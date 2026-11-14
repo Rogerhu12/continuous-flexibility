@@ -1,7 +1,9 @@
-import Mathlib.Analysis.SpecialFunctions.SmoothTransition
-import Mathlib.Analysis.Calculus.ContDiff.Operations
-import Mathlib.Analysis.Calculus.Deriv.Basic
-import Mathlib.Tactic.Linarith
+module
+
+public import Mathlib.Analysis.SpecialFunctions.SmoothTransition
+public import Mathlib.Analysis.Calculus.ContDiff.Operations
+public import Mathlib.Analysis.Calculus.Deriv.Basic
+public import Mathlib.Tactic.Linarith
 
 /-!
 # An actual interpolation cutoff for each negative component
@@ -12,6 +14,8 @@ in the closed middle third. These qualitative facts suffice for the exact
 corrected-flow construction. The manuscript's uniform weighted estimates
 require a quantitatively chosen root collar in addition to these facts.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.PositiveFiberCoordinates
-import ContinuousFlexibility.Analysis.TravelStripAngularInverse
-import ContinuousFlexibility.Analysis.CircleInverseDerivativeBounds
+module
+
+public import ContinuousFlexibility.Analysis.PositiveFiberCoordinates
+public import ContinuousFlexibility.Analysis.TravelStripAngularInverse
+public import ContinuousFlexibility.Analysis.CircleInverseDerivativeBounds
 
 /-!
 # Continuity and perturbation bounds of the actual positive radial inverse
@@ -15,6 +17,8 @@ second inverse point.  In particular it preserves a small state factor
 already present in the forward difference, and charges just one reciprocal
 of the original radial derivative lower bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,12 @@
-import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
-import ContinuousFlexibility.Analysis.N01cReferenceDifferenceBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
+public import ContinuousFlexibility.Analysis.N01cReferenceDifferenceBounds
 
 /-! The full actual multilinear jet is normalized once, after every
 distributed spatial product has been estimated. -/
+
+@[expose] public section
 
 noncomputable section
 

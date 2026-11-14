@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.CompactEvenHeightTests
-import ContinuousFlexibility.Analysis.PlanarInverseRegularity
-import ContinuousFlexibility.Analysis.ReverseCoordinateOperator
-import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
-import Mathlib.Topology.OpenPartialHomeomorph.IsImage
+module
+
+public import ContinuousFlexibility.Analysis.CompactEvenHeightTests
+public import ContinuousFlexibility.Analysis.PlanarInverseRegularity
+public import ContinuousFlexibility.Analysis.ReverseCoordinateOperator
+public import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
+public import Mathlib.Topology.OpenPartialHomeomorph.IsImage
 
 /-!
 # Genuine even periodic test germs away from the reflection axes
@@ -13,6 +15,8 @@ automatically even and π-periodic. A radial bump gives compact physical
 support. The resulting height test agrees on a neighborhood with the
 prescribed smooth function; matching a finite list of jets is not assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

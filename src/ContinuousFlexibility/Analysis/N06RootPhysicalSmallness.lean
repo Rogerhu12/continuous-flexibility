@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06RootNormalizedPacket
+module
+
+public import ContinuousFlexibility.Analysis.N06RootNormalizedPacket
 
 /-!
 # State-linear spatial jets of the actual physical root coefficients
@@ -10,6 +12,8 @@ normalized root formula is constant (0,1) at q=0, for every height pair.
 Its spatial derivatives therefore differ from the reference by O(|q|),
 uniformly over all roots and angles, on a fixed original state seminorm ball.
 -/
+
+@[expose] public section
 
 noncomputable section
 

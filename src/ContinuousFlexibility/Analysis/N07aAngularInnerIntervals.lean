@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularCutoff
-import ContinuousFlexibility.Analysis.N07aAngularIntervalRestriction
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularCutoff
+public import ContinuousFlexibility.Analysis.N07aAngularIntervalRestriction
 
 /-!
 # Actual compact inner radial intervals and their cutoff tests
@@ -9,6 +11,8 @@ The resulting canonical measure is exactly the physical half-period
 measure on that interval. A real smooth bump supplies the compact test
 equal to one on any prescribed strictly smaller closed interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

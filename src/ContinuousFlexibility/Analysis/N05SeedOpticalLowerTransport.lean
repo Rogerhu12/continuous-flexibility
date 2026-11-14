@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05SeedOpticalLowerMorse
-import ContinuousFlexibility.Radial.SeedReferenceRetention
-import ContinuousFlexibility.Radial.ProfileLayerGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N05SeedOpticalLowerMorse
+public import ContinuousFlexibility.Radial.SeedReferenceRetention
+public import ContinuousFlexibility.Radial.ProfileLayerGeometry
 
 /-!
 # The actual seed transports optical ratios and physical cell indices
@@ -9,6 +11,8 @@ Both statements use the profile and cell identities retained by the seed
 construction. The source profile and the final profile are never reselected.
 The index estimate applies to every final cell containing the same point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

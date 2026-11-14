@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N05ReferenceAngularReconstruction
-import ContinuousFlexibility.Analysis.N05ReferenceAngularJetEstimate
-import ContinuousFlexibility.Analysis.N05ReferencePeriodicJetLimit
-import ContinuousFlexibility.Analysis.N05ReferenceZeroRemainder
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceAngularReconstruction
+public import ContinuousFlexibility.Analysis.N05ReferenceAngularJetEstimate
+public import ContinuousFlexibility.Analysis.N05ReferencePeriodicJetLimit
+public import ContinuousFlexibility.Analysis.N05ReferenceZeroRemainder
 
 /-!
 # Actual angular jet limits of a physical output
@@ -10,6 +12,8 @@ Any output with summable frequency-weighted squares has one genuine
 periodic angular jet limit. This reconstruction applies to the original
 inverse output and to its actual normal derivative with the same weights.
 -/
+
+@[expose] public section
 
 noncomputable section
 

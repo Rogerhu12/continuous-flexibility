@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05CanonicalMollifiedJets
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalMollifiedJets
 
 /-!
 # Signed reflection, weak limits, and a radial plateau
@@ -8,6 +10,8 @@ ordinary derivatives of the even average. Actual weak derivative pairs
 are preserved under strong limits. A wider explicit radial cutoff is
 identically one on the support of the original cutoff.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.PreconnectedOperatorFaithfulness
-import ContinuousFlexibility.Analysis.EffectiveRadialCoefficient
-import ContinuousFlexibility.Analysis.CanonicalDomainConnected
-import ContinuousFlexibility.Analysis.N01CoefficientValueJets
+module
+
+public import ContinuousFlexibility.Analysis.PreconnectedOperatorFaithfulness
+public import ContinuousFlexibility.Analysis.EffectiveRadialCoefficient
+public import ContinuousFlexibility.Analysis.CanonicalDomainConnected
+public import ContinuousFlexibility.Analysis.N01CoefficientValueJets
 
 /-!
 # The stored operator equals the actual smooth field on each negative half
@@ -13,6 +15,8 @@ recovers all three stored coefficients, without assuming regularity of the
 stored mixed or angular field. The paired halves have canonical left
 endpoint zero, so their smooth comparison discriminant is strictly positive.
 -/
+
+@[expose] public section
 
 noncomputable section
 

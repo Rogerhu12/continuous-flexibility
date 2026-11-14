@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.TameSmoothingCalculus
-import ContinuousFlexibility.Statements.Analysis
-import Mathlib.Analysis.Normed.Group.InfiniteSum
-import Mathlib.Topology.Algebra.InfiniteSum.Module
+module
+
+public import ContinuousFlexibility.Analysis.TameSmoothingCalculus
+public import ContinuousFlexibility.Statements.Analysis
+public import Mathlib.Analysis.Normed.Group.InfiniteSum
+public import Mathlib.Topology.Algebra.InfiniteSum.Module
 
 /-!
 # Exponential shell analysis and synthesis
@@ -17,6 +19,8 @@ The shell operators and their estimates are hypotheses of this general lemma;
 their construction for the physical and circle spaces is a separate Fourier
 analysis obligation.  No assertion of tameness of those spaces is assumed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

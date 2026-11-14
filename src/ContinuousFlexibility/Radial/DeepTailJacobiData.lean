@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.DeepTailJacobiBounds
-import ContinuousFlexibility.Radial.DeepTailInitialEdge
+module
+
+public import ContinuousFlexibility.Radial.DeepTailJacobiBounds
+public import ContinuousFlexibility.Radial.DeepTailInitialEdge
 
 /-!
 # The actual Jacobi data of a deep tail
@@ -9,6 +11,8 @@ functions.  Deep mass-resistance inequalities give uniform diagonal
 dominance and the weighted square bound used by the continuous natural
 node construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

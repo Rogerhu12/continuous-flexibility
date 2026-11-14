@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aAngularBandNorm
-import ContinuousFlexibility.Analysis.N07aVolumeCell
-import ContinuousFlexibility.Analysis.N07aCanonicalWeakJets
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularBandNorm
+public import ContinuousFlexibility.Analysis.N07aVolumeCell
+public import ContinuousFlexibility.Analysis.N07aCanonicalWeakJets
 
 /-!
 # A true weighted source level from one band of a canonical sequence
@@ -10,6 +12,8 @@ derivatives.  An actual outer L² majorant gives their square summability
 after the material and height weights are applied.  The forgotten source
 is exactly the original band, on every canonical piece.
 -/
+
+@[expose] public section
 
 noncomputable section
 

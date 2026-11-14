@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01OpticalCorrectionCutoffs
-import ContinuousFlexibility.Analysis.ReturnCorrectionErrorSmoothness
-import Mathlib.Order.Filter.Finite
+module
+
+public import ContinuousFlexibility.Analysis.N01OpticalCorrectionCutoffs
+public import ContinuousFlexibility.Analysis.ReturnCorrectionErrorSmoothness
+public import Mathlib.Order.Filter.Finite
 
 /-!
 # Patching with the actual optical cutoff family
@@ -12,6 +14,8 @@ vanishes, even when the transition collars have different relative
 widths. This supplies the global smooth patch for the quantitative
 optical cutoff family.
 -/
+
+@[expose] public section
 
 noncomputable section
 

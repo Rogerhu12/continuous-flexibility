@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.MaterialWeightPhysicalPowerJets
-import ContinuousFlexibility.Analysis.ActualNegativeMaterialSamples
-import ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient
-import ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets
+module
+
+public import ContinuousFlexibility.Analysis.MaterialWeightPhysicalPowerJets
+public import ContinuousFlexibility.Analysis.ActualNegativeMaterialSamples
+public import ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient
+public import ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets
 
 /-!
 # Spatial material ratio jets on the actual negative halves
@@ -11,6 +13,8 @@ typed atlas. Its true bounded endpoint-coordinate displacement cancels
 the same H or M power after physical differentiation. Unit rescaling
 costs only the length of the physical annulus, not an inverse width.
 -/
+
+@[expose] public section
 
 noncomputable section
 

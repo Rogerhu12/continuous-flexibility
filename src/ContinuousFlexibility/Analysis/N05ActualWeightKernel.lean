@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05MaterialLogComparison
-import ContinuousFlexibility.Radial.WeightKernelBounds
+module
+
+public import ContinuousFlexibility.Analysis.N05MaterialLogComparison
+public import ContinuousFlexibility.Radial.WeightKernelBounds
 
 /-!
 # The kernel with actual sampled material weights
@@ -9,6 +11,8 @@ the logarithmic error between the actual sample weight and its reference
 index. With loss four, the two absorbed powers leave one reciprocal
 material factor at each end of the kernel.
 -/
+
+@[expose] public section
 
 noncomputable section
 

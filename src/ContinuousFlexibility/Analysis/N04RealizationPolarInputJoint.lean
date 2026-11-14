@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N01cCoefficientPolarPowerInputs
-import ContinuousFlexibility.Analysis.N01cActualCosineSpeedTower
-import ContinuousFlexibility.Analysis.N04RealizationMixedJointDirections
-import ContinuousFlexibility.Analysis.SmoothDirectionsOneHighLimit
-import ContinuousFlexibility.Analysis.StateNeighborhood
+module
+
+public import ContinuousFlexibility.Analysis.N01cCoefficientPolarPowerInputs
+public import ContinuousFlexibility.Analysis.N01cActualCosineSpeedTower
+public import ContinuousFlexibility.Analysis.N04RealizationMixedJointDirections
+public import ContinuousFlexibility.Analysis.SmoothDirectionsOneHighLimit
+public import ContinuousFlexibility.Analysis.StateNeighborhood
 
 /-!
 # Joint towers of the actual polar height inputs
@@ -13,6 +15,8 @@ coordinates therefore preserves the caller's original state neighborhood.
 This supplies the actual inputs to the finite root coefficient formulas;
 no root flow or reference family is selected.
 -/
+
+@[expose] public section
 
 noncomputable section
 

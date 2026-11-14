@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CoupledCircleCompositionSmoothTame
-import ContinuousFlexibility.Analysis.NeighborhoodCircleChartsState
-import ContinuousFlexibility.Analysis.SolveNewtonBridge
-import ContinuousFlexibility.Analysis.SolveReturnEquations
+module
+
+public import ContinuousFlexibility.Analysis.CoupledCircleCompositionSmoothTame
+public import ContinuousFlexibility.Analysis.NeighborhoodCircleChartsState
+public import ContinuousFlexibility.Analysis.SolveNewtonBridge
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # Smooth tameness of the given N02 chart increment
@@ -12,6 +14,8 @@ therefore supplies a smooth tame map on the original grading. The N02
 decoding identity identifies this map with the supplied chart increment;
 no replacement of the return-equation data is made.
 -/
+
+@[expose] public section
 
 noncomputable section
 

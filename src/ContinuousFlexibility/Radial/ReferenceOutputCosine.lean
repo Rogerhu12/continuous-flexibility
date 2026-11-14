@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ReferenceSourceCosine
+module
+
+public import ContinuousFlexibility.Radial.ReferenceSourceCosine
 
 /-!
 # Actual reference outputs from square-summable cosine modes
@@ -8,6 +10,8 @@ product-measure L² norm equals the sum of the radial mode norms, so adding
 the prescribed left constant gives the frozen output realization and its
 exact norm without an additional synthesis assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

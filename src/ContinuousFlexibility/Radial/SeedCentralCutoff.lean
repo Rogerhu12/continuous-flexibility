@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.SeedConnectorInterpolation
-import ContinuousFlexibility.Radial.SeedConnectorReconstruction
+module
+
+public import ContinuousFlexibility.Radial.SeedConnectorInterpolation
+public import ContinuousFlexibility.Radial.SeedConnectorReconstruction
 
 /-!
 # Cutting the actual central logarithmic slope to the two cone slopes
@@ -9,6 +11,8 @@ slope agrees with the actual central solution on an interval containing both
 turning points, is exactly ±2 on the outer half-lines, and has positive
 profile derivative on the two added connecting intervals.
 -/
+
+@[expose] public section
 
 noncomputable section
 

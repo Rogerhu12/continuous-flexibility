@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ReferenceGraphNorms
-import ContinuousFlexibility.Radial.ReferenceCommonInverse
+module
+
+public import ContinuousFlexibility.Radial.ReferenceGraphNorms
+public import ContinuousFlexibility.Radial.ReferenceCommonInverse
 
 /-!
 # Transport of source-core density through the actual inverse
@@ -9,6 +11,8 @@ sources and smooth solutions on that class give the frozen smooth graph
 core.  The density and the smooth inverse images are separate analytic
 inputs to this lemma, to be proved for the finite cosine source class.
 -/
+
+@[expose] public section
 
 noncomputable section
 

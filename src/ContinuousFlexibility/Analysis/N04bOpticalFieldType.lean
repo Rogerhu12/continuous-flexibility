@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04bOriginalType
-import ContinuousFlexibility.Analysis.N04bCorrectedFieldFacts
-import ContinuousFlexibility.Analysis.N04bFieldRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N04bOriginalType
+public import ContinuousFlexibility.Analysis.N04bCorrectedFieldFacts
+public import ContinuousFlexibility.Analysis.N04bFieldRegularity
 
 /-!
 # Global strict type and raw regularity of the optical correction
@@ -11,6 +13,8 @@ has the strict type proved from N01. These two facts supply strict type
 on the whole negative component, together with the actual coefficient
 regularity and periodicity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

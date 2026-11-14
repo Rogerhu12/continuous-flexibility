@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.PositiveReferenceInterpolation
-import ContinuousFlexibility.Analysis.TravelStripGlobalInverse
-import ContinuousFlexibility.Analysis.PrincipalDensityGerms
+module
+
+public import ContinuousFlexibility.Analysis.PositiveReferenceInterpolation
+public import ContinuousFlexibility.Analysis.TravelStripGlobalInverse
+public import ContinuousFlexibility.Analysis.PrincipalDensityGerms
 
 /-!
 # The actual cylindrical reference interpolation
@@ -10,6 +12,8 @@ genuine smooth cylinder coordinate and a genuine smooth inverse.
 Its planar Jacobian is exactly the actual scalar derivative. Scalar
 endpoint coordinate and height germs lift to density germs on the plane.
 -/
+
+@[expose] public section
 
 noncomputable section
 

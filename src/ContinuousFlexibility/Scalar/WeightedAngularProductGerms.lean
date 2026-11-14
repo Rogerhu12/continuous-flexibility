@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.WeightedOddProductMap
-import ContinuousFlexibility.Scalar.WeightedAngularJetProductBounds
-import ContinuousFlexibility.Scalar.WeightedUniformTameGermOperations
+module
+
+public import ContinuousFlexibility.Scalar.WeightedOddProductMap
+public import ContinuousFlexibility.Scalar.WeightedAngularJetProductBounds
+public import ContinuousFlexibility.Scalar.WeightedUniformTameGermOperations
 
 /-!
 # Actual uniform tame germs for the two angular product operations
@@ -9,6 +11,8 @@ The continuous bilinear maps and their one-high-factor estimates give one
 common neighborhood for the entire genuine tower. Both operations can then
 be composed with the finite state ingredients.
 -/
+
+@[expose] public section
 
 noncomputable section
 

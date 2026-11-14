@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06VolumeFourierCutoff
-import ContinuousFlexibility.Analysis.N06ReferenceForcingMap
-import ContinuousFlexibility.Analysis.N06NegativeReferenceEquation
+module
+
+public import ContinuousFlexibility.Analysis.N06VolumeFourierCutoff
+public import ContinuousFlexibility.Analysis.N06ReferenceForcingMap
+public import ContinuousFlexibility.Analysis.N06NegativeReferenceEquation
 
 /-!
 # Reference source approximants retaining the three actual columns
@@ -15,6 +17,8 @@ The finite object is the remainder forcing. No identification of the cut
 unknown with the inverse of F_N is made here: that additionally requires
 the actual reference operator and domain to commute with the cutoff.
 -/
+
+@[expose] public section
 
 noncomputable section
 

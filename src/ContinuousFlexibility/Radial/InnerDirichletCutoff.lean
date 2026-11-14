@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OscillatorCompactCore
-import Mathlib.Analysis.Calculus.MeanValue
+module
+
+public import ContinuousFlexibility.Radial.OscillatorCompactCore
+public import Mathlib.Analysis.Calculus.MeanValue
 
 /-!
 # Smooth cutoffs at the two endpoints of a finite interval
@@ -9,6 +11,8 @@ When a field vanishes at an endpoint, the factor of the cutoff scale in its
 derivative is cancelled by the linear vanishing of the field.  This is the
 uniform bound needed for convergence in the actual Dirichlet energy domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

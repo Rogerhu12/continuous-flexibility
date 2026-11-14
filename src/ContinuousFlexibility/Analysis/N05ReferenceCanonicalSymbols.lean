@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05ReferenceCoefficients
-import ContinuousFlexibility.Analysis.N05ReferenceQuadraticTests
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05ReferenceCoefficients
+public import ContinuousFlexibility.Analysis.N05ReferenceQuadraticTests
 
 /-!
 # The frozen negative canonical identity determines the reference symbol
@@ -9,6 +11,8 @@ The operator identity is read directly from N04, at the actual chart image.
 The inverse-chart identity and the true coefficient germs give its conjugation
 form.  The physical reference symbol is then identified on actual local tests.
 -/
+
+@[expose] public section
 
 noncomputable section
 

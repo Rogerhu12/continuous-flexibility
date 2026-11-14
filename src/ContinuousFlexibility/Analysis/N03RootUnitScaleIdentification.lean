@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RootParameterUnscaleRegularity
-import ContinuousFlexibility.Analysis.N03FixedRootOrdinaryJets
+module
+
+public import ContinuousFlexibility.Analysis.RootParameterUnscaleRegularity
+public import ContinuousFlexibility.Analysis.N03FixedRootOrdinaryJets
 
 /-!
 # Unit-scale root jets of the same stored canonical fields
@@ -10,6 +12,8 @@ ordinary root jets. The stored K, chosen flow, angular label, divided
 coefficient and physical root all remain the original ones. Neither the
 band radius nor the normalization scale occurs in a derivative bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

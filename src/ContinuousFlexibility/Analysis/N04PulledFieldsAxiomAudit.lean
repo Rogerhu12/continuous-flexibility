@@ -1,57 +1,59 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsColumnPhysical
-import ContinuousFlexibility.Analysis.N04PulledFieldsCurrentData
-import ContinuousFlexibility.Analysis.N04PulledFieldsStaticReference
-import ContinuousFlexibility.Analysis.N04PulledFieldsReferenceCost
-import ContinuousFlexibility.Analysis.N04PulledFieldsReferenceSplit
-import ContinuousFlexibility.Analysis.N04PulledFieldsInverseJoint
-import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientVariation
-import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientMixedVariation
-import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientRegularity
-import ContinuousFlexibility.Analysis.N04PulledFieldsSelectorFixedBase
-import ContinuousFlexibility.Analysis.N04PulledFieldsInverseSlotBounds
-import ContinuousFlexibility.Analysis.N04PulledFieldsSpatial
-import ContinuousFlexibility.Analysis.N04PulledFieldsColumnRegularity
-import ContinuousFlexibility.Analysis.N04PulledFieldsRawPrefix
-import ContinuousFlexibility.Analysis.N04PulledFieldsMaskedExpansion
-import ContinuousFlexibility.Analysis.N04PulledFieldsMaskedComposition
-import ContinuousFlexibility.Analysis.N04PulledFieldsInversePrefixPower
-import ContinuousFlexibility.Analysis.N04PulledFieldsInversePrefixSlots
-import ContinuousFlexibility.Analysis.N04PulledFieldsInverseRawFamily
-import ContinuousFlexibility.Analysis.N04PulledFieldsKernelJointFixedBase
-import ContinuousFlexibility.Analysis.N04PulledFieldsForwardFixedBase
-import ContinuousFlexibility.Analysis.N04PulledFieldsCompositionBudget
-import ContinuousFlexibility.Analysis.N04PulledFieldsMovingPointOneHigh
-import ContinuousFlexibility.Analysis.N04PulledFieldsCompositionCost
-import ContinuousFlexibility.Analysis.N04PulledFieldsSampleTransport
-import ContinuousFlexibility.Analysis.N04PulledFieldsInverseAffineBounds
-import ContinuousFlexibility.Analysis.N04PulledFieldsMovingFamily
-import ContinuousFlexibility.Analysis.N04PulledFieldsAuxiliaryReduction
-import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientJoint
-import ContinuousFlexibility.Analysis.N04PulledFieldsColumnCurrent
-import ContinuousFlexibility.Analysis.N04PulledFieldsAverageFixedBase
-import ContinuousFlexibility.Analysis.N04PulledFieldsInversePointData
-import ContinuousFlexibility.Analysis.N04PulledFieldsVelocityFixedBase
-import ContinuousFlexibility.Analysis.N04PulledFieldsJointExpansion
-import ContinuousFlexibility.Analysis.N04PulledFieldsPhysicalCurrent
-import ContinuousFlexibility.Analysis.N04PulledFieldsPhysicalPrefixPower
-import ContinuousFlexibility.Analysis.N04PulledFieldsSampledCoefficientCost
-import ContinuousFlexibility.Analysis.N04PulledFieldsReferenceCoefficients
-import ContinuousFlexibility.Analysis.N04PulledFieldsFixedBasePrefixRadius
-import ContinuousFlexibility.Analysis.N04PulledFieldsTransportParameterBudget
-import ContinuousFlexibility.Analysis.N04PulledFieldsFieldAssembly
-import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientCurrent
-import ContinuousFlexibility.Analysis.N04PulledFieldsPolynomialFixedBase
-import ContinuousFlexibility.Analysis.N04PulledFieldsCharacteristicPower
-import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientPhysicalAssembly
-import ContinuousFlexibility.Analysis.N04PulledFieldsActualDisplacementFixedBase
-import ContinuousFlexibility.Analysis.N04PulledFieldsStripAngularPower
-import ContinuousFlexibility.Analysis.N04PulledFieldsActualPolynomialGrowth
-import ContinuousFlexibility.Analysis.N04PulledFieldsActualVelocityMixedGrowth
-import ContinuousFlexibility.Analysis.N04PulledFieldsStripPhysicalCost
-import ContinuousFlexibility.Analysis.N04PulledFieldsActualErrorPhysical
-import ContinuousFlexibility.Analysis.N04PulledFieldsOriginalDifferencePhysical
-import ContinuousFlexibility.Blueprint.N04Coordinates.Realization.PulledFields
-import Lean.Util.CollectAxioms
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsColumnPhysical
+public import ContinuousFlexibility.Analysis.N04PulledFieldsCurrentData
+public import ContinuousFlexibility.Analysis.N04PulledFieldsStaticReference
+public import ContinuousFlexibility.Analysis.N04PulledFieldsReferenceCost
+public import ContinuousFlexibility.Analysis.N04PulledFieldsReferenceSplit
+public import ContinuousFlexibility.Analysis.N04PulledFieldsInverseJoint
+public import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientVariation
+public import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientMixedVariation
+public import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientRegularity
+public import ContinuousFlexibility.Analysis.N04PulledFieldsSelectorFixedBase
+public import ContinuousFlexibility.Analysis.N04PulledFieldsInverseSlotBounds
+public import ContinuousFlexibility.Analysis.N04PulledFieldsSpatial
+public import ContinuousFlexibility.Analysis.N04PulledFieldsColumnRegularity
+public import ContinuousFlexibility.Analysis.N04PulledFieldsRawPrefix
+public import ContinuousFlexibility.Analysis.N04PulledFieldsMaskedExpansion
+public import ContinuousFlexibility.Analysis.N04PulledFieldsMaskedComposition
+public import ContinuousFlexibility.Analysis.N04PulledFieldsInversePrefixPower
+public import ContinuousFlexibility.Analysis.N04PulledFieldsInversePrefixSlots
+public import ContinuousFlexibility.Analysis.N04PulledFieldsInverseRawFamily
+public import ContinuousFlexibility.Analysis.N04PulledFieldsKernelJointFixedBase
+public import ContinuousFlexibility.Analysis.N04PulledFieldsForwardFixedBase
+public import ContinuousFlexibility.Analysis.N04PulledFieldsCompositionBudget
+public import ContinuousFlexibility.Analysis.N04PulledFieldsMovingPointOneHigh
+public import ContinuousFlexibility.Analysis.N04PulledFieldsCompositionCost
+public import ContinuousFlexibility.Analysis.N04PulledFieldsSampleTransport
+public import ContinuousFlexibility.Analysis.N04PulledFieldsInverseAffineBounds
+public import ContinuousFlexibility.Analysis.N04PulledFieldsMovingFamily
+public import ContinuousFlexibility.Analysis.N04PulledFieldsAuxiliaryReduction
+public import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientJoint
+public import ContinuousFlexibility.Analysis.N04PulledFieldsColumnCurrent
+public import ContinuousFlexibility.Analysis.N04PulledFieldsAverageFixedBase
+public import ContinuousFlexibility.Analysis.N04PulledFieldsInversePointData
+public import ContinuousFlexibility.Analysis.N04PulledFieldsVelocityFixedBase
+public import ContinuousFlexibility.Analysis.N04PulledFieldsJointExpansion
+public import ContinuousFlexibility.Analysis.N04PulledFieldsPhysicalCurrent
+public import ContinuousFlexibility.Analysis.N04PulledFieldsPhysicalPrefixPower
+public import ContinuousFlexibility.Analysis.N04PulledFieldsSampledCoefficientCost
+public import ContinuousFlexibility.Analysis.N04PulledFieldsReferenceCoefficients
+public import ContinuousFlexibility.Analysis.N04PulledFieldsFixedBasePrefixRadius
+public import ContinuousFlexibility.Analysis.N04PulledFieldsTransportParameterBudget
+public import ContinuousFlexibility.Analysis.N04PulledFieldsFieldAssembly
+public import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientCurrent
+public import ContinuousFlexibility.Analysis.N04PulledFieldsPolynomialFixedBase
+public import ContinuousFlexibility.Analysis.N04PulledFieldsCharacteristicPower
+public import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientPhysicalAssembly
+public import ContinuousFlexibility.Analysis.N04PulledFieldsActualDisplacementFixedBase
+public import ContinuousFlexibility.Analysis.N04PulledFieldsStripAngularPower
+public import ContinuousFlexibility.Analysis.N04PulledFieldsActualPolynomialGrowth
+public import ContinuousFlexibility.Analysis.N04PulledFieldsActualVelocityMixedGrowth
+public import ContinuousFlexibility.Analysis.N04PulledFieldsStripPhysicalCost
+public import ContinuousFlexibility.Analysis.N04PulledFieldsActualErrorPhysical
+public import ContinuousFlexibility.Analysis.N04PulledFieldsOriginalDifferencePhysical
+public import ContinuousFlexibility.Blueprint.N04Coordinates.Realization.PulledFields
+public import Lean.Util.CollectAxioms
 
 /-!
 # Axiom audit of the PulledFields support modules
@@ -60,6 +62,8 @@ This target audits every declaration owned by the imported PulledFields
 modules, including private helpers and all transitive dependencies. It
 also audits the actual blueprint theorem assembled from those proofs.
 -/
+
+@[expose] public section
 
 open Lean in
 run_cmd do
@@ -73,11 +77,15 @@ run_cmd do
       | none => false
     if own then
       declarations := declarations + 1
-      match info with
-      | .thmInfo _ => theorems := theorems + 1
-      | .axiomInfo _ => throwError "PulledFields support declared an axiom: {name}"
-      | _ => pure ()
+      -- Imported declarations of a module may be seen as `axiomInfo` without their
+      -- values; `collectAxioms` still follows them. A declared axiom is the one whose
+      -- own axiom set contains it.
       let axioms ← collectAxioms name
+      if axioms.contains name then
+        throwError "PulledFields support declared an axiom: {name}"
+      match info with
+      | .thmInfo _ | .axiomInfo _ => theorems := theorems + 1
+      | _ => pure ()
       for ax in axioms do
         unless ax == ``propext || ax == ``Classical.choice || ax == ``Quot.sound do
           throwError "Unexpected axiom {ax} in PulledFields support declaration {name}"

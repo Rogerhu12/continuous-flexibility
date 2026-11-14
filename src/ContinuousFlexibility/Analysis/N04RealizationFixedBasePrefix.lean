@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.JointJetInterpolationBudget
-import ContinuousFlexibility.Analysis.TameMultilinearNormalization
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Analysis.JointJetInterpolationBudget
+public import ContinuousFlexibility.Analysis.TameMultilinearNormalization
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # Finite parameter costs with one fixed low order
@@ -11,6 +13,8 @@ prefix coefficient. The existing fixed-base interpolation theorem then
 assigns that coefficient to each parameter slot. No low order is chosen
 again when the parameter prefix grows.
 -/
+
+@[expose] public section
 
 noncomputable section
 

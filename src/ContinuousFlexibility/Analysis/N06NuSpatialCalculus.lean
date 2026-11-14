@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06NuFiniteDifference
-import ContinuousFlexibility.Analysis.CylinderMixedJets
-import Mathlib.Analysis.Calculus.ContDiff.Bounds
-import Mathlib.Data.Nat.Choose.Sum
+module
+
+public import ContinuousFlexibility.Analysis.N06NuFiniteDifference
+public import ContinuousFlexibility.Analysis.CylinderMixedJets
+public import Mathlib.Analysis.Calculus.ContDiff.Bounds
+public import Mathlib.Data.Nat.Choose.Sum
 
 /-!
 # Spatial calculus for the actual nu packet
@@ -12,6 +14,8 @@ lines. The finite nu formula is differentiated on its actual positive
 discriminant segment, and the polar factors are controlled on the fixed
 positive radial interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

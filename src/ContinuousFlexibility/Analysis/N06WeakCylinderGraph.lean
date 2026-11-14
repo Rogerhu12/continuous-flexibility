@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06WeakCylinderPDE
-import ContinuousFlexibility.Analysis.N06WeakFiniteGraph
+module
+
+public import ContinuousFlexibility.Analysis.N06WeakCylinderPDE
+public import ContinuousFlexibility.Analysis.N06WeakFiniteGraph
 
 /-!
 # From the actual weak cylinder PDE to finite graph control
@@ -8,6 +10,8 @@ Every modal equation and every graph-field membership below is derived
 from the original two-variable weak equation and its L2 representatives.
 The finite reconstruction uses their normalized half-period coefficients.
 -/
+
+@[expose] public section
 
 noncomputable section
 

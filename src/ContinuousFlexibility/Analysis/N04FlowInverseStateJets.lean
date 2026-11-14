@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ParameterizedInverseStateJets
+module
+
+public import ContinuousFlexibility.Analysis.ParameterizedInverseStateJets
 
 /-!
 # Actual mixed jets of the inverse flow displacement
@@ -8,6 +10,8 @@ positive first angular Jacobian comes from the original ODE. These
 facts give all inverse displacement jets with one low state order and
 one loss; no quantitative derivative of the inverse is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

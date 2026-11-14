@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.MatchedInnerInterpolationWalls
-import ContinuousFlexibility.Radial.MatchedMorseLocalizerWeights
-import ContinuousFlexibility.Radial.MatchedMorseInnerWeightTransfer
-import ContinuousFlexibility.Radial.MatchedInnerSupportedCells
+module
+
+public import ContinuousFlexibility.Radial.MatchedInnerInterpolationWalls
+public import ContinuousFlexibility.Radial.MatchedMorseLocalizerWeights
+public import ContinuousFlexibility.Radial.MatchedMorseInnerWeightTransfer
+public import ContinuousFlexibility.Radial.MatchedInnerSupportedCells
 
 /-!
 # Actual later inner two-channel kernels
@@ -11,6 +13,8 @@ The actual nonzero localizers supply the signed pointwise comparisons.
 These two independently proved ingredients yield the true restricted
 matching inverse kernel, with its original scalar gate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

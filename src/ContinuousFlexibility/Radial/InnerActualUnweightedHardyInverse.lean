@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerActualUnweightedInverse
-import ContinuousFlexibility.Radial.InnerHardyWeightedPoisson
+module
+
+public import ContinuousFlexibility.Radial.InnerActualUnweightedInverse
+public import ContinuousFlexibility.Radial.InnerHardyWeightedPoisson
 
 /-!
 # The actual finite-chain inverse with Hardy gap costs
@@ -9,6 +11,8 @@ Hardy bound and actual adjacent model endpoint energies replace a
 uniform slope assumption, while the local model errors still control
 the same physical Schur inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

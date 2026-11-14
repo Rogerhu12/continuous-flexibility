@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Blueprint.Statements
-import ContinuousFlexibility.Radial.SeedReferenceTheorem
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
+public import ContinuousFlexibility.Radial.SeedReferenceTheorem
 
 /-!
 # Blueprint node R08
@@ -12,6 +14,8 @@ Task file: docs/tasks/R08.md. The original theorem arguments are retained.
 The construction also retains the homogeneous profile equation and return
 margins on the same witness for the corrected downstream interface.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

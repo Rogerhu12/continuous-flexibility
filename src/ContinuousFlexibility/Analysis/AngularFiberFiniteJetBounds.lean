@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.AngularFiberEndpointJets
-import ContinuousFlexibility.Analysis.AngularInverseFirstDerivative
-import ContinuousFlexibility.Analysis.CylinderMixedJetNorms
-import ContinuousFlexibility.Analysis.FiniteInverseJetBounds
-import ContinuousFlexibility.Analysis.ScalarFlowTriangularJets
+module
+
+public import ContinuousFlexibility.Analysis.AngularFiberEndpointJets
+public import ContinuousFlexibility.Analysis.AngularInverseFirstDerivative
+public import ContinuousFlexibility.Analysis.CylinderMixedJetNorms
+public import ContinuousFlexibility.Analysis.FiniteInverseJetBounds
+public import ContinuousFlexibility.Analysis.ScalarFlowTriangularJets
 
 /-!
 # Finite endpoint bounds from actual forward coordinate jets
@@ -13,6 +15,8 @@ derivative. The existing inverse polynomial then controls every required
 finite inverse jet, and the actual composition formula controls the
 fiber radial field. No inverse higher-jet bound is an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

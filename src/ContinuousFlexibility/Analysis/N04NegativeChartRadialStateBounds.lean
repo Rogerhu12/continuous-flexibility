@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ScalarTransportSystemBounds
+module
+
+public import ContinuousFlexibility.Analysis.ScalarTransportSystemBounds
 
 /-!
 # Radial closure with an additive state-order budget
@@ -8,6 +10,8 @@ Leibniz term. The centered first integral and its forcing retain exactly
 one material height factor. All constants precede the evaluation point,
 which may include the component, radius, angle, state and direction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

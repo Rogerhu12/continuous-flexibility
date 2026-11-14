@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ReferenceRadialKernelPairing
-import ContinuousFlexibility.Radial.MatchedPartitionNormalization
-import Mathlib.Topology.Algebra.InfiniteSum.Real
+module
+
+public import ContinuousFlexibility.Radial.ReferenceRadialKernelPairing
+public import ContinuousFlexibility.Radial.MatchedPartitionNormalization
+public import Mathlib.Topology.Algebra.InfiniteSum.Real
 
 /-!
 # A cellwise bound implies actual weighted radial L2 membership
@@ -10,6 +12,8 @@ of the cell energies are therefore bounded by the ordinary interval
 length times the common pointwise energy bound. This proves both the
 summability and the actual weighted L2 estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

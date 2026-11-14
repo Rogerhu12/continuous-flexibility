@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerL2Restriction
-import ContinuousFlexibility.Radial.InnerLocalizedWeights
+module
+
+public import ContinuousFlexibility.Radial.InnerL2Restriction
+public import ContinuousFlexibility.Radial.InnerLocalizedWeights
 
 /-!
 # Actual orthogonal projections onto the inner pieces
@@ -9,6 +11,8 @@ in the same physical L² measure. Disjoint open pieces give a Bessel bound
 with constant one, derived here from those projections. Multiplication by
 either actual weight commutes with each piece projection.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MatchedScaledMorseWindows
-import ContinuousFlexibility.Radial.ScaledMorseInnerGaps
-import ContinuousFlexibility.Radial.InnerMorseInnerWeightCosts
+module
+
+public import ContinuousFlexibility.Radial.MatchedScaledMorseWindows
+public import ContinuousFlexibility.Radial.ScaledMorseInnerGaps
+public import ContinuousFlexibility.Radial.InnerMorseInnerWeightCosts
 
 /-!
 # Original retained pieces have nearby physical cell labels
@@ -11,6 +13,8 @@ cap remnants are handled by their exact endpoint identities. This
 provides the geometric input for extracting the actual signed weights
 on the true nonzero localizers.
 -/
+
+@[expose] public section
 
 noncomputable section
 

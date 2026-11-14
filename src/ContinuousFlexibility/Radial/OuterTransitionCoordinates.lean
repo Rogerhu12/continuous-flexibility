@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.OuterUnifiedCore
-import ContinuousFlexibility.Radial.OuterDeepGeometry
-import ContinuousFlexibility.Radial.OuterWholeMeasure
+module
+
+public import ContinuousFlexibility.Radial.OuterUnifiedCore
+public import ContinuousFlexibility.Radial.OuterDeepGeometry
+public import ContinuousFlexibility.Radial.OuterWholeMeasure
 
 /-!
 # Actual transition endpoints in the outward radial coordinate
@@ -9,6 +11,8 @@ The same geometrical core is used by the radial energy estimate and
 the whole outer Green operator. The coordinate reflection changes only
 its orientation, including the initial middle cut.
 -/
+
+@[expose] public section
 
 noncomputable section
 

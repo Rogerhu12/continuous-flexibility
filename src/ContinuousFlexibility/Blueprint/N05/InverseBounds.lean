@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05CanonicalInverseBounds
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalInverseBounds
 
 /-!
 # N05: the same reference inverse on all weighted volume levels
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Analysis.N05CanonicalInverseBounds
 Source: readable manuscript §8, lines 75--167 and 169--233.
 Task: `docs/tasks/N05-InverseBounds.md`.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

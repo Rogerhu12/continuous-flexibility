@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartRootIdentification
-import ContinuousFlexibility.Analysis.ReturnChartUniformBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootIdentification
+public import ContinuousFlexibility.Analysis.ReturnChartUniformBounds
 
 /-!
 # Actual root-axis lower bounds at the retained sample
@@ -9,6 +11,8 @@ the speed reciprocal. The retained forward angular slopes control the
 actual odd return label. Their exact inverse-flow formula gives the
 axis coefficient, with an explicit polynomial cost for the chosen scale.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N07bHeightRadialWeights
-import ContinuousFlexibility.Analysis.SpacesSources
-import ContinuousFlexibility.Analysis.N06AngularMeanBridge
-import ContinuousFlexibility.Radial.ProfilePartitionBounds
-import ContinuousFlexibility.Radial.R11bPhysicalPairing
-import Mathlib.Topology.Algebra.InfiniteSum.Real
+module
+
+public import ContinuousFlexibility.Analysis.N07bHeightRadialWeights
+public import ContinuousFlexibility.Analysis.SpacesSources
+public import ContinuousFlexibility.Analysis.N06AngularMeanBridge
+public import ContinuousFlexibility.Radial.ProfilePartitionBounds
+public import ContinuousFlexibility.Radial.R11bPhysicalPairing
+public import Mathlib.Topology.Algebra.InfiniteSum.Real
 
 /-!
 # Physical heights belong to strictly weaker natural radial classes
@@ -13,6 +15,8 @@ controls each weighted localized square by a common multiple of the square
 of its partition function.  The partition-square inequality controls every
 finite cell sum, without a multiplicity bound for the discrete cell index.
 -/
+
+@[expose] public section
 
 noncomputable section
 

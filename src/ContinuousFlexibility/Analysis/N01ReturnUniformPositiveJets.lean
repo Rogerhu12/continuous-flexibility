@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01ReturnInverseJets
-import ContinuousFlexibility.Analysis.MaterialSampleBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01ReturnInverseJets
+public import ContinuousFlexibility.Analysis.MaterialSampleBounds
 
 /-!
 # Uniform positive angular jets of the actual return maps
@@ -10,6 +12,8 @@ The reference return is a translation, so its higher angular jets vanish.
 Only positive inverse jets are estimated; no bound on the reference
 translation or on an arbitrarily chosen component constant is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

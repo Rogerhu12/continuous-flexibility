@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionDisplacementRegularity
-import ContinuousFlexibility.Analysis.ScalarJetFamilyBounds
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionDisplacementRegularity
+public import ContinuousFlexibility.Analysis.ScalarJetFamilyBounds
 
 /-!
 # Angular jets of a smooth compact parameter integral
@@ -8,6 +10,8 @@ All derivative identities are for the actual scalar integral. Joint
 smoothness supplies continuity and domination on each compact rectangle,
 so repeated differentiation uses the existing interval-integral theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

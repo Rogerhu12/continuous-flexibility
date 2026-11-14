@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartJacobianIdentities
-import ContinuousFlexibility.Analysis.N04SourceColumnsDerivative
-import ContinuousFlexibility.Analysis.N04SourceColumnsMultiplication
-import ContinuousFlexibility.Analysis.N04SourceColumnsScalarLinear
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartJacobianIdentities
+public import ContinuousFlexibility.Analysis.N04SourceColumnsDerivative
+public import ContinuousFlexibility.Analysis.N04SourceColumnsMultiplication
+public import ContinuousFlexibility.Analysis.N04SourceColumnsScalarLinear
 
 /-!
 # Current data for the forward first-jet determinant polynomial
@@ -10,6 +12,8 @@ Spatial differentiation adds only a fixed loss. The two products choose
 one common low order and neighborhood before every later derivative order.
 The width ratio is a fixed coefficient at the original material sample.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.MorseSecondModeNaturalTransport
-import ContinuousFlexibility.Radial.TailNaturalUniqueness
-import ContinuousFlexibility.Radial.DeepTailPhysicalBounds
-import ContinuousFlexibility.Radial.SeedTailFlatExtension
+module
+
+public import ContinuousFlexibility.Radial.MorseSecondModeNaturalTransport
+public import ContinuousFlexibility.Radial.TailNaturalUniqueness
+public import ContinuousFlexibility.Radial.DeepTailPhysicalBounds
+public import ContinuousFlexibility.Radial.SeedTailFlatExtension
 
 /-!
 # Endpoint flatness of the specified second-mode natural solution
@@ -10,6 +12,8 @@ The actual Morse tail supplies deep data after a finite discard. The
 concrete natural-line and physical-flatness proofs then transfer a smooth
 flat representative to the original solution on an unchanged endpoint germ.
 -/
+
+@[expose] public section
 
 noncomputable section
 

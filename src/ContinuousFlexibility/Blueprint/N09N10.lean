@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Blueprint.Statements
-import ContinuousFlexibility.Analysis.CoupledStagesConstruction
-import ContinuousFlexibility.Analysis.CoupledCircleChartSmooth
-import ContinuousFlexibility.Analysis.CoupledCircleErrorSmooth
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
+public import ContinuousFlexibility.Analysis.CoupledStagesConstruction
+public import ContinuousFlexibility.Analysis.CoupledCircleChartSmooth
+public import ContinuousFlexibility.Analysis.CoupledCircleErrorSmooth
 
 /-!
 # Blueprint node N09N10
@@ -12,6 +14,8 @@ Source: `paper/flexible-surface-readable/09-solving-the-equation.tex` lines 189â
 
 Task file: `docs/tasks/N09N10.md`. The proof retains the frozen statement.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

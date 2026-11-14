@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CanonicalCubicPointwise
-import ContinuousFlexibility.Analysis.TransmissionJetAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalCubicPointwise
+public import ContinuousFlexibility.Analysis.TransmissionJetAlgebra
 
 /-!
 # Cubic division at both endpoints
@@ -10,6 +12,8 @@ control every requested derivative of the quotient, with constant `1 / 36`
 independent of the interval length.  All three vanishing jets at both
 endpoints are explicit hypotheses.
 -/
+
+@[expose] public section
 
 noncomputable section
 

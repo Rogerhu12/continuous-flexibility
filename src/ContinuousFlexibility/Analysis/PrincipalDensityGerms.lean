@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.PrincipalDensityBoundaryJets
-import ContinuousFlexibility.Analysis.CanonicalFieldJetReduction
-import ContinuousFlexibility.Analysis.BoundaryJetClosure
-import Mathlib.Analysis.Calculus.FDeriv.Congr
+module
+
+public import ContinuousFlexibility.Analysis.PrincipalDensityBoundaryJets
+public import ContinuousFlexibility.Analysis.CanonicalFieldJetReduction
+public import ContinuousFlexibility.Analysis.BoundaryJetClosure
+public import Mathlib.Analysis.Calculus.FDeriv.Congr
 
 /-!
 # Principal-density germs and one-sided boundary equations
@@ -12,6 +14,8 @@ density germs. An actual normal-form equation on only one open side
 then determines the boundary jets of every field with those germs.
 The equation is never asserted on the other side of the boundary.
 -/
+
+@[expose] public section
 
 noncomputable section
 

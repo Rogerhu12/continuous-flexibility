@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ReferenceCosinePairing
-import ContinuousFlexibility.Radial.ReferenceCosineTestOperator
-import ContinuousFlexibility.Radial.ReferenceTestIntegrability
+module
+
+public import ContinuousFlexibility.Radial.ReferenceCosinePairing
+public import ContinuousFlexibility.Radial.ReferenceCosineTestOperator
+public import ContinuousFlexibility.Radial.ReferenceTestIntegrability
 
 /-!
 # Actual Fourier test pairings on the physical annulus
@@ -11,6 +13,8 @@ rectangle. Applying actual Fourier analysis there and then removing the
 harmless restriction gives the paired series in the frozen dr integrals.
 No global weighted-measure comparison is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

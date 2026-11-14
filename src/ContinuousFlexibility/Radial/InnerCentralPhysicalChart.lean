@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerRadialActualPieces
-import ContinuousFlexibility.Radial.InnerCentralPhysicalColumn
-import ContinuousFlexibility.Radial.InnerCentralPhysicalPoisson
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialActualPieces
+public import ContinuousFlexibility.Radial.InnerCentralPhysicalColumn
+public import ContinuousFlexibility.Radial.InnerCentralPhysicalPoisson
 
 /-!
 # The fixed central model as an actual finite-chain piece
@@ -10,6 +12,8 @@ Its scalar column is the original compact auxiliary column at mode two
 and zero otherwise. Its physical coefficient, full conormal drift, and
 Dirichlet bound all refer to the same localized model and radial measure.
 -/
+
+@[expose] public section
 
 noncomputable section
 

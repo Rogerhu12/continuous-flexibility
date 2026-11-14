@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PrincipalDataTowers
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalDataTowers
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
 
 /-!
 # Full current towers from a weighted difference and reference bounds
@@ -8,6 +10,8 @@ The reference contributes only to parameter order zero. A uniform bound
 for the sampled height weight allows the full family to be used as an
 unweighted factor; its difference tower retains the height weight.
 -/
+
+@[expose] public section
 
 noncomputable section
 

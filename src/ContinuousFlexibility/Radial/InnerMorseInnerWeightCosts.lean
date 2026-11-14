@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerMorseInnerWeights
-import ContinuousFlexibility.Radial.InnerActualModelChain
+module
+
+public import ContinuousFlexibility.Radial.InnerMorseInnerWeights
+public import ContinuousFlexibility.Radial.InnerActualModelChain
 
 /-!
 # Fixed coefficient loss for the actual finite-chain weight
@@ -11,6 +13,8 @@ weight have the same square-root coefficient comparison on every
 piece. The output loss is a positive measurable contraction and has
 the exact prescribed coefficient value on each piece.
 -/
+
+@[expose] public section
 
 noncomputable section
 

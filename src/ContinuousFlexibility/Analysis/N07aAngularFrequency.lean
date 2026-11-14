@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularHilbert
-import ContinuousFlexibility.Analysis.AngularYosida
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularHilbert
+public import ContinuousFlexibility.Analysis.AngularYosida
 
 /-!
 # The actual nonnegative angular-frequency operator
@@ -9,6 +11,8 @@ is `|jθ|`; since the angular period is `π`, the physical symbol of
 `|∂θ|` is twice this one. This fixes the normalization used when applying
 the existing real angular inverse theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

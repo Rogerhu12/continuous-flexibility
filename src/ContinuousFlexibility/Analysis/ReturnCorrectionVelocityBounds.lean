@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionSmallness
-import ContinuousFlexibility.Analysis.ReturnCorrectionResidualError
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionSmallness
+public import ContinuousFlexibility.Analysis.ReturnCorrectionResidualError
 
 /-!
 # Quantitative bounds for the actual corrected velocity
@@ -10,6 +12,8 @@ The selected-collar discriminant lower bound therefore controls the
 actual half-gap. The correction velocity is bounded directly from its
 defining formula using the actual flow derivative and actual K-id.
 -/
+
+@[expose] public section
 
 noncomputable section
 

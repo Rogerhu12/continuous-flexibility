@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFourierProducts
-import ContinuousFlexibility.Analysis.OneHighCircleSobolevJets
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierProducts
+public import ContinuousFlexibility.Analysis.OneHighCircleSobolevJets
 
 /-!
 # The circle one-high-factor estimate for distributed derivatives
@@ -9,6 +11,8 @@ Every integrability premise required by the infinite convolution argument is
 derived from that derivative family. The estimate applies to any positive
 number of factors and includes total order zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseJoinActualGerms
-import ContinuousFlexibility.Radial.MorsePositiveJoin
+module
+
+public import ContinuousFlexibility.Radial.MorseJoinActualGerms
+public import ContinuousFlexibility.Radial.MorsePositiveJoin
 
 /-!
 # A finite positive bridge between the two Morse tails
@@ -9,6 +11,8 @@ positive difference of logarithmic heights suffice. The two contributions
 to the interpolation budget are bounded by the actual widths of their
 cutoff supports. This permits an arbitrarily short pair of endpoint collars.
 -/
+
+@[expose] public section
 
 noncomputable section
 namespace ContinuousFlexibility.Radial

@@ -1,10 +1,12 @@
-import ContinuousFlexibility.Radial.OuterActualGreenData
-import ContinuousFlexibility.Radial.OuterDeepUniformProduct
-import ContinuousFlexibility.Radial.OuterMorsePointLabels
-import ContinuousFlexibility.Radial.OuterPhysicalKernelEnvelope
-import ContinuousFlexibility.Radial.OuterPhysicalNaturalEnvelope
-import ContinuousFlexibility.Radial.OuterStateScaleEnvelope
-import ContinuousFlexibility.Radial.OuterWholeKernelEnvelope
+module
+
+public import ContinuousFlexibility.Radial.OuterActualGreenData
+public import ContinuousFlexibility.Radial.OuterDeepUniformProduct
+public import ContinuousFlexibility.Radial.OuterMorsePointLabels
+public import ContinuousFlexibility.Radial.OuterPhysicalKernelEnvelope
+public import ContinuousFlexibility.Radial.OuterPhysicalNaturalEnvelope
+public import ContinuousFlexibility.Radial.OuterStateScaleEnvelope
+public import ContinuousFlexibility.Radial.OuterWholeKernelEnvelope
 
 /-!
 # The actual whole outer kernel has the full cubic attenuation
@@ -15,6 +17,8 @@ term use the basis stored in the same actual Robin inverse certificate.
 The action factor is retained explicitly, with no loss in the exponent
 between the two physical position labels.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04bCutVariationTests
+module
+
+public import ContinuousFlexibility.Analysis.N04bCutVariationTests
 
 /-!
 # Balanced optical first-variation tests
@@ -12,6 +14,8 @@ vanishing at both roots and positivity at the cut give the two endpoint
 inequalities. These results concern the test functions, without assuming a
 canonical chart or asserting the full N04b statement or its negation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

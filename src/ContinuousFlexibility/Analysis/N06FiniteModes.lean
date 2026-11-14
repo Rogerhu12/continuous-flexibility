@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06DegenerateGraph
-import ContinuousFlexibility.Analysis.CylinderSobolev
-import ContinuousFlexibility.Radial.R11bFiniteSynthesis
-import ContinuousFlexibility.Radial.FiniteFourierProjection
+module
+
+public import ContinuousFlexibility.Analysis.N06DegenerateGraph
+public import ContinuousFlexibility.Analysis.CylinderSobolev
+public import ContinuousFlexibility.Radial.R11bFiniteSynthesis
+public import ContinuousFlexibility.Radial.FiniteFourierProjection
 
 /-!
 # Finite-mode transfer of the weighted graph estimate
@@ -10,6 +12,8 @@ Finite synthesis is the existing actual function `r11bFiniteSynthesis`.
 Parseval is applied to the angular variable before radial integration.
 All coordinate derivatives below are the actual Fréchet partials.
 -/
+
+@[expose] public section
 
 noncomputable section
 

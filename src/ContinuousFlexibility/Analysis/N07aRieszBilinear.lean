@@ -1,6 +1,8 @@
-import Mathlib.Analysis.InnerProductSpace.Dual
-import Mathlib.Analysis.Normed.Operator.Bilinear
-import Mathlib.Analysis.Normed.Group.InfiniteSum
+module
+
+public import Mathlib.Analysis.InnerProductSpace.Dual
+public import Mathlib.Analysis.Normed.Operator.Bilinear
+public import Mathlib.Analysis.Normed.Group.InfiniteSum
 
 /-!
 # Riesz realization of a pointwise summable bilinear form
@@ -9,6 +11,8 @@ The hypothesis concerns absolute scalar sums, not a vector-valued series.
 It constructs a genuine bounded operator whose every pairing is the
 prescribed sum.  Angular block estimates supply these hypotheses.
 -/
+
+@[expose] public section
 
 noncomputable section
 

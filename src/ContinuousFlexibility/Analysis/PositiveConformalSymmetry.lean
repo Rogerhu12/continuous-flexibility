@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.PositiveConformalBoundaryJets
-import ContinuousFlexibility.Analysis.PositiveFiberInterpolationSymmetry
-import ContinuousFlexibility.Analysis.AngularTaylorPolynomial
+module
+
+public import ContinuousFlexibility.Analysis.PositiveConformalBoundaryJets
+public import ContinuousFlexibility.Analysis.PositiveFiberInterpolationSymmetry
+public import ContinuousFlexibility.Analysis.AngularTaylorPolynomial
 
 /-!
 # Circle symmetries of the finite conformal coordinate construction
@@ -10,6 +12,8 @@ d is even and e is odd, and both are periodic. The finite recursion
 therefore gives an even radial coordinate and an odd degree-one angular
 lift. These are properties of the constructed data and polynomial.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06PeriodicNormalizedRepresentation
-import ContinuousFlexibility.Analysis.N06PhysicalPeriodicity
+module
+
+public import ContinuousFlexibility.Analysis.N06PeriodicNormalizedRepresentation
+public import ContinuousFlexibility.Analysis.N06PhysicalPeriodicity
 
 /-!
 # The weak equation of the actual named current representatives
@@ -10,6 +12,8 @@ reconstruction, whose normalization is already supplied by the original
 N05 graph. Proving its weak equation therefore implies the original
 perturbed relation without changing that relation's definition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

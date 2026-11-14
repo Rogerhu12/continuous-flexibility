@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.GreenIdentity
-import ContinuousFlexibility.Scalar.NormalizedConservation
-import ContinuousFlexibility.Geometry.FlatDevelopment
+module
+
+public import ContinuousFlexibility.Scalar.GreenIdentity
+public import ContinuousFlexibility.Scalar.NormalizedConservation
+public import ContinuousFlexibility.Geometry.FlatDevelopment
 
 /-!
 # Exact scalar milestone propositions
@@ -9,6 +11,8 @@ These declarations are *targets*, not assumed axioms and not existence proofs.
 Every differential is an actual mathlib derivative of an actual function.
 The node correspondence is the original manuscript Section 3.
 -/
+
+@[expose] public section
 
 noncomputable section
 

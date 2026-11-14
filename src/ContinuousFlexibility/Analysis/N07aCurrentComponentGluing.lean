@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aCurrentCutMeasure
-import ContinuousFlexibility.Analysis.N07aMixedLocalCalculus
-import Mathlib.MeasureTheory.Function.LpSeminorm.Indicator
+module
+
+public import ContinuousFlexibility.Analysis.N07aCurrentCutMeasure
+public import ContinuousFlexibility.Analysis.N07aMixedLocalCalculus
+public import Mathlib.MeasureTheory.Function.LpSeminorm.Indicator
 
 /-!
 # Gluing the two moving halves of a negative component
@@ -9,6 +11,8 @@ Local smooth fields at the cut determine one smooth field on the whole
 component. Its angular derivatives remain in L² because the cut is null
 and the two actual open halves partition its complement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

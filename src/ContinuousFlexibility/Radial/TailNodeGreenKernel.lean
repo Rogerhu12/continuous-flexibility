@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Radial.TridiagonalDominance
-import ContinuousFlexibility.Radial.TailNodeUniqueness
-import ContinuousFlexibility.Radial.TailNodeProducts
-import Mathlib.Analysis.InnerProductSpace.l2Space
-import Mathlib.Analysis.InnerProductSpace.Symmetric
-import Mathlib.Topology.Algebra.InfiniteSum.Module
+module
+
+public import ContinuousFlexibility.Radial.TridiagonalDominance
+public import ContinuousFlexibility.Radial.TailNodeUniqueness
+public import ContinuousFlexibility.Radial.TailNodeProducts
+public import Mathlib.Analysis.InnerProductSpace.l2Space
+public import Mathlib.Analysis.InnerProductSpace.Symmetric
+public import Mathlib.Topology.Algebra.InfiniteSum.Module
 
 /-!
 # Coordinate Green kernels of the tail Jacobi inverse
@@ -14,6 +16,8 @@ controls every kernel entry. Away from the source, each column satisfies the
 homogeneous three-term recurrence. These are the operator facts needed to
 identify a Green column with the natural node line.
 -/
+
+@[expose] public section
 
 noncomputable section
 

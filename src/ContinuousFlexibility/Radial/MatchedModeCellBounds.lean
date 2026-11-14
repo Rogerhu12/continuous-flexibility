@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.MatchedCellBounds
-import ContinuousFlexibility.Radial.MatchedModeLocalization
-import ContinuousFlexibility.Radial.MatchingSourcePairing
-import ContinuousFlexibility.Radial.MatchingGraphRestrictions
+module
+
+public import ContinuousFlexibility.Radial.MatchedCellBounds
+public import ContinuousFlexibility.Radial.MatchedModeLocalization
+public import ContinuousFlexibility.Radial.MatchingSourcePairing
+public import ContinuousFlexibility.Radial.MatchingGraphRestrictions
 
 /-!
 # Actual source rows in localized matching bounds
@@ -15,6 +17,8 @@ The local inverse norms and the four column norms remain separate:
 the actual buffer decomposition can then distinguish the leading
 column from the exponentially small return into the interior.
 -/
+
+@[expose] public section
 
 noncomputable section
 

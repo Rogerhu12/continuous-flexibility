@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.CoupledStateScalarAction
-import ContinuousFlexibility.Analysis.CoupledDerivativeAlgebra
-import ContinuousFlexibility.Analysis.NeighborhoodStateBounds
-import ContinuousFlexibility.Analysis.SolveReturnEquations
-import ContinuousFlexibility.Analysis.StateControlCofiniteClosure
-import ContinuousFlexibility.Scalar.WeightedStateDerivative
+module
+
+public import ContinuousFlexibility.Analysis.CoupledStateScalarAction
+public import ContinuousFlexibility.Analysis.CoupledDerivativeAlgebra
+public import ContinuousFlexibility.Analysis.NeighborhoodStateBounds
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
+public import ContinuousFlexibility.Analysis.StateControlCofiniteClosure
+public import ContinuousFlexibility.Scalar.WeightedStateDerivative
 
 /-!
 # The scalar row of the genuine coupled derivative
@@ -15,6 +17,8 @@ No source realization of a proposed derivative is assumed. The same argument
 identifies the chart component with zero, because the actual scalar field is
 independent of the chart.
 -/
+
+@[expose] public section
 
 noncomputable section
 

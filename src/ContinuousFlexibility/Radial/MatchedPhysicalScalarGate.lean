@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MatchedPhysicalSchur
+module
+
+public import ContinuousFlexibility.Radial.MatchedPhysicalSchur
 
 /-!
 # The single active scalar border
@@ -8,6 +10,8 @@ the corresponding scalar gate removes an arbitrary extension of the
 modal inverse on inadmissible scalar inputs. It leaves every actual
 physical cell block and every admissible solution unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchedOuterWholeRepresentative
-import ContinuousFlexibility.Radial.MatchedWeakFluxEquation
+module
+
+public import ContinuousFlexibility.Radial.MatchedOuterWholeRepresentative
+public import ContinuousFlexibility.Radial.MatchedWeakFluxEquation
 
 /-!
 # The outward Green equation on the original physical interval
@@ -8,6 +10,8 @@ The reflection changes the flux sign and the interval order together.
 The actual source density has no orientation factor. These identities
 give the complete physical modal equation for the same representatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.NeighborhoodCircleFlowBasic
+module
+
+public import ContinuousFlexibility.Analysis.NeighborhoodCircleFlowBasic
 
 /-!
 # Actual angular derivative with continuous time dependence
@@ -7,6 +9,8 @@ The exact finite-difference formula gives the variational exponential.
 The argument only differentiates in the angle, including at the endpoints
 of the compact time interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

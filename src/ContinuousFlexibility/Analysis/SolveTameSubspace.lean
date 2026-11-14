@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.TameTransfer
+module
+
+public import ContinuousFlexibility.Analysis.TameTransfer
 
 /-!
 # Smooth tame maps with values in a closed subspace
@@ -9,6 +11,8 @@ the codomain therefore preserves the full smooth tame tower and its grading
 estimates.  The globally defined subspace-valued representative only needs
 to agree with the original map on that open domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

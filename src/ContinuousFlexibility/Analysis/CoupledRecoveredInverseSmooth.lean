@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CoupledRecoveredInverseFormula
-import ContinuousFlexibility.Analysis.CoupledConstantFeedbackSmooth
-import ContinuousFlexibility.Analysis.SolveTameSubspace
+module
+
+public import ContinuousFlexibility.Analysis.CoupledRecoveredInverseFormula
+public import ContinuousFlexibility.Analysis.CoupledConstantFeedbackSmooth
+public import ContinuousFlexibility.Analysis.SolveTameSubspace
 
 /-!
 # Smooth tameness of the same recovered coupled inverse
@@ -10,6 +12,8 @@ weighted mean is then used in the scalar inverse. The residual chart
 increment is composed last. The regular formula is identified with the
 existing guarded recovery before restricting its codomain to the sector.
 -/
+
+@[expose] public section
 
 noncomputable section
 

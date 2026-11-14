@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.PositiveBufferEnergySpace
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferEnergySpace
 
 /-!
 # Coercivity of the actual positive-buffer energy
@@ -8,6 +10,8 @@ the physical potential integral. On fields supported where `V ≥ m²`, its
 coercivity constant is `m² / (m² + 2)` in the exact Hilbert graph norm. This is
 the variational existence input for finite-buffer and exterior problems.
 -/
+
+@[expose] public section
 
 noncomputable section
 

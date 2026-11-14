@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CanonicalEndpointInverse
-import Mathlib.Data.Set.Function
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalEndpointInverse
+public import Mathlib.Data.Set.Function
 
 /-!
 # Smoothness of actual planar inverses on open sets
@@ -9,6 +11,8 @@ with any right inverse that takes its values in the injectivity domain.
 No continuity of the supplied right inverse is assumed. In particular,
 a genuine bijection of two open sets has a smooth actual `invFunOn`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

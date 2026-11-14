@@ -1,8 +1,12 @@
-import ContinuousFlexibility.Radial.SeedPositiveBridge
-import ContinuousFlexibility.Radial.SeedConnectorReconstruction
-import ContinuousFlexibility.Radial.SeedLogSlopeLower
+module
+
+public import ContinuousFlexibility.Radial.SeedPositiveBridge
+public import ContinuousFlexibility.Radial.SeedConnectorReconstruction
+public import ContinuousFlexibility.Radial.SeedLogSlopeLower
 
 /-! # A positive bridge between the two pure cone modes -/
+
+@[expose] public section
 
 noncomputable section
 

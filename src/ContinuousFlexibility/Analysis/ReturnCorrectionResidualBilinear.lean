@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionComponentIntegral
-import ContinuousFlexibility.Analysis.SolveNormalization
-import Mathlib.Algebra.Algebra.Bilinear
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionComponentIntegral
+public import ContinuousFlexibility.Analysis.SolveNormalization
+public import Mathlib.Algebra.Algebra.Bilinear
 
 /-!
 # Bilinearity of the actual independent-residual differential error
@@ -12,6 +14,8 @@ actual scalar differential error is bilinear in the independent residual
 and height increment. Its source compatibility is already proved; only
 weighted height membership remains for realization in the source space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

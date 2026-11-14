@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalOpenTests
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalOpenTests
 
 /-!
 # The weak product rule for actual open-piece coefficients
@@ -7,6 +9,8 @@ All multiplication operators act on the original canonical L² class.
 Only the compact test times the coefficient is globally smooth; the
 coefficient itself is required to be smooth only where the equation holds.
 -/
+
+@[expose] public section
 
 noncomputable section
 

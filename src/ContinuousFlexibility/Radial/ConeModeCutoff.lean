@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ConeSlopeAsymptotics
+module
+
+public import ContinuousFlexibility.Radial.ConeSlopeAsymptotics
 
 /-!
 # A safe cutoff of an actual cone solution to a pure mode
@@ -9,6 +11,8 @@ error.  A product of retain weights removes the irrelevant cone pole
 from the globally defined slope.  The reconstructed profile therefore
 has positive derivative everywhere.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.SelectedOuterVariation
-import ContinuousFlexibility.Radial.OuterGreenAssembly
-import ContinuousFlexibility.Radial.OuterFirstOrderRegularity
+module
+
+public import ContinuousFlexibility.Radial.SelectedOuterVariation
+public import ContinuousFlexibility.Radial.OuterGreenAssembly
+public import ContinuousFlexibility.Radial.OuterFirstOrderRegularity
 
 /-!
 # The constructed weighted Green map solves the actual equation
@@ -9,6 +11,8 @@ For arbitrary weighted L² data the kernel formula has a C¹ representative
 up to the regular entrance. Its continuous physical flux has the required
 weak derivative and the exact normalized Robin trace.
 -/
+
+@[expose] public section
 
 noncomputable section
 

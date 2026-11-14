@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsCircleAngularPower
-import ContinuousFlexibility.Analysis.N04PulledFieldsTransportPowerGrowth
-import ContinuousFlexibility.Analysis.JointMixedCircleEvaluation
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsCircleAngularPower
+public import ContinuousFlexibility.Analysis.N04PulledFieldsTransportPowerGrowth
+public import ContinuousFlexibility.Analysis.JointMixedCircleEvaluation
 
 /-!
 # Actual strip angular prefixes from fixed-base circle families
@@ -9,6 +11,8 @@ The circle estimates are uniform in a family of radius selectors.
 Covering each physical strip identifies those estimates with the genuine
 joint tower. The common low order precedes every parameter prefix.
 -/
+
+@[expose] public section
 
 noncomputable section
 

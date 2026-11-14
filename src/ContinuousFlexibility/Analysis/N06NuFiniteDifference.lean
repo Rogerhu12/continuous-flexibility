@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06NuFiniteSmooth
-import ContinuousFlexibility.Analysis.N06FiniteJetDifference
+module
+
+public import ContinuousFlexibility.Analysis.N06NuFiniteSmooth
+public import ContinuousFlexibility.Analysis.N06FiniteJetDifference
 
 /-!
 # Finite-dimensional Lipschitz jets of the actual nu formula
@@ -9,6 +11,8 @@ mean value estimate, and the actual ordered-partition chain rule give one
 uniform Lipschitz bound for every fixed composition jet. These are ordinary
 finite-dimensional estimates, before any state or source space is chosen.
 -/
+
+@[expose] public section
 
 noncomputable section
 

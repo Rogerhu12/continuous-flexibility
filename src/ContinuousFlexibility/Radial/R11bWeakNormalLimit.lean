@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.R11bModeL2
-import ContinuousFlexibility.Radial.R11bRadialTests
-import ContinuousFlexibility.Radial.R11bPhysicalPairing
+module
+
+public import ContinuousFlexibility.Radial.R11bModeL2
+public import ContinuousFlexibility.Radial.R11bRadialTests
+public import ContinuousFlexibility.Radial.R11bPhysicalPairing
 
 /-!
 # Closure of the actual normal weak derivative under physical L² convergence
@@ -10,6 +12,8 @@ functions on the bounded annulus. The weak identity therefore passes to the
 limit through the continuous Hilbert pairing, with the original angular
 normalization preserved.
 -/
+
+@[expose] public section
 
 noncomputable section
 

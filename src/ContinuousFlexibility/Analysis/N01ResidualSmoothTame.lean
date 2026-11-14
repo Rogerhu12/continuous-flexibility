@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N01ResidualSectorCoordinates
-import ContinuousFlexibility.Analysis.N01CircleLinearTame
-import ContinuousFlexibility.Analysis.CirclePositiveInverseSmoothTame
-import ContinuousFlexibility.Analysis.TameTopologicalComposition
-import ContinuousFlexibility.Analysis.TameProductDirections
-import ContinuousFlexibility.Analysis.N02ReturnAssembly
+module
+
+public import ContinuousFlexibility.Analysis.N01ResidualSectorCoordinates
+public import ContinuousFlexibility.Analysis.N01CircleLinearTame
+public import ContinuousFlexibility.Analysis.CirclePositiveInverseSmoothTame
+public import ContinuousFlexibility.Analysis.TameTopologicalComposition
+public import ContinuousFlexibility.Analysis.TameProductDirections
+public import ContinuousFlexibility.Analysis.N02ReturnAssembly
 
 /-!
 # Full smooth tameness and N02 for the actual return residual
@@ -15,6 +17,8 @@ The construction works on the full original sector neighborhood and
 provides every field and every clause of N02 without an additional
 membership, differentiability, or tame assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N08CircleSingleState
-import ContinuousFlexibility.Analysis.N08CircleNuLocality
+module
+
+public import ContinuousFlexibility.Analysis.N08CircleSingleState
+public import ContinuousFlexibility.Analysis.N08CircleNuLocality
 
 /-!
 # Uniform control-diagonal stability at zero parameter
@@ -8,6 +10,8 @@ The actual local return data permit replacement by a one-label state.
 The material power in the genuine second-jet estimate is canceled by
 raising the input circle grading. One neighborhood controls every label.
 -/
+
+@[expose] public section
 
 noncomputable section
 

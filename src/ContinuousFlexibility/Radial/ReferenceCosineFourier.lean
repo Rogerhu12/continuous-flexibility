@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ReferenceFourierL2
+module
+
+public import ContinuousFlexibility.Radial.ReferenceFourierL2
 
 /-!
 # The real, even, pi-periodic Fourier sector
@@ -7,6 +9,8 @@ Using the circle of period `π` makes its integer frequency `n` the physical
 frequency `2*n`. The exact normalization agrees with the reference angular
 mean, and even real fields have real coefficients invariant under `n ↦ -n`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

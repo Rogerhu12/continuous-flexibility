@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CylinderMixedJets
+module
+
+public import ContinuousFlexibility.Analysis.CylinderMixedJets
 
 /-!
 # Smooth physical gluing from matching coordinate jets
@@ -9,6 +11,8 @@ Fréchet derivatives.  Their piecewise Taylor series is then a Taylor series
 for the glued function: at the circle the first derivatives on the two
 half-spaces agree, and away from it the glued function is locally one branch.
 -/
+
+@[expose] public section
 
 noncomputable section
 

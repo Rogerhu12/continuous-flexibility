@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cActualFlowForcingComposition
+module
+
+public import ContinuousFlexibility.Analysis.N01cActualFlowForcingComposition
 
 /-!
 # The actual low linear-coefficient integral
@@ -9,6 +11,8 @@ therefore bound the coefficient's first norm. Integrating its continuous
 norm on the unit time interval gives the constant used in every positive
 parameter variational equation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

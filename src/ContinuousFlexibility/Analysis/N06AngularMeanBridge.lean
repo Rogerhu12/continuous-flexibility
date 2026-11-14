@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.Periodic
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.Periodic
 
 /-!
 # The full physical circle and the half-period source model
@@ -9,6 +11,8 @@ The full-period physical mean agrees with the half-period mean for a
 periodic integrand.  For a general physical test its half-period average
 must be used before making that replacement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

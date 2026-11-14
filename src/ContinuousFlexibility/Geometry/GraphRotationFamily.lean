@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Geometry.PlanarRotations
-import ContinuousFlexibility.Contracts.CenteredDevelopment
+module
+
+public import ContinuousFlexibility.Geometry.PlanarRotations
+public import ContinuousFlexibility.Contracts.CenteredDevelopment
 
 /-!
 # The actual rotation-conjugated Euclidean graph family
@@ -9,6 +11,8 @@ height is `Z ∘ Rₜ`. One fixed constructed development supplies every member.
 Joint smoothness, the intrinsic metric, and the fixed collars are proved from
 the actual formulas. This file makes no sphere-closure or noncongruence claim.
 -/
+
+@[expose] public section
 
 noncomputable section
 

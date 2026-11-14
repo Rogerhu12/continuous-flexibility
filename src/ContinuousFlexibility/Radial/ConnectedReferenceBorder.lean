@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ReferenceTrueBorder
+module
+
+public import ContinuousFlexibility.Radial.ReferenceTrueBorder
 
 /-!
 # Retaining the connected selected geometry when installing its true border
@@ -12,6 +14,8 @@ This is the initial common geometry for terminal matching. It does not
 assert an inner or outer inverse, a selected matching margin, or a choice
 of quantitative parameters that the R08 statement does not supply.
 -/
+
+@[expose] public section
 
 noncomputable section
 

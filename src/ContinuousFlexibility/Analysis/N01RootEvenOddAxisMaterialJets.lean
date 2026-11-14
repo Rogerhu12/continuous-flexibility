@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01RootInverseCoordinateAxisMaterialJets
-import ContinuousFlexibility.Analysis.RootOddAxisJets
-import ContinuousFlexibility.Analysis.RootChartExtension
-import ContinuousFlexibility.Analysis.RootChartSymmetry
+module
+
+public import ContinuousFlexibility.Analysis.N01RootInverseCoordinateAxisMaterialJets
+public import ContinuousFlexibility.Analysis.RootOddAxisJets
+public import ContinuousFlexibility.Analysis.RootChartExtension
+public import ContinuousFlexibility.Analysis.RootChartSymmetry
 
 /-!
 # Material jets of the genuine even and odd root extensions
@@ -11,6 +13,8 @@ Only its angular displacement is used at order zero. The odd coefficient
 costs one source derivative, uniformly before the component and state;
 neither the localization radius nor the parameter scale enters the cost.
 -/
+
+@[expose] public section
 
 noncomputable section
 

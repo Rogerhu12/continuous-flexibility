@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartFullHalfFields
-import ContinuousFlexibility.Analysis.N01cWholeSpeedPowerBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartFullHalfFields
+public import ContinuousFlexibility.Analysis.N01cWholeSpeedPowerBounds
 
 /-!
 # The actual divided optical speed in the mixed power algebra
@@ -10,6 +12,8 @@ open state domain and uses any requested base and loss, so it can be
 combined with the actual normalized multiplier without changing that
 multiplier's once-chosen interpolation indices.
 -/
+
+@[expose] public section
 
 noncomputable section
 

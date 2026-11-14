@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Geometry.MarkerStabilizer
-import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+module
+
+public import ContinuousFlexibility.Geometry.MarkerStabilizer
+public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 
 /-!
 # A genuine principal frame from an immersed plane and its normal
@@ -10,6 +12,8 @@ operator forces its simple eigenlines to be preserved; the chain rule then
 forces preservation of the actual E3 principal lines. Surface applications must
 derive that commutation from their actual shape transformation law.
 -/
+
+@[expose] public section
 
 noncomputable section
 

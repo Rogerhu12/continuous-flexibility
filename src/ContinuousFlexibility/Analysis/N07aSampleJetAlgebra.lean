@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aSampleJetProducts
+module
+
+public import ContinuousFlexibility.Analysis.N07aSampleJetProducts
 
 /-!
 # Fixed coefficient algebra on the actual pieces
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Analysis.N07aSampleJetProducts
 Piecewise scalar factors remain sampled subpower envelopes. The bounds
 below retain a single state loss when forming the six normal coefficients.
 -/
+
+@[expose] public section
 
 noncomputable section
 

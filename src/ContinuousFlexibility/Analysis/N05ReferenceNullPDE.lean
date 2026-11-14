@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05NegativeOrientation
-import ContinuousFlexibility.Analysis.N05NullOrientationAlgebra
-import ContinuousFlexibility.Analysis.OpticalTravelVariation
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05NegativeOrientation
+public import ContinuousFlexibility.Analysis.N05NullOrientationAlgebra
+public import ContinuousFlexibility.Analysis.OpticalTravelVariation
 
 /-!
 # The actual reference null characteristic equations
@@ -11,6 +13,8 @@ orientation select opposite characteristic directions.  The speed is the
 existing optical speed of the actual reference profile.  Thus no
 characteristic equation is added as a hypothesis to the canonical data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

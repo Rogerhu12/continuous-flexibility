@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05CanonicalBoundarySymmetry
-import ContinuousFlexibility.Analysis.CanonicalStripGeometry
-import ContinuousFlexibility.Analysis.N04bBoundaryInverseRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalBoundarySymmetry
+public import ContinuousFlexibility.Analysis.CanonicalStripGeometry
+public import ContinuousFlexibility.Analysis.N04bBoundaryInverseRegularity
 
 /-!
 # Closed-chart identities used by N06
@@ -12,6 +14,8 @@ They state the reference closed strip and its regularity for an arbitrary
 `CanonicalGeometry`, and the inverse-chart angular identities on the closed
 canonical cylinder for every admitted state.
 -/
+
+@[expose] public section
 
 noncomputable section
 

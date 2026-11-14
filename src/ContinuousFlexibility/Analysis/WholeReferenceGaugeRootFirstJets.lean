@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ActualPositiveGaugeRootFirstJets
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData
+module
+
+public import ContinuousFlexibility.Analysis.ActualPositiveGaugeRootFirstJets
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData
 
 /-!
 # Actual root first jets in the new whole-atlas record
@@ -10,6 +12,8 @@ negative field identities therefore turn the proved raw first jets
 into first jets of the record's endpoint-aligned charts and heights.
 No new endpoint, orientation, map, or state is selected here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

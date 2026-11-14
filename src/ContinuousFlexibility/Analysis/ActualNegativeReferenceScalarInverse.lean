@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ActualNegativeReferencePotentialFormula
+module
+
+public import ContinuousFlexibility.Analysis.ActualNegativeReferencePotentialFormula
 
 /-!
 # The actual scalar inverse on a negative reference half
@@ -8,6 +10,8 @@ The scalar functions below are its literal zero-angle slices. Their
 inverse identities and unit radial normalization follow from the actual
 chart geometry and density, without selecting another inverse function.
 -/
+
+@[expose] public section
 
 noncomputable section
 

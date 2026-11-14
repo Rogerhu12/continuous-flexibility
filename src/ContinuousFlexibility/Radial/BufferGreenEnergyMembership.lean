@@ -1,12 +1,16 @@
-import ContinuousFlexibility.Radial.PositiveBufferEnergyMass
-import ContinuousFlexibility.Radial.PositiveBufferComparisonGreenRegularity
-import ContinuousFlexibility.Radial.BufferAffineCutGlue
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferEnergyMass
+public import ContinuousFlexibility.Radial.PositiveBufferComparisonGreenRegularity
+public import ContinuousFlexibility.Radial.BufferAffineCutGlue
 
 /-!
 # Actual derivative and weighted membership of the cutoff Green column
 The exterior derivative and weight come from genuine positive energy. Measurable
 gluing and affine transfer give the global derivative and weight in the energy graph.
 -/
+
+@[expose] public section
 noncomputable section
 namespace ContinuousFlexibility.Radial
 open Real Set Filter MeasureTheory

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01NeighborhoodRestriction
-import ContinuousFlexibility.Analysis.SectorParameterGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N01NeighborhoodRestriction
+public import ContinuousFlexibility.Analysis.SectorParameterGeometry
 
 /-!
 # Restriction of the actual N02 and N03 constructions
@@ -8,6 +10,8 @@ Shrinking the common neighborhood retains the same operators and
 geometric data. The genuine directional tower is restricted to the
 smaller open domain, with the original local tame estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

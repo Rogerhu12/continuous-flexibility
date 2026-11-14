@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
-import ContinuousFlexibility.Analysis.PositiveChartRangeGeometry
-import ContinuousFlexibility.Analysis.RootUniformCollar
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
+public import ContinuousFlexibility.Analysis.PositiveChartRangeGeometry
+public import ContinuousFlexibility.Analysis.RootUniformCollar
 
 /-!
 # Spatial regularity of the actual positive geometry atoms
@@ -10,6 +12,8 @@ and angular periodicity of its eight stored scalar atoms. The physical and
 canonical affine unit maps stay distinct. The pulled height is evaluated
 at the actual inverse chart, on the same canonical unit map.
 -/
+
+@[expose] public section
 
 noncomputable section
 

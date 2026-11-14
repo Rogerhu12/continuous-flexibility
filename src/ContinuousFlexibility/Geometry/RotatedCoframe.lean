@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.HeightDerivatives
-import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
+module
+
+public import ContinuousFlexibility.Scalar.HeightDerivatives
+public import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
 
 /-!
 # Rotating a planar coframe with exact connection
@@ -12,6 +14,8 @@ their verification for a particular remainder metric is a separate step.
 This is the calculation in Section 2, lines 84--94: if the connection is
 `dψ`, then `exp(iψ) (η₁ + iη₂)` is closed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

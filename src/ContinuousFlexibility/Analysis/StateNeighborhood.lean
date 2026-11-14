@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import ContinuousFlexibility.Analysis.TameLocalCalculus
-import ContinuousFlexibility.Analysis.TameTransfer
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import ContinuousFlexibility.Analysis.TameLocalCalculus
+public import ContinuousFlexibility.Analysis.TameTransfer
 
 /-!
 # Shrinking the common nonlinear neighborhood
@@ -13,6 +15,8 @@ neighborhood, without changing the reference state or any geometric data.
 These facts allow the low-order smallness choices in the coordinate
 construction to use one neighborhood for all subsequent estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

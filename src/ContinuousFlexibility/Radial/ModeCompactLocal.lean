@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ModeTestIntegrability
-import Mathlib.MeasureTheory.Function.LocallyIntegrable
+module
+
+public import ContinuousFlexibility.Radial.ModeTestIntegrability
+public import Mathlib.MeasureTheory.Function.LocallyIntegrable
 
 /-!
 # Ordinary local integrability of modal weak solutions
@@ -9,6 +11,8 @@ density has a continuous reciprocal. Thus modal L² functions and the
 right hand side of the principal divergence equation are locally L¹
 with respect to ordinary Lebesgue measure.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CoupledConstantFeedbackInverse
-import ContinuousFlexibility.Analysis.CoupledInverseRecovery
+module
+
+public import ContinuousFlexibility.Analysis.CoupledConstantFeedbackInverse
+public import ContinuousFlexibility.Analysis.CoupledInverseRecovery
 
 /-!
 # A regular formula for the same recovered coupled inverse
@@ -9,6 +11,8 @@ the frozen formula. Injectivity of that mean on constant circle elements
 identifies the controls themselves. The regular expression below is thus
 equal to the existing guarded recovery on its valid domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

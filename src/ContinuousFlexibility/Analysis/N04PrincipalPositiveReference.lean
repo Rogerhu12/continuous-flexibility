@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PrincipalPositiveDensity
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeReferencePrincipal
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalPositiveDensity
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeReferencePrincipal
 
 /-!
 # Reference inverse factors for the principal formulas
@@ -9,6 +11,8 @@ interval.  Evaluating the frozen reference-atom bounds there controls
 both the pulled height and its reciprocal.  The genuine inverse
 Jacobian identity similarly exchanges the two Jacobian atoms.
 -/
+
+@[expose] public section
 
 noncomputable section
 

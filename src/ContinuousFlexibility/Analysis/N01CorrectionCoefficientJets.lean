@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01CorrectionCoefficientPointTower
-import ContinuousFlexibility.Analysis.SmoothDirectionsScalarLine
+module
+
+public import ContinuousFlexibility.Analysis.N01CorrectionCoefficientPointTower
+public import ContinuousFlexibility.Analysis.SmoothDirectionsScalarLine
 
 /-!
 # Actual multilinear coefficient fields for the return correction
@@ -11,6 +13,8 @@ line derivatives, parity and periodicity follow from the constructed
 genuine towers. Spatial mixed-jet estimates can therefore concern this
 single family rather than a separate formal representation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

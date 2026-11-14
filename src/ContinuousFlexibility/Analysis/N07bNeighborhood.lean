@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06Neighborhood
+module
+
+public import ContinuousFlexibility.Analysis.N06Neighborhood
 
 /-!
 # Restriction of the scalar inverse on the same nonlinear construction
@@ -11,6 +13,8 @@ inverse, and scalar inverse remains the original witness.
 A fixed state order can be put below the new low order. On a neighborhood
 of radius at most one half, the corresponding state weight is at most two.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05CanonicalAngularTransport
-import ContinuousFlexibility.Analysis.N05CanonicalSmoothJets
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05CanonicalAngularTransport
+public import ContinuousFlexibility.Analysis.N05CanonicalSmoothJets
 
 /-!
 # Unsigned actual representatives for canonical angular jets
@@ -10,6 +12,8 @@ The actual radial chart and source multiplier then assemble its physical
 representative. This preserves odd angular jets and identifies smooth
 single-coordinate jets with their genuine transported derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

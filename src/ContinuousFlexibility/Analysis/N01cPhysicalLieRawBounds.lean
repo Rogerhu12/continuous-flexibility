@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cPhysicalLieParameterJets
-import ContinuousFlexibility.Analysis.N01cPhysicalLieProducts
-import ContinuousFlexibility.Analysis.N01cEndpointMixedPowerAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.N01cPhysicalLieParameterJets
+public import ContinuousFlexibility.Analysis.N01cPhysicalLieProducts
+public import ContinuousFlexibility.Analysis.N01cEndpointMixedPowerAlgebra
 
 /-!
 # Distributed endpoint bounds for the actual physical Lie jets
@@ -11,6 +13,8 @@ order. Their product retains one height factor at positive parameter
 order; the remaining endpoint power uses only the fixed component width.
 The outer angle is unrestricted throughout.
 -/
+
+@[expose] public section
 
 noncomputable section
 

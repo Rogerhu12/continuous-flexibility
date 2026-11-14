@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ReferenceCellL2
-import ContinuousFlexibility.Radial.R11bWeightEmbedding
-import ContinuousFlexibility.Analysis.FlatExtension
+module
+
+public import ContinuousFlexibility.Radial.ReferenceCellL2
+public import ContinuousFlexibility.Radial.R11bWeightEmbedding
+public import ContinuousFlexibility.Analysis.FlatExtension
 
 /-!
 # Endpoint limits from quantitative reference-cell decay
@@ -12,6 +14,8 @@ positive cubic attenuation margin.  The final extension theorem applies to
 actual ordinary derivatives; estimates for those derivatives remain separate
 analytic obligations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

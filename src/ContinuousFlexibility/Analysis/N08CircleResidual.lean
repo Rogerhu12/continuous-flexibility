@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N08ReferenceFlow
-import ContinuousFlexibility.Analysis.N08StateProjection
-import ContinuousFlexibility.Analysis.SolveResidualSpaces
-import ContinuousFlexibility.Analysis.SolveTameSubspace
+module
+
+public import ContinuousFlexibility.Analysis.N08ReferenceFlow
+public import ContinuousFlexibility.Analysis.N08StateProjection
+public import ContinuousFlexibility.Analysis.SolveResidualSpaces
+public import ContinuousFlexibility.Analysis.SolveTameSubspace
 
 /-!
 # The actual return residual in the even circle space
@@ -10,6 +12,8 @@ The odd candidate chart and its two inverse identities force the chosen
 inverse chart to be odd.  The actual return residual is therefore even.
 Restricting its codomain preserves the smooth tame tower supplied by N02.
 -/
+
+@[expose] public section
 
 noncomputable section
 

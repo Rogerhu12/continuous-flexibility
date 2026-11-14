@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01ActualRootGeometry
-import ContinuousFlexibility.Analysis.N01RootFieldLocalization
+module
+
+public import ContinuousFlexibility.Analysis.N01ActualRootGeometry
+public import ContinuousFlexibility.Analysis.N01RootFieldLocalization
 
 /-!
 # Actual root strips with a cell and a state-independent positive speed
@@ -9,6 +11,8 @@ condition in the coefficient strip used by the fixed-loss estimates.
 The selected material cell and collar precede the state. The same
 positive lower bound survives the fixed radial localization everywhere.
 -/
+
+@[expose] public section
 
 noncomputable section
 

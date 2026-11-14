@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.Coordinates
-import Mathlib.Topology.Order.IntermediateValue
+module
+
+public import ContinuousFlexibility.Scalar.Coordinates
+public import Mathlib.Topology.Order.IntermediateValue
 
 /-!
 # Reflection and angular fibers on a genuine radial strip
@@ -9,6 +11,8 @@ and has an inverse preserves the open angular strip `(0, π)`.  This identifies
 the actual domains needed for the ordinary planar change-of-variables theorem;
 there is no implicit change of fundamental domain in the source pairing.
 -/
+
+@[expose] public section
 
 noncomputable section
 

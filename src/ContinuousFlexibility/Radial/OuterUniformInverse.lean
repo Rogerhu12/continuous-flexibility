@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.OuterActualGreenUniform
-import ContinuousFlexibility.Radial.OuterManuscriptBounds
-import ContinuousFlexibility.Radial.OuterMorseKernelEnvelope
-import ContinuousFlexibility.Radial.OuterOrdinaryJacobiSource
-import ContinuousFlexibility.Radial.FlatEndpointUnweightedObstruction
+module
+
+public import ContinuousFlexibility.Radial.OuterActualGreenUniform
+public import ContinuousFlexibility.Radial.OuterManuscriptBounds
+public import ContinuousFlexibility.Radial.OuterMorseKernelEnvelope
+public import ContinuousFlexibility.Radial.OuterOrdinaryJacobiSource
+public import ContinuousFlexibility.Radial.FlatEndpointUnweightedObstruction
 
 /-!
 # Uniform actual outer inverses and their manuscript estimates
@@ -16,6 +18,8 @@ The ordinary estimates here are localized. The proposed global ordinary
 L² bound in the manuscript is contradicted by the flat-endpoint theorem
 imported above; no bounded global ordinary inverse is asserted.
 -/
+
+@[expose] public section
 
 noncomputable section
 

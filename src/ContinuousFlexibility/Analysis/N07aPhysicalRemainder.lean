@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalSolution
-import ContinuousFlexibility.Analysis.N07aMixedLocalCalculus
-import ContinuousFlexibility.Analysis.N07aAngularCandidateCoordinates
-import ContinuousFlexibility.Scalar.WeightedDecodeLift
-import ContinuousFlexibility.Analysis.TameLocalCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalSolution
+public import ContinuousFlexibility.Analysis.N07aMixedLocalCalculus
+public import ContinuousFlexibility.Analysis.N07aAngularCandidateCoordinates
+public import ContinuousFlexibility.Scalar.WeightedDecodeLift
+public import ContinuousFlexibility.Analysis.TameLocalCalculus
 
 /-!
 # The original physical remainder in the actual height decoder
@@ -11,6 +13,8 @@ Only the height remainder is extended by zero. On the physical core its
 decoded height pair is the same smooth solution and has exactly the same
 normalization and differential equation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

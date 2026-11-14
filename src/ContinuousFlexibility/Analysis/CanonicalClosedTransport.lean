@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CanonicalClosedInverseJets
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalClosedInverseJets
 
 /-!
 # Actual reference-to-current transport at physical boundaries
@@ -8,6 +10,8 @@ smoothness of the stored transition at every reference closed-piece point.
 The height ratio is positive and smooth there as well. These are local
 consequences for the actual maps, before any global gluing or estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

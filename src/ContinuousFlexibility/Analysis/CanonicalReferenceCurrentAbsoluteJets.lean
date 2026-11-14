@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aGeometryJetBounds
-import ContinuousFlexibility.Analysis.MaterialSampleBounds
-import ContinuousFlexibility.Analysis.N04RealizationJetScalars
+module
+
+public import ContinuousFlexibility.Analysis.N07aGeometryJetBounds
+public import ContinuousFlexibility.Analysis.MaterialSampleBounds
+public import ContinuousFlexibility.Analysis.N04RealizationJetScalars
 
 /-!
 # Absolute unit jets at the actual material sample
@@ -9,6 +11,8 @@ The reference jets and the genuine current difference share one fixed
 state loss. A uniform bound for the actual positive height power turns
 their sum into an explicit E0 envelope, without replacing the sample.
 -/
+
+@[expose] public section
 
 noncomputable section
 

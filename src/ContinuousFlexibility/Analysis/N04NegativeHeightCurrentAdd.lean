@@ -1,4 +1,8 @@
-import ContinuousFlexibility.Analysis.N04NegativeHeightReferenceLinear
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeHeightReferenceLinear
+
+@[expose] public section
 
 noncomputable section
 

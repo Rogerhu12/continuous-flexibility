@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.PhysicalSpacesAuxiliaryColumn
-import ContinuousFlexibility.Analysis.N04RealizationLeadGauge
-import ContinuousFlexibility.Analysis.N04RealizationSameWitnessCompletion
+module
+
+public import ContinuousFlexibility.Analysis.PhysicalSpacesAuxiliaryColumn
+public import ContinuousFlexibility.Analysis.N04RealizationLeadGauge
+public import ContinuousFlexibility.Analysis.N04RealizationSameWitnessCompletion
 
 /-!
 # Clauses that survive the auxiliary-column replacement
@@ -9,6 +11,8 @@ Replacing the auxiliary column changes only the field `psi` of the physical
 spaces. Every clause below refers to the retained fields of the spaces,
 geometry, correction and canonical records, so it transfers unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

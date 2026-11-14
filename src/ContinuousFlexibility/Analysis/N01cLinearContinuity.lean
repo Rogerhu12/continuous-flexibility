@@ -1,7 +1,9 @@
-import Mathlib.Analysis.Normed.Module.Seminorm.Basic
-import Mathlib.Analysis.Normed.Module.Basic
-import Mathlib.Analysis.Normed.Group.Continuity
-import Mathlib.Topology.Algebra.Group.Neighborhood
+module
+
+public import Mathlib.Analysis.Normed.Module.Seminorm.Basic
+public import Mathlib.Analysis.Normed.Module.Basic
+public import Mathlib.Analysis.Normed.Group.Continuity
+public import Mathlib.Topology.Algebra.Group.Neighborhood
 
 /-!
 # Continuity of linear maps bounded by a source seminorm
@@ -9,6 +11,8 @@ import Mathlib.Topology.Algebra.Group.Neighborhood
 The source retains its original topological vector space topology. A
 norm on that source is neither introduced nor needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

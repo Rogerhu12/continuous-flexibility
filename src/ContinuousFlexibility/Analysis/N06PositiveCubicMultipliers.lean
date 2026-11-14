@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06CubicMultiplierJets
+module
+
+public import ContinuousFlexibility.Analysis.N06CubicMultiplierJets
 
 /-!
 # The actual positive-piece cubic multipliers
@@ -7,6 +9,8 @@ The primitive hypotheses concern only the three divided coefficient
 fields on positive pieces. Negative pieces contribute zero. This keeps
 their different canonical intervals out of the unit-cylinder estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.ReferenceOutputCosineCoordinates
-import ContinuousFlexibility.Radial.ReferenceCosineGraphSufficiency
-import ContinuousFlexibility.Radial.ReferenceRadialKernelPairing
-import ContinuousFlexibility.Radial.ModeLocalMeasure
+module
+
+public import ContinuousFlexibility.Radial.ReferenceOutputCosineCoordinates
+public import ContinuousFlexibility.Radial.ReferenceCosineGraphSufficiency
+public import ContinuousFlexibility.Radial.ReferenceRadialKernelPairing
+public import ContinuousFlexibility.Radial.ModeLocalMeasure
 
 /-!
 # The actual graph of cosine synthesis
@@ -11,6 +13,8 @@ coefficients in the actual weighted measure. Equivalence of null sets
 then transfers their equations and the border row to ordinary interval
 integrals. Thus the synthesized field satisfies every frozen radial test.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerBufferPoisson
-import ContinuousFlexibility.Radial.InnerRadialL2Mass
+module
+
+public import ContinuousFlexibility.Radial.InnerBufferPoisson
+public import ContinuousFlexibility.Radial.InnerRadialL2Mass
 
 /-!
 # The leading buffer column and its exact energy cost
@@ -9,6 +11,8 @@ used by compression. The potential lower bound on that buffer controls
 its L² mass by the actual inward boundary energy. This keeps the inverse
 mass factor before the physical Liouville change of coordinates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OpticalTravelVariation
+module
+
+public import ContinuousFlexibility.Analysis.OpticalTravelVariation
 
 /-!
 # A quantitative obstruction to a tiny normalized optical control
@@ -8,6 +10,8 @@ the second variation and the size of the affine radicand variation to be
 bounded below.  The proof is an elementary integrated cubic inequality.
 It uses actual integrals and introduces no arithmetic or indexing premise.
 -/
+
+@[expose] public section
 
 noncomputable section
 

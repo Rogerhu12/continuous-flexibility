@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ClosedGradientResolvent
-import ContinuousFlexibility.Radial.TailFormCore
+module
+
+public import ContinuousFlexibility.Radial.ClosedGradientResolvent
+public import ContinuousFlexibility.Radial.TailFormCore
 
 /-!
 # The positive Friedrichs resolvent of a deep tail
@@ -9,6 +11,8 @@ it to the equivalent Hilbert product topology and apply orthogonal projection.
 This identifies the actual Friedrichs graph with its positive resolvent and
 proves strong convergence for increasing Dirichlet truncations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

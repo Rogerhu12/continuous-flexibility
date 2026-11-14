@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionSourceEnvelopes
-import ContinuousFlexibility.Analysis.N01NeighborhoodRestriction
-import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionSourceEnvelopes
+public import ContinuousFlexibility.Analysis.N01NeighborhoodRestriction
+public import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
 
 /-!
 # Local coefficient bounds with one fixed material and derivative loss
@@ -10,6 +12,8 @@ order. Two adjacent parameter orders share their finite maximum and a
 smaller low-order neighborhood. The same bounds supply common actual
 coefficient envelopes along each short scalar segment.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aWeightedSchurRealization
+module
+
+public import ContinuousFlexibility.Analysis.N07aWeightedSchurRealization
 
 /-!
 # The same bounded commutator in every actual weighted graph
@@ -8,6 +10,8 @@ identity identifies every higher weighted Schur realization with this
 same operator. The maximal angular domain identity is then the proved
 coordinate identity for this operator, rather than an extra hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

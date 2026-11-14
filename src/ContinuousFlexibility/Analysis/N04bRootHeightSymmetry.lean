@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bActualRootHeightCollar
-import ContinuousFlexibility.Scalar.Conservation
+module
+
+public import ContinuousFlexibility.Analysis.N04bActualRootHeightCollar
+public import ContinuousFlexibility.Scalar.Conservation
 
 /-!
 # Actual angular symmetries of the root height
@@ -10,6 +12,8 @@ reflected chart and the even angular-product denominator. The genuine
 root height is therefore periodic and even whenever the actual leading
 coefficient is, as supplied by N03 and raw field regularity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

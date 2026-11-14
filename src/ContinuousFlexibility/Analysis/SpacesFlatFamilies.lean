@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.MaterialHeightRegularity
-import ContinuousFlexibility.Analysis.SpacesSmoothEvaluation
-import Mathlib.Topology.Baire.CompleteMetrizable
+module
+
+public import ContinuousFlexibility.Analysis.MaterialHeightRegularity
+public import ContinuousFlexibility.Analysis.SpacesSmoothEvaluation
+public import Mathlib.Topology.Baire.CompleteMetrizable
 
 /-!
 # Flat physical heights, including smooth parameter families
@@ -12,6 +14,8 @@ decoding therefore satisfies the barrelled-space evaluation theorem.
 Applying that theorem to the derivative tower in `SmoothTameOn` proves
 joint smoothness on the original parameter interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

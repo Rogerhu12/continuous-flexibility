@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Scalar.WeightedBinaryProduct
-import ContinuousFlexibility.Scalar.WeightedPhysicalMultiplier
-import ContinuousFlexibility.Scalar.WeightedReferenceMaterialJets
-import ContinuousFlexibility.Scalar.WeightedNeighborhood
+module
+
+public import ContinuousFlexibility.Scalar.WeightedBinaryProduct
+public import ContinuousFlexibility.Scalar.WeightedPhysicalMultiplier
+public import ContinuousFlexibility.Scalar.WeightedReferenceMaterialJets
+public import ContinuousFlexibility.Scalar.WeightedNeighborhood
 
 /-!
 # Concrete algebra on the scalar weighted heights
@@ -10,6 +12,8 @@ All operations below use the original Sobolev decoder. The reference
 coefficients act as actual radial multipliers. Products with the constant
 background one are expanded into sums and products of decaying heights.
 -/
+
+@[expose] public section
 
 noncomputable section
 

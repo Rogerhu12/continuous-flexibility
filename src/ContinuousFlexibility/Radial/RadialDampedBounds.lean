@@ -1,9 +1,11 @@
-import Mathlib.Analysis.Calculus.MeanValue
-import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
-import Mathlib.Analysis.Normed.Group.Bounded
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Positivity
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Analysis.Calculus.MeanValue
+public import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
+public import Mathlib.Analysis.Normed.Group.Bounded
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Positivity
+public import Mathlib.Tactic.Ring
 
 /-!
 # Power decay for genuine damped scalar differential equations
@@ -13,6 +15,8 @@ A power fence gives a bound on a further tail. A genuine compact-interval
 bound then restores the original threshold, which may therefore be kept
 fixed when the lemma is used at successive derivative orders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

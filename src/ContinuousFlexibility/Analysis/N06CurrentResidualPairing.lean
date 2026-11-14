@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06CurrentScalarPairing
-import ContinuousFlexibility.Analysis.N06CurrentPhysicalTests
-import ContinuousFlexibility.Analysis.N06NamedPhysicalRelation
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentScalarPairing
+public import ContinuousFlexibility.Analysis.N06CurrentPhysicalTests
+public import ContinuousFlexibility.Analysis.N06NamedPhysicalRelation
 
 /-!
 # The literal current physical residual as a finite Green sum
@@ -15,6 +17,8 @@ The physical test need only be an original RadialTest. No periodicity of
 the bare corrected operator, finite angular support, or weak PDE is an
 input to this change-of-variables identity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

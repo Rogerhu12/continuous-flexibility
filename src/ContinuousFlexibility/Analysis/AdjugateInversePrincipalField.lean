@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.AdjugatePrincipalField
-import Mathlib.Tactic.LinearCombination
+module
+
+public import ContinuousFlexibility.Analysis.AdjugatePrincipalField
+public import Mathlib.Tactic.LinearCombination
 
 /-!
 # The forward adjugate field equals the actual reverse field
@@ -9,6 +11,8 @@ the inverse matrix entries. Their substitution identifies the explicit
 forward-only principal field with the reverse coordinate density on an
 open inverse chart. No boundary value of the prescribed inverse is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

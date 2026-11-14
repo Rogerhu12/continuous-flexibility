@@ -1,7 +1,9 @@
-import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
-import Mathlib.Tactic.Convert
-import Mathlib.Tactic.FieldSimp
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
+public import Mathlib.Tactic.Convert
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.Ring
 
 /-!
 # The logarithmic radial gauge
@@ -11,6 +13,8 @@ Section 5, equation `rad-eq-rm13` of the supplied manuscript uses
 the positive half-line, with a real exponent `a` (later specialized to `j²`).
 The identities do not assert existence of a radial reference or an inverse.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

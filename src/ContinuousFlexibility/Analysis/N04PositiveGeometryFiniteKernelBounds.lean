@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cCompositionJetBounds
-import ContinuousFlexibility.Analysis.N01cStateAngleGraphBudget
-import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
+module
+
+public import ContinuousFlexibility.Analysis.N01cCompositionJetBounds
+public import ContinuousFlexibility.Analysis.N01cStateAngleGraphBudget
+public import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
 
 /-!
 # Finite kernel composition with the original parameter height factor
@@ -11,6 +13,8 @@ no height factor. Multiplying the blocks keeps one height factor
 precisely when the original parameter arity is positive. The spatial
 costs are added before any normalization to one high seminorm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

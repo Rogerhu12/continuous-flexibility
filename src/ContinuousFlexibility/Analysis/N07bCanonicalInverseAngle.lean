@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Blueprint.Statements
-import ContinuousFlexibility.Geometry.PlanarOrientation
-import Mathlib.Tactic.FieldSimp
-import Mathlib.Tactic.Ring
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
+public import ContinuousFlexibility.Geometry.PlanarOrientation
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.Ring
 
 /-!
 # The actual inverse angular direction of a chart
@@ -11,6 +13,8 @@ forward chart. Its derivative identity follows by differentiating the
 genuine local inverse relation. The scalar pullback chain rule therefore
 uses no assumed coordinate-derivative formula.
 -/
+
+@[expose] public section
 
 noncomputable section
 

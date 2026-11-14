@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.HeightSectorDirections
+module
+
+public import ContinuousFlexibility.Analysis.HeightSectorDirections
 
 /-!
 # The sharp one-high weight for scalar and height directions
@@ -7,6 +9,8 @@ The finite-product identity is proved for an abstract seminorm family
 before it is instantiated in the physical state space. Any number of
 unit scalar directions leaves one low and one high height factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01FlowInverseJetBounds
-import ContinuousFlexibility.Analysis.ScalarJetFamilyBounds
-import ContinuousFlexibility.Analysis.CircleCompositionModel
-import ContinuousFlexibility.Analysis.ReturnCorrectionDisplacementRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N01FlowInverseJetBounds
+public import ContinuousFlexibility.Analysis.ScalarJetFamilyBounds
+public import ContinuousFlexibility.Analysis.CircleCompositionModel
+public import ContinuousFlexibility.Analysis.ReturnCorrectionDisplacementRegularity
 
 /-!
 # Uniform angular bounds for the actual return charts
@@ -11,6 +13,8 @@ inverse maps, the odd right chart and the correction conjugation.
 Positive-order jets are controlled by composition and the scalar inverse
 estimate. One common N01 neighborhood supplies all lower bounds.
 -/
+
+@[expose] public section
 
 noncomputable section
 

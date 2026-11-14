@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cFlowCompactStateSmooth
+module
+
+public import ContinuousFlexibility.Analysis.N01cFlowCompactStateSmooth
 
 /-!
 # Joint state and initial-angle smoothness of the supplied circle flow
@@ -8,6 +10,8 @@ The shifted speed uses the same genuine state-and-angle speed tower.
 The compact-time theorem then supplies a genuine joint tower, and
 adding back the initial angle recovers the actual supplied flow.
 -/
+
+@[expose] public section
 
 noncomputable section
 

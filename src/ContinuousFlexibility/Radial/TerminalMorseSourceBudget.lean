@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.TerminalMorseSourceNormalization
-import ContinuousFlexibility.Radial.TerminalMatchingThreshold
+module
+
+public import ContinuousFlexibility.Radial.TerminalMorseSourceNormalization
+public import ContinuousFlexibility.Radial.TerminalMatchingThreshold
 
 /-!
 # A fixed coefficient budget for the actual terminal source
@@ -9,6 +11,8 @@ absorbed by the actual chain scales. The exponent is a fixed number
 defined from the universal cutoff jets; it is chosen before the
 frequency-band threshold and before the tail index.
 -/
+
+@[expose] public section
 
 noncomputable section
 

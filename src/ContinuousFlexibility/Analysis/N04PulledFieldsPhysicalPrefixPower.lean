@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationFixedBasePrefix
-import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationFixedBasePrefix
+public import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
 
 /-!
 # Physical prefixes with parameter-order losses
@@ -11,6 +13,8 @@ prefix offset, chosen before the spatial top order. In particular, a
 high parameter derivative at spatial order zero need not have zero power.
 The sampled height factor is retained at every positive parameter order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

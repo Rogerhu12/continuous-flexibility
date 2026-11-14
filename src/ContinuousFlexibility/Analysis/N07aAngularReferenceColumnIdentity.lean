@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aAngularReferenceLowJets
-import ContinuousFlexibility.Analysis.N07aAngularReferenceSource
-import ContinuousFlexibility.Analysis.N07aReferenceTestOperator
-import ContinuousFlexibility.Analysis.N07aReferenceNuColumn
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceLowJets
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceSource
+public import ContinuousFlexibility.Analysis.N07aReferenceTestOperator
+public import ContinuousFlexibility.Analysis.N07aReferenceNuColumn
 
 /-!
 # The reference scalar columns are the actual differential columns
@@ -10,6 +12,8 @@ The zero reference return residual makes the correction vanish on every
 decoded height pair. Applying it to the actual left cutoff identifies the
 existing canonical scalar column with the radial differential expression.
 -/
+
+@[expose] public section
 
 noncomputable section
 

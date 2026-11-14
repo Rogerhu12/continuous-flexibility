@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartFullHalfFields
-import ContinuousFlexibility.Analysis.N01cFlowAffineCompression
-import ContinuousFlexibility.Analysis.PositivePowerMaterialJets
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartFullHalfFields
+public import ContinuousFlexibility.Analysis.N01cFlowAffineCompression
+public import ContinuousFlexibility.Analysis.PositivePowerMaterialJets
 
 /-!
 # Genuine finite-parameter representatives of the divided root fields
@@ -11,6 +13,8 @@ physical half. A scalar positive-power extension and a radial clamp are
 used only outside those germs; no derivative bound for either extension
 is used in the quantitative point-fiber flow theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

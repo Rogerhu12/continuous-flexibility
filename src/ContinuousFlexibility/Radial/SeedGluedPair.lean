@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.SeedCentralHeads
-import ContinuousFlexibility.Radial.SeedPureTail
-import ContinuousFlexibility.Radial.SeedThreePiece
+module
+
+public import ContinuousFlexibility.Radial.SeedCentralHeads
+public import ContinuousFlexibility.Radial.SeedPureTail
+public import ContinuousFlexibility.Radial.SeedThreePiece
 
 /-!
 # Data of the actual central seed joined to two selected tails
@@ -9,6 +11,8 @@ Every field records a property of the explicitly glued functions. The
 construction is provided by `exists_seedGluedPair`; no new assumption is
 added to the radial milestone.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06RootBoundaryRecursion
-import ContinuousFlexibility.Analysis.N06RootLabelJets
+module
+
+public import ContinuousFlexibility.Analysis.N06RootBoundaryRecursion
+public import ContinuousFlexibility.Analysis.N06RootLabelJets
 
 /-!
 # The finite boundary formulas used by the actual root patch
@@ -10,6 +12,8 @@ traces and the derivative of the actual label. These equalities follow
 from the genuine root transport equation. No regularity of G as a
 function of the state is required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

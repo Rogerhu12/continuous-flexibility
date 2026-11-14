@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aClosedJets
-import ContinuousFlexibility.Analysis.N07aReferenceFirstTraces
+module
+
+public import ContinuousFlexibility.Analysis.N07aClosedJets
+public import ContinuousFlexibility.Analysis.N07aReferenceFirstTraces
 
 /-!
 # First-trace identification for within-smooth closed reference sides
@@ -8,6 +10,8 @@ The radial jet is the genuine derivative within the closed strip. Smooth
 angular traces and their periods follow from this derivative; they are not
 separate regularity or matching assumptions on the unknown.
 -/
+
+@[expose] public section
 
 noncomputable section
 

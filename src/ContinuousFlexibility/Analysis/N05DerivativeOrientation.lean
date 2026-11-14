@@ -1,5 +1,7 @@
-import Mathlib.Analysis.Calculus.Deriv.MeanValue
-import Mathlib.Topology.Order.IntermediateValue
+module
+
+public import Mathlib.Analysis.Calculus.Deriv.MeanValue
+public import Mathlib.Topology.Order.IntermediateValue
 
 /-!
 # One-dimensional orientation from a nonvanishing actual derivative
@@ -8,6 +10,8 @@ An oriented endpoint increment fixes the sign of a continuous nonzero
 derivative throughout a preconnected domain.  The same argument applies
 to either orientation of a radial piece and to a degree-one periodic lift.
 -/
+
+@[expose] public section
 
 noncomputable section
 

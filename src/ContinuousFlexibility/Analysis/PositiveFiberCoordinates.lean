@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.ParameterizedCircleInverse
-import ContinuousFlexibility.Analysis.CircleInverseExistence
-import ContinuousFlexibility.Analysis.TravelStripGlobalInverse
-import ContinuousFlexibility.Analysis.CylinderSobolev
+module
+
+public import ContinuousFlexibility.Analysis.ParameterizedCircleInverse
+public import ContinuousFlexibility.Analysis.CircleInverseExistence
+public import ContinuousFlexibility.Analysis.TravelStripGlobalInverse
+public import ContinuousFlexibility.Analysis.CylinderSobolev
 
 /-!
 # Genuine positive cylinder coordinates from two scalar interpolations
@@ -11,6 +13,8 @@ at fixed η=φ(r,θ). The actual Jacobian is Y_r·φ_θ. The two scalar inverse
 functions give an explicit global inverse, whose joint smoothness follows
 from the already proved parameterized implicit-function theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SourceJetAssembly
+module
+
+public import ContinuousFlexibility.Analysis.SourceJetAssembly
 
 /-!
 # Physical source compatibility propagates to genuine jets
@@ -9,6 +11,8 @@ are genuine derivatives in that space. Differentiating the zero value
 of the functional therefore proves compatibility of every jet from
 compatibility of order zero alone.
 -/
+
+@[expose] public section
 
 noncomputable section
 

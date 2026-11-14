@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometryCorrectedFlowCircle
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryCorrectedFlowCircle
 
 /-!
 # The inverse of the same corrected flow
@@ -8,6 +10,8 @@ in the existing inverse operator's domain. Its decoder is then exactly
 the inverse of the original corrected flow, with the opposite optical
 translation. The resulting state-and-angle derivatives are genuine.
 -/
+
+@[expose] public section
 
 noncomputable section
 

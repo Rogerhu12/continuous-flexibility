@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05CanonicalMultipliers
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalMultipliers
 
 /-!
 # A single canonical angular jet independent of endpoint weights
@@ -8,6 +10,8 @@ When its coordinates form a genuine L² sequence, choose that sequence
 once. Endpoint proofs can therefore supply different physical derivative
 representatives and still identify exactly the same canonical jet.
 -/
+
+@[expose] public section
 
 noncomputable section
 

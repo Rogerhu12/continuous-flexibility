@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFourierInverseLow
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierInverseLow
 
 /-!
 # Uniform tame inversion of genuine circle lifts
@@ -7,6 +9,8 @@ The low geometry of the inverse is first derived from the forward geometry.
 The high-order induction then composes the reciprocal forward defect with
 the actual inverse, using the previously proved tame composition theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

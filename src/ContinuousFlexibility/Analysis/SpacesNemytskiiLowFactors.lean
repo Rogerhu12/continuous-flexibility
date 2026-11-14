@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesInterpolationProducts
-import Mathlib.Algebra.BigOperators.Group.Finset.Piecewise
+module
+
+public import ContinuousFlexibility.Analysis.SpacesInterpolationProducts
+public import Mathlib.Algebra.BigOperators.Group.Finset.Piecewise
 
 /-!
 # Repeated low base factors in a tame product estimate
@@ -9,6 +11,8 @@ norm on a fixed neighborhood leaves one high base norm or one high
 direction norm. The product identities also apply when some low direction
 norm is zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

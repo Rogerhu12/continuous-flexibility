@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerRadialL2Mass
-import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
-import Mathlib.Analysis.Normed.Operator.LinearIsometry
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialL2Mass
+public import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
+public import Mathlib.Analysis.Normed.Operator.LinearIsometry
 
 /-!
 # The exact square-density isometry in real L²
@@ -9,6 +11,8 @@ Multiplication by a measurable, almost everywhere nonzero amplitude
 changes a square-density measure into the base measure. No boundedness
 of the amplitude or its reciprocal is required for this isometry.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.SeedControlledReference
-import ContinuousFlexibility.Radial.FixedCentralBorder
+module
+
+public import ContinuousFlexibility.Radial.SeedControlledReference
+public import ContinuousFlexibility.Radial.FixedCentralBorder
 
 /-!
 # One controlled reference with the preselected central border
@@ -8,6 +10,8 @@ The fixed border and model window are inputs.  The construction retains the
 specified selected tail, both requested cone heads, and the entire model
 window.  Its actual physical column is globally the already fixed column.
 -/
+
+@[expose] public section
 
 noncomputable section
 

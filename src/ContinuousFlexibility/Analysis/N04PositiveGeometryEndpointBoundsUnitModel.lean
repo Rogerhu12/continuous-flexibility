@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N03ControlledRootUnitIdentification
-import ContinuousFlexibility.Analysis.N06RootBoundaryFiniteFormulas
-import ContinuousFlexibility.Analysis.RootCharacteristicReflection
+module
+
+public import ContinuousFlexibility.Analysis.N03ControlledRootUnitIdentification
+public import ContinuousFlexibility.Analysis.N06RootBoundaryFiniteFormulas
+public import ContinuousFlexibility.Analysis.RootCharacteristicReflection
 
 /-!
 # The boundary formulas of the same unit root model
@@ -10,6 +12,8 @@ the root-coordinate contract with its forward angular label. Thus the
 eight finite formulas apply to that very unit model. Localization has no
 effect on any of its raw coefficient traces at the axis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

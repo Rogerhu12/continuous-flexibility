@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.PositiveReferenceCylinder
-import ContinuousFlexibility.Analysis.WholePositiveCanonicalFields
-import ContinuousFlexibility.Analysis.WholePositiveReferenceGauge
+module
+
+public import ContinuousFlexibility.Analysis.PositiveReferenceCylinder
+public import ContinuousFlexibility.Analysis.WholePositiveCanonicalFields
+public import ContinuousFlexibility.Analysis.WholePositiveReferenceGauge
 
 /-!
 # The actual principal field under a fixed radial reference gauge
@@ -10,6 +12,8 @@ by H^2 Y', H^2 and H^2/Y', respectively. The formulas are evaluated at
 the same true inverse point. They do not assume coefficient matching or
 a transformation rule for independent prescribed jets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

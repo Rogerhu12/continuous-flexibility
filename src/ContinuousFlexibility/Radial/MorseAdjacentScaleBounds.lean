@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MorseJoinHeightContrast
+module
+
+public import ContinuousFlexibility.Radial.MorseJoinHeightContrast
 
 /-!
 # Uniform numerical scales at adjacent Morse cells
@@ -13,6 +15,8 @@ The proof includes index zero. A quadratic estimate for the adjacent
 amplitude increment gives one numerical constant without any restriction
 on the initial index of the chain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

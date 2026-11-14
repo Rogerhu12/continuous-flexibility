@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aWeakNormalEquation
+module
+
+public import ContinuousFlexibility.Analysis.N07aWeakNormalEquation
 
 /-!
 # The second normal derivative of a rough canonical solution
@@ -9,6 +11,8 @@ equation. The proof stays in L² throughout: it differentiates the angular
 flux, subtracts the mixed flux, and multiplies by the reciprocal leading
 coefficient using the weak product rule.
 -/
+
+@[expose] public section
 
 noncomputable section
 

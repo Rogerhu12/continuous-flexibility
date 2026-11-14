@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Analysis
-import Mathlib.Analysis.SpecialFunctions.Pow.Real
+module
+
+public import ContinuousFlexibility.Statements.Analysis
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 
 /-!
 # Interpolation of products on one fixed low-order neighborhood
@@ -10,6 +12,8 @@ by one high seminorm whenever the sum of these charges fits below the
 high order. The low order and the final loss are chosen before the
 requested output order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

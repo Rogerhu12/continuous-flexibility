@@ -1,12 +1,14 @@
-import ContinuousFlexibility.Scalar.WeightedConservation
-import ContinuousFlexibility.Scalar.WeightedSourceIntegral
-import ContinuousFlexibility.Scalar.WeightedResidualFormulas
-import ContinuousFlexibility.Scalar.WeightedTypeBound
-import ContinuousFlexibility.Scalar.WeightedGraphSeparation
-import ContinuousFlexibility.Scalar.WeightedGreen
-import ContinuousFlexibility.Scalar.WeightedLinearConservation
-import ContinuousFlexibility.Scalar.WeightedErrorConservation
-import ContinuousFlexibility.Scalar.WeightedStateDerivative
+module
+
+public import ContinuousFlexibility.Scalar.WeightedConservation
+public import ContinuousFlexibility.Scalar.WeightedSourceIntegral
+public import ContinuousFlexibility.Scalar.WeightedResidualFormulas
+public import ContinuousFlexibility.Scalar.WeightedTypeBound
+public import ContinuousFlexibility.Scalar.WeightedGraphSeparation
+public import ContinuousFlexibility.Scalar.WeightedGreen
+public import ContinuousFlexibility.Scalar.WeightedLinearConservation
+public import ContinuousFlexibility.Scalar.WeightedErrorConservation
+public import ContinuousFlexibility.Scalar.WeightedStateDerivative
 
 /-!
 # Analytic consequences of the actual scalar realizations
@@ -17,6 +19,8 @@ identity, maximality of the weak graph, and the endpoint Green statements
 follow on the same chosen neighborhood. This module assembles those proved
 consequences without adding fields to the frozen candidate data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

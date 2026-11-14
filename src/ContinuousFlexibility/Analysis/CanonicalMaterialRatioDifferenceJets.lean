@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SolveReturnEquations
-import ContinuousFlexibility.Analysis.N08Neighborhoods
+module
+
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
+public import ContinuousFlexibility.Analysis.N08Neighborhoods
 
 /-!
 # The six actual material ratios have zero state differences
@@ -10,6 +12,8 @@ current and reference functions, including every mixed spatial jet. The
 zero multilinear maps give a genuine state derivative tower. No estimate
 for the reference spatial jets, or lower bound E0 >= 1, is used here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

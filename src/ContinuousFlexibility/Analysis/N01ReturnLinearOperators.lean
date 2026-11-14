@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01UniformReturnMargins
-import ContinuousFlexibility.Analysis.CircleReturnWeightedInverse
-import ContinuousFlexibility.Analysis.CircleCompositionModel
+module
+
+public import ContinuousFlexibility.Analysis.N01UniformReturnMargins
+public import ContinuousFlexibility.Analysis.CircleReturnWeightedInverse
+public import ContinuousFlexibility.Analysis.CircleCompositionModel
 
 /-!
 # The actual N01 return operators in the supplied circle space
@@ -11,6 +13,8 @@ therefore realizes an operator on the original physical circle model with
 four levels of loss: three angular levels and one sample-weight level.
 Both inverse identities retain the required even/zero-mean and odd sectors.
 -/
+
+@[expose] public section
 
 noncomputable section
 

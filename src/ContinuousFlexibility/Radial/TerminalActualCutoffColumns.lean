@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.TerminalCapRegionalLift
-import ContinuousFlexibility.Radial.TerminalLiftBoundaryTrace
-import ContinuousFlexibility.Radial.TerminalModeLiftPairing
+module
+
+public import ContinuousFlexibility.Radial.TerminalCapRegionalLift
+public import ContinuousFlexibility.Radial.TerminalLiftBoundaryTrace
+public import ContinuousFlexibility.Radial.TerminalModeLiftPairing
 
 /-!
 # Actual cutoff columns for the common inner Poisson construction
@@ -10,6 +12,8 @@ cutoff, homogeneous solution, source norm and support geometry.  The
 Hilbert vectors, retained representatives, diagonal fluxes and source
 pairings are constructed here rather than supplied as inverse data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

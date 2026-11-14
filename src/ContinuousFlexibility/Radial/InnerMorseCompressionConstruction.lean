@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerMorseOrderedConstruction
-import ContinuousFlexibility.Radial.InnerMorseBufferCoefficients
+module
+
+public import ContinuousFlexibility.Radial.InnerMorseOrderedConstruction
+public import ContinuousFlexibility.Radial.InnerMorseBufferCoefficients
 
 /-!
 # Constructing all earlier compressed Morse models after one choice
@@ -10,6 +12,8 @@ the actual tail realization; the index may subsequently meet any given
 lower cutoff and any prescribed error tolerance. The same construction
 works for every frequency in every later band, without an upper bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

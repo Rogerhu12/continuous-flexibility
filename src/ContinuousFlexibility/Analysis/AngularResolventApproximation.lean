@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.AngularResolventSpectrum
-import Mathlib.Analysis.Normed.Operator.Bilinear
-import Mathlib.Analysis.SpecificLimits.Basic
+module
+
+public import ContinuousFlexibility.Analysis.AngularResolventSpectrum
+public import Mathlib.Analysis.Normed.Operator.Bilinear
+public import Mathlib.Analysis.SpecificLimits.Basic
 
 /-!
 # Approximation of a discrete-spectrum resolvent
@@ -9,6 +11,8 @@ The finite spectral sums converge to the bounded resolvent in operator
 norm. This is valid with infinite-dimensional eigenspaces: no finite-rank
 or compact-operator approximation is claimed or used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

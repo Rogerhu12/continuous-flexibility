@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.R07IncomingCap
-import ContinuousFlexibility.Radial.MorseChainGeometry
-import ContinuousFlexibility.Radial.MorseCellMassTravel
+module
+
+public import ContinuousFlexibility.Radial.R07IncomingCap
+public import ContinuousFlexibility.Radial.MorseChainGeometry
+public import ContinuousFlexibility.Radial.MorseCellMassTravel
 
 /-!
 # The concrete Morse caps for normalized incoming solutions
@@ -10,6 +12,8 @@ the fixed short-cap cut and is traversed backwards. Both use one affine
 coordinate with the outward sign, so the physical dilation cancels from
 the Riccati slope estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

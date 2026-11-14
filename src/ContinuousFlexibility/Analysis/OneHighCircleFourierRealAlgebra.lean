@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCircleRealSobolev
-import ContinuousFlexibility.Analysis.OneHighCircleSobolevAlgebra
-import ContinuousFlexibility.Analysis.OneHighCircleFourierSobolevProduct
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleRealSobolev
+public import ContinuousFlexibility.Analysis.OneHighCircleSobolevAlgebra
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierSobolevProduct
 
 /-!
 # Real-function algebra for the physical circle norms
@@ -8,6 +10,8 @@ import ContinuousFlexibility.Analysis.OneHighCircleFourierSobolevProduct
 These are the canonical complexification forms of the verified Fourier
 estimates, used by the real circle diffeomorphism and flow arguments.
 -/
+
+@[expose] public section
 
 noncomputable section
 

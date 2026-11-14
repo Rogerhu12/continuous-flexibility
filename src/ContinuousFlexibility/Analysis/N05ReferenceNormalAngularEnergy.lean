@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05ReferenceNormalHighBlocks
-import ContinuousFlexibility.Analysis.N05ReferenceAngularSourceSobolev
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceNormalHighBlocks
+public import ContinuousFlexibility.Analysis.N05ReferenceAngularSourceSobolev
 
 /-!
 # Every angular energy of the actual physical normal derivative
@@ -8,6 +10,8 @@ The two consecutive actual source jets supply the spectral square sums.
 The singleton first-normal estimate then sums with the angular power.
 The same normal derivative and material exponents serve every order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

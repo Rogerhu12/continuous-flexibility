@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aClosedPhysicalHeight
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalAEPairing
+module
+
+public import ContinuousFlexibility.Analysis.N07aClosedPhysicalHeight
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalAEPairing
 
 /-!
 # The genuine closed reference height represents the original graph field
@@ -8,6 +10,8 @@ The scalar cutoff is restored before comparison with the original graph.
 The half-period change of variables is extended to the full test period using
 periodicity on the actual reference strip.
 -/
+
+@[expose] public section
 
 noncomputable section
 

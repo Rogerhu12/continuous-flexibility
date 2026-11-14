@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N08CircleDerivative
-import ContinuousFlexibility.Analysis.N08FlowLocality
-import ContinuousFlexibility.Analysis.N08ControlBasis
-import ContinuousFlexibility.Analysis.N08ControlDiagonal
-import ContinuousFlexibility.Analysis.N08ProfilePointwise
+module
+
+public import ContinuousFlexibility.Analysis.N08CircleDerivative
+public import ContinuousFlexibility.Analysis.N08FlowLocality
+public import ContinuousFlexibility.Analysis.N08ControlBasis
+public import ContinuousFlexibility.Analysis.N08ControlDiagonal
+public import ContinuousFlexibility.Analysis.N08ProfilePointwise
 
 /-!
 # The actual diagonal control mean derivative
@@ -12,6 +14,8 @@ locality of the ordinary flow proves that every direction with zero
 control mean at `m` has zero derivative in that output coordinate.
 Linearity then gives the exact diagonal formula for every direction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

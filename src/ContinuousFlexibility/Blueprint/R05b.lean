@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Blueprint.Statements
-import ContinuousFlexibility.Radial.MorseChainMassResistance
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
+public import ContinuousFlexibility.Radial.MorseChainMassResistance
 
 /-!
 # Blueprint node R05b
@@ -13,6 +15,8 @@ realization controls the fixed radius charts; physical change of variables
 and connector monotonicity give uniform bounds for every admissible height
 choice, including the initial left interval with no connector.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

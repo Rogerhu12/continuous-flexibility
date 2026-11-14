@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationEnvelopeDifferential
-import ContinuousFlexibility.Analysis.N07aAngularJacobianEnvelope
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationEnvelopeDifferential
+public import ContinuousFlexibility.Analysis.N07aAngularJacobianEnvelope
 
 /-!
 # Actual Jacobian envelopes from positive chart jets
@@ -8,6 +10,8 @@ The determinant uses four entries of the genuine first derivative.
 Only positive coordinate jets enter the estimate. Absolute value is
 transferred through its existing local sign identity at nonzero Jacobians.
 -/
+
+@[expose] public section
 
 noncomputable section
 

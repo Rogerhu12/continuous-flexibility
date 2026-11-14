@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05CanonicalSourceL2Local
-import ContinuousFlexibility.Analysis.N05PeriodicPhysicalL2Norm
-import ContinuousFlexibility.Analysis.N05PhysicalPieces
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05CanonicalSourceL2Local
+public import ContinuousFlexibility.Analysis.N05PeriodicPhysicalL2Norm
+public import ContinuousFlexibility.Analysis.N05PhysicalPieces
 
 /-!
 # Global finite reference-source bounds from canonical volume data
@@ -11,6 +13,8 @@ null set. Their local square-integral estimates sum against the actual
 canonical Hilbert norm. Periodicity then supplies the full reference
 angular interval, with a constant independent of the finite localizer set.
 -/
+
+@[expose] public section
 
 noncomputable section
 

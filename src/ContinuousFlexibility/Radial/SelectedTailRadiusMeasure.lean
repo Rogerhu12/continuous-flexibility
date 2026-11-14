@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.SelectedReferenceTransport
-import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
-import Mathlib.MeasureTheory.Measure.WithDensity
-import Mathlib.MeasureTheory.Integral.Lebesgue.Map
-import Mathlib.MeasureTheory.Function.LpSeminorm.SMul
+module
+
+public import ContinuousFlexibility.Radial.SelectedReferenceTransport
+public import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
+public import Mathlib.MeasureTheory.Measure.WithDensity
+public import Mathlib.MeasureTheory.Integral.Lebesgue.Map
+public import Mathlib.MeasureTheory.Function.LpSeminorm.SMul
 
 /-!
 # The actual radial measure under a radius dilation
@@ -16,6 +18,8 @@ The transport is a measurable equivalence. Consequently the L² statements
 below do not require a separate measurability assumption on the function.
 A single Boolean endpoint parameter handles the two natural tail intervals.
 -/
+
+@[expose] public section
 
 noncomputable section
 

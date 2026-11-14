@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ScalarFlowVariation
-import Mathlib.Analysis.Calculus.ParametricIntervalIntegral
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+module
+
+public import ContinuousFlexibility.Analysis.ScalarFlowVariation
+public import Mathlib.Analysis.Calculus.ParametricIntervalIntegral
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 
 /-!
 # Parameter variation of an actual scalar flow
@@ -11,6 +13,8 @@ integral.  The last lemma records the simplification of the chain rule
 when the velocity's angular derivative vanishes at the base parameter.
 No differentiability of the flow endpoint is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

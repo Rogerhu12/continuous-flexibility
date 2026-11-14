@@ -1,12 +1,14 @@
-import Mathlib.Analysis.Analytic.IteratedFDeriv
-import Mathlib.Analysis.Normed.Module.FiniteDimension
-import Mathlib.LinearAlgebra.Multilinear.FiniteDimensional
-import Mathlib.Topology.ContinuousMap.Bounded.Normed
-import Mathlib.Analysis.Normed.Module.Seminorm.Basic
-import Mathlib.Tactic.FunProp
-import Mathlib.Tactic.Positivity
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Analysis.Analytic.IteratedFDeriv
+public import Mathlib.Analysis.Normed.Module.FiniteDimension
+public import Mathlib.LinearAlgebra.Multilinear.FiniteDimensional
+public import Mathlib.Topology.ContinuousMap.Bounded.Normed
+public import Mathlib.Analysis.Normed.Module.Seminorm.Basic
+public import Mathlib.Tactic.FunProp
+public import Mathlib.Tactic.Positivity
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
 
 /-!
 # Uniform diagonal bounds for symmetric multilinear forms
@@ -19,6 +21,8 @@ therefore gives a polarization bound whose constant depends only on
 the arity. No norm, completeness, or continuity assumption on the
 original parameter space is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

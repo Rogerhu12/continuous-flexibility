@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerSupportedScalarSign
-import ContinuousFlexibility.Radial.InnerRadialPhysicalSchur
+module
+
+public import ContinuousFlexibility.Radial.InnerSupportedScalarSign
+public import ContinuousFlexibility.Radial.InnerRadialPhysicalSchur
 
 /-!
 # The manuscript scalar sign on the actual inner problem
@@ -14,6 +16,8 @@ transports the same inverse by `J G J`, retaining both inverse
 identities, the Schur formula, and Green self-adjointness. No local
 model, interface matrix, or cut geometry is chosen again.
 -/
+
+@[expose] public section
 
 noncomputable section
 

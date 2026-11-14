@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalJetEnvelopes
-import ContinuousFlexibility.Analysis.N07aInverseChartBounds
-import ContinuousFlexibility.Analysis.N07aReferenceReturn
-import ContinuousFlexibility.Analysis.N07aCanonicalSourceRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalJetEnvelopes
+public import ContinuousFlexibility.Analysis.N07aInverseChartBounds
+public import ContinuousFlexibility.Analysis.N07aReferenceReturn
+public import ContinuousFlexibility.Analysis.N07aCanonicalSourceRegularity
 
 /-!
 # The actual reference source coordinates retain the sampled weight
@@ -10,6 +12,8 @@ The physical height and the actual absolute Jacobian inverse multiply
 the source before composition with the genuine reference inverse chart.
 Only positive-order inverse-chart jets enter the finite chain rule.
 -/
+
+@[expose] public section
 
 noncomputable section
 

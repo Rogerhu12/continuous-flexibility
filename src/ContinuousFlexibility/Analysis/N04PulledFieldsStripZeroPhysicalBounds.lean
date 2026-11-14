@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsFixedBaseMixedGrowth
-import ContinuousFlexibility.Analysis.N04RealizationJointMixedRegularity
-import ContinuousFlexibility.Analysis.ReturnCorrectionCoefficientJetSupport
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsFixedBaseMixedGrowth
+public import ContinuousFlexibility.Analysis.N04RealizationJointMixedRegularity
+public import ContinuousFlexibility.Analysis.ReturnCorrectionCoefficientJetSupport
 
 /-!
 # Physical mixed bounds from fixed strips and common zero germs
@@ -11,6 +13,8 @@ weight is moved to the physical point. Off the strips, a common spatial
 zero germ makes every mixed parameter jet zero. The low base is selected
 before all parameter orders, and each loss before the spatial order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

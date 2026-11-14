@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.CoordinateFieldJetBounds
-import ContinuousFlexibility.Analysis.CylinderMixedJetNorms
-import ContinuousFlexibility.Analysis.AbsoluteReciprocalJetBounds
-import ContinuousFlexibility.Analysis.PointwiseMaterialJetOperations
-import Mathlib.Analysis.Normed.Operator.Prod
+module
+
+public import ContinuousFlexibility.Analysis.CoordinateFieldJetBounds
+public import ContinuousFlexibility.Analysis.CylinderMixedJetNorms
+public import ContinuousFlexibility.Analysis.AbsoluteReciprocalJetBounds
+public import ContinuousFlexibility.Analysis.PointwiseMaterialJetOperations
+public import Mathlib.Analysis.Normed.Operator.Prod
 
 /-!
 # Actual chart derivative and reciprocal-Jacobian primitives
@@ -12,6 +14,8 @@ jets. Their two determinant products and the genuine absolute reciprocal
 are controlled by the existing fixed-loss estimates. A lower bound on
 the actual Jacobian is sufficient; no inverse-Jacobian jet is an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

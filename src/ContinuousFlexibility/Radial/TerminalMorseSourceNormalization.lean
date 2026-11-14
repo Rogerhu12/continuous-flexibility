@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.TerminalMorseSourceL2
-import ContinuousFlexibility.Radial.StandInBoundarySlope
+module
+
+public import ContinuousFlexibility.Radial.TerminalMorseSourceL2
+public import ContinuousFlexibility.Radial.StandInBoundarySlope
 
 /-!
 # Scale cancellation in the actual terminal source
@@ -9,6 +11,8 @@ normalized endpoint. The physical radius and profile height cancel
 against the weighted layer measure. What remains is an explicit fixed
 cutoff constant times the sixteenth inverse power of the Morse parameter.
 -/
+
+@[expose] public section
 
 noncomputable section
 

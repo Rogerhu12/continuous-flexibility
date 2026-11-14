@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.MatchingOuterDecomposition
-import ContinuousFlexibility.Radial.MatchingBoundaryAlgebra
-import ContinuousFlexibility.Radial.MatchingInverseFormula
-import ContinuousFlexibility.Radial.ModeWeakRegularity
-import Mathlib.MeasureTheory.Measure.OpenPos
+module
+
+public import ContinuousFlexibility.Radial.MatchingOuterDecomposition
+public import ContinuousFlexibility.Radial.MatchingBoundaryAlgebra
+public import ContinuousFlexibility.Radial.MatchingInverseFormula
+public import ContinuousFlexibility.Radial.ModeWeakRegularity
+public import Mathlib.MeasureTheory.Measure.OpenPos
 
 /-!
 # Triviality of the full matched modal kernel
@@ -13,6 +15,8 @@ restrictions in the Poisson columns. Continuity and the common flux at
 the cuts give the homogeneous matching matrix equation. A left inverse
 of that matrix therefore forces the full mode pair to vanish.
 -/
+
+@[expose] public section
 
 noncomputable section
 

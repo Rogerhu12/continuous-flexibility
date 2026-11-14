@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.StateControlDecay
-import ContinuousFlexibility.Analysis.OpticalControlCurvature
-import Mathlib.Analysis.Calculus.Deriv.Slope
+module
+
+public import ContinuousFlexibility.Analysis.StateControlDecay
+public import ContinuousFlexibility.Analysis.OpticalControlCurvature
+public import Mathlib.Analysis.Calculus.Deriv.Slope
 
 /-!
 # A continuous control ratio at simple turning points
@@ -12,6 +14,8 @@ has a continuous extension, with value zero at both endpoints.  This
 turns the optical radicand into a fixed nonnegative factor times a
 uniformly positive parameter factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

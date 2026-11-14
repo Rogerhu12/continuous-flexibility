@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.PeriodicFlowParameterContinuity
-import Mathlib.Analysis.Calculus.ContDiff.Comp
-import Mathlib.Analysis.Calculus.Deriv.Prod
-import Mathlib.Analysis.Calculus.Deriv.Comp
-import Mathlib.Analysis.Normed.Module.FiniteDimension
-import Mathlib.Analysis.Normed.Module.Convex
+module
+
+public import ContinuousFlexibility.Analysis.PeriodicFlowParameterContinuity
+public import Mathlib.Analysis.Calculus.ContDiff.Comp
+public import Mathlib.Analysis.Calculus.Deriv.Prod
+public import Mathlib.Analysis.Calculus.Deriv.Comp
+public import Mathlib.Analysis.Normed.Module.FiniteDimension
+public import Mathlib.Analysis.Normed.Module.Convex
 
 /-!
 # Actual parameterized flows of smooth periodic scalar fields
@@ -15,6 +17,8 @@ initial angle, and time.  This last assertion follows locally from the
 actual field derivative on compact parameter balls; no continuity of
 the choice of solutions is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.InnerRadialActualAssembly
-import ContinuousFlexibility.Radial.InnerRadialGapDirichletBound
-import ContinuousFlexibility.Radial.InnerSupportedWeights
-import ContinuousFlexibility.Radial.InnerCoefficientCosts
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialActualAssembly
+public import ContinuousFlexibility.Radial.InnerRadialGapDirichletBound
+public import ContinuousFlexibility.Radial.InnerSupportedWeights
+public import ContinuousFlexibility.Radial.InnerCoefficientCosts
 
 /-!
 # The weighted actual Dirichlet sum and its fixed coefficient loss
@@ -12,6 +14,8 @@ identifies it with the same orthogonal ambient sum. The common local
 power thirty-six and the actual reciprocal cell-weight comparisons
 give loss thirty-seven, independently of the number of retained cells.
 -/
+
+@[expose] public section
 
 noncomputable section
 

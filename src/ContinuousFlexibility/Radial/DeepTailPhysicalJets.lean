@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.DeepTailPhysicalWeights
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+module
+
+public import ContinuousFlexibility.Radial.DeepTailPhysicalWeights
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
 
 /-!
 # Actual derivative bounds for the physical flux system
@@ -8,6 +10,8 @@ Fixed coefficient powers are stable under finite sums and products.
 Leibniz's rule then propagates a value bound through a genuine first-order
 two-component system, with one scalar constant for each derivative order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

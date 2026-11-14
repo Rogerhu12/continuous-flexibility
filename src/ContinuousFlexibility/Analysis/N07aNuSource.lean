@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aNuReducedSource
-import ContinuousFlexibility.Analysis.N07aNuScalarState
-import ContinuousFlexibility.Analysis.N07aAffineTame
-import ContinuousFlexibility.Analysis.N07aCoefficientParameterJets
+module
+
+public import ContinuousFlexibility.Analysis.N07aNuReducedSource
+public import ContinuousFlexibility.Analysis.N07aNuScalarState
+public import ContinuousFlexibility.Analysis.N07aAffineTame
+public import ContinuousFlexibility.Analysis.N07aCoefficientParameterJets
 
 /-!
 # The true distinguished column is a smooth tame Source family
@@ -11,6 +13,8 @@ state. Its open realization domain contains the reference point. One
 smaller sector neighborhood therefore carries the original distinguished
 column as a genuine Source-valued smooth tame family.
 -/
+
+@[expose] public section
 
 noncomputable section
 

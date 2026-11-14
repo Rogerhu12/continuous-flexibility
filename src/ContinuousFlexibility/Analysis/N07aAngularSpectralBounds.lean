@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularSobolev
-import ContinuousFlexibility.Analysis.AngularInverseEstimate
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularSobolev
+public import ContinuousFlexibility.Analysis.AngularInverseEstimate
 
 /-!
 # Converting actual level estimates to the spectral inverse interface
@@ -10,6 +12,8 @@ identification converts those estimates to the spectral norms required
 by `angular_inverse_tame_real`.  Finite prefix sums make the constants
 monotone without creating a second high state factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04RealizationAtomJets
-import ContinuousFlexibility.Analysis.N04RealizationPrimitiveNormalization
-import ContinuousFlexibility.Analysis.CanonicalCoordinateCompletion
-import ContinuousFlexibility.Analysis.CanonicalFieldJetReduction
-import ContinuousFlexibility.Analysis.StateNeighborhood
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationAtomJets
+public import ContinuousFlexibility.Analysis.N04RealizationPrimitiveNormalization
+public import ContinuousFlexibility.Analysis.CanonicalCoordinateCompletion
+public import ContinuousFlexibility.Analysis.CanonicalFieldJetReduction
+public import ContinuousFlexibility.Analysis.StateNeighborhood
 
 /-!
 # Completing the quantitative coordinate clause from its primitive jets
@@ -16,6 +18,8 @@ not use them. No final estimate is assumed for these fields.
 The resulting loss can be chosen above any previously fixed loss, while the
 coordinate data and state neighborhood remain the same.
 -/
+
+@[expose] public section
 
 noncomputable section
 

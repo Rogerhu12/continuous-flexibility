@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SpacesCircleBandOperators
+module
+
+public import ContinuousFlexibility.Analysis.SpacesCircleBandOperators
 
 /-!
 # Fixed-loss circle-band analysis estimates
@@ -8,6 +10,8 @@ The two pure jets of order `s` control every band: the discrete weight
 controls rows with large Fourier frequency. No derivative order depends on
 the band index.
 -/
+
+@[expose] public section
 
 noncomputable section
 

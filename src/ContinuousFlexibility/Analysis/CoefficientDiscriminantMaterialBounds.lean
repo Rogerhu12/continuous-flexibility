@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.FlowJetMaterialClosure
-import ContinuousFlexibility.Analysis.FlowJetPartitionPolynomial
-import ContinuousFlexibility.Analysis.SpacesHeightAlgebra
-import ContinuousFlexibility.Analysis.SpacesCylinderEvenJets
-import Mathlib.Algebra.BigOperators.Fin
+module
+
+public import ContinuousFlexibility.Analysis.FlowJetMaterialClosure
+public import ContinuousFlexibility.Analysis.FlowJetPartitionPolynomial
+public import ContinuousFlexibility.Analysis.SpacesHeightAlgebra
+public import ContinuousFlexibility.Analysis.SpacesCylinderEvenJets
+public import Mathlib.Algebra.BigOperators.Fin
 
 /-!
 # Material one-high bounds for the actual coefficient discriminant
@@ -12,6 +14,8 @@ orders exactly. Interpolation is applied once to its finite expanded
 polynomial. Hence b²−ac has one common low order and one common loss,
 independent of the requested mixed derivative order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

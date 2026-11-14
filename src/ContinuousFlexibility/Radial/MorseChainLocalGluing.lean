@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MorseChainRadiusPlacement
+module
+
+public import ContinuousFlexibility.Radial.MorseChainRadiusPlacement
 
 /-!
 # Local gluing on the actual outward partition
@@ -8,6 +10,8 @@ the adjacent pieces agree on a neighborhood, so the actual glued
 function agrees there with either piece. This is a local construction
 below the finite accumulation radius, before the separate flatness proof.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

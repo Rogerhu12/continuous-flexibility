@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerProjectedInverseBound
-import ContinuousFlexibility.Radial.InnerLocalizedInverseBound
+module
+
+public import ContinuousFlexibility.Radial.InnerProjectedInverseBound
+public import ContinuousFlexibility.Radial.InnerLocalizedInverseBound
 
 /-!
 # The actual weighted bordered Dirichlet sum
@@ -10,6 +12,8 @@ receives the scalar. Separate local input and output bounds include
 the actual coefficient loss and preserve a constant independent of
 the number of cells.
 -/
+
+@[expose] public section
 
 noncomputable section
 

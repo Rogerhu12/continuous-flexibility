@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N01FlowMixedParameterTower
-import ContinuousFlexibility.Analysis.N01FlowCollarJetBounds
-import ContinuousFlexibility.Analysis.MixedDerivativeHierarchy
-import ContinuousFlexibility.Analysis.SmoothDirectionsSpatialJets
-import ContinuousFlexibility.Analysis.SmoothDirectionsLocalJointAngular
-import ContinuousFlexibility.Analysis.LocalJointJetSeminormBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01FlowMixedParameterTower
+public import ContinuousFlexibility.Analysis.N01FlowCollarJetBounds
+public import ContinuousFlexibility.Analysis.MixedDerivativeHierarchy
+public import ContinuousFlexibility.Analysis.SmoothDirectionsSpatialJets
+public import ContinuousFlexibility.Analysis.SmoothDirectionsLocalJointAngular
+public import ContinuousFlexibility.Analysis.LocalJointJetSeminormBounds
 
 /-!
 # Spatial regularity of the actual N01 parameter jets on an interior strip
@@ -13,6 +15,8 @@ on the chosen strip. The optical collar supplies this condition on the
 neighborhood used in the correction. All higher parameter-jet spatial
 derivatives follow from the original N01 bounds and local FTC.
 -/
+
+@[expose] public section
 
 noncomputable section
 

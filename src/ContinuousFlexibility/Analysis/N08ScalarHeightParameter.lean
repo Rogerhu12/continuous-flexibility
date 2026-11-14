@@ -1,8 +1,12 @@
-import ContinuousFlexibility.Analysis.N08Neighborhoods
-import ContinuousFlexibility.Scalar.WeightedStatePrimitives
-import ContinuousFlexibility.Scalar.WeightedUniformTameGermOperations
+module
+
+public import ContinuousFlexibility.Analysis.N08Neighborhoods
+public import ContinuousFlexibility.Scalar.WeightedStatePrimitives
+public import ContinuousFlexibility.Scalar.WeightedUniformTameGermOperations
 
 /-! # The actual height coordinates in the scalar finite-jet calculus -/
+
+@[expose] public section
 
 noncomputable section
 

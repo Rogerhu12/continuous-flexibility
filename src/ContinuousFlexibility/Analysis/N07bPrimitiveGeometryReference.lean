@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07bReferenceGeometry
-import ContinuousFlexibility.Analysis.N07bReferencePrimitiveGrowth
+module
+
+public import ContinuousFlexibility.Analysis.N07bReferenceGeometry
+public import ContinuousFlexibility.Analysis.N07bReferencePrimitiveGrowth
 
 /-!
 # Reference coefficient bounds from the retained primitive geometry
@@ -11,6 +13,8 @@ estimate then yields a uniform bound at the same height exponent on one
 smaller neighborhood. No expanded coefficient, source-space membership or
 operator-domain conclusion is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

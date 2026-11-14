@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01aNegativeComponentGeometry
-import Mathlib.Analysis.SpecialFunctions.Log.Deriv
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N01aNegativeComponentGeometry
+public import Mathlib.Analysis.SpecialFunctions.Log.Deriv
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 
 /-!
 # Logarithmic variation on a negative component
@@ -11,6 +13,8 @@ cell, the profile bounds extend to its closed endpoints by continuity. Their
 common leading exponential cancels in the drop, leaving a quadratic bound in
 the cell index.
 -/
+
+@[expose] public section
 
 noncomputable section
 

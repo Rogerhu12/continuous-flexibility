@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalOpenCoefficients
-import ContinuousFlexibility.Analysis.N07aWeakNormalBootstrap
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalOpenCoefficients
+public import ContinuousFlexibility.Analysis.N07aWeakNormalBootstrap
 
 /-!
 # Weak normal bootstrap for the actual open-piece coefficients
@@ -10,6 +12,8 @@ algebra then recovers every mixed order, including the potential term.
 Neither the unknown nor the coefficients are presumed smooth across a
 piece endpoint.
 -/
+
+@[expose] public section
 
 noncomputable section
 

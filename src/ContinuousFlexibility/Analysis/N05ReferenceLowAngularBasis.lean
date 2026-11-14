@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05ReferenceAngularJetBasis
-import ContinuousFlexibility.Statements.Analysis
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceAngularJetBasis
+public import ContinuousFlexibility.Statements.Analysis
 
 /-!
 # Actual derivatives of the two low reference modes
@@ -8,6 +10,8 @@ Every positive angular derivative kills the mean. The remaining bordered
 frequency is exactly two, so it only contributes the scalar factor 2^b.
 The normalized phase continues to have unit angular square norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

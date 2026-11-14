@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderSobolevJetsBasic
-import ContinuousFlexibility.Analysis.OneHighCylinderDerivativeMultiplier
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderSobolevJetsBasic
+public import ContinuousFlexibility.Analysis.OneHighCylinderDerivativeMultiplier
 
 /-!
 # Actual pure derivative towers in frequency space
@@ -8,6 +10,8 @@ These identities use square integrability only through the finite order
 under consideration. The radial and angular towers may be supplied
 independently, which is convenient for composition estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

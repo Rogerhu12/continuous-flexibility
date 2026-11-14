@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.JointMixedDiagonalCalculus
-import ContinuousFlexibility.Analysis.CircleJointEvaluation
-import ContinuousFlexibility.Analysis.SmoothDirectionsConstantShift
+module
+
+public import ContinuousFlexibility.Analysis.JointMixedDiagonalCalculus
+public import ContinuousFlexibility.Analysis.CircleJointEvaluation
+public import ContinuousFlexibility.Analysis.SmoothDirectionsConstantShift
 
 /-!
 # Identifying the angular boundary of an actual joint tower
@@ -11,6 +13,8 @@ circle-valued tower representing the same function. Differentiating
 this equality in the angle identifies all angular parameter jets.
 The circle tower may depend on an arbitrary selector of radii.
 -/
+
+@[expose] public section
 
 noncomputable section
 

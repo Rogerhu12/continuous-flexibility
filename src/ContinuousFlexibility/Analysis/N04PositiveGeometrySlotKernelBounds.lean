@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryFiniteKernelBounds
-import ContinuousFlexibility.Analysis.N01cStateAngleSelections
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryFiniteKernelBounds
+public import ContinuousFlexibility.Analysis.N01cStateAngleSelections
 
 /-!
 # Pure spatial savings through the actual finite kernel
@@ -10,6 +12,8 @@ offset. Both properties survive composition with a material-controlled
 finite kernel, because the exact partition arities are added before
 the powers are estimated.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.RootScaledInverseCoordinate
-import ContinuousFlexibility.Analysis.RootAngularProduct
-import ContinuousFlexibility.Analysis.RootChartSymmetry
-import ContinuousFlexibility.Scalar.Conservation
+module
+
+public import ContinuousFlexibility.Analysis.RootScaledInverseCoordinate
+public import ContinuousFlexibility.Analysis.RootAngularProduct
+public import ContinuousFlexibility.Analysis.RootChartSymmetry
+public import ContinuousFlexibility.Scalar.Conservation
 
 /-!
 # Uniform angular bounds for the same normalized root inverse
@@ -12,6 +14,8 @@ two physical samples have uniformly positive angular derivatives, and
 their product stays in a fixed positive interval throughout the root
 strip. No higher inverse jet or new collar is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

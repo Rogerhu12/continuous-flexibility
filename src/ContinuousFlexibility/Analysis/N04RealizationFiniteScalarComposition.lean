@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cMixedPowerComposition
+module
+
+public import ContinuousFlexibility.Analysis.N01cMixedPowerComposition
 
 /-!
 # Finite scalar composition with the original spatial order
@@ -9,6 +11,8 @@ only through its derivatives at the actual value. The spatial scale
 keeps its exact total order, and one positive parameter height factor
 survives. No common parameter-order loss is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

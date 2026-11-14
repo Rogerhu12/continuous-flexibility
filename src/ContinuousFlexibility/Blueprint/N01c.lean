@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Blueprint.N01c.Coefficients
-import ContinuousFlexibility.Blueprint.N01c.Speeds
-import ContinuousFlexibility.Blueprint.N01c.Flows
+module
+
+public import ContinuousFlexibility.Blueprint.N01c.Coefficients
+public import ContinuousFlexibility.Blueprint.N01c.Speeds
+public import ContinuousFlexibility.Blueprint.N01c.Flows
 
 /-!
 # Blueprint node N01c
@@ -13,6 +15,8 @@ Task file: `docs/tasks/N01c.md`.  The large node is assembled from three
 concrete stages.  This assembly is not a closed proof until all three leaves
 pass the axiom audit.  The flow loss now follows the manuscript's `d_k`.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerSelectedInverseStatement
-import ContinuousFlexibility.Radial.InnerRadialScalarSign
+module
+
+public import ContinuousFlexibility.Radial.InnerSelectedInverseStatement
+public import ContinuousFlexibility.Radial.InnerRadialScalarSign
 
 /-!
 # The complete inner inverse in the manuscript sign convention
@@ -10,6 +12,8 @@ its row into the negative row. The same interface matrices and spatial
 weights are retained. One inverse is chosen before every allowed gamma
 and both signs; the physical output loss is still exactly thirty-seven.
 -/
+
+@[expose] public section
 
 noncomputable section
 

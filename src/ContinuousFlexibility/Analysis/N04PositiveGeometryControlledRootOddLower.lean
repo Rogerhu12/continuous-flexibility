@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRootSpeedFactor
-import ContinuousFlexibility.Analysis.N01RootLabels
-import ContinuousFlexibility.Analysis.SectorParameterGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRootSpeedFactor
+public import ContinuousFlexibility.Analysis.N01RootLabels
+public import ContinuousFlexibility.Analysis.SectorParameterGeometry
 
 /-!
 # A uniform positive root coefficient before the parameter prefix
@@ -10,6 +12,8 @@ slope is at least one quarter, and the existing speed-power theorem
 controls `c⁻¹` on one fixed low-order box. Retained endpoint geometry
 transfers that material cost to the positive component's own sample.
 -/
+
+@[expose] public section
 
 noncomputable section
 

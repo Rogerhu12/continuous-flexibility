@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CenteredJacobianMaterialJets
-import ContinuousFlexibility.Analysis.AbsoluteReciprocalJetBounds
+module
+
+public import ContinuousFlexibility.Analysis.CenteredJacobianMaterialJets
+public import ContinuousFlexibility.Analysis.AbsoluteReciprocalJetBounds
 
 /-!
 # The actual reciprocal Jacobian from pointwise positive chart jets
@@ -8,6 +10,8 @@ Only genuine smoothness at the evaluation point is needed. Centering
 first obtains the actual Jacobian jets, and the scalar absolute
 reciprocal estimate uses the actual lower bound on that determinant.
 -/
+
+@[expose] public section
 
 noncomputable section
 

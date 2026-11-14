@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05ReferenceAuxiliary
-import ContinuousFlexibility.Radial.ReferenceCommonInverse
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceAuxiliary
+public import ContinuousFlexibility.Radial.ReferenceCommonInverse
 
 /-!
 # Physical graph uniqueness for equal source representatives
@@ -9,6 +11,8 @@ source representatives in the iterated weak pairing. The fixed physical
 inverse then identifies the height and metric scalar. Normalization of the
 auxiliary source column also identifies its scalar.
 -/
+
+@[expose] public section
 
 noncomputable section
 

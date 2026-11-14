@@ -1,16 +1,18 @@
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
-import Mathlib.Analysis.Calculus.ContDiff.Operations
-import Mathlib.Analysis.Calculus.Deriv.Inverse
-import Mathlib.Analysis.Calculus.Deriv.Mul
-import Mathlib.Analysis.Calculus.Deriv.Prod
-import Mathlib.Analysis.SpecialFunctions.Sqrt
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
-import Mathlib.Order.Hom.Set
-import Mathlib.Topology.Order.IntermediateValue
-import Mathlib.Topology.Order.MonotoneContinuity
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.NormNum
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+public import Mathlib.Analysis.Calculus.ContDiff.Operations
+public import Mathlib.Analysis.Calculus.Deriv.Inverse
+public import Mathlib.Analysis.Calculus.Deriv.Mul
+public import Mathlib.Analysis.Calculus.Deriv.Prod
+public import Mathlib.Analysis.SpecialFunctions.Sqrt
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+public import Mathlib.Order.Hom.Set
+public import Mathlib.Topology.Order.IntermediateValue
+public import Mathlib.Topology.Order.MonotoneContinuity
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.Ring
 
 /-!
 # Algebra and calculus of the return correction
@@ -25,6 +27,8 @@ The lemmas keep the analytic hypotheses explicit. They do not assert
 existence of the ordinary flow, bounds on its inverse, or membership of
 the resulting divergence error in the weighted source space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

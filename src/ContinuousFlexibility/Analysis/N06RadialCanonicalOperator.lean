@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06RadialReferenceGeometry
-import ContinuousFlexibility.Analysis.N06CubicDifferential
-import ContinuousFlexibility.Analysis.N06WeakCylinderPDE
+module
+
+public import ContinuousFlexibility.Analysis.N06RadialReferenceGeometry
+public import ContinuousFlexibility.Analysis.N06CubicDifferential
+public import ContinuousFlexibility.Analysis.N06WeakCylinderPDE
 
 /-!
 # The actual canonical operator in the radial weak PDE
@@ -10,6 +12,8 @@ used by the weak modal construction. This file carries those identities
 through the genuine divergence and through its pairing in the original
 canonical measure.
 -/
+
+@[expose] public section
 
 noncomputable section
 

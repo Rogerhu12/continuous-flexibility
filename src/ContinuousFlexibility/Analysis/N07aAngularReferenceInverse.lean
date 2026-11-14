@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aAngularReferenceGraph
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceGraph
 
 /-!
 # The actual N05 inverse preserves angular bands
@@ -9,6 +11,8 @@ N05's existing section identity then forces equality with its prescribed
 inverse.  The statement concerns that inverse and its genuine global
 extension, rather than an independently supplied spectral operator.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartVariationStep
-import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartVariationStep
+public import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
 
 /-!
 # The retained weight in every actual variational forcing term
@@ -10,6 +12,8 @@ the weight. A block at the current state order is exactly zero in the
 canonical truncated forcing. Thus no current unknown is estimated on
 the right side of its own variational equation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

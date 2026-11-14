@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PhysicalSpacesAuxiliaryColumn
-import ContinuousFlexibility.Analysis.N04PositiveNormalizationBuffer
+module
+
+public import ContinuousFlexibility.Analysis.PhysicalSpacesAuxiliaryColumn
+public import ContinuousFlexibility.Analysis.N04PositiveNormalizationBuffer
 
 /-!
 # A genuine radial auxiliary column in the normalization buffer
@@ -10,6 +12,8 @@ normalization interval. The same height model encodes this exact radial
 function, so replacing the auxiliary column preserves Q and every
 Through03 field while giving the displayed AuxiliaryColumnGauge.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.Gauge
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+module
+
+public import ContinuousFlexibility.Radial.Gauge
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 
 /-!
 # Joining by a prescribed logarithmic slope
@@ -16,6 +18,8 @@ This file constructs `f` and `log φ` as primitives, and proves that the
 resulting `w, φ` are smooth and positive on `(0, ∞)` and satisfy
 `radialJacobi 4 w φ = 0` there.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

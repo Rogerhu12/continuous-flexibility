@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cReferenceDifferenceBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01cReferenceDifferenceBounds
 
 /-!
 # A reference difference vanishes with its displacement
@@ -7,6 +9,8 @@ If the high seminorm dominates the low seminorm, the one-high first-jet
 weight on the reference segment is at most three times the high
 seminorm of the displacement. No additive constant is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ProjectiveNewtonRecurrence
-import ContinuousFlexibility.Analysis.StateNeighborhood
+module
+
+public import ContinuousFlexibility.Analysis.ProjectiveNewtonRecurrence
+public import ContinuousFlexibility.Analysis.StateNeighborhood
 
 /-!
 # Actual N02 residual values on one common tame neighborhood
@@ -9,6 +11,8 @@ fixed order shift removes the lower-order restriction in that estimate.
 The numerical elimination is performed before specializing the physical
 projective spaces, and one low-order ball precedes every output order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

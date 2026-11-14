@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.FourierModes
-import Mathlib.Analysis.SpecialFunctions.Integrals.Basic
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.NormNum
+module
+
+public import ContinuousFlexibility.Radial.FourierModes
+public import Mathlib.Analysis.SpecialFunctions.Integrals.Basic
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.NormNum
 
 /-!
 # Normalized angular pairings for the real cosine sector
@@ -10,6 +12,8 @@ The normalization is the actual integral `(2π)⁻¹ ∫[0,2π]`, not a
 formal coefficient functional. Infinite Fourier completeness and the
 weighted endpoint source spaces remain separate obligations.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

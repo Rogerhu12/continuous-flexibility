@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.PeriodicGermCollar
-import ContinuousFlexibility.Analysis.N04bFieldRegularity
-import ContinuousFlexibility.Analysis.N04bRootCoefficientGerms
-import ContinuousFlexibility.Scalar.GreenIdentity
+module
+
+public import ContinuousFlexibility.Analysis.PeriodicGermCollar
+public import ContinuousFlexibility.Analysis.N04bFieldRegularity
+public import ContinuousFlexibility.Analysis.N04bRootCoefficientGerms
+public import ContinuousFlexibility.Scalar.GreenIdentity
 
 /-!
 # A genuine uniform collar for the corrected coefficient germs
@@ -14,6 +16,8 @@ and root under consideration.
 
 No uniformity over states or over distinct roots is asserted here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ActualNegativePrincipalDensity
-import ContinuousFlexibility.Analysis.RelativePrincipalCoefficients
-import ContinuousFlexibility.Analysis.NegativeCanonicalEffectiveOperator
+module
+
+public import ContinuousFlexibility.Analysis.ActualNegativePrincipalDensity
+public import ContinuousFlexibility.Analysis.RelativePrincipalCoefficients
+public import ContinuousFlexibility.Analysis.NegativeCanonicalEffectiveOperator
 
 /-!
 # Negative heights from the nonsingular angular density
@@ -11,6 +13,8 @@ chart and the radial physical coefficient.  Its angular numerator is
 this expression does not vanish at a root.  The identity below therefore
 introduces no division by a root coordinate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

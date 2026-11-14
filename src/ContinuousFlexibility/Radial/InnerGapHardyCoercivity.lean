@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.RadialPositiveHardy
-import ContinuousFlexibility.Radial.InnerGapDirichlet
+module
+
+public import ContinuousFlexibility.Radial.RadialPositiveHardy
+public import ContinuousFlexibility.Radial.InnerGapDirichlet
 
 /-!
 # Hardy coercivity on the actual closed gap energy domain
@@ -10,6 +12,8 @@ to the same closed form domain already used by the gap inverse.
 The resulting inverse bound is independent of the positive slope
 chosen to construct that inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.DeepTailSmoothInterpolation
-import ContinuousFlexibility.Radial.DeepTailCandidateIdentification
-import ContinuousFlexibility.Radial.DeepTailShiftInterpolation
-import ContinuousFlexibility.Radial.DeepTailJacobiData
-import ContinuousFlexibility.Radial.TailNaturalNodeContinuity
+module
+
+public import ContinuousFlexibility.Radial.DeepTailSmoothInterpolation
+public import ContinuousFlexibility.Radial.DeepTailCandidateIdentification
+public import ContinuousFlexibility.Radial.DeepTailShiftInterpolation
+public import ContinuousFlexibility.Radial.DeepTailJacobiData
+public import ContinuousFlexibility.Radial.TailNaturalNodeContinuity
 
 /-!
 # Canonical physical candidates and entrance normalization
@@ -12,6 +14,8 @@ Jacobi recurrence is precisely equality of the two physical fluxes at each
 node. The resulting `morseOutwardGlue` is identified with the original
 natural line after shifting once into the tail.
 -/
+
+@[expose] public section
 
 noncomputable section
 

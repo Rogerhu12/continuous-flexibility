@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowSobolevBounds
-import ContinuousFlexibility.Analysis.OneHighCircleFlowTranslationIntegral
-import ContinuousFlexibility.Analysis.OneHighCircleFlowReferenceNorms
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowSobolevBounds
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowTranslationIntegral
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowReferenceNorms
 
 /-!
 # Actual composition bounds for the translation source
@@ -11,6 +13,8 @@ positive order, the proved flow defect bound and the derivative bound
 for the reference difference give a constant controlled by Λ₄ and the
 integrated low difference norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

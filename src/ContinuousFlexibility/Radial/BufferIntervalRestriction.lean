@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.BufferIntervalDomain
-import ContinuousFlexibility.Radial.PositiveBufferTraceMap
+module
+
+public import ContinuousFlexibility.Radial.BufferIntervalDomain
+public import ContinuousFlexibility.Radial.PositiveBufferTraceMap
 
 /-!
 # Restriction of zero-trace fields to the genuine Dirichlet domain
@@ -10,6 +12,8 @@ belong to the closure of the actual supported smooth core. This identifies
 the derivative of the restriction without assuming exterior vanishing of
 the original field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

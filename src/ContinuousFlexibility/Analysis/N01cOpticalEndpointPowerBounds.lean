@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cOpticalMaterialBounds
-import ContinuousFlexibility.Analysis.N01cEndpointMixedPowerAlgebra
-import ContinuousFlexibility.Analysis.N01cStateHeightJets
+module
+
+public import ContinuousFlexibility.Analysis.N01cOpticalMaterialBounds
+public import ContinuousFlexibility.Analysis.N01cEndpointMixedPowerAlgebra
+public import ContinuousFlexibility.Analysis.N01cStateHeightJets
 
 /-!
 # The actual optical root in the endpoint-weighted coefficient algebra
@@ -10,6 +12,8 @@ finite derivative range is enveloped only after its actual low-seminorm
 products have been bounded. Angular derivatives vanish because this
 factor is the original radial optical square root.
 -/
+
+@[expose] public section
 
 noncomputable section
 

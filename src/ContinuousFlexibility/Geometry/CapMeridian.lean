@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Scalar.Coordinates
-import Mathlib.Analysis.SpecialFunctions.SmoothTransition
-import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
-import Mathlib.Analysis.Calculus.Deriv.MeanValue
-import Mathlib.Analysis.Calculus.Deriv.Prod
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.ContDiff
+module
+
+public import ContinuousFlexibility.Scalar.Coordinates
+public import Mathlib.Analysis.SpecialFunctions.SmoothTransition
+public import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
+public import Mathlib.Analysis.Calculus.Deriv.MeanValue
+public import Mathlib.Analysis.Calculus.Deriv.Prod
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.ContDiff
 
 /-!
 # An actual smooth meridian for the fixed cap
@@ -14,6 +16,8 @@ and all endpoint collars come from exact constant values. The coordinate
 speed identity is Euclidean; the norm on `ℝ × ℝ` is not used as Euclidean.
 This file constructs a meridian, not a closed surface.
 -/
+
+@[expose] public section
 
 noncomputable section
 

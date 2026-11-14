@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ModeCompactLocal
-import Mathlib.MeasureTheory.Integral.DominatedConvergence
-import Mathlib.Analysis.SpecificLimits.Basic
+module
+
+public import ContinuousFlexibility.Radial.ModeCompactLocal
+public import Mathlib.MeasureTheory.Integral.DominatedConvergence
+public import Mathlib.Analysis.SpecificLimits.Basic
 
 /-!
 # Affine compression of radial test functions
@@ -10,6 +12,8 @@ towards its midpoint. Its compressed topological supports lie strictly
 inside the interval. The tests and their first two derivatives converge
 against every integrable radial coefficient.
 -/
+
+@[expose] public section
 
 noncomputable section
 

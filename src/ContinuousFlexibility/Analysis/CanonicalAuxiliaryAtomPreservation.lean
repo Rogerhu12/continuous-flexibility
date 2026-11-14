@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PhysicalSpacesAuxiliaryColumn
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+module
+
+public import ContinuousFlexibility.Analysis.PhysicalSpacesAuxiliaryColumn
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
 
 /-!
 # Actual atoms retained by the auxiliary-column replacement
@@ -10,6 +12,8 @@ the exact same function, including its actual inverse point and source
 denominator.  The two E0 ratios are explicitly excluded from that second
 identity; no estimate for those changed ratios is inferred here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

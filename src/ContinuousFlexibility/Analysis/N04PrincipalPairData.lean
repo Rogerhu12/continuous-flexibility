@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PrincipalPairAlgebra
-import ContinuousFlexibility.Analysis.N04PrincipalFullTower
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalPairAlgebra
+public import ContinuousFlexibility.Analysis.N04PrincipalFullTower
 
 /-!
 # Primitive paired bounds from the frozen interface
@@ -8,6 +10,8 @@ The spatial reference hypotheses are required only on the selected
 pieces. This allows the positive physical coefficient formulas to use
 their own reference bounds without imposing a negative-piece formula.
 -/
+
+@[expose] public section
 
 noncomputable section
 

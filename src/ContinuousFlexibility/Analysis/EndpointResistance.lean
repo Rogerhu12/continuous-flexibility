@@ -1,6 +1,8 @@
-import Mathlib.Analysis.Calculus.MeanValue
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
-import Mathlib.Analysis.SpecialFunctions.NonIntegrable
+module
+
+public import Mathlib.Analysis.Calculus.MeanValue
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+public import Mathlib.Analysis.SpecialFunctions.NonIntegrable
 
 /-!
 # Reciprocal resistance at a vanishing endpoint
@@ -10,6 +12,8 @@ the distance to that endpoint. Its reciprocal therefore dominates the
 nonintegrable inverse-distance kernel. The statement is independent of the
 radial cell decomposition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

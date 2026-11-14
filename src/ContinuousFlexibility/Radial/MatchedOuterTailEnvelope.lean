@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Radial.MatchedOuterPhysicalRadiusState
-import ContinuousFlexibility.Radial.MatchedOuterRadiusMeasure
-import ContinuousFlexibility.Radial.MatchedOuterScaledRobinLine
-import ContinuousFlexibility.Radial.SelectedFirstNaturalTransport
-import ContinuousFlexibility.Radial.MatchedOuterModalCells
-import ContinuousFlexibility.Radial.MatchedFiniteEnvelope
+module
+
+public import ContinuousFlexibility.Radial.MatchedOuterPhysicalRadiusState
+public import ContinuousFlexibility.Radial.MatchedOuterRadiusMeasure
+public import ContinuousFlexibility.Radial.MatchedOuterScaledRobinLine
+public import ContinuousFlexibility.Radial.SelectedFirstNaturalTransport
+public import ContinuousFlexibility.Radial.MatchedOuterModalCells
+public import ContinuousFlexibility.Radial.MatchedFiniteEnvelope
 
 /-!
 # Quantitative witnesses for the actual whole exterior problem
@@ -13,6 +15,8 @@ fundamental pair, its natural L² vector and its all-source Green operator.
 The label reference is kept explicit because the retained reference may
 have floored cell labels. No replacement inverse or measure is defined.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerCentralModelBorder
-import ContinuousFlexibility.Radial.InnerCentralCapScale
+module
+
+public import ContinuousFlexibility.Radial.InnerCentralModelBorder
+public import ContinuousFlexibility.Radial.InnerCentralCapScale
 
 /-!
 # Actual central buffer data at every even frequency
@@ -9,6 +11,8 @@ work for all positive even modes. Only the second mode carries the
 genuine compact temporary border. All compression hypotheses below
 are proved from the actual quadratic potential and the spectral inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

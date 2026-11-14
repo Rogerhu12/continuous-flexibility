@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ModeCompactLocal
-import ContinuousFlexibility.Radial.ModeWeakLinearity
+module
+
+public import ContinuousFlexibility.Radial.ModeCompactLocal
+public import ContinuousFlexibility.Radial.ModeWeakLinearity
 
 /-!
 # Normalized border and actual smooth core sources
@@ -9,6 +11,8 @@ This supplies the symmetric border row, and the smooth core source for
 the existing modal weak equation, including the inactive scalar identity
 used to place every frequency on the same product space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

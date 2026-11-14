@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07bNormalizedSourceChain
+module
+
+public import ContinuousFlexibility.Analysis.N07bNormalizedSourceChain
 
 /-!
 # Actual normalized coefficients in material coordinates
@@ -8,6 +10,8 @@ map. On the actual material preimage of each piece it is the usual scalar
 first-order recurrence with two coordinate partials and one drift term.
 All identities use the genuine inverse relation of `rho` and `radius`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

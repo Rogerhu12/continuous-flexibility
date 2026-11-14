@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OuterPhysicalTailState
+module
+
+public import ContinuousFlexibility.Radial.OuterPhysicalTailState
 
 /-!
 # The actual tail state in the outward radial coordinate
@@ -8,6 +10,8 @@ is the correspondingly signed physical flux, divided by the selected
 positive state scale. Both orientations satisfy the same genuine
 first-order system on a half-open interval with its entrance included.
 -/
+
+@[expose] public section
 
 noncomputable section
 

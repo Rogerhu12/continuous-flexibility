@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aActualForwardChartBounds
-import ContinuousFlexibility.Analysis.N07aStateJacobianJetBounds
+module
+
+public import ContinuousFlexibility.Analysis.N07aActualForwardChartBounds
+public import ContinuousFlexibility.Analysis.N07aStateJacobianJetBounds
 
 /-!
 # Height jets on the actual current physical domains
@@ -9,6 +11,8 @@ pulled back by the forward chart times the absolute forward Jacobian.
 Both factors are estimated from canonical atoms and the proved actual
 forward jets, with finitely many fixed-loss product operations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

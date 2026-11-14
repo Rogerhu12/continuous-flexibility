@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedStatePrimitives
-import ContinuousFlexibility.Scalar.WeightedFieldRegularity
+module
+
+public import ContinuousFlexibility.Scalar.WeightedStatePrimitives
+public import ContinuousFlexibility.Scalar.WeightedFieldRegularity
 
 /-!
 # Global finite-jet identities and the actual exterior coefficient values
@@ -9,6 +11,8 @@ jet also at radius zero. This removes the coordinate restriction from the
 finite jet formulas. All actual coefficients vanish outside the annulus by
 the actual decoded first and second derivatives of the increment.
 -/
+
+@[expose] public section
 
 noncomputable section
 

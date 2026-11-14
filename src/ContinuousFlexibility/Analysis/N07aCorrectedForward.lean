@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aOriginalForwardTame
-import ContinuousFlexibility.Analysis.N07aForwardCorrection
+module
+
+public import ContinuousFlexibility.Analysis.N07aOriginalForwardTame
+public import ContinuousFlexibility.Analysis.N07aForwardCorrection
 
 /-!
 # The actual return-corrected forward family into Source
@@ -8,6 +10,8 @@ The N03 error is subtracted from the already constructed original
 divergence map. Its frozen decoder is exactly the required corrected
 operator. Both terms take values in the same physical source kernel.
 -/
+
+@[expose] public section
 
 noncomputable section
 

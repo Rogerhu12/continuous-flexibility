@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R07ConeGeometry
+module
+
+public import ContinuousFlexibility.Radial.R07ConeGeometry
 
 /-!
 # Two genuine cone heads inside the finite middle
@@ -7,6 +9,8 @@ Each cone has a prescribed positive height at its outer join. The two
 outer joins can be arbitrarily short, while a separate positive bridge
 connects the cones. All four seams match full smooth germs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

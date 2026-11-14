@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01EndpointJetLocalGrowth
-import ContinuousFlexibility.Analysis.TameMultilinearNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N01EndpointJetLocalGrowth
+public import ContinuousFlexibility.Analysis.TameMultilinearNormalization
 
 /-!
 # Actual endpoint jets satisfy one-high circle estimates
@@ -9,6 +11,8 @@ continuity is proved from the estimates rather than assumed. The same
 fixed low order works in all parameter orders; the derivative loss may
 depend on that order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

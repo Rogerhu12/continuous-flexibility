@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.RadialReferencePotentialJetEnvelope
+module
+
+public import ContinuousFlexibility.Analysis.RadialReferencePotentialJetEnvelope
 
 /-!
 # Local jets of the negative reference potential after unit cancellation
@@ -8,6 +10,8 @@ by composition with the same actual scalar inverse. Direct estimates on
 the real height powers keep every input polynomial; only positive jets
 of the inverse occur in the composition formula.
 -/
+
+@[expose] public section
 
 noncomputable section
 

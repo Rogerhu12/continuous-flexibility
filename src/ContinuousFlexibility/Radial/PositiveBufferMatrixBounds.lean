@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.PositiveBufferMatrix
-import Mathlib.Tactic
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferMatrix
+public import Mathlib.Tactic
 
 /-!
 # Two-sided weights in the inverse cut matrix
@@ -8,6 +10,8 @@ The inverse identity is estimated entry by entry. In particular, the error
 keeps the small factor at each endpoint; a bound by the largest error alone
 would not give the stated Dirichlet-to-Neumann estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

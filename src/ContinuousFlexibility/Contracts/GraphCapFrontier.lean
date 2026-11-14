@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Contracts.GraphCapHomeomorph
-import ContinuousFlexibility.Contracts.CapInteriorFrontier
+module
+
+public import ContinuousFlexibility.Contracts.GraphCapHomeomorph
+public import ContinuousFlexibility.Contracts.CapInteriorFrontier
 
 /-!
 # The actual moving graph and fixed unmarked cap bound the constructed body
@@ -9,6 +11,8 @@ the attaching cylinder it is the identity, and inside it the cap is the bottom
 disk. The flat top disk maps onto the actual developed graph disk. Frontier
 transport therefore gives equality with the actual glued surface image.
 -/
+
+@[expose] public section
 
 noncomputable section
 

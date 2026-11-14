@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalModeParseval
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalBand
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalModeParseval
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalBand
 
 /-!
 # The actual cosine representative and norm of one canonical band
@@ -9,6 +11,8 @@ coefficient. Its squared norm is exactly π times the radial mode norm,
 including the constant mode. This is the local bridge from the weak mode
 energy to the blocks of the original relative operator.
 -/
+
+@[expose] public section
 
 noncomputable section
 

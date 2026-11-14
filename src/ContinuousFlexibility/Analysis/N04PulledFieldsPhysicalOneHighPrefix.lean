@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsPhysicalPrefixPower
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsPhysicalPrefixPower
 
 /-!
 # Physical prefixes from one-high estimates on a small state set
@@ -7,6 +9,8 @@ The raw low order is selected once, before the parameter order. Its
 small-state condition is part of the abstract set used for interpolation.
 The resulting prefix retains one low order for the whole field family.
 -/
+
+@[expose] public section
 
 noncomputable section
 

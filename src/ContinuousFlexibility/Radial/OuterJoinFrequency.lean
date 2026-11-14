@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterJoinCoefficients
-import ContinuousFlexibility.Radial.OuterCellScale
+module
+
+public import ContinuousFlexibility.Radial.OuterJoinCoefficients
+public import ContinuousFlexibility.Radial.OuterCellScale
 
 /-!
 # The actual preceding connector on the frequency-band scale
@@ -8,6 +10,8 @@ Both individual coefficient integrals have a quadratic exponential
 bound.  Their product has the sharper cap-action bound proved from the
 actual adjacent Morse geometry.
 -/
+
+@[expose] public section
 
 noncomputable section
 

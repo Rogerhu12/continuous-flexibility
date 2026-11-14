@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedUniformComposition
-import ContinuousFlexibility.Scalar.WeightedCompositionMoser
+module
+
+public import ContinuousFlexibility.Scalar.WeightedUniformComposition
+public import ContinuousFlexibility.Scalar.WeightedCompositionMoser
 
 /-!
 # Actual scalar composition maps with uniform derivative towers
@@ -9,6 +11,8 @@ proofs. The original physical-spaces composition map supplies the genuine
 derivatives. Restricting its domain once yields the fixed common ball required
 by the weighted scalar interfaces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

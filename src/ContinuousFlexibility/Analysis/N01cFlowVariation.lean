@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowVariational
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowVariational
 
 /-!
 # Actual first parameter variations of classical circle trajectories
@@ -15,6 +17,8 @@ to N01 still requires the geometric speed estimates, continuity in that
 parameter, and the root regularization on a closed time interval.  No
 all-order smooth tower or tame estimate for the N01 flow is claimed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

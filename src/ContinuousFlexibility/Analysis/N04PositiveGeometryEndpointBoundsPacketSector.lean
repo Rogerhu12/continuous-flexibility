@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsPacketPower
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsPacketSectorDirections
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsPacketPower
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsPacketSectorDirections
 
 /-!
 # The normalized bounds of the original sector packet
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsPacketSec
 The affine parameter transfer is proved over abstract vector spaces.
 Its specialization does not unfold the underlying physical jet tower.
 -/
+
+@[expose] public section
 
 noncomputable section
 

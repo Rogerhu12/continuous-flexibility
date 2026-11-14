@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.Graded
-import Mathlib.Analysis.SpecificLimits.Basic
-import Mathlib.Analysis.Normed.Group.Submodule
+module
+
+public import ContinuousFlexibility.Analysis.Graded
+public import Mathlib.Analysis.SpecificLimits.Basic
+public import Mathlib.Analysis.Normed.Group.Submodule
 
 /-!
 # Closed subspaces, products and constants of projective limits
@@ -24,6 +26,8 @@ family whose coordinates lie in the closures of the coordinate images of a
 closed subspace belongs to that subspace. It uses only continuity of the
 composite bonds, not bounds on their norms.
 -/
+
+@[expose] public section
 
 noncomputable section
 

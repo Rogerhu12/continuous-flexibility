@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06RootPhysicalWeightedSmallness
-import ContinuousFlexibility.Analysis.SolveStateSpaces
+module
+
+public import ContinuousFlexibility.Analysis.N06RootPhysicalWeightedSmallness
+public import ContinuousFlexibility.Analysis.SolveStateSpaces
 
 /-!
 # All finite jets of the actual physical root difference
@@ -8,6 +10,8 @@ The input order n+7 is fixed before the state. Every derivative through
 order n retains the same H^(3/4) M |q| factor. The field is the genuine
 physical drift and speed ratio minus its reference value.
 -/
+
+@[expose] public section
 
 noncomputable section
 

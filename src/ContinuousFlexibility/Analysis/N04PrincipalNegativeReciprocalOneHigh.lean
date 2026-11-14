@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PrincipalNegativeReciprocalFinite
-import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalNegativeReciprocalFinite
+public import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
 
 /-!
 # One high seminorm for reciprocal jets
@@ -8,6 +10,8 @@ All spatial orders in a finite prefix share one scalar envelope.
 Normalization is applied to the complete reciprocal jet, after scalar
 composition has retained the additive spatial and parameter orders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

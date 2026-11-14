@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CanonicalGluedAiryIntegral
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalGluedAiryIntegral
 
 /-!
 # The actual first derivative of the glued Airy integral
@@ -8,6 +10,8 @@ At the common cut the transmission law gives the same full first jet,
 so the ordinary derivative of the piecewise function is the left jet.
 This pointwise interface is independent of stored cut coefficient values.
 -/
+
+@[expose] public section
 
 noncomputable section
 

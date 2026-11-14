@@ -1,6 +1,8 @@
-import Mathlib.MeasureTheory.Function.LpSeminorm.CompareExp
-import Mathlib.Analysis.Complex.Basic
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.MeasureTheory.Function.LpSeminorm.CompareExp
+public import Mathlib.Analysis.Complex.Basic
+public import Mathlib.Tactic.Ring
 
 /-!
 # Frequency weights and Sobolev norms
@@ -10,6 +12,8 @@ to apply to counting measure on circle frequencies and to the product of
 Lebesgue and counting measures on cylinder frequencies. Finiteness is expressed
 by actual `MemLp` hypotheses; taking `toReal` alone does not assert finiteness.
 -/
+
+@[expose] public section
 
 noncomputable section
 

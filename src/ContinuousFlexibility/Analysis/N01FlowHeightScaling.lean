@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.HeightSectorDirections
-import ContinuousFlexibility.Analysis.N01FlowLocality
-import ContinuousFlexibility.Analysis.SmoothDirectionsMixedScalarLine
+module
+
+public import ContinuousFlexibility.Analysis.HeightSectorDirections
+public import ContinuousFlexibility.Analysis.N01FlowLocality
+public import ContinuousFlexibility.Analysis.SmoothDirectionsMixedScalarLine
 
 /-!
 # Actual height scaling in the N01 characteristic flow
@@ -11,6 +13,8 @@ uniqueness proves this identity for the actual flow, including each
 closed radial endpoint.  Differentiating it identifies the genuine
 height and scalar directions of every angular-flow jet.
 -/
+
+@[expose] public section
 
 noncomputable section
 

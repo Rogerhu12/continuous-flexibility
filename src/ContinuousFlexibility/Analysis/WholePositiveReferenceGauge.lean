@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.PositiveChartRangeGeometry
+module
+
+public import ContinuousFlexibility.Analysis.PositiveChartRangeGeometry
 
 /-!
 # A fixed reference gauge with its actual canonical range
@@ -10,6 +12,8 @@ true canonical range and preserve the original relative transport and
 height ratio. Middle normalization is equality with the fixed reference
 fields, not an identity assumption on those fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 

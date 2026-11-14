@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RootModelAllAngleJets
-import ContinuousFlexibility.Analysis.RootAffineOrdinaryJets
+module
+
+public import ContinuousFlexibility.Analysis.RootModelAllAngleJets
+public import ContinuousFlexibility.Analysis.RootAffineOrdinaryJets
 
 /-!
 # Actual physical fields from the scaled ordinary root jets
@@ -9,6 +11,8 @@ stored chart and height. The fixed invertible radial normalization is
 then removed. Its inverse norm and determinant affect only component
 constants, and the inverse-height tower is retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

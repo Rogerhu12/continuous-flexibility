@@ -1,6 +1,10 @@
-import ContinuousFlexibility.Radial.InnerRadialFiniteWeakGraph
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialFiniteWeakGraph
 
 /-! # Linearity and continuity of the actual physical weak residual -/
+
+@[expose] public section
 
 noncomputable section
 

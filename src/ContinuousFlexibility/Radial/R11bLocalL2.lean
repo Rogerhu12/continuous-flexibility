@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.R11bWeightEmbedding
-import Mathlib.MeasureTheory.Function.L2Space
-import Mathlib.MeasureTheory.Function.LpSeminorm.TriangleInequality
+module
+
+public import ContinuousFlexibility.Radial.R11bWeightEmbedding
+public import Mathlib.MeasureTheory.Function.L2Space
+public import Mathlib.MeasureTheory.Function.LpSeminorm.TriangleInequality
 
 /-!
 # Recovering physical local L² from radial cell data
@@ -11,6 +13,8 @@ L² membership, without making any assumption about signs or measurability of
 the unlocalized representative.  Continuous left-tail terms can then be added
 back to recover an output field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

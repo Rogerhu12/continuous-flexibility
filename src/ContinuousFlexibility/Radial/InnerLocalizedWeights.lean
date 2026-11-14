@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerWeightL2
-import ContinuousFlexibility.Radial.InnerDisjointPieces
+module
+
+public import ContinuousFlexibility.Radial.InnerWeightL2
+public import ContinuousFlexibility.Radial.InnerDisjointPieces
 
 /-!
 # Local weight bounds in the physical L² space
@@ -9,6 +11,8 @@ of a local field. The absolute size of a common cell weight cancels between
 the input and output estimates. Thus a global condition number is never
 introduced into the inner Dirichlet or Poisson bounds.
 -/
+
+@[expose] public section
 
 noncomputable section
 

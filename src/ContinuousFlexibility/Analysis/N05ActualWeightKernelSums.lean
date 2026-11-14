@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05ActualWeightKernel
-import ContinuousFlexibility.Analysis.N05IndexFiberSums
+module
+
+public import ContinuousFlexibility.Analysis.N05ActualWeightKernel
+public import ContinuousFlexibility.Analysis.N05IndexFiberSums
 
 /-!
 # Uniform Schur sums for the actual sampled weights
@@ -9,6 +11,8 @@ reciprocal-material majorant. The actual kernel is then summable in each
 variable, with one common row and column bound. The material loss is four
 for every source exponent and coefficient power.
 -/
+
+@[expose] public section
 
 noncomputable section
 

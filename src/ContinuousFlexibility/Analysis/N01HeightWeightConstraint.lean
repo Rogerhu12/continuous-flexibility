@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01HeightResponseBound
-import ContinuousFlexibility.Analysis.N01TravelLowerBound
+module
+
+public import ContinuousFlexibility.Analysis.N01HeightResponseBound
+public import ContinuousFlexibility.Analysis.N01TravelLowerBound
 
 /-!
 # The actual radial-cell constraint detected by height directions
@@ -9,6 +11,8 @@ optical travel from below. Combining that lower bound with the mixed
 height response gives a quantitative constraint at an actual containing
 cell, ready to be applied to a compact radial test direction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

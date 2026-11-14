@@ -1,7 +1,11 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometryFlowCoefficientBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryFlowCoefficientBounds
 
 /-! A finite composition bound on one physical radial fiber. Its numerical
 inputs concern that fiber only; global smoothness supplies the genuine jets. -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderCompositionJets
-import ContinuousFlexibility.Analysis.OneHighL2Domination
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderCompositionJets
+public import ContinuousFlexibility.Analysis.OneHighL2Domination
 
 /-!
 # Finite-energy pure derivatives of actual smooth compositions
@@ -8,6 +10,8 @@ The finite chain-rule majorant proves output L² membership as well as its
 norm bound. The final scalar and multivariable estimates instantiate every
 product premise with the actual one-high derivative-product theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

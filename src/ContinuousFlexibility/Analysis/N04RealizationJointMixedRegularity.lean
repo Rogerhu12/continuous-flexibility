@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.JointMixedTransportCalculus
-import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
-import ContinuousFlexibility.Analysis.N04RealizationJointMixedSlotBounds
+module
+
+public import ContinuousFlexibility.Analysis.JointMixedTransportCalculus
+public import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
+public import ContinuousFlexibility.Analysis.N04RealizationJointMixedSlotBounds
 
 /-!
 # Actual mixed towers on the original product domain
@@ -9,6 +11,8 @@ The existing radial and angular tower constructors differentiate the
 same scalar field. Freezing the spatial point therefore gives genuine
 parameter towers of every mixed derivative, with no new neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RetainedReferenceComponentEnumeration
-import ContinuousFlexibility.Analysis.PositiveComponentEndpoints
+module
+
+public import ContinuousFlexibility.Analysis.RetainedReferenceComponentEnumeration
+public import ContinuousFlexibility.Analysis.PositiveComponentEndpoints
 
 /-!
 # Interior positive endpoints for the same retained reference
@@ -11,6 +13,8 @@ ambient positive component for that same retained reference. The
 retained-coordinate certificate is explicit and is not extracted from
 an arbitrary Through03 witness.
 -/
+
+@[expose] public section
 
 noncomputable section
 

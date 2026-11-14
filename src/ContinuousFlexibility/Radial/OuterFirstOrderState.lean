@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.FiniteLinearFlow
-import ContinuousFlexibility.Radial.OuterNormalizedState
-import Mathlib.Analysis.Normed.Operator.Prod
+module
+
+public import ContinuousFlexibility.Analysis.FiniteLinearFlow
+public import ContinuousFlexibility.Radial.OuterNormalizedState
+public import Mathlib.Analysis.Normed.Operator.Prod
 
 /-!
 # Actual value and flux states on a regular outer interval
@@ -10,6 +12,8 @@ first-order equation. Its component equations recover the radial Jacobi
 equation and the physical scaled flux, without postulating homogeneous
 solutions or an invertible transfer matrix.
 -/
+
+@[expose] public section
 
 noncomputable section
 

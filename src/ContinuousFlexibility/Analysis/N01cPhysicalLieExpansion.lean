@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cPhysicalLieWords
+module
+
+public import ContinuousFlexibility.Analysis.N01cPhysicalLieWords
 
 /-!
 # Finite word expansion of every physical Lie derivative
@@ -8,6 +10,8 @@ or an angular hit followed by a new undifferentiated speed factor.
 Repeated terms remain separate finite indices. Every term is nonempty,
 has at most n+1 factors, and has exactly n spatial differentiations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

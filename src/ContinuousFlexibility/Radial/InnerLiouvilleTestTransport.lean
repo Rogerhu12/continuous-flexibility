@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerLiouvilleCompactTest
+module
+
+public import ContinuousFlexibility.Radial.InnerLiouvilleCompactTest
 
 /-!
 # Every actual compact physical test comes from an actual model test
@@ -8,6 +10,8 @@ model interval. Its true derivative cancels the density drift in the
 gradient lift. Thus both coordinates of the physical test are images
 of the same original Schrodinger energy-core vector.
 -/
+
+@[expose] public section
 
 noncomputable section
 

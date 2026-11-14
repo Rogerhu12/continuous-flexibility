@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalWeakJets
-import ContinuousFlexibility.Analysis.SpacesHeightAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalWeakJets
+public import ContinuousFlexibility.Analysis.SpacesHeightAlgebra
 
 /-!+# Coefficient multiplication on canonical weak jets
 
@@ -8,6 +10,8 @@ canonical L² class.  Its product rule is proved by testing the weak
 equation against the coefficient times a compact radial test.  The same
 proof covers either coordinate direction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

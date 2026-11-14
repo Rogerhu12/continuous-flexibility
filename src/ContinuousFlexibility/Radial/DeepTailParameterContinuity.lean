@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Statements.Radial
-import Mathlib.Analysis.Calculus.Deriv.Mul
-import Mathlib.Analysis.Calculus.TangentCone.Real
-import Mathlib.MeasureTheory.Function.LpSeminorm.SMul
+module
+
+public import ContinuousFlexibility.Statements.Radial
+public import Mathlib.Analysis.Calculus.Deriv.Mul
+public import Mathlib.Analysis.Calculus.TangentCone.Real
+public import Mathlib.MeasureTheory.Function.LpSeminorm.SMul
 
 /-!
 # Entrance normalization of the natural tail line
@@ -11,6 +13,8 @@ tail.  Its entrance value and entrance derivative nevertheless agree for
 all smooth representatives of the same line.  The lemmas below make this
 one-sided argument explicit before taking parameter limits.
 -/
+
+@[expose] public section
 
 noncomputable section
 

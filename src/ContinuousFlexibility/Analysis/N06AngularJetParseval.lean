@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06EvenCylinder
-import ContinuousFlexibility.Analysis.SpacesCircleFourierJets
+module
+
+public import ContinuousFlexibility.Analysis.N06EvenCylinder
+public import ContinuousFlexibility.Analysis.SpacesCircleFourierJets
 
 /-!
 # Actual angular jets and their finite Parseval weights
@@ -8,6 +10,8 @@ The diagonal weight of the k-th actual angular derivative is ν^(2k).
 This includes the zero frequency and gives the finite-jet source norm
 used by the canonical Banach spaces, without replacing it by a formal norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

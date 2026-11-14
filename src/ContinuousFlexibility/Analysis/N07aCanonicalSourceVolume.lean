@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06Neighborhood
-import ContinuousFlexibility.Analysis.N07aCanonicalSourceRegularity
-import ContinuousFlexibility.Analysis.N07aLinearJetVolumeBounds
-import ContinuousFlexibility.Analysis.N07aParameterNeighborhood
+module
+
+public import ContinuousFlexibility.Analysis.N06Neighborhood
+public import ContinuousFlexibility.Analysis.N07aCanonicalSourceRegularity
+public import ContinuousFlexibility.Analysis.N07aLinearJetVolumeBounds
+public import ContinuousFlexibility.Analysis.N07aParameterNeighborhood
 
 /-!
 # The original physical source in every prescribed canonical volume level
@@ -10,6 +12,8 @@ One low-order neighborhood serves all angular and material orders. The
 constructed classes represent the original canonical source, and the
 complete sampled envelope costs only two additional material orders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

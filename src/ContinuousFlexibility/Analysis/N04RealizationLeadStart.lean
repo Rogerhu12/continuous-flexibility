@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationRetainedStart
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
-import ContinuousFlexibility.Analysis.N04bActualTypedAtlas
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationRetainedStart
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+public import ContinuousFlexibility.Analysis.N04bActualTypedAtlas
 
 /-!
 # The retained start of the Realization assembly as one record
@@ -11,6 +13,8 @@ equation and the optical correction field with Through03 and field regularity.
 This file packs exactly that output into one structure, so that later
 statements can quantify over every such start instead of restating it.
 -/
+
+@[expose] public section
 
 noncomputable section
 

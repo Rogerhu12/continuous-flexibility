@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CircleCompositionTameBounds
-import ContinuousFlexibility.Analysis.CircleCompositionJetModels
+module
+
+public import ContinuousFlexibility.Analysis.CircleCompositionTameBounds
+public import ContinuousFlexibility.Analysis.CircleCompositionJetModels
 
 /-!
 # Uniform low-order bounds for actual outer-jet composition
@@ -8,6 +10,8 @@ A single low order works for every fixed outer derivative order.
 The second estimate uses the actual linearity in the outer field;
 its direction is unrestricted and appears homogeneously.
 -/
+
+@[expose] public section
 
 noncomputable section
 

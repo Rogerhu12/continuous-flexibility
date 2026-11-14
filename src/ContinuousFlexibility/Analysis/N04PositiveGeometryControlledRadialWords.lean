@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRadialFormula
-import ContinuousFlexibility.Analysis.N04PositiveGeometrySampledPlaneKernel
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRadialFormula
+public import ContinuousFlexibility.Analysis.N04PositiveGeometrySampledPlaneKernel
 
 /-!
 # Saved words of both stored radial factors
@@ -9,6 +11,8 @@ one open coefficient domain. The inverse estimate is evaluated only on
 the physical component slab; its scalar inverse remains the inverse of
 the displayed stored kernel.
 -/
+
+@[expose] public section
 
 noncomputable section
 

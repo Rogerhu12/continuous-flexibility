@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchedOuterSeparatedInverse
-import ContinuousFlexibility.Radial.MatchedOuterModalCells
+module
+
+public import ContinuousFlexibility.Radial.MatchedOuterSeparatedInverse
+public import ContinuousFlexibility.Radial.MatchedOuterModalCells
 
 /-!
 # The whole-tail bounds apply to the actual global modal localizers
@@ -10,6 +12,8 @@ whole inverse controls the same physical side inverse without a density
 or coordinate loss. The two sides are then added in the existing
 separated inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

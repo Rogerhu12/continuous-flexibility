@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedScalarError
-import ContinuousFlexibility.Scalar.WeightedOddHeightGerms
+module
+
+public import ContinuousFlexibility.Scalar.WeightedScalarError
+public import ContinuousFlexibility.Scalar.WeightedOddHeightGerms
 
 /-!
 # Uniform tame germs of the actual operator and correction error
@@ -8,6 +10,8 @@ All operations below are the previously constructed continuous linear or
 bilinear maps. Their genuine towers compose on one common source
 neighborhood with one fixed base and loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

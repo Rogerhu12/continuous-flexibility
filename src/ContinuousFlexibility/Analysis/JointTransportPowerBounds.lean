@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01ReturnTransportRecurrences
-import ContinuousFlexibility.Analysis.MixedDiagonalPowerGrowth
-import ContinuousFlexibility.Analysis.CircleStripAngularInterpolation
+module
+
+public import ContinuousFlexibility.Analysis.N01ReturnTransportRecurrences
+public import ContinuousFlexibility.Analysis.MixedDiagonalPowerGrowth
+public import ContinuousFlexibility.Analysis.CircleStripAngularInterpolation
 
 /-!
 # Fixed spatial degree for genuine transport jets
@@ -11,6 +13,8 @@ fixed before radial induction. The independently transported field
 retains exactly one copy of its label weight, including in the final
 velocity product.
 -/
+
+@[expose] public section
 
 noncomputable section
 

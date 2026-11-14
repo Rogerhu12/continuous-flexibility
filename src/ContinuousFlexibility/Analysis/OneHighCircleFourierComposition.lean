@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFourierCompositionStep
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierCompositionStep
 
 /-!
 # Uniform tame composition by genuine circle lifts
@@ -7,6 +9,8 @@ The constant is constructed recursively from the period, derivative lower
 bound, and prescribed low geometry. It is uniform in the outer function and
 the lift, and all norms are the actual normalized Fourier/Bessel norms.
 -/
+
+@[expose] public section
 
 noncomputable section
 

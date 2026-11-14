@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N05CanonicalSampleBlockWeights
-import ContinuousFlexibility.Analysis.N05CanonicalFiniteBlockSums
-import ContinuousFlexibility.Analysis.N05ActualWeightKernelSums
-import ContinuousFlexibility.Analysis.N05SchurMembership
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalSampleBlockWeights
+public import ContinuousFlexibility.Analysis.N05CanonicalFiniteBlockSums
+public import ContinuousFlexibility.Analysis.N05ActualWeightKernelSums
+public import ContinuousFlexibility.Analysis.N05SchurMembership
 
 /-!
 # The weighted L² output of the actual global inverse
@@ -11,6 +13,8 @@ inverse. Their coordinates converge to its actual output by the continuous
 source-level restriction. The Schur membership theorem is then applied to
 that very output sequence, before any weighted membership is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

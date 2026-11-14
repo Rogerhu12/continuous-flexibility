@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N08FlowParameterBounds
-import ContinuousFlexibility.Analysis.N08FlowSpeedBounds
+module
+
+public import ContinuousFlexibility.Analysis.N08FlowParameterBounds
+public import ContinuousFlexibility.Analysis.N08FlowSpeedBounds
 
 /-!
 # The actual parameter variation of the ordinary flow at zero
@@ -10,6 +12,8 @@ trajectories. Differentiating the original integral equation therefore
 identifies its parameter derivative with the explicit radial-speed
 variation, without assuming a variational differential equation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

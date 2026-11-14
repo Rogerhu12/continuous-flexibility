@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Geometry.EuclideanRigidity
-import Mathlib.Analysis.ODE.ExistUnique
-import Mathlib.Analysis.Calculus.ContDiff.RCLike
-import Mathlib.Analysis.Normed.Module.FiniteDimension
+module
+
+public import ContinuousFlexibility.Geometry.EuclideanRigidity
+public import Mathlib.Analysis.ODE.ExistUnique
+public import Mathlib.Analysis.Calculus.ContDiff.RCLike
+public import Mathlib.Analysis.Normed.Module.FiniteDimension
 
 /-!
 # Actual metric differentiation toward intrinsic isometry rigidity
@@ -10,6 +12,8 @@ The metric tensor and every derivative below are actual functions and Frechet
 derivatives. In particular, the Hessian transformation law is deduced from the
 metric identity; it is not a connection-preservation assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

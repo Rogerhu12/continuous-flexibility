@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SmoothDirectionsUniformBounds
+module
+
+public import ContinuousFlexibility.Analysis.SmoothDirectionsUniformBounds
 
 /-!
 # Smooth limits under uniform seminorm bounds
@@ -7,6 +9,8 @@ At each fixed jet order a single continuous seminorm bounds the entire
 family. These estimates imply both joint equicontinuity and the local
 second-line bounds required by the endpoint assembly theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

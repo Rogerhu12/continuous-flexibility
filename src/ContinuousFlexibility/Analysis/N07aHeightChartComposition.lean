@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aInverseChartBounds
-import ContinuousFlexibility.Analysis.N07aSourceAtInverseChart
-import ContinuousFlexibility.Analysis.N07aSampleComposition
-import ContinuousFlexibility.Analysis.SolveStateSpaces
+module
+
+public import ContinuousFlexibility.Analysis.N07aInverseChartBounds
+public import ContinuousFlexibility.Analysis.N07aSourceAtInverseChart
+public import ContinuousFlexibility.Analysis.N07aSampleComposition
+public import ContinuousFlexibility.Analysis.SolveStateSpaces
 
 /-!
 # Fixed-loss actual height pullback by the inverse chart
@@ -10,6 +12,8 @@ The actual geometric jets and actual decoded source derivatives supply
 all inputs of the proved partition estimate. The low parameter order is
 chosen once for all mixed and material orders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

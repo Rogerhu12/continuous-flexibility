@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import ContinuousFlexibility.Analysis.SpacesTraceRestriction
-import Mathlib.Analysis.Normed.Lp.lpSpace
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import ContinuousFlexibility.Analysis.SpacesTraceRestriction
+public import Mathlib.Analysis.Normed.Lp.lpSpace
 
 /-!
 # Absorbing the fixed material loss in the actual canonical source scale
@@ -11,6 +13,8 @@ relative estimate, without an auxiliary off-diagonal kernel. All source
 elements below are constructed in the selected `VolumeModelData.level`,
 and their physical canonical fields are identified by its `forget` formula.
 -/
+
+@[expose] public section
 
 noncomputable section
 

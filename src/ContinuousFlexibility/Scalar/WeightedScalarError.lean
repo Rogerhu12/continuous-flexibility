@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Scalar.WeightedScalarOperator
+module
+
+public import ContinuousFlexibility.Scalar.WeightedScalarOperator
 
 /-!
 # The actual correction error from its normalized type coefficient
@@ -8,6 +10,8 @@ extended. A decaying perturbation of w times that coefficient determines this
 product through the actual reciprocal-reference multiplier. Angular integration
 and two actual angular derivatives then construct the bilinear correction error.
 -/
+
+@[expose] public section
 
 noncomputable section
 

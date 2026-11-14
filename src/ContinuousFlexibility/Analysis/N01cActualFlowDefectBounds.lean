@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cActualFlowForcingComposition
-import ContinuousFlexibility.Analysis.N01cOrdinaryFlowZeroAngularBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01cActualFlowForcingComposition
+public import ContinuousFlexibility.Analysis.N01cOrdinaryFlowZeroAngularBounds
 
 /-!
 # The actual derivative defect after the fixed compact time map
@@ -10,6 +12,8 @@ the compact time, even when the two constructions use different
 neighbourhood witnesses. The zero-parameter growth estimate therefore
 restricts to every smaller neighbourhood without changing its loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

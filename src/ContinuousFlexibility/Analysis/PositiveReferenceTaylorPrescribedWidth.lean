@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PositiveReferenceFiniteRadialJets
-import ContinuousFlexibility.Analysis.EndpointFiberPolynomialMargins
+module
+
+public import ContinuousFlexibility.Analysis.PositiveReferenceFiniteRadialJets
+public import ContinuousFlexibility.Analysis.EndpointFiberPolynomialMargins
 
 /-!
 # A displayed width for the actual reference Taylor data
@@ -10,6 +12,8 @@ both slices positive near their endpoints and bounds the endpoint mass.
 Every reciprocal cost is stated in the actual finite data; no estimate
 for a qualitatively selected continuity radius is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

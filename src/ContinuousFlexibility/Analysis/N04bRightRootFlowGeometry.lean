@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04bSymmetricRootField
-import ContinuousFlexibility.Analysis.N04bLeftRootFlowGeometry
-import ContinuousFlexibility.Analysis.N04bRootOrientation
-import ContinuousFlexibility.Analysis.N04bRootFlowContinuity
-import ContinuousFlexibility.Analysis.N04bCorrectedReturnGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N04bSymmetricRootField
+public import ContinuousFlexibility.Analysis.N04bLeftRootFlowGeometry
+public import ContinuousFlexibility.Analysis.N04bRootOrientation
+public import ContinuousFlexibility.Analysis.N04bRootFlowContinuity
+public import ContinuousFlexibility.Analysis.N04bCorrectedReturnGeometry
 
 /-!
 # The actual corrected flow normalized at the right root
@@ -12,6 +14,8 @@ right-root value is the identity. Reversing the radial coordinate then
 gives the positive-sign physical root equation. The root orientation
 and the initial inverse are both derived from the existing data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

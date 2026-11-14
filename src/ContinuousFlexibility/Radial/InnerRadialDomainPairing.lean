@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerRadialFiniteWeakGraph
-import Mathlib.Algebra.BigOperators.Fin
-import Mathlib.Tactic.LinearCombination
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialFiniteWeakGraph
+public import Mathlib.Algebra.BigOperators.Fin
+public import Mathlib.Tactic.LinearCombination
 
 /-!
 # First-order integration by parts on the actual physical domain
@@ -10,6 +12,8 @@ Continuity extends its integration-by-parts identity to that closure.
 Adding the fixed affine lift then recovers the canonical endpoint trace.
 For a matched finite chain, these endpoint terms cancel exactly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06RelativeBoundaryPatch
-import Mathlib.Analysis.SpecialFunctions.Log.Deriv
+module
+
+public import ContinuousFlexibility.Analysis.N06RelativeBoundaryPatch
+public import Mathlib.Analysis.SpecialFunctions.Log.Deriv
 
 /-!
 # Relative coordinate and positive-height patches
@@ -9,6 +11,8 @@ of the height is patched through radial order three and then exponentiated.
 Every coefficient in these formulas is an actual derivative of the current
 boundary field minus the reference boundary field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

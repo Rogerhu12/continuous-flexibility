@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometryChartTowers
-import ContinuousFlexibility.Analysis.N01CoefficientJointTower
-import ContinuousFlexibility.Analysis.N01ReturnVelocitySpatialTower
-import ContinuousFlexibility.Analysis.ReturnCorrectionResidualLinear
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryChartTowers
+public import ContinuousFlexibility.Analysis.N01CoefficientJointTower
+public import ContinuousFlexibility.Analysis.N01ReturnVelocitySpatialTower
+public import ContinuousFlexibility.Analysis.ReturnCorrectionResidualLinear
 
 /-!
 # Actual corrected radial coefficient and half-gap towers
@@ -11,6 +13,8 @@ the literal corrected minus characteristic speed. Reflection recovers
 the actual positive half-gap. Thus the physical height below uses the
 stored corrected field, including the inactive part of each component.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadAssembly
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadAssembly
 
 /-!
 # The negative component adjoining a retained positive endpoint
@@ -8,6 +10,8 @@ endpoint. Consequently every already chosen source is a genuine negative
 component, including at the right endpoint. The natural-number selector
 below retains that supplied source rather than choosing a new adjacency.
 -/
+
+@[expose] public section
 
 noncomputable section
 

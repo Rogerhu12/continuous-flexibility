@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.TameInverseTheorem
+module
+
+public import ContinuousFlexibility.Analysis.TameInverseTheorem
 
 /-!
 # Continuity of the coupled inverse from its actual tame estimates
@@ -8,6 +10,8 @@ joint continuity of the inverse in the original seminorm topologies.
 This applies to diagonal circle inverses and to the recovered control
 inverse without imposing an operator-norm topology on a Fréchet space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

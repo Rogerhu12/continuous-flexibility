@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01FlowSamplePrefactor
-import ContinuousFlexibility.Analysis.MaterialSampleRadialUpper
+module
+
+public import ContinuousFlexibility.Analysis.N01FlowSamplePrefactor
+public import ContinuousFlexibility.Analysis.MaterialSampleRadialUpper
 
 /-!
 # Fixed material loss for the radial collar factor
@@ -10,6 +12,8 @@ material order at the control label. Together with the cancelled-height
 flow prefactor, the total cost is two orders, independently of the
 number of radial or angular derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

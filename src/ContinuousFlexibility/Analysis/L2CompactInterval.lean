@@ -1,6 +1,8 @@
-import Mathlib.MeasureTheory.Function.L2Space
-import Mathlib.Dynamics.Ergodic.MeasurePreserving
-import Mathlib.Topology.Order.ProjIcc
+module
+
+public import Mathlib.MeasureTheory.Function.L2Space
+public import Mathlib.Dynamics.Ergodic.MeasurePreserving
+public import Mathlib.Topology.Order.ProjIcc
 
 /-!
 # Actual restricted L² on a compact interval
@@ -11,6 +13,8 @@ The inverse map is composition with the interval projection; it is an
 inverse only almost everywhere on the restricted ambient measure, which
 is exactly what L² requires.
 -/
+
+@[expose] public section
 
 noncomputable section
 

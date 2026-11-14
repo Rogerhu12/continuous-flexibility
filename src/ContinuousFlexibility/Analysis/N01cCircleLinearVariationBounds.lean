@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowMinkowski
-import ContinuousFlexibility.Analysis.OneHighCircleFlowGronwall
-import ContinuousFlexibility.Analysis.OneHighCircleFourierRealAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowMinkowski
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowGronwall
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierRealAlgebra
 
 /-!
 # One-high Sobolev bounds for the actual linear variational equation
@@ -16,6 +18,8 @@ This is the linear equation used by each positive state-parameter
 variation of the ordinary flow, after the highest variation has been
 separated from its actual lower-order forcing.
 -/
+
+@[expose] public section
 
 noncomputable section
 

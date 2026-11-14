@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.ConnectedLaterTransport
-import ContinuousFlexibility.Radial.SelectedLaterJoinAngle
-import ContinuousFlexibility.Radial.SelectedLaterStandIn
-import ContinuousFlexibility.Radial.SelectedBoundaryRadiusScale
+module
+
+public import ContinuousFlexibility.Radial.ConnectedLaterTransport
+public import ContinuousFlexibility.Radial.SelectedLaterJoinAngle
+public import ContinuousFlexibility.Radial.SelectedLaterStandIn
+public import ContinuousFlexibility.Radial.SelectedBoundaryRadiusScale
 
 /-!
 # Normalized later-band boundary data on the same connected geometry
@@ -12,6 +14,8 @@ solution is continued to that join while preserving its complete old tail.
 One dilation from the same connected witness transports both functions.
 The full natural state gives unit coefficients and the diagonal margin.
 -/
+
+@[expose] public section
 
 noncomputable section
 

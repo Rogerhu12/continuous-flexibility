@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularCoefficients
-import ContinuousFlexibility.Analysis.N07aAngularClassical
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularCoefficients
+public import ContinuousFlexibility.Analysis.N07aAngularClassical
 
 /-!
 # Exact equivalence of the weak angular graph and its Fourier symbol
@@ -10,6 +12,8 @@ proved by integration by parts, provide the dual Fourier symbol. Thus
 the equivalence concerns every member of the frozen weak graph, not only
 smooth source classes or formal Fourier sequences.
 -/
+
+@[expose] public section
 
 noncomputable section
 

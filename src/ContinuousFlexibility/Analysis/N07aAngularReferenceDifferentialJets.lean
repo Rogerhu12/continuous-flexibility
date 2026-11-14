@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aAngularFixedJetOperations
-import ContinuousFlexibility.Analysis.N07aAngularReferenceSource
-import ContinuousFlexibility.Analysis.N07aCoordinateJetNorms
-import ContinuousFlexibility.Scalar.WeightedDifferentiationSupport
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularFixedJetOperations
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceSource
+public import ContinuousFlexibility.Analysis.N07aCoordinateJetNorms
+public import ContinuousFlexibility.Scalar.WeightedDifferentiationSupport
 
 /-!
 # The actual reference differential preserves every sampled decay order
@@ -11,6 +13,8 @@ closed physical core. Differentiating the transported remainder and
 forming its displayed radial differential therefore retain H^(3/4) and
 every chosen material power.
 -/
+
+@[expose] public section
 
 noncomputable section
 

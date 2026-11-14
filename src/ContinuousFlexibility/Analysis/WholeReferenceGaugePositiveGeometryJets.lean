@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.FixedPositiveReferenceGeometryMaterialJets
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
-import ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets
+module
+
+public import ContinuousFlexibility.Analysis.FixedPositiveReferenceGeometryMaterialJets
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+public import ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets
 
 /-!
 # Ten geometric reference atoms of the same positive family
@@ -12,6 +14,8 @@ the supplied radial fields. Their ten geometric atoms therefore equal
 the displayed scalar formulas, globally. The material bound keeps the
 original sample, interval and all-order family; no interpolation is chosen.
 -/
+
+@[expose] public section
 
 noncomputable section
 

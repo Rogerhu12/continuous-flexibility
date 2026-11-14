@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.RootChartExtension
-import ContinuousFlexibility.Analysis.RootChartSymmetry
-import ContinuousFlexibility.Scalar.FormPullback
+module
+
+public import ContinuousFlexibility.Analysis.RootChartExtension
+public import ContinuousFlexibility.Analysis.RootChartSymmetry
+public import ContinuousFlexibility.Scalar.FormPullback
 
 /-!
 # The genuine extended root chart has a positive ordinary Jacobian
@@ -12,6 +14,8 @@ Continuity of the extended coefficient and ordinary Jacobian then gives
 a genuine two-sided collar. No regularity of the unextended formula at
 negative radial coordinates is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

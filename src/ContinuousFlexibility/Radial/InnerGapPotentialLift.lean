@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerGapRadialDomain
-import ContinuousFlexibility.Radial.InnerWeightL2
-import ContinuousFlexibility.Radial.InnerRadialL2Pairing
+module
+
+public import ContinuousFlexibility.Radial.InnerGapRadialDomain
+public import ContinuousFlexibility.Radial.InnerWeightL2
+public import ContinuousFlexibility.Radial.InnerRadialL2Pairing
 
 /-!
 # The positive-gap form on the common physical H¹ domain
@@ -13,6 +15,8 @@ coercive domain to the common function/derivative domain.
 Consequently the constructed gap inverse satisfies the form equation
 against every test in that common H¹ domain, not just projected tests.
 -/
+
+@[expose] public section
 
 noncomputable section
 

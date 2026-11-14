@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05SeedOpticalLowerTail
-import ContinuousFlexibility.Analysis.N05SeedOpticalLowerFiniteHead
+module
+
+public import ContinuousFlexibility.Analysis.N05SeedOpticalLowerTail
+public import ContinuousFlexibility.Analysis.N05SeedOpticalLowerFiniteHead
 
 /-!
 # Optical lower bounds on every actual negative seed component
@@ -8,6 +10,8 @@ The finite central and small-index components use their genuine simple
 zeros. Every remaining component uses the derived Morse estimate and the
 same physical carrier index. No optical lower certificate is an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RootCharacteristicFactor
-import ContinuousFlexibility.Analysis.CanonicalTwoEndpointCubicMixed
+module
+
+public import ContinuousFlexibility.Analysis.RootCharacteristicFactor
+public import ContinuousFlexibility.Analysis.CanonicalTwoEndpointCubicMixed
 
 /-!
 # Actual mixed jets under the two root orientations
@@ -8,6 +10,8 @@ The physical radial coordinate is a translation or a reflection.
 Consequently its pullback preserves absolute mixed jets at every order,
 without requiring a smoothness assumption for the locality identity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

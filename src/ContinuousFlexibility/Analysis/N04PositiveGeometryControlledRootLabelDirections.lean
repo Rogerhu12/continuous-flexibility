@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsRoot
-import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsRoot
+public import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
 
 /-!
 # Genuine angular towers of the actual inverse-root slope
@@ -9,6 +11,8 @@ gives its literal slope and every angular derivative, including the
 reference constant at angular order zero. Positive parameter jets are
 exactly the corresponding jets of the inverse-label displacement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

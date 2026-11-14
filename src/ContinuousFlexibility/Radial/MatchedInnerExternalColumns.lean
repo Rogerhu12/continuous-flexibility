@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MatchingInverseFormula
-import ContinuousFlexibility.Radial.MatchedInnerExternalDecomposition
-import ContinuousFlexibility.Radial.MatchedModeWeightedCells
+module
+
+public import ContinuousFlexibility.Radial.MatchingInverseFormula
+public import ContinuousFlexibility.Radial.MatchedInnerExternalDecomposition
+public import ContinuousFlexibility.Radial.MatchedModeWeightedCells
 
 /-!
 # Spatial bounds for the actual external inner columns
@@ -11,6 +13,8 @@ same matching inverse. Localizer bounds then select the sign giving
 the full distance decay. No internal-interface Poisson vector is used
 in place of an external matching column.
 -/
+
+@[expose] public section
 
 noncomputable section
 

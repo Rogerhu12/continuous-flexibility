@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OuterMorseLocalizedOperator
+module
+
+public import ContinuousFlexibility.Radial.OuterMorseLocalizedOperator
 
 /-!
 # The actual localized ordinary Morse inverse
@@ -9,6 +11,8 @@ ordinary kernel with a minus sign. The exponent depends only on the common
 geometric constants and the position-kernel exponent. Localizers of zero
 physical label give the zero operator on the actual outer interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCircleVectorProducts
-import ContinuousFlexibility.Analysis.OneHighCircleScalarComposition
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleVectorProducts
+public import ContinuousFlexibility.Analysis.OneHighCircleScalarComposition
 
 /-!
 # Uniform multivariable smooth composition on the physical circle
@@ -9,6 +11,8 @@ multilinear derivative norms are bounded on a convex region containing zero
 and the joint input range. The explicit constant involves only these bounds,
 the number of inputs, and their prescribed low Fourier bounds.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFourierProduct
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierProduct
 
 /-!
 # Absolutely summable character series
@@ -8,6 +10,8 @@ circle function. Its actual Fourier coefficients are exactly the original
 sequence. This is used when constructing functions from mixed cylinder
 frequency data, before any physical square-integrability is known.
 -/
+
+@[expose] public section
 
 noncomputable section
 

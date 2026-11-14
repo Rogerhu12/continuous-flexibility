@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CircleUnitIntegral
-import ContinuousFlexibility.Analysis.TameUnitIntegralLinearFamily
-import ContinuousFlexibility.Analysis.CircleCompositionSmoothTame
+module
+
+public import ContinuousFlexibility.Analysis.CircleUnitIntegral
+public import ContinuousFlexibility.Analysis.TameUnitIntegralLinearFamily
+public import ContinuousFlexibility.Analysis.CircleCompositionSmoothTame
 
 /-!
 # Joint smooth tameness of the actual averaged chart composition
@@ -11,6 +13,8 @@ every input grade. Compact parameter integration of the genuine chart
 composition tower therefore gives its full smooth tame dependence on
 both the chart perturbation and the composed function.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerSelectedPhysicalChain
+module
+
+public import ContinuousFlexibility.Radial.InnerSelectedPhysicalChain
 
 /-!
 # Every positive even frequency has one actual inner depth
@@ -8,6 +10,8 @@ index condition expresses that index uniquely as N+K, including K=0.
 The chosen depth therefore uses the same all-band physical chain and the
 same selected outer joins, with no weight exponent or analytic premise.
 -/
+
+@[expose] public section
 
 noncomputable section
 

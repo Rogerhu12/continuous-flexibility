@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Geometry.CapDisk
+module
+
+public import ContinuousFlexibility.Geometry.CapDisk
 
 /-!
 # An actual radial profile for the cap's sphere chart
@@ -8,6 +10,8 @@ the axis is exactly linear, and its germ at the unit circle is the reciprocal
 formula required by stereographic inversion.  It does not construct a sphere
 map or assume the existence of a compatible profile.
 -/
+
+@[expose] public section
 
 noncomputable section
 

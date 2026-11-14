@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06ControlledReferenceSources
+module
+
+public import ContinuousFlexibility.Analysis.N06ControlledReferenceSources
 
 /-!
 # A uniform source norm for one fixed compact physical support
@@ -8,6 +10,8 @@ On a fixed compact radial support, the finitely many resulting factors
 give one source norm constant before the physical field or its size is
 chosen. The element belongs to the original selected volume model.
 -/
+
+@[expose] public section
 
 noncomputable section
 

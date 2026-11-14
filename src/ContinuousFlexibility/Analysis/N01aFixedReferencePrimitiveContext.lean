@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01aFinalAssembly
-import ContinuousFlexibility.Analysis.N01aReferenceHeight
-import ContinuousFlexibility.Analysis.SpacesConclusion
-import ContinuousFlexibility.Analysis.TameCalculusTheorem
+module
+
+public import ContinuousFlexibility.Analysis.N01aFinalAssembly
+public import ContinuousFlexibility.Analysis.N01aReferenceHeight
+public import ContinuousFlexibility.Analysis.SpacesConclusion
+public import ContinuousFlexibility.Analysis.TameCalculusTheorem
 
 /-!
 # The actual material and control context on a fixed reference
@@ -11,6 +13,8 @@ constructions. The physical spaces use the proved tame-calculus theorem,
 and the reference eigenfield membership is derived from this same radial
 reference. The actual host cells and the primitive certificate are kept.
 -/
+
+@[expose] public section
 
 noncomputable section
 

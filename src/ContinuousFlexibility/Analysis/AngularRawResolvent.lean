@@ -1,5 +1,7 @@
-import Mathlib.Analysis.InnerProductSpace.LinearPMap
-import Mathlib.Tactic.Linarith
+module
+
+public import Mathlib.Analysis.InnerProductSpace.LinearPMap
+public import Mathlib.Tactic.Linarith
 
 /-!
 # Bounded resolvents of a given unbounded operator
@@ -9,6 +11,8 @@ including the actual domain of `A` and both inverse identities.  The same
 object is used at every real spectral parameter.  In particular, `r=-1`
 is the shifted inverse used by the angular-frequency construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

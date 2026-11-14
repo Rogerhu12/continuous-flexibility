@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04bCharacteristicFlowClosed
-import ContinuousFlexibility.Analysis.OneHighCircleFlowInterior
-import ContinuousFlexibility.Analysis.OneHighCircleFlowLocalization
+module
+
+public import ContinuousFlexibility.Analysis.N04bCharacteristicFlowClosed
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowInterior
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowLocalization
 
 /-!
 # Interior joint smoothness of the same actual characteristic flow
@@ -12,6 +14,8 @@ the rebased flow, and composition with the proved smooth angular slice gives
 joint smoothness of the original stored flow. No extension of the stored
 flow and no forward joint-regularity hypothesis are introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

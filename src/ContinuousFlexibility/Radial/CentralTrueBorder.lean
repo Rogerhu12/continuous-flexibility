@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.BorderNormalization
-import ContinuousFlexibility.Radial.CentralTurningPoints
-import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
+module
+
+public import ContinuousFlexibility.Radial.BorderNormalization
+public import ContinuousFlexibility.Radial.CentralTurningPoints
+public import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
 
 /-!
 # A true metric border supported in the central positive cap
@@ -15,6 +17,8 @@ with the central model on the cap.  This is the situation of the completed
 reference.  It does not assume smoothness of the inverse central radius at
 nonpositive radii, where that inverse has no geometric meaning.
 -/
+
+@[expose] public section
 
 noncomputable section
 

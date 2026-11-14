@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N08ControlColumnExtraction
-import ContinuousFlexibility.Analysis.TameInverseJets
+module
+
+public import ContinuousFlexibility.Analysis.N08ControlColumnExtraction
+public import ContinuousFlexibility.Analysis.TameInverseJets
 
 /-!
 # The genuine joint tower of a control column
@@ -9,6 +11,8 @@ expression differentiates either the coefficient or the one varying
 control vector. The resulting recursion gives every joint derivative,
 without a norm on the state space or a symmetry assumption on higher jets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

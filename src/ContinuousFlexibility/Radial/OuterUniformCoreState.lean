@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OuterOutwardCoreState
+module
+
+public import ContinuousFlexibility.Radial.OuterOutwardCoreState
 
 /-!
 # Uniform actual core states from the upper frequency threshold
@@ -8,6 +10,8 @@ constants depend only on the common geometric bounds. The lower
 frequency threshold plays no role, so the new initial frequency band
 is covered by the same estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.RadialReferencePotentialGerms
-import ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields
-import ContinuousFlexibility.Analysis.SolveReturnEquations
+module
+
+public import ContinuousFlexibility.Analysis.RadialReferencePotentialGerms
+public import ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # The actual negative reference potential after unit-density cancellation
@@ -11,6 +13,8 @@ the scalar potential. The resulting identity uses the actual zero-angle
 height slice and its ordinary derivatives; it does not assume a uniform
 estimate on that slice throughout the negative component.
 -/
+
+@[expose] public section
 
 noncomputable section
 

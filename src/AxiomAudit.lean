@@ -1,5 +1,7 @@
-import ContinuousFlexibility
-import Lean.Util.CollectAxioms
+module
+
+public import ContinuousFlexibility
+public import Lean.Util.CollectAxioms
 
 /-!
 # Axiom audit of project theorems
@@ -9,6 +11,8 @@ The audit rejects `sorryAx` and every axiom other than Lean's usual
 declarations owned by project modules, including private helper declarations,
 as well as declarations in the project namespace and transitive dependencies.
 -/
+
+@[expose] public section
 
 open Lean in
 run_cmd do
@@ -21,11 +25,15 @@ run_cmd do
       | none => false
     if (`ContinuousFlexibility).isPrefixOf name || projectOwner then
       declarations := declarations + 1
-      match info with
-      | .thmInfo _ => checked := checked + 1
-      | .axiomInfo _ => throwError "Project axiom declared: {name}"
-      | _ => pure ()
+      -- Imported theorems of a module are seen as `axiomInfo` without their proofs;
+      -- `collectAxioms` still follows the proofs. A declared axiom is the one whose
+      -- own axiom set contains it.
       let axioms ← collectAxioms name
+      if axioms.contains name then
+        throwError "Project axiom declared: {name}"
+      match info with
+      | .thmInfo _ | .axiomInfo _ => checked := checked + 1
+      | _ => pure ()
       for ax in axioms do
         unless ax == ``propext || ax == ``Classical.choice || ax == ``Quot.sound do
           throwError "Unexpected axiom {ax} in {name}"

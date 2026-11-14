@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterMorseCellEnergy
-import ContinuousFlexibility.Radial.OuterFrequencyScale
+module
+
+public import ContinuousFlexibility.Radial.OuterMorseCellEnergy
+public import ContinuousFlexibility.Radial.OuterFrequencyScale
 
 /-!
 # The frequency-band size of the actual cell transfer factor
@@ -8,6 +10,8 @@ The long right cap is estimated by its balanced coefficient product.
 Its large length contributes only to the polynomial prefactor, whose
 logarithm is quadratic in the cell index.
 -/
+
+@[expose] public section
 
 noncomputable section
 

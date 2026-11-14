@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneSidedBoundaryTaylorRepresentative
-import ContinuousFlexibility.Analysis.WholeComponentTransportFactory
+module
+
+public import ContinuousFlexibility.Analysis.OneSidedBoundaryTaylorRepresentative
+public import ContinuousFlexibility.Analysis.WholeComponentTransportFactory
 
 /-!
 # Whole-component transport from genuine one-sided endpoint fields
@@ -11,6 +13,8 @@ bound is preserved exactly. The resulting transport matches the full
 ordinary boundary jets of the original fields, on either physical side.
 An ambient endpoint is allowed to supply the identity fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 

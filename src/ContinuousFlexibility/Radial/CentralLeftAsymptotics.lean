@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.CentralRadiusGrowth
-import ContinuousFlexibility.Radial.GaussianLaplaceLeftBounds
-import ContinuousFlexibility.Radial.CentralModel
-import ContinuousFlexibility.Radial.GaussianLaplaceLeftSymbols
+module
+
+public import ContinuousFlexibility.Radial.CentralRadiusGrowth
+public import ContinuousFlexibility.Radial.GaussianLaplaceLeftBounds
+public import ContinuousFlexibility.Radial.CentralModel
+public import ContinuousFlexibility.Radial.GaussianLaplaceLeftSymbols
 
 /-!
 # Actual left-end central radius asymptotics
@@ -11,6 +13,8 @@ then apply the comparison to the already constructed logarithmic radius
 derivative. The logarithmic height slope is identified by differentiation
 of the actual radial height. Right-end estimates are separate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

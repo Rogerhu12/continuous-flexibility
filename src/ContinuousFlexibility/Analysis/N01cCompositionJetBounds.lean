@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cCoefficientJetCalculus
-import ContinuousFlexibility.Analysis.N01cOneHighProducts
-import ContinuousFlexibility.Analysis.N01cOuterDenominatorJets
+module
+
+public import ContinuousFlexibility.Analysis.N01cCoefficientJetCalculus
+public import ContinuousFlexibility.Analysis.N01cOneHighProducts
+public import ContinuousFlexibility.Analysis.N01cOuterDenominatorJets
 
 /-!
 # Quantitative ordered-partition bounds for actual parameter jets
@@ -16,6 +18,8 @@ one-high expression can be centered at the fixed reference state. One base
 and one loss work for every parameter order, spatial order and finite raw
 expansion. Constants may depend on those finite orders and expansions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

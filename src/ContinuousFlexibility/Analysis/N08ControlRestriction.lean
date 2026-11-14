@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CircleJetClosedGraph
-import ContinuousFlexibility.Analysis.SpacesCircleSpectral
-import ContinuousFlexibility.Analysis.StateKappaBounds
+module
+
+public import ContinuousFlexibility.Analysis.CircleJetClosedGraph
+public import ContinuousFlexibility.Analysis.SpacesCircleSpectral
+public import ContinuousFlexibility.Analysis.StateKappaBounds
 
 /-!
 # Restricting the actual circle space to weighted control means
@@ -11,6 +13,8 @@ applying it coordinate by coordinate therefore produces an actual ℓ²
 control vector.  The exact decoding clause identifies its coordinates
 with the manuscript's weighted angular means.
 -/
+
+@[expose] public section
 
 noncomputable section
 

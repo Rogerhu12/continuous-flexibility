@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerOrthogonalOperatorSum
-import ContinuousFlexibility.Radial.InnerBorderPieceProjection
-import ContinuousFlexibility.Radial.InnerBorderWeights
+module
+
+public import ContinuousFlexibility.Radial.InnerOrthogonalOperatorSum
+public import ContinuousFlexibility.Radial.InnerBorderPieceProjection
+public import ContinuousFlexibility.Radial.InnerBorderWeights
 
 /-!
 # Weighted direct sums on the actual bordered source space
@@ -10,6 +12,8 @@ to the central piece. Distinct weighted outputs are still orthogonal.
 The local output loss is kept separate from the input reciprocal weight,
 so its coefficient factor is paid only once.
 -/
+
+@[expose] public section
 
 noncomputable section
 

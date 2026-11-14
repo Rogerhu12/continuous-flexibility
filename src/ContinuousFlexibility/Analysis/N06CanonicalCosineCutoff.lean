@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06CanonicalFourierCutoff
-import ContinuousFlexibility.Analysis.N06EvenFourierCutoff
-import ContinuousFlexibility.Analysis.N06WeakCylinderPDE
+module
+
+public import ContinuousFlexibility.Analysis.N06CanonicalFourierCutoff
+public import ContinuousFlexibility.Analysis.N06EvenFourierCutoff
+public import ContinuousFlexibility.Analysis.N06WeakCylinderPDE
 
 /-!
 # The original canonical weak jet row is the limit of its cosine cutoffs
@@ -11,6 +13,8 @@ coefficients are exactly the half-period coefficients used by the genuine
 weak cylinder equation, and every stored angular jet converges in its
 original canonical L2 norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadAssembly
-import ContinuousFlexibility.Analysis.ActualWholeReferenceNonAuxiliaryJets
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeAuxiliaryPackage
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadAssembly
+public import ContinuousFlexibility.Analysis.ActualWholeReferenceNonAuxiliaryJets
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeAuxiliaryPackage
 
 /-!
 # The reference obligation
@@ -12,6 +14,8 @@ the geometry, the buffered auxiliary package chooses one auxiliary column on
 that neighborhood. The original typed atlas is kept: the package accepts an
 arbitrary supplied atlas, and Through03 is restricted only for the package.
 -/
+
+@[expose] public section
 
 noncomputable section
 

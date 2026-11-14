@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06FinitePhysicalPartition
+module
+
+public import ContinuousFlexibility.Analysis.N06FinitePhysicalPartition
 
 /-!
 # A finite support envelope containing both halves of every cut
@@ -12,6 +14,8 @@ The additional indices do not alter physical/canonical test pairings:
 when an actual current piece misses the physical support, both actual
 canonical test transforms vanish throughout its open cylinder.
 -/
+
+@[expose] public section
 
 noncomputable section
 

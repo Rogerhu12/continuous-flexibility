@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.NeighborhoodCircleCharts
-import ContinuousFlexibility.Analysis.NeighborhoodCircleChartsState
-import ContinuousFlexibility.Blueprint.Statements
+module
+
+public import ContinuousFlexibility.Analysis.NeighborhoodCircleCharts
+public import ContinuousFlexibility.Analysis.NeighborhoodCircleChartsState
+public import ContinuousFlexibility.Blueprint.Statements
 
 /-!
 # Installing the actual flows and their actual inverses
@@ -9,6 +11,8 @@ The reference state, controls and component geometry are retained. The
 return inverse and right-chart inverse are the inverses of their defining
 maps on the real line.
 -/
+
+@[expose] public section
 
 noncomputable section
 

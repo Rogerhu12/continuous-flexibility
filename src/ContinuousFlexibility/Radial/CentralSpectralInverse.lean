@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OscillatorClosedGraph
+module
+
+public import ContinuousFlexibility.Radial.OscillatorClosedGraph
 
 /-!
 # Actual Hilbert-space central inverses on the Hermite graph closure
@@ -8,6 +10,8 @@ isometry. The graph relation is proved for the same closed graph defined
 as the closure of finite actual Hermite differential pairs. Distribution
 and Friedrichs-domain identification are separate subsequent obligations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

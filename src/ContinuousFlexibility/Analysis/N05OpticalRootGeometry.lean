@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05OpticalRootQuotient
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
+module
+
+public import ContinuousFlexibility.Analysis.N05OpticalRootQuotient
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
 
 /-!
 # First derivative bounds for an optical root coordinate
@@ -9,6 +11,8 @@ the regular root average. Both apparent inverse-distance terms have
 numerators of order the root distance. No estimate for the second
 coordinate derivative is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

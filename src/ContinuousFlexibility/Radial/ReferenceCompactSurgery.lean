@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ReferenceIndexFloor
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+module
+
+public import ContinuousFlexibility.Radial.ReferenceIndexFloor
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
 
 /-!
 # Compact interior surgery of an accumulating profile
@@ -14,6 +16,8 @@ The geometric profile clauses (smoothness, positivity, endpoint
 flatness and simple critical points) are supplied by the actual gluing.
 They do not replace any of the quantitative accumulating clauses.
 -/
+
+@[expose] public section
 
 noncomputable section
 

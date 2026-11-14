@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderPureJets
-import Mathlib.Analysis.Calculus.FDeriv.Symmetric
-import Mathlib.Analysis.Calculus.Deriv.Mul
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderPureJets
+public import Mathlib.Analysis.Calculus.FDeriv.Symmetric
+public import Mathlib.Analysis.Calculus.Deriv.Mul
 
 /-!
 # Every ordinary smooth cylinder function has its actual mixed jet tower
@@ -9,6 +11,8 @@ The jets are the existing pure radial derivatives of the existing pure
 angular derivatives. Schwarz symmetry and induction prove the angular
 derivative identities; no auxiliary derivative tower is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryFormulaWordBounds
-import ContinuousFlexibility.Analysis.CircleSmoothDirectionsOperations
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryFormulaWordBounds
+public import ContinuousFlexibility.Analysis.CircleSmoothDirectionsOperations
 
 /-!
 # Fixed-state boundary fields
@@ -9,6 +11,8 @@ joint tower. Every word containing a state slot then vanishes. Bounds
 at the fixed state and unit sampling radius therefore give all state
 orders, with any later parameter shift and the same angular reserve.
 -/
+
+@[expose] public section
 
 noncomputable section
 

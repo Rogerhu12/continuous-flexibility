@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PositiveComponentMaterialCell
-import ContinuousFlexibility.Analysis.MaterialSampleBounds
+module
+
+public import ContinuousFlexibility.Analysis.PositiveComponentMaterialCell
+public import ContinuousFlexibility.Analysis.MaterialSampleBounds
 
 /-!
 # Positive height decay at one genuine component sample
@@ -9,6 +11,8 @@ at that same sample absorbs every fixed pointwise coefficient cost. The
 proof uses the material envelope already present in `IsMaterialData`;
 the whole component is never required to lie in a single cell.
 -/
+
+@[expose] public section
 
 noncomputable section
 

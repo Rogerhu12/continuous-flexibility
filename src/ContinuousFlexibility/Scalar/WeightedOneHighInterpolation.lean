@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Analysis
-import Mathlib.Analysis.SpecialFunctions.Pow.Real
+module
+
+public import ContinuousFlexibility.Statements.Analysis
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 
 /-!
 # One high factor from the frozen interpolation estimate
@@ -10,6 +12,8 @@ the base and high-order shift below are independent of the number of factors.
 The numerical constants may depend on that number and on the distribution of
 derivatives, as is appropriate for a fixed derivative order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

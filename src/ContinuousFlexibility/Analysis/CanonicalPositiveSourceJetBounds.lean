@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CanonicalPositiveFiniteEndpointBounds
-import ContinuousFlexibility.Analysis.N04bActualAtlasInteriorCompletion
-import ContinuousFlexibility.Analysis.CanonicalPositiveSourceInteriorDivision
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalPositiveFiniteEndpointBounds
+public import ContinuousFlexibility.Analysis.N04bActualAtlasInteriorCompletion
+public import ContinuousFlexibility.Analysis.CanonicalPositiveSourceInteriorDivision
 
 /-!
 # All ordinary jets of the same certified positive endpoint sources
@@ -11,6 +13,8 @@ ambient identity. Its high-order coefficient is independent of the state;
 only the single displayed high grading depends on the state. This does
 not assert material growth of those component coefficients.
 -/
+
+@[expose] public section
 
 noncomputable section
 

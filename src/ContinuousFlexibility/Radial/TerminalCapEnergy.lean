@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.TerminalCapLift
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+module
+
+public import ContinuousFlexibility.Radial.TerminalCapLift
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 
 /-!
 # The actual energy of a terminal cutoff lift
@@ -9,6 +11,8 @@ as its boundary flux plus the integral of w (χ')² u². This is the
 geometric source of the two attenuation factors in the lift-energy error.
 The normalized identity uses the same χu/√lam as TerminalCapLift.
 -/
+
+@[expose] public section
 
 noncomputable section
 

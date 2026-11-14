@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06RelativeChartHeightPatch
-import ContinuousFlexibility.Analysis.N06CanonicalProperties
+module
+
+public import ContinuousFlexibility.Analysis.N06RelativeChartHeightPatch
+public import ContinuousFlexibility.Analysis.N06CanonicalProperties
 
 /-!
 # Relative patches of the actual N04 coordinate witness
@@ -20,6 +22,8 @@ These are constructed chart and height fields. Jacobian nondegeneracy,
 the global inverse, and the remaining N04 operator conditions are separate
 obligations; this module does not assert them.
 -/
+
+@[expose] public section
 
 noncomputable section
 

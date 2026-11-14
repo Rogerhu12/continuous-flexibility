@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cOrdinaryFlowAngularBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01cOrdinaryFlowAngularBounds
 
 /-!
 # Transporting the actual angular prefix to arbitrary genuine towers
@@ -8,6 +10,8 @@ its state-order quantifier. Uniqueness transports the same estimate to
 any genuine angular tower. Choosing the spatial cutoff equal to the
 angular order preserves one fixed offset for the whole state prefix.
 -/
+
+@[expose] public section
 
 noncomputable section
 

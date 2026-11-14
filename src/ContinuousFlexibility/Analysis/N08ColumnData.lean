@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N08CircleHeightRow
-import ContinuousFlexibility.Analysis.N08CircleReferenceDiagonal
+module
+
+public import ContinuousFlexibility.Analysis.N08CircleHeightRow
+public import ContinuousFlexibility.Analysis.N08CircleReferenceDiagonal
 
 /-!
 # The control-column data from the actual derivatives
@@ -9,6 +11,8 @@ are defined globally by the bounded construction wherever the required
 coefficient bounds hold, and by zero elsewhere. On the final neighborhood
 their action and both inverse identities follow from the same coefficients.
 -/
+
+@[expose] public section
 
 noncomputable section
 

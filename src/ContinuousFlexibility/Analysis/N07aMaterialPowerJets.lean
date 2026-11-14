@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Scalar.WeightedMaterialScale
+module
+
+public import ContinuousFlexibility.Scalar.WeightedMaterialScale
 
 /-!
 # Actual material-envelope powers retain their power under differentiation
@@ -7,6 +9,8 @@ The positive-order logarithmic jets of M are bounded in the material
 coordinate. Exponentiation therefore preserves the chosen power of M in
 every derivative, including negative powers.
 -/
+
+@[expose] public section
 
 noncomputable section
 

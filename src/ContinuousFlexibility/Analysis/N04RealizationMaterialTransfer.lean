@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.MaterialGlobalEndpointModels
-import ContinuousFlexibility.Analysis.N04RealizationMaterialOneSided
+module
+
+public import ContinuousFlexibility.Analysis.MaterialGlobalEndpointModels
+public import ContinuousFlexibility.Analysis.N04RealizationMaterialOneSided
 
 /-!
 # Exact height decay for actual material weights
@@ -9,6 +11,8 @@ points with one common model coordinate. A one-sided comparison of the
 fixed endpoint coordinates then retains the same positive height exponent.
 The points need not belong to the same material cell.
 -/
+
+@[expose] public section
 
 noncomputable section
 

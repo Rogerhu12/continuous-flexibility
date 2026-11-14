@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Blueprint.Statements
-import ContinuousFlexibility.Analysis.N04bGeometryPreservation
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
+public import ContinuousFlexibility.Analysis.N04bGeometryPreservation
 
 /-!
 # Interior divided coefficients for canonical pieces
@@ -12,6 +14,8 @@ This construction supplies the positive-piece factorization in
 `N04PartB`. It asserts neither an endpoint extension nor a uniform bound
 for that quotient; those require the separate boundary-jet argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

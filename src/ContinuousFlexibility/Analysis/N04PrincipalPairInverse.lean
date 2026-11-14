@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PrincipalPairAlgebra
-import ContinuousFlexibility.Analysis.N04PrincipalNegativeReciprocalDifference
-import ContinuousFlexibility.Analysis.N04PrincipalDataTowers
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalPairAlgebra
+public import ContinuousFlexibility.Analysis.N04PrincipalNegativeReciprocalDifference
+public import ContinuousFlexibility.Analysis.N04PrincipalDataTowers
 
 /-!
 # Restriction and inversion of paired current families
@@ -9,6 +11,8 @@ The reciprocal is formed on one open domain with a uniform inverse-value
 envelope. The full current and reference towers are inverted separately;
 the exact reciprocal difference keeps the original material weight.
 -/
+
+@[expose] public section
 
 noncomputable section
 

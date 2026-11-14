@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryFiniteKernelBounds
-import ContinuousFlexibility.Analysis.N01cStateAngleSelections
-import ContinuousFlexibility.Analysis.N01cPhysicalGraphJets
-import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
-import ContinuousFlexibility.Analysis.N01cAngularJetTowers
-import ContinuousFlexibility.Scalar.WeightedTowerCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryFiniteKernelBounds
+public import ContinuousFlexibility.Analysis.N01cStateAngleSelections
+public import ContinuousFlexibility.Analysis.N01cPhysicalGraphJets
+public import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
+public import ContinuousFlexibility.Analysis.N01cAngularJetTowers
+public import ContinuousFlexibility.Scalar.WeightedTowerCalculus
 
 /-!
 # Actual state-angle slots in the finite endpoint kernel
@@ -13,6 +15,8 @@ of each scalar input. Its parameter arity and angular cost are then
 summed by the exact word identities. This provides the finite-kernel
 consumer for root radial traces and for their finite recurrences.
 -/
+
+@[expose] public section
 
 noncomputable section
 

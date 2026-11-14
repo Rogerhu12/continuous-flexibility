@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.R11bAngularFrequencySource
-import ContinuousFlexibility.Radial.R11bWeightedModeSquares
-import ContinuousFlexibility.Radial.R11bModeScaling
-import ContinuousFlexibility.Radial.R11bRemainderModes
+module
+
+public import ContinuousFlexibility.Radial.R11bAngularFrequencySource
+public import ContinuousFlexibility.Radial.R11bWeightedModeSquares
+public import ContinuousFlexibility.Radial.R11bModeScaling
+public import ContinuousFlexibility.Radial.R11bRemainderModes
 
 /-!
 # Finite angular frequency bounds for the actual reference inverse
@@ -10,6 +12,8 @@ Only selected coefficients of the true inverse are compared. Modal
 uniqueness identifies their scaling, including the critical scalar row;
 weighted Bessel then gives a constant independent of the finite selection.
 -/
+
+@[expose] public section
 
 noncomputable section
 

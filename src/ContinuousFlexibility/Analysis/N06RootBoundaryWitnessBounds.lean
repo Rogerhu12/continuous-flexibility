@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06RootBoundaryPolynomialBounds
+module
+
+public import ContinuousFlexibility.Analysis.N06RootBoundaryPolynomialBounds
 
 /-!
 # Boundary difference estimates for the actual root-flow witnesses
@@ -7,6 +9,8 @@ The estimates are transferred from the explicit finite formulas to the
 same G and G0 that solve the true root transport equations. No state
 continuity or chosen derivative of either witness is an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

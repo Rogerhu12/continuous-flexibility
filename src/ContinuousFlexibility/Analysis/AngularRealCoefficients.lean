@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.AngularHilbertCommutator
+module
+
+public import ContinuousFlexibility.Analysis.AngularHilbertCommutator
 
 /-!
 # Real principal coefficients in the angular inverse estimate
@@ -8,6 +10,8 @@ their nonnegative parts only enlarges the assumed bound, since every
 Sobolev norm is nonnegative. The two scalar-field statements below share
 this conversion and retain the same explicit inverse estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

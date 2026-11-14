@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CoordinateCompositionMaterialBounds
-import ContinuousFlexibility.Analysis.OneHighCircleFlowLocalization
-import ContinuousFlexibility.Analysis.OneSidedOrdinaryJets
-import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
+module
+
+public import ContinuousFlexibility.Analysis.CoordinateCompositionMaterialBounds
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowLocalization
+public import ContinuousFlexibility.Analysis.OneSidedOrdinaryJets
+public import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
 
 /-!
 # Actual positive powers with one fixed state loss
@@ -12,6 +14,8 @@ The existing partition estimate then controls the actual composition.
 The low order and loss precede the exponent, value interval, and state;
 no jets of the powered field occur among the hypotheses.
 -/
+
+@[expose] public section
 
 noncomputable section
 

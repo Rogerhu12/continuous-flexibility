@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CoefficientProbeFieldRegularity
+module
+
+public import ContinuousFlexibility.Analysis.CoefficientProbeFieldRegularity
 
 /-!
 # Fixed finite constants for the actual probe numerators
@@ -9,6 +11,8 @@ in the four source-error jets of orders no higher than the output order.
 The constant is selected before the source fields and their bound, so
 substitution of N03's actual error estimate preserves its common loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

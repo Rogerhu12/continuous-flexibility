@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.FiniteFullJetBoundary
+module
+
+public import ContinuousFlexibility.Analysis.FiniteFullJetBoundary
 
 /-!
 # First jets of the same local inverse maps
@@ -7,6 +9,8 @@ The inverse points are fixed by the genuine left-inverse germs. The
 derivative equality uses one left and one right inverse of the common
 forward derivative; no inverse is chosen by the proof.
 -/
+
+@[expose] public section
 
 noncomputable section
 

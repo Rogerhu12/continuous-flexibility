@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cEndpointMixedPowerAlgebra
-import ContinuousFlexibility.Analysis.N01cMaterialShiftComparison
+module
+
+public import ContinuousFlexibility.Analysis.N01cEndpointMixedPowerAlgebra
+public import ContinuousFlexibility.Analysis.N01cMaterialShiftComparison
 
 /-!
 # Actual cell samples for endpoint-weighted raw bounds
@@ -9,6 +11,8 @@ prescribed material sample. The exact height exponent is preserved.
 The endpoint power on the coefficient factors costs only a fixed annular
 width constant at each spatial order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

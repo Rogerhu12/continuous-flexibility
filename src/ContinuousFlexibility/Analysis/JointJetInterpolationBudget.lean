@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.TameInterpolationProducts
-import ContinuousFlexibility.Analysis.CircleCompositionFaaBounds
+module
+
+public import ContinuousFlexibility.Analysis.TameInterpolationProducts
+public import ContinuousFlexibility.Analysis.CircleCompositionFaaBounds
 
 /-!
 # Fixed interpolation budget for the actual joint chain rule
@@ -9,6 +11,8 @@ total order. A fixed low order absorbs the loss of every block before
 interpolation. All remaining factors then share one affine high scale,
 even when the number of spatial directions grows with the output order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

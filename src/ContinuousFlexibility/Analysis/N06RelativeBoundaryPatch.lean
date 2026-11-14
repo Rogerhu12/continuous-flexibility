@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06BoundaryRadialJets
-import ContinuousFlexibility.Analysis.PositiveEndpointCutoff
+module
+
+public import ContinuousFlexibility.Analysis.N06BoundaryRadialJets
+public import ContinuousFlexibility.Analysis.PositiveEndpointCutoff
 
 /-!
 # A relative boundary patch with an independently small collar
@@ -15,6 +17,8 @@ The construction is scalar and local in its smoothness assumptions. It
 will be applied to both entries of a chart at order four and to the
 logarithm of its positive height at order three.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CanonicalWholeNegativeTransport
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalWholeNegativeTransport
 
 /-!
 # True root germs and physical range of the whole negative transport
@@ -8,6 +10,8 @@ interior is the genuine travel transition, and its endpoint radius is
 fixed. Thus the whole closed component maps into itself, with no value
 assigned through a totalized inverse at a turning point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

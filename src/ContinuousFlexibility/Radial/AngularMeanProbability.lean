@@ -1,6 +1,10 @@
-import ContinuousFlexibility.Radial.AngularMeanL2
+module
+
+public import ContinuousFlexibility.Radial.AngularMeanL2
 
 /-! # The normalized angular interval has total mass one -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

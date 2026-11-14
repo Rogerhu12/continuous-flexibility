@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CircleEnergyEnvelope
-import ContinuousFlexibility.Analysis.CircleNonlinearRealization
+module
+
+public import ContinuousFlexibility.Analysis.CircleEnergyEnvelope
+public import ContinuousFlexibility.Analysis.CircleNonlinearRealization
 
 /-!
 # Genuine circle derivatives from summable remainder bounds
@@ -9,6 +11,8 @@ projective topology when its energy envelope is summable. The error
 factor tends to zero in every weighted order; the energy is kept inside
 the component sum until the physical norm estimate is applied.
 -/
+
+@[expose] public section
 
 noncomputable section
 

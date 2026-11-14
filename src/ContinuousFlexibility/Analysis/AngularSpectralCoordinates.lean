@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.AngularFrequency
-import ContinuousFlexibility.Analysis.AngularSpectralDecomposition
+module
+
+public import ContinuousFlexibility.Analysis.AngularFrequency
+public import ContinuousFlexibility.Analysis.AngularSpectralDecomposition
 
 /-!
 # Coordinates of a general angular resolvent
@@ -10,6 +12,8 @@ the reciprocal-frequency multiplier. Thus the Hilbert-sum model used by
 the commutator estimates describes the given operator, not just an
 unrelated diagonal operator on an auxiliary space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

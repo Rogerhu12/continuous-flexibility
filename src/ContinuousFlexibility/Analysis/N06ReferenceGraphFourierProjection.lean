@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ReferenceGraphProjection
+module
+
+public import ContinuousFlexibility.Radial.ReferenceGraphProjection
 
 /-!
 # Physical Fourier projection of the original reference graph
@@ -12,6 +14,8 @@ finite angular support.
 In applications the source is f - omega * psi. We project that whole source
 and then add omega * psi back; no finite spectrum of psi is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

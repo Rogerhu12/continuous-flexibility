@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartFieldPowerControl
-import ContinuousFlexibility.Analysis.N01cEndpointMixedPowerNormalization
-import ContinuousFlexibility.Analysis.N04RealizationFixedBasePrefix
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartFieldPowerControl
+public import ContinuousFlexibility.Analysis.N01cEndpointMixedPowerNormalization
+public import ContinuousFlexibility.Analysis.N04RealizationFixedBasePrefix
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
 
 /-!
 # The first spatial derivative of the actual root coefficients
@@ -11,6 +13,8 @@ spatial derivatives and the marked state slots retain their fractional
 powers. One base works for both actual coefficients and every state
 prefix, and the positive state weight is never raised to a new power.
 -/
+
+@[expose] public section
 
 noncomputable section
 

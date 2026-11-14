@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.FlatCollar
-import Mathlib.Algebra.Ring.Periodic
-import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+module
+
+public import ContinuousFlexibility.Scalar.FlatCollar
+public import Mathlib.Algebra.Ring.Periodic
+public import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
 
 /-!
 # The actual analytic-to-geometric annular interface
@@ -14,6 +16,8 @@ The enlargement to `AnnularSolution` is proved below. The original core
 has a strictly positive profile; the enlarged annulus has genuine open flat
 collars and therefore does not have a strictly positive profile everywhere.
 -/
+
+@[expose] public section
 
 noncomputable section
 

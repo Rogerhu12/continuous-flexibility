@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06PrimitivePositiveModeEnergy
-import ContinuousFlexibility.Analysis.N07aCanonicalRadialCoefficients
-import ContinuousFlexibility.Analysis.N06WeakModeRegularity
-import ContinuousFlexibility.Analysis.N06WeakCylinderPDE
+module
+
+public import ContinuousFlexibility.Analysis.N06PrimitivePositiveModeEnergy
+public import ContinuousFlexibility.Analysis.N07aCanonicalRadialCoefficients
+public import ContinuousFlexibility.Analysis.N06WeakModeRegularity
+public import ContinuousFlexibility.Analysis.N06WeakCylinderPDE
 
 /-!
 # Actual H2 modal representatives on the original positive intervals
@@ -11,6 +13,8 @@ give H2 representatives of its actual cosine coefficients.  This step
 uses the constant leading coefficient only to identify a second weak
 derivative; no unit interval, smooth source, or new graph bound is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

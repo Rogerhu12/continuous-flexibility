@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.WholeCanonicalAtlasData
-import ContinuousFlexibility.Analysis.N04bActualAtlasCuts
-import ContinuousFlexibility.Analysis.N04bGeometricCompletion
+module
+
+public import ContinuousFlexibility.Analysis.WholeCanonicalAtlasData
+public import ContinuousFlexibility.Analysis.N04bActualAtlasCuts
+public import ContinuousFlexibility.Analysis.N04bGeometricCompletion
 
 /-!
 # Actual operator fields of the whole-component atlas
@@ -10,6 +12,8 @@ the same inverse-coordinate formulas. Establish that fact on the one
 stored record, then apply the full coordinate operator identity with
 physical regularity at its actual inverse image.
 -/
+
+@[expose] public section
 
 noncomputable section
 

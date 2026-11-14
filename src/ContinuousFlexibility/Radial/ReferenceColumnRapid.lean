@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ReferenceColumnSmooth
-import ContinuousFlexibility.Radial.ReferenceRadialJetBootstrap
+module
+
+public import ContinuousFlexibility.Radial.ReferenceColumnSmooth
+public import ContinuousFlexibility.Radial.ReferenceRadialJetBootstrap
 
 /-!
 # Rapid attenuation of every actual border-column derivative
@@ -11,6 +13,8 @@ theorem therefore propagates positive attenuation to every column jet.
 Only rapid membership of phi and its first derivative is used here; the
 separate inverse comparison proves these two analytic inputs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

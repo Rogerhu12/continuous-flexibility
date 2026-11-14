@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bRootFieldFactors
-import ContinuousFlexibility.Analysis.OneHighCircleFlowLocalization
+module
+
+public import ContinuousFlexibility.Analysis.N04bRootFieldFactors
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowLocalization
 
 /-!
 # Global smooth extensions of the actual root characteristic factors
@@ -10,6 +12,8 @@ Composition therefore gives globally smooth periodic factors, preserving
 the actual corrected characteristic equation throughout that collar.
 The positive factor remains positive everywhere.
 -/
+
+@[expose] public section
 
 noncomputable section
 

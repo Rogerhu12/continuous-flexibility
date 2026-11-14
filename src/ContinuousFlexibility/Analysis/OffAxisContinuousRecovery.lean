@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ClosureOperatorFaithfulness
-import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+module
+
+public import ContinuousFlexibility.Analysis.ClosureOperatorFaithfulness
+public import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
 
 /-!
 # Continuous recovery from the complement of the reflection axes
@@ -9,6 +11,8 @@ other zero. Actual continuity therefore extends an identity known off
 the axes to every point of an open physical domain. This uses no value
 or derivative convention for a prospective stored coefficient.
 -/
+
+@[expose] public section
 
 noncomputable section
 

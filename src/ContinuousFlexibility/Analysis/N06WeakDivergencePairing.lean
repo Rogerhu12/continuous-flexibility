@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06WeakFiniteCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N06WeakFiniteCalculus
 
 /-!
 # The genuine symmetric divergence pairing for an actual weak H2 row
@@ -8,6 +10,8 @@ partial identities. Twice applying those identities, with coefficients
 smooth only on the open strip, gives the original symmetric divergence
 operator on every original test.
 -/
+
+@[expose] public section
 
 noncomputable section
 

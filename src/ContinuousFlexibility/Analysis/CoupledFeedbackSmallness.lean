@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.CoupledControlCircleDerivative
-import ContinuousFlexibility.Analysis.CoupledControlNorms
-import ContinuousFlexibility.Analysis.CoupledControlResponseSmooth
-import ContinuousFlexibility.Analysis.CoupledSmoothParameterSmallness
-import ContinuousFlexibility.Analysis.CoupledConstantFeedbackSmooth
+module
+
+public import ContinuousFlexibility.Analysis.CoupledControlCircleDerivative
+public import ContinuousFlexibility.Analysis.CoupledControlNorms
+public import ContinuousFlexibility.Analysis.CoupledControlResponseSmooth
+public import ContinuousFlexibility.Analysis.CoupledSmoothParameterSmallness
+public import ContinuousFlexibility.Analysis.CoupledConstantFeedbackSmooth
 
 /-!
 # Uniform smallness of the actual control feedback
@@ -13,6 +15,8 @@ family which vanishes at parameter zero. Its true parameter derivative
 therefore yields one finite-order neighborhood where its Banach norm is
 less than one quarter. The stored diagonal inverse has norm at most two.
 -/
+
+@[expose] public section
 
 noncomputable section
 

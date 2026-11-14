@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Analysis
-import Mathlib.Algebra.Module.Submodule.Equiv
+module
+
+public import ContinuousFlexibility.Statements.Analysis
+public import Mathlib.Algebra.Module.Submodule.Equiv
 
 /-!
 # Realizing circle operators in the supplied physical model
@@ -10,6 +12,8 @@ linear operators through that decoder and convert physical norm estimates
 into a fixed-loss estimate for the existing grading. The grading is the
 finite maximum of all coordinate norms through the stated order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

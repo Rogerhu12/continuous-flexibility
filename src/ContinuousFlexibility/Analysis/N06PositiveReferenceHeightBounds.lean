@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.PositiveReferenceHeight
+module
+
+public import ContinuousFlexibility.Analysis.PositiveReferenceHeight
 
 /-!
 # Two-sided bounds for the constructed logarithmic reference height
@@ -8,6 +10,8 @@ the actual exponential blend stays between the same two positive
 bounds as its endpoint heights and the middle value one. This gives
 the reciprocal bound needed by the physical-to-canonical transport.
 -/
+
+@[expose] public section
 
 noncomputable section
 

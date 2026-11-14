@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aAffineTower
-import ContinuousFlexibility.Analysis.N07aCoefficientFields
-import ContinuousFlexibility.Analysis.N07aProfileParameterJets
-import ContinuousFlexibility.Analysis.N07aParameterGrading
+module
+
+public import ContinuousFlexibility.Analysis.N07aAffineTower
+public import ContinuousFlexibility.Analysis.N07aCoefficientFields
+public import ContinuousFlexibility.Analysis.N07aProfileParameterJets
+public import ContinuousFlexibility.Analysis.N07aParameterGrading
 
 /-!
 # Genuine coefficient towers on the actual affine sector
@@ -10,6 +12,8 @@ The tangent inclusion preserves every sum seminorm exactly. Pulling the
 N01 towers along the original affine sector map therefore keeps their
 physical decay, base order, and derivative loss unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

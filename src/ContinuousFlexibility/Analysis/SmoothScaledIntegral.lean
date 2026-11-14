@@ -1,9 +1,11 @@
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
-import Mathlib.Analysis.Calculus.ParametricIntervalIntegral
-import Mathlib.Analysis.Normed.Group.Bounded
-import Mathlib.Topology.Order.Compact
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+public import Mathlib.Analysis.Calculus.ParametricIntervalIntegral
+public import Mathlib.Analysis.Normed.Group.Bounded
+public import Mathlib.Topology.Order.Compact
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
 
 /-!
 # Smoothness of integrals along a scaled interval
@@ -14,6 +16,8 @@ tower is obtained by inserting one additional factor of the integration
 variable at each differentiation.  Domination is local in the scale and
 comes from continuity on a compact rectangle.
 -/
+
+@[expose] public section
 
 noncomputable section
 

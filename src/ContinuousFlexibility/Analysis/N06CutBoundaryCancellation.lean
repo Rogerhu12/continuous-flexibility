@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06CutTransmissionJets
+module
+
+public import ContinuousFlexibility.Analysis.N06CutTransmissionJets
 
 /-!
 # True closed test traces and cancellation at an affine cut
@@ -9,6 +11,8 @@ inverse and the original N04 smooth-test transmission law. The two affine terms 
 Wronskian, including for every finite reconstruction of the original N05
 graph. No regularity of the physical coefficient fields is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

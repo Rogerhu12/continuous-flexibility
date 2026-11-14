@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.FourierOrthogonality
+module
+
+public import ContinuousFlexibility.Radial.FourierOrthogonality
 
 /-!
 # Normalized real sine modes and their angular orthogonality
@@ -7,6 +9,8 @@ The normalization agrees with the existing cosine modes and the actual
 angular average. Positive sine modes have unit square average and are
 mutually orthogonal. Their pairings with all cosine modes vanish.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

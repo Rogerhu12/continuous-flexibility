@@ -1,7 +1,9 @@
-import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
-import Mathlib.Analysis.Normed.Group.Bounded
-import Mathlib.Tactic.Linarith
+module
+
+public import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+public import Mathlib.Analysis.Normed.Group.Bounded
+public import Mathlib.Tactic.Linarith
 
 /-!
 # Smooth cutoff of an interval function onto the half-line
@@ -12,6 +14,8 @@ The derivative formula uses the actual derivatives within the interval,
 including both endpoints. The same result applies to either endpoint after
 an affine change of coordinates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

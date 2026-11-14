@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aRelativeCanonicalPairing
-import ContinuousFlexibility.Analysis.N07aCanonicalDifference
+module
+
+public import ContinuousFlexibility.Analysis.N07aRelativeCanonicalPairing
+public import ContinuousFlexibility.Analysis.N07aCanonicalDifference
 
 /-!
 # The actual relative operator on a negative piece
@@ -8,6 +10,8 @@ The principal coefficients coincide as genuine germs. The local relative
 source is therefore exactly the actual potential and scalar-column
 differences in the original canonical L² space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

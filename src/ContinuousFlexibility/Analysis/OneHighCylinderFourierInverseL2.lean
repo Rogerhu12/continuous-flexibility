@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderFourierInverseKernel
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderFourierInverseKernel
 
 /-!
 # Square integrability of the mixed inverse
@@ -8,6 +10,8 @@ kernel belongs to physical `L²`, with the exact norm. Circle Parseval and
 Tonelli give this membership before the physical Fourier transform is used.
 The actual mixed Fourier transform of the inverse then recovers the data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

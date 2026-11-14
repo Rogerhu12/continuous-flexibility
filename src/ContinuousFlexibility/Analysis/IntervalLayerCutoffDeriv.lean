@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.IntervalLayerCutoff
-import Mathlib.Analysis.Normed.Group.Bounded
+module
+
+public import ContinuousFlexibility.Analysis.IntervalLayerCutoff
+public import Mathlib.Analysis.Normed.Group.Bounded
 
 /-!
 # Uniform derivative bounds for endpoint-layer cutoffs
@@ -8,6 +10,8 @@ The fixed smooth transition has compactly supported derivative. Scaling
 therefore gives a single bound `A / δ` for every interval and every outer
 layer width `Δ ≥ δ > 0`.
 -/
+
+@[expose] public section
 
 open Set Filter
 open scoped ContDiff Topology

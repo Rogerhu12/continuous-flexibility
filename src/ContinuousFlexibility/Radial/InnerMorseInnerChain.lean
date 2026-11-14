@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerModelChainGeometry
-import ContinuousFlexibility.Radial.InnerMorseTailGap
+module
+
+public import ContinuousFlexibility.Radial.InnerModelChainGeometry
+public import ContinuousFlexibility.Radial.InnerMorseTailGap
 
 /-!
 # The actual finite inner chain of central and Morse cut models
@@ -9,6 +11,8 @@ model, and the right tail in increasing cell index. The two outer points
 are the outer endpoints of the last retained cells. Thus the terminal
 pieces are cap remnants, rather than whole additional joins.
 -/
+
+@[expose] public section
 
 noncomputable section
 

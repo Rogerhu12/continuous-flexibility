@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularAffineBand
-import ContinuousFlexibility.Analysis.N07aAngularCanonicalProjection
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularAffineBand
+public import ContinuousFlexibility.Analysis.N07aAngularCanonicalProjection
 
 /-!
 # Angular bands preserve the genuine canonical reference relation
@@ -10,6 +12,8 @@ coordinate formulas identify these representatives with the canonical
 Hilbert projections.  All weak equations and endpoint classes come from
 the existing physical reference graph.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientJoint
-import ContinuousFlexibility.Analysis.N04PulledFieldsPhysicalOneHighCurrent
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientJoint
+public import ContinuousFlexibility.Analysis.N04PulledFieldsPhysicalOneHighCurrent
 
 /-!
 # The actual coefficient towers on an admissible neighborhood
@@ -8,6 +10,8 @@ The original physical towers are restricted without changing any jet.
 The original periodicity and the sampled raw physical estimate then
 feed the common-neighborhood moving-point theorem for all three fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 

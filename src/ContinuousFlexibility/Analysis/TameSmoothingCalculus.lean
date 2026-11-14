@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.Analysis
-import Mathlib.Algebra.Order.Floor.Semiring
-import Mathlib.Analysis.SpecialFunctions.Pow.Real
+module
+
+public import ContinuousFlexibility.Statements.Analysis
+public import Mathlib.Algebra.Order.Floor.Semiring
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 
 /-!
 # Smoothing, interpolation, and tame retractions
@@ -11,6 +13,8 @@ retraction are retained. Interpolation follows by balancing the two
 smoothing estimates at one integer cutoff, including vectors with zero
 low seminorm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

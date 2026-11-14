@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01RadialFlow
-import ContinuousFlexibility.Analysis.SpacesSources
+module
+
+public import ContinuousFlexibility.Analysis.N01RadialFlow
+public import ContinuousFlexibility.Analysis.SpacesSources
 
 /-!
 # The actual profile on a line from the reference state
@@ -9,6 +11,8 @@ control vanish. The logarithmic profile therefore contains precisely
 one scalar control amplitude. The reference conditions and linearity of
 the circle decoder make that amplitude affine on the actual state line.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.PositiveBufferActualInverse
-import ContinuousFlexibility.Radial.PositiveBufferCorrectedAlgebra
-import ContinuousFlexibility.Radial.PositiveBufferEnergyGlobalData
-import ContinuousFlexibility.Radial.PositiveBufferPoissonColumnsActual
-import ContinuousFlexibility.Radial.PositiveBufferQuantitative
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferActualInverse
+public import ContinuousFlexibility.Radial.PositiveBufferCorrectedAlgebra
+public import ContinuousFlexibility.Radial.PositiveBufferEnergyGlobalData
+public import ContinuousFlexibility.Radial.PositiveBufferPoissonColumnsActual
+public import ContinuousFlexibility.Radial.PositiveBufferQuantitative
 
 /-!
 # Exact positive-buffer compression from the constructed Green data
@@ -11,6 +13,8 @@ This assembly retains every frozen clause: the actual interval form
 graph, its unique bounded inverse, both variational endpoint profiles,
 the genuine Poisson fields, and the physical conormal estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

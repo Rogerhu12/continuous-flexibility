@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import ContinuousFlexibility.Radial.R11bFourierTests
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import ContinuousFlexibility.Radial.R11bFourierTests
 
 /-!
 # The actual scalar residual at the reference state
@@ -9,6 +11,8 @@ therefore exactly the radial reference profile, and the removable value
 at `q = 0` is its Jacobi operator applied to the distinguished second
 mode.  The reference kernel equation proves that this residual vanishes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

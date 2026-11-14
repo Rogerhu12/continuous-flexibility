@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.IntervalWeakTestExtension
-import Mathlib.MeasureTheory.Function.L2Space
+module
+
+public import ContinuousFlexibility.Analysis.IntervalWeakTestExtension
+public import Mathlib.MeasureTheory.Function.L2Space
 
 /-!
 # Extending the weak equation with a continuous potential and border
@@ -9,6 +11,8 @@ tests. All integrals remain ordinary integrals on the finite interval. The
 L² hypotheses supply the L¹ pairings with continuous coefficients, including
 the product with any smooth test.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionBufferedCollars
-import ContinuousFlexibility.Analysis.N01FlowInverseJetBounds
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionBufferedCollars
+public import ContinuousFlexibility.Analysis.N01FlowInverseJetBounds
 
 /-!
 # One actual optical cutoff with its retained geometric and quantitative data
@@ -9,6 +11,8 @@ buffered optical construction. A further shrinking supplies the old-flow angular
 The strict corrected characteristic gap is retained through that shrinking,
 so the same cutoff can be used for the source and the raw physical field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.IntervalWeakPrimitive
+module
+
+public import ContinuousFlexibility.Analysis.IntervalWeakPrimitive
 
 /-!
 # Recovering pointwise derivatives from locally absolutely continuous states
@@ -9,6 +11,8 @@ the fundamental theorem of calculus upgrades that derivative to every
 interior point.  This applies to the cancellation in variation of parameters
 for merely locally integrable forcing.
 -/
+
+@[expose] public section
 
 noncomputable section
 

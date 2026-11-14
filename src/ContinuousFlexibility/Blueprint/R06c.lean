@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Blueprint.Statements
-import ContinuousFlexibility.Radial.DeepTailPhysicalPipeline
-import ContinuousFlexibility.Radial.DeepTailParameterPipeline
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
+public import ContinuousFlexibility.Radial.DeepTailPhysicalPipeline
+public import ContinuousFlexibility.Radial.DeepTailParameterPipeline
 
 /-!
 # Blueprint node R06c
@@ -11,6 +13,8 @@ Source: `paper/flexible-surface-readable/05-flat-end-chain.tex` lines 513–790.
 
 Task file: `docs/tasks/R06c.md`. The exact statement is preserved.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

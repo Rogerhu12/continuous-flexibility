@@ -1,7 +1,11 @@
-import ContinuousFlexibility.Analysis.N01cFiniteAffineMixedJets
+module
+
+public import ContinuousFlexibility.Analysis.N01cFiniteAffineMixedJets
 
 /-! Smoothness of the actual finite state jet with arbitrary external
 normed variables. No estimate or extension is part of this interface. -/
+
+@[expose] public section
 
 noncomputable section
 

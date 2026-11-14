@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04bSqrtAffine
-import ContinuousFlexibility.Analysis.N01SingletonControl
-import ContinuousFlexibility.Analysis.SmoothDirectionsScalarLine
+module
+
+public import ContinuousFlexibility.Analysis.N04bSqrtAffine
+public import ContinuousFlexibility.Analysis.N01SingletonControl
+public import ContinuousFlexibility.Analysis.SmoothDirectionsScalarLine
 
 /-!
 # Strict optical type on singleton control lines
@@ -10,6 +12,8 @@ square root of the actual radial optical radicand. On a singleton
 control line that radicand is affine. The scalar square-root obstruction
 therefore excludes zeros throughout the allowed parameter interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

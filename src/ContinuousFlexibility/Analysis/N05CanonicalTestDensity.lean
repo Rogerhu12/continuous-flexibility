@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalUniqueness
-import Mathlib.Analysis.InnerProductSpace.Projection.Submodule
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalUniqueness
+public import Mathlib.Analysis.InnerProductSpace.Projection.Submodule
 
 /-!
 # Density of actual smooth periodic canonical tests in L²
@@ -8,6 +10,8 @@ The prescribed canonical tests form a linear space. Their orthogonal
 complement is trivial by the distributional separation theorem, so their
 actual L² classes are dense in each canonical rectangle.
 -/
+
+@[expose] public section
 
 noncomputable section
 

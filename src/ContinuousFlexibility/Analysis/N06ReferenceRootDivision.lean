@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SmoothDivisionBounds
-import ContinuousFlexibility.Analysis.N06RadialGeometryJets
-import Mathlib.Analysis.Calculus.MeanValue
+module
+
+public import ContinuousFlexibility.Analysis.SmoothDivisionBounds
+public import ContinuousFlexibility.Analysis.N06RadialGeometryJets
+public import Mathlib.Analysis.Calculus.MeanValue
 
 /-!
 # The actual divided profile on both sides of a reference root
@@ -10,6 +12,8 @@ Its Taylor integral bounds its ordinary jets on a symmetric interval.
 The resulting Lipschitz estimates retain the actual profile and factor;
 they will provide explicit positive collars from the real root curvature.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.RawEndpointAngularInterpolation
-import ContinuousFlexibility.Analysis.EndpointFiberPullbackAssembly
-import ContinuousFlexibility.Analysis.EndpointTransportGeometry
+module
+
+public import ContinuousFlexibility.Analysis.RawEndpointAngularInterpolation
+public import ContinuousFlexibility.Analysis.EndpointFiberPullbackAssembly
+public import ContinuousFlexibility.Analysis.EndpointTransportGeometry
 
 /-!
 # The displayed whole-component transport and its genuine inverse
@@ -9,6 +11,8 @@ Both endpoint fields are matched by the same angular Taylor patch and
 the actual radial integral interpolation. Widths and the finite inverse
 jet constant precede the family index. This file is a new reconstruction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

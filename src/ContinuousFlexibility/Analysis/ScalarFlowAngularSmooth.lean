@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ScalarSpatialIntegralRegularity
+module
+
+public import ContinuousFlexibility.Analysis.ScalarSpatialIntegralRegularity
 
 /-!
 # Actual angular smoothness with merely continuous time dependence
@@ -8,6 +10,8 @@ is bootstrapped using composition and compact integration to every angular
 order. A continuous time clamp
 includes both endpoints without differentiating the field in time.
 -/
+
+@[expose] public section
 
 noncomputable section
 

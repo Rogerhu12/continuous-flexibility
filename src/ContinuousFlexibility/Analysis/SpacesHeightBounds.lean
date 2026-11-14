@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
-import ContinuousFlexibility.Analysis.PhysicalJetBonding
+module
+
+public import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
+public import ContinuousFlexibility.Analysis.PhysicalJetBonding
 
 /-!
 # Quantitative point evaluation for the physical height grading
@@ -8,6 +10,8 @@ The four cylinder `L²` terms in the elementary Sobolev estimate are
 coordinates of the order-two physical norm. This retains the linear
 dependence on the height, needed for the physical compatibility integral.
 -/
+
+@[expose] public section
 
 noncomputable section
 

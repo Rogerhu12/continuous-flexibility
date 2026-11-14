@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01ReturnChartLineVariation
-import ContinuousFlexibility.Analysis.SectorParameterGeometry
-import ContinuousFlexibility.Analysis.ProjectiveJets
+module
+
+public import ContinuousFlexibility.Analysis.N01ReturnChartLineVariation
+public import ContinuousFlexibility.Analysis.SectorParameterGeometry
+public import ContinuousFlexibility.Analysis.ProjectiveJets
 
 /-!
 # The N02 chart derivative in the actual circle topology
@@ -10,6 +12,8 @@ Continuous point evaluations identify that derivative with the scalar
 return variation already obtained from the actual inverse flow. Thus the
 N02 identity holds for the full circle-valued difference quotient.
 -/
+
+@[expose] public section
 
 noncomputable section
 

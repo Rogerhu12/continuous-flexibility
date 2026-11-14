@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ReferenceCosineJacobi
-import ContinuousFlexibility.Radial.R11bFiniteSynthesis
-import ContinuousFlexibility.Radial.R11bFourierTests
+module
+
+public import ContinuousFlexibility.Radial.ReferenceCosineJacobi
+public import ContinuousFlexibility.Radial.R11bFiniteSynthesis
+public import ContinuousFlexibility.Radial.R11bFourierTests
 
 /-!
 # Actual angular derivatives of the high cosine basis
@@ -10,6 +12,8 @@ Its orthonormality is independent of the derivative order. The frequency
 power is kept in the radial coefficient, so finite synthesis computes
 ordinary angular derivatives with their exact normalization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

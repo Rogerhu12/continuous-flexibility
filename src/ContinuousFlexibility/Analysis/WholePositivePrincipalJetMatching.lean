@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.WholePositiveCanonicalFields
-import ContinuousFlexibility.Analysis.CanonicalWholePositiveRootMatching
-import ContinuousFlexibility.Analysis.CanonicalWholeNegativeBoundary
-import ContinuousFlexibility.Analysis.AdjugateInversePrincipalField
-import ContinuousFlexibility.Analysis.AdjugatePrincipalFiniteJets
-import ContinuousFlexibility.Analysis.FiniteFullJetBoundary
+module
+
+public import ContinuousFlexibility.Analysis.WholePositiveCanonicalFields
+public import ContinuousFlexibility.Analysis.CanonicalWholePositiveRootMatching
+public import ContinuousFlexibility.Analysis.CanonicalWholeNegativeBoundary
+public import ContinuousFlexibility.Analysis.AdjugateInversePrincipalField
+public import ContinuousFlexibility.Analysis.AdjugatePrincipalFiniteJets
+public import ContinuousFlexibility.Analysis.FiniteFullJetBoundary
 
 /-!
 # Actual positive principal jets at a negative neighbor
@@ -13,6 +15,8 @@ The existing coordinate and height matching therefore transfers full
 principal jets from the actual neighboring negative transport. No
 coefficient matching or vanishing remainder is an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

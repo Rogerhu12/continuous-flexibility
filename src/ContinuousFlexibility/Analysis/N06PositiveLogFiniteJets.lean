@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06NuFiniteDifference
-import ContinuousFlexibility.Analysis.N06RootJetTransportCalculus
-import Mathlib.Analysis.SpecialFunctions.Log.Deriv
+module
+
+public import ContinuousFlexibility.Analysis.N06NuFiniteDifference
+public import ContinuousFlexibility.Analysis.N06RootJetTransportCalculus
+public import Mathlib.Analysis.SpecialFunctions.Log.Deriv
 
 /-!
 # Finite logarithmic jets with a genuine positive normalization
@@ -10,6 +12,8 @@ difference from one. Only the value at the evaluation point needs a
 positive lower bound; the whole straight value segment then stays in a
 fixed compact subset of the positive real axis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

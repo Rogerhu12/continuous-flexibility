@@ -1,12 +1,14 @@
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
-import Mathlib.Analysis.Calculus.Deriv.Mul
-import Mathlib.Analysis.Calculus.Deriv.Pow
-import Mathlib.MeasureTheory.Function.L2Space
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
-import Mathlib.Tactic.FunProp
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.NormNum
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+public import Mathlib.Analysis.Calculus.Deriv.Mul
+public import Mathlib.Analysis.Calculus.Deriv.Pow
+public import Mathlib.MeasureTheory.Function.L2Space
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+public import Mathlib.Tactic.FunProp
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.Ring
 
 /-!
 # An L² estimate for the Euler operator on the unit interval
@@ -18,6 +20,8 @@ interval, so no improper integral or unproved boundary limit is used.
 
 This is the estimate needed after differentiating a smooth division by `x`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CanonicalTravelTransitionAlgebra
-import ContinuousFlexibility.Analysis.N04bActualAtlasGerms
-import ContinuousFlexibility.Analysis.SolveReturnEquations
-import ContinuousFlexibility.Analysis.StateNeighborhood
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalTravelTransitionAlgebra
+public import ContinuousFlexibility.Analysis.N04bActualAtlasGerms
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
+public import ContinuousFlexibility.Analysis.StateNeighborhood
 
 /-!
 # One smooth physical transition for both actual negative halves
@@ -12,6 +14,8 @@ transition on the entire negative component, including the common cut.
 All inverse identities and smoothness below come from the constructed
 travel chart of the corrected coefficient field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

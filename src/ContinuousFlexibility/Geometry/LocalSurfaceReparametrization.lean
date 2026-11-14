@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Geometry.LocalInverse
-import ContinuousFlexibility.Geometry.SurfaceReparametrization
-import Mathlib.LinearAlgebra.Basis.VectorSpace
+module
+
+public import ContinuousFlexibility.Geometry.LocalInverse
+public import ContinuousFlexibility.Geometry.SurfaceReparametrization
+public import Mathlib.LinearAlgebra.Basis.VectorSpace
 
 /-!
 # Smooth local reparameterizations from actual surface images
@@ -15,6 +17,8 @@ In particular, image equality alone does not exclude a singular parameterization
 such as `(x, y) ↦ (x³, y, 0)`. Closed sphere image congruences must still be localized
 to these chart hypotheses in a separate theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

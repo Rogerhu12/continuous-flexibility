@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentData
-import ContinuousFlexibility.Analysis.N07aForwardCoefficients
-import ContinuousFlexibility.Analysis.SectorParameterGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentData
+public import ContinuousFlexibility.Analysis.N07aForwardCoefficients
+public import ContinuousFlexibility.Analysis.SectorParameterGeometry
 
 /-!
 # A uniform reciprocal bound from the source difference estimate
@@ -10,6 +12,8 @@ neighborhood.  Consequently its base and radius are independent of all
 later spatial and parameter orders.  The material height absorbs the
 fixed coefficient power before the neighborhood is selected.
 -/
+
+@[expose] public section
 
 noncomputable section
 

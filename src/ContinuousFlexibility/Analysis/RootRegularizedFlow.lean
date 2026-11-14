@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SmoothPeriodicScalarFlow
-import Mathlib.Analysis.Calculus.ContDiff.Operations
+module
+
+public import ContinuousFlexibility.Analysis.SmoothPeriodicScalarFlow
+public import Mathlib.Analysis.Calculus.ContDiff.Operations
 
 /-!
 # Actual flows for the regularized root characteristic field
@@ -15,6 +17,8 @@ and joint continuity in (x, ζ), initial angle, and time.
 These statements concern the displayed regularized field itself.
 Smooth extension of physical coefficient germs is a separate input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

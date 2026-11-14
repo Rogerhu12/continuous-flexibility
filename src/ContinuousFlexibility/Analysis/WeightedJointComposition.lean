@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.JointJetInterpolationBudget
-import ContinuousFlexibility.Analysis.SmoothDirectionsNormedComposition
-import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
+module
+
+public import ContinuousFlexibility.Analysis.JointJetInterpolationBudget
+public import ContinuousFlexibility.Analysis.SmoothDirectionsNormedComposition
+public import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
 
 /-!
 # Fixed-loss composition of weighted joint jets
@@ -11,6 +13,8 @@ Finite-partition interpolation leaves one high factor, and component
 powers stay explicit. The low order and loss precede both the low-ball
 radius and every derivative order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

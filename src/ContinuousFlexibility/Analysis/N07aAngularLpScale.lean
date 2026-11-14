@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SpacesLpOverlap
+module
+
+public import ContinuousFlexibility.Analysis.SpacesLpOverlap
 
 /-!
 # Isometric normalization of a real `L²` measure
@@ -8,6 +10,8 @@ and multiplying the representative by its square root gives an exact
 linear isometry. This file keeps that normalization explicit, so the
 later direct sum over pieces has the prescribed physical norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

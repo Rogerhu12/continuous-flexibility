@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cEndpointDivision
+module
+
+public import ContinuousFlexibility.Analysis.N01cEndpointDivision
 
 /-!
 # Joint parameter smoothness of the same endpoint quotient
@@ -7,6 +9,8 @@ Finite affine parameter planes keep the original radial divided function.
 Its fixed-interval integral formula proves joint smoothness across both
 roots, with no parameter-dependent choice of an extension.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.RadialTargets
-import Mathlib.Analysis.InnerProductSpace.LinearMap
-import Mathlib.Analysis.Normed.Operator.Prod
+module
+
+public import ContinuousFlexibility.Statements.RadialTargets
+public import Mathlib.Analysis.InnerProductSpace.LinearMap
+public import Mathlib.Analysis.Normed.Operator.Prod
 
 /-!
 # The bounded operator in the matched inverse formula
@@ -10,6 +12,8 @@ This identifies them with continuous linear contractions, including the
 scalar coordinate. The finite-rank matching formula consequently defines
 a bounded linear map before any differential graph identity is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

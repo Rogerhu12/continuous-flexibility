@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneSidedBoundaryTaylorRepresentative
-import ContinuousFlexibility.Analysis.PositiveHeightTaylorInterpolation
+module
+
+public import ContinuousFlexibility.Analysis.OneSidedBoundaryTaylorRepresentative
+public import ContinuousFlexibility.Analysis.PositiveHeightTaylorInterpolation
 
 /-!
 # Reference identities for the actual radial Taylor data
@@ -8,6 +10,8 @@ A genuine joint identity germ determines every radial trace. The
 displayed finite polynomials therefore reproduce the two projections,
 and a unit height germ makes the logarithmic interpolation exactly one.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SpacesNemytskiiPartials
+module
+
+public import ContinuousFlexibility.Analysis.SpacesNemytskiiPartials
 
 /-!
 # Differentiating normalized composition terms
@@ -7,6 +9,8 @@ The chain and product rules give a finite sum of terms of the same form.
 Each spatial differentiation raises the recorded derivative budget by
 at most one and preserves exactly one occurrence of every direction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

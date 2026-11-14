@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N07bCanonicalHeightMembership
-import ContinuousFlexibility.Analysis.N07bSourceBoundChangeVariables
-import ContinuousFlexibility.Analysis.N07bMaterialAngularChain
-import ContinuousFlexibility.Analysis.N07bMaterialJetEnergy
-import ContinuousFlexibility.Analysis.N07bAtlasEnergy
-import ContinuousFlexibility.Analysis.MaterialHeightRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N07bCanonicalHeightMembership
+public import ContinuousFlexibility.Analysis.N07bSourceBoundChangeVariables
+public import ContinuousFlexibility.Analysis.N07bMaterialAngularChain
+public import ContinuousFlexibility.Analysis.N07bMaterialJetEnergy
+public import ContinuousFlexibility.Analysis.N07bAtlasEnergy
+public import ContinuousFlexibility.Analysis.MaterialHeightRegularity
 
 /-!
 # Actual canonical height lifts from a geometric density bound
@@ -17,6 +19,8 @@ summation theorem supplies genuine square summability.
 This is a conditional analytic estimate. No such geometric comparison is
 added to or inferred from the frozen canonical geometry conditions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

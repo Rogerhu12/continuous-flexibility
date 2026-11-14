@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aPhysicalRemainder
-import ContinuousFlexibility.Analysis.SolveReturnEquations
+module
+
+public import ContinuousFlexibility.Analysis.N07aPhysicalRemainder
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # Choosing the actual physical solution as one family
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Analysis.SolveReturnEquations
 Every chosen field represents the same canonical unknown. The choice is
 used only before linearity is deduced from uniqueness of the real equation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

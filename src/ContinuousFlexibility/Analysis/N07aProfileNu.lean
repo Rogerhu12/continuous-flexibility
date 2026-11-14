@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.StateProfileRegularity
-import ContinuousFlexibility.Scalar.WeightedCompactRadial
-import ContinuousFlexibility.Scalar.WeightedDecodeLift
+module
+
+public import ContinuousFlexibility.Analysis.StateProfileRegularity
+public import ContinuousFlexibility.Scalar.WeightedCompactRadial
+public import ContinuousFlexibility.Scalar.WeightedDecodeLift
 
 /-!
 # Separating the actual border parameter from the optical controls
@@ -14,6 +16,8 @@ The current true-border certificate contains the actual compact support
 inside the core. It supplies a height realization for the distinguished
 profile variation at every requested weight.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SolveNewtonBridge
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
+module
+
+public import ContinuousFlexibility.Analysis.SolveNewtonBridge
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
 
 /-!
 # Pulling genuine tame towers back to an affine sector chart
@@ -9,6 +11,8 @@ linear inclusion then retains the existing input grading and derivative
 loss. The target can be any topological real module, including the actual
 compatible source subspace.
 -/
+
+@[expose] public section
 
 noncomputable section
 

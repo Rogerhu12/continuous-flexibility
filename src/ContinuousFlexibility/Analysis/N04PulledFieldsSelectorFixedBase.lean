@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04EndpointCircleFixedBaseBounds
-import ContinuousFlexibility.Analysis.CirclePositiveInverseFixedBaseBounds
-import ContinuousFlexibility.Analysis.TameFixedBaseCompositionBounds
-import ContinuousFlexibility.Analysis.N01ReturnCircleUniformBounds
-import ContinuousFlexibility.Analysis.TameProductDirections
+module
+
+public import ContinuousFlexibility.Analysis.N04EndpointCircleFixedBaseBounds
+public import ContinuousFlexibility.Analysis.CirclePositiveInverseFixedBaseBounds
+public import ContinuousFlexibility.Analysis.TameFixedBaseCompositionBounds
+public import ContinuousFlexibility.Analysis.N01ReturnCircleUniformBounds
+public import ContinuousFlexibility.Analysis.TameProductDirections
 
 /-!
 # Fixed-base estimates for the actual inverse flow displacement
@@ -21,6 +23,8 @@ and projects existential witnesses directly to keep the graded goals small.
 Interpolation, endpoint bounds, inverse bounds, and the final tower identity
 are proved at separate opaque theorem boundaries.
 -/
+
+@[expose] public section
 
 noncomputable section
 

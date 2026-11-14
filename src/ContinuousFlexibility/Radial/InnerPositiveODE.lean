@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseRadiusODE
-import Mathlib.Analysis.Calculus.MeanValue
+module
+
+public import ContinuousFlexibility.Radial.MorseRadiusODE
+public import Mathlib.Analysis.Calculus.MeanValue
 
 /-!
 # The positive finite-interval Poisson problem
@@ -9,6 +11,8 @@ unique homogeneous solution with any two endpoint values. The construction
 uses the actual initial-value equation; positivity rules out a vanishing
 Dirichlet determinant. There is no smallness or interval-length assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.ExpPolynomialEnvelope
-import ContinuousFlexibility.Analysis.N01cFlowVariation
-import ContinuousFlexibility.Analysis.ParametricSpatialIntegralJets
-import ContinuousFlexibility.Analysis.PointwiseProductMaterialJets
-import Mathlib.Data.Nat.Choose.Sum
+module
+
+public import ContinuousFlexibility.Analysis.ExpPolynomialEnvelope
+public import ContinuousFlexibility.Analysis.N01cFlowVariation
+public import ContinuousFlexibility.Analysis.ParametricSpatialIntegralJets
+public import ContinuousFlexibility.Analysis.PointwiseProductMaterialJets
+public import Mathlib.Data.Nat.Choose.Sum
 
 /-!
 # Spatial jet bounds for actual linear flow variations
@@ -18,6 +20,8 @@ Higher coefficient jets contribute polynomially. No high-order norm is
 assumed small, and the finite-order constant is chosen before the
 coefficient functions, the forcing, and their amplitudes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

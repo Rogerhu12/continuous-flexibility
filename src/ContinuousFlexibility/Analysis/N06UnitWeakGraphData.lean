@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06WeakGraphParity
+module
+
+public import ContinuousFlexibility.Analysis.N06WeakGraphParity
 
 /-!
 # A single canonical cylinder's actual weak graph package
@@ -7,6 +9,8 @@ The package retains one family of H2 modal representatives, the precise
 finite field cutoffs, their original L2 limits, all weak angular jets and
 the five reflection signs. Its sole analytic input is the actual weak PDE.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aSmoothLocalCoordinates
+module
+
+public import ContinuousFlexibility.Analysis.N07aSmoothLocalCoordinates
 
 /-!
 # The tubular coordinate map has the actual inverse-chart differential
@@ -7,6 +9,8 @@ The angular curve contributes the angular column. The fixed transverse
 vector contributes the radial column, so their sum is the original
 derivative at the chosen point of the cut.
 -/
+
+@[expose] public section
 
 noncomputable section
 

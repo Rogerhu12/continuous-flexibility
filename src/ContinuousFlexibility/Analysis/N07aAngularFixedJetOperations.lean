@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aAngularFixedJetEnvelope
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularFixedJetEnvelope
 
 /-!
 # Finite differential operations retain the actual material envelope
@@ -7,6 +9,8 @@ These operations apply to the displayed spatial fields at a fixed state.
 In particular a physical derivative shifts only the finite jet order; it
 does not spend any of the sampled height factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

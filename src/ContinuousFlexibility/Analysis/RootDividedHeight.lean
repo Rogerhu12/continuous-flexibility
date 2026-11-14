@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RootChartExtension
-import ContinuousFlexibility.Analysis.RootCoefficientFactorization
+module
+
+public import ContinuousFlexibility.Analysis.RootChartExtension
+public import ContinuousFlexibility.Analysis.RootCoefficientFactorization
 
 /-!
 # The root height after the genuine radial factor is divided out
@@ -9,6 +11,8 @@ discriminant, whereas the canonical radial coordinate is x times the
 smooth root power. Cancelling this same x gives a formula smooth at the
 root. The factor δ is retained explicitly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06ReferenceTestOperator
-import ContinuousFlexibility.Analysis.N06ReferenceRemainderEquation
-import ContinuousFlexibility.Analysis.N06CanonicalWeakTransport
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceTestOperator
+public import ContinuousFlexibility.Analysis.N06ReferenceRemainderEquation
+public import ContinuousFlexibility.Analysis.N06CanonicalWeakTransport
 
 /-!
 # The actual reference graph in positive canonical coordinates
@@ -11,6 +13,8 @@ Its differential expression is the actual corrected reference operator,
 and its canonical height is the original test. Consequently no additional
 weak PDE assumption is needed to obtain the canonical equation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

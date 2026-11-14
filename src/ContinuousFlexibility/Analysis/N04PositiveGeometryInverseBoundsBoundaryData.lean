@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledFamily
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundary
-import ContinuousFlexibility.Analysis.N04RealizationOneSidedAngularPositivity
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledFamily
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundary
+public import ContinuousFlexibility.Analysis.N04RealizationOneSidedAngularPositivity
 
 /-!
 # The literal finite data of the chosen angular inverse at the roots
@@ -11,6 +13,8 @@ forward N01 root label. Thus the finite inverse pullback is evaluated on
 the already controlled root data, without a new angular extension or a
 componentwise compactness constant.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.JointJetSpatialRegularity
+module
+
+public import ContinuousFlexibility.Analysis.JointJetSpatialRegularity
 
 /-!
 # Spatial differentiation with the original parameter-slot budget
@@ -7,6 +9,8 @@ Appending a pure physical basis vector does not add a parameter slot.
 The bound is transferred through the actual mixed-derivative identities,
 while the original joint tower and its open product domain are retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

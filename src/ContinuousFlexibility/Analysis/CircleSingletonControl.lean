@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CircleModelRealization
-import ContinuousFlexibility.Analysis.CircleJetClosedGraph
-import Mathlib.Topology.Instances.ENNReal.Lemmas
+module
+
+public import ContinuousFlexibility.Analysis.CircleModelRealization
+public import ContinuousFlexibility.Analysis.CircleJetClosedGraph
+public import Mathlib.Topology.Instances.ENNReal.Lemmas
 
 /-!
 # A single radial control direction in the given circle model
@@ -10,6 +12,8 @@ space. Its physical norm has one explicit power of the sample weight. This
 keeps the control direction used in optical differentiation tied to the
 actual decoder and to the actual projective grading.
 -/
+
+@[expose] public section
 
 noncomputable section
 

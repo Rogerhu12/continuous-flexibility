@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.PositiveBufferEnergyClassical
-import ContinuousFlexibility.Radial.PositiveBufferEnergyIdentities
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferEnergyClassical
+public import ContinuousFlexibility.Radial.PositiveBufferEnergyIdentities
 
 /-!
 # Existence of the finite and exterior positive-buffer profiles
@@ -9,6 +11,8 @@ energy graph. Their trace values are inherited from a compact smooth lift.
 The ordinary ODE continuation supplies globally smooth representatives, and
 the regional physical energy is bounded by the energy of the lift.
 -/
+
+@[expose] public section
 
 noncomputable section
 

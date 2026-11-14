@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerRadialActualAssembly
-import ContinuousFlexibility.Radial.InnerRadialReferenceAssembly
-import ContinuousFlexibility.Radial.InnerModelChainGaps
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialActualAssembly
+public import ContinuousFlexibility.Radial.InnerRadialReferenceAssembly
+public import ContinuousFlexibility.Radial.InnerModelChainGaps
 
 /-!
 # The exact actual dictionary on an alternating model-gap chain
@@ -11,6 +13,8 @@ assembled chain uses the same local models and the same actual gap
 columns. Its interpolation walls are the physical images of the
 original buffer walls on models and the true endpoints on gaps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

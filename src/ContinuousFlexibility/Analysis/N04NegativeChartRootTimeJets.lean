@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartRootFieldBounds
-import ContinuousFlexibility.Analysis.N04NegativeChartVariationForcing
-import ContinuousFlexibility.Analysis.N04FlowJetEquations
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootFieldBounds
+public import ContinuousFlexibility.Analysis.N04NegativeChartVariationForcing
+public import ContinuousFlexibility.Analysis.N04FlowJetEquations
 
 /-!
 # State jets of the same reversed root flow
@@ -11,6 +13,8 @@ its one fixed time derivative. Its numerical cost is chosen before all
 orders, coefficients, and actual flow representatives. The endpoint jets
 are those of the supplied inverse flow itself.
 -/
+
+@[expose] public section
 
 noncomputable section
 

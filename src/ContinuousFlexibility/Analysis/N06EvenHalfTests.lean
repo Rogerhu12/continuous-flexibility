@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06AveragedWeakTests
+module
+
+public import ContinuousFlexibility.Analysis.N06AveragedWeakTests
 
 /-!
 # Even projection of the actual half-period physical tests
@@ -9,6 +11,8 @@ original integral. These facts also apply to integrable operator values,
 so no smoothness of a corrected coefficient is needed in the averaging
 step of the physical left-column pairing.
 -/
+
+@[expose] public section
 
 noncomputable section
 

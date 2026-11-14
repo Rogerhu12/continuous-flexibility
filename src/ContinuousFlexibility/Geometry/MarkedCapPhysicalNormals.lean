@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Geometry.MarkerAmbientDeformation
-import ContinuousFlexibility.Geometry.MarkedCapDiskCurvature
-import ContinuousFlexibility.Contracts.GraphBoundaryNormals
+module
+
+public import ContinuousFlexibility.Geometry.MarkerAmbientDeformation
+public import ContinuousFlexibility.Geometry.MarkedCapDiskCurvature
+public import ContinuousFlexibility.Contracts.GraphBoundaryNormals
 
 /-!
 # The actual marked-cap normal in physical graph coordinates
@@ -12,6 +14,8 @@ Its positive vertical component gives a positive defining-function derivative
 along the same actual normal ray. No enclosed-region identification is assumed
 or supplied here; that separate identification will turn this into outwardness.
 -/
+
+@[expose] public section
 
 noncomputable section
 

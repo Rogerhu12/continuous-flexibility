@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationUnitCubicJets
-import ContinuousFlexibility.Analysis.N07aHeightFamilyTame
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationUnitCubicJets
+public import ContinuousFlexibility.Analysis.N07aHeightFamilyTame
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
 
 /-!
 # Fixed-loss bounds for the actual cubic quotients
@@ -11,6 +13,8 @@ the exact height factor. Their only extra grading cost is six radial
 orders. The inverse sixth power of the same fixed interval width is
 absorbed at the caller's original sample, before collecting the fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 

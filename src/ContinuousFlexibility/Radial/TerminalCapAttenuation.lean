@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.TerminalCapLift
-import ContinuousFlexibility.Radial.PositiveBufferComparison
-import ContinuousFlexibility.Radial.InnerBufferDerivative
+module
+
+public import ContinuousFlexibility.Radial.TerminalCapLift
+public import ContinuousFlexibility.Radial.PositiveBufferComparison
+public import ContinuousFlexibility.Radial.InnerBufferDerivative
 
 /-!
 # Attenuation of the same terminal cap through a Liouville coordinate
@@ -15,6 +17,8 @@ No exponential bound on p, u, or their derivatives is assumed. The
 remaining geometric inputs are the cap equation, its endpoint values,
 the lower and layer upper potential bounds, and the Liouville identity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

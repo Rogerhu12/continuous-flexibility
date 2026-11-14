@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartInwardPower
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartInwardPower
 
 /-!
 # Actual root coefficients with one common interpolation base
@@ -8,6 +10,8 @@ are combined in their existing power algebra. A single neighborhood
 and loss precede every spatial and state order. Every positive state
 jet retains one height factor at the selected negative-half sample.
 -/
+
+@[expose] public section
 
 noncomputable section
 

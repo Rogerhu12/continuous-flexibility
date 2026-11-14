@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.DeepTailInitialEdge
-import ContinuousFlexibility.Radial.DeepTailJacobiBounds
-import ContinuousFlexibility.Radial.TailActualSolutionNodes
+module
+
+public import ContinuousFlexibility.Radial.DeepTailInitialEdge
+public import ContinuousFlexibility.Radial.DeepTailJacobiBounds
+public import ContinuousFlexibility.Radial.TailActualSolutionNodes
 
 /-!
 # Actual initial-edge bounds for classical tail states
@@ -10,6 +12,8 @@ Its positive off-diagonal coefficient is at least the reciprocal
 resistance. All comparisons concern the given state on the original
 closed interval, including its two endpoint fluxes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

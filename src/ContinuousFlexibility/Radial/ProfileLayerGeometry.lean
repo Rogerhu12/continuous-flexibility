@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.IntervalLayerCutoff
-import ContinuousFlexibility.Radial.MorseRealizationBasic
-import Mathlib.Analysis.SpecialFunctions.Log.Basic
-import Mathlib.Analysis.Real.Sqrt
-import Mathlib.Tactic.FieldSimp
-import Mathlib.Tactic.NormNum
+module
+
+public import ContinuousFlexibility.Analysis.IntervalLayerCutoff
+public import ContinuousFlexibility.Radial.MorseRealizationBasic
+public import Mathlib.Analysis.SpecialFunctions.Log.Basic
+public import Mathlib.Analysis.Real.Sqrt
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.NormNum
 
 /-!
 # Endpoint layers and profile cell indices
@@ -13,6 +15,8 @@ meeting an enlarged endpoint layer has index in a fixed finite window.
 This statement counts indices, not cells: the number of cells with one
 index is not assumed uniformly bounded.
 -/
+
+@[expose] public section
 
 open Set Real
 open ContinuousFlexibility.Analysis ContinuousFlexibility.Statements

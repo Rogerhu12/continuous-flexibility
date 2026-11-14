@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRootSpeedFactor
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRootSpeedFactor
 
 /-!
 # Fixed radicand powers at the positive midpoint sample
@@ -8,6 +10,8 @@ root radicand on its genuine strip. The existing material theorem for
 all real powers therefore controls every finite radial prefix of the
 fixed factor needed by the true root height formula.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04RealizationMovingGraphBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationMovingGraphBounds
 
 /-!
 # The actual height field composed with its moving-point graph
@@ -8,6 +10,8 @@ physical coordinate is the supplied genuine point tower. The physical
 mixed-jet estimate and positive point jets are inserted into the actual
 ordered-partition formula on the original domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

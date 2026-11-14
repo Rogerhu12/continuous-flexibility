@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MorseModelReturn
-import ContinuousFlexibility.Radial.ReferenceReturnComponents
-import Lean.Elab.Tactic.Omega
+module
+
+public import ContinuousFlexibility.Radial.MorseModelReturn
+public import ContinuousFlexibility.Radial.ReferenceReturnComponents
+public import Lean.Elab.Tactic.Omega
 
 /-!
 # Exhaustion of the actual Morse tails by their negative model components
@@ -10,6 +12,8 @@ closed joins have nonnegative profile derivative, so a negative point
 belongs to a retained model. Both endpoint orientations use this same
 argument in the signed physical coordinate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.JointJetInterpolationBudget
-import ContinuousFlexibility.Analysis.TameUniformFamilyJets
-import ContinuousFlexibility.Analysis.CircleSobolevPointwise
+module
+
+public import ContinuousFlexibility.Analysis.JointJetInterpolationBudget
+public import ContinuousFlexibility.Analysis.TameUniformFamilyJets
+public import ContinuousFlexibility.Analysis.CircleSobolevPointwise
 
 /-!
 # A common interpolation scale for the actual angular parameter jets
@@ -11,6 +13,8 @@ the low-ball radius and before the total spatial order. Every primitive
 angular jet then uses only its angular order divided by `N + 1` of the
 same high scale. The original sample-height power is retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

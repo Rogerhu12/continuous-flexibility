@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.OscillatorSpectrum
-import ContinuousFlexibility.Radial.ExponentialMoments
-import Mathlib.Algebra.Polynomial.Sequence
+module
+
+public import ContinuousFlexibility.Radial.OscillatorSpectrum
+public import ContinuousFlexibility.Radial.ExponentialMoments
+public import Mathlib.Algebra.Polynomial.Sequence
 
 /-!
 # Actual completeness of the Hermite--Gaussian family
@@ -11,6 +13,8 @@ and shifted Gaussian integrals. Moment uniqueness then gives almost
 everywhere zero, including for genuine `Lp ℝ 2 volume` classes.
 No complete-basis or closed spectral realization is a premise.
 -/
+
+@[expose] public section
 
 noncomputable section
 

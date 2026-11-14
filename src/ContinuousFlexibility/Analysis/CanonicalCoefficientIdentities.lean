@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Blueprint.CanonicalParts
-import ContinuousFlexibility.Scalar.HeightDerivatives
+module
+
+public import ContinuousFlexibility.Blueprint.CanonicalParts
+public import ContinuousFlexibility.Scalar.HeightDerivatives
 
 /-!
 # Exact canonical potential and divided-coefficient identities
@@ -11,6 +13,8 @@ determines the divided coefficients there.  Interior factorization alone
 does not impose any vanishing jet at the boundary: every numerator admits
 the same algebraic division on the open interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

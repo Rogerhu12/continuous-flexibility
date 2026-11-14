@@ -1,5 +1,7 @@
-import Mathlib.LinearAlgebra.Prod
-import Mathlib.Data.Real.Basic
+module
+
+public import Mathlib.LinearAlgebra.Prod
+public import Mathlib.Data.Real.Basic
 
 /-!
 # Schur assembly with the actual weak boundary functional
@@ -10,6 +12,8 @@ argument. Local Dirichlet and Poisson realizations give a single solution
 map. Both inverse identities follow from their source/trace identities,
 the same interface equivalence, and local zero-Dirichlet uniqueness.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedDecodedProduct
-import ContinuousFlexibility.Scalar.WeightedMultilinearLift
+module
+
+public import ContinuousFlexibility.Scalar.WeightedDecodedProduct
+public import ContinuousFlexibility.Scalar.WeightedMultilinearLift
 
 /-!
 # Continuous multilinear products with uniform tame estimates
@@ -9,6 +11,8 @@ multilinearity comes from multiplication of scalar functions; its continuity
 comes from the proved physical estimates.  The one-high-factor estimate keeps
 the same base and loss for every positive arity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

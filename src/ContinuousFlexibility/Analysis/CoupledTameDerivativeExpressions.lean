@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.TameInverseExpressions
-import ContinuousFlexibility.Analysis.TameJetLocalBounds
-import ContinuousFlexibility.Analysis.TameLocalLinear
+module
+
+public import ContinuousFlexibility.Analysis.TameInverseExpressions
+public import ContinuousFlexibility.Analysis.TameJetLocalBounds
+public import ContinuousFlexibility.Analysis.TameLocalLinear
 
 /-!
 # Ordered expressions for the derivative evaluation
@@ -11,6 +13,8 @@ prepends a base increment or replaces that last input by its increment.
 These two operations give finite expressions at every order without
 assuming symmetry of higher directional derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

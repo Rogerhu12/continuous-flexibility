@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ReturnChartDifferentiation
-import Mathlib.Analysis.Calculus.Deriv.Slope
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+module
+
+public import ContinuousFlexibility.Analysis.ReturnChartDifferentiation
+public import Mathlib.Analysis.Calculus.Deriv.Slope
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 
 /-!
 # Differentiating the return residual in a chart direction
@@ -12,6 +14,8 @@ The derivative of the inverse, and then the derivative of the residual,
 are consequences.  The final integral Taylor identity gives precisely
 the frozen-residual coefficient occurring in `circleChartError`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

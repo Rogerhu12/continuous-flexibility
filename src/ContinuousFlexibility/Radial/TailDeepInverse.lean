@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.TailActualLowProjection
-import ContinuousFlexibility.Radial.TailFormIdentification
-import ContinuousFlexibility.Radial.TailInverseTruncation
-import ContinuousFlexibility.Blueprint.Statements
+module
+
+public import ContinuousFlexibility.Radial.TailActualLowProjection
+public import ContinuousFlexibility.Radial.TailFormIdentification
+public import ContinuousFlexibility.Radial.TailInverseTruncation
+public import ContinuousFlexibility.Blueprint.Statements
 
 /-!
 # The deep-tail Friedrichs inverse and its Dirichlet limits
@@ -12,6 +14,8 @@ inverse with norm at most `4 / Λ` on the whole tail and every node truncation.
 The source restrictions and strong convergence are those of the frozen
 operator statement, in its actual weighted `L²` space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

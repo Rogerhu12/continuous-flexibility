@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ReferenceCoordinate
+module
+
+public import ContinuousFlexibility.Radial.ReferenceCoordinate
 
 /-!
 # Transport of actual trace intervals
@@ -7,6 +9,8 @@ The widths are divided by the forward Lipschitz constant.  The resulting
 closed intervals remain inside their actual pulled-back cells, and the
 open intervals remain pairwise disjoint.
 -/
+
+@[expose] public section
 
 noncomputable section
 

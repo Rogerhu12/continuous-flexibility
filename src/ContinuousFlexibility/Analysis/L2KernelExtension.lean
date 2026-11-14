@@ -1,6 +1,8 @@
-import Mathlib.MeasureTheory.Function.L2Space
-import Mathlib.MeasureTheory.Function.ConvergenceInMeasure
-import Mathlib.Topology.Sequences
+module
+
+public import Mathlib.MeasureTheory.Function.L2Space
+public import Mathlib.MeasureTheory.Function.ConvergenceInMeasure
+public import Mathlib.Topology.Sequences
 
 /-!
 # Extending an actual Green representation from dense sources to all of L²
@@ -11,6 +13,8 @@ uses an almost-everywhere convergent subsequence of the output sequence
 and continuity of each row pairing.  No uniform bound on the individual
 rows and no pointwise evaluation on L² equivalence classes is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

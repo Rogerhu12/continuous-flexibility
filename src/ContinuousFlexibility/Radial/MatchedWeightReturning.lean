@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchedWeightSuppression
-import Mathlib.Analysis.Normed.Operator.Basic
+module
+
+public import ContinuousFlexibility.Radial.MatchedWeightSuppression
+public import Mathlib.Analysis.Normed.Operator.Basic
 
 /-!
 # Returning-block norms after paying the matching margin
@@ -9,6 +11,8 @@ and outer source column. Their composition is estimated with the actual
 margin lower bound and the cross-exponent suppression. The intermediate
 boundary spaces may in particular be the two-dimensional matching spaces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

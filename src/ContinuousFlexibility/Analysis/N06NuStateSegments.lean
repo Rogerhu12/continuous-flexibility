@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06NuCoordinateBounds
-import ContinuousFlexibility.Analysis.N05ReferenceResidual
+module
+
+public import ContinuousFlexibility.Analysis.N06NuCoordinateBounds
+public import ContinuousFlexibility.Analysis.N05ReferenceResidual
 
 /-!
 # The actual state segments for nu-column estimates
@@ -10,6 +12,8 @@ carry that line to the literal straight segment in finite-dimensional
 coordinate space. N01 therefore supplies the discriminant lower bound
 all along the finite segment used by the mean value estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

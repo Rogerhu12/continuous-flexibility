@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.RetainedNegativeComponentIdentification
-import ContinuousFlexibility.Analysis.MorseRealizationComponentOrder
-import ContinuousFlexibility.Analysis.N01aNegativeComponentGeometry
+module
+
+public import ContinuousFlexibility.Analysis.RetainedNegativeComponentIdentification
+public import ContinuousFlexibility.Analysis.MorseRealizationComponentOrder
+public import ContinuousFlexibility.Analysis.N01aNegativeComponentGeometry
 
 /-!
 # The natural component enumeration of the same retained reference
@@ -11,6 +13,8 @@ realized join order proves injectivity, and the retained profile
 classification proves surjectivity. No reindexing of material cells or
 replacement of the retained reference is performed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

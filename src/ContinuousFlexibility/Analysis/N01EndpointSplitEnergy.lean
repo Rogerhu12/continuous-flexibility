@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01EndpointStateCircleMember
-import ContinuousFlexibility.Analysis.OneHighLocalizedSlot
+module
+
+public import ContinuousFlexibility.Analysis.N01EndpointStateCircleMember
+public import ContinuousFlexibility.Analysis.OneHighLocalizedSlot
 
 /-!
 # Separate angular and material orders in the actual endpoint jets
@@ -10,6 +12,8 @@ orders are base+c+6 and b+loss+d+c+6. The loss d is fixed for each
 parameter order before choosing b or c. This separation is the input
 for interpolation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

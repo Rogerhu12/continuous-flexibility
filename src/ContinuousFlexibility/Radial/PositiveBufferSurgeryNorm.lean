@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.PositiveBufferGreenAlgebra
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferGreenAlgebra
 
 /-!
 # Norm control of the finite-rank Dirichlet subtraction
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Radial.PositiveBufferGreenAlgebra
 All state norms here are the actual max norm in the frozen statement. The
 pairing estimate includes its factor two explicitly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

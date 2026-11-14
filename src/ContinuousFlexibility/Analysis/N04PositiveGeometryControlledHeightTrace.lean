@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledHeightProduct
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledHeightFormula
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledDiscSamplePrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsOddPowerIdentity
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsCommonContext
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledHeightProduct
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledHeightFormula
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledDiscSamplePrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsOddPowerIdentity
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsCommonContext
 
 /-!
 # Actual radial traces of every power of the root height
@@ -12,6 +14,8 @@ Its genuine height agrees with the finite product of the odd power,
 fixed reference radicand, and actual discriminant power. The original
 atlas has these same radial jets by its common root context.
 -/
+
+@[expose] public section
 
 noncomputable section
 

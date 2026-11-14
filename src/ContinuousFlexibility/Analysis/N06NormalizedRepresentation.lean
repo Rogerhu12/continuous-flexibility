@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06PhysicalNormalization
-import ContinuousFlexibility.Analysis.SolveReturnEquations
+module
+
+public import ContinuousFlexibility.Analysis.N06PhysicalNormalization
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # Actual current representatives with the original physical normalization
@@ -10,6 +12,8 @@ therefore be retained on that region while reconstructing the canonical L²
 unknown elsewhere. This proves representation and the physical row on the
 same N05 graph; the current distributional equation remains a separate claim.
 -/
+
+@[expose] public section
 
 noncomputable section
 

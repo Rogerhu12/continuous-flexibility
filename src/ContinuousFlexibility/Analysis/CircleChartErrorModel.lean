@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CircleAveragedComposition
-import ContinuousFlexibility.Analysis.CircleDifferentialOperators
+module
+
+public import ContinuousFlexibility.Analysis.CircleAveragedComposition
+public import ContinuousFlexibility.Analysis.CircleDifferentialOperators
 
 /-!
 # The actual bilinear chart error in the supplied circle model
@@ -9,6 +11,8 @@ theta + travel + a e(theta) is a genuine linear circle operator.
 Multiplication, angular differentiation, and the supplied parity
 projections then realize the frozen chart-error formula bilinearly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalMeasure
-import ContinuousFlexibility.Analysis.N07aCanonicalScalarColumns
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalMeasure
+public import ContinuousFlexibility.Analysis.N07aCanonicalScalarColumns
 
 /-!
 # Actual physical chart and gauge coefficients with bounded jets
@@ -10,6 +12,8 @@ chart give finite bounds for every fixed spatial jet. These are qualitative
 multipliers for L² pullback; their constants may depend on the state and
 piece, and do not assert a uniform tame estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05CanonicalSourceBlock
-import ContinuousFlexibility.Analysis.N05CanonicalAngularLift
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05CanonicalSourceBlock
+public import ContinuousFlexibility.Analysis.N05CanonicalAngularLift
 
 /-!
 # Unsigned local angular sources retain their endpoint exponent
@@ -10,6 +12,8 @@ chart without reflection averaging. Its source square bound has the same
 endpoint exponential and fixed material order for every L² coordinate,
 including odd angular derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

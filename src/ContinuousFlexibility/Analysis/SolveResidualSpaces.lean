@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import ContinuousFlexibility.Analysis.ProjectiveLimitSubspace
-import ContinuousFlexibility.Analysis.SolveSmoothing
-import ContinuousFlexibility.Analysis.SolveCircleProjection
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import ContinuousFlexibility.Analysis.ProjectiveLimitSubspace
+public import ContinuousFlexibility.Analysis.SolveSmoothing
+public import ContinuousFlexibility.Analysis.SolveCircleProjection
 
 /-!
 # The actual residual space as a complete projective limit
@@ -12,6 +14,8 @@ physical projective limits. Their product has an exact projective realization;
 the statement's sum grading and the resulting maximum grading differ by at
 most a factor of two.
 -/
+
+@[expose] public section
 
 noncomputable section
 

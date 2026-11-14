@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.WeightedTowerCalculus
-import ContinuousFlexibility.Analysis.TameJetComposition
-import ContinuousFlexibility.Analysis.TameMultilinearNormalization
+module
+
+public import ContinuousFlexibility.Scalar.WeightedTowerCalculus
+public import ContinuousFlexibility.Analysis.TameJetComposition
+public import ContinuousFlexibility.Analysis.TameMultilinearNormalization
 
 /-!
 # Fixed-loss bounds for the actual partition composition tower
@@ -10,6 +12,8 @@ low seminorm.  Every low inner jet is then uniformly bounded; only one high
 inner jet occurs in each summand of the outer tame estimate.  Multilinear
 normalization recovers the exact homogeneous one-high-factor estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

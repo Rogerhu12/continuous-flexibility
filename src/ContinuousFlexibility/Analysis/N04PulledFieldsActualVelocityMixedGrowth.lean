@@ -1,11 +1,13 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsActualAngularGrowth
-import ContinuousFlexibility.Analysis.N04PulledFieldsActualTransportIdentities
-import ContinuousFlexibility.Analysis.N04PulledFieldsCharacteristicPower
-import ContinuousFlexibility.Analysis.N04PulledFieldsRadialCutoffGrowth
-import ContinuousFlexibility.Analysis.N04PulledFieldsFixedBaseMixedGrowth
-import ContinuousFlexibility.Analysis.N01CharacteristicJointGrowth
-import ContinuousFlexibility.Analysis.N01ReturnTransportSpatialTowers
-import ContinuousFlexibility.Analysis.MaterialSampleBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsActualAngularGrowth
+public import ContinuousFlexibility.Analysis.N04PulledFieldsActualTransportIdentities
+public import ContinuousFlexibility.Analysis.N04PulledFieldsCharacteristicPower
+public import ContinuousFlexibility.Analysis.N04PulledFieldsRadialCutoffGrowth
+public import ContinuousFlexibility.Analysis.N04PulledFieldsFixedBaseMixedGrowth
+public import ContinuousFlexibility.Analysis.N01CharacteristicJointGrowth
+public import ContinuousFlexibility.Analysis.N01ReturnTransportSpatialTowers
+public import ContinuousFlexibility.Analysis.MaterialSampleBounds
 
 /-!
 # Fixed-base mixed growth of the actual N02 velocity
@@ -15,6 +17,8 @@ provide the primitive towers. Their radial transport equations give
 the velocity estimate on the original sector parameter space, with
 one low order before all parameter orders and one sampled height factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

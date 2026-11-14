@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsAngularKernel
-import ContinuousFlexibility.Analysis.N06RootAbsorbedPacket
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsAngularKernel
+public import ContinuousFlexibility.Analysis.N06RootAbsorbedPacket
 
 /-!
 # The exact finite radial prolongation of the normalized root kernel
@@ -11,6 +13,8 @@ of the radial kernel have uniform constants before the root, state and
 angular order are evaluated. No derivative of a selected root chart is
 an input to this construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

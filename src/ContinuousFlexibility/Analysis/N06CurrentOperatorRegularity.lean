@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06CurrentOperatorPeriodicity
-import ContinuousFlexibility.Analysis.N06PositiveCurrentTestLp
-import ContinuousFlexibility.Analysis.N06CanonicalHeightGerm
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentOperatorPeriodicity
+public import ContinuousFlexibility.Analysis.N06PositiveCurrentTestLp
+public import ContinuousFlexibility.Analysis.N06CanonicalHeightGerm
 
 /-!
 # Local smoothness of the actual corrected operator on even fields
@@ -12,6 +14,8 @@ local even periodic germs transfers that conclusion to the actual N04
 height, including on negative pieces where corrected coefficient
 regularity was not separately stipulated.
 -/
+
+@[expose] public section
 
 noncomputable section
 

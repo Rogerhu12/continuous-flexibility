@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04bCharacteristicFlowField
-import ContinuousFlexibility.Analysis.N04bCharacteristicFirstIntegralsChart
-import ContinuousFlexibility.Analysis.ReturnChartDifferentiation
-import ContinuousFlexibility.Analysis.TravelStripInverseSymmetry
+module
+
+public import ContinuousFlexibility.Analysis.N04bCharacteristicFlowField
+public import ContinuousFlexibility.Analysis.N04bCharacteristicFirstIntegralsChart
+public import ContinuousFlexibility.Analysis.ReturnChartDifferentiation
+public import ContinuousFlexibility.Analysis.TravelStripInverseSymmetry
 
 /-!
 # The actual corrected travel chart
@@ -12,6 +14,8 @@ derived from that witness, and the first integrals use its literal angular
 inverse. The exact return identity proves the global travel-strip
 bijection and its actual smooth inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

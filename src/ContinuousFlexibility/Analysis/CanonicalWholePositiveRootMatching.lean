@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CanonicalWholePositiveTransport
-import ContinuousFlexibility.Analysis.CanonicalWholeNegativeTransport
-import ContinuousFlexibility.Analysis.WholeComponentFieldSelection
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalWholePositiveTransport
+public import ContinuousFlexibility.Analysis.CanonicalWholeNegativeTransport
+public import ContinuousFlexibility.Analysis.WholeComponentFieldSelection
 
 /-!
 # Matching the constructed positive transport to the actual negative roots
@@ -14,6 +16,8 @@ positive construction then matches its genuine negative neighbor.
 The final constructor takes only the original finite endpoint bounds.
 No root-matching or global-transport conclusion is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

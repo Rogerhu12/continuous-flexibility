@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R07DeepTailData
+module
+
+public import ContinuousFlexibility.Radial.R07DeepTailData
 
 /-!
 # Physical cell labels for the actual outward tail
@@ -9,6 +11,8 @@ On the left a node is the turning point inside a cell, so each edge is
 split at the following seam. The same interval-to-block lemma handles
 the whole right edge, both left subintervals, and the initial left glue.
 -/
+
+@[expose] public section
 
 noncomputable section
 

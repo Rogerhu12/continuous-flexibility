@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bConstructedRootDensity
-import ContinuousFlexibility.Analysis.N04bActualAtlasGerms
+module
+
+public import ContinuousFlexibility.Analysis.N04bConstructedRootDensity
+public import ContinuousFlexibility.Analysis.N04bActualAtlasGerms
 
 /-!
 # The actual negative atlas has the common Airy principal density
@@ -9,6 +11,8 @@ The characteristic equations and positive angular derivatives come from
 the actual forward flow and its actual inverse labels.  The stored atlas
 has these chart and height germs on the whole open negative component.
 -/
+
+@[expose] public section
 
 noncomputable section
 

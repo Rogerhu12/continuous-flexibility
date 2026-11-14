@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Scalar.WeightedRationalFactors
-import Mathlib.Analysis.Calculus.MeanValue
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.NormNum
-import Mathlib.Tactic.Positivity
-import Mathlib.Tactic.Ring
+module
+
+public import ContinuousFlexibility.Scalar.WeightedRationalFactors
+public import Mathlib.Analysis.Calculus.MeanValue
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.Positivity
+public import Mathlib.Tactic.Ring
 
 /-!
 # Square-root stability at shared simple roots
@@ -18,6 +20,8 @@ at both roots.
 These are scalar estimates for actual functions on a closed interval.
 They do not assume a desired speed estimate or assert an N04b obstruction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01aReferenceModeIdentification
+module
+
+public import ContinuousFlexibility.Analysis.N01aReferenceModeIdentification
 
 /-!
 # Weighted membership of the actual normalized eigenfield
@@ -7,6 +9,8 @@ The second-mode projection of the inverse pays only one fixed L² constant.
 Its weighted cell sum is therefore finite at the same spare exponent and
 with the same coefficient weight as the given inverse output.
 -/
+
+@[expose] public section
 
 noncomputable section
 

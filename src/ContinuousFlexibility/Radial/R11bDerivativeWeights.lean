@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R11bWeightMonotonicity
+module
+
+public import ContinuousFlexibility.Radial.R11bWeightMonotonicity
 
 /-!
 # Weight changes for the source angular derivative
@@ -9,6 +11,8 @@ Both coefficient monotonicity and strict attenuation embeddings preserve the
 same derivative representative. The first normal estimate consequently
 transports to stronger source and weaker output coefficient weights.
 -/
+
+@[expose] public section
 
 noncomputable section
 

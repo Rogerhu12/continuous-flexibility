@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryMoving
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryFormulaPrefix
-import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryMoving
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryFormulaPrefix
+public import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
 
 /-!
 # Positive words of an unwrapped inverse label
@@ -9,6 +11,8 @@ Words with an angular slot are derivatives of the actual slope. Pure
 state words of positive order are derivatives of the displacement.
 Thus no bound for the value of the unwrapped angle is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

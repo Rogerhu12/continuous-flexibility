@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07bFiniteInteriorGreen
-import ContinuousFlexibility.Radial.ReferenceSmoothGreen
+module
+
+public import ContinuousFlexibility.Analysis.N07bFiniteInteriorGreen
+public import ContinuousFlexibility.Radial.ReferenceSmoothGreen
 
 /-!
 # The reference differential expression for finite-regularity heights
@@ -9,6 +11,8 @@ physical interfaces. Its C² representative still has the actual radial
 Jacobi expression and satisfies Green symmetry against compact radial
 tests. The proof ignores the measure-zero radial endpoints explicitly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

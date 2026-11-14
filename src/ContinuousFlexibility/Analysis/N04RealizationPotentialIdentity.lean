@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04bCanonicalPhysicalAction
-import ContinuousFlexibility.Analysis.CanonicalCoefficientIdentities
-import ContinuousFlexibility.Analysis.PhysicalTransmissionTrace
+module
+
+public import ContinuousFlexibility.Analysis.N04bCanonicalPhysicalAction
+public import ContinuousFlexibility.Analysis.CanonicalCoefficientIdentities
+public import ContinuousFlexibility.Analysis.PhysicalTransmissionTrace
 
 /-!
 # The actual potential from the reciprocal pulled height
@@ -10,6 +12,8 @@ canonical action therefore expresses the stored potential using only
 the canonical principal coefficients and the reciprocal pulled height.
 The same identity covers both canonical signs and every mixed spatial jet.
 -/
+
+@[expose] public section
 
 noncomputable section
 

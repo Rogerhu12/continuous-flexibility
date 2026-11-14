@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ModeLocalMeasure
+module
+
+public import ContinuousFlexibility.Radial.ModeLocalMeasure
 
 /-!
 # Physical equations of the actual modal inverse
@@ -7,6 +9,8 @@ The frozen model uses the source -f / ρ and the scalar opposite to the
 physical border scalar. These identities pass between its actual L²
 graph and the ordinary radial weak equation without changing test classes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

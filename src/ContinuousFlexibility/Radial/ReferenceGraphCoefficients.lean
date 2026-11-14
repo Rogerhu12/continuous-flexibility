@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ReferenceCosineJacobi
-import ContinuousFlexibility.Radial.ReferenceRadialWeighted
+module
+
+public import ContinuousFlexibility.Radial.ReferenceCosineJacobi
+public import ContinuousFlexibility.Radial.ReferenceRadialWeighted
 
 /-!
 # Actual one-dimensional equations of the reference graph
@@ -9,6 +11,8 @@ its first normal derivative onto the genuine mean/cosine coefficients.
 The weighted estimates are the fiberwise L² contraction already proved
 for the actual localized square integrals.
 -/
+
+@[expose] public section
 
 open Set Filter MeasureTheory
 open scoped ContDiff Topology

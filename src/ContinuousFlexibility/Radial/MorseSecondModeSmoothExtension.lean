@@ -1,7 +1,11 @@
-import ContinuousFlexibility.Radial.MorseSecondModeEndpointFlat
-import ContinuousFlexibility.Radial.RadialTailSmoothExtension
+module
+
+public import ContinuousFlexibility.Radial.MorseSecondModeEndpointFlat
+public import ContinuousFlexibility.Radial.RadialTailSmoothExtension
 
 /-! # Smooth outward zero extension of a specified Morse natural tail -/
+
+@[expose] public section
 
 noncomputable section
 

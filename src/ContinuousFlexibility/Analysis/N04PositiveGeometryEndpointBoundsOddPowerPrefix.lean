@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsOddTraces
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsOddTraces
 
 /-!
 # The sampled prefix of the actual odd-coefficient powers
@@ -7,6 +9,8 @@ The common low order includes the already proved reciprocal bound for
 the true zeroth odd coefficient. All later parameter orders use the
 same domain and retain five reserved angular derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.OuterPhysicalInverseGauge
-import ContinuousFlexibility.Radial.ModeTestIntegrability
-import ContinuousFlexibility.Analysis.L2MeasureCongr
+module
+
+public import ContinuousFlexibility.Radial.OuterPhysicalInverseGauge
+public import ContinuousFlexibility.Radial.ModeTestIntegrability
+public import ContinuousFlexibility.Analysis.L2MeasureCongr
 
 /-!
 # The actual exterior measure in the increasing outward coordinate
@@ -8,6 +10,8 @@ import ContinuousFlexibility.Analysis.L2MeasureCongr
 The coordinate reflection preserves the full weighted Hilbert measure.
 Its finite-core complement is exactly the physical deep-tail measure.
 -/
+
+@[expose] public section
 
 noncomputable section
 

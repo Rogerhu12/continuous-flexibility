@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Scalar.WeightedFieldRegularity
+module
+
+public import ContinuousFlexibility.Scalar.WeightedFieldRegularity
 
 /-!
 # Multiplication preserves the actual uniform flat jets
@@ -8,6 +10,8 @@ rectangle.  The product rule and induction on the two derivative orders
 therefore preserve every endpoint decay order.  This argument uses the
 actual derivatives and does not introduce a new jet representation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

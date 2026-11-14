@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.ScalarWeighted
-import Mathlib.MeasureTheory.Integral.DominatedConvergence
+module
+
+public import ContinuousFlexibility.Statements.ScalarWeighted
+public import Mathlib.MeasureTheory.Integral.DominatedConvergence
 
 /-!
 # The actual weak scalar graph on the physical annulus
@@ -8,6 +10,8 @@ The integration by parts formula below uses the physical measure `dr dθ`.
 The angular boundary cancels by periodicity and compact radial tests vanish
 at both radial endpoints. No endpoint condition is imposed on the height.
 -/
+
+@[expose] public section
 
 noncomputable section
 

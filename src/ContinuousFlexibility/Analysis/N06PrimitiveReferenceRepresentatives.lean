@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06IntervalC1Representative
-import ContinuousFlexibility.Analysis.N07aReferenceUnitJets
-import ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient
+module
+
+public import ContinuousFlexibility.Analysis.N06IntervalC1Representative
+public import ContinuousFlexibility.Analysis.N07aReferenceUnitJets
+public import ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient
 
 /-!
 # Reference coefficients with genuine endpoint representatives
@@ -10,6 +12,8 @@ rays. Their C1 representatives are transported to the original canonical
 interval, with its actual affine length. Radiality identifies the original
 open-strip coefficients. Raw endpoint values are never treated as traces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PositiveEndpointCutoff
-import Mathlib.Analysis.SpecialFunctions.Log.Deriv
+module
+
+public import ContinuousFlexibility.Analysis.PositiveEndpointCutoff
+public import Mathlib.Analysis.SpecialFunctions.Log.Deriv
 
 /-!
 # Positive reference heights from endpoint data
@@ -9,6 +11,8 @@ used for the coordinate. Exponentiation gives a globally positive smooth
 height, matching both endpoint germs and equal to one on every forbidden
 set avoided by the cutoff collars.
 -/
+
+@[expose] public section
 
 noncomputable section
 

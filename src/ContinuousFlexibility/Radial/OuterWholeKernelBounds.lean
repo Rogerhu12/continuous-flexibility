@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterFundamentalKernel
-import ContinuousFlexibility.Radial.OuterKernelEnvelopeAlgebra
+module
+
+public import ContinuousFlexibility.Radial.OuterFundamentalKernel
+public import ContinuousFlexibility.Radial.OuterKernelEnvelopeAlgebra
 
 /-!
 # Pointwise bounds for the actual whole Green kernel
@@ -8,6 +10,8 @@ The core blocks follow directly from the actual normalized homogeneous
 pair. On the tail the proved Dirichlet-plus-rank-one identity gives one
 common bound. It remains valid when the natural entrance value vanishes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

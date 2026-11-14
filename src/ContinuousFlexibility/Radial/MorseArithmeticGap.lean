@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.CentralSmallDivisor
-import ContinuousFlexibility.Radial.MorseChainParameters
+module
+
+public import ContinuousFlexibility.Radial.CentralSmallDivisor
+public import ContinuousFlexibility.Radial.MorseChainParameters
 
 /-!
 # Arithmetic gaps for the Morse parameters
@@ -8,6 +10,8 @@ The same integer norm gives a distance from rational return phases and a
 separation for each proposed discrete level. The spectral identification
 and the evaluation of the actual optical integral are separate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

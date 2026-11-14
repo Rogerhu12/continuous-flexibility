@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerMorseInnerWeights
-import ContinuousFlexibility.Radial.MatchingGraphRestrictions
+module
+
+public import ContinuousFlexibility.Radial.InnerMorseInnerWeights
+public import ContinuousFlexibility.Radial.MatchingGraphRestrictions
 
 /-!
 # The actual finite-chain weight on terminal caps
@@ -9,6 +11,8 @@ weight. The half-open partition is kept unchanged: its possible different
 value at the left cut is removed only by the proved physical null-set
 lemma. The exponential bound retains the exact signed height exponent.
 -/
+
+@[expose] public section
 
 noncomputable section
 

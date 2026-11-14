@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06AiryAverage
-import ContinuousFlexibility.Analysis.N06FractionalJetBounds
+module
+
+public import ContinuousFlexibility.Analysis.N06AiryAverage
+public import ContinuousFlexibility.Analysis.N06FractionalJetBounds
 
 /-!
 # The controlled two-sided reference Airy coordinate and height
@@ -9,6 +11,8 @@ is identified from the actual integral identity, so positivity and all
 finite slope bounds concern the true coordinate. The height is the original
 square-root normalization using this same derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

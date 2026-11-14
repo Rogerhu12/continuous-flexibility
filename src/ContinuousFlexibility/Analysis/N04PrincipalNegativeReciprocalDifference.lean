@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PrincipalNegativeReciprocalBounds
-import ContinuousFlexibility.Analysis.N04PrincipalWeightedLinear
-import ContinuousFlexibility.Analysis.N04PrincipalWeightedProduct
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalNegativeReciprocalBounds
+public import ContinuousFlexibility.Analysis.N04PrincipalWeightedLinear
+public import ContinuousFlexibility.Analysis.N04PrincipalWeightedProduct
 
 /-!
 # The height weight in a reciprocal difference
@@ -9,6 +11,8 @@ The exact reciprocal difference is a product with one original
 difference factor. The other two factors are full reciprocal fields.
 Consequently the sampled height weight occurs exactly once.
 -/
+
+@[expose] public section
 
 noncomputable section
 

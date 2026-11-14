@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.EvenPeriodicCoefficientProbes
-import ContinuousFlexibility.Analysis.N04bOperatorCarre
+module
+
+public import ContinuousFlexibility.Analysis.EvenPeriodicCoefficientProbes
+public import ContinuousFlexibility.Analysis.N04bOperatorCarre
 
 /-!
 # Genuine coefficient identities from four even periodic operator probes
@@ -13,6 +15,8 @@ The resulting identities retain the single sine factor for the mixed
 coefficient and the double sine factor for the angular coefficient.
 Quantitative division by these factors is a separate analytic step.
 -/
+
+@[expose] public section
 
 noncomputable section
 

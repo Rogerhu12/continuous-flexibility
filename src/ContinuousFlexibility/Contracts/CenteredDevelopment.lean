@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Contracts.DevelopmentSymmetry
-import ContinuousFlexibility.Geometry.EuclideanRigidity
-import ContinuousFlexibility.Geometry.PlanarOrientation
-import Mathlib.Analysis.Convex.PathConnected
+module
+
+public import ContinuousFlexibility.Contracts.DevelopmentSymmetry
+public import ContinuousFlexibility.Geometry.EuclideanRigidity
+public import ContinuousFlexibility.Geometry.PlanarOrientation
+public import Mathlib.Analysis.Convex.PathConnected
 
 /-!
 # Uniqueness, oddness and the centered inner disk
@@ -10,6 +12,8 @@ These are consequences of the constructed development, rather than extra
 fields imposed on the annular core. Euclidean rigidity uses the actual
 coordinate pairing, since the coordinate product has the max norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

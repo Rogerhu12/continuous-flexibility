@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bLiteralField
-import ContinuousFlexibility.Analysis.N03SourceFromActualCoefficientJets
+module
+
+public import ContinuousFlexibility.Analysis.N04bLiteralField
+public import ContinuousFlexibility.Analysis.N03SourceFromActualCoefficientJets
 
 /-!
 # The actual coefficient family and its literal physical correction
@@ -10,6 +12,8 @@ restricted to the smooth coefficient space. Its sole quantitative input
 is stated for that same family; every qualitative premise is already
 proved from the selected cutoff and the original N01 field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

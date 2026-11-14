@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ProjectiveJetEvaluation
-import ContinuousFlexibility.Analysis.ProjectiveNewtonRecurrence
+module
+
+public import ContinuousFlexibility.Analysis.ProjectiveJetEvaluation
+public import ContinuousFlexibility.Analysis.ProjectiveNewtonRecurrence
 
 /-!
 # Iterated chain rules along real parameter curves
@@ -8,6 +10,8 @@ The source may be the actual product of projective and real parameter
 spaces. Each output coordinate uses its genuine Banach derivative. Finite
 lists retain the multiplicities of the chain-rule terms.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.FlowJetLinearization
+module
+
+public import ContinuousFlexibility.Analysis.FlowJetLinearization
 
 /-!
 # Actual nonlinear inverse jets and their triangular estimate
@@ -9,6 +11,8 @@ order, subtracting the forward linearization leaves only nonlinear
 partition terms, all involving lower inverse jets. These statements
 hold at a point and therefore apply to inverses on open coordinate strips.
 -/
+
+@[expose] public section
 
 noncomputable section
 

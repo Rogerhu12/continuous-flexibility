@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SmoothDirectionsMixedScalarLine
-import Mathlib.Analysis.Calculus.MeanValue
+module
+
+public import ContinuousFlexibility.Analysis.SmoothDirectionsMixedScalarLine
+public import Mathlib.Analysis.Calculus.MeanValue
 
 /-!
 # Propagating equality of genuine directional derivatives
@@ -8,6 +10,8 @@ If two first directions give the same actual first jet throughout an
 open domain, differentiating that identity along arbitrary parameter
 lines preserves it at every order. The final direction is kept explicit.
 -/
+
+@[expose] public section
 
 noncomputable section
 

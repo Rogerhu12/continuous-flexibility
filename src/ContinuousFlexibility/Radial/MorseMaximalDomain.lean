@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorsePotentialEnergy
-import Mathlib.MeasureTheory.Integral.IntegralEqImproper
+module
+
+public import ContinuousFlexibility.Radial.MorsePotentialEnergy
+public import Mathlib.MeasureTheory.Integral.IntegralEqImproper
 
 /-!
 # The maximal distributional Morse graph
@@ -8,6 +10,8 @@ Localization and convolution give an energy inequality for a square-integrable
 weak solution at a strictly positive shifted potential. The shifted form inverse
 then identifies the distributional graph on the whole Lebesgue L² space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

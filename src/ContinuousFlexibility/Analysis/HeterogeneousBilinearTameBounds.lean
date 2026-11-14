@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
+module
+
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
 
 /-!
 # Homogeneous tame bounds with distinct residual, test and output spaces
@@ -12,6 +14,8 @@ This is the heterogeneous version of the fiber-jet argument in
 ProjectiveNewtonCorrectionBounds. It is needed for Circle × Height
 errors taking values in Source; those three spaces are not identified.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06CurrentFiniteGreenRelation
-import ContinuousFlexibility.Analysis.N06PrimitiveFiniteGreenAssembly
-import ContinuousFlexibility.Analysis.N06PrimitiveLeftColumnPairing
-import ContinuousFlexibility.Analysis.N06PrimitivePhysicalClosure
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentFiniteGreenRelation
+public import ContinuousFlexibility.Analysis.N06PrimitiveFiniteGreenAssembly
+public import ContinuousFlexibility.Analysis.N06PrimitiveLeftColumnPairing
+public import ContinuousFlexibility.Analysis.N06PrimitivePhysicalClosure
 
 /-!
 # True finite Green data give the original physical relation
@@ -12,6 +14,8 @@ graph core is dense and the named physical residual is closed there, so
 the genuine finite identities pass to every element of the same graph.
 No physical equation or operator bound is an input to the finite data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

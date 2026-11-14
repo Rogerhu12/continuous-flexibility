@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.SelectedLaterPhysicalIncoming
-import ContinuousFlexibility.Radial.SelectedRetainedMorseProfile
-import ContinuousFlexibility.Radial.TerminalMorseLiftEnergy
+module
+
+public import ContinuousFlexibility.Radial.SelectedLaterPhysicalIncoming
+public import ContinuousFlexibility.Radial.SelectedRetainedMorseProfile
+public import ContinuousFlexibility.Radial.TerminalMorseLiftEnergy
 
 /-!
 # The actual normalized terminal cap on a retained reference
@@ -10,6 +12,8 @@ The same radius-scaled incoming solution therefore supplies the profile,
 equation, zero value, unit value and initial derivative required by the
 terminal source and energy estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

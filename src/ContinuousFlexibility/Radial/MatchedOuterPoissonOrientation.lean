@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MatchedOuterPoissonIdentification
-import ContinuousFlexibility.Radial.MatchedOuterNaturalRealization
-import ContinuousFlexibility.Radial.MatchedOuterGlobalCells
+module
+
+public import ContinuousFlexibility.Radial.MatchedOuterPoissonIdentification
+public import ContinuousFlexibility.Radial.MatchedOuterNaturalRealization
+public import ContinuousFlexibility.Radial.MatchedOuterGlobalCells
 
 /-!
 # Actual outer columns are independent of the orientation of the natural line
@@ -10,6 +12,8 @@ sign.  The existing outer decomposition identifies the supplied actual
 natural vector with that signed matching column. Every localized norm
 therefore agrees, without requiring equality of the chosen unit states.
 -/
+
+@[expose] public section
 
 noncomputable section
 

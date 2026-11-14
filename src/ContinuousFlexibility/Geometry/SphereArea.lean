@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Geometry.SphereMetric
-import Mathlib.Geometry.Euclidean.Volume.Measure
-import Mathlib.Analysis.Calculus.ContDiff.RCLike
-import Mathlib.MeasureTheory.Function.LocallyIntegrable
-import Mathlib.MeasureTheory.Integral.Bochner.Basic
+module
+
+public import ContinuousFlexibility.Geometry.SphereMetric
+public import Mathlib.Geometry.Euclidean.Volume.Measure
+public import Mathlib.Analysis.Calculus.ContDiff.RCLike
+public import Mathlib.MeasureTheory.Function.LocallyIntegrable
+public import Mathlib.MeasureTheory.Integral.Bochner.Basic
 
 /-!
 # Actual Hausdorff area of the constructed sphere images
@@ -12,6 +14,8 @@ actual image in E3. The rotating graph image is an ambient isometric image;
 the cap is fixed, and their intersection is contained in a null circle.
 Finiteness uses Lipschitz images of compact two-dimensional parameter sets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

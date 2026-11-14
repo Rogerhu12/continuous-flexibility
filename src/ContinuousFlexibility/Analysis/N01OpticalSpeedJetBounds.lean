@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01OpticalCollarJetBounds
-import ContinuousFlexibility.Analysis.PolynomialJetPowers
+module
+
+public import ContinuousFlexibility.Analysis.N01OpticalCollarJetBounds
+public import ContinuousFlexibility.Analysis.PolynomialJetPowers
 
 /-!
 # All reference optical-speed jets on the actual correction collars
@@ -10,6 +12,8 @@ power for the reciprocal. The selected optical-speed lower bound then
 controls the square root at every order. Thus no component-dependent
 compactness constant enters the radial reference-flow jet estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

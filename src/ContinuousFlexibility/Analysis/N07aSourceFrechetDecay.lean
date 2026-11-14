@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aSourceJetDecay
-import ContinuousFlexibility.Analysis.CylinderMixedJets
+module
+
+public import ContinuousFlexibility.Analysis.N07aSourceJetDecay
+public import ContinuousFlexibility.Analysis.CylinderMixedJets
 
 /-!
 # Full physical source derivatives with the same fixed material loss
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Analysis.CylinderMixedJets
 The actual mixed-jet bounds control the operator norm of each actual
 Fréchet derivative. The finite coordinate sum changes only its constant.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.BoundaryMixedJets
-import ContinuousFlexibility.Analysis.BoundaryJetClosure
-import ContinuousFlexibility.Analysis.PointwiseCylinderJets
-import Mathlib.Algebra.BigOperators.Fin
+module
+
+public import ContinuousFlexibility.Analysis.BoundaryMixedJets
+public import ContinuousFlexibility.Analysis.BoundaryJetClosure
+public import ContinuousFlexibility.Analysis.PointwiseCylinderJets
+public import Mathlib.Algebra.BigOperators.Fin
 
 /-!
 # Finite ordinary jets at the closed edge of a smooth strip
@@ -10,6 +12,8 @@ Each equality is first proved on the actual open strip and then passed
 to its boundary using continuity of the particular finite derivative.
 No common neighborhood of infinite smoothness is selected.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.SpacesCompactHeights
-import ContinuousFlexibility.Analysis.SpacesHeightBounds
-import ContinuousFlexibility.Analysis.MaterialHeightRegularity
-import ContinuousFlexibility.Analysis.TameTransfer
-import Mathlib.MeasureTheory.Integral.Bochner.Set
+module
+
+public import ContinuousFlexibility.Analysis.SpacesCompactHeights
+public import ContinuousFlexibility.Analysis.SpacesHeightBounds
+public import ContinuousFlexibility.Analysis.MaterialHeightRegularity
+public import ContinuousFlexibility.Analysis.TameTransfer
+public import Mathlib.MeasureTheory.Integral.Bochner.Set
 
 /-!
 # The physical compatibility functional and its projection
@@ -13,6 +15,8 @@ fixed tame loss follow from the order-two point-evaluation estimate.
 The cutoff derivative supplies a compactly supported normalizer, so the
 projection onto compatible sources is an actual continuous linear map.
 -/
+
+@[expose] public section
 
 noncomputable section
 

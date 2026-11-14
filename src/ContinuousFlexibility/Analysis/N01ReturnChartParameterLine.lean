@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01FlowParameterLineRegularity
-import ContinuousFlexibility.Analysis.ScalarParameterInverse
-import ContinuousFlexibility.Analysis.ReturnCorrectionDisplacementRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N01FlowParameterLineRegularity
+public import ContinuousFlexibility.Analysis.ScalarParameterInverse
+public import ContinuousFlexibility.Analysis.ReturnCorrectionDisplacementRegularity
 
 /-!
 # Actual return charts on arbitrary sector parameter lines
@@ -10,6 +12,8 @@ and the angular variable. This follows from the original N01 flow towers,
 the actual inverse identities, and positivity of the angular derivatives.
 The same conclusion applies to the correction initial map and residual.
 -/
+
+@[expose] public section
 
 noncomputable section
 

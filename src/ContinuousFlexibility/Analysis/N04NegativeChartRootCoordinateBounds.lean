@@ -1,13 +1,17 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartRootCoefficient
-import ContinuousFlexibility.Analysis.N04NegativeChartRootScale
-import ContinuousFlexibility.Analysis.N04NegativeChartPositivePowerBounds
-import ContinuousFlexibility.Analysis.N04NegativeChartRadialProjectionBounds
-import ContinuousFlexibility.Analysis.N04NegativeChartPhysicalBounds
-import ContinuousFlexibility.Analysis.N04NegativeHeightDomains
-import ContinuousFlexibility.Analysis.N04NegativeChartInteriorRawBudget
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootCoefficient
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootScale
+public import ContinuousFlexibility.Analysis.N04NegativeChartPositivePowerBounds
+public import ContinuousFlexibility.Analysis.N04NegativeChartRadialProjectionBounds
+public import ContinuousFlexibility.Analysis.N04NegativeChartPhysicalBounds
+public import ContinuousFlexibility.Analysis.N04NegativeHeightDomains
+public import ContinuousFlexibility.Analysis.N04NegativeChartInteriorRawBudget
 
 /-! The actual divided travel and angle prefix determine both physical
 chart components on the selected material root band. -/
+
+@[expose] public section
 
 noncomputable section
 

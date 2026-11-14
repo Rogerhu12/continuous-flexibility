@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CircleSingleComponent
-import ContinuousFlexibility.Analysis.N01ResidualCircleModel
-import ContinuousFlexibility.Analysis.N01RootLabels
+module
+
+public import ContinuousFlexibility.Analysis.CircleSingleComponent
+public import ContinuousFlexibility.Analysis.N01ResidualCircleModel
+public import ContinuousFlexibility.Analysis.N01RootLabels
 
 /-!
 # A nonzero chart variation in every sector neighborhood
@@ -11,6 +13,8 @@ sector direction whose other state fields vanish. Positive multiples
 arbitrarily close to zero lie in any positive sector neighborhood. Their
 actual left root label moves `π / 4` by exactly the scalar multiple.
 -/
+
+@[expose] public section
 
 noncomputable section
 

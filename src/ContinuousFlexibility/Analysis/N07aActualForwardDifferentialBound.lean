@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aInverseChartDifferentialDifference
-import ContinuousFlexibility.Analysis.N07aForwardChartBounds
+module
+
+public import ContinuousFlexibility.Analysis.N07aInverseChartDifferentialDifference
+public import ContinuousFlexibility.Analysis.N07aForwardChartBounds
 
 /-!
 # Uniform first forward derivatives on moving physical pieces
@@ -9,6 +11,8 @@ one stronger low neighborhood. The elementary Neumann norm estimate then
 bounds the genuine current forward differential by twice its reference
 bound. All sampled subpower factors are absorbed together before shrinking.
 -/
+
+@[expose] public section
 
 noncomputable section
 

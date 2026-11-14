@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CanonicalRootTransportBoundary
-import ContinuousFlexibility.Analysis.CanonicalNegativeTravelSymmetries
-import ContinuousFlexibility.Analysis.N04bActualAtlasCuts
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalRootTransportBoundary
+public import ContinuousFlexibility.Analysis.CanonicalNegativeTravelSymmetries
+public import ContinuousFlexibility.Analysis.N04bActualAtlasCuts
 
 /-!
 # Actual one-sided endpoint fields of the constructed atlas
@@ -10,6 +12,8 @@ The ordinary root germs, inverse, Jacobian and height positivity come
 from the constructed closed atlas. No derivative estimate or future
 positive-component transport is an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

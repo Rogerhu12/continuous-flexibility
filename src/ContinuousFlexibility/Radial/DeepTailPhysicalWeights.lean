@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ScaleSlowVariation
+module
+
+public import ContinuousFlexibility.Radial.ScaleSlowVariation
 
 /-!
 # Coefficient weights and physical endpoint distance
@@ -7,6 +9,8 @@ The cubic attenuation dominates every fixed Gaussian endpoint power.
 Fixed shifts of the physical cell index cost only another coefficient
 power; this includes the next-cell cap on a left tail.
 -/
+
+@[expose] public section
 
 noncomputable section
 

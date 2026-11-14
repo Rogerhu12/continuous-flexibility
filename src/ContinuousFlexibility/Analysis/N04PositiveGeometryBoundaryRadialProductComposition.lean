@@ -1,6 +1,10 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryRadialComposition
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryRadialComposition
 
 /-! # Finite word bounds for a radial product with an actual composition -/
+
+@[expose] public section
 
 noncomputable section
 

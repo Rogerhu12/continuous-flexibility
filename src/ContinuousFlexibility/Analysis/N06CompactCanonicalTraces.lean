@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06CurrentTestTraces
-import ContinuousFlexibility.Analysis.N06CanonicalTestTransport
-import ContinuousFlexibility.Analysis.N06WeakCylinderPDE
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentTestTraces
+public import ContinuousFlexibility.Analysis.N06CanonicalTestTransport
+public import ContinuousFlexibility.Analysis.N06WeakCylinderPDE
 
 /-!
 # True traces of transported compact canonical tests
@@ -11,6 +13,8 @@ canonical test throughout the closed measured rectangle, by continuity
 from the open rectangle. Thus both true endpoint traces vanish, without
 using the totalized inverse chart at a boundary.
 -/
+
+@[expose] public section
 
 noncomputable section
 

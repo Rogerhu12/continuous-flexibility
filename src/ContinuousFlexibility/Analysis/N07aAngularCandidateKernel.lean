@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aAngularCandidateDomain
-import ContinuousFlexibility.Analysis.N07aAngularCandidateOperator
-import ContinuousFlexibility.Analysis.N07aAngularHeightInjective
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularCandidateDomain
+public import ContinuousFlexibility.Analysis.N07aAngularCandidateOperator
+public import ContinuousFlexibility.Analysis.N07aAngularHeightInjective
 
 /-!
 # The exact homogeneous physical scalar equation has trivial kernel
@@ -10,6 +12,8 @@ actual fixed N05 graph. Its original differential equation forces its
 actual N06 image to vanish. The already proved inverse identities then
 kill the graph element and, through the genuine coordinates, the height.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Statements.Scalar
+module
+
+public import ContinuousFlexibility.Statements.Scalar
 
 /-!
 # Connection, residual and local development of the height equation
@@ -11,6 +13,8 @@ or global injectivity is asserted.
 
 Source: `paper/flexible-surface-readable/03-height-equation.tex`, lines 23–189.
 -/
+
+@[expose] public section
 
 noncomputable section
 

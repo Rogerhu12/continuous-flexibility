@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderScalarCompositionDerivatives
-import ContinuousFlexibility.Analysis.OneHighCylinderRealSobolevJets
-import ContinuousFlexibility.Analysis.OneHighCylinderRealPureSobolev
-import ContinuousFlexibility.Analysis.OneHighPointwiseComposition
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderScalarCompositionDerivatives
+public import ContinuousFlexibility.Analysis.OneHighCylinderRealSobolevJets
+public import ContinuousFlexibility.Analysis.OneHighCylinderRealPureSobolev
+public import ContinuousFlexibility.Analysis.OneHighPointwiseComposition
 
 /-!
 # Uniform scalar smooth composition on the physical cylinder
@@ -12,6 +14,8 @@ endpoint comparison then supplies output Sobolev membership and its norm
 bound. The outer derivative bounds are imposed on a convex region containing
 zero and the input range, including at order zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

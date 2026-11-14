@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06PositiveCubicSource
-import ContinuousFlexibility.Analysis.N06UnitWeakCubicSource
+module
+
+public import ContinuousFlexibility.Analysis.N06PositiveCubicSource
+public import ContinuousFlexibility.Analysis.N06UnitWeakCubicSource
 
 /-!
 # The actual weak equation of the all-piece positive cubic source
@@ -9,6 +11,8 @@ Both the perturbation and its source vanish on the negative pieces.
 Thus the original all-piece source is identified by canonical tests,
 without requiring any of its graph representatives to be smooth.
 -/
+
+@[expose] public section
 
 noncomputable section
 

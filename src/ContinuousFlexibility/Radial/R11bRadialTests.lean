@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.R11bTestPairing
-import ContinuousFlexibility.Radial.RadialHeight
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
+module
+
+public import ContinuousFlexibility.Radial.R11bTestPairing
+public import ContinuousFlexibility.Radial.RadialHeight
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
 
 /-!
 # Differentiating the actual radial tests
@@ -10,6 +12,8 @@ and compact radial support.  The actual radial operator applied to a test is
 continuous and has the same compact radial support, so its pairing with a
 locally physical L² output is an actual integrable function.
 -/
+
+@[expose] public section
 
 noncomputable section
 

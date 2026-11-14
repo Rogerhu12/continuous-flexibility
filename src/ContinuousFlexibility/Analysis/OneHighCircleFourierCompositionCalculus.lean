@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFourierLiftBounds
-import ContinuousFlexibility.Analysis.OneHighCircleFourierInterpolation
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierLiftBounds
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierInterpolation
 
 /-!
 # Actual chain rule and uniform low composition constants
@@ -8,6 +10,8 @@ The circle functions below are descended from ordinary smooth periodic
 functions. The chain-rule factorization and every derivative tower therefore
 come from the actual functions, with no auxiliary jet hypotheses.
 -/
+
+@[expose] public section
 
 noncomputable section
 

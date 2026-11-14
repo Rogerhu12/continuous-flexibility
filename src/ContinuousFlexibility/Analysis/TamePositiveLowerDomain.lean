@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Statements.Analysis
+module
+
+public import ContinuousFlexibility.Statements.Analysis
 
 /-!
 # A common open domain below a positive affine lower bound
@@ -7,6 +9,8 @@ Scaling the original linear data gives an open domain containing every
 point with the prescribed lower bound. Its smaller positive lower bound
 is fixed before any derivative order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

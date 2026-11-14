@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ScalarFlowAngularSmooth
-import ContinuousFlexibility.Analysis.NeighborhoodCircleFlowRegularity
+module
+
+public import ContinuousFlexibility.Analysis.ScalarFlowAngularSmooth
+public import ContinuousFlexibility.Analysis.NeighborhoodCircleFlowRegularity
 
 /-!
 # Closed-time angular smoothness of an actual periodic scalar flow
@@ -10,6 +12,8 @@ gives all higher angular derivatives, including at both time endpoints.
 No time derivative of the vector field or angular derivative of the flow
 is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

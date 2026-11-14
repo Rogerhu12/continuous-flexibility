@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.CentralRadiusGrowth
-import ContinuousFlexibility.Radial.RadialDampedBounds
-import ContinuousFlexibility.Radial.RadialSymbolBounds
-import Mathlib.Analysis.SpecialFunctions.Pow.Asymptotics
+module
+
+public import ContinuousFlexibility.Radial.CentralRadiusGrowth
+public import ContinuousFlexibility.Radial.RadialDampedBounds
+public import ContinuousFlexibility.Radial.RadialSymbolBounds
+public import Mathlib.Analysis.SpecialFunctions.Pow.Asymptotics
 
 /-!
 # Fixed-order right-end estimates for the actual central radius
@@ -11,6 +13,8 @@ radius. Its proved differential equation gives a damped Riccati error
 equation. The power comparison is applied to actual derivatives, keeping
 one threshold for all orders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

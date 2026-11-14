@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01NeighborhoodRestriction
-import ContinuousFlexibility.Analysis.SmoothDirectionsScalarLine
-import ContinuousFlexibility.Analysis.MaterialSampleRadialLoss
-import Mathlib.Analysis.Calculus.MeanValue
+module
+
+public import ContinuousFlexibility.Analysis.N01NeighborhoodRestriction
+public import ContinuousFlexibility.Analysis.SmoothDirectionsScalarLine
+public import ContinuousFlexibility.Analysis.MaterialSampleRadialLoss
+public import Mathlib.Analysis.Calculus.MeanValue
 
 /-!
 # Small actual coefficient differences on one common neighborhood
@@ -12,6 +14,8 @@ radius of a sufficiently high state neighborhood. Positive material
 height powers absorb every fixed radial coefficient loss, uniformly over
 the actual reference cells.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aInverseJetFormula
-import ContinuousFlexibility.Analysis.N07aJetBudgetExpression
+module
+
+public import ContinuousFlexibility.Analysis.N07aInverseJetFormula
+public import ContinuousFlexibility.Analysis.N07aJetBudgetExpression
 
 /-!
 # A fixed-loss bound for inverse spatial jets
@@ -8,6 +10,8 @@ Strong induction constructs finite unabsorbed expressions. Every
 non-atomic partition spends exactly n - 1 spatial orders. Only after
 this construction is complete is the common one-high estimate applied.
 -/
+
+@[expose] public section
 
 noncomputable section
 

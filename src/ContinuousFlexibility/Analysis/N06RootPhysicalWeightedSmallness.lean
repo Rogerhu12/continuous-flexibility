@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06RootAbsorbedPacket
-import ContinuousFlexibility.Analysis.N06RootPhysicalSmallness
+module
+
+public import ContinuousFlexibility.Analysis.N06RootAbsorbedPacket
+public import ContinuousFlexibility.Analysis.N06RootPhysicalSmallness
 
 /-!
 # Actual root coefficient jets with their material decay
@@ -11,6 +13,8 @@ identify the resulting finite formula with the actual physical root
 coefficients. No state regularity of a chosen root-coordinate witness is
 assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCompositionJets
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCompositionJets
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
 
 /-!
 # Finite jets of the actual radial reference potential
@@ -9,6 +11,8 @@ the composed physical flux. The partition formula uses only positive
 jets of the inverse coordinate. Its zeroth value is used solely as the
 point at which the physical profile jets are evaluated.
 -/
+
+@[expose] public section
 
 noncomputable section
 

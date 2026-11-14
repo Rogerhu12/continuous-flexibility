@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CanonicalFixedPositiveFamily
-import ContinuousFlexibility.Analysis.WholeCanonicalAtlasRestrictedGeometry
-import ContinuousFlexibility.Analysis.WholeCanonicalGlobalReferenceAgreement
-import ContinuousFlexibility.Analysis.CanonicalSourceConversion
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalFixedPositiveFamily
+public import ContinuousFlexibility.Analysis.WholeCanonicalAtlasRestrictedGeometry
+public import ContinuousFlexibility.Analysis.WholeCanonicalGlobalReferenceAgreement
+public import ContinuousFlexibility.Analysis.CanonicalSourceConversion
 
 /-!
 # Actual whole-atlas geometry without an endpoint-bound premise
@@ -13,6 +15,8 @@ operator and source pairing, and one global qualitative relative map.
 The exact positive parameters and matching are retained for the separate
 quantitative proof.
 -/
+
+@[expose] public section
 
 noncomputable section
 

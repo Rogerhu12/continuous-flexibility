@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadAssembly
-import ContinuousFlexibility.Analysis.N05RetainedOpticalLowerAdapter
-import ContinuousFlexibility.Analysis.MaterialSampleRadialPolynomial
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadAssembly
+public import ContinuousFlexibility.Analysis.N05RetainedOpticalLowerAdapter
+public import ContinuousFlexibility.Analysis.MaterialSampleRadialPolynomial
 
 /-!
 # The optical obligation
@@ -10,6 +12,8 @@ with a power of the radial scale of the host cell. The material sample weight
 dominates a fixed power of that scale, so one constant `κ` gives the lower
 bound with a material cost.
 -/
+
+@[expose] public section
 
 noncomputable section
 

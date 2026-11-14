@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05CanonicalSourceEmbedding
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05CanonicalSourceEmbedding
 
 /-!
 # Source bounds for every square-summable canonical coordinate family
@@ -9,6 +11,8 @@ coordinate. Summing it over the disjoint physical pieces gives the same
 fixed reference material order for every angular jet. No reflection
 projection or zero-jet restriction enters this estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

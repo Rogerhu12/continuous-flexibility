@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRootJacobian
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRootJacobian
 
 /-!
 # One material envelope for the genuine finite root fields
@@ -7,6 +9,8 @@ The finite state order is chosen once, before the negative component and its
 host sample. The stored chart, stored height, its reciprocal and the reciprocal
 Jacobian all obey one numerical material bound on that neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

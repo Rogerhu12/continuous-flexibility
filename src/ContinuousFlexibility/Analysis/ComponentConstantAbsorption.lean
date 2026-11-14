@@ -1,6 +1,8 @@
-import Mathlib.Analysis.SpecialFunctions.Pow.Continuity
-import Mathlib.Algebra.Order.BigOperators.Group.Finset
-import Mathlib.Tactic.Linarith
+module
+
+public import Mathlib.Analysis.SpecialFunctions.Pow.Continuity
+public import Mathlib.Algebra.Order.BigOperators.Group.Finset
+public import Mathlib.Tactic.Linarith
 
 /-!
 # Countable absorption of already established component constants
@@ -15,6 +17,8 @@ This lemma does not produce a common state neighborhood, a fixed derivative
 loss, endpoint estimates, or any geometric compatibility. It does not
 modify canonical data or any physical component.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N04RealizationHeightTowerJets
-import ContinuousFlexibility.Analysis.N04RealizationMaterialTransfer
-import ContinuousFlexibility.Analysis.N01cCoefficientBaseSelection
-import ContinuousFlexibility.Analysis.N01cCoefficientPolarPowerInputs
-import ContinuousFlexibility.Analysis.N01cPhysicalGraphNormalization
-import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationHeightTowerJets
+public import ContinuousFlexibility.Analysis.N04RealizationMaterialTransfer
+public import ContinuousFlexibility.Analysis.N01cCoefficientBaseSelection
+public import ContinuousFlexibility.Analysis.N01cCoefficientPolarPowerInputs
+public import ContinuousFlexibility.Analysis.N01cPhysicalGraphNormalization
+public import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
 
 /-!
 # Spatial powers for the actual height-valued towers
@@ -14,6 +16,8 @@ physical height factor is retained even at parameter order zero. This
 allows the actual point-to-sample transfer to precede any relaxation of
 the zeroth-order estimate near a component endpoint.
 -/
+
+@[expose] public section
 
 noncomputable section
 

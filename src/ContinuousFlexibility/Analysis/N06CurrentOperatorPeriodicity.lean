@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N05ReferenceTests
-import ContinuousFlexibility.Analysis.N06LeftColumnSymmetry
-import ContinuousFlexibility.Radial.MatchingCutoffTests
-import ContinuousFlexibility.Scalar.GreenIdentity
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceTests
+public import ContinuousFlexibility.Analysis.N06LeftColumnSymmetry
+public import ContinuousFlexibility.Radial.MatchingCutoffTests
+public import ContinuousFlexibility.Scalar.GreenIdentity
 
 /-!
 # Actual periodicity of the corrected operator on even local fields
@@ -12,6 +14,8 @@ realizes an even periodic smooth strip germ as one genuine HeightPair,
 simultaneously along the whole circle. The actual divergence is local
 even when no regularity of the corrected coefficients is available.
 -/
+
+@[expose] public section
 
 noncomputable section
 

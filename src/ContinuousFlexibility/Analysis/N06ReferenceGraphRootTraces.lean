@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06RootTraceFromInterior
-import ContinuousFlexibility.Radial.R11bEvenModeRegularity
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Analysis.N06RootTraceFromInterior
+public import ContinuousFlexibility.Radial.R11bEvenModeRegularity
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # Actual modal interface traces of the same N05 reference graph
@@ -12,6 +14,8 @@ any two C1 piece representatives at their common interior cut. Applying
 this to N05 retains its own physical representatives and all scalar
 coordinates, including the actual space model's left cutoff and psi.
 -/
+
+@[expose] public section
 
 noncomputable section
 

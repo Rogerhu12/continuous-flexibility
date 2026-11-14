@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerSelectedDirichletCosts
-import ContinuousFlexibility.Radial.InnerMorseInnerSupportedWeights
+module
+
+public import ContinuousFlexibility.Radial.InnerSelectedDirichletCosts
+public import ContinuousFlexibility.Radial.InnerMorseInnerSupportedWeights
 
 /-!
 # Both coefficient estimates for the selected physical Dirichlet sum
@@ -9,6 +11,8 @@ The actual cell comparisons and the proved local Dirichlet costs give
 loss thirty-seven. The coarse estimate uses the largest retained-band
 coefficient and holds for both signs of one weight equivalence.
 -/
+
+@[expose] public section
 
 noncomputable section
 

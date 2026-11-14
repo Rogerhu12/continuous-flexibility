@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.ModeOuterRestriction
-import ContinuousFlexibility.Radial.ModeSmoothWeakEquation
-import ContinuousFlexibility.Radial.SeedPairGluing
-import Mathlib.Analysis.SpecialFunctions.SmoothTransition
+module
+
+public import ContinuousFlexibility.Radial.ModeOuterRestriction
+public import ContinuousFlexibility.Radial.ModeSmoothWeakEquation
+public import ContinuousFlexibility.Radial.SeedPairGluing
+public import Mathlib.Analysis.SpecialFunctions.SmoothTransition
 
 /-!
 # Exterior Poisson vectors from actual smooth natural solutions
@@ -11,6 +13,8 @@ It therefore gives a global smooth lift with the exact natural solution
 on the chosen outer component and zero on the other. Restricting this
 lift produces the actual Hilbert vector and its piecewise representative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

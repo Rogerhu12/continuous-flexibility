@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06ReferencePhysicalCoefficients
-import ContinuousFlexibility.Analysis.N06ReferenceRemainderFields
-import ContinuousFlexibility.Analysis.N06CanonicalTestOperator
-import ContinuousFlexibility.Analysis.N06CubicDifferential
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferencePhysicalCoefficients
+public import ContinuousFlexibility.Analysis.N06ReferenceRemainderFields
+public import ContinuousFlexibility.Analysis.N06CanonicalTestOperator
+public import ContinuousFlexibility.Analysis.N06CubicDifferential
 
 /-!
 # The reference physical operator on transported tests
@@ -12,6 +14,8 @@ test and its differential expression vanish. The resulting equality is
 an equality of the actual global functions, so the original reference
 graph equation, integrability, and periodicity transfer together.
 -/
+
+@[expose] public section
 
 noncomputable section
 

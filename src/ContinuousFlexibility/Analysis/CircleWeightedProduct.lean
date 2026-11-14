@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CircleEnergyPointwiseBounds
-import ContinuousFlexibility.Analysis.CircleCompositionModel
-import ContinuousFlexibility.Analysis.CircleBilinearRealization
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+module
+
+public import ContinuousFlexibility.Analysis.CircleEnergyPointwiseBounds
+public import ContinuousFlexibility.Analysis.CircleCompositionModel
+public import ContinuousFlexibility.Analysis.CircleBilinearRealization
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
 
 /-!
 # Products in the actual weighted circle space
@@ -11,6 +13,8 @@ circle fields.  Leibniz's rule is estimated against the same circle's
 complete energy, which proves finiteness after summing all components.
 For positive decay weight, decoded circle fields are such multipliers.
 -/
+
+@[expose] public section
 
 noncomputable section
 

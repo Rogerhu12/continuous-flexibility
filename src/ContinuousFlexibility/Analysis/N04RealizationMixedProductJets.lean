@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Scalar.WeightedProductJets
-import ContinuousFlexibility.Analysis.LocalMixedProductBounds
-import ContinuousFlexibility.Analysis.N07aMixedLocalCalculus
-import ContinuousFlexibility.Analysis.N01cPhysicalLieProducts
+module
+
+public import ContinuousFlexibility.Scalar.WeightedProductJets
+public import ContinuousFlexibility.Analysis.LocalMixedProductBounds
+public import ContinuousFlexibility.Analysis.N07aMixedLocalCalculus
+public import ContinuousFlexibility.Analysis.N01cPhysicalLieProducts
 
 /-!
 # Parameter jets of spatial differential products
@@ -12,6 +14,8 @@ fixed derivatives already present in the operator. The genuine parameter
 product estimate retains one height factor at positive parameter order.
 No interpolation exponent is changed when a spatial derivative is taken.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.MixedSimpleDivisionBounds
-import ContinuousFlexibility.Analysis.BoundaryMixedJets
-import ContinuousFlexibility.Analysis.PointwiseCylinderJets
+module
+
+public import ContinuousFlexibility.Analysis.MixedSimpleDivisionBounds
+public import ContinuousFlexibility.Analysis.BoundaryMixedJets
+public import ContinuousFlexibility.Analysis.PointwiseCylinderJets
 
 /-!
 # Removing actual angular factors with fixed derivative loss
@@ -11,6 +13,8 @@ jet gives mixed bounds, without a new differentiation-under-integral
 argument. A translated zero costs one angular derivative; its square
 costs two. The constants and the physical radial point are unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

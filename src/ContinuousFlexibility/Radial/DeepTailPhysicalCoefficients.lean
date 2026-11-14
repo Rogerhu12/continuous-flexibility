@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.DeepTailPhysicalJets
-import ContinuousFlexibility.Radial.CentralStatementBridges
-import Mathlib.Analysis.Calculus.Deriv.ZPow
+module
+
+public import ContinuousFlexibility.Radial.DeepTailPhysicalJets
+public import ContinuousFlexibility.Radial.CentralStatementBridges
+public import Mathlib.Analysis.Calculus.Deriv.ZPow
 
 /-!
 # Physical flux coefficients on the actual radial cells
@@ -10,6 +12,8 @@ weight and of its reciprocal. A bounded outward index shift preserves
 these bounds. The remaining factor `1 / r` has uniformly bounded jets on
 the fixed positive radial interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.ModeLocalMeasure
-import Mathlib.Analysis.Calculus.MeanValue
-import Mathlib.Analysis.Calculus.Deriv.Support
-import Mathlib.Analysis.Normed.Group.Bounded
+module
+
+public import ContinuousFlexibility.Radial.ModeLocalMeasure
+public import Mathlib.Analysis.Calculus.MeanValue
+public import Mathlib.Analysis.Calculus.Deriv.Support
+public import Mathlib.Analysis.Normed.Group.Bounded
 
 /-!
 # Glaeser control for the actual reference density
@@ -11,6 +13,8 @@ interval; their topological support need not avoid its endpoints. A global
 bound on the square of the profile derivative, divided by the profile,
 supplies the integrability that this distinction requires.
 -/
+
+@[expose] public section
 
 noncomputable section
 

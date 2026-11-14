@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05ReferenceWeightComparisons
-import ContinuousFlexibility.Analysis.N05MaterialWeights
-import ContinuousFlexibility.Analysis.N05ReferenceSWindow
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceWeightComparisons
+public import ContinuousFlexibility.Analysis.N05MaterialWeights
+public import ContinuousFlexibility.Analysis.N05ReferenceSWindow
 
 /-!
 # A strict endpoint gap absorbs the actual source weights
@@ -10,6 +12,8 @@ reference weight by a fixed coefficient power. The actual sample endpoint
 weight then leaves twice the strictly positive endpoint gap. The prescribed
 material envelope absorbs every remaining fixed material power.
 -/
+
+@[expose] public section
 
 noncomputable section
 

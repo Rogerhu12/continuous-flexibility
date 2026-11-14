@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ProjectiveMultilinearCalculus
-import Mathlib.Logic.Equiv.Fin.Basic
+module
+
+public import ContinuousFlexibility.Analysis.ProjectiveMultilinearCalculus
+public import Mathlib.Logic.Equiv.Fin.Basic
 
 /-!
 # Joint jets of a kernel linear in its outer function
@@ -8,6 +10,8 @@ The same finite formula applies to ordinary circle composition and its
 averaged derivative kernel. At each order the outer function is either
 the base value or exactly one of the joint directions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Statements.Analysis
+module
+
+public import ContinuousFlexibility.Statements.Analysis
 
 /-!
 # Material decay in ordinary endpoint distance
@@ -7,6 +9,8 @@ In the endpoint variable, distance is (d_0 e^{-X^2}) and (H) is
 (e^{-2X^3/3}). A positive power of (H) therefore absorbs any fixed
 inverse power of the ordinary distance, in addition to the material weights.
 -/
+
+@[expose] public section
 
 noncomputable section
 

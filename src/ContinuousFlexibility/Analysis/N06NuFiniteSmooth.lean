@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06NuFiniteJets
-import Mathlib.Analysis.Calculus.ContDiff.RCLike
+module
+
+public import ContinuousFlexibility.Analysis.N06NuFiniteJets
+public import Mathlib.Analysis.Calculus.ContDiff.RCLike
 
 /-!
 # Smoothness and compact derivative bounds for the true finite nu formula
@@ -10,6 +12,8 @@ formula from N06NuFiniteJets is smooth wherever its actual discriminant
 is positive. Every finite derivative has a uniform bound on a bounded
 coordinate set with discriminant at least one half.
 -/
+
+@[expose] public section
 
 noncomputable section
 

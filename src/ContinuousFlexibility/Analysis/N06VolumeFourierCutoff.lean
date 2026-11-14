@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06FourierCutWeakGraph
-import ContinuousFlexibility.Analysis.AngularFrequency
-import Mathlib.Analysis.Normed.Group.Tannery
+module
+
+public import ContinuousFlexibility.Analysis.N06FourierCutWeakGraph
+public import ContinuousFlexibility.Analysis.AngularFrequency
+public import Mathlib.Analysis.Normed.Group.Tannery
 
 /-!
 # Strong angular Fourier truncation in the original volume level
@@ -11,6 +13,8 @@ contracted, and the complete infinite piece sequence converges strongly.
 The resulting dense subspace has genuine finite cosine representatives
 with arbitrary L2 radial coefficients, including every stored angular jet.
 -/
+
+@[expose] public section
 
 noncomputable section
 

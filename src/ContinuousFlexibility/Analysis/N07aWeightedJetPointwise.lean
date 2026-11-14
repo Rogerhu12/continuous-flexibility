@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aMaterialPowerJets
-import ContinuousFlexibility.Analysis.N07aCanonicalWeakJets
-import ContinuousFlexibility.Scalar.WeightedRadialMultiplier
+module
+
+public import ContinuousFlexibility.Analysis.N07aMaterialPowerJets
+public import ContinuousFlexibility.Analysis.N07aCanonicalWeakJets
+public import ContinuousFlexibility.Scalar.WeightedRadialMultiplier
 
 /-!
 # Point evaluation of the actual material-weighted jets
@@ -9,6 +11,8 @@ The material weight is differentiated before applying the cylinder Sobolev
 inequality. Its derivatives retain the same power of M, so the pointwise
 estimate costs exactly two additional orders, independently of the jet.
 -/
+
+@[expose] public section
 
 noncomputable section
 

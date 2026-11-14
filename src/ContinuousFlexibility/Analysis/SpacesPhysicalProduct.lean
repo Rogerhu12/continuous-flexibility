@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesHeightProductBounds
-import ContinuousFlexibility.Analysis.SpacesBilinearContinuity
+module
+
+public import ContinuousFlexibility.Analysis.SpacesHeightProductBounds
+public import ContinuousFlexibility.Analysis.SpacesBilinearContinuity
 
 /-!
 # Smooth tame multiplication of physical heights
@@ -8,6 +10,8 @@ The map is the actual pointwise product, encoded into the prescribed weak
 jet graph. Its one-high-factor estimate supplies the bilinear clause of
 the assumed projective tame calculus.
 -/
+
+@[expose] public section
 
 noncomputable section
 

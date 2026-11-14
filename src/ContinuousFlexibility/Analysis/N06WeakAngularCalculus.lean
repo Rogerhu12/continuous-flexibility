@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import ContinuousFlexibility.Analysis.SpacesCylinderIntegration
-import ContinuousFlexibility.Scalar.WeightedDifferentiationSupport
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import ContinuousFlexibility.Analysis.SpacesCylinderIntegration
+public import ContinuousFlexibility.Scalar.WeightedDifferentiationSupport
 
 /-!
 # Angular calculus on the actual canonical weak graph
@@ -11,6 +13,8 @@ angular derivatives, including successive first derivatives of the stored
 jets. The product rule below applies to arbitrary canonical L2 functions;
 only the multiplier and the test are smooth.
 -/
+
+@[expose] public section
 
 noncomputable section
 

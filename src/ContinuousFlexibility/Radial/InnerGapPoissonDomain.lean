@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerRadialH1Density
-import ContinuousFlexibility.Radial.InnerRadialAffineLift
-import ContinuousFlexibility.Radial.InnerGapPoissonL2
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialH1Density
+public import ContinuousFlexibility.Radial.InnerRadialAffineLift
+public import ContinuousFlexibility.Radial.InnerGapPoissonL2
 
 /-!
 # The actual gap Poisson columns in the common physical domain
@@ -11,6 +13,8 @@ lift gives a smooth zero-endpoint field, so the cutoff density theorem
 places it in the actual H¹ closure. The canonical trace is therefore
 the prescribed boundary vector.
 -/
+
+@[expose] public section
 
 noncomputable section
 

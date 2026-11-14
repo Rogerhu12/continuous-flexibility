@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.PositiveBufferCorrectedData
-import Mathlib.Data.Matrix.Mul
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferCorrectedData
+public import Mathlib.Data.Matrix.Mul
 
 /-!
 # Classical Poisson columns from the corrected Green columns
@@ -8,6 +10,8 @@ The same finite linear combination is used for the representative and
 the scalar row. Its boundary values and conormal matrix follow from
 the actual corrected traces and the inverse of their normalized matrix.
 -/
+
+@[expose] public section
 
 noncomputable section
 

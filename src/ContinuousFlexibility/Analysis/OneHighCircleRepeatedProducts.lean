@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCircleRealSobolev
-import ContinuousFlexibility.Analysis.OneHighCompositionJets
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleRealSobolev
+public import ContinuousFlexibility.Analysis.OneHighCompositionJets
 
 /-!
 # Repeated inputs in the actual circle derivative-product estimate
@@ -8,6 +10,8 @@ The constants are explicit polynomials in a prescribed Fourier `L¹` bound.
 In particular they are uniform over all inputs satisfying that bound, and
 cannot contain an undisclosed high Sobolev norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

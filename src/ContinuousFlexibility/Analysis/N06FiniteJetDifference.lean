@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCompositionJets
-import Mathlib.Analysis.Calculus.MeanValue
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCompositionJets
+public import Mathlib.Analysis.Calculus.MeanValue
 
 /-!
 # Differences of actual finite composition jets
@@ -8,6 +10,8 @@ These estimates use the actual Fréchet derivatives and the existing ordered
 partition chain rule. They retain one explicit factor measuring the input
 difference, with constants fixed before the two input functions are chosen.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ScalarDerivativeLimit
-import ContinuousFlexibility.Analysis.SmoothDirectionsScalarLine
+module
+
+public import ContinuousFlexibility.Analysis.ScalarDerivativeLimit
+public import ContinuousFlexibility.Analysis.SmoothDirectionsScalarLine
 
 /-!
 # Pointwise limits of every jet in a directional tower
@@ -9,6 +11,8 @@ on the next two jets force convergence of every directional jet. The
 argument differentiates scalar affine lines and uses the uniform Taylor
 remainder, rather than assuming endpoint derivatives already exist.
 -/
+
+@[expose] public section
 
 noncomputable section
 

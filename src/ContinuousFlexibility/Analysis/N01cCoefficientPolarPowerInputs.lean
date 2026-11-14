@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cCoefficientRadialPowerInputs
+module
+
+public import ContinuousFlexibility.Analysis.N01cCoefficientRadialPowerInputs
 
 /-!
 # Actual polar-height inputs at the common interpolation indices
@@ -8,6 +10,8 @@ applied to the actual assigned spatial order before products are formed.
 The scalar perturbation parameter is controlled by the original
 neighbourhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

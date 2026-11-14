@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsFactored
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsFactored
 
 /-!
 # Genuine joint towers of the original root coefficients
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsFactored
 The inward drift is the fixed oriented projection of the actual physical
 root fields. The factored speed uses its original genuine trace tower.
 -/
+
+@[expose] public section
 
 noncomputable section
 

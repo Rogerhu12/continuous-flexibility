@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R11bTensorL2
-import Mathlib.Analysis.Real.Sqrt
+module
+
+public import ContinuousFlexibility.Radial.R11bTensorL2
+public import Mathlib.Analysis.Real.Sqrt
 
 /-!
 # Strong L² convergence and actual squared residuals
@@ -7,6 +9,8 @@ import Mathlib.Analysis.Real.Sqrt
 The equivalence uses the original measurable representatives. It holds for
 an arbitrary measure and arbitrary filter, with no sigma-finiteness assumption.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

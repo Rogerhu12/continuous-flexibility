@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Statements.ScalarWeighted
-import ContinuousFlexibility.Scalar.Conservation
-import ContinuousFlexibility.Scalar.RectangleParameterIntegral
-import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.Periodic
+module
+
+public import ContinuousFlexibility.Statements.ScalarWeighted
+public import ContinuousFlexibility.Scalar.Conservation
+public import ContinuousFlexibility.Scalar.RectangleParameterIntegral
+public import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.Periodic
 
 /-!
 # The actual angular primitive for odd scalar fields
@@ -12,6 +14,8 @@ even periodic height.  The primitive is the actual integral from angle zero,
 so its radial support and its compatibility with the material pullback are
 identities.  No boundedness assertion for this integration operator is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

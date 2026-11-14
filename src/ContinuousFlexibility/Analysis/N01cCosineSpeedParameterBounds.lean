@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01cCosineAngularJets
-import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
-import ContinuousFlexibility.Analysis.N01cParameterCalculus
-import ContinuousFlexibility.Analysis.N01cWeightAbsorption
+module
+
+public import ContinuousFlexibility.Analysis.N01cCosineAngularJets
+public import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
+public import ContinuousFlexibility.Analysis.N01cParameterCalculus
+public import ContinuousFlexibility.Analysis.N01cWeightAbsorption
 
 /-!
 # Actual mixed parameter bounds for the cosine speed
@@ -12,6 +14,8 @@ state order removes the fixed reference constant. At each endpoint the
 actual angular family is identically zero. The same physical speed loss
 therefore controls all these jets on the closed half-period.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06CanonicalFourierCutoff
+module
+
+public import ContinuousFlexibility.Analysis.N06CanonicalFourierCutoff
 
 /-!
 # The original canonical tests separate actual L2 fields and weak jets
@@ -8,6 +10,8 @@ isometry identify almost every radial slice. The original product-measure
 completeness lemma then identifies the canonical L2 elements themselves.
 No evenness, unit radial interval, or smooth source is required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

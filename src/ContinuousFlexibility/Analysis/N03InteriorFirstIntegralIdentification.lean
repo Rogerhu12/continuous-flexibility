@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N03NegativeInteriorFlows
-import ContinuousFlexibility.Analysis.InteriorFlowTransport
-import ContinuousFlexibility.Analysis.CanonicalCutFullFaithfulness
+module
+
+public import ContinuousFlexibility.Analysis.N03NegativeInteriorFlows
+public import ContinuousFlexibility.Analysis.InteriorFlowTransport
+public import ContinuousFlexibility.Analysis.CanonicalCutFullFaithfulness
 
 /-!
 # The existing negative coordinates from an actual interior inverse flow
@@ -11,6 +13,8 @@ the canonical charts. It identifies the existing first integral with
 its value on a fixed section transported by the constructed inverse
 flow. No parameter regularity of the stored N03 flow is required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

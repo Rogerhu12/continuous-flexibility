@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07bNormalizedSourceJetBounds
-import ContinuousFlexibility.Analysis.N07bNormalizedSourceMaterial
-import ContinuousFlexibility.Analysis.N07bSourceBoundMajorant
+module
+
+public import ContinuousFlexibility.Analysis.N07bNormalizedSourceJetBounds
+public import ContinuousFlexibility.Analysis.N07bNormalizedSourceMaterial
+public import ContinuousFlexibility.Analysis.N07bSourceBoundMajorant
 
 /-!
 # Actual source coefficients from four primitive geometric jets
@@ -11,6 +13,8 @@ drift. No higher path coefficient or source function occurs in it. The
 actual recursion proves the higher coefficient estimate, and its squared
 normalization is exactly the multiplier used by the source-energy bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

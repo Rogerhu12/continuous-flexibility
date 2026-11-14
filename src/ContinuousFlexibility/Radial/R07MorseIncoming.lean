@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R07MorseCapGeometry
-import ContinuousFlexibility.Radial.R07BandSelection
+module
+
+public import ContinuousFlexibility.Radial.R07MorseCapGeometry
+public import ContinuousFlexibility.Radial.R07BandSelection
 
 /-!
 # The actual normalized incoming solution on a preceding Morse cell
@@ -10,6 +12,8 @@ the concrete cap geometry into a normalized physical radial solution,
 with positive profile derivative on the cut-to-join span and an initial
 join state `(1,a)` whose slope is in the interval needed for selection.
 -/
+
+@[expose] public section
 
 noncomputable section
 

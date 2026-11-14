@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Contracts.Annular
-import Mathlib.Analysis.SpecialFunctions.Complex.LogDeriv
-import Mathlib.Analysis.InnerProductSpace.Calculus
+module
+
+public import ContinuousFlexibility.Contracts.Annular
+public import Mathlib.Analysis.SpecialFunctions.Complex.LogDeriv
+public import Mathlib.Analysis.InnerProductSpace.Calculus
 
 /-!
 # The actual filled Cartesian height
@@ -11,6 +13,8 @@ constant inner extension makes the center genuinely smooth. Thus this
 constructs a global Cartesian function from the analytic core, rather than
 assuming that a smooth Cartesian extension exists.
 -/
+
+@[expose] public section
 
 noncomputable section
 

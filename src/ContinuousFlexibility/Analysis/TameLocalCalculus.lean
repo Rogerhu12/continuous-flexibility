@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Analysis
-import ContinuousFlexibility.Analysis.TameLinear
+module
+
+public import ContinuousFlexibility.Statements.Analysis
+public import ContinuousFlexibility.Analysis.TameLinear
 
 /-!
 # Local tame bounds for values
@@ -10,6 +12,8 @@ in the given topology. This makes finite sums, products and composition
 transparent, before a generating grading is used to choose one low-order
 seminorm ball. It does not assume any differentiability or inverse theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

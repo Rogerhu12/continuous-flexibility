@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledGauge
-import ContinuousFlexibility.Analysis.N04PositiveGeometryGaugeDirections
-import ContinuousFlexibility.Analysis.N04PositiveGeometryTransportSamplePrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometryReferencePullbackCosts
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledGauge
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryGaugeDirections
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryTransportSamplePrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryReferencePullbackCosts
 
 /-!
 # The four actual coordinate components
@@ -11,6 +13,8 @@ relative transport is evaluated at its fixed reference inverse. Their
 unit-coordinate normalizations are exactly the atoms of the stored
 whole atlas, including the angular defects and the inverse radial width.
 -/
+
+@[expose] public section
 
 noncomputable section
 

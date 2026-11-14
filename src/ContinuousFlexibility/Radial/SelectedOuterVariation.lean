@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.OuterEntranceVariation
-import ContinuousFlexibility.Radial.OuterWholeKernelRepresentation
-import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
+module
+
+public import ContinuousFlexibility.Radial.OuterEntranceVariation
+public import ContinuousFlexibility.Radial.OuterWholeKernelRepresentation
+public import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
 
 /-!
 # Weighted variation of parameters for every L² source
@@ -9,6 +11,8 @@ The density is included in the forcing. Integrability at the regular
 entrance follows from the actual weighted L² norm and compact continuity,
 while the natural solution supplies the full tail integral.
 -/
+
+@[expose] public section
 
 noncomputable section
 

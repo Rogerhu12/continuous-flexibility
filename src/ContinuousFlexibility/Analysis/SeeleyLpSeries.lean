@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.SeeleyLpBounds
-import ContinuousFlexibility.Analysis.SeeleyJetExtension
-import Mathlib.MeasureTheory.Function.LpSpace.Complete
-import Mathlib.MeasureTheory.Function.LpSpace.InfiniteSum
-import Mathlib.MeasureTheory.Function.LpSeminorm.Indicator
-import Mathlib.Tactic.NormNum
+module
+
+public import ContinuousFlexibility.Analysis.SeeleyLpBounds
+public import ContinuousFlexibility.Analysis.SeeleyJetExtension
+public import Mathlib.MeasureTheory.Function.LpSpace.Complete
+public import Mathlib.MeasureTheory.Function.LpSpace.InfiniteSum
+public import Mathlib.MeasureTheory.Function.LpSeminorm.Indicator
+public import Mathlib.Tactic.NormNum
 
 /-!
 # Summable L² reflection series and the full extension estimate
@@ -14,6 +16,8 @@ extension formula. No pointwise boundedness or differentiability assumption is
 needed for these estimates; those properties enter only when identifying the
 extension's derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

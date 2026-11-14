@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.PositiveBufferEnergyForm
-import Mathlib.Analysis.Calculus.ContDiff.Operations
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferEnergyForm
+public import Mathlib.Analysis.Calculus.ContDiff.Operations
 
 /-!
 # Compact smooth lifts and the actual variational equation
@@ -8,6 +10,8 @@ Compact smooth functions have canonical lifts into the actual weighted energy
 space. Testing a stationary field with these lifts recovers its local weak
 Schrödinger equation. A scaled fixed cutoff supplies a unit value at any cut.
 -/
+
+@[expose] public section
 
 noncomputable section
 

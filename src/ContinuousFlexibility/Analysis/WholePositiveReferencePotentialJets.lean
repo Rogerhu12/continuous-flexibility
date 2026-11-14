@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.ActualPositiveReferencePotentialMaterialJets
-import ContinuousFlexibility.Analysis.WholePositiveReferencePrincipal
-import ContinuousFlexibility.Analysis.LocalMixedProductBounds
-import ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets
+module
+
+public import ContinuousFlexibility.Analysis.ActualPositiveReferencePotentialMaterialJets
+public import ContinuousFlexibility.Analysis.WholePositiveReferencePrincipal
+public import ContinuousFlexibility.Analysis.LocalMixedProductBounds
+public import ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets
 
 /-!
 # Actual whole-atlas potential and its scalar flux jets
@@ -12,6 +14,8 @@ equality on the actual canonical open piece, so it transports all mixed
 derivatives. No smoothness of an unrelated total coefficient extension is
 assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

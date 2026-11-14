@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.MatchingGraphRepresentatives
-import Mathlib.Analysis.Calculus.TangentCone.Real
-import Mathlib.Analysis.Calculus.Deriv.Add
-import Mathlib.Analysis.Calculus.Deriv.Mul
+module
+
+public import ContinuousFlexibility.Radial.MatchingGraphRepresentatives
+public import Mathlib.Analysis.Calculus.TangentCone.Real
+public import Mathlib.Analysis.Calculus.Deriv.Add
+public import Mathlib.Analysis.Calculus.Deriv.Mul
 
 /-!
 # One-sided matching trace calculus
@@ -11,6 +13,8 @@ Near a matching cut those components and the closure of the outer region
 have the same germ. This gives the actual within-derivative trace
 calculus without regularity at the physical endpoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

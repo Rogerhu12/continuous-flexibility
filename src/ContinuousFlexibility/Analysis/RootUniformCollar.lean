@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.RootChartExtensionGeometry
-import ContinuousFlexibility.Analysis.PeriodicGermCollar
-import Mathlib.Analysis.Calculus.FDeriv.Add
-import Mathlib.Topology.MetricSpace.Thickening
-import Mathlib.Topology.Instances.Real.Lemmas
+module
+
+public import ContinuousFlexibility.Analysis.RootChartExtensionGeometry
+public import ContinuousFlexibility.Analysis.PeriodicGermCollar
+public import Mathlib.Analysis.Calculus.FDeriv.Add
+public import Mathlib.Topology.MetricSpace.Thickening
+public import Mathlib.Topology.Instances.Real.Lemmas
 
 /-!
 # A uniform collar for a periodic root chart
@@ -15,6 +17,8 @@ uniformity over additional states or over distinct root components.
 Applied to the genuine smooth extension, it gives an ordinary smooth
 chart with positive Jacobian on a full two-sided periodic collar.
 -/
+
+@[expose] public section
 
 noncomputable section
 

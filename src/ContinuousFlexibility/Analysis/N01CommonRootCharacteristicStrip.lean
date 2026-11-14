@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.RootCharacteristicFactor
-import ContinuousFlexibility.Analysis.N01ProfileRootCollar
-import ContinuousFlexibility.Analysis.StateControlCofiniteClosure
-import ContinuousFlexibility.Analysis.MaterialHeightRegularity
+module
+
+public import ContinuousFlexibility.Analysis.RootCharacteristicFactor
+public import ContinuousFlexibility.Analysis.N01ProfileRootCollar
+public import ContinuousFlexibility.Analysis.StateControlCofiniteClosure
+public import ContinuousFlexibility.Analysis.MaterialHeightRegularity
 
 /-!
 # A common actual characteristic-factor strip at each reference root
@@ -14,6 +16,8 @@ speeds, uniformly for every angle and every sector state in the same U.
 The radius depends on the root. No uniform radius over components, and no
 common germ for an arbitrary corrected N03 operator, is asserted here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

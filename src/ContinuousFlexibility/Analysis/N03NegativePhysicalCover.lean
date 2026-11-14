@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N03NegativePotentialAssembly
-import ContinuousFlexibility.Analysis.N03ControlledRootPhysicalJets
+module
+
+public import ContinuousFlexibility.Analysis.N03NegativePotentialAssembly
+public import ContinuousFlexibility.Analysis.N03ControlledRootPhysicalJets
 
 /-!
 # Covering each actual negative half by fixed root bands and an interior
@@ -9,6 +11,8 @@ leave an open middle interval. Actual disjointness identifies which
 stored half contains every collar point, so no geometric graph or
 unproved index-surjectivity assumption is used in combining the bounds.
 -/
+
+@[expose] public section
 
 noncomputable section
 

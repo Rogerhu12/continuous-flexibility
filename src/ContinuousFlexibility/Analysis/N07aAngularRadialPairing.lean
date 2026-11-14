@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aAngularRadialSymbol
-import ContinuousFlexibility.Analysis.N07aAngularCoefficients
-import ContinuousFlexibility.Analysis.N07aAngularClassical
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularRadialSymbol
+public import ContinuousFlexibility.Analysis.N07aAngularCoefficients
+public import ContinuousFlexibility.Analysis.N07aAngularClassical
 
 /-!
 # True weak radial derivatives from the full canonical Fourier transform
@@ -9,6 +11,8 @@ Only the test function is smooth. Its compact radial support removes the
 boundary term when computing its radial Fourier coefficient. Parseval
 then identifies Fourier multiplication with the original weak equation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

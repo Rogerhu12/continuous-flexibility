@@ -1,10 +1,12 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05CanonicalOutputChange
-import ContinuousFlexibility.Analysis.N05CanonicalOutputMultiplier
-import ContinuousFlexibility.Analysis.N05CanonicalSourceCoefficient
-import ContinuousFlexibility.Analysis.N05ReferenceCutoffChange
-import ContinuousFlexibility.Geometry.EuclideanRigidity
-import ContinuousFlexibility.Radial.ReferenceGraphNorms
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05CanonicalOutputChange
+public import ContinuousFlexibility.Analysis.N05CanonicalOutputMultiplier
+public import ContinuousFlexibility.Analysis.N05CanonicalSourceCoefficient
+public import ContinuousFlexibility.Analysis.N05ReferenceCutoffChange
+public import ContinuousFlexibility.Geometry.EuclideanRigidity
+public import ContinuousFlexibility.Radial.ReferenceGraphNorms
 
 /-!
 # Physical reference outputs define canonical L² sequences
@@ -14,6 +16,8 @@ physical-space cutoff. A genuine measurable piece coefficient majorant is
 integrable by positive attenuation. Change of variables on the pairwise
 disjoint physical pieces gives the square-summable canonical height sequence.
 -/
+
+@[expose] public section
 
 noncomputable section
 

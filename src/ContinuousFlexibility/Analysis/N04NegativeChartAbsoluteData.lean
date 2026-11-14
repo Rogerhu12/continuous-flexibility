@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04SourceColumnsSign
-import ContinuousFlexibility.Analysis.N04SourceColumnsScalarLinear
-import ContinuousFlexibility.Analysis.N04SourceColumnsSmallness
-import ContinuousFlexibility.Analysis.N04SourceColumnsReciprocal
+module
+
+public import ContinuousFlexibility.Analysis.N04SourceColumnsSign
+public import ContinuousFlexibility.Analysis.N04SourceColumnsScalarLinear
+public import ContinuousFlexibility.Analysis.N04SourceColumnsSmallness
+public import ContinuousFlexibility.Analysis.N04SourceColumnsReciprocal
 
 /-!
 # Absolute determinants and their reciprocal current data
@@ -11,6 +13,8 @@ Multiplication by this fixed scalar preserves its exact current estimates.
 The reference reciprocal envelope then chooses a single smaller sector on
 which reciprocal composition supplies every derivative order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

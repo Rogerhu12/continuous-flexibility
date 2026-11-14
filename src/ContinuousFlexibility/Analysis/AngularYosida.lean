@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.AngularWeightBounds
-import Mathlib.Analysis.SpecificLimits.Basic
+module
+
+public import ContinuousFlexibility.Analysis.AngularWeightBounds
+public import Mathlib.Analysis.SpecificLimits.Basic
 
 /-!
 # Domains and bounded Yosida approximations of angular frequency
@@ -8,6 +10,8 @@ The regularizers are `(N+1) / (N+1+Λ)`.  They map the entire Hilbert
 space into the maximal domain of `Λ`.  Their commutator identity is
 proved on that domain before any inverse regularity is asserted.
 -/
+
+@[expose] public section
 
 noncomputable section
 

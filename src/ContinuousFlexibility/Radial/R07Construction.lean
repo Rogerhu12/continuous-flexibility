@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.R07IncomingSelection
-import ContinuousFlexibility.Radial.R07FirstBandMatching
-import ContinuousFlexibility.Radial.R07ExistentialAssembly
+module
+
+public import ContinuousFlexibility.Radial.R07IncomingSelection
+public import ContinuousFlexibility.Radial.R07FirstBandMatching
+public import ContinuousFlexibility.Radial.R07ExistentialAssembly
 
 /-!
 # One actual selected tail for every frequency
@@ -11,6 +13,8 @@ remaining finite band is matched by a fixed middle replacement, which
 preserves every previously selected tail. The positive minimum of the two
 margins gives exactly the public selected-tail statement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

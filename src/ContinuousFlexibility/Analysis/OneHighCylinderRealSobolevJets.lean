@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderRealSobolev
-import ContinuousFlexibility.Analysis.OneHighCylinderSobolevJets
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderRealSobolev
+public import ContinuousFlexibility.Analysis.OneHighCylinderSobolevJets
 
 /-!
 # Finite Sobolev control of the actual real cylinder derivatives
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Analysis.OneHighCylinderSobolevJets
 These are canonical real specializations of the same mixed Fourier
 derivative theorem. Only base L² and the stated finite high norm are assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

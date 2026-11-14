@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Scalar.WeightedAngularPrimitiveL2
-import Mathlib.Analysis.Calculus.Deriv.Support
-import Mathlib.MeasureTheory.Function.LpSpace.Indicator
-import Mathlib.MeasureTheory.Function.LpSeminorm.Prod
+module
+
+public import ContinuousFlexibility.Scalar.WeightedAngularPrimitiveL2
+public import Mathlib.Analysis.Calculus.Deriv.Support
+public import Mathlib.MeasureTheory.Function.LpSpace.Indicator
+public import Mathlib.MeasureTheory.Function.LpSeminorm.Prod
 
 /-!
 # Compactly supported radial fields belong to every weighted height space
@@ -11,6 +13,8 @@ image is compact because the original radial support stays inside the
 open annulus. All material derivatives keep compact support, so every
 actual weighted jet is square integrable on the material cylinder.
 -/
+
+@[expose] public section
 
 noncomputable section
 

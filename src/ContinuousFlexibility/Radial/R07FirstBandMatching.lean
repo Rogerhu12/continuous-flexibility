@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R07FiniteConeChoice
-import ContinuousFlexibility.Radial.R07MiddlePreservation
+module
+
+public import ContinuousFlexibility.Radial.R07FiniteConeChoice
+public import ContinuousFlexibility.Radial.R07MiddlePreservation
 
 /-!
 # Actual matching for the finite first band
@@ -11,6 +13,8 @@ their determinant zeros. The outgoing functions are unchanged on the
 tails, and the short-head-join estimate proves the angle inequality for
 the actual cut-normalized incoming solutions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MorsePotentialEnergy
-import ContinuousFlexibility.Radial.BufferIntervalForm
-import ContinuousFlexibility.Radial.PositiveBufferEnergyVariational
+module
+
+public import ContinuousFlexibility.Radial.MorsePotentialEnergy
+public import ContinuousFlexibility.Radial.BufferIntervalForm
+public import ContinuousFlexibility.Radial.PositiveBufferEnergyVariational
 
 /-!
 # The actual Hilbert energy space for a positive-buffer problem
@@ -11,6 +13,8 @@ absolute-potential weight. The defining relation is exactly the frozen
 product's max norm. Completeness therefore follows from the supplied actual
 closed-form realization. Supported zero-boundary fields form a closed subspace.
 -/
+
+@[expose] public section
 
 noncomputable section
 

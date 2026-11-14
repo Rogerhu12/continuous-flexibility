@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.MaterialDivergenceEnvelopes
+module
+
+public import ContinuousFlexibility.Analysis.MaterialDivergenceEnvelopes
 
 /-!
 # One weighted L² envelope along a bounded affine height family
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Analysis.MaterialDivergenceEnvelopes
 Only the scalar coefficients vary. The envelope is made from the two
 fixed decoded height jets and is independent of the family parameter.
 -/
+
+@[expose] public section
 
 noncomputable section
 

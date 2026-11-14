@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R07OutgoingFamily
-import ContinuousFlexibility.Radial.R07NaturalTailScale
+module
+
+public import ContinuousFlexibility.Radial.R07OutgoingFamily
+public import ContinuousFlexibility.Radial.R07NaturalTailScale
 
 /-!
 # Exact outgoing-state invariance under a scalar tail change
@@ -9,6 +11,8 @@ When the coefficient is multiplied by one positive scalar on that interval,
 both actual solutions satisfy the same homogeneous equation. Finite radial
 uniqueness then gives equality of the outgoing states at the matching seam.
 -/
+
+@[expose] public section
 
 noncomputable section
 

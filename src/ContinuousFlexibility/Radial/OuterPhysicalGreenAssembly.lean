@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OuterPhysicalBlocks
+module
+
+public import ContinuousFlexibility.Radial.OuterPhysicalBlocks
 
 /-!
 # The actual whole-outer Green operator
@@ -9,6 +11,8 @@ resulting bounded operator has the single manuscript kernel for every L²
 source.  Its bound uses only the core and Poisson estimates supplied by
 the preceding transition-input lemma.
 -/
+
+@[expose] public section
 
 noncomputable section
 

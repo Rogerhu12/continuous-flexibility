@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.FlatMixedDiagonalGrowth
-import ContinuousFlexibility.Analysis.CircleStripAngularInterpolation
+module
+
+public import ContinuousFlexibility.Analysis.FlatMixedDiagonalGrowth
+public import ContinuousFlexibility.Analysis.CircleStripAngularInterpolation
 
 /-!
 # A common power scale for actual mixed jets
@@ -9,6 +11,8 @@ budget. A finite aggregation over parameter and spatial arities turns
 the fractional power bound into the affine bound used by coefficient
 products, with one fixed loss and the original flat label factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

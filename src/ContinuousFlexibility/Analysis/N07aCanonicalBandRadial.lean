@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalBandModes
-import ContinuousFlexibility.Analysis.N07aCanonicalRadialReflection
-import ContinuousFlexibility.Analysis.N07aCanonicalSmoothJets
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalBandModes
+public import ContinuousFlexibility.Analysis.N07aCanonicalRadialReflection
+public import ContinuousFlexibility.Analysis.N07aCanonicalSmoothJets
 
 /-!
 # Actual angular bands commute with weak radial differentiation
@@ -10,6 +12,8 @@ radial derivative is differentiated under the fixed angular integral.
 Uniqueness then shows that the original weak derivative retains a single
 input band. No derivative of an arbitrary L² representative is taken.
 -/
+
+@[expose] public section
 
 noncomputable section
 

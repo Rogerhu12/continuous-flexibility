@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationPrincipalHalfBounds
-import ContinuousFlexibility.Analysis.N04SourceColumnsSmallness
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationPrincipalHalfBounds
+public import ContinuousFlexibility.Analysis.N04SourceColumnsSmallness
 
 /-!
 # One state neighborhood preserves all actual interior travel lower bounds
@@ -9,6 +11,8 @@ height factor absorbs every sampled material power, including the
 inverse reference travel on a smaller root overlap. All later state and
 spatial orders therefore use the same positive value interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

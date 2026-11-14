@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06FiniteBoundaryMatching
-import ContinuousFlexibility.Analysis.N05N06ClosedChartBridge
+module
+
+public import ContinuousFlexibility.Analysis.N06FiniteBoundaryMatching
+public import ContinuousFlexibility.Analysis.N05N06ClosedChartBridge
 
 /-!
 # Genuine atlas jets give every finite modal matching condition
@@ -15,6 +17,8 @@ The original N05 graph then forces matching for its actual finite modes.
 The original N01/N04 geometry classifies every adjacent pair, and the
 endpoint values themselves determine the two negative-cut orientations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

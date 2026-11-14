@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ProfileLayerOverlap
-import ContinuousFlexibility.Radial.ProfileScalarSquares
-import ContinuousFlexibility.Radial.ProfileWeightedPartition
+module
+
+public import ContinuousFlexibility.Radial.ProfileLayerOverlap
+public import ContinuousFlexibility.Radial.ProfileScalarSquares
+public import ContinuousFlexibility.Radial.ProfileWeightedPartition
 
 /-!
 # Weighted integrals over endpoint layers
@@ -9,6 +11,8 @@ A pointwise weighted partition estimate is integrated against its actual
 summable square density. The layer overlap then sums the result with a
 uniform constant. The proof never counts profile cells of a fixed index.
 -/
+
+@[expose] public section
 
 open Set Filter MeasureTheory Real
 open ContinuousFlexibility.Analysis ContinuousFlexibility.Statements

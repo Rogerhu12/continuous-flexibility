@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.DeepTailPhysicalDecay
-import ContinuousFlexibility.Radial.OuterEnvelope
-import Mathlib.Algebra.BigOperators.Intervals
+module
+
+public import ContinuousFlexibility.Radial.DeepTailPhysicalDecay
+public import ContinuousFlexibility.Radial.OuterEnvelope
+public import Mathlib.Algebra.BigOperators.Intervals
 
 /-!
 # Relative products with the full cubic attenuation exponent
@@ -9,6 +11,8 @@ The physical mass-resistance bound gives an estimate for every interval
 product, with an explicit constant independent of the starting index.
 It retains the coefficient one in the difference of the cubic exponents.
 -/
+
+@[expose] public section
 
 noncomputable section
 

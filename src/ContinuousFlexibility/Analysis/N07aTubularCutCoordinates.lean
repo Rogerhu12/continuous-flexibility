@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N07aSmoothLocalCoordinates
-import ContinuousFlexibility.Analysis.N07aTubularLocalSigns
-import ContinuousFlexibility.Analysis.N07aTubularDifferential
-import ContinuousFlexibility.Analysis.N07aClosedChartDifferentials
-import ContinuousFlexibility.Analysis.N07aCurrentCutMeasure
+module
+
+public import ContinuousFlexibility.Analysis.N07aSmoothLocalCoordinates
+public import ContinuousFlexibility.Analysis.N07aTubularLocalSigns
+public import ContinuousFlexibility.Analysis.N07aTubularDifferential
+public import ContinuousFlexibility.Analysis.N07aClosedChartDifferentials
+public import ContinuousFlexibility.Analysis.N07aCurrentCutMeasure
 
 /-!
 # Genuine smooth tubular coordinates around the current middle cut
@@ -11,6 +13,8 @@ The angular curve is the actual common inverse-chart boundary. Its normal
 direction is the left inverse derivative at the chosen center. The scalar
 left chart radius identifies the two physical sides on one closed rectangle.
 -/
+
+@[expose] public section
 
 noncomputable section
 

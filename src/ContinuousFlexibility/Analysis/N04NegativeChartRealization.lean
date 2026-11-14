@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartRootProjectedPrefix
-import ContinuousFlexibility.Analysis.N04NegativeChartRootValueData
-import ContinuousFlexibility.Analysis.N04NegativeChartCoverage
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootProjectedPrefix
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootValueData
+public import ContinuousFlexibility.Analysis.N04NegativeChartCoverage
 
 /-!
 # Actual physical estimates for the negative chart
@@ -10,6 +12,8 @@ its positive value band. Their scale is the same low-input choice. The
 root and interior estimates then cover the complete reference half on
 one parameter sector chosen before every derivative order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

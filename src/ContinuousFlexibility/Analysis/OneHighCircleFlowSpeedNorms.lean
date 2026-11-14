@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowNormContinuity
-import ContinuousFlexibility.Analysis.CylinderMixedJets
-import ContinuousFlexibility.Analysis.CylinderSobolev
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowNormContinuity
+public import ContinuousFlexibility.Analysis.CylinderMixedJets
+public import ContinuousFlexibility.Analysis.CylinderSobolev
 
 /-!
 # Genuine speed norms and the integrated flow quantities
@@ -11,6 +13,8 @@ continuous in physical time and hence integrable on every compact time
 interval. The pointwise estimate uses the existing physical-frequency
 circle Sobolev embedding.
 -/
+
+@[expose] public section
 
 noncomputable section
 

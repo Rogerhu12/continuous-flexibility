@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PrincipalPairInverse
-import ContinuousFlexibility.Analysis.N04PrincipalNegativeReciprocalNeighborhood
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalPairInverse
+public import ContinuousFlexibility.Analysis.N04PrincipalNegativeReciprocalNeighborhood
 
 /-!
 # A common value neighborhood for a paired family
@@ -9,6 +11,8 @@ the radius. This applies to any piece index, including a subtype of the
 positive or negative pieces; no tower on the complementary pieces is
 needed to establish the relative-error estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

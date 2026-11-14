@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationAtomJets
-import ContinuousFlexibility.Analysis.N07aCanonicalAtomBounds
-import ContinuousFlexibility.Analysis.CylinderMixedJets
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationAtomJets
+public import ContinuousFlexibility.Analysis.N07aCanonicalAtomBounds
+public import ContinuousFlexibility.Analysis.CylinderMixedJets
 
 /-!
 # Fréchet bounds with the original sampled coefficient envelope
@@ -10,6 +12,8 @@ power when mixed derivatives are converted to Fréchet operator norms. The
 conversion is uniform over all atoms and pieces and uses one fixed state
 loss. No sampled subpower envelope replaces the coefficient power.
 -/
+
+@[expose] public section
 
 noncomputable section
 

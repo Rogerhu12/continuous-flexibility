@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.SelectedPhysicalGreenKernel
-import ContinuousFlexibility.Radial.OuterGreenAssembly
+module
+
+public import ContinuousFlexibility.Radial.SelectedPhysicalGreenKernel
+public import ContinuousFlexibility.Radial.OuterGreenAssembly
 
 /-!
 # The actual Green operator from the matching cut to the singular end
@@ -8,6 +10,8 @@ The bounded deep inverse and its proved kernel are joined to the finite
 regular core through the existing four-block construction. All measures
 are the actual restrictions of the radial Hilbert measure.
 -/
+
+@[expose] public section
 
 noncomputable section
 

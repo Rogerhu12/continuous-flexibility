@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06Neighborhood
-import ContinuousFlexibility.Analysis.N06RelativeConstruction
+module
+
+public import ContinuousFlexibility.Analysis.N06Neighborhood
+public import ContinuousFlexibility.Analysis.N06RelativeConstruction
 
 /-!
 # Choosing the one neighborhood for the relative inverse
@@ -8,6 +10,8 @@ A linear smallness estimate in one fixed state seminorm determines a positive
 radius and a single low order. All preceding properties and the Neumann inverse
 then hold on that same neighborhood and on the source and graph selected by N05.
 -/
+
+@[expose] public section
 
 noncomputable section
 

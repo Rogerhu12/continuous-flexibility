@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.SelectedOuterWeakAssembly
-import ContinuousFlexibility.Radial.SelectedOuterTraceAssembly
+module
+
+public import ContinuousFlexibility.Radial.SelectedOuterWeakAssembly
+public import ContinuousFlexibility.Radial.SelectedOuterTraceAssembly
 
 /-!
 # The constructed bounded exterior operator satisfies the frozen graph
@@ -8,6 +10,8 @@ Every input below is a proved property of the two actual regional
 operators. Neither a matching realization nor a separated-graph right
 inverse is assumed. The scalar component is set to zero by construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

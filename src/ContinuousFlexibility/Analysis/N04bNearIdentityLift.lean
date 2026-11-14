@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04bLiftTranslationBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04bLiftTranslationBounds
 
 /-!
 # Actual near-identity circle conjugacies
@@ -8,6 +10,8 @@ the displacement estimate makes H_q strictly increasing. Continuity and
 the period-one lift property make it surjective, so it defines an actual
 unit in mathlib's monoid of lifts.
 -/
+
+@[expose] public section
 
 noncomputable section
 

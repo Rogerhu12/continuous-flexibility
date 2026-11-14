@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CircleAveragedComposition
-import ContinuousFlexibility.Analysis.CircleFiniteEnergyEnvelopes
-import Mathlib.Analysis.Calculus.IteratedDeriv.FaaDiBruno
+module
+
+public import ContinuousFlexibility.Analysis.CircleAveragedComposition
+public import ContinuousFlexibility.Analysis.CircleFiniteEnergyEnvelopes
+public import Mathlib.Analysis.Calculus.IteratedDeriv.FaaDiBruno
 
 /-!
 # Composition estimates retaining the actual derivative orders
@@ -10,6 +12,8 @@ enlarged. Each term keeps the component energy of the outer field at
 exactly the order it uses. The remaining chart factors use uniform
 pointwise estimates from their actual circle grading.
 -/
+
+@[expose] public section
 
 noncomputable section
 

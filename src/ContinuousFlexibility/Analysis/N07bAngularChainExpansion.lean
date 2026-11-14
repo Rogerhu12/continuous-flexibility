@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07bMaterialAngularChain
-import Mathlib.Tactic.FinCases
+module
+
+public import ContinuousFlexibility.Analysis.N07bMaterialAngularChain
+public import Mathlib.Tactic.FinCases
 
 /-!
 # All-order finite expansions of the actual angular source jets
@@ -11,6 +13,8 @@ orders. Every coefficient is defined before, and independently of, the
 physical source. The resulting finite expansion has exactly `3 ^ j` paths
 and every jet occurring at level `j` has total order at most `j`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

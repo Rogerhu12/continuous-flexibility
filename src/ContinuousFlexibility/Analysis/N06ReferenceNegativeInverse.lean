@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06ReferenceNegativeHeight
-import Mathlib.Analysis.Calculus.InverseFunctionTheorem.ContDiff
-import Mathlib.Analysis.Calculus.InverseFunctionTheorem.Deriv
-import Mathlib.Analysis.Calculus.LocalExtr.Rolle
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceNegativeHeight
+public import Mathlib.Analysis.Calculus.InverseFunctionTheorem.ContDiff
+public import Mathlib.Analysis.Calculus.InverseFunctionTheorem.Deriv
+public import Mathlib.Analysis.Calculus.LocalExtr.Rolle
 
 /-!
 # Genuine endpoint inverses of the selected negative reference chart
@@ -15,6 +17,8 @@ germs at every point of the closed image, including its endpoints.
 The constructed inverse agrees with the original inverse on the open
 piece.  No value of the totalized inverse at a boundary point is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Geometry.GlobalInverse
-import ContinuousFlexibility.Geometry.LocalInverse
-import Mathlib.Topology.Covering.Basic
-import Mathlib.Topology.Homotopy.Lifting
-import Mathlib.Analysis.Convex.Contractible
-import Mathlib.Analysis.LocallyConvex.WithSeminorms
+module
+
+public import ContinuousFlexibility.Geometry.GlobalInverse
+public import ContinuousFlexibility.Geometry.LocalInverse
+public import Mathlib.Topology.Covering.Basic
+public import Mathlib.Topology.Homotopy.Lifting
+public import Mathlib.Analysis.Convex.Contractible
+public import Mathlib.Analysis.LocallyConvex.WithSeminorms
 
 /-!
 # Global inversion of a planar local development
@@ -16,6 +18,8 @@ homeomorphism and preserves every region outside which it is fixed.
 
 This is a statement about the whole coordinate plane, not an annulus.
 -/
+
+@[expose] public section
 
 noncomputable section
 

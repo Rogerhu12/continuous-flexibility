@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N06NamedPhysicalRelation
-import ContinuousFlexibility.Analysis.N06PhysicalHeightAffinePairing
-import ContinuousFlexibility.Analysis.N06PhysicalTestCoordinates
-import ContinuousFlexibility.Analysis.N06CurrentPhysicalTests
-import ContinuousFlexibility.Analysis.N06PrimitiveFiniteSupport
-import ContinuousFlexibility.Analysis.N06PrimitiveGraphFourierCore
+module
+
+public import ContinuousFlexibility.Analysis.N06NamedPhysicalRelation
+public import ContinuousFlexibility.Analysis.N06PhysicalHeightAffinePairing
+public import ContinuousFlexibility.Analysis.N06PhysicalTestCoordinates
+public import ContinuousFlexibility.Analysis.N06CurrentPhysicalTests
+public import ContinuousFlexibility.Analysis.N06PrimitiveFiniteSupport
+public import ContinuousFlexibility.Analysis.N06PrimitiveGraphFourierCore
 
 /-!
 # Actual physical closedness and the original graph core
@@ -15,6 +17,8 @@ its original graph and source spaces, without a controlled-coordinate
 window. Together with the actual primitive-gauge Fourier core this passes
 finite graph identities to every original graph element.
 -/
+
+@[expose] public section
 
 noncomputable section
 

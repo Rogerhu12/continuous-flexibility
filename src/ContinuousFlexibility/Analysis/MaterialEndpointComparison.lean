@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.MaterialPlateauGeometry
+module
+
+public import ContinuousFlexibility.Analysis.MaterialPlateauGeometry
 
 /-!
 # Comparing actual material weights with their endpoint formulas
@@ -9,6 +11,8 @@ Thus products with arbitrary fixed real powers can be transported between
 the supplied physical weights and the explicit endpoint model without
 changing any exponent.
 -/
+
+@[expose] public section
 
 noncomputable section
 

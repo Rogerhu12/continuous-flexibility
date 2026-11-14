@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06ReferenceNegativeRigidity
-import ContinuousFlexibility.Analysis.N06RadialReferenceGeometry
-import ContinuousFlexibility.Analysis.N05N06ClosedChartBridge
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceNegativeRigidity
+public import ContinuousFlexibility.Analysis.N06RadialReferenceGeometry
+public import ContinuousFlexibility.Analysis.N05N06ClosedChartBridge
 
 /-!
 # The actual negative reference height and root curvature
@@ -15,6 +17,8 @@ All endpoint derivatives come from the smooth forward chart and
 uniqueness of derivatives within the closed physical interval.  No
 boundary value of the totalized inverse chart is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

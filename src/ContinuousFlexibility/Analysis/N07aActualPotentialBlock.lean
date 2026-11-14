@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aActualCoefficientBlocks
-import ContinuousFlexibility.Analysis.N07aModeProductBounds
-import ContinuousFlexibility.Analysis.N07aRelativeCanonicalPairing
-import ContinuousFlexibility.Analysis.N07aCubicMatrixRows
+module
+
+public import ContinuousFlexibility.Analysis.N07aActualCoefficientBlocks
+public import ContinuousFlexibility.Analysis.N07aModeProductBounds
+public import ContinuousFlexibility.Analysis.N07aRelativeCanonicalPairing
+public import ContinuousFlexibility.Analysis.N07aCubicMatrixRows
 
 /-!
 # The actual potential blocks, with their prescribed sign
@@ -11,6 +13,8 @@ by the signed current-minus-reference potential.  Its ordinary and
 frequency-commutator bounds retain the genuine height gain and one
 parameter seminorm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

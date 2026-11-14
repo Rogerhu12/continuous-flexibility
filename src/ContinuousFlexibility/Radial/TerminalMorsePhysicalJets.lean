@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.TerminalMorseCutoffGeometry
-import ContinuousFlexibility.Radial.TerminalMorseLongCap
+module
+
+public import ContinuousFlexibility.Radial.TerminalMorseCutoffGeometry
+public import ContinuousFlexibility.Radial.TerminalMorseLongCap
 
 /-!
 # Uniform physical jets on the constructed Morse cutoff layer
@@ -10,6 +12,8 @@ removes the point-dependent denominator in the physical derivative.
 Both orientations then use one absolute decay rate and one coefficient
 budget.
 -/
+
+@[expose] public section
 
 noncomputable section
 

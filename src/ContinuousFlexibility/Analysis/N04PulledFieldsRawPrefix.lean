@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsInverseJoint
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsInverseJoint
 
 /-!
 # Finite positive parameter prefixes from the actual current data
@@ -8,6 +10,8 @@ A finite parameter prefix takes one finite sum of these losses; the
 sampled coefficient constants are collected only afterwards.  No low
 parameter base is changed when the prefix is enlarged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

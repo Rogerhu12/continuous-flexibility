@@ -1,11 +1,13 @@
-import Mathlib.Analysis.SpecialFunctions.Gaussian.GaussianIntegral
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
-import Mathlib.MeasureTheory.Function.L2Space
-import Mathlib.MeasureTheory.Function.LpSeminorm.SMul
-import Mathlib.MeasureTheory.Function.LpSeminorm.TriangleInequality
-import Mathlib.Tactic.Positivity
-import Mathlib.Tactic.Ring
-import Mathlib.Tactic.Linarith
+module
+
+public import Mathlib.Analysis.SpecialFunctions.Gaussian.GaussianIntegral
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+public import Mathlib.MeasureTheory.Function.L2Space
+public import Mathlib.MeasureTheory.Function.LpSeminorm.SMul
+public import Mathlib.MeasureTheory.Function.LpSeminorm.TriangleInequality
+public import Mathlib.Tactic.Positivity
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.Linarith
 
 /-!
 # The actual Morse ground state
@@ -15,6 +17,8 @@ second-order differential equation. Its whole-line `L²` condition is
 proved by the substitution `t = exp (-x)` into a convergent Gamma-type
 integral. Neither integrability nor a spectral classification is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

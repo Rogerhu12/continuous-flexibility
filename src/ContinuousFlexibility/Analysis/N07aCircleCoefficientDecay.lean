@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesCircleFourierJets
-import ContinuousFlexibility.Analysis.OneHighCircleFourierWeights
+module
+
+public import ContinuousFlexibility.Analysis.SpacesCircleFourierJets
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierWeights
 
 /-!
 # Actual coefficient tails for the angular block estimate
@@ -9,6 +11,8 @@ ordinary angular derivatives gives an inverse-square summable tail after
 any fixed polynomial frequency weight. These are coefficient bounds;
 the existing Schur theorem will sum the actual operator blocks.
 -/
+
+@[expose] public section
 
 noncomputable section
 

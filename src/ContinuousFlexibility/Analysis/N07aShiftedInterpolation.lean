@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SpacesInterpolationProducts
-import ContinuousFlexibility.Analysis.TameTransfer
-import ContinuousFlexibility.Analysis.TameSmoothingCalculus
+module
+
+public import ContinuousFlexibility.Analysis.SpacesInterpolationProducts
+public import ContinuousFlexibility.Analysis.TameTransfer
+public import ContinuousFlexibility.Analysis.TameSmoothingCalculus
 
 /-!
 # Fixed offsets in the genuine interpolation grading
@@ -8,6 +10,8 @@ import ContinuousFlexibility.Analysis.TameSmoothingCalculus
 A fixed coefficient or source loss is absorbed into the low base once.
 It is not charged separately for each factor in a normal expansion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

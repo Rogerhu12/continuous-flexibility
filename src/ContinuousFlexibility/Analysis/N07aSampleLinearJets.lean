@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aSampleJetProducts
-import ContinuousFlexibility.Analysis.N07aFiniteParameterProduct
+module
+
+public import ContinuousFlexibility.Analysis.N07aSampleJetProducts
+public import ContinuousFlexibility.Analysis.N07aFiniteParameterProduct
 
 /-!
 # Actual source-linear mixed jets with one fixed loss
@@ -8,6 +10,8 @@ A finite multiplication by a geometric coefficient preserves the same
 one-high form. The proof applies the product interpolation theorem to the
 actual Leibniz terms, including the source low-norm term.
 -/
+
+@[expose] public section
 
 noncomputable section
 

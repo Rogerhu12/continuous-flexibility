@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.ModeWeakGreen
-import ContinuousFlexibility.Radial.ModeRegionalPairing
-import ContinuousFlexibility.Radial.MatchingWeakGluing
-import ContinuousFlexibility.Radial.MatchingTraceCalculus
+module
+
+public import ContinuousFlexibility.Radial.ModeWeakGreen
+public import ContinuousFlexibility.Radial.ModeRegionalPairing
+public import ContinuousFlexibility.Radial.MatchingWeakGluing
+public import ContinuousFlexibility.Radial.MatchingTraceCalculus
 
 /-!
 # Green's boundary form for the outer weak realization
@@ -11,6 +13,8 @@ the radial core. The remaining test is an admissible outer weak test.
 Thus only finite regular intervals are integrated by parts, even when
 the original test approaches either degenerate endpoint.
 -/
+
+@[expose] public section
 
 noncomputable section
 

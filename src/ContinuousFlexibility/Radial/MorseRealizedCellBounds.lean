@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseRetainedRadiusModelBounds
-import ContinuousFlexibility.Radial.MorseRealizationBasic
+module
+
+public import ContinuousFlexibility.Radial.MorseRetainedRadiusModelBounds
+public import ContinuousFlexibility.Radial.MorseRealizationBasic
 
 /-!
 # Model integrals of an arbitrary realized Morse chain
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Radial.MorseRealizationBasic
 The estimates refer to the actual radius charts carried by `MorseChainData`.
 Their constants are independent of the height choices in a realized family.
 -/
+
+@[expose] public section
 
 noncomputable section
 

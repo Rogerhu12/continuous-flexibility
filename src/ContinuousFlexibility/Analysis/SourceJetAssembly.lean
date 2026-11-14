@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SourceMultilinearRealization
-import ContinuousFlexibility.Analysis.PhysicalTaylorDifferentiation
-import ContinuousFlexibility.Analysis.ProjectiveJetContinuity
+module
+
+public import ContinuousFlexibility.Analysis.SourceMultilinearRealization
+public import ContinuousFlexibility.Analysis.PhysicalTaylorDifferentiation
+public import ContinuousFlexibility.Analysis.ProjectiveJetContinuity
 
 /-!
 # Actual source-valued smooth towers from weighted scalar jets
@@ -9,6 +11,8 @@ The weighted second variations dominate the full projective difference
 quotient. Coordinate mean value estimates then give joint continuity in
 the base point and all directions, inside the original source kernel.
 -/
+
+@[expose] public section
 
 noncomputable section
 

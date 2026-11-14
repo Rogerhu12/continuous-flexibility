@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchingGraphRestrictions
-import Mathlib.Analysis.Calculus.ContDiff.Defs
+module
+
+public import ContinuousFlexibility.Radial.MatchingGraphRestrictions
+public import Mathlib.Analysis.Calculus.ContDiff.Defs
 
 /-!
 # Representatives for the frozen local matching graphs
@@ -8,6 +10,8 @@ A representative specified on one matching region and vanishing almost
 everywhere on the other gives an actual globally defined representative
 in the frozen graph. Endpoint values and one-sided fluxes are preserved.
 -/
+
+@[expose] public section
 
 noncomputable section
 

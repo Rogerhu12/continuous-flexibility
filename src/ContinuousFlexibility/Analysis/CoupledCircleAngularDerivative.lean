@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CircleJetEncoding
-import ContinuousFlexibility.Analysis.SpacesTraceCircleBounds
-import ContinuousFlexibility.Analysis.TameLinear
+module
+
+public import ContinuousFlexibility.Analysis.CircleJetEncoding
+public import ContinuousFlexibility.Analysis.SpacesTraceCircleBounds
+public import ContinuousFlexibility.Analysis.TameLinear
 
 /-!
 # Angular differentiation in the actual weighted circle model
@@ -9,6 +11,8 @@ Shifting the angular jet index loses precisely one order and retains the
 material weight. The existing realization and its injective decoder then
 give a continuous linear angular derivative on every circle model.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.SeedLogSystem
-import ContinuousFlexibility.Radial.SeedConeModes
-import ContinuousFlexibility.Radial.SeedPositiveLogExtension
-import ContinuousFlexibility.Radial.MorseChainLocalGluing
+module
+
+public import ContinuousFlexibility.Radial.SeedLogSystem
+public import ContinuousFlexibility.Radial.SeedConeModes
+public import ContinuousFlexibility.Radial.SeedPositiveLogExtension
+public import ContinuousFlexibility.Radial.MorseChainLocalGluing
 
 /-!
 # Global log-radius solutions with exact cone ends
@@ -9,6 +11,8 @@ import ContinuousFlexibility.Radial.MorseChainLocalGluing
 A finite Cauchy solution is continued beyond both ends by its actual
 homogeneous cone coefficients. All joins use equality on open collars.
 -/
+
+@[expose] public section
 
 noncomputable section
 

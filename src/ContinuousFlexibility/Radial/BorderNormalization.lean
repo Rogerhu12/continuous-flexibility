@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.Gauge
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
+module
+
+public import ContinuousFlexibility.Radial.Gauge
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
 
 /-!
 # Border-column pairing and normalization
@@ -13,6 +15,8 @@ bump `χ` supported where `φ'/φ < 0`, the border pairing
 
 The support hypothesis is `Function.support χ ⊆ Set.Icc α' β'` with `α < α'` and `β' < β`.
 -/
+
+@[expose] public section
 
 open scoped ContDiff
 open MeasureTheory

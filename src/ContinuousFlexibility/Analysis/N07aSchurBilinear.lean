@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aRieszBilinear
-import ContinuousFlexibility.Radial.WeightedSchurTest
+module
+
+public import ContinuousFlexibility.Analysis.N07aRieszBilinear
+public import ContinuousFlexibility.Radial.WeightedSchurTest
 
 /-!
 # Constructing a bounded operator from actual Schur blocks
@@ -8,6 +10,8 @@ The real Schur test proves absolute summability of every scalar pairing.
 Riesz realization then produces the operator itself; no vector series
 convergence or commutator-domain conclusion is assumed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

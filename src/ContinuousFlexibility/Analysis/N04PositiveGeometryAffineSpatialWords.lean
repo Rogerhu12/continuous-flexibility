@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryAtomDirections
-import ContinuousFlexibility.Analysis.N01cStateAngleSelections
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryAtomDirections
+public import ContinuousFlexibility.Analysis.N01cStateAngleSelections
 
 /-!
 # Fixed spatial affine maps preserve the parameter word
@@ -8,6 +10,8 @@ Rescaling the transformed directions by one fixed operator bound makes
 them admissible for the original joint estimate. The word and its state
 arity are unchanged, and the affine map costs only a finite scalar power.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CircleCompositionSmoothDirections
-import ContinuousFlexibility.Analysis.CircleCompositionUniformBounds
-import ContinuousFlexibility.Analysis.TameJetLocalBounds
+module
+
+public import ContinuousFlexibility.Analysis.CircleCompositionSmoothDirections
+public import ContinuousFlexibility.Analysis.CircleCompositionUniformBounds
+public import ContinuousFlexibility.Analysis.TameJetLocalBounds
 
 /-!
 # Local tame value calculus for actual circle composition
@@ -9,6 +11,8 @@ The low order is selected before the neighborhood radius. All maps in
 the estimates are actual circle-model values; finite products are built
 with the genuine pointwise multiplication operator.
 -/
+
+@[expose] public section
 
 noncomputable section
 

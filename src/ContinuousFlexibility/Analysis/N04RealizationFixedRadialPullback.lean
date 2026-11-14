@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.MaterialCoordinateParameterDerivatives
-import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
-import ContinuousFlexibility.Analysis.N01cFiniteParameterProducts
+module
+
+public import ContinuousFlexibility.Analysis.MaterialCoordinateParameterDerivatives
+public import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
+public import ContinuousFlexibility.Analysis.N01cFiniteParameterProducts
 
 /-!
 # Genuine mixed towers under the fixed radial reference inverse
@@ -10,6 +12,8 @@ domain. Their coefficients depend only on the fixed map, so the exact
 spatial formula identifies every genuine parameter derivative by a
 finite scalar linear combination on the original parameter set.
 -/
+
+@[expose] public section
 
 noncomputable section
 

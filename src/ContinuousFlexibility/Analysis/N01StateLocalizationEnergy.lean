@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01LocalizedStateDirections
-import ContinuousFlexibility.Analysis.N01WeightedPlateauEnvelope
+module
+
+public import ContinuousFlexibility.Analysis.N01LocalizedStateDirections
+public import ContinuousFlexibility.Analysis.N01WeightedPlateauEnvelope
 
 /-!
 # A summable energy for actual localized state directions
@@ -9,6 +11,8 @@ original circle-control component energy. It has a uniform bound in one
 actual state seminorm at order s+d+5. The same localized directions work
 for every s and d, and no base state is replaced by a large cutoff state.
 -/
+
+@[expose] public section
 
 noncomputable section
 

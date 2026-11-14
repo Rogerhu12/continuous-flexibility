@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.RadialPlateauCutoff
-import ContinuousFlexibility.Analysis.RadialPrimitiveJets
-import Mathlib.Data.Nat.Choose.Sum
+module
+
+public import ContinuousFlexibility.Analysis.RadialPlateauCutoff
+public import ContinuousFlexibility.Analysis.RadialPrimitiveJets
+public import Mathlib.Data.Nat.Choose.Sum
 
 /-!
 # Quantitative material jets of a radial plateau test
@@ -10,6 +12,8 @@ the actual material radius. Multiplying by the physical height weight
 retains that weight, so no loss in its exponent is hidden in the cutoff
 construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

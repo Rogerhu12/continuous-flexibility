@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06NuCoordinateCompact
-import ContinuousFlexibility.Analysis.N06NuFiniteDifference
+module
+
+public import ContinuousFlexibility.Analysis.N06NuCoordinateCompact
+public import ContinuousFlexibility.Analysis.N06NuFiniteDifference
 
 /-!
 # Fixed-seminorm smallness of the actual nu-column jets
@@ -10,6 +12,8 @@ state segment, with N01's discriminant bound. Thus each fixed angular jet
 of the actual current-reference difference is linearly small in one
 original state seminorm and the real q parameter.
 -/
+
+@[expose] public section
 
 noncomputable section
 

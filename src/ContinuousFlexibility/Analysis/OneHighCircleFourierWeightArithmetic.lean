@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFourierBasic
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierBasic
 
 /-!
 # Subadditivity of the physical circle frequency weight
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Analysis.OneHighCircleFourierBasic
 These numerical inequalities transfer an output Sobolev weight onto one
 input factor in the actual convolution formula.
 -/
+
+@[expose] public section
 
 noncomputable section
 

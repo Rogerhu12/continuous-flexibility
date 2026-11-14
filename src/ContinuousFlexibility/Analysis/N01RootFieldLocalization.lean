@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01RootFieldFDerivBounds
-import ContinuousFlexibility.Analysis.RootFieldLocalization
+module
+
+public import ContinuousFlexibility.Analysis.N01RootFieldFDerivBounds
+public import ContinuousFlexibility.Analysis.RootFieldLocalization
 
 /-!
 # Actual globally smooth periodic root fields on the common N01 strip
@@ -9,6 +11,8 @@ fields and every ordinary jet in the physical quarter-strip, while
 providing genuine global smoothness and angular periodicity for Picard
 existence outside the parameter box used in the estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

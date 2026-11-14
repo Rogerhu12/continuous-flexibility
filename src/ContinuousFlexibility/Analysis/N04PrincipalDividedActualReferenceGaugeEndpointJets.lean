@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CanonicalWholePositiveReferenceJets
-import ContinuousFlexibility.Analysis.N04PrincipalDividedRadialGaugePrincipalFiniteJets
-import ContinuousFlexibility.Analysis.PositiveReferencePhysicalLower
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalWholePositiveReferenceJets
+public import ContinuousFlexibility.Analysis.N04PrincipalDividedRadialGaugePrincipalFiniteJets
+public import ContinuousFlexibility.Analysis.PositiveReferencePhysicalLower
 
 /-!
 # Actual endpoint jets after the fixed reference normalization
@@ -10,6 +12,8 @@ the canonical endpoints. The actual relative principal jets there are
 transported by one common fixed radial gauge. Both coefficient fields
 are the displayed current and reference fields of that same gauge.
 -/
+
+@[expose] public section
 
 noncomputable section
 

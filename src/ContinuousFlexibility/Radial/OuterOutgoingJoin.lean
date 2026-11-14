@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OuterCoreInterior
+module
+
+public import ContinuousFlexibility.Radial.OuterCoreInterior
 
 /-!
 # The outgoing right connector to the actual deep-tail entrance
@@ -8,6 +10,8 @@ connector after the transition cell is therefore included explicitly.
 Its frequency estimate uses the proved upper frequency bound, without
 claiming that the same frequency belongs to the next band.
 -/
+
+@[expose] public section
 
 noncomputable section
 

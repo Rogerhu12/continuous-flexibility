@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.MaterialPlateauJets
-import ContinuousFlexibility.Analysis.MaterialPlateauGeometry
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Analysis.MaterialPlateauJets
+public import ContinuousFlexibility.Analysis.MaterialPlateauGeometry
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # Realizing the radial plateau as an actual physical height
@@ -10,6 +12,8 @@ Its physical field therefore belongs to every height model, agrees with
 the reference primitive as a germ throughout the complete open component,
 and has the actual weighted-jet bounds supplied by the material calculation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

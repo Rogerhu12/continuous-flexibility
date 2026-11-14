@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N08ProfilePointwise
-import ContinuousFlexibility.Analysis.N08ScalarFormula
-import ContinuousFlexibility.Analysis.N08ReferenceFlow
-import ContinuousFlexibility.Analysis.N08Neighborhoods
-import ContinuousFlexibility.Analysis.ProjectiveJetEvaluation
-import ContinuousFlexibility.Analysis.N08RealJetBounds
+module
+
+public import ContinuousFlexibility.Analysis.N08ProfilePointwise
+public import ContinuousFlexibility.Analysis.N08ScalarFormula
+public import ContinuousFlexibility.Analysis.N08ReferenceFlow
+public import ContinuousFlexibility.Analysis.N08Neighborhoods
+public import ContinuousFlexibility.Analysis.ProjectiveJetEvaluation
+public import ContinuousFlexibility.Analysis.N08RealJetBounds
 
 /-!
 # Extracting the actual logarithmic profile from the N01 coefficient tower
@@ -13,6 +15,8 @@ profile. Its genuine first state derivative is the profile times the linear
 logarithmic perturbation. Consequently N01 controls that actual perturbation
 at every reference cell, independently of where the control labels are placed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

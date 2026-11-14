@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CoefficientProbeRecoveredCoefficients
-import ContinuousFlexibility.Analysis.N03CanonicalCoefficientProbes
+module
+
+public import ContinuousFlexibility.Analysis.CoefficientProbeRecoveredCoefficients
+public import ContinuousFlexibility.Analysis.N03CanonicalCoefficientProbes
 
 /-!
 # The actual N03 coefficients have one common smooth representative
@@ -10,6 +12,8 @@ field agrees with it by genuine off-axis division and continuity. The
 already proved full-cut faithfulness then identifies the stored field on
 the entire fixed negative component, including every cut-axis point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

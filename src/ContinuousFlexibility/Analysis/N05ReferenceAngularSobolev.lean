@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05ReferenceAngularInverseWeak
-import ContinuousFlexibility.Analysis.N05ReferenceAngularSourceSobolev
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceAngularInverseWeak
+public import ContinuousFlexibility.Analysis.N05ReferenceAngularSourceSobolev
 
 /-!
 # High angular Sobolev preservation by the original reference inverse
@@ -9,6 +11,8 @@ weak angular derivatives. Fourier summability, the output jet, its
 weighted membership and its weak identity are conclusions. The same
 constant and material exponents work for every angular order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

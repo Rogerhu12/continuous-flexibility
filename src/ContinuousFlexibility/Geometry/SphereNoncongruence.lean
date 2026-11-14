@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Geometry.SphereMarkerRigidity
-import ContinuousFlexibility.Geometry.GraphOrbitVariation
+module
+
+public import ContinuousFlexibility.Geometry.SphereMarkerRigidity
+public import ContinuousFlexibility.Geometry.GraphOrbitVariation
 
 /-!
 # Actual noncongruent closed sphere images
@@ -10,6 +12,8 @@ members are congruent. Above the common bottom plane, its part in the central
 closed cylinder recovers the actual graph disk, contradicting the previously
 proved nonconstant graph images. All marker choices use the supplied cap length.
 -/
+
+@[expose] public section
 
 noncomputable section
 

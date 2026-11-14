@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01EndpointScalarSplitNorm
-import ContinuousFlexibility.Analysis.CircleWeightedJetNormSum
-import ContinuousFlexibility.Analysis.LocalizedJetInterpolation
-import ContinuousFlexibility.Analysis.TameSmoothingCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N01EndpointScalarSplitNorm
+public import ContinuousFlexibility.Analysis.CircleWeightedJetNormSum
+public import ContinuousFlexibility.Analysis.LocalizedJetInterpolation
+public import ContinuousFlexibility.Analysis.TameSmoothingCalculus
 
 /-!
 # Local growth of pure scalar endpoint jets on one common box
@@ -11,6 +13,8 @@ The resulting circle norm has one high base-point seminorm, with a loss
 chosen for each parameter order, independently of the spatial order
 and local radius.
 -/
+
+@[expose] public section
 
 noncomputable section
 

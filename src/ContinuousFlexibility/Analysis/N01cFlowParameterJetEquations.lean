@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cFiniteAffineJets
-import ContinuousFlexibility.Analysis.N01cFlowFrechetContinuity
+module
+
+public import ContinuousFlexibility.Analysis.N01cFiniteAffineJets
+public import ContinuousFlexibility.Analysis.N01cFlowFrechetContinuity
 
 /-!
 # True time equations for all finite-parameter flow derivatives
@@ -10,6 +12,8 @@ derivative through an arbitrary finite word of parameter directions.
 The existing theorem derives joint smoothness from the classical ODE,
 so no parameter derivative of the flow is an input here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,10 @@
-import ContinuousFlexibility.Analysis.N07aVolumeCell
+module
+
+public import ContinuousFlexibility.Analysis.N07aVolumeCell
 
 /-! # Exact cancellation of the actual integer material weights -/
+
+@[expose] public section
 
 noncomputable section
 

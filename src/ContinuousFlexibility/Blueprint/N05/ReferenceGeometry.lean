@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05PrimitiveReferenceAssembly
+module
+
+public import ContinuousFlexibility.Analysis.N05PrimitiveReferenceAssembly
 
 /-!
 # N05 reference geometry from the primitive interface
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Analysis.N05PrimitiveReferenceAssembly
 The sub-statement retains every witness of the supplied N04 output.
 Both primitive certificates are retained on the same canonical data.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

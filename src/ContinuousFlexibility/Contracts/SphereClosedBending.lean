@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Geometry.SphereCommonCapLength
-import ContinuousFlexibility.Geometry.SphereFixedDiskBridges
-import ContinuousFlexibility.Geometry.SphereOrientedEnclosed
-import ContinuousFlexibility.Geometry.SphereImmersion
+module
+
+public import ContinuousFlexibility.Geometry.SphereCommonCapLength
+public import ContinuousFlexibility.Geometry.SphereFixedDiskBridges
+public import ContinuousFlexibility.Geometry.SphereOrientedEnclosed
+public import ContinuousFlexibility.Geometry.SphereImmersion
 
 /-!
 # Geometric closure of a genuine annular core
@@ -11,6 +13,8 @@ that same sphere family for the metric, disks, image noncongruence, outward
 shape geometry and all three invariants. This is the geometric implication in
 the paper. The existence of a core is a separate analytical theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

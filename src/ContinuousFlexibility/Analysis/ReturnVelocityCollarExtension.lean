@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ReturnResidualVelocityMixedWeighted
-import ContinuousFlexibility.Analysis.ReturnCorrectionErrorSmoothness
-import Mathlib.Topology.Order.OrderClosed
+module
+
+public import ContinuousFlexibility.Analysis.ReturnResidualVelocityMixedWeighted
+public import ContinuousFlexibility.Analysis.ReturnCorrectionErrorSmoothness
+public import Mathlib.Topology.Order.OrderClosed
 
 /-!
 # Global weighted velocity jets from the same optical collars
@@ -10,6 +12,8 @@ the actual cutoff vanishes. Smoothness on the closed positive
 discriminant collar and this support identity extend its open-collar
 jet bounds to every point, including the collar boundary.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.SelectedSideTransport
-import ContinuousFlexibility.Radial.SelectedLaterRetained
-import ContinuousFlexibility.Radial.SelectedLaterStandIn
-import ContinuousFlexibility.Radial.SelectedBoundaryRadiusScale
+module
+
+public import ContinuousFlexibility.Radial.SelectedSideTransport
+public import ContinuousFlexibility.Radial.SelectedLaterRetained
+public import ContinuousFlexibility.Radial.SelectedLaterStandIn
+public import ContinuousFlexibility.Radial.SelectedBoundaryRadiusScale
 
 /-!
 # Later incoming solutions on the same retained pair
@@ -10,6 +12,8 @@ Both endpoint normalizations and the complete homogeneous interval use
 the retained pair's actual radius dilation. The derivative sign and the
 normalized boundary slope survive this positive dilation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

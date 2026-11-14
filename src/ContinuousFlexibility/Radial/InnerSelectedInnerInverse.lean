@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerSelectedInverseEstimates
-import ContinuousFlexibility.Radial.InnerSelectedInverseStatement
-import ContinuousFlexibility.Radial.InnerSelectedFrequencyBands
+module
+
+public import ContinuousFlexibility.Radial.InnerSelectedInverseEstimates
+public import ContinuousFlexibility.Radial.InnerSelectedInverseStatement
+public import ContinuousFlexibility.Radial.InnerSelectedFrequencyBands
 
 /-!
 # The inner inverse for all bands of one physical realization
@@ -10,6 +12,8 @@ uses its original Dirichlet sum, Poisson map, full reference, and flux
 matrix. The band depth may be zero, and the unique selected band
 covers every positive even frequency.
 -/
+
+@[expose] public section
 
 noncomputable section
 

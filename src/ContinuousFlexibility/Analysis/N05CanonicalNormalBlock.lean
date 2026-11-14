@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalNormalSingleEnergy
-import ContinuousFlexibility.Analysis.N05CanonicalInverseNormalAngular
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalNormalSingleEnergy
+public import ContinuousFlexibility.Analysis.N05CanonicalInverseNormalAngular
 
 /-!
 # Actual endpoint blocks for the fixed first normal derivative
@@ -8,6 +10,8 @@ The output is the fixed angular jet of the fixed radial derivative of the
 same global inverse. Consecutive corrected source jets provide the exact
 first-normal energy at the original endpoint and material order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

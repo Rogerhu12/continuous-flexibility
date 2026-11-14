@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerRadialPoissonSigns
-import ContinuousFlexibility.Radial.InnerActualModelChain
-import ContinuousFlexibility.Radial.InnerMorseInnerWeights
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialPoissonSigns
+public import ContinuousFlexibility.Radial.InnerActualModelChain
+public import ContinuousFlexibility.Radial.InnerMorseInnerWeights
 
 /-!
 # Actual cut and piece weights for the inner Poisson estimate
@@ -14,6 +16,8 @@ Only active gap endpoints are constrained. The exterior zero traces
 keep their arbitrary default entry one. Both reciprocal signs use
 the same functions and the same piece geometry.
 -/
+
+@[expose] public section
 
 noncomputable section
 

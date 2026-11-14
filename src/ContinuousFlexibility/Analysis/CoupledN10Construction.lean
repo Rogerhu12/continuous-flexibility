@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CoupledN10Assembly
-import ContinuousFlexibility.Analysis.CoupledQuadraticSmooth
-import ContinuousFlexibility.Analysis.CoupledScalarErrorCoefficientTame
-import ContinuousFlexibility.Analysis.CoupledRecoveryComponentsSmooth
+module
+
+public import ContinuousFlexibility.Analysis.CoupledN10Assembly
+public import ContinuousFlexibility.Analysis.CoupledQuadraticSmooth
+public import ContinuousFlexibility.Analysis.CoupledScalarErrorCoefficientTame
+public import ContinuousFlexibility.Analysis.CoupledRecoveryComponentsSmooth
 
 /-!
 # Constructing the exact N10 error on one common neighborhood
@@ -12,6 +14,8 @@ the same data and inverse. The scalar and circle errors then give the two
 independent decoding identities, conservation, both genuine derivatives,
 and the joint smooth tame tower required by N10.
 -/
+
+@[expose] public section
 
 noncomputable section
 

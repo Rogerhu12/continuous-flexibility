@@ -1,12 +1,16 @@
-import ContinuousFlexibility.Radial.R07ChainIncoming
-import ContinuousFlexibility.Radial.R07RadialTransport
-import ContinuousFlexibility.Radial.R07NaturalTailScale
-import ContinuousFlexibility.Radial.R07TailParameter
-import ContinuousFlexibility.Radial.MorseChainFullRealization
+module
+
+public import ContinuousFlexibility.Radial.R07ChainIncoming
+public import ContinuousFlexibility.Radial.R07RadialTransport
+public import ContinuousFlexibility.Radial.R07NaturalTailScale
+public import ContinuousFlexibility.Radial.R07TailParameter
+public import ContinuousFlexibility.Radial.MorseChainFullRealization
 
 /-!
 # Fixed cap normalization and the exact height coordinate at a join
 -/
+
+@[expose] public section
 
 noncomputable section
 

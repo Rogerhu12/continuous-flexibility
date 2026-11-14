@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05CanonicalModel
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalModel
 
 /-!
 # N05: the actual closed canonical volume scale
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Analysis.N05CanonicalModel
 Source: readable manuscript §8, lines 34--74.
 Task: `docs/tasks/N05-VolumeModel.md`.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

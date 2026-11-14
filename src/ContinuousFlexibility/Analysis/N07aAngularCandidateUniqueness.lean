@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularCandidateKernel
-import ContinuousFlexibility.Analysis.N07aScalarSolution
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularCandidateKernel
+public import ContinuousFlexibility.Analysis.N07aScalarSolution
 
 /-!
 # Uniqueness among all actual normalized height-pair solutions
@@ -9,6 +11,8 @@ space. Their difference satisfies the genuine homogeneous scalar equation.
 The preceding result constructs its fixed-domain representative before
 using N06 injectivity; no membership or boundary certificate is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

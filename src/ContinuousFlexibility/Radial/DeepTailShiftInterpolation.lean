@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.DeepTailInterpolation
-import ContinuousFlexibility.Radial.DeepTailShift
+module
+
+public import ContinuousFlexibility.Radial.DeepTailInterpolation
+public import ContinuousFlexibility.Radial.DeepTailShift
 
 /-!
 # Square integrability on a shifted tail
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Radial.DeepTailShift
 The edge estimates and square-summable original node sequence can be
 reindexed without changing the physical density or interpolation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

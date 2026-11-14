@@ -1,8 +1,12 @@
-import ContinuousFlexibility.Analysis.N04SourceColumnsGeometry
-import ContinuousFlexibility.Analysis.N04SourceColumnsData
-import ContinuousFlexibility.Analysis.N04SourceColumnsScalarLinear
+module
+
+public import ContinuousFlexibility.Analysis.N04SourceColumnsGeometry
+public import ContinuousFlexibility.Analysis.N04SourceColumnsData
+public import ContinuousFlexibility.Analysis.N04SourceColumnsScalarLinear
 
 /-! The stored physical-to-canonical width ratio has a reference envelope. -/
+
+@[expose] public section
 
 noncomputable section
 

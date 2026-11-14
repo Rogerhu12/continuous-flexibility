@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerRadialWeightedPoisson
-import ContinuousFlexibility.Radial.InnerInterfaceHilbertInverse
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialWeightedPoisson
+public import ContinuousFlexibility.Radial.InnerInterfaceHilbertInverse
 
 /-!
 # Both weight signs for the same actual Poisson operator
@@ -14,6 +16,8 @@ gap slope and constant-weight data. The reciprocal gap data are
 derived here. No global Poisson bound, interface smallness, or
 commutation assumption is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

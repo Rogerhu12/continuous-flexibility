@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.FiniteFourierBessel
-import ContinuousFlexibility.Radial.AngularMeanProbability
+module
+
+public import ContinuousFlexibility.Radial.FiniteFourierBessel
+public import ContinuousFlexibility.Radial.AngularMeanProbability
 
 /-!
 # The real even half-turn Fourier basis including the mean
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Radial.AngularMeanProbability
 The zero basis vector is the constant one. Positive indices use the normalized
 mode sqrt(2) * cos(2*n*theta), so every basis vector has unit angular mean square.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

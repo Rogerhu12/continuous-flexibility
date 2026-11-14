@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import ContinuousFlexibility.Analysis.CylinderTestPairing
-import ContinuousFlexibility.Analysis.SpacesCylinderEvenJets
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import ContinuousFlexibility.Analysis.CylinderTestPairing
+public import ContinuousFlexibility.Analysis.SpacesCylinderEvenJets
 
 /-!+# Mixed weak derivatives on the actual canonical pieces
 
@@ -9,6 +11,8 @@ tests as the frozen angular graph.  Testing, linear combinations and
 composition of derivatives are established before any smooth
 representative of the solution is chosen.
 -/
+
+@[expose] public section
 
 noncomputable section
 

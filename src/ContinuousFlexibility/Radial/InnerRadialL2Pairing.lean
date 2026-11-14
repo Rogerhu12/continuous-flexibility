@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerRadialL2Mass
-import ContinuousFlexibility.Statements.RadialTargets
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialL2Mass
+public import ContinuousFlexibility.Statements.RadialTargets
 
 /-!
 # Physical L² pairings of interval fields
@@ -8,6 +10,8 @@ These identities use the existing radial measure and arbitrary L²
 representatives. The two-field version gives the exact interval pairing
 needed for the physical closed-energy form.
 -/
+
+@[expose] public section
 
 noncomputable section
 

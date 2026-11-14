@@ -1,8 +1,12 @@
-import ContinuousFlexibility.Analysis.RootInverseNormalizedBounds
-import ContinuousFlexibility.Analysis.PointwiseAffineMaterialJets
+module
+
+public import ContinuousFlexibility.Analysis.RootInverseNormalizedBounds
+public import ContinuousFlexibility.Analysis.PointwiseAffineMaterialJets
 
 /-! Unit-cost normalization of the genuine root-coordinate jets. The
 closed radial face is recovered from the same smooth jet by continuity. -/
+
+@[expose] public section
 
 noncomputable section
 

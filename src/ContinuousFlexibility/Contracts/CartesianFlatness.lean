@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Contracts.CartesianMetricRegularity
-import ContinuousFlexibility.Geometry.PullbackCurvature
+module
+
+public import ContinuousFlexibility.Contracts.CartesianMetricRegularity
+public import ContinuousFlexibility.Geometry.PullbackCurvature
 
 /-!
 # Actual flatness of the Cartesian remainder
@@ -10,6 +12,8 @@ At the center, the existing constant-height/zero-profile inner disk gives
 an actual zero connection germ. No Cartesian flatness premise is added to
 the analytic core.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationPositivePrimitiveKernel
-import ContinuousFlexibility.Analysis.PositiveReferenceCollarFactory
-import ContinuousFlexibility.Scalar.S04CalculusProof
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationPositivePrimitiveKernel
+public import ContinuousFlexibility.Analysis.PositiveReferenceCollarFactory
+public import ContinuousFlexibility.Scalar.S04CalculusProof
 
 /-!
 # The actual radial collar as a smooth finite coefficient kernel
@@ -10,6 +12,8 @@ coefficient vector. Its identity with the actual angular data follows
 from equality of radial slices before taking their true derivatives.
 No new collar or inverse is selected.
 -/
+
+@[expose] public section
 
 noncomputable section
 

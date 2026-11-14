@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aLeadingRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N07aLeadingRegularity
 
 /-!
 # Interior regularity of all three actual coefficients
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Analysis.N07aLeadingRegularity
 The same pointwise geometric inequalities used for the leading coefficient
 also give regularity of the mixed and corrected angular coefficients.
 -/
+
+@[expose] public section
 
 noncomputable section
 

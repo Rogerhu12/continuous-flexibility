@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PhysicalTopology
-import ContinuousFlexibility.Analysis.TameMultilinearNormalization
+module
+
+public import ContinuousFlexibility.Analysis.PhysicalTopology
+public import ContinuousFlexibility.Analysis.TameMultilinearNormalization
 
 /-!
 # Homogeneous normalization in the actual physical height model
@@ -10,6 +12,8 @@ physical norm is the norm of one coordinate of that lift. Unit-ball
 growth therefore yields the exact one-high-factor estimate before any
 continuity of the multilinear map is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

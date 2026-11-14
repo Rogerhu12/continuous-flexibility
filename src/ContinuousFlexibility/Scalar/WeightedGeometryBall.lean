@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Scalar.WeightedGeometryBounds
+module
+
+public import ContinuousFlexibility.Scalar.WeightedGeometryBounds
 
 /-!
 # A common scalar positivity ball from quantitative low-order jet bounds
@@ -7,6 +9,8 @@ The hypotheses here are intermediate estimates for the actual decoder. The
 conclusion uses the original state seminorm ball, with a single radius for
 every point of the annulus, including all angular variables.
 -/
+
+@[expose] public section
 
 noncomputable section
 

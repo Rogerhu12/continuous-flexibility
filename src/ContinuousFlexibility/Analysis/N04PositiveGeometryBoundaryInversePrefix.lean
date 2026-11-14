@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryInverseStep
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryInverseStep
 
 /-!
 # A common polynomial for actual finite boundary inverse jets
@@ -8,6 +10,8 @@ sample. Induction is on the finite ordinary inverse order. It neither
 assumes parameter regularity of a chosen extension nor introduces an
 estimate on the unwrapped zeroth angular coordinate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

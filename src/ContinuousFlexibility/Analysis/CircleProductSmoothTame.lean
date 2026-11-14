@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CircleProductMixedBounds
-import ContinuousFlexibility.Analysis.CircleMultilinearRealization
-import ContinuousFlexibility.Analysis.TameMultilinearNormalization
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
+module
+
+public import ContinuousFlexibility.Analysis.CircleProductMixedBounds
+public import ContinuousFlexibility.Analysis.CircleMultilinearRealization
+public import ContinuousFlexibility.Analysis.TameMultilinearNormalization
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
 
 /-!
 # Joint smooth tame multiplication in the actual circle model
@@ -12,6 +14,8 @@ seminorm ball and homogeneous normalization give one high factor with
 a fixed loss. The ordinary quadratic directional tower then proves
 joint smooth tameness of actual pointwise multiplication.
 -/
+
+@[expose] public section
 
 noncomputable section
 

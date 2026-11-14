@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerRadialEnergyDomain
-import ContinuousFlexibility.Radial.InnerRadialL2Pairing
-import ContinuousFlexibility.Radial.InnerIntervalTrace
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialEnergyDomain
+public import ContinuousFlexibility.Radial.InnerRadialL2Pairing
+public import ContinuousFlexibility.Radial.InnerIntervalTrace
 
 /-!
 # Canonical physical traces and fixed affine lifts
@@ -12,6 +14,8 @@ The zero-endpoint closure has trace zero. Fixed physical affine lifts
 then define the full first-order domain without an independent trace
 label or an assumed gluing property.
 -/
+
+@[expose] public section
 
 noncomputable section
 

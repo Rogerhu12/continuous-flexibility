@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerRadialActualAssembly
-import ContinuousFlexibility.Radial.InnerMorseInnerWeights
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialActualAssembly
+public import ContinuousFlexibility.Radial.InnerMorseInnerWeights
 
 /-!
 # Interpolation walls from the actual finite-chain dictionary
@@ -9,6 +11,8 @@ actual endpoints. These walls define the existing finite-chain weight
 on the same physical geometry and recover the original interpolation
 on every closed model chart.
 -/
+
+@[expose] public section
 
 noncomputable section
 

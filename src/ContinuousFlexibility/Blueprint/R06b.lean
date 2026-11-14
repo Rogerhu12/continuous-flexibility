@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Blueprint.Statements
-import ContinuousFlexibility.Radial.TailNaturalFull
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
+public import ContinuousFlexibility.Radial.TailNaturalFull
 
 /-!
 # Blueprint node R06b
@@ -11,6 +13,8 @@ Source: `paper/flexible-surface-readable/05-flat-end-chain.tex` lines 513–790.
 Task file: `docs/tasks/R06b.md`. The natural line and the actual localized
 kernel are constructed in `Radial.TailNaturalFull`.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

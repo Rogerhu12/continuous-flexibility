@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.DeepTailPhysicalWeights
-import ContinuousFlexibility.Radial.OuterEnvelope
+module
+
+public import ContinuousFlexibility.Radial.DeepTailPhysicalWeights
+public import ContinuousFlexibility.Radial.OuterEnvelope
 
 /-!
 # Actual cell labels and nearby edge weights
@@ -8,6 +10,8 @@ The two-cell displacement between a localizer label and a deep-tail edge
 costs a coefficient power.  The coefficient of the cubic attenuation
 remains exactly one.
 -/
+
+@[expose] public section
 
 noncomputable section
 

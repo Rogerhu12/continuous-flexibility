@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.BufferLocalPrimitive
-import ContinuousFlexibility.Radial.PositiveBufferEnergyLift
+module
+
+public import ContinuousFlexibility.Radial.BufferLocalPrimitive
+public import ContinuousFlexibility.Radial.PositiveBufferEnergyLift
 
 /-!
 # The closed Dirichlet energy domain
@@ -9,6 +11,8 @@ We use the Hilbert graph product to characterize this closure by its
 annihilator; the argument keeps the actual weak derivative and potential
 weight throughout.
 -/
+
+@[expose] public section
 
 noncomputable section
 

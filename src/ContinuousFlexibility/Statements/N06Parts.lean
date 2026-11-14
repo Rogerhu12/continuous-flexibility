@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06DegenerateGraph
-import ContinuousFlexibility.Analysis.N06RelativeConstruction
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.AbsolutelyContinuousFun
+module
+
+public import ContinuousFlexibility.Analysis.N06DegenerateGraph
+public import ContinuousFlexibility.Analysis.N06RelativeConstruction
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.AbsolutelyContinuousFun
 
 /-!
 # The analytic substatements of N06
@@ -12,6 +14,8 @@ linear displacement bound. Neither substatement assumes a small relative
 operator or a Neumann inverse. The latter are assembled after the neighborhood
 has been restricted once.
 -/
+
+@[expose] public section
 
 noncomputable section
 

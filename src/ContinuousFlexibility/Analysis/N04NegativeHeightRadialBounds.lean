@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04NegativeHeightRadialFamilies
-import ContinuousFlexibility.Analysis.N04NegativeGeometryFlowBounds
-import ContinuousFlexibility.Analysis.ActualNegativeHostMaterialSamples
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeHeightRadialFamilies
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryFlowBounds
+public import ContinuousFlexibility.Analysis.ActualNegativeHostMaterialSamples
 
 /-!
 # Sharp current jets of the physical radial coefficient
@@ -12,6 +14,8 @@ Integrating the first parameter derivative gives the reference-difference
 value estimate, on one neighborhood fixed before all derivative orders
 and before the auxiliary column.
 -/
+
+@[expose] public section
 
 noncomputable section
 

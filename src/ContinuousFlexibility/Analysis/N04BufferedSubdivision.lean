@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04IntervalSubdivision
+module
+
+public import ContinuousFlexibility.Analysis.N04IntervalSubdivision
 
 /-!
 # A positive subdivision with a prescribed central interval
@@ -8,6 +10,8 @@ strict buffer at both ends. The remaining pieces are the existing dyadic
 subdivisions of the two gaps. Every closed piece stays inside the original
 open interval, including when that interval touches the ambient boundary.
 -/
+
+@[expose] public section
 
 noncomputable section
 

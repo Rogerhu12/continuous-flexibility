@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N08CircleResidual
-import ContinuousFlexibility.Analysis.N08Neighborhoods
-import ContinuousFlexibility.Analysis.ProjectiveJetEvaluation
-import ContinuousFlexibility.Analysis.N08StateLinearOperations
+module
+
+public import ContinuousFlexibility.Analysis.N08CircleResidual
+public import ContinuousFlexibility.Analysis.N08Neighborhoods
+public import ContinuousFlexibility.Analysis.ProjectiveJetEvaluation
+public import ContinuousFlexibility.Analysis.N08StateLinearOperations
 
 /-!
 # The actual state derivative of the projected return residual
@@ -11,6 +13,8 @@ sector.  Its first jet is pulled back by the actual mean/odd projection.
 This gives a continuous linear derivative on every ambient state direction,
 including control directions whose decoded functions are not constant.
 -/
+
+@[expose] public section
 
 noncomputable section
 

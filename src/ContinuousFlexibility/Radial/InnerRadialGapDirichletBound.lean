@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerRadialActualPieces
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialActualPieces
 
 /-!
 # The actual gap Hilbert Dirichlet bound
@@ -8,6 +10,8 @@ Those two inclusions are contractions. Its norm therefore inherits the
 exact physical coercive bound of the same gap inverse, without a spare
 identity on the scalar coordinate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

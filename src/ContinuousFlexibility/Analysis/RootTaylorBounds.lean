@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.FiniteTaylorPolynomial
-import ContinuousFlexibility.Analysis.RootTaylorPolynomial
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Analysis.FiniteTaylorPolynomial
+public import ContinuousFlexibility.Analysis.RootTaylorPolynomial
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # Bounds for the polynomial part of the root substitution
@@ -11,6 +13,8 @@ terms.  Their coefficient norms are controlled by the input jets at the
 Taylor center.  This argument does not assume that the input function itself
 is smooth, since only its specified finite list of jets is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

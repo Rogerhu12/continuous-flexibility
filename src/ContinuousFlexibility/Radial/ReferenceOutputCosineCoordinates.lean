@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ReferenceOutputCosine
-import ContinuousFlexibility.Radial.ReferenceCosineCoordinates
+module
+
+public import ContinuousFlexibility.Radial.ReferenceOutputCosine
+public import ContinuousFlexibility.Radial.ReferenceCosineCoordinates
 
 /-!
 # Actual angular coefficients of reconstructed reference outputs
@@ -9,6 +11,8 @@ uses integrability of the genuine products of two angular L² functions;
 the radial identities then follow from the already proved reconstruction
 coordinates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

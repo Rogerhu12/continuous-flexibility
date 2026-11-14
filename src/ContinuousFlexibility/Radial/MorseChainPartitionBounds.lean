@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MorseChainPartitionData
-import ContinuousFlexibility.Radial.MorseChainEndpointDistances
-import ContinuousFlexibility.Radial.MorseChainGeometry
+module
+
+public import ContinuousFlexibility.Radial.MorseChainPartitionData
+public import ContinuousFlexibility.Radial.MorseChainEndpointDistances
+public import ContinuousFlexibility.Radial.MorseChainGeometry
 
 /-!
 # Quantitative geometry of the actual indexed windows
@@ -9,6 +11,8 @@ The end-distance comparison uses the same placed model widths and
 connector endpoints. The actual overlap changes each distance by a
 bounded factor. Compact subsets away from the two ends meet only finitely many windows.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

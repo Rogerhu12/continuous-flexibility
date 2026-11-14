@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.BufferIntervalTrace
+module
+
+public import ContinuousFlexibility.Radial.BufferIntervalTrace
 
 /-!
 # Bounded traces of weak energy representatives
@@ -7,6 +9,8 @@ The interval indicator realizes an integral as a true `L²` pairing.
 Cauchy--Schwarz and an interval average then give bounded point evaluation
 without requiring classical differentiability of the representative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

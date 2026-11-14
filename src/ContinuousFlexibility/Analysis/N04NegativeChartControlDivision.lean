@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadStart
-import ContinuousFlexibility.Analysis.N01cComponentOpticalGeometry
-import ContinuousFlexibility.Analysis.N01OpticalRootDivision
-import ContinuousFlexibility.Analysis.SmoothDivisionBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadStart
+public import ContinuousFlexibility.Analysis.N01cComponentOpticalGeometry
+public import ContinuousFlexibility.Analysis.N01OpticalRootDivision
+public import ContinuousFlexibility.Analysis.SmoothDivisionBounds
 
 /-!
 # Dividing the actual optical control by its root coordinate
@@ -13,6 +15,8 @@ selects one smooth root division, with one extra radial derivative and
 no inverse collar width. These are the affine state-dependent parts of
 the full-half normalized optical square.
 -/
+
+@[expose] public section
 
 noncomputable section
 

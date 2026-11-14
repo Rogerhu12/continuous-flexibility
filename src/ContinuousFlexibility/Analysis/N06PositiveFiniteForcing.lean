@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06CompactCanonicalTraces
-import ContinuousFlexibility.Analysis.N06CurrentPositiveFiniteGreen
-import ContinuousFlexibility.Analysis.N06CanonicalTestSeparation
+module
+
+public import ContinuousFlexibility.Analysis.N06CompactCanonicalTraces
+public import ContinuousFlexibility.Analysis.N06CurrentPositiveFiniteGreen
+public import ContinuousFlexibility.Analysis.N06CanonicalTestSeparation
 
 /-!
 # Finite positive height determines the actual finite forcing
@@ -13,6 +15,8 @@ test pairings identifies the entire forcing with its finite synthesis.
 No finite-support assumption on the raw source or compatibility column
 is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

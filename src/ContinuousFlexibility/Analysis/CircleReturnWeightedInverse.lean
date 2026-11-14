@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CircleReturnInverseLinear
-import ContinuousFlexibility.Analysis.CircleReturnBounded
+module
+
+public import ContinuousFlexibility.Analysis.CircleReturnInverseLinear
+public import ContinuousFlexibility.Analysis.CircleReturnBounded
 
 /-!
 # The return inverse in the supplied weighted circle model
@@ -12,6 +14,8 @@ hold in the supplied model, by its injective decoder.
 The quantitative margin hypothesis is explicit. Pointwise irrationality
 alone is not used as a substitute for that uniform weighted hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

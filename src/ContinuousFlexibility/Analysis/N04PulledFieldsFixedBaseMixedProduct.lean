@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsFixedBaseAffineProduct
-import ContinuousFlexibility.Analysis.N04PulledFieldsFixedBaseMixedGrowth
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsFixedBaseAffineProduct
+public import ContinuousFlexibility.Analysis.N04PulledFieldsFixedBaseMixedGrowth
 
 /-!
 # Fixed-base multiplication of genuine mixed jets
@@ -8,6 +10,8 @@ The three-index Leibniz formula is the existing genuine tower identity.
 The scalar interpolation estimate keeps its low base independent of the
 parameter prefix; only the high derivative loss changes with that prefix.
 -/
+
+@[expose] public section
 
 noncomputable section
 

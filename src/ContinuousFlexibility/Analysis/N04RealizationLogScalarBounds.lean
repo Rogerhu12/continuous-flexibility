@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.LogPolynomialEnvelope
-import ContinuousFlexibility.Analysis.CircleCompositionFaaBounds
+module
+
+public import ContinuousFlexibility.Analysis.LogPolynomialEnvelope
+public import ContinuousFlexibility.Analysis.CircleCompositionFaaBounds
 
 /-!
 # Scalar kernels for the actual logarithmic height traces
@@ -9,6 +11,8 @@ controls every scalar outer derivative used by the finite root-trace
 construction from the actual height value and its reciprocal. The
 exponential retains its actual amplitude at every outer order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

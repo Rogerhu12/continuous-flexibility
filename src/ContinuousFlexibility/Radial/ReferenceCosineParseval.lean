@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ReferenceCosineFourier
-import ContinuousFlexibility.Radial.ReferenceCosineProjection
-import Mathlib.Topology.Algebra.InfiniteSum.NatInt
+module
+
+public import ContinuousFlexibility.Radial.ReferenceCosineFourier
+public import ContinuousFlexibility.Radial.ReferenceCosineProjection
+public import Mathlib.Topology.Algebra.InfiniteSum.NatInt
 
 /-!
 # Parseval in the real cosine sector
@@ -10,6 +12,8 @@ normalized physical cosine coefficients, and pairs the positive and
 negative integer frequencies in Parseval.  The final wrappers expose the
 same identity for the physical constant/cosine basis, including index zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

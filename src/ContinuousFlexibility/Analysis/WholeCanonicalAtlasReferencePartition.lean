@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.WholeCanonicalAtlasCurrentPartition
-import ContinuousFlexibility.Analysis.N04PositiveNormalizationBuffer
+module
+
+public import ContinuousFlexibility.Analysis.WholeCanonicalAtlasCurrentPartition
+public import ContinuousFlexibility.Analysis.N04PositiveNormalizationBuffer
 
 /-!
 # The actual reference partition and buffered normalization inclusion
@@ -8,6 +10,8 @@ The old optical cut supplies the exact negative reference radii. Whole
 positive components supply the remaining intervals. Their already proved
 countable reference exception gives the radial null-set partition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

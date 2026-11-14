@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N08MixedWeightProduct
-import ContinuousFlexibility.Analysis.N08ScalarFormula
-import ContinuousFlexibility.Scalar.WeightedScalarCandidates
+module
+
+public import ContinuousFlexibility.Analysis.N08MixedWeightProduct
+public import ContinuousFlexibility.Analysis.N08ScalarFormula
+public import ContinuousFlexibility.Scalar.WeightedScalarCandidates
 
 /-!
 # The scalar residual with a weaker profile weight
@@ -11,6 +13,8 @@ mixed product retains the required source weight. The construction uses
 the existing height derivatives, including the cutoff constant, and the
 actual odd-jet products.
 -/
+
+@[expose] public section
 
 noncomputable section
 

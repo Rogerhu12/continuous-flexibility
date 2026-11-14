@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.Radial
-import ContinuousFlexibility.Radial.Gauge
-import Mathlib.Analysis.Calculus.Deriv.CompMul
+module
+
+public import ContinuousFlexibility.Statements.Radial
+public import ContinuousFlexibility.Radial.Gauge
+public import Mathlib.Analysis.Calculus.Deriv.CompMul
 
 /-!
 # The physical source identity on both deep tails
@@ -10,6 +12,8 @@ Thus the left and right tails are specializations of the same derivative
 calculation.  The normalization at the physical endpoint is included in
 both the gauge and the density, including the exact nonhomogeneous factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

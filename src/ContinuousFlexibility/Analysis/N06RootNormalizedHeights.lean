@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Scalar.WeightedCommonHeightCalculus
-import ContinuousFlexibility.Scalar.WeightedStateTopology
-import ContinuousFlexibility.Analysis.N06NuSpatialCalculus
-import ContinuousFlexibility.Analysis.NeighborhoodStateBounds
+module
+
+public import ContinuousFlexibility.Scalar.WeightedCommonHeightCalculus
+public import ContinuousFlexibility.Scalar.WeightedStateTopology
+public import ContinuousFlexibility.Analysis.N06NuSpatialCalculus
+public import ContinuousFlexibility.Analysis.NeighborhoodStateBounds
 
 /-!
 # Actual reference-normalized root height fields
@@ -12,6 +14,8 @@ of the original common height. The two odd fields are angular derivatives
 of even decoded primitives. Their spatial jets have one fixed loss; no
 pointwise lower bound for the flat reference profile is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

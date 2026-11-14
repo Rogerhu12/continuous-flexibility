@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.RootInverseNormalizedBounds
-import ContinuousFlexibility.Analysis.RootRescaledAngularControl
-import ContinuousFlexibility.Analysis.RootPhysicalCharacteristicFlow
-import ContinuousFlexibility.Analysis.ActualRootChart
+module
+
+public import ContinuousFlexibility.Analysis.RootInverseNormalizedBounds
+public import ContinuousFlexibility.Analysis.RootRescaledAngularControl
+public import ContinuousFlexibility.Analysis.RootPhysicalCharacteristicFlow
+public import ContinuousFlexibility.Analysis.ActualRootChart
 
 /-!
 # The exact normalized parameters of the actual root inverse
@@ -13,6 +15,8 @@ flow with coefficients δ d(δ x,θ) and δ τ c(δ x,θ). Its true inverse has
 the negative forcing derivative at the root; negating that derivative
 gives the positive odd coefficient when τ = sqrt(δ).
 -/
+
+@[expose] public section
 
 noncomputable section
 

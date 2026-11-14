@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerBufferFullInverse
-import ContinuousFlexibility.Radial.CentralAuxiliaryBorder
-import Mathlib.Analysis.Normed.Group.Bounded
+module
+
+public import ContinuousFlexibility.Radial.InnerBufferFullInverse
+public import ContinuousFlexibility.Radial.CentralAuxiliaryBorder
+public import Mathlib.Analysis.Normed.Group.Bounded
 
 /-!
 # A compact temporary border for the central Schrödinger model
@@ -13,6 +15,8 @@ arbitrary L² sources and arbitrary scalar rows. The graph remains the
 frozen weak Schrödinger graph; the physical radial inverse is not used
 as a substitute for this model inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

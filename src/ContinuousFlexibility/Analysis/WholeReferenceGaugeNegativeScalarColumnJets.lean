@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.ActualNegativeReferenceScalarSourceData
-import ContinuousFlexibility.Analysis.CanonicalReferenceScalarColumnMaterialJets
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeNegativeAtomTransport
-import ContinuousFlexibility.Analysis.CanonicalAuxiliaryAtomPreservation
+module
+
+public import ContinuousFlexibility.Analysis.ActualNegativeReferenceScalarSourceData
+public import ContinuousFlexibility.Analysis.CanonicalReferenceScalarColumnMaterialJets
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeNegativeAtomTransport
+public import ContinuousFlexibility.Analysis.CanonicalAuxiliaryAtomPreservation
 
 /-!
 # The actual negative scalar columns of the same whole atlas
@@ -10,6 +12,8 @@ The old atlas and its sample are fixed before the numerical envelopes.
 Its literal inverse/source slices supply both columns. All whole-atlas
 and material-enlargement steps are equalities of the actual functions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

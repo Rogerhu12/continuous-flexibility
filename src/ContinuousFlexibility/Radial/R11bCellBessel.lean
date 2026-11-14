@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R11bPhysicalProjection
+module
+
+public import ContinuousFlexibility.Radial.R11bPhysicalProjection
 
 /-!
 # Cell Bessel bounds for the original angular coefficients
@@ -7,6 +9,8 @@ The localizer commutes exactly with each ordinary angular coefficient.
 Consequently finite Bessel inequalities apply directly to every actual
 localized L² field, with no global regularity premise on the original field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

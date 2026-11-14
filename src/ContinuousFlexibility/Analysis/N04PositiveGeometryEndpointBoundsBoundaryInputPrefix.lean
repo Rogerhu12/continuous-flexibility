@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsBoundaryInputs
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledForwardLabelReserve
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsBoundaryInputs
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledForwardLabelReserve
 
 /-!
 # One fixed low base for all nine actual root inputs
@@ -9,6 +11,8 @@ label has a loss for each finite parameter prefix. A single low base is
 selected before that prefix, and their budgets then agree exactly. Eight
 angular orders are reserved for the subsequent finite root formulas.
 -/
+
+@[expose] public section
 
 noncomputable section
 

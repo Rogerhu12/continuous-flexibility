@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.RadialReferencePotentialJetEnvelope
+module
+
+public import ContinuousFlexibility.Analysis.RadialReferencePotentialJetEnvelope
 
 /-!
 # Finite jets of the radial principal formulas
@@ -9,6 +11,8 @@ coefficients replace the last pullback by the derivative of the genuine
 inverse coordinate. The same finite polynomial bound handles both forms,
 requiring smoothness of physical factors only at the evaluation point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

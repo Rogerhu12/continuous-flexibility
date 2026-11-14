@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.MaterialEndpointGlobalJets
+module
+
+public import ContinuousFlexibility.Analysis.MaterialEndpointGlobalJets
 
 /-!
 # The actual material envelope logarithm
@@ -7,6 +9,8 @@ The endpoint formula for log E0 has symbol order at most three. The shared
 endpoint-to-global lemma therefore bounds its positive material derivatives
 for every actual IsMaterialData witness, including the compact middle.
 -/
+
+@[expose] public section
 
 noncomputable section
 

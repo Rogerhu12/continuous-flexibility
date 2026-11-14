@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterCellInterior
-import ContinuousFlexibility.Radial.OuterCoreTransfer
+module
+
+public import ContinuousFlexibility.Radial.OuterCellInterior
+public import ContinuousFlexibility.Radial.OuterCoreTransfer
 
 /-!
 # Pointwise energy throughout the ordinary transition core
@@ -8,6 +10,8 @@ The same estimate applies between any two physical points of the core.
 This supplies the homogeneous kernel bounds needed inside the core,
 as well as the endpoint transfer estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

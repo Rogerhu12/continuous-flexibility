@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R11bCellProjection
+module
+
+public import ContinuousFlexibility.Radial.R11bCellProjection
 
 /-!
 # Finite transfer between normalized angular systems
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Radial.R11bCellProjection
 Analysis in one orthonormal angular family followed by synthesis in another
 contracts the actual physical and localized L² norms.
 -/
+
+@[expose] public section
 
 noncomputable section
 

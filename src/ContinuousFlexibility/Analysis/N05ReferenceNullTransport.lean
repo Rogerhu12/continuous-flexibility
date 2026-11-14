@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05ReferenceNullPDE
-import ContinuousFlexibility.Analysis.N05OpticalPrimitive
-import ContinuousFlexibility.Analysis.N05RadialTransport
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05ReferenceNullPDE
+public import ContinuousFlexibility.Analysis.N05OpticalPrimitive
+public import ContinuousFlexibility.Analysis.N05RadialTransport
 
 /-!
 # Exact optical transport on the actual negative cut halves
@@ -12,6 +14,8 @@ optical integral as a primitive all the way to their root and cut.  The
 transport formula below uses the actual chart, with one sign parameter for
 both null coordinates and one orientation parameter for both halves.
 -/
+
+@[expose] public section
 
 noncomputable section
 

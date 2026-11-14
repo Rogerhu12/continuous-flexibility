@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.SeedGluedPair
-import ContinuousFlexibility.Radial.TwoTailReferenceAssembly
+module
+
+public import ContinuousFlexibility.Radial.SeedGluedPair
+public import ContinuousFlexibility.Radial.TwoTailReferenceAssembly
 
 /-!
 # Exhaustiveness of the negative pieces in the glued seed
@@ -8,6 +10,8 @@ Every negative derivative of the actual glued profile comes from one
 retained old tail or the retained central model. The increasing
 connectors cannot introduce additional negative components.
 -/
+
+@[expose] public section
 
 noncomputable section
 

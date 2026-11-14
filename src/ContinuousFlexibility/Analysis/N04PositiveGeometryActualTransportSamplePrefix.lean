@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledTransportWords
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledCoefficientSamplePrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceAngleSamplePrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometryTransportSamplePrefix
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledTransportWords
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledCoefficientSamplePrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceAngleSamplePrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryTransportSamplePrefix
 
 /-!
 # The common sample prefix of the actual positive transports
@@ -11,6 +13,8 @@ aligned by increasing the angular horizon before composition, so the
 normalized denominator remains identical throughout. The final added
 shift pays precisely for boundary coefficients becoming plane fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 

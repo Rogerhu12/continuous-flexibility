@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationFiniteScalarComposition
-import ContinuousFlexibility.Analysis.N04RealizationLogScalarBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationFiniteScalarComposition
+public import ContinuousFlexibility.Analysis.N04RealizationLogScalarBounds
 
 /-!
 # Finite logarithmic compositions with one spatial scale
@@ -9,6 +11,8 @@ value and its reciprocal. The existing finite composition rule then
 keeps every spatial order in its own power. Constants precede the
 field, state, direction predicate and numerical envelope.
 -/
+
+@[expose] public section
 
 noncomputable section
 

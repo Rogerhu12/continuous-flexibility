@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerLiouvillePoissonTransport
-import ContinuousFlexibility.Radial.InnerRadialEnergyDomain
+module
+
+public import ContinuousFlexibility.Radial.InnerLiouvillePoissonTransport
+public import ContinuousFlexibility.Radial.InnerRadialEnergyDomain
 
 /-!
 # The actual normalized gradient lift
@@ -9,6 +11,8 @@ gradient has model isometric coordinate d-(s'/s)f. This gives a bounded
 map on the actual L² spaces. The only drift bound needed to define it
 is derived from positivity and smoothness on the compact retained cell.
 -/
+
+@[expose] public section
 
 noncomputable section
 

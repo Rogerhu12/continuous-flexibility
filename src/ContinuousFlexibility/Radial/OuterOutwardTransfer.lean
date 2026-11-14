@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OuterTransferNorm
+module
+
+public import ContinuousFlexibility.Radial.OuterTransferNorm
 
 /-!
 # The two outward state orientations
@@ -8,6 +10,8 @@ That fixed reflection is an isometry for the actual product norm.
 The outward left transfer is its conjugate of the inverse radial transfer,
 so the sum of the two operator norms is unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

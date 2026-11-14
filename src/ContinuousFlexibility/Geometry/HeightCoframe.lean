@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.Cartan
-import ContinuousFlexibility.Geometry.RotatedCoframe
+module
+
+public import ContinuousFlexibility.Scalar.Cartan
+public import ContinuousFlexibility.Geometry.RotatedCoframe
 
 /-!
 # The actual remainder coframe as coordinate one-forms
@@ -8,6 +10,8 @@ This binds the general one-form calculus to the coframe of `g - dz²`.
 In particular, the Cartan premises of the rotation lemmas are proved here,
 not assumed for the actual height. Primitive existence is a later step.
 -/
+
+@[expose] public section
 
 noncomputable section
 

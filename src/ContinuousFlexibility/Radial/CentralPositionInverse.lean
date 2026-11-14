@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.OscillatorClosedForm
-import ContinuousFlexibility.Radial.CentralSpectralInverse
-import Mathlib.Analysis.InnerProductSpace.Adjoint
+module
+
+public import ContinuousFlexibility.Radial.OscillatorClosedForm
+public import ContinuousFlexibility.Radial.CentralSpectralInverse
+public import Mathlib.Analysis.InnerProductSpace.Adjoint
 
 /-!
 # Actual position-weighted central inverse
@@ -11,6 +13,8 @@ An energy estimate, beyond the unweighted spectral gap, proves a uniform
 bound for the actual `XGf`. This is the position weight `X`, not the
 geometric weight `nu = R'/R`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

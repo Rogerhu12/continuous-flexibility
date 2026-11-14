@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationAngularTraceBounds
-import ContinuousFlexibility.Analysis.N04RealizationLogCompositionBounds
-import ContinuousFlexibility.Analysis.N04RealizationFiniteProductScale
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationAngularTraceBounds
+public import ContinuousFlexibility.Analysis.N04RealizationLogCompositionBounds
+public import ContinuousFlexibility.Analysis.N04RealizationFiniteProductScale
 
 /-!
 # Quantitative parameter jets of the actual finite logarithmic traces
@@ -11,6 +13,8 @@ estimated term by term, with every angular order distributed before
 products are formed. Thus the fixed radial degree never multiplies the
 angular interpolation cost, and the same parameter domain is retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

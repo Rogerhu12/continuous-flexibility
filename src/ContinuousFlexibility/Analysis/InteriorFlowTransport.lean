@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.InteriorSpeedLocalization
-import ContinuousFlexibility.Analysis.AiryHalfHolonomy
+module
+
+public import ContinuousFlexibility.Analysis.InteriorSpeedLocalization
+public import ContinuousFlexibility.Analysis.AiryHalfHolonomy
 
 /-!
 # True transport by the constructed interior flows
@@ -9,6 +11,8 @@ integral is constant along that path by the chain rule and the mean
 value theorem. Applying the actual inverse endpoint map therefore
 recovers the first integral from one fixed radial section.
 -/
+
+@[expose] public section
 
 noncomputable section
 

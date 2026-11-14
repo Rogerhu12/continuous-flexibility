@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRelativeFields
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRelativeFields
 
 /-!
 # Actual finite relative endpoint bounds at the original host sample
@@ -7,6 +9,8 @@ This is the quantitative version of the existing qualitative finite root
 factory. Its one numerical envelope controls the true current transport,
 the true height ratio and both reciprocal positive diagonal bounds.
 -/
+
+@[expose] public section
 
 noncomputable section
 

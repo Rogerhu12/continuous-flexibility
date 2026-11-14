@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N08ReferenceResidual
-import ContinuousFlexibility.Analysis.OpticalTravelVariation
-import ContinuousFlexibility.Analysis.SolveReturnEquations
+module
+
+public import ContinuousFlexibility.Analysis.N08ReferenceResidual
+public import ContinuousFlexibility.Analysis.OpticalTravelVariation
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # The actual characteristic flow at the reference state
@@ -10,6 +12,8 @@ coefficients.  Integrating the ordinary characteristic equation supplied by
 N01 identifies its reference flow on the whole closed component.  The existing
 inverse identities then prove that the genuine return residual vanishes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

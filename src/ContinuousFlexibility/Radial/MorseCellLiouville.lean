@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.GeneralLiouvilleLocalConjugacy
-import ContinuousFlexibility.Radial.MorseCellMassTravel
+module
+
+public import ContinuousFlexibility.Radial.GeneralLiouvilleLocalConjugacy
+public import ContinuousFlexibility.Radial.MorseCellMassTravel
 
 /-!
 # Liouville transport on a retained Morse cell
@@ -8,6 +10,8 @@ The inverse radius is taken on the retained interval. Its local smoothness
 follows from the positive velocity there, even if the extended ODE solution
 has a turning point outside the interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

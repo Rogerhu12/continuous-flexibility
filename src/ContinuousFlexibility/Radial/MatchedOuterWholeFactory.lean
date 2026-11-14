@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.SelectedWholeGreenKernel
-import ContinuousFlexibility.Radial.OuterWholeNaturalVector
-import ContinuousFlexibility.Radial.OuterWholeMeasure
+module
+
+public import ContinuousFlexibility.Radial.SelectedWholeGreenKernel
+public import ContinuousFlexibility.Radial.OuterWholeNaturalVector
+public import ContinuousFlexibility.Radial.OuterWholeMeasure
 
 /-!
 # The same whole Green inverse and its natural L² vector
@@ -9,6 +11,8 @@ This is the original full-source Green construction expressed in the
 canonical whole-tail measure. The natural vector is supplied by the
 existing core/deep assembly, for the very same fundamental pair.
 -/
+
+@[expose] public section
 
 noncomputable section
 

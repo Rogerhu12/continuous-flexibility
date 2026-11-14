@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.RootPhysicalTransport
-import ContinuousFlexibility.Analysis.RootChartExtensionGeometry
-import ContinuousFlexibility.Analysis.CharacteristicPrincipalDensity
-import ContinuousFlexibility.Analysis.ScaledRadialPrincipalDensity
-import Mathlib.Analysis.Calculus.FDeriv.Congr
-import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
+module
+
+public import ContinuousFlexibility.Analysis.RootPhysicalTransport
+public import ContinuousFlexibility.Analysis.RootChartExtensionGeometry
+public import ContinuousFlexibility.Analysis.CharacteristicPrincipalDensity
+public import ContinuousFlexibility.Analysis.ScaledRadialPrincipalDensity
+public import Mathlib.Analysis.Calculus.FDeriv.Congr
+public import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
 
 /-!
 # The true differential from travel time to the root coordinate
@@ -14,6 +16,8 @@ extended root chart is locally the composition
 (τ,φ) ↦ (((3/2)τ)^(2/3),φ).
 The scalar chain rule gives radial differential scale 1/sqrt(ξ).
 -/
+
+@[expose] public section
 
 noncomputable section
 

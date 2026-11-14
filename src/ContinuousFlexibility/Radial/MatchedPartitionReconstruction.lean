@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MatchedPartitionNormalization
-import Mathlib.MeasureTheory.Integral.DominatedConvergence
-import Mathlib.MeasureTheory.Function.LpSpace.Complete
+module
+
+public import ContinuousFlexibility.Radial.MatchedPartitionNormalization
+public import Mathlib.MeasureTheory.Integral.DominatedConvergence
+public import Mathlib.MeasureTheory.Function.LpSpace.Complete
 
 /-!
 # Actual L² reconstruction for modal block estimates
@@ -9,6 +11,8 @@ The normalized square partition reconstructs every actual modal L²
 vector in norm. Applying the existing continuous inverse to these finite
 source decompositions therefore converges to its actual value.
 -/
+
+@[expose] public section
 
 noncomputable section
 

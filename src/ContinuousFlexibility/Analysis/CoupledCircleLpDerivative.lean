@@ -1,5 +1,7 @@
-import Mathlib.Analysis.Normed.Lp.lpSpace
-import Mathlib.Analysis.Calculus.SmoothSeries
+module
+
+public import Mathlib.Analysis.Normed.Lp.lpSpace
+public import Mathlib.Analysis.Calculus.SmoothSeries
 
 /-!
 # Actual derivatives in the Hilbert sum of circle components
@@ -8,6 +10,8 @@ A summable bound on component derivatives justifies differentiation in
 the original Hilbert sum. The proof differentiates the canonical series
 of single-component vectors.
 -/
+
+@[expose] public section
 
 noncomputable section
 

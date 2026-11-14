@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalActualModeEnergy
-import ContinuousFlexibility.Analysis.N07aCanonicalModeBessel
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalActualModeEnergy
+public import ContinuousFlexibility.Analysis.N07aCanonicalModeBessel
 
 /-!
 # Summing the actual positive mode energies
@@ -8,6 +10,8 @@ The source is an arbitrary canonical L² class. Its finite cosine Bessel
 bound suffices, and the final sum controls the same weak second normal
 derivative as the original reference equation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

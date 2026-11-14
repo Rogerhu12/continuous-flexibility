@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryAtomPairInputs
-import ContinuousFlexibility.Analysis.N04PositiveGeometryChartJacobianFormula
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryAtomPairInputs
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryChartJacobianFormula
 
 /-!
 # The actual forward Jacobian from the two chart atoms
@@ -8,6 +10,8 @@ The determinant polynomial is evaluated at the fixed physical unit
 point. The positive range certificate identifies its sign, and the fixed
 width factor carries the original material sample.
 -/
+
+@[expose] public section
 
 noncomputable section
 

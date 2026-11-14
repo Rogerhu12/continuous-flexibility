@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.TameUniformFamilyJets
+module
+
+public import ContinuousFlexibility.Analysis.TameUniformFamilyJets
 
 /-!
 # Finite assembly of uniformly estimated genuine families
@@ -8,6 +10,8 @@ family bounds proved in the preceding module. The closure lemmas retain
 the concrete maps and their genuine jets; no estimate is inferred from
 an abstract smooth-tame assertion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

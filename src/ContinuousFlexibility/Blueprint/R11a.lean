@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Blueprint.Statements
-import ContinuousFlexibility.Radial.R11aActualAssembly
-import Lean.Util.CollectAxioms
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
+public import ContinuousFlexibility.Radial.R11aActualAssembly
+public import Lean.Util.CollectAxioms
 
 /-!
 # Blueprint node R11a
@@ -11,6 +13,8 @@ on the same retained geometry.
 Source: `paper/flexible-surface-readable/06-global-reference-inverse.tex` lines 850–1017.
 Task file: `docs/tasks/R11a.md`.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

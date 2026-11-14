@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CoupledQuadraticAlgebra
-import ContinuousFlexibility.Analysis.CoupledWeakScalarErrorSmooth
-import ContinuousFlexibility.Analysis.CoupledScalarActionSmooth
-import ContinuousFlexibility.Analysis.SolveResidualSpaces
+module
+
+public import ContinuousFlexibility.Analysis.CoupledQuadraticAlgebra
+public import ContinuousFlexibility.Analysis.CoupledWeakScalarErrorSmooth
+public import ContinuousFlexibility.Analysis.CoupledScalarActionSmooth
+public import ContinuousFlexibility.Analysis.SolveResidualSpaces
 
 /-!
 # Joint smooth tameness of the independent coupled error
@@ -11,6 +13,8 @@ on their common parameter neighborhood. Both residual arguments remain
 unrestricted. The constructed source and even-circle components retain
 their original codomains throughout the composition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

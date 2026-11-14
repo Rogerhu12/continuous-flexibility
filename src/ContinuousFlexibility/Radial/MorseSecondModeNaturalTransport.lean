@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.MorseSecondModePhysicalRelation
-import ContinuousFlexibility.Radial.DeepTailPhysicalLift
-import ContinuousFlexibility.Statements.RadialTargets
-import Mathlib.MeasureTheory.Function.JacobianOneDim
-import Mathlib.MeasureTheory.Function.L2Space
+module
+
+public import ContinuousFlexibility.Radial.MorseSecondModePhysicalRelation
+public import ContinuousFlexibility.Radial.DeepTailPhysicalLift
+public import ContinuousFlexibility.Statements.RadialTargets
+public import Mathlib.MeasureTheory.Function.JacobianOneDim
+public import Mathlib.MeasureTheory.Function.L2Space
 
 /-!
 # Transport of a specified physical natural solution
@@ -11,6 +13,8 @@ The given radial solution is pulled back through the actual signed
 logarithm. Its square density transforms exactly, so the natural L²
 condition passes to the deep equation without a new existence assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

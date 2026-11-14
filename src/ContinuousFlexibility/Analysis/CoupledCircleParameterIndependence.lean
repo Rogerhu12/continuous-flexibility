@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CoupledScalarHeightDerivative
-import ContinuousFlexibility.Analysis.NeighborhoodCharacteristicSpeedExtension
-import ContinuousFlexibility.Analysis.NeighborhoodCircleFlowBasic
+module
+
+public import ContinuousFlexibility.Analysis.CoupledScalarHeightDerivative
+public import ContinuousFlexibility.Analysis.NeighborhoodCharacteristicSpeedExtension
+public import ContinuousFlexibility.Analysis.NeighborhoodCircleFlowBasic
 
 /-!
 # Parameter independence of the actual circle residual
@@ -12,6 +14,8 @@ flow, followed by its two inverse identities, proves independence of the
 given return residual.  At zero independent parameter the same comparison
 also removes the height coordinate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

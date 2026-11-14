@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CylinderPairCompositionBounds
-import ContinuousFlexibility.Analysis.OneHighCircleFlowLocalization
-import ContinuousFlexibility.Analysis.PhysicalTransmissionTrace
-import Mathlib.Analysis.SpecialFunctions.Sqrt
+module
+
+public import ContinuousFlexibility.Analysis.CylinderPairCompositionBounds
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowLocalization
+public import ContinuousFlexibility.Analysis.PhysicalTransmissionTrace
+public import Mathlib.Analysis.SpecialFunctions.Sqrt
 
 /-!
 # Fixed-loss recovery of a positive root factor
@@ -11,6 +13,8 @@ one fixed globally smooth extension. Compactness bounds its actual
 derivatives before the state is chosen. Applying the existing one-high
 composition closure therefore does not assume any jets of √H/a.
 -/
+
+@[expose] public section
 
 noncomputable section
 

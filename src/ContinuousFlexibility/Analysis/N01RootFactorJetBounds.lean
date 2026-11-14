@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01CoefficientDiscriminantBounds
-import ContinuousFlexibility.Analysis.RootCoefficientDivision
-import ContinuousFlexibility.Analysis.RootShiftMixedJets
+module
+
+public import ContinuousFlexibility.Analysis.N01CoefficientDiscriminantBounds
+public import ContinuousFlexibility.Analysis.RootCoefficientDivision
+public import ContinuousFlexibility.Analysis.RootShiftMixedJets
 
 /-!
 # Actual N01 fixed-loss jets for the smooth root determinant factor
@@ -11,6 +13,8 @@ division adds exactly one. The common low order and loss precede the
 root, orientation, collar, physical cell, and requested derivative order.
 Only numerical constants may depend on those geometric choices.
 -/
+
+@[expose] public section
 
 noncomputable section
 

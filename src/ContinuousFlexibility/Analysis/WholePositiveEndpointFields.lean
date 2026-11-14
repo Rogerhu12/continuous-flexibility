@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PositiveComponentAdjacency
-import ContinuousFlexibility.Analysis.CanonicalActualEndpointFields
+module
+
+public import ContinuousFlexibility.Analysis.PositiveComponentAdjacency
+public import ContinuousFlexibility.Analysis.CanonicalActualEndpointFields
 
 /-!
 # State-independent endpoint sources for a whole positive component
@@ -11,6 +13,8 @@ resulting fields for every permitted state are the actual stored fields,
 and their one-sided smoothness and symmetries are proved by the atlas
 factory. No endpoint derivative estimate is assumed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

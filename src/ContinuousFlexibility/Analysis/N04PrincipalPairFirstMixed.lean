@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PrincipalPairAlgebra
-import ContinuousFlexibility.Scalar.WeightedPartialIdentities
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalPairAlgebra
+public import ContinuousFlexibility.Scalar.WeightedPartialIdentities
 
 /-!
 # First mixed derivatives of paired families
@@ -8,6 +10,8 @@ The first ordinary mixed derivatives agree with the coordinate partials
 of the same smooth current and reference fields. A nonempty parameter
 domain supplies the reference spatial regularity already in the pair.
 -/
+
+@[expose] public section
 
 noncomputable section
 

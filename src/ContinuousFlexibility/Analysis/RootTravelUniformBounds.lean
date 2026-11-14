@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.RootCompositionZeroOrder
-import ContinuousFlexibility.Analysis.RootChartSymmetry
-import Mathlib.Topology.Instances.Real.Lemmas
+module
+
+public import ContinuousFlexibility.Analysis.RootCompositionZeroOrder
+public import ContinuousFlexibility.Analysis.RootChartSymmetry
+public import Mathlib.Topology.Instances.Real.Lemmas
 
 /-!
 # Uniform small travel from a true first-derivative bound
@@ -10,6 +12,8 @@ of its smooth input. Angular periodicity extends the estimate from one
 fixed period to every angle. A single radius, selected before the input
 function, then bounds the root travel strictly below any positive target.
 -/
+
+@[expose] public section
 
 noncomputable section
 

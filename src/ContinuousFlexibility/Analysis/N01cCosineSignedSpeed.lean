@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cComponentCosineSpeed
+module
+
+public import ContinuousFlexibility.Analysis.N01cComponentCosineSpeed
 
 /-!
 # The actual cosine speed at every real time
@@ -8,6 +10,8 @@ speed and its actual normalized drift. The absolute sine keeps the
 identity valid on both halves of every period. At a sine zero all terms
 vanish, without evaluating an interior identity at a boundary point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

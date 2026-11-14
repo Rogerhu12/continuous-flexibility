@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04bTypedAtlasData
+module
+
+public import ContinuousFlexibility.Analysis.N04bTypedAtlasData
 
 /-!
 # Domain and normalization fields of the concrete typed atlas
@@ -9,6 +11,8 @@ proofs are independent of the later choice of negative chart extensions.
 The chart normalization follows because every negative piece misses the
 normalization region and every positive chart and height is fixed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

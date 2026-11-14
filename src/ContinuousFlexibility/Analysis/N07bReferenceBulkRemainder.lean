@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07bReferenceBulkEnergy
-import ContinuousFlexibility.Analysis.N07bReferenceForcingSymmetry
-import ContinuousFlexibility.Analysis.N07bCanonicalSourceSymmetry
-import ContinuousFlexibility.Analysis.MaterialHeightRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N07bReferenceBulkEnergy
+public import ContinuousFlexibility.Analysis.N07bReferenceForcingSymmetry
+public import ContinuousFlexibility.Analysis.N07bCanonicalSourceSymmetry
+public import ContinuousFlexibility.Analysis.MaterialHeightRegularity
 
 /-!
 # The canonical bulk source of the actual global reference remainder
@@ -13,6 +15,8 @@ Its PDE has those same symmetries, while local closed-piece representatives
 supply the canonical jet regularity. The energy bound therefore produces an
 element of the prescribed volume level for this actual global forcing.
 -/
+
+@[expose] public section
 
 noncomputable section
 

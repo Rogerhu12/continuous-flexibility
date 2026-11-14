@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cStateAngleSelections
+module
+
+public import ContinuousFlexibility.Analysis.N01cStateAngleSelections
 
 /-!
 # Parameter-slot budgets for the original joint directions
@@ -7,6 +9,8 @@ The predicate records an existing state-angle word on the actual tuple.
 Appending a pure spatial direction preserves its parameter budget.
 Partition costs are summed with the exact arity identities of that word.
 -/
+
+@[expose] public section
 
 noncomputable section
 

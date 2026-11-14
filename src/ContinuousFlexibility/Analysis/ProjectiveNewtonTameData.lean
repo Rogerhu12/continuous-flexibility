@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ProjectiveNewtonRecurrence
-import ContinuousFlexibility.Analysis.ProjectiveNewtonCorrectionBounds
+module
+
+public import ContinuousFlexibility.Analysis.ProjectiveNewtonRecurrence
+public import ContinuousFlexibility.Analysis.ProjectiveNewtonCorrectionBounds
 
 /-!
 # Common tame estimates for the Newton iteration
@@ -8,6 +10,8 @@ The residual and its first two directional jets, the linear correction, and
 the bilinear error use the same finite base, loss, and radius. The base can
 be chosen above the original domain base and both smoothing bases.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledFamily
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledCollars
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledFamily
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledCollars
 
 /-!
 # One sample envelope for the chosen positive transport
@@ -9,6 +11,8 @@ family have uniform material costs. In particular, the inverse kernel may
 use the displayed fiber widths and radial lower bound without choosing a
 second family. Every coefficient and exponent precedes the component.
 -/
+
+@[expose] public section
 
 noncomputable section
 

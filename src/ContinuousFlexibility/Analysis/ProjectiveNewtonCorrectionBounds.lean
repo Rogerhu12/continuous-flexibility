@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Statements.Analysis
+module
+
+public import ContinuousFlexibility.Statements.Analysis
 
 /-!
 # Homogeneous bounds for the Newton correction and error
@@ -9,6 +11,8 @@ variables at zero. Evaluating the smooth tame estimates on these directions
 gives homogeneous bounds for all residuals, including the kernels of the
 base seminorm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

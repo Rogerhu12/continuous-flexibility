@@ -1,13 +1,15 @@
-import ContinuousFlexibility.Analysis.CoordinatePotentialRegularity
-import ContinuousFlexibility.Analysis.CanonicalFieldJetReduction
-import ContinuousFlexibility.Analysis.CylinderSobolev
-import ContinuousFlexibility.Analysis.FlowJetMaterialClosure
-import ContinuousFlexibility.Analysis.FlowJetPartitionPolynomial
-import ContinuousFlexibility.Analysis.SpacesHeightAlgebra
-import ContinuousFlexibility.Analysis.SpacesCylinderEvenJets
-import ContinuousFlexibility.Analysis.LocalMixedProductBounds
-import Mathlib.Algebra.BigOperators.Fin
-import Mathlib.Tactic.FinCases
+module
+
+public import ContinuousFlexibility.Analysis.CoordinatePotentialRegularity
+public import ContinuousFlexibility.Analysis.CanonicalFieldJetReduction
+public import ContinuousFlexibility.Analysis.CylinderSobolev
+public import ContinuousFlexibility.Analysis.FlowJetMaterialClosure
+public import ContinuousFlexibility.Analysis.FlowJetPartitionPolynomial
+public import ContinuousFlexibility.Analysis.SpacesHeightAlgebra
+public import ContinuousFlexibility.Analysis.SpacesCylinderEvenJets
+public import ContinuousFlexibility.Analysis.LocalMixedProductBounds
+public import Mathlib.Algebra.BigOperators.Fin
+public import Mathlib.Tactic.FinCases
 
 /-!
 # Fixed-loss raw-jet bounds for the actual transformed fields
@@ -24,6 +26,8 @@ first derivative components of the chart, the height, and the reciprocal
 absolute actual Jacobian. The angular lift itself is not an input field.
 No potential or transformed-coefficient jet bound is an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

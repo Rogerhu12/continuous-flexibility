@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OperatorMixedCoefficientRegularity
+module
+
+public import ContinuousFlexibility.Analysis.OperatorMixedCoefficientRegularity
 
 /-!
 # Pointwise coefficient alternatives forced by the actual operator
@@ -9,6 +11,8 @@ without applying a product rule to that coefficient. A nonvanishing
 smooth multiplier cannot remove that failure. The polynomial tests then
 force a precise degenerate alternative for the smooth comparison field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

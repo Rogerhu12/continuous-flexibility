@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsTransportPowerGrowth
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsTransportPowerGrowth
 
 /-!
 # Common bases and budgets for transport powers
@@ -8,6 +10,8 @@ independently. This combines finitely many primitive choices while
 retaining the order of their quantifiers. A bounded height can also be
 absorbed for the unweighted copy of the same transported field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

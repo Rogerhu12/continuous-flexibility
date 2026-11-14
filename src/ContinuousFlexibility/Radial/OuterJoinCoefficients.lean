@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OuterCoreEnergy
+module
+
+public import ContinuousFlexibility.Radial.OuterCoreEnergy
 
 /-!
 # Separate coefficient integrals on the actual positive connector
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Radial.OuterCoreEnergy
 No lower bound for the connector width is used.  The ordinary state
 prefactor is controlled from its departure and arrival heights.
 -/
+
+@[expose] public section
 
 noncomputable section
 

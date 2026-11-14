@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aFiniteCoefficientVolume
-import ContinuousFlexibility.Analysis.N07aSampleJetBounds
+module
+
+public import ContinuousFlexibility.Analysis.N07aFiniteCoefficientVolume
+public import ContinuousFlexibility.Analysis.N07aSampleJetBounds
 
 /-!
 # One-high weighted norms on a fixed finite set of pieces
@@ -8,6 +10,8 @@ The estimate uses the actual coefficient representatives and actual
 weighted volume graph. Compact support makes the material constants
 finite; monotonicity of the parameter grading keeps one fixed loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

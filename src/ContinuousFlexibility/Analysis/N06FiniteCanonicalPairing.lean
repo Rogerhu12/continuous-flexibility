@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06FinitePhysicalPartition
-import ContinuousFlexibility.Analysis.N06CurrentPiecePairing
+module
+
+public import ContinuousFlexibility.Analysis.N06FinitePhysicalPartition
+public import ContinuousFlexibility.Analysis.N06CurrentPiecePairing
 
 /-!
 # Actual compact physical tests as finite canonical pairings
@@ -9,6 +11,8 @@ the original atlas. Actual canonical representation and current-coordinate
 change of variables then express the physical pairing as a finite sum in
 the original L2 coordinates. Integrability is derived before summation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

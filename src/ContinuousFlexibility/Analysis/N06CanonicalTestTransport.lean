@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CanonicalStripGeometry
-import ContinuousFlexibility.Analysis.N06CanonicalProperties
-import Mathlib.Algebra.Field.Periodic
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalStripGeometry
+public import ContinuousFlexibility.Analysis.N06CanonicalProperties
+public import Mathlib.Algebra.Field.Periodic
 
 /-!
 # Compact canonical tests as genuine physical tests
@@ -12,6 +14,8 @@ canonical period, strictly inside the original annulus. At an actual
 physical boundary the forward image leaves that compact canonical support,
 so the zero extension is smooth even along a moving cut.
 -/
+
+@[expose] public section
 
 noncomputable section
 

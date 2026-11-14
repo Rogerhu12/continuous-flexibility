@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.CoupledErrorParity
-import ContinuousFlexibility.Analysis.CoupledDerivativeAlgebra
-import ContinuousFlexibility.Analysis.CoupledWeakScalarError
-import ContinuousFlexibility.Scalar.WeightedScalarError
-import ContinuousFlexibility.Scalar.WeightedErrorConservation
+module
+
+public import ContinuousFlexibility.Analysis.CoupledErrorParity
+public import ContinuousFlexibility.Analysis.CoupledDerivativeAlgebra
+public import ContinuousFlexibility.Analysis.CoupledWeakScalarError
+public import ContinuousFlexibility.Scalar.WeightedScalarError
+public import ContinuousFlexibility.Scalar.WeightedErrorConservation
 
 /-!
 # Source-valued bilinear errors and the coupled quadratic candidate
@@ -14,6 +16,8 @@ geometry. Both independent variables remain linear. The circle component
 uses the existing even projection and agrees with the actual N02 error on
 the geometric domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

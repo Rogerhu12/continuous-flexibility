@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.PositivePowerMaterialJets
-import ContinuousFlexibility.Analysis.PointwiseMaterialJetOperations
-import Mathlib.Analysis.Normed.Operator.Prod
+module
+
+public import ContinuousFlexibility.Analysis.PositivePowerMaterialJets
+public import ContinuousFlexibility.Analysis.PointwiseMaterialJetOperations
+public import Mathlib.Analysis.Normed.Operator.Prod
 
 /-!
 # Actual radial power jets on a unit radial strip
@@ -10,6 +12,8 @@ For a positive odd coefficient, the two actual functions
 fixed loss. Only the value of χ is restricted to a fixed positive
 interval; its higher derivatives enter through the original field jets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

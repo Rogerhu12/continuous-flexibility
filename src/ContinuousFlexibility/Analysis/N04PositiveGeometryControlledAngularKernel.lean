@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsAngularKernel
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsControlled
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsBoundaryData
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsAngularKernel
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsControlled
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsBoundaryData
 
 /-!
 # The stored angular kernel and its material envelope
@@ -10,6 +12,8 @@ unwrapped angle is kept outside the packet. The coefficient envelope
 may depend on a requested finite jet prefix; the selected angular width
 and the original component sample remain fixed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

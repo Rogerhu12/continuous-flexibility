@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularRealFourier
-import ContinuousFlexibility.Analysis.SpacesTorusWaves
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularRealFourier
+public import ContinuousFlexibility.Analysis.SpacesTorusWaves
 
 /-!
 # Recovering one radial derivative from an actual second-order Fourier identity
@@ -9,6 +11,8 @@ first derivative plus an L² source controls one radial derivative at every
 nonzero radial frequency; the zero radial frequency has derivative zero.
 Conjugate symmetry reconstructs an actual real canonical L² class.
 -/
+
+@[expose] public section
 
 noncomputable section
 

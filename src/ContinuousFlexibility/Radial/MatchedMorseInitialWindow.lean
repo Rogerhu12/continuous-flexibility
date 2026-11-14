@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MorseRealizationBasic
+module
+
+public import ContinuousFlexibility.Radial.MorseRealizationBasic
 
 /-!
 # A fixed seam window for the initial localizer labels
@@ -8,6 +10,8 @@ bounded label from both endpoints by one positive distance. The actual
 seam limits then give a fixed enclosing window. Its choice precedes all
 later frequency and retained-length choices.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceTraceUniform
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsTransportDirections
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRadialFormula
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceTraceUniform
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsTransportDirections
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRadialFormula
 
 /-!
 # Genuine factors of the stored positive coordinate change
@@ -10,6 +12,8 @@ smaller sector the angular lift, its inverse, both radial factors and
 both transports are produced together. The coefficient towers are the
 same towers used by the finite radial kernel.
 -/
+
+@[expose] public section
 
 noncomputable section
 

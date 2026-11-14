@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01aFinalAssembly
-import ContinuousFlexibility.Analysis.N01cActualN01aReference
-import ContinuousFlexibility.Analysis.N01aReferenceHeight
+module
+
+public import ContinuousFlexibility.Analysis.N01aFinalAssembly
+public import ContinuousFlexibility.Analysis.N01cActualN01aReference
+public import ContinuousFlexibility.Analysis.N01aReferenceHeight
 
 /-!
 # Blueprint node N01a
@@ -11,6 +13,8 @@ same actual retained reference, with the controls' actual host cells.
 Source: `paper/flexible-surface-readable/07-fixed-geometry.tex` lines 506–646.
 Task file: `docs/tasks/N01a.md`.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

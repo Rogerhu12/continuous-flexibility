@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.OuterTailDensityBounds
-import ContinuousFlexibility.Radial.OuterLocalizationWeights
-import ContinuousFlexibility.Radial.TailFundamentalGreenBounds
+module
+
+public import ContinuousFlexibility.Radial.OuterTailDensityBounds
+public import ContinuousFlexibility.Radial.OuterLocalizationWeights
+public import ContinuousFlexibility.Radial.TailFundamentalGreenBounds
 
 /-!
 # Coefficient bounds for the actual deep-tail Green block weight
@@ -10,6 +12,8 @@ reciprocal-density bound therefore controls both resistance integrals.
 The remaining inverse-mass term is bounded by the actual resistance using
 the large mass-resistance hypothesis, with no new spectral estimate assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

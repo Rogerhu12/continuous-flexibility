@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01cFlowAffineCompression
-import ContinuousFlexibility.Analysis.N01cAngularJetTowers
-import ContinuousFlexibility.Analysis.N01cCircleLinearVariationSmooth
-import ContinuousFlexibility.Analysis.OneHighCircleFourierCompositionCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N01cFlowAffineCompression
+public import ContinuousFlexibility.Analysis.N01cAngularJetTowers
+public import ContinuousFlexibility.Analysis.N01cCircleLinearVariationSmooth
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierCompositionCalculus
 
 /-!
 # The actual higher flow variations satisfy the circle Sobolev estimate
@@ -14,6 +16,8 @@ and the already constructed strictly lower-order forcing as its source.
 This builds the inputs of the circle linear estimate from the actual
 flow; no parameter derivative or norm bound of the flow is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

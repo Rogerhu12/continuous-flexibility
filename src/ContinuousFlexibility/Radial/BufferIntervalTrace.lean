@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.BufferIntervalForm
-import Mathlib.Analysis.Calculus.BumpFunction.Normed
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.AbsolutelyContinuousFun
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.LebesgueDifferentiationThm
-import Mathlib.MeasureTheory.Measure.OpenPos
+module
+
+public import ContinuousFlexibility.Radial.BufferIntervalForm
+public import Mathlib.Analysis.Calculus.BumpFunction.Normed
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.AbsolutelyContinuousFun
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.LebesgueDifferentiationThm
+public import Mathlib.MeasureTheory.Measure.OpenPos
 
 /-!
 # Continuous representatives of the actual weak energy domain
@@ -11,6 +13,8 @@ A weak first derivative in Lebesgue `L²` determines an absolutely continuous
 representative. The proof uses an actual integral primitive, integration by
 parts for absolutely continuous functions, and compact smooth tests.
 -/
+
+@[expose] public section
 
 noncomputable section
 

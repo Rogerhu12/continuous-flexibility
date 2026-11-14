@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ReferenceRadialSmoothExtension
-import Mathlib.Analysis.SpecialFunctions.SmoothTransition
+module
+
+public import ContinuousFlexibility.Radial.ReferenceRadialSmoothExtension
+public import Mathlib.Analysis.SpecialFunctions.SmoothTransition
 
 /-!
 # A genuine smooth left switch for the zero mode
@@ -10,6 +12,8 @@ from that cutoff is compactly supported relative to the open radial core.
 All positive derivatives and the actual zero-mode forcing are compactly
 supported strictly inside the core.
 -/
+
+@[expose] public section
 
 noncomputable section
 

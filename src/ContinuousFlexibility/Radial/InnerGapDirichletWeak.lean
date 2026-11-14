@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerGapDirichletSupport
-import ContinuousFlexibility.Radial.InnerRadialL2Pairing
-import ContinuousFlexibility.Radial.InnerRadialGreen
+module
+
+public import ContinuousFlexibility.Radial.InnerGapDirichletSupport
+public import ContinuousFlexibility.Radial.InnerRadialL2Pairing
+public import ContinuousFlexibility.Radial.InnerRadialGreen
 
 /-!
 # The actual differential equation of the closed positive-gap inverse
@@ -11,6 +13,8 @@ closure as an equality of continuous linear functionals. Consequently
 the arbitrary-L² inverse satisfies the actual radial weak equation;
 the form construction is not an unrelated abstract graph.
 -/
+
+@[expose] public section
 
 noncomputable section
 

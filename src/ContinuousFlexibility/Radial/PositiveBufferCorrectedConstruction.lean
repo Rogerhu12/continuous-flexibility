@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.PositiveBufferCorrectedIdentities
-import ContinuousFlexibility.Radial.PositiveBufferCorrectedData
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferCorrectedIdentities
+public import ContinuousFlexibility.Radial.PositiveBufferCorrectedData
 
 /-!
 # Quantitative construction of the corrected Green data
@@ -8,6 +10,8 @@ The actual inverse bound and the exponentially localized commutator
 sources control the column norms. The sharp cut estimate supplies the
 product of the two buffer exponentials in every cut-matrix entry.
 -/
+
+@[expose] public section
 
 noncomputable section
 

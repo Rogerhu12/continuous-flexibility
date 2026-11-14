@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Scalar.WeightedPointwise
+module
+
+public import ContinuousFlexibility.Scalar.WeightedPointwise
 
 /-!
 # Summing bounds in the actual physical jet norm
@@ -7,6 +9,8 @@ The physical norm is the square sum of its finitely many weighted L² jets.
 A common bound for precisely the jets in that norm therefore gives the
 explicit square-root-of-cardinality factor below.
 -/
+
+@[expose] public section
 
 noncomputable section
 

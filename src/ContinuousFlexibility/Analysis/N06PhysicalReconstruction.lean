@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import ContinuousFlexibility.Analysis.CircleWeakPrimitive
-import Mathlib.MeasureTheory.Measure.OpenPos
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import ContinuousFlexibility.Analysis.CircleWeakPrimitive
+public import Mathlib.MeasureTheory.Measure.OpenPos
 
 /-!
 # Actual physical representatives of canonical L² data
@@ -12,6 +14,8 @@ pieces without ambiguity. These formulas verify the actual canonical
 height and source identities. No physical differential equation or
 transmission condition is inferred from representation alone.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import Mathlib.MeasureTheory.Function.L2Space
-import Mathlib.Analysis.InnerProductSpace.Adjoint
-import Mathlib.Analysis.InnerProductSpace.l2Space
+module
+
+public import Mathlib.MeasureTheory.Function.L2Space
+public import Mathlib.Analysis.InnerProductSpace.Adjoint
+public import Mathlib.Analysis.InnerProductSpace.l2Space
 
 /-!
 # Bounded-overlap localization and Hilbert-space gluing
@@ -10,6 +12,8 @@ a bounded map into the Hilbert sum of the original `L²` space. Its adjoint
 is the actual gluing map: on each single row it multiplies by that row's
 cutoff. This construction keeps all infinite sums inside complete spaces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

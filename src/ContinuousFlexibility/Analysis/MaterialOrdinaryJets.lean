@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CylinderMixedJets
+module
+
+public import ContinuousFlexibility.Analysis.CylinderMixedJets
 
 /-!
 # Ordinary mixed jets from bounded material jets
@@ -8,6 +10,8 @@ derivative. Uniform logarithmic jet bounds control differentiation of
 the positive weight. The physical derivative expansion then loses just
 one factor of the envelope M.
 -/
+
+@[expose] public section
 
 noncomputable section
 

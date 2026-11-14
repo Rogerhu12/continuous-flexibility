@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.IntervalLayerCutoffDeriv
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
-import Mathlib.Data.Nat.Choose.Sum
+module
+
+public import ContinuousFlexibility.Analysis.IntervalLayerCutoffDeriv
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+public import Mathlib.Data.Nat.Choose.Sum
 
 /-!
 # Uniform ordinary jets of the actual endpoint-band cutoff
@@ -10,6 +12,8 @@ point. Each fixed order costs only a fixed inverse power of the inner
 width. This estimate also applies when the two layers lie near either end
 of the annulus at once.
 -/
+
+@[expose] public section
 
 noncomputable section
 

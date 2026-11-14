@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CylinderMixedJets
+module
+
+public import ContinuousFlexibility.Analysis.CylinderMixedJets
 
 /-!
 # Parameter differentiation of smooth spatial jets
@@ -7,6 +9,8 @@ Constant directional partials commute for smooth functions. Applying that
 fact to the parameter, radial, and angular directions proves the actual
 parameter derivative formula for every mixed spatial jet.
 -/
+
+@[expose] public section
 
 noncomputable section
 

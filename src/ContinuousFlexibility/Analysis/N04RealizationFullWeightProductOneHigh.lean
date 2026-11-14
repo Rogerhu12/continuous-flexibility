@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationFullWeightProduct
-import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationFullWeightProduct
+public import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
 
 /-!
 # One high seminorm for the full raw source product
@@ -10,6 +12,8 @@ at order zero. Only the genuine product is normalized. Its finite
 prefix costs enlarge the high order without changing the supplied
 low order, parameter neighborhood, or fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 

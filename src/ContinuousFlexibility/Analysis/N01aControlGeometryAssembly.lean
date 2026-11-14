@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01aReferenceNormalization
-import ContinuousFlexibility.Analysis.N01aNegativeComponentGeometry
-import ContinuousFlexibility.Blueprint.Statements
+module
+
+public import ContinuousFlexibility.Analysis.N01aReferenceNormalization
+public import ContinuousFlexibility.Analysis.N01aNegativeComponentGeometry
+public import ContinuousFlexibility.Blueprint.Statements
 
 /-!
 # Assembly of the reference and optical-control geometry
@@ -10,6 +12,8 @@ travel fields. Their cell map is the identity. The reference height comes
 from the existing normalized Sobolev representation. The three ordinary
 flow candidates have no conditions in Part A and are set to zero here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

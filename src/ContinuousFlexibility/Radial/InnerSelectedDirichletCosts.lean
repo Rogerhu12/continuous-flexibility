@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerSelectedMorseEstimates
-import ContinuousFlexibility.Radial.InnerRadialDirichletWeights
-import ContinuousFlexibility.Radial.InnerMorseInnerWeightCosts
+module
+
+public import ContinuousFlexibility.Radial.InnerSelectedMorseEstimates
+public import ContinuousFlexibility.Radial.InnerRadialDirichletWeights
+public import ContinuousFlexibility.Radial.InnerMorseInnerWeightCosts
 
 /-!
 # Uniform local Dirichlet costs on the selected physical chain
@@ -11,6 +13,8 @@ use the already constructed radial inverse. One constant, chosen from
 the fixed geometry and the two original model constants, controls
 every piece in every finite band with the fixed power thirty-six.
 -/
+
+@[expose] public section
 
 noncomputable section
 

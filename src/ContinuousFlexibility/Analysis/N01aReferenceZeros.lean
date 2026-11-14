@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N01aJacobiTransfer
-import ContinuousFlexibility.Analysis.N01aReferenceMeasure
-import Mathlib.Analysis.Calculus.Deriv.Inverse
-import Mathlib.Analysis.SpecialFunctions.Trigonometric.Complex
-import Mathlib.Topology.Compactness.Lindelof
+module
+
+public import ContinuousFlexibility.Analysis.N01aJacobiTransfer
+public import ContinuousFlexibility.Analysis.N01aReferenceMeasure
+public import Mathlib.Analysis.Calculus.Deriv.Inverse
+public import Mathlib.Analysis.SpecialFunctions.Trigonometric.Complex
+public import Mathlib.Topology.Compactness.Lindelof
 
 /-!
 # The reference second-mode multiplier is nonzero almost everywhere
@@ -11,6 +13,8 @@ The actual Jacobi energy transfer excludes zero Cauchy data for the
 nontrivial reference kernel. Its interior zeros are therefore simple and
 countable. The angular second-mode zeros are countable as well.
 -/
+
+@[expose] public section
 
 noncomputable section
 

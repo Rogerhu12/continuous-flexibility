@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06CurrentTestLp
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentTestLp
 
 /-!
 # Actual inverse-coordinate test jets on the closed canonical strip
@@ -12,6 +14,8 @@ as pullbacks of continuous functions on the compact physical tile.
 Consequently they lie in the original canonical L2 space. The genuine boundary inverse germs also give smoothness on the full closed
 canonical strip, which supplies the finite-measure bounds for the actual tests.
 -/
+
+@[expose] public section
 
 noncomputable section
 

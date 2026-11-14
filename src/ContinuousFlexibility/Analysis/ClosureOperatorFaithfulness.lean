@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OperatorCoefficientClassification
-import ContinuousFlexibility.Analysis.EffectiveRadialCoefficient
-import ContinuousFlexibility.Analysis.CoordinatePotentialRegularity
+module
+
+public import ContinuousFlexibility.Analysis.OperatorCoefficientClassification
+public import ContinuousFlexibility.Analysis.EffectiveRadialCoefficient
+public import ContinuousFlexibility.Analysis.CoordinatePotentialRegularity
 
 /-!
 # Faithfulness at a genuine closure point
@@ -11,6 +13,8 @@ differentiability there. Its interior equality extends by continuity and
 excludes the degenerate alternative. No continuity of the stored angular
 coefficient and no common smooth extension of both pieces is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.CircleWeightedEstimate
-import ContinuousFlexibility.Analysis.CircleSobolevPointwise
-import ContinuousFlexibility.Analysis.TameLinear
-import Mathlib.Analysis.Calculus.Deriv.Add
-import Mathlib.Analysis.Calculus.Deriv.Mul
+module
+
+public import ContinuousFlexibility.Analysis.CircleWeightedEstimate
+public import ContinuousFlexibility.Analysis.CircleSobolevPointwise
+public import ContinuousFlexibility.Analysis.TameLinear
+public import Mathlib.Analysis.Calculus.Deriv.Add
+public import Mathlib.Analysis.Calculus.Deriv.Mul
 
 /-!
 # Angular differentiation in the supplied circle model
@@ -12,6 +14,8 @@ loss of sample weight.  Its membership proof shifts the angular index in
 the complete energy sum.  The decoder then realizes this operation as a
 continuous linear map in the original circle space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

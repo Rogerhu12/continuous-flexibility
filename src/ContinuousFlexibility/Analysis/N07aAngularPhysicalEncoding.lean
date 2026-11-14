@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalMeasure
-import ContinuousFlexibility.Analysis.N07aAngularInnerIntervals
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalMeasure
+public import ContinuousFlexibility.Analysis.N07aAngularInnerIntervals
 
 /-!
 # Returning the same physical representative to its canonical classes
@@ -10,6 +12,8 @@ weighted-measure identity. Thus physical a.e. equalities push back to
 canonical a.e. equalities, without any measurability or endpoint meaning
 being imposed on the inverse-coordinate candidate outside its open strip.
 -/
+
+@[expose] public section
 
 noncomputable section
 

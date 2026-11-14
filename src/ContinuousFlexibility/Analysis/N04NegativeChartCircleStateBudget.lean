@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartFixedBaseFamilies
-import ContinuousFlexibility.Analysis.CircleStripAngularInterpolation
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartFixedBaseFamilies
+public import ContinuousFlexibility.Analysis.CircleStripAngularInterpolation
 
 /-!
 # Angular estimates with one low order for every state derivative
@@ -10,6 +12,8 @@ the state order. State orders add in the transport Leibniz rule, so this
 degree remains additive through arbitrarily many radial differentiations.
 The state prefix changes the high shift and never the low order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

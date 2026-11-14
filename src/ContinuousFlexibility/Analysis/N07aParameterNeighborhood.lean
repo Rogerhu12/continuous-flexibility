@@ -1,5 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aNeighborhood
-import ContinuousFlexibility.Analysis.N07aSampleComposition
+module
+
+public import ContinuousFlexibility.Analysis.N07aNeighborhood
+public import ContinuousFlexibility.Analysis.N07aSampleComposition
+
+@[expose] public section
 
 noncomputable section
 

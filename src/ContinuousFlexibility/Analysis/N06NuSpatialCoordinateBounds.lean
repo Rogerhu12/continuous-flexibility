@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06NuSpatialPacket
+module
+
+public import ContinuousFlexibility.Analysis.N06NuSpatialPacket
 
 /-!
 # Fixed-seminorm bounds for all spatial jets of the actual nu coordinates
@@ -9,6 +11,8 @@ state grading at order n+4, uniformly over the physical annulus. The
 estimate is for the actual coordinate packet, with no independently
 assigned jets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

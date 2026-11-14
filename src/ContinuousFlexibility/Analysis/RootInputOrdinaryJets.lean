@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RootExtensionPhysicalBounds
-import ContinuousFlexibility.Analysis.RootChartSymmetry
+module
+
+public import ContinuousFlexibility.Analysis.RootExtensionPhysicalBounds
+public import ContinuousFlexibility.Analysis.RootChartSymmetry
 
 /-!
 # Ordinary root jets from actual smooth input jets
@@ -9,6 +11,8 @@ Their ordinary jets, including the root itself, obey the already proved
 finite-order estimates. Packaging those estimates costs one fixed input
 order and preserves a single high state seminorm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

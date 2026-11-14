@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.ReturnChartIdentities
-import Mathlib.Analysis.Calculus.Deriv.Inverse
-import Mathlib.Analysis.Calculus.Deriv.MeanValue
-import Mathlib.Topology.Order.MonotoneContinuity
+module
+
+public import ContinuousFlexibility.Analysis.ReturnChartIdentities
+public import Mathlib.Analysis.Calculus.Deriv.Inverse
+public import Mathlib.Analysis.Calculus.Deriv.MeanValue
+public import Mathlib.Topology.Order.MonotoneContinuity
 
 /-!
 # Positivity of the actual right-chart derivative
@@ -12,6 +14,8 @@ continuous.  The inverse derivative theorem then applies to that very
 inverse.  The transported left chart has positive derivative, and taking
 its odd part averages the derivatives at the two reflected points.
 -/
+
+@[expose] public section
 
 noncomputable section
 

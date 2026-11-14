@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06RootWeightedHeights
-import ContinuousFlexibility.Analysis.N01cPolarMixedParameterJets
-import ContinuousFlexibility.Analysis.CylinderMixedJetNorms
+module
+
+public import ContinuousFlexibility.Analysis.N06RootWeightedHeights
+public import ContinuousFlexibility.Analysis.N01cPolarMixedParameterJets
+public import ContinuousFlexibility.Analysis.CylinderMixedJetNorms
 
 /-!
 # Actual parameter jets of the four normalized root height inputs
@@ -12,6 +14,8 @@ height. Multiplying by the original scalar parameter gives the genuine
 quadratic tower and preserves the material height gain at every
 parameter order. The four inputs share one fixed spatial loss seven.
 -/
+
+@[expose] public section
 
 noncomputable section
 

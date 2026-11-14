@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ScalarEquationBoundaryContinuity
+module
+
+public import ContinuousFlexibility.Analysis.ScalarEquationBoundaryContinuity
 
 /-!
 # Actual inverse germs under a change of initial label
@@ -10,6 +12,8 @@ inverse values near the base point, using only the supplied right
 inverse and injectivity. No inverse regularity is postulated for the
 second family.
 -/
+
+@[expose] public section
 
 noncomputable section
 

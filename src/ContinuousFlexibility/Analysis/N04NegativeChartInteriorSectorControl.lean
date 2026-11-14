@@ -1,7 +1,11 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartInteriorSpeedBounds
-import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartInteriorSpeedBounds
+public import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
 
 /-! The actual interior speed control on one stable sector neighborhood. -/
+
+@[expose] public section
 
 noncomputable section
 

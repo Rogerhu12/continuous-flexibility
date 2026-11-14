@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05ReferenceLeftChoice
-import ContinuousFlexibility.Radial.ReferenceCommonInverse
-import ContinuousFlexibility.Radial.ReferenceCellAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceLeftChoice
+public import ContinuousFlexibility.Radial.ReferenceCommonInverse
+public import ContinuousFlexibility.Radial.ReferenceCellAlgebra
 
 /-!
 # Linearity of the single physical endpoint scalar
@@ -10,6 +12,8 @@ class whenever a positive-weight output realization exists. Its linearity
 then follows from the literal output class and the fixed physical inverse,
 without imposing pointwise linearity on representatives chosen by that inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

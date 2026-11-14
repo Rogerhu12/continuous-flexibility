@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Scalar.WeightedStatePrimitives
+module
+
+public import ContinuousFlexibility.Scalar.WeightedStatePrimitives
 
 /-!
 # Actual linear calculus on the common height domain
@@ -7,6 +9,8 @@ The free endpoint constant enters the radial derivative through the actual
 cutoff derivative. It has no angular derivative. The reference corrected
 coefficient acts through two proved physical radial multiplier maps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

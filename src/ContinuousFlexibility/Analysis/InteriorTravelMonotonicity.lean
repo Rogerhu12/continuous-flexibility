@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.InteriorFlowTransport
+module
+
+public import ContinuousFlexibility.Analysis.InteriorFlowTransport
 
 /-!
 # The actual travel difference is monotone along the plus flow
@@ -10,6 +12,8 @@ nonnegative angular derivative therefore propagate section bounds.
 This is a statement along characteristics, without assuming radial
 monotonicity at a fixed physical angle.
 -/
+
+@[expose] public section
 
 noncomputable section
 

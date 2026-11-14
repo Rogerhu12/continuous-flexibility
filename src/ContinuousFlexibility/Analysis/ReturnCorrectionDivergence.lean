@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionCoefficients
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionCoefficients
 
 /-!
 # Exact divergence comparison for the return correction
@@ -9,6 +11,8 @@ actual coordinate derivatives. Differentiability of the fluxes is
 explicit; linearity of a totalized derivative on arbitrary functions
 is never assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

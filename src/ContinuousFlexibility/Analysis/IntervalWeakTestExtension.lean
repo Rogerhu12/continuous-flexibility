@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.IntervalTestCompression
-import Mathlib.Analysis.Normed.Group.Bounded
-import Mathlib.MeasureTheory.Integral.DominatedConvergence
+module
+
+public import ContinuousFlexibility.Analysis.IntervalTestCompression
+public import Mathlib.Analysis.Normed.Group.Bounded
+public import Mathlib.MeasureTheory.Integral.DominatedConvergence
 
 /-!
 # Extending weak equations to tests meeting the interval endpoints
@@ -13,6 +15,8 @@ uniformly bounded, so dominated convergence extends the weak equation.
 Only L¹ membership of the solution and forcing is used. No quantitative
 flatness of either the coefficient or the test is required.
 -/
+
+@[expose] public section
 
 open Set Filter MeasureTheory
 open scoped ContDiff Topology

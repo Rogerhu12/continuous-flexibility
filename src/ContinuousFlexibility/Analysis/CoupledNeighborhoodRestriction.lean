@@ -1,10 +1,12 @@
-import ContinuousFlexibility.Analysis.SolveStateSpaces
-import ContinuousFlexibility.Analysis.N06Neighborhood
-import ContinuousFlexibility.Analysis.StateKappaBounds
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
-import ContinuousFlexibility.Analysis.TameTransfer
-import ContinuousFlexibility.Analysis.N01cBoundsRestriction
-import ContinuousFlexibility.Analysis.N06Neighborhood
+module
+
+public import ContinuousFlexibility.Analysis.SolveStateSpaces
+public import ContinuousFlexibility.Analysis.N06Neighborhood
+public import ContinuousFlexibility.Analysis.StateKappaBounds
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
+public import ContinuousFlexibility.Analysis.TameTransfer
+public import ContinuousFlexibility.Analysis.N01cBoundsRestriction
+public import ContinuousFlexibility.Analysis.N06Neighborhood
 
 /-!
 # Restricting the cumulative nonlinear construction
@@ -14,6 +16,8 @@ smaller positive radius. Every property through N08 survives that choice,
 with the same geometric data, inverse data, and loss. In particular the
 one-high-factor estimates retain their common neighborhood at every order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

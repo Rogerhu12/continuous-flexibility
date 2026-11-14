@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.InnerRadialModelPoissonPiece
-import ContinuousFlexibility.Radial.InnerRadialGapPiece
-import ContinuousFlexibility.Radial.InnerModelPoissonAssembly
-import ContinuousFlexibility.Radial.InnerModelDirichletCost
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialModelPoissonPiece
+public import ContinuousFlexibility.Radial.InnerRadialGapPiece
+public import ContinuousFlexibility.Radial.InnerModelPoissonAssembly
+public import ContinuousFlexibility.Radial.InnerModelDirichletCost
 
 /-!
 # Actual model and gap data on one common finite chain
@@ -15,6 +17,8 @@ The finite-chain assembly below uses these exact Hilbert Dirichlet and
 Poisson operators. The model inverse is the existing Hilbert transport;
 the positive-gap operator sends its field into the scalar-zero summand.
 -/
+
+@[expose] public section
 
 noncomputable section
 

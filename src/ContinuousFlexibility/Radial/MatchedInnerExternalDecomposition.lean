@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchingInnerDecomposition
-import Mathlib.Tactic.Abel
+module
+
+public import ContinuousFlexibility.Radial.MatchingInnerDecomposition
+public import Mathlib.Tactic.Abel
 
 /-!
 # The actual external inner Poisson column from its leading buffer
@@ -10,6 +12,8 @@ data. Frozen inner uniqueness proves the subtraction identity. This
 does not identify the two external columns with the finite chain's
 internal-interface Poisson map.
 -/
+
+@[expose] public section
 
 noncomputable section
 

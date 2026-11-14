@@ -1,5 +1,7 @@
-import Mathlib.Analysis.InnerProductSpace.LinearPMap
-import Mathlib.Tactic.Abel
+module
+
+public import Mathlib.Analysis.InnerProductSpace.LinearPMap
+public import Mathlib.Tactic.Abel
 
 /-!
 # The unbounded operator determined by an injective self-adjoint resolvent
@@ -10,6 +12,8 @@ the range is dense and this partially defined operator is genuinely
 self-adjoint: the domain of its Hilbert-space adjoint is proved to be the
 same range, rather than included as a hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

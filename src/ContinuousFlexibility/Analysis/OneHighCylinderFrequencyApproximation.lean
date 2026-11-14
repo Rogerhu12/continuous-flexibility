@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderFourierCutoff
-import Mathlib.MeasureTheory.Integral.DominatedConvergence
-import Mathlib.MeasureTheory.Function.LpSeminorm.LpNorm
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderFourierCutoff
+public import Mathlib.MeasureTheory.Integral.DominatedConvergence
+public import Mathlib.MeasureTheory.Function.LpSeminorm.LpNorm
 
 /-!
 # Strong convergence of bounded-frequency cutoffs
@@ -9,6 +11,8 @@ Every fixed mixed frequency eventually belongs to the cutoff. Dominated
 convergence gives actual L1 and L2 convergence, including the weighted L2
 norm whenever that finite Sobolev membership is given.
 -/
+
+@[expose] public section
 
 noncomputable section
 

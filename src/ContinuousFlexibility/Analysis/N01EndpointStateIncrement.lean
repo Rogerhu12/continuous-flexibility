@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01EndpointStateCircleMember
-import ContinuousFlexibility.Analysis.CircleCurveEnergyEnvelope
+module
+
+public import ContinuousFlexibility.Analysis.N01EndpointStateCircleMember
+public import ContinuousFlexibility.Analysis.CircleCurveEnergyEnvelope
 
 /-!
 # The actual zero-scalar endpoint increment is a circle field
@@ -9,6 +11,8 @@ A fixed localized state direction supplies the summable energy for the
 whole segment, and the scalar mean value theorem controls every angular
 jet of the actual endpoint difference.
 -/
+
+@[expose] public section
 
 noncomputable section
 

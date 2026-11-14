@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCurrentPhysicalGeometry
-import Mathlib.Algebra.Order.ToIntervalMod
+module
+
+public import ContinuousFlexibility.Analysis.N07aCurrentPhysicalGeometry
+public import Mathlib.Algebra.Order.ToIntervalMod
 
 /-!
 # Genuine compact physical tests for canonical weak equations
@@ -8,6 +10,8 @@ A compact canonical radial test has compact radial preimage under the
 actual periodic strip diffeomorphism. Zero extension outside the physical
 piece is therefore globally smooth and is a genuine physical test.
 -/
+
+@[expose] public section
 
 noncomputable section
 

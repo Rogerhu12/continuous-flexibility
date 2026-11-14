@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bTypedAtlasPositive
-import ContinuousFlexibility.Analysis.N04bNegativePieceGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N04bTypedAtlasPositive
+public import ContinuousFlexibility.Analysis.N04bNegativePieceGeometry
 
 /-!
 # Negative fields of the same concrete typed atlas
@@ -9,6 +11,8 @@ negative functions. Their proved geometric output gives the four
 remaining chart clauses of CanonicalGeometry, without changing either
 the moving physical domain or its fixed canonical interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

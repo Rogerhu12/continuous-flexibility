@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerRadialH1Density
-import ContinuousFlexibility.Radial.InnerRadialAffineLift
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialH1Density
+public import ContinuousFlexibility.Radial.InnerRadialAffineLift
 
 /-!
 # Smooth tests in the actual physical first-order domain
@@ -10,6 +12,8 @@ proved physical cutoff density puts that residual in the actual closure.
 This supplies the tests needed to compare the finite weak graph with the
 modal equation; no new test domain is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

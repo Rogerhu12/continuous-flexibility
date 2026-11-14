@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerAdmissibleSource
-import ContinuousFlexibility.Radial.InnerBorderWeights
-import ContinuousFlexibility.Radial.InnerIsometricRestriction
+module
+
+public import ContinuousFlexibility.Radial.InnerAdmissibleSource
+public import ContinuousFlexibility.Radial.InnerBorderWeights
+public import ContinuousFlexibility.Radial.InnerIsometricRestriction
 
 /-!
 # Actual weights on the supported admissible source
@@ -13,6 +15,8 @@ A coefficient-loss multiplier is the same construction with bound one.
 The inclusion remains isometric. Ambient operator estimates and actual
 Poisson adjoints therefore transfer without a norm-equivalence loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

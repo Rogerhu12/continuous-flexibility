@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.TerminalPhysicalCutoff
-import ContinuousFlexibility.Radial.TerminalCapLayerL2
-import ContinuousFlexibility.Radial.TerminalCapEnergyError
+module
+
+public import ContinuousFlexibility.Radial.TerminalPhysicalCutoff
+public import ContinuousFlexibility.Radial.TerminalCapLayerL2
+public import ContinuousFlexibility.Radial.TerminalCapEnergyError
 
 /-!
 # Actual source estimates on a retained first cone
@@ -10,6 +12,8 @@ so the weighted layer mass is bounded independently of how far inward
 the layer is placed. The profile height and frequency cancel against the
 same boundary normalization used by the actual cutoff lift.
 -/
+
+@[expose] public section
 
 noncomputable section
 

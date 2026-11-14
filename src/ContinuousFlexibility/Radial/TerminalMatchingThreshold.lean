@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.TerminalMatchingSuppression
+module
+
+public import ContinuousFlexibility.Radial.TerminalMatchingSuppression
 
 /-!
 # Matching suppression with an external frequency threshold
@@ -11,6 +13,8 @@ The lower band edge controls every earlier cap, in particular cap m for
 band m+1. The action of the transition cell m+1 has an upper band bound,
 so no lower cap-action estimate is asserted for that cell.
 -/
+
+@[expose] public section
 
 noncomputable section
 

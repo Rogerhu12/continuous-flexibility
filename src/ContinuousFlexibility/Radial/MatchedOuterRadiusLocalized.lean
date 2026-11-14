@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchedRadiusMultipliers
-import ContinuousFlexibility.Radial.MatchedOuterModalCells
+module
+
+public import ContinuousFlexibility.Radial.MatchedRadiusMultipliers
+public import ContinuousFlexibility.Radial.MatchedOuterModalCells
 
 /-!
 # Actual final-reference cell norms from the original radius kernel
@@ -9,6 +11,8 @@ This remains valid on the finite core, where the retained order coordinate
 can differ from a dilation. Both conclusions concern the supplied
 transported operator and supplied vector on all L² sources.
 -/
+
+@[expose] public section
 
 noncomputable section
 

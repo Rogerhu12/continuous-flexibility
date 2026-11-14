@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N01ActualRetainedReference
-import ContinuousFlexibility.Analysis.N01aFixedReferencePrimitiveContext
-import ContinuousFlexibility.Analysis.NeighborhoodFlowRetainedGeometry
-import ContinuousFlexibility.Analysis.N01PrimitiveFixedWitnessConstruction
-import ContinuousFlexibility.Analysis.N01cActualPrimitiveGeometry
-import ContinuousFlexibility.Analysis.N01cRetainedComponentEnumeration
+module
+
+public import ContinuousFlexibility.Analysis.N01ActualRetainedReference
+public import ContinuousFlexibility.Analysis.N01aFixedReferencePrimitiveContext
+public import ContinuousFlexibility.Analysis.NeighborhoodFlowRetainedGeometry
+public import ContinuousFlexibility.Analysis.N01PrimitiveFixedWitnessConstruction
+public import ContinuousFlexibility.Analysis.N01cActualPrimitiveGeometry
+public import ContinuousFlexibility.Analysis.N01cRetainedComponentEnumeration
 
 /-!
 # N01 on the actual retained reference
@@ -14,6 +16,8 @@ and flow constructions. Only the three flow fields are installed in the
 control geometry. The N01c conclusion is the parameter-order-loss
 contract of the selected upstream version.
 -/
+
+@[expose] public section
 
 noncomputable section
 

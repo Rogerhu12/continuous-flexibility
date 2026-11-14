@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationPotentialOneHigh
-import ContinuousFlexibility.Analysis.N04RealizationDifferenceValue
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationPotentialOneHigh
+public import ContinuousFlexibility.Analysis.N04RealizationDifferenceValue
 
 /-!
 # The potential value difference has no additive constant
@@ -8,6 +10,8 @@ Only the raw five-field parameter prefix through order one is used. The
 genuine first derivative on the same reference segment gives precisely
 the displacement factor required by the zeroth current-jet clause.
 -/
+
+@[expose] public section
 
 noncomputable section
 

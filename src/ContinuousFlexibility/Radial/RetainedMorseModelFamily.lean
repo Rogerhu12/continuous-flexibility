@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.RetainedMorseModelChart
-import ContinuousFlexibility.Radial.InnerActualModelChain
-import ContinuousFlexibility.Radial.InnerMorseInnerChain
+module
+
+public import ContinuousFlexibility.Radial.RetainedMorseModelChart
+public import ContinuousFlexibility.Radial.InnerActualModelChain
+public import ContinuousFlexibility.Radial.InnerMorseInnerChain
 
 /-!
 # One actual central-and-tail model dictionary
@@ -10,6 +12,8 @@ physical transports of the original localized Morse buffers. The two
 side factors belong to the same retained pair. The selector has exact
 application lemmas, so the local estimates refer to the original models.
 -/
+
+@[expose] public section
 
 noncomputable section
 

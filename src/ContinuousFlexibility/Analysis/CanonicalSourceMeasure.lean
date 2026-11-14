@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Scalar.FormPullback
-import Mathlib.LinearAlgebra.Basis.Fin
-import Mathlib.MeasureTheory.Function.Jacobian
-import Mathlib.MeasureTheory.Measure.Haar.OfBasis
+module
+
+public import ContinuousFlexibility.Scalar.FormPullback
+public import Mathlib.LinearAlgebra.Basis.Fin
+public import Mathlib.MeasureTheory.Function.Jacobian
+public import Mathlib.MeasureTheory.Measure.Haar.OfBasis
 
 /-!
 # Measure conversion for canonical sources
@@ -13,6 +15,8 @@ resulting pairing formula.  The formula does not assume integrability:
 the change-of-variables theorem treats both integrals with the same
 totalized Bochner-integral convention.
 -/
+
+@[expose] public section
 
 noncomputable section
 

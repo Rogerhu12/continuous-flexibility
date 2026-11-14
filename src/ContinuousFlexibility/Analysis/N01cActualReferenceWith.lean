@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.R11aClosedInputs
-import ContinuousFlexibility.Radial.R11aRetainedFamily
-import ContinuousFlexibility.Radial.MatchedInnerCompletedFamily
-import ContinuousFlexibility.Radial.MatchedOuterCompletedFamily
-import ContinuousFlexibility.Analysis.N01cRetainedRegionalEnvelope
+module
+
+public import ContinuousFlexibility.Radial.R11aClosedInputs
+public import ContinuousFlexibility.Radial.R11aRetainedFamily
+public import ContinuousFlexibility.Radial.MatchedInnerCompletedFamily
+public import ContinuousFlexibility.Radial.MatchedOuterCompletedFamily
+public import ContinuousFlexibility.Analysis.N01cRetainedRegionalEnvelope
 
 /-!
 # Retaining geometric information through the actual inverse construction
@@ -10,6 +12,8 @@ import ContinuousFlexibility.Analysis.N01cRetainedRegionalEnvelope
 The regional constructions and both spatial estimates use the same
 completed matching family. The constants precede the modal index.
 -/
+
+@[expose] public section
 
 noncomputable section
 

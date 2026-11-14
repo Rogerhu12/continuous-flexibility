@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesPhysicalCellBands
-import ContinuousFlexibility.Analysis.SpacesRadialWeightOverlap
+module
+
+public import ContinuousFlexibility.Analysis.SpacesPhysicalCellBands
+public import ContinuousFlexibility.Analysis.SpacesRadialWeightOverlap
 
 /-!
 # Weighted row operators for physical synthesis
@@ -9,6 +11,8 @@ actual material weight and its value at the cell center. Its square-sum
 bound gives a bounded gluing map. The remaining center weight is placed
 on the finite Fourier jet, where the joint spectral band controls it.
 -/
+
+@[expose] public section
 
 noncomputable section
 

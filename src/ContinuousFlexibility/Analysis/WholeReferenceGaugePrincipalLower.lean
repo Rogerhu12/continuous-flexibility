@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PositiveReferencePhysicalLower
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeReferencePrincipal
+module
+
+public import ContinuousFlexibility.Analysis.PositiveReferencePhysicalLower
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeReferencePrincipal
 
 /-!
 # Physical inputs for the actual reference angular lower bound
@@ -10,6 +12,8 @@ component. The final criterion records the precise uniform cost that
 the profile and interpolation estimates must supply; it does not assert
 that these estimates follow from the current Through03 hypotheses.
 -/
+
+@[expose] public section
 
 noncomputable section
 

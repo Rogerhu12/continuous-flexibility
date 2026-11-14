@@ -1,7 +1,9 @@
-import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
-import Mathlib.Topology.Algebra.Support
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
+public import Mathlib.Topology.Algebra.Support
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
 
 /-!
 # Smooth tests near a matching cut
@@ -12,6 +14,8 @@ The decomposition below preserves the portions approaching the original
 endpoints and isolates an interior cut in a test supported strictly
 inside a prescribed neighborhood of that cut.
 -/
+
+@[expose] public section
 
 noncomputable section
 

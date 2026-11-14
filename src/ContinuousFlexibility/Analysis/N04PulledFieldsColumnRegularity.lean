@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsColumnPhysical
-import ContinuousFlexibility.Analysis.N04PulledFieldsSpatial
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsColumnPhysical
+public import ContinuousFlexibility.Analysis.N04PulledFieldsSpatial
 
 /-!
 # Regularity of both actual pulled columns on one neighborhood
@@ -14,6 +16,8 @@ needed to form genuine mixed parameter/spatial towers.
 No quantitative composition estimate or current-jet conclusion is asserted
 by this regularity module.
 -/
+
+@[expose] public section
 
 noncomputable section
 

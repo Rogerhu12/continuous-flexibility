@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ReferenceFiniteIndexFloor
+module
+
+public import ContinuousFlexibility.Radial.ReferenceFiniteIndexFloor
 
 /-!
 # Positive radial indices
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Radial.ReferenceFiniteIndexFloor
 The positive-index normalization is the value N=1 of the general
 finite index floor. All quantitative preservation is proved there.
 -/
+
+@[expose] public section
 
 noncomputable section
 

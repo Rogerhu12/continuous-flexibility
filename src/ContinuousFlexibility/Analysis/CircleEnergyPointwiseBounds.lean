@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CircleWeightedComposition
+module
+
+public import ContinuousFlexibility.Analysis.CircleWeightedComposition
 
 /-!
 # Weighted membership from actual componentwise pointwise bounds
@@ -7,6 +9,8 @@ These estimates keep each circle's complete input energy until the final
 sum.  In particular a uniform pointwise estimate with a global seminorm
 does not by itself assert square summability over the circles.
 -/
+
+@[expose] public section
 
 noncomputable section
 

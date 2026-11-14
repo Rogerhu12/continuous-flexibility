@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerRadialEnergyDomain
-import ContinuousFlexibility.Radial.InnerDirichletDomain
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialEnergyDomain
+public import ContinuousFlexibility.Radial.InnerDirichletDomain
 
 /-!
 # Smooth zero-endpoint fields in the physical H¹ closure
@@ -10,6 +12,8 @@ directly in μ_D to the value and the normalized derivative. In
 particular no transfer of an unproved Sobolev domain between measures
 is used, and endpoint derivatives need not vanish.
 -/
+
+@[expose] public section
 
 noncomputable section
 

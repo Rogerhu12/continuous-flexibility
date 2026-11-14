@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsKernelJointFixedBase
-import ContinuousFlexibility.Analysis.CoupledCircleCompositionSmoothTame
-import ContinuousFlexibility.Analysis.CircleTranslationUniformBounds
-import ContinuousFlexibility.Analysis.CircleShiftedForwardFixedBaseBounds
-import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
-import ContinuousFlexibility.Analysis.TameUnitIntegralLinearFamily
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsKernelJointFixedBase
+public import ContinuousFlexibility.Analysis.CoupledCircleCompositionSmoothTame
+public import ContinuousFlexibility.Analysis.CircleTranslationUniformBounds
+public import ContinuousFlexibility.Analysis.CircleShiftedForwardFixedBaseBounds
+public import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
+public import ContinuousFlexibility.Analysis.TameUnitIntegralLinearFamily
 
 /-!
 # Fixed-base bounds for both inputs of actual circle composition
@@ -13,6 +15,8 @@ low base survives all parameter orders. Travel is moved into the existing
 circle translation, which contracts every grading, and uniqueness transfers
 the estimate to every supplied tower of the actual shifted composition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

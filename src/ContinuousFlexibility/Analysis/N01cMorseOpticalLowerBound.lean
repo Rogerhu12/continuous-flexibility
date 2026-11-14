@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.MorseRealizationBasic
-import ContinuousFlexibility.Radial.MorseRetainedRadiusModelBounds
-import Mathlib.Analysis.Calculus.Deriv.MeanValue
-import Mathlib.Topology.Order.IntermediateValue
+module
+
+public import ContinuousFlexibility.Radial.MorseRealizationBasic
+public import ContinuousFlexibility.Radial.MorseRetainedRadiusModelBounds
+public import Mathlib.Analysis.Calculus.Deriv.MeanValue
+public import Mathlib.Topology.Order.IntermediateValue
 
 /-!
 # Quantitative optical nondegeneracy of the actual Morse realization
@@ -17,6 +19,8 @@ The theorem applies to tail indices `100 ≤ n`.  It does not identify the
 Morse realization with an arbitrary `IsRadialReference`, or choose the cell
 indices of a nonlinear geometry witness.
 -/
+
+@[expose] public section
 
 noncomputable section
 

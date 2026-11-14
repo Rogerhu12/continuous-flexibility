@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Blueprint.Statements
-import ContinuousFlexibility.Radial.R11bFirstNormal
-import ContinuousFlexibility.Radial.R11bMaximumGraphUniqueness
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
+public import ContinuousFlexibility.Radial.R11bFirstNormal
+public import ContinuousFlexibility.Radial.R11bMaximumGraphUniqueness
 
 /-!
 # Blueprint node R11b
@@ -11,6 +13,8 @@ Source: `paper/flexible-surface-readable/06-global-reference-inverse.tex` lines 
 
 Task file: `docs/tasks/R11b.md`.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

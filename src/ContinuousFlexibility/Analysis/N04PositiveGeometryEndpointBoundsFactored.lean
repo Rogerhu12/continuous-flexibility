@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsOrientation
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsOrientation
 
 /-!
 # The literal factored speed with its fixed reference material cost
@@ -7,6 +9,8 @@ Only a finite list of ordinary jets of the fixed reference speed enters
 the radial Leibniz rule. All parameter derivatives belong to the actual
 physical coefficient, so the original height factor is retained once.
 -/
+
+@[expose] public section
 
 noncomputable section
 

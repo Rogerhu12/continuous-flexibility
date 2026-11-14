@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CircleInverseModel
-import ContinuousFlexibility.Analysis.CircleJetPointwiseEnergy
-import Mathlib.Topology.Algebra.InfiniteSum.ENNReal
+module
+
+public import ContinuousFlexibility.Analysis.CircleInverseModel
+public import ContinuousFlexibility.Analysis.CircleJetPointwiseEnergy
+public import Mathlib.Topology.Algebra.InfiniteSum.ENNReal
 
 /-!
 # The open domain of positive circle lifts
@@ -11,6 +13,8 @@ along the components. A positive degree-one lift consequently has one
 positive lower derivative bound on all components, and that bound persists
 on a neighborhood measured by the original second circle grading.
 -/
+
+@[expose] public section
 
 noncomputable section
 

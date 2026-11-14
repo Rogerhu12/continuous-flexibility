@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01EndpointCircleTower
+module
+
+public import ContinuousFlexibility.Analysis.N01EndpointCircleTower
 
 /-!
 # Zeroth-order tame growth from the actual circle derivative
@@ -7,6 +9,8 @@ The endpoint displacement vanishes at the origin. The genuine first
 circle derivative along the straight segment therefore controls the
 value in every Hilbert coordinate, with the same fixed derivative loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

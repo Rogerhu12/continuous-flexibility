@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R11bPhysicalProjection
-import ContinuousFlexibility.Radial.ProfilePartitionBounds
+module
+
+public import ContinuousFlexibility.Radial.R11bPhysicalProjection
+public import ContinuousFlexibility.Radial.ProfilePartitionBounds
 
 /-!
 # Actual finite angular synthesis and cell Parseval
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Radial.ProfilePartitionBounds
 The radial coefficients may be arbitrary L² functions. Orthogonality is only
 used in the angular variable; localizers act on the original representatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

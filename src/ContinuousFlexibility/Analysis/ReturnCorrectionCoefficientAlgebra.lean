@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionResidualPeriodicity
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionResidualPeriodicity
 
 /-!
 # Polynomial form of the actual coefficient error
@@ -10,6 +12,8 @@ and the reflected velocity increments. This form keeps the spatial and
 parameter derivative budgets visible without introducing a reciprocal
 coefficient into the error formula.
 -/
+
+@[expose] public section
 
 noncomputable section
 

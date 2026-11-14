@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalRepresentative
-import ContinuousFlexibility.Analysis.N07aCanonicalSmoothJets
-import ContinuousFlexibility.Analysis.N07aOpenClassicalNormal
-import ContinuousFlexibility.Analysis.N07aAngularCandidateCoordinates
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalRepresentative
+public import ContinuousFlexibility.Analysis.N07aCanonicalSmoothJets
+public import ContinuousFlexibility.Analysis.N07aOpenClassicalNormal
+public import ContinuousFlexibility.Analysis.N07aAngularCandidateCoordinates
 
 /-!
 # Actual physical evenness survives gluing across all interfaces
@@ -11,6 +13,8 @@ decoder is therefore even, and the actual reference/current chart symmetry
 transfers that fact to each physical piece. The reference radial cover and the current planar cover are treated
 separately; continuity supplies equality at roots and artificial cuts.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07bInteriorGreen
+module
+
+public import ContinuousFlexibility.Analysis.N07bInteriorGreen
 
 /-!
 # Strong physical solutions satisfy the canonical weak relation
@@ -17,6 +19,8 @@ This module uses the full-period version of PerturbedCanonicalRelation.
 It identifies the physical weak equation; it does not assert membership
 in the fixed reference graph.
 -/
+
+@[expose] public section
 
 noncomputable section
 

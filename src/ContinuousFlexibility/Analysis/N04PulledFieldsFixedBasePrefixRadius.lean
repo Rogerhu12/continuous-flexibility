@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04RealizationFixedBasePrefix
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationFixedBasePrefix
 
 /-!
 # Fixed-base affine prefixes on arbitrary low-order balls
@@ -8,6 +10,8 @@ Positive parameter losses are paid once per parameter slot. The radius
 of the low-order ball affects only the numerical coefficient, while the
 power denominator remains the chosen spatial top plus one.
 -/
+
+@[expose] public section
 
 noncomputable section
 

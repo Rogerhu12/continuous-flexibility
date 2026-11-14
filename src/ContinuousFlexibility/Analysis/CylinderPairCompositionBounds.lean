@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CylinderMixedJetNorms
-import ContinuousFlexibility.Analysis.CoordinateCompositionMaterialBounds
+module
+
+public import ContinuousFlexibility.Analysis.CylinderMixedJetNorms
+public import ContinuousFlexibility.Analysis.CoordinateCompositionMaterialBounds
 
 /-!
 # A common fixed loss for actual scalar functions of two cylinder fields
@@ -9,6 +11,8 @@ existing partition/interpolation estimate is applied once to the pair.
 The low order and loss are independent of the outer function, its compact
 range bounds, the cylinder domain, and the requested derivative order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

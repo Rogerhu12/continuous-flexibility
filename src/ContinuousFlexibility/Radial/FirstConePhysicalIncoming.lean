@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.SelectedSideTransport
-import ContinuousFlexibility.Radial.SelectedBoundaryRadiusScale
-import ContinuousFlexibility.Radial.R07DeepTailChange
+module
+
+public import ContinuousFlexibility.Radial.SelectedSideTransport
+public import ContinuousFlexibility.Radial.SelectedBoundaryRadiusScale
+public import ContinuousFlexibility.Radial.R07DeepTailChange
 
 /-!
 # Normalized first-band incoming solutions on the final common geometry
@@ -9,6 +11,8 @@ The physical solution uses the same side radius and height as the retained
 pair. Its growing cap, actual equation, unit join value, slope `1 / j`
 and original selected entrance angle therefore refer to one geometry.
 -/
+
+@[expose] public section
 
 noncomputable section
 

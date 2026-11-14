@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06WeightedHeight
-import Mathlib.Analysis.Normed.Operator.Bilinear
+module
+
+public import ContinuousFlexibility.Analysis.N06WeightedHeight
+public import Mathlib.Analysis.Normed.Operator.Bilinear
 
 /-!
 # The three actual scalar columns in the relative operator
@@ -9,6 +11,8 @@ All three columns are retained, including the source-normalizing column:
 its canonical pullback need not be independent of the current state.
 The resulting finite-rank map acts on the original source space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MatchedPiecesAssembly
+module
+
+public import ContinuousFlexibility.Radial.MatchedPiecesAssembly
 
 /-!
 # The outer region on an unchanged matching shell
@@ -7,6 +9,8 @@ The actual outer construction installs its inverse, representative and
 Poisson columns independently of the inner operator. Both frequency cases
 use this same interface, after fixing their actual boundary data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

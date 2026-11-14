@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Analysis
-import ContinuousFlexibility.Analysis.ProjectiveJetEvaluation
+module
+
+public import ContinuousFlexibility.Statements.Analysis
+public import ContinuousFlexibility.Analysis.ProjectiveJetEvaluation
 
 /-!
 # Differentiating a continuous family of linear inverses
@@ -9,6 +11,8 @@ particular, continuity of the inverse family is applied simultaneously to
 the changing parameter and the converging difference quotient.  No norm on
 the space of continuous linear maps is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

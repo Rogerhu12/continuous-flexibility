@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06CutoffCorrectionConservation
-import ContinuousFlexibility.Analysis.N06FiniteCurrentBoundaryGluing
-import ContinuousFlexibility.Analysis.N06CurrentPhysicalTests
-import ContinuousFlexibility.Analysis.SpacesSources
+module
+
+public import ContinuousFlexibility.Analysis.N06CutoffCorrectionConservation
+public import ContinuousFlexibility.Analysis.N06FiniteCurrentBoundaryGluing
+public import ContinuousFlexibility.Analysis.N06CurrentPhysicalTests
+public import ContinuousFlexibility.Analysis.SpacesSources
 
 /-!
 # The actual left column paired with compact even half-period tests
@@ -12,6 +14,8 @@ assumption at the flat annular ends. N03's weighted correction conservation
 then replaces the original operator by the corrected one. All functions
 are the original physical fields and all integrals use the source mean.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationMaterialTransfer
-import ContinuousFlexibility.Analysis.N04PositiveComponents
-import ContinuousFlexibility.Analysis.WholeCanonicalAtlasData
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationMaterialTransfer
+public import ContinuousFlexibility.Analysis.N04PositiveComponents
+public import ContinuousFlexibility.Analysis.WholeCanonicalAtlasData
 
 /-!
 # Exact height decay at the retained positive-component sample
@@ -14,6 +16,8 @@ ambient endpoint. No cell or sample is selected in this module.
 The elementary displacement proof is extracted from the already merged
 recovery version of PositiveComponentMaterialCell.
 -/
+
+@[expose] public section
 
 noncomputable section
 

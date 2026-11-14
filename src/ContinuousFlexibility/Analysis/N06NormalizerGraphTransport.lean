@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06NormalizerGraphShear
+module
+
+public import ContinuousFlexibility.Analysis.N06NormalizerGraphShear
 
 /-!
 # Source-preserving graph equivalences transport the selected inverse
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Analysis.N06NormalizerGraphShear
 These statements separate the elementary graph algebra from the large
 dependent canonical data. They preserve the actual source projection.
 -/
+
+@[expose] public section
 
 noncomputable section
 

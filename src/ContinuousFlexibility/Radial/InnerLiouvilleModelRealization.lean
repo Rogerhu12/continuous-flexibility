@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.InnerLiouvilleEnergyDomain
-import ContinuousFlexibility.Radial.InnerLiouvilleBorderTransport
-import ContinuousFlexibility.Radial.InnerBufferLocalizedConstruction
-import ContinuousFlexibility.Radial.InnerWeakGreen
+module
+
+public import ContinuousFlexibility.Radial.InnerLiouvilleEnergyDomain
+public import ContinuousFlexibility.Radial.InnerLiouvilleBorderTransport
+public import ContinuousFlexibility.Radial.InnerBufferLocalizedConstruction
+public import ContinuousFlexibility.Radial.InnerWeakGreen
 
 /-!
 # The actual model inverse has the physical domain and scalar row
@@ -13,6 +15,8 @@ Its original energy witness then maps into the actual radial
 zero-endpoint closure, and the inverse-adjoint border preserves the
 single scalar row exactly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

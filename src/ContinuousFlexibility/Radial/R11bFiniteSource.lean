@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R11bFiniteTransfer
+module
+
+public import ContinuousFlexibility.Radial.R11bFiniteTransfer
 
 /-!
 # Compatible finite sources from the angular derivative
@@ -7,6 +9,8 @@ Negative sine coefficients synthesize a positive even-frequency cosine
 field. Its weighted cell norm contracts the derivative source norm. Its
 angular mean is identically zero, so all original source conditions hold.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CircleDifferentialOperators
+module
+
+public import ContinuousFlexibility.Analysis.CircleDifferentialOperators
 
 /-!
 # Linear evaluation of every actual circle angular jet
@@ -7,6 +9,8 @@ Repeated differentiation stays in the supplied circle model. Composing
 its decoder with point evaluations therefore gives a linear functional
 for each angular derivative, with the exact iterated-derivative formula.
 -/
+
+@[expose] public section
 
 noncomputable section
 

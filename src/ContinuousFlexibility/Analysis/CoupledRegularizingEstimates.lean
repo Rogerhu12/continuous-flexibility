@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CoupledUniformLinearFamily
+module
+
+public import ContinuousFlexibility.Analysis.CoupledUniformLinearFamily
 
 /-!
 # Estimates for control smoothing and the recovered inverse
@@ -8,6 +10,8 @@ again regularizing when its one low parameter seminorm is bounded. The
 control Banach estimate then supplies a tame bound for the recovered
 constant-circle inverse at every order on the same neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

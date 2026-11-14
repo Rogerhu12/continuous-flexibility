@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R07UniformSelection
+module
+
+public import ContinuousFlexibility.Radial.R07UniformSelection
 
 /-!
 # Selecting only the noninitial bands
@@ -8,6 +10,8 @@ All later conditions form a subtype of the full two-endpoint condition
 set, so the same previously chosen height tolerance pays for them.
 No artificial matching states are needed at the initial band.
 -/
+
+@[expose] public section
 
 noncomputable section
 

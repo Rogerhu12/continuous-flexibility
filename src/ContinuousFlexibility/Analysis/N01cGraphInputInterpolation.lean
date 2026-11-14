@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
 
 /-!
 # Interpolated angular inputs for the complete graph estimate
@@ -8,6 +10,8 @@ beta minus one. Positive-state factors use the offset-zero interpolation
 chosen once; their parameter-prefix loss is counted in their effective
 spatial order, rather than changing the low base.
 -/
+
+@[expose] public section
 
 noncomputable section
 

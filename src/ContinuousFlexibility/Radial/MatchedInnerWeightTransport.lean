@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.MatchingInverseFormula
-import ContinuousFlexibility.Radial.MatchedInnerActualSource
-import ContinuousFlexibility.Radial.MatchedModeWeightedCells
-import ContinuousFlexibility.Radial.InnerSupportedWeights
+module
+
+public import ContinuousFlexibility.Radial.MatchingInverseFormula
+public import ContinuousFlexibility.Radial.MatchedInnerActualSource
+public import ContinuousFlexibility.Radial.MatchedModeWeightedCells
+public import ContinuousFlexibility.Radial.InnerSupportedWeights
 
 /-!
 # From the same supported inner inverse to the original mode-pair norm
@@ -13,6 +15,8 @@ for C.inverse transfers to M.innerInverse on its actual restricted
 sources, including the frequency-dependent scalar gate. The only
 change of norm costs sqrt 2.
 -/
+
+@[expose] public section
 
 noncomputable section
 

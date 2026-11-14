@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.TameJetComposition
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
-import ContinuousFlexibility.Statements.Nonlinear
-import Mathlib.Analysis.SpecialFunctions.Sqrt
+module
+
+public import ContinuousFlexibility.Analysis.TameJetComposition
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
+public import ContinuousFlexibility.Statements.Nonlinear
+public import Mathlib.Analysis.SpecialFunctions.Sqrt
 
 /-!
 # Genuine parameter jets of the scalar coefficient formulas
@@ -20,6 +22,8 @@ and nonvanishing of `heightQ`.  The final constructor specializes directly to
 `originalCoefficients`.  These are parameter-smoothness results at a fixed
 spatial point, not spatially differentiated or quantitative tame estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

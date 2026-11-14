@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFourierChangeVariables
-import ContinuousFlexibility.Analysis.OneHighCircleRealSobolev
-import ContinuousFlexibility.Analysis.OneHighCompositionJets
-import ContinuousFlexibility.Analysis.OneHighL2Domination
-import Mathlib.Topology.ContinuousMap.Lattice
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierChangeVariables
+public import ContinuousFlexibility.Analysis.OneHighCircleRealSobolev
+public import ContinuousFlexibility.Analysis.OneHighCompositionJets
+public import ContinuousFlexibility.Analysis.OneHighL2Domination
+public import Mathlib.Topology.ContinuousMap.Lattice
 
 /-!
 # Low-order circle composition estimates
@@ -11,6 +13,8 @@ The actual Faà di Bruno formula is combined with change of variables. Bounds
 on the first three derivatives of the lift will provide the uniform low-order
 base for the tame high-order induction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

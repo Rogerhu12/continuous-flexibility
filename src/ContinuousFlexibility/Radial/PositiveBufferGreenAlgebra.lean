@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.PositiveBufferFullInverse
-import ContinuousFlexibility.Radial.PositiveBufferSurgery
-import ContinuousFlexibility.Radial.PositiveBufferMatrixBounds
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferFullInverse
+public import ContinuousFlexibility.Radial.PositiveBufferSurgery
+public import ContinuousFlexibility.Radial.PositiveBufferMatrixBounds
 
 /-!
 # Actual normalized Green columns and their cut matrix
@@ -8,6 +10,8 @@ import ContinuousFlexibility.Radial.PositiveBufferMatrixBounds
 These definitions retain the energy domain, its true continuous traces, and
 the physical L² × ℝ pairing throughout the finite-dimensional subtraction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

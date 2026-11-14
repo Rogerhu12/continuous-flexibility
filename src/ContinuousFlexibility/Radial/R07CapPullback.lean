@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R07RadialODE
-import ContinuousFlexibility.Radial.DirichletRiccatiComparison
+module
+
+public import ContinuousFlexibility.Radial.R07RadialODE
+public import ContinuousFlexibility.Radial.DirichletRiccatiComparison
 
 /-!
 # The positive-cap equation in an oriented model coordinate
@@ -10,6 +12,8 @@ the same lemma applies when the left cap is traversed in reverse.
 The identity is only required on the closed cap; uniqueness of derivatives
 within that interval justifies the calculation at both boundary points.
 -/
+
+@[expose] public section
 
 noncomputable section
 

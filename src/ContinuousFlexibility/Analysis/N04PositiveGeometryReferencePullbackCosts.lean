@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryReferenceCosts
-import ContinuousFlexibility.Analysis.N04RealizationFixedRadialEnvelope
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryReferenceCosts
+public import ContinuousFlexibility.Analysis.N04RealizationFixedRadialEnvelope
 
 /-!
 # The fixed reference inverse has a controlled chain-coefficient mass
@@ -10,6 +12,8 @@ before the positive component, point and output order in the prefix are
 chosen. The bound concerns the same reference inverse retained by the
 assembly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

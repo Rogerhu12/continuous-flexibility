@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import ContinuousFlexibility.Scalar.WeightedGeometryLowJets
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import ContinuousFlexibility.Scalar.WeightedGeometryLowJets
 
 /-!
 # One low-order neighbourhood for the actual state denominators
@@ -9,6 +11,8 @@ constant.  Only a comparison of the actual profile with the reference profile
 is needed from the separate control construction.  All radii below are chosen
 before any higher derivative order is requested.
 -/
+
+@[expose] public section
 
 noncomputable section
 

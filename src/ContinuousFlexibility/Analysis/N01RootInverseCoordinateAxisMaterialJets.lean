@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01RootStationaryFlowMaterialJets
-import ContinuousFlexibility.Analysis.N01RootLabelUniformJets
-import ContinuousFlexibility.Analysis.ActualRootChart
+module
+
+public import ContinuousFlexibility.Analysis.N01RootStationaryFlowMaterialJets
+public import ContinuousFlexibility.Analysis.N01RootLabelUniformJets
+public import ContinuousFlexibility.Analysis.ActualRootChart
 
 /-!
 # Uniform material jets of the same normalized inverse coordinate
@@ -11,6 +13,8 @@ Only the angular displacement is estimated at order zero; its bound is
 the genuine pi bound of the original label. Neither a strip radius nor
 the arbitrary parameter normalization contributes an inverse cost.
 -/
+
+@[expose] public section
 
 noncomputable section
 

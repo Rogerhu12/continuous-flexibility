@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerSelectedPhysicalGeometry
+module
+
+public import ContinuousFlexibility.Radial.InnerSelectedPhysicalGeometry
 
 /-!
 # Every finite chain in the selected physical reference
@@ -8,6 +10,8 @@ and the original right-tail order. Each tail uses its own physical scale.
 The two exterior cuts are defined by the same selected joins at N+K,
 including the actual first join when K=0.
 -/
+
+@[expose] public section
 
 noncomputable section
 

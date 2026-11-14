@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CylinderTestPairing
-import Mathlib.Analysis.InnerProductSpace.Adjoint
-import Mathlib.Analysis.InnerProductSpace.l2Space
+module
+
+public import ContinuousFlexibility.Analysis.CylinderTestPairing
+public import Mathlib.Analysis.InnerProductSpace.Adjoint
+public import Mathlib.Analysis.InnerProductSpace.l2Space
 
 /-!
 # Circle data inside the fixed model Banach space
@@ -13,6 +15,8 @@ inverse. This supplies the Banach-space change needed by the circle Fourier
 retraction.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 namespace ContinuousFlexibility.Statements
@@ -20,9 +24,10 @@ namespace ContinuousFlexibility.Statements
 open Set Filter MeasureTheory
 open scoped ENNReal
 
-private instance circleAngleMeasure_sFinite : SFinite angleMeasure := by
-  unfold angleMeasure
-  infer_instance
+/-- `angleMeasure` is finite. Public, so that every module using the angular
+measure finds it; a module does not see another module's private instances. -/
+instance circleAngleMeasure_isFiniteMeasure : IsFiniteMeasure angleMeasure :=
+  ⟨by simp [angleMeasure, Measure.restrict_apply_univ, Real.volume_Ioc]⟩
 
 private def circleUnitRadialMeasure : Measure ℝ :=
   volume.restrict (Ioc (0 : ℝ) 1)

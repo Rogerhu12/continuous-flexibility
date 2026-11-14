@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RootEvenAxisJets
-import ContinuousFlexibility.Analysis.RootOddBounds
+module
+
+public import ContinuousFlexibility.Analysis.RootEvenAxisJets
+public import ContinuousFlexibility.Analysis.RootOddBounds
 
 /-!
 # Genuine odd root jets with one input derivative
@@ -10,6 +12,8 @@ The fixed polynomial integrand map has angular-translation-invariant
 positive jets, so a fixed compact estimate for that map has no component,
 angle, model-radius or normalization-scale cost.
 -/
+
+@[expose] public section
 
 noncomputable section
 

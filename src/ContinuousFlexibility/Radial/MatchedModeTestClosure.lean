@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MatchedModeTestApprox
+module
+
+public import ContinuousFlexibility.Radial.MatchedModeTestApprox
 
 /-!
 # Closing the frozen modal test class
@@ -8,6 +10,8 @@ and w' u. Affine compression therefore extends every compact-core weak
 equation to all smooth tests whose ordinary support lies in the core,
 which is exactly the test class of ModeLocalEquation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

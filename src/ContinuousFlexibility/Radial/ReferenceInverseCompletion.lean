@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ReferenceGraphAlgebra
+module
+
+public import ContinuousFlexibility.Radial.ReferenceGraphAlgebra
 
 /-!
 # Completion of the inverse from actual bounded solvability
@@ -8,6 +10,8 @@ bound have been proved for each source. Maximal-graph uniqueness forces
 this choice to be linear modulo physical almost-everywhere equality.
 This supplies exactly the inverse properties in the frozen statement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

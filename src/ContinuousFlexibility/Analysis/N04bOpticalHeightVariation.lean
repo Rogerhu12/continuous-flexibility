@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.S05CalculusProof
-import ContinuousFlexibility.Radial.RadialHeight
-import ContinuousFlexibility.Analysis.OpticalTravelVariation
+module
+
+public import ContinuousFlexibility.Scalar.S05CalculusProof
+public import ContinuousFlexibility.Radial.RadialHeight
+public import ContinuousFlexibility.Analysis.OpticalTravelVariation
 
 /-!
 # Optical variation along actual height perturbations
@@ -10,6 +12,8 @@ The height is the genuine affine family `h(r) + q * u(r, θ)` at fixed profile
 speed already identified with the corrected principal coefficients by S05.
 It is different from varying the metric profile in `opticalLogPerturbation`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.TameTransfer
-import ContinuousFlexibility.Analysis.TamePairTopology
+module
+
+public import ContinuousFlexibility.Analysis.TameTransfer
+public import ContinuousFlexibility.Analysis.TamePairTopology
 
 /-!
 # Smoothing on a tame complemented subspace
@@ -10,6 +12,8 @@ one instead uses the forward smoothing estimate and the triangle inequality.
 This permits the same smoothing family on the actual sector and source
 subspaces, without assuming that their projections have zero loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

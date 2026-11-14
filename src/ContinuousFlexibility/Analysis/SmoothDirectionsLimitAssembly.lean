@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SmoothDirectionsJetLimits
-import Mathlib.Topology.UniformSpace.Equicontinuity
+module
+
+public import ContinuousFlexibility.Analysis.SmoothDirectionsJetLimits
+public import Mathlib.Topology.UniformSpace.Equicontinuity
 
 /-!
 # Assembling actual directional towers at a limit
@@ -8,6 +10,8 @@ The pointwise limits retain the multilinear identities. Equicontinuity
 of the joint jet evaluations supplies continuity, and the uniform
 second-line bounds identify every derivative of the limit tower.
 -/
+
+@[expose] public section
 
 noncomputable section
 

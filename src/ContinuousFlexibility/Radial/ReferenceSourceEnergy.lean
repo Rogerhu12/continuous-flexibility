@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ReferenceSourceCosine
+module
+
+public import ContinuousFlexibility.Radial.ReferenceSourceCosine
 
 /-!
 # The exact energy of each actual source mode
@@ -7,6 +9,8 @@ These identities use the coefficients of the physical source and its
 frozen cell norm. The separate scalar source is included once in the
 full energy and is available for the frequency-two bordered equation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

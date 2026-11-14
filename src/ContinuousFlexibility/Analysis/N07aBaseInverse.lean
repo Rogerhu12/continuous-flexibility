@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import ContinuousFlexibility.Analysis.TameInverseFamily
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import ContinuousFlexibility.Analysis.TameInverseFamily
 
 /-!+# The actual Banach solution used in the regularity bootstrap
 
@@ -8,6 +10,8 @@ it with the reference graph inverse gives a solution of the perturbed weak
 equation.  All identities below concern those two existing inverses; no new
 solution or regularity assumption is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

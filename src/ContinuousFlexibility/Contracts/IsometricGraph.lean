@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Contracts.PlanarDevelopment
-import ContinuousFlexibility.Geometry.GraphEmbedding
+module
+
+public import ContinuousFlexibility.Contracts.PlanarDevelopment
+public import ContinuousFlexibility.Geometry.GraphEmbedding
 
 /-!
 # An actual Euclidean graph from the analytic annular core
@@ -9,6 +11,8 @@ In particular, this is a proved output interface, not an assumed embedding
 or an additional existence input. The remaining analytic obligation is to
 construct a `FlatAnnularCore`; sphere closure and noncongruence are separate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

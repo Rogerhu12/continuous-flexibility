@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CoupledWeakScalarError
-import ContinuousFlexibility.Analysis.SolveTameSubspace
-import ContinuousFlexibility.Scalar.WeightedHeightSmooth
+module
+
+public import ContinuousFlexibility.Analysis.CoupledWeakScalarError
+public import ContinuousFlexibility.Analysis.SolveTameSubspace
+public import ContinuousFlexibility.Scalar.WeightedHeightSmooth
 
 /-!
 # Joint smooth tame evaluation of the weak-coefficient scalar error
@@ -10,6 +12,8 @@ Only the coefficient family has to lie in the common parameter domain.
 The actual conservation law restricts every derivative in the genuine
 tower to the original Source subspace.
 -/
+
+@[expose] public section
 
 noncomputable section
 

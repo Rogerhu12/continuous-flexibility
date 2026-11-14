@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OperatorCoefficientClassification
-import Mathlib.Topology.Connected.Basic
+module
+
+public import ContinuousFlexibility.Analysis.OperatorCoefficientClassification
+public import Mathlib.Topology.Connected.Basic
 
 /-!
 # Faithfulness of an actual hyperbolic divergence operator
@@ -10,6 +12,8 @@ positive. A single point where the stored mixed coefficient vanishes
 excludes the degenerate alternative on the whole domain. In particular,
 an actual canonical piece can supply that point by reflection symmetry.
 -/
+
+@[expose] public section
 
 noncomputable section
 

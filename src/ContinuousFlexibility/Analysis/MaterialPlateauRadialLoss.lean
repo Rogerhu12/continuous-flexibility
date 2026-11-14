@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.MaterialPlateauIndexBand
-import ContinuousFlexibility.Analysis.MaterialEndpointComparison
-import ContinuousFlexibility.Analysis.MaterialSampleShift
+module
+
+public import ContinuousFlexibility.Analysis.MaterialPlateauIndexBand
+public import ContinuousFlexibility.Analysis.MaterialEndpointComparison
+public import ContinuousFlexibility.Analysis.MaterialSampleShift
 
 /-!
 # Radial losses at every point of an expanded support
@@ -9,6 +11,8 @@ The reverse endpoint band transfers a fixed radial power of the actual
 containing cell to a fixed coefficient weight at each support point.
 This is the input needed to combine interval packing with local energy.
 -/
+
+@[expose] public section
 
 noncomputable section
 

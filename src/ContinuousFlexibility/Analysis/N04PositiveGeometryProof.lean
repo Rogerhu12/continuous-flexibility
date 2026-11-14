@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryCommonNeighborhood
-import ContinuousFlexibility.Analysis.N04PositiveGeometryActualTransportSamplePrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometryActualCoordinatesCurrentData
-import ContinuousFlexibility.Analysis.N04PositiveGeometryActualPhysicalHeightCurrentData
-import ContinuousFlexibility.Analysis.N04PositiveGeometryActualPulledHeightCurrentData
-import ContinuousFlexibility.Analysis.N04PositiveGeometryUniformCollector
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryCommonNeighborhood
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryActualTransportSamplePrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryActualCoordinatesCurrentData
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryActualPhysicalHeightCurrentData
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryActualPulledHeightCurrentData
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryUniformCollector
 
 /-!
 # The positive geometry obligation
@@ -14,6 +16,8 @@ coordinate atoms, the physical height and the pulled height. The
 collector then supplies all eight geometry atoms on one neighborhood,
 uniformly in the auxiliary column.
 -/
+
+@[expose] public section
 
 noncomputable section
 

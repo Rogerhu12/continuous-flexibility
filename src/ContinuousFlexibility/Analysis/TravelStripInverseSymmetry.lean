@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CanonicalStripGeometry
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalStripGeometry
 
 /-!
 # Symmetries of the actual inverse of a travel strip
@@ -7,6 +9,8 @@ The inverse is the set-theoretic inverse furnished by a genuine bijection.
 Its periodic lift and reflection follow from the original chart identities;
 no separate inverse with assumed symmetry is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

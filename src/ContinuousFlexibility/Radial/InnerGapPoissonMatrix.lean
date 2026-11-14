@@ -1,11 +1,13 @@
-import ContinuousFlexibility.Radial.InnerRadialPoisson
-import ContinuousFlexibility.Radial.InnerRadialGreen
-import ContinuousFlexibility.Statements.RadialTargets
-import Mathlib.Analysis.Matrix.Order
-import Mathlib.Analysis.InnerProductSpace.Positive
-import Mathlib.Topology.Algebra.Module.FiniteDimension
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.FinCases
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialPoisson
+public import ContinuousFlexibility.Radial.InnerRadialGreen
+public import ContinuousFlexibility.Statements.RadialTargets
+public import Mathlib.Analysis.Matrix.Order
+public import Mathlib.Analysis.InnerProductSpace.Positive
+public import Mathlib.Topology.Algebra.Module.FiniteDimension
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.FinCases
 
 /-!
 # The actual Poisson and Dirichlet-to-Neumann maps of a positive gap
@@ -20,6 +22,8 @@ positive semidefiniteness and the quantitative mass estimate. None of
 these properties is assumed of the boundary matrix. The full two by two
 matrix, including both off-diagonal entries, is retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

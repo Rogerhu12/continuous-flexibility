@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.InteriorEndpointMaterialJets
-import ContinuousFlexibility.Scalar.Conservation
+module
+
+public import ContinuousFlexibility.Analysis.InteriorEndpointMaterialJets
+public import ContinuousFlexibility.Scalar.Conservation
 
 /-!
 # Angular bounds for a genuinely transported section label
@@ -9,6 +11,8 @@ flow is the product of the section-label derivative and the inverse
 flow Jacobian. Open-set equality identifies this with the ordinary
 angular derivative of the original first integral, including a cut.
 -/
+
+@[expose] public section
 
 noncomputable section
 

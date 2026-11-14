@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterJoinScale
-import ContinuousFlexibility.Radial.MorseRealizedConnectorBounds
+module
+
+public import ContinuousFlexibility.Radial.OuterJoinScale
+public import ContinuousFlexibility.Radial.MorseRealizedConnectorBounds
 
 /-!
 # The actual positive-glue transfer product
@@ -9,6 +11,8 @@ controlled by the departure height, arrival height, and physical width
 of the connector.  The explicit Morse scales then put this product on
 the action scale of either adjacent cell.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedScalarError
-import ContinuousFlexibility.Scalar.WeightedHeightSmooth
+module
+
+public import ContinuousFlexibility.Scalar.WeightedScalarError
+public import ContinuousFlexibility.Scalar.WeightedHeightSmooth
 
 /-!
 # Smooth tame operator evaluation on full parameter domains
@@ -8,6 +10,8 @@ The state-dependent coefficient heights and each independent height
 argument are combined by their actual linear and bilinear maps. All
 compositions retain the given source domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

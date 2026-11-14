@@ -1,6 +1,10 @@
-import ContinuousFlexibility.Statements.Radial
+module
+
+public import ContinuousFlexibility.Statements.Radial
 
 /-! The zero endpoint scalar leaves the actual physical output field unchanged. -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

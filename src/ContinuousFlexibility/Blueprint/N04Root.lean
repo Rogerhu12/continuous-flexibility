@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Blueprint.Statements
-import ContinuousFlexibility.Analysis.RootCompositionBounds
-import ContinuousFlexibility.Analysis.RootCompositionSmooth
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
+public import ContinuousFlexibility.Analysis.RootCompositionBounds
+public import ContinuousFlexibility.Analysis.RootCompositionSmooth
 
 /-!
 # Blueprint node N04Root
@@ -16,6 +18,8 @@ divided difference is the even root average of a smooth integral of the
 middle derivative, giving exactly one derivative of loss. Ordinary jets
 at the boundary are controlled by their negative-halfspace comparison.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

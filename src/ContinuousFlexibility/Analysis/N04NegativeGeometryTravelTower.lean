@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometryFirstIntegralTower
-import ContinuousFlexibility.Analysis.N04bActualTravelChart
-import ContinuousFlexibility.Analysis.ReturnCorrectionPatching
-import ContinuousFlexibility.Analysis.TameProductDirections
-import ContinuousFlexibility.Analysis.SolveNewtonBridge
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryFirstIntegralTower
+public import ContinuousFlexibility.Analysis.N04bActualTravelChart
+public import ContinuousFlexibility.Analysis.ReturnCorrectionPatching
+public import ContinuousFlexibility.Analysis.TameProductDirections
+public import ContinuousFlexibility.Analysis.SolveNewtonBridge
 
 /-!
 # Joint towers of the stored travel chart on real physical strips
@@ -13,6 +15,8 @@ first-integral tower therefore applies on every interior strip. Its
 reflection and two fixed linear combinations are the very same stored
 travel chart; neither a new inverse nor a new coordinate family is chosen.
 -/
+
+@[expose] public section
 
 noncomputable section
 

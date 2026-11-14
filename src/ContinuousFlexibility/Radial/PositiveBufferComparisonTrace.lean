@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.PositiveBufferComparison
-import Mathlib.MeasureTheory.Function.L2Space
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
-import Mathlib.MeasureTheory.Integral.Bochner.Set
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferComparison
+public import Mathlib.MeasureTheory.Function.L2Space
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
+public import Mathlib.MeasureTheory.Integral.Bochner.Set
 
 /-!
 # A sharp L²-to-cut estimate through a positive half-line
@@ -11,6 +13,8 @@ layer.  Integrating over a layer of length `1 / m` gives the `sqrt m`
 trace cost without using a derivative norm.  This is the second
 attenuation factor in the matrix of cut values.
 -/
+
+@[expose] public section
 
 noncomputable section
 

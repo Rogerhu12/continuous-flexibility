@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import Mathlib.Topology.Instances.AddCircle.DenseSubgroup
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.Periodic
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import Mathlib.Topology.Instances.AddCircle.DenseSubgroup
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.Periodic
 
 /-!
 # Rigidity of the actual reference boundary circle
@@ -13,6 +15,8 @@ identity by a constant.  Reflection fixes that constant.
 The last theorem uses the irrationality retained by the original
 `RadialReturnMargins`; it does not introduce a new nonresonance premise.
 -/
+
+@[expose] public section
 
 noncomputable section
 

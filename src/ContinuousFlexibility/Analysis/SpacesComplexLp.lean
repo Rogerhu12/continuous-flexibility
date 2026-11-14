@@ -1,4 +1,6 @@
-import Mathlib.MeasureTheory.Function.LpSpace.Basic
+module
+
+public import Mathlib.MeasureTheory.Function.LpSpace.Basic
 
 /-!
 # Real and complex value maps on actual `L²` classes
@@ -6,6 +8,8 @@ import Mathlib.MeasureTheory.Function.LpSpace.Basic
 Complexification is isometric and taking real parts is contractive. Their
 composition is exactly the identity on the original real classes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

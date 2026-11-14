@@ -1,6 +1,10 @@
-import ContinuousFlexibility.Analysis.N07bPiecewiseCanonicalLift
+module
+
+public import ContinuousFlexibility.Analysis.N07bPiecewiseCanonicalLift
 
 /-! # Linearity of actual canonical source representatives -/
+
+@[expose] public section
 
 noncomputable section
 

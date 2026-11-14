@@ -1,8 +1,10 @@
-import Mathlib.Analysis.Convolution
-import Mathlib.MeasureTheory.Function.LpSpace.Complete
-import Mathlib.MeasureTheory.Function.LpSpace.ContinuousCompMeasurePreserving
-import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
-import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
+module
+
+public import Mathlib.Analysis.Convolution
+public import Mathlib.MeasureTheory.Function.LpSpace.Complete
+public import Mathlib.MeasureTheory.Function.LpSpace.ContinuousCompMeasurePreserving
+public import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
+public import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
 
 /-!
 # Strong translations and convolution on the actual real Lebesgue L² space
@@ -12,6 +14,8 @@ vector. Convolution is a Bochner integral in L² for each such vector. No
 operator-norm continuity of translations, or integral of an operator-valued
 translation family, is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

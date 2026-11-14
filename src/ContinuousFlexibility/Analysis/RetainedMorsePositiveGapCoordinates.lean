@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.MorsePositiveGapCells
-import ContinuousFlexibility.Analysis.MorseRealizationComponentOrder
-import ContinuousFlexibility.Radial.R11aRetainedFamily
-import ContinuousFlexibility.Radial.SelectedSideTransport
+module
+
+public import ContinuousFlexibility.Analysis.MorsePositiveGapCells
+public import ContinuousFlexibility.Analysis.MorseRealizationComponentOrder
+public import ContinuousFlexibility.Radial.R11aRetainedFamily
+public import ContinuousFlexibility.Radial.SelectedSideTransport
 
 /-!
 # Exact retained coordinates on a whole positive Morse gap
@@ -11,6 +13,8 @@ closed interval between them therefore remains in that tail. The
 retained order isomorphism is exactly the existing radius dilation
 there, so its original cell inclusion and index floor apply unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

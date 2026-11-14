@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.SelectedLaterCutoffBounds
-import ContinuousFlexibility.Radial.FirstConeLayerSeparation
-import ContinuousFlexibility.Radial.TerminalPhysicalCutoffGeometry
+module
+
+public import ContinuousFlexibility.Radial.SelectedLaterCutoffBounds
+public import ContinuousFlexibility.Radial.FirstConeLayerSeparation
+public import ContinuousFlexibility.Radial.TerminalPhysicalCutoffGeometry
 
 /-!
 # The later terminal cutoffs on the same retained reference
@@ -10,6 +12,8 @@ outer endpoints. Their inner endpoints lie beyond the initial entries,
 so the two cutoffs and the fixed central column have disjoint closed
 supports. All equations use the retained pair's own radius dilations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aForwardCoefficients
-import ContinuousFlexibility.Scalar.WeightedCoefficientAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.N07aForwardCoefficients
+public import ContinuousFlexibility.Scalar.WeightedCoefficientAlgebra
 
 /-!
 # A complete finite coefficient product costs one material power
@@ -9,6 +11,8 @@ sums and products preserve this property. The exponent is chosen only
 after the complete finite expression has been formed, so the final cost
 is one power of M, independently of the length of a normal expansion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

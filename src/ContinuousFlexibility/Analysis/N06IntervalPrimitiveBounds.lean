@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06IntervalPrimitiveLp
-import ContinuousFlexibility.Radial.R11bModeL2
+module
+
+public import ContinuousFlexibility.Analysis.N06IntervalPrimitiveLp
+public import ContinuousFlexibility.Radial.R11bModeL2
 
 /-!
 # Primitive bounds on an actual finite canonical interval
@@ -9,6 +11,8 @@ interval L2 space. Cauchy--Schwarz therefore gives both the uniform
 primitive bound and the reverse passage from a uniform bound to an L2
 bound without normalizing or changing the recorded interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

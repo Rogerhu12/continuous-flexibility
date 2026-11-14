@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.MaterialScaleSampleJets
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeUnitMaterialGeometry
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+module
+
+public import ContinuousFlexibility.Analysis.MaterialScaleSampleJets
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeUnitMaterialGeometry
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
 
 /-!
 # The two actual scale atoms on the same whole reference atlas
@@ -10,6 +12,8 @@ retained. The true whole-unit geometry supplies the sample comparison and
 physical width, so the scalar scale estimates apply without a new atlas.
 The explicit envelope enlargement packages the finite orders uniformly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

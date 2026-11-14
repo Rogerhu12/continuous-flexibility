@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04SourceColumnsIdentities
+module
+
+public import ContinuousFlexibility.Analysis.N04SourceColumnsIdentities
 
 /-!
 # The forward Jacobian at the fixed physical unit point
@@ -8,6 +10,8 @@ physical affine unit map. Its determinant is their first-jet polynomial
 times the ratio of the canonical and physical widths. Positivity removes
 the absolute value in the geometry atom at that same physical point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

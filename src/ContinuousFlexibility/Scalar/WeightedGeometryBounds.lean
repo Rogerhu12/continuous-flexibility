@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedStateRegularity
-import ContinuousFlexibility.Scalar.WeightedNeighborhood
+module
+
+public import ContinuousFlexibility.Scalar.WeightedStateRegularity
+public import ContinuousFlexibility.Scalar.WeightedNeighborhood
 
 /-!
 # Quantitative positivity for the actual scalar state
@@ -9,6 +11,8 @@ statement. Their exact algebraic expansions reduce positivity to explicit
 small-jet inequalities. These are intermediate estimates, not new hypotheses
 in a blueprint statement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

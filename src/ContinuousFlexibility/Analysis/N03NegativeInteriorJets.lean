@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N03TotalCoefficientJets
-import ContinuousFlexibility.Analysis.N03NegativeInteriorValues
-import ContinuousFlexibility.Analysis.NegativeCharacteristicMaterialJets
-import ContinuousFlexibility.Analysis.CanonicalStateInterpolation
-import ContinuousFlexibility.Analysis.CanonicalVariationBounds
+module
+
+public import ContinuousFlexibility.Analysis.N03TotalCoefficientJets
+public import ContinuousFlexibility.Analysis.N03NegativeInteriorValues
+public import ContinuousFlexibility.Analysis.NegativeCharacteristicMaterialJets
+public import ContinuousFlexibility.Analysis.CanonicalStateInterpolation
+public import ContinuousFlexibility.Analysis.CanonicalVariationBounds
 
 /-!
 # Actual characteristic jets on every fixed compact negative interior
@@ -13,6 +15,8 @@ the order-zero coefficient values. The same neighborhood and derivative
 loss then work for every component, every fixed compact interior, every
 spatial order, and both characteristic signs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

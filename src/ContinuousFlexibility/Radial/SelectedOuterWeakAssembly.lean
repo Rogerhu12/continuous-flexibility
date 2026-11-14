@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.SelectedTailWeakPairing
-import ContinuousFlexibility.Radial.MatchingCutoffTests
+module
+
+public import ContinuousFlexibility.Radial.SelectedTailWeakPairing
+public import ContinuousFlexibility.Radial.MatchingCutoffTests
 
 /-!
 # Assembly of the two actual exterior weak inverses
@@ -9,6 +11,8 @@ scalar component. A compact smooth test on the disjoint union splits
 across a point in the open gap. Each part retains the original endpoint
 behavior, so this proves the frozen ordinary-support weak equation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

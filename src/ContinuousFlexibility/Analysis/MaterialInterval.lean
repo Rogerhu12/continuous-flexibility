@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.MaterialCoordinate
-import Mathlib.Analysis.SpecialFunctions.SmoothTransition
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.ContDiff
-import Mathlib.Analysis.Calculus.Deriv.MeanValue
-import Mathlib.Analysis.Calculus.InverseFunctionTheorem.ContDiff
-import Mathlib.Analysis.Calculus.InverseFunctionTheorem.Deriv
+module
+
+public import ContinuousFlexibility.Analysis.MaterialCoordinate
+public import Mathlib.Analysis.SpecialFunctions.SmoothTransition
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.ContDiff
+public import Mathlib.Analysis.Calculus.Deriv.MeanValue
+public import Mathlib.Analysis.Calculus.InverseFunctionTheorem.ContDiff
+public import Mathlib.Analysis.Calculus.InverseFunctionTheorem.Deriv
 
 /-!
 # A genuine global material coordinate on the unit interval
@@ -13,6 +15,8 @@ endpoint scales. Its integral from `1/2` is a strictly increasing smooth
 coordinate with limits `-∞` and `+∞` at the two ends. No profile-dependent
 material scale is assumed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aAngularFrequency
-import ContinuousFlexibility.Analysis.N07aAngularSobolev
-import ContinuousFlexibility.Analysis.AngularHilbertScale
-import ContinuousFlexibility.Analysis.AngularRealInverseEstimate
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularFrequency
+public import ContinuousFlexibility.Analysis.N07aAngularSobolev
+public import ContinuousFlexibility.Analysis.AngularHilbertScale
+public import ContinuousFlexibility.Analysis.AngularRealInverseEstimate
 
 /-!
 # Applying the real angular inverse theorem to the actual canonical graph
@@ -12,6 +14,8 @@ stated for actual source operators, and the conclusion constructs an
 actual higher-level source. This is the transport step used after the
 relative operator and its commutator estimates have been proved.
 -/
+
+@[expose] public section
 
 noncomputable section
 

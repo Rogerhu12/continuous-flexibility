@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05CanonicalTests
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalTests
 
 /-!
 # Lifting actual canonical source jets into the prescribed volume model
@@ -15,6 +17,8 @@ prove their L² membership, reflection and weak derivative identities, and a
 uniform bound on the displayed sum of weighted squares. In particular, this
 module does not assume those analytic inputs in the final blueprint statement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

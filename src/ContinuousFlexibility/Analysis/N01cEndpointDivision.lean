@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Scalar.RectangleParameterIntegral
-import Mathlib.Analysis.Calculus.DSlope
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
-import Mathlib.Analysis.Convex.Basic
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+module
+
+public import ContinuousFlexibility.Scalar.RectangleParameterIntegral
+public import Mathlib.Analysis.Calculus.DSlope
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+public import Mathlib.Analysis.Convex.Basic
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 
 /-!
 # Smooth division by the two endpoint factors
@@ -13,6 +15,8 @@ fixed-interval integral formula gives smoothness across the endpoint.
 Applying it twice divides a function with two zeros by both root
 distances; the same construction treats both orientations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

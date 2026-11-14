@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.AngularFrequency
-import ContinuousFlexibility.Analysis.AngularTameConstants
+module
+
+public import ContinuousFlexibility.Analysis.AngularFrequency
+public import ContinuousFlexibility.Analysis.AngularTameConstants
 
 /-!
 # Weighted Hilbert-sum inequalities for angular estimates
@@ -8,6 +10,8 @@ All comparisons are made on the full Hilbert sum with arbitrary fibers.
 The domain hypotheses are explicit, including for every use of a weighted
 norm defined by a square sum.
 -/
+
+@[expose] public section
 
 noncomputable section
 

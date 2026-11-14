@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CylinderTestPeriodization
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Analysis.CylinderTestPeriodization
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # Compact half-period tests in the full-period radial test class
@@ -10,6 +12,8 @@ integration period (0, 2π], the extension equals the original planar test.
 The construction reuses the existing cylinder test periodization after an
 explicit change of angular scale.
 -/
+
+@[expose] public section
 
 noncomputable section
 

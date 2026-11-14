@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.TameJetComposition
-import ContinuousFlexibility.Analysis.TameJetLocalBounds
-import ContinuousFlexibility.Analysis.TameLocalLinear
+module
+
+public import ContinuousFlexibility.Analysis.TameJetComposition
+public import ContinuousFlexibility.Analysis.TameJetLocalBounds
+public import ContinuousFlexibility.Analysis.TameLocalLinear
 
 /-!
 # Smooth tame composition on projective limits
@@ -10,6 +12,8 @@ jet evaluations and linear coordinate selections. Finite sums preserve
 these local bounds. Multilinear normalization then recovers the exact
 homogeneous estimate required by `SmoothTameOn` for the genuine jet tower.
 -/
+
+@[expose] public section
 
 noncomputable section
 

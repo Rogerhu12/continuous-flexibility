@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.R11bPhysicalPairing
-import Mathlib.Analysis.SpecialFunctions.SmoothTransition
-import Mathlib.MeasureTheory.Integral.DominatedConvergence
+module
+
+public import ContinuousFlexibility.Radial.R11bPhysicalPairing
+public import Mathlib.Analysis.SpecialFunctions.SmoothTransition
+public import Mathlib.MeasureTheory.Integral.DominatedConvergence
 
 /-!
 # Smooth radial cutoffs exhausting the physical annulus
@@ -10,6 +12,8 @@ zero and one, and are eventually one at every interior point.  Dominated
 convergence therefore extends integrable physical pairings from compact
 radial tests without estimating derivatives of the cutoffs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

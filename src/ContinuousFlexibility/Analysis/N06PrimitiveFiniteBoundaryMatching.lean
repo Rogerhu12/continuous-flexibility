@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06PrimitiveModalTraces
-import ContinuousFlexibility.Analysis.N06PrimitiveAtlasTransmissionJets
-import ContinuousFlexibility.Analysis.N05N06ClosedChartBridge
+module
+
+public import ContinuousFlexibility.Analysis.N06PrimitiveModalTraces
+public import ContinuousFlexibility.Analysis.N06PrimitiveAtlasTransmissionJets
+public import ContinuousFlexibility.Analysis.N05N06ClosedChartBridge
 
 /-!
 # Finite true boundary matching from the original primitive atlas
@@ -11,6 +13,8 @@ the current charts. The original affine cut law cancels its two true
 Wronskians directly. This uses the same K and no controlled-coordinate
 window, replacement atlas, or matching premise on the finite fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 

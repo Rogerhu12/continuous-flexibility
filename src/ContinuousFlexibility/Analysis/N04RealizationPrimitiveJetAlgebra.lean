@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationEnvelopeJacobian
-import ContinuousFlexibility.Analysis.N01cOuterDenominatorJets
-import ContinuousFlexibility.Radial.ReferenceColumnSmooth
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationEnvelopeJacobian
+public import ContinuousFlexibility.Analysis.N01cOuterDenominatorJets
+public import ContinuousFlexibility.Radial.ReferenceColumnSmooth
 
 /-!
 # Finite jet algebra for the actual primitive factors
@@ -10,6 +12,8 @@ The derivative application uses the genuine continuous linear map and
 one arbitrary vector field. The three fixed reference profile columns
 have uniform jets on the closed physical radial interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

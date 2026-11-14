@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CylinderSobolev
+module
+
+public import ContinuousFlexibility.Analysis.CylinderSobolev
 
 /-!
 # Gluing at a genuine radial endpoint germ
@@ -9,6 +11,8 @@ The glued field is exactly the second field beyond that exit and retains
 a common radial derivative lower bound. Two applications preserve the
 fixed reference field between disjoint left and right collars.
 -/
+
+@[expose] public section
 
 noncomputable section
 

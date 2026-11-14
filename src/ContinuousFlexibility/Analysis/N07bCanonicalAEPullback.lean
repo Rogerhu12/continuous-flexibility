@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CanonicalSourceConversion
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalSourceConversion
 
 /-!
 # Almost-everywhere transport through the actual canonical charts
@@ -12,6 +14,8 @@ integrable.
 This is a local statement on each physical piece. It does not assert
 membership in the fixed reference graph or weighted bounds across pieces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

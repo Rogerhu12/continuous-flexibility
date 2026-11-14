@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CylinderTestPairing
+module
+
+public import ContinuousFlexibility.Analysis.CylinderTestPairing
 
 /-!
 # The actual weighted physical jet graph is closed
@@ -8,6 +10,8 @@ multiplier on the cylinder `L²` space and recovers the unweighted derivative
 from the weighted coordinate. The graph is an intersection of closed
 preimages of the weak derivative graph and the angular reflection condition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

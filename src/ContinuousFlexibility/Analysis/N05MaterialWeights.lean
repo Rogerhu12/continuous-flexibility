@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.StateKappaBounds
+module
+
+public import ContinuousFlexibility.Analysis.StateKappaBounds
 
 /-!
 # Material weights for the canonical volume scale
@@ -10,6 +12,8 @@ weight into an unweighted sequence space.  A strict endpoint margin absorbs
 any fixed change of material order, and a coefficient power costs one
 material order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

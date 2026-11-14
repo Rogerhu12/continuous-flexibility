@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ReferenceRadialMeasureComparison
-import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
+module
+
+public import ContinuousFlexibility.Radial.ReferenceRadialMeasureComparison
+public import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
 
 /-!
 # Pairing a kernel row with the actual weighted radial source
@@ -10,6 +12,8 @@ product with any actual weighted L2 source, including the ordinary L2
 norm and the integral. The comparison constant is chosen before the
 weight parameters and before the kernel row.
 -/
+
+@[expose] public section
 
 noncomputable section
 

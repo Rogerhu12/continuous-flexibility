@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsCircleFixedBaseOperations
-import ContinuousFlexibility.Analysis.N04PulledFieldsSelectorFixedBase
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsCircleFixedBaseOperations
+public import ContinuousFlexibility.Analysis.N04PulledFieldsSelectorFixedBase
 
 /-!
 # One common low base for the actual return-circle formulas
@@ -10,6 +12,8 @@ N01 objects. Every step uses a strong seed or a fixed-base closure lemma.
 The common first-angular-derivative bound is the same hypothesis already
 provided by the retained uniform inverse neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

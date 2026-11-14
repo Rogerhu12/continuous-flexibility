@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ReferenceGraphProjection
+module
+
+public import ContinuousFlexibility.Radial.ReferenceGraphProjection
 
 /-!
 # Arbitrary angular bands preserve the actual physical reference graph
@@ -8,6 +10,8 @@ cosine mode controls both the border row and its scalar coefficient.
 Consequently an arbitrary finite projection preserves the genuine weak
 graph when those scalar components are projected onto their own modes.
 -/
+
+@[expose] public section
 
 open Set Filter MeasureTheory
 open scoped ContDiff Topology

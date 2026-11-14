@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06ReferenceRemainderFields
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceRemainderFields
 
 /-!
 # The reference graph equation after removing the actual left tail
@@ -8,6 +10,8 @@ physical pairings are integrable before they are subtracted. This theorem
 applies to the original maximal weak graph and does not posit a modal
 equation, smoothness of the unknown, or a new domain realization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

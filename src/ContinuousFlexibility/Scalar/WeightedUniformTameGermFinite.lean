@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Scalar.WeightedUniformTameGermOperations
+module
+
+public import ContinuousFlexibility.Scalar.WeightedUniformTameGermOperations
 
 /-!
 # One common ball for finitely many actual uniform tame germs
@@ -7,6 +9,8 @@ The common base and loss are chosen before every derivative order.  An
 additional prescribed neighborhood can impose the geometric positivity and
 decoded smallness conditions needed by the scalar assembly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

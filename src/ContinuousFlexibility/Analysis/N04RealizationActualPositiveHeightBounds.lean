@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationFixedPositiveLogBounds
-import ContinuousFlexibility.Analysis.N04RealizationPositiveHeightParameterPrefix
-import ContinuousFlexibility.Analysis.N04RealizationPositiveHeightTaylorJets
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationFixedPositiveLogBounds
+public import ContinuousFlexibility.Analysis.N04RealizationPositiveHeightParameterPrefix
+public import ContinuousFlexibility.Analysis.N04RealizationPositiveHeightTaylorJets
 
 /-!
 # Raw endpoint jets give the same actual positive height jets
@@ -11,6 +13,8 @@ low logarithmic certificate supplies the exponential margin. The only
 quantitative inputs are the raw endpoint jets, their reciprocal values,
 and the cost of the already selected collar.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CircleJetEncoding
-import ContinuousFlexibility.Analysis.CylinderTestPairing
-import ContinuousFlexibility.Analysis.ProjectiveLimitSubspace
+module
+
+public import ContinuousFlexibility.Analysis.CircleJetEncoding
+public import ContinuousFlexibility.Analysis.CylinderTestPairing
+public import ContinuousFlexibility.Analysis.ProjectiveLimitSubspace
 
 /-!
 # Parity projections on the actual circle spaces
@@ -10,6 +12,8 @@ through any exact circle model gives continuous linear even and odd projections
 with zero tame loss. The result uses the genuine decoded functions and the exact
 norm identities in `IsCircleModel`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerSelectedPhysicalGeometry
-import ContinuousFlexibility.Radial.InnerCentralPhysicalChart
-import ContinuousFlexibility.Radial.InnerPhysicalModelSelection
+module
+
+public import ContinuousFlexibility.Radial.InnerSelectedPhysicalGeometry
+public import ContinuousFlexibility.Radial.InnerCentralPhysicalChart
+public import ContinuousFlexibility.Radial.InnerPhysicalModelSelection
 
 /-!
 # The same selected central model in the actual physical geometry
@@ -10,6 +12,8 @@ temporary mode-two column. The chart uses the already selected central
 compression witness. Its physical cut energies, conormal error, inverse
 cost and weighted Poisson columns are properties of this same chart.
 -/
+
+@[expose] public section
 
 noncomputable section
 

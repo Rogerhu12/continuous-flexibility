@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N07aAngularActualPhysicalRegularity
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalEncoding
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalEven
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalClassical
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalAEPairing
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularActualPhysicalRegularity
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalEncoding
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalEven
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalClassical
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalAEPairing
 
 /-!
 # The same perturbed canonical solution has the actual classical physical field
@@ -13,6 +15,8 @@ that same L² class. The final field keeps its canonical coordinates, its
 physical row, its evenness, and the actual corrected differential equation.
 No prior physical trace regularity is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

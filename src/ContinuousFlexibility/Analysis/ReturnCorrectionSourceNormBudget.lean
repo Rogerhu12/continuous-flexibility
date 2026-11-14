@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionSourceJets
-import ContinuousFlexibility.Analysis.ReturnDivergenceMembership
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionSourceJets
+public import ContinuousFlexibility.Analysis.ReturnDivergenceMembership
 
 /-!
 # The exact spatial-order budget of each source parameter jet
@@ -9,6 +11,8 @@ the physical multiplier estimate to each summand keeps coefficient order
 k paired with height order s+4-k+d. All constants are chosen before the
 coefficient fields, parameter point, directions, and height.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesTorusCell
-import ContinuousFlexibility.Analysis.SpacesTorusWaves
+module
+
+public import ContinuousFlexibility.Analysis.SpacesTorusCell
+public import ContinuousFlexibility.Analysis.SpacesTorusWaves
 
 /-!
 # Fourier coefficients of localized physical mixed jets
@@ -9,6 +11,8 @@ cylinder. Compact radial localization removes the radial boundary, while
 the angular period removes the other boundary. The cell chart preserves
 the normalized measure, including its exact factor `1 / (6π)`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

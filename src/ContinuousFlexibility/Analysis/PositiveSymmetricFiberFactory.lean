@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.AngularFiberFiniteJetBounds
-import ContinuousFlexibility.Analysis.PositiveFiberInterpolationSymmetry
-import ContinuousFlexibility.Analysis.PositiveAngularTaylorInterpolation
+module
+
+public import ContinuousFlexibility.Analysis.AngularFiberFiniteJetBounds
+public import ContinuousFlexibility.Analysis.PositiveFiberInterpolationSymmetry
+public import ContinuousFlexibility.Analysis.PositiveAngularTaylorInterpolation
 
 /-!
 # Positive fiber collars from actual symmetric endpoint fields
@@ -11,6 +13,8 @@ explicit mass-corrected primitive realizes them. Periodicity and
 reflection follow from that explicit primitive. The collar width and
 positive radial lower bound are selected before the family member.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.CentralSmallDivisor
-import Mathlib.Analysis.SpecialFunctions.Integrals.Basic
+module
+
+public import ContinuousFlexibility.Radial.CentralSmallDivisor
+public import Mathlib.Analysis.SpecialFunctions.Integrals.Basic
 
 /-!
 # The actual travel integral of the central model
@@ -9,6 +11,8 @@ integral on its positive component is `∫[-sqrt A,sqrt A] sqrt(A-X²) dX`.
 This file computes that integral, specializes to the central oscillator,
 and transfers the proved sine lower bound to this actual integral.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

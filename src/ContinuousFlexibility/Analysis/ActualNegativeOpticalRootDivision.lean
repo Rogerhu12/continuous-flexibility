@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01OpticalRootDivision
-import ContinuousFlexibility.Analysis.N01ReturnMargins
-import ContinuousFlexibility.Analysis.ActualNegativeLengthRadialBounds
-import ContinuousFlexibility.Analysis.ActualNegativeHostMaterialSamples
+module
+
+public import ContinuousFlexibility.Analysis.N01OpticalRootDivision
+public import ContinuousFlexibility.Analysis.N01ReturnMargins
+public import ContinuousFlexibility.Analysis.ActualNegativeLengthRadialBounds
+public import ContinuousFlexibility.Analysis.ActualNegativeHostMaterialSamples
 
 /-!
 # The actual optical root factor on an entire half component
@@ -12,6 +14,8 @@ then keep that same factor positive on the entire closed optical half.
 Both its ordinary jets and its reciprocal value are measured at the
 original sample stored by that half. No chosen root-model radius occurs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

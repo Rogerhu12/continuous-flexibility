@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.PositiveBufferEnergyGlobalData
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferEnergyGlobalData
 
 /-!
 # Classical representatives of the constructed Green energy columns
@@ -8,6 +10,8 @@ field. Its smooth interior formula therefore has the genuine retained
 traces and satisfies the ordinary cutoff-source equation. The same
 energy representative bounds the physical exterior endpoint profile.
 -/
+
+@[expose] public section
 
 noncomputable section
 

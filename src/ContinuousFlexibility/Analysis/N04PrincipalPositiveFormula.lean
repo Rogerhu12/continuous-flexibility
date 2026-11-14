@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PrincipalPositiveOrientation
-import ContinuousFlexibility.Scalar.WeightedPartialIdentities
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalPositiveOrientation
+public import ContinuousFlexibility.Scalar.WeightedPartialIdentities
 
 /-!
 # Positive principal atoms in the supplied scalar inputs
@@ -9,6 +11,8 @@ the inverse derivative are first derivatives of the two inverse atoms,
 with the fixed physical width retained. The positive inverse determinant
 then gives one scalar reciprocal and a finite polynomial formula.
 -/
+
+@[expose] public section
 
 noncomputable section
 

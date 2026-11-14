@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCompositionJets
-import Mathlib.Analysis.Calculus.Deriv.ZPow
-import Mathlib.Analysis.SpecialFunctions.Log.Deriv
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCompositionJets
+public import Mathlib.Analysis.Calculus.Deriv.ZPow
+public import Mathlib.Analysis.SpecialFunctions.Log.Deriv
 
 /-!
 # Fixed polynomial bounds for the actual logarithm jets
@@ -11,6 +13,8 @@ are the only inputs. The zeroth logarithm is included without assuming
 a bound on a real angular lift or on any constructed coordinate field.
 This is a new reconstruction after the workspace reset.
 -/
+
+@[expose] public section
 
 noncomputable section
 

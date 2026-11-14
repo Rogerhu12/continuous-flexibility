@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.SeeleyData
-import Mathlib.Analysis.Calculus.FDeriv.Extend
-import Mathlib.Analysis.Calculus.IteratedDeriv.Defs
-import Mathlib.Analysis.Calculus.SmoothSeries
-import Mathlib.Topology.Order.OrderClosed
+module
+
+public import ContinuousFlexibility.Analysis.SeeleyData
+public import Mathlib.Analysis.Calculus.FDeriv.Extend
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Defs
+public import Mathlib.Analysis.Calculus.SmoothSeries
+public import Mathlib.Topology.Order.OrderClosed
 
 /-!
 # A single smooth extension of every half-line jet
@@ -14,6 +16,8 @@ termwise differentiation. This is the analytic part of Seeley's extension;
 the coefficients are constructed separately, and the Sobolev estimates use
 the same reflection formula.
 -/
+
+@[expose] public section
 
 noncomputable section
 

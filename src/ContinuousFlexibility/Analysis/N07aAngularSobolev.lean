@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularHilbert
-import ContinuousFlexibility.Analysis.N07aAngularBandNorm
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularHilbert
+public import ContinuousFlexibility.Analysis.N07aAngularBandNorm
 
 /-!
 # The full prescribed angular source scale and spectral Sobolev regularity
@@ -10,6 +12,8 @@ is reconstructed in the original higher weak graph. Both norm bounds
 refer to the actual prescribed source norms, and their constants are
 independent of the base order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

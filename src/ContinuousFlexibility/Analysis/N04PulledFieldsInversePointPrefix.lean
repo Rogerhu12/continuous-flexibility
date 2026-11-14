@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsInverseRawFamily
-import ContinuousFlexibility.Analysis.N04PulledFieldsInversePointAssembly
-import ContinuousFlexibility.Analysis.N04PulledFieldsSampleCost
-import ContinuousFlexibility.Analysis.SolveStateSpaces
-import ContinuousFlexibility.Analysis.TameSmoothingCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsInverseRawFamily
+public import ContinuousFlexibility.Analysis.N04PulledFieldsInversePointAssembly
+public import ContinuousFlexibility.Analysis.N04PulledFieldsSampleCost
+public import ContinuousFlexibility.Analysis.SolveStateSpaces
+public import ContinuousFlexibility.Analysis.TameSmoothingCalculus
 
 /-!
 # Prefix bounds for the actual inverse-chart point
@@ -13,6 +15,8 @@ projection is retained exactly, so positive parameter orders keep the
 sampled height factor. Every tower in the conclusion is a genuine tower
 of the retained inverse point on the original neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

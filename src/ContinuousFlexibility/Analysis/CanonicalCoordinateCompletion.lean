@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CanonicalJetNormalization
-import ContinuousFlexibility.Analysis.CanonicalSourceConversion
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalJetNormalization
+public import ContinuousFlexibility.Analysis.CanonicalSourceConversion
 
 /-!
 # The precise remaining estimate in the canonical coordinate stage
@@ -13,6 +15,8 @@ No existence of quantitatively controlled coordinates is asserted here.
 The last theorem assembles such coordinates once their sector estimate has
 been proved, using normalization only on fields that the identities do not use.
 -/
+
+@[expose] public section
 
 noncomputable section
 

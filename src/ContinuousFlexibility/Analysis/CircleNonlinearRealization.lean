@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CircleModelRealization
-import ContinuousFlexibility.Analysis.ProjectiveDifferential
+module
+
+public import ContinuousFlexibility.Analysis.CircleModelRealization
+public import ContinuousFlexibility.Analysis.ProjectiveDifferential
 
 /-!
 # Nonlinear realization and limits in the actual circle model
@@ -9,6 +11,8 @@ projective limit. Convergence and directional derivatives are tested in all
 of its physical weighted norms. In particular, scalar pointwise derivative
 identities are not substituted for convergence in the circle topology.
 -/
+
+@[expose] public section
 
 noncomputable section
 

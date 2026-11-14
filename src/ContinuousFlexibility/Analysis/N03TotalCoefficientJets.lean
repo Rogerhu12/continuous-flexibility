@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N03CoefficientStateNeighborhood
-import ContinuousFlexibility.Analysis.N01OriginalCoefficientStripJets
-import ContinuousFlexibility.Analysis.N04bFieldRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N03CoefficientStateNeighborhood
+public import ContinuousFlexibility.Analysis.N01OriginalCoefficientStripJets
+public import ContinuousFlexibility.Analysis.N04bFieldRegularity
 
 /-!
 # All actual corrected coefficient jets on the whole negative component
@@ -12,6 +14,8 @@ allows the existing localized N01 bound to be used on its entire open
 strip. One state neighborhood and one derivative loss precede every
 component and derivative order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

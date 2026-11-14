@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseRealizedIntegralTransfer
-import ContinuousFlexibility.Radial.MorseRealizedConnectorBounds
+module
+
+public import ContinuousFlexibility.Radial.MorseRealizedIntegralTransfer
+public import ContinuousFlexibility.Radial.MorseRealizedConnectorBounds
 
 /-!
 # The Hilbert density on the actual transition core
@@ -9,6 +11,8 @@ mass-resistance construction is `w r⁶`.  The positive inner radius gives
 their explicit comparison.  The retained-cell estimates below use the
 actual physical profile and the already proved model integrals.
 -/
+
+@[expose] public section
 
 noncomputable section
 

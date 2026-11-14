@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.RadialHeight
-import ContinuousFlexibility.Radial.ReferenceLocalL2
+module
+
+public import ContinuousFlexibility.Radial.RadialHeight
+public import ContinuousFlexibility.Radial.ReferenceLocalL2
 
 /-!
 # Regularity and support of the actual weak-test operator
@@ -10,6 +12,8 @@ admissible test: the test and all of its radial slices vanish on a
 neighborhood of that radius. The same compact radial support controls
 the test after applying the operator.
 -/
+
+@[expose] public section
 
 noncomputable section
 

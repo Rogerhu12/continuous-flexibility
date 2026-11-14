@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsCorrectionCircleFixedBase
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsCorrectionCircleFixedBase
 
 /-!
 # The actual residual-substituted displacement at one fixed low base
@@ -7,6 +9,8 @@ The independent-residual circle displacement is evaluated on the graph
 of the retained N02 residual. The graph and its genuine tower use the
 same sector parameter and the original residual decoder identity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

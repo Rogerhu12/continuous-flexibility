@@ -1,11 +1,13 @@
-import ContinuousFlexibility.Radial.MatchedRetainedFamilyInnerWeightData
-import ContinuousFlexibility.Radial.MatchedRetainedTerminalCapWeights
-import ContinuousFlexibility.Radial.MatchedRetainedLocalizerWeights
-import ContinuousFlexibility.Radial.MatchedSelectedTerminalTwoWeights
-import ContinuousFlexibility.Radial.MatchedMorseInnerWeightTransfer
-import ContinuousFlexibility.Radial.MatchedInnerSupportedCells
-import ContinuousFlexibility.Radial.MatchedSupportedColumnCells
-import ContinuousFlexibility.Radial.ReferenceRawKernelSchur
+module
+
+public import ContinuousFlexibility.Radial.MatchedRetainedFamilyInnerWeightData
+public import ContinuousFlexibility.Radial.MatchedRetainedTerminalCapWeights
+public import ContinuousFlexibility.Radial.MatchedRetainedLocalizerWeights
+public import ContinuousFlexibility.Radial.MatchedSelectedTerminalTwoWeights
+public import ContinuousFlexibility.Radial.MatchedMorseInnerWeightTransfer
+public import ContinuousFlexibility.Radial.MatchedInnerSupportedCells
+public import ContinuousFlexibility.Radial.MatchedSupportedColumnCells
+public import ContinuousFlexibility.Radial.ReferenceRawKernelSchur
 
 /-!
 # Both actual later inner envelopes from the same finite chain
@@ -15,6 +17,8 @@ matching inverse. Its two external columns use the original terminal
 leading functions and residuals between those same two weights.
 Actual localizers then give the canonical channel estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.SelectedTailCauchyUniqueness
-import ContinuousFlexibility.Radial.ModeWeakGreen
+module
+
+public import ContinuousFlexibility.Radial.SelectedTailCauchyUniqueness
+public import ContinuousFlexibility.Radial.ModeWeakGreen
 
 /-!
 # The actual weak modal equation gives the tail Cauchy system
@@ -9,6 +11,8 @@ On each compact interior interval its weak divergence equation has a
 continuous source, so the weak fundamental theorem gives a classical
 first-order system. This uses the original radial measure and Robin row.
 -/
+
+@[expose] public section
 
 noncomputable section
 

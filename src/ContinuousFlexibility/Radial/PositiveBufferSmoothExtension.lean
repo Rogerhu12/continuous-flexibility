@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseRadiusODE
-import ContinuousFlexibility.Radial.PositiveBufferRegularity
+module
+
+public import ContinuousFlexibility.Radial.MorseRadiusODE
+public import ContinuousFlexibility.Radial.PositiveBufferRegularity
 
 /-!
 # Smooth continuation across positive-buffer cuts
@@ -10,6 +12,8 @@ closed interval identify it with a smooth solution through both endpoints.
 This provides the actual, two-sided derivatives appearing in the conormal
 data of positive-buffer compression.
 -/
+
+@[expose] public section
 
 noncomputable section
 

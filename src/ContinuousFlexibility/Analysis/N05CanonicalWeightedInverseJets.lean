@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N05CanonicalWeightedAngularBlock
-import ContinuousFlexibility.Analysis.N05CanonicalInverseJetLinearity
-import ContinuousFlexibility.Analysis.N05ActualWeightKernelSums
-import ContinuousFlexibility.Analysis.N05SchurMembership
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalWeightedAngularBlock
+public import ContinuousFlexibility.Analysis.N05CanonicalInverseJetLinearity
+public import ContinuousFlexibility.Analysis.N05ActualWeightKernelSums
+public import ContinuousFlexibility.Analysis.N05SchurMembership
 
 /-!
 # Schur membership for the genuine fixed inverse jets
@@ -11,6 +13,8 @@ Its actual finite source truncations converge to that very jet, through
 the continuous linear restriction proved from weak derivative uniqueness.
 Schur then proves membership of this actual weighted sequence.
 -/
+
+@[expose] public section
 
 noncomputable section
 

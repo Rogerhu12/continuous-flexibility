@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.AffineWeightedCompositionJets
-import ContinuousFlexibility.Analysis.RootFieldLocalization
-import ContinuousFlexibility.Analysis.N04FlowJetsTarget
+module
+
+public import ContinuousFlexibility.Analysis.AffineWeightedCompositionJets
+public import ContinuousFlexibility.Analysis.RootFieldLocalization
+public import ContinuousFlexibility.Analysis.N04FlowJetsTarget
 
 /-!
 # An actual scalar flow with variable terminal radius
@@ -11,6 +13,8 @@ original field's spatial jets on that interval enter the estimates; the
 second external parameter is unused. The angular Gronwall bound depends
 on the first angular derivative alone.
 -/
+
+@[expose] public section
 
 noncomputable section
 

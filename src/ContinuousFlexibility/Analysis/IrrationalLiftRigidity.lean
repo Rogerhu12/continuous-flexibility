@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PeriodicLiftAxisIntervals
-import Mathlib.Topology.Instances.AddCircle.DenseSubgroup
+module
+
+public import ContinuousFlexibility.Analysis.PeriodicLiftAxisIntervals
+public import Mathlib.Topology.Instances.AddCircle.DenseSubgroup
 
 /-!
 # Uniqueness of a degree-one lift with an irrational second translation
@@ -11,6 +13,8 @@ be constant. Reflection or the value at zero removes that constant.
 These statements concern genuine continuous functions on the whole
 real line and do not assume differentiability or monotonicity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

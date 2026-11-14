@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterNaturalPhysicalPoisson
-import ContinuousFlexibility.Radial.OuterPhysicalMeasure
+module
+
+public import ContinuousFlexibility.Radial.OuterNaturalPhysicalPoisson
+public import ContinuousFlexibility.Radial.OuterPhysicalMeasure
 
 /-!
 # The natural solution in the original radial Hilbert space
@@ -8,6 +10,8 @@ The change of variables uses the actual physical density 12w/r².
 The signed logarithmic gauge is handled by exact measure transport,
 and the resulting function is proved to belong to the physical L² space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

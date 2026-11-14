@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04SourceColumnsFactor
-import ContinuousFlexibility.Analysis.N04SourceColumnsAuxiliary
+module
+
+public import ContinuousFlexibility.Analysis.N04SourceColumnsFactor
+public import ContinuousFlexibility.Analysis.N04SourceColumnsAuxiliary
 
 /-!
 # Assembly of the source-column obligation
@@ -10,6 +12,8 @@ witness, if one exists, selects the neighborhood before the universally
 quantified auxiliary column; without such a witness the conclusion is
 vacuous on the original admissible neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.MixedDerivativeLocality
+module
+
+public import ContinuousFlexibility.Analysis.MixedDerivativeLocality
 
 /-!
 # The two actual first derivatives of the mixed derivative hierarchy
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Analysis.MixedDerivativeLocality
 The statements are local on the original open cylinder. They do not
 require an extension of a smooth field outside that cylinder.
 -/
+
+@[expose] public section
 
 noncomputable section
 

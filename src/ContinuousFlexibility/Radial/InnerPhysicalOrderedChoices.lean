@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerCentralPhysicalPoisson
-import ContinuousFlexibility.Radial.InnerMorsePhysicalPoisson
-import ContinuousFlexibility.Radial.InnerOrderedChoices
+module
+
+public import ContinuousFlexibility.Radial.InnerCentralPhysicalPoisson
+public import ContinuousFlexibility.Radial.InnerMorsePhysicalPoisson
+public import ContinuousFlexibility.Radial.InnerOrderedChoices
 
 /-!
 # Ordered choices for the same physical central and Morse models
@@ -18,6 +20,8 @@ already contains the selected far cuts. Each local existential returns
 one model whose genuine physical Poisson columns and full conormal
 error satisfy the estimates simultaneously.
 -/
+
+@[expose] public section
 
 noncomputable section
 

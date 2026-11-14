@@ -1,6 +1,10 @@
-import ContinuousFlexibility.Analysis.N04SourceColumnsAdd
+module
+
+public import ContinuousFlexibility.Analysis.N04SourceColumnsAdd
 
 /-! Fixed scalars and subtraction in the source interfaces. -/
+
+@[expose] public section
 
 noncomputable section
 

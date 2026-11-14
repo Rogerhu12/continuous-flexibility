@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04NegativeHeightGaugeIdentity
-import ContinuousFlexibility.Analysis.N04NegativeHeightReferenceData
-import ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields
-import ContinuousFlexibility.Analysis.EffectiveRadialCoefficient
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeHeightGaugeIdentity
+public import ContinuousFlexibility.Analysis.N04NegativeHeightReferenceData
+public import ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields
+public import ContinuousFlexibility.Analysis.EffectiveRadialCoefficient
 
 /-!
 # Reference normalization of the negative-height factors
@@ -11,6 +13,8 @@ coordinate. Thus its nonsingular angular numerator is exactly one. The
 actual density identity then normalizes the coefficient--Jacobian--height
 product to one, using the same reference height as the current atoms.
 -/
+
+@[expose] public section
 
 noncomputable section
 

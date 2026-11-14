@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aAngularBoundaryQuotient
-import Mathlib.Analysis.Calculus.TangentCone.Prod
-import Mathlib.Analysis.Calculus.TangentCone.Real
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularBoundaryQuotient
+public import Mathlib.Analysis.Calculus.TangentCone.Prod
+public import Mathlib.Analysis.Calculus.TangentCone.Real
 
 /-!
 # Local gluing of one physical first jet
@@ -10,6 +12,8 @@ differentiability there. Once differentiability is known throughout the
 open region, the two smooth closed-side representatives also prove
 continuity of the actual derivative. No second normal matching is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

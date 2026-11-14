@@ -1,5 +1,7 @@
-import Mathlib.Analysis.InnerProductSpace.Adjoint
-import Mathlib.Analysis.Normed.Operator.Prod
+module
+
+public import Mathlib.Analysis.InnerProductSpace.Adjoint
+public import Mathlib.Analysis.Normed.Operator.Prod
 
 /-!
 # Adjoint inversion on a bordered Hilbert space
@@ -9,6 +11,8 @@ explicitly, and the four block adjoints give a bounded adjoint for this
 pairing. A bounded left inverse on a symmetric test core is the full
 maximal inverse as soon as the maximal homogeneous kernel is zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

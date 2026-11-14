@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerMorseBufferVelocity
-import ContinuousFlexibility.Radial.InnerPositiveGapGeometry
+module
+
+public import ContinuousFlexibility.Radial.InnerMorseBufferVelocity
+public import ContinuousFlexibility.Radial.InnerPositiveGapGeometry
 
 /-!
 # Actual cut geometry and positive caps of both Morse tails
@@ -10,6 +12,8 @@ The already proved velocity-to-mass estimate gives one fixed lower
 bound for the physical logarithmic slope on both outer caps. Neither a
 frequency, a tail truncation nor a local inverse enters this bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

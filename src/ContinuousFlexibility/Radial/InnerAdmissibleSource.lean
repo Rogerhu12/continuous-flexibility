@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerBorderPieceProjection
-import Mathlib.Topology.Algebra.Module.ClosedSubmodule
+module
+
+public import ContinuousFlexibility.Radial.InnerBorderPieceProjection
+public import Mathlib.Topology.Algebra.Module.ClosedSubmodule
 
 /-!
 # The genuine admissible Hilbert source space
@@ -10,6 +12,8 @@ coordinate. The inherited norm is exactly the physical Hilbert norm.
 An optional physical support kernel restricts sources to the true inner
 region while retaining the same measure.
 -/
+
+@[expose] public section
 
 noncomputable section
 

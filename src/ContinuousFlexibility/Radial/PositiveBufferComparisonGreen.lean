@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.PositiveBufferComparisonCutoffL2
-import ContinuousFlexibility.Radial.PositiveBufferComparisonCoordinates
-import ContinuousFlexibility.Radial.PositiveBufferComparisonScaling
-import ContinuousFlexibility.Radial.BufferCutGlue
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferComparisonCutoffL2
+public import ContinuousFlexibility.Radial.PositiveBufferComparisonCoordinates
+public import ContinuousFlexibility.Radial.PositiveBufferComparisonScaling
+public import ContinuousFlexibility.Radial.BufferCutGlue
 
 /-!
 # The normalized cutoff Green profile
@@ -11,6 +13,8 @@ interior profile in the inward coordinate.  The common cut is zero.
 The profile uses the same measurable gluing operation as the weak
 derivative and point-source identities.
 -/
+
+@[expose] public section
 
 noncomputable section
 

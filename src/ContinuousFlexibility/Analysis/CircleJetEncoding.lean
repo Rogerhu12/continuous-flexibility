@@ -1,5 +1,9 @@
-import ContinuousFlexibility.Analysis.CircleJetEvaluation
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
+module
+
+public import ContinuousFlexibility.Analysis.CircleJetEvaluation
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
+
+@[expose] public section
 
 open Set Filter MeasureTheory
 open scoped BigOperators ContDiff ENNReal

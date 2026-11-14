@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04bActualTravelChart
-import ContinuousFlexibility.Analysis.N04bRootPhysicalBoundary
-import ContinuousFlexibility.Analysis.N04bRootInteriorRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N04bActualTravelChart
+public import ContinuousFlexibility.Analysis.N04bRootPhysicalBoundary
+public import ContinuousFlexibility.Analysis.N04bRootInteriorRegularity
 
 /-!
 # The actual closed travel inverse of the cumulative N03 witness
@@ -10,6 +12,8 @@ proved actual interior travel chart they construct the inverse on the
 closed physical strip. Its values agree with the stored actual interior
 inverse wherever the travel coordinate is interior.
 -/
+
+@[expose] public section
 
 noncomputable section
 

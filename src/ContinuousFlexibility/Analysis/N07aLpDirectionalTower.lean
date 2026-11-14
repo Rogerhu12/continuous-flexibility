@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aLpParameterJets
+module
+
+public import ContinuousFlexibility.Analysis.N07aLpParameterJets
 
 /-!
 # Genuine L² towers from locally dominated pointwise towers
@@ -7,6 +9,8 @@ The values are the actual L² classes of the pointwise derivatives. Local
 majorants prove their joint continuity and justify each genuine line
 derivative. The analytic majorants remain explicit in this internal bridge.
 -/
+
+@[expose] public section
 
 noncomputable section
 

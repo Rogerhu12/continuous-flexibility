@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06PositiveFullPeriodTests
-import ContinuousFlexibility.Analysis.N06NegativeFullPeriodGreen
+module
+
+public import ContinuousFlexibility.Analysis.N06PositiveFullPeriodTests
+public import ContinuousFlexibility.Analysis.N06NegativeFullPeriodGreen
 
 /-!
 # The actual full-period operator test on every current piece
@@ -9,6 +11,8 @@ proof uses the actual canonical normal form and the potential periodicity
 forced by N03. Together they identify exactly the source appearing in full
 physical weak pairings, on every selected canonical piece.
 -/
+
+@[expose] public section
 
 noncomputable section
 

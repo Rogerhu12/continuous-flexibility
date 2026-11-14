@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowBasic
-import ContinuousFlexibility.Analysis.OneHighCircleFlowIntegral
-import Mathlib.Analysis.Calculus.Deriv.Slope
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowBasic
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowIntegral
+public import Mathlib.Analysis.Calculus.Deriv.Slope
 
 /-!
 # Initial-angle differentiability from the genuine flow equation
@@ -11,6 +13,8 @@ angular derivative of the speed along the segment joining the solutions.
 The initial-angle derivative follows by taking a difference-quotient
 limit, without assuming any angular differentiability of the flow.
 -/
+
+@[expose] public section
 
 noncomputable section
 

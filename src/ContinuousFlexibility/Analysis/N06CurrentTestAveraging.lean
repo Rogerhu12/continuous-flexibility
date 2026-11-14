@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06FullPeriodOperatorTests
-import ContinuousFlexibility.Analysis.N06PhysicalRepresentativeUniqueness
+module
+
+public import ContinuousFlexibility.Analysis.N06FullPeriodOperatorTests
+public import ContinuousFlexibility.Analysis.N06PhysicalRepresentativeUniqueness
 
 /-!
 # Actual current test averaging on the physical pieces
@@ -13,6 +15,8 @@ global smoothness of the bare corrected coefficients is assumed.
 The actual planar a.e. cover gives the identities for almost every radial
 coordinate and almost every angle, exactly as required by the integrals.
 -/
+
+@[expose] public section
 
 noncomputable section
 

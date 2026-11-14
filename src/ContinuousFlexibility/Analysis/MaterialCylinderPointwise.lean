@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.CylinderSobolev
-import ContinuousFlexibility.Analysis.CylinderMixedJets
-import Mathlib.Algebra.Field.Periodic
-import Mathlib.Analysis.Calculus.Deriv.Shift
-import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
+module
+
+public import ContinuousFlexibility.Analysis.CylinderSobolev
+public import ContinuousFlexibility.Analysis.CylinderMixedJets
+public import Mathlib.Algebra.Field.Periodic
+public import Mathlib.Analysis.Calculus.Deriv.Shift
+public import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
 
 /-!
 # Uniform mixed jet bounds on the actual material cylinder
@@ -12,6 +14,8 @@ the restriction of the material cylinder measure in its first coordinate.
 The global jet integrability in `HeightMember` therefore controls the four
 window norms needed for each pointwise mixed jet bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Blueprint.R10a.Geometry
-import ContinuousFlexibility.Radial.SeedRetainedReference
-import ContinuousFlexibility.Radial.SeedReturnMargins
-import ContinuousFlexibility.Radial.MatchedWeightFlooredMorseFibers
+module
+
+public import ContinuousFlexibility.Blueprint.R10a.Geometry
+public import ContinuousFlexibility.Radial.SeedRetainedReference
+public import ContinuousFlexibility.Radial.SeedReturnMargins
+public import ContinuousFlexibility.Radial.MatchedWeightFlooredMorseFibers
 
 /-!
 # One constructed reference with retained coordinates and return margins
@@ -13,6 +15,8 @@ profiles, true border and every localizer stay unchanged. We retain the
 exact floor, the original cell inclusion, and a finite multiplicity bound
 for the final reference itself.
 -/
+
+@[expose] public section
 
 noncomputable section
 

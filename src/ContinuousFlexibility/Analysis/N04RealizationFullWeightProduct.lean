@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04RealizationMixedProductJets
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationMixedProductJets
 
 /-!
 # Full weights in raw mixed products
@@ -9,6 +11,8 @@ physical height retained by one factor is not discarded at order zero.
 The existing spatial Leibniz expansion and genuine parameter product
 tower keep the sum of the assigned spatial and fixed prefix costs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

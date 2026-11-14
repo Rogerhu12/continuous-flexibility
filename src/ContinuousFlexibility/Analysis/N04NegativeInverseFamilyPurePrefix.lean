@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeInverseFiniteFamily
-import ContinuousFlexibility.Analysis.N04NegativeInverseForwardBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeInverseFiniteFamily
+public import ContinuousFlexibility.Analysis.N04NegativeInverseForwardBounds
 
 /-!
 # Uniform pure prefixes for finite families of actual negative atoms
@@ -9,6 +11,8 @@ shift before the spatial order. The conversion to the genuine joint
 towers preserves the parameter and spatial arities. Its spatial factor
 is absorbed into a single material envelope for the whole family.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MorseCellMassTravel
-import ContinuousFlexibility.Radial.MorseJoinHeightContrast
-import ContinuousFlexibility.Radial.MorseAdjacentJoin
+module
+
+public import ContinuousFlexibility.Radial.MorseCellMassTravel
+public import ContinuousFlexibility.Radial.MorseJoinHeightContrast
+public import ContinuousFlexibility.Radial.MorseAdjacentJoin
 
 /-!
 # Physical mass and resistance of one Morse cell
@@ -9,6 +11,8 @@ The mass interval runs from the short left cap to the right turning
 point. The resistance interval continues along the long cap and its
 following connector in increasing physical radius.
 -/
+
+@[expose] public section
 
 noncomputable section
 namespace ContinuousFlexibility.Radial

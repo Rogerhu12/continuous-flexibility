@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Geometry.GraphRotationFamily
+module
+
+public import ContinuousFlexibility.Geometry.GraphRotationFamily
 
 /-!
 # Actual ambient rotations of the graph-disk images
@@ -7,6 +9,8 @@ The ambient map is a genuine Euclidean linear isometry equivalence of
 `E3`. Image identities concern the whole closed graph disk, and do not
 assert noncongruence of closed surfaces before attaching a marked cap.
 -/
+
+@[expose] public section
 
 noncomputable section
 

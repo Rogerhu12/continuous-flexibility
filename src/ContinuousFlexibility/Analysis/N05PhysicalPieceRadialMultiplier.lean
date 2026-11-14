@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05CanonicalOutputMultiplier
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalOutputMultiplier
 
 /-!
 # Radial multipliers on the actual physical pieces
@@ -7,6 +9,8 @@ The disjoint N04 pieces turn smooth local radial coefficients into one
 measurable physical field. The real cell association transfers a fixed
 piece coefficient bound to every active reference localizer.
 -/
+
+@[expose] public section
 
 noncomputable section
 

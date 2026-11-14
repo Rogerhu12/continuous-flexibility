@@ -1,10 +1,12 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryActualCoordinateUnitBounds
-import ContinuousFlexibility.Analysis.N04PositiveGeometryCoordinateSampleNormalization
-import ContinuousFlexibility.Analysis.N04PositiveGeometryReferenceChartSamplePrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometryReferenceInverseSamplePrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometryCurrentJointPowers
-import ContinuousFlexibility.Analysis.N04PositiveGeometryGaugeRegularity
-import ContinuousFlexibility.Analysis.N04PrincipalPositiveIndex
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryActualCoordinateUnitBounds
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryCoordinateSampleNormalization
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryReferenceChartSamplePrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryReferenceInverseSamplePrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryCurrentJointPowers
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryGaugeRegularity
+public import ContinuousFlexibility.Analysis.N04PrincipalPositiveIndex
 
 /-!
 # Current data for all four actual positive coordinates
@@ -14,6 +16,8 @@ all derivative orders. Fixed reference composition, unit coordinates,
 angular defects and the inverse radial width are evaluated in the stored
 whole atlas, with its original component and material sample.
 -/
+
+@[expose] public section
 
 noncomputable section
 

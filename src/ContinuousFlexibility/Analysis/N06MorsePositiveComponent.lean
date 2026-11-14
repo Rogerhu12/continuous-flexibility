@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06MorseJoinFloor
-import ContinuousFlexibility.Radial.ScaleSlowVariation
+module
+
+public import ContinuousFlexibility.Analysis.N06MorseJoinFloor
+public import ContinuousFlexibility.Radial.ScaleSlowVariation
 
 /-!
 # A physical two-root lower bound on every positive Morse gap
@@ -10,6 +12,8 @@ The entire interval consists of the departure cap, the original join,
 and the arrival cap. Their proved physical estimates combine into one
 coefficient-power lower bound times the product of the two distances.
 -/
+
+@[expose] public section
 
 noncomputable section
 

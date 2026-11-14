@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.PositiveEndpointCutoffIntegral
+module
+
+public import ContinuousFlexibility.Analysis.PositiveEndpointCutoffIntegral
 
 /-!
 # The normalized positive reference slope
@@ -8,6 +10,8 @@ Small endpoint masses make this scalar positive. A common positive lower
 bound for the endpoint slopes then gives a genuine positive lower bound
 on the whole real line.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cStateAngleSelections
-import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01cStateAngleSelections
+public import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
 
 /-!
 # The distributed order budget of a state-flow graph term
@@ -10,6 +12,8 @@ less angular order. Positive-state flow factors carry their fixed prefix
 offset. The resulting budget depends on the number of state slots, not
 on the number of angular slots.
 -/
+
+@[expose] public section
 
 noncomputable section
 

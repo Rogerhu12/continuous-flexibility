@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularBands
-import ContinuousFlexibility.Analysis.N07aAngularWeights
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularBands
+public import ContinuousFlexibility.Analysis.N07aAngularWeights
 
 /-!
 # Arbitrarily high true weak jets in a fixed angular band
@@ -9,6 +11,8 @@ angular derivative multiplier is bounded. Real Fourier inversion thus
 constructs every weak angular derivative of that band on the original
 canonical piece. Its norm is computed exactly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

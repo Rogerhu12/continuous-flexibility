@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowIntegral
-import Mathlib.Analysis.Calculus.ContDiff.Comp
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowIntegral
+public import Mathlib.Analysis.Calculus.ContDiff.Comp
 
 /-!
 # Actual spatial jets of parameterized functions and compact integrals
@@ -9,6 +11,8 @@ Joint smoothness gives joint continuity of every actual spatial jet.
 When only time continuity of those jets is available, differentiation
 still commutes with the compact integral at every finite order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

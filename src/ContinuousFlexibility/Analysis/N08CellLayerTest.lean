@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.IntervalLayerCutoff
-import ContinuousFlexibility.Analysis.SpacesCompactHeights
-import ContinuousFlexibility.Radial.ProfileLayerGeometry
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Analysis.IntervalLayerCutoff
+public import ContinuousFlexibility.Analysis.SpacesCompactHeights
+public import ContinuousFlexibility.Radial.ProfileLayerGeometry
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # Actual radial tests on a complete reference cell
@@ -12,6 +14,8 @@ of the entire cell. Multiplying by the radius gives a genuine compact
 height whose derivative is one throughout every negative component in
 that cell; the derivative is free to change outside the component.
 -/
+
+@[expose] public section
 
 noncomputable section
 

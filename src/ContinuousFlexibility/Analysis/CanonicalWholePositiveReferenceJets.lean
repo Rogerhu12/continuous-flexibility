@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.WholePositivePrincipalJetMatching
-import ContinuousFlexibility.Analysis.CanonicalNegativeRelativeBoundaryJets
-import ContinuousFlexibility.Analysis.PrincipalDensityGerms
+module
+
+public import ContinuousFlexibility.Analysis.WholePositivePrincipalJetMatching
+public import ContinuousFlexibility.Analysis.CanonicalNegativeRelativeBoundaryJets
+public import ContinuousFlexibility.Analysis.PrincipalDensityGerms
 
 /-!
 # The actual positive principal difference vanishes to the matched order
@@ -11,6 +13,8 @@ that equation to the actual inverse-chart coefficient field. Interior
 positive endpoints use their genuine negative neighbors; ambient endpoints
 are explicitly excluded from this conclusion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

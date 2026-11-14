@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bOpticalBalancedTests
-import ContinuousFlexibility.Analysis.N04bOpticalHeightVariation
+module
+
+public import ContinuousFlexibility.Analysis.N04bOpticalBalancedTests
+public import ContinuousFlexibility.Analysis.N04bOpticalHeightVariation
 
 /-!
 # Balanced actual radial height increments
@@ -9,6 +11,8 @@ roots, smooth and positive in a negative component, and zero at the roots.
 Consequently every interior cut has a compact radial increment whose total
 first-order optical pairing vanishes while its left pairing is one.
 -/
+
+@[expose] public section
 
 noncomputable section
 

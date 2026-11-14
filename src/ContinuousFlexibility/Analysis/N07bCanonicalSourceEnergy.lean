@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CanonicalSourceConversion
-import ContinuousFlexibility.Analysis.SpacesLpCurveDerivative
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalSourceConversion
+public import ContinuousFlexibility.Analysis.SpacesLpCurveDerivative
 
 /-!
 # The actual physical energy of a canonical source
@@ -14,6 +16,8 @@ no integrability assertion. The final norm identity assumes actual
 `MemLp` of the transformed source. Uniform bounds for the physical
 density and summability over all pieces are separate analytic obligations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

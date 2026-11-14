@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aMixedCoefficientSum
-import ContinuousFlexibility.Analysis.N07aForwardConservation
-import ContinuousFlexibility.Analysis.N07aDiagonalCoefficientParameter
-import ContinuousFlexibility.Analysis.N07aMixedCoefficientParameter
+module
+
+public import ContinuousFlexibility.Analysis.N07aMixedCoefficientSum
+public import ContinuousFlexibility.Analysis.N07aForwardConservation
+public import ContinuousFlexibility.Analysis.N07aDiagonalCoefficientParameter
+public import ContinuousFlexibility.Analysis.N07aMixedCoefficientParameter
 
 /-!
 # The original physical forward map on the common height space
@@ -11,6 +13,8 @@ mixed coefficient determine this continuous linear operator. The zero
 reference operator supplies the fixed background. Conservation places
 the literal output in the prescribed source kernel.
 -/
+
+@[expose] public section
 
 noncomputable section
 

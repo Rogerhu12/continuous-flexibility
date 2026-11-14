@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N08PhysicalLabelWeights
-import ContinuousFlexibility.Analysis.N08RadialForcingLowerBound
-import ContinuousFlexibility.Analysis.N08NormalizedCellHeight
+module
+
+public import ContinuousFlexibility.Analysis.N08PhysicalLabelWeights
+public import ContinuousFlexibility.Analysis.N08RadialForcingLowerBound
+public import ContinuousFlexibility.Analysis.N08NormalizedCellHeight
 
 /-!
 # Reading the physical cell from uniformly bounded positive height tests
@@ -10,6 +12,8 @@ Its positive slope and the return margin force a comparison between the
 physical cell weight and N01's assigned control label. No placement of a
 control interval in its assigned cell is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

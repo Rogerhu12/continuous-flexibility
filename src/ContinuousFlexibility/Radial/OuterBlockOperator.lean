@@ -1,7 +1,9 @@
-import Mathlib.Analysis.InnerProductSpace.Adjoint
-import Mathlib.Analysis.Normed.Operator.Prod
-import Mathlib.Analysis.Real.Sqrt
-import Mathlib.Analysis.SpecialFunctions.Exp
+module
+
+public import Mathlib.Analysis.InnerProductSpace.Adjoint
+public import Mathlib.Analysis.Normed.Operator.Prod
+public import Mathlib.Analysis.Real.Sqrt
+public import Mathlib.Analysis.SpecialFunctions.Exp
 
 /-!
 # The four blocks of the outer inverse
@@ -15,6 +17,8 @@ The intermediate product carries the maximum norm.  No Hilbert norm on
 that product is used.  The individual core and tail spaces are Hilbert
 spaces, as needed for their rank-one operators.
 -/
+
+@[expose] public section
 
 noncomputable section
 

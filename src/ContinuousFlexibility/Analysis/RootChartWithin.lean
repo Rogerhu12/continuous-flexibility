@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.RootCompositionSmooth
-import ContinuousFlexibility.Analysis.RootCompositionZeroOrder
-import Mathlib.Analysis.Calculus.FDeriv.Mul
-import Mathlib.Analysis.Calculus.ContDiff.Comp
+module
+
+public import ContinuousFlexibility.Analysis.RootCompositionSmooth
+public import ContinuousFlexibility.Analysis.RootCompositionZeroOrder
+public import Mathlib.Analysis.Calculus.FDeriv.Mul
+public import Mathlib.Analysis.Calculus.ContDiff.Comp
 
 /-!
 # The root chart within the nonnegative half-plane
@@ -12,6 +14,8 @@ derivative and Jacobian in this file is taken within the nonnegative
 half-plane. A positive odd coefficient gives a smooth radial rescaling,
 an explicit nondegenerate boundary Jacobian, and a positive local collar.
 -/
+
+@[expose] public section
 
 noncomputable section
 

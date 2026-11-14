@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionReferenceLower
-import ContinuousFlexibility.Analysis.N01RootRadialCoefficientValues
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionReferenceLower
+public import ContinuousFlexibility.Analysis.N01RootRadialCoefficientValues
 
 /-!
 # State-independent denominators on each fixed negative interior
@@ -11,6 +13,8 @@ reference interval and the exact N03 equality of radial coefficients.
 Thus every fixed compact subset of a negative component has two genuine
 positive lower bounds on the same state neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

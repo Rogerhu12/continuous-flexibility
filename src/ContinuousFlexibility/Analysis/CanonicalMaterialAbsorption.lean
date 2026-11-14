@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.StateNeighborhood
-import ContinuousFlexibility.Analysis.MaterialSampleBounds
+module
+
+public import ContinuousFlexibility.Analysis.StateNeighborhood
+public import ContinuousFlexibility.Analysis.MaterialSampleBounds
 
 /-!
 # Uniform absorption of geometric coefficient powers
@@ -10,6 +12,8 @@ properties give a uniform coefficient bound, including all sampled cells.
 Consequently a fixed low-order state displacement can be made uniformly
 small on one smaller state neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

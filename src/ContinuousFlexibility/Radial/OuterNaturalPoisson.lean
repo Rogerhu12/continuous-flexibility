@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterNaturalInitialGap
-import ContinuousFlexibility.Radial.TailNaturalUniqueness
+module
+
+public import ContinuousFlexibility.Radial.OuterNaturalInitialGap
+public import ContinuousFlexibility.Radial.TailNaturalUniqueness
 
 /-!
 # The normalized natural Poisson solution with its full weighted bound
@@ -9,6 +11,8 @@ first outgoing flux follows from the canonical edge coefficients, so
 the initial resistance interval and the complete norm estimate require
 no additional boundary or integrability hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.RetainedMorseChainInverse
-import ContinuousFlexibility.Radial.MatchedRetainedMorseColumns
-import ContinuousFlexibility.Radial.MatchedInnerFiniteWeightedInverse
+module
+
+public import ContinuousFlexibility.Radial.RetainedMorseChainInverse
+public import ContinuousFlexibility.Radial.MatchedRetainedMorseColumns
+public import ContinuousFlexibility.Radial.MatchedInnerFiniteWeightedInverse
 
 /-!
 # Both signed bounds for the same retained Morse inverse
@@ -11,6 +13,8 @@ energy and unweighted Dirichlet bounds supply the finite-chain theorem.
 The constants depend on the fixed model suppliers, before the frequency
 and the retained transition index are chosen.
 -/
+
+@[expose] public section
 
 noncomputable section
 

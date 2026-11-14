@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07bAtlasEnergy
+module
+
+public import ContinuousFlexibility.Analysis.N07bAtlasEnergy
 
 /-!
 # The actual reference physical representative
@@ -12,6 +14,8 @@ exact preservation of the physical row.
 These identities do not assert transmission across the piece boundaries or
 membership in the reference graph's weighted endpoint class.
 -/
+
+@[expose] public section
 
 noncomputable section
 

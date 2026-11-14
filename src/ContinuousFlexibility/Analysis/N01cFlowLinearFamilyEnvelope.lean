@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cCircleLinearVariationEnvelope
-import ContinuousFlexibility.Analysis.N01cFlowHeadEnvelope
+module
+
+public import ContinuousFlexibility.Analysis.N01cCircleLinearVariationEnvelope
+public import ContinuousFlexibility.Analysis.N01cFlowHeadEnvelope
 
 /-!
 # Uniform angular envelopes for actual linear variation families
@@ -8,6 +10,8 @@ A fixed low coefficient integral and the one-high forcing polynomial
 give a polynomial bound for the actual angular jets. The exponent and
 the fixed aggregate order are chosen before the requested angular order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

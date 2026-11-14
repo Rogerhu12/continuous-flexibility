@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.R07ConeSolution
-import ContinuousFlexibility.Radial.R07CapPullback
-import ContinuousFlexibility.Radial.R07JoinSmallness
-import ContinuousFlexibility.Radial.R07AngleScale
-import ContinuousFlexibility.Radial.R07FiniteAngles
+module
+
+public import ContinuousFlexibility.Radial.R07ConeSolution
+public import ContinuousFlexibility.Radial.R07CapPullback
+public import ContinuousFlexibility.Radial.R07JoinSmallness
+public import ContinuousFlexibility.Radial.R07AngleScale
+public import ContinuousFlexibility.Radial.R07FiniteAngles
 
 /-!
 # The actual first-band cone solution across its short join
@@ -12,6 +14,8 @@ positive value at the join gives a state with a fixed cone slope, so the
 same transfer estimate used for the infinite height selection applies.
 The angle is then transferred back to the required cut normalization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

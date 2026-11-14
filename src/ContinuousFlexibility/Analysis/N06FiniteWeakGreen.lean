@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06PhysicalWeakIntegration
-import ContinuousFlexibility.Analysis.N06WeakDivergencePairing
-import ContinuousFlexibility.Scalar.GreenIdentity
+module
+
+public import ContinuousFlexibility.Analysis.N06PhysicalWeakIntegration
+public import ContinuousFlexibility.Analysis.N06WeakDivergencePairing
+public import ContinuousFlexibility.Scalar.GreenIdentity
 
 /-!
 # Physical Green identity for finite C1/H2 Fourier fields
@@ -10,6 +12,8 @@ integration identities have their true endpoint pairings, while angular
 periodicity removes only the seam. The finite-field constructor below
 obtains all six identities from AC modal representatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

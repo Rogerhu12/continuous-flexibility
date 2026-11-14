@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Statements.Radial
-import ContinuousFlexibility.Analysis.MaterialWeights
-import Mathlib.Algebra.Order.BigOperators.GroupWithZero.Finset
-import Mathlib.Algebra.Order.Floor.Semiring
-import Mathlib.Data.Nat.Find
-import Mathlib.Order.Interval.Finset.Nat
+module
+
+public import ContinuousFlexibility.Statements.Radial
+public import ContinuousFlexibility.Analysis.MaterialWeights
+public import Mathlib.Algebra.Order.BigOperators.GroupWithZero.Finset
+public import Mathlib.Algebra.Order.Floor.Semiring
+public import Mathlib.Data.Nat.Find
+public import Mathlib.Order.Interval.Finset.Nat
 
 /-!
 # The scale budget of the accumulating Morse chain
@@ -14,6 +16,8 @@ The least nonsquare choices, the uniform height products in
 They do not construct a Morse radius or identify the mass and resistance
 intervals of a cell.
 -/
+
+@[expose] public section
 
 noncomputable section
 

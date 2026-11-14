@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06CanonicalTestOperator
-import ContinuousFlexibility.Analysis.N06HalfPhysicalPairing
+module
+
+public import ContinuousFlexibility.Analysis.N06CanonicalTestOperator
+public import ContinuousFlexibility.Analysis.N06HalfPhysicalPairing
 
 /-!
 # Actual physical weak pairings in the original canonical measure
@@ -11,6 +13,8 @@ height may be any weak L2 representative; no smooth approximation of that
 height is assumed. The physical remainder and forcing can include the
 original three scalar columns before this change of variables.
 -/
+
+@[expose] public section
 
 noncomputable section
 

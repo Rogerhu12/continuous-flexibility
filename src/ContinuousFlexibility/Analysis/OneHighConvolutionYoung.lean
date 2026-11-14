@@ -1,6 +1,8 @@
-import Mathlib.Analysis.LConvolution
-import Mathlib.MeasureTheory.Function.LpSeminorm.CompareExp
-import Mathlib.Tactic.NormNum
+module
+
+public import Mathlib.Analysis.LConvolution
+public import Mathlib.MeasureTheory.Function.LpSeminorm.CompareExp
+public import Mathlib.Tactic.NormNum
 
 /-!
 # Young's `L¹ * L² → L²` inequality
@@ -10,6 +12,8 @@ Cauchy--Schwarz followed by Tonelli proves Young's inequality on any commutative
 measurable group with an invariant measure. This includes both circle and
 cylinder frequency measures.
 -/
+
+@[expose] public section
 
 noncomputable section
 

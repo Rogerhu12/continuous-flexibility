@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01EndpointAngularJets
-import ContinuousFlexibility.Analysis.SmoothDirectionsAngularLine
-import ContinuousFlexibility.Analysis.SmoothDirectionsMixedScalarLine
-import ContinuousFlexibility.Analysis.ReturnFlowInverseRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N01EndpointAngularJets
+public import ContinuousFlexibility.Analysis.SmoothDirectionsAngularLine
+public import ContinuousFlexibility.Analysis.SmoothDirectionsMixedScalarLine
+public import ContinuousFlexibility.Analysis.ReturnFlowInverseRegularity
 
 /-!
 # Actual N01 flow and inverse along every sector parameter line
@@ -14,6 +16,8 @@ that inverse on the entire admissible line domain.
 
 No regularity of the inverse family is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

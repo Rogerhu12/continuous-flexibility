@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.SeedPureTailReplacement
-import ContinuousFlexibility.Radial.SeedBridgePair
-import ContinuousFlexibility.Radial.SeedThreePiece
+module
+
+public import ContinuousFlexibility.Radial.SeedPureTailReplacement
+public import ContinuousFlexibility.Radial.SeedBridgePair
+public import ContinuousFlexibility.Radial.SeedThreePiece
 
 /-!
 # Orienting the pure inward mode of a natural tail
@@ -9,6 +11,8 @@ The positive bridge changes an exceptional pure cone mode to the mode
 needed by the central reference pair.  The complete original outward tail
 is retained, including its endpoint jets and its signed normalization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

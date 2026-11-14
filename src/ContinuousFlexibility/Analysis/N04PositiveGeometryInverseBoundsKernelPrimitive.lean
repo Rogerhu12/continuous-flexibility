@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsKernelSlope
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsKernelSlope
 
 /-!
 # Uniform jets of the literal finite coefficient radial collar
@@ -9,6 +11,8 @@ coefficient and radial jets then follow from the preceding slope bounds.
 Their constants depend on the common scalar envelopes, not on the
 component, coefficient vector, or evaluation point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

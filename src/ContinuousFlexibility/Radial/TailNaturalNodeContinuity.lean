@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.TailNaturalNodeLine
+module
+
+public import ContinuousFlexibility.Radial.TailNaturalNodeLine
 
 /-!
 # Continuous natural node data
@@ -7,6 +9,8 @@ The uniform continued-fraction limit gives continuous exact node ratios.
 Finite products of these ratios then select the node solution with value
 one at the first node, continuously in the product topology on parameters.
 -/
+
+@[expose] public section
 
 noncomputable section
 

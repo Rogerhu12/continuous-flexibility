@@ -1,5 +1,7 @@
-import Mathlib.MeasureTheory.Function.L2Space
-import Mathlib.Analysis.SpecialFunctions.Pow.NNReal
+module
+
+public import Mathlib.MeasureTheory.Function.L2Space
+public import Mathlib.Analysis.SpecialFunctions.Pow.NNReal
 
 /-!
 # A continuous core kernel as an actual `L²` operator
@@ -13,6 +15,8 @@ for every `L²` source without assuming an integral operator exists.
 The operator norm is at most the core mass times the uniform kernel bound.
 This is the core/core estimate used in the outer Green construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

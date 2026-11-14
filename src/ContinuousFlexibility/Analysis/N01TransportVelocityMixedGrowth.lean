@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.JointTransportPowerBounds
-import ContinuousFlexibility.Analysis.N01TransportCharacteristicInterpolation
-import ContinuousFlexibility.Analysis.JointMixedRadialScalar
+module
+
+public import ContinuousFlexibility.Analysis.JointTransportPowerBounds
+public import ContinuousFlexibility.Analysis.N01TransportCharacteristicInterpolation
+public import ContinuousFlexibility.Analysis.JointMixedRadialScalar
 
 /-!
 # The same actual cutoff velocity has fixed-loss mixed parameter bounds
@@ -12,6 +14,8 @@ The true transport equations then propagate the estimates radially.
 Both the independent residual and the supplied N02 residual use the
 same cutoff and the same flow inverses.
 -/
+
+@[expose] public section
 
 noncomputable section
 

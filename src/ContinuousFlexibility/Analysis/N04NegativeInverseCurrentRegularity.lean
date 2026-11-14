@@ -1,6 +1,10 @@
-import ContinuousFlexibility.Analysis.N04SourceColumnsData
+module
+
+public import ContinuousFlexibility.Analysis.N04SourceColumnsData
 
 /-! Genuine selected-piece current towers, obtained by adding back the fixed reference. -/
+
+@[expose] public section
 
 noncomputable section
 

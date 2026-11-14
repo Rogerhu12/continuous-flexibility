@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.RetainedMorsePoissonBound
-import ContinuousFlexibility.Radial.FixedCentralModelColumnCost
+module
+
+public import ContinuousFlexibility.Radial.RetainedMorsePoissonBound
+public import ContinuousFlexibility.Radial.FixedCentralModelColumnCost
 
 /-!
 # Actual endpoint density is controlled by the same physical cut energy
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Radial.FixedCentralModelColumnCost
 Height and radius dilations cancel exactly.  These estimates pay the
 Hardy endpoint term using the original model diagonal.
 -/
+
+@[expose] public section
 
 noncomputable section
 

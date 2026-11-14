@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01aReferenceCoarseningInverse
-import ContinuousFlexibility.Analysis.N01aReferenceCoarseningClosure
-import ContinuousFlexibility.Analysis.N01aReferenceSourceMeasurability
+module
+
+public import ContinuousFlexibility.Analysis.N01aReferenceCoarseningInverse
+public import ContinuousFlexibility.Analysis.N01aReferenceCoarseningClosure
+public import ContinuousFlexibility.Analysis.N01aReferenceSourceMeasurability
 
 /-!
 # Transporting the complete reference inverse package
@@ -9,6 +11,8 @@ The genuine pure-kernel graph supplies signed source measurability through
 Green reciprocity. Thus all five parts of the frozen reference inverse
 package pass to the coarse partition, including its actual graph topology.
 -/
+
+@[expose] public section
 
 noncomputable section
 

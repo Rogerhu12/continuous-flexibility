@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ZeroModeWeightGeometry
-import ContinuousFlexibility.Radial.ReferenceWeightedProduct
+module
+
+public import ContinuousFlexibility.Radial.ZeroModeWeightGeometry
+public import ContinuousFlexibility.Radial.ReferenceWeightedProduct
 
 /-!
 # The endpoint singularity is controlled by the actual output weight
@@ -9,6 +11,8 @@ output weights dominate the inverse square of the distance to the two
 endpoints. This is a consequence of the stated coefficient absorption
 and distance bounds, without using trace scaffolds or spectral data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.AngularHilbertScale
-import ContinuousFlexibility.Analysis.AngularResolventOperator
-import Mathlib.Tactic.FieldSimp
-import Mathlib.Tactic.Module
-import Mathlib.Tactic.Ring
+module
+
+public import ContinuousFlexibility.Analysis.AngularHilbertScale
+public import ContinuousFlexibility.Analysis.AngularResolventOperator
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.Module
+public import Mathlib.Tactic.Ring
 
 /-!
 # Identification of the angular Sobolev domain with the original operator
@@ -11,6 +13,8 @@ The first Sobolev domain is exactly the range of the bounded resolvent.
 On that domain the spectral frequency action equals the actual maximal
 self-adjoint partial operator `B⁻¹ - I`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

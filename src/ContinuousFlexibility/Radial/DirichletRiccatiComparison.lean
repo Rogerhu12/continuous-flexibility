@@ -1,6 +1,8 @@
-import Mathlib.Analysis.SpecialFunctions.ExpDeriv
-import Mathlib.Analysis.Calculus.Deriv.MeanValue
-import Mathlib.Topology.Order.Monotone
+module
+
+public import Mathlib.Analysis.SpecialFunctions.ExpDeriv
+public import Mathlib.Analysis.Calculus.Deriv.MeanValue
+public import Mathlib.Topology.Order.Monotone
 
 /-!
 # Dirichlet cut through a positive cap: Riccati comparison
@@ -15,6 +17,8 @@ and consequently the logarithmic slope satisfies
 
   `0 < u' x / u x ≤ M coth (M x) ≤ M + 1 / x`  for `x ∈ (0, L]`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

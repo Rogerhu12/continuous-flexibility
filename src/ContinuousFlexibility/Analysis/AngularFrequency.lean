@@ -1,6 +1,8 @@
-import Mathlib.Analysis.InnerProductSpace.LinearPMap
-import Mathlib.Analysis.InnerProductSpace.l2Space
-import Mathlib.Analysis.Real.Sqrt
+module
+
+public import Mathlib.Analysis.InnerProductSpace.LinearPMap
+public import Mathlib.Analysis.InnerProductSpace.l2Space
+public import Mathlib.Analysis.Real.Sqrt
 
 /-!
 # Angular frequency spaces with arbitrary spectral multiplicities
@@ -14,6 +16,8 @@ The Sobolev weight is exactly the Japanese bracket `sqrt (1 + n²)`.
 Weighted norms are defined independently of a membership proof; every
 analytic statement about them includes the corresponding domain condition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

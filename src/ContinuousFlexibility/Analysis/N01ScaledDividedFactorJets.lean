@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01RootFactorJetBounds
-import ContinuousFlexibility.Analysis.CylinderMixedJetNorms
-import ContinuousFlexibility.Analysis.PointwiseAffineMaterialJets
+module
+
+public import ContinuousFlexibility.Analysis.N01RootFactorJetBounds
+public import ContinuousFlexibility.Analysis.CylinderMixedJetNorms
+public import ContinuousFlexibility.Analysis.PointwiseAffineMaterialJets
 
 /-!
 # Actual divided-discriminant jets in the same normalized root variable
@@ -10,6 +12,8 @@ give all ordinary Fréchet jets. A fixed radial linear pullback adds only
 an order-dependent numerical constant. No new state loss is introduced,
 and neither the root scale nor the selected flow is changed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

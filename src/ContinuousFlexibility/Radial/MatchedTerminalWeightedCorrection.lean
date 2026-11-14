@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchedTerminalLeadingBounds
-import ContinuousFlexibility.Radial.MatchedInnerWeightTransport
+module
+
+public import ContinuousFlexibility.Radial.MatchedTerminalLeadingBounds
+public import ContinuousFlexibility.Radial.MatchedInnerWeightTransport
 
 /-!
 # The original terminal correction after the actual physical weight
@@ -10,6 +12,8 @@ The resulting inequality contains the norm of the same actual chain
 inverse, which the local-piece theorem bounds independently; no weighted
 inverse or external-column estimate is assumed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

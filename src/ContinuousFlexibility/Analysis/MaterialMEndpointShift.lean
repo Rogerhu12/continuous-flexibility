@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.MaterialSampleShift
-import Mathlib.Analysis.Calculus.MeanValue
-import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
+module
+
+public import ContinuousFlexibility.Analysis.MaterialSampleShift
+public import Mathlib.Analysis.Calculus.MeanValue
+public import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
 
 /-!
 # The actual material weight under a bounded endpoint displacement
@@ -10,6 +12,8 @@ The logarithmic derivative of the model weight is bounded by its actual
 power of `M`, including negative powers, at the cost of a fixed `E0`
 power. No extra material order or change of material data is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

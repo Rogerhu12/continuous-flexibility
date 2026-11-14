@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aClosedHeightFirstJet
-import ContinuousFlexibility.Analysis.N07aCurrentCutMeasure
+module
+
+public import ContinuousFlexibility.Analysis.N07aClosedHeightFirstJet
+public import ContinuousFlexibility.Analysis.N07aCurrentCutMeasure
 
 /-!
 # The original reference graph determines current first traces
@@ -8,6 +10,8 @@ The common reference cutoff is removed from both value and differential.
 The source-independent primitive transport then carries these two genuine
 traces to the actual moving cut. No trace of a solution is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

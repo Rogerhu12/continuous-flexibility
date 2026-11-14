@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CylinderMixedJets
-import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
-import Mathlib.Tactic.FunProp
+module
+
+public import ContinuousFlexibility.Analysis.CylinderMixedJets
+public import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+public import Mathlib.Tactic.FunProp
 
 /-!
 # Boundary Taylor extensions on a cylinder
@@ -18,6 +20,8 @@ the extension of an actual smooth field kills its radial boundary jets
 through the selected degree. This module asserts exact interpolation and
 smoothness, not a width-independent bound for derivatives of the cutoff.
 -/
+
+@[expose] public section
 
 noncomputable section
 

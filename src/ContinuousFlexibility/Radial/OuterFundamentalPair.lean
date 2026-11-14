@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterHomogeneousContinuation
-import ContinuousFlexibility.Radial.OuterGreenIntegral
+module
+
+public import ContinuousFlexibility.Radial.OuterHomogeneousContinuation
+public import ContinuousFlexibility.Radial.OuterGreenIntegral
 
 /-!
 # Constructing the normalized homogeneous pair on the whole outer region
@@ -10,6 +12,8 @@ its perpendicular state gives the two solutions used by the outer Green
 kernel.  Neither the construction nor the Wronskian proof divides by the
 natural solution's value at the outer entrance.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.AngularRegularity
+module
+
+public import ContinuousFlexibility.Analysis.AngularRegularity
 
 /-!
 # Patching actual angular jets across radial endpoints
@@ -7,6 +9,8 @@ Only derivatives of one-dimensional angular slices occur here. A full
 neighborhood equality of scalar fields transfers all these jets, even
 when neither field has a radial derivative at the base point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

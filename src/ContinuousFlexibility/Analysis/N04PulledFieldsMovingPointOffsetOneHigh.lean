@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsMovingPointOneHigh
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsMovingPointOneHigh
 
 /-!
 # Moving-point normalization with a physical prefix offset
@@ -8,6 +10,8 @@ of its spatial order. This power is included once in the total exponent
 before normalizing the genuine multilinear jet. The sampled height and
 the low grading are unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

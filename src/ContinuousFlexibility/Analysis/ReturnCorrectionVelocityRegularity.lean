@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionDisplacementRegularity
-import ContinuousFlexibility.Analysis.N01FlowAngularJointRegularity
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionDisplacementRegularity
+public import ContinuousFlexibility.Analysis.N01FlowAngularJointRegularity
 
 /-!
 # Joint regularity of the actual correction velocity
@@ -10,6 +12,8 @@ frozen velocity correction is C¹ for every independent circle residual.
 All regularity premises on the forward and inverse charts have been
 discharged using N01 and the physical-space realizations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

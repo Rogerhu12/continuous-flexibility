@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Statements.N06PrimitiveGeometryBridge
+module
+
+public import ContinuousFlexibility.Statements.N06PrimitiveGeometryBridge
 
 /-!
 # Spatial return-correction regularity already retained by the primitive geometry
@@ -7,6 +9,8 @@ The actual coefficient fields in the N04 primitive payload give the raw
 smoothness and angular period required by the distributional pairing. This
 projection uses the same correction and does not reselect its coefficients.
 -/
+
+@[expose] public section
 
 noncomputable section
 

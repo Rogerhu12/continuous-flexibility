@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aActualChartDifferentials
-import ContinuousFlexibility.Analysis.N07aCoordinateJetNorms
-import ContinuousFlexibility.Analysis.N07aInverseChartDisplacement
-import ContinuousFlexibility.Analysis.SolveReturnEquations
+module
+
+public import ContinuousFlexibility.Analysis.N07aActualChartDifferentials
+public import ContinuousFlexibility.Analysis.N07aCoordinateJetNorms
+public import ContinuousFlexibility.Analysis.N07aInverseChartDisplacement
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # First inverse-chart differences on the canonical strip
@@ -10,6 +12,8 @@ The radial and angular difference atoms retain the H^(3/4) gain when
 rescaled to the original canonical coordinates. The identity angular
 coordinate cancels before taking the derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

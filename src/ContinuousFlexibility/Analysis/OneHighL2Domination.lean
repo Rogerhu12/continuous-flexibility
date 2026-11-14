@@ -1,5 +1,7 @@
-import Mathlib.MeasureTheory.Function.LpSeminorm.SMul
-import Mathlib.MeasureTheory.Function.LpSeminorm.TriangleInequality
+module
+
+public import Mathlib.MeasureTheory.Function.LpSeminorm.SMul
+public import Mathlib.MeasureTheory.Function.LpSeminorm.TriangleInequality
 
 /-!
 # Finite pointwise majorants in the actual L² space
@@ -8,6 +10,8 @@ This lemma proves membership before passing to real norms. It therefore
 applies on the noncompact cylinder without assuming that the output, or its
 derivatives, already has finite energy.
 -/
+
+@[expose] public section
 
 noncomputable section
 

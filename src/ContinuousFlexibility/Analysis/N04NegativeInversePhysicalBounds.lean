@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeInverseForwardBounds
-import ContinuousFlexibility.Analysis.N04NegativeInverseFamilyPurePrefix
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeInverseForwardBounds
+public import ContinuousFlexibility.Analysis.N04NegativeInverseFamilyPurePrefix
 
 /-!
 # Undoing the fixed physical unit normalization
@@ -9,6 +11,8 @@ slots and their height factors are unchanged.  The inverse interval
 length is charged once for each physical slot, before any transition
 between the two old reference halves is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

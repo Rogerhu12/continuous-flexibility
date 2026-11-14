@@ -1,10 +1,14 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartInteriorRawBudget
-import ContinuousFlexibility.Analysis.N04NegativeChartInteriorMaterial
-import ContinuousFlexibility.Analysis.N04NegativeChartTransportStateBudget
-import ContinuousFlexibility.Analysis.N04NegativeChartRadialStateBounds
-import ContinuousFlexibility.Analysis.JointMixedRadialScalar
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartInteriorRawBudget
+public import ContinuousFlexibility.Analysis.N04NegativeChartInteriorMaterial
+public import ContinuousFlexibility.Analysis.N04NegativeChartTransportStateBudget
+public import ContinuousFlexibility.Analysis.N04NegativeChartRadialStateBounds
+public import ContinuousFlexibility.Analysis.JointMixedRadialScalar
 
 /-! The genuine interior transport system with one common state-order budget. -/
+
+@[expose] public section
 
 noncomputable section
 

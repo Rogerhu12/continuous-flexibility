@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05RootCutTransport
-import ContinuousFlexibility.Analysis.N05PeriodicLiftRigidity
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05RootCutTransport
+public import ContinuousFlexibility.Analysis.N05PeriodicLiftRigidity
 
 /-!
 # Identification of the negative optical travel
@@ -10,6 +12,8 @@ root-to-cut finite difference identifies each half travel with the common
 Tricomi cut time.  Additivity of the actual optical integral then recovers
 the original full return travel and its frozen irrationality margin.
 -/
+
+@[expose] public section
 
 noncomputable section
 

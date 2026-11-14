@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01CorrectionCoefficientStripJets
-import ContinuousFlexibility.Analysis.MaterialCoordinateParameterDerivatives
+module
+
+public import ContinuousFlexibility.Analysis.N01CorrectionCoefficientStripJets
+public import ContinuousFlexibility.Analysis.MaterialCoordinateParameterDerivatives
 
 /-!
 # The actual correction coefficient jets on the whole annulus
@@ -11,6 +13,8 @@ the actual zero jets therefore patch at every parameter order, including
 all mixed spatial derivatives. The material-coordinate recurrence is
 then the chain rule for these same fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 

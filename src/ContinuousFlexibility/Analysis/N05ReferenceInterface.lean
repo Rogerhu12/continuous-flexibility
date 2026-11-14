@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # Intermediate specifications for the canonical reference inverse
@@ -9,6 +11,8 @@ their first radial derivatives. It asserts no inverse estimate. The inverse
 specification uses the frozen physical relation and the actual volume norms;
 its converse is a separate uniqueness problem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.PositiveConformalMaterialJets
+module
+
+public import ContinuousFlexibility.Analysis.PositiveConformalMaterialJets
 
 /-!
 # Actual negative characteristic speeds with one fixed derivative loss
@@ -10,6 +12,8 @@ jets. The coefficient value bound is derived from the order-zero input
 on one low state ball. The low order and derivative loss are chosen
 before the lower bounds and all component-dependent jet constants.
 -/
+
+@[expose] public section
 
 noncomputable section
 

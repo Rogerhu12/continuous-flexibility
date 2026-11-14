@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N08ControlResidualColumn
-import ContinuousFlexibility.Analysis.N08SectorParameterChart
+module
+
+public import ContinuousFlexibility.Analysis.N08ControlResidualColumn
+public import ContinuousFlexibility.Analysis.N08SectorParameterChart
 
 /-!
 # The control column on the actual sector chart
@@ -9,6 +11,8 @@ column by zero off that sector preserves its actual sector derivatives and
 its smooth pullback to the sector chart. No regularity across the ambient
 sector boundary is asserted or needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

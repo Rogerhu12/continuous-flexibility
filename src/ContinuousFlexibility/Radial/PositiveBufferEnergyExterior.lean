@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.PositiveBufferEnergyProfiles
-import ContinuousFlexibility.Radial.PositiveBufferComparison
-import ContinuousFlexibility.Radial.PositiveBufferComparisonAffine
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferEnergyProfiles
+public import ContinuousFlexibility.Radial.PositiveBufferComparison
+public import ContinuousFlexibility.Radial.PositiveBufferComparisonAffine
 
 /-!
 # Actual exterior minimizers and their conormal energy
@@ -10,6 +12,8 @@ above. Positivity and exponential comparison imply that its boundary flux
 vanishes at infinity. Reflection treats the left and right exteriors using
 one half-line argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

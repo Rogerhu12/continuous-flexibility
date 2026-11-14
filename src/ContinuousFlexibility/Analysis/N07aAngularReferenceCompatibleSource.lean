@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aAngularReferenceSource
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceSource
 
 /-!
 # The literal compatible source of the transported reference field
@@ -7,6 +9,8 @@ The interior differential is extended across the null interface set by
 zero and combined with the original radial border column. Both natural
 graph membership and canonical source realization use this same function.
 -/
+
+@[expose] public section
 
 noncomputable section
 

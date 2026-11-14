@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PointwiseMaterialJetOperations
-import ContinuousFlexibility.Analysis.RootAngularProduct
+module
+
+public import ContinuousFlexibility.Analysis.PointwiseMaterialJetOperations
+public import ContinuousFlexibility.Analysis.RootAngularProduct
 
 /-!
 # Actual jets of the smooth root angular denominator
@@ -9,6 +11,8 @@ once and applying two genuine product estimates proves its fixed-loss
 bound. The fixed radial cubic has state-independent jets at every root
 point, including all angular representatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06WeakAngularModes
-import ContinuousFlexibility.Analysis.SpacesTorusWaves
-import ContinuousFlexibility.Radial.R11bPhysicalCompleteness
+module
+
+public import ContinuousFlexibility.Analysis.N06WeakAngularModes
+public import ContinuousFlexibility.Analysis.SpacesTorusWaves
+public import ContinuousFlexibility.Radial.R11bPhysicalCompleteness
 
 /-!
 # Fourier symbols of the actual canonical weak angular jets
@@ -10,6 +12,8 @@ a complex wave. The two choices c = 1 and c = -I identify the entire complex
 coefficient. This proves the symbol at every weak order without requiring
 smooth source representatives or a sectionwise weak-derivative hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,11 +1,13 @@
-import ContinuousFlexibility.Statements.Radial
-import Mathlib.Analysis.Calculus.Deriv.Inverse
-import Mathlib.Analysis.Calculus.Deriv.MeanValue
-import Mathlib.Basic.Denumerable
-import Mathlib.Data.Finset.Max
-import Mathlib.Data.Rat.Encodable
-import Mathlib.Topology.Compactness.LocallyFinite
-import Mathlib.Topology.DiscreteSubset
+module
+
+public import ContinuousFlexibility.Statements.Radial
+public import Mathlib.Analysis.Calculus.Deriv.Inverse
+public import Mathlib.Analysis.Calculus.Deriv.MeanValue
+public import Mathlib.Basic.Denumerable
+public import Mathlib.Data.Finset.Max
+public import Mathlib.Data.Rat.Encodable
+public import Mathlib.Topology.Compactness.LocallyFinite
+public import Mathlib.Topology.DiscreteSubset
 
 /-!
 # The actual negative components of a radial reference
@@ -20,6 +22,8 @@ admit a bijective enumeration by the natural numbers.
 This module makes no assertion relating that enumeration to a coefficient
 weight or to the indexing of the reference partition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

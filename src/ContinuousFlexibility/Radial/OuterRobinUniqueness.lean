@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterFundamentalKernel
-import ContinuousFlexibility.Radial.OuterFirstOrderRegularity
+module
+
+public import ContinuousFlexibility.Radial.OuterFundamentalKernel
+public import ContinuousFlexibility.Radial.OuterFirstOrderRegularity
 
 /-!
 # Robin uniqueness with a genuine one-sided entrance state
@@ -8,6 +10,8 @@ The differential system is required only in the open interval.  Continuity
 extends its constant state determinant to the entrance.  Thus uniqueness
 does not assume an ordinary derivative across that boundary.
 -/
+
+@[expose] public section
 
 noncomputable section
 

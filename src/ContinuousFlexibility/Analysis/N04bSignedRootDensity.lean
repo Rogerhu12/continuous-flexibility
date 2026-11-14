@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CharacteristicRootDensity
+module
+
+public import ContinuousFlexibility.Analysis.CharacteristicRootDensity
 
 /-!
 # One principal-density normalization for both root orientations
@@ -8,6 +10,8 @@ value enters the transformed density and the positive height, while the
 mixed coefficient changes by the orientation sign. The same calculation
 therefore gives the Tricomi principal density at both roots.
 -/
+
+@[expose] public section
 
 noncomputable section
 

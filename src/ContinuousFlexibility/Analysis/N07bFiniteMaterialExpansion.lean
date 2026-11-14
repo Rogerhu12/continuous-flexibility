@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07bReferenceMaterialSeeds
+module
+
+public import ContinuousFlexibility.Analysis.N07bReferenceMaterialSeeds
 
 /-!
 # Continuing a finite material expansion by actual directional derivatives
@@ -8,6 +10,8 @@ It retains the initial material orders and all coefficient derivatives.
 Applied to the reference seeds, the resulting jets have order at most
 the number of new derivatives plus two.
 -/
+
+@[expose] public section
 
 noncomputable section
 

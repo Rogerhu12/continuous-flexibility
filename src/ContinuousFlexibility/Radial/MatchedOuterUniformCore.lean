@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MatchedOuterCoreBounds
+module
+
+public import ContinuousFlexibility.Radial.MatchedOuterCoreBounds
 
 /-!
 # One actual core-pair envelope before the height choices
@@ -8,6 +10,8 @@ common geometry and coefficient bounds. The upper frequency cutoff
 suffices, including every low frequency assigned to an enlarged initial
 band. The same supplied fundamental pair is retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

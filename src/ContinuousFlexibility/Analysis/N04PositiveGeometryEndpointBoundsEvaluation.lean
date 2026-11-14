@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsCalculus
-import ContinuousFlexibility.Analysis.CircleJointEvaluation
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsCalculus
+public import ContinuousFlexibility.Analysis.CircleJointEvaluation
 
 /-!
 # Uniform angular evaluation of the actual circle jets
@@ -8,6 +10,8 @@ The circle norm already contains every component, so angular evaluation
 introduces only its original sample height weight. A single output order
 controls the entire finite prefix of angular derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

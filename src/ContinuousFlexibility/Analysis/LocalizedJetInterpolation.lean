@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.TameInterpolationProducts
+module
+
+public import ContinuousFlexibility.Analysis.TameInterpolationProducts
 
 /-!
 # Fixed-loss interpolation for a localized derivative slot
@@ -7,6 +9,8 @@ The low order and loss are chosen before the radius of the low-order
 box. Angular and material orders enter only through their sum. This
 allows the base-point box to be centered at any actual state later.
 -/
+
+@[expose] public section
 
 noncomputable section
 

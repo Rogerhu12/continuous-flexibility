@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalMultipliers
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalMultipliers
 
 /-!
 # Recovering a normal derivative from the weak flux equation
@@ -8,6 +10,8 @@ are commuted on compact radial test functions. The flux identity then
 recovers the missing normal derivative without first choosing a smooth
 representative of the solution.
 -/
+
+@[expose] public section
 
 noncomputable section
 

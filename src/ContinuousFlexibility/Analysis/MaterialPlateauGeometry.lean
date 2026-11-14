@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Statements.Analysis
+module
+
+public import ContinuousFlexibility.Statements.Analysis
 
 /-!
 # The endpoint-distance band of an actual component cutoff
@@ -9,6 +11,8 @@ to the two annular endpoints. The resulting entire support stays in a
 controlled endpoint band. This statement does not assert disjointness of
 different expanded supports.
 -/
+
+@[expose] public section
 
 noncomputable section
 

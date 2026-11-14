@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06ReferenceProjectionRepresentatives
-import ContinuousFlexibility.Analysis.N06ReferenceRemainderTraces
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceProjectionRepresentatives
+public import ContinuousFlexibility.Analysis.N06ReferenceRemainderTraces
 
 /-!
 # Physical projection retains the original left-height coordinate
@@ -11,6 +13,8 @@ with the reference data's cutoff. Genuine reference chart pullback then
 identifies the projected canonical height with the projected physical
 height minus that same left scalar column.
 -/
+
+@[expose] public section
 
 noncomputable section
 

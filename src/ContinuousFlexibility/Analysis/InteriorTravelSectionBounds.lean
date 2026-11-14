@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.InteriorTravelMonotonicity
+module
+
+public import ContinuousFlexibility.Analysis.InteriorTravelMonotonicity
 
 /-!
 # Propagating the two true section bounds into the radial interior
@@ -8,6 +10,8 @@ For the right bound a plus trajectory starts at the point being tested
 and ends on the fixed right section. Ordinary periodic-flow existence
 supplies that trajectory; no inverse regularity is postulated.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04RealizationEnvelopeComposition
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationEnvelopeComposition
 
 /-!
 # Differential operations on finite envelopes
@@ -8,6 +10,8 @@ actual derivative shifts the input order by one; square root uses its
 positive value and reciprocal value, without a second representation of
 the square-root field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

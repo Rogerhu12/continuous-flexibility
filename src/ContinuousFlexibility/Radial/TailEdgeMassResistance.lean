@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.TailEdgeEnergy
+module
+
+public import ContinuousFlexibility.Radial.TailEdgeEnergy
 
 /-!
 # The diagonal Green integral in terms of mass and resistance
@@ -7,6 +9,8 @@ In resistance coordinates the lengths of the two pieces are the two
 resistances. The diagonal integral is bounded by the corresponding
 length times mass on each piece.
 -/
+
+@[expose] public section
 
 noncomputable section
 

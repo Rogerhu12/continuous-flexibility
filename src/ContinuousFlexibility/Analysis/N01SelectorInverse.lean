@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N01EndpointSmoothTame
-import ContinuousFlexibility.Analysis.N01FlowSmallness
-import ContinuousFlexibility.Analysis.CirclePositiveInverseSmoothTame
-import ContinuousFlexibility.Analysis.CirclePositiveInversePerturbation
-import ContinuousFlexibility.Analysis.CircleJointEvaluation
+module
+
+public import ContinuousFlexibility.Analysis.N01EndpointSmoothTame
+public import ContinuousFlexibility.Analysis.N01FlowSmallness
+public import ContinuousFlexibility.Analysis.CirclePositiveInverseSmoothTame
+public import ContinuousFlexibility.Analysis.CirclePositiveInversePerturbation
+public import ContinuousFlexibility.Analysis.CircleJointEvaluation
 
 /-!
 # Actual inverse flows at every fixed selector of closed radii
@@ -14,6 +16,8 @@ inside the given circle space, with a complete smooth tame tower on the
 original sector neighborhood. No inverse membership or parameter
 regularity is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

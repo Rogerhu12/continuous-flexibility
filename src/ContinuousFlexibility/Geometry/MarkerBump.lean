@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.HeightDerivatives
-import Mathlib.Analysis.SpecialFunctions.SmoothTransition
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.ContDiff
+module
+
+public import ContinuousFlexibility.Scalar.HeightDerivatives
+public import Mathlib.Analysis.SpecialFunctions.SmoothTransition
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.ContDiff
 
 /-!
 # The explicit elliptic marker bump
@@ -9,6 +11,8 @@ This is the actual integral height used in `lem:fixed-cap`, Section 2.
 The smooth zero extension is built from `expNegInvGlue`; no endpoint
 regularity is assumed. Identification with surface curvature is separate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

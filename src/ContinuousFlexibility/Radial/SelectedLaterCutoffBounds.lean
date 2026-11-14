@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.SelectedLaterCapData
-import ContinuousFlexibility.Radial.TerminalMorseCapExtension
-import ContinuousFlexibility.Radial.TerminalMorseRelativeSource
-import ContinuousFlexibility.Radial.TerminalMorseEnergyBudget
+module
+
+public import ContinuousFlexibility.Radial.SelectedLaterCapData
+public import ContinuousFlexibility.Radial.TerminalMorseCapExtension
+public import ContinuousFlexibility.Radial.TerminalMorseRelativeSource
+public import ContinuousFlexibility.Radial.TerminalMorseEnergyBudget
 
 /-!
 # Source and energy of the actual later terminal cutoffs
@@ -10,6 +12,8 @@ Both errors use the selected incoming solution, its actual matching
 slope and the same physical cutoff. The coefficient powers are fixed
 before the selected sequence, radius dilations and profile heights.
 -/
+
+@[expose] public section
 
 noncomputable section
 

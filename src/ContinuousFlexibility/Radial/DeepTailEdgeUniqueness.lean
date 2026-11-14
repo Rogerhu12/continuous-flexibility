@@ -1,8 +1,10 @@
-import Mathlib.Analysis.Calculus.Deriv.MeanValue
-import Mathlib.Analysis.Calculus.Deriv.Inv
-import Mathlib.Analysis.ODE.ExistUnique
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Analysis.Calculus.Deriv.MeanValue
+public import Mathlib.Analysis.Calculus.Deriv.Inv
+public import Mathlib.Analysis.ODE.ExistUnique
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
 
 /-!
 # Uniqueness on a deep-tail edge
@@ -12,6 +14,8 @@ at both endpoints.  The argument uses the constant weighted Wronskian and
 then the derivative of the quotient.  Only continuity up to the endpoints
 and actual derivative identities in the open edge are needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

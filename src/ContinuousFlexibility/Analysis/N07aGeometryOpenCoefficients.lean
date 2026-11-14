@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient
 
 /-!
 # The actual principal coefficients belong to the interior jet algebra
@@ -7,6 +9,8 @@ Reference jets and genuine current-minus-reference jets give bounded jets
 of the same current functions. Affine unit rescaling transfers these
 primitive geometric bounds to the original canonical interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

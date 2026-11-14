@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05ReferenceAngularJetCells
-import ContinuousFlexibility.Radial.ReferenceWeightedProduct
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceAngularJetCells
+public import ContinuousFlexibility.Radial.ReferenceWeightedProduct
 
 /-!
 # The actual singleton energy in the weighted radial marginal
@@ -9,6 +11,8 @@ corresponding radial coefficient. Product disintegration and normalized
 angular Parseval identify its frozen source norm with the coefficient
 square integral, including the original measure normalization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

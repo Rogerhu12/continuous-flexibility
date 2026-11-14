@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RootBoundaryMaterialJets
-import ContinuousFlexibility.Analysis.RootInputOrdinaryJets
+module
+
+public import ContinuousFlexibility.Analysis.RootBoundaryMaterialJets
+public import ContinuousFlexibility.Analysis.RootInputOrdinaryJets
 
 /-!
 # Combining the actual ordinary field and coefficient inputs
@@ -9,6 +11,8 @@ estimate can have different fixed losses. Their maximum is taken before
 the root and the order constants; all subsequent numerical work stays
 in the abstract state grading.
 -/
+
+@[expose] public section
 
 noncomputable section
 

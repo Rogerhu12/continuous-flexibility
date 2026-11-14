@@ -1,7 +1,11 @@
-import ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets
-import ContinuousFlexibility.Scalar.WeightedCompositionGerm
+module
+
+public import ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets
+public import ContinuousFlexibility.Scalar.WeightedCompositionGerm
 
 /-! # The actual exponential perturbation in the weak profile weight -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.ReferenceCosineCoefficients
-import ContinuousFlexibility.Radial.ReferenceCosineParseval
-import Mathlib.MeasureTheory.Integral.DominatedConvergence
-import Mathlib.Analysis.InnerProductSpace.l2Space
+module
+
+public import ContinuousFlexibility.Radial.ReferenceCosineCoefficients
+public import ContinuousFlexibility.Radial.ReferenceCosineParseval
+public import Mathlib.MeasureTheory.Integral.DominatedConvergence
+public import Mathlib.Analysis.InnerProductSpace.l2Space
 
 /-!
 # Partial angular Parseval with the radial variable kept in L²
@@ -11,6 +13,8 @@ arbitrary radial measure. No periodic extension in the radial variable is
 introduced. The resulting sequence consists of the genuine radial L²
 classes of the angular coefficients.
 -/
+
+@[expose] public section
 
 noncomputable section
 

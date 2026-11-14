@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N03RecoveredCoefficientField
-import ContinuousFlexibility.Analysis.CoefficientProbeRecoveryBounds
-import ContinuousFlexibility.Analysis.FiniteProbeRecoveryBounds
-import ContinuousFlexibility.Analysis.SolveReturnEquations
+module
+
+public import ContinuousFlexibility.Analysis.N03RecoveredCoefficientField
+public import ContinuousFlexibility.Analysis.CoefficientProbeRecoveryBounds
+public import ContinuousFlexibility.Analysis.FiniteProbeRecoveryBounds
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # Actual corrected coefficient jets on the fixed negative components
@@ -13,6 +15,8 @@ every point of the fixed negative component, including the cut axes.
 Consequently the bound concerns actual mixed derivatives of the stored
 coefficient differences, on one common low-order state neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

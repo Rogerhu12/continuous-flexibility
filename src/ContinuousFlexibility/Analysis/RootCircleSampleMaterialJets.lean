@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.InteriorEndpointMaterialJets
-import ContinuousFlexibility.Analysis.RootExtensionPhysicalBounds
-import ContinuousFlexibility.Analysis.OneHighCircleFourierCompositionCalculus
+module
+
+public import ContinuousFlexibility.Analysis.InteriorEndpointMaterialJets
+public import ContinuousFlexibility.Analysis.RootExtensionPhysicalBounds
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierCompositionCalculus
 
 /-!
 # Actual angular jets on fixed sections of the controlled root input
@@ -10,6 +12,8 @@ operator norm one. The original compact-box jet bounds therefore give
 the same derivative loss on one angular period. Periodicity of the
 actual displacement extends these bounds to every angular representative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

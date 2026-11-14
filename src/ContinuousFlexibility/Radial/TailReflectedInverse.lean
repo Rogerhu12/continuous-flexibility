@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ReflectedFormInverse
-import ContinuousFlexibility.Radial.TailPositiveResolvent
+module
+
+public import ContinuousFlexibility.Radial.ReflectedFormInverse
+public import ContinuousFlexibility.Radial.TailPositiveResolvent
 
 /-!
 # A genuine tail inverse from the low mode projection
@@ -8,6 +10,8 @@ This module applies the reflection argument on the actual closed Friedrichs
 form space. Its hypotheses are precisely the low and high energy estimates;
 its conclusion is the operator graph and `4 / Λ` norm bound required by R06a.
 -/
+
+@[expose] public section
 
 noncomputable section
 

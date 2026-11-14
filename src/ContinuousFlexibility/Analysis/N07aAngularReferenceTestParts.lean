@@ -1,9 +1,13 @@
-import ContinuousFlexibility.Analysis.N07aAngularReferenceDecomposition
-import ContinuousFlexibility.Radial.R11bRadialTests
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceDecomposition
+public import ContinuousFlexibility.Radial.R11bRadialTests
 
 /-!
 # The actual radial and angular pieces of an original reference test
 -/
+
+@[expose] public section
 
 noncomputable section
 

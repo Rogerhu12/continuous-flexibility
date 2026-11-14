@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.TameForwardJetSourceBounds
+module
+
+public import ContinuousFlexibility.Analysis.TameForwardJetSourceBounds
 
 /-!
 # Uniform fixed-base bounds for an abstract forward family
@@ -7,6 +9,8 @@ All existential constants and universal jet binders are handled before
 instantiating a concrete realized family. The same low base and source
 normalization are retained at every parameter order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

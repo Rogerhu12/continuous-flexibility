@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PrincipalAllPairs
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalAllPairs
 
 /-!
 # Height and inverse height on one common sector
@@ -8,6 +10,8 @@ piece. Its reference jets and the reference inverse-height atom allow
 the reciprocal calculus to choose a single smaller sector before any
 spatial or parameter orders are selected.
 -/
+
+@[expose] public section
 
 noncomputable section
 

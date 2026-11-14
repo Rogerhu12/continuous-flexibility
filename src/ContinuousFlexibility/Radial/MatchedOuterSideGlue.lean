@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MatchingTraceCalculus
+module
+
+public import ContinuousFlexibility.Radial.MatchingTraceCalculus
 
 /-!
 # Combining the two physical outer representatives
@@ -7,6 +9,8 @@ The open inner interval is zero.  The two supplied side representatives
 remain unchanged on the half-closed outer intervals, with arbitrary
 within regularity and the original one-sided matching derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

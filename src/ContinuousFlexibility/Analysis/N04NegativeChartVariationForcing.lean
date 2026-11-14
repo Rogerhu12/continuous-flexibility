@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometryMarkedProducts
-import ContinuousFlexibility.Analysis.N01cFlowVariationForcingBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryMarkedProducts
+public import ContinuousFlexibility.Analysis.N01cFlowVariationForcingBounds
 
 /-!
 # Mixed spatial bounds for the actual state-variation forcing
@@ -10,6 +12,8 @@ product expansion can therefore be differentiated in all spatial
 variables. A marked forcing weight survives once, while state-order
 powers are kept outside the polynomial coefficient envelope.
 -/
+
+@[expose] public section
 
 noncomputable section
 

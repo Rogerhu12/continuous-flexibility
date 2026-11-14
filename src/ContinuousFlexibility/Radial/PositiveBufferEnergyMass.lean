@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.PositiveBufferEnergyBufferProfiles
-import ContinuousFlexibility.Radial.PositiveBufferComparisonCoordinates
-import ContinuousFlexibility.Radial.PositiveBufferComparisonDomains
-import ContinuousFlexibility.Radial.PositiveBufferComparisonScaling
-import ContinuousFlexibility.Radial.BufferCutGlue
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferEnergyBufferProfiles
+public import ContinuousFlexibility.Radial.PositiveBufferComparisonCoordinates
+public import ContinuousFlexibility.Radial.PositiveBufferComparisonDomains
+public import ContinuousFlexibility.Radial.PositiveBufferComparisonScaling
+public import ContinuousFlexibility.Radial.BufferCutGlue
 
 /-!
 # Square-mass control by the genuine positive-buffer energy
@@ -12,6 +14,8 @@ The same positivity recovers derivative and weighted L² membership from
 the actual energy density. Affine changes preserve these concrete local
 energy data, including for measurable derivative representatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

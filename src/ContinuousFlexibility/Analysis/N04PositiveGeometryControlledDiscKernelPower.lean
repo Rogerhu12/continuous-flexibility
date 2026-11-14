@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledDiscTrace
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledDiscTrace
 
 /-!
 # Material bounds for the discriminant power kernel
@@ -9,6 +11,8 @@ Ordinary outer derivatives on that fixed compact set are combined with
 the actual six-coordinate input estimates. The resulting material cost
 is polynomial and retains the full positive-parameter height factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

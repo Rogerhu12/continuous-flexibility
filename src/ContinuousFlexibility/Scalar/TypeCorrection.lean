@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.Linearization
-import ContinuousFlexibility.Scalar.Normalization
+module
+
+public import ContinuousFlexibility.Scalar.Linearization
+public import ContinuousFlexibility.Scalar.Normalization
 
 /-!
 # Actual coefficients with fixed type-change set
@@ -9,6 +11,8 @@ and profile. The correction's sign changes exactly with the profile slope.
 The divergence comparison below is a real derivative identity; its stated
 differentiability premises must be supplied on the eventual PDE domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

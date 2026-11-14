@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cMorseOpticalLowerBound
+module
+
+public import ContinuousFlexibility.Analysis.N01cMorseOpticalLowerBound
 
 /-!
 # One coefficient envelope for the actual Morse optical lower bound
@@ -7,6 +9,8 @@ The explicit geometric coefficient is bounded below by one negative power
 of the reference envelope. The constant is chosen before the side and the
 cell index. No optical or nonlinear estimate is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

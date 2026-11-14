@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OuterFundamentalPair
+module
+
+public import ContinuousFlexibility.Radial.OuterFundamentalPair
 
 /-!
 # Kernel identities and Robin uniqueness for the constructed pair
@@ -9,6 +11,8 @@ the construction, and is not a hypothesis about the desired inverse.
 A natural homogeneous state satisfying the normalized Robin condition
 vanishes identically, even when the natural entrance value is zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

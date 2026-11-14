@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.MaterialSampleShift
+module
+
+public import ContinuousFlexibility.Analysis.MaterialSampleShift
 
 /-!
 # Comparison of actual containing radial cells
@@ -7,6 +9,8 @@ Two cells containing the same point have uniformly close cell indices.
 Every fixed radial loss can therefore be transferred between them with
 a new fixed power. No identification with a control label is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

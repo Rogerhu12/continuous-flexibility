@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PrincipalWeightedLinear
-import ContinuousFlexibility.Analysis.N04PrincipalWeightedProduct
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalWeightedLinear
+public import ContinuousFlexibility.Analysis.N04PrincipalWeightedProduct
 
 /-!
 # Paired current and reference fields
@@ -9,6 +11,8 @@ actual difference has the designated external weight. This interface is
 closed under the finite differential expressions used by the principal
 and potential formulas, with one low seminorm chosen for each expression.
 -/
+
+@[expose] public section
 
 noncomputable section
 

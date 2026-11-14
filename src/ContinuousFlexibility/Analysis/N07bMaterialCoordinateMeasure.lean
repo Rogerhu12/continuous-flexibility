@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Statements.Analysis
-import ContinuousFlexibility.Analysis.CanonicalSourceMeasure
-import Mathlib.Analysis.Calculus.Deriv.Comp
-import Mathlib.Tactic.Ring
+module
+
+public import ContinuousFlexibility.Statements.Analysis
+public import ContinuousFlexibility.Analysis.CanonicalSourceMeasure
+public import Mathlib.Analysis.Calculus.Deriv.Comp
+public import Mathlib.Tactic.Ring
 
 /-!
 # Change of variables from the physical interval to the material cylinder
@@ -13,6 +15,8 @@ change-of-variables theorem therefore applies to every measurable angular
 set.  The integral identities use totalized Bochner integrals; integrability
 is asserted separately by the equivalence below.
 -/
+
+@[expose] public section
 
 noncomputable section
 

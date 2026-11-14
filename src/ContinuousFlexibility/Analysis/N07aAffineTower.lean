@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SolveNewtonBridge
+module
+
+public import ContinuousFlexibility.Analysis.SolveNewtonBridge
 
 /-!
 # Actual directional towers on an affine parameter slice
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Analysis.SolveNewtonBridge
 Translation of the base point and a continuous linear tangent inclusion
 transport genuine difference quotients directly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

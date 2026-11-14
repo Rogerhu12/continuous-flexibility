@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06WeakAngularCalculus
-import ContinuousFlexibility.Analysis.SpacesCircleFourierJets
-import ContinuousFlexibility.Analysis.IntervalWeakPrimitive
-import ContinuousFlexibility.Radial.R11bModeL2
+module
+
+public import ContinuousFlexibility.Analysis.N06WeakAngularCalculus
+public import ContinuousFlexibility.Analysis.SpacesCircleFourierJets
+public import ContinuousFlexibility.Analysis.IntervalWeakPrimitive
+public import ContinuousFlexibility.Radial.R11bModeL2
 
 /-!
 # Actual angular coefficients of canonical weak derivatives
@@ -11,6 +13,8 @@ frozen canonical test class. Fubini and the fundamental lemma therefore
 identify the radial coefficient functions of every weak angular jet.
 The source and its derivative are arbitrary elements of the actual L² space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

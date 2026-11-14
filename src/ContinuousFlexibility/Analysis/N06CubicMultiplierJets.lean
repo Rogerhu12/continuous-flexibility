@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06CubicMultiplierSymmetry
+module
+
+public import ContinuousFlexibility.Analysis.N06CubicMultiplierSymmetry
 
 /-!
 # Local angular jet bounds for the actual cubic multipliers
@@ -9,6 +11,8 @@ same angular order, together with the first spatial derivatives already
 present in divergence. No extension across a degenerate endpoint is
 required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

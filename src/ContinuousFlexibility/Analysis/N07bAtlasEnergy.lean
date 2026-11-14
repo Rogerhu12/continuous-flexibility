@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07bAtlasAEPullback
-import Mathlib.MeasureTheory.Integral.Bochner.Set
+module
+
+public import ContinuousFlexibility.Analysis.N07bAtlasAEPullback
+public import Mathlib.MeasureTheory.Integral.Bochner.Set
 
 /-!
 # Summing physical energy over the current canonical atlas
@@ -10,6 +12,8 @@ integrable energy splits into a summable family of piece energies, with no
 multiplicity factor. The radial reference intervals retain their separate
 disjointness statement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

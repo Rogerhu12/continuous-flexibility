@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.EndpointAffinePrimitive
-import ContinuousFlexibility.Analysis.IntervalWeakDivergence
+module
+
+public import ContinuousFlexibility.Analysis.EndpointAffinePrimitive
+public import ContinuousFlexibility.Analysis.IntervalWeakDivergence
 
 /-!
 # Uniqueness of a homogeneous weak divergence solution at a vanishing endpoint
@@ -9,6 +11,8 @@ inverse coefficient weight near the endpoint. The weak equation supplies its
 affine reciprocal-primitive representative, and the resistance estimate
 forces that representative to vanish on the whole connected interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

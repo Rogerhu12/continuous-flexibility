@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGraphDensity
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGraphDensity
 
 /-!
 # A dense common core for every canonical volume level
@@ -9,6 +11,8 @@ their forgotten physical sequence identical. The intersection of all
 such actual ranges is a submodule containing the smooth graph core,
 hence it is dense in each canonical volume level.
 -/
+
+@[expose] public section
 
 noncomputable section
 

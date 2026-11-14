@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MatchedCentralTrueCoefficients
+module
+
+public import ContinuousFlexibility.Radial.MatchedCentralTrueCoefficients
 
 /-!
 # Actual Poisson and conormal envelopes for the true central border
@@ -8,6 +10,8 @@ Poisson remainder and the two-cut conormal error. Their bounds use only
 the fixed true full-inverse cost and universal compression constants.
 The later retained geometry does not enter either envelope.
 -/
+
+@[expose] public section
 
 noncomputable section
 

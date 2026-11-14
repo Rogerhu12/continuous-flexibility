@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SpacesTraceCircleBounds
-import ContinuousFlexibility.Analysis.MaterialSampleBounds
-import ContinuousFlexibility.Analysis.StateNeighborhood
+module
+
+public import ContinuousFlexibility.Analysis.SpacesTraceCircleBounds
+public import ContinuousFlexibility.Analysis.MaterialSampleBounds
+public import ContinuousFlexibility.Analysis.StateNeighborhood
 
 /-!
 # Actual angular jets of the left return coordinate
@@ -11,6 +13,8 @@ coordinate is the angle plus the decoded last state component, which is
 zero at the reference state. Thus its displacement has the fixed loss one,
 with a constant chosen before the state, angle, order, and component.
 -/
+
+@[expose] public section
 
 noncomputable section
 

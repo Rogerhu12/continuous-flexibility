@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentData
-import ContinuousFlexibility.Analysis.CanonicalFieldJetReduction
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentData
+public import ContinuousFlexibility.Analysis.CanonicalFieldJetReduction
 
 /-!
 # The current obligation split along the canonical formulas
@@ -29,6 +31,8 @@ together with the forward chart, height and Jacobian atoms.
 `n04Realization_currentObligation_of_split` proves the current obligation
 from these five statements.
 -/
+
+@[expose] public section
 
 noncomputable section
 

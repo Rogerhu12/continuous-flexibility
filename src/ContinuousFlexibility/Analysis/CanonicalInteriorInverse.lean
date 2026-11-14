@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.CanonicalEndpointInverse
-import ContinuousFlexibility.Analysis.CanonicalBoundaryImage
-import ContinuousFlexibility.Analysis.N04bBoundaryInverseRegularity
-import Mathlib.Topology.Order.IntermediateValue
-import Mathlib.Analysis.Convex.Topology
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalEndpointInverse
+public import ContinuousFlexibility.Analysis.CanonicalBoundaryImage
+public import ContinuousFlexibility.Analysis.N04bBoundaryInverseRegularity
+public import Mathlib.Topology.Order.IntermediateValue
+public import Mathlib.Analysis.Convex.Topology
 
 /-!
 # Agreement of genuine local inverses on the canonical interior
@@ -13,6 +15,8 @@ physical domain, the closed inverse contract already gives continuity and
 the exact inverse value. These identify the local inverse on a nearby
 canonical interior without imposing a rectangular shape on the domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

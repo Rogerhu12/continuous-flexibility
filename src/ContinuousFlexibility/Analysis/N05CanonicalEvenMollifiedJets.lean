@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05CanonicalSymmetryLimits
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalSymmetryLimits
 
 /-!
 # Even canonical tests approximating every finite angular weak jet
@@ -10,6 +12,8 @@ angular derivative converges strongly to the corresponding cutoff weak
 derivative. The identification uses closedness and uniqueness of the
 actual weak derivative, with no parity or density premise.
 -/
+
+@[expose] public section
 
 noncomputable section
 

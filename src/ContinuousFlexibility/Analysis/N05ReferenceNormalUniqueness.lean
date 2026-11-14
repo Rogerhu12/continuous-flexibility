@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N05PeriodicPhysicalL2Norm
-import ContinuousFlexibility.Analysis.CylinderTestPeriodization
-import ContinuousFlexibility.Radial.R11bPhysicalPairing
-import Mathlib.Analysis.Distribution.AEEqOfIntegralContDiff
+module
+
+public import ContinuousFlexibility.Analysis.N05PeriodicPhysicalL2Norm
+public import ContinuousFlexibility.Analysis.CylinderTestPeriodization
+public import ContinuousFlexibility.Radial.R11bPhysicalPairing
+public import Mathlib.Analysis.Distribution.AEEqOfIntegralContDiff
 
 /-!
 # Uniqueness of the actual periodic physical normal derivative
@@ -11,6 +13,8 @@ The full physical test pairing separates pi-periodic L² fields. Therefore
 two periodic physical normal derivatives of the same field coincide in
 the actual physical measure, with no additional endpoint conditions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

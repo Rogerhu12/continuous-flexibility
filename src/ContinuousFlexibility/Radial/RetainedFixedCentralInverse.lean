@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.RetainedMorseChainInverse
-import ContinuousFlexibility.Radial.FixedCentralPolynomialColumn
-import ContinuousFlexibility.Radial.InnerPhysicalFrozenInverse
-import ContinuousFlexibility.Radial.InnerLaterPolynomialBudget
+module
+
+public import ContinuousFlexibility.Radial.RetainedMorseChainInverse
+public import ContinuousFlexibility.Radial.FixedCentralPolynomialColumn
+public import ContinuousFlexibility.Radial.InnerPhysicalFrozenInverse
+public import ContinuousFlexibility.Radial.InnerLaterPolynomialBudget
 
 /-!
 # The same fixed central model in the retained finite-chain inverse
@@ -11,6 +13,8 @@ piece uses the original fixed column and its actual Liouville density;
 all Morse pieces and positive gaps belong to the same retained pair.
 The final conversion to the frozen radial pair norm costs only sqrt 2.
 -/
+
+@[expose] public section
 
 noncomputable section
 

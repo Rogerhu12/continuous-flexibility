@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalInverseLinearity
-import ContinuousFlexibility.Analysis.N05ReferenceInterface
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalInverseLinearity
+public import ContinuousFlexibility.Analysis.N05ReferenceInterface
 
 /-!
 # The actual canonical reference inverse data
@@ -9,6 +11,8 @@ weaker endpoint, its original material orders, and material loss four define
 one canonical inverse, including the continuous restriction at angular order
 two. No endpoint or Sobolev order changes the underlying map or its scalars.
 -/
+
+@[expose] public section
 
 noncomputable section
 

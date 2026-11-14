@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06RootTransmissionJets
-import ContinuousFlexibility.Scalar.FormPullback
+module
+
+public import ContinuousFlexibility.Analysis.N06RootTransmissionJets
+public import ContinuousFlexibility.Scalar.FormPullback
 
 /-!
 # Root transmission inherited from one reference physical field
@@ -11,6 +13,8 @@ Nonvanishing of the height and actual chart Jacobian justifies cancellation.
 The common current root jets then transport those same traces to matching
 physical values and conormals. No canonical matching condition is an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

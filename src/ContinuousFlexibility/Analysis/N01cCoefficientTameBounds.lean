@@ -1,11 +1,13 @@
-import ContinuousFlexibility.Analysis.N01cCoefficientBaseSelection
-import ContinuousFlexibility.Analysis.N01cCoefficientSampleBounds
-import ContinuousFlexibility.Analysis.N01cOriginalCoefficientPowerBounds
-import ContinuousFlexibility.Analysis.N01cCoefficientPointBounds
-import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
-import ContinuousFlexibility.Analysis.N01cMaterialShiftComparison
-import ContinuousFlexibility.Analysis.N01cWeightAbsorption
-import ContinuousFlexibility.Analysis.N01cBoundsRestriction
+module
+
+public import ContinuousFlexibility.Analysis.N01cCoefficientBaseSelection
+public import ContinuousFlexibility.Analysis.N01cCoefficientSampleBounds
+public import ContinuousFlexibility.Analysis.N01cOriginalCoefficientPowerBounds
+public import ContinuousFlexibility.Analysis.N01cCoefficientPointBounds
+public import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
+public import ContinuousFlexibility.Analysis.N01cMaterialShiftComparison
+public import ContinuousFlexibility.Analysis.N01cWeightAbsorption
+public import ContinuousFlexibility.Analysis.N01cBoundsRestriction
 
 /-!
 # The actual coefficient-family tame estimate
@@ -15,6 +17,8 @@ of the controls, interior support of the fixed profile cutoff, and the
 material normalization E0 ≥ 1. The conclusion is the exact coefficient
 clause on one fixed smaller state neighbourhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

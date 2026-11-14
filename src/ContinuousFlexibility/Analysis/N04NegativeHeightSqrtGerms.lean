@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeHeightGerms
-import ContinuousFlexibility.Analysis.N04NegativeHeightScalarData
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeHeightGerms
+public import ContinuousFlexibility.Analysis.N04NegativeHeightScalarData
 
 /-!
 # Square roots of normalized current families
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Analysis.N04NegativeHeightScalarData
 Both scalar kernels are evaluated on the same fixed compact positive
 interval, after a single uniform shrink. Their reference value is one.
 -/
+
+@[expose] public section
 
 noncomputable section
 

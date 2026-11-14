@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.TailLowModeSynthesis
-import Mathlib.MeasureTheory.Function.L2Space
+module
+
+public import ContinuousFlexibility.Radial.TailLowModeSynthesis
+public import Mathlib.MeasureTheory.Function.L2Space
 
 /-!
 # Actual mass averages as a bounded coefficient map
@@ -8,6 +10,8 @@ Disjoint measurable mass cells of positive finite measure give normalized
 indicator vectors in the physical `L²` space. Their analysis map has norm at
 most one and its coordinates are exactly the normalized cell integrals.
 -/
+
+@[expose] public section
 
 noncomputable section
 

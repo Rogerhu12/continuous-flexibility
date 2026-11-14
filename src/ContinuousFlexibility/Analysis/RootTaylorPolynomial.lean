@@ -1,16 +1,18 @@
-import Mathlib.Analysis.Calculus.ContDiff.Bounds
-import Mathlib.Analysis.Calculus.ContDiff.CPolynomial
-import Mathlib.Analysis.Calculus.ContDiff.Operations
-import Mathlib.Analysis.Normed.Operator.Prod
-import Mathlib.Analysis.SpecialFunctions.Pow.Real
-import Mathlib.Algebra.Ring.Parity
-import Mathlib.Algebra.BigOperators.Field
-import Mathlib.Topology.Order.Compact
-import Mathlib.Tactic.FunProp
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.NormNum
-import Lean.Elab.Tactic.Omega
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Analysis.Calculus.ContDiff.Bounds
+public import Mathlib.Analysis.Calculus.ContDiff.CPolynomial
+public import Mathlib.Analysis.Calculus.ContDiff.Operations
+public import Mathlib.Analysis.Normed.Operator.Prod
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
+public import Mathlib.Algebra.Ring.Parity
+public import Mathlib.Algebra.BigOperators.Field
+public import Mathlib.Topology.Order.Compact
+public import Mathlib.Tactic.FunProp
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.NormNum
+public import Lean.Elab.Tactic.Omega
+public import Mathlib.Tactic.Ring
 
 /-!
 # Polynomial terms under the root substitution
@@ -19,6 +21,8 @@ Symmetrizing a homogeneous multilinear Taylor term removes every odd power
 of the root coordinate.  The remaining powers of `x ^ (3 / 2)` are ordinary
 integer powers of `x`, giving a polynomial in the translated output variables.
 -/
+
+@[expose] public section
 
 noncomputable section
 

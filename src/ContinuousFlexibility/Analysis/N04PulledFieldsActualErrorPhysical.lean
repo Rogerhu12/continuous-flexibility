@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsActualErrorStripGrowth
-import ContinuousFlexibility.Analysis.N04PulledFieldsStripZeroPhysicalBounds
-import ContinuousFlexibility.Analysis.N04PulledFieldsStripPhysicalCost
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsActualErrorStripGrowth
+public import ContinuousFlexibility.Analysis.N04PulledFieldsStripZeroPhysicalBounds
+public import ContinuousFlexibility.Analysis.N04PulledFieldsStripPhysicalCost
 
 /-!
 # Full physical height for the actual coefficient correction
@@ -11,6 +13,8 @@ transferred to the same physical point, and the common zero germs cover
 the rest of the annulus. The result applies to every genuine mixed tower
 of the actual residual-substituted error, including parameter order zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06LeftColumnSources
-import ContinuousFlexibility.Analysis.N06ReferenceChartNuSource
+module
+
+public import ContinuousFlexibility.Analysis.N06LeftColumnSources
+public import ContinuousFlexibility.Analysis.N06ReferenceChartNuSource
 
 /-!
 # The true left-column difference as a small reference-chart source
@@ -10,6 +12,8 @@ common compact support produce a source in the same selected V.level.
 The constant is chosen before the state. The representative identity
 uses the reference chart explicitly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

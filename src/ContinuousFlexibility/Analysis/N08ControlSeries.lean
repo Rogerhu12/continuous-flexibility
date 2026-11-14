@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N08ControlLabelDecay
+module
+
+public import ContinuousFlexibility.Analysis.N08ControlLabelDecay
 
 /-!
 # Actual locally finite control series with arbitrary scalar coefficients
@@ -7,6 +9,8 @@ The coefficients need no summability assumption. Local finiteness of the
 given smooth controls identifies the series with a finite sum near each
 interior point; disjointness then bounds each jet by its sole active term.
 -/
+
+@[expose] public section
 
 noncomputable section
 

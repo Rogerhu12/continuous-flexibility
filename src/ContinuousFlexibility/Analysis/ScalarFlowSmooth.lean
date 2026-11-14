@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.ScalarFlowParameterFDeriv
-import ContinuousFlexibility.Analysis.ScalarFlowTimeChange
-import Mathlib.Analysis.Calculus.FDeriv.Partial
-import Mathlib.Analysis.Calculus.Deriv.Prod
-import Mathlib.Analysis.Calculus.ContDiff.FiniteDimension
+module
+
+public import ContinuousFlexibility.Analysis.ScalarFlowParameterFDeriv
+public import ContinuousFlexibility.Analysis.ScalarFlowTimeChange
+public import Mathlib.Analysis.Calculus.FDeriv.Partial
+public import Mathlib.Analysis.Calculus.Deriv.Prod
+public import Mathlib.Analysis.Calculus.ContDiff.FiniteDimension
 
 /-!
 # Joint smoothness of an actual scalar flow
@@ -13,6 +15,8 @@ derivative. Finite-order integration then bootstraps this derivative to
 every order. A smooth time change applies the result to a supplied closed
 time interval, including its terminal slice.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SpacesCircleFourierCut
-import ContinuousFlexibility.Radial.R11bLpConvergence
-import Mathlib.Order.Filter.AtTopBot.Finset
+module
+
+public import ContinuousFlexibility.Analysis.SpacesCircleFourierCut
+public import ContinuousFlexibility.Radial.R11bLpConvergence
+public import Mathlib.Order.Filter.AtTopBot.Finset
 
 /-!
 # Strong finite Fourier cutoff convergence in the actual angular L² norm
@@ -9,6 +11,8 @@ The existing Fourier isometry sends a cutoff to the corresponding finite
 sum of coordinates. Square-summability proves strong convergence, and the
 projection bound supplies a uniform squared-error majorant for radial Fubini.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFourierInverseBasic
-import ContinuousFlexibility.Analysis.OneHighCircleFourierComposition
-import Mathlib.Tactic.Positivity
-import Mathlib.Tactic.Ring
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierInverseBasic
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierComposition
+public import Mathlib.Tactic.Positivity
+public import Mathlib.Tactic.Ring
 
 /-!
 # The actual scalar flow variation kernel
@@ -11,6 +13,8 @@ The external-parameter variational formula contains the kernel
 estimate is linear in the high forcing norm and in the high derivative
 defect of h. All derivatives below are those of the actual functions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

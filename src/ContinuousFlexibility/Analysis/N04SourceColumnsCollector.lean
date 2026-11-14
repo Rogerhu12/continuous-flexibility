@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04SourceColumnsCollectorBounds
-import ContinuousFlexibility.Analysis.SectorParameterGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N04SourceColumnsCollectorBounds
+public import ContinuousFlexibility.Analysis.SectorParameterGeometry
 
 /-!
 # Collect positive scalar towers into the frozen difference estimates
@@ -8,6 +10,8 @@ The first actual parameter derivative gives the value difference with no
 additive constant. Positive derivatives are unchanged by subtracting the
 fixed reference. No extra regularity or estimate is assumed for the output.
 -/
+
+@[expose] public section
 
 noncomputable section
 

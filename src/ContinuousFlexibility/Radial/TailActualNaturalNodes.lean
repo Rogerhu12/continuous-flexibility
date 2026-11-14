@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.TailActualNodeCoefficients
-import ContinuousFlexibility.Radial.TailNaturalNodeBounds
+module
+
+public import ContinuousFlexibility.Radial.TailActualNodeCoefficients
+public import ContinuousFlexibility.Radial.TailNaturalNodeBounds
 
 /-!
 # The natural node sequence for the actual tail coefficients
@@ -8,6 +10,8 @@ All recurrence coefficients come from the canonical Poisson edge pair.
 The unused zeroth diagonal is set to `Λ μ₀` for the continued-fraction
 bookkeeping; no condition is imposed on the solution at the entrance.
 -/
+
+@[expose] public section
 
 noncomputable section
 

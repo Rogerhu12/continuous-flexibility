@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CoordinateGaugeKernel
-import ContinuousFlexibility.Radial.OuterPhysicalInverseGauge
+module
+
+public import ContinuousFlexibility.Analysis.CoordinateGaugeKernel
+public import ContinuousFlexibility.Radial.OuterPhysicalInverseGauge
 
 /-!
 # The actual deep inverse and kernel in outward coordinates
@@ -8,6 +10,8 @@ The physical inverse and its measure are reflected together.  Its
 logarithmic gauge is exact, and transports the same Dirichlet kernel
 with its two physical gauge factors.
 -/
+
+@[expose] public section
 
 noncomputable section
 

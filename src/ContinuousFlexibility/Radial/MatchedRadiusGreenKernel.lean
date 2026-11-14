@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.SelectedTailInverseRadius
-import ContinuousFlexibility.Radial.OuterGreenIntegral
-import ContinuousFlexibility.Analysis.CoordinateGaugeKernel
+module
+
+public import ContinuousFlexibility.Radial.SelectedTailInverseRadius
+public import ContinuousFlexibility.Radial.OuterGreenIntegral
+public import ContinuousFlexibility.Analysis.CoordinateGaugeKernel
 
 /-!
 # The actual Green kernel of the retained-radius inverse
@@ -10,6 +12,8 @@ square-root-density isometry.  The height factor in the measure cancels
 the height factor in the Green normalization.  Every source is an actual
 L² class; no smooth-source or pointwise-integrability restriction is added.
 -/
+
+@[expose] public section
 
 noncomputable section
 

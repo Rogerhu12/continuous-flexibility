@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cStateSeminorms
-import ContinuousFlexibility.Analysis.SolveCircleProjection
+module
+
+public import ContinuousFlexibility.Analysis.N01cStateSeminorms
+public import ContinuousFlexibility.Analysis.SolveCircleProjection
 
 /-!
 # A norm-contracting sector projection preserving the nonlinear geometry
@@ -10,6 +12,8 @@ therefore preserves profile and height and contracts the actual state
 grading. Geometric properties proved on the sector extend to the entire
 same parameter neighbourhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

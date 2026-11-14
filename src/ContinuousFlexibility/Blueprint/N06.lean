@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Blueprint.Statements
-import ContinuousFlexibility.Blueprint.N06.WeakGraph
-import ContinuousFlexibility.Blueprint.N06.CanonicalRelative
-import ContinuousFlexibility.Analysis.N06SmallNeighborhood
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
+public import ContinuousFlexibility.Blueprint.N06.WeakGraph
+public import ContinuousFlexibility.Blueprint.N06.CanonicalRelative
+public import ContinuousFlexibility.Analysis.N06SmallNeighborhood
 
 /-!
 # Blueprint node N06
@@ -14,6 +16,8 @@ Task file: `docs/tasks/N06.md`. The exact statement is assembled from the
 weak-graph and canonical-relative substatements. Completion requires both
 substatements to have proofs with only the three standard logical axioms.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

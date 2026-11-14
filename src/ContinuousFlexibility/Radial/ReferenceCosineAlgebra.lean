@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ReferenceCosineWeighted
+module
+
+public import ContinuousFlexibility.Radial.ReferenceCosineWeighted
 
 /-!
 # Algebra of the actual finite cosine projections
@@ -7,6 +9,8 @@ The coefficient and pairing identities use the genuine L² inner product.
 They include finite-sum reproduction, self-adjointness, and the exact
 half-turn and reflection symmetries of projected fields.
 -/
+
+@[expose] public section
 
 open Set Filter MeasureTheory
 open scoped Topology RealInnerProductSpace InnerProductSpace

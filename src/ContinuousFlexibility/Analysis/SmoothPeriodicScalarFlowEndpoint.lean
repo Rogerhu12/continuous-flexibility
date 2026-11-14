@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SmoothPeriodicScalarFlow
-import ContinuousFlexibility.Analysis.ScalarFlowSmooth
-import ContinuousFlexibility.Analysis.ScalarFlowInitialAngle
+module
+
+public import ContinuousFlexibility.Analysis.SmoothPeriodicScalarFlow
+public import ContinuousFlexibility.Analysis.ScalarFlowSmooth
+public import ContinuousFlexibility.Analysis.ScalarFlowInitialAngle
 
 /-!
 # Smooth periodic flow families constructed from the field
@@ -11,6 +13,8 @@ order bootstrap then give their smooth endpoint map. The same actual
 time equation gives its strictly positive initial-angle Jacobian.
 Neither flow continuity nor a parameter derivative is an input here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

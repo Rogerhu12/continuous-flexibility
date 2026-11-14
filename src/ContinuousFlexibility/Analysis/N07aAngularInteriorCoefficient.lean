@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalOpenCoefficients
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalOpenCoefficients
 
 /-!
 # Genuine physical interior coefficients on a compact inner strip
@@ -8,6 +10,8 @@ strictly smaller closed radial interval. This constructs the open
 coefficient record from the real function, without extending it across
 an endpoint or assuming a regularity statement about a solution.
 -/
+
+@[expose] public section
 
 noncomputable section
 

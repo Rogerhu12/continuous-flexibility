@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchedInnerFiniteWeightData
-import ContinuousFlexibility.Radial.MatchedInnerHardyWeightedInverse
+module
+
+public import ContinuousFlexibility.Radial.MatchedInnerFiniteWeightData
+public import ContinuousFlexibility.Radial.MatchedInnerHardyWeightedInverse
 
 /-!
 # The original finite-chain inverse with its fixed coefficient loss
@@ -10,6 +12,8 @@ loss are proved from that interpolation. The only quantitative inputs
 are the actual model columns and errors, actual endpoint energy, and
 unweighted piece Dirichlet costs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

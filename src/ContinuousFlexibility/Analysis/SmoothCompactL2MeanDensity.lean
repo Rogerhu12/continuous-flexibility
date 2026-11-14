@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SmoothCompactL2Density
-import Mathlib.MeasureTheory.Integral.DominatedConvergence
+module
+
+public import ContinuousFlexibility.Analysis.SmoothCompactL2Density
+public import Mathlib.MeasureTheory.Integral.DominatedConvergence
 
 /-!
 # Smooth approximation with an additional integral
@@ -10,6 +12,8 @@ allows smooth approximation for the sum measure. This is useful when a
 source has an exact ordinary-integral compatibility condition but its
 Hilbert norm uses a singular weight.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import ContinuousFlexibility.Analysis.StateNeighborhood
-import Mathlib.Analysis.Calculus.Deriv.MeanValue
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import ContinuousFlexibility.Analysis.StateNeighborhood
+public import Mathlib.Analysis.Calculus.Deriv.MeanValue
 
 /-!
 # The angular derivative of the reference ordinary flow
@@ -15,6 +17,8 @@ The total radial derivative identities also cover nondifferentiable radial
 profiles, using the standard zero convention for `fderiv` and `deriv`.
 Consequently the flow conclusion needs no additional profile hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

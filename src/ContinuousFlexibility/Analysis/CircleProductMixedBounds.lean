@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CircleCompositionFaaBounds
-import ContinuousFlexibility.Analysis.TameInterpolationProducts
+module
+
+public import ContinuousFlexibility.Analysis.CircleCompositionFaaBounds
+public import ContinuousFlexibility.Analysis.TameInterpolationProducts
 
 /-!
 # Joint mixed-order estimates for actual circle products
@@ -8,6 +10,8 @@ Leibniz's rule keeps the first factor at order i+1 and the second
 factor's component energy at order b-i+k+1. Their sum is b+k+2.
 Interpolation is applied only after the complete sum over circles.
 -/
+
+@[expose] public section
 
 noncomputable section
 

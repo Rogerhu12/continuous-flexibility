@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N06PrimitiveReferenceRepresentatives
-import ContinuousFlexibility.Analysis.N06PrimitivePositiveFiniteGreen
-import ContinuousFlexibility.Analysis.N06PrimitiveNegativeFiniteGreen
-import ContinuousFlexibility.Analysis.N06PrimitiveFiniteBoundaryMatching
-import ContinuousFlexibility.Analysis.N06PrimitiveFiniteGreenRelation
-import ContinuousFlexibility.Analysis.N06FiniteHeightModes
+module
+
+public import ContinuousFlexibility.Analysis.N06PrimitiveReferenceRepresentatives
+public import ContinuousFlexibility.Analysis.N06PrimitivePositiveFiniteGreen
+public import ContinuousFlexibility.Analysis.N06PrimitiveNegativeFiniteGreen
+public import ContinuousFlexibility.Analysis.N06PrimitiveFiniteBoundaryMatching
+public import ContinuousFlexibility.Analysis.N06PrimitiveFiniteGreenRelation
+public import ContinuousFlexibility.Analysis.N06FiniteHeightModes
 
 /-!
 # Actual finite Green data on the original primitive atlas
@@ -15,6 +17,8 @@ and original negative equation give the two local Green formulas. The
 primitive shared first jets and actual moving-cut law cancel their true
 boundary terms. No coordinate replacement or unit interval is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.TransitionTransfer
-import ContinuousFlexibility.Radial.MorseRightCapBounds
-import ContinuousFlexibility.Radial.MorseLeftCapIntegrals
+module
+
+public import ContinuousFlexibility.Radial.TransitionTransfer
+public import ContinuousFlexibility.Radial.MorseRightCapBounds
+public import ContinuousFlexibility.Radial.MorseLeftCapIntegrals
 
 /-!
 # The actual Morse coefficient in the transition-core energy estimate
@@ -11,6 +13,8 @@ gives a two-direction estimate between its actual turning points.  The
 positive-cap coefficient products are estimated on the actual retained
 intervals, before making a change to the physical radius.
 -/
+
+@[expose] public section
 
 noncomputable section
 

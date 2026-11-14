@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CylinderTestPeriodization
-import ContinuousFlexibility.Analysis.PhysicalJetBonding
-import Mathlib.Analysis.Calculus.ContDiff.Convolution
+module
+
+public import ContinuousFlexibility.Analysis.CylinderTestPeriodization
+public import ContinuousFlexibility.Analysis.PhysicalJetBonding
+public import Mathlib.Analysis.Calculus.ContDiff.Convolution
 
 /-!
 # Compact-kernel convolution of actual physical jets
@@ -10,6 +12,8 @@ kernel is smooth and angularly periodic. The planar weak-test identity
 transfers each mixed derivative of the kernel to the corresponding actual
 unweighted derivative class of the physical jet graph.
 -/
+
+@[expose] public section
 
 noncomputable section
 

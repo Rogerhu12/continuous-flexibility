@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N05CanonicalInverseAngularJets
-import ContinuousFlexibility.Analysis.N05CanonicalNormalizedAngularJets
-import ContinuousFlexibility.Analysis.N05CanonicalInverseLinearity
-import ContinuousFlexibility.Radial.R11bAngularFrequencySource
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalInverseAngularJets
+public import ContinuousFlexibility.Analysis.N05CanonicalNormalizedAngularJets
+public import ContinuousFlexibility.Analysis.N05CanonicalInverseLinearity
+public import ContinuousFlexibility.Radial.R11bAngularFrequencySource
 
 /-!
 # Genuine bounded jets of the fixed inverse on each source level
@@ -11,6 +13,8 @@ global inverse. Their unweighted bounds hold uniformly over the retained
 finite angular family. These identities keep the choice's default branch
 out of the later linearity and finite-truncation arguments.
 -/
+
+@[expose] public section
 
 noncomputable section
 

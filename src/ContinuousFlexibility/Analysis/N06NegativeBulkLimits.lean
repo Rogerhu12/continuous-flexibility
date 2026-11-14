@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N06NegativeFiniteForcing
-import ContinuousFlexibility.Analysis.N06NegativeForcingParity
-import ContinuousFlexibility.Analysis.N06CanonicalCosineCutoff
-import ContinuousFlexibility.Analysis.N06GraphCauchy
-import ContinuousFlexibility.Radial.R11bWeakNormalLimit
+module
+
+public import ContinuousFlexibility.Analysis.N06NegativeFiniteForcing
+public import ContinuousFlexibility.Analysis.N06NegativeForcingParity
+public import ContinuousFlexibility.Analysis.N06CanonicalCosineCutoff
+public import ContinuousFlexibility.Analysis.N06GraphCauchy
+public import ContinuousFlexibility.Radial.R11bWeakNormalLimit
 
 /-!
 # The actual negative Green bulk terms converge in the original L2 space
@@ -17,6 +19,8 @@ The finite Green identity retains the literal endpoint Wronskians. A caller
 can cancel these finite terms using actual root transmission before applying
 the bulk limit. No infinite endpoint trace is introduced or assumed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

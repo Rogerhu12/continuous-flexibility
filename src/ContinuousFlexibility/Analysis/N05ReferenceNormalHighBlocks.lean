@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05ReferenceNormalProjection
-import ContinuousFlexibility.Analysis.N05ReferenceAngularJetEstimate
-import ContinuousFlexibility.Analysis.N05ReferenceNormalizerJets
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceNormalProjection
+public import ContinuousFlexibility.Analysis.N05ReferenceAngularJetEstimate
+public import ContinuousFlexibility.Analysis.N05ReferenceNormalizerJets
 
 /-!
 # High angular blocks of the same physical normal derivative
@@ -10,6 +12,8 @@ sources. Physical weak-derivative uniqueness identifies each resulting
 normal derivative with the corresponding projection of the original one.
 Thus every high normal block costs exactly one angular source derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

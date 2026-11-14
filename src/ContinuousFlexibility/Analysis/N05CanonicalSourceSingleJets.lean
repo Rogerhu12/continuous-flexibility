@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N05CanonicalSourceWeakClosure
-import ContinuousFlexibility.Analysis.N05CanonicalCommonCore
-import ContinuousFlexibility.Analysis.N05CanonicalFiniteBlockSums
-import ContinuousFlexibility.Analysis.N05CanonicalAngularSourceSingleBound
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalSourceWeakClosure
+public import ContinuousFlexibility.Analysis.N05CanonicalCommonCore
+public import ContinuousFlexibility.Analysis.N05CanonicalFiniteBlockSums
+public import ContinuousFlexibility.Analysis.N05CanonicalAngularSourceSingleBound
 
 /-!
 # Actual angular jets of a single canonical graph row
@@ -13,6 +15,8 @@ The derivative uses the unsigned lift, including at odd angular orders.
 Only this identity uses the stronger level; no stronger-level estimate
 is substituted for a same-endpoint block bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

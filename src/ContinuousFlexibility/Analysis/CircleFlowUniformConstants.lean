@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowTranslationBounds
-import Mathlib.Topology.Order.Compact
-import Mathlib.Tactic.FunProp
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowTranslationBounds
+public import Mathlib.Topology.Order.Compact
+public import Mathlib.Tactic.FunProp
 
 /-!
 # Uniform constants for circle flow families
@@ -10,6 +12,8 @@ functions of their low integrated speed norms. A compact range of those
 low norms therefore gives one constant for every member of a family.
 The high-order norm remains a linear factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

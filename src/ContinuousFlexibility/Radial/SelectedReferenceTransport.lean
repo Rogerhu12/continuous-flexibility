@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.RadialTargets
-import Mathlib.Analysis.Calculus.Deriv.CompMul
-import Mathlib.Tactic.FieldSimp
+module
+
+public import ContinuousFlexibility.Statements.RadialTargets
+public import Mathlib.Analysis.Calculus.Deriv.CompMul
+public import Mathlib.Tactic.FieldSimp
 
 /-!
 # Radius and height transport of selected radial states
@@ -14,6 +16,8 @@ The state identity only needs the profile height at the comparison point.
 A version for prescribed first jets also applies when the target solution
 agrees with the scaled one only near that point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

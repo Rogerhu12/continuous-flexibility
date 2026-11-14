@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06ReferenceRootLower
-import ContinuousFlexibility.Analysis.N06RootCollarFromProfile
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceRootLower
+public import ContinuousFlexibility.Analysis.N06RootCollarFromProfile
 
 /-!
 # Genuine positive-side root collars for the selected reference
@@ -14,6 +16,8 @@ The cost still records both original cell labels.  The frozen cover and
 weight contracts do not identify the physical return-margin cell with
 `K.cell`; this theorem does not replace that missing comparison by an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

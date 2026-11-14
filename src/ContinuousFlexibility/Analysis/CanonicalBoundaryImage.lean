@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Blueprint.CanonicalParts
-import Mathlib.Topology.Separation.Hausdorff
+module
+
+public import ContinuousFlexibility.Blueprint.CanonicalParts
+public import Mathlib.Topology.Separation.Hausdorff
 
 /-!
 # Images of physical endpoints
@@ -10,6 +12,8 @@ image of the frontier of the current physical domain. Fixed radial
 endpoints are used only for positive pieces, whose actual domain is the
 reference rectangle by the canonical contract.
 -/
+
+@[expose] public section
 
 noncomputable section
 

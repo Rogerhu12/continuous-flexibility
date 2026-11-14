@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05CanonicalSourceBlock
-import ContinuousFlexibility.Radial.ReferenceCellL2
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05CanonicalSourceBlock
+public import ContinuousFlexibility.Radial.ReferenceCellL2
 
 /-!
 # The actual single-coordinate source of the fixed lift
@@ -11,6 +13,8 @@ of physical almost-everywhere classes, not an assertion about pointwise
 linearity of chosen L² representatives. The same endpoint estimate then
 holds for that literal global lift, without a volume-membership premise.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.NegativeCanonicalEffectiveOperator
+module
+
+public import ContinuousFlexibility.Analysis.NegativeCanonicalEffectiveOperator
 
 /-!
 # Determinants of actual coordinate principal densities
@@ -9,6 +11,8 @@ the coordinate change therefore gives det B = det A / h^4. The negative
 Airy field has determinant -ξ, so the frozen open-piece chart supplies the
 exact physical identity without any regularity hypothesis on stored L.
 -/
+
+@[expose] public section
 
 noncomputable section
 

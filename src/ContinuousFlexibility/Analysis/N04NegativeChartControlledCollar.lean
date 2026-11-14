@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartFullHalfFields
-import ContinuousFlexibility.Analysis.N04NegativeChartInwardPower
-import ContinuousFlexibility.Analysis.MaterialPointRadialPolynomial
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartFullHalfFields
+public import ContinuousFlexibility.Analysis.N04NegativeChartInwardPower
+public import ContinuousFlexibility.Analysis.MaterialPointRadialPolynomial
 
 /-!
 # A material collar for the literal corrected chart
@@ -11,6 +13,8 @@ constant on a neighborhood of every collar point, so the original
 factored field is exactly the corrected field there. Outside the smaller
 overlap collar the same reciprocal pays both physical endpoint distances.
 -/
+
+@[expose] public section
 
 noncomputable section
 

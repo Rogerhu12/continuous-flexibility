@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.WholeComponentTransportFactory
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledFiberPullback
+module
+
+public import ContinuousFlexibility.Analysis.WholeComponentTransportFactory
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledFiberPullback
 
 /-!
 # A fixed polynomial envelope for the same whole-component transport
@@ -9,6 +11,8 @@ bound is kappa/2, so the inverse-fiber theorem is applied at 2M. The
 resulting coefficient absorbs only the fixed factor 2^degree; neither
 the actual angular patch nor either endpoint field is replaced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

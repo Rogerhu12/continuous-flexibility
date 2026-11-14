@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N08ProfileJetBounds
-import ContinuousFlexibility.Analysis.N08ControlSpatialBounds
+module
+
+public import ContinuousFlexibility.Analysis.N08ProfileJetBounds
+public import ContinuousFlexibility.Analysis.N08ControlSpatialBounds
 
 /-!
 # Actual decay of the scalar profile direction
@@ -9,6 +11,8 @@ support need not lie in a compact subset of that core. Its weighted decay
 is therefore extracted from the actual N01 coefficient jets, just as for
 the control directions. No stronger support condition is imposed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

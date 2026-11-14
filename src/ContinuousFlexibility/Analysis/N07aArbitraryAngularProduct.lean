@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.ReferenceGraphCoefficients
-import ContinuousFlexibility.Radial.ReferenceColumnSmooth
-import ContinuousFlexibility.Radial.WeakDivergenceRegularity
-import ContinuousFlexibility.Radial.R11bLocalL2
-import Mathlib.MeasureTheory.Function.LocallyIntegrable
+module
+
+public import ContinuousFlexibility.Radial.ReferenceGraphCoefficients
+public import ContinuousFlexibility.Radial.ReferenceColumnSmooth
+public import ContinuousFlexibility.Radial.WeakDivergenceRegularity
+public import ContinuousFlexibility.Radial.R11bLocalL2
+public import Mathlib.MeasureTheory.Function.LocallyIntegrable
 
 /-!
 # Arbitrary angular product tests for the reference graph
@@ -12,6 +14,8 @@ scalar weak-divergence equation. Its forcing retains the angular second-test
 derivative, so no eigenfunction identity or source differentiability is needed.
 Local integrability follows from the graph's actual weighted L² membership.
 -/
+
+@[expose] public section
 
 noncomputable section
 

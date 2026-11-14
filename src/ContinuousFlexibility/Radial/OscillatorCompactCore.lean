@@ -1,10 +1,12 @@
-import ContinuousFlexibility.Radial.OscillatorClosedGraph
-import ContinuousFlexibility.Radial.CentralGraphAdjoint
-import ContinuousFlexibility.Radial.OscillatorDifferentialPairing
-import Mathlib.Analysis.SpecialFunctions.SmoothTransition
-import Mathlib.Analysis.Calculus.Deriv.Support
-import Mathlib.MeasureTheory.Function.LpSpace.Indicator
-import Mathlib.MeasureTheory.Integral.DominatedConvergence
+module
+
+public import ContinuousFlexibility.Radial.OscillatorClosedGraph
+public import ContinuousFlexibility.Radial.CentralGraphAdjoint
+public import ContinuousFlexibility.Radial.OscillatorDifferentialPairing
+public import Mathlib.Analysis.SpecialFunctions.SmoothTransition
+public import Mathlib.Analysis.Calculus.Deriv.Support
+public import Mathlib.MeasureTheory.Function.LpSpace.Indicator
+public import Mathlib.MeasureTheory.Integral.DominatedConvergence
 
 /-!
 # Actual compact cutoffs for the central differential operator
@@ -14,6 +16,8 @@ rescalings have two explicitly controlled derivatives. These are used to
 compare the compact-test distribution graph with the Hermite graph core.
 The Friedrichs quadratic-form identification is a separate obligation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

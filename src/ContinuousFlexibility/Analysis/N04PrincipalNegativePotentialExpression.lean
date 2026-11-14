@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PrincipalNegativePotential
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalNegativePotential
 
 /-!
 # Coordinate-partial form of the negative potential
@@ -7,6 +9,8 @@ This is the same negative potential identity in the operators used by
 the paired jet calculus. Spatial smoothness comes from the qualitative
 chart and height certificate on the actual canonical open piece.
 -/
+
+@[expose] public section
 
 noncomputable section
 

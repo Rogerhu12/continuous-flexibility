@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N06PrimitiveC1Green
-import ContinuousFlexibility.Analysis.N06PrimitiveModeRegularity
-import ContinuousFlexibility.Analysis.N06CompactCanonicalTraces
-import ContinuousFlexibility.Analysis.N06CanonicalTestSeparation
-import ContinuousFlexibility.Analysis.N06ReferenceUnitEquation
+module
+
+public import ContinuousFlexibility.Analysis.N06PrimitiveC1Green
+public import ContinuousFlexibility.Analysis.N06PrimitiveModeRegularity
+public import ContinuousFlexibility.Analysis.N06CompactCanonicalTraces
+public import ContinuousFlexibility.Analysis.N06CanonicalTestSeparation
+public import ContinuousFlexibility.Analysis.N06ReferenceUnitEquation
 
 /-!
 # The actual reference forcing of a finite height on its original interval
@@ -13,6 +15,8 @@ synthesis with the complete original forcing.  The original compatibility
 column is retained, and no finite support of the unmodified source is
 assumed.  The leading reference coefficient needs only a C1 representative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

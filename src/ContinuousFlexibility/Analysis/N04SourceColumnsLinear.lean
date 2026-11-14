@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04SourceColumnsData
+module
+
+public import ContinuousFlexibility.Analysis.N04SourceColumnsData
 
 /-!
 # Linear operations on the scalar source interfaces
@@ -7,6 +9,8 @@ Equalities are required only on the actual open strip.  Fixed scalar
 factors may depend on the piece and have a material coefficient envelope.
 All operations retain the original parameter neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

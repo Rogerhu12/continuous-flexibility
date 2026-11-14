@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01ReferenceOpticalCollars
-import ContinuousFlexibility.Analysis.N01NeighborhoodRestriction
+module
+
+public import ContinuousFlexibility.Analysis.N01ReferenceOpticalCollars
+public import ContinuousFlexibility.Analysis.N01NeighborhoodRestriction
 
 /-!
 # The optical collar controls the radial endpoint weights in N01
@@ -9,6 +11,8 @@ bound force a quantitative distance from both turning radii. Thus the
 radial endpoint factors in the original N01 flow tower can be divided
 out on the actual correction collars with a fixed radial-cell power.
 -/
+
+@[expose] public section
 
 noncomputable section
 

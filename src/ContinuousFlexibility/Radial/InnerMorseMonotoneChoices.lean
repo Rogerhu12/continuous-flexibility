@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerMorsePhysicalPoisson
+module
+
+public import ContinuousFlexibility.Radial.InnerMorsePhysicalPoisson
 
 /-!
 # Morse choices valid for every later starting index
@@ -13,6 +15,8 @@ weight is one even when the selected chain begins strictly after the scalar
 threshold.  The physical-column step uses the public version of the existing
 `physical_bound_of_remainder` theorem from `InnerMorsePhysicalPoisson`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06CanonicalCosineCutoff
+module
+
+public import ContinuousFlexibility.Analysis.N06CanonicalCosineCutoff
 
 /-!
 # Actual global canonical Fourier approximants
@@ -9,6 +11,8 @@ height sequence. The three scalar coordinates are unchanged. These are
 canonical unknowns even when they do not belong to the N05 graph, and
 their piecewise strong limits are precisely the original unknown.
 -/
+
+@[expose] public section
 
 noncomputable section
 

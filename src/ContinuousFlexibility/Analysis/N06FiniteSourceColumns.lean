@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05CanonicalSmoothJets
-import ContinuousFlexibility.Analysis.SpacesTraceRestriction
-import Mathlib.Algebra.Order.BigOperators.Ring.Finset
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalSmoothJets
+public import ContinuousFlexibility.Analysis.SpacesTraceRestriction
+public import Mathlib.Algebra.Order.BigOperators.Ring.Finset
 
 /-!
 # Finite smooth fields in the actual canonical source level
@@ -12,6 +14,8 @@ then represents the given physical fields in every original canonical
 measure. The norm estimate uses their actual angular derivatives and the
 finite cylinder measures, with no source-membership premise.
 -/
+
+@[expose] public section
 
 noncomputable section
 

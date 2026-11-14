@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.R11bRadialTests
-import ContinuousFlexibility.Radial.R11bPhysicalPairing
-import ContinuousFlexibility.Scalar.GreenIdentity
+module
+
+public import ContinuousFlexibility.Radial.R11bRadialTests
+public import ContinuousFlexibility.Radial.R11bPhysicalPairing
+public import ContinuousFlexibility.Scalar.GreenIdentity
 
 /-!
 # Green symmetry of the smooth radial differential expression
@@ -10,6 +12,8 @@ The actual radial Jacobi PDE is a symmetric divergence with coefficients
 Wronskian vanishes because the profile is zero at both endpoints.
 No endpoint condition on the two smooth test fields is needed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

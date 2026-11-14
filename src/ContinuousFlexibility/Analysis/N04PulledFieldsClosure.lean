@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientPhysicalDifference
-import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientPhysicalAssembly
-import ContinuousFlexibility.Analysis.N04PulledFieldsAuxiliaryReduction
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientPhysicalDifference
+public import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientPhysicalAssembly
+public import ContinuousFlexibility.Analysis.N04PulledFieldsAuxiliaryReduction
 
 /-!
 # Closing the pulled-field obligation
@@ -11,6 +13,8 @@ at a fixed same-atlas reference witness. Auxiliary independence then
 puts the common neighborhood before every auxiliary column, as required
 by the shared obligation used in the unchanged parent assembly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

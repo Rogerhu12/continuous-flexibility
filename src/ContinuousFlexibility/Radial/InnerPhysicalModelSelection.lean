@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerPhysicalOrderedChoices
+module
+
+public import ContinuousFlexibility.Radial.InnerPhysicalOrderedChoices
 
 /-!
 # Selecting the one physical model used by the actual dictionary
@@ -9,6 +11,8 @@ use one witness for the equation and another for the estimates. The
 Morse selector is shared by the two tails and normalizes the even
 natural frequency to the same real expression as the central chart.
 -/
+
+@[expose] public section
 
 noncomputable section
 

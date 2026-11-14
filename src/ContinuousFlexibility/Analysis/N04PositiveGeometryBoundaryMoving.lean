@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledSavedMovingWords
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryKernelBounds
-import ContinuousFlexibility.Analysis.N01cPhysicalFlowGraph
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledSavedMovingWords
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryKernelBounds
+public import ContinuousFlexibility.Analysis.N01cPhysicalFlowGraph
 
 /-!
 # Boundary towers at the actual moving angle
@@ -10,6 +12,8 @@ topology, and the outer target may be a space of continuous multilinear
 maps. A finite angular horizon pays for parameter slots becoming angle
 slots. No absolute bound is imposed on the unwrapped inner angle.
 -/
+
+@[expose] public section
 
 noncomputable section
 

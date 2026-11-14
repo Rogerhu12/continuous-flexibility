@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OuterOutwardCoreState
+module
+
+public import ContinuousFlexibility.Radial.OuterOutwardCoreState
 
 /-!
 # The selected-band envelope for the same actual outer pair
@@ -9,6 +11,8 @@ frequency cutoff at this same transition cell absorbs its action into
 the coefficient weight.  Constants may depend on the fixed actual
 profile; they are chosen before the frequency and the pair.
 -/
+
+@[expose] public section
 
 noncomputable section
 

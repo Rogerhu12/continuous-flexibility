@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PrincipalCoefficientPullback
-import ContinuousFlexibility.Analysis.PositiveConformalBoundaryJets
+module
+
+public import ContinuousFlexibility.Analysis.PrincipalCoefficientPullback
+public import ContinuousFlexibility.Analysis.PositiveConformalBoundaryJets
 
 /-!
 # The actual positive principal density and its conformal residual
@@ -11,6 +13,8 @@ combination of the two actual first-order conformal residuals. This is
 an algebraic identity for the actual differential, not an assumed
 coordinate transformation law or an equation on a collar.
 -/
+
+@[expose] public section
 
 noncomputable section
 

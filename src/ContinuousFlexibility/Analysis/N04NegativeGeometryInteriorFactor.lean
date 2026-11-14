@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometryGaugePerturbation
-import ContinuousFlexibility.Analysis.PositiveEndpointCutoff
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryGaugePerturbation
+public import ContinuousFlexibility.Analysis.PositiveEndpointCutoff
 
 /-!
 # An explicit nonconstant interior height multiplier
@@ -9,6 +11,8 @@ and the fixed middle. Adding one gives a multiplier in `[1,2]`, equal to
 two at the cutoff center and identically one near both endpoints and the
 entire fixed middle.
 -/
+
+@[expose] public section
 
 noncomputable section
 

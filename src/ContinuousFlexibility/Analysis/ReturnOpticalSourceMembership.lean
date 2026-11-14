@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionHeightMember
-import ContinuousFlexibility.Analysis.N01FlowInverseJetBounds
-import ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionHeightMember
+public import ContinuousFlexibility.Analysis.N01FlowInverseJetBounds
+public import ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap
 
 /-!
 # One actual optical cutoff family yields physical source members
@@ -14,6 +16,8 @@ No source-membership or extra regularity condition is assumed.
 The quantitative collar witnesses are retained for the subsequent
 parameter-jet estimates on this same family.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Geometry.SphereShapeOperator
-import ContinuousFlexibility.Geometry.SphereCurvature
-import Mathlib.LinearAlgebra.Basis.Fin
+module
+
+public import ContinuousFlexibility.Geometry.SphereShapeOperator
+public import ContinuousFlexibility.Geometry.SphereCurvature
+public import Mathlib.LinearAlgebra.Basis.Fin
 
 /-!
 # Identifying the actual tangent shape operator with coordinate curvature
@@ -10,6 +12,8 @@ A chart differential then conjugates the actual sphere tangent operator to
 that matrix, so its trace and determinant are the existing coordinate mean
 and Gaussian curvatures. The same normal is used throughout.
 -/
+
+@[expose] public section
 
 noncomputable section
 

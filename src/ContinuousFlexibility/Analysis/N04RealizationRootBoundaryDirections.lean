@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04RealizationRootBoundaryPoint
-import ContinuousFlexibility.Analysis.N01ReturnInverseCircle
-import ContinuousFlexibility.Analysis.CircleSmoothDirectionsOperations
-import ContinuousFlexibility.Analysis.N01cCoefficientJetCalculus
-import ContinuousFlexibility.Analysis.SpacesTraceCircleBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationRootBoundaryPoint
+public import ContinuousFlexibility.Analysis.N01ReturnInverseCircle
+public import ContinuousFlexibility.Analysis.CircleSmoothDirectionsOperations
+public import ContinuousFlexibility.Analysis.N01cCoefficientJetCalculus
+public import ContinuousFlexibility.Analysis.SpacesTraceCircleBounds
 
 /-!
 # Genuine directions of the actual inverse boundary point
@@ -13,6 +15,8 @@ constructs their genuine joint inverses. The actual stored atlas point
 is identified by its closed inverse identity, without choosing a smooth
 parameter family of root charts.
 -/
+
+@[expose] public section
 
 noncomputable section
 

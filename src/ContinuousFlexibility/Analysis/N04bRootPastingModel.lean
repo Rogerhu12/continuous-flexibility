@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bMatchedRootCollars
-import ContinuousFlexibility.Analysis.N04bRootCollarDomain
+module
+
+public import ContinuousFlexibility.Analysis.N04bMatchedRootCollars
+public import ContinuousFlexibility.Analysis.N04bRootCollarDomain
 
 /-!
 # Actual local data for literal root pasting
@@ -8,6 +10,8 @@ A matched smooth root collar is shrunk using its genuine uniform radial
 bound. Its physical positive side then lies in the actual moving half.
 This constructs the local inputs of the pasting theorem from Through03.
 -/
+
+@[expose] public section
 
 noncomputable section
 

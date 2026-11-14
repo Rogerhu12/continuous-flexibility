@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalAtomBounds
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalAtomBounds
 
 /-!
 # Quantitative displacement of the actual inverse chart
@@ -7,6 +9,8 @@ The inverse radial atom is sampled on the fixed canonical unit strip.
 Its current-minus-reference bound therefore controls the actual inverse
 points without asserting that either current point lies in a reference piece.
 -/
+
+@[expose] public section
 
 noncomputable section
 

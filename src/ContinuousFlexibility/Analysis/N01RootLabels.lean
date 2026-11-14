@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01RightChartJets
-import ContinuousFlexibility.Analysis.NeighborhoodCircleCharts
+module
+
+public import ContinuousFlexibility.Analysis.N01RightChartJets
+public import ContinuousFlexibility.Analysis.NeighborhoodCircleCharts
 
 /-!
 # The two actual angular root labels
@@ -10,6 +12,8 @@ first derivatives, and displacement jets with one common low order and
 fixed loss. The right endpoint uses the stored return inverse; no label
 regularity or high-jet estimate is supplied as an extra hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

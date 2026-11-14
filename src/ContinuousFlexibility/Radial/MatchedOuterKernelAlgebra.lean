@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OuterKernelEnvelopeAlgebra
+module
+
+public import ContinuousFlexibility.Radial.OuterKernelEnvelopeAlgebra
 
 /-!
 # The core and return terms preserve the full cell attenuation
@@ -7,6 +9,8 @@ All exponents are chosen before the transition index.  The near-label
 bounds are applied only to the actual core labels; a tail label merely
 has to lie beyond the transition up to the fixed overlap displacement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

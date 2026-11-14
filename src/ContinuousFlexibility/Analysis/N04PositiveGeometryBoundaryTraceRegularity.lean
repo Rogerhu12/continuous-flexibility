@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OneSidedBoundaryTaylorRepresentative
+module
+
+public import ContinuousFlexibility.Analysis.OneSidedBoundaryTaylorRepresentative
 
 /-! # Smoothness and periodicity of radial angular defects
 
@@ -6,6 +8,8 @@ These scalar boundary identities are proved before specializing to an
 actual atlas, keeping the angular shift calculation independent of its
 geometric certificates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

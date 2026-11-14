@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01ControlledLeftRootFields
-import ContinuousFlexibility.Analysis.N01RootRadialCoefficientValues
-import ContinuousFlexibility.Analysis.RootBoundaryOrdinaryFieldBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01ControlledLeftRootFields
+public import ContinuousFlexibility.Analysis.N01RootRadialCoefficientValues
+public import ContinuousFlexibility.Analysis.RootBoundaryOrdinaryFieldBounds
 
 /-!
 # Actual controlled left-root charts and heights with all boundary jets
@@ -14,6 +16,8 @@ These are the normalized coordinates x = (r-r₀)/δ and the normalized
 radial coefficient a/δ. Identification with a global negative atlas is
 a separate transport statement; it is not presumed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

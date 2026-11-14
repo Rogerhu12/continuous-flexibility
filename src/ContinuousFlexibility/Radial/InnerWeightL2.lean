@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Radial.InnerWeightInterpolation
-import Mathlib.Analysis.InnerProductSpace.Adjoint
-import Mathlib.Analysis.Normed.Operator.Mul
-import Mathlib.MeasureTheory.Function.Holder
-import Mathlib.MeasureTheory.Function.L2Space
-import Mathlib.Topology.Algebra.Module.Equiv
+module
+
+public import ContinuousFlexibility.Radial.InnerWeightInterpolation
+public import Mathlib.Analysis.InnerProductSpace.Adjoint
+public import Mathlib.Analysis.Normed.Operator.Mul
+public import Mathlib.MeasureTheory.Function.Holder
+public import Mathlib.MeasureTheory.Function.L2Space
+public import Mathlib.Topology.Algebra.Module.Equiv
 
 /-!
 # Actual inner weights on the physical L² space
@@ -15,6 +17,8 @@ inverse is multiplication by that same reciprocal. The measure is
 arbitrary, so these operators apply directly to the physical radial
 measure and its restrictions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

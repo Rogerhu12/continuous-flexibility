@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N01EndpointAngularJets
-import ContinuousFlexibility.Analysis.N01FlowSmallness
-import ContinuousFlexibility.Analysis.N04RealizationDifferenceValue
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
-import ContinuousFlexibility.Analysis.StateNeighborhood
+module
+
+public import ContinuousFlexibility.Analysis.N01EndpointAngularJets
+public import ContinuousFlexibility.Analysis.N01FlowSmallness
+public import ContinuousFlexibility.Analysis.N04RealizationDifferenceValue
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+public import ContinuousFlexibility.Analysis.StateNeighborhood
 
 /-!
 # The actual closed-radius flow bounds in the current-jet normalization
@@ -17,6 +19,8 @@ These estimates retain the sampled height factor. They do not replace it
 by a uniform upper bound, and make no assertion about unregularized radial
 derivatives at a root.
 -/
+
+@[expose] public section
 
 noncomputable section
 

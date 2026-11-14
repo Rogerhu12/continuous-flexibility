@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.OuterDeepActionHypotheses
-import ContinuousFlexibility.Radial.OuterDeepCutoff
-import ContinuousFlexibility.Radial.R07DeepTailPhysical
+module
+
+public import ContinuousFlexibility.Radial.OuterDeepActionHypotheses
+public import ContinuousFlexibility.Radial.OuterDeepCutoff
+public import ContinuousFlexibility.Radial.R07DeepTailPhysical
 
 /-!
 # One actual deep tail for the entire moving frequency band
@@ -10,6 +12,8 @@ Fine action estimates control the small products, while the existing R07
 large-product and mass-ratio bounds have frequency-independent thresholds.
 The final data are the actual outer factory at the geometrical entrance.
 -/
+
+@[expose] public section
 
 noncomputable section
 

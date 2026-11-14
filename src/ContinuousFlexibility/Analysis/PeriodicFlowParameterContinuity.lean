@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PeriodicFieldLipschitz
-import ContinuousFlexibility.Analysis.ScalarFlowParameterContinuity
+module
+
+public import ContinuousFlexibility.Analysis.PeriodicFieldLipschitz
+public import ContinuousFlexibility.Analysis.ScalarFlowParameterContinuity
 
 /-!
 # Joint continuity of actual periodic scalar flows
@@ -11,6 +13,8 @@ the field ignores this coordinate and the initial-value map is its
 second projection.  Thus the selected solutions are jointly continuous
 for every initial angle, with no continuity assumption on their choice.
 -/
+
+@[expose] public section
 
 noncomputable section
 

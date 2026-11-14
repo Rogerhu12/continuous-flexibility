@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R11bCompactSources
+module
+
+public import ContinuousFlexibility.Radial.R11bCompactSources
 
 /-!
 # The compact forcing produced by the left-tail constant
@@ -7,6 +9,8 @@ The tail cutoff is constant near each end of the core. Its conormal flux
 therefore has zero derivative there. A single local-constant lemma treats
 both endpoints and gives a compact interior correction in every cell weight.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07bSourceBoundMajorant
-import ContinuousFlexibility.Analysis.N07bSourceBoundChangeVariables
-import ContinuousFlexibility.Analysis.N07bActualCanonicalSourceLift
-import ContinuousFlexibility.Analysis.N07bAtlasEnergy
+module
+
+public import ContinuousFlexibility.Analysis.N07bSourceBoundMajorant
+public import ContinuousFlexibility.Analysis.N07bSourceBoundChangeVariables
+public import ContinuousFlexibility.Analysis.N07bActualCanonicalSourceLift
+public import ContinuousFlexibility.Analysis.N07bAtlasEnergy
 
 /-!
 # Summation and actual lifting under a geometric coefficient bound
@@ -11,6 +13,8 @@ The uniform geometry-only comparison is an explicit additional hypothesis.
 Under it, the disjoint atlas and one physical material majorant give both
 genuine square summability and the norm of the actual prescribed lift.
 -/
+
+@[expose] public section
 
 noncomputable section
 

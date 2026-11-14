@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aAngularClassicalEquation
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalPairing
-import ContinuousFlexibility.Analysis.N07aAngularInteriorCoefficient
-import ContinuousFlexibility.Analysis.N07aAngularInnerIntervals
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularClassicalEquation
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalPairing
+public import ContinuousFlexibility.Analysis.N07aAngularInteriorCoefficient
+public import ContinuousFlexibility.Analysis.N07aAngularInnerIntervals
 
 /-!
 # Pointwise physical equation of the reconstructed weak representative
@@ -12,6 +14,8 @@ actual Green identity and L² test separation identify its classical
 source. In particular no two-period test is silently treated as a
 one-period test.
 -/
+
+@[expose] public section
 
 noncomputable section
 

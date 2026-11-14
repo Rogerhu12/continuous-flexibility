@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.MatchedTerminalExternalColumns
-import ContinuousFlexibility.Radial.TerminalCapLayerL2
-import ContinuousFlexibility.Radial.R07CapPullback
-import Mathlib.Analysis.Convex.Jensen
+module
+
+public import ContinuousFlexibility.Radial.MatchedTerminalExternalColumns
+public import ContinuousFlexibility.Radial.TerminalCapLayerL2
+public import ContinuousFlexibility.Radial.R07CapPullback
+public import Mathlib.Analysis.Convex.Jensen
 
 /-!
 # Actual terminal leading fields and their physical L² bounds
@@ -12,6 +14,8 @@ The actual radial pullback supplies that equation. The regional leading
 vector is then estimated on its original physical cap, using the actual
 density and the actual weight only on that cap.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalTestDivergence
-import ContinuousFlexibility.Analysis.N07aReferenceOpenCoefficients
-import ContinuousFlexibility.Analysis.N07aCanonicalRadialCoefficients
-import ContinuousFlexibility.Analysis.N07aCanonicalDifference
-import ContinuousFlexibility.Radial.ReferenceCosineJacobi
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalTestDivergence
+public import ContinuousFlexibility.Analysis.N07aReferenceOpenCoefficients
+public import ContinuousFlexibility.Analysis.N07aCanonicalRadialCoefficients
+public import ContinuousFlexibility.Analysis.N07aCanonicalDifference
+public import ContinuousFlexibility.Radial.ReferenceCosineJacobi
 
 /-!
 # The genuine reference divergence on separated cosine tests
@@ -10,6 +12,8 @@ import ContinuousFlexibility.Radial.ReferenceCosineJacobi
 Only the angular variable is expanded. Radial coefficients remain actual
 functions on the open interval, and no periodic radial extension is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

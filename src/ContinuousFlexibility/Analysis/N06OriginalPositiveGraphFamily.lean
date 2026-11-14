@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06ControlledPositiveCubic
+module
+
+public import ContinuousFlexibility.Analysis.N06ControlledPositiveCubic
 
 /-!
 # Positive modal families from the same original graph element
@@ -9,6 +11,8 @@ identity returns that same graph element. Thus the existing positive
 weak graph construction gives its actual modal representatives without
 adding a forcing lift or a weak PDE as an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

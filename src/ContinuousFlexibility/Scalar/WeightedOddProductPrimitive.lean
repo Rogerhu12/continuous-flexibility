@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Scalar.WeightedAngularProductJets
-import ContinuousFlexibility.Scalar.WeightedAngularPrimitiveBounds
-import ContinuousFlexibility.Scalar.WeightedDifferentiationSupport
-import ContinuousFlexibility.Analysis.MaterialHeightRegularity
+module
+
+public import ContinuousFlexibility.Scalar.WeightedAngularProductJets
+public import ContinuousFlexibility.Scalar.WeightedAngularPrimitiveBounds
+public import ContinuousFlexibility.Scalar.WeightedDifferentiationSupport
+public import ContinuousFlexibility.Analysis.MaterialHeightRegularity
 
 /-!
 # The actual even primitive of an odd angular product
@@ -12,6 +14,8 @@ supported in the physical core. Its prescribed angular primitive is therefore
 an actual even height member. The primitive and the return from the sum weight
 to the original weight preserve the one-high-factor estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04bCollarInjectivity
-import ContinuousFlexibility.Analysis.N04bPlanarInverseGerm
-import ContinuousFlexibility.Analysis.PeriodicGermCollar
+module
+
+public import ContinuousFlexibility.Analysis.N04bCollarInjectivity
+public import ContinuousFlexibility.Analysis.N04bPlanarInverseGerm
+public import ContinuousFlexibility.Analysis.PeriodicGermCollar
 
 /-!
 # An actual smooth inverse on a uniform target cylinder
@@ -10,6 +12,8 @@ zero-radius axis. Angular equivariance makes membership in that image
 periodic. Compactness of one angular period supplies a genuine target
 collar, on which the actual invFunOn is smooth and has full inverse germs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

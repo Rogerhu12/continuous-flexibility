@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.CoupledControlCircleInverse
-import ContinuousFlexibility.Analysis.CoupledCircleParameterIndependence
-import ContinuousFlexibility.Analysis.CoupledTameDerivative
-import ContinuousFlexibility.Analysis.SolveNewtonBridge
-import ContinuousFlexibility.Analysis.SolveStateSpaces
-import ContinuousFlexibility.Scalar.WeightedStateTopology
+module
+
+public import ContinuousFlexibility.Analysis.CoupledControlCircleInverse
+public import ContinuousFlexibility.Analysis.CoupledCircleParameterIndependence
+public import ContinuousFlexibility.Analysis.CoupledTameDerivative
+public import ContinuousFlexibility.Analysis.SolveNewtonBridge
+public import ContinuousFlexibility.Analysis.SolveStateSpaces
+public import ContinuousFlexibility.Scalar.WeightedStateTopology
 
 /-!
 # Smooth tame control and height rows from the actual residual
@@ -13,6 +15,8 @@ residual. The constant control and height insertions preserve their given
 gradings. In particular the height row is used with its actual factor `q`;
 no regularity of the separately divided row at `q = 0` is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

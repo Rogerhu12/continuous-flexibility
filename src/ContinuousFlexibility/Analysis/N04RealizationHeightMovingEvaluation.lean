@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationHeightJointDirections
-import ContinuousFlexibility.Analysis.N01cPhysicalFlowGraph
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationHeightJointDirections
+public import ContinuousFlexibility.Analysis.N01cPhysicalFlowGraph
 
 /-!
 # Actual physical fields evaluated at a moving inverse point
@@ -9,6 +11,8 @@ with the previously constructed joint physical tower uses the existing
 projective chain rule on that same domain. Multiplication by the actual
 source factor then yields the literal canonical source.
 -/
+
+@[expose] public section
 
 noncomputable section
 

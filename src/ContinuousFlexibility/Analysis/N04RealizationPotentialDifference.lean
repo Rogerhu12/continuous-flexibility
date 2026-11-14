@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04RealizationPotentialOneHigh
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationPotentialOneHigh
 
 /-!
 # All parameter orders of the actual potential difference
@@ -8,6 +10,8 @@ The genuine first derivative on the reference segment supplies order zero.
 The same neighborhood, reference state, high seminorm, and original
 height gain serve every order in the finite parameter prefix.
 -/
+
+@[expose] public section
 
 noncomputable section
 

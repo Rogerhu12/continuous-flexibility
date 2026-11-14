@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterIntegrableFlux
-import ContinuousFlexibility.Radial.TailFundamentalGreenRepresentation
+module
+
+public import ContinuousFlexibility.Radial.OuterIntegrableFlux
+public import ContinuousFlexibility.Radial.TailFundamentalGreenRepresentation
 
 /-!
 # The actual one-sided entrance trace of the outer Green solution
@@ -10,6 +12,8 @@ interior point proves its value and flux equations.  Continuity of the
 initial primitives then gives the genuine one-sided derivative at the
 entrance, and hence both normalized Robin traces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

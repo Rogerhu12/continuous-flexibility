@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05ReferencePieceIndexBounds
-import ContinuousFlexibility.Analysis.N05ReferencePieceCoefficients
-import ContinuousFlexibility.Analysis.N05PhysicalPieces
-import ContinuousFlexibility.Radial.R11bPhysicalMultiplier
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05ReferencePieceIndexBounds
+public import ContinuousFlexibility.Analysis.N05ReferencePieceCoefficients
+public import ContinuousFlexibility.Analysis.N05PhysicalPieces
+public import ContinuousFlexibility.Radial.R11bPhysicalMultiplier
 
 /-!
 # Actual piecewise constant physical coefficient multipliers
@@ -12,6 +14,8 @@ therefore form a measurable field with exactly one active value on each
 piece. The real cell-index association then allows the existing physical
 partition estimate to absorb every fixed coefficient power.
 -/
+
+@[expose] public section
 
 noncomputable section
 

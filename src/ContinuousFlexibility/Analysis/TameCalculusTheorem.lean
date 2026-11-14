@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.TameComposition
-import ContinuousFlexibility.Analysis.TameSmoothingCalculus
+module
+
+public import ContinuousFlexibility.Analysis.TameComposition
+public import ContinuousFlexibility.Analysis.TameSmoothingCalculus
 
 /-!
 # The complete tame-calculus target
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Analysis.TameSmoothingCalculus
 This assembles the six frozen calculus clauses on the actual projective
 limits, together with smoothing on the exponential sequence model.
 -/
+
+@[expose] public section
 
 noncomputable section
 

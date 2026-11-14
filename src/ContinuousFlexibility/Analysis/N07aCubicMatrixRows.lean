@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCubicDifferenceJets
-import ContinuousFlexibility.Analysis.N07aCircleBlockCoefficients
+module
+
+public import ContinuousFlexibility.Analysis.N07aCubicDifferenceJets
+public import ContinuousFlexibility.Analysis.N07aCircleBlockCoefficients
 
 /-!
 # Circle matrix entries retain the cubic endpoint factors
@@ -8,6 +10,8 @@ The cosine and sine entries satisfy the same linear identities. The
 first radial derivative costs one endpoint power; an angular derivative
 retains all three powers.
 -/
+
+@[expose] public section
 
 noncomputable section
 

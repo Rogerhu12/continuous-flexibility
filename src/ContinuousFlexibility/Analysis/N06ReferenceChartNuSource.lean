@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06NuAngularDifference
-import ContinuousFlexibility.Analysis.N06NuPhysicalRegularity
-import ContinuousFlexibility.Analysis.N06ControlledReferenceSourceNorm
+module
+
+public import ContinuousFlexibility.Analysis.N06NuAngularDifference
+public import ContinuousFlexibility.Analysis.N06NuPhysicalRegularity
+public import ContinuousFlexibility.Analysis.N06ControlledReferenceSourceNorm
 
 /-!
 # The actual nu difference as a small source in the reference chart
@@ -12,6 +14,8 @@ construction place it in the selected original V.level, with a linear
 bound in one fixed state seminorm. This theorem uses the reference chart;
 it makes no assertion identifying that chart with a current chart.
 -/
+
+@[expose] public section
 
 noncomputable section
 

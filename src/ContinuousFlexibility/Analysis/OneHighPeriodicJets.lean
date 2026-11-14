@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFourierDerivative
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
-import Mathlib.Algebra.Ring.Periodic
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierDerivative
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+public import Mathlib.Algebra.Ring.Periodic
 
 /-!
 # Genuine derivative towers of smooth periodic functions
@@ -10,6 +12,8 @@ for their successive actual derivatives. Here that entire tower is constructed
 from an ordinary smooth periodic lift. Thus the applications do not assume a
 separate family of jets, nor any derivative identity or frequency estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

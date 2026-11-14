@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledEndpoints
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledBuffer
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledTransport
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledEndpoints
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledBuffer
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledTransport
 
 /-!
 # One actual controlled positive transport family
@@ -11,6 +13,8 @@ envelope and the logarithmic height envelope remain attached to the same
 displayed transport formulas. The strict coefficient margins are retained
 for the actual radial inverse construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

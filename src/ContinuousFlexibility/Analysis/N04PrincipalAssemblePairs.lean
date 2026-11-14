@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PrincipalCoreData
-import ContinuousFlexibility.Analysis.N04PrincipalPositivePotentialPairs
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalCoreData
+public import ContinuousFlexibility.Analysis.N04PrincipalPositivePotentialPairs
 
 /-!
 # Assembling the principal and potential pairs on all pieces
@@ -9,6 +11,8 @@ smaller neighborhood. All other finite expressions are restricted to
 these neighborhoods, so every final atom retains the same atlas and the
 same reference member.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CircleComponentContraction
-import ContinuousFlexibility.Analysis.CircleWeightedProduct
+module
+
+public import ContinuousFlexibility.Analysis.CircleComponentContraction
+public import ContinuousFlexibility.Analysis.CircleWeightedProduct
 
 /-!
 # Component multipliers with a fixed sample-weight loss
@@ -9,6 +11,8 @@ actual material sample weight. The complete weighted jet norm then
 shifts only that weight index. The construction uses the same decoder
 and the same scalar field map as the component contractions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

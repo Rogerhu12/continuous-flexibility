@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CircleWeightedComposition
+module
+
+public import ContinuousFlexibility.Analysis.CircleWeightedComposition
 
 /-!
 # Chart composition in the supplied circle model
@@ -8,6 +10,8 @@ its weighted Sobolev evaluation bound and the material envelope give this
 directly.  Thus composition by its degree-one lift is an actual continuous
 linear operator on the same circle model, with one fixed derivative loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

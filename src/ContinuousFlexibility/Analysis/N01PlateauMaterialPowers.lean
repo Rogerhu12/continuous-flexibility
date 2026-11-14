@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01ControlPlateauWeights
-import ContinuousFlexibility.Analysis.N01FlowSamplePrefactor
+module
+
+public import ContinuousFlexibility.Analysis.N01ControlPlateauWeights
+public import ContinuousFlexibility.Analysis.N01FlowSamplePrefactor
 
 /-!
 # Fixed material losses from return labels to local energy points
@@ -8,6 +10,8 @@ The pure material comparison costs three orders, uniformly in the
 requested power. Combining it with the complete N01 sample prefactor
 costs four orders, even when the N01 exponent depends on the output jet.
 -/
+
+@[expose] public section
 
 noncomputable section
 

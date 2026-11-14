@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R07Assembly
+module
+
+public import ContinuousFlexibility.Radial.R07Assembly
 
 /-!
 # Assembling concrete per-band solutions
@@ -8,6 +10,8 @@ frequencies. Classical choice extends those actual witnesses to the total
 function fields required by the public statement; unused frequencies carry
 zero functions. The matching conclusion itself is unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

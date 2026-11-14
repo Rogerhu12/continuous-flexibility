@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N08SectorControlColumn
-import ContinuousFlexibility.Analysis.N08ControlResponseBounds
+module
+
+public import ContinuousFlexibility.Analysis.N08SectorControlColumn
+public import ContinuousFlexibility.Analysis.N08ControlResponseBounds
 
 /-!
 # All-order control responses through the existing scalar inverse
@@ -10,6 +12,8 @@ stronger neighborhood, so the existing inverse-family estimate has only
 one high state factor. The bound includes the source, the full height pair,
 and the scalar compatibility response at every output order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

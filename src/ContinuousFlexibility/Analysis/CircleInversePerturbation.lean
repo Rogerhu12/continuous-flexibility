@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CircleInverseSmoothTame
-import ContinuousFlexibility.Analysis.TameTopologicalComposition
-import ContinuousFlexibility.Analysis.TameProductDirections
+module
+
+public import ContinuousFlexibility.Analysis.CircleInverseSmoothTame
+public import ContinuousFlexibility.Analysis.TameTopologicalComposition
+public import ContinuousFlexibility.Analysis.TameProductDirections
 
 /-!
 # The actual inverse lift displacement
@@ -10,6 +12,8 @@ translation by `-e` composed with that inverse. This is an element of
 the original circle space, and the diagonal of the inverse-composition
 family has its genuine smooth tame tower.
 -/
+
+@[expose] public section
 
 noncomputable section
 

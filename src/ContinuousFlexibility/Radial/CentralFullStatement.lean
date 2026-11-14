@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.CentralStatementBridges
-import ContinuousFlexibility.Radial.CentralAuxiliaryBorder
-import ContinuousFlexibility.Radial.CentralRadialFlatTests
+module
+
+public import ContinuousFlexibility.Radial.CentralStatementBridges
+public import ContinuousFlexibility.Radial.CentralAuxiliaryBorder
+public import ContinuousFlexibility.Radial.CentralRadialFlatTests
 
 /-!
 # The complete central-model statement
@@ -9,6 +11,8 @@ The output scalar is reflected to match the independently frozen target.
 The larger radial test class is handled by the genuine flat-test extension.
 All thirteen clauses of R03 retain their original quantifiers and domains.
 -/
+
+@[expose] public section
 
 noncomputable section
 

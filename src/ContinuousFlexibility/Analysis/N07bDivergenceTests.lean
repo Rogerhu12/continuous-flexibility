@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07bHalfPeriodSeparation
-import ContinuousFlexibility.Analysis.PhysicalTransmissionOperator
+module
+
+public import ContinuousFlexibility.Analysis.N07bHalfPeriodSeparation
+public import ContinuousFlexibility.Analysis.PhysicalTransmissionOperator
 
 /-!
 # Locality of the actual divergence operator on compact tests
@@ -13,6 +15,8 @@ The final identity transfers the full-period weak divergence pairing to the
 ordinary compact planar test. It uses local physical integrability, rather
 than imposing any regularity on the unencoded half-period of a representative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

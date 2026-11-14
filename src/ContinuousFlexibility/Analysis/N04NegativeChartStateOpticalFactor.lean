@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartOpticalFactorBounds
-import ContinuousFlexibility.Analysis.N04NegativeChartControlDivision
-import ContinuousFlexibility.Analysis.N01NegativeOpticalLower
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartOpticalFactorBounds
+public import ContinuousFlexibility.Analysis.N04NegativeChartControlDivision
+public import ContinuousFlexibility.Analysis.N01NegativeOpticalLower
 
 /-!
 # The actual affine optical factor on each complete negative half
@@ -11,6 +13,8 @@ actual state optical square. On one common state neighborhood it stays
 above half the reference factor, including the root, so its reciprocal
 has the same sampled polynomial cost. No profile-identity collar enters.
 -/
+
+@[expose] public section
 
 noncomputable section
 

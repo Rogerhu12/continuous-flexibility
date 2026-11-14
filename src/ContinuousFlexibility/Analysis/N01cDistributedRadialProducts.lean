@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cProfileMixedDerivatives
-import Mathlib.Analysis.Calculus.IteratedDeriv.FaaDiBruno
-import Mathlib.Algebra.BigOperators.Fin
+module
+
+public import ContinuousFlexibility.Analysis.N01cProfileMixedDerivatives
+public import Mathlib.Analysis.Calculus.IteratedDeriv.FaaDiBruno
+public import Mathlib.Algebra.BigOperators.Fin
 
 /-!
 # Finite radial Leibniz products with exact differential order
@@ -10,6 +12,8 @@ one or more scalar functions.  Every summand has exactly the requested
 total spatial order, including terms whose order at some factors is zero.
 The exponential expansion uses the genuine ordered-partition formula.
 -/
+
+@[expose] public section
 
 noncomputable section
 

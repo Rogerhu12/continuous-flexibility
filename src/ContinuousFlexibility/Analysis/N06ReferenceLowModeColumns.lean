@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N06FourierCutLinearity
-import ContinuousFlexibility.Analysis.N06ReferenceProjectionRepresentatives
-import ContinuousFlexibility.Analysis.N06ReferenceGraphFourierProjection
-import ContinuousFlexibility.Analysis.N06ReferenceFourierSources
-import ContinuousFlexibility.Analysis.N06MaterialJetRows
+module
+
+public import ContinuousFlexibility.Analysis.N06FourierCutLinearity
+public import ContinuousFlexibility.Analysis.N06ReferenceProjectionRepresentatives
+public import ContinuousFlexibility.Analysis.N06ReferenceGraphFourierProjection
+public import ContinuousFlexibility.Analysis.N06ReferenceFourierSources
+public import ContinuousFlexibility.Analysis.N06MaterialJetRows
 
 /-!
 # The two actual low-frequency reference columns are fixed by cutoff
@@ -13,6 +15,8 @@ in every stored jet by forget injectivity. Thus the source approximant
 retaining all three columns is precisely a cutoff plus the unchanged
 compatibility-column correction; that last column may have any spectrum.
 -/
+
+@[expose] public section
 
 noncomputable section
 

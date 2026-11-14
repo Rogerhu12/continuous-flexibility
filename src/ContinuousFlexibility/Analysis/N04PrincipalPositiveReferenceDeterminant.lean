@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PrincipalPositiveOrientation
-import ContinuousFlexibility.Analysis.N04PrincipalPositiveReferenceJets
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalPositiveOrientation
+public import ContinuousFlexibility.Analysis.N04PrincipalPositiveReferenceJets
 
 /-!
 # Reference jets of the signed inverse determinant
@@ -9,6 +11,8 @@ reciprocal with the two original Jacobian atoms evaluated at the actual
 reference inverse point. Thus both factors retain the same-piece
 reference envelopes at every spatial order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

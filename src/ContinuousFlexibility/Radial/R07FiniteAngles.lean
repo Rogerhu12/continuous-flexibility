@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseHeightAngleExclusion
-import Mathlib.Order.Interval.Set.Infinite
+module
+
+public import ContinuousFlexibility.Radial.MorseHeightAngleExclusion
+public import Mathlib.Order.Interval.Set.Infinite
 
 /-!
 # Choosing the finite first-band matching angles
@@ -9,6 +11,8 @@ remain. A cone height in any nonempty open interval avoids the finitely
 many affine determinant zeros. A common positive tolerance can then be
 chosen and preserved by sufficiently short positive joins.
 -/
+
+@[expose] public section
 
 noncomputable section
 

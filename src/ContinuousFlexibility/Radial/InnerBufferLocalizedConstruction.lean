@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerBufferSource
-import ContinuousFlexibility.Radial.InnerBufferLeading
+module
+
+public import ContinuousFlexibility.Radial.InnerBufferSource
+public import ContinuousFlexibility.Radial.InnerBufferLeading
 
 /-!
 # One localized construction from the actual compression witnesses
@@ -9,6 +11,8 @@ localized leading fields and cutoff errors all come from one application
 of positive-buffer compression. The leading and remainder estimates are
 derived here, using the original inward energy and the actual commutator.
 -/
+
+@[expose] public section
 
 noncomputable section
 

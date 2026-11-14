@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04bOpticalFieldRealization
+module
+
+public import ContinuousFlexibility.Analysis.N04bOpticalFieldRealization
 
 /-!
 # The retained optical cutoff and cumulative physical construction
@@ -9,6 +11,8 @@ and return-equation record are retained. The cutoff record is returned
 with the complete cumulative certificate, so its numerical collar and
 cutoff bounds remain available for later coordinate estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

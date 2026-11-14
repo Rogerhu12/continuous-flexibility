@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01aPartitionBounds
-import ContinuousFlexibility.Analysis.N01aReferenceCoarseningClosure
-import ContinuousFlexibility.Analysis.N01aReferenceCoarseningInverse
+module
+
+public import ContinuousFlexibility.Analysis.N01aPartitionBounds
+public import ContinuousFlexibility.Analysis.N01aReferenceCoarseningClosure
+public import ContinuousFlexibility.Analysis.N01aReferenceCoarseningInverse
 
 /-!
 # Retaining the full radial reference under cell grouping
@@ -10,6 +12,8 @@ first-normal estimate are transported using the proved norm comparisons.
 The source-measurability bridge is kept explicit at this intermediate
 stage; it is discharged from the actual reference graph separately.
 -/
+
+@[expose] public section
 
 noncomputable section
 

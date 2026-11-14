@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometryJacobianTowers
-import ContinuousFlexibility.Analysis.N04NegativeGeometrySpatialRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryJacobianTowers
+public import ContinuousFlexibility.Analysis.N04NegativeGeometrySpatialRegularity
 
 /-!
 # The six physical negative geometry atoms on the fixed unit strip
@@ -9,6 +11,8 @@ component. Affine pullback of the actual joint chart, height and Jacobian
 towers therefore gives the literal six physical atoms of the gauge atlas.
 The two inverse-coordinate atoms are treated on their canonical domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

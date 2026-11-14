@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCircleInverseGeometry
-import Mathlib.Tactic.Positivity
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleInverseGeometry
+public import Mathlib.Tactic.Positivity
 
 /-!
 # Uniform low geometry of the genuine inverse lift
@@ -9,6 +11,8 @@ the first derivative enter these constants. In particular no fourth-derivative
 supremum is assumed. The low inverse Sobolev estimate can then use composition
 of the reciprocal defect and the genuine change-of-variables estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

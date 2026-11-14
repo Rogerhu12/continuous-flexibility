@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06PrimitivePrincipalBandLift
-import ContinuousFlexibility.Analysis.N06CanonicalSourceSchur
+module
+
+public import ContinuousFlexibility.Analysis.N06PrimitivePrincipalBandLift
+public import ContinuousFlexibility.Analysis.N06CanonicalSourceSchur
 
 /-!
 # The actual principal relative operator on the same source space
@@ -10,6 +12,8 @@ the original compact canonical tests.  The statement retains the given
 K, V, b and B and does not use an N06 inverse or a pre-existing relative
 operator bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

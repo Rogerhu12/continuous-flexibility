@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cBoundsRestriction
-import ContinuousFlexibility.Blueprint.N01c.Statements
+module
+
+public import ContinuousFlexibility.Analysis.N01cBoundsRestriction
+public import ContinuousFlexibility.Blueprint.N01c.Statements
 
 /-!
 # Restriction of the actual speed estimate
@@ -9,6 +11,8 @@ the speed family. It keeps the original parameter-order loss and actual
 directional derivatives when a later construction raises the base or
 shrinks the common state neighbourhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

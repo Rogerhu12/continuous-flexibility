@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.CentralModelColumnInverse
-import ContinuousFlexibility.Radial.ReferenceCentralInverse
+module
+
+public import ContinuousFlexibility.Radial.CentralModelColumnInverse
+public import ContinuousFlexibility.Radial.ReferenceCentralInverse
 
 /-!
 # The physical column in the ordinary central Liouville model
@@ -9,6 +11,8 @@ The model column is R' * g(R) / s. Its ordinary dx ground pairing
 is the ordinary dr pairing divided only by the explicit normalizations.
 This differs from the weighted radial Hilbert transform.
 -/
+
+@[expose] public section
 
 noncomputable section
 

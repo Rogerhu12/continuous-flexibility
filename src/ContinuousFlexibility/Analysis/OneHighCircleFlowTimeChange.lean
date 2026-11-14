@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowSmooth
-import ContinuousFlexibility.Analysis.OneHighCircleFlowContinuity
-import Mathlib.Analysis.SpecialFunctions.SmoothTransition
-import Mathlib.Topology.Order.IntermediateValue
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowSmooth
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowContinuity
+public import Mathlib.Analysis.SpecialFunctions.SmoothTransition
+public import Mathlib.Topology.Order.IntermediateValue
 
 /-!
 # Smooth time changes of the supplied compact-interval flow
@@ -13,6 +15,8 @@ smooth by the global bootstrap. A flat transition reaching every time in
 the original interval proves actual angular smoothness at every slice,
 including both endpoint slices, without extending the supplied solution.
 -/
+
+@[expose] public section
 
 noncomputable section
 

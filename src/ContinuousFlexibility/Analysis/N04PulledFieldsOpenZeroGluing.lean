@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SmoothDirectionsGluing
-import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
+module
+
+public import ContinuousFlexibility.Analysis.SmoothDirectionsGluing
+public import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
 
 /-!
 # Joint towers on strips and a common zero region
@@ -9,6 +11,8 @@ Concrete physical-state adapters only supply the strip towers and the
 proved common zero set, avoiding expansion of their graded models in
 the topological covering argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

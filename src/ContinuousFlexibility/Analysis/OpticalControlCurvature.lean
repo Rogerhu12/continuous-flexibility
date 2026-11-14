@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OpticalTravelSecondVariation
+module
+
+public import ContinuousFlexibility.Analysis.OpticalTravelSecondVariation
 
 /-!
 # Curvature of the actual compactly supported optical control
@@ -9,6 +11,8 @@ the full travel has the same second derivative as one compact interior
 integral.  The resulting lower bound connects actual normalization with
 an actual second-derivative bound and a control-derivative bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

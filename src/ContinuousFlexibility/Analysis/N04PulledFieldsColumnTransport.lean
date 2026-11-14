@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsColumnData
-import ContinuousFlexibility.Analysis.N04PulledFieldsSampleTransport
-import ContinuousFlexibility.Analysis.N04PulledFieldsSampleCost
-import ContinuousFlexibility.Analysis.N04PulledFieldsCompositionCost
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsColumnData
+public import ContinuousFlexibility.Analysis.N04PulledFieldsSampleTransport
+public import ContinuousFlexibility.Analysis.N04PulledFieldsSampleCost
+public import ContinuousFlexibility.Analysis.N04PulledFieldsCompositionCost
 
 /-!
 # Physical column data at the actual moving inverse point
@@ -10,6 +12,8 @@ Restriction preserves the original physical loss. The exact mixed jets
 are evaluated at the retained inverse-chart point, whose same-piece
 sample comparison supplies the common sampled material weight.
 -/
+
+@[expose] public section
 
 noncomputable section
 

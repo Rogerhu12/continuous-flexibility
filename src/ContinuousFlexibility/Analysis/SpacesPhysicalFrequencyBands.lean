@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SpacesTorusReal
-import ContinuousFlexibility.Analysis.SpacesTorusWaves
-import Mathlib.Analysis.Real.Pi.Bounds
+module
+
+public import ContinuousFlexibility.Analysis.SpacesTorusReal
+public import ContinuousFlexibility.Analysis.SpacesTorusWaves
+public import Mathlib.Analysis.Real.Pi.Bounds
 
 /-!
 # Joint material, radial and angular frequency bands
@@ -10,6 +12,8 @@ Every band is finite in the two Fourier indices. All three pure top jets
 control its analysis, while every mixed jet has the same total-order
 exponential growth bound for synthesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

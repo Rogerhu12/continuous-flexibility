@@ -1,4 +1,6 @@
-import Mathlib.Analysis.InnerProductSpace.Adjoint
+module
+
+public import Mathlib.Analysis.InnerProductSpace.Adjoint
 
 /-!
 # Exact transfer through the physical isometric inclusion
@@ -7,6 +9,8 @@ These lemmas transfer operator bounds, Hilbert adjoints, and weighted
 Schur formulas through an actual isometric inclusion. They introduce
 no norm-equivalence constants.
 -/
+
+@[expose] public section
 
 noncomputable section
 

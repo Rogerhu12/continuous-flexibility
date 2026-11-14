@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import Mathlib.Analysis.Calculus.FDeriv.Congr
-import Mathlib.Analysis.Calculus.BumpFunction.FiniteDimension
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import Mathlib.Analysis.Calculus.FDeriv.Congr
+public import Mathlib.Analysis.Calculus.BumpFunction.FiniteDimension
 
 /-!
 # Operator locality and genuine smooth test extensions
@@ -13,6 +15,8 @@ test after preserving the whole germ, rather than only finitely many jets.
 The extension hypothesis is smoothness on an open neighborhood. Smoothness
 at a single point of order infinity alone does not supply this hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Scalar.WeightedFieldRegularity
+module
+
+public import ContinuousFlexibility.Scalar.WeightedFieldRegularity
 
 /-!
 # Global regularity of the actual weighted scalar coefficients
@@ -9,6 +11,8 @@ inner radius places the apparent division by zero inside an open region
 where the numerator vanishes identically.  Both backgrounds have every
 uniform flat jet at the actual radial endpoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

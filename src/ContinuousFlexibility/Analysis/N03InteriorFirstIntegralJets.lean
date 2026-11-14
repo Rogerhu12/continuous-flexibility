@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N03LeftRootSectionIdentification
-import ContinuousFlexibility.Analysis.N03InteriorFirstIntegralIdentification
-import ContinuousFlexibility.Analysis.InteriorRootLabelMaterialJets
-import ContinuousFlexibility.Analysis.N01ControlledRootInput
+module
+
+public import ContinuousFlexibility.Analysis.N03LeftRootSectionIdentification
+public import ContinuousFlexibility.Analysis.N03InteriorFirstIntegralIdentification
+public import ContinuousFlexibility.Analysis.InteriorRootLabelMaterialJets
+public import ContinuousFlexibility.Analysis.N01ControlledRootInput
 
 /-!
 # Actual all-order first-integral jets from the controlled root section
@@ -11,6 +13,8 @@ already constructed actual interior inverse flows transport them to
 every interior point. One low order and derivative loss are fixed
 before the component, section, interval, or numerical constants.
 -/
+
+@[expose] public section
 
 noncomputable section
 

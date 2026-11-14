@@ -1,9 +1,13 @@
-import ContinuousFlexibility.Radial.R07OriginalFamily
-import ContinuousFlexibility.Radial.R07DeepTailPhysical
-import ContinuousFlexibility.Radial.R07DeepTailEntry
-import ContinuousFlexibility.Radial.R07DensityParameter
-import ContinuousFlexibility.Radial.R07OutgoingInvariance
-import ContinuousFlexibility.Radial.R07TailEquationScale
+module
+
+public import ContinuousFlexibility.Radial.R07OriginalFamily
+public import ContinuousFlexibility.Radial.R07DeepTailPhysical
+public import ContinuousFlexibility.Radial.R07DeepTailEntry
+public import ContinuousFlexibility.Radial.R07DensityParameter
+public import ContinuousFlexibility.Radial.R07OutgoingInvariance
+public import ContinuousFlexibility.Radial.R07TailEquationScale
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N08ScalarFormula
-import ContinuousFlexibility.Analysis.SolveTameSubspace
-import ContinuousFlexibility.Analysis.SpacesCompactHeights
+module
+
+public import ContinuousFlexibility.Analysis.N08ScalarFormula
+public import ContinuousFlexibility.Analysis.SolveTameSubspace
+public import ContinuousFlexibility.Analysis.SpacesCompactHeights
 
 /-!
 # The nonlinear scalar state in the weighted scalar calculus
@@ -11,6 +13,8 @@ The primitive-independence theorem identifies its decoded residual with the
 nonlinear residual. Conservation places the weighted residual in the actual
 source kernel, and closed-range restriction retains its smooth tame tower.
 -/
+
+@[expose] public section
 
 noncomputable section
 

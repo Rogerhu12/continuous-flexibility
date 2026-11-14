@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalSmoothJets
-import ContinuousFlexibility.Analysis.SpacesLpOverlap
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalSmoothJets
+public import ContinuousFlexibility.Analysis.SpacesLpOverlap
 
 /-!
 # Radial cutoff multiplication on the actual canonical weak derivatives
@@ -8,6 +10,8 @@ A smooth bounded radial scalar acts continuously on canonical L². Testing
 against its product with a canonical test proves commutation with every
 angular weak derivative. Radial multiplication also preserves evenness.
 -/
+
+@[expose] public section
 
 noncomputable section
 

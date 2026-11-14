@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aFiniteParameterProduct
+module
+
+public import ContinuousFlexibility.Analysis.N07aFiniteParameterProduct
 
 /-!
 # Arbitrary finite products of the same state grading
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Analysis.N07aFiniteParameterProduct
 The number of factors affects the constant only. One low-order ball and
 one fixed loss suffice for every distribution of the derivative budget.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ScalarFlowInitialAngle
-import Mathlib.MeasureTheory.Integral.DominatedConvergence
+module
+
+public import ContinuousFlexibility.Analysis.ScalarFlowInitialAngle
+public import Mathlib.MeasureTheory.Integral.DominatedConvergence
 
 /-!
 # The true external-parameter variation as a Jacobian kernel
@@ -9,6 +11,8 @@ formulas identify the actual directional parameter variation with the
 forward Jacobian times the integral of its reciprocal-Jacobian kernel.
 No parameter derivative of the chosen flow is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06CurrentCubicTestPairing
-import ContinuousFlexibility.Analysis.N06N05PositiveCubicSourceMap
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentCubicTestPairing
+public import ContinuousFlexibility.Analysis.N06N05PositiveCubicSourceMap
 
 /-!
 # The original N05 cubic source map paired with current physical tests
@@ -9,6 +11,8 @@ actual transformed physical tests. N04 supplies their open smoothness
 and all required L2 jets. No extension of the inverse chart at a radial
 endpoint is assumed, and the reference height and source level stay fixed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

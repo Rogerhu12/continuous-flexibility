@@ -1,5 +1,7 @@
-import Mathlib.Analysis.SpecialFunctions.Integrals.Basic
-import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+module
+
+public import Mathlib.Analysis.SpecialFunctions.Integrals.Basic
+public import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
 
 /-!
 # Algebra of the circle return operator
@@ -9,6 +11,8 @@ Everything here concerns plain real functions of one real variable: even/odd pro
 the operator `M_T ψ = E[ψ(· + T)]`, its action on trigonometric modes, its inverse on finite
 trigonometric sums, the small-divisor coefficient bound, and the corresponding `L²` estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

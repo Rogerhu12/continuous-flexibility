@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06MorseRootSpeed
+module
+
+public import ContinuousFlexibility.Analysis.N06MorseRootSpeed
 
 /-!
 # A controlled global extension of the actual reference speed germ
@@ -9,6 +11,8 @@ value at the root. This is the explicitly chosen reference extension for
 the new controlled atlas; no assertion about a previous Seeley extension
 on the negative half-plane is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

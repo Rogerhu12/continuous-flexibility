@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationPositiveGaugeHeightBounds
-import ContinuousFlexibility.Analysis.N04RealizationPotentialShiftedOneHigh
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationPositiveGaugeHeightBounds
+public import ContinuousFlexibility.Analysis.N04RealizationPotentialShiftedOneHigh
 
 /-!
 # The positive potential from the original root traces and principal fields
@@ -11,6 +13,8 @@ product estimate. One multilinear normalization is applied to the actual
 potential. The low order, parameter domain, and interpolation denominator
 are unchanged. No potential estimate or CurrentJets premise is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

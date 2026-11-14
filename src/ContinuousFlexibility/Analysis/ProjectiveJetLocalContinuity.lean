@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ProjectiveJetContinuity
+module
+
+public import ContinuousFlexibility.Analysis.ProjectiveJetContinuity
 
 /-!
 # Joint projective jet continuity from order-dependent local bounds
@@ -8,6 +10,8 @@ one convex open neighborhood suffices. The neighborhoods may depend on
 all three. In particular, no single neighborhood supporting estimates
 for infinitely many parameter orders is required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

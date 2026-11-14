@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryOperatorBounds
-import ContinuousFlexibility.Analysis.N04RealizationInverseBoundaryDirections
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryOperatorBounds
+public import ContinuousFlexibility.Analysis.N04RealizationInverseBoundaryDirections
 
 /-!
 # A quantitative step for genuine finite boundary inverse jets
@@ -9,6 +11,8 @@ jet. Its parameter and angular tower is assembled from the first inverse
 differential, the forward jets at the actual inverse point, and lower
 actual inverse jets. Every operation preserves the finite angular reserve.
 -/
+
+@[expose] public section
 
 noncomputable section
 

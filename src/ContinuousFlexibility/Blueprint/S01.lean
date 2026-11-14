@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.Milestones
-import ContinuousFlexibility.Scalar.Positivity
-import ContinuousFlexibility.Scalar.Coframe
+module
+
+public import ContinuousFlexibility.Statements.Milestones
+public import ContinuousFlexibility.Scalar.Positivity
+public import ContinuousFlexibility.Scalar.Coframe
 
 /-!
 # Blueprint node S01
@@ -9,6 +11,8 @@ Source: `paper/flexible-surface-rewrite/03-height-equation.tex` lines 13–24 (`
 
 Task file: `docs/tasks/S01.md`. The statement is frozen. Proved.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

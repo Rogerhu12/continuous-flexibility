@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.SeedConeTailGluing
-import ContinuousFlexibility.Radial.SeedPureTailConstruction
-import ContinuousFlexibility.Radial.SeedPureTailCanonical
+module
+
+public import ContinuousFlexibility.Radial.SeedConeTailGluing
+public import ContinuousFlexibility.Radial.SeedPureTailConstruction
+public import ContinuousFlexibility.Radial.SeedPureTailCanonical
 
 /-!
 # Retaining an arbitrarily long part of the original first cone
@@ -12,6 +14,8 @@ is replaced by a pure mode can be moved arbitrarily far inward, without
 changing either function.  Subsequent canonicalization retains every
 outward germ and preserves positivity of the profile derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

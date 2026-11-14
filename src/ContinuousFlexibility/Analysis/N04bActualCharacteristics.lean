@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bFieldRegularity
-import Mathlib.Analysis.SpecialFunctions.Sqrt
+module
+
+public import ContinuousFlexibility.Analysis.N04bFieldRegularity
+public import Mathlib.Analysis.SpecialFunctions.Sqrt
 
 /-!
 # The actual characteristic speeds of the corrected field
@@ -10,6 +12,8 @@ follow from raw field regularity and the cumulative N03 symmetry. The
 coefficient factorization used by characteristic coordinates is a
 consequence, rather than an independent assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

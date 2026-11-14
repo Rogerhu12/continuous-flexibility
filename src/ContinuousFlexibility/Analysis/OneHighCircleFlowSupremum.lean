@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowTranslationBounds
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowTranslationBounds
 
 /-!
 # Literal time-supremum forms of the circle-flow estimates
@@ -7,6 +9,8 @@ The proved uniform bounds include both physical time endpoints. Taking the
 supremum over the closed time interval preserves the same constants, without
 adding a norm or differentiability assumption on the flow.
 -/
+
+@[expose] public section
 
 noncomputable section
 

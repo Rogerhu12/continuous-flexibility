@@ -1,6 +1,10 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartReturnCircleBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartReturnCircleBounds
 
 /-! One common low base for all actual ordinary-flow inverse selectors. -/
+
+@[expose] public section
 
 noncomputable section
 

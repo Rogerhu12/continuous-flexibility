@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06PrimitiveReferenceTransport
-import ContinuousFlexibility.Analysis.N06ReferenceProjectionRemainder
+module
+
+public import ContinuousFlexibility.Analysis.N06PrimitiveReferenceTransport
+public import ContinuousFlexibility.Analysis.N06ReferenceProjectionRemainder
 
 /-!
 # Original L2 cutoffs under the primitive radial reference geometry
@@ -9,6 +11,8 @@ projections without a material-label or coordinate-cost assumption.
 AE identities in the original physical measure pass through both genuine
 transforms, and the original left scalar is retained exactly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SmoothDivisionBounds
-import ContinuousFlexibility.Analysis.CanonicalCubicJets
+module
+
+public import ContinuousFlexibility.Analysis.SmoothDivisionBounds
+public import ContinuousFlexibility.Analysis.CanonicalCubicJets
 
 /-!
 # Mixed fixed-loss bounds for an actual simple radial factor
@@ -9,6 +11,8 @@ Taylor integral. Every mixed derivative therefore loses exactly one
 radial derivative of F, independently of the derivative order.
 The bound applies on either side of the radial zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

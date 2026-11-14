@@ -1,9 +1,11 @@
-import Mathlib.Analysis.Calculus.ContDiff.Bounds
-import Mathlib.Tactic.IntervalCases
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.NormNum
-import Mathlib.Tactic.Ring
-import Lean.Elab.Tactic.Omega
+module
+
+public import Mathlib.Analysis.Calculus.ContDiff.Bounds
+public import Mathlib.Tactic.IntervalCases
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.Ring
+public import Lean.Elab.Tactic.Omega
 
 /-!
 # Actual finite jets of a transported scalar field
@@ -13,6 +15,8 @@ actual Fréchet derivatives at the evaluation point, and the conclusions
 bound the actual derivatives of the product and composition there.
 No extension or infinite-order smoothness is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

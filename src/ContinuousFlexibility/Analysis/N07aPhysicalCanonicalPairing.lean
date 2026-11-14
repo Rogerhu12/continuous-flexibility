@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aLocalizedRoughPairing
-import ContinuousFlexibility.Analysis.N07aPhysicalTestSupport
-import ContinuousFlexibility.Analysis.N07aCanonicalRepresentationPairing
+module
+
+public import ContinuousFlexibility.Analysis.N07aLocalizedRoughPairing
+public import ContinuousFlexibility.Analysis.N07aPhysicalTestSupport
+public import ContinuousFlexibility.Analysis.N07aCanonicalRepresentationPairing
 
 /-!
 # Exact physical pairings against a pulled canonical test
@@ -9,6 +11,8 @@ Each integral is justified from its actual canonical representative.
 These two change-of-variable lemmas handle the source terms and the
 distributional operator term, retaining the cutoff scalar and the factor π.
 -/
+
+@[expose] public section
 
 noncomputable section
 

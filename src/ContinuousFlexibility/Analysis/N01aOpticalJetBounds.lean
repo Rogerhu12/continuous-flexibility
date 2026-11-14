@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01aOpticalSupport
-import ContinuousFlexibility.Analysis.WeightedJetComposition
+module
+
+public import ContinuousFlexibility.Analysis.N01aOpticalSupport
+public import ContinuousFlexibility.Analysis.WeightedJetComposition
 
 /-!
 # Finite jet bounds for the actual interior control
@@ -8,6 +10,8 @@ The fixed cutoff contributes a constant depending only on the requested
 derivative order. All dependence on the optical profile is displayed
 through a finite bound for its actual radicand jets and the cutoff scale.
 -/
+
+@[expose] public section
 
 noncomputable section
 

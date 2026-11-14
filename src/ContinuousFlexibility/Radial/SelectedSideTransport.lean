@@ -1,7 +1,11 @@
-import ContinuousFlexibility.Radial.SeedRetainedReference
-import ContinuousFlexibility.Radial.SelectedFirstConeLift
+module
+
+public import ContinuousFlexibility.Radial.SeedRetainedReference
+public import ContinuousFlexibility.Radial.SelectedFirstConeLift
 
 /-! # One side of the retained pair on its actual common reference -/
+
+@[expose] public section
 
 noncomputable section
 

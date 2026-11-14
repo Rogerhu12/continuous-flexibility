@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderCompositionL2
-import ContinuousFlexibility.Analysis.OneHighCylinderVectorProducts
-import ContinuousFlexibility.Analysis.OneHighCircleVectorProducts
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderCompositionL2
+public import ContinuousFlexibility.Analysis.OneHighCylinderVectorProducts
+public import ContinuousFlexibility.Analysis.OneHighCircleVectorProducts
 
 /-!
 # Finite-energy derivatives of multivariable cylinder compositions
@@ -9,6 +11,8 @@ The actual vector derivative products supply every lower output derivative
 through a single finite high order. Both membership and the norm estimate
 are conclusions, so no output integrability is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

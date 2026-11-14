@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Geometry.CapDisk
-import ContinuousFlexibility.Contracts.GraphFamilyImage
-import Mathlib.Topology.Sets.VietorisTopology
-import Mathlib.Topology.Separation.Connected
+module
+
+public import ContinuousFlexibility.Geometry.CapDisk
+public import ContinuousFlexibility.Contracts.GraphFamilyImage
+public import Mathlib.Topology.Sets.VietorisTopology
+public import Mathlib.Topology.Separation.Connected
 
 /-!
 # Attachment of one fixed cap to the whole graph rotation family
@@ -11,6 +13,8 @@ core, development, radius, and cap are used for every real phase. This
 proves the common rim and open physical collar; it does not construct the
 marked sphere or supply the still-unproved analytic core.
 -/
+
+@[expose] public section
 
 noncomputable section
 

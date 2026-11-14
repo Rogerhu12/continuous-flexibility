@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterPhysicalRobinSolution
-import ContinuousFlexibility.Radial.OuterPhysicalTailUniqueness
+module
+
+public import ContinuousFlexibility.Radial.OuterPhysicalRobinSolution
+public import ContinuousFlexibility.Radial.OuterPhysicalTailUniqueness
 
 /-!
 # Uniqueness in the actual physical outer Robin graph
@@ -9,6 +11,8 @@ the interior.  Its restriction to the actual deep weighted space lies on
 the already proved natural line.  The normalized full entrance state then
 forces the difference to vanish, without dividing by V at that entrance.
 -/
+
+@[expose] public section
 
 noncomputable section
 

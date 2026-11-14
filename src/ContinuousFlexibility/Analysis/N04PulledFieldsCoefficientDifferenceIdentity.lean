@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsPhysicalDifferenceAlgebra
-import ContinuousFlexibility.Analysis.N04PulledFieldsReferenceCoefficients
-import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientReconstruction
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsPhysicalDifferenceAlgebra
+public import ContinuousFlexibility.Analysis.N04PulledFieldsReferenceCoefficients
+public import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientReconstruction
 
 /-!
 # The actual coefficient difference in arbitrary genuine towers
@@ -10,6 +12,8 @@ the actual residual-substituted correction. At the reference the
 correction vanishes. Both identities are transported through the
 genuine mixed parameter towers on any smaller parameter neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

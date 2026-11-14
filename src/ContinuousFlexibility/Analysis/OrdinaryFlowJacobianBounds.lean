@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.CanonicalVariationBounds
-import ContinuousFlexibility.Analysis.CanonicalMaterialAbsorption
-import ContinuousFlexibility.Analysis.CanonicalNeighborhoodRestriction
-import ContinuousFlexibility.Analysis.ReferenceCircleFlow
-import ContinuousFlexibility.Analysis.CircleFlowEndpointBounds
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalVariationBounds
+public import ContinuousFlexibility.Analysis.CanonicalMaterialAbsorption
+public import ContinuousFlexibility.Analysis.CanonicalNeighborhoodRestriction
+public import ContinuousFlexibility.Analysis.ReferenceCircleFlow
+public import ContinuousFlexibility.Analysis.CircleFlowEndpointBounds
 
 /-!
 # Uniform angular Jacobians of the ordinary flows
@@ -13,6 +15,8 @@ the component index. The reference derivative is exactly one, and passing
 increment bounds to the radial endpoints gives the same closed-interval
 Jacobian bounds on one smaller state neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

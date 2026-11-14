@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Geometry.SphereMetric
-import ContinuousFlexibility.Geometry.MarkedCapDiskCurvature
-import ContinuousFlexibility.Contracts.GraphFamilyCurvature
+module
+
+public import ContinuousFlexibility.Geometry.SphereMetric
+public import ContinuousFlexibility.Geometry.MarkedCapDiskCurvature
+public import ContinuousFlexibility.Contracts.GraphFamilyCurvature
 
 /-!
 # The actual smooth unit normal of the marked sphere family
@@ -10,6 +12,8 @@ vertical vector on a whole open equatorial neighborhood. Their piecewise
 formula is jointly smooth and orthogonal to the actual vector-valued manifold
 derivative of the same sphere family. Outward orientation is a separate claim.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.StateKappaBounds
-import ContinuousFlexibility.Analysis.TameLocalCalculus
+module
+
+public import ContinuousFlexibility.Analysis.StateKappaBounds
+public import ContinuousFlexibility.Analysis.TameLocalCalculus
 
 /-!
 # State seminorms and restriction to a common neighbourhood
@@ -13,6 +15,8 @@ changing any of its derivatives.
 
 No coefficient or flow estimate is assumed or asserted in this module.
 -/
+
+@[expose] public section
 
 noncomputable section
 

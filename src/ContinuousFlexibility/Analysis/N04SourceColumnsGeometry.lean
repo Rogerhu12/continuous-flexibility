@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04SourceColumnsIdentities
+module
+
+public import ContinuousFlexibility.Analysis.N04SourceColumnsIdentities
 
 /-!
 # The admissible atlas and its actual inverse determinant
@@ -8,6 +10,8 @@ same neighborhood.  The auxiliary replacement preserves those fields.
 The determinant family below is the explicit first-jet polynomial from
 `N04SourceColumnsIdentities`, with the stored physical/canonical width ratio.
 -/
+
+@[expose] public section
 
 noncomputable section
 

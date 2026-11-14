@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.MaterialCutoffJetEnergy
+module
+
+public import ContinuousFlexibility.Analysis.MaterialCutoffJetEnergy
 
 /-!
 # Sample-weighted local physical jet energies
@@ -8,6 +10,8 @@ The coefficient estimate may absorb any prescribed material power on
 the support. The resulting L2 bound uses that precise additional input
 material order, without differentiating a material multiplier.
 -/
+
+@[expose] public section
 
 noncomputable section
 

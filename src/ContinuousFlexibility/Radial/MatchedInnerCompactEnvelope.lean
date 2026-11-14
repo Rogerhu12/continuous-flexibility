@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MatchedInnerCompactSupport
-import ContinuousFlexibility.Radial.MatchingInverseFormula
-import ContinuousFlexibility.Radial.WeightKernelBounds
+module
+
+public import ContinuousFlexibility.Radial.MatchedInnerCompactSupport
+public import ContinuousFlexibility.Radial.MatchingInverseFormula
+public import ContinuousFlexibility.Radial.WeightKernelBounds
 
 /-!
 # Canonical spatial bounds for an actual compact inner region
@@ -11,6 +13,8 @@ The scalar channel is included separately. The norms of the existing
 inner inverse and its two existing columns then give a spatial envelope
 with no positive radialQ loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

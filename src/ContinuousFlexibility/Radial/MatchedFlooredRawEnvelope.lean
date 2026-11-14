@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ReferenceRawKernelSchur
-import ContinuousFlexibility.Radial.MatchedWeightFlooredMorseFibers
+module
+
+public import ContinuousFlexibility.Radial.ReferenceRawKernelSchur
+public import ContinuousFlexibility.Radial.MatchedWeightFlooredMorseFibers
 
 /-!
 # Raw channel envelopes on the actual return-margin reference
@@ -10,6 +12,8 @@ border-to-field comparison pays at most exp(S N). This fixed cost is
 retained explicitly. Neither the kernel nor any physical operator is
 changed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

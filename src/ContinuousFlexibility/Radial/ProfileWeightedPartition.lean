@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.R11bPartitionSquare
-import Mathlib.Algebra.BigOperators.Group.Finset.Basic
-import Mathlib.Topology.Algebra.InfiniteSum.Order
-import Mathlib.Tactic.Linarith
+module
+
+public import ContinuousFlexibility.Radial.R11bPartitionSquare
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+public import Mathlib.Topology.Algebra.InfiniteSum.Order
+public import Mathlib.Tactic.Linarith
 
 /-!
 # Weighted pointwise partition and index-fiber estimates
@@ -10,6 +12,8 @@ The first estimate uses only the finite overlap of the partition. The
 second groups a finite family by its cell index before making any
 estimate, so no uniform bound on the number of cells at one index is used.
 -/
+
+@[expose] public section
 
 open Set
 open scoped BigOperators

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ActualReferenceNegativeEndpointData
-import ContinuousFlexibility.Analysis.WholePositiveEndpointFields
+module
+
+public import ContinuousFlexibility.Analysis.ActualReferenceNegativeEndpointData
+public import ContinuousFlexibility.Analysis.WholePositiveEndpointFields
 
 /-!
 # Actual reference data at a positive component's certified endpoints
@@ -10,6 +12,8 @@ increasing physical radius. The ambient branch is the displayed affine
 coordinate with height one. The certified source and the original atlas
 are retained throughout; no reference interpolation is assumed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

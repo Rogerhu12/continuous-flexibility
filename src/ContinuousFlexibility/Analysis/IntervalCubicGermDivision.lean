@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CanonicalTwoEndpointCubicMixed
-import ContinuousFlexibility.Analysis.BoundaryTaylorExtension
-import ContinuousFlexibility.Analysis.LocalMixedProductBounds
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalTwoEndpointCubicMixed
+public import ContinuousFlexibility.Analysis.BoundaryTaylorExtension
+public import ContinuousFlexibility.Analysis.LocalMixedProductBounds
 
 /-!
 # Cubic division of an actual field with a smooth representative
@@ -10,6 +12,8 @@ quotient. Its genuine germs on the closed cylinder retain all jets of
 the actual field. The factorization and the fixed-loss mixed estimate
 therefore refer to that actual field, including both boundary circles.
 -/
+
+@[expose] public section
 
 noncomputable section
 

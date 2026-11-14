@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N05ReferenceAngularJetCells
-import ContinuousFlexibility.Analysis.N05ReferenceLowAngularBasis
-import ContinuousFlexibility.Analysis.N05ReferenceAngularIntegration
-import ContinuousFlexibility.Radial.R11bSymmetricLimit
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceAngularJetCells
+public import ContinuousFlexibility.Analysis.N05ReferenceLowAngularBasis
+public import ContinuousFlexibility.Analysis.N05ReferenceAngularIntegration
+public import ContinuousFlexibility.Radial.R11bSymmetricLimit
 
 /-!
 # Periodic representatives of the actual angular jet limits
@@ -11,6 +13,8 @@ every angular orbit. This preserves the period without imposing evenness,
 so the same construction applies to odd angular derivatives. The finite
 high and low jets are derivatives of genuine periodic functions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
+module
+
+public import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
 
 /-!
 # Boundary jets of an equation on an open strip
@@ -8,6 +10,8 @@ For globally smooth functions these derivatives are continuous, so the
 equality extends to the closure. A single closed-strip formulation handles
 both sides of a physical transmission interface.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Statements
 

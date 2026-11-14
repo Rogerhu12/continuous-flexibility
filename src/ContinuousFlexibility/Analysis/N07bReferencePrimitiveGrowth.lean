@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07bReferenceAngularBound
-import ContinuousFlexibility.Analysis.N07bSourceBoundNeighborhood
-import ContinuousFlexibility.Scalar.WeightedCoefficientAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.N07bReferenceAngularBound
+public import ContinuousFlexibility.Analysis.N07bSourceBoundNeighborhood
+public import ContinuousFlexibility.Scalar.WeightedCoefficientAlgebra
 
 /-!
 # Uniform reference coefficient density from primitive geometric growth
@@ -14,6 +16,8 @@ The inputs concern only actual geometric fields and their finite jets.
 This does not assert that qualitative canonical geometry already supplies
 these quantitative bounds.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,11 @@
-import ContinuousFlexibility.Radial.FourierCompleteness
-import ContinuousFlexibility.Radial.AngularMeanProbability
+module
+
+public import ContinuousFlexibility.Radial.FourierCompleteness
+public import ContinuousFlexibility.Radial.AngularMeanProbability
 
 /-! # Uniqueness from the actual angular cosine coefficients -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

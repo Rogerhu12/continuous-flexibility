@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.ZeroModePrimitive
-import ContinuousFlexibility.Statements.Radial
-import Mathlib.Analysis.Calculus.ContDiff.RCLike
-import Mathlib.Analysis.SpecialFunctions.Log.Deriv
+module
+
+public import ContinuousFlexibility.Radial.ZeroModePrimitive
+public import ContinuousFlexibility.Statements.Radial
+public import Mathlib.Analysis.Calculus.ContDiff.RCLike
+public import Mathlib.Analysis.SpecialFunctions.Log.Deriv
 
 /-!
 # Divergence of the actual endpoint resistance
@@ -11,6 +13,8 @@ by a constant times the distance to that endpoint. Positivity in the core
 then forces its resistance primitive to diverge at least logarithmically.
 Only the actual profile geometry is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

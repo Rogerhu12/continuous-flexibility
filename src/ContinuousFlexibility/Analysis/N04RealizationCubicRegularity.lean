@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
-import ContinuousFlexibility.Analysis.CanonicalTwoEndpointCubicMixed
+module
+
+public import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
+public import ContinuousFlexibility.Analysis.CanonicalTwoEndpointCubicMixed
 
 /-!
 # Genuine mixed towers for fixed cubic factors
@@ -9,6 +11,8 @@ parameter tower on the open cylinder. Translation and reflection use the
 existing mixed derivative identities. These operations do not shrink the
 parameter set or prescribe any quantitative estimate for the quotient.
 -/
+
+@[expose] public section
 
 noncomputable section
 

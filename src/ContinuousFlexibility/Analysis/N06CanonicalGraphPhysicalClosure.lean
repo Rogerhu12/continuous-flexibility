@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06CanonicalGraphFourierCore
-import ContinuousFlexibility.Analysis.N06ClosedPhysicalTests
+module
+
+public import ContinuousFlexibility.Analysis.N06CanonicalGraphFourierCore
+public import ContinuousFlexibility.Analysis.N06ClosedPhysicalTests
 
 /-!
 # Physical identification reduces to the actual finite-height graph core
@@ -10,6 +12,8 @@ graph. The named reconstruction, actual test pairings and finite test support
 supply closedness; the original inverse supplies the dense approximants.
 No assertion of convergence of boundary traces is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

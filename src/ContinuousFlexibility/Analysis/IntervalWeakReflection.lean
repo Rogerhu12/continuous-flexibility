@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.IntervalWeakPrimitive
-import Mathlib.Analysis.Calculus.Deriv.Shift
-import Mathlib.MeasureTheory.Measure.Lebesgue.Integral
+module
+
+public import ContinuousFlexibility.Analysis.IntervalWeakPrimitive
+public import Mathlib.Analysis.Calculus.Deriv.Shift
+public import Mathlib.MeasureTheory.Measure.Lebesgue.Integral
 
 /-!
 # Reflection and almost-everywhere representatives of a weak flux
@@ -9,6 +11,8 @@ Reflecting a coordinate reverses the flux sign and the interval order.
 The source has no sign change. These identities apply to the actual weak
 derivative and use all compactly contained tests in its definition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

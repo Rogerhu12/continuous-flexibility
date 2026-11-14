@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ReturnResidualDriftSpeedMixed
-import ContinuousFlexibility.Analysis.N01CoefficientMixedBounds
+module
+
+public import ContinuousFlexibility.Analysis.ReturnResidualDriftSpeedMixed
+public import ContinuousFlexibility.Analysis.N01CoefficientMixedBounds
 
 /-!
 # Mixed weighted jets of the actual frozen coefficient error
@@ -10,6 +12,8 @@ discriminant square root remains. Polynomial composition and product
 estimates then preserve the independent residual's precise height
 factor through the actual frozen coefficient reconstruction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

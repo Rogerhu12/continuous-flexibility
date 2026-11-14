@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04NegativeHeightSqrtGerms
-import ContinuousFlexibility.Analysis.N04NegativeHeightNormalizedIdentity
-import ContinuousFlexibility.Analysis.N04NegativeHeightReferenceLengths
-import ContinuousFlexibility.Analysis.N04NegativeHeightRadialBounds
-import ContinuousFlexibility.Analysis.N04RealizationLeadNegativeSplit
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeHeightSqrtGerms
+public import ContinuousFlexibility.Analysis.N04NegativeHeightNormalizedIdentity
+public import ContinuousFlexibility.Analysis.N04NegativeHeightReferenceLengths
+public import ContinuousFlexibility.Analysis.N04NegativeHeightRadialBounds
+public import ContinuousFlexibility.Analysis.N04RealizationLeadNegativeSplit
 
 /-!
 # Current germs of the two normalized negative height factors
@@ -11,6 +13,8 @@ Only the forward chart atoms and the already proved physical radial
 coefficient enter. The reference height is a fixed spatial multiplier;
 no current height estimate is an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

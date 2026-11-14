@@ -1,6 +1,10 @@
-import ContinuousFlexibility.Analysis.N04SourceColumnsLinear
+module
+
+public import ContinuousFlexibility.Analysis.N04SourceColumnsLinear
 
 /-! Addition of actual current-minus-reference towers. -/
+
+@[expose] public section
 
 noncomputable section
 

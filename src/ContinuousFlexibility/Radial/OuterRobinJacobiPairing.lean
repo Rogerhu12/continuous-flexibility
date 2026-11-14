@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterPhysicalRobinSolution
-import ContinuousFlexibility.Radial.MatchingGraphRestrictions
+module
+
+public import ContinuousFlexibility.Radial.OuterPhysicalRobinSolution
+public import ContinuousFlexibility.Radial.MatchingGraphRestrictions
 
 /-!
 # The original Jacobi pairing of the weak Robin graph
@@ -9,6 +11,8 @@ second-order Jacobi expression by integration by parts.  The final
 identity uses the actual L² representative and the physical density,
 for every smooth test compactly supported in the open outer interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

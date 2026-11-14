@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartFixedBaseFamilies
-import ContinuousFlexibility.Analysis.N04RealizationFixedBasePrefix
-import ContinuousFlexibility.Analysis.CircleJointEvaluation
-import ContinuousFlexibility.Analysis.CircleSobolevPointwise
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartFixedBaseFamilies
+public import ContinuousFlexibility.Analysis.N04RealizationFixedBasePrefix
+public import ContinuousFlexibility.Analysis.CircleJointEvaluation
+public import ContinuousFlexibility.Analysis.CircleSobolevPointwise
 
 /-!
 # The first angular order at one fixed low base
@@ -10,6 +12,8 @@ The scalar jets are the actual evaluations of the circle-valued tower.
 The fixed low base pays for the value and first angular derivative. Every
 remaining angular derivative and every state slot keeps its own power.
 -/
+
+@[expose] public section
 
 noncomputable section
 

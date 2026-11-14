@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.IntervalFluxOffset
-import ContinuousFlexibility.Radial.R11bRadialTests
+module
+
+public import ContinuousFlexibility.Analysis.IntervalFluxOffset
+public import ContinuousFlexibility.Radial.R11bRadialTests
 
 /-!
 # The scalar equation after subtracting the left-tail datum
@@ -8,6 +10,8 @@ Only the zero angular mode may carry the left constant. Its subtraction
 therefore changes the forcing by the fixed compact radial flux of
 `chiLeft`, with no angular-frequency-dependent correction.
 -/
+
+@[expose] public section
 
 open Set Filter MeasureTheory
 open ContinuousFlexibility.Analysis ContinuousFlexibility.Statements

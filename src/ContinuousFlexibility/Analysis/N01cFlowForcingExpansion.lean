@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cVolterraStateJets
+module
+
+public import ContinuousFlexibility.Analysis.N01cVolterraStateJets
 
 /-!
 # Exact state/angle expansion of the actual variational forcing
@@ -11,6 +13,8 @@ remaining factors are exactly the lower Volterra variations.
 
 No size bound or derivative of the flow is added as a hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesCutoff
-import ContinuousFlexibility.Analysis.CylinderTestPairing
+module
+
+public import ContinuousFlexibility.Analysis.SpacesCutoff
+public import ContinuousFlexibility.Analysis.CylinderTestPairing
 
 /-!
 # Compact radial functions in every physical height space
@@ -10,6 +12,8 @@ support into a bounded interval; all material jets are therefore genuine
 cylinder tests. In particular the derivative of the endpoint cutoff
 supplies a compatible-source normalizer with integral one.
 -/
+
+@[expose] public section
 
 noncomputable section
 

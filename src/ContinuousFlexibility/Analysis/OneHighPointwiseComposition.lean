@@ -1,5 +1,7 @@
-import Mathlib.Analysis.Calculus.MeanValue
-import Mathlib.MeasureTheory.Function.LpSeminorm.SMul
+module
+
+public import Mathlib.Analysis.Calculus.MeanValue
+public import Mathlib.MeasureTheory.Function.LpSeminorm.SMul
 
 /-!
 # The base-point term in smooth composition
@@ -13,6 +15,8 @@ they include a smooth function of several real variables.
 The constants below are the specified derivative bound itself. In particular,
 they are uniform over the outer functions and inputs satisfying that bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
-import ContinuousFlexibility.Analysis.SolveNewtonBridge
-import ContinuousFlexibility.Scalar.WeightedTowerOperations
-import Mathlib.Analysis.Normed.Module.Multilinear.Curry
-import Mathlib.Analysis.Normed.Operator.Bilinear
+module
+
+public import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
+public import ContinuousFlexibility.Analysis.SolveNewtonBridge
+public import ContinuousFlexibility.Scalar.WeightedTowerOperations
+public import Mathlib.Analysis.Normed.Module.Multilinear.Curry
+public import Mathlib.Analysis.Normed.Operator.Bilinear
 
 /-!
 # Parameter towers of the actual plane multilinear maps
@@ -12,6 +14,8 @@ Currying repeats this finite reconstruction for an existing multilinear
 map. Only genuine towers of its fixed-vector evaluations are inputs; no
 new representation of a spatial jet is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

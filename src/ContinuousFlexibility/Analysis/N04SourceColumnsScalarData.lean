@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04SourceColumnsScalarFamily
-import ContinuousFlexibility.Analysis.N04SourceColumnsCollector
-import ContinuousFlexibility.Analysis.N04SourceColumnsSmallness
+module
+
+public import ContinuousFlexibility.Analysis.N04SourceColumnsScalarFamily
+public import ContinuousFlexibility.Analysis.N04SourceColumnsCollector
+public import ContinuousFlexibility.Analysis.N04SourceColumnsSmallness
 
 /-!
 # Scalar composition of the frozen current difference data
@@ -10,6 +12,8 @@ neighborhood, chosen before the derivative orders, carries the complete
 output difference tower. This applies to the reciprocal after a uniform
 lower bound for the actual source factor has been established.
 -/
+
+@[expose] public section
 
 noncomputable section
 

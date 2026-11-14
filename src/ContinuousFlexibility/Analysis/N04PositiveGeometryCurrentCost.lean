@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundary
-import ContinuousFlexibility.Analysis.N04PositiveGeometryCircleVariation
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBufferCost
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundary
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryCircleVariation
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBufferCost
 
 /-!
 # A necessary right-collar cost for the actual current geometry
@@ -17,6 +19,8 @@ the current atom to zero, and the original N01 label fixes its right
 endpoint value.  Thus this necessary condition does not assume any
 additional inverse or transport estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

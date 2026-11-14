@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.SeeleyData
-import Mathlib.LinearAlgebra.Lagrange
-import Mathlib.Tactic.FieldSimp
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Positivity
-import Mathlib.Tactic.Ring
+module
+
+public import ContinuousFlexibility.Analysis.SeeleyData
+public import Mathlib.LinearAlgebra.Lagrange
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Positivity
+public import Mathlib.Tactic.Ring
 
 /-!
 # Finite corrections of reflection moments
@@ -12,6 +14,8 @@ Lagrange interpolation gives a finite block whose moments below a prescribed
 order vanish. Dilation preserves this cancellation and makes every lower
 absolute moment arbitrarily small, while the prescribed moment stays fixed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

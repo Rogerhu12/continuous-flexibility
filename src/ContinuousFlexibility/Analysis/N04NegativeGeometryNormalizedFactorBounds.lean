@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometryRootProfileJoint
-import ContinuousFlexibility.Analysis.N04NegativeGeometryMixedPowerTransfer
-import ContinuousFlexibility.Analysis.N01cNormalizedSpeedPowerBounds
-import ContinuousFlexibility.Analysis.N01cCoefficientBaseSelection
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryRootProfileJoint
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryMixedPowerTransfer
+public import ContinuousFlexibility.Analysis.N01cNormalizedSpeedPowerBounds
+public import ContinuousFlexibility.Analysis.N01cCoefficientBaseSelection
 
 /-!
 # Fixed-base bounds for the actual normalized root factors
@@ -12,6 +14,8 @@ every spatial and parameter order. The sector inclusion preserves the
 grading, so both actual factors retain the original full height gain.
 The bounds hold on the whole annulus and do not contain a collar radius.
 -/
+
+@[expose] public section
 
 noncomputable section
 

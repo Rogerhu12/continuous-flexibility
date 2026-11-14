@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientRegularity
-import ContinuousFlexibility.Analysis.N04PulledFieldsOpenZeroGluing
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientRegularity
+public import ContinuousFlexibility.Analysis.N04PulledFieldsOpenZeroGluing
 
 /-!
 # The actual correction error has a joint tower on the whole annulus
@@ -10,6 +12,8 @@ coefficient tower is genuine. On the zero region the literal error vanishes
 for every state and residual. Uniqueness glues these towers before the
 actual N02 residual is substituted into the state graph.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -69,6 +73,33 @@ def n04PulledFields_opticalErrorJointDirections (π : (ℝ × ℝ) →L[ℝ] ℝ
         (Q.stripLeft m) (Q.stripRight m) (Q.stripLeft_gt m) (Q.stripRight_lt m)
         (fun z hz q hq => Q.strip_discriminant hN hS hT z hz m q hq)) π
 
+/-- The graph map `x ↦ ((x.1, residual), x.2)` of the genuine N02 residual. -/
+def n04PulledFields_residualGraphDirections
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {R : ReturnEquationData S} {base : ℕ} {ε : ℝ}
+    (hR : N02Properties D T S C R base ε) :
+    SmoothDirections (sectorNeighborhood S base ε ε ×ˢ annularOpen D)
+      (fun x : (StateDirections S × ℝ) × PolarPoint =>
+        ((x.1, R.residual (liftSectorParameter S C x.1)), x.2)) := by
+  have hU : IsOpen (sectorNeighborhood S base ε ε) :=
+    sectorNeighborhood_isOpen S base ε ε
+  have hΩ : IsOpen (annularOpen D) := isOpen_Ioo.prod isOpen_univ
+  have hres : SmoothTameOn (pairGrading (sectorGrading S) realGrading)
+      (S.circle (3 / 4 : ℝ)).grading (sectorNeighborhood S base ε ε)
+      (fun z => R.residual (liftSectorParameter S C z)) :=
+    hR.2.2.2.2.2.2.2.2.2.2
+  let J : SmoothDirections (sectorNeighborhood S base ε ε)
+      (fun z : StateDirections S × ℝ => (z, R.residual (liftSectorParameter S C z))) :=
+    smoothDirectionsProd
+      (smoothDirectionsLinearOn (ContinuousLinearMap.id ℝ (StateDirections S × ℝ)) hU)
+      hres.choose
+  exact (smoothDirectionsProd
+    (J.compLinear (ContinuousLinearMap.fst ℝ (StateDirections S × ℝ) PolarPoint)
+      (hU.prod hΩ) (fun _ hx => hx.1))
+    (smoothDirectionsLinearOn
+      (ContinuousLinearMap.snd ℝ (StateDirections S × ℝ) PolarPoint) (hU.prod hΩ))).congrOn
+    (fun x _ => by simp only [ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd'])
+
 /-- Substitute the genuine N02 residual into the joint tower. The
 physical annulus and the state neighborhood both remain unchanged. -/
 def n04PulledFields_actualErrorJointDirections (π : (ℝ × ℝ) →L[ℝ] ℝ) :
@@ -77,38 +108,18 @@ def n04PulledFields_actualErrorJointDirections (π : (ℝ × ℝ) →L[ℝ] ℝ)
         π (returnCorrectionCoefficientError D S C R Q.cutoff
           (liftSectorParameter S C x.1) x.2
             (R.residual (liftSectorParameter S C x.1)))) := by
-  let H := S.circle (3 / 4 : ℝ)
   letI : LocallyConvexSpace ℝ ((StateDirections S × ℝ) × CircleSpace S) :=
     (withSeminorms_pairGrading (sectorPairGrading_withSeminorms S)
-      (withSeminorms_graded (fun n => H.level n) H.bond)).toLocallyConvexSpace
-  have hU : IsOpen (sectorNeighborhood S base ε ε) :=
-    sectorNeighborhood_isOpen S base ε ε
-  have hΩ : IsOpen (annularOpen D) := isOpen_Ioo.prod isOpen_univ
-  have hres : SmoothTameOn (pairGrading (sectorGrading S) realGrading) H.grading
-      (sectorNeighborhood S base ε ε)
-      (fun z => R.residual (liftSectorParameter S C z)) :=
-    hR.2.2.2.2.2.2.2.2.2.2
-  let J : SmoothDirections (sectorNeighborhood S base ε ε)
-      (fun z : StateDirections S × ℝ => (z, R.residual (liftSectorParameter S C z))) :=
-    smoothDirectionsProd
-      (smoothDirectionsLinearOn (ContinuousLinearMap.id ℝ (StateDirections S × ℝ)) hU)
-      hres.choose
-  let Jstate := J.compLinear
-    (ContinuousLinearMap.fst ℝ (StateDirections S × ℝ) PolarPoint)
-    (hU.prod hΩ) (fun _ hx => hx.1)
-  let Jpoint := smoothDirectionsLinearOn
-    (ContinuousLinearMap.snd ℝ (StateDirections S × ℝ) PolarPoint) (hU.prod hΩ)
-  let Jgraph : SmoothDirections (sectorNeighborhood S base ε ε ×ˢ annularOpen D)
-      (fun x : (StateDirections S × ℝ) × PolarPoint =>
-        ((x.1, R.residual (liftSectorParameter S C x.1)), x.2)) :=
-    smoothDirectionsProd Jstate Jpoint
-  let K := n04PulledFields_opticalErrorJointDirections Q hN hS hT hR π
+      (withSeminorms_graded (fun n => (S.circle (3 / 4 : ℝ)).level n)
+        (S.circle (3 / 4 : ℝ)).bond)).toLocallyConvexSpace
   exact smoothDirections_realCompTVS
     (f := fun x : (StateDirections S × ℝ) × PolarPoint =>
       ((x.1, R.residual (liftSectorParameter S C x.1)), x.2))
     (g := fun x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint =>
       π (returnCorrectionCoefficientError D S C R Q.cutoff
-        (liftSectorParameter S C x.1.1) x.2 x.1.2)) Jgraph K
+        (liftSectorParameter S C x.1.1) x.2 x.1.2))
+    (n04PulledFields_residualGraphDirections hR)
+    (n04PulledFields_opticalErrorJointDirections Q hN hS hT hR π)
     (fun _ hx => ⟨⟨hx.1, mem_univ _⟩, hx.2⟩)
 
 end ContinuousFlexibility.Analysis

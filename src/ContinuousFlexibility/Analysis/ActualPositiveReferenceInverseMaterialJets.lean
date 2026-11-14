@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.ActualPositiveReferenceAllOrderMaterialJets
-import ContinuousFlexibility.Analysis.PositiveReferencePrescribedCosts
-import ContinuousFlexibility.Analysis.FiniteInversePolynomialEnvelope
-import ContinuousFlexibility.Analysis.CircleInverseDerivativeBounds
+module
+
+public import ContinuousFlexibility.Analysis.ActualPositiveReferenceAllOrderMaterialJets
+public import ContinuousFlexibility.Analysis.PositiveReferencePrescribedCosts
+public import ContinuousFlexibility.Analysis.FiniteInversePolynomialEnvelope
+public import ContinuousFlexibility.Analysis.CircleInverseDerivativeBounds
 
 /-!
 # Inverse jets of the same displayed positive reference coordinate
@@ -12,6 +14,8 @@ coordinate has polynomial material jets. Forward coordinate and height
 bounds are retained for the same choice. No global zeroth inverse-value
 bound is asserted.
 -/
+
+@[expose] public section
 
 noncomputable section
 

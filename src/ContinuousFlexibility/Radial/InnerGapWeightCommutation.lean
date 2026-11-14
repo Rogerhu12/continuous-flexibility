@@ -1,7 +1,10 @@
-import ContinuousFlexibility.Radial.InnerWeightRatios
-import Mathlib.Algebra.BigOperators.Ring.Finset
-import Mathlib.LinearAlgebra.Matrix.PosDef
-import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
+module
+
+public import ContinuousFlexibility.Radial.InnerWeightRatios
+public import Mathlib.Algebra.BigOperators.Ring.Finset
+public import Mathlib.LinearAlgebra.Matrix.PosDef
+public import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
+public import Mathlib.Algebra.Order.Star.Real
 
 /-!
 # Exact commutation of gap weights and the positive interface
@@ -13,6 +16,8 @@ whole gap flux block, including its off-diagonal entries. This proof is
 independent of their size and applies simultaneously to either weight
 sign.
 -/
+
+@[expose] public section
 
 noncomputable section
 

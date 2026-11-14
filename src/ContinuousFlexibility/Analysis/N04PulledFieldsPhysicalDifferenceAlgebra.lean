@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsOriginalDifferencePhysical
-import ContinuousFlexibility.Analysis.SolveNewtonBridge
-import ContinuousFlexibility.Analysis.MixedDerivativeLocality
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsOriginalDifferencePhysical
+public import ContinuousFlexibility.Analysis.SolveNewtonBridge
+public import ContinuousFlexibility.Analysis.MixedDerivativeLocality
 
 /-!
 # Subtraction and finite packing of physical height bounds
@@ -9,6 +11,8 @@ The jet identity is proved for arbitrary genuine towers.  The numerical
 packing keeps one low base for the finite family, and chooses the high
 loss before the spatial order.  No moving spatial point occurs here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.R07MiddleRealization
-import ContinuousFlexibility.Radial.R07Assembly
-import ContinuousFlexibility.Radial.R07ChainIncoming
-import ContinuousFlexibility.Radial.R07NaturalTailScale
+module
+
+public import ContinuousFlexibility.Radial.R07MiddleRealization
+public import ContinuousFlexibility.Radial.R07Assembly
+public import ContinuousFlexibility.Radial.R07ChainIncoming
+public import ContinuousFlexibility.Radial.R07NaturalTailScale
 
 /-!
 # Matching data are preserved outside the finite middle
@@ -10,6 +12,8 @@ The replacement has the original full profile germ on both closed tails.
 Consequently it preserves the radial equation even at finite interval
 endpoints, the weighted natural-tail condition, and the matching states.
 -/
+
+@[expose] public section
 
 noncomputable section
 

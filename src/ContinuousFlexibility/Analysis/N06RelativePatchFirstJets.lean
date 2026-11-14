@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06RelativeBoundaryJacobian
-import ContinuousFlexibility.Analysis.N06RootTransmissionJets
+module
+
+public import ContinuousFlexibility.Analysis.N06RelativeBoundaryJacobian
+public import ContinuousFlexibility.Analysis.N06RootTransmissionJets
 
 /-!
 # The relative patch preserves genuine boundary first jets
@@ -14,6 +16,8 @@ Only endpoint data of the actual forward functions are used, on pieces
 whose actual domain is the reference rectangle. No inverse boundary value
 or reconstructed-field transmission is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

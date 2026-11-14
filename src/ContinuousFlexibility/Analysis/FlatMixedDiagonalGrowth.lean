@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.JointMixedDiagonalCalculus
-import ContinuousFlexibility.Analysis.MixedAffineInterpolation
-import ContinuousFlexibility.Analysis.MixedParameterSymmetry
-import ContinuousFlexibility.Analysis.SymmetricMultilinearDiagonalBounds
+module
+
+public import ContinuousFlexibility.Analysis.JointMixedDiagonalCalculus
+public import ContinuousFlexibility.Analysis.MixedAffineInterpolation
+public import ContinuousFlexibility.Analysis.MixedParameterSymmetry
+public import ContinuousFlexibility.Analysis.SymmetricMultilinearDiagonalBounds
 
 /-!
 # Products of mixed jets at a fixed parameter order
@@ -12,6 +14,8 @@ Interpolation therefore gives a loss chosen before every spatial order,
 even when the low order of a factor depends on its parameter arity.
 The independent flat label factor is retained through multiplication.
 -/
+
+@[expose] public section
 
 noncomputable section
 

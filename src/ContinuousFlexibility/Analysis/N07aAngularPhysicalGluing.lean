@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aAngularInnerIntervals
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalPatch
-import ContinuousFlexibility.Analysis.N07aCanonicalPieceReconstruction
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularInnerIntervals
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalPatch
+public import ContinuousFlexibility.Analysis.N07aCanonicalPieceReconstruction
 
 /-!
 # Gluing the same actual physical representative on the open annulus
@@ -11,6 +13,8 @@ same rough function in the original local measure. This produces one
 smooth function on the whole annular open set without boundary traces or
 a smooth extension through either accumulation endpoint.
 -/
+
+@[expose] public section
 
 noncomputable section
 

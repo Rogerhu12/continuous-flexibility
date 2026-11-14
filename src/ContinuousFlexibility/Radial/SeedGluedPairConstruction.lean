@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.SeedGluedPair
-import ContinuousFlexibility.Radial.SeedLogSlopeLower
+module
+
+public import ContinuousFlexibility.Radial.SeedGluedPair
+public import ContinuousFlexibility.Radial.SeedLogSlopeLower
 
 /-!
 # Construction of the global seed from two canonical pure tails
@@ -9,6 +11,8 @@ pure cone modes then agree with the central pair after two positive
 profile rescalings and two nonzero field rescalings. Full germs at the
 cuts preserve the ordinary differential equation and every derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

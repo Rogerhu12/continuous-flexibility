@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.SolveCircleProjection
-import ContinuousFlexibility.Analysis.SolveSmoothing
-import ContinuousFlexibility.Analysis.ProjectiveNewtonTameData
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Analysis.SolveCircleProjection
+public import ContinuousFlexibility.Analysis.SolveSmoothing
+public import ContinuousFlexibility.Analysis.ProjectiveNewtonTameData
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # The sector state space used by the nonlinear iteration
@@ -10,6 +12,8 @@ The state grading defines the ordinary product topology. Angular averaging
 and the odd projection provide a tame projection onto the sector, so its
 closed subspace inherits smoothing from the physical height and circle models.
 -/
+
+@[expose] public section
 
 noncomputable section
 

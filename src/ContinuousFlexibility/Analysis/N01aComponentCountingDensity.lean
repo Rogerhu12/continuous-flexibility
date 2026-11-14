@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01aComponentCountingTransfer
+module
+
+public import ContinuousFlexibility.Analysis.N01aComponentCountingTransfer
 
 /-!
 # Linear density forced by cubic Jacobi-energy decay
@@ -9,6 +11,8 @@ linear function of the depth has quadratic logarithmic cost. A genuine
 pointwise cubic energy-decay estimate therefore forces a linear number of
 distinct negative components before that point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06MaterialPotential
-import ContinuousFlexibility.Analysis.N06WeightedHeight
+module
+
+public import ContinuousFlexibility.Analysis.N06MaterialPotential
+public import ContinuousFlexibility.Analysis.N06WeightedHeight
 
 /-!
 # The actual potential contribution on the fixed canonical source
@@ -8,6 +10,8 @@ The material-small multiplier is composed with N05's already selected
 weighted height map. Its physical output is the coefficient times the
 height of the same graph inverse, at the same fixed angular source order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

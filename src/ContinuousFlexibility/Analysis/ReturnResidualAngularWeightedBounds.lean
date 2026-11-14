@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ReturnResidualWeightedBounds
-import ContinuousFlexibility.Analysis.ScalarParameterIntegralJets
-import ContinuousFlexibility.Analysis.ScalarWeightedJetBounds
+module
+
+public import ContinuousFlexibility.Analysis.ReturnResidualWeightedBounds
+public import ContinuousFlexibility.Analysis.ScalarParameterIntegralJets
+public import ContinuousFlexibility.Analysis.ScalarWeightedJetBounds
 
 /-!
 # All angular jets of the independent residual displacement
@@ -11,6 +13,8 @@ difference therefore has uniformly bounded jets of every order. Its
 product with the independently decoded circle argument retains the
 original component height weight, at every angular order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

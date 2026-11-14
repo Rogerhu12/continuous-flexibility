@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CoupledN09Construction
-import ContinuousFlexibility.Analysis.CoupledN10Construction
+module
+
+public import ContinuousFlexibility.Analysis.CoupledN09Construction
+public import ContinuousFlexibility.Analysis.CoupledN10Construction
 
 /-!
 # Passing from the N08 data to the complete nonlinear construction
@@ -8,6 +10,8 @@ The two circle calculus inputs are properties of the actual N02 chart and
 error. The control and coefficient estimates choose one common smaller
 neighborhood, while all data and the recovered inverse are retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

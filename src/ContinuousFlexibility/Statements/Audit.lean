@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.Milestones
-import Lean.Util.CollectAxioms
-import Lean.Compiler.Old
+module
+
+public import ContinuousFlexibility.Statements.Milestones
+public import Lean.Util.CollectAxioms
+public import Lean.Compiler.Old
 
 /-!
 This audit checks actual declaration ownership, including private helpers and
@@ -11,6 +13,8 @@ definition is identified separately; its axioms are still checked.
 It also checks that all 58 milestone declarations have the closed type Prop.
 Passing this audit does not construct a proof of any milestone proposition.
 -/
+
+@[expose] public section
 
 open Lean in
 run_cmd do
@@ -109,15 +113,17 @@ run_cmd do
             env.getModuleIdxFor? name == env.getModuleIdxFor? parent do
           throwError "Recursive runtime auxiliary has an invalid checked definition: {name}"
         compilerRecursions := compilerRecursions + 1
-      match info with
-      | .axiomInfo _ => throwError "Project axiom declared: {name}"
-      | _ => pure ()
+      -- Imported theorems of a module are seen as `axiomInfo` without their proofs;
+      -- `collectAxioms` still follows the proofs. A declared axiom is the one whose
+      -- own axiom set contains it.
+      let axioms ← collectAxioms name
+      if axioms.contains name then
+        throwError "Project axiom declared: {name}"
       if (`ContinuousFlexibility.Statements).isPrefixOf owner then
         targetDeclarations := targetDeclarations + 1
         match info with
-        | .thmInfo _ => targetTheorems := targetTheorems + 1
+        | .thmInfo _ | .axiomInfo _ => targetTheorems := targetTheorems + 1
         | _ => pure ()
-      let axioms ← collectAxioms name
       for ax in axioms do
         unless ax == ``propext || ax == ``Classical.choice || ax == ``Quot.sound do
           throwError "Unexpected axiom {ax} in {name}"

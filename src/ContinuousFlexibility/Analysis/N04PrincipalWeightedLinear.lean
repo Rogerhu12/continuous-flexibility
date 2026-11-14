@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N04PrincipalWeightedPrefix
-import ContinuousFlexibility.Analysis.N04RealizationFixedSpatialProduct
-import ContinuousFlexibility.Analysis.N04RealizationCubicRegularity
-import ContinuousFlexibility.Analysis.N04RealizationPotentialRegularity
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
-import ContinuousFlexibility.Analysis.SpacesCylinderEvenJets
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalWeightedPrefix
+public import ContinuousFlexibility.Analysis.N04RealizationFixedSpatialProduct
+public import ContinuousFlexibility.Analysis.N04RealizationCubicRegularity
+public import ContinuousFlexibility.Analysis.N04RealizationPotentialRegularity
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+public import ContinuousFlexibility.Analysis.SpacesCylinderEvenJets
 
 /-!
 # Linear operations on weighted current towers
@@ -14,6 +16,8 @@ taking coordinate derivatives only change the uniform constants or the
 high-order loss. The regularity tower can always be replaced by any
 genuine tower of the same actual family.
 -/
+
+@[expose] public section
 
 noncomputable section
 

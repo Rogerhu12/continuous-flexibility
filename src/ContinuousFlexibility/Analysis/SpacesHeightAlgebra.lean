@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesHeightBounds
-import Mathlib.MeasureTheory.Function.LpSeminorm.TriangleInequality
+module
+
+public import ContinuousFlexibility.Analysis.SpacesHeightBounds
+public import Mathlib.MeasureTheory.Function.LpSeminorm.TriangleInequality
 
 /-!
 # Products of actual weighted heights
@@ -10,6 +12,8 @@ the weight on an integrable factor and uses the cylinder Sobolev bound on
 the other factor. This proves membership in the exact target space for
 every pair of exponents.
 -/
+
+@[expose] public section
 
 noncomputable section
 

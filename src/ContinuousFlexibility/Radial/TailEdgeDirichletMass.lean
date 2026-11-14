@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.TailEdgePerturbedGreen
+module
+
+public import ContinuousFlexibility.Radial.TailEdgePerturbedGreen
 
 /-!
 # Weighted mass estimate for the Dirichlet edge solution
@@ -7,6 +9,8 @@ The exact differential equation gives the energy identity. The Green
 diagonal controls the weighted mass form, yielding the operator estimate
 on continuous forcing in the mass norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

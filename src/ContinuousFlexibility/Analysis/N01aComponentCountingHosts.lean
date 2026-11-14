@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01aComponentCountingDensity
+module
+
+public import ContinuousFlexibility.Analysis.N01aComponentCountingDensity
 
 /-!
 # Host indices of components before a right-endpoint good point
@@ -8,6 +10,8 @@ the same right-endpoint margin as `r`. The physical cell-distance estimate
 therefore bounds every possible host index, independently of how hosts are
 chosen for individual components.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bRootTravelCharts
-import Mathlib.Analysis.Calculus.ContDiff.Operations
+module
+
+public import ContinuousFlexibility.Analysis.N04bRootTravelCharts
+public import Mathlib.Analysis.Calculus.ContDiff.Operations
 
 /-!
 # Nonnegative endpoints and interior regularity of the actual root maps
@@ -10,6 +12,8 @@ It adds their nonnegative scalar bijection, endpoint identities, and
 positive-argument smoothness. No fractional-power smoothness is asserted
 through a root where its argument vanishes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

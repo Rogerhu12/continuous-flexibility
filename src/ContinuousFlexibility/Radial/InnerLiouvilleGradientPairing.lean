@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerLiouvilleEnergyLift
+module
+
+public import ContinuousFlexibility.Radial.InnerLiouvilleEnergyLift
 
 /-!
 # Exact gradient pairings in the actual Liouville coordinates
@@ -8,6 +10,8 @@ restriction loses no pairing, while the intervening Liouville map is
 an actual linear isometry. The physical gradient pairing therefore
 equals the model pairing after subtracting the density drift.
 -/
+
+@[expose] public section
 
 noncomputable section
 

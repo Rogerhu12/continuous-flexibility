@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.SelectedOuterGraphUniqueness
-import ContinuousFlexibility.Radial.SelectedFirstNaturalTransport
-import ContinuousFlexibility.Radial.SelectedOuterPoisson
-import ContinuousFlexibility.Radial.MatchedPiecesAssembly
+module
+
+public import ContinuousFlexibility.Radial.SelectedOuterGraphUniqueness
+public import ContinuousFlexibility.Radial.SelectedFirstNaturalTransport
+public import ContinuousFlexibility.Radial.SelectedOuterPoisson
+public import ContinuousFlexibility.Radial.MatchedPiecesAssembly
 
 /-!
 # Installing the constructed exterior inverse and Poisson columns
@@ -11,6 +13,8 @@ physical scales, source restrictions and diagonal boundary rows belong to
 the given common matching datum. Poisson columns are constructed from the
 same prescribed natural functions used to identify the inverse's domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

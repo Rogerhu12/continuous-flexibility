@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowJetBoundsBasic
-import ContinuousFlexibility.Analysis.OneHighCircleFlowJetEquations
-import ContinuousFlexibility.Analysis.OneHighCircleFlowGronwall
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowJetBoundsBasic
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowJetEquations
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowGronwall
 
 /-!
 # Actual flow jets controlled by integrated speed derivatives
@@ -11,6 +13,8 @@ a common speed-derivative envelope, uniformly in physical time and the
 initial angle. The speed itself, and hence the mean rotation, does not
 enter the estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

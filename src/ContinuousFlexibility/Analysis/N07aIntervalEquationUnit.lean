@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aIntervalUnitPullback
-import ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient
+module
+
+public import ContinuousFlexibility.Analysis.N07aIntervalUnitPullback
+public import ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient
 
 /-!
 # Affine normalization of the actual second-order weak equation
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient
 The coefficient and unknown are pulled back as the same functions. The
 square interval factor on both the lower coefficient and source is exact.
 -/
+
+@[expose] public section
 
 noncomputable section
 

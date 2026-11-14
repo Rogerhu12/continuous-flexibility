@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06OpenCubicPairing
-import ContinuousFlexibility.Analysis.N06CurrentShiftedTestLp
-import ContinuousFlexibility.Analysis.N06AngularMeanBridge
+module
+
+public import ContinuousFlexibility.Analysis.N06OpenCubicPairing
+public import ContinuousFlexibility.Analysis.N06CurrentShiftedTestLp
+public import ContinuousFlexibility.Analysis.N06AngularMeanBridge
 
 /-!
 # The cubic weak equation paired with actual current physical tests
@@ -11,6 +13,8 @@ The open-strip cutoff argument applies to the true height transform,
 including the half-period average of every full-period physical test.
 There is no hypothesis about the totalized inverse at a radial endpoint.
 -/
+
+@[expose] public section
 
 noncomputable section
 

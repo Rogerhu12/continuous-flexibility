@@ -1,6 +1,8 @@
-import Mathlib.Analysis.Calculus.Deriv.MeanValue
-import Mathlib.Analysis.Calculus.Deriv.Inverse
-import Mathlib.Topology.MetricSpace.Lipschitz
+module
+
+public import Mathlib.Analysis.Calculus.Deriv.MeanValue
+public import Mathlib.Analysis.Calculus.Deriv.Inverse
+public import Mathlib.Topology.MetricSpace.Lipschitz
 
 /-!
 # First derivatives of inverse circle lifts
@@ -11,6 +13,8 @@ therefore Lipschitz, which supplies its continuity before the inverse
 derivative theorem is applied.  No continuity or differentiability of the
 inverse is assumed, and no higher-order inverse theorem is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

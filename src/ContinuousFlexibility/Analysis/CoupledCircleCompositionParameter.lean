@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CoupledCircleCompositionRealization
-import ContinuousFlexibility.Analysis.SpacesParameterJets
-import ContinuousFlexibility.Analysis.CircleJetEncoding
+module
+
+public import ContinuousFlexibility.Analysis.CoupledCircleCompositionRealization
+public import ContinuousFlexibility.Analysis.SpacesParameterJets
+public import ContinuousFlexibility.Analysis.CircleJetEncoding
 
 /-!
 # Actual parameter derivatives of circle composition fields
@@ -10,6 +12,8 @@ weighted Hilbert levels. Smooth spatial partials commute with this real
 parameter derivative. The original circle model's graph condition also
 identifies every level coordinate with the corresponding actual jet.
 -/
+
+@[expose] public section
 
 noncomputable section
 

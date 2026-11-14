@@ -1,7 +1,11 @@
-import ContinuousFlexibility.Analysis.CylinderMixedJets
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+module
+
+public import ContinuousFlexibility.Analysis.CylinderMixedJets
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
 
 /-! Local identities for the actual mixed coordinate derivatives. -/
+
+@[expose] public section
 
 noncomputable section
 

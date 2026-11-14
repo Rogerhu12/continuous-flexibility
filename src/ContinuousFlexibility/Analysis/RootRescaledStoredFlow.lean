@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RootScaledInverseCoordinate
-import ContinuousFlexibility.Analysis.N04bRootFlowIdentification
+module
+
+public import ContinuousFlexibility.Analysis.RootScaledInverseCoordinate
+public import ContinuousFlexibility.Analysis.N04bRootFlowIdentification
 
 /-!
 # Identifying the same controlled root flow after its exact rescaling
@@ -9,6 +11,8 @@ reselected. Physical distance is δ x and the second normalized parameter
 is σ sqrt(δ) x^(3/2). The comparison trajectory needs only closed-time
 continuity and the ordinary interior ODE.
 -/
+
+@[expose] public section
 
 noncomputable section
 

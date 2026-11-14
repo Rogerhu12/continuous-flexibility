@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PolynomialJetOperations
-import ContinuousFlexibility.Analysis.PolynomialJetPowers
+module
+
+public import ContinuousFlexibility.Analysis.PolynomialJetOperations
+public import ContinuousFlexibility.Analysis.PolynomialJetPowers
 
 /-!
 # Fixed-power mixed jets of a fiberwise inverse
@@ -9,6 +11,8 @@ inverse derivative. Induction on the total derivative order then uses
 only lower inverse jets. No bound for the value of either circle lift
 is needed. All constants are uniform in the component index.
 -/
+
+@[expose] public section
 
 noncomputable section
 

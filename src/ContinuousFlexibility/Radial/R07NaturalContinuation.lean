@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.R07RadialUniqueness
-import ContinuousFlexibility.Radial.R07DeepTailBridge
-import ContinuousFlexibility.Radial.MorseChainLocalGluing
+module
+
+public import ContinuousFlexibility.Radial.R07RadialUniqueness
+public import ContinuousFlexibility.Radial.R07DeepTailBridge
+public import ContinuousFlexibility.Radial.MorseChainLocalGluing
 
 /-!
 # Continuing a natural tail to an earlier matching radius
@@ -10,6 +12,8 @@ out. The smooth physical solution is then continued through a finite radial
 interval. A cut inside an overlap of the two actual solutions gives a smooth
 global representative and preserves its nonzero tail witness.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N05CanonicalInverseData
-import ContinuousFlexibility.Analysis.N05CanonicalReferenceRelation
-import ContinuousFlexibility.Analysis.N05CanonicalAllOrderInverse
-import ContinuousFlexibility.Analysis.N05CanonicalAllOrderNormal
-import ContinuousFlexibility.Analysis.N05CanonicalVolumeTransport
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalInverseData
+public import ContinuousFlexibility.Analysis.N05CanonicalReferenceRelation
+public import ContinuousFlexibility.Analysis.N05CanonicalAllOrderInverse
+public import ContinuousFlexibility.Analysis.N05CanonicalAllOrderNormal
+public import ContinuousFlexibility.Analysis.N05CanonicalVolumeTransport
 
 /-!
 # The complete canonical reference inverse estimates
@@ -14,6 +16,8 @@ derivative obeys the corresponding bound with one additional source
 angular derivative. The physical relation and the continuous base map
 are those of this same inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

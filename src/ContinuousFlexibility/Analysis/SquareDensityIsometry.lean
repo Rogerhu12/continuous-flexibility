@@ -1,5 +1,7 @@
-import Mathlib.MeasureTheory.Function.L2Space
-import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
+module
+
+public import Mathlib.MeasureTheory.Function.L2Space
+public import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
 
 /-!
 # An actual isometry for a positive square density
@@ -8,6 +10,8 @@ Multiplication by a positive measurable function is an isometry between
 the two appropriate L2 spaces. No boundedness of that function or of its
 reciprocal is required: the measure changes with its square.
 -/
+
+@[expose] public section
 
 noncomputable section
 

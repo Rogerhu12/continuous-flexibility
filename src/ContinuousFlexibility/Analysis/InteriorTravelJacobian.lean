@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.RootTravelDifferential
+module
+
+public import ContinuousFlexibility.Analysis.RootTravelDifferential
 
 /-!
 # The actual Jacobian after converting travel time to the root coordinate
@@ -9,6 +11,8 @@ Jacobian and an upper bound on the square root of the root coordinate.
 The characteristic formula below is the existing principal-density
 calculation expressed directly with the two physical speeds.
 -/
+
+@[expose] public section
 
 noncomputable section
 

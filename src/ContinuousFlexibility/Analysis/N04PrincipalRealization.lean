@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04PrincipalAuxiliaryQuantifiers
-import ContinuousFlexibility.Analysis.N04PrincipalAssemblePairs
-import ContinuousFlexibility.Analysis.N04PrincipalNegativeHeightPairs
-import ContinuousFlexibility.Analysis.N04PrincipalCorePeriodicity
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalAuxiliaryQuantifiers
+public import ContinuousFlexibility.Analysis.N04PrincipalAssemblePairs
+public import ContinuousFlexibility.Analysis.N04PrincipalNegativeHeightPairs
+public import ContinuousFlexibility.Analysis.N04PrincipalCorePeriodicity
 
 /-!
 # The principal realization obligation
@@ -11,6 +13,8 @@ and one principal-A neighborhood suffice for all eight actual atoms.
 Their finite maximum is taken before all jet orders. Auxiliary-column
 independence then restores the quantifier order of the frozen statement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

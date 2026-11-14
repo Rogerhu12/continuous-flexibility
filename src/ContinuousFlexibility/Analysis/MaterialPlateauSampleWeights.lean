@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.MaterialPlateauIndexBand
-import ContinuousFlexibility.Analysis.MaterialPlateauWeights
-import ContinuousFlexibility.Analysis.MaterialSampleGlobalModels
+module
+
+public import ContinuousFlexibility.Analysis.MaterialPlateauIndexBand
+public import ContinuousFlexibility.Analysis.MaterialPlateauWeights
+public import ContinuousFlexibility.Analysis.MaterialSampleGlobalModels
 
 /-!
 # Moving actual sample weights into the expanded plateau
@@ -10,6 +12,8 @@ of every point in the expanded support. The inverse height exponent is
 preserved. Its fixed endpoint loss costs one material order, and the
 material comparison costs one more, uniformly in the requested order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

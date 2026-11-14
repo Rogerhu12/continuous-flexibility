@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CanonicalActualWholeGeometry
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalActualWholeGeometry
 
 /-!
 # Geometry for the supplied whole-component family
@@ -9,6 +11,8 @@ original typed construction before any restriction of the neighborhood.
 The existing geometry, operator and global transport theorems then apply
 to precisely that whole atlas. No component controls are selected here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.SpacesNemytskiiMajorants
-import ContinuousFlexibility.Analysis.SpacesNemytskiiParameter
-import ContinuousFlexibility.Analysis.SpacesLpCurveDerivative
-import ContinuousFlexibility.Analysis.ProjectiveDifferential
+module
+
+public import ContinuousFlexibility.Analysis.SpacesNemytskiiMajorants
+public import ContinuousFlexibility.Analysis.SpacesNemytskiiParameter
+public import ContinuousFlexibility.Analysis.SpacesLpCurveDerivative
+public import ContinuousFlexibility.Analysis.ProjectiveDifferential
 
 /-!
 # Actual projective derivatives of the composition kernels
@@ -10,6 +12,8 @@ The affine parameter derivatives have a common L² majorant on a real
 interval. Dominated differentiation gives derivatives of the actual L²
 classes, and hence of every closed Hilbert level and the projective limit.
 -/
+
+@[expose] public section
 
 noncomputable section
 

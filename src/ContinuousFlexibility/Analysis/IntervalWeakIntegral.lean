@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.IntervalWeakDivergence
-import Mathlib.MeasureTheory.Integral.Prod
+module
+
+public import ContinuousFlexibility.Analysis.IntervalWeakDivergence
+public import Mathlib.MeasureTheory.Integral.Prod
 
 /-!
 # Integral representatives of locally integrable weak derivatives
@@ -10,6 +12,8 @@ a bounded interval uses Fubini on a triangle; it does not assume pointwise
 differentiability of an L¹ primitive. Consequently, first weak derivatives
 admit their actual integral representatives.
 -/
+
+@[expose] public section
 
 open Set Filter MeasureTheory
 open scoped ContDiff Topology

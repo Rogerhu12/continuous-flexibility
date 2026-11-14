@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cFiniteAffineInputs
-import ContinuousFlexibility.Analysis.N01cOpticalSquareBounds
-import ContinuousFlexibility.Analysis.N01cCommonType
+module
+
+public import ContinuousFlexibility.Analysis.N01cFiniteAffineInputs
+public import ContinuousFlexibility.Analysis.N01cOpticalSquareBounds
+public import ContinuousFlexibility.Analysis.N01cCommonType
 
 /-!
 # The actual component optical square through its two roots
@@ -10,6 +12,8 @@ the negative component it equals the optical square of the actual state
 profile. Its smooth endpoint quotient is positive on the entire closed
 component on one common state neighbourhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularRadialRegularity
-import ContinuousFlexibility.Analysis.N07aCanonicalGreenPairing
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularRadialRegularity
+public import ContinuousFlexibility.Analysis.N07aCanonicalGreenPairing
 
 /-!
 # The actual rough divergence equation recovers the first normal graph
@@ -10,6 +12,8 @@ identity `(a u)ᵣᵣ = ((aᵣ - bθ)u - 2b uθ)ᵣ + F + (bᵣu - c uθ)θ`.
 The compact Fourier argument then gives first normal regularity on each
 smaller strip, with no trace hypothesis and no smooth unknown.
 -/
+
+@[expose] public section
 
 noncomputable section
 

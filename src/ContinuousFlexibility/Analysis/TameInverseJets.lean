@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.TameInverseExpressions
+module
+
+public import ContinuousFlexibility.Analysis.TameInverseExpressions
 
 /-!
 # The full directional tower of an inverse family
@@ -8,6 +10,8 @@ new direction the differential is a continuous linear map by construction.
 Linearity in each old direction follows by differentiating the corresponding
 multilinear identity and using uniqueness of the actual quotient limit.
 -/
+
+@[expose] public section
 
 noncomputable section
 

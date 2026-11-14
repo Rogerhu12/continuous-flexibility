@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Scalar.WeightedStateBasicFields
+module
+
+public import ContinuousFlexibility.Scalar.WeightedStateBasicFields
 
 /-!
 # Concrete candidate maps for every scalar output
@@ -8,6 +10,8 @@ primitive products, and canonical scalar compositions. Constant reference
 backgrounds enter through radial multiplier maps and unital actions. No
 candidate uses division by the construction parameter.
 -/
+
+@[expose] public section
 
 noncomputable section
 

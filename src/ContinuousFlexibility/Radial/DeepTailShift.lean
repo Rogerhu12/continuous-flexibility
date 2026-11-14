@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.TailMassResistanceData
+module
+
+public import ContinuousFlexibility.Radial.TailMassResistanceData
 
 /-!
 # Starting a deep tail at a later mass entrance
@@ -8,6 +10,8 @@ preserves the actual weighted square-integrability and the differential
 equation. A positive shift places its entrance inside the original smooth
 open interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

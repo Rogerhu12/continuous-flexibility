@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06MaterialAbsorption
-import ContinuousFlexibility.Analysis.N06UnitWeakGraphData
+module
+
+public import ContinuousFlexibility.Analysis.N06MaterialAbsorption
+public import ContinuousFlexibility.Analysis.N06UnitWeakGraphData
 
 /-!
 # Material absorption for the actual five weak graph fields
@@ -10,6 +12,8 @@ Multiplying a physical graph field by E0_m^A then
 retains an H_m^beta factor from the physical solution/source rows.
 That factor absorbs both this coefficient growth and the fixed N05 loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

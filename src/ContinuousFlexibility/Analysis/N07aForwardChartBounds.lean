@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aPhysicalAtomBounds
-import ContinuousFlexibility.Analysis.N07aCoordinateJetNorms
+module
+
+public import ContinuousFlexibility.Analysis.N07aPhysicalAtomBounds
+public import ContinuousFlexibility.Analysis.N07aCoordinateJetNorms
 
 /-!
 # Forward-chart jets on the fixed reference physical intervals
@@ -9,6 +11,8 @@ angle defect on the fixed intervals sampled by CurrentJets. Its first
 derivative is charged in one fixed offset. These reference-domain bounds
 do not assert estimates on a moving current physical piece.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06ReferenceTravelBounds
-import ContinuousFlexibility.Analysis.N04bActualTypedAtlas
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceTravelBounds
+public import ContinuousFlexibility.Analysis.N04bActualTypedAtlas
 
 /-!
 # Length costs of the actual optical halves before N04
@@ -11,6 +13,8 @@ radius therefore have polynomial costs at that host. No Through04 or
 primitive certificate is used, and this host is not identified with the
 cell stored by the typed atlas.
 -/
+
+@[expose] public section
 
 noncomputable section
 

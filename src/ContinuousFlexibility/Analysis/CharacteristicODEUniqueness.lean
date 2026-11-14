@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Scalar.Conservation
-import Mathlib.Analysis.ODE.ExistUnique
-import Mathlib.Analysis.Calculus.MeanValue
-import Mathlib.Topology.Order.ProjIcc
+module
+
+public import ContinuousFlexibility.Scalar.Conservation
+public import Mathlib.Analysis.ODE.ExistUnique
+public import Mathlib.Analysis.Calculus.MeanValue
+public import Mathlib.Topology.Order.ProjIcc
 
 /-!
 # Uniqueness for ordinary characteristic trajectories
@@ -12,6 +14,8 @@ missing endpoint derivative by the fundamental theorem of calculus.  The
 angular Lipschitz constant is needed only on the compact range of the two
 trajectories being compared.
 -/
+
+@[expose] public section
 
 noncomputable section
 

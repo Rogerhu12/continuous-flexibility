@@ -1,11 +1,15 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartRootInversePrefix
-import ContinuousFlexibility.Analysis.N04NegativeChartRootLabelFieldPrefix
-import ContinuousFlexibility.Analysis.N04NegativeChartParameterCompositionBounds
-import ContinuousFlexibility.Analysis.N04NegativeChartDisplacementComposition
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootInversePrefix
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootLabelFieldPrefix
+public import ContinuousFlexibility.Analysis.N04NegativeChartParameterCompositionBounds
+public import ContinuousFlexibility.Analysis.N04NegativeChartDisplacementComposition
 
 /-! The full root displacement uses the supplied inverse and label.
 The raw coefficient and label prefixes determine its bounds uniformly
 over all representatives. No estimate of a state variation is an input. -/
+
+@[expose] public section
 
 noncomputable section
 

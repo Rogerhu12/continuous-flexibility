@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import ContinuousFlexibility.Analysis.SpacesTraceRestriction
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import ContinuousFlexibility.Analysis.SpacesTraceRestriction
 
 /-!
 # Actual cell localization and change of volume weights
@@ -9,6 +11,8 @@ that graph to one physical piece therefore preserves every angular jet.
 The scalar change of weight below preserves the actual forgotten source;
 it does not assume an inclusion between different global weighted spaces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

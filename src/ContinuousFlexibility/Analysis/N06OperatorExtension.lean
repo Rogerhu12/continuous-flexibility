@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06RelativeConstruction
-import Mathlib.Analysis.Normed.Operator.Extend
+module
+
+public import ContinuousFlexibility.Analysis.N06RelativeConstruction
+public import Mathlib.Analysis.Normed.Operator.Extend
 
 /-!
 # Extending the N06 perturbation from a dense source core
@@ -9,6 +11,8 @@ bound gives its continuous extension on that same source space. Closed relations
 from the core to the whole space. The final theorem keeps both the analytic bound and the
 closedness of the physical relation as explicit hypotheses.
 -/
+
+@[expose] public section
 
 noncomputable section
 

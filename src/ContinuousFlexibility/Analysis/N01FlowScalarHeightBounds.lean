@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01FlowConstantDirections
-import ContinuousFlexibility.Analysis.N01EndpointParameterTower
-import ContinuousFlexibility.Analysis.SmoothDirectionsEuler
-import ContinuousFlexibility.Analysis.HeightScalarVariationWeights
+module
+
+public import ContinuousFlexibility.Analysis.N01FlowConstantDirections
+public import ContinuousFlexibility.Analysis.N01EndpointParameterTower
+public import ContinuousFlexibility.Analysis.SmoothDirectionsEuler
+public import ContinuousFlexibility.Analysis.HeightScalarVariationWeights
 
 /-!
 # Every pure scalar flow jet has a local physical height factor
@@ -11,6 +13,8 @@ scalar segment. A mixed N01 jet and the scalar mean value theorem then
 bound every positive pure scalar order, including at scalar parameter
 zero. The precise one-high-factor height expression is retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

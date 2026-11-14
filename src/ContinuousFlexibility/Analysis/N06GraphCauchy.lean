@@ -1,10 +1,12 @@
-import Mathlib.Analysis.Normed.Group.Continuity
-import Mathlib.Analysis.Real.Sqrt
-import Mathlib.Topology.MetricSpace.Cauchy
-import Mathlib.Tactic.FieldSimp
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.NormNum
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Analysis.Normed.Group.Continuity
+public import Mathlib.Analysis.Real.Sqrt
+public import Mathlib.Topology.MetricSpace.Cauchy
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.Ring
 
 /-!
 # Completion estimates for the actual graph-field cutoffs
@@ -13,6 +15,8 @@ The source cutoff errors tend to zero. A square bound for each ordered tail
 therefore makes its graph fields Cauchy, without changing the ambient L2
 space or assuming a priori regularity of the source representative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

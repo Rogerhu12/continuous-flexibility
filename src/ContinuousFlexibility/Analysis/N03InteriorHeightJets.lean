@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04NegativeHeightIdentity
-import ContinuousFlexibility.Analysis.NegativeHeightMaterialJets
-import ContinuousFlexibility.Analysis.CanonicalStateInterpolation
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeHeightIdentity
+public import ContinuousFlexibility.Analysis.NegativeHeightMaterialJets
+public import ContinuousFlexibility.Analysis.CanonicalStateInterpolation
 
 /-!
 # The actual negative height inherits the determinant-ratio estimates
@@ -10,6 +12,8 @@ whole smooth germ at every interior point. All ordinary height jets are
 therefore those of the genuine determinant ratio. The fixed low order
 and loss come entirely from the previously proved scalar estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

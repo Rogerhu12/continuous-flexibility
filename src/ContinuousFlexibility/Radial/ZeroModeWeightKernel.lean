@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ZeroModeWeightGeometry
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
+module
+
+public import ContinuousFlexibility.Radial.ZeroModeWeightGeometry
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
 
 /-!
 # Weighted pointwise bounds for the actual zero-mode Green kernel
@@ -10,6 +12,8 @@ The input weight is `exp (M₀ q + γ S)` and the output weight is
 The resistance integral is the kernel obtained by exchanging the two
 integrals in `zeroModeHeight`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

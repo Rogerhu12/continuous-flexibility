@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aOpenClassicalNormal
-import ContinuousFlexibility.Analysis.SpacesInterpolationProducts
-import Mathlib.Algebra.Order.BigOperators.GroupWithZero.List
+module
+
+public import ContinuousFlexibility.Analysis.N07aOpenClassicalNormal
+public import ContinuousFlexibility.Analysis.SpacesInterpolationProducts
+public import Mathlib.Algebra.Order.BigOperators.GroupWithZero.List
 
 /-!
 # L² control of the exact finite normal expansion
@@ -9,6 +11,8 @@ Every coefficient derivative is charged in its actual finite product, and
 only the terminal solution/source jet is measured in L². This estimate
 never invokes an unknown full mixed Sobolev norm on its right hand side.
 -/
+
+@[expose] public section
 
 noncomputable section
 

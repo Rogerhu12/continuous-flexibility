@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationPolarInputJoint
-import ContinuousFlexibility.Analysis.N06RootAbsorbedPacket
-import ContinuousFlexibility.Analysis.N01cCoefficientJetCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationPolarInputJoint
+public import ContinuousFlexibility.Analysis.N06RootAbsorbedPacket
+public import ContinuousFlexibility.Analysis.N01cCoefficientJetCalculus
 
 /-!
 # The actual absorbed root packet has genuine joint parameter jets
@@ -10,6 +12,8 @@ entries are the original polar height inputs multiplied by the scalar
 parameter, with the fixed reciprocal reference profile where prescribed.
 The same physical and state domain is retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

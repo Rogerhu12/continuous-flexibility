@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Geometry.Primitive
-import ContinuousFlexibility.Geometry.LocalInverse
+module
+
+public import ContinuousFlexibility.Geometry.Primitive
+public import ContinuousFlexibility.Geometry.LocalInverse
 
 /-!
 # Cartesian coframe linear algebra
@@ -8,6 +10,8 @@ The underlying coordinate space is `ℝ × ℝ`; the names of the two one-form
 fields denote its coordinate coefficients here. No positive-radius or
 polar chart assumption is made in this file.
 -/
+
+@[expose] public section
 
 noncomputable section
 

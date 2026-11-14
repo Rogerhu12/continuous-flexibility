@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06PhysicalHeightAffinePairing
-import ContinuousFlexibility.Analysis.N06PhysicalPeriodicity
-import Mathlib.Analysis.InnerProductSpace.LinearMap
+module
+
+public import ContinuousFlexibility.Analysis.N06PhysicalHeightAffinePairing
+public import ContinuousFlexibility.Analysis.N06PhysicalPeriodicity
+public import Mathlib.Analysis.InnerProductSpace.LinearMap
 
 /-!
 # Limits of the actual full-period physical pairings
@@ -11,6 +13,8 @@ space and convergence of the left-height scalar suffice. The genuine finite
 piece formulas retain both angular halves and the literal affine cutoff.
 No endpoint trace convergence or periodicity of the paired function is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

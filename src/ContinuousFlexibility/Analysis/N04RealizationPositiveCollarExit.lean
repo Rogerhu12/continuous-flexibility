@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.PositiveReferenceCollarFactory
+module
+
+public import ContinuousFlexibility.Analysis.PositiveReferenceCollarFactory
 
 /-!
 # A fixed exit neighborhood for every finite radial collar
@@ -8,6 +10,8 @@ primitive has the reference endpoint value and the reference derivative
 throughout that neighborhood, so its equality with the fixed radial
 coordinate is uniform in every later state and angle.
 -/
+
+@[expose] public section
 
 noncomputable section
 

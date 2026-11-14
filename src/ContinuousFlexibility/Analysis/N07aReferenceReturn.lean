@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aProfileHeight
-import ContinuousFlexibility.Analysis.SolveReturnEquations
+module
+
+public import ContinuousFlexibility.Analysis.N07aProfileHeight
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # The actual reference characteristic return
@@ -9,6 +11,8 @@ divided by the radius. The actual reference flow therefore integrates to
 the reference optical travel. Its return residual is zero in the actual
 circle space, by the N02 decoder identity and decoder injectivity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

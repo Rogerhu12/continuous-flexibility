@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterGreenAssembly
-import ContinuousFlexibility.Radial.WeightKernelBounds
+module
+
+public import ContinuousFlexibility.Radial.OuterGreenAssembly
+public import ContinuousFlexibility.Radial.WeightKernelBounds
 
 /-!
 # The actual localizers and solutions on a fixed compact outer core
@@ -8,6 +10,8 @@ Compact local finiteness bounds every label of a nonzero original
 localizer on the core. The bounds on the supplied fundamental pair come
 from its already proved continuity. No spatial envelope is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

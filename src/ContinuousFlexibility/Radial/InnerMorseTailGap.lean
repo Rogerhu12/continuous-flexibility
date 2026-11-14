@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerMorseTailGeometry
-import ContinuousFlexibility.Radial.MorseRealizedConnectorBounds
+module
+
+public import ContinuousFlexibility.Radial.InnerMorseTailGeometry
+public import ContinuousFlexibility.Radial.MorseRealizedConnectorBounds
 
 /-!
 # Complete positive gaps in either actual Morse tail
@@ -10,6 +12,8 @@ Departure and arrival are ordered by increasing physical radius, so a
 single construction treats both tails. The coercivity constant is
 fixed before the frequency and the finite inner truncation are chosen.
 -/
+
+@[expose] public section
 
 noncomputable section
 

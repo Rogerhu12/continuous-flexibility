@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.InnerRadialActualRealization
-import ContinuousFlexibility.Radial.InnerRadialFluxAssembly
-import ContinuousFlexibility.Radial.InnerRadialPhysicalDirichlet
-import ContinuousFlexibility.Radial.InnerBorderDirichletBound
-import ContinuousFlexibility.Radial.InnerChainErrorAssembly
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialActualRealization
+public import ContinuousFlexibility.Radial.InnerRadialFluxAssembly
+public import ContinuousFlexibility.Radial.InnerRadialPhysicalDirichlet
+public import ContinuousFlexibility.Radial.InnerBorderDirichletBound
+public import ContinuousFlexibility.Radial.InnerChainErrorAssembly
 
 /-!
 # One actual finite-chain Dirichlet/Poisson/interface assembly
@@ -13,6 +15,8 @@ domain maps. Their physical values equal the exact ambient sums used by
 the estimates, including the one central scalar. The conormal matrix is
 the same full reference plus the same model error.
 -/
+
+@[expose] public section
 
 noncomputable section
 

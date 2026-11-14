@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseTransitionBands
-import ContinuousFlexibility.Radial.OuterCoreMassScale
+module
+
+public import ContinuousFlexibility.Radial.MorseTransitionBands
+public import ContinuousFlexibility.Radial.OuterCoreMassScale
 
 /-!
 # Quadratic exponential bounds within a transition frequency band
@@ -9,6 +11,8 @@ actual Morse coefficient.  The resulting frequency powers and model
 lengths have logarithms bounded by a constant times the square of the
 cell index.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aLinearAssembly
+module
+
+public import ContinuousFlexibility.Analysis.N07aLinearAssembly
 
 /-!
 # Closing the actual inverse from a bounded physical candidate
@@ -7,6 +9,8 @@ The estimate is proved for the original reconstructed candidate. Uniqueness
 against every HeightPair transfers it to every normalized solution before
 the actual continuous linear inverse is packaged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

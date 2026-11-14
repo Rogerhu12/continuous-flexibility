@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05RootAngularRigidity
-import ContinuousFlexibility.Analysis.N05NegativePieceEnumeration
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05RootAngularRigidity
+public import ContinuousFlexibility.Analysis.N05NegativePieceEnumeration
 
 /-!
 # The actual negative reference chart is radial
@@ -11,6 +13,8 @@ angle, and their difference gives the radial optical time.  Strict
 monotonicity of Tricomi time on the nonnegative canonical radius then makes
 the first chart coordinate independent of the angle, including endpoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

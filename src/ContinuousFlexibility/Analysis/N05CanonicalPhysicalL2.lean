@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05CanonicalPhysicalL2Local
-import Mathlib.Dynamics.Ergodic.MeasurePreserving
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05CanonicalPhysicalL2Local
+public import Mathlib.Dynamics.Ergodic.MeasurePreserving
 
 /-!
 # Canonical volume membership implies the actual physical endpoint L² class
@@ -10,6 +12,8 @@ physical-piece cover convert the canonical Hilbert square sum into physical
 inverse-square-root profile integrability. Periodicity supplies the second
 half of the physical angular interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

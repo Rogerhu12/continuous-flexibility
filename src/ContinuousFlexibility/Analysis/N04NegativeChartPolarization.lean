@@ -1,6 +1,10 @@
-import ContinuousFlexibility.Analysis.MixedDiagonalOneHighBounds
+module
+
+public import ContinuousFlexibility.Analysis.MixedDiagonalOneHighBounds
 
 /-! Polarization retains simultaneous low and high seminorm budgets. -/
+
+@[expose] public section
 
 noncomputable section
 

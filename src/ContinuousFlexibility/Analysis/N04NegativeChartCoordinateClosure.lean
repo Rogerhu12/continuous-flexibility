@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartGeometry
-import ContinuousFlexibility.Analysis.N04NegativeChartReferences
-import ContinuousFlexibility.Analysis.N04NegativeChartDeterminantData
-import ContinuousFlexibility.Analysis.N04NegativeChartAbsoluteData
-import ContinuousFlexibility.Analysis.SolveStateSpaces
-import ContinuousFlexibility.Analysis.TameSmoothingCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartGeometry
+public import ContinuousFlexibility.Analysis.N04NegativeChartReferences
+public import ContinuousFlexibility.Analysis.N04NegativeChartDeterminantData
+public import ContinuousFlexibility.Analysis.N04NegativeChartAbsoluteData
+public import ContinuousFlexibility.Analysis.SolveStateSpaces
+public import ContinuousFlexibility.Analysis.TameSmoothingCalculus
 
 /-!
 # The four chart atoms from the two actual coordinates
@@ -13,6 +15,8 @@ operations on current data. This closes both Jacobian atoms from the
 actual radial coordinate and angle defect. Only negative pieces are
 enumerated, and every operation retains their original material samples.
 -/
+
+@[expose] public section
 
 noncomputable section
 

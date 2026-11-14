@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.OuterEnvelope
-import ContinuousFlexibility.Radial.OuterPhysicalHilbert
-import ContinuousFlexibility.Analysis.LocalizedDensityTransport
+module
+
+public import ContinuousFlexibility.Radial.OuterEnvelope
+public import ContinuousFlexibility.Radial.OuterPhysicalHilbert
+public import ContinuousFlexibility.Analysis.LocalizedDensityTransport
 
 /-!
 # The actual cellwise density factors
@@ -10,6 +12,8 @@ extended by one outside it. Its square gives exactly the original
 radial Hilbert measure. The reciprocal, restricted to each cell, is
 bounded by a coefficient power from the actual profile estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

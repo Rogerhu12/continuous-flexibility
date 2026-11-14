@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledAngleWords
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRadialWords
-import ContinuousFlexibility.Analysis.N04PositiveGeometryPlaneSavedComposition
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledAngleWords
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRadialWords
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryPlaneSavedComposition
 
 /-!
 # Factor prefix estimates on the actual parameter space
@@ -9,6 +11,8 @@ The generic angle, radial, and angular inverse estimates are specialized
 to the sector parameter space before the four factor bounds are assembled.
 Their constants remain independent of the component and evaluation state.
 -/
+
+@[expose] public section
 
 noncomputable section
 

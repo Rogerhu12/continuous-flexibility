@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06PrimitiveReferenceDistribution
-import ContinuousFlexibility.Analysis.N07aReferenceSecondNormal
-import ContinuousFlexibility.Analysis.N07aCanonicalModeEnergySum
+module
+
+public import ContinuousFlexibility.Analysis.N06PrimitiveReferenceDistribution
+public import ContinuousFlexibility.Analysis.N07aReferenceSecondNormal
+public import ContinuousFlexibility.Analysis.N07aCanonicalModeEnergySum
 
 /-!
 # Positive graph energy of the same N05 inverse on its original intervals
@@ -11,6 +13,8 @@ derivative in the original canonical L2 space.  These are the fields used
 by the principal mode estimate on the original intervals.  There is no
 N06 premise and no replacement of K, V, b or B.
 -/
+
+@[expose] public section
 
 noncomputable section
 

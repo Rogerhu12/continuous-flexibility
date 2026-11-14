@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04RealizationHeightTowerJets
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationHeightTowerJets
 
 /-!
 # Genuine mixed jets of the actual decoded physical field
@@ -8,6 +10,8 @@ same parameter neighborhood. It therefore identifies every spatial jet
 before the retained height tower is evaluated. The material exponent and
 the fixed loss are preserved without a new neighborhood choice.
 -/
+
+@[expose] public section
 
 noncomputable section
 

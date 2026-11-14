@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04NegativeInverseJetBudget
-import ContinuousFlexibility.Analysis.N04NegativeInverseSpatialLinear
-import ContinuousFlexibility.Analysis.N04NegativeInversePureJointBounds
-import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeInverseJetBudget
+public import ContinuousFlexibility.Analysis.N04NegativeInverseSpatialLinear
+public import ContinuousFlexibility.Analysis.N04NegativeInversePureJointBounds
+public import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
 
 /-!
 # From actual forward prefixes to normalized inverse prefixes
@@ -12,6 +14,8 @@ affine target normalization is applied only after the implicit estimate.
 It changes spatial directions and their coefficient, while preserving
 the exact parameter arity, interpolation degree and height factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

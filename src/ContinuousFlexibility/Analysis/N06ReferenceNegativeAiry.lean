@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06ReferenceNegativeHeight
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceNegativeHeight
 
 /-!
 # The actual selected reference chart satisfies the scalar Airy equation
@@ -9,6 +11,8 @@ interval fixes its root slope, including its sign.  These identities do
 not identify an independently constructed positive extension with an
 arbitrary old positive chart.
 -/
+
+@[expose] public section
 
 noncomputable section
 

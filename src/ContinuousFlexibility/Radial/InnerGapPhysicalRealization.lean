@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerGapPhysicalPoisson
-import ContinuousFlexibility.Radial.InnerGapJointRealization
+module
+
+public import ContinuousFlexibility.Radial.InnerGapPhysicalPoisson
+public import ContinuousFlexibility.Radial.InnerGapJointRealization
 
 /-!
 # The same gap inverse, Poisson map, and matrix in the finite weak domain
@@ -9,6 +11,8 @@ source. Adding the actual Poisson field gives the prescribed canonical
 trace, the common physical weak equation, and the full outgoing flux
 Λξ − P†F computed on the fixed affine hats.
 -/
+
+@[expose] public section
 
 noncomputable section
 

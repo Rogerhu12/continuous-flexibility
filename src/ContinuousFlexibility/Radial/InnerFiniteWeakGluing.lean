@@ -1,7 +1,9 @@
-import Mathlib.LinearAlgebra.Pi
-import Mathlib.Data.Real.Basic
-import Mathlib.Tactic.Abel
-import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+module
+
+public import Mathlib.LinearAlgebra.Pi
+public import Mathlib.Data.Real.Basic
+public import Mathlib.Tactic.Abel
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 
 /-!
 # Weak gluing on a finite family of actual closed piece domains
@@ -12,6 +14,8 @@ every test field. Neither the global weak equation nor an inverse is
 part of the input data. The radial specialization supplies the actual
 physical closures, affine lifts, and energy-minus-forcing functionals.
 -/
+
+@[expose] public section
 
 noncomputable section
 

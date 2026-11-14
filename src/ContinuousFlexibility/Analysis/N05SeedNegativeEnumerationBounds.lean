@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05SeedNegativeEnumeration
-import Mathlib.Algebra.Order.Group.MinMax
+module
+
+public import ContinuousFlexibility.Analysis.N05SeedNegativeEnumeration
+public import Mathlib.Algebra.Order.Group.MinMax
 
 /-!
 # Actual host indices of the explicit seed enumeration
@@ -8,6 +10,8 @@ Only the original Morse partition's exact index formula is an extra
 input.  The carrier comparison follows from the actual cells meeting at
 one point.  The constant is chosen before every possible carrier map.
 -/
+
+@[expose] public section
 
 noncomputable section
 

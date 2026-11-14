@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryJacobianDirections
-import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
-import ContinuousFlexibility.Analysis.CircleSmoothDirectionsOperations
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryJacobianDirections
+public import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
+public import ContinuousFlexibility.Analysis.CircleSmoothDirectionsOperations
 
 /-!
 # Genuine towers of the eight positive geometric atoms
@@ -10,6 +12,8 @@ unit points. The chart components, inverse components, and height supply
 joint towers before that affine pullback. The Jacobian tower is computed
 from the chart, and its reciprocal uses the proved positive range.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cDistributedRadialProducts
-import ContinuousFlexibility.Analysis.N01cStateProfileProductBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01cDistributedRadialProducts
+public import ContinuousFlexibility.Analysis.N01cStateProfileProductBounds
 
 /-!
 # All radial orders of the actual profile parameter tower
@@ -12,6 +14,8 @@ the original denominator comparison bounds the exponential by two.
 
 No control support is assigned to a material cell in this module.
 -/
+
+@[expose] public section
 
 noncomputable section
 

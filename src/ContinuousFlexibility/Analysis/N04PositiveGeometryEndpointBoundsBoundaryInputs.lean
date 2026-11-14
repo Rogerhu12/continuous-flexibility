@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsSampleCoefficients
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledForwardLabelPrefix
-import ContinuousFlexibility.Analysis.N06RootBoundaryFiniteFormulas
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsSampleCoefficients
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledForwardLabelPrefix
+public import ContinuousFlexibility.Analysis.N06RootBoundaryFiniteFormulas
 
 /-!
 # Genuine inputs of the finite root boundary formulas
@@ -9,6 +11,8 @@ These are the literal drift and factored speed at the original root,
 with the forward root-label slope. Each of the nine joint towers is
 constructed from the actual state fields before estimating its jets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

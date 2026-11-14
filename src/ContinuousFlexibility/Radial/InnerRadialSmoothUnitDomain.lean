@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerRadialH1Density
-import ContinuousFlexibility.Radial.InnerRadialAffineLift
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialH1Density
+public import ContinuousFlexibility.Radial.InnerRadialAffineLift
 
 /-!
 # Actual smooth unit-trace fields belong to the physical piece domain
@@ -9,6 +11,8 @@ as is appropriate for retained Liouville representatives. Subtracting
 the fixed affine hat leaves a genuine zero-endpoint field; actual
 cutoff density supplies its membership in the common physical closure.
 -/
+
+@[expose] public section
 
 noncomputable section
 

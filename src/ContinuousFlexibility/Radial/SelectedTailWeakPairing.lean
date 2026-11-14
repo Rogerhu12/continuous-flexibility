@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ModeWeakLinearity
-import ContinuousFlexibility.Analysis.L2RestrictionSplit
+module
+
+public import ContinuousFlexibility.Radial.ModeWeakLinearity
+public import ContinuousFlexibility.Analysis.L2RestrictionSplit
 
 /-!
 # Actual tail restriction, weak pairing and zero extension
@@ -9,6 +11,8 @@ Its restriction and zero-extension maps are adjoint. Thus the full modal
 weak identity follows from the proved regional pairing without changing
 the frozen ordinary-support test class.
 -/
+
+@[expose] public section
 
 noncomputable section
 

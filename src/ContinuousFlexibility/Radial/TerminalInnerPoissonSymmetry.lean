@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ModeWeakGreen
-import ContinuousFlexibility.Radial.ModeRegionalPairing
-import ContinuousFlexibility.Radial.MatchingTraceCalculus
+module
+
+public import ContinuousFlexibility.Radial.ModeWeakGreen
+public import ContinuousFlexibility.Radial.ModeRegionalPairing
+public import ContinuousFlexibility.Radial.MatchingTraceCalculus
 
 /-!
 # Symmetry of the actual inner Poisson fluxes
@@ -10,6 +12,8 @@ annihilate the alternating boundary form. Inserting normalized Poisson
 values proves symmetry of the measured conormal-flux matrix, before any
 MatchingLocalRealizations object is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

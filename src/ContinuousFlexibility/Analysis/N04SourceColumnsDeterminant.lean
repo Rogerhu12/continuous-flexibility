@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04SourceColumnsWidth
-import ContinuousFlexibility.Analysis.N04SourceColumnsDerivative
-import ContinuousFlexibility.Analysis.N04SourceColumnsMultiplication
-import ContinuousFlexibility.Analysis.SolveStateSpaces
-import ContinuousFlexibility.Analysis.TameSmoothingCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N04SourceColumnsWidth
+public import ContinuousFlexibility.Analysis.N04SourceColumnsDerivative
+public import ContinuousFlexibility.Analysis.N04SourceColumnsMultiplication
+public import ContinuousFlexibility.Analysis.SolveStateSpaces
+public import ContinuousFlexibility.Analysis.TameSmoothingCalculus
 
 /-!
 # Current data for the actual inverse determinant
@@ -12,6 +14,8 @@ atoms. The two product operations each choose one fixed neighborhood, and
 all remaining operations retain the final neighborhood. The stored width
 ratio contributes only its reference coefficient envelope.
 -/
+
+@[expose] public section
 
 noncomputable section
 

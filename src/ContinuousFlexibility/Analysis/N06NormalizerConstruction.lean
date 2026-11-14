@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06NormalizerFirstNormal
-import ContinuousFlexibility.Analysis.N06NormalizerDirection
+module
+
+public import ContinuousFlexibility.Analysis.N06NormalizerFirstNormal
+public import ContinuousFlexibility.Analysis.N06NormalizerDirection
 
 /-!
 # A supported normalizer with the complete original N05 contract
@@ -11,6 +13,8 @@ all three weighted exponents, every material and angular order, and the
 first weak normal derivative. No normalizer-support hypothesis is added
 to the old witness, and no normalization region is enlarged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

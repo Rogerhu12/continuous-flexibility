@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CoupledControlCircleDerivative
-import ContinuousFlexibility.Analysis.CoupledControlResponseSmooth
-import ContinuousFlexibility.Analysis.CoupledPhysicalTameComposition
-import ContinuousFlexibility.Analysis.CoupledNeighborhoodRestriction
+module
+
+public import ContinuousFlexibility.Analysis.CoupledControlCircleDerivative
+public import ContinuousFlexibility.Analysis.CoupledControlResponseSmooth
+public import ContinuousFlexibility.Analysis.CoupledPhysicalTameComposition
+public import ContinuousFlexibility.Analysis.CoupledNeighborhoodRestriction
 
 /-!
 # Smooth tame components of any N09 inverse
@@ -11,6 +13,8 @@ constant control is lifted by its actual angular mean, and the circle
 solution is formed by applying the given return inverse to the actual
 remainder. No particular construction of the N09 inverse is required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

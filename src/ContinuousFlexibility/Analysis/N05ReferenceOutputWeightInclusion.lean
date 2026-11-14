@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05ReferenceZeroRemainder
-import ContinuousFlexibility.Radial.ReferenceWeightedMeasure
-import ContinuousFlexibility.Radial.ReferenceExponentComparison
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceZeroRemainder
+public import ContinuousFlexibility.Radial.ReferenceWeightedMeasure
+public import ContinuousFlexibility.Radial.ReferenceExponentComparison
 
 /-!
 # Increasing the output material loss for arbitrary physical jets
@@ -9,6 +11,8 @@ This inclusion uses only the actual localized square sum. It therefore
 applies to odd jets and to first normal derivatives as well as to even
 reference outputs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06NormalizerCompatibility
-import ContinuousFlexibility.Analysis.N06CurrentCompactSources
+module
+
+public import ContinuousFlexibility.Analysis.N06NormalizerCompatibility
+public import ContinuousFlexibility.Analysis.N06CurrentCompactSources
 
 /-!
 # The old inverse supplies the actual normalizer-change direction
@@ -9,6 +11,8 @@ smooth. Its canonical source is realized in every original weight and
 angular level, all with the same L2 sequence. The old inverse's lambda
 coordinate is zero by the physical compatibility identity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

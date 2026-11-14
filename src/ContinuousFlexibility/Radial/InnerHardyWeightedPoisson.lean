@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerHardyPoissonEnergy
+module
+
+public import ContinuousFlexibility.Radial.InnerHardyPoissonEnergy
 
 /-!
 # Full-reference Poisson control with Hardy gap terms
@@ -7,6 +9,8 @@ The complete positive gap matrices remain in the common reference
 matrix.  Orthogonal piece projections and the exact cut incidence
 absorb the Hardy endpoint costs without a factor for the number of gaps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

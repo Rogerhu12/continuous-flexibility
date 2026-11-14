@@ -1,8 +1,12 @@
-import ContinuousFlexibility.Analysis.CirclePositiveInverseFixedBaseBounds
-import ContinuousFlexibility.Analysis.CircleTravelUniformJets
-import ContinuousFlexibility.Analysis.CircleSmoothDirectionsOperations
+module
+
+public import ContinuousFlexibility.Analysis.CirclePositiveInverseFixedBaseBounds
+public import ContinuousFlexibility.Analysis.CircleTravelUniformJets
+public import ContinuousFlexibility.Analysis.CircleSmoothDirectionsOperations
 
 /-! One fixed base for the actual inverse-composition operator, uniformly in travel. -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SpacesPhysicalBandEstimates
-import ContinuousFlexibility.Analysis.SpacesPhysicalLocalization
-import ContinuousFlexibility.Analysis.SpacesLpFamilyBounds
+module
+
+public import ContinuousFlexibility.Analysis.SpacesPhysicalBandEstimates
+public import ContinuousFlexibility.Analysis.SpacesPhysicalLocalization
+public import ContinuousFlexibility.Analysis.SpacesLpFamilyBounds
 
 /-!
 # The actual physical shell analysis map
@@ -9,6 +11,8 @@ Localize the common weak-jet representative, take the joint material and
 Fourier band in each integer cell, and retain the original cylinder L²
 classes. The complete family estimate has fixed loss zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

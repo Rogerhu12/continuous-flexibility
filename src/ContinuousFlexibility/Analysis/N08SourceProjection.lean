@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N08StateProjection
-import ContinuousFlexibility.Analysis.N08ScalarConservation
-import ContinuousFlexibility.Analysis.SolveNewtonBridge
-import ContinuousFlexibility.Analysis.SolveTameSubspace
-import ContinuousFlexibility.Scalar.WeightedSmoothTameLinear
-import ContinuousFlexibility.Scalar.WeightedStateTopology
+module
+
+public import ContinuousFlexibility.Analysis.N08StateProjection
+public import ContinuousFlexibility.Analysis.N08ScalarConservation
+public import ContinuousFlexibility.Analysis.SolveNewtonBridge
+public import ContinuousFlexibility.Analysis.SolveTameSubspace
+public import ContinuousFlexibility.Scalar.WeightedSmoothTameLinear
+public import ContinuousFlexibility.Scalar.WeightedStateTopology
 
 /-!
 # The actual global projection to compatible scalar sources
@@ -14,6 +16,8 @@ gives a global source-valued map. Its derivative towers need no domain or
 sector cutoff. Conservation identifies its values with the encoded scalar
 residual wherever the actual equation is realized.
 -/
+
+@[expose] public section
 
 noncomputable section
 

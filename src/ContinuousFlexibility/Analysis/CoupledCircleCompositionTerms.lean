@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CoupledCirclePointwiseBounds
-import Mathlib.Algebra.BigOperators.Group.Finset.Piecewise
+module
+
+public import ContinuousFlexibility.Analysis.CoupledCirclePointwiseBounds
+public import Mathlib.Algebra.BigOperators.Group.Finset.Piecewise
 
 /-!
 # Terms in the angular jets of circle composition
@@ -9,6 +11,8 @@ its angular derivative order. With this convention both parts of the
 chain rule increase the total budget by one. No inverse chart or lower
 bound on its derivative is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

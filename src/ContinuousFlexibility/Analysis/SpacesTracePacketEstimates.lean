@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.SpacesTracePackets
-import ContinuousFlexibility.Analysis.SpacesTraceCircleBounds
-import ContinuousFlexibility.Analysis.SpacesTraceRestriction
-import ContinuousFlexibility.Analysis.SpacesTraceSeries
+module
+
+public import ContinuousFlexibility.Analysis.SpacesTracePackets
+public import ContinuousFlexibility.Analysis.SpacesTraceCircleBounds
+public import ContinuousFlexibility.Analysis.SpacesTraceRestriction
+public import ContinuousFlexibility.Analysis.SpacesTraceSeries
 
 /-!
 # Uniform estimates for the extension packets
@@ -11,6 +13,8 @@ the derivative order. Two additional sample weights leave a square summable
 inverse-weight factor, allowing the packet series to converge in every
 physical jet norm with one fixed loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cActualFlowAngularInduction
+module
+
+public import ContinuousFlexibility.Analysis.N01cActualFlowAngularInduction
 
 /-!
 # Positive angular prefixes of the canonical ordinary-flow tower
@@ -7,6 +9,8 @@ One genuine tower is selected before the state-order prefix. Finite
 uniformization changes only the additive high loss and scalar constant.
 It leaves the common domain and every actual derivative unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

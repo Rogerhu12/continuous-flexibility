@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05CanonicalUniqueness
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalUniqueness
 
 /-!
 # The canonical volume model with its prescribed forget map
@@ -7,6 +9,8 @@ The weighted levels use the actual closed weak angular graph. Multiplication
 by the positive piece weights recovers the unweighted sequence. Uniqueness
 of weak derivatives makes this recovery injective at each finite level.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Statements.DeepTailOperator
-import ContinuousFlexibility.Radial.OscillatorCompactCore
-import ContinuousFlexibility.Radial.CentralSpectralInverse
-import ContinuousFlexibility.Radial.MorseModel
-import ContinuousFlexibility.Radial.FourierOrthogonality
-import ContinuousFlexibility.Scalar.GreenIdentity
+module
+
+public import ContinuousFlexibility.Statements.DeepTailOperator
+public import ContinuousFlexibility.Radial.OscillatorCompactCore
+public import ContinuousFlexibility.Radial.CentralSpectralInverse
+public import ContinuousFlexibility.Radial.MorseModel
+public import ContinuousFlexibility.Radial.FourierOrthogonality
+public import ContinuousFlexibility.Scalar.GreenIdentity
 
 /-!
 # Typed targets for the radial existence engine
@@ -15,6 +17,8 @@ a theorem producing a reference.  The source density is ordinary `dr`, and
 the angular average is normalized.  Closed forms and distribution graphs are
 spelled out independently of the already constructed Hermite graph.
 -/
+
+@[expose] public section
 
 noncomputable section
 

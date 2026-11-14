@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07bMaterialDirection
-import ContinuousFlexibility.Analysis.N07bAngularChainExpansion
+module
+
+public import ContinuousFlexibility.Analysis.N07bMaterialDirection
+public import ContinuousFlexibility.Analysis.N07bAngularChainExpansion
 
 /-!
 # Finite chains of arbitrary geometric derivatives
@@ -10,6 +12,8 @@ including the coefficient derivative. The same finite expansion applies
 to any initial material jet, so a second-order reference expression can
 be followed by the required number of current angular derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

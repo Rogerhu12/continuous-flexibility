@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06PhysicalRepresentativeUniqueness
-import ContinuousFlexibility.Analysis.N06PhysicalNormalization
-import ContinuousFlexibility.Analysis.SolveReturnEquations
+module
+
+public import ContinuousFlexibility.Analysis.N06PhysicalRepresentativeUniqueness
+public import ContinuousFlexibility.Analysis.N06PhysicalNormalization
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # Periodic reconstruction with the original physical normalization
@@ -11,6 +13,8 @@ from the actual N05 graph representative to the explicit periodic
 reconstruction. N04 fixes that reconstruction on the normalization region,
 so the same conclusion holds at every admissible current state.
 -/
+
+@[expose] public section
 
 noncomputable section
 

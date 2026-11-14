@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CoupledCircleCompositionExpansion
-import ContinuousFlexibility.Analysis.CoupledCircleCompositionTermBounds
-import ContinuousFlexibility.Analysis.SpacesNemytskiiLowFactors
+module
+
+public import ContinuousFlexibility.Analysis.CoupledCircleCompositionExpansion
+public import ContinuousFlexibility.Analysis.CoupledCircleCompositionTermBounds
+public import ContinuousFlexibility.Analysis.SpacesNemytskiiLowFactors
 
 /-!
 # Fixed-loss bounds for the complete angular composition jets
@@ -9,6 +11,8 @@ The chart factors are bounded in one fixed low seminorm. The outer
 function and each direction retain exactly one linear occurrence, with
 one high seminorm among them or on the chart displacement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

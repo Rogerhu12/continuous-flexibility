@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N07aAngularRadialWeights
-import ContinuousFlexibility.Radial.R11bCompactSources
-import ContinuousFlexibility.Radial.ReferenceColumnSmooth
-import ContinuousFlexibility.Radial.R11bZeroMode
-import ContinuousFlexibility.Radial.ReferenceCellAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularRadialWeights
+public import ContinuousFlexibility.Radial.R11bCompactSources
+public import ContinuousFlexibility.Radial.ReferenceColumnSmooth
+public import ContinuousFlexibility.Radial.R11bZeroMode
+public import ContinuousFlexibility.Radial.ReferenceCellAlgebra
 
 /-!
 # The actual physical and radial cutoffs give the same natural output class
@@ -12,6 +14,8 @@ subtracts `D.chiLeft`. Their equality is not assumed. Their difference is
 supported in a compact subset of the core, by the two actual endpoint
 conditions, and therefore belongs to every reference cell weight.
 -/
+
+@[expose] public section
 
 noncomputable section
 

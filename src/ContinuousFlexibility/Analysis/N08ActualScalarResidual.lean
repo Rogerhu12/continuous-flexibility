@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N08ExpProfile
-import ContinuousFlexibility.Analysis.N08LogProfileLift
-import ContinuousFlexibility.Analysis.N08ScalarProfileRealization
-import ContinuousFlexibility.Analysis.N08NuDerivative
-import ContinuousFlexibility.Analysis.SolveReturnEquations
-import ContinuousFlexibility.Analysis.TameLocalLinear
+module
+
+public import ContinuousFlexibility.Analysis.N08ExpProfile
+public import ContinuousFlexibility.Analysis.N08LogProfileLift
+public import ContinuousFlexibility.Analysis.N08ScalarProfileRealization
+public import ContinuousFlexibility.Analysis.N08NuDerivative
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
+public import ContinuousFlexibility.Analysis.TameLocalLinear
 
 /-!
 # The actual scalar residual on the prescribed state space
@@ -13,6 +15,8 @@ weight and used in the finite scalar formula. Projection to the compatible
 source space is global. On every admissible sector state it is identified
 with the literal residual, including its removable value at `q = 0`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

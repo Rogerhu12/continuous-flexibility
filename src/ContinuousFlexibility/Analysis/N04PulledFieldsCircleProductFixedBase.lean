@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsFixedBaseComposition
-import ContinuousFlexibility.Analysis.CircleProductSmoothTame
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsFixedBaseComposition
+public import ContinuousFlexibility.Analysis.CircleProductSmoothTame
 
 /-!
 # Fixed-base multiplication of the actual circle fields
@@ -9,6 +11,8 @@ value. Its original bilinear one-high bound therefore controls every
 parameter order on the same low box. No parameter-dependent low base is
 introduced when this operation is used in the correction formulas.
 -/
+
+@[expose] public section
 
 noncomputable section
 

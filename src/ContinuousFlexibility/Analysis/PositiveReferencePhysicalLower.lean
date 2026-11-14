@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PositiveChartRangeGeometry
-import Mathlib.Analysis.Calculus.Deriv.MeanValue
+module
+
+public import ContinuousFlexibility.Analysis.PositiveChartRangeGeometry
+public import Mathlib.Analysis.Calculus.Deriv.MeanValue
 
 /-!
 # Physical lower bounds for the same radial reference chart
@@ -10,6 +12,8 @@ The resulting angular coefficient estimate uses the actual height H,
 the physical profile coefficient, and the same derivative bound. None
 of these hypotheses is a bound on a final canonical coefficient.
 -/
+
+@[expose] public section
 
 noncomputable section
 

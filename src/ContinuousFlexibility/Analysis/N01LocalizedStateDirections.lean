@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01FlowStateLocality
-import ContinuousFlexibility.Analysis.N01HeightPlateauDirections
-import ContinuousFlexibility.Analysis.CircleJetPointwiseEnergy
+module
+
+public import ContinuousFlexibility.Analysis.N01FlowStateLocality
+public import ContinuousFlexibility.Analysis.N01HeightPlateauDirections
+public import ContinuousFlexibility.Analysis.CircleJetPointwiseEnergy
 
 /-!
 # Actual component-local state directions and their physical energies
@@ -11,6 +13,8 @@ border and chart coordinates vanish. The same direction works in every
 genuine parameter jet. Its weighted grading is controlled by the physical
 plateau energy and the original control's circle component energy.
 -/
+
+@[expose] public section
 
 noncomputable section
 

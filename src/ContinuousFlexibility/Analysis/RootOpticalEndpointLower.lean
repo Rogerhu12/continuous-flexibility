@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RootCharacteristicFactor
-import Mathlib.Topology.Order.OrderClosed
+module
+
+public import ContinuousFlexibility.Analysis.RootCharacteristicFactor
+public import Mathlib.Topology.Order.OrderClosed
 
 /-!
 # A root factor lower bound from the actual component optical inequality
@@ -7,6 +9,8 @@ import Mathlib.Topology.Order.OrderClosed
 The positive-side factorization is cancelled before taking a one-sided
 limit. No common positive-width germ of all states is postulated.
 -/
+
+@[expose] public section
 
 noncomputable section
 

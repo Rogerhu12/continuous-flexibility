@@ -1,5 +1,7 @@
-import Mathlib.Analysis.Normed.Operator.Bilinear
-import Mathlib.Topology.Algebra.Module.Equiv
+module
+
+public import Mathlib.Analysis.Normed.Operator.Bilinear
+public import Mathlib.Topology.Algebra.Module.Equiv
 
 /-!
 # The explicit graph change for a source normalizer
@@ -10,6 +12,8 @@ the corresponding change of unknown is U ↦ U + lambda(U) v. Both are
 actual bounded linear shears. The graph equivalence retains the source
 projection exactly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

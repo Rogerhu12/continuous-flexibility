@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aOpenNormalBootstrap
-import ContinuousFlexibility.Analysis.N07aCanonicalSmoothJets
-import ContinuousFlexibility.Analysis.N07aNormalExpansionExact
+module
+
+public import ContinuousFlexibility.Analysis.N07aOpenNormalBootstrap
+public import ContinuousFlexibility.Analysis.N07aCanonicalSmoothJets
+public import ContinuousFlexibility.Analysis.N07aNormalExpansionExact
 
 /-!
 # The classical normal equation of the actual weak solution
@@ -10,6 +12,8 @@ second normal derivative of its smooth representative. The six coefficients
 below are the actual algebraic expressions in the divergence coefficients;
 the source is the original source, with the potential retained separately.
 -/
+
+@[expose] public section
 
 noncomputable section
 

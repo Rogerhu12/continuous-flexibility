@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06CurrentRelativeSourceIdentity
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentRelativeSourceIdentity
 
 /-!
 # The actual negative source with a zero principal contribution
@@ -7,6 +9,8 @@ The original-atlas construction makes its principal source zero on negative
 pieces. This gives the literal remainder identity without imposing a
 unit-interval cubic-test characterization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

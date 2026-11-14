@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedWeightShift
-import ContinuousFlexibility.Scalar.WeightedHeightSmooth
+module
+
+public import ContinuousFlexibility.Scalar.WeightedWeightShift
+public import ContinuousFlexibility.Scalar.WeightedHeightSmooth
 
 /-!
 # Actual multiplication of a coefficient and a height
@@ -10,6 +12,8 @@ argument. The established weight inclusion then retains the unknown's
 weight for every nonnegative coefficient weight. The same prescribed map
 has a joint smooth tame tower.
 -/
+
+@[expose] public section
 
 noncomputable section
 

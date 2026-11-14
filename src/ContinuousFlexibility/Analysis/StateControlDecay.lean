@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.StateProfileRegularity
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+module
+
+public import ContinuousFlexibility.Analysis.StateProfileRegularity
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
 
 /-!
 # Passing control estimates through the actual profile sum
@@ -9,6 +11,8 @@ Every derivative vanishes on the complement of its own component, including
 both turning points. The derivatives of the actual locally finite sum
 therefore obey the same uniform estimate as the individual active term.
 -/
+
+@[expose] public section
 
 noncomputable section
 

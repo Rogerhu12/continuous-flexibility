@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cMixedPowerAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.N01cMixedPowerAlgebra
 
 /-!
 # Actual parameter jets with a fixed spatial factor
@@ -7,6 +9,8 @@ The fixed reference multiplier contributes only its spatial jets. The
 genuine parameter derivative remains entirely on the current factor,
 so its height gain is retained without a positive-order product loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.TailEdgePerturbedGreen
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
-import Mathlib.Analysis.Calculus.InverseFunctionTheorem.Deriv
-import Mathlib.Analysis.Calculus.ContDiff.RCLike
+module
+
+public import ContinuousFlexibility.Radial.TailEdgePerturbedGreen
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
+public import Mathlib.Analysis.Calculus.InverseFunctionTheorem.Deriv
+public import Mathlib.Analysis.Calculus.ContDiff.RCLike
 
 /-!
 # Resistance coordinate on a positive edge
@@ -10,6 +12,8 @@ The chart is the actual integral of the reciprocal density. Its inverse
 gives the transformed mass density, and the flux identity yields the
 actual forced equation in resistance coordinates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerSupportedWeights
-import ContinuousFlexibility.Radial.InnerChainDiagonal
+module
+
+public import ContinuousFlexibility.Radial.InnerSupportedWeights
+public import ContinuousFlexibility.Radial.InnerChainDiagonal
 
 /-!
 # Unit weights on the actual inner source and cut spaces
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Radial.InnerChainDiagonal
 These identities remove constant physical weights through the public
 application lemmas. The scalar coordinate and supported source are preserved.
 -/
+
+@[expose] public section
 
 noncomputable section
 

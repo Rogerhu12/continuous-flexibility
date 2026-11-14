@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aIntervalEnergyClosure
-import ContinuousFlexibility.Analysis.IntervalWeakDivergence
-import ContinuousFlexibility.Analysis.SpacesLpCurveDerivative
-import Mathlib.Analysis.SpecificLimits.Basic
+module
+
+public import ContinuousFlexibility.Analysis.N07aIntervalEnergyClosure
+public import ContinuousFlexibility.Analysis.IntervalWeakDivergence
+public import ContinuousFlexibility.Analysis.SpacesLpCurveDerivative
+public import Mathlib.Analysis.SpecificLimits.Basic
 
 /-!
 # Interior exhaustion of the actual open-interval coefficients
@@ -13,6 +15,8 @@ endpoint. On the closed unit interval all derivatives are the actual
 derivatives at the inset point, with their affine factors. The vanishing
 cylinder weight increases under this inset, so its lower bound is retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

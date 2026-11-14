@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N03CanonicalRootAngles
-import ContinuousFlexibility.Analysis.CanonicalClosedSymmetry
-import ContinuousFlexibility.Analysis.TwoReturnBoundaryRigidity
-import ContinuousFlexibility.Analysis.N01TravelRigidity
+module
+
+public import ContinuousFlexibility.Analysis.N03CanonicalRootAngles
+public import ContinuousFlexibility.Analysis.CanonicalClosedSymmetry
+public import ContinuousFlexibility.Analysis.TwoReturnBoundaryRigidity
+public import ContinuousFlexibility.Analysis.N01TravelRigidity
 
 /-!
 # The existing canonical root gauges equal the actual N01 gauges
@@ -11,6 +13,8 @@ true closed canonical boundary lifts are continuous, degree one, and
 zero at the reflection axis. Irrationality of the actual reference travel
 therefore fixes both gauges and the canonical Airy width.
 -/
+
+@[expose] public section
 
 noncomputable section
 

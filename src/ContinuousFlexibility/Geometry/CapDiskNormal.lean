@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Geometry.CapDisk
-import ContinuousFlexibility.Geometry.SurfaceGeometry
-import Mathlib.Analysis.Matrix.Normed
+module
+
+public import ContinuousFlexibility.Geometry.CapDisk
+public import ContinuousFlexibility.Geometry.SurfaceGeometry
+public import Mathlib.Analysis.Matrix.Normed
 
 /-!
 # The actual smooth unit normal of the meridian cap
@@ -12,6 +14,8 @@ Orthogonality is proved for the actual derivative of `capDiskMap`, using the
 surjective polar Jacobian away from the axis. Identification as the outward
 normal of a closed surface requires the separate inside-region construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

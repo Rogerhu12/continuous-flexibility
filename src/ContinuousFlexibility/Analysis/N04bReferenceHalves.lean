@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04SignedPieces
+module
+
+public import ContinuousFlexibility.Analysis.N04SignedPieces
 
 /-!
 # Reference negative halves at an arbitrary genuine interior cut
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Analysis.N04SignedPieces
 The original component enumeration is retained. Only its splitting radius
 is parameterized; no physical midpoint condition is imposed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

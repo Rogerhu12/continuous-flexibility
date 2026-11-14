@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsRawPrefix
-import ContinuousFlexibility.Analysis.N04PulledFieldsInverseRawBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsRawPrefix
+public import ContinuousFlexibility.Analysis.N04PulledFieldsInverseRawBounds
 
 /-!
 # Common raw losses for a finite family of geometry atoms
@@ -9,6 +11,8 @@ Finite sums, zero-order identities and interpolation are handled over
 an abstract parameter space in `N04PulledFieldsInverseRawBounds`.
 The public interfaces retain the exact supplied mixed and joint towers.
 -/
+
+@[expose] public section
 
 noncomputable section
 

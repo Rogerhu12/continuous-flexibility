@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationParameterRescale
-import ContinuousFlexibility.Analysis.N04RealizationPotentialProductBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationParameterRescale
+public import ContinuousFlexibility.Analysis.N04RealizationPotentialProductBounds
 
 /-!
 # Potential products with a finite parameter interpolation cost
@@ -9,6 +11,8 @@ it from every raw factor, so the existing seven-term product estimate
 applies unchanged. The final genuine multilinear map restores precisely
 the total parameter cost. The common low order is not enlarged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04bOpticalCutoffProperties
-import ContinuousFlexibility.Analysis.N04bOpticalFieldType
-import ContinuousFlexibility.Analysis.N04bReferenceCorrection
-import ContinuousFlexibility.Analysis.N03CorrectionAssembly
+module
+
+public import ContinuousFlexibility.Analysis.N04bOpticalCutoffProperties
+public import ContinuousFlexibility.Analysis.N04bOpticalFieldType
+public import ContinuousFlexibility.Analysis.N04bReferenceCorrection
+public import ContinuousFlexibility.Analysis.N03CorrectionAssembly
 
 /-!
 # The literal optical correction satisfies the physical field contracts
@@ -12,6 +14,8 @@ cutoff, including the strict corrected characteristic gap and the exact
 reference flow. No regularity of an arbitrary stored coefficient field
 is inferred from its operator action.
 -/
+
+@[expose] public section
 
 noncomputable section
 

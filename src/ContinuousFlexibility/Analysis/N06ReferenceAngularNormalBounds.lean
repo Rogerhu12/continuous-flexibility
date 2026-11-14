@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06ReferenceNormalProjection
-import ContinuousFlexibility.Analysis.N06WeakAngularCalculus
-import ContinuousFlexibility.Analysis.N05ReferenceAngularJetEstimate
-import ContinuousFlexibility.Analysis.N05ReferenceAngularWeakClosure
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceNormalProjection
+public import ContinuousFlexibility.Analysis.N06WeakAngularCalculus
+public import ContinuousFlexibility.Analysis.N05ReferenceAngularJetEstimate
+public import ContinuousFlexibility.Analysis.N05ReferenceAngularWeakClosure
 
 /-!
 # Angular estimates for the same physical first normal derivative
@@ -13,6 +15,8 @@ mode with the original derivative mode. Weighted Parseval then gives all
 finite angular orders with the original material exponents and exactly
 one additional source angular derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

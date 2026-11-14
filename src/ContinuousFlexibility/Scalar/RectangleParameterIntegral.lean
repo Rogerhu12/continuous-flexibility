@@ -1,9 +1,11 @@
-import Mathlib.Analysis.Calculus.ParametricIntegral
-import Mathlib.Analysis.Calculus.ContDiff.Comp
-import Mathlib.Analysis.Calculus.ContDiff.Operations
-import Mathlib.Analysis.Normed.Module.FiniteDimension
-import Mathlib.MeasureTheory.Integral.Prod
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
+module
+
+public import Mathlib.Analysis.Calculus.ParametricIntegral
+public import Mathlib.Analysis.Calculus.ContDiff.Comp
+public import Mathlib.Analysis.Calculus.ContDiff.Operations
+public import Mathlib.Analysis.Normed.Module.FiniteDimension
+public import Mathlib.MeasureTheory.Integral.Prod
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
 
 /-!
 # Smooth parameters in compact physical integrals
@@ -13,6 +15,8 @@ of a parameter ball times the physical integration set supplies the uniform
 bound needed for differentiation under the integral. Iterating that argument
 gives every mixed derivative, including arbitrary direction tuples.
 -/
+
+@[expose] public section
 
 noncomputable section
 

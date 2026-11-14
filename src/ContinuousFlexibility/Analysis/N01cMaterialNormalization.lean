@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.StateKappaBounds
-import ContinuousFlexibility.Blueprint.Statements
-import Mathlib.Analysis.SpecialFunctions.SmoothTransition
+module
+
+public import ContinuousFlexibility.Analysis.StateKappaBounds
+public import ContinuousFlexibility.Blueprint.Statements
+public import Mathlib.Analysis.SpecialFunctions.SmoothTransition
 
 /-!
 # Normalizing the coefficient envelope without changing the physical model
@@ -15,6 +17,8 @@ This is a construction from the original N01b hypotheses. The lower bound
 on `E0` is a conclusion about a replacement witness, not a new hypothesis
 on the original witness.
 -/
+
+@[expose] public section
 
 noncomputable section
 

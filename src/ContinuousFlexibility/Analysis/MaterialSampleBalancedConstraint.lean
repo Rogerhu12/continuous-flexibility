@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.MaterialBalancedConstraint
-import ContinuousFlexibility.Analysis.MaterialSampleShift
+module
+
+public import ContinuousFlexibility.Analysis.MaterialBalancedConstraint
+public import ContinuousFlexibility.Analysis.MaterialSampleShift
 
 /-!
 # Fixed-order comparison of actual samples from a balanced constraint
@@ -8,6 +10,8 @@ Global comparison with the endpoint formulas transfers the scalar
 balanced-height estimate to actual material samples. The return label
 may first be changed by a uniformly bounded cell-index displacement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

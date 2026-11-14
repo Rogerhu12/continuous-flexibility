@@ -1,9 +1,11 @@
-import Mathlib.MeasureTheory.Function.L2Space
-import Mathlib.MeasureTheory.Function.LpSpace.Indicator
-import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
-import Mathlib.Analysis.SpecialFunctions.Pow.Real
-import Mathlib.Tactic.FieldSimp
-import Mathlib.Tactic.Linarith
+module
+
+public import Mathlib.MeasureTheory.Function.L2Space
+public import Mathlib.MeasureTheory.Function.LpSpace.Indicator
+public import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.Linarith
 
 /-!
 # The support-length factor in the buffer error
@@ -13,6 +15,8 @@ The pointwise cutoff commutator is supported on a layer of length
 the actual Lebesgue `L²` norm. The first lemma applies to any source
 measure and a measurable set of finite mass.
 -/
+
+@[expose] public section
 
 noncomputable section
 

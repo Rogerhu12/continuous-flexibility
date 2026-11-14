@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationPositiveHeightParameterPrefix
-import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationPositiveHeightParameterPrefix
+public import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
 
 /-!
 # One high seminorm for the actual positive Taylor height
@@ -9,6 +11,8 @@ height and reciprocal. The finite parameter cost enters the high order
 only. The actual output map is normalized once, retaining one height
 factor and the original low order, collar, and parameter neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

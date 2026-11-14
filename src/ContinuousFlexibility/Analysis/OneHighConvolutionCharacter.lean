@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighConvolutionComplex
-import ContinuousFlexibility.Analysis.OneHighCylinderFourierInverseKernel
-import Mathlib.MeasureTheory.Group.Integral
+module
+
+public import ContinuousFlexibility.Analysis.OneHighConvolutionComplex
+public import ContinuousFlexibility.Analysis.OneHighCylinderFourierInverseKernel
+public import Mathlib.MeasureTheory.Group.Integral
 
 /-!
 # Characters convert actual convolution to multiplication
@@ -10,6 +12,8 @@ for arbitrary integrable complex functions. Applied to the actual cylinder
 inverse character, this identifies the inverse of the full mixed convolution
 with pointwise multiplication of the two inverse integrals.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.AngularRawResolvent
-import ContinuousFlexibility.Analysis.AngularResolventDomains
-import Mathlib.Tactic.FieldSimp
-import Mathlib.Tactic.Module
+module
+
+public import ContinuousFlexibility.Analysis.AngularRawResolvent
+public import ContinuousFlexibility.Analysis.AngularResolventDomains
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.Module
 
 /-!
 # From an arbitrary angular operator to its bounded resolvent
@@ -14,6 +16,8 @@ the reciprocal spectral condition used by the bounded spectral theorem.
 The reconstructed unbounded operator is proved equal to the original
 operator, including its domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

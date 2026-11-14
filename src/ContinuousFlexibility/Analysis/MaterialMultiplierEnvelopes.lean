@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.MaterialDivergenceEnergy
+module
+
+public import ContinuousFlexibility.Analysis.MaterialDivergenceEnergy
 
 /-!
 # Common weighted energy envelopes for coefficient families
@@ -8,6 +10,8 @@ coefficient bound uses one fixed extra power of the material weight,
 independently of both spatial derivative orders. Finite Leibniz sums
 therefore give one nonnegative L² envelope for the entire family.
 -/
+
+@[expose] public section
 
 noncomputable section
 

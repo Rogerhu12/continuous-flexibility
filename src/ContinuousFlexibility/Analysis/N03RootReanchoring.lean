@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ScalarReanchoredInverseGerm
-import ContinuousFlexibility.Analysis.N03RootJointContinuity
+module
+
+public import ContinuousFlexibility.Analysis.ScalarReanchoredInverseGerm
+public import ContinuousFlexibility.Analysis.N03RootJointContinuity
 
 /-!
 # Reanchoring the original stored trajectories at either root
@@ -10,6 +12,8 @@ the actual chosen inverse. This uses neither a field certificate nor
 the N02 gauge identification, and supplies the initial-angle change used
 when comparing the right-root controlled flow with the stored family.
 -/
+
+@[expose] public section
 
 noncomputable section
 

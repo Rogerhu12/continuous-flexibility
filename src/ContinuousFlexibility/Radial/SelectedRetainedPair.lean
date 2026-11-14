@@ -1,8 +1,12 @@
-import ContinuousFlexibility.Radial.SelectedRetainedCone
-import ContinuousFlexibility.Radial.SeedGluedPairConstruction
-import ContinuousFlexibility.Radial.SelectedReferenceTransport
+module
+
+public import ContinuousFlexibility.Radial.SelectedRetainedCone
+public import ContinuousFlexibility.Radial.SeedGluedPairConstruction
+public import ContinuousFlexibility.Radial.SelectedReferenceTransport
 
 /-! # One actually glued pair retaining both long selected first cones -/
+
+@[expose] public section
 
 noncomputable section
 

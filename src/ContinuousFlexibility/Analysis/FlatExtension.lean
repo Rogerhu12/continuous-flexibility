@@ -1,5 +1,7 @@
-import Mathlib.Analysis.Calculus.FDeriv.Extend
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+module
+
+public import Mathlib.Analysis.Calculus.FDeriv.Extend
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
 
 /-!
 # Flat extension from actual one-sided derivative limits
@@ -14,6 +16,8 @@ Weighted Sobolev embedding and uniform estimates in angle and construction
 parameters are separate inputs needed to apply this one-dimensional result
 to the manuscript's weighted spaces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

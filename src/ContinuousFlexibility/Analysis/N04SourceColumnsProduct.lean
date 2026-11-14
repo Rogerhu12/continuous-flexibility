@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationFixedBasePrefix
-import ContinuousFlexibility.Analysis.N04RealizationFullWeightProductOneHigh
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationFixedBasePrefix
+public import ContinuousFlexibility.Analysis.N04RealizationFullWeightProductOneHigh
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
 
 /-!
 # Multiplication of scalar families with one high parameter seminorm
@@ -11,6 +13,8 @@ finite parameter prefix, interpolation distributes its loss among the
 factors; the full product is then normalized by multilinearity.  Every
 external scalar weight is retained, including the order-zero weights.
 -/
+
+@[expose] public section
 
 noncomputable section
 

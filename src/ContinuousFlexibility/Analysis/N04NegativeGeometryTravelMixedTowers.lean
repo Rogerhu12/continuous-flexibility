@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometryTravelTower
-import ContinuousFlexibility.Analysis.JointMixedTransportCalculus
-import ContinuousFlexibility.Analysis.SectorParameterGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryTravelTower
+public import ContinuousFlexibility.Analysis.JointMixedTransportCalculus
+public import ContinuousFlexibility.Analysis.SectorParameterGeometry
 
 /-!
 # Mixed spatial towers of the same stored travel chart
@@ -12,6 +14,8 @@ Freezing the physical point then gives the genuine parameter tower of
 each actual mixed derivative. Its diagonal jets are exactly the spatial
 mixed jets of the original joint tower.
 -/
+
+@[expose] public section
 
 noncomputable section
 

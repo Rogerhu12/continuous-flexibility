@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06PhysicalPairingCongruence
-import ContinuousFlexibility.Analysis.N06PhysicalSourceUniqueness
+module
+
+public import ContinuousFlexibility.Analysis.N06PhysicalPairingCongruence
+public import ContinuousFlexibility.Analysis.N06PhysicalSourceUniqueness
 
 /-!
 # The N05 reference equation on the explicit periodic reconstruction
@@ -9,6 +11,8 @@ N05 graph. Its unknown and source may both be replaced by their explicit
 canonical reconstructions because their periodic representatives agree
 almost everywhere. The source-normalizing column is retained verbatim.
 -/
+
+@[expose] public section
 
 noncomputable section
 

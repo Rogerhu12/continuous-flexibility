@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalGraph
-import ContinuousFlexibility.Statements.N07aCanonicalGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalGraph
+public import ContinuousFlexibility.Statements.N07aCanonicalGeometry
 
 /-!
 # Angular projection through the actual reference coordinates
@@ -9,6 +11,8 @@ therefore radial, as are the height and source multipliers.  Finite angular
 projection commutes with the true coordinate transforms on their open
 domains.  No commutation property of an inverse is assumed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01CoefficientSpatialJets
-import ContinuousFlexibility.Analysis.SmoothDirectionsConstantShift
+module
+
+public import ContinuousFlexibility.Analysis.N01CoefficientSpatialJets
+public import ContinuousFlexibility.Analysis.SmoothDirectionsConstantShift
 
 /-!
 # Full original coefficients in the actual mixed parameter/spatial tower
@@ -11,6 +13,8 @@ N01 estimate. The zero-order spatial identity adds back the actual
 reference derivative and gives the genuine parameter recurrence at
 every order, including the first derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06PositiveCubicSourceMap
-import ContinuousFlexibility.Analysis.N06WeightedHeight
+module
+
+public import ContinuousFlexibility.Analysis.N06PositiveCubicSourceMap
+public import ContinuousFlexibility.Analysis.N06WeightedHeight
 
 /-!
 # The positive cubic perturbation on the same N05 inverse
@@ -11,6 +13,8 @@ weak equation then give the positive cubic source as a bounded
 endomorphism of the original source level, without a material or angular
 loss in the target.
 -/
+
+@[expose] public section
 
 noncomputable section
 

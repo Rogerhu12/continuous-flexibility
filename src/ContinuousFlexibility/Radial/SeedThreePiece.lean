@@ -1,6 +1,10 @@
-import ContinuousFlexibility.Radial.SeedPairGluing
+module
+
+public import ContinuousFlexibility.Radial.SeedPairGluing
 
 /-! # Three-piece gluing with complete germs at both cuts -/
+
+@[expose] public section
 
 noncomputable section
 

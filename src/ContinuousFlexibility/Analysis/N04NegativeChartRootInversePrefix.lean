@@ -1,11 +1,15 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartRootTimeJets
-import ContinuousFlexibility.Analysis.N04NegativeChartRootForcingPrefix
-import ContinuousFlexibility.Analysis.N04NegativeChartVariationInduction
-import ContinuousFlexibility.Analysis.N04NegativeChartFiberComposition
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootTimeJets
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootForcingPrefix
+public import ContinuousFlexibility.Analysis.N04NegativeChartVariationInduction
+public import ContinuousFlexibility.Analysis.N04NegativeChartFiberComposition
 
 /-! Uniform finite state prefixes of the supplied inverse root flow.
 The index type contains every admissible coefficient representative and
 flow. Thus the variation constants precede every actual input. -/
+
+@[expose] public section
 
 noncomputable section
 

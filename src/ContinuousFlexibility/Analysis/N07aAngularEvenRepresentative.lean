@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aAngularPeriodMeasure
-import ContinuousFlexibility.Analysis.N07aAngularEven
-import Mathlib.Algebra.Order.ToIntervalMod
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularPeriodMeasure
+public import ContinuousFlexibility.Analysis.N07aAngularEven
+public import Mathlib.Algebra.Order.ToIntervalMod
 
 /-!
 # Genuine periodic even representatives of the canonical reflection class
@@ -9,6 +11,8 @@ Only the angular variable is extended. The representative agrees with the
 given L² class on its prescribed half period, so no radial periodicity or
 smoothness across the radial endpoints is required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

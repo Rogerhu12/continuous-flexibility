@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Blueprint.Statements
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
 
 /-!
 # The coefficient, speed and flow stages of N01c
@@ -9,6 +11,8 @@ claims that an arbitrary unlocalized witness of N01b has quantitative flow
 bounds.  All families below are the actual coefficients and speeds from
 `Statements.Nonlinear`, not abstract substitutes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

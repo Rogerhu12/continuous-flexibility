@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledDiscKernelPower
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsOrientationDirections
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledSamplePrefix
-import ContinuousFlexibility.Analysis.N01FlowChartIndependence
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledDiscKernelPower
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsOrientationDirections
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledSamplePrefix
+public import ContinuousFlexibility.Analysis.N01FlowChartIndependence
 
 /-!
 # The actual discriminant power prefix at the retained positive sample
@@ -11,6 +13,8 @@ finite sum is then transported by its fixed inward orientation and the
 endpoint-to-sample material comparison. Radial orders through three
 and five intrinsic angular orders use the single spatial budget eight.
 -/
+
+@[expose] public section
 
 noncomputable section
 

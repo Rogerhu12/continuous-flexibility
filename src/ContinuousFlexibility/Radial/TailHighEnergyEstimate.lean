@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.TailMassResistanceData
-import ContinuousFlexibility.Radial.TailWeightedPoincare
+module
+
+public import ContinuousFlexibility.Radial.TailMassResistanceData
+public import ContinuousFlexibility.Radial.TailWeightedPoincare
 
 /-!
 # The high part of the deep-tail form
@@ -9,6 +11,8 @@ estimate. Weighted zero means will supply these zeros for the high part of
 the low-mode decomposition. The separate initial resistance interval is
 included with the same trace estimate as every other gap.
 -/
+
+@[expose] public section
 
 noncomputable section
 

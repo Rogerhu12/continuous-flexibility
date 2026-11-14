@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Statements.ScalarWeighted
+module
+
+public import ContinuousFlexibility.Statements.ScalarWeighted
 
 /-!
 # The actual common low-order scalar neighbourhood
@@ -7,6 +9,8 @@ All four state coordinates are controlled by the one seminorm ball appearing
 in the frozen scalar statements.  The topology and bounds below use that ball
 itself, including its arbitrary fixed height centre.
 -/
+
+@[expose] public section
 
 noncomputable section
 

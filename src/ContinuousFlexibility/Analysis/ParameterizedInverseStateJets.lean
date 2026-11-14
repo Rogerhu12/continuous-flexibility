@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04FlowInverseGeometry
-import ContinuousFlexibility.Analysis.NonlinearInverseMaterialBounds
-import ContinuousFlexibility.Analysis.ScalarFlowTriangularJets
+module
+
+public import ContinuousFlexibility.Analysis.N04FlowInverseGeometry
+public import ContinuousFlexibility.Analysis.NonlinearInverseMaterialBounds
+public import ContinuousFlexibility.Analysis.ScalarFlowTriangularJets
 
 /-!
 # One state loss for the actual parameterized circle inverse
@@ -11,6 +13,8 @@ the external parameters. Its first differential is derived from the
 right-inverse equation, and every higher differential follows from the
 proved nonlinear inverse polynomial before state interpolation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

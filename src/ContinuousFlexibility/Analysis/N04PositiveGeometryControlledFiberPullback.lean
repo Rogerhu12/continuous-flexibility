@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.EndpointFiberPullbackAssembly
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledAngularFiber
+module
+
+public import ContinuousFlexibility.Analysis.EndpointFiberPullbackAssembly
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledAngularFiber
 
 /-!
 # A polynomial choice for the displayed inverse-fiber interpolation
@@ -8,6 +10,8 @@ The actual inverse boundary traces are bounded before choosing a member
 of the family. The supplied-bound interpolation then uses exactly this
 fixed monomial as its numerical envelope and keeps its displayed formula.
 -/
+
+@[expose] public section
 
 noncomputable section
 

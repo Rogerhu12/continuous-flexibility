@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterNaturalMassAllIndices
-import ContinuousFlexibility.Radial.OuterNaturalPhysicalL2
+module
+
+public import ContinuousFlexibility.Radial.OuterNaturalMassAllIndices
+public import ContinuousFlexibility.Radial.OuterNaturalPhysicalL2
 
 /-!
 # The actual physical natural norm in every frequency band
@@ -9,6 +11,8 @@ The conclusion uses the actual radial Hilbert measure on the entire
 selected tail, includes its initial resistance edge, and applies to
 every positive transition index.
 -/
+
+@[expose] public section
 
 noncomputable section
 

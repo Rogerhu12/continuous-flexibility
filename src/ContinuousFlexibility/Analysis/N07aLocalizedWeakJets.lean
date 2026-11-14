@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalExtension
-import ContinuousFlexibility.Analysis.N07aWeakDivergenceEquation
-import ContinuousFlexibility.Analysis.N07aCylinderReconstruction
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalExtension
+public import ContinuousFlexibility.Analysis.N07aWeakDivergenceEquation
+public import ContinuousFlexibility.Analysis.N07aCylinderReconstruction
 
 /-!
 # Compact radial localization of every actual canonical weak jet
@@ -10,6 +12,8 @@ original canonical interval. Extension by zero therefore introduces no
 boundary distributions. An induction using the genuine first product
 rule gives the full cylinder weak jet tower and its smooth representative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

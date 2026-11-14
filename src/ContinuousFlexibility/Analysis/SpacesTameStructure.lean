@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SpacesSequenceRetraction
+module
+
+public import ContinuousFlexibility.Analysis.SpacesSequenceRetraction
 
 /-!
 # Smoothing and interpolation after the concrete retractions
@@ -7,6 +9,8 @@ The exponential model grading equals its projective grading because the
 weighted level norms are monotone. The stated H01 calculus therefore
 transfers smoothing to each actual retract and supplies interpolation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

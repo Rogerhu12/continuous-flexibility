@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.SelectedRetainedRegionalInverse
-import ContinuousFlexibility.Radial.SelectedOuterRealizations
+module
+
+public import ContinuousFlexibility.Radial.SelectedRetainedRegionalInverse
+public import ContinuousFlexibility.Radial.SelectedOuterRealizations
 
 /-!
 # Actual exterior realizations for one fixed selected band and reference
@@ -9,6 +11,8 @@ shell. Its natural functions are inputs already fixed by the first- or
 later-band construction. The old outer fields and all inner fields are
 irrelevant to the construction and are never used as hypotheses.
 -/
+
+@[expose] public section
 
 noncomputable section
 

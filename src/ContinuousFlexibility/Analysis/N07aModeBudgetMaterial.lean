@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aGeometryLengthBounds
-import ContinuousFlexibility.Analysis.N07aCanonicalModeEnergySum
+module
+
+public import ContinuousFlexibility.Analysis.N07aGeometryLengthBounds
+public import ContinuousFlexibility.Analysis.N07aCanonicalModeEnergySum
 
 /-!
 # Material envelopes for the actual weak mode budget
@@ -8,6 +10,8 @@ The complete energy expression, the affine L² normalization, and any
 fixed material output weight are absorbed after they have been formed.
 The positive height gain is used only once in that final step.
 -/
+
+@[expose] public section
 
 noncomputable section
 

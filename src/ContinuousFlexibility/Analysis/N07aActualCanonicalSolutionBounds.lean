@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N07aActualNormalFamilyData
-import ContinuousFlexibility.Analysis.N07aCurrentNormalBounds
-import ContinuousFlexibility.Analysis.N07aNormalExpansionTame
-import ContinuousFlexibility.Analysis.N07aLinearJetsFromL2
-import ContinuousFlexibility.Analysis.SolveResidualSpaces
+module
+
+public import ContinuousFlexibility.Analysis.N07aActualNormalFamilyData
+public import ContinuousFlexibility.Analysis.N07aCurrentNormalBounds
+public import ContinuousFlexibility.Analysis.N07aNormalExpansionTame
+public import ContinuousFlexibility.Analysis.N07aLinearJetsFromL2
+public import ContinuousFlexibility.Analysis.SolveResidualSpaces
 
 /-!
 # Fixed-loss jets of the same actual canonical solution
@@ -12,6 +14,8 @@ first-normal weak jets and the original source with its three scalar
 columns feed the exact normal recurrence. Open-strip Sobolev estimates
 then give the pointwise mixed jets used in physical reconstruction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

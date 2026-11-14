@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsSlab
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsSlab
 
 /-!
 # Forward radial kernel jets on the same physical slab
@@ -8,6 +10,8 @@ used by the inverse kernel. The evaluation radius stays between the two
 physical endpoints, so all ordinary finite-kernel jets have the same
 kind of sampled material envelope.
 -/
+
+@[expose] public section
 
 noncomputable section
 

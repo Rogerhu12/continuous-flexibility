@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cFlowVariationCircleData
-import ContinuousFlexibility.Analysis.N01cFlowForcingSobolev
+module
+
+public import ContinuousFlexibility.Analysis.N01cFlowVariationCircleData
+public import ContinuousFlexibility.Analysis.N01cFlowForcingSobolev
 
 /-!
 # The actual variational forcing has a one-high circle estimate
@@ -10,6 +12,8 @@ finite product estimate applies without an additional regularity
 hypothesis on the forcing factors. Its right side retains the actual
 selected speed jets and strict lower parameter variations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

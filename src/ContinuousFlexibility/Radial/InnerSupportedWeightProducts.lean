@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerSupportedWeights
-import ContinuousFlexibility.Radial.InnerLocalizedInverseBound
+module
+
+public import ContinuousFlexibility.Radial.InnerSupportedWeights
+public import ContinuousFlexibility.Radial.InnerLocalizedInverseBound
 
 /-!
 # Products of actual weights on the supported physical source
@@ -9,6 +11,8 @@ These identities identify that composition with multiplication by the
 pointwise product, including the unchanged scalar coordinate. The
 auxiliary bounds used to construct a multiplier do not change its value.
 -/
+
+@[expose] public section
 
 noncomputable section
 

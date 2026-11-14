@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04bNegativePieceProperties
-import ContinuousFlexibility.Analysis.N04bRootPastingInverse
-import ContinuousFlexibility.Analysis.N04bActualRootInterior
+module
+
+public import ContinuousFlexibility.Analysis.N04bNegativePieceProperties
+public import ContinuousFlexibility.Analysis.N04bRootPastingInverse
+public import ContinuousFlexibility.Analysis.N04bActualRootInterior
 
 /-!
 # A genuinely constructed negative canonical piece
@@ -11,6 +13,8 @@ formulas. Continuity identifies the pasted boundary values with the
 actual closed travel inverse, while the local inverse theorem gives full
 inverse germs at both the physical root and the moving artificial cut.
 -/
+
+@[expose] public section
 
 noncomputable section
 

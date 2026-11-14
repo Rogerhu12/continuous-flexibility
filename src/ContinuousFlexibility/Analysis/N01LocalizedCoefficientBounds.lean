@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N01CoefficientValueJets
-import ContinuousFlexibility.Analysis.OneHighCircleFlowLocalization
-import ContinuousFlexibility.Analysis.PhysicalTransmissionTrace
-import ContinuousFlexibility.Analysis.SpacesCylinderEvenJets
-import ContinuousFlexibility.Analysis.SolveReturnEquations
+module
+
+public import ContinuousFlexibility.Analysis.N01CoefficientValueJets
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowLocalization
+public import ContinuousFlexibility.Analysis.PhysicalTransmissionTrace
+public import ContinuousFlexibility.Analysis.SpacesCylinderEvenJets
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # Uniform actual coefficient jets on one physical cell strip
@@ -13,6 +15,8 @@ coefficient-difference estimate then bounds all selected coefficient
 jets on the inner strip. Constants may depend on the fixed cell and
 spatial order; the state base and loss remain exactly those of N01.
 -/
+
+@[expose] public section
 
 noncomputable section
 

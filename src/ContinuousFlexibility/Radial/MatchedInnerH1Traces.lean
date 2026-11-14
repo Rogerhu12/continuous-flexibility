@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerRadialAffineLift
-import ContinuousFlexibility.Radial.ModeWeakRegularity
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialAffineLift
+public import ContinuousFlexibility.Radial.ModeWeakRegularity
 
 /-!
 # The actual H¹ traces as values of a continuous representative
@@ -11,6 +13,8 @@ representative, and the canonical reciprocal-density trace pairings are
 its two endpoint values. No regularity or trace identity is assumed of
 an arbitrary element of the closed domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

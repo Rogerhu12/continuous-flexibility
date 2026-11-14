@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.IntervalWeakRegularity
-import ContinuousFlexibility.Analysis.IntervalWeakPotential
+module
+
+public import ContinuousFlexibility.Analysis.IntervalWeakRegularity
+public import ContinuousFlexibility.Analysis.IntervalWeakPotential
 
 /-!
 # C¹ representatives for weak equations with a continuous potential
@@ -8,6 +10,8 @@ All weak equations use actual scalar integrals. The representative is chosen
 only after applying one-dimensional weak regularity; its primitive flux is
 then rewritten with the new representative by ordinary a.e. congruence.
 -/
+
+@[expose] public section
 
 noncomputable section
 

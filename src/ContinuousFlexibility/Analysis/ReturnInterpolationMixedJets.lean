@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.ReturnInitialMapJetBounds
-import ContinuousFlexibility.Analysis.ReturnInterpolationJetBounds
-import ContinuousFlexibility.Analysis.ReturnCorrectionVelocityRegularity
-import ContinuousFlexibility.Analysis.PolynomialFiberInverseJets
+module
+
+public import ContinuousFlexibility.Analysis.ReturnInitialMapJetBounds
+public import ContinuousFlexibility.Analysis.ReturnInterpolationJetBounds
+public import ContinuousFlexibility.Analysis.ReturnCorrectionVelocityRegularity
+public import ContinuousFlexibility.Analysis.PolynomialFiberInverseJets
 
 /-!
 # Mixed jets of the actual cutoff interpolation and its inverse
@@ -11,6 +13,8 @@ The actual cutoff has component-power radial bounds. Their product
 controls the full mixed jets of the interpolation, and the triangular
 inverse recurrence controls its actual inverse with the same weights.
 -/
+
+@[expose] public section
 
 noncomputable section
 

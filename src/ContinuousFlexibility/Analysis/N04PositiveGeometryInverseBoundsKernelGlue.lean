@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsKernelPrimitive
-import ContinuousFlexibility.Analysis.PositiveReferenceAffineDifference
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsKernelPrimitive
+public import ContinuousFlexibility.Analysis.PositiveReferenceAffineDifference
 
 /-!
 # Uniform jets through the two actual radial collars
@@ -10,6 +12,8 @@ jet of one of its two collars or of the identity radial coordinate.
 The same three uniform polynomial envelopes therefore bound the glue,
 including both interface radii.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N07aScalarColumnVolumes
-import ContinuousFlexibility.Analysis.N07aRelativeMainIdentity
-import ContinuousFlexibility.Analysis.N07aReferenceScalarMaps
-import ContinuousFlexibility.Analysis.N07aAngularBlockWeights
-import ContinuousFlexibility.Analysis.N07aAngularBandNorm
+module
+
+public import ContinuousFlexibility.Analysis.N07aScalarColumnVolumes
+public import ContinuousFlexibility.Analysis.N07aRelativeMainIdentity
+public import ContinuousFlexibility.Analysis.N07aReferenceScalarMaps
+public import ContinuousFlexibility.Analysis.N07aAngularBlockWeights
+public import ContinuousFlexibility.Analysis.N07aAngularBandNorm
 
 /-!
 # The three original finite-rank columns as weighted angular blocks
@@ -12,6 +14,8 @@ output jets therefore give the same summable gap kernel for the columns
 and their true frequency commutators. The construction stays in the
 original volume graph and retains the original column difference.
 -/
+
+@[expose] public section
 
 noncomputable section
 

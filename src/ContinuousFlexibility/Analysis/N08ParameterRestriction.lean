@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N08Neighborhoods
-import ContinuousFlexibility.Analysis.StateKappaBounds
-import ContinuousFlexibility.Analysis.N06Neighborhood
-import ContinuousFlexibility.Analysis.N07aNeighborhood
+module
+
+public import ContinuousFlexibility.Analysis.N08Neighborhoods
+public import ContinuousFlexibility.Analysis.StateKappaBounds
+public import ContinuousFlexibility.Analysis.N06Neighborhood
+public import ContinuousFlexibility.Analysis.N07aNeighborhood
 
 /-!
 # Retaining the nonlinear construction on a common smaller neighborhood
@@ -11,6 +13,8 @@ together with a smaller positive radius, preserve all assertions. The final
 joint residual may therefore choose its own common low-order neighborhood
 without replacing the already constructed physical scalar inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

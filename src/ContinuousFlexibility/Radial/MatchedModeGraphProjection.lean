@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ReferenceZeroModeGraph
-import ContinuousFlexibility.Radial.FourierOrthogonality
-import ContinuousFlexibility.Radial.MatchedModePhysicalEquation
+module
+
+public import ContinuousFlexibility.Radial.ReferenceZeroModeGraph
+public import ContinuousFlexibility.Radial.FourierOrthogonality
+public import ContinuousFlexibility.Radial.MatchedModePhysicalEquation
 
 /-!
 # Cosine projection of the actual two-dimensional weak graph
@@ -9,6 +11,8 @@ These lemmas use the same normalized angular integrals as ReferenceGraph.
 The tests here have topological radial support compactly contained in the
 core. Extension to the larger frozen modal test class is a separate step.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cCosineSignedSpeed
-import ContinuousFlexibility.Analysis.N01cMixedPowerAlgebra
-import ContinuousFlexibility.Analysis.N01cStateAngleSmoothDirections
+module
+
+public import ContinuousFlexibility.Analysis.N01cCosineSignedSpeed
+public import ContinuousFlexibility.Analysis.N01cMixedPowerAlgebra
+public import ContinuousFlexibility.Analysis.N01cStateAngleSmoothDirections
 
 /-!
 # Actual angular state towers of a signed cosine speed
@@ -9,6 +11,8 @@ Only the two genuine physical mixed-jet towers are inputs. Their exact
 signed cosine identity determines the state tower at every external
 time. At a sine zero the actual angular family is identically zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

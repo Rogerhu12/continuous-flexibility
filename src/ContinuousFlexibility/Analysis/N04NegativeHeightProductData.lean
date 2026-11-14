@@ -1,12 +1,16 @@
-import ContinuousFlexibility.Analysis.N04NegativeHeightDomains
-import ContinuousFlexibility.Analysis.N04NegativeGeometryDataCollector
-import ContinuousFlexibility.Analysis.N04SourceColumnsFullProductBounds
-import ContinuousFlexibility.Analysis.N04NegativeHeightReferenceProduct
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeHeightDomains
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryDataCollector
+public import ContinuousFlexibility.Analysis.N04SourceColumnsFullProductBounds
+public import ContinuousFlexibility.Analysis.N04NegativeHeightReferenceProduct
 
 /-! Multiplication of current scalar families on selected negative pieces.
 The low order and the neighborhood are chosen before the parameter order.
 The full product jet retains the sampled height gain, and its first jet
 controls the reference difference on the same neighborhood. -/
+
+@[expose] public section
 
 noncomputable section
 

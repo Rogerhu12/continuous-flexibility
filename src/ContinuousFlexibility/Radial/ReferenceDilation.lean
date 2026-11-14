@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Radial
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
+module
+
+public import ContinuousFlexibility.Statements.Radial
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
 
 /-!
 # Radius and height changes on the actual radial equation
@@ -9,6 +11,8 @@ identity includes its exact source factor; the negative components and
 their travel integrals are preserved by the same radius change.
 The germ hypotheses are local equalities of the actual profiles.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

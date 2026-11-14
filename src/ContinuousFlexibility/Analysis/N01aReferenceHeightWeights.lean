@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.AffineMaterialSampling
-import ContinuousFlexibility.Analysis.MaterialRadialExpansion
-import ContinuousFlexibility.Radial.WeightKernelBounds
+module
+
+public import ContinuousFlexibility.Analysis.AffineMaterialSampling
+public import ContinuousFlexibility.Analysis.MaterialRadialExpansion
+public import ContinuousFlexibility.Radial.WeightKernelBounds
 
 /-!
 # The material height weight versus the reference output weight
@@ -10,6 +12,8 @@ Every fixed envelope moment, including that scale, is absorbed by a
 positive fraction of the additional reference attenuation. The remaining
 comparison uses the actual cell logarithms from the affine material model.
 -/
+
+@[expose] public section
 
 noncomputable section
 

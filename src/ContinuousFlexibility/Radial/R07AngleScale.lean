@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Statements.RadialTargets
+module
+
+public import ContinuousFlexibility.Statements.RadialTargets
 
 /-!
 # Normalizing the matching states without changing their angle
@@ -8,6 +10,8 @@ height-exclusion estimate normalizes the incoming state at the join. The
 angle sine is unchanged by either nonzero rescaling. These lemmas transfer
 the estimate back to the cut normalization in the public R07 statement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

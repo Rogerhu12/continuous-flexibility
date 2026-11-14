@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01ReverseMaterialOrder
-import ContinuousFlexibility.Analysis.ActualRadialCellComparison
+module
+
+public import ContinuousFlexibility.Analysis.N01ReverseMaterialOrder
+public import ContinuousFlexibility.Analysis.ActualRadialCellComparison
 
 /-!
 # Fixed material-order transfer at every containing cell
@@ -9,6 +11,8 @@ each component. Any other containing cell has a uniformly close index.
 Reserving half an extra material order for each comparison gives total
 loss one, uniformly over all actual containing cells.
 -/
+
+@[expose] public section
 
 noncomputable section
 

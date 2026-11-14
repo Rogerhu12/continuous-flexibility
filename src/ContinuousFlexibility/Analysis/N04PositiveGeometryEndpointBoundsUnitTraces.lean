@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsUnitModel
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryFormulaAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsUnitModel
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryFormulaAlgebra
 
 /-!
 # Literal finite traces of the same unit model
@@ -9,6 +11,8 @@ order three are precisely the eight differential formulas. The equality
 uses the actual flow at the current state and removes only the harmless
 coefficient localization at its zero axis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

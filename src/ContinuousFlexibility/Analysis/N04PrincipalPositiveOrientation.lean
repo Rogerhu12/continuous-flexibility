@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PrincipalPositiveIndex
-import ContinuousFlexibility.Analysis.N04PrincipalPositiveReference
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalPositiveIndex
+public import ContinuousFlexibility.Analysis.N04PrincipalPositiveReference
 
 /-!
 # Orientation and reference ellipticity of the supplied positive atlas
@@ -9,6 +11,8 @@ same actual maps. Consequently its inverse determinant is positive and
 the principal formula can use an ordinary reciprocal. The reference
 leading coefficient is positive independently of every current bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

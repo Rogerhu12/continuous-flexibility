@@ -1,7 +1,11 @@
-import ContinuousFlexibility.Analysis.SpacesTraceGeometry
-import ContinuousFlexibility.Scalar.WeightedMaterialScale
+module
+
+public import ContinuousFlexibility.Analysis.SpacesTraceGeometry
+public import ContinuousFlexibility.Scalar.WeightedMaterialScale
 
 /-! # Every inverse endpoint-distance power has subpower material growth -/
+
+@[expose] public section
 
 noncomputable section
 

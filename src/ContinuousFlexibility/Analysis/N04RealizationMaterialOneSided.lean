@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.MaterialSampleShift
+module
+
+public import ContinuousFlexibility.Analysis.MaterialSampleShift
 
 /-!
 # Exact height decay under a one-sided endpoint comparison
@@ -9,6 +11,8 @@ weight in that region. When the coordinates are comparable, a bounded
 height shift and a fixed coefficient rescaling retain the same height
 exponent at the sample.
 -/
+
+@[expose] public section
 
 noncomputable section
 

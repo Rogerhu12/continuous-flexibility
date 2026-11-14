@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationPositiveHeightTaylorBounds
-import ContinuousFlexibility.Analysis.N04RealizationParameterRescale
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationPositiveHeightTaylorBounds
+public import ContinuousFlexibility.Analysis.N04RealizationParameterRescale
 
 /-!+# The actual positive height with a finite parameter interpolation cost
 
@@ -9,6 +11,8 @@ before the actual logarithmic Taylor and exponential construction. The
 genuine output multilinear map restores only the total parameter order.
 The fixed collar, low order, and parameter domain are unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

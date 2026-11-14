@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.TailNaturalInitialExtension
-import ContinuousFlexibility.Radial.TailActualSolutionNodes
+module
+
+public import ContinuousFlexibility.Radial.TailNaturalInitialExtension
+public import ContinuousFlexibility.Radial.TailActualSolutionNodes
 
 /-!
 # A Dirichlet left state paired with the natural state
@@ -9,6 +11,8 @@ Subtracting the appropriate multiple of the natural solution sets its
 entrance value to zero. The two states have Wronskian one throughout the
 tail, which fixes the normalization of the Green kernel.
 -/
+
+@[expose] public section
 
 noncomputable section
 

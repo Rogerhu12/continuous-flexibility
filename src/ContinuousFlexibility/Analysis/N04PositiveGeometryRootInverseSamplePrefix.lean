@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryRootInverseDifferentialDirections
-import ContinuousFlexibility.Analysis.N04PositiveGeometryRootInverseLabelSamplePrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsOddPowerPrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledFiniteCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryRootInverseDifferentialDirections
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryRootInverseLabelSamplePrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsOddPowerPrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledFiniteCalculus
 
 /-!
 # The actual inverse differential at the retained positive sample
@@ -10,6 +12,8 @@ All three scalar prefixes share one low base. Their enlarged angular
 horizons align the high seminorm and power denominator before the
 inverse-label substitution. The original context and atlas are retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

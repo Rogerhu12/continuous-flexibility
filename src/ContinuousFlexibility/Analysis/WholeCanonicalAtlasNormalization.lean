@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.WholeCanonicalAtlasData
-import ContinuousFlexibility.Analysis.WholePositiveNormalizationGeometry
+module
+
+public import ContinuousFlexibility.Analysis.WholeCanonicalAtlasData
+public import ContinuousFlexibility.Analysis.WholePositiveNormalizationGeometry
 
 /-!
 # Normalization of the single whole-component atlas
@@ -8,6 +10,8 @@ Restrict the old normalization set to the reference-only buffered set.
 The negative fields are unchanged; each positive normalization point lies
 in the actual identity middle for both the current and reference maps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05ReferenceNullTransport
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05ReferenceNullTransport
 
 /-!
 # Root-to-cut identities for the actual reference chart
@@ -8,6 +10,8 @@ Both physical orientations have the same inward optical displacement.
 At the root the two null coordinates coincide with the actual angular
 chart.  At the cut their difference is the fixed Tricomi displacement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

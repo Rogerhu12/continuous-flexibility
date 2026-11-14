@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.PlanarInverseRegularity
-import ContinuousFlexibility.Analysis.ParameterizedCircleInverse
-import ContinuousFlexibility.Scalar.HeightDerivatives
-import Mathlib.Topology.Order.Basic
+module
+
+public import ContinuousFlexibility.Analysis.PlanarInverseRegularity
+public import ContinuousFlexibility.Analysis.ParameterizedCircleInverse
+public import ContinuousFlexibility.Scalar.HeightDerivatives
+public import Mathlib.Topology.Order.Basic
 
 /-!
 # The actual angular inverse on a parameter strip
@@ -12,6 +14,8 @@ by trapping the inverse between two fixed angular values. On an open
 parameter set, the actual planar inverse function theorem gives joint
 smoothness of the same choice.
 -/
+
+@[expose] public section
 
 noncomputable section
 

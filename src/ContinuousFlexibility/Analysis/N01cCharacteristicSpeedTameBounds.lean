@@ -1,11 +1,13 @@
-import ContinuousFlexibility.Analysis.N01cWholeSpeedPowerBounds
-import ContinuousFlexibility.Analysis.N01cEndpointReferenceBounds
-import ContinuousFlexibility.Analysis.N01cEndpointSamplePowerBounds
-import ContinuousFlexibility.Analysis.N01cEndpointMixedPowerNormalization
-import ContinuousFlexibility.Analysis.N01cOpticalEndpointPowerBounds
-import ContinuousFlexibility.Analysis.N01cBoundsRestriction
-import ContinuousFlexibility.Analysis.N01cStateInterpolation
-import ContinuousFlexibility.Blueprint.N01c.Statements
+module
+
+public import ContinuousFlexibility.Analysis.N01cWholeSpeedPowerBounds
+public import ContinuousFlexibility.Analysis.N01cEndpointReferenceBounds
+public import ContinuousFlexibility.Analysis.N01cEndpointSamplePowerBounds
+public import ContinuousFlexibility.Analysis.N01cEndpointMixedPowerNormalization
+public import ContinuousFlexibility.Analysis.N01cOpticalEndpointPowerBounds
+public import ContinuousFlexibility.Analysis.N01cBoundsRestriction
+public import ContinuousFlexibility.Analysis.N01cStateInterpolation
+public import ContinuousFlexibility.Blueprint.N01c.Statements
 
 /-!
 # The actual characteristic-speed tame estimate
@@ -15,6 +17,8 @@ combined before multilinear normalization. Both the radial endpoint power
 and the physical material sample are unchanged. Reference subtraction
 uses the genuine first jet of the complete speed on the common segment.
 -/
+
+@[expose] public section
 
 noncomputable section
 

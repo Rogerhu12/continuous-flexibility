@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ModeCompactLocal
-import ContinuousFlexibility.Radial.WeakGreenWithin
+module
+
+public import ContinuousFlexibility.Radial.ModeCompactLocal
+public import ContinuousFlexibility.Radial.WeakGreenWithin
 
 /-!
 # Finite Green identities for actual modal weak solutions
@@ -8,6 +10,8 @@ These identities apply on any compact subinterval of the radial core,
 including intervals whose endpoints are matching cuts. Representatives
 only need C1 or C2 regularity within the displayed closed interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

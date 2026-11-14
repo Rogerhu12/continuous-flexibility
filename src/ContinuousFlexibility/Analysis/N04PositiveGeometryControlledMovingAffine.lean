@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledMovingComposition
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsMixedAffine
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledMovingComposition
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsMixedAffine
 
 /-!
 # Moving-point estimates for the original state towers
@@ -9,6 +11,8 @@ the supplied genuine tower on the original topological state space.
 The selected state singletons keep the outer state prefix unchanged,
 even when the requested spatial order grows.
 -/
+
+@[expose] public section
 
 noncomputable section
 

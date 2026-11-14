@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N01ReturnLinearOperators
-import ContinuousFlexibility.Analysis.N02ChartIncrement
-import ContinuousFlexibility.Analysis.N02ChartError
-import ContinuousFlexibility.Analysis.N02ProjectiveChartVariation
-import ContinuousFlexibility.Analysis.ReturnChartIdentities
+module
+
+public import ContinuousFlexibility.Analysis.N01ReturnLinearOperators
+public import ContinuousFlexibility.Analysis.N02ChartIncrement
+public import ContinuousFlexibility.Analysis.N02ChartError
+public import ContinuousFlexibility.Analysis.N02ProjectiveChartVariation
+public import ContinuousFlexibility.Analysis.ReturnChartIdentities
 
 /-!
 # Assembly of the actual N02 return equation
@@ -12,6 +14,8 @@ smooth tame tower determine all remaining fields of the frozen return
 equation. The Fourier inverse has the fixed loss already proved from
 N01, and the variation identity holds in the full projective topology.
 -/
+
+@[expose] public section
 
 noncomputable section
 

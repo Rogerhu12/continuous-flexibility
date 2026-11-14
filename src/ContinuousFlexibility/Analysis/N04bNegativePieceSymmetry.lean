@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bNegativePieceProperties
-import ContinuousFlexibility.Analysis.N04bRootHeightSymmetry
+module
+
+public import ContinuousFlexibility.Analysis.N04bNegativePieceProperties
+public import ContinuousFlexibility.Analysis.N04bRootHeightSymmetry
 
 /-!
 # Actual root-map symmetries used by the negative atlas
@@ -8,6 +10,8 @@ Every comparison map is the literal root transform of the actual
 corrected travel chart. Periodicity and reflection are deduced from its
 proved symmetries and the actual coefficient symmetries.
 -/
+
+@[expose] public section
 
 noncomputable section
 

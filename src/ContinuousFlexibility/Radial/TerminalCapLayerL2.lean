@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.TerminalCapLift
-import Mathlib.MeasureTheory.Function.LpSeminorm.Indicator
-import Mathlib.MeasureTheory.Measure.WithDensity
-import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
+module
+
+public import ContinuousFlexibility.Radial.TerminalCapLift
+public import Mathlib.MeasureTheory.Function.LpSeminorm.Indicator
+public import Mathlib.MeasureTheory.Measure.WithDensity
+public import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
 
 /-!
 # Terminal source layers in the actual radial weighted measure
@@ -12,6 +14,8 @@ the actual radial L² space, with an explicit seminorm bound. The final
 theorem applies this to the genuine Jacobi source from TerminalCapLift
 and derives its envelope from the original coefficient and jet bounds.
 -/
+
+@[expose] public section
 
 noncomputable section
 

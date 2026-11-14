@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationFixedBasePrefix
-import ContinuousFlexibility.Analysis.N04RealizationFullWeightProductOneHigh
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationFixedBasePrefix
+public import ContinuousFlexibility.Analysis.N04RealizationFullWeightProductOneHigh
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
 
 /-!
 # Interpolation of a finite prefix of current scalar towers
@@ -9,6 +11,8 @@ The external weight may depend on the parameter order. This includes
 the weight which is one at order zero and the sampled height at every
 positive order. The low order is fixed before the prefix is chosen.
 -/
+
+@[expose] public section
 
 noncomputable section
 

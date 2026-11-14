@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05CanonicalPhysicalChange
-import ContinuousFlexibility.Analysis.N05CanonicalPhysicalRepresentatives
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05CanonicalPhysicalChange
+public import ContinuousFlexibility.Analysis.N05CanonicalPhysicalRepresentatives
 
 /-!
 # The actual canonical height transform of a physical field
@@ -9,6 +11,8 @@ The inverse chart transfers the measurable representative class. The genuine
 Jacobian formula then identifies the square integral of the height transform
 with its physical density, before any weighted estimate is applied.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aGeometryOpenCoefficients
+module
+
+public import ContinuousFlexibility.Analysis.N07aGeometryOpenCoefficients
 
 /-!
 # The actual canonical scalar columns in the open jet algebra
@@ -8,6 +10,8 @@ divergence, the ν derivative, and the chosen compatibility source. Their
 spatial regularity, periodicity and finite-piece bounds come directly
 from the corresponding primitive atoms.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.IntervalWeakPrimitive
-import Mathlib.Analysis.Calculus.Deriv.Support
-import Mathlib.Analysis.SpecificLimits.Basic
-import Mathlib.Tactic.Positivity
+module
+
+public import ContinuousFlexibility.Analysis.IntervalWeakPrimitive
+public import Mathlib.Analysis.Calculus.Deriv.Support
+public import Mathlib.Analysis.SpecificLimits.Basic
+public import Mathlib.Tactic.Positivity
 
 /-!
 # Compression of smooth interval tests
@@ -11,6 +13,8 @@ midpoint moves its topological support strictly inside the interval. As
 the expansion factors decrease to one, the test and its first two
 derivatives converge pointwise to the original test.
 -/
+
+@[expose] public section
 
 open Set Filter MeasureTheory
 open scoped ContDiff Topology

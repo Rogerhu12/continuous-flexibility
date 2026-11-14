@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets
-import ContinuousFlexibility.Analysis.N08MaterialWeightIntegrability
-import ContinuousFlexibility.Scalar.WeightedAngularPrimitiveBounds
-import ContinuousFlexibility.Scalar.WeightedJetNorm
+module
+
+public import ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets
+public import ContinuousFlexibility.Analysis.N08MaterialWeightIntegrability
+public import ContinuousFlexibility.Scalar.WeightedAngularPrimitiveBounds
+public import ContinuousFlexibility.Scalar.WeightedJetNorm
 
 /-!
 # Actual weighted height norms of radial families
@@ -10,6 +12,8 @@ All weighted jets are dominated by the same positive material-height power,
 which is square integrable on the full cylinder. The finite physical jet
 norm therefore has a uniform bound by the weak control norm at every order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

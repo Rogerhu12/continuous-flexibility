@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01aControlGeometryAssembly
-import ContinuousFlexibility.Analysis.N01cPrimitiveGeometry
-import ContinuousFlexibility.Analysis.N01cCoefficientRadialPowerInputs
+module
+
+public import ContinuousFlexibility.Analysis.N01aControlGeometryAssembly
+public import ContinuousFlexibility.Analysis.N01cPrimitiveGeometry
+public import ContinuousFlexibility.Analysis.N01cCoefficientRadialPowerInputs
 
 /-!
 # N01a controls with their actual containing cells
@@ -9,6 +11,8 @@ The same normalized optical controls and reference state are assembled
 with the containing host map. The index comparison is a proved input
 about that map; no identity-cell replacement is made.
 -/
+
+@[expose] public section
 
 noncomputable section
 

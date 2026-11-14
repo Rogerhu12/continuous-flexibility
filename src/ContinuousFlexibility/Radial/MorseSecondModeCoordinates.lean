@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.Radial
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
-import Mathlib.Analysis.SpecialFunctions.Log.Deriv
+module
+
+public import ContinuousFlexibility.Statements.Radial
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
+public import Mathlib.Analysis.SpecialFunctions.Log.Deriv
 
 /-!
 # Actual logarithmic coordinates for the second-mode Morse tail
@@ -9,6 +11,8 @@ A single signed logarithmic change of variables treats both orientations.
 The transformed density has mass proportional to w r^6 dr and resistance
 proportional to dr/(w r^8); the endpoint normalization cancels in products.
 -/
+
+@[expose] public section
 
 noncomputable section
 

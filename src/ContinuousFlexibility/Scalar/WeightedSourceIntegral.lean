@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedStateFlatness
-import ContinuousFlexibility.Scalar.NormalizedConservation
+module
+
+public import ContinuousFlexibility.Scalar.WeightedStateFlatness
+public import ContinuousFlexibility.Scalar.NormalizedConservation
 
 /-!
 # Compatibility of the actual weighted scalar residual
@@ -10,6 +12,8 @@ It applies to the removable value at `q = 0` as well as nonzero parameters.
 The compatibility of any decoded residual then follows from the defining
 physical integral of `S.Q`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

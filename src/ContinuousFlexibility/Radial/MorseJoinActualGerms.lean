@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseCellJoinCollars
-import ContinuousFlexibility.Radial.MorsePositiveJoin
+module
+
+public import ContinuousFlexibility.Radial.MorseCellJoinCollars
+public import ContinuousFlexibility.Radial.MorsePositiveJoin
 
 /-!
 # Actual Morse collar germs at a positive join
@@ -8,6 +10,8 @@ The local physical logarithmic height is smooth on the image of its
 model interval. A compact cutoff globalizes it while preserving its
 full germ at every point of the closed interval used by the join.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import Mathlib.Probability.Moments.ComplexMGF
-import Mathlib.Analysis.Complex.TaylorSeries
-import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
-import Mathlib.Tactic.Ring
-import Mathlib.Tactic.Linarith
+module
+
+public import Mathlib.Probability.Moments.ComplexMGF
+public import Mathlib.Analysis.Complex.TaylorSeries
+public import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.Linarith
 
 /-!
 # Uniqueness from actual exponential moments
@@ -12,6 +14,8 @@ actual polynomial integrals. The proof uses the entire complex MGF and
 its Taylor expansion, followed by mathlib's measure-uniqueness theorem.
 This supplies the analytic step in Hermite completeness.
 -/
+
+@[expose] public section
 
 noncomputable section
 

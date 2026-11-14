@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.Analysis
-import ContinuousFlexibility.Scalar.HeightDerivatives
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+module
+
+public import ContinuousFlexibility.Statements.Analysis
+public import ContinuousFlexibility.Scalar.HeightDerivatives
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
 
 /-!
 # Mixed coordinate jets control the actual Fréchet jets on a cylinder
@@ -10,6 +12,8 @@ uses the actual second derivative of each smooth iterated partial.
 Multilinear expansion in the two coordinate directions gives the
 operator-norm bound with constant 2 ^ n in the product max norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

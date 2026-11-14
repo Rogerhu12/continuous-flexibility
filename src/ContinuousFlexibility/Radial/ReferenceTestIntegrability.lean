@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ReferenceTestRegularity
-import ContinuousFlexibility.Radial.WeakDivergenceRegularity
+module
+
+public import ContinuousFlexibility.Radial.ReferenceTestRegularity
+public import ContinuousFlexibility.Radial.WeakDivergenceRegularity
 
 /-!
 # Genuine integrability of weak-test pairings
@@ -9,6 +11,8 @@ test of compact radial support. This applies both to an admissible test
 and to the actual PDE applied to that test. Fubini then identifies the
 frozen iterated angular integral with the physical two-dimensional integral.
 -/
+
+@[expose] public section
 
 noncomputable section
 

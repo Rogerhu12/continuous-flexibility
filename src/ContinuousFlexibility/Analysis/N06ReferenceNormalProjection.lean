@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06ReferenceGraphFourierProjection
-import ContinuousFlexibility.Radial.R11bAngularDerivativeModes
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceGraphFourierProjection
+public import ContinuousFlexibility.Radial.R11bAngularDerivativeModes
 
 /-!
 # Finite angular projection of the actual physical normal derivative
@@ -13,6 +15,8 @@ same projected derivative as that same inverse at the projected source.
 All weighted output estimates below use the original physical cell
 weights. No reference chart or controlled-coordinate premise is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

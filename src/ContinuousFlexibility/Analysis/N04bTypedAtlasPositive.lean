@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04bTypedAtlasDomains
+module
+
+public import ContinuousFlexibility.Analysis.N04bTypedAtlasDomains
 
 /-!
 # The actual positive pieces retain their proved affine geometry
@@ -8,6 +10,8 @@ proved reference atlas on every positive index. The complete open-chart,
 closed-boundary, and reflection clauses therefore transfer to the same
 actual constructor without introducing a new geometric assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

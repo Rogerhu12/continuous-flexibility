@@ -1,10 +1,12 @@
-import ContinuousFlexibility.Analysis.N07aFiniteScalarColumnJets
-import ContinuousFlexibility.Analysis.N07aSourceLinearTerminal
-import ContinuousFlexibility.Analysis.N07aScalarColumnVolumes
-import ContinuousFlexibility.Analysis.N07aCanonicalSourceRegularity
-import ContinuousFlexibility.Analysis.N07aModeBudgetMaterial
-import ContinuousFlexibility.Analysis.N07aReferenceScalarMaps
-import ContinuousFlexibility.Analysis.N07aBaseInverse
+module
+
+public import ContinuousFlexibility.Analysis.N07aFiniteScalarColumnJets
+public import ContinuousFlexibility.Analysis.N07aSourceLinearTerminal
+public import ContinuousFlexibility.Analysis.N07aScalarColumnVolumes
+public import ContinuousFlexibility.Analysis.N07aCanonicalSourceRegularity
+public import ContinuousFlexibility.Analysis.N07aModeBudgetMaterial
+public import ContinuousFlexibility.Analysis.N07aReferenceScalarMaps
+public import ContinuousFlexibility.Analysis.N07aBaseInverse
 
 /-!
 # The original canonical source after subtracting its three actual columns
@@ -14,6 +16,8 @@ same base inverse. Fixed physical support gives every material decay
 order for these actual columns. Subtraction from the original canonical
 source yields exactly the mixed L² terminal used by normal expansion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bConstructedRootDensity
-import ContinuousFlexibility.Analysis.N04bCanonicalCut
+module
+
+public import ContinuousFlexibility.Analysis.N04bConstructedRootDensity
+public import ContinuousFlexibility.Analysis.N04bCanonicalCut
 
 /-!
 # Transmission for the constructed inverse and physical root height
@@ -12,6 +14,8 @@ The existing root-height transmission calculation then applies to the
 actual constructor fields. No transmission or operator identity is an
 input. The physical cut remains X(T/2, θ).
 -/
+
+@[expose] public section
 
 noncomputable section
 

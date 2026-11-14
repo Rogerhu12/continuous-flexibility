@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.RetainedMorseInnerGeometry
+module
+
+public import ContinuousFlexibility.Radial.RetainedMorseInnerGeometry
 
 /-!
 # Positivity on the two actual middle gaps
@@ -8,6 +10,8 @@ cut-to-entry bridge, and the already fixed central connector. Only the
 actual derivative positivity of the short bridge is used. No uniform
 lower bound for that bridge is asserted or needed by the Hardy estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

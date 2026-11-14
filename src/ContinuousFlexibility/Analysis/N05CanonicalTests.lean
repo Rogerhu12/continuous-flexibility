@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import ContinuousFlexibility.Analysis.CylinderTestPairing
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import ContinuousFlexibility.Analysis.CylinderTestPairing
 
 /-!
 # Canonical cylinder test pairings
@@ -8,6 +10,8 @@ The canonical measure is the actual finite cylinder measure. Its L²
 pairings and angular reflection are continuous maps on the quotient spaces.
 These maps will define the weak derivative graph by closed kernels.
 -/
+
+@[expose] public section
 
 noncomputable section
 

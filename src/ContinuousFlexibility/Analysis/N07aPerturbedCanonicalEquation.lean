@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalEquationPairing
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalEquationPairing
 
 /-!
 # The actual perturbed relation on an open canonical piece
@@ -8,6 +10,8 @@ Jacobian pairing, the cutoff column identity and interior Green pairing
 give the original canonical divergence equation with its actual signed
 potential and all three scalar source columns.
 -/
+
+@[expose] public section
 
 noncomputable section
 

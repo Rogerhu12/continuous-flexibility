@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SmoothDirectionsGluing
-import ContinuousFlexibility.Analysis.RadialGermGlue
+module
+
+public import ContinuousFlexibility.Analysis.SmoothDirectionsGluing
+public import ContinuousFlexibility.Analysis.RadialGermGlue
 
 /-!
 # Joint towers across a fixed radial glue
@@ -9,6 +11,8 @@ overlapping open pieces cover the original state product with the whole
 physical plane. Uniqueness glues the genuine towers of the literal
 piecewise field, with no restriction of the state neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

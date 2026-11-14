@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.InnerRadialReferenceAssembly
-import ContinuousFlexibility.Radial.InnerRadialPhysicalSchur
-import ContinuousFlexibility.Radial.InnerInterfaceHilbertInverse
-import ContinuousFlexibility.Radial.InnerIsometricRestriction
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialReferenceAssembly
+public import ContinuousFlexibility.Radial.InnerRadialPhysicalSchur
+public import ContinuousFlexibility.Radial.InnerInterfaceHilbertInverse
+public import ContinuousFlexibility.Radial.InnerIsometricRestriction
 
 /-!
 # The actual finite-chain inverse from its actual interface matrix
@@ -12,6 +14,8 @@ same finite matrix gives both inverse identities on the physical weak
 graph and Green self-adjointness. The ambient formula uses the adjoint
 of exactly the ambient Poisson map used by the weighted estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

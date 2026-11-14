@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.OuterDeepUniformProduct
-import ContinuousFlexibility.Radial.OuterLocalizerCutoff
-import ContinuousFlexibility.Radial.OuterPhysicalTailBasis
-import ContinuousFlexibility.Radial.OuterWholeMeasure
+module
+
+public import ContinuousFlexibility.Radial.OuterDeepUniformProduct
+public import ContinuousFlexibility.Radial.OuterLocalizerCutoff
+public import ContinuousFlexibility.Radial.OuterPhysicalTailBasis
+public import ContinuousFlexibility.Radial.OuterWholeMeasure
 
 /-!
 # A true deep cutoff for every fixed outer frequency and regular cut
@@ -10,6 +12,8 @@ The cutoff moves beyond the supplied regular cut and beyond all proved
 uniform deep-tail thresholds. Small transition indices are therefore
 handled by the same physical basis, with a larger compact core.
 -/
+
+@[expose] public section
 
 noncomputable section
 

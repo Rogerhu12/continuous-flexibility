@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.CentralSpectralGap
+module
+
+public import ContinuousFlexibility.Radial.CentralSpectralGap
 
 /-!
 # Actual whole-line differential pairings with Hermite functions
@@ -13,6 +15,8 @@ Friedrichs domain.
 This supplies the differential-to-coefficient bridge for Section 4,
 `eq:central-spectrum-new` and the closed realization used in `eq:rad-eq-sc3`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

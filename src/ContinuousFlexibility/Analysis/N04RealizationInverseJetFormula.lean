@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.NonlinearInverseJetTriangle
+module
+
+public import ContinuousFlexibility.Analysis.NonlinearInverseJetTriangle
 
 /-!
 # Exact finite boundary inverse jet formulas
@@ -8,6 +10,8 @@ ordinary inverse jet. All nonlinear terms use strictly smaller inverse
 orders. The maps need only be smooth at the actual boundary base points;
 no common smooth extension in the parameter is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

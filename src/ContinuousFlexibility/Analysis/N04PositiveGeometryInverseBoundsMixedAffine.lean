@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsMixedEnvelope
-import ContinuousFlexibility.Analysis.N01cFiniteAffineJets
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsMixedEnvelope
+public import ContinuousFlexibility.Analysis.N01cFiniteAffineJets
 
 /-!
 # The mixed inverse estimate on the original topological state space
@@ -10,6 +12,8 @@ jets, evaluated on the images of the slice directions. The exact
 identity and the true forward spatial differential provide the inverse
 recurrence; no quantitative inverse premise is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

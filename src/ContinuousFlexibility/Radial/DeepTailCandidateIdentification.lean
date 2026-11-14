@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Blueprint.Statements
-import ContinuousFlexibility.Radial.DeepTailShift
-import ContinuousFlexibility.Radial.DeepTailEdgeUniqueness
-import ContinuousFlexibility.Radial.DeepTailParameterContinuity
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
+public import ContinuousFlexibility.Radial.DeepTailShift
+public import ContinuousFlexibility.Radial.DeepTailEdgeUniqueness
+public import ContinuousFlexibility.Radial.DeepTailParameterContinuity
 
 /-!
 # Identifying a candidate from a positively shifted tail
@@ -12,6 +14,8 @@ identifies it there.  Initial-value uniqueness transports that proportionality
 back through the finite entrance segment.  The final representative is the
 original smooth natural solution, normalized at its nonzero entrance value.
 -/
+
+@[expose] public section
 
 noncomputable section
 

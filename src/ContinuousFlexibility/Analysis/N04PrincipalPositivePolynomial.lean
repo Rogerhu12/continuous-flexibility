@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PrincipalPairAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalPairAlgebra
 
 /-!
 # The three inverse-adjugate polynomials preserve paired bounds
@@ -7,6 +9,8 @@ One common scale and the same four inverse-derivative entries produce
 all three principal components. Each product difference keeps exactly
 one copy of the external material weight through the paired algebra.
 -/
+
+@[expose] public section
 
 noncomputable section
 

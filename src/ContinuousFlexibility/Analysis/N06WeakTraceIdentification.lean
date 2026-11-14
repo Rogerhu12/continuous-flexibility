@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06WeakModeRegularity
-import ContinuousFlexibility.Radial.InnerIntervalTrace
-import ContinuousFlexibility.Radial.InnerRadialSmoothGreen
+module
+
+public import ContinuousFlexibility.Analysis.N06WeakModeRegularity
+public import ContinuousFlexibility.Radial.InnerIntervalTrace
+public import ContinuousFlexibility.Radial.InnerRadialSmoothGreen
 
 /-!
 # True endpoint values and conormals of weak modal solutions
@@ -15,6 +17,8 @@ No smooth forcing, prescribed boundary values, or additional weak-domain
 condition is introduced. The finite-interface gluing theorem is not
 reproved here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

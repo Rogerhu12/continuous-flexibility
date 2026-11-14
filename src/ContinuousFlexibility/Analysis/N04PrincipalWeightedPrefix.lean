@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationFixedBasePrefix
-import ContinuousFlexibility.Analysis.N04RealizationFullWeightProductOneHigh
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationFixedBasePrefix
+public import ContinuousFlexibility.Analysis.N04RealizationFullWeightProductOneHigh
 
 /-!
 # A common interpolation base for finitely many weighted jet towers
@@ -8,6 +10,8 @@ The parameter-order losses may grow. Their order-zero values alone fix
 the low seminorm; a finite prefix changes only the high order. Constants
 are uniform in the spatial point and in the piece index.
 -/
+
+@[expose] public section
 
 noncomputable section
 

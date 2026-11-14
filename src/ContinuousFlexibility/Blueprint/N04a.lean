@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Blueprint.Statements
-import ContinuousFlexibility.Analysis.N04SignedPieces
-import ContinuousFlexibility.Analysis.N04CanonicalAtlas
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
+public import ContinuousFlexibility.Analysis.N04SignedPieces
+public import ContinuousFlexibility.Analysis.N04CanonicalAtlas
 
 /-!
 # Blueprint node N04a
@@ -15,6 +17,8 @@ lines 992–1046, 1211–1303, and 1316–1497.
 
 Task file: docs/tasks/N04a.md.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

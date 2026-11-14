@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
 
 /-!
 # A common scale for a finite parameter prefix
@@ -8,6 +10,8 @@ removed from every input block by rescaling its directions once. The
 same rescaling on the genuine output restores that cost only once, at
 the total parameter order. No low seminorm is changed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,10 +1,12 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryFiniteKernelBounds
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledFiniteCalculus
-import ContinuousFlexibility.Analysis.N01cAngularJetTowers
-import ContinuousFlexibility.Analysis.N01cStateAngleSelections
-import ContinuousFlexibility.Analysis.FlowJetLinearization
-import ContinuousFlexibility.Analysis.SmoothDirectionsFixedLast
-import ContinuousFlexibility.Analysis.SmoothDirectionsNormedComposition
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryFiniteKernelBounds
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledFiniteCalculus
+public import ContinuousFlexibility.Analysis.N01cAngularJetTowers
+public import ContinuousFlexibility.Analysis.N01cStateAngleSelections
+public import ContinuousFlexibility.Analysis.FlowJetLinearization
+public import ContinuousFlexibility.Analysis.SmoothDirectionsFixedLast
+public import ContinuousFlexibility.Analysis.SmoothDirectionsNormedComposition
 
 /-!
 # A finite angular reserve for the actual boundary formulas
@@ -14,6 +16,8 @@ the boundary recursion. Product partitions distribute every remaining
 angular order exactly once and retain the original parameter arity.
 The constants below precede every function and every material value.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aAngularCandidateGreen
-import ContinuousFlexibility.Analysis.N07aCurrentCanonicalEquation
-import ContinuousFlexibility.Analysis.N07aBaseInverse
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularCandidateGreen
+public import ContinuousFlexibility.Analysis.N07aCurrentCanonicalEquation
+public import ContinuousFlexibility.Analysis.N07aBaseInverse
 
 /-!
 # The original homogeneous candidate has zero actual N06 image
@@ -10,6 +12,8 @@ canonical coordinates. Their actual compact distribution equations have
 the same potential and scalar terms. Subtraction identifies the prescribed
 source coordinate with zero, without a new weak-solution certificate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

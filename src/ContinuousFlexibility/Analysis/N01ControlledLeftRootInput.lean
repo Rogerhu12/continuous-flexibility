@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01ControlledRootInput
+module
+
+public import ContinuousFlexibility.Analysis.N01ControlledRootInput
 
 /-!
 # Left-root compatibility interface
@@ -7,6 +9,8 @@ The implementation is the single Boolean endpoint construction.
 These aliases and the false-endpoint corollary retain the existing
 left-root API, including its sharper odd-coefficient lower bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

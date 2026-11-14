@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Statements.RadialTargets
+module
+
+public import ContinuousFlexibility.Statements.RadialTargets
 
 /-!
 # The common oriented coordinate of the two positive buffers
@@ -9,6 +11,8 @@ buffer `[0, action + 6]`, with the exterior lying at negative coordinates.
 This module extracts the geometric and potential estimates from the actual
 R09 hypotheses; it does not assume a compressed inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

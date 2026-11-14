@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryActualRootInversePacket
-import ContinuousFlexibility.Analysis.N04PositiveGeometryRootInverseSlopeDirections
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledHeightTrace
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryActualRootInversePacket
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryRootInverseSlopeDirections
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledHeightTrace
 
 /-!
 # The actual inverse differential tower
@@ -8,6 +10,8 @@ import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledHeightTrace
 This module isolates one stage of the actual inverse differential.
 The original state, functions and derivative budgets are retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

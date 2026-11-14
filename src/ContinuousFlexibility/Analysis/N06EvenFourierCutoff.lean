@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06CylinderFourierCutoff
-import ContinuousFlexibility.Analysis.CylinderTestPairing
-import ContinuousFlexibility.Radial.ReferenceCosineProjection
-import Mathlib.MeasureTheory.Group.MeasurableEquiv
+module
+
+public import ContinuousFlexibility.Analysis.N06CylinderFourierCutoff
+public import ContinuousFlexibility.Analysis.CylinderTestPairing
+public import ContinuousFlexibility.Radial.ReferenceCosineProjection
+public import Mathlib.MeasureTheory.Group.MeasurableEquiv
 
 /-!
 # The actual even Fourier cutoff in the normalized cosine basis
@@ -12,6 +14,8 @@ frequencies then identifies the same finite polynomial with the normalized
 mean/cosine synthesis, including all actual angular derivatives.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 namespace ContinuousFlexibility.Statements
@@ -21,8 +25,6 @@ open scoped BigOperators ContDiff Topology ComplexConjugate
 open ContinuousFlexibility.Radial
 
 set_option backward.isDefEq.respectTransparency false
-
-private instance : Fact (0 < Real.pi) := ⟨Real.pi_pos⟩
 
 theorem n06_circleFourierWave_reflection (n : ℤ) (θ : ℝ) :
     circleFourierWave n (Real.pi - θ) = conj (circleFourierWave n θ) := by

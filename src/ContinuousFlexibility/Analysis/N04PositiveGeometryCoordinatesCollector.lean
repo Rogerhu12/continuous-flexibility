@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryJacobianPair
-import ContinuousFlexibility.Analysis.N04PositiveGeometryReciprocalPairs
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryJacobianPair
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryReciprocalPairs
 
 /-!
 # Collecting all eight positive geometry atoms
@@ -9,6 +11,8 @@ are sufficient. The Jacobian is their first-jet polynomial, and the two
 reciprocals use the supplied reference material certificate. All resulting
 neighborhoods are chosen before the derivative orders in current data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

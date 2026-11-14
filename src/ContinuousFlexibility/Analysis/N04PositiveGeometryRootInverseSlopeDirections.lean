@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationRootBoundaryDirections
-import ContinuousFlexibility.Analysis.N01cAngularJetTowers
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationRootBoundaryDirections
+public import ContinuousFlexibility.Analysis.N01cAngularJetTowers
 
 /-!
 # The joint inverse-label slope
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Analysis.N01cAngularJetTowers
 This module isolates one stage of the actual inverse differential.
 The original state, functions and derivative budgets are retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N08CharacteristicFactors
-import ContinuousFlexibility.Analysis.N08FlowUniqueness
+module
+
+public import ContinuousFlexibility.Analysis.N08CharacteristicFactors
+public import ContinuousFlexibility.Analysis.N08FlowUniqueness
 
 /-!
 # Locality of the actual flow and return on one negative component
@@ -9,6 +11,8 @@ the actual ordinary flows.  The two inverse identities from N02 then
 identify the chosen inverse return and inverse right chart.  Thus the
 given residual, not a replacement candidate, has component locality.
 -/
+
+@[expose] public section
 
 noncomputable section
 

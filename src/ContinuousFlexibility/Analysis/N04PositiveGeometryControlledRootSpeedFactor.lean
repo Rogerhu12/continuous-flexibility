@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N01RootSpeedPowerMaterialJets
-import ContinuousFlexibility.Analysis.N04RealizationLeadAssembly
-import ContinuousFlexibility.Analysis.N04bOpticalHeightVariation
-import ContinuousFlexibility.Analysis.N05ReferenceResidual
-import ContinuousFlexibility.Analysis.RetainedPositiveEndpointHostSample
-import ContinuousFlexibility.Analysis.PointwiseAffineMaterialJets
+module
+
+public import ContinuousFlexibility.Analysis.N01RootSpeedPowerMaterialJets
+public import ContinuousFlexibility.Analysis.N04RealizationLeadAssembly
+public import ContinuousFlexibility.Analysis.N04bOpticalHeightVariation
+public import ContinuousFlexibility.Analysis.N05ReferenceResidual
+public import ContinuousFlexibility.Analysis.RetainedPositiveEndpointHostSample
+public import ContinuousFlexibility.Analysis.PointwiseAffineMaterialJets
 
 /-!
 # Fixed root-speed factors at the actual positive samples
@@ -14,6 +16,8 @@ of its ordinary radial derivatives. The retained endpoint geometry then
 puts that bound at the original positive midpoint sample. The division
 function and its actual root strip remain the ones used by the source.
 -/
+
+@[expose] public section
 
 noncomputable section
 

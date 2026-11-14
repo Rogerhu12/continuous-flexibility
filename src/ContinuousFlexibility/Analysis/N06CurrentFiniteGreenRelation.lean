@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06FiniteCurrentGreenAssembly
-import ContinuousFlexibility.Analysis.N06LeftColumnFullPairing
-import ContinuousFlexibility.Analysis.N06PositiveDividedRegularity
-import ContinuousFlexibility.Analysis.N06NamedPhysicalRelation
+module
+
+public import ContinuousFlexibility.Analysis.N06FiniteCurrentGreenAssembly
+public import ContinuousFlexibility.Analysis.N06LeftColumnFullPairing
+public import ContinuousFlexibility.Analysis.N06PositiveDividedRegularity
+public import ContinuousFlexibility.Analysis.N06NamedPhysicalRelation
 
 /-!
 # From actual local Green data to the original physical relation
@@ -13,6 +15,8 @@ removes the last scalar defect. The original N05 graph supplies the
 normalization row. Positive regularity is derived on the same complete
 Through05 witness after one neighborhood restriction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

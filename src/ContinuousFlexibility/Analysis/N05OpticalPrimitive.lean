@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OpticalTravelVariation
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+module
+
+public import ContinuousFlexibility.Analysis.OpticalTravelVariation
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 
 /-!
 # The actual optical primitive in the physical core
@@ -9,6 +11,8 @@ the roots of the radial derivative.  Its ordinary interval integral is a
 genuine differentiable primitive there.  No regularity at the outer
 physical endpoints is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

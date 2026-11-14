@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06CurrentOperatorRegularity
-import ContinuousFlexibility.Analysis.N06PositiveFullPeriodTests
-import Mathlib.Analysis.Calculus.MeanValue
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentOperatorRegularity
+public import ContinuousFlexibility.Analysis.N06PositiveFullPeriodTests
+public import Mathlib.Analysis.Calculus.MeanValue
 
 /-!
 # Conservation of the actual correction after the left cutoff
@@ -12,6 +14,8 @@ without assuming smoothness of the corrected coefficients on negative
 pieces. Applying N03's source conservation to the genuine compact test
 `chiLeft * phi` gives the weighted conservation identity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

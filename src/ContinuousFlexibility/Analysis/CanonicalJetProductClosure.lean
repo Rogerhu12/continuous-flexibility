@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CanonicalStateInterpolation
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalStateInterpolation
 
 /-!
 # Fixed-loss closure of numerical jet products
@@ -8,6 +10,8 @@ factors. Interpolation reduces every product whose total derivative
 order is at most s to one high seminorm on one common low neighborhood.
 The factors may include a constant term, as actual coordinate jets do.
 -/
+
+@[expose] public section
 
 noncomputable section
 

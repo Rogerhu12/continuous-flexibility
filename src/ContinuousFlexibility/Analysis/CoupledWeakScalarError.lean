@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CoupledMixedWeightAction
-import ContinuousFlexibility.Analysis.CoupledWeakHeightCalculus
-import ContinuousFlexibility.Scalar.WeightedScalarError
-import ContinuousFlexibility.Scalar.WeightedErrorConservation
+module
+
+public import ContinuousFlexibility.Analysis.CoupledMixedWeightAction
+public import ContinuousFlexibility.Analysis.CoupledWeakHeightCalculus
+public import ContinuousFlexibility.Scalar.WeightedScalarError
+public import ContinuousFlexibility.Scalar.WeightedErrorConservation
 
 /-!
 # The actual scalar correction error with a weak normalized coefficient
@@ -11,6 +13,8 @@ Its product with the independent source retains the original strong weight.
 The angular primitive and its second derivative then give an actual Source,
 linear in both independent arguments, for every weak coefficient.
 -/
+
+@[expose] public section
 
 noncomputable section
 

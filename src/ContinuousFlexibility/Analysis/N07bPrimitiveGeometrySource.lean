@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07bSourceBoundPrimitiveLift
+module
+
+public import ContinuousFlexibility.Analysis.N07bSourceBoundPrimitiveLift
 
 /-!
 # The actual source estimate from the retained primitive geometry
@@ -8,6 +10,8 @@ lift: its normalized initial factor, the two material inverse-angular
 components, and their actual density drift. The finite chain and energy
 theorems then supply the source-space element and its uniform norm bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

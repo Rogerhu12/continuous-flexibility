@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aActualPotentialBlock
-import ContinuousFlexibility.Analysis.N07aRelativeNegative
-import ContinuousFlexibility.Analysis.N07aRelativeExpanded
+module
+
+public import ContinuousFlexibility.Analysis.N07aActualPotentialBlock
+public import ContinuousFlexibility.Analysis.N07aRelativeNegative
+public import ContinuousFlexibility.Analysis.N07aRelativeExpanded
 
 /-!
 # Removing the three genuine scalar columns from the relative source
@@ -9,6 +11,8 @@ The remaining local class is exactly the principal coefficient difference
 and the signed potential difference acting on the original reference
 inverse. On negative pieces the principal part vanishes identically.
 -/
+
+@[expose] public section
 
 noncomputable section
 

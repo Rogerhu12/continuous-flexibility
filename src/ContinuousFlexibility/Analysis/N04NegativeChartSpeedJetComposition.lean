@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometryFlowCoefficientBounds
-import ContinuousFlexibility.Analysis.N04NegativeChartVariationForcing
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryFlowCoefficientBounds
+public import ContinuousFlexibility.Analysis.N04NegativeChartVariationForcing
 
 /-!
 # Original mixed speed jets along the actual spatial flow
@@ -10,6 +12,8 @@ Its positive spatial jets of order j have weight j-1, so composition
 with a raw mixed speed jet spends exactly the requested spatial order.
 The state-order power and any marked height factor remain linear.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01SectorFlowTower
-import ContinuousFlexibility.Analysis.SmoothDirectionsOneHighLimit
-import ContinuousFlexibility.Analysis.MaterialSampleCofinite
-import Mathlib.Topology.Sequences
+module
+
+public import ContinuousFlexibility.Analysis.N01SectorFlowTower
+public import ContinuousFlexibility.Analysis.SmoothDirectionsOneHighLimit
+public import ContinuousFlexibility.Analysis.MaterialSampleCofinite
+public import Mathlib.Topology.Sequences
 
 /-!
 # Actual parameter jets at every closed N01 flow radius
@@ -12,6 +14,8 @@ orders. The uniform next-two-jet bounds produce an actual smooth limit
 tower. The original sharp one-high-factor bound passes to that tower
 without changing its height power, material loss, or uniform constant.
 -/
+
+@[expose] public section
 
 noncomputable section
 

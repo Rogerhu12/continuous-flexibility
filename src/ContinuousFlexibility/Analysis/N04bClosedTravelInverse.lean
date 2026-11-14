@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bClosedTravelStrip
-import Mathlib.Topology.MetricSpace.Basic
+module
+
+public import ContinuousFlexibility.Analysis.N04bClosedTravelStrip
+public import Mathlib.Topology.MetricSpace.Basic
 
 /-!
 # Continuity of the actual inverse up to both travel endpoints
@@ -11,6 +13,8 @@ injectivity then prove inverse continuity, including endpoint values.
 For the actual circle lifts the displacement bound follows from period
 equivariance; inverse continuity is not an additional hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,10 @@
-import ContinuousFlexibility.Analysis.N08CellLayerWeights
+module
+
+public import ContinuousFlexibility.Analysis.N08CellLayerWeights
 
 /-! # Sample envelope losses on the whole support of a cell cutoff -/
+
+@[expose] public section
 
 noncomputable section
 

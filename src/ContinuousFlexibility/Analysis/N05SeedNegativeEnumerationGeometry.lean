@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05SeedOpticalLowerComponents
+module
+
+public import ContinuousFlexibility.Analysis.N05SeedOpticalLowerComponents
 
 /-!
 # The exact retained indices of the seed's negative components
@@ -7,6 +9,8 @@ The signed physical radius orders both tails outward.  Its seam intervals
 separate the actual Morse turning components and recover the retained
 starting index from the existing whole-component tail containment.
 -/
+
+@[expose] public section
 
 noncomputable section
 

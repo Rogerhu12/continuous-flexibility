@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06ReferenceNegativeInverse
-import Mathlib.MeasureTheory.Function.JacobianOneDim
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceNegativeInverse
+public import Mathlib.MeasureTheory.Function.JacobianOneDim
 
 /-!
 # Actual reciprocal mass and endpoint bounds for the negative reference height
@@ -10,6 +12,8 @@ the physical integral of `1 / w` over its actual image, for either orientation.
 The genuine determinant formula and global physical profile bounds also
 give a polynomial upper bound for `W(y)` when `y > 0`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

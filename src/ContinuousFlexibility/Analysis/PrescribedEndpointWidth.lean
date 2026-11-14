@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.RadialTaylorSlopeBounds
+module
+
+public import ContinuousFlexibility.Analysis.RadialTaylorSlopeBounds
 
 /-!
 # A displayed collar width from finite numerical data
@@ -8,6 +10,8 @@ particular no compactness or choice operation can make it arbitrarily
 smaller than its geometric and finite-jet inputs.  The same width is used
 for an entire indexed family once those inputs have been bounded.
 -/
+
+@[expose] public section
 
 noncomputable section
 

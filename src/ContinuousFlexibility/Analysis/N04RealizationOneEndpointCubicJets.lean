@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationCubicRegularity
-import ContinuousFlexibility.Analysis.N04RealizationDominatedParameterIntegral
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationCubicRegularity
+public import ContinuousFlexibility.Analysis.N04RealizationDominatedParameterIntegral
 
 /-!
 # Parameter jets through one cubic Taylor division
@@ -10,6 +12,8 @@ representatives may be chosen independently: their role ends before
 parameter differentiation. The Taylor integrand is extended by zero at
 the two integration endpoints, so no endpoint parameter tower is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

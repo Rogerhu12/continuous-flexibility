@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
-import ContinuousFlexibility.Analysis.SpacesMollifierL1
-import Mathlib.Analysis.Calculus.UniformLimitsDeriv
-import Mathlib.Topology.UniformSpace.UniformApproximation
+module
+
+public import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
+public import ContinuousFlexibility.Analysis.SpacesMollifierL1
+public import Mathlib.Analysis.Calculus.UniformLimitsDeriv
+public import Mathlib.Topology.UniformSpace.UniformApproximation
 
 /-!
 # Reconstructing smooth cylinder functions from all weak jets
@@ -11,6 +13,8 @@ uniform convergence of every mixed derivative. The four-term cylinder
 Sobolev estimate supplies this passage without a subsequence or an
 auxiliary regularity hypothesis on the weak representatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

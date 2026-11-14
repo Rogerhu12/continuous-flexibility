@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05ReferenceNormalization
-import ContinuousFlexibility.Radial.R11bAngularL2Bridge
-import ContinuousFlexibility.Radial.R11bCompactSources
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceNormalization
+public import ContinuousFlexibility.Radial.R11bAngularL2Bridge
+public import ContinuousFlexibility.Radial.R11bCompactSources
 
 /-!
 # Compatibility of the actual physical source after its auxiliary correction
@@ -11,6 +13,8 @@ periodic source supplies actual physical integrability. Subtracting its
 normalized integral times that column then gives the literal compatible
 source class required by the physical inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04FlowJetsTarget
-import ContinuousFlexibility.Analysis.SmoothPeriodicScalarFlowEndpoint
-import ContinuousFlexibility.Analysis.OneHighCircleFlowJacobian
+module
+
+public import ContinuousFlexibility.Analysis.N04FlowJetsTarget
+public import ContinuousFlexibility.Analysis.SmoothPeriodicScalarFlowEndpoint
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowJacobian
 
 /-!
 # Qualitative facts for the actual family in the mixed-flow target
@@ -11,6 +13,8 @@ constructed Picard family. The angular exponential bounds use only the
 angular time majorant. These are prerequisites for, rather than the
 all-order quantitative conclusion of, N04FlowJetsTarget.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05NegativePieceLabels
-import ContinuousFlexibility.Analysis.N05PhysicalPieces
-import Mathlib.Data.Set.Card
-import Mathlib.MeasureTheory.Measure.Real
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05NegativePieceLabels
+public import ContinuousFlexibility.Analysis.N05PhysicalPieces
+public import Mathlib.Data.Set.Card
+public import Mathlib.MeasureTheory.Measure.Real
 
 /-!
 # Counting actual negative pieces at each physical cell index
@@ -13,6 +15,8 @@ that bound to the assigned cell. Pairwise disjointness then gives finite
 packing in the radial core. No optical root-distance lower bound or chart
 coefficient estimate is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06CutBoundaryCancellation
+module
+
+public import ContinuousFlexibility.Analysis.N06CutBoundaryCancellation
 
 /-!
 # The actual negative-cut boundary integrals cancel
@@ -10,6 +12,8 @@ actual closed Green integrals sum to zero. The measure here is the original unno
 half-period interval; subsequent full angular averaging multiplies this
 zero identity by the prescribed normalization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

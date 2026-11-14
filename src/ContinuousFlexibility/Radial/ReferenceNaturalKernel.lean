@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ModeLocalMeasure
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+module
+
+public import ContinuousFlexibility.Radial.ModeLocalMeasure
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 
 /-!
 # Natural kernels of the fixed radial operator
@@ -10,6 +12,8 @@ second mode, its injectivity and the actual normalized border identify the
 kernel with the span of the given homogeneous profile. Almost-everywhere
 representatives are transported through the actual Hilbert density.
 -/
+
+@[expose] public section
 
 noncomputable section
 

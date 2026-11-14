@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06CubicLp
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
-import Mathlib.Algebra.Order.BigOperators.Ring.Finset
+module
+
+public import ContinuousFlexibility.Analysis.N06CubicLp
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+public import Mathlib.Algebra.Order.BigOperators.Ring.Finset
 
 /-!
 # Multiplication on the actual finite angular-jet L² space
@@ -10,6 +12,8 @@ using only the coefficient derivatives through the fixed source order.
 The measure is arbitrary, and every norm below is an actual L² norm of
 `mixedDerivative 0 k`, rather than a replacement Fourier norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

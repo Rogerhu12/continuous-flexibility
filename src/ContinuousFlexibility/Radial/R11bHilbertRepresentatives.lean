@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R11bHilbertModes
-import ContinuousFlexibility.Statements.RadialTargets
+module
+
+public import ContinuousFlexibility.Radial.R11bHilbertModes
+public import ContinuousFlexibility.Statements.RadialTargets
 
 /-!
 # Representatives and ordinary radial integrals
@@ -9,6 +11,8 @@ a.e. equality is exactly ordinary radial a.e. equality there. This permits
 raw angular coefficients and their L² classes to be used interchangeably in
 the frozen modal weak graph.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R07IncomingSelection
+module
+
+public import ContinuousFlexibility.Radial.R07IncomingSelection
 
 /-!
 # Preserve the smooth representatives and cap states in height selection
@@ -10,6 +12,8 @@ outgoing solution retains the globally smooth representative constructed
 from R06. These facts are needed to continue the natural solution inward
 to the R10a matching cut without changing its selected entrance jet.
 -/
+
+@[expose] public section
 
 noncomputable section
 

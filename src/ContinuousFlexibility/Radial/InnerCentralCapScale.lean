@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.CentralRadiusGrowth
-import ContinuousFlexibility.Radial.PositiveBufferGeometry
+module
+
+public import ContinuousFlexibility.Radial.CentralRadiusGrowth
+public import ContinuousFlexibility.Radial.PositiveBufferGeometry
 
 /-!
 # The central buffer scale in the actual Liouville coordinate
@@ -9,6 +11,8 @@ actual central potential and the logarithmic derivative of the actual
 integral-defined radius. The available length includes the six extra
 mass units in the R09 buffer convention.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01RootFieldLocalization
-import ContinuousFlexibility.Analysis.RootControlledFlow
+module
+
+public import ContinuousFlexibility.Analysis.N01RootFieldLocalization
+public import ContinuousFlexibility.Analysis.RootControlledFlow
 
 /-!
 # A genuinely controlled root flow from the actual N01 coefficients
@@ -10,6 +12,8 @@ localized coefficient fields and their actual ordinary jets. A collar
 chosen before the state bounds the angular Gronwall exponent, and the
 independent flow theorem supplies the actual solution and all its jets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

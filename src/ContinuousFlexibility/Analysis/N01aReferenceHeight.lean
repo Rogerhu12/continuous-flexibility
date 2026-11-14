@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01aReferenceHeightRadial
-import ContinuousFlexibility.Analysis.N01aReferenceWeightedRealizations
-import ContinuousFlexibility.Analysis.CylinderTestPairing
-import Mathlib.MeasureTheory.Function.LpSeminorm.Prod
+module
+
+public import ContinuousFlexibility.Analysis.N01aReferenceHeightRadial
+public import ContinuousFlexibility.Analysis.N01aReferenceWeightedRealizations
+public import ContinuousFlexibility.Analysis.CylinderTestPairing
+public import Mathlib.MeasureTheory.Function.LpSeminorm.Prod
 
 /-!
 # The actual reference eigenfield belongs to the physical height space
@@ -11,6 +13,8 @@ first-normal estimate. The actual Jacobi equation supplies higher jets,
 and the proved affine coordinate transfers their integrals. This proves
 the frozen height membership without an extra regularity premise.
 -/
+
+@[expose] public section
 
 noncomputable section
 

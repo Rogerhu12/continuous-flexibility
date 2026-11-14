@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06LeftColumnPhysical
-import ContinuousFlexibility.Analysis.FixedReferenceScalarSourceMaterialJets
-import ContinuousFlexibility.Analysis.LocalMixedProductBounds
-import ContinuousFlexibility.Radial.R11bFourierTests
+module
+
+public import ContinuousFlexibility.Analysis.N06LeftColumnPhysical
+public import ContinuousFlexibility.Analysis.FixedReferenceScalarSourceMaterialJets
+public import ContinuousFlexibility.Analysis.LocalMixedProductBounds
+public import ContinuousFlexibility.Radial.R11bFourierTests
 
 /-!
 # The actual left and nu columns in a fixed radial reference atlas
@@ -11,6 +13,8 @@ canonical pullbacks use the same stored inverse and the same stored
 source factor. The identities below require only those actual fields on
 the unit strip, so they apply to positive pieces and negative halves.
 -/
+
+@[expose] public section
 
 noncomputable section
 

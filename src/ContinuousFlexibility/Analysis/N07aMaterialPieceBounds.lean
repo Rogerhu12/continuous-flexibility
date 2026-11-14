@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aGeometryLengthBounds
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalMeasure
+module
+
+public import ContinuousFlexibility.Analysis.N07aGeometryLengthBounds
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalMeasure
 
 /-!
 # Material ratios throughout each reference physical piece
@@ -8,6 +10,8 @@ The ratios are fixed geometric atoms, so their reference zero-jets control
 them throughout the fixed reference interval. Comparison at an actual
 current inverse-chart point is established separately from displacement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

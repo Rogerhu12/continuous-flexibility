@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalRoughPairing
-import Mathlib.Analysis.Calculus.InverseFunctionTheorem.ContDiff
-import Mathlib.Analysis.Normed.Module.FiniteDimension
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalRoughPairing
+public import Mathlib.Analysis.Calculus.InverseFunctionTheorem.ContDiff
+public import Mathlib.Analysis.Normed.Module.FiniteDimension
 
 /-!
 # True boundary inverse germs of the actual open coordinate chart
@@ -11,6 +13,8 @@ The inverse-function theorem then identifies the true smooth inverse germ
 at a boundary point. No meaning is assigned to the candidate's arbitrary
 value at that boundary.
 -/
+
+@[expose] public section
 
 noncomputable section
 

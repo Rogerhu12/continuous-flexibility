@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Statements.Analysis
+module
+
+public import ContinuousFlexibility.Statements.Analysis
 
 /-!
 # Actual scalar derivatives along a line in a smooth directional tower
@@ -8,6 +10,8 @@ multilinear jet, evaluated repeatedly on the actual direction. This
 permits use of the quantitative N01 tower bounds on optical control
 curves without substituting a formal derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

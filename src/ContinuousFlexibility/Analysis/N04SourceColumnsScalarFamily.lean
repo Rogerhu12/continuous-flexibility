@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04SourceColumnsScalarComposition
-import ContinuousFlexibility.Analysis.N04SourceColumnsPrefix
+module
+
+public import ContinuousFlexibility.Analysis.N04SourceColumnsScalarComposition
+public import ContinuousFlexibility.Analysis.N04SourceColumnsPrefix
 
 /-!
 # Material envelopes for scalar compositions of current families
@@ -8,6 +10,8 @@ The low order is fixed before the parameter order. A finite prefix of
 the input towers is interpolated at that order, and the scalar chain rule
 is normalized before its coefficient and exponent are packed together.
 -/
+
+@[expose] public section
 
 noncomputable section
 

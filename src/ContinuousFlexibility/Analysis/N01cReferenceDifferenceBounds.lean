@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N01cStateSeminorms
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
-import ContinuousFlexibility.Analysis.ProjectiveJetEvaluation
-import Mathlib.Analysis.Calculus.MeanValue
-import Mathlib.Tactic.Abel
+module
+
+public import ContinuousFlexibility.Analysis.N01cStateSeminorms
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
+public import ContinuousFlexibility.Analysis.ProjectiveJetEvaluation
+public import Mathlib.Analysis.Calculus.MeanValue
+public import Mathlib.Tactic.Abel
 
 /-!
 # Recovering the zeroth difference from the actual first parameter jet
@@ -14,6 +16,8 @@ segment is bounded by twice its order-zero counterpart. This preserves
 every external material weight without treating the reference profile
 itself as a small height-weight factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

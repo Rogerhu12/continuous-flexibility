@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsBoundaryFormulas
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsPowerTrace
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsUnitTraces
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRootOddLower
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsBoundaryFormulas
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsPowerTrace
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsUnitTraces
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRootOddLower
 
 /-!
 # The finite original odd trace packet
@@ -10,6 +12,8 @@ The packet consists of the four already identified odd boundary
 formulas. Positivity follows from the actual factored speed and forward
 label slope on the same root strip.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectedFlow
-import ContinuousFlexibility.Analysis.ReturnCorrectionCoefficients
-import ContinuousFlexibility.Analysis.ReturnCorrectionCutoff
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectedFlow
+public import ContinuousFlexibility.Analysis.ReturnCorrectionCoefficients
+public import ContinuousFlexibility.Analysis.ReturnCorrectionCutoff
 
 /-!
 # Actual corrected coefficients on the disjoint negative components
@@ -16,6 +18,8 @@ reconstructed speed. The quantitative estimate giving that positivity on
 one neighborhood for all components is deliberately not assumed to follow
 from these qualitative patching arguments.
 -/
+
+@[expose] public section
 
 noncomputable section
 

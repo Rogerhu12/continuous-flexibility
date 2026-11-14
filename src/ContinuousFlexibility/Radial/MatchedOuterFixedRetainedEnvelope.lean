@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Radial.R11aRetainedFamily
-import ContinuousFlexibility.Radial.MatchedOuterRetainedParameters
-import ContinuousFlexibility.Radial.MatchedOuterTailEnvelope
-import ContinuousFlexibility.Radial.MatchedOuterWholeFactory
-import ContinuousFlexibility.Radial.MatchedOuterFixedCutoff
-import ContinuousFlexibility.Radial.MatchedOuterFixedOperatorBounds
+module
+
+public import ContinuousFlexibility.Radial.R11aRetainedFamily
+public import ContinuousFlexibility.Radial.MatchedOuterRetainedParameters
+public import ContinuousFlexibility.Radial.MatchedOuterTailEnvelope
+public import ContinuousFlexibility.Radial.MatchedOuterWholeFactory
+public import ContinuousFlexibility.Radial.MatchedOuterFixedCutoff
+public import ContinuousFlexibility.Radial.MatchedOuterFixedOperatorBounds
 
 /-!
 # Actual outer envelopes at every fixed retained frequency
@@ -14,6 +16,8 @@ transition; its localizer labels are controlled by actual compactness.
 The same original full-source kernel is then dilated to the retained
 reference, preserving its natural Robin line.
 -/
+
+@[expose] public section
 
 noncomputable section
 

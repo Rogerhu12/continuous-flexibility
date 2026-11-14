@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseRealizationBasic
-import ContinuousFlexibility.Radial.MorseTransitionBands
+module
+
+public import ContinuousFlexibility.Radial.MorseRealizationBasic
+public import ContinuousFlexibility.Radial.MorseTransitionBands
 
 /-!
 # Entrances of the actual selected-chain construction
@@ -12,6 +14,8 @@ band happens to be empty. Successive entrances move strictly outwards.
 A sufficiently large construction index and Cstar put mode two in the
 first band, independently of any existential selected-tail witness.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06RelativeBoundaryPatch
-import ContinuousFlexibility.Analysis.N06PositiveCutoffJets
+module
+
+public import ContinuousFlexibility.Analysis.N06RelativeBoundaryPatch
+public import ContinuousFlexibility.Analysis.N06PositiveCutoffJets
 
 /-!
 # Quantitative jets of the actual relative Taylor correction
@@ -10,6 +12,8 @@ finite spatial jet of the existing boundary extension is bounded linearly
 by the angular jets of its actual boundary data. The constant is uniform
 in the endpoints and in the collar width; the width dependence is displayed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

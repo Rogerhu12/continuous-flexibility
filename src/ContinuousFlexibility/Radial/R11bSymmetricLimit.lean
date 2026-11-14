@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.Radial
-import Mathlib.MeasureTheory.Function.ConvergenceInMeasure
-import Mathlib.MeasureTheory.Function.L2Space
+module
+
+public import ContinuousFlexibility.Statements.Radial
+public import Mathlib.MeasureTheory.Function.ConvergenceInMeasure
+public import Mathlib.MeasureTheory.Function.L2Space
 
 /-!
 # A pointwise symmetric representative of an L² sequence limit
@@ -10,6 +12,8 @@ Taking the same pointwise limit of the original functions on every angular
 orbit preserves their exact evenness and half-turn periodicity, including
 outside the physical annulus. No choice of exceptional sets by radius is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MorseDarbouxForms
+module
+
+public import ContinuousFlexibility.Radial.MorseDarbouxForms
 
 /-!
 # Darboux transfer of actual Morse graph eigenvectors
@@ -7,6 +9,8 @@ The differential intertwining identities hold on smooth compact tests.
 The true first-order adjoint pairings move those identities onto `L²`
 eigenvectors of the associated graphs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

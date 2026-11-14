@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Statements.N06PrimitiveGeometryBridge
-import ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient
-import ContinuousFlexibility.Analysis.N05ReferenceResidual
-import ContinuousFlexibility.Analysis.TameLocalCalculus
-import ContinuousFlexibility.Analysis.PhysicalTransmissionTrace
-import ContinuousFlexibility.Analysis.SpacesCylinderIntegration
+module
+
+public import ContinuousFlexibility.Statements.N06PrimitiveGeometryBridge
+public import ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient
+public import ContinuousFlexibility.Analysis.N05ReferenceResidual
+public import ContinuousFlexibility.Analysis.TameLocalCalculus
+public import ContinuousFlexibility.Analysis.PhysicalTransmissionTrace
+public import ContinuousFlexibility.Analysis.SpacesCylinderIntegration
 
 /-!
 # Actual state differences on the original canonical intervals
@@ -13,6 +15,8 @@ This module only translates the state parameter and undoes the radial affine
 rescaling. Both length atoms share one reference bound. Their product is one,
 so that common bound is at least one, without a lower bound `E0 ≥ 1`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

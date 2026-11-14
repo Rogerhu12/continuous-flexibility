@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06IntervalPrimitiveLp
-import ContinuousFlexibility.Radial.R11bModeL2
+module
+
+public import ContinuousFlexibility.Analysis.N06IntervalPrimitiveLp
+public import ContinuousFlexibility.Radial.R11bModeL2
 
 /-!
 # Limits of weighted L2 integrals on the unit interval
@@ -8,6 +10,8 @@ A coefficient continuous on the closed interval acts continuously on L2.
 Weighted square integrals are then ordinary L2 inner products, including
 the odd powers of the cylinder weight used by the cubic graph estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

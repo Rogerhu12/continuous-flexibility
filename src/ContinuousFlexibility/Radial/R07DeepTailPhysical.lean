@@ -1,9 +1,13 @@
-import ContinuousFlexibility.Radial.R07DeepTailSharp
-import ContinuousFlexibility.Radial.R07DeepTailLocalization
+module
+
+public import ContinuousFlexibility.Radial.R07DeepTailSharp
+public import ContinuousFlexibility.Radial.R07DeepTailLocalization
 
 /-!
 # Actual physical data satisfying the complete R06 hypotheses
 -/
+
+@[expose] public section
 
 noncomputable section
 

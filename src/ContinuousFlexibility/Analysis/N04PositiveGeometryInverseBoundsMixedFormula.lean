@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationInverseJetFormula
-import ContinuousFlexibility.Analysis.N01cStateAngleSelections
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationInverseJetFormula
+public import ContinuousFlexibility.Analysis.N01cStateAngleSelections
 
 /-!
 # The actual inverse formula with separate state and spatial slots
@@ -10,6 +12,8 @@ which only reads the state orders present in the original word. This
 avoids estimating a full derivative norm which would introduce unrelated
 higher state derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

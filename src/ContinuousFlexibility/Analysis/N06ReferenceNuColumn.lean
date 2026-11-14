@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06ReferencePhysicalCoefficients
-import ContinuousFlexibility.Radial.ReferenceCosineTests
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferencePhysicalCoefficients
+public import ContinuousFlexibility.Radial.ReferenceCosineTests
 
 /-!
 # The actual nu column at the reference state
@@ -9,6 +11,8 @@ Jacobi PDE. Varying the actual logarithmic profile by nu chi differentiates
 it to w chi. Consequently the frozen nu column is exactly the reference
 border, with its original cosine normalization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

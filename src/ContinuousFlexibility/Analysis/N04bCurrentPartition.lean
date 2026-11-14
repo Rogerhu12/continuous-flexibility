@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04SignedPieces
-import ContinuousFlexibility.Analysis.N04bCutCurve
-import ContinuousFlexibility.Analysis.N04bAtlasBoundary
+module
+
+public import ContinuousFlexibility.Analysis.N04SignedPieces
+public import ContinuousFlexibility.Analysis.N04bCutCurve
+public import ContinuousFlexibility.Analysis.N04bAtlasBoundary
 
 /-!
 # The actual planar partition by moving characteristic halves
@@ -11,6 +13,8 @@ countable reference radial exception and the genuine smooth middle cuts
 are omitted. This proves the current planar partition without a radial
 graph assumption on any cut.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aReferenceCanonicalEquation
-import ContinuousFlexibility.Analysis.N07aPerturbedCanonicalEquation
-import ContinuousFlexibility.Analysis.N07aAngularEvenTestSeparation
+module
+
+public import ContinuousFlexibility.Analysis.N07aReferenceCanonicalEquation
+public import ContinuousFlexibility.Analysis.N07aPerturbedCanonicalEquation
+public import ContinuousFlexibility.Analysis.N07aAngularEvenTestSeparation
 
 /-!
 # The actual perturbed operator equals the reference source at the reference state
@@ -10,6 +12,8 @@ same canonical functions. Genuine even test separation identifies their
 source classes, so this is an equality of the actual operators rather than
 an additional reference normalization assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

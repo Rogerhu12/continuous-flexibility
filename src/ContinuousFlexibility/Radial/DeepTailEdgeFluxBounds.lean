@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.DeepTailEdgeComparison
+module
+
+public import ContinuousFlexibility.Radial.DeepTailEdgeComparison
 
 /-!
 # Uniform control of the actual tail flux
@@ -8,6 +10,8 @@ increment divided by the total resistance. The differential equation then
 controls its variation on the edge. No lower bound on the physical edge
 length, and no derivative of the density, is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cJointJetContinuity
-import ContinuousFlexibility.Analysis.N01cStateAngleSmoothDirections
-import ContinuousFlexibility.Analysis.TameMultilinearNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N01cJointJetContinuity
+public import ContinuousFlexibility.Analysis.N01cStateAngleSmoothDirections
+public import ContinuousFlexibility.Analysis.TameMultilinearNormalization
 
 /-!
 # Joint jet continuity from local grading bounds
@@ -11,6 +13,8 @@ convex grading neighbourhood, this gives joint continuity in the state,
 external variables and every direction. The source remains a topological
 real module.
 -/
+
+@[expose] public section
 
 noncomputable section
 

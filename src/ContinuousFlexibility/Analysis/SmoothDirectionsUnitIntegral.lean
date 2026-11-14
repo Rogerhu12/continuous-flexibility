@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ProjectiveUnitIntegral
-import ContinuousFlexibility.Analysis.SolveNewtonBridge
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
+module
+
+public import ContinuousFlexibility.Analysis.ProjectiveUnitIntegral
+public import ContinuousFlexibility.Analysis.SolveNewtonBridge
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
 
 /-!
 # Actual directional towers under compact parameter integration
@@ -9,6 +11,8 @@ Joint continuity of every evaluated jet gives continuity and local
 domination in each Banach level. Differentiating the level integrals
 therefore constructs a genuine projective directional tower.
 -/
+
+@[expose] public section
 
 noncomputable section
 

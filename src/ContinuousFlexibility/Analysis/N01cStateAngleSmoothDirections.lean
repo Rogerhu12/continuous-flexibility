@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N01cFiniteParameterProducts
-import ContinuousFlexibility.Analysis.N01cFiniteAffineMixedJets
-import ContinuousFlexibility.Analysis.N01cStateAngleJets
-import ContinuousFlexibility.Analysis.N01cVolterraStateJets
-import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
+module
+
+public import ContinuousFlexibility.Analysis.N01cFiniteParameterProducts
+public import ContinuousFlexibility.Analysis.N01cFiniteAffineMixedJets
+public import ContinuousFlexibility.Analysis.N01cStateAngleJets
+public import ContinuousFlexibility.Analysis.N01cVolterraStateJets
+public import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
 
 /-!
 # Genuine state-and-angle towers from the actual mixed state jets
@@ -12,6 +14,8 @@ finite affine mixed differentiation. Its evaluated jets are continuous
 when the original state-jet evaluations are continuous. Time remains an
 external variable and the state space is only a topological real module.
 -/
+
+@[expose] public section
 
 noncomputable section
 

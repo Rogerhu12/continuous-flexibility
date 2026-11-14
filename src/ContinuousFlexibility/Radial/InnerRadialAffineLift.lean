@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerRadialTrace
-import Mathlib.Tactic.Abel
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialTrace
+public import Mathlib.Tactic.Abel
 
 /-!
 # Fixed physical affine lifts and the full piece domain
@@ -9,6 +11,8 @@ Their canonical traces are the two coordinate vectors. Subtracting the
 lift of the canonical trace defines the full first-order piece domain,
 and its zero-trace part is exactly the actual zero-endpoint closure.
 -/
+
+@[expose] public section
 
 noncomputable section
 

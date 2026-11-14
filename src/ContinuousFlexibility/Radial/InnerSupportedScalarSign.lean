@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerSupportedWeights
-import Mathlib.Analysis.Normed.Lp.ProdLp
+module
+
+public import ContinuousFlexibility.Radial.InnerSupportedWeights
+public import Mathlib.Analysis.Normed.Lp.ProdLp
 
 /-!
 # Scalar sign on the same supported physical Hilbert space
@@ -10,6 +12,8 @@ isometry of the existing supported source, including its scalar-zero
 constraint in unbordered modes. Actual field weights commute with this
 map, so conjugating the same inverse preserves every weighted norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

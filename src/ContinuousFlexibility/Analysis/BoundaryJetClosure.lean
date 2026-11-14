@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PhysicalTransmissionTrace
-import ContinuousFlexibility.Analysis.PointwiseCylinderJets
+module
+
+public import ContinuousFlexibility.Analysis.PhysicalTransmissionTrace
+public import ContinuousFlexibility.Analysis.PointwiseCylinderJets
 
 /-!
 # Boundary jets from a one-sided actual equation
@@ -10,6 +12,8 @@ continuous there, so the equation extends to that point. No common open
 neighborhood of infinite smoothness or equation across the boundary is
 assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

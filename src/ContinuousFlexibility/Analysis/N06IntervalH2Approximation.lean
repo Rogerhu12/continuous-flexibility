@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06IntervalPrimitiveBounds
-import ContinuousFlexibility.Analysis.SmoothCompactL2Density
-import Mathlib.Topology.Sequences
+module
+
+public import ContinuousFlexibility.Analysis.N06IntervalPrimitiveBounds
+public import ContinuousFlexibility.Analysis.SmoothCompactL2Density
+public import Mathlib.Topology.Sequences
 
 /-!
 # Smooth approximation with genuine endpoint traces on any finite interval
@@ -11,6 +13,8 @@ produces globally smooth functions converging in H2 and uniformly in C1
 on the closed recorded interval. In particular both endpoint traces
 converge, without imposing any zero boundary condition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

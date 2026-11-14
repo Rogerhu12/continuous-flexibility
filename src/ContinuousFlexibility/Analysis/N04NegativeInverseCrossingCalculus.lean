@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04NegativeInversePhysicalBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeInversePhysicalBounds
 
 /-!
 # Scalar calculus for changing the reference half
@@ -7,6 +9,8 @@ These elementary steps are proved before the physical atlas is
 instantiated. Their applications preserve the actual directional tower
 and the coefficient chosen for its whole finite prefix.
 -/
+
+@[expose] public section
 
 noncomputable section
 

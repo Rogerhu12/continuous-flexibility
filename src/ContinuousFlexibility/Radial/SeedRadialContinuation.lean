@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.SeedLogSystem
-import ContinuousFlexibility.Radial.LogSlopeConnector
+module
+
+public import ContinuousFlexibility.Radial.SeedLogSystem
+public import ContinuousFlexibility.Radial.LogSlopeConnector
 
 /-!
 # Smooth finite radial continuation through a positive profile
@@ -9,6 +11,8 @@ equation. Interval uniqueness compares this continuation with an original
 solution on an outward collar, including an entry point at the end of that
 collar.
 -/
+
+@[expose] public section
 
 noncomputable section
 

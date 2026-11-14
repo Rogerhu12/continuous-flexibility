@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderFourierCutoffJets
-import ContinuousFlexibility.Analysis.OneHighCylinderFrequencyApproximation
-import ContinuousFlexibility.Analysis.OneHighCylinderFourierLinearity
-import ContinuousFlexibility.Analysis.OneHighCylinderSobolevJets
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderFourierCutoffJets
+public import ContinuousFlexibility.Analysis.OneHighCylinderFrequencyApproximation
+public import ContinuousFlexibility.Analysis.OneHighCylinderFourierLinearity
+public import ContinuousFlexibility.Analysis.OneHighCylinderSobolevJets
 
 /-!
 # Finite-order approximation of the actual physical cylinder jets
@@ -12,6 +14,8 @@ frequency dominated convergence, the genuine derivative multiplier identity,
 and exact Plancherel for differences. The original function has no assumed
 all-order square-integrability.
 -/
+
+@[expose] public section
 
 noncomputable section
 

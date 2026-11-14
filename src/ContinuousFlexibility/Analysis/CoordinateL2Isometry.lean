@@ -1,4 +1,6 @@
-import Mathlib.MeasureTheory.Function.L2Space
+module
+
+public import Mathlib.MeasureTheory.Function.L2Space
 
 /-!
 # L2 isometry for an actual coordinate embedding
@@ -7,6 +9,8 @@ Pullback by a measurable embedding is a surjective L2 isometry onto the
 original measure space when a left inverse of the coordinate map is given.
 The physical measure is the actual pushforward measure.
 -/
+
+@[expose] public section
 
 noncomputable section
 

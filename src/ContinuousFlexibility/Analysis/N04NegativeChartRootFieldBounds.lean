@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartFieldJetBounds
-import ContinuousFlexibility.Analysis.RootRescaledFieldJets
-import ContinuousFlexibility.Analysis.N01cFlowVariationCircleData
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartFieldJetBounds
+public import ContinuousFlexibility.Analysis.RootRescaledFieldJets
+public import ContinuousFlexibility.Analysis.N01cFlowVariationCircleData
 
 /-!
 # Actual state jets of the regularized root field
@@ -10,6 +12,8 @@ state derivatives therefore preserves the coefficient weight exactly.
 The spatial estimate uses those same derivatives at the physical point;
 it does not require any estimate on the negative radial extension.
 -/
+
+@[expose] public section
 
 noncomputable section
 

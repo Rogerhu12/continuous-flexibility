@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesCircleFourierJets
-import ContinuousFlexibility.Analysis.SpacesCircleSpectral
+module
+
+public import ContinuousFlexibility.Analysis.SpacesCircleFourierJets
+public import ContinuousFlexibility.Analysis.SpacesCircleSpectral
 
 /-!
 # Finite angular Fourier projections
@@ -9,6 +11,8 @@ formulas below are exact Fourier coefficient identities, not approximation
 assumptions supplied by a caller.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 set_option backward.isDefEq.respectTransparency false
@@ -17,8 +21,6 @@ namespace ContinuousFlexibility.Statements
 
 open Set Filter MeasureTheory
 open scoped ENNReal BigOperators ComplexConjugate ContDiff
-
-private instance circleFourierProjection_period_pos : Fact (0 < Real.pi) := ⟨Real.pi_pos⟩
 
 /-- Passing from the actual angular interval to the quotient circle preserves
 our Fourier coefficients with their stated normalization. -/

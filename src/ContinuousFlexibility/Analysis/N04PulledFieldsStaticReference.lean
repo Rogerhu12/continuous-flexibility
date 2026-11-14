@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentData
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentData
 
 /-!
 # State-independent families satisfy the current difference interface
@@ -12,6 +14,8 @@ qualitative part of the interface are used below.
 This is a statement about the interface itself, not a counterexample to
 the full realization obligation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

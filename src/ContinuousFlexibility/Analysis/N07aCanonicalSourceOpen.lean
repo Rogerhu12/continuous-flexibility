@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N06Neighborhood
-import ContinuousFlexibility.Analysis.N07aCanonicalSourceBounds
-import ContinuousFlexibility.Analysis.N07aCanonicalSourceRegularity
-import ContinuousFlexibility.Analysis.N07aCanonicalOpenCoefficients
-import ContinuousFlexibility.Analysis.N07aParameterNeighborhood
+module
+
+public import ContinuousFlexibility.Analysis.N06Neighborhood
+public import ContinuousFlexibility.Analysis.N07aCanonicalSourceBounds
+public import ContinuousFlexibility.Analysis.N07aCanonicalSourceRegularity
+public import ContinuousFlexibility.Analysis.N07aCanonicalOpenCoefficients
+public import ContinuousFlexibility.Analysis.N07aParameterNeighborhood
 
 /-!
 # The actual source in the bounded open coefficient algebra
@@ -12,6 +14,8 @@ source transform. One justified low-order restriction bounds all of its
 mixed jets on every open canonical piece. No regularity certificate for a
 replacement source is an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

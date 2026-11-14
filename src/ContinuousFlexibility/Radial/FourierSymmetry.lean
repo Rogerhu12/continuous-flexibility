@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.FourierSineOrthogonality
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.Periodic
+module
+
+public import ContinuousFlexibility.Radial.FourierSineOrthogonality
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.Periodic
 
 /-!
 # Actual Fourier moment cancellations from the radial symmetries
@@ -9,6 +11,8 @@ cosine moments. Consequently a zero angular mean and zero positive even
 cosine coefficients give zero cosine moments at every integer frequency.
 These are integral identities; L² completeness is a separate step.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

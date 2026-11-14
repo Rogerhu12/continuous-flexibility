@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.RetainedMorseModelChart
-import ContinuousFlexibility.Radial.InnerMorseScaledPhysicalPoisson
+module
+
+public import ContinuousFlexibility.Radial.RetainedMorseModelChart
+public import ContinuousFlexibility.Radial.InnerMorseScaledPhysicalPoisson
 
 /-!
 # Signed weights on the actual retained Morse pieces
@@ -10,6 +12,8 @@ The original normalized remainder therefore controls its actual
 weighted physical columns. Its conormal error is the error of that
 same model at the retained physical height.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.NeighborhoodStateBounds
-import ContinuousFlexibility.Analysis.StateControlCofiniteClosure
-import ContinuousFlexibility.Analysis.N06ReferenceRemainderFields
-import ContinuousFlexibility.Radial.ReferenceColumnSmooth
+module
+
+public import ContinuousFlexibility.Analysis.NeighborhoodStateBounds
+public import ContinuousFlexibility.Analysis.StateControlCofiniteClosure
+public import ContinuousFlexibility.Analysis.N06ReferenceRemainderFields
+public import ContinuousFlexibility.Radial.ReferenceColumnSmooth
 
 /-!
 # The fixed physical support of the actual nu column
@@ -14,6 +16,8 @@ same height increment. Consequently the real nu derivative vanishes off
 the fixed topological support of the border cutoff at every state and
 construction parameter.
 -/
+
+@[expose] public section
 
 noncomputable section
 

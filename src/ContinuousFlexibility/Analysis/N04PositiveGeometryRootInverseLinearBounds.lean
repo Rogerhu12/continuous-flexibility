@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryRootInverseLinear
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryMoving
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsFiniteProducts
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryRootInverseLinear
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryMoving
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsFiniteProducts
 
 /-!
 # Word estimates for the triangular inverse differential
@@ -9,6 +11,8 @@ Three scalar coefficients determine the operator. Their finite product
 and the fixed reconstruction map retain the full angular reserve.
 Moving the two physical coefficients uses only positive inner jets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalTestPullback
-import ContinuousFlexibility.Analysis.N07aCanonicalTestDivergence
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalTestPullback
+public import ContinuousFlexibility.Analysis.N07aCanonicalTestDivergence
 
 /-!
 # The exact operator on genuine pulled-back tests
@@ -9,6 +11,8 @@ zero extension has the same germ there, so the original N04 operator
 identity applies without assuming a global chart or height extension.
 The sign of the positive-piece convention remains explicit.
 -/
+
+@[expose] public section
 
 noncomputable section
 

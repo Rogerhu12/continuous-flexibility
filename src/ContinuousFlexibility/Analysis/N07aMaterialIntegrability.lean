@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Scalar.WeightedMaterialScale
-import ContinuousFlexibility.Scalar.WeightedWeightShiftJets
-import ContinuousFlexibility.Analysis.CylinderTestPairing
-import Mathlib.MeasureTheory.Function.JacobianOneDim
-import Mathlib.MeasureTheory.Function.LpSeminorm.Prod
+module
+
+public import ContinuousFlexibility.Scalar.WeightedMaterialScale
+public import ContinuousFlexibility.Scalar.WeightedWeightShiftJets
+public import ContinuousFlexibility.Analysis.CylinderTestPairing
+public import Mathlib.MeasureTheory.Function.JacobianOneDim
+public import Mathlib.MeasureTheory.Function.LpSeminorm.Prod
 
 /-!
 # Integrable positive powers of the actual material height weight
@@ -12,6 +14,8 @@ on the entire material axis to a bounded function on the finite physical
 interval. The reciprocal scale has the existing `E0` bound, and every
 positive height power absorbs that bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerRadialActualAssembly
-import ContinuousFlexibility.Radial.InnerGapAssemblyData
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialActualAssembly
+public import ContinuousFlexibility.Radial.InnerGapAssemblyData
 
 /-!
 # The exact full reference matrix of the actual chain
@@ -10,6 +12,8 @@ their entire two-by-two DtN blocks, including off-diagonal entries,
 remain in the reference. This is the same S0 used by the weak flux and
 the matrix estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06CurrentNegativeTwoHalf
-import ContinuousFlexibility.Analysis.N06CanonicalPotentialPeriodicity
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentNegativeTwoHalf
+public import ContinuousFlexibility.Analysis.N06CanonicalPotentialPeriodicity
 
 /-!
 # Negative Green for the original full-period test class
@@ -9,6 +11,8 @@ potential periodicity. Hence the genuine two-half defect vanishes, and
 the finite negative Green identity and its bulk limit apply to every
 original `RadialTest`, without an added operator-periodicity hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

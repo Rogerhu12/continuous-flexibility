@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PlanarInverseRegularity
-import Mathlib.Topology.OpenPartialHomeomorph.Basic
+module
+
+public import ContinuousFlexibility.Analysis.PlanarInverseRegularity
+public import Mathlib.Topology.OpenPartialHomeomorph.Basic
 
 /-!
 # Genuine planar inverse germs from actual inverse identities
@@ -8,6 +10,8 @@ The inverse function theorem makes the image of an open smooth
 nondegenerate chart open. Injectivity then identifies any actual right
 inverse with its smooth local inverse on a full target neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

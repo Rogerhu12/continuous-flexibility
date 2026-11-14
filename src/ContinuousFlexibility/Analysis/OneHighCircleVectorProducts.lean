@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCircleComponents
-import ContinuousFlexibility.Analysis.OneHighCompositionJets
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleComponents
+public import ContinuousFlexibility.Analysis.OneHighCompositionJets
 
 /-!
 # One-high-factor products of actual vector derivative norms
@@ -8,6 +10,8 @@ A finite expansion over component choices converts the vector norm products
 in the genuine Faà di Bruno formula to the already proved scalar derivative
 products. The resulting constant is explicit in the number of components.
 -/
+
+@[expose] public section
 
 noncomputable section
 

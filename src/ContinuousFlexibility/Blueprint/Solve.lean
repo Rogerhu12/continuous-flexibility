@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SolveCoupledSystem
+module
+
+public import ContinuousFlexibility.Analysis.SolveCoupledSystem
 
 /-!
 # Blueprint node Solve
@@ -11,6 +13,8 @@ Task file: `docs/tasks/Solve.md`. The statement is frozen. The proof runs the
 fixed-parameter iteration on the actual normalized sector and extracts its
 nonzero-parameter zero using the N02/N08 realization identities.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

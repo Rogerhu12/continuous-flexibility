@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cCosineAngularJets
-import ContinuousFlexibility.Analysis.N01cSpeedLowBounds
-import ContinuousFlexibility.Analysis.OneHighCircleFlowReferenceNorms
+module
+
+public import ContinuousFlexibility.Analysis.N01cCosineAngularJets
+public import ContinuousFlexibility.Analysis.N01cSpeedLowBounds
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowReferenceNorms
 
 /-!
 # Uniform low geometry of the actual compact component speeds
@@ -10,6 +12,8 @@ factor. The circle norms below are the actual canonical angular jets.
 The mean reference speed disappears before estimating any norm, so it
 does not enter the constants that control the flow geometry.
 -/
+
+@[expose] public section
 
 noncomputable section
 

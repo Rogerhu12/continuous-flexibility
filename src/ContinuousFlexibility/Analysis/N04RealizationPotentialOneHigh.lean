@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationPotentialProductBounds
-import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationPotentialProductBounds
+public import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
 
 /-!
 # One-high normalization of the raw potential products
@@ -9,6 +11,8 @@ All products have been estimated before the genuine multilinear output
 is normalized. Only the finite parameter prefix through `K` is needed;
 the high seminorm may therefore depend on that prefix in applications.
 -/
+
+@[expose] public section
 
 noncomputable section
 

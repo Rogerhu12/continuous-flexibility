@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationMixedProductJets
-import ContinuousFlexibility.Analysis.N04RealizationPotentialRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationMixedProductJets
+public import ContinuousFlexibility.Analysis.N04RealizationPotentialRegularity
 
 /-!
 # Raw differential-product bounds for the actual potential
@@ -9,6 +11,8 @@ has coefficient two. Each term has three raw factors and exactly two
 spatial derivatives before the requested outer derivatives. The genuine
 parameter product bound is applied at that full spatial budget.
 -/
+
+@[expose] public section
 
 noncomputable section
 

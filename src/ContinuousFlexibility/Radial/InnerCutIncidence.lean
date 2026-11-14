@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.InnerBoundedOverlap
-import Mathlib.Analysis.InnerProductSpace.PiL2
-import Mathlib.Data.Fin.Basic
-import Mathlib.Data.Finset.Card
+module
+
+public import ContinuousFlexibility.Radial.InnerBoundedOverlap
+public import Mathlib.Analysis.InnerProductSpace.PiL2
+public import Mathlib.Data.Fin.Basic
+public import Mathlib.Data.Finset.Card
 
 /-!
 # The actual finite cut incidence and its Hilbert bounds
@@ -13,6 +15,8 @@ that estimate. For a linear chain with `n` internal cuts and `n + 1`
 pieces, each cut belongs to exactly its two neighboring pieces. The two
 outer Dirichlet endpoints are not internal cuts.
 -/
+
+@[expose] public section
 
 noncomputable section
 

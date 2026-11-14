@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06PhysicalRepresentativeUniqueness
-import ContinuousFlexibility.Analysis.N06ControlledPieceFiniteness
-import ContinuousFlexibility.Analysis.N06NegativePieceFiniteness
-import Mathlib.MeasureTheory.Integral.Bochner.Set
+module
+
+public import ContinuousFlexibility.Analysis.N06PhysicalRepresentativeUniqueness
+public import ContinuousFlexibility.Analysis.N06ControlledPieceFiniteness
+public import ContinuousFlexibility.Analysis.N06NegativePieceFiniteness
+public import Mathlib.MeasureTheory.Integral.Bochner.Set
 
 /-!
 # The actual finite partition of a compact physical test
@@ -14,6 +16,8 @@ integrability on the physical test rectangle and its exact finite sum of
 piece integrals. The angular set is arbitrary, so the same result covers
 the measured half-period and the original full-period physical tests.
 -/
+
+@[expose] public section
 
 noncomputable section
 

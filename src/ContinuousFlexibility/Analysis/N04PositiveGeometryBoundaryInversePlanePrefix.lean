@@ -1,7 +1,11 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryInversePrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsPlaneJets
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryInversePrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsPlaneJets
 
 /-! # Full plane inverse jets from the finite evaluated prefix -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsKernelGlue
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsEnvelope
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsKernelGlue
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsEnvelope
 
 /-!
 # Actual inverse kernel jets on the physical component
@@ -10,6 +12,8 @@ is the displayed positive radial lower bound. All inverse derivatives
 are therefore estimated from numerical forward material, with constants
 chosen before the component, coefficient vector and evaluation point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07bFiniteMaterialExpansion
-import ContinuousFlexibility.Analysis.N07bNormalizedDirectionChainJets
+module
+
+public import ContinuousFlexibility.Analysis.N07bFiniteMaterialExpansion
+public import ContinuousFlexibility.Analysis.N07bNormalizedDirectionChainJets
 
 /-!
 # Finite jets of the actual normalized reference seeds
@@ -15,6 +17,8 @@ The order budget is `n + 2 <= B`. The common bound is
 `2^B * (3 * 2^B)^2 * R^4`, so `B = b + 2` controls all seed jets through
 order `b`. The physical domains below are the actual current domains.
 -/
+
+@[expose] public section
 
 noncomputable section
 

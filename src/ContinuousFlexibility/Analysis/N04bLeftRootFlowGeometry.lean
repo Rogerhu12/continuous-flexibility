@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04bSymmetricRootField
-import ContinuousFlexibility.Analysis.N04bRootOrientation
-import ContinuousFlexibility.Analysis.N04bRootFlowIdentification
+module
+
+public import ContinuousFlexibility.Analysis.N04bSymmetricRootField
+public import ContinuousFlexibility.Analysis.N04bRootOrientation
+public import ContinuousFlexibility.Analysis.N04bRootFlowIdentification
 
 /-!
 # The actual corrected flow on a left root collar
@@ -11,6 +13,8 @@ closed radial continuity and its actual interior differential equation.
 The smooth periodic Picard flow then proves the angular geometry of the
 stored family, including the actual chosen inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

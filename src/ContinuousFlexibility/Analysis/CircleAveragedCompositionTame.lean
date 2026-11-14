@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CircleAveragedComposition
+module
+
+public import ContinuousFlexibility.Analysis.CircleAveragedComposition
 
 /-!
 # Fixed loss estimates for the averaged chart operator
@@ -8,6 +10,8 @@ therefore retain the same component-energy bound as each fixed chart.
 The averaged operator has one angular derivative of loss and defines an
 actual continuous linear map in the supplied circle model.
 -/
+
+@[expose] public section
 
 noncomputable section
 

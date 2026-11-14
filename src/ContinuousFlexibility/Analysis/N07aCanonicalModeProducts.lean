@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalBandAngular
-import ContinuousFlexibility.Analysis.N07aCanonicalOpenCoefficients
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalBandAngular
+public import ContinuousFlexibility.Analysis.N07aCanonicalOpenCoefficients
 
 /-!
 # Actual coefficient products between angular modes
@@ -8,6 +10,8 @@ The coefficient of a product is computed from the existing L²
 representative and the actual circle multiplication matrix. Radial
 factors remain arbitrary measurable representatives throughout.
 -/
+
+@[expose] public section
 
 noncomputable section
 

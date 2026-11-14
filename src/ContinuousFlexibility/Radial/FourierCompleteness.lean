@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.AngularMeanL2
-import ContinuousFlexibility.Radial.FourierSymmetry
-import Mathlib.Analysis.Fourier.AddCircle
+module
+
+public import ContinuousFlexibility.Radial.AngularMeanL2
+public import ContinuousFlexibility.Radial.FourierSymmetry
+public import Mathlib.Analysis.Fourier.AddCircle
 
 /-!
 # Completeness of the actual even half-turn cosine coefficients
@@ -10,6 +12,8 @@ angular interval. The complex Fourier kernel is related explicitly to its
 real cosine and sine parts. Symmetry then reduces all coefficients to the
 mean and the positive even cosine moments of the raw L² function.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

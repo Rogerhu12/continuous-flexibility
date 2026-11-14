@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CanonicalBoundaryLift
-import ContinuousFlexibility.Analysis.CanonicalStripGeometry
-import ContinuousFlexibility.Analysis.N04bBoundaryInverseRegularity
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalBoundaryLift
+public import ContinuousFlexibility.Analysis.CanonicalStripGeometry
+public import ContinuousFlexibility.Analysis.N04bBoundaryInverseRegularity
 
 /-!
 # True inverse symmetry on the closed canonical rectangle
@@ -11,6 +13,8 @@ boundaries as well. Closed inverse identities give actual injectivity,
 which identifies the two reflection-axis fibers without a radial-graph
 assumption on the current physical boundary.
 -/
+
+@[expose] public section
 
 noncomputable section
 

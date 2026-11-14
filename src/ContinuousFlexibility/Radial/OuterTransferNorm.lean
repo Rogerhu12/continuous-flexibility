@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OuterFirstOrderState
+module
+
+public import ContinuousFlexibility.Radial.OuterFirstOrderState
 
 /-!
 # Operator norms of the actual value/flux transfer
@@ -8,6 +10,8 @@ the Euclidean state energy, so both comparisons are proved explicitly.
 The transfer below is the solution operator of the actual differential
 equation, including its inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

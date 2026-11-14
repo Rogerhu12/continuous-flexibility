@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01RootOddPowerMaterialJets
-import ContinuousFlexibility.Analysis.RootDividedHeight
-import ContinuousFlexibility.Analysis.PointwiseProductPolynomialMaterialJets
+module
+
+public import ContinuousFlexibility.Analysis.N01RootOddPowerMaterialJets
+public import ContinuousFlexibility.Analysis.RootDividedHeight
+public import ContinuousFlexibility.Analysis.PointwiseProductPolynomialMaterialJets
 
 /-!
 # Material jets of the same unit-normalized divided height
@@ -10,6 +12,8 @@ and the actual divided discriminant. Both powers already have explicit
 material costs at the same root and sample. The sole remaining scalar
 factor depends only on the requested exponent, never on a chosen box.
 -/
+
+@[expose] public section
 
 noncomputable section
 

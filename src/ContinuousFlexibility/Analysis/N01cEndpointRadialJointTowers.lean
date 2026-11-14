@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cGradedJetContinuity
-import ContinuousFlexibility.Analysis.N01cEndpointCosineTower
-import ContinuousFlexibility.Analysis.N01cOrdinarySpeedFiniteAffine
+module
+
+public import ContinuousFlexibility.Analysis.N01cGradedJetContinuity
+public import ContinuousFlexibility.Analysis.N01cEndpointCosineTower
+public import ContinuousFlexibility.Analysis.N01cOrdinarySpeedFiniteAffine
 
 /-!
 # Genuine joint state-angle towers for physical radial jets
@@ -11,6 +13,8 @@ bounds for every angular derivative. The resulting state-angle tower
 uses the actual radial derivatives and the original topological state
 space throughout.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Radial.MatchedOuterKernelAlgebra
-import ContinuousFlexibility.Radial.MatchedOuterUniformCore
-import ContinuousFlexibility.Radial.MatchedOuterLocalizerBounds
-import ContinuousFlexibility.Radial.MatchedOuterModalCells
-import ContinuousFlexibility.Radial.OuterStateScaleEnvelope
-import ContinuousFlexibility.Radial.OuterGreenAssembly
+module
+
+public import ContinuousFlexibility.Radial.MatchedOuterKernelAlgebra
+public import ContinuousFlexibility.Radial.MatchedOuterUniformCore
+public import ContinuousFlexibility.Radial.MatchedOuterLocalizerBounds
+public import ContinuousFlexibility.Radial.MatchedOuterModalCells
+public import ContinuousFlexibility.Radial.OuterStateScaleEnvelope
+public import ContinuousFlexibility.Radial.OuterGreenAssembly
 
 /-!
 # Uniform cell bounds for the actual whole outer Green operator
@@ -13,6 +15,8 @@ pair.  The determinant gives the deep rank-one correction exactly.
 The common constants precede the height, frequency, scale and supplied
 operator, whose all-source integral identity is retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ReferenceCosineParseval
-import ContinuousFlexibility.Radial.ReferenceL2Tensor
-import ContinuousFlexibility.Radial.FourierOrthogonality
+module
+
+public import ContinuousFlexibility.Radial.ReferenceCosineParseval
+public import ContinuousFlexibility.Radial.ReferenceL2Tensor
+public import ContinuousFlexibility.Radial.FourierOrthogonality
 
 /-!
 # The actual cosine family in angular L²
@@ -9,6 +11,8 @@ The constant mode and the positive even physical cosine modes form an
 orthonormal family on the circle of period π. Its product-space synthesis
 converges in the actual L² norm and retains the exact physical normalization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

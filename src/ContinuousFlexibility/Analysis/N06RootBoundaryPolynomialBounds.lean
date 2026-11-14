@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06RootBoundaryJetComparison
+module
+
+public import ContinuousFlexibility.Analysis.N06RootBoundaryJetComparison
 
 /-!
 # Quantitative bounds for the actual finite boundary formulas
@@ -8,6 +10,8 @@ root boundary formulas. Their cost is an explicit polynomial of degree
 sixteen in the input bound. Thus a material bound for the genuine input
 jets remains a material bound after the boundary recursion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

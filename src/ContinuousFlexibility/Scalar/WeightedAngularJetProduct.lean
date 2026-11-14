@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.WeightedAngularDifferentiation
-import ContinuousFlexibility.Scalar.WeightedBinaryProduct
-import ContinuousFlexibility.Analysis.MaterialHeightRegularity
+module
+
+public import ContinuousFlexibility.Scalar.WeightedAngularDifferentiation
+public import ContinuousFlexibility.Scalar.WeightedBinaryProduct
+public import ContinuousFlexibility.Analysis.MaterialHeightRegularity
 
 /-!
 # Products of two actual odd angular jets
@@ -9,6 +11,8 @@ The second angular derivative product rule realizes the product of two odd
 first derivatives as an even weighted height. The construction uses only the
 actual even multiplication and angular-second-derivative maps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

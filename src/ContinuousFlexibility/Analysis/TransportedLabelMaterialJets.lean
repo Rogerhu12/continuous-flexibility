@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.InteriorEndpointMaterialJets
-import ContinuousFlexibility.Analysis.CoordinateCompositionMaterialBounds
+module
+
+public import ContinuousFlexibility.Analysis.InteriorEndpointMaterialJets
+public import ContinuousFlexibility.Analysis.CoordinateCompositionMaterialBounds
 
 /-!
 # Fixed-loss jets of a genuinely transported circle label
@@ -9,6 +11,8 @@ displacements. Their values need no bound as circle lifts. Composition
 uses the already proved one-high partition estimate, with one common
 low order and loss before the input constants or the evaluation point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

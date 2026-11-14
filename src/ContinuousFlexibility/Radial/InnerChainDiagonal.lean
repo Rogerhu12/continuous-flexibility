@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerChainBoundaryHilbert
-import ContinuousFlexibility.Radial.InnerReferenceNormalization
+module
+
+public import ContinuousFlexibility.Radial.InnerChainBoundaryHilbert
+public import ContinuousFlexibility.Radial.InnerReferenceNormalization
 
 /-!
 # Diagonal multiplication on the actual chain cut space
@@ -9,6 +11,8 @@ cut weights and cut energies with their two-endpoint diagonal maps.
 Outer endpoint values are zero, so an arbitrary positive outer diagonal
 value introduces no boundary degree of freedom.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.PolynomialJetComposition
+module
+
+public import ContinuousFlexibility.Analysis.PolynomialJetComposition
 
 /-!
 # Composition of two lifts with bounded positive jets
@@ -7,6 +9,8 @@ Circle lifts themselves are unbounded. For a positive derivative order,
 the chain rule is applied first, so every outer derivative used in the
 remaining Faà di Bruno estimate has positive order as well.
 -/
+
+@[expose] public section
 
 noncomputable section
 

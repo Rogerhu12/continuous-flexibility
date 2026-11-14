@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.SelectedNaturalRobinInverse
-import ContinuousFlexibility.Radial.SelectedTailRadiusWeakEquation
-import ContinuousFlexibility.Radial.SelectedNaturalTailTransport
+module
+
+public import ContinuousFlexibility.Radial.SelectedNaturalRobinInverse
+public import ContinuousFlexibility.Radial.SelectedTailRadiusWeakEquation
+public import ContinuousFlexibility.Radial.SelectedNaturalTailTransport
 
 /-!
 # The actual Robin inverse after the reference's retained-tail dilation
@@ -9,6 +11,8 @@ The prescribed target natural function is pulled back, not reselected.
 The pullback has exactly the same full value/flux state when the physical
 boundary scale is multiplied by the profile-height factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

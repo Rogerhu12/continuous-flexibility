@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01PlateauEnergyEnvelope
+module
+
+public import ContinuousFlexibility.Analysis.N01PlateauEnergyEnvelope
 
 /-!
 # A fixed two-order bound for the actual localization envelope
@@ -7,6 +9,8 @@ The constant is chosen before the input height. All local grading
 energies are summed, including the full expanded supports. The total is
 bounded by the square of one actual input grading two orders higher.
 -/
+
+@[expose] public section
 
 noncomputable section
 

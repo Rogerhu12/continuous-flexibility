@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Statements.Nonlinear
-import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Statements.Nonlinear
+public import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
 
 /-!
 # Pointwise disjointness of the actual physical pieces
@@ -10,6 +12,8 @@ radial intervals: a nonempty overlap would be an interval of positive
 Lebesgue measure. Thus a source assembled by its physical piece agrees
 pointwise with each local source throughout that piece.
 -/
+
+@[expose] public section
 
 noncomputable section
 

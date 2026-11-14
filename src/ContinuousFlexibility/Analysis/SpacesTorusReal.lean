@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SpacesTorusFourier
+module
+
+public import ContinuousFlexibility.Analysis.SpacesTorusFourier
 
 /-!
 # Real Fourier shells and finite frequency windows
@@ -8,6 +10,8 @@ a real function real. Thus the physical analysis and synthesis operators
 can use real cylinder `L²` rows while their Fourier calculation uses the
 complex exponential basis internally.
 -/
+
+@[expose] public section
 
 noncomputable section
 

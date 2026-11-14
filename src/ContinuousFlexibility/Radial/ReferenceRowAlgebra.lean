@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MatchedModeDomainEmbedding
-import ContinuousFlexibility.Radial.ModeCoreSource
-import ContinuousFlexibility.Radial.ReferenceWeakAlgebra
+module
+
+public import ContinuousFlexibility.Radial.MatchedModeDomainEmbedding
+public import ContinuousFlexibility.Radial.ModeCoreSource
+public import ContinuousFlexibility.Radial.ReferenceWeakAlgebra
 
 /-!
 # The actual bordered row is linear on the weighted output domain
@@ -10,6 +12,8 @@ places the second coefficient in the modal Hilbert space, where the true
 normalized border is an L² test. Angular additivity uses the actual
 local L² sections. No rule for adding undefined integrals is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

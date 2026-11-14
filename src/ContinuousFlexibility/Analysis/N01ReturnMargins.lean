@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # Return margins of the actual N01 negative components
@@ -13,6 +15,8 @@ witness.  It does not identify that witness with `C.cell m`, or infer an
 estimate in the circle grading sampled at `m`.  That further comparison is
 a separate obligation in constructing the weighted circle inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

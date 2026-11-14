@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cEndpointMixedPowerAlgebra
-import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N01cEndpointMixedPowerAlgebra
+public import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
 
 /-!
 # Normalize the complete weighted jet once
@@ -9,6 +11,8 @@ It therefore scales the genuine parameter multilinear map. Unit-ball
 normalization applies to that complete map, and the actual first-jet
 segment theorem supplies the zeroth reference difference.
 -/
+
+@[expose] public section
 
 noncomputable section
 

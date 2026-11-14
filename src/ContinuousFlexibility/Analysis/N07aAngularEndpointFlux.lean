@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aAngularReferenceFlux
-import ContinuousFlexibility.Analysis.N07aAngularMaterialWeights
-import Mathlib.Analysis.Normed.Ring.Lemmas
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceFlux
+public import ContinuousFlexibility.Analysis.N07aAngularMaterialWeights
+public import Mathlib.Analysis.Normed.Ring.Lemmas
 
 /-!
 # Actual endpoint flux and the reference compatibility integral
@@ -10,6 +12,8 @@ radial first derivative and the actual flat endpoint coefficient make its
 flux continuous on the closed radial interval. FTC2 then applies to its
 right derivative, including all interior transmission interfaces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

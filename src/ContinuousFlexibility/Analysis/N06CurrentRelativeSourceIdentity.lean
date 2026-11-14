@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N06CurrentScalarPairing
-import ContinuousFlexibility.Analysis.N06FiniteReferenceColumns
-import ContinuousFlexibility.Analysis.N06ReferenceCanonicalEquation
-import ContinuousFlexibility.Analysis.N06NegativeReferenceForcingLp
-import ContinuousFlexibility.Analysis.N06PositiveCubicPairing
-import ContinuousFlexibility.Analysis.N06CanonicalTestSeparation
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentScalarPairing
+public import ContinuousFlexibility.Analysis.N06FiniteReferenceColumns
+public import ContinuousFlexibility.Analysis.N06ReferenceCanonicalEquation
+public import ContinuousFlexibility.Analysis.N06NegativeReferenceForcingLp
+public import ContinuousFlexibility.Analysis.N06PositiveCubicPairing
+public import ContinuousFlexibility.Analysis.N06CanonicalTestSeparation
 
 /-!
 # The actual relative source and the two canonical Green signs
@@ -17,6 +19,8 @@ The negative cubic contribution is proved to vanish from its defining
 canonical test pairing and separation in the original L2 space. It is
 not a further support assumption on the constructed source.
 -/
+
+@[expose] public section
 
 noncomputable section
 

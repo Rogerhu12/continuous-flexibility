@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05PolynomialProbes
+module
+
+public import ContinuousFlexibility.Analysis.N05PolynomialProbes
 
 /-!
 # Recovering coefficient differentiability from genuine elliptic probes
@@ -9,6 +11,8 @@ rules that possibility out. A probe factor is one at the point, so its
 product is differentiable exactly when the original coefficient is.
 The same directional lemma handles both coordinate axes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

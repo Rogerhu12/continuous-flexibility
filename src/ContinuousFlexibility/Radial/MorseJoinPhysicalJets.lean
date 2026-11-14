@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseCellPhysicalJets
-import ContinuousFlexibility.Radial.MorseJoinActualGerms
+module
+
+public import ContinuousFlexibility.Radial.MorseCellPhysicalJets
+public import ContinuousFlexibility.Radial.MorseJoinActualGerms
 
 /-!
 # Physical derivatives on the Morse connectors
@@ -9,6 +11,8 @@ profiles. Leibniz's formula bounds the derivatives of the prescribed slope
 on the entire connector. The exponential and its reciprocal retain their
 respective height factors.
 -/
+
+@[expose] public section
 
 noncomputable section
 

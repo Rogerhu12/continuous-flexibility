@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aMixedAngularProduct
-import ContinuousFlexibility.Scalar.WeightedScalarOperator
+module
+
+public import ContinuousFlexibility.Analysis.N07aMixedAngularProduct
+public import ContinuousFlexibility.Scalar.WeightedScalarOperator
 
 /-!
 # The actual divergence operator for mixed coefficient weights
@@ -9,6 +11,8 @@ retains weight three quarters. The odd coefficient is the angular
 derivative of its actual even primitive, and the free left endpoint
 constant is included through the common radial derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

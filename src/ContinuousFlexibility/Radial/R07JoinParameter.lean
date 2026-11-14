@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MorseJoinActualGerms
+module
+
+public import ContinuousFlexibility.Radial.MorseJoinActualGerms
 
 /-!
 # Parameter identities for the actual positive joins
@@ -12,6 +14,8 @@ affine formula.  This is the parameter dependence needed in R07: multiplying
 both heights by the same positive number multiplies the whole join by that
 number, while changing their ratio changes one fixed smooth coordinate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01cMorseOpticalEnvelope
-import ContinuousFlexibility.Analysis.N01cMorseComponentClassification
-import ContinuousFlexibility.Analysis.N01cOpticalPointCover
-import ContinuousFlexibility.Radial.OpenComponentTransport
+module
+
+public import ContinuousFlexibility.Analysis.N01cMorseOpticalEnvelope
+public import ContinuousFlexibility.Analysis.N01cMorseComponentClassification
+public import ContinuousFlexibility.Analysis.N01cOpticalPointCover
+public import ContinuousFlexibility.Radial.OpenComponentTransport
 
 /-!
 # Actual scaled Morse components retain their optical lower bound
@@ -10,6 +12,8 @@ The original profile identity is differentiated; radial dilation changes
 the ratio Q0/distance by the inverse cube of its scale. The actual cell
 pullback and finite index floor retain the coefficient weight.
 -/
+
+@[expose] public section
 
 noncomputable section
 

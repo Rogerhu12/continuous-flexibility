@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.ProjectiveDifferential
-import Mathlib.Analysis.Calculus.ContDiff.Operations
-import Mathlib.Analysis.Calculus.FDeriv.Partial
-import Mathlib.Analysis.LocallyConvex.Barrelled
-import Mathlib.Topology.MetricSpace.Equicontinuity
+module
+
+public import ContinuousFlexibility.Analysis.ProjectiveDifferential
+public import Mathlib.Analysis.Calculus.ContDiff.Operations
+public import Mathlib.Analysis.Calculus.FDeriv.Partial
+public import Mathlib.Analysis.LocallyConvex.Barrelled
+public import Mathlib.Topology.MetricSpace.Equicontinuity
 
 /-!
 # Smooth evaluation along curves in a Fréchet space
@@ -15,6 +17,8 @@ quotients. Together they justify joint smoothness along actual smooth
 curves, including at a boundary already crossed by the individual smooth
 functions. No uniform weighted estimate is assumed in this argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

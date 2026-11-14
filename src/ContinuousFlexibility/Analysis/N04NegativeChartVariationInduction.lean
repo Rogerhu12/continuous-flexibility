@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartVariationSelection
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartVariationSelection
 
 /-!
 # Every finite state prefix of the actual flow on one fixed domain
@@ -11,6 +13,8 @@ spatial constants are selected afterwards. This is the quantitative
 closure of the genuine variational equations, with no lower-flow bounds
 left among the hypotheses of the final theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cSectorProjection
-import ContinuousFlexibility.Blueprint.Statements
+module
+
+public import ContinuousFlexibility.Analysis.N01cSectorProjection
+public import ContinuousFlexibility.Blueprint.Statements
 
 /-!
 # Actual coefficient denominators on the full N01 neighbourhood
@@ -10,6 +12,8 @@ on its entire neighbourhood, with the same base and radius. These are
 bounds for the actual scalar formulas; no differentiability or tame bound
 is added as a hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

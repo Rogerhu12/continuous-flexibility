@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04RealizationRootBoundaryDirections
-import ContinuousFlexibility.Analysis.WholePositiveEndpointFields
-import ContinuousFlexibility.Analysis.N01cAngularJetTowers
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationRootBoundaryDirections
+public import ContinuousFlexibility.Analysis.WholePositiveEndpointFields
+public import ContinuousFlexibility.Analysis.N01cAngularJetTowers
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
 
 /-!
 # Genuine towers of the actual positive endpoint values
@@ -12,6 +14,8 @@ inverse of the original root label. The source subtype also admits an
 ambient endpoint; that branch is the identity and is handled by the same
 statement. No new source or root coordinate is selected.
 -/
+
+@[expose] public section
 
 noncomputable section
 

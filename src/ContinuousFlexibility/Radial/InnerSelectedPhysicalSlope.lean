@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerSelectedPhysicalGeometry
-import ContinuousFlexibility.Radial.ReferenceDilation
+module
+
+public import ContinuousFlexibility.Radial.InnerSelectedPhysicalGeometry
+public import ContinuousFlexibility.Radial.ReferenceDilation
 
 /-!
 # One physical slope after independent tail dilations
@@ -10,6 +12,8 @@ final reference. The two fixed middle intervals supply their positive
 constants by compactness. The minimum is chosen before a finite
 truncation or a frequency.
 -/
+
+@[expose] public section
 
 noncomputable section
 

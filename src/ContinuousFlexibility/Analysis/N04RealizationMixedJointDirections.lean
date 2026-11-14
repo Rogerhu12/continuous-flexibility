@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04RealizationPhysicalJointBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationPhysicalJointBounds
 
 /-!
 # Joining a uniformly controlled mixed tower in two physical coordinates
@@ -9,6 +11,8 @@ qualitative and is supplied independently by the physical coefficient
 construction. The formula below retains the original mixed parameter
 towers for the sharper weighted estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

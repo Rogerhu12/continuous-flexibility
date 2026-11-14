@@ -1,9 +1,13 @@
-import ContinuousFlexibility.Radial.PositiveBufferCorrectedData
-import ContinuousFlexibility.Radial.PositiveBufferGreenAlgebra
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferCorrectedData
+public import ContinuousFlexibility.Radial.PositiveBufferGreenAlgebra
 
 /-!
 # The actual cut matrix of the constructed corrected columns
 -/
+
+@[expose] public section
 
 noncomputable section
 

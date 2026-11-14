@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aParameterGrading
-import ContinuousFlexibility.Analysis.N07aForwardCoefficients
-import ContinuousFlexibility.Analysis.TameTransfer
+module
+
+public import ContinuousFlexibility.Analysis.N07aParameterGrading
+public import ContinuousFlexibility.Analysis.N07aForwardCoefficients
+public import ContinuousFlexibility.Analysis.TameTransfer
 
 /-!
 # Restricting the actual construction to a stronger neighborhood
@@ -9,6 +11,8 @@ The original functions and genuine directional derivatives are retained.
 Increasing the fixed low order and decreasing the radius only restrict
 their domain and increases the low variation bounds.
 -/
+
+@[expose] public section
 
 noncomputable section
 

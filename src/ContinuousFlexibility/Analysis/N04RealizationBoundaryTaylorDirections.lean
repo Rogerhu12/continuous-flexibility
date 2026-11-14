@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CircleSmoothDirectionsOperations
-import ContinuousFlexibility.Analysis.N01cPhysicalFlowGraph
-import ContinuousFlexibility.Analysis.OneSidedBoundaryTaylorRepresentative
+module
+
+public import ContinuousFlexibility.Analysis.CircleSmoothDirectionsOperations
+public import ContinuousFlexibility.Analysis.N01cPhysicalFlowGraph
+public import ContinuousFlexibility.Analysis.OneSidedBoundaryTaylorRepresentative
 
 /-!
 # Genuine towers for the existing finite endpoint representative
@@ -9,6 +11,8 @@ The finite tuple contains the actual boundary coefficients at the same
 angle. The fixed polynomial kernel reconstructs the original Taylor
 formula on the entire plane, without assuming a tower for its output.
 -/
+
+@[expose] public section
 
 noncomputable section
 

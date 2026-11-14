@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06PeriodicAlmostEverywhere
+module
+
+public import ContinuousFlexibility.Analysis.N06PeriodicAlmostEverywhere
 
 /-!
 # Canonical equality determines the physical representative almost everywhere
@@ -9,6 +11,8 @@ they agree in the measured half-period tile. The smooth chart then transports
 this identity to the physical piece. The countable piece cover gives the
 global statement on the annulus.
 -/
+
+@[expose] public section
 
 noncomputable section
 

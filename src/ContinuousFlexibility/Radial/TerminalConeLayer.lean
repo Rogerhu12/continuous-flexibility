@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.TerminalConeEnergy
-import ContinuousFlexibility.Radial.SelectedGrowingCone
+module
+
+public import ContinuousFlexibility.Radial.TerminalConeEnergy
+public import ContinuousFlexibility.Radial.SelectedGrowingCone
 
 /-!
 # Placing a fixed-ratio layer deep in the actual retained cone
@@ -8,6 +10,8 @@ One Boolean handles the two orientations. The layer is strictly between
 the retained inner endpoint and the old cut. The normalized growing
 power is exponentially small there, with no change to its old join jet.
 -/
+
+@[expose] public section
 
 noncomputable section
 

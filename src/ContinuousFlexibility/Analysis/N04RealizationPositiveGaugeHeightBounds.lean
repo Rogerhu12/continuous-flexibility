@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04RealizationPositiveHeightParameterPrefix
-import ContinuousFlexibility.Analysis.N04RealizationPositivePulledHeight
-import ContinuousFlexibility.Analysis.WholePositiveReferenceGauge
-import ContinuousFlexibility.Analysis.PositiveReferenceCylinder
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationPositiveHeightParameterPrefix
+public import ContinuousFlexibility.Analysis.N04RealizationPositivePulledHeight
+public import ContinuousFlexibility.Analysis.WholePositiveReferenceGauge
+public import ContinuousFlexibility.Analysis.PositiveReferenceCylinder
 
 /-!
 # Actual positive pulled-height bounds in the supplied reference gauge
@@ -13,6 +15,8 @@ reference-gauged height at its literal inverse point. Fixed reference
 height jets and radial chain coefficients contribute two polynomial
 factors; the parameter height gain and interpolation order are retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

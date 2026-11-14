@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R07UniformSelection
-import ContinuousFlexibility.Radial.MorseChainScales
+module
+
+public import ContinuousFlexibility.Radial.R07UniformSelection
+public import ContinuousFlexibility.Radial.MorseChainScales
 
 /-!
 # The actual first and later matching margins have one reciprocal bound
@@ -8,6 +10,8 @@ The first margin is fixed before the modal frequency. The later margin
 is the selected tolerance times exp(-n²)/8. The same positive constant
 therefore bounds both reciprocal costs by exp(radialQ n).
 -/
+
+@[expose] public section
 
 noncomputable section
 

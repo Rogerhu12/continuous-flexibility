@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SpacesCircleFourier
+module
+
+public import ContinuousFlexibility.Analysis.SpacesCircleFourier
 
 /-!
 # Angular Fourier symbols of the actual circle jets
@@ -8,6 +10,8 @@ The coefficient identity is proved from integration by parts for smooth
 periodic functions and then iterated through all derivative orders.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 set_option backward.isDefEq.respectTransparency false
@@ -16,8 +20,6 @@ namespace ContinuousFlexibility.Statements
 
 open Set Filter MeasureTheory
 open scoped ENNReal ComplexConjugate ContDiff
-
-private instance circleFourierJets_period_pos : Fact (0 < Real.pi) := ⟨Real.pi_pos⟩
 
 theorem circleFourierWave_periodic (n : ℤ) :
     Function.Periodic (circleFourierWave n) Real.pi := by

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06VolumeFourierCutoff
+module
+
+public import ContinuousFlexibility.Analysis.N06VolumeFourierCutoff
 
 /-!
 # Linearity of the actual canonical Fourier cutoff
@@ -8,6 +10,8 @@ representatives. Its action on the original volume level commutes with
 forget, including the original material factors. Consequently cutting a
 volume member retains membership in the same weighted level.
 -/
+
+@[expose] public section
 
 noncomputable section
 

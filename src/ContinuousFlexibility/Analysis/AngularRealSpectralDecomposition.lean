@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.AngularComplexificationSpectrum
-import ContinuousFlexibility.Analysis.AngularSpectralDecomposition
+module
+
+public import ContinuousFlexibility.Analysis.AngularComplexificationSpectrum
+public import ContinuousFlexibility.Analysis.AngularSpectralDecomposition
 
 /-!
 # The angular spectral decomposition over the reals
@@ -10,6 +12,8 @@ step is transferred: take the real components of the finite complex
 spectral sums.  This proves the full real Hilbert decomposition without
 assuming a real continuous functional calculus or a diagonalization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

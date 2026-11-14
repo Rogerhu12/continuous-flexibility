@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.PositivePowerMaterialJets
-import ContinuousFlexibility.Analysis.PointwiseMaterialJetOperations
-import Mathlib.Analysis.Normed.Operator.Prod
+module
+
+public import ContinuousFlexibility.Analysis.PositivePowerMaterialJets
+public import ContinuousFlexibility.Analysis.PointwiseMaterialJetOperations
+public import Mathlib.Analysis.Normed.Operator.Prod
 
 /-!
 # Actual Airy coordinate jets on a positive travel interval
@@ -10,6 +12,8 @@ map. Away from a root the travel lies in a fixed positive interval, so
 the actual two-thirds power is estimated by the existing composition
 theorem. Only positive jets of the angular lift enter the map estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

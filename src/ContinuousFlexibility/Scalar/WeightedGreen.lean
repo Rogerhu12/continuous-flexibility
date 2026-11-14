@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Scalar.WeightedCoefficientRegularity
-import ContinuousFlexibility.Scalar.WeightedFlatProducts
-import ContinuousFlexibility.Scalar.GreenIdentity
-import Mathlib.MeasureTheory.Integral.DominatedConvergence
+module
+
+public import ContinuousFlexibility.Scalar.WeightedCoefficientRegularity
+public import ContinuousFlexibility.Scalar.WeightedFlatProducts
+public import ContinuousFlexibility.Scalar.GreenIdentity
+public import Mathlib.MeasureTheory.Integral.DominatedConvergence
 
 /-!
 # Endpoint flux and Green symmetry on the weighted common height domain
@@ -11,6 +13,8 @@ physical annulus.  In particular the normal coefficient row vanishes at
 both endpoints.  No boundary condition is imposed on the common heights,
 whose left constants remain free.
 -/
+
+@[expose] public section
 
 noncomputable section
 

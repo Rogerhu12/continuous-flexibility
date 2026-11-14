@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aNormalizedInverseMap
-import ContinuousFlexibility.Analysis.N07aInverseContinuity
-import ContinuousFlexibility.Analysis.SolveReturnEquations
-import ContinuousFlexibility.Statements.N07aRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N07aNormalizedInverseMap
+public import ContinuousFlexibility.Analysis.N07aInverseContinuity
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
+public import ContinuousFlexibility.Statements.N07aRegularity
 
 /-!
 # Closing the smooth inverse from the actual physical forward map
@@ -11,6 +13,8 @@ target. The forward premise in this internal assembly lemma is a genuine
 source-valued continuous linear family with the actual physical decoder.
 The concrete forward construction supplies it in the smooth subnode.
 -/
+
+@[expose] public section
 
 noncomputable section
 

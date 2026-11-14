@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveNormalizationBuffer
-import ContinuousFlexibility.Analysis.WholePositiveCanonicalFields
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveNormalizationBuffer
+public import ContinuousFlexibility.Analysis.WholePositiveCanonicalFields
 
 /-!
 # Normalization on the actual middle of each positive component
@@ -8,6 +10,8 @@ Disjointness of the genuine positive components puts every normalization
 point in its own buffer. The already constructed middle germs then give
 the same chart and height for any two members of the family.
 -/
+
+@[expose] public section
 
 noncomputable section
 

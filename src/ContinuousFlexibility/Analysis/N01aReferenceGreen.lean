@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01aReferenceModes
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N01aReferenceModes
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 
 /-!
 # Radial Green symmetry and actual modal tests
@@ -8,6 +10,8 @@ The flat radial coefficient kills the endpoint Wronskian.  This permits
 moving the radial Jacobi operator from an interior cutoff to a smooth
 admissible mode before the cutoff is removed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

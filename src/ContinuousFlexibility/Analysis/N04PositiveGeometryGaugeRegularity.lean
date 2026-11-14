@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryAtomRegularity
-import ContinuousFlexibility.Analysis.N04PositiveGeometryCurrentData
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryAtomRegularity
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryCurrentData
 
 /-!
 # Regularity on every positive piece of the chosen atlas
@@ -9,6 +11,8 @@ positive piece. Auxiliary-column replacement retains these exact fields.
 Consequently both the geometric atoms and the pulled height meet the
 spatial and reference clauses of the current-data constructor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

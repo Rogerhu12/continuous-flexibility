@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CanonicalReferenceTransportGerms
-import ContinuousFlexibility.Analysis.WholePositiveTransportAssembly
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalReferenceTransportGerms
+public import ContinuousFlexibility.Analysis.WholePositiveTransportAssembly
 
 /-!
 # The actual whole-positive-component transport from finite endpoint data
@@ -14,6 +16,8 @@ The common constants below are an interface for the separate material
 endpoint estimates. No global transport, positive atlas, or primitive
 bound is an assumption of this finite construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

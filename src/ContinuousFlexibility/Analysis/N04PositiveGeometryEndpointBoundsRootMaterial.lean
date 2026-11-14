@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsRootHeight
-import ContinuousFlexibility.Analysis.N01cPhysicalHeightBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsRootHeight
+public import ContinuousFlexibility.Analysis.N01cPhysicalHeightBounds
 
 /-!
 # Polynomial material costs for the actual normalized root inputs
@@ -9,6 +11,8 @@ height space. Evaluating those maps with the physical `E0` estimate
 retains `H^(3/4)` and a finite `E0` power, with fixed spatial loss seven.
 This is stronger than the older estimate using the material envelope M.
 -/
+
+@[expose] public section
 
 noncomputable section
 

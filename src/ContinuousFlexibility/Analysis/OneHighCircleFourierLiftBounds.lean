@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFourierLiftGeometry
-import ContinuousFlexibility.Analysis.OneHighCircleFourierRealAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierLiftGeometry
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierRealAlgebra
 
 /-!
 # Low geometry controlled by the actual derivative defect
@@ -8,6 +10,8 @@ The prescribed `H³` bound on `h' - 1` controls the first three pointwise
 derivatives of a circle lift and the Fourier `L¹` norm of `h'`. These are
 the uniform low-order inputs to the tame composition induction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

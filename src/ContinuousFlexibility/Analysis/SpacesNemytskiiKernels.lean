@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SpacesNemytskiiJetBounds
+module
+
+public import ContinuousFlexibility.Analysis.SpacesNemytskiiJetBounds
 
 /-!
 # The actual normalized Nemytskii kernels
@@ -7,6 +9,8 @@ These functions are the composition map and its directional derivative
 kernels. Their spatial jets belong to every weighted Hilbert level,
 so they determine elements of the original compatible-jet space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

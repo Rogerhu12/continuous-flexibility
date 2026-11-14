@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RetainedMorsePositiveGapCoordinates
-import ContinuousFlexibility.Analysis.ScaledMorsePositiveGapMaterialWidth
+module
+
+public import ContinuousFlexibility.Analysis.RetainedMorsePositiveGapCoordinates
+public import ContinuousFlexibility.Analysis.ScaledMorsePositiveGapMaterialWidth
 
 /-!
 # Sampled width costs for the same retained positive gaps
@@ -9,6 +11,8 @@ the actual retained-coordinate certificate. The material datum and its
 sample assignment stay fixed. This is a theorem about that same
 constructed reference, not an extraction from arbitrary Through03.
 -/
+
+@[expose] public section
 
 noncomputable section
 

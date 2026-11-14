@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01FlowParameterPartialVariation
-import ContinuousFlexibility.Analysis.N01CharacteristicParameterRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N01FlowParameterPartialVariation
+public import ContinuousFlexibility.Analysis.N01CharacteristicParameterRegularity
 
 /-!
 # The actual first height response of the ordinary return
@@ -9,6 +11,8 @@ and finite-dimensional differentiability premise needed by the dominated
 flow-variation argument. Thus the partial-return and complete-return
 derivatives below follow directly from N01 and the physical realizations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

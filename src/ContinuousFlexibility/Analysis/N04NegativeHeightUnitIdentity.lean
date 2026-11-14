@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeHeightDensityIdentity
-import ContinuousFlexibility.Analysis.N04NegativeGeometrySpatialRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeHeightDensityIdentity
+public import ContinuousFlexibility.Analysis.N04NegativeGeometrySpatialRegularity
 
 /-!
 # The nonsingular height numerator in normalized chart atoms
@@ -8,6 +10,8 @@ The physical unit map preserves the angular tangent vector.  Consequently
 the angular numerator of the Airy density is a polynomial in the two
 normalized forward-chart atoms and their first angular derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

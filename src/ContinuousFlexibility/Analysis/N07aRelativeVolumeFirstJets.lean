@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aBaseInverseWeightedFirst
-import ContinuousFlexibility.Analysis.N07aVolumeJetBounds
-import ContinuousFlexibility.Analysis.N07aSampleLinearJets
-import ContinuousFlexibility.Analysis.N07aParameterGrading
+module
+
+public import ContinuousFlexibility.Analysis.N07aBaseInverseWeightedFirst
+public import ContinuousFlexibility.Analysis.N07aVolumeJetBounds
+public import ContinuousFlexibility.Analysis.N07aSampleLinearJets
+public import ContinuousFlexibility.Analysis.N07aParameterGrading
 
 /-!
 # The actual first-normal jet estimates from the lifted relative inverse
@@ -9,6 +11,8 @@ import ContinuousFlexibility.Analysis.N07aParameterGrading
 Only the reference inverse's fixed material loss and one angular order
 are added. The weak derivatives all belong to the same Banach unknown.
 -/
+
+@[expose] public section
 
 noncomputable section
 

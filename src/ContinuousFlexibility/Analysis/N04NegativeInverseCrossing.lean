@@ -1,12 +1,14 @@
-import ContinuousFlexibility.Analysis.N04NegativeInversePhysicalBounds
-import ContinuousFlexibility.Analysis.N04NegativeInverseScalarComposition
-import ContinuousFlexibility.Analysis.N04NegativeInverseMixedPrefix
-import ContinuousFlexibility.Analysis.PolynomialProductOuterJets
-import ContinuousFlexibility.Analysis.PointwiseAffineMaterialJets
-import ContinuousFlexibility.Analysis.N06RootJetTransportCalculus
-import ContinuousFlexibility.Analysis.N04NegativeInverseFiniteEnvelope
-import ContinuousFlexibility.Analysis.N04NegativeInversePairSampleEnvelope
-import ContinuousFlexibility.Analysis.N04NegativeInverseCrossingCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeInversePhysicalBounds
+public import ContinuousFlexibility.Analysis.N04NegativeInverseScalarComposition
+public import ContinuousFlexibility.Analysis.N04NegativeInverseMixedPrefix
+public import ContinuousFlexibility.Analysis.PolynomialProductOuterJets
+public import ContinuousFlexibility.Analysis.PointwiseAffineMaterialJets
+public import ContinuousFlexibility.Analysis.N06RootJetTransportCalculus
+public import ContinuousFlexibility.Analysis.N04NegativeInverseFiniteEnvelope
+public import ContinuousFlexibility.Analysis.N04NegativeInversePairSampleEnvelope
+public import ContinuousFlexibility.Analysis.N04NegativeInverseCrossingCalculus
 
 /-!
 # Actual scalar fields across the old negative cut
@@ -16,6 +18,8 @@ halves.  On an opposite half the normalized radial coordinate belongs to
 a fixed middle band.  The actual chart and height identities then use
 fixed smooth scalar transitions on that band.
 -/
+
+@[expose] public section
 
 noncomputable section
 

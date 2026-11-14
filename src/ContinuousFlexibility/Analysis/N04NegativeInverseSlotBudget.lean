@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cStateAngleGraphBudget
-import ContinuousFlexibility.Analysis.N04RealizationMixedSlotBudget
+module
+
+public import ContinuousFlexibility.Analysis.N01cStateAngleGraphBudget
+public import ContinuousFlexibility.Analysis.N04RealizationMixedSlotBudget
 
 /-!
 # Exact mixed-slot degree and height budgets
@@ -9,6 +11,8 @@ term in the actual inverse graph expansion has exact degree
 `angleArity + shift * stateArity - 1` and retains one height factor at
 positive parameter order. No inverse estimate is assumed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterMorseEnergy
-import ContinuousFlexibility.Radial.OuterPositiveTransfer
+module
+
+public import ContinuousFlexibility.Radial.OuterMorseEnergy
+public import ContinuousFlexibility.Radial.OuterPositiveTransfer
 
 /-!
 # Energy across one entire retained Morse cell
@@ -8,6 +10,8 @@ The two positive caps and the negative component are traversed in either
 direction.  All three pieces use the same actual solution of the model
 equation; the transfer factors are derived from its coefficient.
 -/
+
+@[expose] public section
 
 noncomputable section
 

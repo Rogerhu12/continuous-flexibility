@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01ScaledDividedFactorJets
-import ContinuousFlexibility.Analysis.N01RootCoefficientValueRectangle
-import ContinuousFlexibility.Analysis.N01ActualRootGeometry
-import ContinuousFlexibility.Analysis.N01RootFieldLocalization
+module
+
+public import ContinuousFlexibility.Analysis.N01ScaledDividedFactorJets
+public import ContinuousFlexibility.Analysis.N01RootCoefficientValueRectangle
+public import ContinuousFlexibility.Analysis.N01ActualRootGeometry
+public import ContinuousFlexibility.Analysis.N01RootFieldLocalization
 
 /-!
 # A genuine positive divided-factor band for the already selected root scale
@@ -12,6 +14,8 @@ and chosen flow remain unchanged. The positive divided determinant,
 its all-order ordinary jets, and a positive localized-speed lower bound
 hold on the same closed band, with constants chosen before every state.
 -/
+
+@[expose] public section
 
 noncomputable section
 

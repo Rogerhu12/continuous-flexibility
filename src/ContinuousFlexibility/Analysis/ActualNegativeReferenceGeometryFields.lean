@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ActualNegativeReferenceScalarInverse
-import ContinuousFlexibility.Analysis.RadialUnitDensityInverseJets
+module
+
+public import ContinuousFlexibility.Analysis.ActualNegativeReferenceScalarInverse
+public import ContinuousFlexibility.Analysis.RadialUnitDensityInverseJets
 
 /-!
 # The actual negative reference geometric fields
@@ -9,6 +11,8 @@ field on the true half. Unit density removes the absolute Jacobian from
 its reciprocal and from the canonical source factor. These identities
 are independent of the material estimates and introduce no new fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 

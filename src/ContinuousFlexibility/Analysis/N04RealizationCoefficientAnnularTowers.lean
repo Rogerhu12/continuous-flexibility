@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04RealizationConstantShiftUniform
-import ContinuousFlexibility.Analysis.N01OriginalCoefficientTameBounds
-import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
-import ContinuousFlexibility.Analysis.N04SignedPieces
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationConstantShiftUniform
+public import ContinuousFlexibility.Analysis.N01OriginalCoefficientTameBounds
+public import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
+public import ContinuousFlexibility.Analysis.N04SignedPieces
 
 /-!
 # The actual coefficient towers on the whole annulus
@@ -16,6 +18,8 @@ The actual reference coefficient is restored at every mixed spatial
 order. Its uniform reference bound gives the seminorm bounds needed for
 the existing two-coordinate joint construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

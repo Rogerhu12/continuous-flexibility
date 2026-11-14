@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
 
 /-!
 # Selecting one reference witness before the common neighborhood
@@ -9,6 +11,8 @@ therefore be selected before the neighborhood. A theorem at that fixed
 witness gives the same field data for every auxiliary column. If no
 certificate exists, the conditional conclusion uses the input neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

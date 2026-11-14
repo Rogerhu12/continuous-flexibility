@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05ReferenceInterface
-import ContinuousFlexibility.Analysis.N05ReferenceResidual
-import ContinuousFlexibility.Analysis.SpacesMollifierL1
-import Mathlib.MeasureTheory.Function.Jacobian
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05ReferenceInterface
+public import ContinuousFlexibility.Analysis.N05ReferenceResidual
+public import ContinuousFlexibility.Analysis.SpacesMollifierL1
+public import Mathlib.MeasureTheory.Function.Jacobian
 
 /-!
 # Almost-everywhere transfer through the actual canonical charts
@@ -12,6 +14,8 @@ null set to a physical null set. The actual height and Jacobian then permit
 cancellation in the frozen source formula. Periodicity and the N04 null-set
 cover identify the physical source on its full physical measure.
 -/
+
+@[expose] public section
 
 noncomputable section
 

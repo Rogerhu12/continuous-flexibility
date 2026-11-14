@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderSobolevWeights
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderSobolevWeights
 
 /-!
 # The actual physical mixed derivative multiplier
@@ -7,6 +9,8 @@ Radial Fourier frequency uses the 2π convention and angular frequency uses
 the physical period. This shared definition is independent of frequency
 cutoffs and the reverse derivative-membership argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

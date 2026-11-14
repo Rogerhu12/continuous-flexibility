@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ActualNegativeReferenceScalarInverse
-import ContinuousFlexibility.Analysis.LocalMixedProductBounds
-import ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets
+module
+
+public import ContinuousFlexibility.Analysis.ActualNegativeReferenceScalarInverse
+public import ContinuousFlexibility.Analysis.LocalMixedProductBounds
+public import ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets
 
 /-!
 # The stored negative potential as a germ of its actual scalar formula
@@ -10,6 +12,8 @@ with the same angle. The previously established unit-density potential
 identity therefore gives a full planar germ on the canonical half and
 transports every mixed derivative, including order zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

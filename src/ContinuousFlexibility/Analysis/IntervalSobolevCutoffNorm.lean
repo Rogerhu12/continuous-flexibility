@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.IntervalSobolevCutoffCore
-import ContinuousFlexibility.Analysis.SobolevJetCompletion
+module
+
+public import ContinuousFlexibility.Analysis.IntervalSobolevCutoffCore
+public import ContinuousFlexibility.Analysis.SobolevJetCompletion
 
 /-!
 # The cutoff bound in the complete derivative Sobolev norm
@@ -8,6 +10,8 @@ Every lower derivative in Leibniz's rule is a coordinate of the source jet.
 Coordinate contraction in `PiLp 2` therefore turns the finite Leibniz estimate
 into a bound in the usual sum-of-squares Sobolev norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

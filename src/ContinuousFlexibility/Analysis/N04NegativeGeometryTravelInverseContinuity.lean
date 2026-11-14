@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometryInverseContinuity
-import ContinuousFlexibility.Analysis.TravelStripGlobalInverse
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryInverseContinuity
+public import ContinuousFlexibility.Analysis.TravelStripGlobalInverse
 
 /-!
 # Actual travel inverses in a topological parameter family
@@ -9,6 +11,8 @@ angle the travel coordinate is strictly increasing in the physical
 radius. The two scalar inverse continuity theorems therefore establish
 joint continuity of the actual planar inverse on the open travel strip.
 -/
+
+@[expose] public section
 
 noncomputable section
 

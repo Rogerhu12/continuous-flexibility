@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06FiniteCorePieceGreen
-import ContinuousFlexibility.Analysis.N06AtlasTransmissionJets
-import ContinuousFlexibility.Analysis.N06CurrentFiniteGreenRelation
+module
+
+public import ContinuousFlexibility.Analysis.N06FiniteCorePieceGreen
+public import ContinuousFlexibility.Analysis.N06AtlasTransmissionJets
+public import ContinuousFlexibility.Analysis.N06CurrentFiniteGreenRelation
 
 /-!
 # Actual finite-core Green data from the original graph
@@ -16,6 +18,8 @@ weak modal equations, Green formulas, or modal transmission as inputs.
 The remaining geometric inputs are the explicit radial reference bounds
 and actual forward atlas first jets required of the chosen construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

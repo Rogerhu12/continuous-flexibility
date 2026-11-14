@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeInverseForwardBounds
-import ContinuousFlexibility.Analysis.N04NegativeInverseSpatialLinear
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeInverseForwardBounds
+public import ContinuousFlexibility.Analysis.N04NegativeInverseSpatialLinear
 
 /-!
 # The retained negative chart as an actual inverse system
@@ -9,6 +11,8 @@ the reference-gauged atlas. The source is the whole original negative
 component and the target is the fixed root strip. A smaller parameter
 neighborhood changes neither function nor spatial domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

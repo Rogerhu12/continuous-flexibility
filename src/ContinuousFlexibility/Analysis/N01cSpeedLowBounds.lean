@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N01cSpeedBoundsRestriction
-import ContinuousFlexibility.Analysis.N01cStateInterpolation
-import ContinuousFlexibility.Analysis.N01cMaterialAbsorption
-import ContinuousFlexibility.Analysis.OneHighCircleRealSobolev
-import ContinuousFlexibility.Analysis.OneHighCircleFourierRealAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.N01cSpeedBoundsRestriction
+public import ContinuousFlexibility.Analysis.N01cStateInterpolation
+public import ContinuousFlexibility.Analysis.N01cMaterialAbsorption
+public import ContinuousFlexibility.Analysis.OneHighCircleRealSobolev
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierRealAlgebra
 
 /-!
 # Uniform fixed-order speed bounds and circle endpoint norms
@@ -11,6 +13,8 @@ Only a prescribed finite spatial order is used to enlarge the common base.
 The actual parameter-order-zero tower is evaluated at its genuine value;
 the circle estimate uses the actual zeroth and highest angular jets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04FlowInverseStateJets
-import ContinuousFlexibility.Analysis.RootCompositionBounds
-import Mathlib.Analysis.Calculus.ContDiff.Bounds
+module
+
+public import ContinuousFlexibility.Analysis.N04FlowInverseStateJets
+public import ContinuousFlexibility.Analysis.RootCompositionBounds
+public import Mathlib.Analysis.Calculus.ContDiff.Bounds
 
 /-!
 # Ordinary jets of the actual inverse on the root input rectangle
@@ -12,6 +14,8 @@ jets are controlled by the projection norm.  Thus the actual inverse
 displacement estimates give the complete ordinary input jets needed by
 the even and odd root substitutions, with the same fixed state loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

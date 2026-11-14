@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalNormalBlock
-import ContinuousFlexibility.Analysis.N05InnerExponentBlocks
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalNormalBlock
+public import ContinuousFlexibility.Analysis.N05InnerExponentBlocks
 
 /-!
 # Two physical endpoints for the same canonical normal blocks
@@ -8,6 +10,8 @@ Square roots and the two-weight inequality are applied to the fixed
 canonical angular jet of the fixed radial derivative. Their coefficient exponent is chosen before the
 retained angular order. Only the finite-order norm constant depends on it.
 -/
+
+@[expose] public section
 
 noncomputable section
 

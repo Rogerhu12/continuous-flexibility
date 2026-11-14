@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R11bRadialTests
-import ContinuousFlexibility.Radial.ReferenceModerateCoefficients
+module
+
+public import ContinuousFlexibility.Radial.R11bRadialTests
+public import ContinuousFlexibility.Radial.ReferenceModerateCoefficients
 
 /-!
 # Smoothness and support of the actual border column
@@ -9,6 +11,8 @@ The column is genuinely smooth on all of ℝ and its topological support is
 contained in that of the actual cutoff. Strict inclusion of the latter in
 the open core is not inferred from a mere function-support inclusion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.WeightedScalarCandidates
-import ContinuousFlexibility.Scalar.WeightedStateBasicGerms
-import ContinuousFlexibility.Scalar.WeightedUniformTameGermFinite
+module
+
+public import ContinuousFlexibility.Scalar.WeightedScalarCandidates
+public import ContinuousFlexibility.Scalar.WeightedStateBasicGerms
+public import ContinuousFlexibility.Scalar.WeightedUniformTameGermFinite
 
 /-!
 # Genuine uniform tame germs of every concrete scalar candidate
@@ -10,6 +12,8 @@ derivatives, and canonical scalar compositions.  Their fixed bases and losses
 are selected before all directional orders.  Finite pairing and the prescribed
 sum grading assemble the seven jets and three coefficient fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 

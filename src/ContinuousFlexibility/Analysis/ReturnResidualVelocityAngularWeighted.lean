@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ReturnResidualAngularWeightedBounds
-import ContinuousFlexibility.Analysis.ReturnInterpolationJetBounds
-import ContinuousFlexibility.Analysis.ScalarVelocityWeightedJets
+module
+
+public import ContinuousFlexibility.Analysis.ReturnResidualAngularWeightedBounds
+public import ContinuousFlexibility.Analysis.ReturnInterpolationJetBounds
+public import ContinuousFlexibility.Analysis.ScalarVelocityWeightedJets
 
 /-!
 # Weighted angular jets of the actual independent correction velocity
@@ -12,6 +14,8 @@ height weight. The cutoff derivative remains an explicit scalar factor;
 the theorem applies to the same optical cutoffs used for positivity and
 source compatibility.
 -/
+
+@[expose] public section
 
 noncomputable section
 

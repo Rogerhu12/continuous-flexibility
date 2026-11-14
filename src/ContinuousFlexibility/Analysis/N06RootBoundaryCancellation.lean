@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06RootGreenDensity
-import ContinuousFlexibility.Analysis.N06N05CurrentRootTransmission
+module
+
+public import ContinuousFlexibility.Analysis.N06RootGreenDensity
+public import ContinuousFlexibility.Analysis.N06N05CurrentRootTransmission
 
 /-!
 # Signed root density and actual finite-mode cancellation
@@ -14,6 +16,8 @@ The result concerns the actual transported density. Identifying it with a
 particular closed endpoint value of the recorded canonical coefficient row
 is a separate geometric statement, not an assumption hidden here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

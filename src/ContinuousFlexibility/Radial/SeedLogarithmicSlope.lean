@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.LogSlopeConnector
-import ContinuousFlexibility.Radial.CentralStatementBridges
+module
+
+public import ContinuousFlexibility.Radial.LogSlopeConnector
+public import ContinuousFlexibility.Radial.CentralStatementBridges
 
 /-!
 # Logarithmic slopes of actual second-mode solutions
@@ -9,6 +11,8 @@ only convergence of the slope itself.  The second-mode equation supplies
 its first derivative.  This file proves that identity for actual radial
 functions and applies it to the central model at both ends.
 -/
+
+@[expose] public section
 
 noncomputable section
 

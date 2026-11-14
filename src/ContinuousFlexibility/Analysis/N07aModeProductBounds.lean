@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalModeLinear
-import ContinuousFlexibility.Analysis.N07aCylinderWeightedNorms
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalModeLinear
+public import ContinuousFlexibility.Analysis.N07aCylinderWeightedNorms
 
 /-!
 # Weighted L² bounds for the actual mode products
@@ -8,6 +10,8 @@ Pointwise bounds on the genuine circle multiplication entries pass to
 the actual interval L² classes. The resulting weights are precisely
 those controlled by the positive weak mode energy.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CanonicalWholePositiveReferenceJets
-import ContinuousFlexibility.Analysis.WholePositivePrincipalExtension
-import ContinuousFlexibility.Analysis.IntervalCubicGermDivision
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalWholePositiveReferenceJets
+public import ContinuousFlexibility.Analysis.WholePositivePrincipalExtension
+public import ContinuousFlexibility.Analysis.IntervalCubicGermDivision
 
 /-!
 # Actual cubic principal differences on an interior positive component
@@ -14,6 +16,8 @@ removable quotient and its fixed six-derivative estimate.
 The component is buffered inside the annulus. This statement does not
 claim the separate ambient-endpoint case or a material numerator bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

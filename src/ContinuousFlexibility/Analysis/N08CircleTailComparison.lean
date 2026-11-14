@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N08CircleParameterComparison
-import ContinuousFlexibility.Analysis.N08CircleZeroUniform
+module
+
+public import ContinuousFlexibility.Analysis.N08CircleParameterComparison
+public import ContinuousFlexibility.Analysis.N08CircleZeroUniform
 
 /-!
 # Uniform tail stability from the actual localized height estimates
@@ -9,6 +11,8 @@ norm tends to zero with the physical sample, so both rescaled states remain
 in the same N02 domain. The zero-parameter estimate and the fixed-parameter
 comparison then control the same diagonal by one quarter.
 -/
+
+@[expose] public section
 
 noncomputable section
 

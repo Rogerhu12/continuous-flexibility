@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.MaterialInterval
-import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
+module
+
+public import ContinuousFlexibility.Analysis.MaterialInterval
+public import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
 
 /-!
 # Actual material weights on the whole open unit interval
@@ -14,6 +16,8 @@ These are explicit reference weights. Their comparison with the
 manuscript's discrete profile and all higher-order coordinate estimates
 remain separate obligations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

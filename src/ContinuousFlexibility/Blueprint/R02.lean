@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Milestones
-import ContinuousFlexibility.Radial.GeneralLiouvilleTransport
+module
+
+public import ContinuousFlexibility.Statements.Milestones
+public import ContinuousFlexibility.Radial.GeneralLiouvilleTransport
 
 /-!
 # Blueprint node R02
@@ -12,6 +14,8 @@ The proof is `ContinuousFlexibility.Radial.generalLiouville_R02_statement`, the
 Liouville transport on the actual open range of each positive increasing radius.
 It does not need the hypothesis `R01Statement`.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

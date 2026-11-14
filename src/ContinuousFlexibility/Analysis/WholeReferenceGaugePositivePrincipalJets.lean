@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.FixedPositiveReferencePrincipalMaterialJets
-import ContinuousFlexibility.Analysis.WholePositiveReferencePrincipal
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
-import ContinuousFlexibility.Analysis.LocalMixedProductBounds
-import ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets
+module
+
+public import ContinuousFlexibility.Analysis.FixedPositiveReferencePrincipalMaterialJets
+public import ContinuousFlexibility.Analysis.WholePositiveReferencePrincipal
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+public import ContinuousFlexibility.Analysis.LocalMixedProductBounds
+public import ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets
 
 /-!
 # Four principal reference atoms for the same positive family
@@ -12,6 +14,8 @@ principal atoms agree on the unit strip with the scalar radial formulas.
 The same original cell and normalized material data are used in both the
 atlas and the estimates. No reference family is selected in this proof.
 -/
+
+@[expose] public section
 
 noncomputable section
 

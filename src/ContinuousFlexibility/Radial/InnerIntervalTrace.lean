@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerWeakFlux
+module
+
+public import ContinuousFlexibility.Radial.InnerWeakFlux
 
 /-!
 # Actual endpoint traces on the interval energy domain
@@ -9,6 +11,8 @@ a smooth representative they equal its endpoint values. Thus the trace
 used for finite-piece matching is determined by the field and derivative,
 rather than being an independently supplied boundary label.
 -/
+
+@[expose] public section
 
 noncomputable section
 

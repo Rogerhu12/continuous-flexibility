@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalSourceWeakCore
-import ContinuousFlexibility.Analysis.N05CanonicalGraphDensity
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalSourceWeakCore
+public import ContinuousFlexibility.Analysis.N05CanonicalGraphDensity
 
 /-!
 # All weak angular jets of the same actual canonical source lift
@@ -9,6 +11,8 @@ Its graph-norm density and the continuity of each fixed unsigned source
 column preserve those identities. The zero column is finally identified
 with the source lift already used by the global inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

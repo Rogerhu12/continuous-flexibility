@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.PositiveBufferMatrixBounds
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferMatrixBounds
 
 /-!
 # Positivity of the physical conormal matrix
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Radial.PositiveBufferMatrixBounds
 The entrywise estimate controls the entire quadratic form. Rescaling by
 the positive endpoint energies then yields strict physical positivity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
-import ContinuousFlexibility.Analysis.N04RealizationColumnPowerBounds
-import ContinuousFlexibility.Analysis.N04RealizationHeightMovingEvaluation
-import ContinuousFlexibility.Analysis.N04RealizationMovingPointMixedBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
+public import ContinuousFlexibility.Analysis.N04RealizationColumnPowerBounds
+public import ContinuousFlexibility.Analysis.N04RealizationHeightMovingEvaluation
+public import ContinuousFlexibility.Analysis.N04RealizationMovingPointMixedBounds
 
 /-!
 # The physical columns of the retained realization gauge
@@ -16,6 +18,8 @@ This module supplies physical data and the exact moving-evaluation
 regularity interface.  Bounds for the inverse point are not assumed to
 follow merely from qualitative smoothness.
 -/
+
+@[expose] public section
 
 noncomputable section
 

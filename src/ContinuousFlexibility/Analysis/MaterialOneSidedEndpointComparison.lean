@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.MaterialGlobalEndpointModels
+module
+
+public import ContinuousFlexibility.Analysis.MaterialGlobalEndpointModels
 
 /-!
 # Actual sample costs in one endpoint-coordinate direction
@@ -8,6 +10,8 @@ A one-sided coordinate bound controls the height ratio in the useful
 direction and every fixed coefficient power at the second point. The
 same actual material data are retained; no common cell is an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

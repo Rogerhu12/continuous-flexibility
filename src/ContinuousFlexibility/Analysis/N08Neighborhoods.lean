@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SolveStateSpaces
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
-import ContinuousFlexibility.Analysis.TameTransfer
+module
+
+public import ContinuousFlexibility.Analysis.SolveStateSpaces
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
+public import ContinuousFlexibility.Analysis.TameTransfer
 
 /-!
 # Common parameter neighborhoods for the joint residual
@@ -10,6 +12,8 @@ physical state neighborhood. The topology and derivative towers are unchanged.
 The elementary monotonicity lemmas below are used to retain all seven preceding
 nonlinear stages on the final neighborhood chosen for N08.
 -/
+
+@[expose] public section
 
 noncomputable section
 

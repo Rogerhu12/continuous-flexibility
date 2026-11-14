@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import ContinuousFlexibility.Analysis.ProjectiveJetEvaluation
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import ContinuousFlexibility.Analysis.ProjectiveJetEvaluation
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
 
 /-!
 # Algebra of the genuine coupled derivative
@@ -12,6 +14,8 @@ the four coordinate directions. Pointwise height differentiation and the
 weighted realization of the two error components remain separate analytic
 steps; none is substituted for a conclusion of the nonlinear target.
 -/
+
+@[expose] public section
 
 noncomputable section
 

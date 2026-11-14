@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05CanonicalFiniteApproximation
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalFiniteApproximation
 
 /-!
 # A common dense carrier for all material and endpoint weights
@@ -8,6 +10,8 @@ to every endpoint exponent and every real material order. Finite-cell
 truncation therefore gives an actual dense common carrier in each level.
 No smooth-density hypothesis or relationship between physical charts is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

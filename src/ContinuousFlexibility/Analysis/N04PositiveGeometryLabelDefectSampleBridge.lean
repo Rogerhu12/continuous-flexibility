@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledLabelPrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRootLabelSample
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryFormulaPrefix
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledLabelPrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRootLabelSample
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryFormulaPrefix
 
 /-!
 # Label displacements at the original positive sample
@@ -10,6 +12,8 @@ order zero. A uniform height bound absorbs precisely that extra factor.
 Every positive parameter order keeps the full height at the supplied
 positive midpoint, with the low order chosen before all jet prefixes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

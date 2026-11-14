@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCircleInverseGeometry
-import Mathlib.Topology.Order.IntermediateValue
-import Mathlib.Topology.Order.MonotoneContinuity
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleInverseGeometry
+public import Mathlib.Topology.Order.IntermediateValue
+public import Mathlib.Topology.Order.MonotoneContinuity
 
 /-!
 # Actual inverses for the neighborhood circle charts
@@ -10,6 +12,8 @@ real line. The odd part of a composition of two increasing lifts is again
 an increasing lift. These facts construct the return and right-chart
 inverses from their defining maps; no inverse is supplied as a hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

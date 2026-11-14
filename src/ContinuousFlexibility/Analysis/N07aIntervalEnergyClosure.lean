@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aIntervalH2Density
-import ContinuousFlexibility.Analysis.N06DegenerateGraph
-import ContinuousFlexibility.Analysis.L2BoundedMultiplier
+module
+
+public import ContinuousFlexibility.Analysis.N07aIntervalH2Density
+public import ContinuousFlexibility.Analysis.N06DegenerateGraph
+public import ContinuousFlexibility.Analysis.L2BoundedMultiplier
 
 /-!
 # The positive-cylinder estimate on the actual weak H² graph
@@ -10,6 +12,8 @@ by two integrations. Every energy term is a continuous quadratic form on
 the actual L² class, so the same frequency-uniform estimate passes to the
 weak graph. No endpoint condition is imposed on the original solution.
 -/
+
+@[expose] public section
 
 noncomputable section
 

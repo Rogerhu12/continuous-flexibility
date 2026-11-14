@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.MorseChainLocalGluing
-import Mathlib.Analysis.SpecificLimits.Basic
-import Mathlib.Data.Set.Countable
-import Mathlib.MeasureTheory.Measure.Typeclasses.NullSingletonClass
+module
+
+public import ContinuousFlexibility.Radial.MorseChainLocalGluing
+public import Mathlib.Analysis.SpecificLimits.Basic
+public import Mathlib.Data.Set.Countable
+public import Mathlib.MeasureTheory.Measure.Typeclasses.NullSingletonClass
 
 /-!
 # Countable subdivisions with interior closed intervals
@@ -13,6 +15,8 @@ original interval. This permits positive reference height factors to be
 used on the closed pieces even when the original component reaches an
 outer endpoint of the annulus.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerMorseInnerWeightInterfaces
-import ContinuousFlexibility.Radial.InnerRadialInterfaceWeights
+module
+
+public import ContinuousFlexibility.Radial.InnerMorseInnerWeightInterfaces
+public import ContinuousFlexibility.Radial.InnerRadialInterfaceWeights
 
 /-!
 # Actual weighted interface estimates for the alternating inner chain
@@ -10,6 +12,8 @@ analytic inputs here. Every gap-weight condition follows from the
 actual finite-chain weights, so neither global smallness nor a global
 Poisson estimate is an assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledForwardLabelPrefix
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledForwardLabelPrefix
 
 /-!
 # An arbitrary fixed angular reserve for the actual forward label
@@ -7,6 +9,8 @@ The reserve is selected before the low parameter order. The subsequent
 parameter prefixes change only the high-order shift. The existing
 five-order defect and four-order slope interfaces remain unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

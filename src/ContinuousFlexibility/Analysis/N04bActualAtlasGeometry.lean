@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04bActualTypedAtlas
+module
+
+public import ContinuousFlexibility.Analysis.N04bActualTypedAtlas
 
 /-!
 # Part A for the actual corrected characteristic atlas
@@ -9,6 +11,8 @@ is proved for that record: moving-domain partition, optical reference
 metadata, normalization, both open and closed inverses, smooth boundary
 germs, angular period and reflection.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01cActualFlowCircleData
-import ContinuousFlexibility.Analysis.N01cFlowVariationForcingBounds
-import ContinuousFlexibility.Analysis.N01cCosineSpeedPrefixBounds
-import ContinuousFlexibility.Analysis.N01cSpeedLowBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01cActualFlowCircleData
+public import ContinuousFlexibility.Analysis.N01cFlowVariationForcingBounds
+public import ContinuousFlexibility.Analysis.N01cCosineSpeedPrefixBounds
+public import ContinuousFlexibility.Analysis.N01cSpeedLowBounds
 
 /-!
 # Weighted Sobolev bounds for the actual outer forcing speed
@@ -11,6 +13,8 @@ the original material height factor and one aggregate high seminorm.
 The state selection consists only of original parameter directions or
 zeros. The fixed compact time change contributes one bounded derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

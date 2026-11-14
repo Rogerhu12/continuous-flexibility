@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerRadialPoissonEnergy
-import ContinuousFlexibility.Radial.InnerSupportedWeights
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialPoissonEnergy
+public import ContinuousFlexibility.Radial.InnerSupportedWeights
 
 /-!
 # Weighted Poisson control for the same actual finite chain
@@ -11,6 +13,8 @@ quadratic energy estimates. Orthogonality and the exact full reference
 normalization then give the j-inverse bound for the same assembled
 Poisson map, independently of the number of pieces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

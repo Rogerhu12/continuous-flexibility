@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PrincipalPositiveReference
-import ContinuousFlexibility.Analysis.N04RealizationEnvelopeComposition
-import ContinuousFlexibility.Analysis.N07aCoordinateJetNorms
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalPositiveReference
+public import ContinuousFlexibility.Analysis.N04RealizationEnvelopeComposition
+public import ContinuousFlexibility.Analysis.N07aCoordinateJetNorms
 
 /-!
 # Reference jets after the normalized inverse chart
@@ -10,6 +12,8 @@ the angle is the identity angle plus its stored defect.  Thus finite
 composition costs only a coefficient power.  The composition estimate
 uses positive inner derivatives and never bounds the unwrapped angle.
 -/
+
+@[expose] public section
 
 noncomputable section
 

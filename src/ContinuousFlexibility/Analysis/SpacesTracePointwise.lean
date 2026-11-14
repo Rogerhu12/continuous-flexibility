@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesHeightBounds
-import ContinuousFlexibility.Analysis.SpacesTraceGeometry
+module
+
+public import ContinuousFlexibility.Analysis.SpacesHeightBounds
+public import ContinuousFlexibility.Analysis.SpacesTraceGeometry
 
 /-!
 # Weighted pointwise estimates for trace and multiplication
@@ -9,6 +11,8 @@ elementary cylinder Sobolev estimate by the weight at the evaluation point
 therefore costs exactly two differential orders, with no loss depending on
 the requested weight power.
 -/
+
+@[expose] public section
 
 noncomputable section
 

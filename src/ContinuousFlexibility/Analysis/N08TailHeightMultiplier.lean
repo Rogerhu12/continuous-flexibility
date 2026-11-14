@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N08TailCutoffCoefficients
-import ContinuousFlexibility.Analysis.N08RadialMultiplierFamily
-import ContinuousFlexibility.Scalar.WeightedReferenceMaterialJets
+module
+
+public import ContinuousFlexibility.Analysis.N08TailCutoffCoefficients
+public import ContinuousFlexibility.Analysis.N08RadialMultiplierFamily
+public import ContinuousFlexibility.Scalar.WeightedReferenceMaterialJets
 
 /-!
 # Actual height localizations with arbitrary sample-envelope decay
@@ -9,6 +11,8 @@ The cutoff operator is fixed independently of the requested decay power
 and grading. A fixed extra number of input orders pays for each requested
 sample-envelope power, uniformly over the complete cell family.
 -/
+
+@[expose] public section
 
 noncomputable section
 

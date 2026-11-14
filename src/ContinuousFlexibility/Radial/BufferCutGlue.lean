@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.BufferIntervalTrace
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
+module
+
+public import ContinuousFlexibility.Radial.BufferIntervalTrace
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
 
 /-!
 # Gluing genuine fields at a buffer cut
@@ -9,6 +11,8 @@ by parts on the two sides of the cut. Matching values remove the first-order
 boundary term. A jump in the first derivative gives the exact point-source
 coefficient for the Schrödinger equation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

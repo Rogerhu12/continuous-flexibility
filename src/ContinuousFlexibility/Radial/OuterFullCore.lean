@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OuterOutgoingJoin
+module
+
+public import ContinuousFlexibility.Radial.OuterOutgoingJoin
 
 /-!
 # The complete core ending at the actual natural-tail entrance
@@ -7,6 +9,8 @@ At the right end the outgoing connector is included, so the endpoint
 is the next mass interval's left cut.  At the left end the already
 constructed core leads into the initial resistance edge.
 -/
+
+@[expose] public section
 
 noncomputable section
 

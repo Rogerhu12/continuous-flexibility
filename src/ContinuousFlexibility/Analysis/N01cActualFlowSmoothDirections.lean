@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01cFlowTopologicalContinuity
-import ContinuousFlexibility.Analysis.N01cFlowInitialAngleSmooth
-import ContinuousFlexibility.Analysis.N01cAngularJetTowers
-import ContinuousFlexibility.Analysis.N01cPhysicalFlowRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N01cFlowTopologicalContinuity
+public import ContinuousFlexibility.Analysis.N01cFlowInitialAngleSmooth
+public import ContinuousFlexibility.Analysis.N01cAngularJetTowers
+public import ContinuousFlexibility.Analysis.N01cPhysicalFlowRegularity
 
 /-!
 # Genuine state and angle towers of the supplied ordinary trajectories
@@ -15,6 +17,8 @@ returns the same towers at every physical radius, including both ends.
 The speed tower is an internal input to be constructed from the actual
 speed estimates. The neighbourhood and its base are unchanged here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

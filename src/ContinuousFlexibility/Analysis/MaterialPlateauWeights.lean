@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.MaterialEndpointComparison
-import ContinuousFlexibility.Analysis.MaterialWeightShift
-import ContinuousFlexibility.Analysis.MaterialMScale
+module
+
+public import ContinuousFlexibility.Analysis.MaterialEndpointComparison
+public import ContinuousFlexibility.Analysis.MaterialWeightShift
+public import ContinuousFlexibility.Analysis.MaterialMScale
 
 /-!
 # Actual sample weights on a full plateau support
@@ -11,6 +13,8 @@ same sample exponent, and any fixed material order by an arbitrarily
 small positive extra order. The remaining loss is a fixed coefficient
 power at the sample of the actual containing cell.
 -/
+
+@[expose] public section
 
 noncomputable section
 

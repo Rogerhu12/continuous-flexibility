@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06MaterialAbsorption
+module
+
+public import ContinuousFlexibility.Analysis.N06MaterialAbsorption
 
 /-!
 # The weighted height map supplied by N05 is continuous and linear
@@ -9,6 +11,8 @@ component of the already selected graph inverse. Consequently its linearity
 follows from that inverse, without asserting linearity of `globalInverse` on
 arbitrary canonical sequences.
 -/
+
+@[expose] public section
 
 noncomputable section
 

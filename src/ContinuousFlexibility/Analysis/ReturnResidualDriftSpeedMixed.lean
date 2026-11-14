@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ReturnVelocityCollarExtension
-import ContinuousFlexibility.Analysis.PolynomialJetOperations
+module
+
+public import ContinuousFlexibility.Analysis.ReturnVelocityCollarExtension
+public import ContinuousFlexibility.Analysis.PolynomialJetOperations
 
 /-!
 # Reflection preserves the exact independent-residual height weight
@@ -8,6 +10,8 @@ The odd and even reconstruction of the drift and optical speed uses a
 fixed linear reflection of the angular coordinate. Its mixed jets
 preserve the same height factor as the actual correction velocity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

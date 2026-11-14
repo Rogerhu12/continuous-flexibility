@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.RootCoefficientDivision
-import ContinuousFlexibility.Analysis.RootShiftMixedJets
-import ContinuousFlexibility.Analysis.CylinderMixedJetNorms
-import ContinuousFlexibility.Analysis.OneSidedOrdinaryJets
+module
+
+public import ContinuousFlexibility.Analysis.RootCoefficientDivision
+public import ContinuousFlexibility.Analysis.RootShiftMixedJets
+public import ContinuousFlexibility.Analysis.CylinderMixedJetNorms
+public import ContinuousFlexibility.Analysis.OneSidedOrdinaryJets
 
 /-!
 # Actual coefficient division on the root axis
@@ -12,6 +14,8 @@ factorization, but its width contributes no inverse power to the bound.
 Only one additional numerator derivative and the planar factor `2^n`
 are needed, at every angle and for either root orientation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

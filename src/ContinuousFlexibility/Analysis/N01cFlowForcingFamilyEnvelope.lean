@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cFlowForcingEnvelope
-import ContinuousFlexibility.Analysis.N01cFlowHeadEnvelope
+module
+
+public import ContinuousFlexibility.Analysis.N01cFlowForcingEnvelope
+public import ContinuousFlexibility.Analysis.N01cFlowHeadEnvelope
 
 /-!
 # A uniform forcing envelope from actual head and lower factors
@@ -9,6 +11,8 @@ the material weight, while the strict lower factors have scalar bounds.
 Only one factor uses the requested spatial order; the degree depends on
 the parameter order and never on the spatial order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

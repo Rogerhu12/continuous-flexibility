@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04bRootBoundaryGeometry
-import ContinuousFlexibility.Analysis.N04bFieldRegularity
-import ContinuousFlexibility.Analysis.RootCharacteristicFactor
+module
+
+public import ContinuousFlexibility.Analysis.N04bRootBoundaryGeometry
+public import ContinuousFlexibility.Analysis.N04bFieldRegularity
+public import ContinuousFlexibility.Analysis.RootCharacteristicFactor
 
 /-!
 # A genuine positive smooth root height for the actual corrected coefficient
@@ -11,6 +13,8 @@ local smoothness and positivity. Intersecting the genuine chart collar
 with a physical radial collar gives a single two-sided strip where the
 actual height quotient is smooth, positive and exactly normalized.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06PositivePrimitiveConstruction
-import ContinuousFlexibility.Analysis.N06RadialInverseExtension
+module
+
+public import ContinuousFlexibility.Analysis.N06PositivePrimitiveConstruction
+public import ContinuousFlexibility.Analysis.N06RadialInverseExtension
 
 /-!
 # Primitive reference bounds from physical fields and the true inverse
@@ -10,6 +12,8 @@ in terms of both endpoint distances becomes the canonical quadratic
 weight by the actual upper slope estimate. A smooth inverse extension
 preserves these bounds through equality of germs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

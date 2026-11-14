@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N05TricomiNullCoordinates
-import ContinuousFlexibility.Analysis.N01RadialFlow
-import Mathlib.Topology.Algebra.Field
-import ContinuousFlexibility.Analysis.N05N06ClosedChartBridge
+module
+
+public import ContinuousFlexibility.Analysis.N05TricomiNullCoordinates
+public import ContinuousFlexibility.Analysis.N01RadialFlow
+public import Mathlib.Topology.Algebra.Field
+public import ContinuousFlexibility.Analysis.N05N06ClosedChartBridge
 
 /-!
 # Transport of the actual reference null coordinates
@@ -11,6 +13,8 @@ equation on each connected negative piece.  Integrating its actual
 characteristics identifies the null coordinate with its value at either
 physical endpoint.  Only the forward chart is used on the boundary.
 -/
+
+@[expose] public section
 
 noncomputable section
 

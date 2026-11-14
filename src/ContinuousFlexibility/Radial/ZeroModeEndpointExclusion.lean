@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ZeroModeEndpointIntegrability
-import Mathlib.Analysis.SpecialFunctions.NonIntegrable
+module
+
+public import ContinuousFlexibility.Radial.ZeroModeEndpointIntegrability
+public import Mathlib.Analysis.SpecialFunctions.NonIntegrable
 
 /-!
 # Excluding nonzero endpoint limits in the actual output space
@@ -9,6 +11,8 @@ endpoint interval. The proof uses its inverse-distance L2 control, finite
 interval L2-to-L1 inclusion, and the actual nonintegrability of
 `(b-r)⁻¹`. The lower bound is only required almost everywhere.
 -/
+
+@[expose] public section
 
 noncomputable section
 

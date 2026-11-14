@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cDistributedRadialProducts
-import ContinuousFlexibility.Analysis.OneHighCircleFourierRealAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.N01cDistributedRadialProducts
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierRealAlgebra
 
 /-!
 # One-high Sobolev norms of the actual finite forcing products
@@ -11,6 +13,8 @@ the output order, while precisely one factor carries the high Sobolev
 norm.  These are the products occurring in the higher variational
 forcing of the ordinary flow.
 -/
+
+@[expose] public section
 
 noncomputable section
 

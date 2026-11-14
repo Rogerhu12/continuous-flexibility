@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Geometry.SphereCommonCapLength
-import ContinuousFlexibility.Statements.MainGeometry
+module
+
+public import ContinuousFlexibility.Geometry.SphereCommonCapLength
+public import ContinuousFlexibility.Statements.MainGeometry
 
 /-!
 # The actual marked cap satisfies the geometric specification
@@ -9,6 +11,8 @@ collar, bottom disk, and strict curvature maximum. The principal directions
 come from the cap shape eigenvectors. The differential gives their lengths,
 and symmetry of the second form gives their orthogonality.
 -/
+
+@[expose] public section
 
 noncomputable section
 

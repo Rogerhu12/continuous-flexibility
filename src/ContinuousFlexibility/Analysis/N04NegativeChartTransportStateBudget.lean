@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ScalarTransportSystemBounds
+module
+
+public import ContinuousFlexibility.Analysis.ScalarTransportSystemBounds
 
 /-!
 # State-order budgets in the actual transport recurrence
@@ -8,6 +10,8 @@ commutes with the three-index Leibniz product. The existing radial
 transport induction therefore applies unchanged, and undoing the scalar
 rescaling restores exactly the degree `n * D + a + b`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

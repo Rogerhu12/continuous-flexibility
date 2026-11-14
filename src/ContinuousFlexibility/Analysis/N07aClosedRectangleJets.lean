@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aMixedLocalCalculus
-import ContinuousFlexibility.Analysis.CylinderMixedJets
-import Mathlib.Analysis.Calculus.TangentCone.Prod
-import Mathlib.Analysis.Calculus.TangentCone.Real
+module
+
+public import ContinuousFlexibility.Analysis.N07aMixedLocalCalculus
+public import ContinuousFlexibility.Analysis.CylinderMixedJets
+public import Mathlib.Analysis.Calculus.TangentCone.Prod
+public import Mathlib.Analysis.Calculus.TangentCone.Real
 
 /-!
 # Genuine mixed jets on a closed rectangle
@@ -11,6 +13,8 @@ closed rectangle. Their continuity, interior identification, and angular
 trace derivatives follow from the within Taylor series. No extension is
 assumed smooth on the other side of a boundary.
 -/
+
+@[expose] public section
 
 noncomputable section
 

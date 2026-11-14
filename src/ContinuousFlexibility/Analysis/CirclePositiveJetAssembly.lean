@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CircleJetAssembly
+module
+
+public import ContinuousFlexibility.Analysis.CircleJetAssembly
 
 /-!
 # Actual circle towers from positive-order estimates
@@ -8,6 +10,8 @@ continuous in those variables. Base-point continuity follows from the
 genuine first derivative. Thus positive-order seminorm bounds suffice;
 no independent zeroth-order growth estimate is needed to assemble the tower.
 -/
+
+@[expose] public section
 
 noncomputable section
 

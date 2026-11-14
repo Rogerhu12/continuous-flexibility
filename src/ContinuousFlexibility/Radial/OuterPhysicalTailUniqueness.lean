@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterPhysicalInverseGauge
-import ContinuousFlexibility.Radial.OuterHomogeneousContinuation
+module
+
+public import ContinuousFlexibility.Radial.OuterPhysicalInverseGauge
+public import ContinuousFlexibility.Radial.OuterHomogeneousContinuation
 
 /-!
 # Classification of the actual physical L2 natural line
@@ -10,6 +12,8 @@ condition then transports to the smooth logarithmic combination.
 R06b's natural-line theorem and the nonzero basis Wronskian eliminate
 the Dirichlet coefficient. No assumed endpoint classification enters.
 -/
+
+@[expose] public section
 
 noncomputable section
 

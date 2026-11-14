@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerPoissonCutoff
+module
+
+public import ContinuousFlexibility.Radial.InnerPoissonCutoff
 
 /-!
 # Weak Green identities for the actual inner Dirichlet graph
@@ -8,6 +10,8 @@ Integration by parts is proved on IntervalEnergyCore and extended by
 continuity. The Poisson test may have arbitrary endpoint values. Its
 scalar is the same temporary border scalar as in the actual graph.
 -/
+
+@[expose] public section
 
 noncomputable section
 

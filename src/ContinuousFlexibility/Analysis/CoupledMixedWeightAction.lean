@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedWeightShift
-import ContinuousFlexibility.Scalar.WeightedSmoothTameLinear
+module
+
+public import ContinuousFlexibility.Scalar.WeightedWeightShift
+public import ContinuousFlexibility.Scalar.WeightedSmoothTameLinear
 
 /-!
 # A weak positive coefficient acts on the original strong height space
@@ -9,6 +11,8 @@ weight inclusion then returns to the weight of the second argument. This
 preserves the actual product, both independent linearities, and the genuine
 joint smooth tame tower on the full product domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

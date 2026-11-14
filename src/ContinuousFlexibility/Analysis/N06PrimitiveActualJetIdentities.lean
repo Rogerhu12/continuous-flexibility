@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06PrimitiveJetRescaling
-import ContinuousFlexibility.Analysis.N06ActualRelativeJetBounds
+module
+
+public import ContinuousFlexibility.Analysis.N06PrimitiveJetRescaling
+public import ContinuousFlexibility.Analysis.N06ActualRelativeJetBounds
 
 /-!
 # Identifying the primitive differences with the actual N06 fields
@@ -9,6 +11,8 @@ factorization. The left and nu atoms agree with the literal reference
 columns. These are identities of the original functions on their actual
 open domains, including all current inverse-coordinate factors.
 -/
+
+@[expose] public section
 
 noncomputable section
 

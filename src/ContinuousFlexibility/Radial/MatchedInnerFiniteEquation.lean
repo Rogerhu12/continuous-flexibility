@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MatchedInnerFiniteTests
+module
+
+public import ContinuousFlexibility.Radial.MatchedInnerFiniteTests
 
 /-!
 # The finite physical weak equation in the frozen modal language
@@ -8,6 +10,8 @@ temporary central column is identified with the actual border divided
 by the true Hilbert density. The scalar row is therefore the original
 unweighted border integral, and remains active only at frequency two.
 -/
+
+@[expose] public section
 
 noncomputable section
 

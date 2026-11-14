@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06CubicMultiplierJets
-import ContinuousFlexibility.Analysis.N06WeakJetProduct
-import ContinuousFlexibility.Analysis.SpacesCylinderEvenJets
+module
+
+public import ContinuousFlexibility.Analysis.N06CubicMultiplierJets
+public import ContinuousFlexibility.Analysis.N06WeakJetProduct
+public import ContinuousFlexibility.Analysis.SpacesCylinderEvenJets
 
 /-!
 # Cubic weak source in the original volume level
@@ -12,6 +14,8 @@ in the original even volume graph, with all stored angular jets and an
 explicit norm bound. The final identity records the material scaling
 that recovers the physical cubic source.
 -/
+
+@[expose] public section
 
 noncomputable section
 

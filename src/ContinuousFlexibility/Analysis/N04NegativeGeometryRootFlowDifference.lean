@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04FlowJetGronwall
-import ContinuousFlexibility.Analysis.N04FlowTimeReversal
-import ContinuousFlexibility.Analysis.RootRescaledFieldJets
+module
+
+public import ContinuousFlexibility.Analysis.N04FlowJetGronwall
+public import ContinuousFlexibility.Analysis.N04FlowTimeReversal
+public import ContinuousFlexibility.Analysis.RootRescaledFieldJets
 
 /-!
 # Difference estimates for the actual regularized root flows
@@ -16,6 +18,8 @@ field estimate without an added constant. The value comparison below
 applies throughout the closed parameter box and the closed time interval,
 and applies also to the actual inverse endpoint flows by time reversal.
 -/
+
+@[expose] public section
 
 noncomputable section
 

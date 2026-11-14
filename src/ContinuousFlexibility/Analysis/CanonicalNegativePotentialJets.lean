@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CanonicalCoefficientIdentities
-import ContinuousFlexibility.Analysis.CoordinateOperatorConstruction
-import ContinuousFlexibility.Analysis.PhysicalTransmissionTrace
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalCoefficientIdentities
+public import ContinuousFlexibility.Analysis.CoordinateOperatorConstruction
+public import ContinuousFlexibility.Analysis.PhysicalTransmissionTrace
 
 /-!
 # The actual negative potential and its ordinary jets
@@ -11,6 +13,8 @@ Equality on this open set identifies every actual mixed derivative.
 No coefficient regularity or derivative estimate is needed for this
 identification; those belong to the subsequent quantitative argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

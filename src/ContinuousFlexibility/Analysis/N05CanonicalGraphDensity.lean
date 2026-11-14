@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalEvenMollifiedJets
-import ContinuousFlexibility.Analysis.N05CanonicalFiniteApproximation
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalEvenMollifiedJets
+public import ContinuousFlexibility.Analysis.N05CanonicalFiniteApproximation
 
 /-!
 # Density of the actual smooth canonical graph core
@@ -9,6 +11,8 @@ row. Finite-cell truncation then proves that the span of their genuine
 single-cell graph realizations is dense in the full canonical closed
 volume graph, at every finite angular order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.CanonicalReferenceCurrentAbsoluteJets
-import ContinuousFlexibility.Analysis.N07aCanonicalAtomBounds
-import ContinuousFlexibility.Analysis.N07aScalarSolution
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
-import ContinuousFlexibility.Analysis.CanonicalCoordinateCompletion
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalReferenceCurrentAbsoluteJets
+public import ContinuousFlexibility.Analysis.N07aCanonicalAtomBounds
+public import ContinuousFlexibility.Analysis.N07aScalarSolution
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+public import ContinuousFlexibility.Analysis.CanonicalCoordinateCompletion
 
 /-!
 # The actual potential and divided estimates from primitive jets
@@ -11,6 +13,8 @@ The inverse canonical affine scale has its own reference atom. Its cost
 changes the material exponent, while the state loss stays fixed. Four
 literal atoms then give the exact sector estimate on the same atlas.
 -/
+
+@[expose] public section
 
 noncomputable section
 

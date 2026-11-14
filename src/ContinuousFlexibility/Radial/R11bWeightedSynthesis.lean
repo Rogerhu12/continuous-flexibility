@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R11bFiniteSynthesis
-import ContinuousFlexibility.Radial.EvenFourierBasis
+module
+
+public import ContinuousFlexibility.Radial.R11bFiniteSynthesis
+public import ContinuousFlexibility.Radial.EvenFourierBasis
 
 /-!
 # Exact weighted energy of finite synthesis
@@ -8,6 +10,8 @@ Finite angular Parseval commutes with the summable cell series. The even
 basis includes its normalized constant vector, so the zero mode is retained
 without a special coefficient or an extra scalar term.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05ReferenceInterface
-import ContinuousFlexibility.Analysis.N05MaterialCellCoordinates
-import ContinuousFlexibility.Analysis.N05ReferenceSourceWeightGap
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceInterface
+public import ContinuousFlexibility.Analysis.N05MaterialCellCoordinates
+public import ContinuousFlexibility.Analysis.N05ReferenceSourceWeightGap
 
 /-!
 # Every active reference cell satisfies the endpoint-exponent window
@@ -11,6 +13,8 @@ uniformly close indices. Combining that overlap estimate with the genuine
 association transfers the endpoint-exponent window to every active reference
 localizer on a canonical physical piece.
 -/
+
+@[expose] public section
 
 noncomputable section
 

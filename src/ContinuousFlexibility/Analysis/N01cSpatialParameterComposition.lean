@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01cParameterCalculus
-import ContinuousFlexibility.Analysis.N01cStateSeminorms
-import ContinuousFlexibility.Analysis.CylinderMixedJets
-import Mathlib.Analysis.Calculus.ContDiff.CPolynomial
+module
+
+public import ContinuousFlexibility.Analysis.N01cParameterCalculus
+public import ContinuousFlexibility.Analysis.N01cStateSeminorms
+public import ContinuousFlexibility.Analysis.CylinderMixedJets
+public import Mathlib.Analysis.Calculus.ContDiff.CPolynomial
 
 /-!
 # Actual spatial composition jets with smooth parameter towers
@@ -12,6 +14,8 @@ smooth function of its base input and the finitely many actual spatial
 input jets. This gives parameter towers of every mixed spatial derivative,
 without assuming joint normability of the parameter space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

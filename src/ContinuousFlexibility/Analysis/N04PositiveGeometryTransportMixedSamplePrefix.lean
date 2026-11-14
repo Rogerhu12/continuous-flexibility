@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryTransportSamplePrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometryJointNormalization
-import ContinuousFlexibility.Analysis.N01cParameterCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryTransportSamplePrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryJointNormalization
+public import ContinuousFlexibility.Analysis.N01cParameterCalculus
 
 /-!
 # Positive parameter mixed jets of the actual transports
@@ -10,6 +12,8 @@ sample envelope. Appending the actual radial and angular directions
 keeps the parameter arity at its requested order, and spends only the
 saved final spatial power.
 -/
+
+@[expose] public section
 
 noncomputable section
 

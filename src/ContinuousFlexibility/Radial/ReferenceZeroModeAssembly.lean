@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ReferenceModeAssembly
-import ContinuousFlexibility.Radial.ZeroModeWeightedSolution
+module
+
+public import ContinuousFlexibility.Radial.ReferenceModeAssembly
+public import ContinuousFlexibility.Radial.ZeroModeWeightedSolution
 
 /-!
 # Supplying the zero channel in the full weighted assembly
@@ -9,6 +11,8 @@ two-primitive zero-mode solution. Its coefficient threshold and energy
 constant are chosen before all three attenuation exponents and before
 the source. Only the positive-mode construction remains to be supplied.
 -/
+
+@[expose] public section
 
 noncomputable section
 

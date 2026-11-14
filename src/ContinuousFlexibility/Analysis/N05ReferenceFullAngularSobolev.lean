@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05ReferenceAngularSobolev
-import ContinuousFlexibility.Analysis.N05ReferenceLowAngularEnergy
-import ContinuousFlexibility.Analysis.N05ReferenceLowAngularWeak
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceAngularSobolev
+public import ContinuousFlexibility.Analysis.N05ReferenceLowAngularEnergy
+public import ContinuousFlexibility.Analysis.N05ReferenceLowAngularWeak
 
 /-!
 # Positive angular Sobolev estimates for the same full reference inverse
@@ -9,6 +11,8 @@ The high jet and the actual derivative of the two low modes add to a weak
 derivative of the original output. The material exponents stay fixed. The
 only order dependent factor is the elementary contribution of frequency two.
 -/
+
+@[expose] public section
 
 noncomputable section
 

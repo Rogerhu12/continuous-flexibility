@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cActualFlowUnitDirections
-import ContinuousFlexibility.Analysis.N01cFlowNormalizationProperty
-import ContinuousFlexibility.Analysis.N01cWeightAbsorption
+module
+
+public import ContinuousFlexibility.Analysis.N01cActualFlowUnitDirections
+public import ContinuousFlexibility.Analysis.N01cFlowNormalizationProperty
+public import ContinuousFlexibility.Analysis.N01cWeightAbsorption
 
 /-!
 # Normalizing the genuine angular flow variation
@@ -11,6 +13,8 @@ then acts once on the genuine continuous multilinear derivative.
 The low base is fixed, and only the additive high loss depends on the
 parameter order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

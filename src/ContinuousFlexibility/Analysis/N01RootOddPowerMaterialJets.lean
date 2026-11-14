@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01RootEvenOddAxisMaterialJets
-import ContinuousFlexibility.Analysis.N01RootOddCoefficientMaterialValues
-import ContinuousFlexibility.Analysis.PositivePowerPolynomialMaterialJets
+module
+
+public import ContinuousFlexibility.Analysis.N01RootEvenOddAxisMaterialJets
+public import ContinuousFlexibility.Analysis.N01RootOddCoefficientMaterialValues
+public import ContinuousFlexibility.Analysis.PositivePowerPolynomialMaterialJets
 
 /-!
 # Actual odd-coefficient powers at the root
@@ -10,6 +12,8 @@ value and reciprocal at the same root. The scalar power calculus has
 explicit polynomial costs, so its common low order and loss precede
 the real exponent. No interval of possible values is chosen afterward.
 -/
+
+@[expose] public section
 
 noncomputable section
 

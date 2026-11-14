@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04WholeComponentPieces
-import ContinuousFlexibility.Analysis.WholePositiveCanonicalFields
-import ContinuousFlexibility.Analysis.N04bPositiveDivision
-import ContinuousFlexibility.Analysis.CanonicalClosedTransport
+module
+
+public import ContinuousFlexibility.Analysis.N04WholeComponentPieces
+public import ContinuousFlexibility.Analysis.WholePositiveCanonicalFields
+public import ContinuousFlexibility.Analysis.N04bPositiveDivision
+public import ContinuousFlexibility.Analysis.CanonicalClosedTransport
 
 /-!
 # One atlas with the retained negative halves and whole positive pieces
@@ -13,6 +15,8 @@ The existing interior-division constructor supplies the actual quotient.
 The positive material labels and normalization region are chosen once by
 the reference construction and remain explicit data here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

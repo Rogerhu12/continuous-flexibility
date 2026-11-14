@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeInverseCurrentTowers
-import ContinuousFlexibility.Analysis.N04NegativeInversePrefixPower
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeInverseCurrentTowers
+public import ContinuousFlexibility.Analysis.N04NegativeInversePrefixPower
 
 /-!
 # One low base for a finite family of actual negative atoms
@@ -9,6 +11,8 @@ The scalar prefix theorem is then applied once to the product of the atom
 index and the selected component index. Its low base precedes the prefix,
 and its shift precedes the spatial order, uniformly in both indices.
 -/
+
+@[expose] public section
 
 noncomputable section
 

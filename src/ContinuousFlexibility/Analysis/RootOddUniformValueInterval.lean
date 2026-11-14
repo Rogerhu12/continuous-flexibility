@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.RootExtensionPhysicalBounds
-import ContinuousFlexibility.Analysis.RootTravelUniformBounds
-import Mathlib.Analysis.Calculus.MeanValue
+module
+
+public import ContinuousFlexibility.Analysis.RootExtensionPhysicalBounds
+public import ContinuousFlexibility.Analysis.RootTravelUniformBounds
+public import Mathlib.Analysis.Calculus.MeanValue
 
 /-!
 # A fixed positive value interval throughout a root collar
@@ -10,6 +12,8 @@ root. A bound on one angular period controls every angle. Applied to
 the genuine extended odd coefficient, this uses two derivatives of the
 original smooth inverse input, and selects the collar before that input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

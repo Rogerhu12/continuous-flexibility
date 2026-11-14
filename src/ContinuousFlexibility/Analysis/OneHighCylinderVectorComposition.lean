@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderVectorCompositionDerivatives
-import ContinuousFlexibility.Analysis.OneHighCylinderRealSobolevJets
-import ContinuousFlexibility.Analysis.OneHighCylinderRealPureSobolev
-import ContinuousFlexibility.Analysis.OneHighPointwiseComposition
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderVectorCompositionDerivatives
+public import ContinuousFlexibility.Analysis.OneHighCylinderRealSobolevJets
+public import ContinuousFlexibility.Analysis.OneHighCylinderRealPureSobolev
+public import ContinuousFlexibility.Analysis.OneHighPointwiseComposition
 
 /-!
 # Uniform multivariable smooth composition on the physical cylinder
@@ -11,6 +13,8 @@ their prescribed low Fourier bounds, and the outer derivative bounds on a
 convex region through zero. The genuine composed function acquires both
 L² and finite Sobolev membership from the component input hypotheses.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.WeightedPointwise
-import ContinuousFlexibility.Scalar.WeightedOneHighInterpolation
-import Mathlib.MeasureTheory.Function.LpSeminorm.Monotonicity
+module
+
+public import ContinuousFlexibility.Scalar.WeightedPointwise
+public import ContinuousFlexibility.Scalar.WeightedOneHighInterpolation
+public import Mathlib.MeasureTheory.Function.LpSeminorm.Monotonicity
 
 /-!
 # Actual material-jet monomials in the cylinder L² norm
@@ -10,6 +12,8 @@ factors use the quantitative cylinder evaluation bound.  A coefficient bounded
 by one material envelope costs one further weighted jet, and interpolation
 puts the resulting high order on only one input factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

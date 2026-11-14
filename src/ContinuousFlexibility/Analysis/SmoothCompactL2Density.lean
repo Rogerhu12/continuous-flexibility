@@ -1,6 +1,8 @@
-import Mathlib.Analysis.Distribution.AEEqOfIntegralContDiff
-import Mathlib.Analysis.InnerProductSpace.Projection.Submodule
-import Mathlib.MeasureTheory.Function.L2Space
+module
+
+public import Mathlib.Analysis.Distribution.AEEqOfIntegralContDiff
+public import Mathlib.Analysis.InnerProductSpace.Projection.Submodule
+public import Mathlib.MeasureTheory.Function.L2Space
 
 /-!
 # Smooth compact approximation in L² on an open set
@@ -10,6 +12,8 @@ it. In particular, its mass may diverge at the boundary. Density follows
 from the ordinary fundamental lemma for distributions and the Hilbert-space
 orthogonal-complement criterion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

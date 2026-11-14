@@ -1,10 +1,12 @@
-import ContinuousFlexibility.Scalar.Determinant
-import Mathlib.Analysis.SpecialFunctions.Sqrt
-import Mathlib.Analysis.Calculus.Deriv.Add
-import Mathlib.Analysis.Calculus.Deriv.Mul
-import Mathlib.Analysis.Calculus.Deriv.Inv
-import Mathlib.Analysis.Calculus.Deriv.Pow
-import Mathlib.Tactic.Convert
+module
+
+public import ContinuousFlexibility.Scalar.Determinant
+public import Mathlib.Analysis.SpecialFunctions.Sqrt
+public import Mathlib.Analysis.Calculus.Deriv.Add
+public import Mathlib.Analysis.Calculus.Deriv.Mul
+public import Mathlib.Analysis.Calculus.Deriv.Inv
+public import Mathlib.Analysis.Calculus.Deriv.Pow
+public import Mathlib.Tactic.Convert
 
 /-!
 # Actual parameter derivatives of the height connection
@@ -14,6 +16,8 @@ statements below concern actual one-parameter curves and use `HasDerivAt`.
 The spatial Cartan equations and their exterior derivatives are separate
 from these parameter differentiation rules.
 -/
+
+@[expose] public section
 
 noncomputable section
 

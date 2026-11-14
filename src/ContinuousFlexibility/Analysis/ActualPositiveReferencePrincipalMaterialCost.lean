@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.RetainedPositiveComponentProfileLower
-import ContinuousFlexibility.Analysis.ActualPositiveReferenceAllOrderMaterialJets
-import ContinuousFlexibility.Analysis.PositiveReferencePrescribedCosts
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+module
+
+public import ContinuousFlexibility.Analysis.RetainedPositiveComponentProfileLower
+public import ContinuousFlexibility.Analysis.ActualPositiveReferenceAllOrderMaterialJets
+public import ContinuousFlexibility.Analysis.PositiveReferencePrescribedCosts
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
 
 /-!
 # Physical principal costs for the same displayed reference interpolation
@@ -13,6 +15,8 @@ bound is evaluated at the same physical midpoint sample. The envelope is
 already normalized before the family is constructed; only then is the
 independent coefficient/exponent cost packed into one constant.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01aOpticalNormalization
-import Mathlib.Analysis.SpecialFunctions.Pow.Real
+module
+
+public import ContinuousFlexibility.Analysis.N01aOpticalNormalization
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 
 /-!
 # Coefficient powers for the optical construction
@@ -8,6 +10,8 @@ These are numerical consequences of the single hypothesis `1 ≤ E`.
 The same actual radicand and control are used throughout; finite jet
 bounds merely enlarge the coefficient and exponent.
 -/
+
+@[expose] public section
 
 noncomputable section
 

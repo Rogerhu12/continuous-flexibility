@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.WeightedStateRegularity
-import Mathlib.Analysis.Calculus.Taylor
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+module
+
+public import ContinuousFlexibility.Scalar.WeightedStateRegularity
+public import Mathlib.Analysis.Calculus.Taylor
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
 
 /-!
 # Flat scalar profiles and admissible scalar states
@@ -11,6 +13,8 @@ lemma handles the left and right endpoints. The resulting boundary jets and
 periodicity identify a geometric weighted state with the existing admissible
 scalar-calculus domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

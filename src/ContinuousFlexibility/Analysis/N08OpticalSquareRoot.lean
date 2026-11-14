@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.ProjectiveDifferential
-import Mathlib.Analysis.Calculus.Deriv.Abs
-import Mathlib.Analysis.Calculus.Deriv.Pow
-import Mathlib.Analysis.SpecialFunctions.Sqrt
+module
+
+public import ContinuousFlexibility.Analysis.ProjectiveDifferential
+public import Mathlib.Analysis.Calculus.Deriv.Abs
+public import Mathlib.Analysis.Calculus.Deriv.Pow
+public import Mathlib.Analysis.SpecialFunctions.Sqrt
 
 /-!
 # A smooth optical square root cannot cross its type boundary
@@ -11,6 +13,8 @@ parameter interval, its zero cannot lie inside that interval. This elementary
 fact turns genuine parameter differentiability of the ordinary flow into a
 relative bound for the controlled optical radicand.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cCosineAngularJets
+module
+
+public import ContinuousFlexibility.Analysis.N01cCosineAngularJets
 
 /-!
 # The supplied ordinary trajectories in the compact coordinate
@@ -8,6 +10,8 @@ from the supplied ordinary trajectories on the same radial component.
 These facts are the compact-flow inputs for their actual state and
 spatial regularity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

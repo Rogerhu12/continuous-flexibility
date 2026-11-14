@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledFamily
-import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
-import ContinuousFlexibility.Analysis.N01cStateAngleSelections
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledFamily
+public import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
+public import ContinuousFlexibility.Analysis.N01cStateAngleSelections
 
 /-!
 # The common sampled word budget of the two actual transports
@@ -9,6 +11,8 @@ Only positive joint orders are bounded. The state arity remains within
 the original parameter prefix, and the estimate is used on the physical
 open slab. In particular it does not bound the value of an angular lift.
 -/
+
+@[expose] public section
 
 noncomputable section
 

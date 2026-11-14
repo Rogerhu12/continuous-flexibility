@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerBorderTransport
-import ContinuousFlexibility.Radial.InnerWeightL2
-import Mathlib.Analysis.Normed.Operator.Prod
+module
+
+public import ContinuousFlexibility.Radial.InnerBorderTransport
+public import ContinuousFlexibility.Radial.InnerWeightL2
+public import Mathlib.Analysis.Normed.Operator.Prod
 
 /-!
 # Actual weights on the Hilbert space with one scalar
@@ -10,6 +12,8 @@ single central scalar. This is the weight used in Hilbert adjoints.
 In particular an output coefficient loss bounded by one remains a
 contraction on the full bordered source space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

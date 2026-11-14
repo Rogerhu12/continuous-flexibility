@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterDeepActionSmallness
-import ContinuousFlexibility.Radial.R07DeepTailSharp
+module
+
+public import ContinuousFlexibility.Radial.OuterDeepActionSmallness
+public import ContinuousFlexibility.Radial.R07DeepTailSharp
 
 /-!
 # Deep hypotheses from fine physical action estimates
@@ -9,6 +11,8 @@ construction. All geometric, adjacent large-product and mass-ratio
 conditions are the existing conclusions for the actual realized profile.
 The remaining two numerical conditions are independent of the frequency.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07bNormalizedReferenceSeeds
+module
+
+public import ContinuousFlexibility.Analysis.N07bNormalizedReferenceSeeds
 
 /-!
 # Actual outer angular coefficients of the reference expression
@@ -12,6 +14,8 @@ Only geometric fields occur in the hypotheses. The source-independent
 constant depends on `b`, and the common primitive radius has exponent
 `4 * (b + 1)`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

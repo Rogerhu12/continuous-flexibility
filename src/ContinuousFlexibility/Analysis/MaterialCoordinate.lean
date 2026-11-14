@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.MaterialWeights
-import Mathlib.Analysis.SpecialFunctions.Log.Deriv
-import Mathlib.Analysis.SpecialFunctions.Sqrt
+module
+
+public import ContinuousFlexibility.Analysis.MaterialWeights
+public import Mathlib.Analysis.SpecialFunctions.Log.Deriv
+public import Mathlib.Analysis.SpecialFunctions.Sqrt
 
 /-!
 # The actual left-endpoint material coordinate
@@ -15,6 +17,8 @@ This is an endpoint model. No smooth middle interpolation or whole-line
 material coordinate for the manuscript's actual discrete profile is
 constructed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

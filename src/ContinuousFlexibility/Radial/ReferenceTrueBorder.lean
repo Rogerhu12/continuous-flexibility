@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.CentralTrueBorder
-import ContinuousFlexibility.Statements.RadialTargets
+module
+
+public import ContinuousFlexibility.Radial.CentralTrueBorder
+public import ContinuousFlexibility.Statements.RadialTargets
 
 /-!
 # Installing the true border on the same reference geometry
@@ -9,6 +11,8 @@ Only the compact metric control and the left endpoint cutoff are installed.
 Thus a central patch in the geometry delivered by R08 already suffices for
 the actual normalized border, independently of the construction of an inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.CanonicalJetProductClosure
-import ContinuousFlexibility.Analysis.FlowJetPolynomial
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
-import Mathlib.Algebra.BigOperators.Fin
-import Mathlib.Algebra.Order.BigOperators.GroupWithZero.List
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalJetProductClosure
+public import ContinuousFlexibility.Analysis.FlowJetPolynomial
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+public import Mathlib.Algebra.BigOperators.Fin
+public import Mathlib.Algebra.Order.BigOperators.GroupWithZero.List
 
 /-!
 # A common fixed loss for finite flow-jet majorants
@@ -13,6 +15,8 @@ finite material factors are then absorbed before the state and the
 material envelope are chosen. Empty products and constant terms are
 included, so the loss is independent of both order and factor count.
 -/
+
+@[expose] public section
 
 noncomputable section
 

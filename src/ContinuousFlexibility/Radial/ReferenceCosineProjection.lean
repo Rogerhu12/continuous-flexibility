@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ReferenceGraphNorms
-import ContinuousFlexibility.Radial.ReferenceWeightedRadialBase
-import Mathlib.Analysis.InnerProductSpace.Orthonormal
+module
+
+public import ContinuousFlexibility.Radial.ReferenceGraphNorms
+public import ContinuousFlexibility.Radial.ReferenceWeightedRadialBase
+public import Mathlib.Analysis.InnerProductSpace.Orthonormal
 
 /-!
 # Finite cosine projections with the physical normalization
@@ -10,6 +12,8 @@ family for the actual probability measure `(2π)⁻¹ dθ` on one full period.
 Bessel's inequality therefore controls finite angular projections before
 any radial weight is introduced.
 -/
+
+@[expose] public section
 
 open Set Filter MeasureTheory
 open scoped ContDiff Topology RealInnerProductSpace InnerProductSpace

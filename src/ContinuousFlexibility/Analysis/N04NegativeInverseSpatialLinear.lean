@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeInverseImplicitIdentification
-import ContinuousFlexibility.Analysis.PlanarInverseDerivativeBound
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeInverseImplicitIdentification
+public import ContinuousFlexibility.Analysis.PlanarInverseDerivativeBound
 
 /-!
 # The actual spatial inverse used in the mixed inverse recursion
@@ -10,6 +12,8 @@ In dimension two its norm is bounded by forward first spatial jets and
 the reciprocal actual Jacobian, with no inverse derivative estimate
 among the hypotheses.
 -/
+
+@[expose] public section
 
 noncomputable section
 

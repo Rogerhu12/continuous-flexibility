@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aConstructionRestriction
-import ContinuousFlexibility.Analysis.N07aAngularConstruction
+module
+
+public import ContinuousFlexibility.Analysis.N07aConstructionRestriction
+public import ContinuousFlexibility.Analysis.N07aAngularConstruction
 
 /-!
 # N07a: the original inverse has all angular orders and material weights
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Analysis.N07aAngularConstruction
 Source: `paper/flexible-surface-readable/08-stable-inverse.tex` lines 489–635.
 Task: `docs/tasks/N07a-Angular.md`.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

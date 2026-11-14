@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsInversePrefixSlots
-import ContinuousFlexibility.Analysis.N01cFiniteParameterProducts
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsInversePrefixSlots
+public import ContinuousFlexibility.Analysis.N01cFiniteParameterProducts
 
 /-!
 # Abstract finite-family collection of raw inverse bounds
@@ -8,6 +10,8 @@ All finite sums, zero-order identities and coefficient normalization
 are proved over an abstract parameter space. Concrete current-data
 adapters only supply the already proved scalar estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

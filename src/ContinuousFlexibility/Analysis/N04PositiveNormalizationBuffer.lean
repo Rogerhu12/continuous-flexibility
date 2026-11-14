@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveComponents
-import ContinuousFlexibility.Analysis.IntervalWeakPrimitive
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveComponents
+public import ContinuousFlexibility.Analysis.IntervalWeakPrimitive
 
 /-!
 # Compact normalization support inside positive components
@@ -9,6 +11,8 @@ set, even if the component touches an ambient endpoint. Each such set has
 two nested interior interval buffers. The construction is entirely at the
 reference state and is selected before any perturbed state.
 -/
+
+@[expose] public section
 
 noncomputable section
 

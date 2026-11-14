@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Geometry.HeightCoframe
-import ContinuousFlexibility.Geometry.Primitive
-import ContinuousFlexibility.Geometry.LocalInverse
+module
+
+public import ContinuousFlexibility.Geometry.HeightCoframe
+public import ContinuousFlexibility.Geometry.Primitive
+public import ContinuousFlexibility.Geometry.LocalInverse
 
 /-!
 # Actual local planar development of a zero-residual height
@@ -13,6 +15,8 @@ This does not assert global exactness of the polar connection on an annulus:
 its period there can be `2π`. Global filled-disk reconstruction additionally
 requires the Cartesian coframe, the angle gauge, and global injectivity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

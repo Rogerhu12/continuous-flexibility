@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05NegativePieceCount
-import ContinuousFlexibility.Radial.ReferenceCellL2
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05NegativePieceCount
+public import ContinuousFlexibility.Radial.ReferenceCellL2
 
 /-!
 # Controlled coordinates on the actual negative reference pieces
@@ -11,6 +13,8 @@ radial identities, cell association, finite fibers and five first coefficient
 bounds all concern the same N04 data. One positive constant controls every
 quantitative conclusion; no chart estimate is assumed as an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

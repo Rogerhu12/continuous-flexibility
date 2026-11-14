@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CircleComponentMultiplier
-import ContinuousFlexibility.Analysis.N01ControlIndexBound
-import ContinuousFlexibility.Analysis.MaterialSampleRadialLoss
+module
+
+public import ContinuousFlexibility.Analysis.CircleComponentMultiplier
+public import ContinuousFlexibility.Analysis.N01ControlIndexBound
+public import ContinuousFlexibility.Analysis.MaterialSampleRadialLoss
 
 /-!
 # The actual optical cutoff jets cost one fixed circle weight
@@ -11,6 +13,8 @@ by the original control label. One material sample weight therefore
 absorbs the entire radial cost, independently of the radial jet order
 and of the selected radii.
 -/
+
+@[expose] public section
 
 noncomputable section
 

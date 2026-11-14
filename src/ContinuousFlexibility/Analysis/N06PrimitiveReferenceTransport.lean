@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.N06PrimitiveGeometryBridge
-import ContinuousFlexibility.Analysis.N06ReferenceProjectionTransport
+module
+
+public import ContinuousFlexibility.Statements.N06PrimitiveGeometryBridge
+public import ContinuousFlexibility.Analysis.N06ReferenceProjectionTransport
 
 /-!
 # Exact reference transport from the primitive radial identities
@@ -9,6 +11,8 @@ material-label window, coordinate estimate, or auxiliary coordinate
 witness is needed to transport modes and finite angular projections.
 Both transformations retain their genuine inverse and Jacobian.
 -/
+
+@[expose] public section
 
 noncomputable section
 

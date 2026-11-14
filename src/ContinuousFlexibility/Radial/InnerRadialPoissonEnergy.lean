@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerRadialReferenceAssembly
-import ContinuousFlexibility.Radial.InnerGapWeights
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialReferenceAssembly
+public import ContinuousFlexibility.Radial.InnerGapWeights
 
 /-!
 # Local weighted Poisson energy on the actual model/gap pieces
@@ -9,6 +11,8 @@ Positive-gap estimates use the actual radial coercivity and the full
 gap conormal matrix. A weight constant on the gap cancels its cut
 weight exactly. Both computations keep the original local operators.
 -/
+
+@[expose] public section
 
 noncomputable section
 

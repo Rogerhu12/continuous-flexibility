@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ZeroModeL1Primitive
-import Mathlib.Analysis.Calculus.Deriv.Support
+module
+
+public import ContinuousFlexibility.Radial.ZeroModeL1Primitive
+public import Mathlib.Analysis.Calculus.Deriv.Support
 
 /-!
 # The zero-mode equation for an integrable source
@@ -9,6 +11,8 @@ equation holds for every smooth test compactly inside the radial interval,
 assuming only integrability of the source and of its flux divided by the
 profile. In particular, the source need not have a continuous representative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

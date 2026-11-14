@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cOpticalCellComparison
-import ContinuousFlexibility.Statements.RadialTargets
-import ContinuousFlexibility.Radial.ReferenceReturnComponents
+module
+
+public import ContinuousFlexibility.Analysis.N01cOpticalCellComparison
+public import ContinuousFlexibility.Statements.RadialTargets
+public import ContinuousFlexibility.Radial.ReferenceReturnComponents
 
 /-!
 # From actual optical model components to the primitive certificate
@@ -10,6 +12,8 @@ a cell of the model index containing that point, and a lower bound on the
 whole component. The overlap comparison then allows every containing cell
 as the designated nonlinear cell.
 -/
+
+@[expose] public section
 
 noncomputable section
 

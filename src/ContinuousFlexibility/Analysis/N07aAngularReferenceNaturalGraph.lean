@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N07aAngularReferenceGreen
-import ContinuousFlexibility.Analysis.N07aAngularReferenceMean
-import ContinuousFlexibility.Analysis.N07aAngularReferenceIntegrable
-import ContinuousFlexibility.Analysis.N07aAngularCutoffChange
-import ContinuousFlexibility.Analysis.N07aAngularReferenceCompatibleSource
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceGreen
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceMean
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceIntegrable
+public import ContinuousFlexibility.Analysis.N07aAngularCutoffChange
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceCompatibleSource
 
 /-!
 # The transported candidate belongs to the genuine reference graph
@@ -11,6 +13,8 @@ The inputs are bounds on its displayed physical derivatives and remainder.
 Natural source membership, conserved mean, and the full weak equation are
 proved here, rather than required as certificates of the candidate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,10 +1,12 @@
-import Mathlib.Analysis.InnerProductSpace.StarOrder
-import Mathlib.Analysis.InnerProductSpace.Spectrum
-import Mathlib.Analysis.InnerProductSpace.l2Space
-import Mathlib.Tactic.FunProp
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.NormNum
-import Mathlib.Tactic.Positivity
+module
+
+public import Mathlib.Analysis.InnerProductSpace.StarOrder
+public import Mathlib.Analysis.InnerProductSpace.Spectrum
+public import Mathlib.Analysis.InnerProductSpace.l2Space
+public import Mathlib.Tactic.FunProp
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.Positivity
 
 /-!
 # Spectral projections for an integer angular frequency
@@ -14,6 +16,8 @@ The bounded resolvent `(I + Λ)⁻¹` of an angular frequency has spectrum in
 each nonzero spectral value. Their functional calculus gives the spectral
 projections without a finite-multiplicity or compactness assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

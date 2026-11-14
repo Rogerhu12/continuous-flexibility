@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # A single constant for the coefficient and endpoint-weight estimates
@@ -8,6 +10,8 @@ constant and exponent can be replaced by the same positive constant.
 The height exponent is preserved exactly; no power of the height weight
 is spent in this step.
 -/
+
+@[expose] public section
 
 noncomputable section
 

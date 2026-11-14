@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SpacesComplexLp
-import ContinuousFlexibility.Analysis.SpacesTorusReal
-import ContinuousFlexibility.Analysis.SpacesTorusWaves
+module
+
+public import ContinuousFlexibility.Analysis.SpacesComplexLp
+public import ContinuousFlexibility.Analysis.SpacesTorusReal
+public import ContinuousFlexibility.Analysis.SpacesTorusWaves
 
 /-!
 # Bounded real Fourier jet projections on the normalized torus
@@ -9,6 +11,8 @@ Finite coefficient multipliers are constructed as actual continuous
 operators. Conjugate symmetry identifies their real parts with the
 original complex polynomial, so Parseval gives the exact symbol estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

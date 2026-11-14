@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N04RealizationEnvelopeDifferential
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
-import ContinuousFlexibility.Analysis.PointwiseAffineMaterialJets
-import ContinuousFlexibility.Analysis.N07aCoordinateJetNorms
-import ContinuousFlexibility.Analysis.N07bNormalizedSourceMaterial
-import ContinuousFlexibility.Scalar.WeightedMaterialRadiusJets
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationEnvelopeDifferential
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+public import ContinuousFlexibility.Analysis.PointwiseAffineMaterialJets
+public import ContinuousFlexibility.Analysis.N07aCoordinateJetNorms
+public import ContinuousFlexibility.Analysis.N07bNormalizedSourceMaterial
+public import ContinuousFlexibility.Scalar.WeightedMaterialRadiusJets
 
 /-!
 # Actual material scalar jets for primitive geometry
@@ -13,6 +15,8 @@ bounded jets, and its reciprocal retains an actual pointwise E0 power.
 Every jet of a positive power of the material height ratio retains that
 same ratio power. The sample height is never estimated separately.
 -/
+
+@[expose] public section
 
 noncomputable section
 

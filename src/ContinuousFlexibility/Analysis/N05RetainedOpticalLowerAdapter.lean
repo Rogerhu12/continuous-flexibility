@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R11aRetainedFamily
-import ContinuousFlexibility.Analysis.N05SeedOpticalLower
+module
+
+public import ContinuousFlexibility.Radial.R11aRetainedFamily
+public import ContinuousFlexibility.Analysis.N05SeedOpticalLower
 
 /-!
 # The optical lower certificate on the same completed retained reference
@@ -23,6 +25,8 @@ profile/height identities and construction geometry. The selected first band
 is `metadata.first_two` in the retained assembly, and `metadata.selected`
 supplies its selected-tail condition. No open Blueprint result is applied.
 -/
+
+@[expose] public section
 
 noncomputable section
 

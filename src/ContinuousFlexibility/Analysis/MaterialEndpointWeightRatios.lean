@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.MaterialEndpointWeightTransport
+module
+
+public import ContinuousFlexibility.Analysis.MaterialEndpointWeightTransport
 
 /-!
 # Common actual height and material ratios from endpoint displacement
@@ -7,6 +9,8 @@ The two ratio estimates use the same actual material data and one common
 constant and exponent. Only a fixed scaling of `E0` is at least one; the
 unscaled coefficient weight is merely positive.
 -/
+
+@[expose] public section
 
 noncomputable section
 

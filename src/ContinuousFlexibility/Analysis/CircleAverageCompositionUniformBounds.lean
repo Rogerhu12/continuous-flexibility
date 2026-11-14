@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CircleAverageCompositionSmoothTame
-import ContinuousFlexibility.Analysis.CircleCompositionUniformBounds
-import ContinuousFlexibility.Analysis.UniformUnitIntegralLinearFamily
+module
+
+public import ContinuousFlexibility.Analysis.CircleAverageCompositionSmoothTame
+public import ContinuousFlexibility.Analysis.CircleCompositionUniformBounds
+public import ContinuousFlexibility.Analysis.UniformUnitIntegralLinearFamily
 
 /-!
 # Uniform one-high bounds for the actual averaged composition
@@ -11,6 +13,8 @@ fixed before the low-seminorm radius and output order. This uniformity
 is retained when the base point subsequently ranges over a family of
 physical radius selectors.
 -/
+
+@[expose] public section
 
 noncomputable section
 

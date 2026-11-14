@@ -1,8 +1,10 @@
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
-import Mathlib.Analysis.Calculus.Deriv.Inv
-import Mathlib.Analysis.Calculus.Deriv.Pow
-import Mathlib.Tactic
+module
+
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+public import Mathlib.Analysis.Calculus.Deriv.Inv
+public import Mathlib.Analysis.Calculus.Deriv.Pow
+public import Mathlib.Tactic
 
 /-!
 # A radial Hardy estimate for every nondecreasing positive gap
@@ -11,6 +13,8 @@ Completing a square retains the actual endpoint terms. Thus the
 Dirichlet coercivity constant does not require a lower bound on the
 logarithmic slope. Nonzero Poisson traces retain their explicit cost.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.ProfileScalarWeightedOffset
-import ContinuousFlexibility.Radial.R11bRegularModeData
-import ContinuousFlexibility.Radial.R11bModeForcingBounds
-import ContinuousFlexibility.Radial.R11bRemainderEnergy
-import ContinuousFlexibility.Radial.R11bAngularFrequencyEstimate
+module
+
+public import ContinuousFlexibility.Radial.ProfileScalarWeightedOffset
+public import ContinuousFlexibility.Radial.R11bRegularModeData
+public import ContinuousFlexibility.Radial.R11bModeForcingBounds
+public import ContinuousFlexibility.Radial.R11bRemainderEnergy
+public import ContinuousFlexibility.Radial.R11bAngularFrequencyEstimate
 
 /-!
 # Uniform finite energy bounds for all actual normal modes
@@ -11,6 +13,8 @@ The zero mode retains its left-tail constant and the critical positive
 mode retains the true border column. The scalar estimate is summed over
 an arbitrary finite selection, with constants independent of that selection.
 -/
+
+@[expose] public section
 
 noncomputable section
 

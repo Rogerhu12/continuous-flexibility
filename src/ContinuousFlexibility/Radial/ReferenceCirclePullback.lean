@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ReferenceWeightedProduct
-import Mathlib.Analysis.Fourier.AddCircle
+module
+
+public import ContinuousFlexibility.Radial.ReferenceWeightedProduct
+public import Mathlib.Analysis.Fourier.AddCircle
 
 /-!
 # Pullback from the period-π circle to the physical angular interval
@@ -9,6 +11,8 @@ period π preserves measure: the interval consists of two fundamental
 domains. Its product with the radial identity therefore preserves the
 actual weighted product L² norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

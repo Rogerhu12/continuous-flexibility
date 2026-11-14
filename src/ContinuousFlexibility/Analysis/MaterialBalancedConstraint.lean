@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.MaterialMScale
+module
+
+public import ContinuousFlexibility.Analysis.MaterialMScale
 
 /-!
 # Fixed material-order loss from a balanced height constraint
@@ -10,6 +12,8 @@ of the second, apart from a bounded initial region. Combining this with
 the explicit material scaling bound costs any prescribed positive extra
 material order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

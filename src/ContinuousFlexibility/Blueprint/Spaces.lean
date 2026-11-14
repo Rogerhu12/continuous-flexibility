@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesConclusion
-import ContinuousFlexibility.Analysis.SpacesFlatFamilies
+module
+
+public import ContinuousFlexibility.Analysis.SpacesConclusion
+public import ContinuousFlexibility.Analysis.SpacesFlatFamilies
 
 /-!
 # Blueprint node Spaces
@@ -10,6 +12,8 @@ Source: `paper/flexible-surface-readable/07-fixed-geometry.tex` lines 108–237 
 
 Task file: `docs/tasks/Spaces.md`. The original statement is preserved.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

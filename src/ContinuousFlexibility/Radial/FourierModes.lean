@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.Gauge
-import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
-import Mathlib.Analysis.Real.Sqrt
+module
+
+public import ContinuousFlexibility.Radial.Gauge
+public import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
+public import Mathlib.Analysis.Real.Sqrt
 
 /-!
 # Actual Fourier separation of the radial Jacobi operator
@@ -10,6 +12,8 @@ mathlib derivatives of functions. This implements the cosine sector at the
 start of Section 4. Infinite Fourier reconstruction and endpoint domains
 are separate obligations; no spectral or inverse statement is assumed here.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

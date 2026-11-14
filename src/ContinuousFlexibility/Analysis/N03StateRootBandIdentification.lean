@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bRootGermCollar
-import ContinuousFlexibility.Analysis.N03FixedRootOrdinaryJets
+module
+
+public import ContinuousFlexibility.Analysis.N04bRootGermCollar
+public import ContinuousFlexibility.Analysis.N03FixedRootOrdinaryJets
 
 /-!
 # Identifying the chosen controlled root model for each actual state
@@ -10,6 +12,8 @@ chosen controlled flow and its chart near the root. Its width enters no
 jet bound. No fixed correction cutoff or uniform collar over states is
 assumed, and the original reference, correction and stored atlas remain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

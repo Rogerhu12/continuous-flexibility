@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ScalarEquationBoundaryContinuity
-import ContinuousFlexibility.Analysis.CanonicalStoredSliceBijection
-import ContinuousFlexibility.Analysis.CanonicalBoundaryLift
+module
+
+public import ContinuousFlexibility.Analysis.ScalarEquationBoundaryContinuity
+public import ContinuousFlexibility.Analysis.CanonicalStoredSliceBijection
+public import ContinuousFlexibility.Analysis.CanonicalBoundaryLift
 
 /-!
 # Joint root continuity of the original stored N03 flow
@@ -11,6 +13,8 @@ injective interior slices and the strictly increasing boundary lift,
 give the joint initial-angle/radial limit. The Airy primitive is used
 only continuously at zero; no smoothness there is asserted.
 -/
+
+@[expose] public section
 
 noncomputable section
 

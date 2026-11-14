@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07bMaterialCoordinateMeasure
-import ContinuousFlexibility.Analysis.SpacesTracePointwise
-import ContinuousFlexibility.Analysis.SpacesLpCurveDerivative
+module
+
+public import ContinuousFlexibility.Analysis.N07bMaterialCoordinateMeasure
+public import ContinuousFlexibility.Analysis.SpacesTracePointwise
+public import ContinuousFlexibility.Analysis.SpacesLpCurveDerivative
 
 /-!
 # Physical integral densities for the actual material jets
@@ -10,6 +12,8 @@ physical coordinates. These formulas supply an integrable physical majorant
 for the canonical source estimate, retaining the actual decoded field and
 its original material seminorm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

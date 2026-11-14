@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aVolumeCell
-import ContinuousFlexibility.Analysis.N07aWeakNormalEquation
+module
+
+public import ContinuousFlexibility.Analysis.N07aVolumeCell
+public import ContinuousFlexibility.Analysis.N07aWeakNormalEquation
 
 /-!
 # The four actual weak jets already supplied by N05
@@ -8,6 +10,8 @@ Only two angular derivatives of the field and one angular derivative of
 its first normal derivative are used. They belong to the original volume
 graph and describe the same reference inverse by its coherence clause.
 -/
+
+@[expose] public section
 
 noncomputable section
 

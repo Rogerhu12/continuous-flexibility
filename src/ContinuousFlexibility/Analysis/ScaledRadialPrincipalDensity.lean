@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.PrincipalCoefficientPullback
+module
+
+public import ContinuousFlexibility.Analysis.PrincipalCoefficientPullback
 
 /-!
 # Principal density under a positive change of the radial differential
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Analysis.PrincipalCoefficientPullback
 This is a pointwise formula for two actual coordinate maps. It applies to
 the root coordinate once its actual derivative has been computed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

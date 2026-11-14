@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N03ControlledRootUnitIdentification
-import ContinuousFlexibility.Analysis.N04RealizationLeadAssembly
+module
+
+public import ContinuousFlexibility.Analysis.N03ControlledRootUnitIdentification
+public import ContinuousFlexibility.Analysis.N04RealizationLeadAssembly
 
 /-!
 # One common neighborhood for the original root models
@@ -8,6 +10,8 @@ The completed atlas changes only its divided field. Its chart and height
 jets identify the original atlas with one unit model at each state, using
 the same flow for every angle and every spatial order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

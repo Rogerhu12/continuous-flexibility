@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsBoundaryData
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsBoundaryData
 
 /-!
 # The actual angular lower bound of the selected transport
@@ -7,6 +9,8 @@ The chosen endpoint interpolation keeps half its original lower bound
 on the entire physical cylinder. Its reciprocal is charged to the same
 stored material envelope, without selecting another width or radius.
 -/
+
+@[expose] public section
 
 noncomputable section
 

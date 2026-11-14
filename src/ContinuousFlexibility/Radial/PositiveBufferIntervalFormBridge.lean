@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.PositiveBufferIntervalProjection
-import ContinuousFlexibility.Radial.BufferIntervalRestriction
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferIntervalProjection
+public import ContinuousFlexibility.Radial.BufferIntervalRestriction
 
 /-!
 # The frozen interval graph and all zero-trace energy tests
@@ -9,6 +11,8 @@ solution and its derivative pair identically with the original and
 restricted tests. The resulting equivalence preserves the scalar border
 and arbitrary outside values of the interval source.
 -/
+
+@[expose] public section
 
 noncomputable section
 

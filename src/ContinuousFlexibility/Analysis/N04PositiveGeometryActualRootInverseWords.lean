@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryActualRootInversePacket
-import ContinuousFlexibility.Analysis.N04PositiveGeometryRootInversePacketWordData
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryActualRootInversePacket
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryRootInversePacketWordData
 
 /-!
 # Word bounds for the actual inverse differential
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Analysis.N04PositiveGeometryRootInversePacketWordDa
 This module isolates one stage of the actual inverse differential.
 The original state, functions and derivative budgets are retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

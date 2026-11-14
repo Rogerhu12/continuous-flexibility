@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryAtomDirections
-import ContinuousFlexibility.Analysis.N04RealizationMovingPointMixedBounds
-import ContinuousFlexibility.Analysis.WholePositiveReferenceGauge
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryAtomDirections
+public import ContinuousFlexibility.Analysis.N04RealizationMovingPointMixedBounds
+public import ContinuousFlexibility.Analysis.WholePositiveReferenceGauge
 
 /-!
 # Genuine joint towers in the fixed positive reference gauge
@@ -11,6 +13,8 @@ uses the actual transport at the fixed reference inverse, and the height
 is the actual moving quotient. These constructions also give the pulled
 height without changing the inverse point at which it is evaluated.
 -/
+
+@[expose] public section
 
 noncomputable section
 

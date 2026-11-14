@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.RetainedPositiveComponentClassification
-import ContinuousFlexibility.Analysis.RetainedMorsePositiveGapEndpointX
-import ContinuousFlexibility.Analysis.PositiveComponentMaterialCell
-import Mathlib.Topology.Order.Compact
+module
+
+public import ContinuousFlexibility.Analysis.RetainedPositiveComponentClassification
+public import ContinuousFlexibility.Analysis.RetainedMorsePositiveGapEndpointX
+public import ContinuousFlexibility.Analysis.PositiveComponentMaterialCell
+public import Mathlib.Topology.Order.Compact
 
 /-!
 # Uniform endpoint coordinates on the actual whole positive intervals
@@ -12,6 +14,8 @@ endpoints, so compactness supplies one bound for their entire intervals.
 The actual midpoint and its original host sample are then compared using
 the material index estimate; no whole-component cell is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

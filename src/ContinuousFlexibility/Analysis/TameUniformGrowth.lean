@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.TameJetLocalBounds
+module
+
+public import ContinuousFlexibility.Analysis.TameJetLocalBounds
 
 /-!
 # Fixed-order growth on arbitrary bounded low-seminorm sets
@@ -9,6 +11,8 @@ closed under finite algebra and composition. For genuine multilinear
 jets, normalization recovers a homogeneous one-high-factor estimate
 with the same uniform choice of low order and loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

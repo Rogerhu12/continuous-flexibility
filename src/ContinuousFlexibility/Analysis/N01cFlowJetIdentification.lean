@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cFlowHighestVariation
-import ContinuousFlexibility.Analysis.N01cFlowParameterJetEquations
+module
+
+public import ContinuousFlexibility.Analysis.N01cFlowHighestVariation
+public import ContinuousFlexibility.Analysis.N01cFlowParameterJetEquations
 
 /-!
 # The recursively constructed variations are the actual parameter jets
@@ -12,6 +14,8 @@ the recursively constructed continuous multilinear Volterra map.
 
 No differentiability or derivative bound for the flow is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

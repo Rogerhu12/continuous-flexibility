@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R07IncomingJoin
-import ContinuousFlexibility.Radial.R07OriginalOutgoing
+module
+
+public import ContinuousFlexibility.Radial.R07IncomingJoin
+public import ContinuousFlexibility.Radial.R07OriginalOutgoing
 
 /-!
 # Concrete simultaneous matching in every later band
@@ -10,6 +12,8 @@ supplies the invariant nonzero natural state. A single height sequence then
 separates the actual two physical solutions at both endpoints in every
 noninitial frequency band.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CanonicalJetNormalization
-import ContinuousFlexibility.Analysis.N04RealizationPrimitiveNormalization
-import ContinuousFlexibility.Analysis.N07aGeometryJetBounds
-import ContinuousFlexibility.Analysis.SolveReturnEquations
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalJetNormalization
+public import ContinuousFlexibility.Analysis.N04RealizationPrimitiveNormalization
+public import ContinuousFlexibility.Analysis.N07aGeometryJetBounds
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # Retaining the primitive jet certificate under final normalization
@@ -10,6 +12,8 @@ On every actual sector parameter all unit atoms are unchanged. Their
 entire difference-jet map is therefore unchanged, so the existing genuine
 directional tower and its fixed-loss bounds transport together.
 -/
+
+@[expose] public section
 
 noncomputable section
 

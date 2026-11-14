@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SmoothDirectionsLocalAngularJets
-import ContinuousFlexibility.Analysis.AngularJetExpansion
-import ContinuousFlexibility.Analysis.ScalarPlaneJetRegularity
+module
+
+public import ContinuousFlexibility.Analysis.SmoothDirectionsLocalAngularJets
+public import ContinuousFlexibility.Analysis.AngularJetExpansion
+public import ContinuousFlexibility.Analysis.ScalarPlaneJetRegularity
 
 /-!
 # Joint towers on an open spatial interval
@@ -10,6 +12,8 @@ extending the spatial smoothness through either endpoint. Uniform scalar
 jet bounds give joint continuity, and the local spatial FTC gives the
 mixed derivatives entering the finite multilinear expansion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

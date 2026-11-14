@@ -1,12 +1,14 @@
-import ContinuousFlexibility.Analysis.RootCompositionEven
-import ContinuousFlexibility.Statements.Nonlinear
-import Mathlib.Analysis.Calculus.ContDiff.Operations
-import Mathlib.Analysis.Calculus.TangentCone.Prod
-import Mathlib.Analysis.Calculus.TangentCone.Real
-import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
-import Mathlib.Tactic.NormNum
-import Mathlib.Tactic.Ring
-import Mathlib.Tactic.Linarith
+module
+
+public import ContinuousFlexibility.Analysis.RootCompositionEven
+public import ContinuousFlexibility.Statements.Nonlinear
+public import Mathlib.Analysis.Calculus.ContDiff.Operations
+public import Mathlib.Analysis.Calculus.TangentCone.Prod
+public import Mathlib.Analysis.Calculus.TangentCone.Real
+public import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.Linarith
 
 /-!
 # Smooth substitution at a root
@@ -18,6 +20,8 @@ apparently singular factor cancels against the odd scalar derivative of
 the integrand.  This yields an induction on the smoothness order with
 values in arbitrary Banach spaces, including spaces of linear maps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

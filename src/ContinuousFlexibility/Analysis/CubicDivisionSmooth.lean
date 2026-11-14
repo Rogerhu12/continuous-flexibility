@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import ContinuousFlexibility.Analysis.SmoothScaledIntegral
-import Mathlib.Analysis.Calculus.TaylorIntegral
-import Mathlib.Analysis.SpecialFunctions.Integrals.Basic
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import ContinuousFlexibility.Analysis.SmoothScaledIntegral
+public import Mathlib.Analysis.Calculus.TaylorIntegral
+public import Mathlib.Analysis.SpecialFunctions.Integrals.Basic
 
 /-!
 # Smooth division by a cubic zero
@@ -16,6 +18,8 @@ estimate without any endpoint extension assumptions.
 Source: `paper/flexible-surface-readable/07-fixed-geometry.tex`, the paragraph
 "The difference vanishes to third order at the roots".
 -/
+
+@[expose] public section
 
 noncomputable section
 

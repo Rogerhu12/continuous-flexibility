@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedWeightShiftJets
-import ContinuousFlexibility.Scalar.WeightedOrdinaryPointwise
+module
+
+public import ContinuousFlexibility.Scalar.WeightedWeightShiftJets
+public import ContinuousFlexibility.Scalar.WeightedOrdinaryPointwise
 
 /-!
 # Normalized material jets of actual decoded heights
@@ -10,6 +12,8 @@ as a finite sum of jets of the weighted pullback, with bounded coefficients.
 The weighted L² estimate preserves the total jet order, while evaluation
 uses the same two additional orders as the cylinder pointwise estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

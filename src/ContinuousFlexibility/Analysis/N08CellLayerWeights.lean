@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N08CellLayerTest
-import ContinuousFlexibility.Analysis.N08SampleEnvelopeComparison
-import ContinuousFlexibility.Analysis.MaterialEndpointDecay
+module
+
+public import ContinuousFlexibility.Analysis.N08CellLayerTest
+public import ContinuousFlexibility.Analysis.N08SampleEnvelopeComparison
+public import ContinuousFlexibility.Analysis.MaterialEndpointDecay
 
 /-!
 # Material weights on the actual endpoint band
@@ -10,6 +12,8 @@ comparison therefore applies on the whole support of the test, although
 the support need not lie in its original cell. The inverse layer width
 costs only two powers of the actual endpoint distance.
 -/
+
+@[expose] public section
 
 noncomputable section
 

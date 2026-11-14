@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartPhysicalBounds
-import ContinuousFlexibility.Analysis.N04NegativeChartCoordinateClosure
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartPhysicalBounds
+public import ContinuousFlexibility.Analysis.N04NegativeChartCoordinateClosure
 
 /-!
 # Assembly of negative chart data from the actual physical estimates
@@ -9,6 +11,8 @@ the auxiliary-column replacement. Its exact material sample is retained
 as well. Thus one physical estimate supplies all four chart atoms on
 one neighborhood, before any auxiliary source column is selected.
 -/
+
+@[expose] public section
 
 noncomputable section
 

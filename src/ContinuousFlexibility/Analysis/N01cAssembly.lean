@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Blueprint.Statements
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
 
 /-!
 # Exact assembly of the N01 geometric and tame clauses
@@ -7,6 +9,8 @@ The theorem below only assembles estimates that have already been proved
 for the same data and the same neighbourhood.  It proves no existence of
 coefficient or flow estimates and is not a replacement for the N01c leaves.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

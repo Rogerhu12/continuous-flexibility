@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aAngularRadialRecovery
-import ContinuousFlexibility.Analysis.N07aAngularIntervalRestriction
-import ContinuousFlexibility.Analysis.N07aCanonicalOpenCoefficients
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularRadialRecovery
+public import ContinuousFlexibility.Analysis.N07aAngularIntervalRestriction
+public import ContinuousFlexibility.Analysis.N07aCanonicalOpenCoefficients
 
 /-!
 # All angular orders of the recovered first normal derivative
@@ -10,6 +12,8 @@ its compact test. A radial cutoff commutes with these angular derivatives.
 Consequently the recovered graph has every angular order, and restriction
 where the cutoff is one recovers the original solution on a smaller strip.
 -/
+
+@[expose] public section
 
 noncomputable section
 

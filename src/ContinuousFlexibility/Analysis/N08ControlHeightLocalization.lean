@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N08PhysicalLabelTests
-import ContinuousFlexibility.Analysis.N08TailHeightMultiplier
+module
+
+public import ContinuousFlexibility.Analysis.N08PhysicalLabelTests
+public import ContinuousFlexibility.Analysis.N08TailHeightMultiplier
 
 /-!
 # Actual height cutoffs at the physical control components
@@ -9,6 +11,8 @@ cutoffs are fixed once, before any grading or control-label power. The
 weight comparison pays that label power and leaves one inverse physical
 envelope factor, including for the fixed reference height.
 -/
+
+@[expose] public section
 
 noncomputable section
 

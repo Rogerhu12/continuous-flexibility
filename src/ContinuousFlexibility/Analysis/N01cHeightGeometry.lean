@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.StateControlCofiniteClosure
-import ContinuousFlexibility.Analysis.MaterialHeightRegularity
-import ContinuousFlexibility.Blueprint.Statements
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+module
+
+public import ContinuousFlexibility.Analysis.StateControlCofiniteClosure
+public import ContinuousFlexibility.Analysis.MaterialHeightRegularity
+public import ContinuousFlexibility.Blueprint.Statements
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 
 /-!
 # The genuine spatial inputs of the nonlinear coefficient formula
@@ -13,6 +15,8 @@ fundamental theorem of calculus then identifies the first and second
 spatial height jets. No abstract height-jet family replaces the integral
 in `stateHeight`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

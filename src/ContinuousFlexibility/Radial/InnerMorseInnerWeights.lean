@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.InnerMorseInnerChain
-import ContinuousFlexibility.Radial.InnerModelChainGaps
-import ContinuousFlexibility.Radial.InnerMorseWeights
-import ContinuousFlexibility.Radial.InnerChainDiagonal
+module
+
+public import ContinuousFlexibility.Radial.InnerMorseInnerChain
+public import ContinuousFlexibility.Radial.InnerModelChainGaps
+public import ContinuousFlexibility.Radial.InnerMorseWeights
+public import ContinuousFlexibility.Radial.InnerChainDiagonal
 
 /-!
 # The actual cut weights on the finite inner chain
@@ -12,6 +14,8 @@ cuts carry exactly the same geometric mean, including the two terminal
 cap remnants. Flattening these values therefore gives one positive
 physical weight which is constant on every gap.
 -/
+
+@[expose] public section
 
 noncomputable section
 

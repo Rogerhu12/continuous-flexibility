@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryKernelBounds
-import ContinuousFlexibility.Analysis.PointwiseAffineMaterialJets
-import ContinuousFlexibility.Analysis.N04RealizationEnvelopeComposition
-import Mathlib.Analysis.Calculus.FDeriv.Analytic
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryKernelBounds
+public import ContinuousFlexibility.Analysis.PointwiseAffineMaterialJets
+public import ContinuousFlexibility.Analysis.N04RealizationEnvelopeComposition
+public import Mathlib.Analysis.Calculus.FDeriv.Analytic
 
 /-!
 # Polynomial material costs of actual multilinear evaluation
@@ -11,6 +13,8 @@ multilinear map. Its ordinary derivatives therefore have a polynomial
 bound in the values of the operator and its arguments. The constants
 depend only on the finite orders and the normed spaces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

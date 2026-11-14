@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.NeighborhoodConstruction
+module
+
+public import ContinuousFlexibility.Analysis.NeighborhoodConstruction
 
 /-!
 # Blueprint node N01b
@@ -10,6 +12,8 @@ Source: `paper/flexible-surface-readable/07-fixed-geometry.tex` lines 646–761.
 Task file: `docs/tasks/N01b.md`. The node uses the actual common-neighborhood construction.
 The strict-support interface repair is documented in `docs/notes/N01b-support-interface.md`.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01aReferenceGreen
-import ContinuousFlexibility.Analysis.N01aReferencePureRow
-import ContinuousFlexibility.Scalar.NormalizedConservation
+module
+
+public import ContinuousFlexibility.Analysis.N01aReferenceGreen
+public import ContinuousFlexibility.Analysis.N01aReferencePureRow
+public import ContinuousFlexibility.Scalar.NormalizedConservation
 
 /-!
 # The explicit reference eigenfield satisfies the actual weak graph
@@ -10,6 +12,8 @@ normal boundary fluxes vanish because the profile itself vanishes at the
 endpoints. This tests the eigenfield against every smooth periodic test,
 without imposing a separated form on that test.
 -/
+
+@[expose] public section
 
 noncomputable section
 

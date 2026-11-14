@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.SelectedNaturalJoin
-import ContinuousFlexibility.Radial.SelectedGrowingCone
-import ContinuousFlexibility.Radial.R07FiniteAngles
-import ContinuousFlexibility.Radial.R07LaterSelection
-import ContinuousFlexibility.Radial.RadialGreenBoundary
+module
+
+public import ContinuousFlexibility.Radial.SelectedNaturalJoin
+public import ContinuousFlexibility.Radial.SelectedGrowingCone
+public import ContinuousFlexibility.Radial.R07FiniteAngles
+public import ContinuousFlexibility.Radial.R07LaterSelection
+public import ContinuousFlexibility.Radial.RadialGreenBoundary
 
 /-!
 # A first-band margin fixed before constructing the cone heads
@@ -13,6 +15,8 @@ angle at the actual join. The incoming cone slope is exactly `1 / j`.
 A positive minimum over the finite first band is therefore available
 before choosing any retained-cone length or connected reference.
 -/
+
+@[expose] public section
 
 noncomputable section
 

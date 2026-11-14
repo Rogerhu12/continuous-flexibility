@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04RealizationDifferenceValue
-import ContinuousFlexibility.Analysis.N07aCurrentPrincipalBounds
-import ContinuousFlexibility.Analysis.SectorParameterGeometry
-import ContinuousFlexibility.Analysis.StateNeighborhood
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationDifferenceValue
+public import ContinuousFlexibility.Analysis.N07aCurrentPrincipalBounds
+public import ContinuousFlexibility.Analysis.SectorParameterGeometry
+public import ContinuousFlexibility.Analysis.StateNeighborhood
 
 /-!
 # A half-reference lower bound from the genuine first parameter jet
@@ -10,6 +12,8 @@ The neighborhood is chosen using only parameter order one. The actual
 coefficient, atlas, sample, and all later higher-order towers are unchanged.
 No current-jet certificate is used to prove positivity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

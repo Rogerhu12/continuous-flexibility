@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ReferenceCellAlgebra
-import Mathlib.Analysis.Fourier.AddCircle
+module
+
+public import ContinuousFlexibility.Radial.ReferenceCellAlgebra
+public import Mathlib.Analysis.Fourier.AddCircle
 
 /-!
 # Fourier completeness for the actual angular sections
@@ -8,6 +10,8 @@ The coefficients are the genuine interval Fourier integrals. Parseval is
 inherited from mathlib's complete Fourier Hilbert basis, and its hypotheses
 are supplied by the local physical `L²` condition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

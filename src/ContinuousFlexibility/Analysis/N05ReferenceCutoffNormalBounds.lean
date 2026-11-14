@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalCutoffNormalJet
-import ContinuousFlexibility.Analysis.N05ReferenceFullAngularSobolev
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalCutoffNormalJet
+public import ContinuousFlexibility.Analysis.N05ReferenceFullAngularSobolev
 
 /-!
 # The normal cutoff correction in every physical output weight
@@ -8,6 +10,8 @@ The prescribed cutoff derivative has compact radial support. Its fixed
 weighted square costs only the square of the same left scalar already
 included in the original reference output norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

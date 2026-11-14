@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.RootCharacteristicFactor
+module
+
+public import ContinuousFlexibility.Analysis.RootCharacteristicFactor
 
 /-!
 # The actual coefficient discriminant at a simple root
@@ -7,6 +9,8 @@ The corrected determinant identity gives b²−ac=x a² c₀² on both sides
 of the reference root. This identity uses the actual coefficient fields,
 not the square of a speed that is only real on one side.
 -/
+
+@[expose] public section
 
 noncomputable section
 

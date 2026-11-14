@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerPoissonCutoff
-import ContinuousFlexibility.Radial.PositiveBufferGeometry
-import Mathlib.Analysis.Convex.Segment
+module
+
+public import ContinuousFlexibility.Radial.InnerPoissonCutoff
+public import ContinuousFlexibility.Radial.PositiveBufferGeometry
+public import Mathlib.Analysis.Convex.Segment
 
 /-!
 # The cutoff of an actual R09 buffer Poisson column
@@ -10,6 +12,8 @@ t = action + 6. The cutoff changes only between action + 3 and
 action + 4, hence at distances between 2 / mass and 3 / mass before
 the wall. Both endpoints use this same construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

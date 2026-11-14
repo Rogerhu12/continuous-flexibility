@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchedTerminalLeadingBounds
-import ContinuousFlexibility.Radial.TerminalMorseLiftEnergy
+module
+
+public import ContinuousFlexibility.Radial.MatchedTerminalLeadingBounds
+public import ContinuousFlexibility.Radial.TerminalMorseLiftEnergy
 
 /-!
 # Leading-column bounds on the original terminal Morse caps
@@ -9,6 +11,8 @@ throughout. The two endpoint choices share one scalar convexity argument.
 The physical norm estimate cancels the dilation and profile height,
 leaving only 400 / (j A²).
 -/
+
+@[expose] public section
 
 noncomputable section
 

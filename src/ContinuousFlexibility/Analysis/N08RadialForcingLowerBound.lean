@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N08RadialHeightForcing
-import Mathlib.Analysis.SpecialFunctions.Trigonometric.Bounds
-import Mathlib.MeasureTheory.Integral.DominatedConvergence
-import Mathlib.Topology.Order.IntermediateValue
+module
+
+public import ContinuousFlexibility.Analysis.N08RadialHeightForcing
+public import Mathlib.Analysis.SpecialFunctions.Trigonometric.Bounds
+public import Mathlib.MeasureTheory.Integral.DominatedConvergence
+public import Mathlib.Topology.Order.IntermediateValue
 
 /-!
 # A positive physical-cell height direction detects the flow label
@@ -12,6 +14,8 @@ half that lower bound. A constant positive radial height slope then forces
 a positive mixed flow variation at that radius. The upper bound remains
 at N01's original label, while the return margin records its actual cell.
 -/
+
+@[expose] public section
 
 noncomputable section
 

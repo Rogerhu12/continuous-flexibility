@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.NegativeCanonicalFaithfulness
-import Mathlib.Analysis.SpecialFunctions.Pow.Real
+module
+
+public import ContinuousFlexibility.Analysis.NegativeCanonicalFaithfulness
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 
 /-!
 # The actual negative height is a fourth root of the determinant ratio
@@ -9,6 +11,8 @@ identify the height on each actual open negative half. This is a value
 identity for the already chosen chart and height; it assumes no height
 derivative estimate. Both endpoints use the same Boolean statement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

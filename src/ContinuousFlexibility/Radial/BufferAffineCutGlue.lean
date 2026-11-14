@@ -1,11 +1,15 @@
-import ContinuousFlexibility.Radial.BufferCutGlue
-import ContinuousFlexibility.Radial.BufferEnergyDensity
+module
+
+public import ContinuousFlexibility.Radial.BufferCutGlue
+public import ContinuousFlexibility.Radial.BufferEnergyDensity
 
 /-!
 # Affine gluing and the physical point-source normalization
 A single affine coordinate handles both cuts. Reflection exchanges the two branches
 and changes the sign of each first derivative, so the jump transforms by the absolute slope.
 -/
+
+@[expose] public section
 noncomputable section
 namespace ContinuousFlexibility.Radial
 open Real Set Filter MeasureTheory

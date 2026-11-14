@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06NormalizerRetype
-import ContinuousFlexibility.Analysis.N06PhysicalSourceUniqueness
-import ContinuousFlexibility.Analysis.N06PhysicalPairingCongruence
-import ContinuousFlexibility.Analysis.N06AngularMeanBridge
+module
+
+public import ContinuousFlexibility.Analysis.N06NormalizerRetype
+public import ContinuousFlexibility.Analysis.N06PhysicalSourceUniqueness
+public import ContinuousFlexibility.Analysis.N06PhysicalPairingCongruence
+public import ContinuousFlexibility.Analysis.N06AngularMeanBridge
 
 /-!
 # The actual compatibility coordinate of the original N05 inverse
@@ -11,6 +13,8 @@ space, the lambda coordinate is exactly its unchanged functional Q.
 This follows from the literal zero-mean clause of SourceMember and the
 proved injectivity of the actual canonical source transformation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

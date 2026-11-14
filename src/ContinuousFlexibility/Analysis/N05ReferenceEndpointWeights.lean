@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05MaterialCellCoordinates
-import ContinuousFlexibility.Radial.WeightKernelBounds
+module
+
+public import ContinuousFlexibility.Analysis.N05MaterialCellCoordinates
+public import ContinuousFlexibility.Radial.WeightKernelBounds
 
 /-!
 # Actual endpoint weights and the discrete reference exponent
@@ -8,6 +10,8 @@ The prescribed material endpoint weight has the same cubic exponent as
 the reference weights up to a coefficient-sized error. The compact middle
 is handled using the actual local finiteness of the reference cells.
 -/
+
+@[expose] public section
 
 noncomputable section
 

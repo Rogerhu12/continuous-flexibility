@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01ReturnTransportSpatialTowers
-import ContinuousFlexibility.Analysis.JointMixedTransportCalculus
-import ContinuousFlexibility.Analysis.ScalarTransportSystemBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01ReturnTransportSpatialTowers
+public import ContinuousFlexibility.Analysis.JointMixedTransportCalculus
+public import ContinuousFlexibility.Analysis.ScalarTransportSystemBounds
 
 /-!
 # The actual N01 correction satisfies the finite transport system
@@ -10,6 +12,8 @@ identities therefore apply both to that independent residual and to
 the residual of the supplied N02 operator.  The cutoff and the two
 inverse maps are precisely those in the existing correction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

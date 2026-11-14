@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ActualNegativeReferenceHeightProfileJets
-import ContinuousFlexibility.Analysis.ActualNegativeLengthMaterialBounds
-import ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient
+module
+
+public import ContinuousFlexibility.Analysis.ActualNegativeReferenceHeightProfileJets
+public import ContinuousFlexibility.Analysis.ActualNegativeLengthMaterialBounds
+public import ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient
 
 /-!
 # The original negative reference inverse and scalar source
@@ -9,6 +11,8 @@ The two scalar families are literal unit-coordinate slices of the same
 stored atlas. Canonical affine rescaling costs only positive powers of
 the actual half length. All estimates retain its original material sample.
 -/
+
+@[expose] public section
 
 noncomputable section
 

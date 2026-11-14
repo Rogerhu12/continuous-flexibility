@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PrincipalPositivePrincipalPairs
-import ContinuousFlexibility.Analysis.N04PrincipalPositivePotential
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalPositivePrincipalPairs
+public import ContinuousFlexibility.Analysis.N04PrincipalPositivePotential
 
 /-!
 # The positive potential preserves the principal pairs
@@ -9,6 +11,8 @@ two genuine fluxes. One further coordinate derivative and multiplication
 by the pulled height give the stored potential and its exact reference.
 No potential estimate or potential tower is an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

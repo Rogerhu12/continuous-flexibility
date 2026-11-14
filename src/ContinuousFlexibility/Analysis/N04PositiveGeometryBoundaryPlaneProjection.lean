@@ -1,8 +1,12 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryTraceOperations
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsPlaneJets
-import ContinuousFlexibility.Analysis.N01cFiniteParameterProducts
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryTraceOperations
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsPlaneJets
+public import ContinuousFlexibility.Analysis.N01cFiniteParameterProducts
 
 /-! # Fixed output projections of actual plane multilinear jets -/
+
+@[expose] public section
 
 noncomputable section
 

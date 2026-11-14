@@ -1,4 +1,6 @@
-import Mathlib.Analysis.Calculus.ContDiff.Comp
+module
+
+public import Mathlib.Analysis.Calculus.ContDiff.Comp
 
 /-!
 # Finite ordinary jets under actual smooth operations
@@ -8,6 +10,8 @@ functions. Common smooth composition, pairing, and differentiation
 preserve the appropriate finite order without a common infinite-order
 neighborhood assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

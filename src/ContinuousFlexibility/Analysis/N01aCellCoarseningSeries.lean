@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01aCellCoarsening
-import Mathlib.Topology.Algebra.InfiniteSum.Real
-import Mathlib.Topology.Algebra.InfiniteSum.Ring
+module
+
+public import ContinuousFlexibility.Analysis.N01aCellCoarsening
+public import Mathlib.Topology.Algebra.InfiniteSum.Real
+public import Mathlib.Topology.Algebra.InfiniteSum.Ring
 
 /-!
 # Weighted square sums under finite-fiber coarsening
@@ -9,6 +11,8 @@ Weights are constant on each fiber. The actual coarse square integrals are
 summable exactly when the fine weighted integrals are summable, and their
 sums are comparable with constants one and the original overlap number.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SmoothCompactL2Density
-import ContinuousFlexibility.Radial.ReferenceSmoothSources
-import ContinuousFlexibility.Radial.ReferenceWeightedRadialBase
+module
+
+public import ContinuousFlexibility.Analysis.SmoothCompactL2Density
+public import ContinuousFlexibility.Radial.ReferenceSmoothSources
+public import ContinuousFlexibility.Radial.ReferenceWeightedRadialBase
 
 /-!
 # Local finiteness of the reference weighted measure
@@ -11,6 +13,8 @@ The proof uses the actual compact local finiteness of the cell family.
 The radial measure used below is the marginal of the existing weighted
 physical measure, so no alternate weighted-space representation is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

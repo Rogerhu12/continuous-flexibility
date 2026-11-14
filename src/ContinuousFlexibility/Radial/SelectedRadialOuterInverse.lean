@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.SelectedWholeWeakInverse
-import ContinuousFlexibility.Radial.ModeWeakLinearity
-import ContinuousFlexibility.Analysis.L2RestrictionSplit
+module
+
+public import ContinuousFlexibility.Radial.SelectedWholeWeakInverse
+public import ContinuousFlexibility.Radial.ModeWeakLinearity
+public import ContinuousFlexibility.Analysis.L2RestrictionSplit
 
 /-!
 # The constructed exterior inverse in the original radial coordinate
@@ -9,6 +11,8 @@ Reflection is applied simultaneously to the actual measure, operator,
 test function and Jacobi test source. The resulting bounded operator on
 the radial tail has the full ordinary-support weak pairing.
 -/
+
+@[expose] public section
 
 noncomputable section
 

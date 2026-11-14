@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsMixedAffine
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledMovingWords
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsMixedAffine
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledMovingWords
 
 /-!
 # Actual inverse words on the original seminorm boxes
@@ -9,6 +11,8 @@ the prescribed directions costs only a constant depending on their
 number. The inverse equation and the true spatial inverse differential
 are the sole inverse inputs; every quantitative jet premise is forward.
 -/
+
+@[expose] public section
 
 noncomputable section
 

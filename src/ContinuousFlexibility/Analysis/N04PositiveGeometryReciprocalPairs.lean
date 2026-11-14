@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryAtomPairInputs
-import ContinuousFlexibility.Analysis.N04PositiveGeometryPairCurrentData
-import ContinuousFlexibility.Analysis.N04PrincipalPairNeighborhood
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryAtomPairInputs
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryPairCurrentData
+public import ContinuousFlexibility.Analysis.N04PrincipalPairNeighborhood
 
 /-!
 # Height and Jacobian reciprocals on one neighborhood
@@ -10,6 +12,8 @@ paired denominator estimate therefore selects a common smaller
 neighborhood before all orders of its reciprocal. Both denominators are
 strictly positive by the actual positive range geometry.
 -/
+
+@[expose] public section
 
 noncomputable section
 

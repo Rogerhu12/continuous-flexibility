@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SourceMixedOrderInterpolation
+module
+
+public import ContinuousFlexibility.Analysis.SourceMixedOrderInterpolation
 
 /-!
 # A fixed budget for products of diagonal mixed-jet bounds
@@ -8,6 +10,8 @@ grading. The low order and the derivative loss are chosen before the
 low-ball radius and the spatial order. This is the scalar estimate used
 in the three-index Leibniz formula at fixed parameter order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

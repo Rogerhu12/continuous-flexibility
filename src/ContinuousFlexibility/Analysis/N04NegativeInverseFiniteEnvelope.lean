@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04NegativeInverseJetEnvelope
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeInverseJetEnvelope
 
 /-!
 # Finite composition coefficients in one material envelope
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Analysis.N04NegativeInverseJetEnvelope
 Every constant in this module is chosen before the material sample and
 before the derivative order inside the requested finite prefix.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import Mathlib.Analysis.Calculus.IteratedDeriv.FaaDiBruno
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
-import Mathlib.Tactic.FieldSimp
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Analysis.Calculus.IteratedDeriv.FaaDiBruno
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
 
 /-!
 # Actual inverse-lift derivative identities
@@ -11,6 +13,8 @@ The two real functions are genuine smooth inverses. Their lift law and
 derivatives below are derived from those inverse identities and the ordinary
 chain rule, with no supplied inverse-derivative or norm estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

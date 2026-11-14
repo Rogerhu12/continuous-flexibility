@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationJointExpansionBounds
-import ContinuousFlexibility.Analysis.N04RealizationMovingGraphBounds
-import ContinuousFlexibility.Analysis.N01cStateAngleGraphBudget
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationJointExpansionBounds
+public import ContinuousFlexibility.Analysis.N04RealizationMovingGraphBounds
+public import ContinuousFlexibility.Analysis.N01cStateAngleGraphBudget
 
 /-!
 # Height factors in the existing two-coordinate expansion
@@ -15,6 +17,8 @@ coefficient application its all-order loss is fixed, so this changes
 only the permitted finite-prefix constant. The inverse block orders
 are still the counts of the original parameter slots.
 -/
+
+@[expose] public section
 
 noncomputable section
 

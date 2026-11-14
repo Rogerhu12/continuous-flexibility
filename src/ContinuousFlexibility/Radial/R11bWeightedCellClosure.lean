@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.R11bBoundedMultiplierLimit
-import ContinuousFlexibility.Radial.ProfilePartitionBounds
-import ContinuousFlexibility.Radial.R11bPhysicalPairing
-import ContinuousFlexibility.Radial.R11bWeightEmbedding
-import Mathlib.Topology.Algebra.InfiniteSum.Real
+module
+
+public import ContinuousFlexibility.Radial.R11bBoundedMultiplierLimit
+public import ContinuousFlexibility.Radial.ProfilePartitionBounds
+public import ContinuousFlexibility.Radial.R11bPhysicalPairing
+public import ContinuousFlexibility.Radial.R11bWeightEmbedding
+public import Mathlib.Topology.Algebra.InfiniteSum.Real
 
 /-!
 # Weighted cell square bounds are closed under physical L² limits
@@ -11,6 +13,8 @@ Each radial localizer is bounded by one. Its square integral is therefore
 continuous in physical L². Finite cell sums pass to the limit, and their
 uniform bound yields the complete summable weighted series.
 -/
+
+@[expose] public section
 
 noncomputable section
 

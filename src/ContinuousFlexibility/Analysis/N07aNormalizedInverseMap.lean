@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aNormalizedInverseCore
+module
+
+public import ContinuousFlexibility.Analysis.N07aNormalizedInverseCore
 
 /-!
 # Smooth tame inversion on the actual normalized height space
@@ -8,6 +10,8 @@ remain explicit: the forward family, both inverse identities, joint
 continuity, and a fixed-loss linear-family estimate. This module supplies
 the smooth-tame bridge, not those analytic estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

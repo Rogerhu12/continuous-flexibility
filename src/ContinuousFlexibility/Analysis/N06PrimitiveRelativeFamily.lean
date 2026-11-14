@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06PrimitiveJetRescaling
-import ContinuousFlexibility.Analysis.N06OperatorExtension
+module
+
+public import ContinuousFlexibility.Analysis.N06PrimitiveJetRescaling
+public import ContinuousFlexibility.Analysis.N06OperatorExtension
 
 /-!
 # Selecting the actual relative family on the retained N05 graph
@@ -9,6 +11,8 @@ is zero elsewhere. The physical operator is the source projection plus
 that selected endomorphism. No continuity in the state is required, and
 the original N05 inverse right identity identifies its relative operator.
 -/
+
+@[expose] public section
 
 noncomputable section
 

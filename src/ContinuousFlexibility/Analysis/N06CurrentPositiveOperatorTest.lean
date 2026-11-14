@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06NegativeCurrentTestLp
-import ContinuousFlexibility.Analysis.N06PositiveCanonicalDifference
-import ContinuousFlexibility.Analysis.N06RadialCanonicalOperator
-import ContinuousFlexibility.Analysis.CanonicalCoefficientIdentities
+module
+
+public import ContinuousFlexibility.Analysis.N06NegativeCurrentTestLp
+public import ContinuousFlexibility.Analysis.N06PositiveCanonicalDifference
+public import ContinuousFlexibility.Analysis.N06RadialCanonicalOperator
+public import ContinuousFlexibility.Analysis.CanonicalCoefficientIdentities
 
 /-!
 # The actual positive operator on current physical tests
@@ -17,6 +19,8 @@ the divided coefficients need local differentiability in this intermediate
 identity; current principal differentiability follows from the same cubic
 germs and the reference coefficients.
 -/
+
+@[expose] public section
 
 noncomputable section
 

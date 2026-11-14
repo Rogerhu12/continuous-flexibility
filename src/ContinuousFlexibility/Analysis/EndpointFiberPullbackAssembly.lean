@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.EndpointFiberInterpolation
-import ContinuousFlexibility.Analysis.AngularFiberFiniteJetBounds
+module
+
+public import ContinuousFlexibility.Analysis.EndpointFiberInterpolation
+public import ContinuousFlexibility.Analysis.AngularFiberFiniteJetBounds
 
 /-!
 # Radial interpolation in the actual angular inverse coordinates
@@ -10,6 +12,8 @@ the displayed widths. A second theorem obtains that bound from the
 ordinary forward jets, uniformly before the family index.
 This is a new reconstruction after the workspace reset.
 -/
+
+@[expose] public section
 
 noncomputable section
 

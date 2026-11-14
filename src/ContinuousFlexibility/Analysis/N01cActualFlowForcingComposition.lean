@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cActualFlowForcingBounds
-import ContinuousFlexibility.Analysis.N01cActualFlowSpeedOuterBounds
-import ContinuousFlexibility.Analysis.OneHighCircleFourierComposition
+module
+
+public import ContinuousFlexibility.Analysis.N01cActualFlowForcingBounds
+public import ContinuousFlexibility.Analysis.N01cActualFlowSpeedOuterBounds
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierComposition
 
 /-!
 # Composing the actual forcing speed with the actual ordinary flow
@@ -11,6 +13,8 @@ its high norm into the high outer norm and a low outer norm times the
 actual flow derivative defect. The linear coefficient is the one-angle
 instance of the same head.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsSpatialInputs
-import ContinuousFlexibility.Analysis.SmoothDirectionsNormedComposition
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsSpatialInputs
+public import ContinuousFlexibility.Analysis.SmoothDirectionsNormedComposition
 
 /-!
 # Actual normalized root kernel terms with distributed angular powers
@@ -10,6 +12,8 @@ and the outer derivative constants come from the fixed compact packet
 ball. Thus this bound has no quantitative hypothesis about the output
 root fields or about any selected root-coordinate extension.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R07LaterSelection
+module
+
+public import ContinuousFlexibility.Radial.R07LaterSelection
 
 /-!
 # Exact assembly of the selected radial tail
@@ -11,6 +13,8 @@ The geometric record below consists exactly of the non-angle clauses in
 analytic hypothesis. Separate initial and later margins are combined by
 their positive minimum.
 -/
+
+@[expose] public section
 
 noncomputable section
 

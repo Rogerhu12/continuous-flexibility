@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerSelectedDirichletEstimates
-import ContinuousFlexibility.Radial.InnerSelectedCouplingBound
-import ContinuousFlexibility.Radial.InnerSelectedInverseConstants
+module
+
+public import ContinuousFlexibility.Radial.InnerSelectedDirichletEstimates
+public import ContinuousFlexibility.Radial.InnerSelectedCouplingBound
+public import ContinuousFlexibility.Radial.InnerSelectedInverseConstants
 
 /-!
 # Both weighted bounds for the same selected inner inverse
@@ -10,6 +12,8 @@ the actual weight. The genuine local Dirichlet bounds pay exponent
 thirty-seven; the same Poisson-adjoint correction pays no coefficient
 loss. All constants are fixed before the band, mode and weight exponent.
 -/
+
+@[expose] public section
 
 noncomputable section
 

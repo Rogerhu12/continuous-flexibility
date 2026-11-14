@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerActualModelChain
-import ContinuousFlexibility.Radial.InnerMorseAllBandsGeometry
+module
+
+public import ContinuousFlexibility.Radial.InnerActualModelChain
+public import ContinuousFlexibility.Radial.InnerMorseAllBandsGeometry
 
 /-!
 # Selecting the actual central model and the two physical tail arrays
@@ -9,6 +11,8 @@ domain. Its central and tail values are exact, including the first band
 with no tail slots. Properties therefore pass from the same local models
 to the assembled array without choosing new witnesses.
 -/
+
+@[expose] public section
 
 noncomputable section
 

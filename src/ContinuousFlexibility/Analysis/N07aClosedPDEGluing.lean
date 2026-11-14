@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aClosedNormalTransmission
-import ContinuousFlexibility.Analysis.N07aClosedSmoothGluing
+module
+
+public import ContinuousFlexibility.Analysis.N07aClosedNormalTransmission
+public import ContinuousFlexibility.Analysis.N07aClosedSmoothGluing
 
 /-!
 # Smooth local gluing from the common noncharacteristic equation
@@ -8,6 +10,8 @@ The transmission theorem determines the genuine closed jets. Restriction
 to an open angular interval preserves these derivatives by uniqueness,
 so the two closed radial halves glue smoothly on the entire open rectangle.
 -/
+
+@[expose] public section
 
 noncomputable section
 

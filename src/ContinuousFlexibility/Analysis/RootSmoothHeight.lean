@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RootAngularProduct
-import ContinuousFlexibility.Analysis.CharacteristicRootDensity
+module
+
+public import ContinuousFlexibility.Analysis.RootAngularProduct
+public import ContinuousFlexibility.Analysis.CharacteristicRootDensity
 
 /-!
 # A genuine smooth height through the root
@@ -11,6 +13,8 @@ Jacobian is smooth and positive at the boundary. Their quotient
 therefore defines a positive smooth height through the root and agrees
 with the interior characteristic normalization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

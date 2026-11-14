@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.CentralCompactColumn
-import ContinuousFlexibility.Radial.CentralColumnInverse
+module
+
+public import ContinuousFlexibility.Radial.CentralCompactColumn
+public import ContinuousFlexibility.Radial.CentralColumnInverse
 
 /-!
 # The physical central inverse with an actual compact column
@@ -10,6 +12,8 @@ is proved with the actual density and the original kernel normalization.
 The inverse is an isometric conjugate of `centralColumnInverse`; its graph
 is the pre-existing physical distributional equation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

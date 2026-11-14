@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05TwoWeightBlocks
+module
+
+public import ContinuousFlexibility.Analysis.N05TwoWeightBlocks
 
 /-!
 # The same two physical endpoint bounds control every inner exponent
@@ -8,6 +10,8 @@ physical endpoint bounds. Moving the conjugating exponent away from their
 midpoint consumes only the corresponding part of the off-diagonal decay.
 The physical inverse and its two endpoint estimates stay fixed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CompactEvenHeightTests
-import ContinuousFlexibility.Geometry.RotatedCoframe
+module
+
+public import ContinuousFlexibility.Analysis.CompactEvenHeightTests
+public import ContinuousFlexibility.Geometry.RotatedCoframe
 
 /-!
 # Actual even periodic coefficient probes
@@ -10,6 +12,8 @@ of the cosine test are actual height fields with zero endpoint constant.
 On the open region where the cutoff is one their actual partials are the
 coordinate partials needed to recover the mixed and angular coefficients.
 -/
+
+@[expose] public section
 
 noncomputable section
 

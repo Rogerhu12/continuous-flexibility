@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04bRootGermCollar
-import ContinuousFlexibility.Analysis.N01CommonRootCharacteristicStrip
-import ContinuousFlexibility.Analysis.N04bOpticalCoefficientVariation
+module
+
+public import ContinuousFlexibility.Analysis.N04bRootGermCollar
+public import ContinuousFlexibility.Analysis.N01CommonRootCharacteristicStrip
+public import ContinuousFlexibility.Analysis.N04bOpticalCoefficientVariation
 
 /-!
 # Actual corrected characteristic factors on a root collar
@@ -11,6 +13,8 @@ transfers this factor and the drift to the corrected operator.
 All the functions below are constructed from the original height and
 profile; the corrected characteristic identities are conclusions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

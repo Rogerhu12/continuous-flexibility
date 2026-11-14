@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R11bFourierCoefficients
-import ContinuousFlexibility.Radial.R11bProductSeriesLimit
+module
+
+public import ContinuousFlexibility.Radial.R11bFourierCoefficients
+public import ContinuousFlexibility.Radial.R11bProductSeriesLimit
 
 /-!
 # Actual finite even Fourier sums, including the mean
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Radial.R11bProductSeriesLimit
 The index zero is the constant basis vector one. Every finite sum has exact
 pointwise symmetry, and its coefficients are computed by ordinary integrals.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

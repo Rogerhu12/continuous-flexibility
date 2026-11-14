@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerPhysicalFrozenGraph
-import ContinuousFlexibility.Radial.ModeInnerHilbertProjection
-import Mathlib.Data.Finset.Max
+module
+
+public import ContinuousFlexibility.Radial.InnerPhysicalFrozenGraph
+public import ContinuousFlexibility.Radial.ModeInnerHilbertProjection
+public import Mathlib.Data.Finset.Max
 
 /-!
 # The same finite physical source in frozen modal coordinates
@@ -11,6 +13,8 @@ Consequently the genuine supported Hilbert source is precisely the
 range of the concrete frozen inner indicator, with the inactive scalar
 removed in unbordered modes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

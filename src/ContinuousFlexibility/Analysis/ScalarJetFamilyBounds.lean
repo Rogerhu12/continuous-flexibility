@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ScalarInverseJetBounds
+module
+
+public import ContinuousFlexibility.Analysis.ScalarInverseJetBounds
 
 /-!
 # Algebra of uniform positive-order scalar jets
@@ -7,6 +9,8 @@ Composition of circle lifts only uses their positive-order jets.
 Their values can be unbounded. These estimates separate that distinction
 from the ordinary product estimate, which also controls order zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

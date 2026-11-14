@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.BufferedRadialAuxiliaryColumn
+module
+
+public import ContinuousFlexibility.Analysis.BufferedRadialAuxiliaryColumn
 
 /-!
 # Retaining the actual auxiliary column's single-component support
@@ -8,6 +10,8 @@ encoded in the unchanged height space.  The same column then supplies
 the replacement spaces, their true Q normalization, and every support
 statement.  No new choice is made after passing to the replacement data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

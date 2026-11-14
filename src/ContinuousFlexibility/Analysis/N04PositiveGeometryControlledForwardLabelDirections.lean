@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRootLabelDirections
-import ContinuousFlexibility.Analysis.N04RealizationRootBoundaryDirections
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRootLabelDirections
+public import ContinuousFlexibility.Analysis.N04RealizationRootBoundaryDirections
 
 /-!
 # The actual forward root-label slope
@@ -8,6 +10,8 @@ Stored root-coordinate recursions use the forward label. Its circle is
 the original chart coordinate at the left root and the odd actual return
 transport at the right root. Both circles retain a common low order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

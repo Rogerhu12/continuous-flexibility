@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04FlowQualitative
-import ContinuousFlexibility.Analysis.ParametricSpatialClosedJets
+module
+
+public import ContinuousFlexibility.Analysis.N04FlowQualitative
+public import ContinuousFlexibility.Analysis.ParametricSpatialClosedJets
 
 /-!
 # Integral equations for every actual mixed spatial flow jet
@@ -10,6 +12,8 @@ of every spatial jet of the composed field. Differentiating the actual
 value integral by the compact-integral theorem therefore gives the
 integral equation at every order, without a supplied flow-jet tower.
 -/
+
+@[expose] public section
 
 noncomputable section
 

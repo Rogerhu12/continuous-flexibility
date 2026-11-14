@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionErrorSupport
-import ContinuousFlexibility.Analysis.ReturnCorrectionVelocityRegularity
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionErrorSupport
+public import ContinuousFlexibility.Analysis.ReturnCorrectionVelocityRegularity
 
 /-!
 # Regularity of the actual frozen coefficient error
@@ -14,6 +16,8 @@ Away from those collars the actual coefficient map is identically zero
 on a neighborhood. Thus no regularity of a square root at a turning point
 is assumed, and the global selector introduces no interface term.
 -/
+
+@[expose] public section
 
 noncomputable section
 

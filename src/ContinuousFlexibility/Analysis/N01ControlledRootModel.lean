@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N01ControlledRootInput
-import ContinuousFlexibility.Analysis.N01DividedRootBand
-import ContinuousFlexibility.Analysis.RootInputOrdinaryJets
-import ContinuousFlexibility.Analysis.RootOddUniformValueInterval
-import ContinuousFlexibility.Analysis.RootDividedModelMaterialJets
-import ContinuousFlexibility.Analysis.RootScaledJacobianClosedBand
+module
+
+public import ContinuousFlexibility.Analysis.N01ControlledRootInput
+public import ContinuousFlexibility.Analysis.N01DividedRootBand
+public import ContinuousFlexibility.Analysis.RootInputOrdinaryJets
+public import ContinuousFlexibility.Analysis.RootOddUniformValueInterval
+public import ContinuousFlexibility.Analysis.RootDividedModelMaterialJets
+public import ContinuousFlexibility.Analysis.RootScaledJacobianClosedBand
 
 /-!
 # The actual controlled root model on a uniform closed band
@@ -15,6 +17,8 @@ common neighborhood and derivative loss control the resulting chart,
 Jacobian, height and inverse height, with a genuine numerical Jacobian
 lower bound throughout the closed band.
 -/
+
+@[expose] public section
 
 noncomputable section
 

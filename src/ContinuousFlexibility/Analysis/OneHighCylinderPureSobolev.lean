@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderPureFourierJets
-import ContinuousFlexibility.Analysis.OneHighL2Domination
-import Mathlib.Tactic.FinCases
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderPureFourierJets
+public import ContinuousFlexibility.Analysis.OneHighL2Domination
+public import Mathlib.Tactic.FinCases
 
 /-!
 # Sobolev control by the two pure endpoint derivatives
@@ -10,6 +12,8 @@ Only their physical L2 membership through the finite order s is needed.
 The weighted frequency membership of the output is proved before taking
 its real norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

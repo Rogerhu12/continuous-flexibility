@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ProjectiveNewtonTameBounds
+module
+
+public import ContinuousFlexibility.Analysis.ProjectiveNewtonTameBounds
 
 /-!
 # Smoothing bounds for the actual Newton update
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Analysis.ProjectiveNewtonTameBounds
 One smoothing family controls the increment and its smoothing defect at two
 grades. The estimates retain the fixed smoothing loss and the real parameter.
 -/
+
+@[expose] public section
 
 noncomputable section
 

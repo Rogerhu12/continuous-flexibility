@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
-import Mathlib.Dynamics.Ergodic.MeasurePreserving
-import Mathlib.MeasureTheory.Function.L2Space
-import Mathlib.MeasureTheory.Function.LpSeminorm.Indicator
+module
+
+public import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
+public import Mathlib.Dynamics.Ergodic.MeasurePreserving
+public import Mathlib.MeasureTheory.Function.L2Space
+public import Mathlib.MeasureTheory.Function.LpSeminorm.Indicator
 
 /-!
 # Tests and closed weak differentiation on the material cylinder
@@ -11,6 +13,8 @@ the radial support bound. The integral identities defining weak mixed
 derivatives are kernels of continuous linear functionals on the actual
 pair of cylinder `L²` spaces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

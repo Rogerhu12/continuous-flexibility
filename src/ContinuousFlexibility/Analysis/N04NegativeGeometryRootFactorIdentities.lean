@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometryNormalizedFactorBounds
-import ContinuousFlexibility.Analysis.N04NegativeGeometryRootCollarTowers
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryNormalizedFactorBounds
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryRootCollarTowers
 
 /-!
 # The bounded normalized factors are the actual root coefficients
@@ -9,6 +11,8 @@ On a common profile locus its second factor is the actual physical speed
 ratio. These are pointwise identities of the unchanged fields, and hence
 identify their genuine mixed towers on every open subdomain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

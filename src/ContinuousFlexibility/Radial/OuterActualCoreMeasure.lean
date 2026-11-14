@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OuterTransitionCoordinates
+module
+
+public import ContinuousFlexibility.Radial.OuterTransitionCoordinates
 
 /-!
 # The actual core Hilbert mass in the whole outward measure
@@ -7,6 +9,8 @@ The closed outward core pulls back to a half-open radial interval.
 The endpoint convention is immaterial to the Lebesgue density integral,
 and the resulting mass is exactly the one in the existing Morse bounds.
 -/
+
+@[expose] public section
 
 noncomputable section
 

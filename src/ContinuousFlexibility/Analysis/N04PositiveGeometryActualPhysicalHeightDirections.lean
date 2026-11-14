@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryActualHeightDirections
-import ContinuousFlexibility.Analysis.N04PositiveGeometryGaugeDirections
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryActualHeightDirections
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryGaugeDirections
 
 /-!
 # Genuine towers of the physical reference height
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Analysis.N04PositiveGeometryGaugeDirections
 The numerator and denominator are evaluated at the actual inverse
 transport. The subsequent unit pullback uses the physical endpoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

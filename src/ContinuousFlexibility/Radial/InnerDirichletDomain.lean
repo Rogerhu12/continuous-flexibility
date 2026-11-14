@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.InnerDirichletCutoff
-import ContinuousFlexibility.Statements.RadialTargets
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
-import Mathlib.MeasureTheory.Measure.OpenPos
+module
+
+public import ContinuousFlexibility.Radial.InnerDirichletCutoff
+public import ContinuousFlexibility.Statements.RadialTargets
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
+public import Mathlib.MeasureTheory.Measure.OpenPos
 
 /-!
 # The actual finite-interval Dirichlet energy domain
@@ -11,6 +13,8 @@ three energy coordinates by supported smooth fields.  The endpoints are not
 required to have zero derivatives.  All fields below are genuine Lebesgue
 `L²` classes, and the closure is the frozen `IntervalEnergyCore` closure.
 -/
+
+@[expose] public section
 
 noncomputable section
 

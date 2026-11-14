@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationHeightGraphComposition
-import ContinuousFlexibility.Analysis.N04RealizationJointMixedRegularity
-import ContinuousFlexibility.Analysis.N04RealizationMixedSlotBudget
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationHeightGraphComposition
+public import ContinuousFlexibility.Analysis.N04RealizationJointMixedRegularity
+public import ContinuousFlexibility.Analysis.N04RealizationMixedSlotBudget
 
 /-!
 # Actual mixed jets after evaluation at the moving physical point
@@ -10,6 +12,8 @@ Only its original parameter slots enter the inverse-point parameter
 budget. The physical height estimate is used once in every partition
 term, so its complete height factor is retained in the coefficient C.
 -/
+
+@[expose] public section
 
 noncomputable section
 

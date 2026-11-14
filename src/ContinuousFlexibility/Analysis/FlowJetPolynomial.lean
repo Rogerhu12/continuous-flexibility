@@ -1,8 +1,10 @@
-import Mathlib.Algebra.BigOperators.Group.List.Basic
-import Mathlib.Algebra.Order.BigOperators.Group.List
-import Mathlib.Data.Real.Basic
-import Mathlib.Tactic.Positivity
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Algebra.BigOperators.Group.List.Basic
+public import Mathlib.Algebra.Order.BigOperators.Group.List
+public import Mathlib.Data.Real.Basic
+public import Mathlib.Tactic.Positivity
+public import Mathlib.Tactic.Ring
 
 /-!
 # Finite nonnegative majorants with spatial derivative weights
@@ -13,6 +15,8 @@ This records the exact weight of each original factor before applying
 state interpolation, so derivative losses are not multiplied during
 the flow induction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

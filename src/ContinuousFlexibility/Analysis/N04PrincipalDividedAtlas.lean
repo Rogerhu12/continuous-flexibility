@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N04PrincipalDividedData
-import ContinuousFlexibility.Analysis.N04PrincipalDividedActualReferenceGaugeEndpointJets
-import ContinuousFlexibility.Analysis.N04PrincipalDividedRadialGaugePrincipalDifferenceExtension
-import ContinuousFlexibility.Analysis.N04PrincipalPositiveIndex
-import ContinuousFlexibility.Analysis.N04RealizationActualCubicFactor
-import ContinuousFlexibility.Analysis.CanonicalReferenceDividedJets
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalDividedData
+public import ContinuousFlexibility.Analysis.N04PrincipalDividedActualReferenceGaugeEndpointJets
+public import ContinuousFlexibility.Analysis.N04PrincipalDividedRadialGaugePrincipalDifferenceExtension
+public import ContinuousFlexibility.Analysis.N04PrincipalPositiveIndex
+public import ContinuousFlexibility.Analysis.N04RealizationActualCubicFactor
+public import ContinuousFlexibility.Analysis.CanonicalReferenceDividedJets
 
 /-!
 # Divided atoms of the supplied reference-gauged atlas
@@ -14,6 +16,8 @@ reference gauge transports these jets and supplies a smooth representative
 on the closed unit cylinder. The current-data division theorem then applies
 to the stored quotient; the negative and reference atoms are zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

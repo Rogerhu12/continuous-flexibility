@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CanonicalDensityExtension
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalDensityExtension
 
 /-!
 # Subtracting the two actual canonical endpoint extensions
@@ -8,6 +10,8 @@ angles. Once their genuine local extensions are centered at the same
 canonical point, the common normal form cancels. Only finite vanishing
 orders are needed, and smoothness is retained on the smaller actual ball.
 -/
+
+@[expose] public section
 
 noncomputable section
 

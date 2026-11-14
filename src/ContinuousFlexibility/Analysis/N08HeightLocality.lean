@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N08FlowLocality
+module
+
+public import ContinuousFlexibility.Analysis.N08FlowLocality
 
 /-!
 # Local height rescaling preserves the actual return map
@@ -10,6 +12,8 @@ agree locally up to a constant. This includes the constant endpoint-height
 coordinate and permits a compactly supported rescaling of the decaying
 height coordinate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Geometry.SphereCurvature
-import Mathlib.Analysis.InnerProductSpace.Projection.FiniteDimensional
+module
+
+public import ContinuousFlexibility.Geometry.SphereCurvature
+public import Mathlib.Analysis.InnerProductSpace.Projection.FiniteDimensional
 
 /-!
 # Curvature transport from actual sphere image congruence
@@ -11,6 +13,8 @@ reparameterization. The two actual unit normals differ by a sign, as proved from
 the dimension of the orthogonal complement of the actual surface differential.
 Gaussian curvature therefore transports without an outward-orientation premise.
 -/
+
+@[expose] public section
 
 noncomputable section
 

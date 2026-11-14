@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cStateSeminorms
-import ContinuousFlexibility.Analysis.N01cAssembly
+module
+
+public import ContinuousFlexibility.Analysis.N01cStateSeminorms
+public import ContinuousFlexibility.Analysis.N01cAssembly
 
 /-!
 # Restriction of the N01 estimates to one common neighbourhood
@@ -14,6 +16,8 @@ The final assembly puts independently obtained geometric, coefficient and
 flow estimates on their common neighbourhood.  It does not assert any of the
 analytic estimates that are the open N01c tasks.
 -/
+
+@[expose] public section
 
 noncomputable section
 

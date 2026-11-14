@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04bActualAtlasCuts
-import ContinuousFlexibility.Analysis.CanonicalRootTransportBoundary
-import ContinuousFlexibility.Analysis.N01RootLabels
-import ContinuousFlexibility.Analysis.N04bReferenceCorrection
+module
+
+public import ContinuousFlexibility.Analysis.N04bActualAtlasCuts
+public import ContinuousFlexibility.Analysis.CanonicalRootTransportBoundary
+public import ContinuousFlexibility.Analysis.N01RootLabels
+public import ContinuousFlexibility.Analysis.N04bReferenceCorrection
 
 /-!
 # The actual inverse point on a physical root circle
@@ -11,6 +13,8 @@ label. Its closed inverse is consequently the inverse of that same
 label, with the physical radius fixed. At the reference state the label
 is the identity, by the proved N01 reference-flow formulas.
 -/
+
+@[expose] public section
 
 noncomputable section
 

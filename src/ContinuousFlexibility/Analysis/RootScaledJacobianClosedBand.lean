@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.RootScaledJacobianBounds
-import ContinuousFlexibility.Analysis.RootChartExtensionGeometry
-import ContinuousFlexibility.Geometry.EuclideanRigidity
+module
+
+public import ContinuousFlexibility.Analysis.RootScaledJacobianBounds
+public import ContinuousFlexibility.Analysis.RootChartExtensionGeometry
+public import ContinuousFlexibility.Geometry.EuclideanRigidity
 
 /-!
 # The genuine root Jacobian lower bound includes the root
@@ -9,6 +11,8 @@ The known interior formula gives one lower bound on the open band.
 Ordinary smoothness of the same extended chart at each closed-band
 point extends that bound to both edges, without changing its constant.
 -/
+
+@[expose] public section
 
 noncomputable section
 

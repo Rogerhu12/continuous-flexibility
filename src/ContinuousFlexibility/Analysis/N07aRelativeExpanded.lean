@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06PrincipalJetAlgebra
-import ContinuousFlexibility.Analysis.N07aOpenDivergenceExpansion
-import ContinuousFlexibility.Analysis.N07aRelativeCanonicalPairing
-import ContinuousFlexibility.Analysis.N07aReferenceSecondNormal
+module
+
+public import ContinuousFlexibility.Analysis.N06PrincipalJetAlgebra
+public import ContinuousFlexibility.Analysis.N07aOpenDivergenceExpansion
+public import ContinuousFlexibility.Analysis.N07aRelativeCanonicalPairing
+public import ContinuousFlexibility.Analysis.N07aReferenceSecondNormal
 
 /-!
 # The original relative operator is the actual weak jet expression
@@ -10,6 +12,8 @@ This identifies the local L² representative of `P.relative` using its
 already proved physical/canonical pairing. The same reference inverse
 and its original weak jets occur in every term.
 -/
+
+@[expose] public section
 
 noncomputable section
 

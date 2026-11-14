@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06WeakModeRegularity
-import Mathlib.MeasureTheory.Function.LpSeminorm.LpNorm
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.AbsolutelyContinuousFun
+module
+
+public import ContinuousFlexibility.Analysis.N06WeakModeRegularity
+public import Mathlib.MeasureTheory.Function.LpSeminorm.LpNorm
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.AbsolutelyContinuousFun
 
 /-!
 # L2 stability of primitives on the unit interval
@@ -9,6 +11,8 @@ The integral primitive takes an L2 error to a uniformly bounded error with
 the same bound on `[0,1]`. Applied successively to the first and second
 derivatives, this gives a smooth approximation without endpoint conditions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

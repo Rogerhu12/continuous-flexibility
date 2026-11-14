@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PrincipalPositiveGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalPositiveGeometry
 
 /-!
 # The fixed unit interval of every positive whole piece
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Analysis.N04PrincipalPositiveGeometry
 These are the actual stored endpoints, before any principal estimate.
 The shared index lemmas are used by both the principal and divided fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 

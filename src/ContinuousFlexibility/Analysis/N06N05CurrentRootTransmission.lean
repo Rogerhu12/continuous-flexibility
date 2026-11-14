@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06N05LocalModalTraces
-import ContinuousFlexibility.Analysis.N06PositiveRootFirstJets
-import ContinuousFlexibility.Analysis.N06ReferenceRootTransmission
-import ContinuousFlexibility.Radial.R11bFiniteSynthesis
+module
+
+public import ContinuousFlexibility.Analysis.N06N05LocalModalTraces
+public import ContinuousFlexibility.Analysis.N06PositiveRootFirstJets
+public import ContinuousFlexibility.Analysis.N06ReferenceRootTransmission
+public import ContinuousFlexibility.Radial.R11bFiniteSynthesis
 
 /-!
 # Current root transmission of modes from the same original N05 graph
@@ -18,6 +20,8 @@ and positive-interpolation constructors. Their realization by the chosen
 assert that every possible atlas has these germs. This finite-synthesis
 identity also does not assert convergence of the full boundary trace.
 -/
+
+@[expose] public section
 
 noncomputable section
 

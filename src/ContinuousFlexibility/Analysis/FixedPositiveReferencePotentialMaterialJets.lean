@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.RadialReferencePotentialJetEnvelope
-import Mathlib.Topology.Order.Compact
-import Mathlib.Analysis.SpecialFunctions.Pow.Real
+module
+
+public import ContinuousFlexibility.Analysis.RadialReferencePotentialJetEnvelope
+public import Mathlib.Topology.Order.Compact
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 
 /-!
 # Potential bounds for an already chosen positive reference family
@@ -10,6 +12,8 @@ inverse of that coordinate. Only numerical bounds are chosen here. Thus
 the principal and potential estimates can use one common construction,
 including its original low envelope, width, cell and sampling point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

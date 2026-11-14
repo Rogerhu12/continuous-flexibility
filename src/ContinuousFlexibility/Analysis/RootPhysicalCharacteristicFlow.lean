@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.RootFlowSymmetry
-import Mathlib.Analysis.Real.Sqrt
-import Mathlib.Analysis.SpecialFunctions.Pow.Real
-import Mathlib.Analysis.Calculus.Deriv.Comp
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Ring
+module
+
+public import ContinuousFlexibility.Analysis.RootFlowSymmetry
+public import Mathlib.Analysis.Real.Sqrt
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
+public import Mathlib.Analysis.Calculus.Deriv.Comp
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
 
 /-!
 # Ordinary physical characteristics behind the regularized root flow
@@ -16,6 +18,8 @@ its genuine closed-interval ODE to the displayed regularized root ODE
 at the parameter ζ = σ x^(3/2), including t = 0. Uniqueness identifies
 the time-one maps without assuming their differential equation in x.
 -/
+
+@[expose] public section
 
 noncomputable section
 

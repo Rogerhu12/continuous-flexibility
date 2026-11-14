@@ -1,6 +1,8 @@
-import Mathlib.Data.Set.Card
-import Mathlib.Data.Nat.Find
-import Mathlib.Order.Monotone.Basic
+module
+
+public import Mathlib.Data.Set.Card
+public import Mathlib.Data.Nat.Find
+public import Mathlib.Order.Monotone.Basic
 
 /-!
 # Enumerating an infinite family in increasing weight
@@ -10,6 +12,8 @@ prefix. Finite sublevel sets make the resulting injection surjective.
 A lower bound on the number of low-weight points becomes an upper bound
 on the weight of each enumerated point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

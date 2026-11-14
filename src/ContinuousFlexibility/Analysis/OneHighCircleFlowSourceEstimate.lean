@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFourierComposition
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierComposition
 
 /-!
 # Tame bound for the actual differentiated composed speed
@@ -9,6 +11,8 @@ estimate then give the exact linear dependence on the high defect norm
 needed in the flow argument. The constant uses only the prescribed low
 circle geometry, and is uniform in both functions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

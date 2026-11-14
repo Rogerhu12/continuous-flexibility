@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCircleRealSobolev
-import ContinuousFlexibility.Analysis.OneHighL2Domination
-import Mathlib.Algebra.BigOperators.Ring.Finset
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleRealSobolev
+public import ContinuousFlexibility.Analysis.OneHighL2Domination
+public import Mathlib.Algebra.BigOperators.Ring.Finset
 
 /-!
 # Actual component derivatives for multivariable composition
@@ -9,6 +11,8 @@ The joint input uses the usual finite-product norm. Its component functions
 use exactly the existing physical Fourier norms. The finite sums below make
 the dependence on the number of input functions explicit.
 -/
+
+@[expose] public section
 
 noncomputable section
 

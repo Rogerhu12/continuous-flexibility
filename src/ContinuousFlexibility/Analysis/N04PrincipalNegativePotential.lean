@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04PrincipalNegativeJets
-import ContinuousFlexibility.Analysis.N04RealizationPotentialIdentity
-import ContinuousFlexibility.Analysis.N07aCanonicalDifference
-import ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient
-import ContinuousFlexibility.Analysis.N07aLocalPullbackEquation
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalNegativeJets
+public import ContinuousFlexibility.Analysis.N04RealizationPotentialIdentity
+public import ContinuousFlexibility.Analysis.N07aCanonicalDifference
+public import ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient
+public import ContinuousFlexibility.Analysis.N07aLocalPullbackEquation
 
 /-!
 # The negative potential in the canonical unit variable
@@ -13,6 +15,8 @@ pulled height, its reciprocal, and two spatial derivatives.  The affine
 length factor is retained explicitly, so both negative halves use one
 formula without a change of representation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Scalar.HeightDerivatives
-import Mathlib.Analysis.Calculus.ContDiff.Bounds
-import Mathlib.Data.Nat.Choose.Sum
-import Mathlib.Tactic.NormNum
+module
+
+public import ContinuousFlexibility.Scalar.HeightDerivatives
+public import Mathlib.Analysis.Calculus.ContDiff.Bounds
+public import Mathlib.Data.Nat.Choose.Sum
+public import Mathlib.Tactic.NormNum
 
 /-!
 # Finite jet algebra for actual scalar coefficients
@@ -11,6 +13,8 @@ constant can nevertheless be chosen once for any larger fixed order b.
 Coordinate differentiation is treated through one common fixed-direction
 estimate, without introducing a second representation of the derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

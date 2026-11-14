@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N05CanonicalZeroExtension
-import ContinuousFlexibility.Analysis.IntervalLayerCutoff
-import ContinuousFlexibility.Analysis.SpacesLpCurveDerivative
-import Mathlib.Analysis.SpecificLimits.Basic
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalZeroExtension
+public import ContinuousFlexibility.Analysis.IntervalLayerCutoff
+public import ContinuousFlexibility.Analysis.SpacesLpCurveDerivative
+public import Mathlib.Analysis.SpecificLimits.Basic
 
 /-!
 # Compact radial cutoff approximation on a canonical cell
@@ -12,6 +14,8 @@ interior point. Multiplication by them converges strongly on the actual
 canonical L² space. The same cutoff preserves every angular weak
 derivative pair.
 -/
+
+@[expose] public section
 
 noncomputable section
 

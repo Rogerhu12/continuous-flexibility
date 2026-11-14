@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.WeightedMaterialRadiusJets
-import ContinuousFlexibility.Scalar.WeightedNormalizedMaterialJets
-import Mathlib.Analysis.Calculus.IteratedDeriv.FaaDiBruno
+module
+
+public import ContinuousFlexibility.Scalar.WeightedMaterialRadiusJets
+public import ContinuousFlexibility.Scalar.WeightedNormalizedMaterialJets
+public import Mathlib.Analysis.Calculus.IteratedDeriv.FaaDiBruno
 
 /-!
 # Finite formulas for the actual material-coordinate jets
@@ -10,6 +12,8 @@ combination of ordinary physical jets. Its coefficients depend only on
 the fixed radius map. They are smooth and globally bounded, before any
 state or parameter variation is chosen.
 -/
+
+@[expose] public section
 
 noncomputable section
 

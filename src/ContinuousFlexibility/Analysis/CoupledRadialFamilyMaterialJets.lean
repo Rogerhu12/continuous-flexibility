@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CoupledPositiveWeightBounds
-import ContinuousFlexibility.Scalar.WeightedWeightShiftJets
+module
+
+public import ContinuousFlexibility.Analysis.CoupledPositiveWeightBounds
+public import ContinuousFlexibility.Scalar.WeightedWeightShiftJets
 
 /-!
 # Material jets of radial families with a fixed grading loss
@@ -9,6 +11,8 @@ radius and the height normalization. The source majorants may grow with
 the derivative order; only monotonicity is used, so this applies directly
 to the actual state grading.
 -/
+
+@[expose] public section
 
 noncomputable section
 

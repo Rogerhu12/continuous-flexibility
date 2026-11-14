@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchedModeWeightedCells
-import ContinuousFlexibility.Radial.MatchingGraphRestrictions
+module
+
+public import ContinuousFlexibility.Radial.MatchedModeWeightedCells
+public import ContinuousFlexibility.Radial.MatchingGraphRestrictions
 
 /-!
 # Cell decay from actual supported weighted columns
@@ -9,6 +11,8 @@ inner region. Only their values where an actual localizer is nonzero and the
 original vector is supported enter the estimate. Null cut endpoints are
 allowed. The scalar channel still has weight one and level zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

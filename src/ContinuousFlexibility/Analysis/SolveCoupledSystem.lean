@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.SolveKernelApplication
-import ContinuousFlexibility.Analysis.SolveNormalization
-import ContinuousFlexibility.Analysis.SolveStateSpaces
-import ContinuousFlexibility.Analysis.SolveResidualSpaces
-import ContinuousFlexibility.Analysis.SolveReturnEquations
+module
+
+public import ContinuousFlexibility.Analysis.SolveKernelApplication
+public import ContinuousFlexibility.Analysis.SolveNormalization
+public import ContinuousFlexibility.Analysis.SolveStateSpaces
+public import ContinuousFlexibility.Analysis.SolveResidualSpaces
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # Applying the quadratic-error iteration to the coupled annular system
@@ -12,6 +14,8 @@ directions. This module supplies the actual integral row, its normalized
 reference direction, and the tangency of the actual coupled inverse. All
 residual, inverse, and quadratic-error data are the same data supplied by N10.
 -/
+
+@[expose] public section
 
 noncomputable section
 

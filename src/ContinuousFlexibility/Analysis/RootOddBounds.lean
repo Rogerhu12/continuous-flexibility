@@ -1,11 +1,13 @@
-import ContinuousFlexibility.Analysis.RootCompositionIntegral
-import ContinuousFlexibility.Statements.Nonlinear
-import Mathlib.Analysis.Calculus.ContDiff.Operations
-import Mathlib.Analysis.Calculus.Deriv.Prod
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.NormNum
-import Mathlib.Tactic.Ring
+module
+
+public import ContinuousFlexibility.Analysis.RootCompositionIntegral
+public import ContinuousFlexibility.Statements.Nonlinear
+public import Mathlib.Analysis.Calculus.ContDiff.Operations
+public import Mathlib.Analysis.Calculus.Deriv.Prod
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.Ring
 
 /-!
 # A smooth integral model for the odd root quotient
@@ -16,6 +18,8 @@ of a globally smooth function.  Compact-parameter integral estimates and
 the ordinary composition bounds control its jets with one input derivative
 more than the output order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

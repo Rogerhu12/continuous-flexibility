@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ReferenceCosineTestCalculus
+module
+
+public import ContinuousFlexibility.Radial.ReferenceCosineTestCalculus
 
 /-!
 # Fourier commutation for the actual two-dimensional test operator
@@ -8,6 +10,8 @@ angular second derivative to the cosine eigenfunction. Combined with
 the genuine parameter-integral radial derivatives, this proves the exact
 Jacobi equation for every test coefficient, including the zero mode.
 -/
+
+@[expose] public section
 
 noncomputable section
 

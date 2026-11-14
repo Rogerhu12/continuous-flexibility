@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05ReferenceAngularJetBasis
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceAngularJetBasis
 
 /-!
 # Dual high angular tests for all derivative orders
@@ -8,6 +10,8 @@ cosine with the exact sign and frequency power. These identities turn the
 actual weak angular relation into coefficient identities without assuming
 smoothness of the source.
 -/
+
+@[expose] public section
 
 noncomputable section
 

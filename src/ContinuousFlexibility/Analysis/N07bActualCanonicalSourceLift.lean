@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N07bCanonicalSourceLift
-import ContinuousFlexibility.Analysis.N07bCanonicalSourceJets
-import ContinuousFlexibility.Analysis.N07bCanonicalSourceWeakJets
-import ContinuousFlexibility.Analysis.MaterialHeightRegularity
-import ContinuousFlexibility.Analysis.StateKappaBounds
+module
+
+public import ContinuousFlexibility.Analysis.N07bCanonicalSourceLift
+public import ContinuousFlexibility.Analysis.N07bCanonicalSourceJets
+public import ContinuousFlexibility.Analysis.N07bCanonicalSourceWeakJets
+public import ContinuousFlexibility.Analysis.MaterialHeightRegularity
+public import ContinuousFlexibility.Analysis.StateKappaBounds
 
 /-!
 # Lifting the actual physical source into the chosen volume model
@@ -16,6 +18,8 @@ The sole additional analytic input below is summability of the displayed
 actual weighted jet energy. No uniform bound for that energy is claimed,
 and no hypothesis is added to the frozen N07b statement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

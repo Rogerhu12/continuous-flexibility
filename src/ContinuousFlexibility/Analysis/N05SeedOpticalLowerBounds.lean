@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05SeedOpticalLowerTransport
+module
+
+public import ContinuousFlexibility.Analysis.N05SeedOpticalLowerTransport
 
 /-!
 # A fixed actual-cell power for the retained optical lower constant
@@ -7,6 +9,8 @@ The original Morse coefficient costs at most an exponential in the square
 of its model index. The proved physical index window converts that loss
 to the twelfth power of the actual carrier envelope.
 -/
+
+@[expose] public section
 
 noncomputable section
 

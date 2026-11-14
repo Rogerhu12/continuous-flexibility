@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06ReferenceNegativeMassBounds
-import ContinuousFlexibility.Analysis.N06ReferenceNegativeODE
-import ContinuousFlexibility.Analysis.N06ShortODEQuantitative
-import ContinuousFlexibility.Analysis.SpacesTraceRestriction
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceNegativeMassBounds
+public import ContinuousFlexibility.Analysis.N06ReferenceNegativeODE
+public import ContinuousFlexibility.Analysis.N06ShortODEQuantitative
+public import ContinuousFlexibility.Analysis.SpacesTraceRestriction
 
 /-!
 # Root curvature forced by the selected negative reference atlas
@@ -16,6 +18,8 @@ Both indices are retained: the ODE coefficient uses `K.cell i`, while the
 mass uses the physical cell containing the negative component.  No
 identification or comparison between those labels is assumed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

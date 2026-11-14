@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SpacesNemytskiiExpansion
-import ContinuousFlexibility.Analysis.SpacesNemytskiiTermZero
-import ContinuousFlexibility.Analysis.SpacesNemytskiiLowFactors
+module
+
+public import ContinuousFlexibility.Analysis.SpacesNemytskiiExpansion
+public import ContinuousFlexibility.Analysis.SpacesNemytskiiTermZero
+public import ContinuousFlexibility.Analysis.SpacesNemytskiiLowFactors
 
 /-!
 # Tame bounds for every normalized composition jet
@@ -8,6 +10,8 @@ import ContinuousFlexibility.Analysis.SpacesNemytskiiLowFactors
 The finite spatial expansion and the repeated-base estimate retain one
 fixed low seminorm and one fixed derivative loss for all spatial orders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

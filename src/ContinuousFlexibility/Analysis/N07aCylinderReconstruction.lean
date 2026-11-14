@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SpacesPhysicalReconstruction
+module
+
+public import ContinuousFlexibility.Analysis.SpacesPhysicalReconstruction
 
 /-!
 # Smooth reconstruction from the actual unweighted cylinder jets
@@ -8,6 +10,8 @@ compact radial localization, this version of the existing mollification
 argument reconstructs a smooth function directly from those derivatives,
 before packing any material grading or physical projective limit.
 -/
+
+@[expose] public section
 
 noncomputable section
 

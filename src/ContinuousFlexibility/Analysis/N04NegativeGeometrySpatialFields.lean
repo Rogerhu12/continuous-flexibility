@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bActualAtlasGeometry
-import ContinuousFlexibility.Analysis.CanonicalStripGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N04bActualAtlasGeometry
+public import ContinuousFlexibility.Analysis.CanonicalStripGeometry
 
 /-!
 # Current negative fields on the fixed reference half
@@ -10,6 +12,8 @@ their prescribed physical germs throughout the whole original component.
 Those germs therefore give the spatial regularity and symmetries needed
 on the fixed reference half without identifying it with the moving domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

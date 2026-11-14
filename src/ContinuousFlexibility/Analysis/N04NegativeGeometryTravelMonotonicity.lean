@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometryChartTowers
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryChartTowers
 
 /-!
 # The two genuine monotonicities of the actual travel chart
@@ -8,6 +10,8 @@ give angular monotonicity. At fixed target angle, the radial derivative
 is the positive travel Jacobian divided by the positive angular derivative.
 Both assertions concern the literal corrected characteristic chart.
 -/
+
+@[expose] public section
 
 noncomputable section
 

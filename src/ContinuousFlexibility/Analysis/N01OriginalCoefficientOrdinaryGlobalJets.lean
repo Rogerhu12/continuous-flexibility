@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01OriginalCoefficientGlobalJets
-import ContinuousFlexibility.Analysis.CylinderMixedJets
+module
+
+public import ContinuousFlexibility.Analysis.N01OriginalCoefficientGlobalJets
+public import ContinuousFlexibility.Analysis.CylinderMixedJets
 
 /-!
 # Ordinary jets of the actual coefficients on the full annulus
@@ -8,6 +10,8 @@ The fixed polar basis converts the already uniform mixed derivative
 bound into ordinary jets. The original state neighborhood and loss are
 unchanged, and no component, root, or material cell has been selected.
 -/
+
+@[expose] public section
 
 noncomputable section
 

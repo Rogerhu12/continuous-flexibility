@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerSelectedPhysicalModels
-import ContinuousFlexibility.Radial.InnerMorseScaledPhysicalPoisson
+module
+
+public import ContinuousFlexibility.Radial.InnerSelectedPhysicalModels
+public import ContinuousFlexibility.Radial.InnerMorseScaledPhysicalPoisson
 
 /-!
 # Estimates for the same actual selected tail models
@@ -9,6 +11,8 @@ through the exact independently scaled chart. The column estimate is
 stated for weights on the actual physical closed interval, so the
 canonical finite-chain interpolation supplies it directly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

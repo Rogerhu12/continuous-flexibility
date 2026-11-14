@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsPositivePower
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsFiniteProducts
-import ContinuousFlexibility.Analysis.N06BoundaryRadialJets
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsPositivePower
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsFiniteProducts
+public import ContinuousFlexibility.Analysis.N06BoundaryRadialJets
 
 /-!
 # Actual finite radial traces of a positive power
@@ -9,6 +11,8 @@ Only the finite radial trace packet enters the exact scalar partition
 formula. Its joint parameter and angular tower is therefore constructed
 without assuming joint smoothness of an arbitrary root extension.
 -/
+
+@[expose] public section
 
 noncomputable section
 

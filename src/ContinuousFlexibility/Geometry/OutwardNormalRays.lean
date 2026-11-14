@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Contracts.GraphBoundaryNormals
-import Mathlib.Topology.Neighborhoods
-import Mathlib.Topology.NhdsWithin
-import Mathlib.Topology.ClusterPt
+module
+
+public import ContinuousFlexibility.Contracts.GraphBoundaryNormals
+public import Mathlib.Topology.Neighborhoods
+public import Mathlib.Topology.NhdsWithin
+public import Mathlib.Topology.ClusterPt
 
 /-!
 # Actual outward rays and local inside-region identification
@@ -10,6 +12,8 @@ Equality of regions in a genuine neighborhood also identifies their closures
 locally, so it transports the same Euclidean inward and outward normal rays.
 The two opposite directions cannot both point outward from the same region.
 -/
+
+@[expose] public section
 
 noncomputable section
 

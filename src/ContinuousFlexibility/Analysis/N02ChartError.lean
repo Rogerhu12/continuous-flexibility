@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CircleAveragedCompositionTame
-import ContinuousFlexibility.Analysis.CircleDifferentialOperators
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Analysis.CircleAveragedCompositionTame
+public import ContinuousFlexibility.Analysis.CircleDifferentialOperators
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # The actual bilinear chart error in N02
@@ -9,6 +11,8 @@ Products, angular differentiation, fixed shifted composition, and the
 unit-interval average all act in the supplied weighted circle model.
 Their composition realizes the prescribed bilinear error exactly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

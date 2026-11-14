@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.ScalarWeighted
-import ContinuousFlexibility.Analysis.MaterialHeightRegularity
-import ContinuousFlexibility.Analysis.ProjectiveJets
+module
+
+public import ContinuousFlexibility.Statements.ScalarWeighted
+public import ContinuousFlexibility.Analysis.MaterialHeightRegularity
+public import ContinuousFlexibility.Analysis.ProjectiveJets
 
 /-!
 # Conservation and evaluation of weighted scalar towers
@@ -12,6 +14,8 @@ the physical integral separately at every order.  Point evaluation of the
 Sobolev decoder is also continuous linear, so the same actual quotient limits
 give the pointwise derivative compatibility required by S04.
 -/
+
+@[expose] public section
 
 noncomputable section
 

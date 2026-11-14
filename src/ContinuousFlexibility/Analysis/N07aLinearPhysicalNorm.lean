@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aLinearPhysicalBounds
-import ContinuousFlexibility.Analysis.N07aMaterialInverseIntegrability
-import ContinuousFlexibility.Scalar.WeightedJetNorm
+module
+
+public import ContinuousFlexibility.Analysis.N07aLinearPhysicalBounds
+public import ContinuousFlexibility.Analysis.N07aMaterialInverseIntegrability
+public import ContinuousFlexibility.Scalar.WeightedJetNorm
 
 /-!
 # Fixed-loss bounds in the original physical norm
@@ -9,6 +11,8 @@ The pointwise majorant is an actual square-integrable function for the
 supplied material coordinate. Its L² norm and the finite physical jet sum
 give the original norm, without introducing a replacement grading.
 -/
+
+@[expose] public section
 
 noncomputable section
 

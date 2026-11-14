@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalModeProducts
-import ContinuousFlexibility.Analysis.N07aCanonicalModeBessel
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalModeProducts
+public import ContinuousFlexibility.Analysis.N07aCanonicalModeBessel
 
 /-!
 # Linearity of the actual radial and unit modes
@@ -8,6 +10,8 @@ The maps below keep the already fixed coefficient representatives.
 Fubini gives the integrability needed to pass addition through the circle
 integral; affine normalization preserves these exact linear operations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05CanonicalOutputL2
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalOutputL2
 
 /-!
 # One canonical L² height sequence independent of the weight
@@ -8,6 +10,8 @@ representatives. Selecting that sequence where it exists gives one fixed
 map, independent of an endpoint exponent, material exponent, or proof of
 membership. Actual positively attenuated outputs always have this sequence.
 -/
+
+@[expose] public section
 
 noncomputable section
 

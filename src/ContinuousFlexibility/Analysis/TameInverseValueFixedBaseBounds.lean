@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.TameForwardJetSourceBounds
-import ContinuousFlexibility.Analysis.TameInverseFamily
+module
+
+public import ContinuousFlexibility.Analysis.TameForwardJetSourceBounds
+public import ContinuousFlexibility.Analysis.TameInverseFamily
 
 /-!
 # Fixed-base value bounds for a continuous linear family
@@ -8,6 +10,8 @@ Finite seminorm comparison and normalization of the source are performed
 on abstract spaces. The supplied family and its original low base are
 unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

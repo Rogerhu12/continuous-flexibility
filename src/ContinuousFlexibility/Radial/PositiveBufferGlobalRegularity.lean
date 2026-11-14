@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.PositiveBufferWeakRegularity
-import ContinuousFlexibility.Radial.PositiveBufferTraceMap
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferWeakRegularity
+public import ContinuousFlexibility.Radial.PositiveBufferTraceMap
 
 /-!
 # Smooth representatives of full-model corrections
@@ -9,6 +11,8 @@ continuous energy representative. Local weak regularity identifies that
 same representative with smooth classical solutions on every finite
 interval, giving a globally smooth correction with the actual equation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

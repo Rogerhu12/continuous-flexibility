@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometryChartTowers
-import ContinuousFlexibility.Analysis.N04NegativeGeometryTravelInverseContinuity
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryChartTowers
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryTravelInverseContinuity
 
 /-!
 # Continuity and identities for the actual negative inverse
@@ -9,6 +11,8 @@ topology. The fixed root change gives continuity of the stored negative
 inverse, while the whole physical component provides its inverse identities
 and angular periods. These facts precede the inverse directional tower.
 -/
+
+@[expose] public section
 
 noncomputable section
 

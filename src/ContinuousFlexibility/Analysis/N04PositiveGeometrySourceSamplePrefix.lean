@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceWordBounds
-import ContinuousFlexibility.Analysis.N04PositiveGeometryStoredInverseSamplePrefix
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceWordBounds
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryStoredInverseSamplePrefix
 
 /-!
 # Sampled full spatial jets of the original endpoint source
@@ -8,6 +10,8 @@ The reference jets admit every later parameter shift. Their finite
 composition with the actual inverse jets therefore preserves the common
 high denominator, the material height, and the full angular reserve.
 -/
+
+@[expose] public section
 
 noncomputable section
 

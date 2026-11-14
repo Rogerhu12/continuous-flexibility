@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ActualRadialCellComparison
-import ContinuousFlexibility.Analysis.N01TravelLowerBound
-import ContinuousFlexibility.Analysis.N01RadialFlow
+module
+
+public import ContinuousFlexibility.Analysis.ActualRadialCellComparison
+public import ContinuousFlexibility.Analysis.N01TravelLowerBound
+public import ContinuousFlexibility.Analysis.N01RadialFlow
 
 /-!
 # A lower length bound for each actual negative component
@@ -10,6 +12,8 @@ an upper bound for the actual optical speed. The frequency-one return
 margin gives a lower bound for its full integral. Their combination
 forces a lower interval length in every actual containing radial cell.
 -/
+
+@[expose] public section
 
 noncomputable section
 

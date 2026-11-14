@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterPhysicalMeasure
-import ContinuousFlexibility.Analysis.L2MeasureCongr
+module
+
+public import ContinuousFlexibility.Radial.OuterPhysicalMeasure
+public import ContinuousFlexibility.Analysis.L2MeasureCongr
 
 /-!
 # The physical deep-tail Hilbert space
@@ -9,6 +11,8 @@ isometry from the original radial Hilbert measure to the actual deep-tail
 measure. The amplitude is sqrt(12)/g; it need not have a bounded reciprocal
 at the singular endpoint.
 -/
+
+@[expose] public section
 
 noncomputable section
 

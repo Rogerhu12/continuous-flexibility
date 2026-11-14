@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.TailActualSolutionNodes
-import ContinuousFlexibility.Radial.TailMassCells
-import Mathlib.MeasureTheory.Integral.Bochner.Set
+module
+
+public import ContinuousFlexibility.Radial.TailActualSolutionNodes
+public import ContinuousFlexibility.Radial.TailMassCells
+public import Mathlib.MeasureTheory.Integral.Bochner.Set
 
 /-!
 # The actual state and mass integrals of a natural solution
@@ -10,6 +12,8 @@ up to the regular entrance. Its square integrability also makes the
 disjoint physical mass-cell integrals summable, before any estimate of
 the point values at the nodes is available.
 -/
+
+@[expose] public section
 
 noncomputable section
 

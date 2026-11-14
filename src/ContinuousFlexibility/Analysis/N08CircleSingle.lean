@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SolveCircleProjection
-import ContinuousFlexibility.Analysis.ProjectiveLimitSubspace
+module
+
+public import ContinuousFlexibility.Analysis.SolveCircleProjection
+public import ContinuousFlexibility.Analysis.ProjectiveLimitSubspace
 
 /-!
 # Retaining one actual circle component
@@ -8,6 +10,8 @@ The component projection is realized through the exact circle decoder.
 It contracts every prescribed circle norm, and hence every projective
 grading. No identification of a control interval with its label is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

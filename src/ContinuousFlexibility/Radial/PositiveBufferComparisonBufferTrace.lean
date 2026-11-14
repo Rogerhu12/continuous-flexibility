@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.PositiveBufferComparisonTrace
-import ContinuousFlexibility.Radial.PositiveBufferComparisonGreenRegularity
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferComparisonTrace
+public import ContinuousFlexibility.Radial.PositiveBufferComparisonGreenRegularity
 
 /-!
 # The sharp trace of a full-model correction at either cut
@@ -8,6 +10,8 @@ One outward affine coordinate handles both physical endpoints. The
 comparison uses a preceding normalized interval of length one, hence
 only the actual L² norm appears on the right-hand side.
 -/
+
+@[expose] public section
 
 noncomputable section
 

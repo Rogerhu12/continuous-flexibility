@@ -1,9 +1,13 @@
-import ContinuousFlexibility.Analysis.N07aRelativeMainIdentity
-import ContinuousFlexibility.Analysis.N07aScalarColumnSupport
-import ContinuousFlexibility.Analysis.N07aCanonicalJetRealization
-import ContinuousFlexibility.Analysis.N07aReferenceReturn
+module
+
+public import ContinuousFlexibility.Analysis.N07aRelativeMainIdentity
+public import ContinuousFlexibility.Analysis.N07aScalarColumnSupport
+public import ContinuousFlexibility.Analysis.N07aCanonicalJetRealization
+public import ContinuousFlexibility.Analysis.N07aReferenceReturn
 
 /-! Reflection of the genuine relative source and its finite-rank part. -/
+
+@[expose] public section
 
 noncomputable section
 

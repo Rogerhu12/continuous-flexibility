@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.FiniteFourierBessel
-import Mathlib.MeasureTheory.Function.LpSeminorm.TriangleInequality
+module
+
+public import ContinuousFlexibility.Radial.FiniteFourierBessel
+public import Mathlib.MeasureTheory.Function.LpSeminorm.TriangleInequality
 
 /-!
 # Finite angular synthesis and projection contraction
@@ -8,6 +10,8 @@ Finite synthesis has exactly the sum-of-squares energy of its coefficients.
 The actual finite cosine and sine projections therefore contract the
 normalized angular L² norm for every interval L² input.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

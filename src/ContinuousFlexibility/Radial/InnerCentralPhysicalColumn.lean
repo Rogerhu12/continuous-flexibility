@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerCentralModelBorder
-import ContinuousFlexibility.Radial.InnerLiouvillePoissonEquation
-import ContinuousFlexibility.Radial.InnerLiouvillePoissonTransport
+module
+
+public import ContinuousFlexibility.Radial.InnerCentralModelBorder
+public import ContinuousFlexibility.Radial.InnerLiouvillePoissonEquation
+public import ContinuousFlexibility.Radial.InnerLiouvillePoissonTransport
 
 /-!
 # The fixed temporary central column in the actual radial measure
@@ -10,6 +12,8 @@ auxiliary column. Once the cuts enclose its fixed support, its physical
 L² class does not depend on the cuts. This identifies the scalar column
 and row of the same local central inverse used in finite weak gluing.
 -/
+
+@[expose] public section
 
 noncomputable section
 

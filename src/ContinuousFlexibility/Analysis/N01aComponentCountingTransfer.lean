@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01aJacobiTransfer
-import ContinuousFlexibility.Analysis.N01aNegativeComponentTotalVariation
+module
+
+public import ContinuousFlexibility.Analysis.N01aJacobiTransfer
+public import ContinuousFlexibility.Analysis.N01aNegativeComponentTotalVariation
 
 /-!
 # Energy decay and the number of negative components
@@ -9,6 +11,8 @@ multiple of the actual total logarithmic variation. A finite cover of the
 negative points then expresses that exponent in terms of the full drops of
 the components, including components crossing an endpoint of the interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

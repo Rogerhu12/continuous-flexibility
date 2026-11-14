@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cCutoffJetBounds
-import ContinuousFlexibility.Analysis.N01cStateHeightJets
-import ContinuousFlexibility.Analysis.N01cStateSeminorms
+module
+
+public import ContinuousFlexibility.Analysis.N01cCutoffJetBounds
+public import ContinuousFlexibility.Analysis.N01cStateHeightJets
+public import ContinuousFlexibility.Analysis.N01cStateSeminorms
 
 /-!
 # Fixed-loss bounds for the actual state height direction
@@ -10,6 +12,8 @@ jets. Combining these with the decoded physical height gives a bound
 for every positive-order mixed jet of stateU with exactly two additional
 input grading orders and the original H^(3/4) weight.
 -/
+
+@[expose] public section
 
 noncomputable section
 

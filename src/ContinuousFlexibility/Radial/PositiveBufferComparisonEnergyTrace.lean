@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.PositiveBufferComparisonBufferTrace
-import ContinuousFlexibility.Radial.PositiveBufferTraceMap
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferComparisonBufferTrace
+public import ContinuousFlexibility.Radial.PositiveBufferTraceMap
 
 /-!
 # Sharp traces of actual energy corrections
@@ -9,6 +11,8 @@ closed energy domain. The cutoff source and scalar border vanish in
 both comparison regions, so one estimate applies to every entry of
 the cut-correction matrix.
 -/
+
+@[expose] public section
 
 noncomputable section
 

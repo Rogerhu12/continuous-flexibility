@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cWeightAbsorption
+module
+
+public import ContinuousFlexibility.Analysis.N01cWeightAbsorption
 
 /-!
 # Exact small material weights in products
@@ -8,6 +10,8 @@ bounds H^gamma times every M power when gamma is positive. Their
 combination bounds the exact H^gamma E0^A weight on the whole annulus.
 Products retain one complete H^gamma factor, with no loss of its exponent.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Blueprint.N05.ReferenceGeometry
-import ContinuousFlexibility.Blueprint.N05.VolumeModel
-import ContinuousFlexibility.Blueprint.N05.InverseBounds
-import ContinuousFlexibility.Blueprint.N05.GraphIdentification
-import ContinuousFlexibility.Analysis.N05ReferenceAssembly
+module
+
+public import ContinuousFlexibility.Blueprint.N05.ReferenceGeometry
+public import ContinuousFlexibility.Blueprint.N05.VolumeModel
+public import ContinuousFlexibility.Blueprint.N05.InverseBounds
+public import ContinuousFlexibility.Blueprint.N05.GraphIdentification
+public import ContinuousFlexibility.Analysis.N05ReferenceAssembly
 
 /-!
 # Blueprint node N05
@@ -14,6 +16,8 @@ Source: `paper/flexible-surface-rewrite/08-stable-inverse.tex` lines 14–171.
 Task file: `docs/tasks/N05.md`. The frozen statement is assembled from the
 explicit sub-blueprint. Completion also requires closing every sub-statement.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

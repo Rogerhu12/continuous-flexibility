@@ -1,5 +1,7 @@
-import Mathlib.Analysis.Calculus.IteratedDeriv.FaaDiBruno
-import Mathlib.Analysis.Calculus.ContDiff.Bounds
+module
+
+public import Mathlib.Analysis.Calculus.IteratedDeriv.FaaDiBruno
+public import Mathlib.Analysis.Calculus.ContDiff.Bounds
 
 /-!
 # The actual higher derivatives in smooth composition
@@ -9,6 +11,8 @@ Every block has positive size and the block sizes add up to the total order.
 Consequently the derivative products are precisely of the form needed by the
 one-high-factor product estimate, including for a multivariate outer function.
 -/
+
+@[expose] public section
 
 noncomputable section
 

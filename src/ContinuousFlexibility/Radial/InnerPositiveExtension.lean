@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.OscillatorCompactCore
-import ContinuousFlexibility.Statements.Radial
-import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
+module
+
+public import ContinuousFlexibility.Radial.OscillatorCompactCore
+public import ContinuousFlexibility.Statements.Radial
+public import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
 
 /-!
 # Smooth positive coefficients for a retained radial interval
@@ -13,6 +15,8 @@ radius removes the irrelevant singularity at zero. These extensions
 allow the ordinary finite-interval ODE existence theorem to be applied
 to the actual radial flux system.
 -/
+
+@[expose] public section
 
 noncomputable section
 

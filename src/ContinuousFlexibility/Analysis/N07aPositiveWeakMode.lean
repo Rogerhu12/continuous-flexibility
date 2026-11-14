@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aPositiveUnitBounds
-import ContinuousFlexibility.Analysis.N07aIntervalWeakSecond
+module
+
+public import ContinuousFlexibility.Analysis.N07aPositiveUnitBounds
+public import ContinuousFlexibility.Analysis.N07aIntervalWeakSecond
 
 /-!
 # Closing the positive mode estimate from its actual weak equation
@@ -9,6 +11,8 @@ genuine second weak derivative. The cubic estimate then follows by smooth
 approximation, with all coefficient constants supplied by primitive
 reference geometry. No smooth representative or endpoint condition is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

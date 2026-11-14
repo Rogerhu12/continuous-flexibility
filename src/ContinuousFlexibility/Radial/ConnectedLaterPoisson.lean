@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ConnectedLaterBoundary
-import ContinuousFlexibility.Radial.SelectedOuterPoisson
+module
+
+public import ContinuousFlexibility.Radial.ConnectedLaterBoundary
+public import ContinuousFlexibility.Radial.SelectedOuterPoisson
 
 /-!
 # Both later Poisson columns on one actual connected reference
@@ -9,6 +11,8 @@ matching cuts lie on opposite sides of the central patch, which proves
 their order. The same natural representatives then produce both actual
 Poisson columns, with the physical scales and every frozen exterior trace.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SpacesHeightBounds
-import ContinuousFlexibility.Analysis.SpacesCutoff
-import ContinuousFlexibility.Analysis.TameTransfer
+module
+
+public import ContinuousFlexibility.Analysis.SpacesHeightBounds
+public import ContinuousFlexibility.Analysis.SpacesCutoff
+public import ContinuousFlexibility.Analysis.TameTransfer
 
 /-!
 # The reciprocal from smooth composition on one fixed neighborhood
@@ -11,6 +13,8 @@ annulus inside that interval on one fixed grading neighborhood. Thus
 the reciprocal clause follows from the smooth composition clause without
 introducing a separate family of neighborhoods at higher orders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

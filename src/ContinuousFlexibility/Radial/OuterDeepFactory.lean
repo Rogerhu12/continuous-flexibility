@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterDeepGeometry
-import ContinuousFlexibility.Radial.R07DeepTailData
+module
+
+public import ContinuousFlexibility.Radial.OuterDeepGeometry
+public import ContinuousFlexibility.Radial.R07DeepTailData
 
 /-!
 # Equality of the actual outer and R07 deep-tail data
@@ -9,6 +11,8 @@ resistance intervals on the left. The right full core includes its outgoing
 join, and the left entrance retains the complete initial resistance edge.
 The equality also identifies the integer-power and real-power densities.
 -/
+
+@[expose] public section
 
 noncomputable section
 

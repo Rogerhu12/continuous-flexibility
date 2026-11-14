@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06FiniteCurrentGreenAssembly
-import ContinuousFlexibility.Analysis.N06PrimitiveFiniteSupport
+module
+
+public import ContinuousFlexibility.Analysis.N06FiniteCurrentGreenAssembly
+public import ContinuousFlexibility.Analysis.N06PrimitiveFiniteSupport
 
 /-!
 # Finite current Green assembly on the retained primitive atlas
@@ -9,6 +11,8 @@ finite. Reference intervals are used only to pair indices; every current
 integral uses its genuine moving domain and every missing-neighbor row
 vanishes by the true inverse endpoint circle and physical test support.
 -/
+
+@[expose] public section
 
 noncomputable section
 

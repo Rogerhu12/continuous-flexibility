@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.WeightedSchurTest
+module
+
+public import ContinuousFlexibility.Radial.WeightedSchurTest
 
 /-!
 # Square-sum form of the Schur test
@@ -7,6 +9,8 @@ The block application needs an output square-sum bound before that output
 is known to lie in the weighted Hilbert space. This form proves both
 summability and the bound from actual coordinate inequalities.
 -/
+
+@[expose] public section
 
 noncomputable section
 

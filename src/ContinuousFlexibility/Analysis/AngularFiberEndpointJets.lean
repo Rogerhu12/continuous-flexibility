@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.ParameterizedCircleInverse
-import ContinuousFlexibility.Analysis.BoundaryMixedJets
-import ContinuousFlexibility.Analysis.CylinderSobolev
-import ContinuousFlexibility.Geometry.GraphSurfaceGeometry
+module
+
+public import ContinuousFlexibility.Analysis.ParameterizedCircleInverse
+public import ContinuousFlexibility.Analysis.BoundaryMixedJets
+public import ContinuousFlexibility.Analysis.CylinderSobolev
+public import ContinuousFlexibility.Geometry.GraphSurfaceGeometry
 
 /-!
 # Actual endpoint jets in angular inverse coordinates
@@ -13,6 +15,8 @@ radial boundary slope is unchanged. Matching finite jets in these
 fiber coordinates then matches the original physical radial jets after
 composition with the angular lift.
 -/
+
+@[expose] public section
 
 noncomputable section
 

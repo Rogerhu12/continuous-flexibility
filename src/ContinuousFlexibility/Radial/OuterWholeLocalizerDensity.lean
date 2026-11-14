@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterLocalizerDensity
-import ContinuousFlexibility.Radial.OuterWholeMeasure
+module
+
+public import ContinuousFlexibility.Radial.OuterLocalizerDensity
+public import ContinuousFlexibility.Radial.OuterWholeMeasure
 
 /-!
 # Localized ordinary kernels on the actual whole outer interval
@@ -10,6 +12,8 @@ density multipliers preserve the actual localized kernel, with the
 minus sign of the manuscript's ordinary inverse. Their coefficient loss
 depends only on the common profile bounds and the common outer radius.
 -/
+
+@[expose] public section
 
 noncomputable section
 

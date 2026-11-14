@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.FixedCentralModelColumnCost
-import ContinuousFlexibility.Radial.InnerModelCoefficientEnvelope
+module
+
+public import ContinuousFlexibility.Radial.FixedCentralModelColumnCost
+public import ContinuousFlexibility.Radial.InnerModelCoefficientEnvelope
 
 /-!
 # A fixed quadratic frequency cost for the original central columns
@@ -8,6 +10,8 @@ All coefficients are selected before the tail and the physical
 reference.  The actual R09 remainder is bounded from its mass, inverse
 and velocity coefficients, without a new normalized remainder premise.
 -/
+
+@[expose] public section
 
 noncomputable section
 

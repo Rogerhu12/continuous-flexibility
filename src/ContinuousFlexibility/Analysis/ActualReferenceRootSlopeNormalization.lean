@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ActualReferenceNegativeEndpointData
+module
+
+public import ContinuousFlexibility.Analysis.ActualReferenceNegativeEndpointData
 
 /-!
 # Exact normalization of the actual reference slope at a root
@@ -9,6 +11,8 @@ this identity to the root. The existing inward orientation then removes
 the absolute value. No quantitative collar, auxiliary reference chart,
 or lower bound for the desired inverse slope is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

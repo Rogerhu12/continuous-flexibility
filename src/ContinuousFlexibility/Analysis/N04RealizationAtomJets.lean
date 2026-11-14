@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04RealizationJetScalars
-import ContinuousFlexibility.Analysis.N06PrimitiveJetRescaling
-import ContinuousFlexibility.Analysis.N07aGeometryJetBounds
-import ContinuousFlexibility.Analysis.MaterialSampleBounds
-import ContinuousFlexibility.Analysis.SolveReturnEquations
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationJetScalars
+public import ContinuousFlexibility.Analysis.N06PrimitiveJetRescaling
+public import ContinuousFlexibility.Analysis.N07aGeometryJetBounds
+public import ContinuousFlexibility.Analysis.MaterialSampleBounds
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # The same primitive atoms have absolute canonical-coordinate bounds
@@ -15,6 +17,8 @@ there is one state loss, chosen before every spatial order.
 No canonical-potential bound, divided-field bound, or N04Properties premise
 is used here. The primitive jet hypotheses are construction obligations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

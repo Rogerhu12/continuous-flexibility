@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aFiniteParameterProduct
-import ContinuousFlexibility.Analysis.OneHighCompositionJets
-import ContinuousFlexibility.Analysis.CylinderMixedJets
+module
+
+public import ContinuousFlexibility.Analysis.N07aFiniteParameterProduct
+public import ContinuousFlexibility.Analysis.OneHighCompositionJets
+public import ContinuousFlexibility.Analysis.CylinderMixedJets
 
 /-!
 # The actual chain-rule derivative budget
@@ -9,6 +11,8 @@ A partition with k blocks has k source derivatives. Charging each chart
 factor only its order minus one leaves total order exactly n. The first
 chart derivative is part of the fixed offset, not a loss repeated k times.
 -/
+
+@[expose] public section
 
 noncomputable section
 

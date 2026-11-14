@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationPositiveTracePrefix
-import ContinuousFlexibility.Analysis.N04RealizationTaylorCorrectionBounds
-import ContinuousFlexibility.Analysis.EndpointHeightValueBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationPositiveTracePrefix
+public import ContinuousFlexibility.Analysis.N04RealizationTaylorCorrectionBounds
+public import ContinuousFlexibility.Analysis.EndpointHeightValueBounds
 
 /-!
 # Quantitative jets of the actual positive Taylor height and reciprocal
@@ -12,6 +14,8 @@ amplitude is obtained from the original low collar estimate, so no
 high-state envelope is exponentiated. Both reciprocal choices use the
 same proof and the same parameter domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

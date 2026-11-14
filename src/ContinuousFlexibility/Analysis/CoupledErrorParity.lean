@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import ContinuousFlexibility.Analysis.CircleReturnAlgebra
-import ContinuousFlexibility.Analysis.SpacesCircleParity
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import ContinuousFlexibility.Analysis.CircleReturnAlgebra
+public import ContinuousFlexibility.Analysis.SpacesCircleParity
 
 /-!
 # Parity of the independent circle correction error
@@ -11,6 +13,8 @@ term is an even part. The second independent argument need not itself be
 odd. The original even projection gives a total continuous linear map into
 the required subspace and preserves this actual error on the N02 domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

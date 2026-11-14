@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01CorrectionOriginalFactorGrowth
-import ContinuousFlexibility.Analysis.N01CorrectionCoefficientTameTransfer
-import ContinuousFlexibility.Analysis.FlatMixedPolynomialCoefficients
+module
+
+public import ContinuousFlexibility.Analysis.N01CorrectionOriginalFactorGrowth
+public import ContinuousFlexibility.Analysis.N01CorrectionCoefficientTameTransfer
+public import ContinuousFlexibility.Analysis.FlatMixedPolynomialCoefficients
 
 /-!
 # Actual coefficient growth from the same-cutoff velocity estimates
@@ -11,6 +13,8 @@ Reflection gives the actual drift and speed, the division-free identity
 gives the original coefficient error, and uniqueness applies all bounds
 to its previously selected joint towers.
 -/
+
+@[expose] public section
 
 noncomputable section
 

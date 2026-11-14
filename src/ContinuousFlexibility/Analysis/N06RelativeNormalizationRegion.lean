@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06RelativeCanonicalBoundaryPatch
-import ContinuousFlexibility.Radial.ReferenceColumnSmooth
-import Mathlib.Topology.MetricSpace.Thickening
+module
+
+public import ContinuousFlexibility.Analysis.N06RelativeCanonicalBoundaryPatch
+public import ContinuousFlexibility.Radial.ReferenceColumnSmooth
+public import Mathlib.Topology.MetricSpace.Thickening
 
 /-!
 # One actual normalization region for all separated boundary collars
@@ -13,6 +15,8 @@ interval then keeps the two actual relative corrections out of that region.
 The conclusions identify field germs on the reference rectangle; equality
 of the current and reference domains there is a separate geometry clause.
 -/
+
+@[expose] public section
 
 noncomputable section
 

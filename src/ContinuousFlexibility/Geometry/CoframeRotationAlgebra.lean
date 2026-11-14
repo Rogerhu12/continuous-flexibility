@@ -1,7 +1,11 @@
-import ContinuousFlexibility.Geometry.CartesianCoframe
-import Mathlib.Tactic.Linarith
+module
+
+public import ContinuousFlexibility.Geometry.CartesianCoframe
+public import Mathlib.Tactic.Linarith
 
 /-! # The actual relative rotation of equally oriented orthonormal coframes -/
+
+@[expose] public section
 
 noncomputable section
 

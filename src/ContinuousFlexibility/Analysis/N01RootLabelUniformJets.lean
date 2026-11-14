@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01ReturnUniformPositiveJets
-import ContinuousFlexibility.Analysis.N01RootLabels
-import Mathlib.Algebra.Field.Periodic
+module
+
+public import ContinuousFlexibility.Analysis.N01ReturnUniformPositiveJets
+public import ContinuousFlexibility.Analysis.N01RootLabels
+public import Mathlib.Algebra.Field.Periodic
 
 /-!
 # Uniform jets of the actual normalized root labels
@@ -10,6 +12,8 @@ orders use the genuine left label and stored return inverse, with one
 fixed composition loss. All numerical constants precede the component.
 The reference return translation never enters a zeroth-order majorant.
 -/
+
+@[expose] public section
 
 noncomputable section
 

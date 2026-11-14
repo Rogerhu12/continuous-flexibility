@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05OpticalProfileLipschitz
-import ContinuousFlexibility.Analysis.N05ReferenceOpticalBound
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05OpticalProfileLipschitz
+public import ContinuousFlexibility.Analysis.N05ReferenceOpticalBound
 
 /-!
 # A genuine reference-cell bound for the negative Jacobian and density
@@ -11,6 +13,8 @@ controls both actual canonical halves with one constant. This statement
 keeps the genuine carrier cell explicit; it makes no claim equating that
 cell with the separate label stored in `K.cell`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

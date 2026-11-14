@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aAngularReferenceRemainderVolume
-import ContinuousFlexibility.Analysis.N07aAngularReferenceColumnIdentity
-import ContinuousFlexibility.Analysis.N07aAngularReferenceCompatibleSource
-import ContinuousFlexibility.Analysis.N07aScalarColumnVolumes
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceRemainderVolume
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceColumnIdentity
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceCompatibleSource
+public import ContinuousFlexibility.Analysis.N07aScalarColumnVolumes
 
 /-!
 # The genuine compatible reference source in the prescribed volume graph
@@ -11,6 +13,8 @@ remainder differential plus the original left and distinguished columns.
 All three summands have already been constructed in the same volume
 space. No membership assumption on the candidate source is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

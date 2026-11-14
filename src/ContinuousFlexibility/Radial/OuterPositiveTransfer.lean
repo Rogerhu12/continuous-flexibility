@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.TransitionTransfer
+module
+
+public import ContinuousFlexibility.Radial.TransitionTransfer
 
 /-!
 # Positive transfer without a lower bound on the interval length
@@ -8,6 +10,8 @@ weight with a controlled condition number even when one integral tends
 to zero.  This is needed on the physical joins, whose hypotheses impose
 an upper width bound but no quantitative lower width bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

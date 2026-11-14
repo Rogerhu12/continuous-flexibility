@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Contracts.MarkedCapOutward
-import ContinuousFlexibility.Statements.MainGeometry
+module
+
+public import ContinuousFlexibility.Contracts.MarkedCapOutward
+public import ContinuousFlexibility.Statements.MainGeometry
 
 /-!
 # The enclosed-region witness for the actual marked sphere
@@ -8,6 +10,8 @@ The same marked cap length, marker, sphere family and inside region appear
 in every field. In particular, the normal is the explicit jointly smooth
 sphere normal whose rays were proved outward for that very region.
 -/
+
+@[expose] public section
 
 noncomputable section
 

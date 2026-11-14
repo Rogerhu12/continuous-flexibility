@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N08CircleReferenceDiagonal
+module
+
+public import ContinuousFlexibility.Analysis.N08CircleReferenceDiagonal
 
 /-!
 # Zero-parameter return data depend only on the local control and chart
@@ -9,6 +11,8 @@ control mean. At zero parameter the actual ordinary flow is its radial
 rotation, independently of both the height and the nu coordinate. Equality
 on the same control line identifies the genuine diagonal derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

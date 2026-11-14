@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06PositiveCurrentTestLp
-import ContinuousFlexibility.Analysis.N06CubicDifferential
-import ContinuousFlexibility.Analysis.N06ReferencePhysicalCoefficients
-import ContinuousFlexibility.Analysis.N06FiniteReferenceColumns
+module
+
+public import ContinuousFlexibility.Analysis.N06PositiveCurrentTestLp
+public import ContinuousFlexibility.Analysis.N06CubicDifferential
+public import ContinuousFlexibility.Analysis.N06ReferencePhysicalCoefficients
+public import ContinuousFlexibility.Analysis.N06FiniteReferenceColumns
 
 /-!
 # The actual corrected left-tail column
@@ -13,6 +15,8 @@ neighborhood, regardless of coefficient regularity. Thus the genuine
 corrected left column equals its original-coefficient expression on the
 whole plane, is smooth, and has the original common compact support.
 -/
+
+@[expose] public section
 
 noncomputable section
 

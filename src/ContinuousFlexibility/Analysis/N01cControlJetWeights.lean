@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cStateProfileProductBounds
-import ContinuousFlexibility.Analysis.N01cShiftedSampleWeights
-import ContinuousFlexibility.Analysis.StateControlDecay
+module
+
+public import ContinuousFlexibility.Analysis.N01cStateProfileProductBounds
+public import ContinuousFlexibility.Analysis.N01cShiftedSampleWeights
+public import ContinuousFlexibility.Analysis.StateControlDecay
 
 /-!
 # Pointwise material bounds for the actual profile exponent jets
@@ -13,6 +15,8 @@ physical placement then permits the bounded-index material comparison.
 The two placement hypotheses below are explicit inputs.  They are not
 consequences asserted for the present definition of N01PartA.
 -/
+
+@[expose] public section
 
 noncomputable section
 

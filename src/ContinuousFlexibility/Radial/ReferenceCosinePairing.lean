@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ReferenceCosineReconstruction
+module
+
+public import ContinuousFlexibility.Radial.ReferenceCosineReconstruction
 
 /-!
 # Pairing genuine cosine synthesis with arbitrary L² tests
@@ -8,6 +10,8 @@ arise from Fubini applied to the product of two L² functions. Applying
 the continuous inner product functional to the convergent synthesis
 then gives the full paired series.
 -/
+
+@[expose] public section
 
 noncomputable section
 

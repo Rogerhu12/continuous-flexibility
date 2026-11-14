@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.ParameterizedScalarInverse
-import ContinuousFlexibility.Analysis.PeriodicScalarFlow
-import Mathlib.Topology.Order.IntermediateValue
-import Mathlib.Logic.Function.Basic
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Ring
+module
+
+public import ContinuousFlexibility.Analysis.ParameterizedScalarInverse
+public import ContinuousFlexibility.Analysis.PeriodicScalarFlow
+public import Mathlib.Topology.Order.IntermediateValue
+public import Mathlib.Logic.Function.Basic
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
 
 /-!
 # Actual smooth inverses of parameterized circle lifts
@@ -14,6 +16,8 @@ surjectivity. A positive angular derivative supplies injectivity.
 The actual chosen inverse therefore satisfies both inverse identities,
 and the parameterized implicit theorem supplies its joint smoothness.
 -/
+
+@[expose] public section
 
 noncomputable section
 

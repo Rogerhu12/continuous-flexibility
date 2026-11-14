@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06MorseRootCurvature
-import ContinuousFlexibility.Radial.ReferenceDilation
-import ContinuousFlexibility.Analysis.RootCharacteristicFactor
+module
+
+public import ContinuousFlexibility.Analysis.N06MorseRootCurvature
+public import ContinuousFlexibility.Radial.ReferenceDilation
+public import ContinuousFlexibility.Analysis.RootCharacteristicFactor
 
 /-!
 # Actual second derivatives on the dilated R08 tails
@@ -15,6 +17,8 @@ The original model realization and the actual tail identity remain
 explicit. They are certificates of a chosen construction and are not
 asserted to follow from the erased `RadialReference.property` alone.
 -/
+
+@[expose] public section
 
 noncomputable section
 

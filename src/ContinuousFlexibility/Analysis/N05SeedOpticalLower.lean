@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05SeedOpticalLowerAssembly
-import ContinuousFlexibility.Analysis.N05OpticalNegativeGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N05SeedOpticalLowerAssembly
+public import ContinuousFlexibility.Analysis.N05OpticalNegativeGeometry
 
 /-!
 # The actual carrier optical certificate for the retained seed
@@ -9,6 +11,8 @@ variant also covers finite grouping of cells with unchanged indices and
 unchanged physical profile. Its input is the actual cell-point identity,
 not a lower-bound hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

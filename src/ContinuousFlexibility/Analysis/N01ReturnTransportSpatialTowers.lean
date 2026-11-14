@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01ReturnVelocitySpatialTower
-import ContinuousFlexibility.Analysis.ReturnCorrectionTransportEquations
-import ContinuousFlexibility.Analysis.SmoothDirectionsNormedComposition
+module
+
+public import ContinuousFlexibility.Analysis.N01ReturnVelocitySpatialTower
+public import ContinuousFlexibility.Analysis.ReturnCorrectionTransportEquations
+public import ContinuousFlexibility.Analysis.SmoothDirectionsNormedComposition
 
 /-!
 # Actual joint towers of the transported correction factors
@@ -11,6 +13,8 @@ same displacement at the actual return residual.  Their joint towers
 use the existing circle realizations and the same cutoff as the final
 correction.  No radial or parameter regularity is added as a premise.
 -/
+
+@[expose] public section
 
 noncomputable section
 

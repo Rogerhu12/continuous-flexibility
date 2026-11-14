@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.NeighborhoodCircleCharts
-import ContinuousFlexibility.Analysis.NeighborhoodStateBounds
-import ContinuousFlexibility.Analysis.SpacesTraceCircleBounds
-import ContinuousFlexibility.Analysis.StateKappaBounds
-import Mathlib.Analysis.Calculus.Deriv.MeanValue
+module
+
+public import ContinuousFlexibility.Analysis.NeighborhoodCircleCharts
+public import ContinuousFlexibility.Analysis.NeighborhoodStateBounds
+public import ContinuousFlexibility.Analysis.SpacesTraceCircleBounds
+public import ContinuousFlexibility.Analysis.StateKappaBounds
+public import Mathlib.Analysis.Calculus.Deriv.MeanValue
 
 /-!
 # Uniform control of the actual left circle charts
@@ -13,6 +15,8 @@ the reference chart coordinate is zero, one neighborhood controls every
 left chart at once. Periodicity comes from the actual circle model and
 oddness comes from the stated sector condition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

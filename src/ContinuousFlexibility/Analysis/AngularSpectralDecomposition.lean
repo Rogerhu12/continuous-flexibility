@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.AngularResolventApproximation
+module
+
+public import ContinuousFlexibility.Analysis.AngularResolventApproximation
 
 /-!
 # The full discrete angular spectral decomposition
@@ -10,6 +12,8 @@ density of the range of an injective self-adjoint operator. Eigenspaces
 may have arbitrary dimension, and the original Hilbert space may be
 nonseparable.
 -/
+
+@[expose] public section
 
 noncomputable section
 

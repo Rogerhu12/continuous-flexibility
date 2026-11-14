@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CoordinateOperatorConstruction
-import ContinuousFlexibility.Blueprint.Statements
-import ContinuousFlexibility.Analysis.N04bGeometryPreservation
+module
+
+public import ContinuousFlexibility.Analysis.CoordinateOperatorConstruction
+public import ContinuousFlexibility.Blueprint.Statements
+public import ContinuousFlexibility.Analysis.N04bGeometryPreservation
 
 /-!
 # The actual canonical operator from the chart data
@@ -11,6 +13,8 @@ with the elliptic or hyperbolic sign from the frozen canonical operator.
 The proof uses the local inverse identities and regularity already in
 N04PartA; no transformed operator identity is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

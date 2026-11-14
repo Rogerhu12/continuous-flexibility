@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Statements.RadialTargets
+module
+
+public import ContinuousFlexibility.Statements.RadialTargets
 
 /-!
 # Preparing the selected second mode without a first-band assumption
@@ -9,6 +11,8 @@ We set that entry to the actual selected band of mode two, preserving every
 selection clause. If the first band is nonempty, uniqueness forces mode two
 to belong to it and the update changes no entry.
 -/
+
+@[expose] public section
 
 noncomputable section
 

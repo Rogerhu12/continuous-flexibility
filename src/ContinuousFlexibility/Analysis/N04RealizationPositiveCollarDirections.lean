@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationPositiveCollarKernel
-import ContinuousFlexibility.Analysis.CircleSmoothDirectionsOperations
-import ContinuousFlexibility.Analysis.N01cPhysicalFlowGraph
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationPositiveCollarKernel
+public import ContinuousFlexibility.Analysis.CircleSmoothDirectionsOperations
+public import ContinuousFlexibility.Analysis.N01cPhysicalFlowGraph
 
 /-!
 # The same radial collar on a topological state neighborhood
@@ -9,6 +11,8 @@ Only its finite actual boundary traces enter the smooth coefficient
 kernel. The product of the state neighborhood with the full physical
 plane is retained, including all collar endpoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

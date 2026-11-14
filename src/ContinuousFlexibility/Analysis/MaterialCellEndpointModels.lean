@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.MaterialSampleShift
+module
+
+public import ContinuousFlexibility.Analysis.MaterialSampleShift
 
 /-!
 # Endpoint models at every point of the actual material cells
@@ -8,6 +10,8 @@ Only one compact middle interval is used to compare the remaining
 positive weights. The resulting constants are chosen before every cell
 and every physical evaluation point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

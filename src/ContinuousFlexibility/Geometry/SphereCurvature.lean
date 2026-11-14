@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Geometry.SphereNormals
-import ContinuousFlexibility.Geometry.LocalSurfaceReparametrization
-import ContinuousFlexibility.Contracts.GraphCurvatureBounds
+module
+
+public import ContinuousFlexibility.Geometry.SphereNormals
+public import ContinuousFlexibility.Geometry.LocalSurfaceReparametrization
+public import ContinuousFlexibility.Contracts.GraphCurvatureBounds
 
 /-!
 # Actual Gaussian curvature and the unique marker of the whole sphere
@@ -15,6 +17,8 @@ This file does not assume a curvature field, a curvature comparison, or a
 congruence-invariance law. Ambient image congruence and outward orientation are
 separate subsequent obligations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

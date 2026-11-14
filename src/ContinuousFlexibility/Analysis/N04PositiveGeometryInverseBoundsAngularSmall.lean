@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationPositiveAngularCircle
-import ContinuousFlexibility.Analysis.CircleSingleComponent
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationPositiveAngularCircle
+public import ContinuousFlexibility.Analysis.CircleSingleComponent
 
 /-!
 # Uniform low angular control for the stored interpolation
@@ -9,6 +11,8 @@ jets when its finite endpoint displacements do. The estimate uses only
 the already stored width being at most one. In particular it neither
 changes that width nor introduces a component-dependent inverse constant.
 -/
+
+@[expose] public section
 
 noncomputable section
 

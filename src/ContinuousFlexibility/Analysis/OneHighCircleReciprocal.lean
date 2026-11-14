@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCircleReciprocalBasic
-import ContinuousFlexibility.Analysis.OneHighCircleScalarComposition
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleReciprocalBasic
+public import ContinuousFlexibility.Analysis.OneHighCircleScalarComposition
 
 /-!
 # Uniform Sobolev estimates for the reciprocal defect
@@ -8,6 +10,8 @@ The lower bound for the denominator controls every outer derivative on the
 entire segment to zero. The resulting constant depends only on the positive
 lower bound, the prescribed low Fourier norm, and the Sobolev order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

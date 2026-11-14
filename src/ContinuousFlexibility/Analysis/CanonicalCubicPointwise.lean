@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CubicDivisionSmooth
+module
+
+public import ContinuousFlexibility.Analysis.CubicDivisionSmooth
 
 /-!
 # Pointwise cubic division with a fixed loss of three derivatives
@@ -10,6 +12,8 @@ the additional factor `t ^ s` is at most one on the integration interval.
 The hypotheses explicitly require the three vanishing boundary jets.  These
 lemmas do not assert that a particular canonical coefficient has those jets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N07aMixedCoefficientTame
-import ContinuousFlexibility.Analysis.N07aNormalizedSpaces
-import ContinuousFlexibility.Analysis.N07aParameterGrading
-import ContinuousFlexibility.Analysis.SolveTameSubspace
-import ContinuousFlexibility.Analysis.SolveNewtonBridge
+module
+
+public import ContinuousFlexibility.Analysis.N07aMixedCoefficientTame
+public import ContinuousFlexibility.Analysis.N07aNormalizedSpaces
+public import ContinuousFlexibility.Analysis.N07aParameterGrading
+public import ContinuousFlexibility.Analysis.SolveTameSubspace
+public import ContinuousFlexibility.Analysis.SolveNewtonBridge
 
 /-!
 # Adding the actual scalar column on the normalized unknown space
@@ -11,6 +13,8 @@ The common-height forward map and the distinguished Source family are
 combined by ordinary continuous linear maps. The grading is the induced
 grading on the true normalization kernel.
 -/
+
+@[expose] public section
 
 noncomputable section
 

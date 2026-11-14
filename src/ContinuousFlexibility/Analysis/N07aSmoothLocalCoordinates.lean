@@ -1,5 +1,8 @@
-import ContinuousFlexibility.Geometry.LocalInverse
-import ContinuousFlexibility.Analysis.CanonicalSourceMeasure
+module
+
+public import ContinuousFlexibility.Geometry.LocalInverse
+public import ContinuousFlexibility.Analysis.CanonicalSourceMeasure
+public import Mathlib.Analysis.Calculus.FDeriv.OfCompLeft
 
 /-!
 # Genuine smooth local coordinates for a globally smooth map
@@ -10,6 +13,8 @@ gives smoothness of its inverse at every target point. The construction
 uses the original globally smooth map and retains its exact derivative
 and inverse derivative at the center.
 -/
+
+@[expose] public section
 
 noncomputable section
 

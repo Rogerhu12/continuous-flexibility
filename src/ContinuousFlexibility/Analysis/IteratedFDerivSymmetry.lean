@@ -1,5 +1,7 @@
-import Mathlib.Analysis.Calculus.FDeriv.Symmetric
-import Mathlib.GroupTheory.Perm.Sign
+module
+
+public import Mathlib.Analysis.Calculus.FDeriv.Symmetric
+public import Mathlib.GroupTheory.Perm.Sign
 
 /-!
 # Symmetry of the iterated derivative of a smooth real function
@@ -9,6 +11,8 @@ the scalar field is real, so symmetry of second derivatives and generation
 of finite permutations by adjacent transpositions give the corresponding
 result for a `C^∞` function.
 -/
+
+@[expose] public section
 
 noncomputable section
 

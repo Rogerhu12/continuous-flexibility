@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterMorsePullback
-import ContinuousFlexibility.Radial.OuterMorseCellEnergy
+module
+
+public import ContinuousFlexibility.Radial.OuterMorsePullback
+public import ContinuousFlexibility.Radial.OuterMorseCellEnergy
 
 /-!
 # Whole-cell energy for actual physical states
@@ -8,6 +10,8 @@ The model estimate is applied to the pullback of the actual physical
 solution.  Comparing the chosen state scale with the realized cell
 amplitude then gives the ordinary two-coordinate square energy.
 -/
+
+@[expose] public section
 
 noncomputable section
 

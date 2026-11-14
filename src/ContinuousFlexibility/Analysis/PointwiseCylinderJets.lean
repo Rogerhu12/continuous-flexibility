@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.BoundaryTaylorExtension
-import Mathlib.Analysis.Calculus.ContDiff.Comp
+module
+
+public import ContinuousFlexibility.Analysis.BoundaryTaylorExtension
+public import Mathlib.Analysis.Calculus.ContDiff.Comp
 
 /-!
 # Actual cylinder jets from smoothness at a point
@@ -13,6 +15,8 @@ open neighborhood. In particular pointwise smoothness along a boundary
 circle is enough to make each radial boundary trace globally smooth in
 the angle.
 -/
+
+@[expose] public section
 
 noncomputable section
 

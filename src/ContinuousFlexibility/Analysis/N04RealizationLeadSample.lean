@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadAssembly
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeMaterialSamples
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadAssembly
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeMaterialSamples
 
 /-!
 # The sample obligation
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Analysis.WholeReferenceGaugeMaterialSamples
 The ported sample displacement of the reference-gauged atlas, for the
 original typed atlas of the start and any supplied charts and families.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerPieceProjection
+module
+
+public import ContinuousFlexibility.Radial.InnerPieceProjection
 
 /-!
 # Uniform bounds for actual sums over disjoint inner pieces
@@ -8,6 +10,8 @@ when the number of retained cells changes. The second theorem applies the
 Hilbert estimate to restriction and zero extension in the actual L² measure,
 including the local weight ratios on both sides of each Dirichlet block.
 -/
+
+@[expose] public section
 
 noncomputable section
 

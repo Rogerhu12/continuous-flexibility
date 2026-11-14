@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06PositiveClippedJets
-import ContinuousFlexibility.Analysis.PositiveReferenceCoordinate
+module
+
+public import ContinuousFlexibility.Analysis.N06PositiveClippedJets
+public import ContinuousFlexibility.Analysis.PositiveReferenceCoordinate
 
 /-!
 # Polynomial finite-jet bounds for the constructed positive coordinate
@@ -9,6 +11,8 @@ actual integral normalizer determine the first three coordinate jets.
 No derivative bound for the constructed coordinate is supplied as an
 input. The constant below comes only from the one fixed cutoff.
 -/
+
+@[expose] public section
 
 noncomputable section
 

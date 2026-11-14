@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledAngularKernel
-import ContinuousFlexibility.Analysis.N04PositiveGeometrySampledPlaneKernel
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledAngularKernel
+public import ContinuousFlexibility.Analysis.N04PositiveGeometrySampledPlaneKernel
 
 /-!
 # Saved positive words of the actual angular interpolation
@@ -8,6 +10,8 @@ The bounded packet contains the angular defect, while the unwrapped
 angle is added through its fixed linear tower. Every estimate refers to
 the selected width and the original component sample.
 -/
+
+@[expose] public section
 
 noncomputable section
 

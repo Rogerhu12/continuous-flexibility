@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # Actual intermediate targets for N07a
@@ -8,6 +10,8 @@ The linear target is precisely the equation, uniqueness and fixed-loss
 estimate of the final scalar inverse. Neither is added to N06: the three
 N07a subnodes prove these conclusions in manuscript order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

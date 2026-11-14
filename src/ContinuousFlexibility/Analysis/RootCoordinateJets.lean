@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.RootPowerJets
-import Mathlib.Analysis.Calculus.ContDiff.Operations
-import Mathlib.Analysis.Normed.Operator.Prod
-import Mathlib.Tactic.FieldSimp
-import Lean.Elab.Tactic.Omega
+module
+
+public import ContinuousFlexibility.Analysis.RootPowerJets
+public import Mathlib.Analysis.Calculus.ContDiff.Operations
+public import Mathlib.Analysis.Normed.Operator.Prod
+public import Mathlib.Tactic.FieldSimp
+public import Lean.Elab.Tactic.Omega
 
 /-!
 # Uniform jets of the root coordinate
@@ -12,6 +14,8 @@ coordinate map with a scalar parameter of norm at most one. On the
 positive radial interval, its derivatives admit the scale used by the
 weighted composition estimate. The proof uses the max norm on products.
 -/
+
+@[expose] public section
 
 noncomputable section
 

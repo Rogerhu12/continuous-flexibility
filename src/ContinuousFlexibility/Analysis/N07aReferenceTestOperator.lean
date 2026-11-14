@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCompactEvenHeight
-import ContinuousFlexibility.Analysis.N07aReferenceReturn
+module
+
+public import ContinuousFlexibility.Analysis.N07aCompactEvenHeight
+public import ContinuousFlexibility.Analysis.N07aReferenceReturn
 
 /-!
 # The actual reference operator on compact even tests
@@ -9,6 +11,8 @@ linear correction on a test lifted through the physical height decoder.
 The explicit zero-amplitude coefficients identify the remaining operator
 with the radial differential expression used by N05.
 -/
+
+@[expose] public section
 
 noncomputable section
 

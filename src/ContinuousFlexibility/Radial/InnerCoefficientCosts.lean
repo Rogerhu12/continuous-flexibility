@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerCoefficientWeights
+module
+
+public import ContinuousFlexibility.Radial.InnerCoefficientWeights
 
 /-!
 # The fixed coefficient loss in the two inner inverse estimates
@@ -9,6 +11,8 @@ Dirichlet exponent, not on the weight exponent selected before N.
 Fixed multiplicative constants in the coarse estimate are absorbed into
 one further coefficient power, uniformly over all later transition cells.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ReferenceNaturalKernel
+module
+
+public import ContinuousFlexibility.Radial.ReferenceNaturalKernel
 
 /-!
 # The second-mode inverse identifies the actual homogeneous profile
@@ -9,6 +11,8 @@ zero ordinary source and unit border datum then identify the modal
 solution with the given homogeneous field by the actual inverse's
 uniqueness clause.
 -/
+
+@[expose] public section
 
 noncomputable section
 

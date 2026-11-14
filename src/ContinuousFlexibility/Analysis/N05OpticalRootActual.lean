@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05OpticalRootGeometry
-import ContinuousFlexibility.Analysis.N05ReferenceNegativeDensity
-import Mathlib.Analysis.Calculus.Deriv.Abs
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05OpticalRootGeometry
+public import ContinuousFlexibility.Analysis.N05ReferenceNegativeDensity
+public import Mathlib.Analysis.Calculus.Deriv.Abs
 
 /-!
 # The first height identity for the actual negative reference chart
@@ -11,6 +13,8 @@ differentiates that very normalization for the actual N04 slices, with
 the absolute Jacobian retained throughout. Both physical orientations
 therefore have the same logarithmic formula, also at the closed ends.
 -/
+
+@[expose] public section
 
 noncomputable section
 

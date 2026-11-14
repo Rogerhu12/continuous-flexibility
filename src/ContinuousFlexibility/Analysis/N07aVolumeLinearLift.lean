@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aVolumeCell
-import Mathlib.Algebra.Module.Submodule.Equiv
+module
+
+public import ContinuousFlexibility.Analysis.N07aVolumeCell
+public import Mathlib.Algebra.Module.Submodule.Equiv
 
 /-!
 # Linear realization in a prescribed source level
@@ -8,6 +10,8 @@ Existence in the actual volume graph and injectivity of its forget map
 determine the lift uniquely.  The standard range equivalence supplies
 linearity; the genuine norm estimate then supplies continuity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

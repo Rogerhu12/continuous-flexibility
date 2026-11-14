@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Radial.LpConvolution
-import ContinuousFlexibility.Radial.MorseEnergyCutoff
-import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
-import Mathlib.Analysis.Calculus.BumpFunction.Normed
-import Mathlib.Analysis.Calculus.ContDiff.Convolution
-import Mathlib.Analysis.Calculus.Deriv.Shift
+module
+
+public import ContinuousFlexibility.Radial.LpConvolution
+public import ContinuousFlexibility.Radial.MorseEnergyCutoff
+public import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
+public import Mathlib.Analysis.Calculus.BumpFunction.Normed
+public import Mathlib.Analysis.Calculus.ContDiff.Convolution
+public import Mathlib.Analysis.Calculus.Deriv.Shift
 
 /-!
 # A smooth compact core for the physical Morse energy form
@@ -13,6 +15,8 @@ its weak derivative, and its exponential weight. The scalar convolution
 is identified with the vector-valued L² convolution by actual test
 integrals. No point evaluation functional on L² is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

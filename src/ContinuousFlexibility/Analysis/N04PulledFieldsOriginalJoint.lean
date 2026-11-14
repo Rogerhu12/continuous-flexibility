@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationCoefficientAnnularTowers
-import ContinuousFlexibility.Analysis.N04RealizationMixedJointDirections
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationCoefficientAnnularTowers
+public import ContinuousFlexibility.Analysis.N04RealizationMixedJointDirections
 
 /-!
 # Small joint-tower adapters before the retained start is substituted
@@ -8,6 +10,8 @@ The original coefficient mixed tower is joined with abstract N01 data.
 Subtraction is likewise carried out over an arbitrary parameter space.
 The retained start then supplies its data to these short constructors.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchedRadiusGreenKernel
-import ContinuousFlexibility.Radial.OuterWholeMeasure
+module
+
+public import ContinuousFlexibility.Radial.MatchedRadiusGreenKernel
+public import ContinuousFlexibility.Radial.OuterWholeMeasure
 
 /-!
 # The same whole-tail Green inverse on the scaled physical profile
@@ -8,6 +10,8 @@ The whole outward measure is derived from the existing exact radial
 measure law.  The already constructed radius isometry therefore applies
 to the actual whole-tail spaces on both ends, including the left end.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.FiniteInversePolynomialEnvelope
-import ContinuousFlexibility.Analysis.PlanarInverseDerivativeBound
-import ContinuousFlexibility.Analysis.PointwiseProductMaterialJets
-import ContinuousFlexibility.Analysis.OneHighCompositionJets
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
-import Mathlib.Data.Nat.Choose.Sum
+module
+
+public import ContinuousFlexibility.Analysis.FiniteInversePolynomialEnvelope
+public import ContinuousFlexibility.Analysis.PlanarInverseDerivativeBound
+public import ContinuousFlexibility.Analysis.PointwiseProductMaterialJets
+public import ContinuousFlexibility.Analysis.OneHighCompositionJets
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+public import Mathlib.Data.Nat.Choose.Sum
 
 /-!
 # Finite ordinary calculus with uniform polynomial costs
@@ -12,6 +14,8 @@ Only genuine forward jets and genuine inverse germs enter these estimates.
 The coefficients and powers are chosen before every map, point and numerical
 envelope. Zeroth angular lift values are never bounded.
 -/
+
+@[expose] public section
 
 noncomputable section
 

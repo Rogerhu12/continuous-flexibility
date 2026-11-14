@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartInteriorSectorControl
-import ContinuousFlexibility.Analysis.ActualNegativeReferenceAiryCoordinate
-import ContinuousFlexibility.Analysis.N01ControlLengthBound
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartInteriorSectorControl
+public import ContinuousFlexibility.Analysis.ActualNegativeReferenceAiryCoordinate
+public import ContinuousFlexibility.Analysis.N01ControlLengthBound
 
 /-!
 # The actual reference travel stays quantitatively positive in the interior
@@ -10,6 +12,8 @@ reference optical factor on the same closed half. Every overlap radius
 with a material reciprocal bound is allowed. Thus the later root collar
 can be chosen from the actual divided odd coefficient.
 -/
+
+@[expose] public section
 
 noncomputable section
 

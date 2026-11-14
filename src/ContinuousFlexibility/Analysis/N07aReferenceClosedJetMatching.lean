@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aClosedFirstTraces
-import ContinuousFlexibility.Analysis.N07aClosedHeightRepresentation
-import ContinuousFlexibility.Analysis.N07aClosedCanonicalRepresentatives
+module
+
+public import ContinuousFlexibility.Analysis.N07aClosedFirstTraces
+public import ContinuousFlexibility.Analysis.N07aClosedHeightRepresentation
+public import ContinuousFlexibility.Analysis.N07aClosedCanonicalRepresentatives
 
 /-!
 # Reference weak graph membership forces the actual closed first jets to match
@@ -10,6 +12,8 @@ two adjacent pieces. The graph's arbitrary angular tests identify their
 radial first traces; differentiating the common angular value trace gives
 the other component of the first Fréchet derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

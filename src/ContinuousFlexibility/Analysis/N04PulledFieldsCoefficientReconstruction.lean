@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientRegularity
 
 /-!
 # Reconstruction of the actual physical coefficients
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientRegularity
 The retained coefficient is exactly the original coefficient minus
 its actual residual-substituted correction error, at the same point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

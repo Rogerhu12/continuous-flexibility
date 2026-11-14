@@ -1,5 +1,7 @@
-import Mathlib.Topology.MetricSpace.Contracting
-import Mathlib.Topology.MetricSpace.Pseudo.Constructions
+module
+
+public import Mathlib.Topology.MetricSpace.Contracting
+public import Mathlib.Topology.MetricSpace.Pseudo.Constructions
 
 /-!
 # Continuous parameter dependence of a uniformly contracting equation
@@ -8,6 +10,8 @@ Only continuity in the parameter at each fixed argument is required.
 The a posteriori contraction estimate compares a nearby solution with
 the fixed solution at the parameter under consideration.
 -/
+
+@[expose] public section
 
 noncomputable section
 

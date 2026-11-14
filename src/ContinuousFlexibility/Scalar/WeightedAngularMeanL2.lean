@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedAngularMeanJets
-import ContinuousFlexibility.Scalar.WeightedAngularPrimitiveL2
+module
+
+public import ContinuousFlexibility.Scalar.WeightedAngularMeanJets
+public import ContinuousFlexibility.Scalar.WeightedAngularPrimitiveL2
 
 /-!
 # Angular averaging contracts the actual cylinder L² norm
@@ -9,6 +11,8 @@ normalized mean. The angular interval has mass pi, which cancels its
 normalization after Fubini. The output is therefore an actual L² member
 with operator norm at most one.
 -/
+
+@[expose] public section
 
 noncomputable section
 

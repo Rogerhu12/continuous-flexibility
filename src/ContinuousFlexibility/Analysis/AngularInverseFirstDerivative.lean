@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ParameterizedCircleInverse
-import ContinuousFlexibility.Analysis.CylinderSobolev
-import ContinuousFlexibility.Geometry.GraphSurfaceGeometry
+module
+
+public import ContinuousFlexibility.Analysis.ParameterizedCircleInverse
+public import ContinuousFlexibility.Analysis.CylinderSobolev
+public import ContinuousFlexibility.Geometry.GraphSurfaceGeometry
 
 /-!
 # Actual first derivative bounds for the angular inverse
@@ -10,6 +12,8 @@ right-inverse identity. Its norm is controlled by the original radial
 derivative and the positive original angular derivative. These are the
 low-order inputs needed by the existing nonlinear inverse-jet estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

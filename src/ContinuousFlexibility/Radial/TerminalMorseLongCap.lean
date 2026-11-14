@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.TerminalMorseLongGeometry
-import ContinuousFlexibility.Radial.TerminalCapCoshComparison
+module
+
+public import ContinuousFlexibility.Radial.TerminalMorseLongGeometry
+public import ContinuousFlexibility.Radial.TerminalCapCoshComparison
 
 /-!
 # Attenuation of the actual normalized long-cap stand-in
@@ -13,6 +15,8 @@ only on the later subinterval beyond log 4.
 This proves both attenuated jets on a fixed cutoff layer without imposing
 a false mass lower bound at the turning point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

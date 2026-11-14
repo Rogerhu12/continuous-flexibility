@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CoupledCircleCompositionSmoothTame
-import ContinuousFlexibility.Analysis.CoupledCircleTranslation
-import ContinuousFlexibility.Analysis.CircleUnitIntegral
-import ContinuousFlexibility.Analysis.TameUnitIntegralLinearFamily
+module
+
+public import ContinuousFlexibility.Analysis.CoupledCircleCompositionSmoothTame
+public import ContinuousFlexibility.Analysis.CoupledCircleTranslation
+public import ContinuousFlexibility.Analysis.CircleUnitIntegral
+public import ContinuousFlexibility.Analysis.TameUnitIntegralLinearFamily
 
 /-!
 # Actual averaged circle composition with fixed travel
@@ -11,6 +13,8 @@ by a unit-interval parameter contracts each input grade. The genuine
 projective integral of the resulting compositions therefore has the
 required joint smooth tame tower and the exact scalar integral decoder.
 -/
+
+@[expose] public section
 
 noncomputable section
 

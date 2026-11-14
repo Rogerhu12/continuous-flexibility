@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01cOpticalSquareBounds
-import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
-import Mathlib.Analysis.Calculus.Deriv.CompMul
-import Mathlib.Analysis.Calculus.Deriv.Shift
+module
+
+public import ContinuousFlexibility.Analysis.N01cOpticalSquareBounds
+public import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
+public import Mathlib.Analysis.Calculus.Deriv.CompMul
+public import Mathlib.Analysis.Calculus.Deriv.Shift
 
 /-!
 # Actual mixed spatial and parameter jets of an affine optical root
@@ -10,6 +12,8 @@ The mixed-coordinate theorem is local on the genuine positive domain.
 No global smoothness of the totalized square root is used. The scalar
 parameter is then the original continuous linear control mean.
 -/
+
+@[expose] public section
 
 noncomputable section
 

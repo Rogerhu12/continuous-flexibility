@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bReferencePieces
-import ContinuousFlexibility.Analysis.N04bRootTravelCharts
+module
+
+public import ContinuousFlexibility.Analysis.N04bReferencePieces
+public import ContinuousFlexibility.Analysis.N04bRootTravelCharts
 
 /-!
 # Canonical reference metadata for arbitrary interior negative cuts
@@ -9,6 +11,8 @@ data and gives each negative pair its actual root radius. Positive
 canonical intervals and all physical domains, charts and heights are
 retained from the supplied data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

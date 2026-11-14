@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.MaterialLogJets
+module
+
+public import ContinuousFlexibility.Analysis.MaterialLogJets
 
 /-!
 # Endpoint symbols and global material derivatives
@@ -7,6 +9,8 @@ This shared endpoint-to-global argument uses the actual endpoint expression
 for ell and the existing endpoint material differentiation operator. It does
 not specialize to H or M and does not change the installed logarithm proofs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bOpticalSource
-import ContinuousFlexibility.Analysis.N01CorrectionCoefficientMaterialTame
+module
+
+public import ContinuousFlexibility.Analysis.N04bOpticalSource
+public import ContinuousFlexibility.Analysis.N01CorrectionCoefficientMaterialTame
 
 /-!
 # The actual buffered optical field, including its source estimate
@@ -9,6 +11,8 @@ input for the actual coefficient estimate. The same coefficient jets
 therefore produce the bilinear source, and the literal corrected field
 retains all N03 identities and all five raw field properties.
 -/
+
+@[expose] public section
 
 noncomputable section
 

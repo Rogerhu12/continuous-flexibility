@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedAngularPrimitiveJets
-import ContinuousFlexibility.Scalar.WeightedStateRegularity
+module
+
+public import ContinuousFlexibility.Scalar.WeightedAngularPrimitiveJets
+public import ContinuousFlexibility.Scalar.WeightedStateRegularity
 
 /-!
 # The actual normalized angular-mean field and its weighted jets
@@ -8,6 +10,8 @@ Averaging always uses the prescribed interval from zero to pi and its
 normalization. It commutes with the material pullback and all radial jets.
 Every positive angular jet of the resulting radial field is zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06PeriodicNormalizedRepresentation
+module
+
+public import ContinuousFlexibility.Analysis.N06PeriodicNormalizedRepresentation
 
 /-!
 # Physical weak pairings respect almost-everywhere representatives
@@ -8,6 +10,8 @@ Fubini's almost-everywhere implication is enough to transport equality of
 representatives through this pairing; no new integrability assumption is
 needed for equality of the integrals themselves.
 -/
+
+@[expose] public section
 
 noncomputable section
 

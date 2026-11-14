@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalMultipliers
-import ContinuousFlexibility.Analysis.N05MaterialWeights
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalMultipliers
+public import ContinuousFlexibility.Analysis.N05MaterialWeights
 
 /-!
 # Actual embeddings of canonical volume levels
@@ -9,6 +11,8 @@ map to the unweighted Hilbert sequence. A strict endpoint margin absorbs
 any change of material order. Every angular jet is scaled by the same
 piecewise factor, so the weaker realization represents the same source.
 -/
+
+@[expose] public section
 
 noncomputable section
 

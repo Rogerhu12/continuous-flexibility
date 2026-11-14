@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N08ScalarFormula
+module
+
+public import ContinuousFlexibility.Analysis.N08ScalarFormula
 
 /-!
 # Component locality of the actual controlled coefficients
@@ -9,6 +11,8 @@ constant when other controls change, but its first spatial derivatives
 do not.  Consequently all three actual corrected coefficients have the
 same component locality.  No reference-cell placement is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

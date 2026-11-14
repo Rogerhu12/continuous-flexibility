@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationForwardFiniteJets
-import ContinuousFlexibility.Analysis.N04RealizationEnvelopeAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationForwardFiniteJets
+public import ContinuousFlexibility.Analysis.N04RealizationEnvelopeAlgebra
 
 /-!
 # One finite envelope for actual charts and scalar atoms
@@ -10,6 +12,8 @@ requirements. The evaluation index and its state, piece and point maps
 are arbitrary. All three families use the same sampled E0 times state
 weight; neither an unwrapped angular value nor a new chart is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

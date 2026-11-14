@@ -1,6 +1,8 @@
-import Mathlib.Analysis.Calculus.BumpFunction.Convolution
-import Mathlib.MeasureTheory.Function.LpSpace.ContinuousCompMeasurePreserving
-import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
+module
+
+public import Mathlib.Analysis.Calculus.BumpFunction.Convolution
+public import Mathlib.MeasureTheory.Function.LpSpace.ContinuousCompMeasurePreserving
+public import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
 
 /-!
 # Local integral convergence of planar mollification
@@ -10,6 +12,8 @@ on the periodically extended plane. Translation continuity in `L¹`,
 followed by Fubini, gives the integral approximation needed for the
 two-dimensional pointwise Sobolev estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryCoordinatesCollector
-import ContinuousFlexibility.Analysis.N04PositiveGeometryAuxiliary
-import ContinuousFlexibility.Analysis.N04PositiveGeometryActualCoordinateDirections
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryCoordinatesCollector
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryAuxiliary
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryActualCoordinateDirections
 
 /-!
 # A uniform neighborhood for all positive geometry atoms
@@ -10,6 +12,8 @@ Reciprocals are constructed at the zero auxiliary column, after which
 the existing preservation theorem gives the same neighborhood for all
 columns. No additional reference-jet premise is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

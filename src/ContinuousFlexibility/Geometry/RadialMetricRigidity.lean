@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Geometry.MetricIsometryRigidity
-import ContinuousFlexibility.Geometry.PlanarRotations
-import ContinuousFlexibility.Contracts.CartesianMetricRegularity
-import Mathlib.Analysis.Convex.PathConnected
-import Mathlib.Analysis.Normed.Module.RCLike.Real
+module
+
+public import ContinuousFlexibility.Geometry.MetricIsometryRigidity
+public import ContinuousFlexibility.Geometry.PlanarRotations
+public import ContinuousFlexibility.Contracts.CartesianMetricRegularity
+public import Mathlib.Analysis.Convex.PathConnected
+public import Mathlib.Analysis.Normed.Module.RCLike.Real
 
 /-!
 # Intrinsic rigidity of the actual radial Cartesian metric
@@ -12,6 +14,8 @@ at the center. The one-jet ODE theorem is applied to its constructed tensor;
 no isometry rigidity or connection preservation is added as an assumption.
 The closed-disk conclusion includes the actual boundary continuity argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

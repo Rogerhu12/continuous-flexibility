@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04SourceColumnsScalarData
-import ContinuousFlexibility.Analysis.AbsoluteReciprocalJetBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04SourceColumnsScalarData
+public import ContinuousFlexibility.Analysis.AbsoluteReciprocalJetBounds
 
 /-!
 # Reciprocal current jets from a material lower bound
@@ -8,6 +10,8 @@ The true scalar derivative formula converts a bound for the reciprocal
 value into every outer derivative envelope. Scalar composition then
 produces the complete reference-difference tower on one neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

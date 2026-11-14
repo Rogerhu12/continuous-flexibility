@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.EndpointResistance
-import Mathlib.MeasureTheory.Integral.IntegralEqImproper
+module
+
+public import ContinuousFlexibility.Analysis.EndpointResistance
+public import Mathlib.MeasureTheory.Integral.IntegralEqImproper
 
 /-!
 # Unbounded primitive of endpoint resistance
@@ -9,6 +11,8 @@ vanishing endpoint. If it were bounded, the ordinary integrals over interior
 intervals would give an integrable reciprocal by exhaustion, contradicting
 the inverse-distance comparison. This argument needs only C¹ regularity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.MaterialWeights
+module
+
+public import ContinuousFlexibility.Analysis.MaterialWeights
 
 /-!
 # Material powers under a scale close to one
@@ -8,6 +10,8 @@ as the scale tends to one. Consequently every fixed power can be
 transferred across a bounded coordinate displacement at the cost of any
 prescribed positive extra material order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

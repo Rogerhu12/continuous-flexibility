@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CoupledCircleCompositionTerms
-import ContinuousFlexibility.Analysis.SpacesInterpolationProducts
+module
+
+public import ContinuousFlexibility.Analysis.CoupledCircleCompositionTerms
+public import ContinuousFlexibility.Analysis.SpacesInterpolationProducts
 
 /-!
 # One high factor in the weighted circle composition terms
@@ -8,6 +10,8 @@ The outer function is a distinguished linear factor. All repeated factors
 come from the chart displacement. An extra sample weight supplies the
 fixed square-summable envelope without imposing an inverse-chart condition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

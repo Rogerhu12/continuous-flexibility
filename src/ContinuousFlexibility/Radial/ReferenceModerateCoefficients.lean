@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.ReferenceRadialWeighted
-import ContinuousFlexibility.Radial.MorseChainScales
-import ContinuousFlexibility.Radial.CentralStatementBridges
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
+module
+
+public import ContinuousFlexibility.Radial.ReferenceRadialWeighted
+public import ContinuousFlexibility.Radial.MorseChainScales
+public import ContinuousFlexibility.Radial.CentralStatementBridges
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
 
 /-!
 # Coefficient powers and rapidly attenuated scalar fields
@@ -12,6 +14,8 @@ union of all positively attenuated scalar L² spaces. The profile, reciprocal
 profile, and reciprocal radius provide all ordinary derivative generators
 needed when the radial equation is differentiated.
 -/
+
+@[expose] public section
 
 noncomputable section
 

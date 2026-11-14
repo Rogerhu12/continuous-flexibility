@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Blueprint.R10a.Geometry
-import ContinuousFlexibility.Radial.R10aRegionalConstruction
+module
+
+public import ContinuousFlexibility.Blueprint.R10a.Geometry
+public import ContinuousFlexibility.Radial.R10aRegionalConstruction
 
 /-!
 # R10a: regional inverses and terminal cutoff data on one geometry
@@ -10,6 +12,8 @@ lengths. The output uses one reference at every frequency and records
 actual weak inverse graphs and physical cutoff data. The inner Poisson
 columns and their flux matrix are constructed separately.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

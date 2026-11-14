@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05CanonicalZeroExtension
-import ContinuousFlexibility.Analysis.CylinderTestPeriodization
-import ContinuousFlexibility.Analysis.SpacesCylinderEvenJets
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalZeroExtension
+public import ContinuousFlexibility.Analysis.CylinderTestPeriodization
+public import ContinuousFlexibility.Analysis.SpacesCylinderEvenJets
 
 /-!
 # A fixed even periodic representative of each canonical source coordinate
@@ -11,6 +13,8 @@ averaging makes its angular symmetries pointwise. On the reflection-fixed
 canonical subspace this representative is the original L² equivalence class.
 The construction depends only on that class, not on a weight or jet order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

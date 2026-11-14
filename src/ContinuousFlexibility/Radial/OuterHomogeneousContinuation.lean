@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.OuterFirstOrderState
-import ContinuousFlexibility.Radial.MorseChainLocalGluing
-import Mathlib.Analysis.Calculus.MeanValue
+module
+
+public import ContinuousFlexibility.Radial.OuterFirstOrderState
+public import ContinuousFlexibility.Radial.MorseChainLocalGluing
+public import Mathlib.Analysis.Calculus.MeanValue
 
 /-!
 # Continuing every actual core state into the deep tail
@@ -11,6 +13,8 @@ an actual continuation of every initial core state.  The existing physical
 gluing operation is C¹ because both value and flux match, including the
 derivative at the interface itself.
 -/
+
+@[expose] public section
 
 noncomputable section
 

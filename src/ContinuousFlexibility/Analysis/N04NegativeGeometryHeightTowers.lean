@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometryCoefficientTowers
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryCoefficientTowers
 
 /-!
 # The literal negative height and its reciprocal have joint towers
@@ -9,6 +11,8 @@ scalar arguments permit ordinary smooth composition. The component germ
 then identifies this formula with the stored chosen height, and all mixed
 spatial parameter towers come from that single joint tower.
 -/
+
+@[expose] public section
 
 noncomputable section
 

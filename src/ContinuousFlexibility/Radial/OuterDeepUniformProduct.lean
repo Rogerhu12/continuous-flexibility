@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OuterDeepUniform
+module
+
+public import ContinuousFlexibility.Radial.OuterDeepUniform
 
 /-!
 # A single sharp product exponent for all actual deep tails
@@ -7,6 +9,8 @@ The existing R07 proof uses the explicit constant below. Keeping this
 constant outside the height, frequency, endpoint and cell quantifiers
 provides the uniform input needed for localized Green estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

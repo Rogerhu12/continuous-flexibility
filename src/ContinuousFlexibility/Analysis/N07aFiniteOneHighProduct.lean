@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aFiniteParameterProduct
-import Mathlib.Data.List.OfFn
+module
+
+public import ContinuousFlexibility.Analysis.N07aFiniteParameterProduct
+public import Mathlib.Data.List.OfFn
 
 /-!
 # Multiplying a source estimate by the complete finite coefficient product
@@ -8,6 +10,8 @@ Both terms in the source estimate use the same interpolation choice. The
 parameter factor already present in its low-source term is included in
 the derivative budget before the product is bounded.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05CanonicalMollifierL2Approximation
-import ContinuousFlexibility.Analysis.N05CanonicalCutoffApproximation
-import ContinuousFlexibility.Analysis.SpacesPhysicalReconstruction
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalMollifierL2Approximation
+public import ContinuousFlexibility.Analysis.N05CanonicalCutoffApproximation
+public import ContinuousFlexibility.Analysis.SpacesPhysicalReconstruction
 
 /-!
 # Mollification of actual weak jets on canonical cells
@@ -10,6 +12,8 @@ after restriction to a canonical cell. Any actual weak mixed derivative
 is approximated by the corresponding ordinary derivative of the same
 smooth function. This includes radial derivatives whenever they exist.
 -/
+
+@[expose] public section
 
 noncomputable section
 

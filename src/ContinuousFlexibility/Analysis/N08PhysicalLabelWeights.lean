@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N08SampleEnvelopeComparison
-import ContinuousFlexibility.Scalar.WeightedReferenceCoefficients
+module
+
+public import ContinuousFlexibility.Analysis.N08SampleEnvelopeComparison
+public import ContinuousFlexibility.Scalar.WeightedReferenceCoefficients
 
 /-!
 # Removing the coefficient losses from the physical-label height comparison
@@ -9,6 +11,8 @@ N01 mixed flow estimate costs an envelope at its original label. One extra
 positive physical height power and half of the label height power absorb
 both costs. The resulting exponents are still strictly positive.
 -/
+
+@[expose] public section
 
 noncomputable section
 

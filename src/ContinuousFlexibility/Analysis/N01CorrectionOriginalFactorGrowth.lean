@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01TransportCharacteristicInterpolation
-import ContinuousFlexibility.Analysis.FlatMixedDiagonalRealization
+module
+
+public import ContinuousFlexibility.Analysis.N01TransportCharacteristicInterpolation
+public import ContinuousFlexibility.Analysis.FlatMixedDiagonalRealization
 
 /-!
 # The actual original factors in the correction polynomial
@@ -10,6 +12,8 @@ characteristic speed gives the square-root factor by the exact identity
 `sqrt(discriminant) = b - a * minusSpeed`. Thus all three actual factors
 have fixed-loss mixed growth on the full correction parameter space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

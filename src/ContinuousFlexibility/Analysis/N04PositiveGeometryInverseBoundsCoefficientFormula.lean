@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsAngularGraph
-import ContinuousFlexibility.Analysis.N06BoundaryRadialJets
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsAngularGraph
+public import ContinuousFlexibility.Analysis.N06BoundaryRadialJets
 
 /-!
 # The chosen radial coefficients from actual source and inverse jets
@@ -9,6 +11,8 @@ coefficients. Every forward factor is a genuine source jet at the
 forward root label; every inverse factor is a lower positive jet of the
 actual triangular angular inverse. No new extension is selected.
 -/
+
+@[expose] public section
 
 noncomputable section
 

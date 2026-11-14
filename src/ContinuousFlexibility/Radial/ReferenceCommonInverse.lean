@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ReferenceExponentComparison
+module
+
+public import ContinuousFlexibility.Radial.ReferenceExponentComparison
 
 /-!
 # One inverse for all reference exponents on a fixed geometry
@@ -8,6 +10,8 @@ obtained in the stronger domains. The local L² identity transports their
 norms and output realizations. Thus separate existence results at the
 three exponents can be assembled without making another geometric choice.
 -/
+
+@[expose] public section
 
 noncomputable section
 

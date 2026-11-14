@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.SelectedTailCauchyUniqueness
-import ContinuousFlexibility.Radial.SelectedTailWeakPairing
+module
+
+public import ContinuousFlexibility.Radial.SelectedTailCauchyUniqueness
+public import ContinuousFlexibility.Radial.SelectedTailWeakPairing
 
 /-!
 # The actual inverse with the fixed natural solution's Robin state
@@ -8,6 +10,8 @@ The natural solution supplied by the selected construction is kept fixed.
 Its state belongs to the same natural line as the deep factory's state,
 so its normalized full state gives exactly the constructed Robin domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

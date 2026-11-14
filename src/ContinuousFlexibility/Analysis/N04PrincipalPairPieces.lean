@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PrincipalPairAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalPairAlgebra
 
 /-!
 # Reindexing and covering the actual pieces
@@ -8,6 +10,8 @@ parameter and spatial tower. A cover by two predicates combines their
 genuine towers into one family defined on every index, while taking one
 common low order and uniform constants for the two estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

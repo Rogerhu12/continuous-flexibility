@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.R07IncomingJoin
-import ContinuousFlexibility.Radial.SelectedJoinAngle
-import ContinuousFlexibility.Radial.SelectedNaturalJoin
+module
+
+public import ContinuousFlexibility.Radial.R07IncomingJoin
+public import ContinuousFlexibility.Radial.SelectedJoinAngle
+public import ContinuousFlexibility.Radial.SelectedNaturalJoin
 
 /-!
 # The actual later selected angle at the matching join
@@ -11,6 +13,8 @@ width give the exponential transfer estimate for both actual solutions.
 Continuing the natural solution inward preserves the selected entry jet;
 the resulting lower angle bound is therefore at joinInner itself.
 -/
+
+@[expose] public section
 
 noncomputable section
 

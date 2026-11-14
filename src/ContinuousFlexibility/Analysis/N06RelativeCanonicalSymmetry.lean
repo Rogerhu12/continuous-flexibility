@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06RelativeBoundarySymmetry
-import ContinuousFlexibility.Analysis.N06RelativeCanonicalBoundaryPatch
-import ContinuousFlexibility.Analysis.N05CanonicalBoundarySymmetry
+module
+
+public import ContinuousFlexibility.Analysis.N06RelativeBoundarySymmetry
+public import ContinuousFlexibility.Analysis.N06RelativeCanonicalBoundaryPatch
+public import ContinuousFlexibility.Analysis.N05CanonicalBoundarySymmetry
 
 /-!
 # The actual relative N04 patches retain period and reflection
@@ -11,6 +13,8 @@ therefore supply the symmetries of the constructed Taylor corrections.
 The new fields retain the original pi lift and the even/odd reflection
 without a separate symmetry hypothesis on a chosen extension.
 -/
+
+@[expose] public section
 
 noncomputable section
 

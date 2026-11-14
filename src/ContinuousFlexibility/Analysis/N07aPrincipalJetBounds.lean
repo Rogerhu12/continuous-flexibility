@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aGeometryLengthBounds
-import ContinuousFlexibility.Analysis.N07aSampleJetBounds
+module
+
+public import ContinuousFlexibility.Analysis.N07aGeometryLengthBounds
+public import ContinuousFlexibility.Analysis.N07aSampleJetBounds
 
 /-!
 # Quantitative actual principal jets on the original canonical intervals
@@ -8,6 +10,8 @@ The genuine unit-piece bounds are transferred by the exact affine jet
 formula. All powers of inverse interval length stay in one subpower
 envelope until the complete normal expression is formed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

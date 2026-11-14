@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aAngularMaterialEmbedding
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularMaterialEmbedding
 
 /-!
 # Material regularity of the already constructed relative inverse
@@ -10,6 +12,8 @@ single high state factor.  The relative gain is an input proved from the
 actual coefficients in the companion analytic modules, not a new premise
 of N07a or a replacement for that analytic step.
 -/
+
+@[expose] public section
 
 noncomputable section
 

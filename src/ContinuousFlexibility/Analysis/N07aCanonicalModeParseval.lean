@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aAngularEvenRepresentative
-import ContinuousFlexibility.Analysis.N07aAngularRadialParseval
-import ContinuousFlexibility.Analysis.N07aCanonicalUnitModes
-import ContinuousFlexibility.Analysis.N07aPeriodicRadialPairing
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularEvenRepresentative
+public import ContinuousFlexibility.Analysis.N07aAngularRadialParseval
+public import ContinuousFlexibility.Analysis.N07aCanonicalUnitModes
+public import ContinuousFlexibility.Analysis.N07aPeriodicRadialPairing
 
 /-!
 # Partial Parseval for the actual canonical L² classes
@@ -10,6 +12,8 @@ The true cosine coefficients of a reflection-fixed canonical class form
 an exact radial L² Parseval series. The normalization includes both the
 canonical half period and the affine radial interval length.
 -/
+
+@[expose] public section
 
 noncomputable section
 

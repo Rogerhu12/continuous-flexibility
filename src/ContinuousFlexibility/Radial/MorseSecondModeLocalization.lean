@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MorseSecondModeGeometry
+module
+
+public import ContinuousFlexibility.Radial.MorseSecondModeGeometry
 
 /-!
 # Actual cell labels in the signed logarithmic coordinate
@@ -7,6 +9,8 @@ The right edge is one physical block. A left edge crosses the cap of
 the next block, so its cell label changes exactly at that cap entrance.
 The initial left edge has the corresponding predecessor/current labels.
 -/
+
+@[expose] public section
 
 noncomputable section
 

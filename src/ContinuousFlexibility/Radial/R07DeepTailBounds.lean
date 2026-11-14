@@ -1,8 +1,12 @@
-import ContinuousFlexibility.Radial.R07DeepTailComparison
+module
+
+public import ContinuousFlexibility.Radial.R07DeepTailComparison
 
 /-!
 # Numerical bounds for the actual outward logarithmic tail
 -/
+
+@[expose] public section
 
 noncomputable section
 

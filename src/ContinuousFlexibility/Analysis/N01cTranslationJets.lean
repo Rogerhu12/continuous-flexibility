@@ -1,9 +1,11 @@
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
-import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
-import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Positivity
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+public import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+public import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Positivity
+public import Mathlib.Tactic.Ring
 
 /-!
 # Parameter derivatives of translated evaluation
@@ -19,6 +21,8 @@ derivative identities and the explicit Fourier obstruction here; we do not asser
 that every such varied vector field is a characteristic speed of the nonlinear
 surface problem.  In particular this file does not prove `¬ N01Statement`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

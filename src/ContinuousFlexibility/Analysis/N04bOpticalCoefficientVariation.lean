@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04bOpticalHeightVariation
+module
+
+public import ContinuousFlexibility.Analysis.N04bOpticalHeightVariation
 
 /-!
 # Variation of the actual corrected characteristic coefficients
@@ -8,6 +10,8 @@ The drift and speed formulas here are transferred to `b/a` and
 along the genuine height family near zero, so this transfer is an equality
 of functions on a parameter neighborhood, rather than only at the base.
 -/
+
+@[expose] public section
 
 noncomputable section
 

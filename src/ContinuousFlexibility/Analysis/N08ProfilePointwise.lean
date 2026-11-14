@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N08StateProjection
-import ContinuousFlexibility.Analysis.StateProfileRegularity
-import ContinuousFlexibility.Analysis.N08StateLinearOperations
+module
+
+public import ContinuousFlexibility.Analysis.N08StateProjection
+public import ContinuousFlexibility.Analysis.StateProfileRegularity
+public import ContinuousFlexibility.Analysis.N08StateLinearOperations
 
 /-!
 # Actual linear logarithmic profiles and their parameter derivatives
@@ -11,6 +13,8 @@ Together these facts give a continuous linear logarithmic profile in the
 pointwise topology and the exact exponential derivative of the physical
 profile. No weighted height realization is assumed in this construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

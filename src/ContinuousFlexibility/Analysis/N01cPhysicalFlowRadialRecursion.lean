@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
-import ContinuousFlexibility.Analysis.SpacesJetLimits
-import ContinuousFlexibility.Blueprint.N01c.Statements
+module
+
+public import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
+public import ContinuousFlexibility.Analysis.SpacesJetLimits
+public import ContinuousFlexibility.Blueprint.N01c.Statements
 
 /-!
 # Actual physical radial jets of the ordinary characteristic flow
@@ -11,6 +13,8 @@ The resulting identity retains the angular derivative outside a
 differential expression in the actual speed, evaluated on the actual
 flow. It is the qualitative identity used by the quantitative lifting.
 -/
+
+@[expose] public section
 
 noncomputable section
 

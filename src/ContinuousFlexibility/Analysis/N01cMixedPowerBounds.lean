@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cFiniteParameterProducts
-import ContinuousFlexibility.Analysis.N01cOneHighProducts
-import ContinuousFlexibility.Analysis.N01cDistributedRadialProducts
+module
+
+public import ContinuousFlexibility.Analysis.N01cFiniteParameterProducts
+public import ContinuousFlexibility.Analysis.N01cOneHighProducts
+public import ContinuousFlexibility.Analysis.N01cDistributedRadialProducts
 
 /-!
 # Spatial orders in actual parameter-jet estimates
@@ -10,6 +12,8 @@ the fixed top order plus one. Products add these orders before any
 one-high normalization. Neither multiplication nor scalar composition
 changes the base or the spatial loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

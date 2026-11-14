@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01FlowSmallness
-import ContinuousFlexibility.Analysis.ReturnCorrectedFlow
-import ContinuousFlexibility.Analysis.N01ReturnMargins
-import ContinuousFlexibility.Analysis.CircleSobolevPointwise
+module
+
+public import ContinuousFlexibility.Analysis.N01FlowSmallness
+public import ContinuousFlexibility.Analysis.ReturnCorrectedFlow
+public import ContinuousFlexibility.Analysis.N01ReturnMargins
+public import ContinuousFlexibility.Analysis.CircleSobolevPointwise
 
 /-!
 # Small actual inverse-chart correction
@@ -12,6 +14,8 @@ bound after the identity is removed. Applying these elementary facts to
 the specified N01 return charts controls the actual K-id and the actual
 return residual by the ordinary-flow error and the decoded left chart.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06PrincipalJetAlgebra
-import ContinuousFlexibility.Analysis.N07aCubicMatrixRows
-import ContinuousFlexibility.Analysis.N07aActualCoefficientBlocks
+module
+
+public import ContinuousFlexibility.Analysis.N06PrincipalJetAlgebra
+public import ContinuousFlexibility.Analysis.N07aCubicMatrixRows
+public import ContinuousFlexibility.Analysis.N07aActualCoefficientBlocks
 
 /-!
 # Matrix rows of the actual principal difference
@@ -9,6 +11,8 @@ The original current-minus-reference multipliers and their first jets
 retain the exact cubic endpoint gain after affine normalization. A
 single statement covers cosine and sine multiplication entries.
 -/
+
+@[expose] public section
 
 noncomputable section
 

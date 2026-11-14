@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationFiniteJetCollection
-import ContinuousFlexibility.Analysis.MaterialSampleBounds
-import Mathlib.Tactic.DeriveFintype
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationFiniteJetCollection
+public import ContinuousFlexibility.Analysis.MaterialSampleBounds
+public import Mathlib.Tactic.DeriveFintype
 
 /-!
 # The full current certificate from its actual atom families
@@ -11,6 +13,8 @@ losses and constants. The data, atlas, samples, low order and neighborhood
 are unchanged. The construction of the individual atom families remains
 an explicit obligation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

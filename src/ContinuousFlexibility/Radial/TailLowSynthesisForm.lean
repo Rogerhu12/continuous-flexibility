@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.TailFiniteLowHats
-import ContinuousFlexibility.Radial.TailMassCells
-import ContinuousFlexibility.Radial.TailReflectedInverse
+module
+
+public import ContinuousFlexibility.Radial.TailFiniteLowHats
+public import ContinuousFlexibility.Radial.TailMassCells
+public import ContinuousFlexibility.Radial.TailReflectedInverse
 
 /-!
 # Normalized low-mode synthesis in the actual closed form
@@ -10,6 +12,8 @@ the given wall. Every normalized hat is an actual compact smooth core
 element. The finite estimates construct its bounded synthesis in the
 closed Friedrichs form space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

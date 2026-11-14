@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.InteriorFlowTransport
-import ContinuousFlexibility.Analysis.PointwiseAffineMaterialJets
-import ContinuousFlexibility.Analysis.FlowJetLinearization
-import Mathlib.Analysis.Normed.Operator.Prod
+module
+
+public import ContinuousFlexibility.Analysis.InteriorFlowTransport
+public import ContinuousFlexibility.Analysis.PointwiseAffineMaterialJets
+public import ContinuousFlexibility.Analysis.FlowJetLinearization
+public import Mathlib.Analysis.Normed.Operator.Prod
 
 /-!
 # Actual spatial jets of an interior endpoint map
@@ -11,6 +13,8 @@ flow displacement back by this map preserves its derivative loss; only
 the fixed affine norm enters the numerical constants. Positive jets of
 the full angular lift are then recovered by adding the linear angle.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerCentralBufferCoefficients
-import ContinuousFlexibility.Radial.InnerModelCoefficientEnvelope
-import ContinuousFlexibility.Radial.InnerFrequencySuppression
+module
+
+public import ContinuousFlexibility.Radial.InnerCentralBufferCoefficients
+public import ContinuousFlexibility.Radial.InnerModelCoefficientEnvelope
+public import ContinuousFlexibility.Radial.InnerFrequencySuppression
 
 /-!
 # One central cut for all compressed even modes
@@ -14,6 +16,8 @@ mode, and suppresses the common envelope even after multiplication by
 the frequency. The requested initial cut may depend on an already
 chosen tail index.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N05ReferenceInterface
-import ContinuousFlexibility.Analysis.N05PrimitiveReferenceFirstBounds
-import ContinuousFlexibility.Analysis.N05PrimitiveReferenceFibers
-import Lean.Util.CollectAxioms
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceInterface
+public import ContinuousFlexibility.Analysis.N05PrimitiveReferenceFirstBounds
+public import ContinuousFlexibility.Analysis.N05PrimitiveReferenceFibers
+public import Lean.Util.CollectAxioms
 
 /-!
 # Controlled reference coordinates from explicit reference jets
@@ -12,6 +14,8 @@ All estimates concern the same supplied charts, heights, physical intervals,
 and labels. The reference radiality and jet certificates remain explicit
 hypotheses; no full nonlinear witness is changed or strengthened here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

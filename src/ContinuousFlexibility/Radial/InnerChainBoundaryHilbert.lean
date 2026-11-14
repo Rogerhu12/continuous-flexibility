@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerRadialFiniteWeakGraph
-import ContinuousFlexibility.Radial.InnerBoundedOverlap
-import Mathlib.Analysis.Normed.Module.FiniteDimension
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialFiniteWeakGraph
+public import ContinuousFlexibility.Radial.InnerBoundedOverlap
+public import Mathlib.Analysis.Normed.Module.FiniteDimension
 
 /-!
 # Hilbert incidence for the actual finite physical chain
@@ -10,6 +12,8 @@ weak domain, now with their Euclidean norm. Each internal cut is counted
 once on each of its two sides. The boundary vector contains no outer
 endpoint coordinates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

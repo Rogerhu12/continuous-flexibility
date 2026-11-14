@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesTorusCell
-import ContinuousFlexibility.Analysis.SpacesLpRestriction
+module
+
+public import ContinuousFlexibility.Analysis.SpacesTorusCell
+public import ContinuousFlexibility.Analysis.SpacesLpRestriction
 
 /-!
 # Actual `L²` transport between physical cells and the normalized torus
@@ -8,6 +10,8 @@ The inverse charts induce inverse linear isometries on the original
 almost-everywhere classes. Restriction from the cylinder is contractive;
 extension back to the cylinder keeps the fixed factor coming from `6π`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

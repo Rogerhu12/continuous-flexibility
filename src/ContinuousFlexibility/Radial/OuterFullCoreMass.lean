@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterFullCore
-import ContinuousFlexibility.Radial.OuterCoreMassScale
+module
+
+public import ContinuousFlexibility.Radial.OuterFullCore
+public import ContinuousFlexibility.Radial.OuterCoreMassScale
 
 /-!
 # Hilbert mass of the complete transition core
@@ -8,6 +10,8 @@ The outgoing right connector is a subinterval of the next ordinary
 core.  Its already proved mass bound and the adjacent amplitude ratio
 therefore include it without assuming a separate mass estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

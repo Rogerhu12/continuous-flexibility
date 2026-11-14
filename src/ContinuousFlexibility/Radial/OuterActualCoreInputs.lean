@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.OuterUniformCoreState
-import ContinuousFlexibility.Radial.OuterActualCoreMeasure
-import ContinuousFlexibility.Radial.OuterPhysicalInverse
-import ContinuousFlexibility.Radial.OuterPhysicalFundamentalPair
+module
+
+public import ContinuousFlexibility.Radial.OuterUniformCoreState
+public import ContinuousFlexibility.Radial.OuterActualCoreMeasure
+public import ContinuousFlexibility.Radial.OuterPhysicalInverse
+public import ContinuousFlexibility.Radial.OuterPhysicalFundamentalPair
 
 /-!
 # The four actual core and deep-tail inputs
@@ -12,6 +14,8 @@ the larger coefficient envelope is introduced in the whole-outer bound.
 The Poisson function is the same basis vector used by the outer Green
 operator, and the deep inverse has the actual transported Friedrichs graph.
 -/
+
+@[expose] public section
 
 noncomputable section
 

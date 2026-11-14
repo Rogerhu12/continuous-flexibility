@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bConstructedRootDensity
-import ContinuousFlexibility.Analysis.N04bRootInteriorRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N04bConstructedRootDensity
+public import ContinuousFlexibility.Analysis.N04bRootInteriorRegularity
 
 /-!
 # Cancellation of the common root reparametrization in physical transport
@@ -10,6 +12,8 @@ reduces to the smooth travel transition, including across its middle cut.
 The common root factor also cancels in the height ratio. These identities
 use the actual defined functions and do not assume a transport certificate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

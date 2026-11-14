@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01RadialFlow
-import ContinuousFlexibility.Analysis.N06ReferencePhysicalCoefficients
-import ContinuousFlexibility.Analysis.SolveReturnEquations
+module
+
+public import ContinuousFlexibility.Analysis.N01RadialFlow
+public import ContinuousFlexibility.Analysis.N06ReferencePhysicalCoefficients
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # The actual reference return residual is zero
@@ -12,6 +14,8 @@ therefore the opposite translation. The reference chart is the identity,
 so the actual even return residual vanishes. Injectivity of the original
 circle model then eliminates the N03 error by linearity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

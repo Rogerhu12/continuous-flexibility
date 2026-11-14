@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.SelectedBoundaryMargin
+module
+
+public import ContinuousFlexibility.Radial.SelectedBoundaryMargin
 
 /-!
 # Actual normalized boundary data under a radius dilation
@@ -8,6 +10,8 @@ transported. Radius dilation preserves the stand-in slope, while the
 physical matching scale is computed from the actual target profile.
 The full natural state is normalized, without dividing by its value.
 -/
+
+@[expose] public section
 
 noncomputable section
 

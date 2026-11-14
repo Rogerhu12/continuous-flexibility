@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Radial.CentralModel
-import Mathlib.Analysis.Calculus.MeanValue
-import Mathlib.Analysis.SpecialFunctions.Gaussian.GaussianIntegral
-import Mathlib.MeasureTheory.Function.LpSeminorm.SMul
-import Mathlib.MeasureTheory.Function.LpSeminorm.TriangleInequality
-import Mathlib.MeasureTheory.Function.L1Space.Integrable
+module
+
+public import ContinuousFlexibility.Radial.CentralModel
+public import Mathlib.Analysis.Calculus.MeanValue
+public import Mathlib.Analysis.SpecialFunctions.Gaussian.GaussianIntegral
+public import Mathlib.MeasureTheory.Function.LpSeminorm.SMul
+public import Mathlib.MeasureTheory.Function.LpSeminorm.TriangleInequality
+public import Mathlib.MeasureTheory.Function.L1Space.Integrable
 
 /-!
 # Uniqueness of the actual square-integrable oscillator ground state
@@ -14,6 +16,8 @@ Its annihilation remainder solves a first-order equation; actual `L²`
 integrability excludes the growing solution. No spectral decomposition,
 closed operator domain, or ground-state uniqueness is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

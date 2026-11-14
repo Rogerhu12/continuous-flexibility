@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerSelectedInterfaceEstimates
-import ContinuousFlexibility.Radial.InnerSelectedPhysicalInverse
-import ContinuousFlexibility.Radial.InnerRadialWeightedInverse
+module
+
+public import ContinuousFlexibility.Radial.InnerSelectedInterfaceEstimates
+public import ContinuousFlexibility.Radial.InnerSelectedPhysicalInverse
+public import ContinuousFlexibility.Radial.InnerRadialWeightedInverse
 
 /-!
 # The coupling correction for the same selected inverse
@@ -10,6 +12,8 @@ control the actual Poisson-adjoint correction. This term has no
 coefficient loss. A contraction on the output preserves this estimate;
 only the actual Dirichlet part remains to be bounded.
 -/
+
+@[expose] public section
 
 noncomputable section
 

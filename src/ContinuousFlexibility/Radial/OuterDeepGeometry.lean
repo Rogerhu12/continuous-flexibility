@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterNaturalPhysicalMass
-import ContinuousFlexibility.Radial.OuterCoreIntervals
+module
+
+public import ContinuousFlexibility.Radial.OuterNaturalPhysicalMass
+public import ContinuousFlexibility.Radial.OuterCoreIntervals
 
 /-!
 # Geometry of the actual logarithmic Morse tail
@@ -9,6 +11,8 @@ the positive radial profile. In particular no deep-tail hypothesis is
 used to establish positivity, the coordinate range, or the node geometry.
 The mass-resistance inequalities remain separate quantitative work.
 -/
+
+@[expose] public section
 
 noncomputable section
 

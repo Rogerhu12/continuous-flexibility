@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.TailClampedResistance
-import ContinuousFlexibility.Radial.TailMassResistanceData
-import ContinuousFlexibility.Radial.TailEdgeFluxMatrix
+module
+
+public import ContinuousFlexibility.Radial.TailClampedResistance
+public import ContinuousFlexibility.Radial.TailMassResistanceData
+public import ContinuousFlexibility.Radial.TailEdgeFluxMatrix
 
 /-!
 # The Poisson problem on an actual deep-tail edge
@@ -10,6 +12,8 @@ The resistance chart of the clamped physical density identifies the edge
 `Λ` times the transformed density, and its two masses and two resistances
 are the quantities in `DeepTailHypotheses`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

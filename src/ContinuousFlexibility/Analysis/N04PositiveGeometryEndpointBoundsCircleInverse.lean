@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsLinear
-import ContinuousFlexibility.Analysis.CirclePositiveInverseFixedBaseBounds
-import ContinuousFlexibility.Analysis.CircleCompositionUniformBounds
-import ContinuousFlexibility.Analysis.CircleSmoothDirectionsOperations
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsLinear
+public import ContinuousFlexibility.Analysis.CirclePositiveInverseFixedBaseBounds
+public import ContinuousFlexibility.Analysis.CircleCompositionUniformBounds
+public import ContinuousFlexibility.Analysis.CircleSmoothDirectionsOperations
 
 /-!
 # The actual inverse endpoint circle on one fixed low-order ball
@@ -15,6 +17,8 @@ The only condition on the parameter map is a grading contraction; the
 only geometric condition is a positive angular derivative lower bound.
 No inverse-jet estimate is an input to the result.
 -/
+
+@[expose] public section
 
 noncomputable section
 

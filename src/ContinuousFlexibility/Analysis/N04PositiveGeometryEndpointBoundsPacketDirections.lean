@@ -1,10 +1,12 @@
-import ContinuousFlexibility.Analysis.N04RealizationRootAbsorbedJoint
-import ContinuousFlexibility.Analysis.N04RealizationJointSpatialEvaluation
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsRootHeight
-import ContinuousFlexibility.Analysis.N01cAngularJetTowers
-import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
-import ContinuousFlexibility.Analysis.BoundaryMixedJets
-import ContinuousFlexibility.Analysis.CircleCompositionFaaBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationRootAbsorbedJoint
+public import ContinuousFlexibility.Analysis.N04RealizationJointSpatialEvaluation
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsRootHeight
+public import ContinuousFlexibility.Analysis.N01cAngularJetTowers
+public import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
+public import ContinuousFlexibility.Analysis.BoundaryMixedJets
+public import ContinuousFlexibility.Analysis.CircleCompositionFaaBounds
 
 /-!
 # The actual radial packet traces and their angular parameter towers
@@ -15,6 +17,8 @@ radial evaluation, and its angular slices are identified with the
 actual mixed spatial derivatives. The four variable entries are exactly
 the original q-weighted normalized height inputs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

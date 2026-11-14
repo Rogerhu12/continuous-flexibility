@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationFixedRadialPullback
-import ContinuousFlexibility.Analysis.N04RealizationFixedSpatialProduct
-import ContinuousFlexibility.Analysis.N07aMixedLocalCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationFixedRadialPullback
+public import ContinuousFlexibility.Analysis.N04RealizationFixedSpatialProduct
+public import ContinuousFlexibility.Analysis.N07aMixedLocalCalculus
 
 /-!
 # The actual positive pulled height in the fixed reference gauge
@@ -10,6 +12,8 @@ height and its reciprocal are therefore fixed radial pullbacks of a
 fixed reference multiplier times the raw relative height ratio or its
 reciprocal. No parameter-dependent spatial composition is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

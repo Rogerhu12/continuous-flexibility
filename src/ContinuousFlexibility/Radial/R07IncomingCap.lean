@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R07CapPullback
-import ContinuousFlexibility.Radial.R07DeepTailChange
+module
+
+public import ContinuousFlexibility.Radial.R07CapPullback
+public import ContinuousFlexibility.Radial.R07DeepTailChange
 
 /-!
 # A normalized incoming solution from a positive cap
@@ -10,6 +12,8 @@ its value at the join is positive. Dividing by that value produces the
 normalization and the signed derivative required in R07. The two endpoints
 are handled by the same outward sign and the same cap theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

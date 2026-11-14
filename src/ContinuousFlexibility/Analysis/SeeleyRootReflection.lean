@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.RootChartExtension
+module
+
+public import ContinuousFlexibility.Analysis.RootChartExtension
 
 /-!
 # Angular reflection through the fixed endpoint extension
@@ -8,6 +10,8 @@ passes term by term through its reflection formula; angular oddness
 uses linearity under negation. These identities require no assumed
 derivative or smoothness of the input outside the half-plane.
 -/
+
+@[expose] public section
 
 noncomputable section
 

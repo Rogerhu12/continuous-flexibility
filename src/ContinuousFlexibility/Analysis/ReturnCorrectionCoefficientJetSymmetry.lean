@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionResidualPeriodicity
-import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
-import ContinuousFlexibility.Analysis.SolveNewtonBridge
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionResidualPeriodicity
+public import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
+public import ContinuousFlexibility.Analysis.SolveNewtonBridge
 
 /-!
 # Reflection and periodicity of the actual parameter coefficient jets
@@ -10,6 +12,8 @@ pointwise identities. In particular, each parameter derivative has odd
 mixed coefficient and even angular coefficient, and both remain periodic.
 No symmetry is imposed separately on a candidate formal derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

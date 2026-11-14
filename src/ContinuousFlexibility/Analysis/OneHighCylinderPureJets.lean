@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderSmoothJets
-import ContinuousFlexibility.Analysis.OneHighPeriodicJets
-import Mathlib.Topology.Maps.OpenQuotient
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderSmoothJets
+public import ContinuousFlexibility.Analysis.OneHighPeriodicJets
+public import Mathlib.Topology.Maps.OpenQuotient
 
 /-!
 # Actual pure derivatives of a smooth cylinder function
@@ -9,6 +11,8 @@ These two towers retain the radial and angular endpoints needed for the
 Sobolev norm comparison. They are constructed from the function itself,
 including for smooth compositions on the noncompact cylinder.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05ReferenceSymbols
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceSymbols
 
 /-!
 # Actual polynomial probes for coefficient identification
@@ -7,6 +9,8 @@ All identities use the real Frechet partial derivatives of the displayed
 polynomials.  The first flux formulas impose no regularity on the coefficient
 fields; this permits differentiation itself to be recovered from operator data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

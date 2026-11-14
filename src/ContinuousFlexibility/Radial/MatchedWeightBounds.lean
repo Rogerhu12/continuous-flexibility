@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.WeightKernelBounds
+module
+
+public import ContinuousFlexibility.Radial.WeightKernelBounds
 
 /-!
 # Uniform weights for matched inverse blocks
@@ -15,6 +17,8 @@ the source weight is `exp (M₀ * q + γ * S)` and the output weight is
 Actual block bounds and the transition-index comparison are hypotheses;
 the scalar estimates do not assert that an actual matched inverse has them.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.HeightDerivatives
-import ContinuousFlexibility.Geometry.PlanarOrientation
+module
+
+public import ContinuousFlexibility.Scalar.HeightDerivatives
+public import ContinuousFlexibility.Geometry.PlanarOrientation
 
 /-!
 # Actual inverse jets forced by weighted cut transmission
@@ -11,6 +13,8 @@ Equality along the boundary curve fixes the angular columns. These facts
 are statements about actual derivatives, with no coefficient regularity or
 normal-form estimates as hypotheses.
 -/
+
+@[expose] public section
 
 noncomputable section
 

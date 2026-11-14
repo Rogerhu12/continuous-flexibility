@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Geometry.CartesianCoframe
-import ContinuousFlexibility.Geometry.GlobalCovering
-import Mathlib.Analysis.Calculus.MeanValue
+module
+
+public import ContinuousFlexibility.Geometry.CartesianCoframe
+public import ContinuousFlexibility.Geometry.GlobalCovering
+public import Mathlib.Analysis.Calculus.MeanValue
 
 /-!
 # Whole-plane Cartesian development and exterior normalization
@@ -10,6 +12,8 @@ coordinate plane. A global primitive is produced by Poincare's lemma on
 the convex plane, and constants are fixed on a connected open exterior.
 No primitive of the polar connection on an annulus is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

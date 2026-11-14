@@ -1,11 +1,13 @@
-import ContinuousFlexibility.Blueprint.R10a.Geometry
-import ContinuousFlexibility.Radial.SelectedLaterPairBoundary
-import ContinuousFlexibility.Radial.SelectedLaterCutoffGeometry
-import ContinuousFlexibility.Radial.SelectedTerminalMatching
-import ContinuousFlexibility.Radial.SelectedTerminalBudget
-import ContinuousFlexibility.Radial.SelectedTerminalInnerSupply
-import ContinuousFlexibility.Radial.SelectedRetainedOuterSupply
-import ContinuousFlexibility.Radial.TerminalRegionalData
+module
+
+public import ContinuousFlexibility.Blueprint.R10a.Geometry
+public import ContinuousFlexibility.Radial.SelectedLaterPairBoundary
+public import ContinuousFlexibility.Radial.SelectedLaterCutoffGeometry
+public import ContinuousFlexibility.Radial.SelectedTerminalMatching
+public import ContinuousFlexibility.Radial.SelectedTerminalBudget
+public import ContinuousFlexibility.Radial.SelectedTerminalInnerSupply
+public import ContinuousFlexibility.Radial.SelectedRetainedOuterSupply
+public import ContinuousFlexibility.Radial.TerminalRegionalData
 
 /-!
 # Actual later-band regional data on the retained reference
@@ -15,6 +17,8 @@ scaled joins. The stand-ins, cutoff functions and measured errors all
 come from the same retained Morse caps. Only the already constructed
 regional inverse outputs are passed through supply predicates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

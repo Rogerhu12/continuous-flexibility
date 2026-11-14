@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05CanonicalEmbeddings
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalEmbeddings
 
 /-!
 # Forgetting angular derivatives in the actual canonical volume model
@@ -8,6 +10,8 @@ It is a contraction for the finite Hilbert products and hence for the
 outer Hilbert sequence. Its zero coordinate is unchanged, so it commutes
 with the prescribed weighted forget maps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

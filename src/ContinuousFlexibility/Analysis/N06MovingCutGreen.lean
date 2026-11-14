@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bRootCutHeight
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
+module
+
+public import ContinuousFlexibility.Analysis.N04bRootCutHeight
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
 
 /-!
 # Green cancellation on the actual moving travel cut
@@ -16,6 +18,8 @@ it does not identify the moving cut with a radial line or a radial graph.
 The last two statements retain an arbitrary angular parametrization and
 its signed derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

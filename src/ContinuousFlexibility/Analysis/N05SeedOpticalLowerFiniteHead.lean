@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Statements.Radial
-import Mathlib.Analysis.Calculus.DSlope
-import Mathlib.Topology.Order.Compact
-import Mathlib.Topology.DiscreteSubset
+module
+
+public import ContinuousFlexibility.Statements.Radial
+public import Mathlib.Analysis.Calculus.DSlope
+public import Mathlib.Topology.Order.Compact
+public import Mathlib.Topology.DiscreteSubset
 
 /-!
 # Optical lower bounds on finitely many actual negative seed components
@@ -22,6 +24,8 @@ fixed component, or a finite collection of components.  It does not assert
 a uniform quantitative bound on an infinite family of components; that
 requires the actual tail geometry.
 -/
+
+@[expose] public section
 
 noncomputable section
 

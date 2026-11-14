@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.SelectedReferenceEquation
-import ContinuousFlexibility.Radial.SelectedTailRadiusMeasure
+module
+
+public import ContinuousFlexibility.Radial.SelectedReferenceEquation
+public import ContinuousFlexibility.Radial.SelectedTailRadiusMeasure
 
 /-!
 # Natural radial solutions under the actual R08 dilation
@@ -13,6 +15,8 @@ The final theorem transports a proved natural-line uniqueness statement.
 It does not assert uniqueness merely from the existence of a natural
 solution or from the R08 profile identity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,10 +1,13 @@
-import ContinuousFlexibility.Statements.DeepTailOperator
-import Mathlib.Analysis.Calculus.Deriv.Add
-import Mathlib.Analysis.Calculus.Deriv.Mul
-import Mathlib.Analysis.Calculus.Deriv.Support
-import Mathlib.MeasureTheory.Function.LpSpace.Indicator
-import Mathlib.Topology.Algebra.Module.Basic
-import Mathlib.Topology.Order.MonotoneConvergence
+module
+
+public import ContinuousFlexibility.Statements.DeepTailOperator
+public import Mathlib.Analysis.Calculus.Deriv.Add
+public import Mathlib.Analysis.Calculus.Deriv.Mul
+public import Mathlib.Analysis.Calculus.Deriv.Support
+public import Mathlib.MeasureTheory.Function.LpSpace.Indicator
+public import Mathlib.Topology.Algebra.Module.Basic
+public import Mathlib.Topology.Order.MonotoneConvergence
+public import Mathlib.Analysis.Calculus.ContDiff.Operations
 
 /-!
 # The deep-tail form core and its Dirichlet truncations
@@ -15,6 +18,8 @@ product of the two weighted L² spaces. Every core element already belongs to
 one finite truncation, and all elements of a truncated form vanish outside
 that truncation, including their weak derivative coordinate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

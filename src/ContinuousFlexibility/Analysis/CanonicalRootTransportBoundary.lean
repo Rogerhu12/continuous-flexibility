@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CanonicalClosedTransport
-import ContinuousFlexibility.Analysis.CanonicalClosedSymmetry
-import ContinuousFlexibility.Analysis.CanonicalCutOrientation
-import ContinuousFlexibility.Analysis.N04bRootHeightSymmetry
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalClosedTransport
+public import ContinuousFlexibility.Analysis.CanonicalClosedSymmetry
+public import ContinuousFlexibility.Analysis.CanonicalCutOrientation
+public import ContinuousFlexibility.Analysis.N04bRootHeightSymmetry
 
 /-!
 # Genuine geometry of transport at the physical root circles
@@ -11,6 +13,8 @@ make the transition Jacobian positive; its fixed root radius and degree-one
 angular lift then make both diagonal derivatives positive. These are
 consequences for the stored maps, not inputs on a future interpolation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

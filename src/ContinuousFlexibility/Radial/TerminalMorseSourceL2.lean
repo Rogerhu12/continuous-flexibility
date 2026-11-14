@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.TerminalMorseProfileJets
-import ContinuousFlexibility.Radial.TerminalCapLayerL2
+module
+
+public import ContinuousFlexibility.Radial.TerminalMorseProfileJets
+public import ContinuousFlexibility.Radial.TerminalCapLayerL2
 
 /-!
 # The actual terminal Morse cutoff source in weighted L²
@@ -9,6 +11,8 @@ cutoff and the same normalized stand-in solution. Potential, solution,
 profile, cutoff, support, and measure estimates are all supplied by the
 actual Morse construction and the preceding proved lemmas.
 -/
+
+@[expose] public section
 
 noncomputable section
 

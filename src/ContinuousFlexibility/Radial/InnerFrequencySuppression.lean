@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerUniformSuppression
-import ContinuousFlexibility.Radial.InnerCoefficientWeights
-import ContinuousFlexibility.Radial.MorseJoinHeightContrast
+module
+
+public import ContinuousFlexibility.Radial.InnerUniformSuppression
+public import ContinuousFlexibility.Radial.InnerCoefficientWeights
+public import ContinuousFlexibility.Radial.MorseJoinHeightContrast
 
 /-!
 # Frequency-uniform choices, including the Poisson remainder
@@ -11,6 +13,8 @@ the frequency, even though the bands have no global upper frequency bound.
 The logarithmic frequency comparison is proved from the actual Morse
 parameters, rather than assumed as an additional estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

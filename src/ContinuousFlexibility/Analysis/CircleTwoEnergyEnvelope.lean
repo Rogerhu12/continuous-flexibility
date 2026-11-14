@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CircleEnergyPointwiseBounds
+module
+
+public import ContinuousFlexibility.Analysis.CircleEnergyPointwiseBounds
 
 /-!
 # Two summable envelopes for one weighted circle jet
@@ -8,6 +10,8 @@ sum over components. A numerical square estimate and the actual circle
 L2 integral give the joint norm bound without a summable scalar majorant
 for the component labels.
 -/
+
+@[expose] public section
 
 noncomputable section
 

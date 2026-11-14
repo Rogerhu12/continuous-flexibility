@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06PrimitiveFiniteCoreGreenData
-import ContinuousFlexibility.Analysis.N06OperatorExtension
+module
+
+public import ContinuousFlexibility.Analysis.N06PrimitiveFiniteCoreGreenData
+public import ContinuousFlexibility.Analysis.N06OperatorExtension
 
 /-!
 # The actual relative source satisfies the original physical relation
@@ -10,6 +12,8 @@ Green formula. The primitive transmission identities cancel its actual
 interfaces. Density and closed physical tests then pass the equation to
 every vector of the original graph, with its original normalization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

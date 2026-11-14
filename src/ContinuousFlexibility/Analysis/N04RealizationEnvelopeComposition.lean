@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationEnvelopeAlgebra
-import ContinuousFlexibility.Analysis.OneHighCompositionJets
-import ContinuousFlexibility.Analysis.PointwiseProductMaterialJets
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationEnvelopeAlgebra
+public import ContinuousFlexibility.Analysis.OneHighCompositionJets
+public import ContinuousFlexibility.Analysis.PointwiseProductMaterialJets
 
 /-!
 # Finite jet envelopes for actual products and compositions
@@ -9,6 +11,8 @@ The point and functions may vary with an arbitrary index. Composition
 uses outer jets through the requested order and only positive inner
 jets. In particular, it never estimates an unwrapped angular value.
 -/
+
+@[expose] public section
 
 noncomputable section
 

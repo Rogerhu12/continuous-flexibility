@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aAngularReferenceLowJets
-import ContinuousFlexibility.Analysis.N07aAngularReferenceIntegrable
-import ContinuousFlexibility.Analysis.N07aAngularEndpointFlux
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceLowJets
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceIntegrable
+public import ContinuousFlexibility.Analysis.N07aAngularEndpointFlux
 
 /-!
 # The arbitrary current height pair supplies the reference graph bounds
@@ -10,6 +12,8 @@ from the original HeightPair and the primitive geometric jets. The first
 derivative is bounded across interfaces by the already constructed C¹
 representative, while the second derivatives are used on the open pieces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

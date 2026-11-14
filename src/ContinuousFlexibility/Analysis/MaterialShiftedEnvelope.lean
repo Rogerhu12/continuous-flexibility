@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.MaterialWeights
+module
+
+public import ContinuousFlexibility.Analysis.MaterialWeights
 
 /-!
 # Comparing endpoint weights at distinct sample locations
@@ -7,6 +9,8 @@ The cubic exponent in H dominates the E0 loss when the sample locations
 are comparable to the endpoint coordinate. This is the estimate needed
 when the amplitude and the control derivatives use different cell samples.
 -/
+
+@[expose] public section
 
 noncomputable section
 

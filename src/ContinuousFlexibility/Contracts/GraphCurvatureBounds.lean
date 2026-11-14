@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Contracts.GraphDiskIntegrals
+module
+
+public import ContinuousFlexibility.Contracts.GraphDiskIntegrals
 
 /-!
 # A genuine uniform curvature bound for the whole graph phase family
@@ -8,6 +10,8 @@ normal. Compactness bounds the fixed physical graph; proved rotation naturality
 then bounds every real phase by the same constant. No curvature bound is an
 input, and no marked cap or analytic core existence is asserted here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

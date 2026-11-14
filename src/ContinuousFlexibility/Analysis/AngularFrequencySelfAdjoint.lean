@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.AngularFrequency
+module
+
+public import ContinuousFlexibility.Analysis.AngularFrequency
 
 /-!
 # Self-adjointness of the maximal angular frequency operator
@@ -8,6 +10,8 @@ each of its coefficients.  Consequently its domain is precisely the
 maximal square-summability domain of the integer-frequency multiplier.
 The proof permits arbitrary Hilbert spaces as spectral summands.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N02ChartError
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N02ChartError
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
 
 /-!
 # The circle projections used by the actual return residual
@@ -8,6 +10,8 @@ The even and odd projections, and the chart coordinate of a sector
 parameter, are continuous linear maps with zero derivative loss. Their
 smooth tame towers therefore describe the actual decoded coordinates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

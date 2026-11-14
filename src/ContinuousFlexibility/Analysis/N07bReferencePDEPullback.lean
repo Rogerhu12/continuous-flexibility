@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07bDirectionChain
-import ContinuousFlexibility.Analysis.N07bFiniteRadialGreen
+module
+
+public import ContinuousFlexibility.Analysis.N07bDirectionChain
+public import ContinuousFlexibility.Analysis.N07bFiniteRadialGreen
 
 /-!
 # The actual reference differential expression under a coordinate change
@@ -10,6 +12,8 @@ inverse relations and actual derivatives of the transition. In particular,
 the second-order reference expression is a sum of words of lengths one
 and two, to which the source-independent material expansion applies.
 -/
+
+@[expose] public section
 
 noncomputable section
 

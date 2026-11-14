@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RadialPlateauHeight
-import ContinuousFlexibility.Analysis.MaterialPlateauWeights
+module
+
+public import ContinuousFlexibility.Analysis.RadialPlateauHeight
+public import ContinuousFlexibility.Analysis.MaterialPlateauWeights
 
 /-!
 # Common actual jet bounds for a complete plateau
@@ -8,6 +10,8 @@ All physical jets vanish outside the expanded support. Inside that
 support, the endpoint band transfers the exact inverse height weight
 and a fixed material order to the sample of the actual containing cell.
 -/
+
+@[expose] public section
 
 noncomputable section
 

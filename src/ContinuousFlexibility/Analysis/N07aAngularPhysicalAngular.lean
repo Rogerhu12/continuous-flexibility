@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aCurrentAngularPatch
-import ContinuousFlexibility.Analysis.N07aCurrentCutRegularity
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalRepresentative
-import ContinuousFlexibility.Analysis.N07aCanonicalSmoothJets
+module
+
+public import ContinuousFlexibility.Analysis.N07aCurrentAngularPatch
+public import ContinuousFlexibility.Analysis.N07aCurrentCutRegularity
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalRepresentative
+public import ContinuousFlexibility.Analysis.N07aCanonicalSmoothJets
 
 /-!
 # Actual canonical weak jets give physical angular jets across all cuts
@@ -12,6 +14,8 @@ and locally finite angular patching then recover the original physical
 height remainder on every compact inner strip, including intervals that
 cross roots or artificial cuts.
 -/
+
+@[expose] public section
 
 noncomputable section
 

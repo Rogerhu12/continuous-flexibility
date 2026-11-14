@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06PositiveCubicMultipliers
-import ContinuousFlexibility.Analysis.N06PositiveWeakGraph
-import ContinuousFlexibility.Analysis.N06WeakCubicSource
+module
+
+public import ContinuousFlexibility.Analysis.N06PositiveCubicMultipliers
+public import ContinuousFlexibility.Analysis.N06PositiveWeakGraph
+public import ContinuousFlexibility.Analysis.N06WeakCubicSource
 
 /-!
 # The all-piece cubic source with one fixed constant
@@ -11,6 +13,8 @@ volume level. Its forgetful image is the unscaled physical five-field
 sum. The constant is fixed before the perturbing coefficient family and
 before the original source and height rows.
 -/
+
+@[expose] public section
 
 noncomputable section
 

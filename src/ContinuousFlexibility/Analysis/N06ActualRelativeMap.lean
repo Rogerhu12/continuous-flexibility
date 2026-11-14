@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06ActualRelativeJetBounds
-import ContinuousFlexibility.Analysis.N06CurrentRelativeSourceIdentity
-import ContinuousFlexibility.Analysis.N06ScalarColumns
+module
+
+public import ContinuousFlexibility.Analysis.N06ActualRelativeJetBounds
+public import ContinuousFlexibility.Analysis.N06CurrentRelativeSourceIdentity
+public import ContinuousFlexibility.Analysis.N06ScalarColumns
 
 /-!
 # The actual relative map on one retained source level
@@ -10,6 +12,8 @@ scalar columns are combined as continuous linear endomorphisms of the
 same N05 source space. The canonical source formula and its operator norm
 keep all three contributions explicit.
 -/
+
+@[expose] public section
 
 noncomputable section
 

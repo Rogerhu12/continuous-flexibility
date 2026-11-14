@@ -1,10 +1,12 @@
-import Mathlib.Analysis.MeanInequalities
-import Mathlib.Analysis.MeanInequalitiesPow
-import Mathlib.Tactic.FieldSimp
-import Mathlib.Tactic.GCongr
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Positivity
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Analysis.MeanInequalities
+public import Mathlib.Analysis.MeanInequalitiesPow
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.GCongr
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Positivity
+public import Mathlib.Tactic.Ring
 
 /-!
 # Scalar estimates for the angular commutator lemma
@@ -16,6 +18,8 @@ The absorption constant is an explicit function of the derivative order,
 the preceding estimate constant, and the base inverse norm; it has no
 argument for the large coefficient.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06CanonicalPotentialPeriodicity
-import ContinuousFlexibility.Analysis.N06CurrentOperatorRegularity
-import ContinuousFlexibility.Analysis.N06CurrentOperatorReflection
-import ContinuousFlexibility.Analysis.N06FiniteSourceGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N06CanonicalPotentialPeriodicity
+public import ContinuousFlexibility.Analysis.N06CurrentOperatorRegularity
+public import ContinuousFlexibility.Analysis.N06CurrentOperatorReflection
+public import ContinuousFlexibility.Analysis.N06FiniteSourceGeometry
 
 /-!
 # Smoothness and reflection of the actual current potential
@@ -12,6 +14,8 @@ and even reflection. The source transform is differentiated only on its
 actual open piece, and the corrected physical coefficients are not
 assumed to possess additional smoothness.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.HeightDerivatives
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
-import Mathlib.Analysis.SpecialFunctions.ExpDeriv
+module
+
+public import ContinuousFlexibility.Scalar.HeightDerivatives
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+public import Mathlib.Analysis.SpecialFunctions.ExpDeriv
 
 /-!
 # Finite scalar spatial regularity with a continuous time parameter
@@ -9,6 +11,8 @@ The first coordinate is differentiated; the second is only a continuous
 parameter. The recursive predicate uses actual derivatives throughout.
 Its elementary closure properties require no time derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

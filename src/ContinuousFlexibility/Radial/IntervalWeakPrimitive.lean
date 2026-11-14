@@ -1,11 +1,13 @@
-import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
-import Mathlib.Analysis.Calculus.BumpFunction.Normed
-import Mathlib.Analysis.Distribution.AEEqOfIntegralContDiff
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.AbsolutelyContinuousFun
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
-import Mathlib.MeasureTheory.Measure.OpenPos
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
+public import Mathlib.Analysis.Calculus.BumpFunction.Normed
+public import Mathlib.Analysis.Distribution.AEEqOfIntegralContDiff
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.AbsolutelyContinuousFun
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+public import Mathlib.MeasureTheory.Measure.OpenPos
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
 
 /-!
 # Weak primitives on a finite interval
@@ -20,6 +22,8 @@ integral representative. If the original function is continuous on the
 closed interval, that representative agrees at every point, including
 both endpoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.RootFlowParameterUnscale
-import ContinuousFlexibility.Analysis.RootDividedHeight
-import ContinuousFlexibility.Analysis.OpenGermBoundaryJets
+module
+
+public import ContinuousFlexibility.Analysis.RootFlowParameterUnscale
+public import ContinuousFlexibility.Analysis.RootDividedHeight
+public import ContinuousFlexibility.Analysis.OpenGermBoundaryJets
 
 /-!
 # Exact removal of the root model's parameter normalization
@@ -11,6 +13,8 @@ contains exactly one power of the normalization, which cancels in the
 height. Ordinary jets at the root follow from the open-side equality and
 smoothness at that point; no quantitative collar size is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

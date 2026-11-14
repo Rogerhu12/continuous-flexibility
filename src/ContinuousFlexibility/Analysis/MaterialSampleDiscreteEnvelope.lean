@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.MaterialSampleIndexModels
-import ContinuousFlexibility.Analysis.MaterialShiftedEnvelope
+module
+
+public import ContinuousFlexibility.Analysis.MaterialSampleIndexModels
+public import ContinuousFlexibility.Analysis.MaterialShiftedEnvelope
 
 /-!
 # Uniform discrete envelopes at the actual material samples
@@ -9,6 +11,8 @@ distance from its reference-cell index.  Positive powers of the actual
 sample height therefore absorb arbitrary discrete radial losses, while
 negative powers admit a uniform cubic exponential bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

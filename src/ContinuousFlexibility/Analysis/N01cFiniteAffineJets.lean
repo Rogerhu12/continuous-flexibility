@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cParameterCalculus
-import ContinuousFlexibility.Analysis.ProjectiveJetSchwarz
-import Mathlib.Analysis.Calculus.ContDiff.FiniteDimension
+module
+
+public import ContinuousFlexibility.Analysis.N01cParameterCalculus
+public import ContinuousFlexibility.Analysis.ProjectiveJetSchwarz
+public import Mathlib.Analysis.Calculus.ContDiff.FiniteDimension
 
 /-!
 # Actual Fréchet derivatives on finite-dimensional restrictions
@@ -14,6 +16,8 @@ identifies the given tower with the actual iterated Fréchet derivatives.
 The affine pullback retains the original topological state space. Only its
 finite-dimensional parameter space is normed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

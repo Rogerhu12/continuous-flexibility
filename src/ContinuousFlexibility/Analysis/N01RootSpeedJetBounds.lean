@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01RootFactorJetBounds
-import ContinuousFlexibility.Analysis.N01RootCoefficientValueRectangle
-import ContinuousFlexibility.Analysis.PositiveRootRecoveryBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01RootFactorJetBounds
+public import ContinuousFlexibility.Analysis.N01RootCoefficientValueRectangle
+public import ContinuousFlexibility.Analysis.PositiveRootRecoveryBounds
 
 /-!
 # Actual fixed-loss mixed jets of the normalized root characteristic speed
@@ -12,6 +14,8 @@ N01 value rectangle then permits one smooth square-root/quotient
 composition. No derivative estimate for the resulting root speed is an
 input. The common low order and loss precede every root and spatial order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

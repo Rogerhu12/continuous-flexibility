@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.RetainedPositiveIntervalEndpointX
-import ContinuousFlexibility.Analysis.ActualNegativeMaterialRatioJets
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData
+module
+
+public import ContinuousFlexibility.Analysis.RetainedPositiveIntervalEndpointX
+public import ContinuousFlexibility.Analysis.ActualNegativeMaterialRatioJets
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData
 
 /-!
 # Uniform physical-unit geometry for the same whole atlas
@@ -10,6 +12,8 @@ Each positive whole component uses the given actual midpoint host. The
 same retained classification gives a two-sided endpoint-coordinate bound
 to these exact samples. All widths are positive and at most the annulus.
 -/
+
+@[expose] public section
 
 noncomputable section
 

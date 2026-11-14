@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.WholeCanonicalAtlasData
-import ContinuousFlexibility.Analysis.ActualNegativePrincipalDensity
+module
+
+public import ContinuousFlexibility.Analysis.WholeCanonicalAtlasData
+public import ContinuousFlexibility.Analysis.ActualNegativePrincipalDensity
 
 /-!
 # Negative principal density on the actual whole atlas
@@ -9,6 +11,8 @@ component. The actual root-coordinate density computation therefore
 applies to its stored chart and height, using the old enumeration only
 to identify the same constructed functions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

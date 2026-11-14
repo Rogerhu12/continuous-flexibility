@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFourierDerivative
-import ContinuousFlexibility.Analysis.OneHighCircleFourierParseval
-import Mathlib.MeasureTheory.Function.LpSeminorm.Monotonicity
-import Mathlib.MeasureTheory.Function.LpSeminorm.TriangleInequality
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Positivity
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierDerivative
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierParseval
+public import Mathlib.MeasureTheory.Function.LpSeminorm.Monotonicity
+public import Mathlib.MeasureTheory.Function.LpSeminorm.TriangleInequality
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Positivity
 
 /-!
 # Physical weights and actual circle derivative jets
@@ -12,6 +14,8 @@ The frequency is `2 * π * n / P` throughout. These elementary bounds and
 coefficient identities connect a family of actual successive derivatives to
 the Bessel Sobolev norm, without changing its representation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

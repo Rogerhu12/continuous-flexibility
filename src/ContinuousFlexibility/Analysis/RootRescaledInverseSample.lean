@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RootScaledInverseCoordinate
-import Mathlib.Analysis.SpecialFunctions.Pow.Continuity
+module
+
+public import ContinuousFlexibility.Analysis.RootScaledInverseCoordinate
+public import Mathlib.Analysis.SpecialFunctions.Pow.Continuity
 
 /-!
 # The actual inverse sampled on a signed root curve
@@ -9,6 +11,8 @@ itself is the genuine jointly smooth inverse of the controlled flow.
 Both its right-inverse identity and its exact zero value follow from
 that same supplied ODE family.
 -/
+
+@[expose] public section
 
 noncomputable section
 

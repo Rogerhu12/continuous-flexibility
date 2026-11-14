@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedHomogeneousJets
-import ContinuousFlexibility.Scalar.WeightedUniformTameGerm
+module
+
+public import ContinuousFlexibility.Scalar.WeightedHomogeneousJets
+public import ContinuousFlexibility.Scalar.WeightedUniformTameGerm
 
 /-!
 # Fixed-loss bounds for homogeneous operator families
@@ -9,6 +11,8 @@ Its actual first and mixed second derivatives recover the frozen linear
 and bilinear maps. The resulting bounds retain one base, one loss and one
 state ball, independently of the output order and of the input vectors.
 -/
+
+@[expose] public section
 
 noncomputable section
 

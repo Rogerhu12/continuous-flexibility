@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalBandRadial
-import ContinuousFlexibility.Analysis.N07aCircleBlockCoefficients
-import Mathlib.MeasureTheory.Function.LpSeminorm.Prod
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalBandRadial
+public import ContinuousFlexibility.Analysis.N07aCircleBlockCoefficients
+public import Mathlib.MeasureTheory.Function.LpSeminorm.Prod
 
 /-!
 # Actual separated L² fields and their angular weak derivative
@@ -9,6 +11,8 @@ Only the angular factor is differentiated. The radial factor is an
 arbitrary actual interval L² representative, and Fubini is justified by
 the compact-test L² pairing before integration by parts on the circle.
 -/
+
+@[expose] public section
 
 noncomputable section
 

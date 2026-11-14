@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Geometry.GraphSurfaceGeometry
-import ContinuousFlexibility.Geometry.MarkerBump
+module
+
+public import ContinuousFlexibility.Geometry.GraphSurfaceGeometry
+public import ContinuousFlexibility.Geometry.MarkerBump
 
 /-!
 # The strict peak of the proposed cap marker
@@ -9,6 +11,8 @@ the explicit expression in `eq:marker-curvature`, Section 2, and proves its
 strict global maximum. It does not yet construct the separated cap or compare
 the marker with the rest of a closed surface.
 -/
+
+@[expose] public section
 
 noncomputable section
 

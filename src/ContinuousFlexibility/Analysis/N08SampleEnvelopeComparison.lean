@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N08MaterialEnvelopeComparison
-import ContinuousFlexibility.Analysis.N08SamplePointWeights
+module
+
+public import ContinuousFlexibility.Analysis.N08MaterialEnvelopeComparison
+public import ContinuousFlexibility.Analysis.N08SamplePointWeights
 
 /-!
 # Envelope comparison across a bounded change of control labels
@@ -9,6 +11,8 @@ The height comparison is first moved across the bounded label displacement,
 then the endpoint envelope comparison transfers every fixed material loss
 to the actual physical cell.
 -/
+
+@[expose] public section
 
 noncomputable section
 

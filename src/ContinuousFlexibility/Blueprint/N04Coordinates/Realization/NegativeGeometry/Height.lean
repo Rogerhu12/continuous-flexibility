@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04NegativeHeightProof
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeHeightProof
 
 /-!
 # N04Coordinates-Realization, negative geometry: height
@@ -10,6 +12,8 @@ The statement is defined in
 Source: paper/flexible-surface-readable/07-fixed-geometry.tex, lines 1545-1678.
 Task: docs/tasks/N04Realization-NegativeHeight.md.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

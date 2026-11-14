@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.NonlinearInverseJetTriangle
-import ContinuousFlexibility.Analysis.FlowJetPartitionPolynomial
+module
+
+public import ContinuousFlexibility.Analysis.NonlinearInverseJetTriangle
+public import ContinuousFlexibility.Analysis.FlowJetPartitionPolynomial
 
 /-!
 # Weighted polynomial bounds for actual nonlinear inverse jets
@@ -9,6 +11,8 @@ derivative of order k+1 has weight k. The genuine local inverse identity
 and the triangular chain rule produce every higher inverse jet from
 strictly lower inverse jets. No higher inverse derivative bound is an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

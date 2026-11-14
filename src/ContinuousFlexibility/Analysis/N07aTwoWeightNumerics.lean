@@ -1,4 +1,6 @@
-import Mathlib.Analysis.SpecialFunctions.Pow.Real
+module
+
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 
 /-!
 # The decay supplied by the two actual height weights
@@ -7,6 +9,8 @@ Using the smaller of the two neighboring weighted bounds produces decay
 in the difference of logarithmic heights. The prefactor is retained
 exactly, so the estimate can be applied before any material absorption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MorseRealizationBasic
-import ContinuousFlexibility.Radial.MorseRealizedCellBounds
-import ContinuousFlexibility.Radial.MorseAdjacentScaleBounds
+module
+
+public import ContinuousFlexibility.Radial.MorseRealizationBasic
+public import ContinuousFlexibility.Radial.MorseRealizedCellBounds
+public import ContinuousFlexibility.Radial.MorseAdjacentScaleBounds
 
 /-!
 # Connector integrals of an arbitrary realized Morse chain
@@ -9,6 +11,8 @@ The profile on a connector is controlled by its endpoint heights and
 the physical logarithmic slope. Both endpoint orientations use the
 same estimates in increasing physical radius.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01EndpointParameterTower
-import ContinuousFlexibility.Analysis.SmoothDirectionsAngularJets
+module
+
+public import ContinuousFlexibility.Analysis.N01EndpointParameterTower
+public import ContinuousFlexibility.Analysis.SmoothDirectionsAngularJets
 
 /-!
 # The actual closed-radius N01 tower as a smooth angular family
@@ -9,6 +11,8 @@ transfers every sharp N01 bound to those same towers. Their angular
 derivatives, joint continuity and periodicity then follow from the
 actual flow and the generic angular-jet theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

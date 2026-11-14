@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartRootLabelRepresentative
-import ContinuousFlexibility.Analysis.PointwiseAffineMaterialJets
-import ContinuousFlexibility.Analysis.N04FlowJetsTarget
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootLabelRepresentative
+public import ContinuousFlexibility.Analysis.PointwiseAffineMaterialJets
+public import ContinuousFlexibility.Analysis.N04FlowJetsTarget
 
 /-!
 # The raw label field at the original state and half sample
@@ -10,6 +12,8 @@ Its spatial jets therefore cost exactly their angular order. The unit
 angle projection has norm at most one; neither the two root coordinates
 nor the unused time coordinate adds a power or a constant.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,12 +1,14 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadStart
-import ContinuousFlexibility.Analysis.N04RealizationLeadReplacement
-import ContinuousFlexibility.Analysis.N04RealizationCurrentJetCollector
-import ContinuousFlexibility.Analysis.WholePositiveEndpointFields
-import ContinuousFlexibility.Analysis.N04WholeComponentPieces
-import ContinuousFlexibility.Analysis.N04bReferencePieces
-import ContinuousFlexibility.Analysis.N04PositiveNormalizationBuffer
-import ContinuousFlexibility.Analysis.PositiveComponentMaterialCell
-import ContinuousFlexibility.Analysis.N04PositiveReferenceMaterialBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadStart
+public import ContinuousFlexibility.Analysis.N04RealizationLeadReplacement
+public import ContinuousFlexibility.Analysis.N04RealizationCurrentJetCollector
+public import ContinuousFlexibility.Analysis.WholePositiveEndpointFields
+public import ContinuousFlexibility.Analysis.N04WholeComponentPieces
+public import ContinuousFlexibility.Analysis.N04bReferencePieces
+public import ContinuousFlexibility.Analysis.N04PositiveNormalizationBuffer
+public import ContinuousFlexibility.Analysis.PositiveComponentMaterialCell
+public import ContinuousFlexibility.Analysis.N04PositiveReferenceMaterialBounds
 
 /-!
 # The Realization theorem from four explicit obligations
@@ -29,6 +31,8 @@ remain as hypotheses:
 
 All four are stated for the same displayed objects, so the witness is the same.
 -/
+
+@[expose] public section
 
 noncomputable section
 

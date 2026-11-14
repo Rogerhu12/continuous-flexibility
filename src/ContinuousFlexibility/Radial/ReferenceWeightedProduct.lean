@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ReferenceWeightedCompact
-import ContinuousFlexibility.Radial.ReferenceCosineCoefficients
-import Mathlib.MeasureTheory.Measure.WithDensity
+module
+
+public import ContinuousFlexibility.Radial.ReferenceWeightedCompact
+public import ContinuousFlexibility.Radial.ReferenceCosineCoefficients
+public import Mathlib.MeasureTheory.Measure.WithDensity
 
 /-!
 # Exact product disintegration of the reference weight
@@ -9,6 +11,8 @@ The radial marginal of the frozen weighted physical measure and normalized
 angular measure reconstruct the same measure exactly. This supplies
 Fubini and L² estimates for the actual radial Fourier coefficients.
 -/
+
+@[expose] public section
 
 noncomputable section
 

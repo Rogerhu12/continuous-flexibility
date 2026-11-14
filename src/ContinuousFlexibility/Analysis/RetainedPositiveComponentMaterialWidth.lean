@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.RetainedPositiveComponentClassification
-import ContinuousFlexibility.Analysis.RetainedMorsePositiveGapMaterialWidth
-import ContinuousFlexibility.Analysis.PositiveComponentMaterialCell
-import ContinuousFlexibility.Analysis.MaterialGlobalEndpointModels
+module
+
+public import ContinuousFlexibility.Analysis.RetainedPositiveComponentClassification
+public import ContinuousFlexibility.Analysis.RetainedMorsePositiveGapMaterialWidth
+public import ContinuousFlexibility.Analysis.PositiveComponentMaterialCell
+public import ContinuousFlexibility.Analysis.MaterialGlobalEndpointModels
 
 /-!
 # Width costs of every actual retained positive component
@@ -11,6 +13,8 @@ The finitely many central components have a uniform reciprocal-width
 constant. The actual scaled E0 floor absorbs that constant and the fixed
 annulus span without assuming that the original E0 is at least one.
 -/
+
+@[expose] public section
 
 noncomputable section
 

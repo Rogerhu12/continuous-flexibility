@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N03ErrorHomogeneousBounds
-import ContinuousFlexibility.Scalar.WeightedOrdinaryPointwise
+module
+
+public import ContinuousFlexibility.Analysis.N03ErrorHomogeneousBounds
+public import ContinuousFlexibility.Scalar.WeightedOrdinaryPointwise
 
 /-!
 # Actual spatial jets of the N03 source error
@@ -10,6 +12,8 @@ fiber estimate preserves the residual factor and a common loss at all
 spatial orders. Constants are chosen before the state, residual, test
 and evaluation point. No bound for an effective coefficient is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

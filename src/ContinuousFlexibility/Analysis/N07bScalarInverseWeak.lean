@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07bStrongRelation
-import ContinuousFlexibility.Analysis.MaterialHeightRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N07bStrongRelation
+public import ContinuousFlexibility.Analysis.MaterialHeightRegularity
 
 /-!
 # The actual scalar inverse satisfies the weak relation
@@ -9,6 +11,8 @@ from the already constructed physical spaces. The coefficient smoothness
 and angular periodicity remain explicit analytic premises. The conclusion
 does not supply a canonical source norm or fixed-graph membership.
 -/
+
+@[expose] public section
 
 noncomputable section
 

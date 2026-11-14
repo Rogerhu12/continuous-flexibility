@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MatchedMorseCellWindows
+module
+
+public import ContinuousFlexibility.Radial.MatchedMorseCellWindows
 
 /-!
 # The true localizer after the retained coordinate change
@@ -8,6 +10,8 @@ cell. Its two neighboring seams give an outer closed interval and an
 inner exclusion. Comparing these intervals with an actual retained
 piece bounds the two cell indices without splitting the two tails.
 -/
+
+@[expose] public section
 
 noncomputable section
 

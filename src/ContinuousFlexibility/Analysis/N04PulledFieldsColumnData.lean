@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsColumnPhysical
-import ContinuousFlexibility.Analysis.N04RealizationMixedJointDirections
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsColumnPhysical
+public import ContinuousFlexibility.Analysis.N04RealizationMixedJointDirections
 
 /-!
 # Common physical data for the two actual columns
@@ -10,6 +12,8 @@ tower is restricted with its original low order and loss. The sharper power
 estimate is transferred from its original physical tower by uniqueness of
 genuine derivatives on the smaller open neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

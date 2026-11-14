@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAffineTower
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N07aAffineTower
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
 
 /-!
 # Smooth tame pullback along a fixed affine contraction
@@ -8,6 +10,8 @@ The output may be a closed source subspace. The proof pulls back the
 actual directional tower, so no representation of that subspace as a
 projective limit is required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

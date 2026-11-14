@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.TravelStripGlobalInverse
+module
+
+public import ContinuousFlexibility.Analysis.TravelStripGlobalInverse
 
 /-!
 # Injectivity on a genuine two-sided cylindrical collar
@@ -7,6 +9,8 @@ Positive angular derivatives invert every angular slice. The actual
 Jacobian quotient then makes radial travel at fixed output angle strictly
 increasing. This proves injectivity without constant outer-boundary values.
 -/
+
+@[expose] public section
 
 noncomputable section
 

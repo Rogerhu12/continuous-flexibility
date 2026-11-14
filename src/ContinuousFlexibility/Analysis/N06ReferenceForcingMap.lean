@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06ControlledReferenceSources
-import ContinuousFlexibility.Analysis.N06ScalarColumns
-import ContinuousFlexibility.Analysis.N06ReferenceCanonicalEquation
+module
+
+public import ContinuousFlexibility.Analysis.N06ControlledReferenceSources
+public import ContinuousFlexibility.Analysis.N06ScalarColumns
+public import ContinuousFlexibility.Analysis.N06ReferenceCanonicalEquation
 
 /-!
 # The actual reference forcing as a map on the original source space
@@ -10,6 +12,8 @@ selected volume model. They combine with minus the original source to
 give the genuine right-hand side of the positive reference equation.
 The same N05 inverse supplies both the unknown and its scalar coordinates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

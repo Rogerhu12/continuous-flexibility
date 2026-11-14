@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedAngularPrimitiveL2
-import ContinuousFlexibility.Scalar.WeightedPointwise
+module
+
+public import ContinuousFlexibility.Scalar.WeightedAngularPrimitiveL2
+public import ContinuousFlexibility.Scalar.WeightedPointwise
 
 /-!
 # Weighted membership and fixed-loss bounds for angular primitives
@@ -9,6 +11,8 @@ therefore either a bounded angular integral of the corresponding input jet,
 or an input jet with one fewer angular derivative. Summing these estimates
 gives a bound at the same physical order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

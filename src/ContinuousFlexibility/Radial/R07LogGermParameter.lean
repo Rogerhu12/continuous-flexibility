@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R07JoinParameter
-import Mathlib.Topology.Connected.TotallyDisconnected
+module
+
+public import ContinuousFlexibility.Radial.R07JoinParameter
+public import Mathlib.Topology.Connected.TotallyDisconnected
 
 /-!
 # Logarithmic scale changes on a connected collar
@@ -14,6 +16,8 @@ logarithms can take only the two values zero and the log scale ratio.
 Consequently every positive amplitude has the expected additive logarithmic
 shift on every collar germ.  This applies to the already chosen Morse joins.
 -/
+
+@[expose] public section
 
 noncomputable section
 

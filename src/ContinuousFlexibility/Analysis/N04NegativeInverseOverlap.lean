@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeInverseGeometry
-import Mathlib.Analysis.Calculus.IteratedDeriv.Defs
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeInverseGeometry
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Defs
 
 /-!
 # The fixed middle band for the two actual negative charts
@@ -13,6 +15,8 @@ The same Bool-indexed identity treats both sides.  The transition is only
 used on a fixed open interval with strictly positive power arguments;
 no smoothness through a physical root is asserted.
 -/
+
+@[expose] public section
 
 noncomputable section
 

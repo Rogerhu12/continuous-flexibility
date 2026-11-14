@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06ReferencePhysicalCoefficients
-import ContinuousFlexibility.Analysis.CanonicalCoefficientIdentities
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferencePhysicalCoefficients
+public import ContinuousFlexibility.Analysis.CanonicalCoefficientIdentities
 
 /-!
 # Explicit radial reference geometry in the actual canonical operator
@@ -9,6 +11,8 @@ density and constant-test identities determine all scalar coefficients.
 Only germs of the chart and height are used, so these formulas also apply
 to a construction that changes its extensions away from a physical piece.
 -/
+
+@[expose] public section
 
 noncomputable section
 

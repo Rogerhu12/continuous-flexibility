@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Blueprint.Statements
-import ContinuousFlexibility.Analysis.PointSolutionCore
-import ContinuousFlexibility.Analysis.StateControlCofiniteClosure
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
+public import ContinuousFlexibility.Analysis.PointSolutionCore
+public import ContinuousFlexibility.Analysis.StateControlCofiniteClosure
 
 /-!
 # Blueprint node N12
@@ -16,6 +18,8 @@ uses only the scalar equation and the normalization at the chosen nonzero
 parameter. The scalar identities it needs are already proved in the tree,
 so the S03 hypothesis is not needed by this proof.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

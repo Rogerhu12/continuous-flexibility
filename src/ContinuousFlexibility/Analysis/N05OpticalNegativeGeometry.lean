@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05OpticalRootActual
-import ContinuousFlexibility.Analysis.N05OpticalProfileSecondDerivative
-import ContinuousFlexibility.Analysis.N05NegativeTravel
-import Mathlib.Analysis.Calculus.Deriv.Shift
-import Mathlib.Analysis.SpecialFunctions.Trigonometric.Bounds
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05OpticalRootActual
+public import ContinuousFlexibility.Analysis.N05OpticalProfileSecondDerivative
+public import ContinuousFlexibility.Analysis.N05NegativeTravel
+public import Mathlib.Analysis.Calculus.Deriv.Shift
+public import Mathlib.Analysis.SpecialFunctions.Trigonometric.Bounds
 
 /-!
 # Quantitative geometry of the actual negative reference halves
@@ -12,6 +14,8 @@ The optical root-distance lower bound is an explicit sufficient input
 certificate. It is not asserted for the frozen N05 witnesses here. All
 five chart and height bounds are derived for the actual N04 halves.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.MaterialRadiusJets
-import ContinuousFlexibility.Analysis.PolynomialJetOperations
-import ContinuousFlexibility.Analysis.MaterialMixedMultiplier
+module
+
+public import ContinuousFlexibility.Analysis.MaterialRadiusJets
+public import ContinuousFlexibility.Analysis.PolynomialJetOperations
+public import ContinuousFlexibility.Analysis.MaterialMixedMultiplier
 
 /-!
 # Uniform coefficients act on the actual material weighted energies
@@ -11,6 +13,8 @@ coordinate is a lift, so only positive jets of the coordinate map are
 used. Evaluation on coordinate unit vectors identifies the resulting
 bounds with the genuine mixed derivatives used in the physical norms.
 -/
+
+@[expose] public section
 
 noncomputable section
 

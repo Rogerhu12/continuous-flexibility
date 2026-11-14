@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.MaterialOneSidedEndpointComparison
-import ContinuousFlexibility.Analysis.N04RealizationEnvelopeAlgebra
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+module
+
+public import ContinuousFlexibility.Analysis.MaterialOneSidedEndpointComparison
+public import ContinuousFlexibility.Analysis.N04RealizationEnvelopeAlgebra
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
 
 /-!
 # Converting actual sample costs to the physical point
@@ -10,6 +12,8 @@ ratio and the sampled coefficient base. A finite polynomial envelope
 using both sample and point costs then becomes a pointwise E0 envelope
 with an ordinary natural state degree. Every index and sample is retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

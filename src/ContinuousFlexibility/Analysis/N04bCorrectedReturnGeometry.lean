@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01ReturnChartSmoothness
-import ContinuousFlexibility.Analysis.ReturnCorrectionResidualPeriodicity
+module
+
+public import ContinuousFlexibility.Analysis.N01ReturnChartSmoothness
+public import ContinuousFlexibility.Analysis.ReturnCorrectionResidualPeriodicity
 
 /-!
 # The actual corrected return map is a smooth increasing circle lift
@@ -9,6 +11,8 @@ the actual N01 right-chart inverse composed with the shifted left chart.
 Its smoothness, positive derivative and true inverse are consequences.
 No regularity of the corrected endpoint map is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

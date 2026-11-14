@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentData
-import ContinuousFlexibility.Analysis.N04RealizationDifferenceValue
-import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
-import ContinuousFlexibility.Analysis.N07aMixedLocalCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentData
+public import ContinuousFlexibility.Analysis.N04RealizationDifferenceValue
+public import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
+public import ContinuousFlexibility.Analysis.N07aMixedLocalCalculus
 
 /-!
 # Completing current data from genuine positive parameter jets
@@ -13,6 +15,8 @@ comes from the first derivative on the reference segment; in particular,
 the required value bound vanishes at zero parameter. The zeroth tower
 bound follows from that value bound, on the same neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

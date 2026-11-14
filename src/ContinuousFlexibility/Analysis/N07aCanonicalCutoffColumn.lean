@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalScalarColumns
-import ContinuousFlexibility.Analysis.N07aCanonicalTestOperator
-import ContinuousFlexibility.Analysis.N07aAngularCutoff
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalScalarColumns
+public import ContinuousFlexibility.Analysis.N07aCanonicalTestOperator
+public import ContinuousFlexibility.Analysis.N07aAngularCutoff
 
 /-!
 # The actual cutoff height and its scalar source column
@@ -10,6 +12,8 @@ cutoff supplies a compact canonical test with the same germ at any
 interior point. Applying N04 there identifies its differential expression
 with the actual left scalar column, with the original sign convention.
 -/
+
+@[expose] public section
 
 noncomputable section
 

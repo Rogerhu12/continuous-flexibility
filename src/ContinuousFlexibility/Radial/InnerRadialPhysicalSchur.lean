@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerRadialPhysicalDirichlet
-import ContinuousFlexibility.Radial.InnerRadialSchurInverse
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialPhysicalDirichlet
+public import ContinuousFlexibility.Radial.InnerRadialSchurInverse
 
 /-!
 # The actual physical Schur inverse and Green self-adjointness
@@ -13,6 +15,8 @@ The interface identification is with the actual Poisson conormal flux.
 Its invertibility is supplied by the finite normalized interface proof.
 Global Green reciprocity proves self-adjointness of this same operator.
 -/
+
+@[expose] public section
 
 noncomputable section
 

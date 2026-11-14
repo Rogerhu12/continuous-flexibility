@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05SeedNegativeEnumeration
-import ContinuousFlexibility.Analysis.PositiveComponentEndpoints
+module
+
+public import ContinuousFlexibility.Analysis.N05SeedNegativeEnumeration
+public import ContinuousFlexibility.Analysis.PositiveComponentEndpoints
 
 /-!
 # Interior positive endpoints of the same retained seed
@@ -14,6 +16,8 @@ RetainedPositiveComponentInteriorEndpoints (snapshot 16, 0db1a62e),
 with the active seed tail enumeration instead of the legacy enumeration
 package. No reference, material data, cell, or atlas is selected again.
 -/
+
+@[expose] public section
 
 noncomputable section
 

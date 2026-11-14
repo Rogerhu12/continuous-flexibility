@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeInverseFiniteEnvelope
-import ContinuousFlexibility.Analysis.N04NegativeInverseRawPrefixBridge
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeInverseFiniteEnvelope
+public import ContinuousFlexibility.Analysis.N04NegativeInverseRawPrefixBridge
 
 /-!
 # Common material constants for normalized point and height jets
@@ -8,6 +10,8 @@ The constant is selected before the sample and before any geometric
 inverse system. This is the coefficient closure needed to apply the
 pointwise raw bridge simultaneously to all negative components.
 -/
+
+@[expose] public section
 
 noncomputable section
 

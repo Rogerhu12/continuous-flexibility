@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MorsePartnerWeakGraph
+module
+
+public import ContinuousFlexibility.Radial.MorsePartnerWeakGraph
 
 /-!
 # Darboux factorization on the Morse energy space
@@ -8,6 +10,8 @@ of the closed energy graph. Compact test pairings identify them with the
 classical Darboux expressions. Energy-core density extends both factorizations
 to arbitrary energy vectors.
 -/
+
+@[expose] public section
 
 noncomputable section
 

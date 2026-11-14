@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N01OriginalCoefficientOrdinaryGlobalJets
-import ContinuousFlexibility.Analysis.N01RadialCoefficientMaterialInverse
-import ContinuousFlexibility.Analysis.PositivePowerPolynomialMaterialJets
-import ContinuousFlexibility.Analysis.MaterialGlobalEndpointModels
-import ContinuousFlexibility.Analysis.CanonicalStateInterpolation
+module
+
+public import ContinuousFlexibility.Analysis.N01OriginalCoefficientOrdinaryGlobalJets
+public import ContinuousFlexibility.Analysis.N01RadialCoefficientMaterialInverse
+public import ContinuousFlexibility.Analysis.PositivePowerPolynomialMaterialJets
+public import ContinuousFlexibility.Analysis.MaterialGlobalEndpointModels
+public import ContinuousFlexibility.Analysis.CanonicalStateInterpolation
 
 /-!
 # Material jets of every real power of the actual radial coefficient
@@ -13,6 +15,8 @@ The global ordinary coefficient tower supplies all positive jets. The
 same material data are retained; only a fixed scalar multiplies E0 so
 that its envelope is at least one. No optical root lower is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

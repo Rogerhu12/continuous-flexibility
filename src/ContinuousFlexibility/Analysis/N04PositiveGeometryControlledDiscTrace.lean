@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledDiscKernel
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledHeightFormula
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsSpatialInputs
-import ContinuousFlexibility.Analysis.SmoothDirectionsNormedComposition
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledDiscKernel
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledHeightFormula
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsSpatialInputs
+public import ContinuousFlexibility.Analysis.SmoothDirectionsNormedComposition
 
 /-!
 # Genuine joint towers of the physical discriminant power traces
@@ -12,6 +14,8 @@ radial trace then give the same finite spatial partition formula. Each
 term is a smooth function of the actual absorbed packet, so the result
 is a genuine joint state and angle tower on the common neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

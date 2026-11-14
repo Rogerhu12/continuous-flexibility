@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # Uniform coordinate maps on the canonical Hilbert sequence spaces
@@ -7,6 +9,8 @@ The maps are formed coordinate by coordinate in the actual lp spaces.
 Their norm estimate is the pointwise norm comparison with a constant
 multiple of the input, and does not use a completion chosen by an inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

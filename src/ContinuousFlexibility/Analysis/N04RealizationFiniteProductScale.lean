@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationMixedProductJets
-import ContinuousFlexibility.Analysis.N04RealizationParameterRescale
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationMixedProductJets
+public import ContinuousFlexibility.Analysis.N04RealizationParameterRescale
 
 /-!
 # A spatial scale for the existing finite product estimate
@@ -9,6 +11,8 @@ The positive spatial scale is retained to exactly the sum of the input
 orders. The parameter directions are arbitrary members of the supplied
 predicate, so a common direction rescaling remains admissible.
 -/
+
+@[expose] public section
 
 noncomputable section
 

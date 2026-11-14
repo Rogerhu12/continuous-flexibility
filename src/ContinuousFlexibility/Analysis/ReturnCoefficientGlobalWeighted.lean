@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.ReturnCoefficientErrorMixedWeighted
-import ContinuousFlexibility.Analysis.ReturnOpticalCutoffPatching
-import ContinuousFlexibility.Analysis.N01ControlIndexBound
-import ContinuousFlexibility.Analysis.MaterialSampleRadialLoss
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCoefficientErrorMixedWeighted
+public import ContinuousFlexibility.Analysis.ReturnOpticalCutoffPatching
+public import ContinuousFlexibility.Analysis.N01ControlIndexBound
+public import ContinuousFlexibility.Analysis.MaterialSampleRadialLoss
 
 /-!
 # Global bounds for the actual patched independent coefficient error
@@ -12,6 +14,8 @@ The global selector has the same local jet, or zero near a nonnegative
 reference radius. The actual containing-cell index bound lets the
 residual height factor absorb every remaining spatial derivative loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

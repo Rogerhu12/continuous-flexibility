@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N01FlowInverseCollarJets
-import ContinuousFlexibility.Analysis.ReturnInterpolationMixedJets
-import ContinuousFlexibility.Analysis.ReturnResidualAngularWeightedBounds
-import ContinuousFlexibility.Analysis.PolynomialWeightedJets
-import ContinuousFlexibility.Analysis.PolynomialPositiveComposition
+module
+
+public import ContinuousFlexibility.Analysis.N01FlowInverseCollarJets
+public import ContinuousFlexibility.Analysis.ReturnInterpolationMixedJets
+public import ContinuousFlexibility.Analysis.ReturnResidualAngularWeightedBounds
+public import ContinuousFlexibility.Analysis.PolynomialWeightedJets
+public import ContinuousFlexibility.Analysis.PolynomialPositiveComposition
 
 /-!
 # Mixed weighted jets of the actual independent correction velocity
@@ -14,6 +16,8 @@ additional losses are powers of the containing reference-cell weight.
 The cutoff is an argument throughout, so this estimate applies to the
 same quantitative optical collar selected for characteristic positivity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.WeightKernelBounds
+module
+
+public import ContinuousFlexibility.Radial.WeightKernelBounds
 
 /-!
 # Selecting the two endpoint bounds for one reference block
@@ -11,6 +13,8 @@ existing Schur estimates.  These are numerical implications: the
 localization and canonical change-of-variables estimates remain separate
 proof obligations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

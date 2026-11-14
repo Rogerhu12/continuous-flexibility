@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerGapPoissonMatrix
-import ContinuousFlexibility.Radial.InnerRadialL2Mass
-import Mathlib.Analysis.InnerProductSpace.Adjoint
+module
+
+public import ContinuousFlexibility.Radial.InnerGapPoissonMatrix
+public import ContinuousFlexibility.Radial.InnerRadialL2Mass
+public import Mathlib.Analysis.InnerProductSpace.Adjoint
 
 /-!
 # The actual gap Poisson operator in the radial Hilbert space
@@ -11,6 +13,8 @@ Euclidean boundary space. Its norm is the physical mass, its quantitative
 bound follows from the actual gap energy, and its adjoint pairs with
 arbitrary L² sources through the physical radial integral.
 -/
+
+@[expose] public section
 
 noncomputable section
 

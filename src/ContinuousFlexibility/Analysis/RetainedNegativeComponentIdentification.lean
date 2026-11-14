@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.R11aRetainedFamily
-import ContinuousFlexibility.Radial.MorseNegativeCover
-import ContinuousFlexibility.Radial.SeedCentralReturn
+module
+
+public import ContinuousFlexibility.Radial.R11aRetainedFamily
+public import ContinuousFlexibility.Radial.MorseNegativeCover
+public import ContinuousFlexibility.Radial.SeedCentralReturn
 
 /-!
 # Exact negative components of the same retained reference
@@ -12,6 +14,8 @@ the fact that its closed interval stays inside that tail. The central
 case is the one fixed physical oscillator interval. The reference and
 the retained pair are never replaced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.TailFundamentalGreenRepresentation
-import ContinuousFlexibility.Analysis.L2KernelExtension
-import Mathlib.Analysis.Normed.Lp.SmoothApprox
+module
+
+public import ContinuousFlexibility.Radial.TailFundamentalGreenRepresentation
+public import ContinuousFlexibility.Analysis.L2KernelExtension
+public import Mathlib.Analysis.Normed.Lp.SmoothApprox
 
 /-!
 # The actual tail Green formula for every weighted L² source
@@ -11,6 +13,8 @@ is a multiple of the natural solution.  Interior smooth sources are dense
 for the finite physical tail measure.  The already constructed Dirichlet
 resolvent therefore has its actual kernel representation for every source.
 -/
+
+@[expose] public section
 
 noncomputable section
 

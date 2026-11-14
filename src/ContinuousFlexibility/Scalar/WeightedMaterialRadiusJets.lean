@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedMaterialScale
-import Mathlib.Analysis.Calculus.ContDiff.Bounds
+module
+
+public import ContinuousFlexibility.Scalar.WeightedMaterialScale
+public import Mathlib.Analysis.Calculus.ContDiff.Bounds
 
 /-!
 # Bounded jets of the actual material radius
@@ -9,6 +11,8 @@ material scale. Its bounded logarithmic jets then bound every ordinary jet
 of the actual radius. Consequently composition with that radius preserves
 arbitrarily small material-envelope growth.
 -/
+
+@[expose] public section
 
 noncomputable section
 

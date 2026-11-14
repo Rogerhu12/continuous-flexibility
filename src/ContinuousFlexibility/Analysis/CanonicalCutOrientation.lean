@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.CanonicalBoundaryLift
-import ContinuousFlexibility.Analysis.CanonicalClosedInverseJets
-import ContinuousFlexibility.Analysis.CanonicalDomainConnected
-import ContinuousFlexibility.Analysis.CanonicalStripGeometry
-import ContinuousFlexibility.Geometry.EuclideanRigidity
-import Mathlib.Analysis.Calculus.Deriv.Slope
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalBoundaryLift
+public import ContinuousFlexibility.Analysis.CanonicalClosedInverseJets
+public import ContinuousFlexibility.Analysis.CanonicalDomainConnected
+public import ContinuousFlexibility.Analysis.CanonicalStripGeometry
+public import ContinuousFlexibility.Geometry.EuclideanRigidity
+public import Mathlib.Analysis.Calculus.Deriv.Slope
 
 /-!
 # The actual orientations of the paired negative halves
@@ -15,6 +17,8 @@ has the inward sign. The nonzero ordinary Jacobian makes that sign strict.
 Actual inverse germs transfer the sign to the forward chart, and
 connectedness propagates it throughout the closure of the current piece.
 -/
+
+@[expose] public section
 
 noncomputable section
 

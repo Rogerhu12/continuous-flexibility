@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CircleReturnFourier
-import ContinuousFlexibility.Analysis.CircleReturnSeries
-import ContinuousFlexibility.Analysis.CircleJetClosedGraph
+module
+
+public import ContinuousFlexibility.Analysis.CircleReturnFourier
+public import ContinuousFlexibility.Analysis.CircleReturnSeries
+public import ContinuousFlexibility.Analysis.CircleJetClosedGraph
 
 /-!
 # Quantitative estimates for the actual circle Fourier coefficients
@@ -10,6 +12,8 @@ numerical series.  They are independent of the circle, its travel angle,
 the input function, and the derivative order.  Integration by parts followed
 by the actual angular L² pairing gives a fixed loss of three derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

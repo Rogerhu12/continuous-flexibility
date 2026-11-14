@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.TailNaturalInterpolation
-import Mathlib.Analysis.Calculus.Deriv.MeanValue
+module
+
+public import ContinuousFlexibility.Radial.TailNaturalInterpolation
+public import Mathlib.Analysis.Calculus.Deriv.MeanValue
 
 /-!
 # From actual classical tail solutions to their node recurrence
@@ -10,6 +12,8 @@ the entrance, where the original density need only be smooth from the right.
 The canonical Poisson pair has nonzero Wronskian, so its two endpoint values
 determine every classical solution on that edge.
 -/
+
+@[expose] public section
 
 noncomputable section
 

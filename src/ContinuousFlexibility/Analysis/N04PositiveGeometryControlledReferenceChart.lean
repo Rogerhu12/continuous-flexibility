@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledFamilyMaterial
-import ContinuousFlexibility.Analysis.N04PositiveGeometryReferencePullbackCosts
-import ContinuousFlexibility.Analysis.N04PositiveGeometrySlotKernelBounds
-import ContinuousFlexibility.Analysis.PointwiseAffineMaterialJets
-import ContinuousFlexibility.Analysis.WholePositiveReferenceGauge
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledFamilyMaterial
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryReferencePullbackCosts
+public import ContinuousFlexibility.Analysis.N04PositiveGeometrySlotKernelBounds
+public import ContinuousFlexibility.Analysis.PointwiseAffineMaterialJets
+public import ContinuousFlexibility.Analysis.WholePositiveReferenceGauge
 
 /-!
 # The radial chart in the actual fixed reference gauge
@@ -12,6 +14,8 @@ reference coordinate. Its exact partition formula keeps both the
 original parameter height factor and the saved pure spatial order.
 Only the material certificate of that reference family is consumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

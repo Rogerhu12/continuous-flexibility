@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MorseCellJoinCollars
-import ContinuousFlexibility.Radial.MorseChainRadiusPlacement
-import ContinuousFlexibility.Radial.MorseChainEndpointDistances
+module
+
+public import ContinuousFlexibility.Radial.MorseCellJoinCollars
+public import ContinuousFlexibility.Radial.MorseChainRadiusPlacement
+public import ContinuousFlexibility.Radial.MorseChainEndpointDistances
 
 /-!
 # Actual geometry of the two accumulating Morse chains
@@ -11,6 +13,8 @@ the entire right placement is dilated to create a positive middle gap.
 This constructs the geometry of the Morse chain, before building its
 globally flat profile and partition.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

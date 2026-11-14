@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartProjectionJets
-import ContinuousFlexibility.Analysis.N04NegativeChartProjectionBounds
-import ContinuousFlexibility.Analysis.N04RealizationJointMixedRegularity
-import ContinuousFlexibility.Analysis.CylinderMixedJetNorms
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartProjectionJets
+public import ContinuousFlexibility.Analysis.N04NegativeChartProjectionBounds
+public import ContinuousFlexibility.Analysis.N04RealizationJointMixedRegularity
+public import ContinuousFlexibility.Analysis.CylinderMixedJetNorms
 
 /-!
 # Mixed state and spatial jets of the literal root projections
@@ -11,6 +13,8 @@ even or divided odd projection of the same input jet. Spatial locality
 then permits the sharp root estimate on the positive half-plane. No
 periodicity or degree-one lift is required of a positive state slice.
 -/
+
+@[expose] public section
 
 noncomputable section
 

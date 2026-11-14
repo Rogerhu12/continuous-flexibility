@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryStoredInverseJets
-import ContinuousFlexibility.Analysis.N04PositiveGeometryRootInverseSamplePrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometryStoredForwardSamplePrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledFiniteCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryStoredInverseJets
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryRootInverseSamplePrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryStoredForwardSamplePrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledFiniteCalculus
 
 /-!
 # Sampled bounds for the original full inverse jets
@@ -10,6 +12,8 @@ The forward jets move along the actual inverse root label. A single
 extra parameter shift pays for this substitution, and the finite inverse
 recursion retains the same reserve and material weight.
 -/
+
+@[expose] public section
 
 noncomputable section
 

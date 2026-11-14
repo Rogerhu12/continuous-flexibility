@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowMinkowski
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowMinkowski
 
 /-!
 # Sobolev Minkowski for integrable time families
@@ -7,6 +9,8 @@ The reference angular speed in the translation comparison need only be
 integrable in time. The continuous-map-to-L² linear map commutes with
 its Bochner integral just as it does for a continuous time family.
 -/
+
+@[expose] public section
 
 noncomputable section
 

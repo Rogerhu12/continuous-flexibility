@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.MaterialCellEndpointModels
-import ContinuousFlexibility.Analysis.MaterialSampleBounds
+module
+
+public import ContinuousFlexibility.Analysis.MaterialCellEndpointModels
+public import ContinuousFlexibility.Analysis.MaterialSampleBounds
 
 /-!
 # Radial envelopes on overlapping actual material cells
@@ -9,6 +11,8 @@ the same index. A common physical point compares both indices to one
 endpoint coordinate. The sample of the host then gives a uniform
 polynomial material bound, without changing either cell assignment.
 -/
+
+@[expose] public section
 
 noncomputable section
 

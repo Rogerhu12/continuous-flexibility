@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import Mathlib.Analysis.InnerProductSpace.l2Space
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import Mathlib.Analysis.InnerProductSpace.l2Space
 
 /-!
 # Finite piece cores in the actual canonical source space
@@ -9,6 +11,8 @@ Consequently cutting off whole cylinders preserves the original source
 submodule. Its finite piece core is dense in its own Banach norm. No
 replacement of the source by an abstract sequence space is used here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

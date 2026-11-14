@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.IntervalFluxEnergy
-import Mathlib.Tactic.Positivity
-import Mathlib.MeasureTheory.Function.L2Space
+module
+
+public import ContinuousFlexibility.Analysis.IntervalFluxEnergy
+public import Mathlib.Tactic.Positivity
+public import Mathlib.MeasureTheory.Function.L2Space
 
 /-!
 # Caccioppoli estimates from the conormal energy identity
@@ -9,6 +11,8 @@ The cutoff estimate costs one power of angular frequency. Its proof uses
 only the actual first derivative and the energy identity established from
 the flux primitive; no classical second derivative is assumed.
 -/
+
+@[expose] public section
 
 open Set Filter MeasureTheory
 open scoped ContDiff Topology

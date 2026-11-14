@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFourierWeights
-import Mathlib.Analysis.Fourier.AddCircle
-import Mathlib.MeasureTheory.Function.LpSeminorm.LpNorm
-import Mathlib.MeasureTheory.Integral.Bochner.SumMeasure
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierWeights
+public import Mathlib.Analysis.Fourier.AddCircle
+public import Mathlib.MeasureTheory.Function.LpSeminorm.LpNorm
+public import Mathlib.MeasureTheory.Integral.Bochner.SumMeasure
 
 /-!
 # The physical Fourier norms on a circle
@@ -12,6 +14,8 @@ The Sobolev and Fourier `L¹` norms are the frequency norms already shared with
 the cylinder theory. Pointwise estimates are stated for the continuous
 representative, with actual integrability hypotheses on its coefficients.
 -/
+
+@[expose] public section
 
 noncomputable section
 

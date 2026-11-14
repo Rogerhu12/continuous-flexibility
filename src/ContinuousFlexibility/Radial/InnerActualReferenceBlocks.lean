@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerActualModelChain
-import ContinuousFlexibility.Radial.InnerRadialInterfaceWeights
-import ContinuousFlexibility.Radial.InnerCutIncidence
+module
+
+public import ContinuousFlexibility.Radial.InnerActualModelChain
+public import ContinuousFlexibility.Radial.InnerRadialInterfaceWeights
+public import ContinuousFlexibility.Radial.InnerCutIncidence
 
 /-!
 # The full reference has blocks of size at most two
@@ -11,6 +13,8 @@ The complete reference matrix vanishes between different labels. Its
 blocks therefore have at most two variables; no gap off-diagonal is
 discarded to obtain this statement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N01cRadialPowerInputs
-import ContinuousFlexibility.Analysis.N01cInverseProfileBounds
-import ContinuousFlexibility.Analysis.N01cProfileBaseBounds
-import ContinuousFlexibility.Analysis.N01cCoefficientMixedParameterJets
-import ContinuousFlexibility.Analysis.N01cStateInterpolation
+module
+
+public import ContinuousFlexibility.Analysis.N01cRadialPowerInputs
+public import ContinuousFlexibility.Analysis.N01cInverseProfileBounds
+public import ContinuousFlexibility.Analysis.N01cProfileBaseBounds
+public import ContinuousFlexibility.Analysis.N01cCoefficientMixedParameterJets
+public import ContinuousFlexibility.Analysis.N01cStateInterpolation
 
 /-!
 # The actual radial inputs of the normalized coefficients
@@ -11,6 +13,8 @@ The three inputs are the state profile, its first radial derivative, and
 its reciprocal. Their quantitative bounds use the original material
 estimates, actual localization, and the actual parameter towers.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,12 +1,16 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartRootActualComposition
-import ContinuousFlexibility.Analysis.N04NegativeChartRootCoordinateBounds
-import ContinuousFlexibility.Analysis.N04NegativeChartNormalizedPrefix
-import ContinuousFlexibility.Analysis.N04NegativeChartPolarization
-import ContinuousFlexibility.Analysis.SmoothDirectionsPermutationSymmetry
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootActualComposition
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootCoordinateBounds
+public import ContinuousFlexibility.Analysis.N04NegativeChartNormalizedPrefix
+public import ContinuousFlexibility.Analysis.N04NegativeChartPolarization
+public import ContinuousFlexibility.Analysis.SmoothDirectionsPermutationSymmetry
 
 /-! The actual root projections retain the original fractional state
 budget. A single finite state line supplies diagonal jets; symmetry and
 polarization return arbitrary directions without changing the base. -/
+
+@[expose] public section
 
 noncomputable section
 

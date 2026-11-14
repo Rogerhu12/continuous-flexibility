@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MorseTransitionBands
+module
+
+public import ContinuousFlexibility.Radial.MorseTransitionBands
 
 /-!
 # Uniform suppression on every inner frequency band
@@ -10,6 +12,8 @@ upper bound on the frequency.  A second estimate treats a long positive
 head, and also a central cut after its squared coordinate is used as the
 length parameter.
 -/
+
+@[expose] public section
 
 noncomputable section
 

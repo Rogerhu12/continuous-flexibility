@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SmoothDirectionsBoundedLimit
-import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
+module
+
+public import ContinuousFlexibility.Analysis.SmoothDirectionsBoundedLimit
+public import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
 
 /-!
 # Directional limits with the original one-high-factor bounds
@@ -8,6 +10,8 @@ Only the existence and continuity argument uses a larger single
 seminorm. Every sharper bound on the interior jets passes unchanged to
 their limits by continuity of absolute value.
 -/
+
+@[expose] public section
 
 noncomputable section
 

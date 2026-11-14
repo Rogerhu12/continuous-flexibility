@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.RetainedMorsePoissonBound
-import ContinuousFlexibility.Radial.InnerModelEndpointEnergy
-import ContinuousFlexibility.Radial.InnerMorseWeights
+module
+
+public import ContinuousFlexibility.Radial.RetainedMorsePoissonBound
+public import ContinuousFlexibility.Radial.InnerModelEndpointEnergy
+public import ContinuousFlexibility.Radial.InnerMorseWeights
 
 /-!
 # Constant-weight estimates for the same retained Morse charts
@@ -11,6 +13,8 @@ model selected before the reference is built therefore supplies its
 actual physical error and its normalized column bound without a new
 choice of model or a condition number.
 -/
+
+@[expose] public section
 
 noncomputable section
 

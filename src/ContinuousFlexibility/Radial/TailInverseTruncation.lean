@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.TailPositiveResolvent
-import ContinuousFlexibility.Radial.TailTruncationConvergence
+module
+
+public import ContinuousFlexibility.Radial.TailPositiveResolvent
+public import ContinuousFlexibility.Radial.TailTruncationConvergence
 
 /-!
 # Convergence of the actual deep-tail inverses
@@ -9,6 +11,8 @@ The elementary resolvent identity transfers this convergence to the spectral
 parameter, using the uniform inverse bound. Restricting a source to a finite
 Dirichlet interval preserves its pairings with the entire form domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.WeightedStateBasicFields
-import ContinuousFlexibility.Scalar.WeightedOddHeightGerms
-import ContinuousFlexibility.Scalar.WeightedHeightSmallness
+module
+
+public import ContinuousFlexibility.Scalar.WeightedStateBasicFields
+public import ContinuousFlexibility.Scalar.WeightedOddHeightGerms
+public import ContinuousFlexibility.Scalar.WeightedHeightSmallness
 
 /-!
 # Uniform tame germs of the actual basic scalar state fields
@@ -9,6 +11,8 @@ These proofs apply the fixed-loss calculus to the literal candidate
 expressions.  The four decoded scalar ranges used by the power extensions
 are simultaneously small on one neighborhood of the prescribed center.
 -/
+
+@[expose] public section
 
 noncomputable section
 

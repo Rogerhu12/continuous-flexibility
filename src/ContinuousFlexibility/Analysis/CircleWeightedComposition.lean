@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CircleJetPointwiseEnergy
-import ContinuousFlexibility.Analysis.CircleReturnBounded
+module
+
+public import ContinuousFlexibility.Analysis.CircleJetPointwiseEnergy
+public import ContinuousFlexibility.Analysis.CircleReturnBounded
 
 /-!
 # Fixed-chart composition on the actual weighted circle model
@@ -10,6 +12,8 @@ over components therefore preserve every existing circle level.  For a
 fixed uniformly smooth circle lift the resulting operator is linear,
 continuous, and tame with one angular derivative of loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

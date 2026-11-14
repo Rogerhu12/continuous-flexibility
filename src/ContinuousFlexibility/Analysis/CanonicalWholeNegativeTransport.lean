@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CanonicalActualEndpointFields
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalActualEndpointFields
 
 /-!
 # The actual transport on one closed negative component
@@ -9,6 +11,8 @@ right field near the right root therefore gives one ordinarily smooth
 field on the entire closed component, including its artificial cut.
 The values at true roots are the genuine closed inverse values.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryActualPhysicalHeightSamplePrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledGauge
-import ContinuousFlexibility.Analysis.N04PositiveGeometryCurrentJointPowers
-import ContinuousFlexibility.Analysis.N04PositiveGeometryGaugeRegularity
-import ContinuousFlexibility.Analysis.N04PrincipalPositiveIndex
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryActualPhysicalHeightSamplePrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledGauge
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryCurrentJointPowers
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryGaugeRegularity
+public import ContinuousFlexibility.Analysis.N04PrincipalPositiveIndex
 
 /-!
 # Current data for the actual physical height
@@ -11,6 +13,8 @@ The positive height atom is the physical unit pullback of the same
 moving quotient. Its positive joint words give the required one-high
 parameter estimates on one neighborhood, for every auxiliary column.
 -/
+
+@[expose] public section
 
 noncomputable section
 

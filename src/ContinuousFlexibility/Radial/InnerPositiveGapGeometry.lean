@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerPositiveGap
-import Mathlib.Analysis.Calculus.TangentCone.Real
-import Mathlib.Topology.Order.Compact
+module
+
+public import ContinuousFlexibility.Radial.InnerPositiveGap
+public import Mathlib.Analysis.Calculus.TangentCone.Real
+public import Mathlib.Topology.Order.Compact
 
 /-!
 # Closed geometric bounds for actual positive gaps
@@ -11,6 +13,8 @@ slope bounds extend to the closed join by continuity. A fixed compact
 positive connector has a positive slope constant without any inverse or
 coercivity hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

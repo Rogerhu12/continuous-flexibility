@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CircleSingleComponentJets
-import ContinuousFlexibility.Analysis.CircleSmoothDirectionsOperations
-import ContinuousFlexibility.Analysis.CircleJointEvaluation
-import ContinuousFlexibility.Analysis.SpacesTraceCircleBounds
+module
+
+public import ContinuousFlexibility.Analysis.CircleSingleComponentJets
+public import ContinuousFlexibility.Analysis.CircleSmoothDirectionsOperations
+public import ContinuousFlexibility.Analysis.CircleJointEvaluation
+public import ContinuousFlexibility.Analysis.SpacesTraceCircleBounds
 
 /-!
 # The actual circle inverse with topological state parameters
@@ -11,6 +13,8 @@ Its proved positive-lift inversion supplies a genuine joint tower for
 the literal chosen inverse. No normed structure on the parameter space,
 inverse regularity premise, or change of parameter domain is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

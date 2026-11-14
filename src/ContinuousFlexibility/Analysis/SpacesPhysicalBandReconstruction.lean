@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SpacesPhysicalBandAnalysis
+module
+
+public import ContinuousFlexibility.Analysis.SpacesPhysicalBandAnalysis
 
 /-!
 # Exact reconstruction by the physical Fourier bands
@@ -7,6 +9,8 @@ The zero-order bands are genuine spectral projections. Their series recovers
 each localized cylinder class, and the order-one analysis estimate promotes
 the coordinate identities to convergence in the full Hilbert sum of cells.
 -/
+
+@[expose] public section
 
 noncomputable section
 

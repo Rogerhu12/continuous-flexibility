@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseRadiusODE
-import ContinuousFlexibility.Radial.MorseChainParameters
+module
+
+public import ContinuousFlexibility.Radial.MorseRadiusODE
+public import ContinuousFlexibility.Radial.MorseChainParameters
 
 /-!
 # The long right Morse cap
@@ -9,6 +11,8 @@ initial value. Once this control gives positivity, the velocity integral
 gives the lower and upper speed bounds. The cap length in the radius
 coordinate and its travel integral are calculated on the same interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

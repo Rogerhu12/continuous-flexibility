@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesNemytskiiDifferentiation
-import Mathlib.Algebra.BigOperators.Group.List.Basic
+module
+
+public import ContinuousFlexibility.Analysis.SpacesNemytskiiDifferentiation
+public import Mathlib.Algebra.BigOperators.Group.List.Basic
 
 /-!
 # The finite spatial jet formula for smooth composition
@@ -8,6 +10,8 @@ Repeated coordinate differentiation produces an explicit finite list of
 normalized composition terms. Every term has total derivative order at
 most the requested mixed order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

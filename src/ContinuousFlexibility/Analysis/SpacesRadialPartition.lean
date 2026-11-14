@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.SpacesCutoff
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
-import Mathlib.Topology.Order.AtTopBotIxx
-import Mathlib.Topology.Algebra.InfiniteSum.Basic
+module
+
+public import ContinuousFlexibility.Analysis.SpacesCutoff
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+public import Mathlib.Topology.Order.AtTopBotIxx
+public import Mathlib.Topology.Algebra.InfiniteSum.Basic
 
 /-!
 # A fixed unit-scale radial partition
@@ -12,6 +14,8 @@ nonzero. This supplies the uniformly smooth localizations used by the
 physical Fourier construction, together with a wider cutoff which is
 identically one on each localization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

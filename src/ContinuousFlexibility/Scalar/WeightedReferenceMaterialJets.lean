@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Scalar.WeightedMaterialRadiusJets
+module
+
+public import ContinuousFlexibility.Scalar.WeightedMaterialRadiusJets
 
 /-!
 # Actual reference coefficients in material coordinates
@@ -9,6 +11,8 @@ arbitrarily small powers of the envelope, then transported by the actual
 radius. Smooth coefficients on a neighborhood of the closed physical
 interval are handled by compactness.
 -/
+
+@[expose] public section
 
 noncomputable section
 

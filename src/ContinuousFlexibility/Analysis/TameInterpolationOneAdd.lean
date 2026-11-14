@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.TameInterpolationProducts
+module
+
+public import ContinuousFlexibility.Analysis.TameInterpolationProducts
 
 /-!
 # Affine factors in finite interpolation products
@@ -7,6 +9,8 @@ The first derivative of a circle chart is one plus a decoded derivative.
 Adding one to an interpolated seminorm does not change its order cost,
 because the common high scale is at least one.
 -/
+
+@[expose] public section
 
 noncomputable section
 

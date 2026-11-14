@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01RadialFlow
-import Mathlib.Analysis.Calculus.Deriv.MeanValue
+module
+
+public import ContinuousFlexibility.Analysis.N01RadialFlow
+public import Mathlib.Analysis.Calculus.Deriv.MeanValue
 
 /-!
 # The actual reference cut at half optical travel
@@ -9,6 +11,8 @@ reference optical travel. The physical arithmetic midpoint need not have
 that travel value. Strict positivity of the actual optical speed inside
 each negative component gives a unique interior reference cut.
 -/
+
+@[expose] public section
 
 noncomputable section
 

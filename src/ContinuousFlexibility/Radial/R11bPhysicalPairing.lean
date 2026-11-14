@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R11bLocalL2
-import Mathlib.MeasureTheory.Integral.Prod
+module
+
+public import ContinuousFlexibility.Radial.R11bLocalL2
+public import Mathlib.MeasureTheory.Integral.Prod
 
 /-!
 # Physical integrals and the normalized radial cell squares
@@ -9,6 +11,8 @@ the product physical measure.  Fubini's theorem identifies them only after
 actual integrability has been established.  These lemmas retain that premise
 and the paper's angular normalization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

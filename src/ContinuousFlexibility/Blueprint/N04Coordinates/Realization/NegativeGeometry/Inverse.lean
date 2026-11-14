@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeInverseForwardClosure
-import ContinuousFlexibility.Analysis.N04NegativeInverseJointCollector
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeInverseForwardClosure
+public import ContinuousFlexibility.Analysis.N04NegativeInverseJointCollector
 
 /-!
 # N04Coordinates-Realization, negative geometry: inverse chart
@@ -12,6 +14,8 @@ The statement is defined in
 Source: paper/flexible-surface-readable/07-fixed-geometry.tex, lines 1545-1678.
 Task: docs/tasks/N04Realization-NegativeInverse.md.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

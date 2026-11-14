@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.ScalarFlowInitialAngle
-import ContinuousFlexibility.Analysis.ScalarFlowParameterFDeriv
-import Mathlib.Algebra.Order.Group.Pointwise.Interval
-import Mathlib.Analysis.SpecialFunctions.Log.Basic
-import Mathlib.Tactic.NormNum
+module
+
+public import ContinuousFlexibility.Analysis.ScalarFlowInitialAngle
+public import ContinuousFlexibility.Analysis.ScalarFlowParameterFDeriv
+public import Mathlib.Algebra.Order.Group.Pointwise.Interval
+public import Mathlib.Analysis.SpecialFunctions.Log.Basic
+public import Mathlib.Tactic.NormNum
 
 /-!
 # Actual low-order scalar flow derivative bounds
@@ -14,6 +16,8 @@ The parameter bound is linear in the field's parameter derivative norm
 and the initial-data derivative norm; no derivative bound for the flow
 is supplied as an assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

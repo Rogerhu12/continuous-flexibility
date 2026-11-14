@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OuterTailResistanceBounds
+module
+
+public import ContinuousFlexibility.Radial.OuterTailResistanceBounds
 
 /-!
 # The actual initial resistance has a uniform coefficient envelope
@@ -8,6 +10,8 @@ physical localization uses the first label or its predecessor, both of
 which are controlled by the first coefficient weight. On the right the
 initial interval has zero length.
 -/
+
+@[expose] public section
 
 noncomputable section
 

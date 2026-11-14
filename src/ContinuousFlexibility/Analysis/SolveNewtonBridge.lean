@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.TameTransfer
+module
+
+public import ContinuousFlexibility.Analysis.TameTransfer
 
 /-!
 # Tame transport for the actual Nash--Moser spaces
@@ -10,6 +12,8 @@ changing between uniformly comparable gradings.  Linear precomposition also
 covers restriction to a closed affine tangent space after translation of the
 base point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

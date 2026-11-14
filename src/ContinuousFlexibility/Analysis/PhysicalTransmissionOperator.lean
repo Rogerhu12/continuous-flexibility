@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import ContinuousFlexibility.Analysis.CylinderSobolev
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import ContinuousFlexibility.Analysis.CylinderSobolev
 
 /-!
 # The smooth physical divergence operator at a transmission interface
@@ -11,6 +13,8 @@ radial derivative. Higher derivatives are handled by the equation.
 
 Source: the readable manuscript, §7, lines 1725–1755.
 -/
+
+@[expose] public section
 
 noncomputable section
 

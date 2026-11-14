@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedAngularJetProduct
-import ContinuousFlexibility.Scalar.WeightedProductTower
+module
+
+public import ContinuousFlexibility.Scalar.WeightedAngularJetProduct
+public import ContinuousFlexibility.Scalar.WeightedProductTower
 
 /-!
 # One-high-factor estimates for two odd angular jets
@@ -9,6 +11,8 @@ second derivative product rule. Each application of the second derivative
 costs two orders. Enlarging the common low order by two and the common loss
 by two controls all three terms with one high input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseTransitionBands
-import ContinuousFlexibility.Radial.ScaleSlowVariation
+module
+
+public import ContinuousFlexibility.Radial.MorseTransitionBands
+public import ContinuousFlexibility.Radial.ScaleSlowVariation
 
 /-!
 # Parameter absorption at the terminal matching cuts
@@ -14,6 +16,8 @@ These are scalar estimates. Applying them to a matching matrix still
 requires the actual Poisson error and outer propagation estimates on the
 same geometry; no such differential estimate is included as a conclusion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CanonicalGluedAiryIntegral
-import ContinuousFlexibility.Analysis.CanonicalCutEndpointSeparation
-import ContinuousFlexibility.Analysis.AiryHalfHolonomy
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalGluedAiryIntegral
+public import ContinuousFlexibility.Analysis.CanonicalCutEndpointSeparation
+public import ContinuousFlexibility.Analysis.AiryHalfHolonomy
 
 /-!
 # True endpoint traces of the glued Airy first integral
@@ -11,6 +13,8 @@ opposite root from the other closed half. The limit is therefore the
 genuine closed chart trace, regardless of the total chart values outside
 its physical domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

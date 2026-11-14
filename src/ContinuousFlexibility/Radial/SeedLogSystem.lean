@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MorseRadiusODE
+module
+
+public import ContinuousFlexibility.Radial.MorseRadiusODE
 
 /-!
 # Finite continuation of the logarithmic radial system
@@ -7,6 +9,8 @@ A scalar gauge reduces the logarithmic second-mode equation to the arbitrary
 smooth second-order system. The first-order formulation also supplies interval
 uniqueness and preservation of a nonzero Cauchy state.
 -/
+
+@[expose] public section
 
 noncomputable section
 

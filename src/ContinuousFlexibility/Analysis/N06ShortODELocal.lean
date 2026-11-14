@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06ShortODEBounds
-import ContinuousFlexibility.Analysis.OneHighCircleFlowLocalization
+module
+
+public import ContinuousFlexibility.Analysis.N06ShortODEBounds
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowLocalization
 
 /-!
 # The short ODE endpoint estimate for genuine closed-interval germs
@@ -10,6 +12,8 @@ all germs on that interval.  Reduction of order then uses the already
 proved normalized short-interval estimate.  No smoothness or positivity
 of an arbitrarily totalized function outside the interval is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

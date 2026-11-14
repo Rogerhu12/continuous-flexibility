@@ -1,6 +1,10 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartControlledCollar
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartControlledCollar
 
 /-! One material scale fixes the root flow before all state and spatial orders. -/
+
+@[expose] public section
 
 noncomputable section
 

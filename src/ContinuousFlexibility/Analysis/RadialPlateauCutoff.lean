@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CompactRadialHeightMember
-import Mathlib.Analysis.SpecialFunctions.SmoothTransition
+module
+
+public import ContinuousFlexibility.Analysis.CompactRadialHeightMember
+public import Mathlib.Analysis.SpecialFunctions.SmoothTransition
 
 /-!
 # Quantitative radial plateau cutoffs
@@ -9,6 +11,8 @@ ends of an interval. The cutoff equals one on the whole closed interval,
 has an explicit exterior collar, and its order-n derivative loses only
 the n-th power of the collar width.
 -/
+
+@[expose] public section
 
 noncomputable section
 

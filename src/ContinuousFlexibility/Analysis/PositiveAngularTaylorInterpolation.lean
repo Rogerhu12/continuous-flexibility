@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.PositiveAngularTaylorPatch
+module
+
+public import ContinuousFlexibility.Analysis.PositiveAngularTaylorPatch
 
 /-!
 # A common positive angular interpolation for a family of endpoint jets
@@ -8,6 +10,8 @@ chosen from a uniform bound on finitely many actual boundary jets,
 before the family index is selected. The construction is the identity
 off the two collars and preserves degree-one lifts and reflection.
 -/
+
+@[expose] public section
 
 noncomputable section
 

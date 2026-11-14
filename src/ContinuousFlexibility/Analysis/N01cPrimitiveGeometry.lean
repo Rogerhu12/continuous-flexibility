@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cReferenceJetBounds
-import ContinuousFlexibility.Analysis.N01cMaterialNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N01cReferenceJetBounds
+public import ContinuousFlexibility.Analysis.N01cMaterialNormalization
 
 /-!
 # Transport of the retained primitive reference geometry
@@ -10,6 +12,8 @@ converts it to the exact sampled envelope used by N01. This conversion
 uses the same profile, cells, material data and chosen controls throughout.
 No coefficient, speed or flow estimate is an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

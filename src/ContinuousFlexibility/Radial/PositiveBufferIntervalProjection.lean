@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.PositiveBufferFullForm
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferFullForm
 
 /-!
 # Restricting the physical field to the retained interval
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Radial.PositiveBufferFullForm
 The scalar border coordinate is retained. The field coordinate is the actual
 Lebesgue L² restriction followed by zero extension.
 -/
+
+@[expose] public section
 
 noncomputable section
 

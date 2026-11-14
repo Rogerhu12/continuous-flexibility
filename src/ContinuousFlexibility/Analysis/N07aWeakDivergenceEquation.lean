@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aWeakRegularityAlgebra
-import ContinuousFlexibility.Analysis.N07aAngularClassical
-import ContinuousFlexibility.Analysis.PhysicalTransmissionOperator
+module
+
+public import ContinuousFlexibility.Analysis.N07aWeakRegularityAlgebra
+public import ContinuousFlexibility.Analysis.N07aAngularClassical
+public import ContinuousFlexibility.Analysis.PhysicalTransmissionOperator
 
 /-!
 # From the actual distributional operator to the weak flux equation
@@ -10,6 +12,8 @@ weak derivatives against its two smooth coefficient fluxes proves the
 first-order divergence identity used in normal regularity. The unknown
 itself is only an L² class throughout this argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

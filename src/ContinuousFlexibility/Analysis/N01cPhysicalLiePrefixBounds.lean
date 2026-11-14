@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cPhysicalLieRawBounds
-import ContinuousFlexibility.Analysis.N01cPhysicalGraphNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N01cPhysicalLieRawBounds
+public import ContinuousFlexibility.Analysis.N01cPhysicalGraphNormalization
 
 /-!
 # A finite genuine outer Lie-jet prefix
@@ -8,6 +10,8 @@ The ordered graph formula uses finitely many state and angular orders.
 Their material constants can be enlarged together while preserving the
 individual angular exponent and the same raw loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

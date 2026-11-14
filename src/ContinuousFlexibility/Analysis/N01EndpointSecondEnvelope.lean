@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01EndpointHeightLineEnvelope
-import ContinuousFlexibility.Analysis.CircleFiniteEnergyEnvelopes
-import ContinuousFlexibility.Analysis.CircleJetAssembly
+module
+
+public import ContinuousFlexibility.Analysis.N01EndpointHeightLineEnvelope
+public import ContinuousFlexibility.Analysis.CircleFiniteEnergyEnvelopes
+public import ContinuousFlexibility.Analysis.CircleJetAssembly
 
 /-!
 # Actual summable second-variation envelopes of the endpoint flow
@@ -10,6 +12,8 @@ combined through the genuine multilinear identity of every angular jet.
 This supplies the projective Taylor estimate on any open subdomain of
 the N01 sector neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

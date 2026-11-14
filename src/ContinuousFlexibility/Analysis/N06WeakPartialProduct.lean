@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06WeakTensorCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N06WeakTensorCalculus
 
 /-!
 # Weak partial products against the original unit-cylinder tests
@@ -8,6 +10,8 @@ the compact radial test are globally smooth and square integrable, so
 these distributional product identities need no endpoint extension or
 global bound on the coefficient itself.
 -/
+
+@[expose] public section
 
 noncomputable section
 

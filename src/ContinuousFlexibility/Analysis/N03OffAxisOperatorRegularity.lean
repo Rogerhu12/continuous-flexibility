@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.EvenPeriodicTestGerms
-import ContinuousFlexibility.Analysis.N01CoefficientValueJets
-import ContinuousFlexibility.Analysis.CoordinatePotentialRegularity
+module
+
+public import ContinuousFlexibility.Analysis.EvenPeriodicTestGerms
+public import ContinuousFlexibility.Analysis.N01CoefficientValueJets
+public import ContinuousFlexibility.Analysis.CoordinatePotentialRegularity
 
 /-!
 # Actual N03 operator regularity away from the reflection axes
@@ -11,6 +13,8 @@ a non-axis point. Locality of the actual divergence therefore makes its
 stored corrected-operator output smooth there. No differentiability of
 the stored mixed or angular coefficient is assumed in this argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

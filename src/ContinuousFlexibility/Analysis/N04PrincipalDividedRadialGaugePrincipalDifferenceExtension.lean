@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PrincipalDividedRadialGaugePrincipalFiniteJets
-import ContinuousFlexibility.Analysis.WholePositivePrincipalExtension
-import ContinuousFlexibility.Analysis.PositiveChartRangeGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalDividedRadialGaugePrincipalFiniteJets
+public import ContinuousFlexibility.Analysis.WholePositivePrincipalExtension
+public import ContinuousFlexibility.Analysis.PositiveChartRangeGeometry
 
 /-!
 # Smooth representatives after the same fixed radial gauge
@@ -11,6 +13,8 @@ therefore equal the displayed current-minus-reference principal field
 on the entire closed canonical cylinder. The charts and height remain
 the original chosen functions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,9 +1,13 @@
-import ContinuousFlexibility.Analysis.N07aSampleLinearJets
-import ContinuousFlexibility.Analysis.CylinderMixedJets
+module
+
+public import ContinuousFlexibility.Analysis.N07aSampleLinearJets
+public import ContinuousFlexibility.Analysis.CylinderMixedJets
 
 /-!
 # Fréchet norms of the genuine source-linear mixed jets
 -/
+
+@[expose] public section
 
 noncomputable section
 

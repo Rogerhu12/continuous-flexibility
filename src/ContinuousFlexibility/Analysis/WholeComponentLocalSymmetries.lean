@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.WholeComponentFieldSelection
+module
+
+public import ContinuousFlexibility.Analysis.WholeComponentFieldSelection
 
 /-!
 # Symmetries using only the selected component domains
@@ -7,6 +9,8 @@ The actual selector tests only the radius. Its chosen index comes with
 membership in the corresponding closed negative or open positive piece.
 Thus no symmetry of a stored endpoint field outside that piece is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.PointwiseAffineMaterialJets
-import ContinuousFlexibility.Analysis.RootCharacteristicFactor
-import ContinuousFlexibility.Geometry.PlanarOrientation
+module
+
+public import ContinuousFlexibility.Analysis.PointwiseAffineMaterialJets
+public import ContinuousFlexibility.Analysis.RootCharacteristicFactor
+public import ContinuousFlexibility.Geometry.PlanarOrientation
 
 /-!
 # Removing the fixed inward root scale from actual ordinary jets
@@ -10,6 +12,8 @@ The state neighborhood and derivative loss are unchanged. The actual
 Jacobian changes by the signed radial scale, so its absolute lower
 bound has the same positive scaling at both endpoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

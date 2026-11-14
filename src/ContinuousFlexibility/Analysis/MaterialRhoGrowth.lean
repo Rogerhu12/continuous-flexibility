@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.MaterialEndpointComparison
-import Mathlib.Analysis.Calculus.MeanValue
+module
+
+public import ContinuousFlexibility.Analysis.MaterialEndpointComparison
+public import Mathlib.Analysis.Calculus.MeanValue
 
 /-!
 # Growth of the supplied material coordinate
@@ -9,6 +11,8 @@ the explicit cubic primitive, with the appropriate orientation. Their
 difference is constant. This gives a polynomial bound in the endpoint
 coordinate, which controls the material volume of a full radial plateau.
 -/
+
+@[expose] public section
 
 noncomputable section
 

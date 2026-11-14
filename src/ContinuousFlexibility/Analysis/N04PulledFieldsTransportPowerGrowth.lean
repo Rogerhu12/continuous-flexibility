@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.JointTransportPowerBounds
+module
+
+public import ContinuousFlexibility.Analysis.JointTransportPowerBounds
 
 /-!
 # Power growth with a fixed low order and a parameter charge
@@ -8,6 +10,8 @@ parameter prefix has an independent high loss and one charge per state
 derivative. Increasing the top by the total parameter charge recovers
 the original flat mixed growth without changing the low order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

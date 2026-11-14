@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CanonicalJetNormalization
-import ContinuousFlexibility.Analysis.N04bFieldRegularity
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalJetNormalization
+public import ContinuousFlexibility.Analysis.N04bFieldRegularity
 
 /-!
 # Retaining primitive geometry through the final operator normalization
@@ -9,6 +11,8 @@ field used by the primitive geometry retains its actual value, including
 the material cell. The physical coefficient clause is supplied directly
 by the controlled field's existing smoothness and periodicity certificate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

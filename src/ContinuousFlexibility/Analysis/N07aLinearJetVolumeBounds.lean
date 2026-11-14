@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalJetNormBounds
-import ContinuousFlexibility.Analysis.N07aLinearJetCoefficient
-import ContinuousFlexibility.Analysis.N07aSourceWeightCancellation
-import ContinuousFlexibility.Analysis.N07aModeBudgetMaterial
-import ContinuousFlexibility.Analysis.N07aAngularPieceSummability
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalJetNormBounds
+public import ContinuousFlexibility.Analysis.N07aLinearJetCoefficient
+public import ContinuousFlexibility.Analysis.N07aSourceWeightCancellation
+public import ContinuousFlexibility.Analysis.N07aModeBudgetMaterial
+public import ContinuousFlexibility.Analysis.N07aAngularPieceSummability
 
 /-!
 # The actual source-linear jets give every prescribed volume level
@@ -11,6 +13,8 @@ All finite jet and interval factors are collected before using one
 material power. The second extra material power supplies the outer lp
 summability of the genuine source classes, with a fixed order loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ReferenceCosineBoundedSynthesis
-import ContinuousFlexibility.Radial.ReferenceCosineSynthesisGraph
-import ContinuousFlexibility.Radial.ReferenceSourceEnergy
+module
+
+public import ContinuousFlexibility.Radial.ReferenceCosineBoundedSynthesis
+public import ContinuousFlexibility.Radial.ReferenceCosineSynthesisGraph
+public import ContinuousFlexibility.Radial.ReferenceSourceEnergy
 
 /-!
 # Assembling the actual zero and positive radial solutions
@@ -10,6 +12,8 @@ radial L² vector; only the first carries the scalar border. Their genuine
 weak equations and a common energy estimate produce an actual field in
 the full frozen weak graph, with the exact frozen output norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Scalar.Coordinates
-import Mathlib.Analysis.Calculus.Deriv.MeanValue
-import Mathlib.Analysis.Calculus.ContDiff.Operations
-import Mathlib.Topology.Order.DenselyOrdered
+module
+
+public import ContinuousFlexibility.Scalar.Coordinates
+public import Mathlib.Analysis.Calculus.Deriv.MeanValue
+public import Mathlib.Analysis.Calculus.ContDiff.Operations
+public import Mathlib.Topology.Order.DenselyOrdered
 
 /-!
 # A uniform local side test from a positive transverse derivative
@@ -10,6 +12,8 @@ A scalar defining function with positive radial derivative at the center
 is strictly increasing on every radial line of one closed rectangle.
 Only finite C¹ regularity near the center is used for this side test.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerRadialActualPieces
-import ContinuousFlexibility.Radial.InnerMorseTailGeometry
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialActualPieces
+public import ContinuousFlexibility.Radial.InnerMorseTailGeometry
 
 /-!
 # The actual retained Morse models in the common physical chain
@@ -10,6 +12,8 @@ bound. The only endpoint data below identify the chosen physical cuts
 with their positions in the finite chain. No physical local inverse,
 Poisson equation, or norm estimate is an additional input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

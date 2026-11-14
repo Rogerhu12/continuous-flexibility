@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.NonlinearInversePolynomialBounds
+module
+
+public import ContinuousFlexibility.Analysis.NonlinearInversePolynomialBounds
 
 /-!
 # Finite raw jets suffice for a finite inverse-jet bound
@@ -9,6 +11,8 @@ sequence beyond that order gives a bound selected before the actual
 maps, using the true inverse first derivative and only the required
 finite forward jets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

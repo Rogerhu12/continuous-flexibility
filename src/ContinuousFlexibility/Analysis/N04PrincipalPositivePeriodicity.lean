@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PrincipalPositivePotential
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalPositivePotential
 
 /-!
 # Periodicity of the actual positive principal fields
@@ -8,6 +10,8 @@ Mixed spatial derivatives preserve this property, so the exact principal
 and reciprocal-height flux formulas retain it without a periodicity
 assumption on any output field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

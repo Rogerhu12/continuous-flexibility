@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.Analysis
-import Mathlib.Analysis.Calculus.Deriv.MeanValue
-import Mathlib.Analysis.SpecialFunctions.SmoothTransition
+module
+
+public import ContinuousFlexibility.Statements.Analysis
+public import Mathlib.Analysis.Calculus.Deriv.MeanValue
+public import Mathlib.Analysis.SpecialFunctions.SmoothTransition
 
 /-!
 # The endpoint-height cutoff in the physical spaces
@@ -11,6 +13,8 @@ positive. A smooth transition supported in that interval gives the
 cutoff required by `CutoffConditions`; no choice of reference cutoff is
 assumed in the input data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

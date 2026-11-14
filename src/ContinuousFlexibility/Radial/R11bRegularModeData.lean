@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R11bEvenModeRegularity
-import ContinuousFlexibility.Radial.R11bRemainderModes
+module
+
+public import ContinuousFlexibility.Radial.R11bEvenModeRegularity
+public import ContinuousFlexibility.Radial.R11bRemainderModes
 
 /-!
 # A common countable family of actual radial mode representatives
@@ -8,6 +10,8 @@ The chosen C1 representatives point toward the original angular
 coefficients. Subtracting the left radial correction changes only the
 mean channel, and this identity holds on the radial full-measure set.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

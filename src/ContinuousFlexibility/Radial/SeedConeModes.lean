@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.Gauge
-import Mathlib.Analysis.Calculus.MeanValue
+module
+
+public import ContinuousFlexibility.Radial.Gauge
+public import Mathlib.Analysis.Calculus.MeanValue
 
 /-!
 # Actual homogeneous solutions on a cone
@@ -8,6 +10,8 @@ The radial second-mode equation on w(r)=c*r is the constant-coefficient
 equation v''=4v in y=log r. The two exponential coefficients are conserved.
 A single signed-frequency formula treats both independent modes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

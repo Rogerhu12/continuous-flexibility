@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R11bPartitionL2
+module
+
+public import ContinuousFlexibility.Radial.R11bPartitionL2
 
 /-!
 # Physical multipliers bounded on each localized cell
@@ -7,6 +9,8 @@ A multiplier may be unbounded globally. Its square bound on the support of
 each localizer suffices, provided the corresponding weighted square integrals
 are summable. This applies to both the physical density and its reciprocal.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

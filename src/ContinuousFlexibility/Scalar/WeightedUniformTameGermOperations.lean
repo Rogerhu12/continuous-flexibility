@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.WeightedUniformTameGerm
-import ContinuousFlexibility.Scalar.WeightedTowerOperations
-import ContinuousFlexibility.Scalar.WeightedStateTopology
+module
+
+public import ContinuousFlexibility.Scalar.WeightedUniformTameGerm
+public import ContinuousFlexibility.Scalar.WeightedTowerOperations
+public import ContinuousFlexibility.Scalar.WeightedStateTopology
 
 /-!
 # Finite algebra of uniform tame germs
@@ -10,6 +12,8 @@ whole actual directional tower.  The source can be the prescribed nested
 scalar state space.  Bilinear operations use genuine continuous multilinear
 maps together with their proved fixed two-factor estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

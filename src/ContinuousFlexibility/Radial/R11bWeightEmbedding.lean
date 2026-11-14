@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.WeightKernelBounds
+module
+
+public import ContinuousFlexibility.Radial.WeightKernelBounds
 
 /-!
 # Strict exponent embeddings for the reference inverse
@@ -9,6 +11,8 @@ squares and preserve the representative and the left constant.  In particular,
 they transport a maximum weak graph into a lower-exponent graph, so that the
 latter graph's uniqueness applies without changing its output exponent.
 -/
+
+@[expose] public section
 
 noncomputable section
 

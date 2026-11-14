@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsFinite
-import ContinuousFlexibility.Analysis.FiniteInversePolynomialEnvelope
-import ContinuousFlexibility.Analysis.PolynomialJetOperations
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsFinite
+public import ContinuousFlexibility.Analysis.FiniteInversePolynomialEnvelope
+public import ContinuousFlexibility.Analysis.PolynomialJetOperations
 
 /-!
 # Uniform finite coefficient bounds for the actual scalar inverse
@@ -15,6 +17,8 @@ Together with the preceding actual inverse tower and its partition
 formula, these are the finite coefficient estimates required to retain
 uniform component envelopes after pulling back to the original state.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularCoefficients
-import ContinuousFlexibility.Analysis.CylinderTestPairing
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularCoefficients
+public import ContinuousFlexibility.Analysis.CylinderTestPairing
 
 /-!
 # Actual angular reflection and canonical Fourier parity
@@ -8,6 +10,8 @@ Reflection uses the exact involution appearing in `canonicalVolumeGraph`.
 It preserves the canonical measure and becomes reflection of only the
 angular Fourier index. The radial index remains unrestricted.
 -/
+
+@[expose] public section
 
 noncomputable section
 

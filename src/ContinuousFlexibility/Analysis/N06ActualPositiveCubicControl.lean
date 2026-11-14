@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06PositiveDividedSymmetry
-import ContinuousFlexibility.Analysis.N06PositiveCubicMultipliers
+module
+
+public import ContinuousFlexibility.Analysis.N06PositiveDividedSymmetry
+public import ContinuousFlexibility.Analysis.N06PositiveCubicMultipliers
 
 /-!
 # Actual positive cubic control from the retained N05 construction
@@ -9,6 +11,8 @@ from the original data. The original N04 bound supplies a genuine finite
 absolute bound. Its factor `1 + grading + |q|` is kept explicitly: this
 does not assert the additional state-linear smallness needed to close N06.
 -/
+
+@[expose] public section
 
 noncomputable section
 

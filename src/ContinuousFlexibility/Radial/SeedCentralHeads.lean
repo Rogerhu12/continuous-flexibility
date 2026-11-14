@@ -1,6 +1,10 @@
-import ContinuousFlexibility.Radial.SeedCentralPair
+module
+
+public import ContinuousFlexibility.Radial.SeedCentralPair
 
 /-! # Arbitrarily long exact cone heads of the central seed -/
+
+@[expose] public section
 
 noncomputable section
 

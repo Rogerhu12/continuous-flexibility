@@ -1,9 +1,13 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartRootActualComposition
-import ContinuousFlexibility.Analysis.N04NegativeChartRootCoordinateBounds
-import ContinuousFlexibility.Analysis.N04NegativeChartOverlapRadius
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootActualComposition
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootCoordinateBounds
+public import ContinuousFlexibility.Analysis.N04NegativeChartOverlapRadius
 
 /-! The low input and its same-flow positive band fix the actual root
 coefficient interval and the physical overlap before every jet order. -/
+
+@[expose] public section
 
 noncomputable section
 

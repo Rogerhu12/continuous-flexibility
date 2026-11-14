@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CharacteristicPrincipalDensity
-import ContinuousFlexibility.Analysis.ScaledRadialPrincipalDensity
-import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
+module
+
+public import ContinuousFlexibility.Analysis.CharacteristicPrincipalDensity
+public import ContinuousFlexibility.Analysis.ScaledRadialPrincipalDensity
+public import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
 
 /-!
 # The explicit height that normalizes a characteristic root chart
@@ -9,6 +11,8 @@ The root chart's actual radial differential is a positive scale s of the
 travel differential, and s² ξ = 1. The physical height is the reciprocal
 square root of a v s. Its principal density is exactly diag(1,-ξ).
 -/
+
+@[expose] public section
 
 noncomputable section
 

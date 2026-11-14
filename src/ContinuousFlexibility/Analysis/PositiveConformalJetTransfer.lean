@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PositiveConformalDensityJets
-import ContinuousFlexibility.Analysis.CoordinateOperatorConstruction
+module
+
+public import ContinuousFlexibility.Analysis.PositiveConformalDensityJets
+public import ContinuousFlexibility.Analysis.CoordinateOperatorConstruction
 
 /-!
 # Finite conformal data give the actual canonical boundary jets
@@ -11,6 +13,8 @@ comparison then gives physical vanishing, and the genuine smooth inverse
 transports it to ordinary canonical radial jets. No density zero jets or
 Jacobian estimate for the new chart are hypotheses.
 -/
+
+@[expose] public section
 
 noncomputable section
 

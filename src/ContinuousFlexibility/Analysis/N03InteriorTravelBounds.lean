@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.InteriorTravelSectionBounds
-import ContinuousFlexibility.Analysis.CanonicalInteriorAngularClosure
-import ContinuousFlexibility.Analysis.CanonicalRootTravelDomain
-import ContinuousFlexibility.Analysis.N03InteriorFirstIntegralIdentification
+module
+
+public import ContinuousFlexibility.Analysis.InteriorTravelSectionBounds
+public import ContinuousFlexibility.Analysis.CanonicalInteriorAngularClosure
+public import ContinuousFlexibility.Analysis.CanonicalRootTravelDomain
+public import ContinuousFlexibility.Analysis.N03InteriorFirstIntegralIdentification
 
 /-!
 # Two true root-section bounds control travel throughout the interior
@@ -12,6 +14,8 @@ strip. Its real trajectories propagate the left lower bound and the
 right upper bound. Both root orientations consequently share one
 positive travel interval, with no fixed-angle radial monotonicity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

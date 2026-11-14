@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.IntervalWeakPrimitiveStrict
-import ContinuousFlexibility.Radial.RadialGreenBoundary
-import Mathlib.Analysis.Calculus.TangentCone.Real
+module
+
+public import ContinuousFlexibility.Radial.IntervalWeakPrimitiveStrict
+public import ContinuousFlexibility.Radial.RadialGreenBoundary
+public import Mathlib.Analysis.Calculus.TangentCone.Real
 
 /-!
 # Weak Green identity with one-sided cut traces
@@ -11,6 +13,8 @@ absolutely continuous, including at both cuts. Green's identity then
 uses only these within-derivative traces; no extension across a cut is
 assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

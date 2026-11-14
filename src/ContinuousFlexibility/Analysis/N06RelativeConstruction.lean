@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.NeumannPackage
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Analysis.NeumannPackage
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # The algebraic and Banach-space construction in N06
@@ -11,6 +13,8 @@ by `N06Properties`. The source space is complete because its defining jet graph 
 The lemmas below do not assert the analytic smallness estimate or construct the physical
 operator. They isolate the remaining algebra without changing either of those obligations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

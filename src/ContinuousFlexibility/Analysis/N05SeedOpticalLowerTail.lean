@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05SeedOpticalLowerBounds
-import ContinuousFlexibility.Analysis.N05SeedOpticalLowerComponents
+module
+
+public import ContinuousFlexibility.Analysis.N05SeedOpticalLowerBounds
+public import ContinuousFlexibility.Analysis.N05SeedOpticalLowerComponents
 
 /-!
 # The actual seed's quantitative optical lower bound on every deep tail
@@ -8,6 +10,8 @@ The model coefficient, physical dilation and actual carrier index are all
 the ones retained by the same seed construction. The closed endpoints are
 included using their actual zero derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

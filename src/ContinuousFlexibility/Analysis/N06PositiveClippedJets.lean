@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06PositiveCutoffJets
+module
+
+public import ContinuousFlexibility.Analysis.N06PositiveCutoffJets
 
 /-!
 # Finite jets of locally defined endpoint fields after clipping
@@ -8,6 +10,8 @@ actual collar. Multiplication by the fixed cutoff gives a global smooth
 field. The first two derivative bounds follow from the real product
 rule on that collar and the zero germ outside it.
 -/
+
+@[expose] public section
 
 noncomputable section
 

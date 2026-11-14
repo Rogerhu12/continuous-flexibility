@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.PositiveBufferComparisonCutoff
-import Mathlib.MeasureTheory.Function.LpSpace.Indicator
-import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferComparisonCutoff
+public import Mathlib.MeasureTheory.Function.LpSpace.Indicator
+public import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
 
 /-!
 # Actual L² cutoff errors
@@ -9,6 +11,8 @@ The cutoff commutator is a continuous, compactly supported function.
 Its normalized support has length two.  This file records the resulting
 ordinary L² element and its norm bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

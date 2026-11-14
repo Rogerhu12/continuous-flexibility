@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MatchedWeightFibers
+module
+
+public import ContinuousFlexibility.Radial.MatchedWeightFibers
 
 /-!
 # Weighted matched kernels on the actual cell enumeration
@@ -11,6 +13,8 @@ The source and output weights are exactly exp(M₀ q + γ S) and
 exp(-M₁ q + γ S). This file only transforms scalar block majorants;
 it introduces neither a physical norm nor an inverse operator.
 -/
+
+@[expose] public section
 
 noncomputable section
 

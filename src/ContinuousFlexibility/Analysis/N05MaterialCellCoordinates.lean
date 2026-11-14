@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedReferenceCoefficients
-import ContinuousFlexibility.Radial.ScaleSlowVariation
+module
+
+public import ContinuousFlexibility.Scalar.WeightedReferenceCoefficients
+public import ContinuousFlexibility.Radial.ScaleSlowVariation
 
 /-!
 # Comparing the actual material coordinate with the reference cell index
@@ -9,6 +11,8 @@ the reference index is uniformly bounded on every cell near an endpoint.
 The estimate keeps all three actual weight formulas, including the material
 weight used in the fixed-loss Schur argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

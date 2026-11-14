@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsCircleInverse
-import ContinuousFlexibility.Analysis.TameFixedBaseCompositionBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsCircleInverse
+public import ContinuousFlexibility.Analysis.TameFixedBaseCompositionBounds
 
 /-!
 # Fixed-base calculus for genuine endpoint towers
@@ -10,6 +12,8 @@ the same common low order. The composition step uses the existing
 ordered-partition theorem and selects its new low order before every
 parameter derivative order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

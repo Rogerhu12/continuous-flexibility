@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadStart
-import ContinuousFlexibility.Analysis.N04RealizationRootAbsorbedJoint
-import ContinuousFlexibility.Analysis.N06RootPhysicalSmallness
-import ContinuousFlexibility.Analysis.SmoothDirectionsNormedComposition
-import ContinuousFlexibility.Analysis.SectorParameterGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadStart
+public import ContinuousFlexibility.Analysis.N04RealizationRootAbsorbedJoint
+public import ContinuousFlexibility.Analysis.N06RootPhysicalSmallness
+public import ContinuousFlexibility.Analysis.SmoothDirectionsNormedComposition
+public import ContinuousFlexibility.Analysis.SectorParameterGeometry
 
 /-!
 # Actual root fields on a common profile collar
@@ -13,6 +15,8 @@ root denominators. The absorbed packet has an actual joint tower, so the
 physical drift and speed ratio have one too. This applies on a whole root
 collar, not only to traces at its zero axis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

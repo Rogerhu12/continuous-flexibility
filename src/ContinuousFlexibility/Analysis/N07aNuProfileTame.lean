@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aProfileNu
-import ContinuousFlexibility.Scalar.WeightedCompositionGerm
+module
+
+public import ContinuousFlexibility.Analysis.N07aProfileNu
+public import ContinuousFlexibility.Scalar.WeightedCompositionGerm
 
 /-!
 # The genuine border-profile map as a uniform tame germ
@@ -9,6 +11,8 @@ weight. Composing its scalar multiples with exp minus one is the existing
 weighted composition map, identified with the literal profile by its
 injective decoder.
 -/
+
+@[expose] public section
 
 noncomputable section
 

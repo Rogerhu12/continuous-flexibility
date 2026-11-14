@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBufferFreedom
-import ContinuousFlexibility.Analysis.N04PositiveGeometryDiagonalCost
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInfiniteComponents
-import ContinuousFlexibility.Analysis.N04PositiveGeometryRightSource
-import ContinuousFlexibility.Analysis.N04PositiveGeometryCircleVariation
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBufferFreedom
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryDiagonalCost
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInfiniteComponents
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryRightSource
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryCircleVariation
 
 /-!
 # A legal normalization buffer with no uniform endpoint cost
@@ -13,6 +15,8 @@ original region. Infinitely many actual positive components allow the
 right transition widths to be diagonalized against every pair of a
 material exponent and a derivative loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

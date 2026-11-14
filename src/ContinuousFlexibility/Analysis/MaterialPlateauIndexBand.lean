@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.MaterialPlateauGeometry
+module
+
+public import ContinuousFlexibility.Analysis.MaterialPlateauGeometry
 
 /-!
 # The reverse endpoint band of an expanded plateau
@@ -8,6 +10,8 @@ the containing cell's distance scale. Together with the previously
 proved lower distance bound, this prevents an expanded cutoff from
 reaching cells at arbitrarily different endpoint indices.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aScalarSolution
-import ContinuousFlexibility.Analysis.TameLinear
-import ContinuousFlexibility.Statements.N07aRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N07aScalarSolution
+public import ContinuousFlexibility.Analysis.TameLinear
+public import ContinuousFlexibility.Statements.N07aRegularity
 
 /-!
 # Packaging unique physical solutions as the actual continuous linear inverse
@@ -11,6 +13,8 @@ the actual equation.  Continuity follows from that estimate and the
 prescribed seminorm topologies.  No continuous or linear choice of
 solutions is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.PositiveBufferEnergyLift
-import ContinuousFlexibility.Radial.BufferTraceBound
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferEnergyLift
+public import ContinuousFlexibility.Radial.BufferTraceBound
 
 /-!
 # Actual variational buffer profiles and their boundary values
@@ -9,6 +11,8 @@ continuous representative has the same boundary values as a chosen smooth
 lift, because their difference vanishes on the exterior. No boundary value
 is assigned to an arbitrary representative of an `L²` class.
 -/
+
+@[expose] public section
 
 noncomputable section
 

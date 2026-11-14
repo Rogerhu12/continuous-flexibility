@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RootScaledInverseCoordinate
-import ContinuousFlexibility.Analysis.RootChartSymmetry
+module
+
+public import ContinuousFlexibility.Analysis.RootScaledInverseCoordinate
+public import ContinuousFlexibility.Analysis.RootChartSymmetry
 
 /-!
 # Reflection of the same controlled inverse after root scaling
@@ -8,6 +10,8 @@ The parameter rescaling commutes with the actual ODE reflection. The
 chosen family is unchanged, and the true endpoint inverse supplies the
 simultaneous reflection of its root parameter and angular coordinate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

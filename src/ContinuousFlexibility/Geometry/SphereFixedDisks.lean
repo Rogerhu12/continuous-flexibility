@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Geometry.SphereCapGluing
-import Mathlib.Analysis.Normed.Module.RCLike.Real
+module
+
+public import ContinuousFlexibility.Geometry.SphereCapGluing
+public import Mathlib.Analysis.Normed.Module.RCLike.Real
 
 /-!
 # Actual fixed disks on the standard sphere
@@ -14,6 +16,8 @@ Euclidean radius, not the max norm of `PolarPoint`.
 This supplies the fixed-region topology in `thm:geometric-closure`, including
 the relative complement and regular-closed properties on the standard sphere.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerMorseInnerChain
+module
+
+public import ContinuousFlexibility.Radial.InnerMorseInnerChain
 
 /-!
 # The finite inner geometry with independent left and right radius scales
@@ -8,6 +10,8 @@ profile supplies its actual core and positivity. Every old cut and
 terminal point is rescaled on its own side, while the central cut pair
 is specified in the new physical radius.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.ReferenceSmoothGreen
-import ContinuousFlexibility.Radial.ReferenceRadialCutoff
-import ContinuousFlexibility.Radial.ReferenceGraphClosed
-import ContinuousFlexibility.Radial.ReferenceGreenClosure
+module
+
+public import ContinuousFlexibility.Radial.ReferenceSmoothGreen
+public import ContinuousFlexibility.Radial.ReferenceRadialCutoff
+public import ContinuousFlexibility.Radial.ReferenceGraphClosed
+public import ContinuousFlexibility.Radial.ReferenceGreenClosure
 
 /-!
 # Green reciprocity on the smooth weak graph
@@ -11,6 +13,8 @@ identity. Radial cutoffs then extend the weak equation to arbitrary smooth
 periodic tests by dominated convergence. This proves reciprocity on the
 smooth graph without assuming a pointwise PDE or an endpoint trace theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

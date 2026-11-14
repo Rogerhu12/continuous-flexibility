@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OneHighCircleSobolevJetsBasic
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleSobolevJetsBasic
 
 /-!
 # Sobolev bounds for actual circle derivative families
@@ -8,6 +10,8 @@ circle. Parseval therefore supplies genuine square summability. The exact
 derivative multiplier then proves weighted square summability at every
 finite order and compares the Bessel norm with physical derivative norms.
 -/
+
+@[expose] public section
 
 noncomputable section
 

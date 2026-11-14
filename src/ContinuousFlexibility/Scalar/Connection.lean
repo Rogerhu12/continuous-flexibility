@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Scalar.HeightDerivatives
-import ContinuousFlexibility.Scalar.ConnectionVariation
-import Mathlib.Analysis.Calculus.LineDeriv.Basic
-import Mathlib.Tactic.Linarith
+module
+
+public import ContinuousFlexibility.Scalar.HeightDerivatives
+public import ContinuousFlexibility.Scalar.ConnectionVariation
+public import Mathlib.Analysis.Calculus.LineDeriv.Basic
+public import Mathlib.Tactic.Linarith
 
 /-!
 # Exterior derivative of the actual height connection
@@ -11,6 +13,8 @@ derivatives. The curl is the coefficient of `dr ∧ dθ` in the exterior
 derivative of the displayed one-form. No formal jet is substituted for a
 partial derivative. The Cartan structure equations are a separate step.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.InnerRadialPotentialMultiplier
-import ContinuousFlexibility.Radial.InnerRadialH1Density
-import ContinuousFlexibility.Radial.InnerRadialL2Pairing
-import ContinuousFlexibility.Radial.InnerRadialGreen
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialPotentialMultiplier
+public import ContinuousFlexibility.Radial.InnerRadialH1Density
+public import ContinuousFlexibility.Radial.InnerRadialL2Pairing
+public import ContinuousFlexibility.Radial.InnerRadialGreen
 
 /-!
 # True physical Green boundary pairings for smooth local fields
@@ -11,6 +13,8 @@ normalized derivative. Its residual on the fixed physical affine hats
 is exactly the classical outward conormal. This identifies the finite
 weak interface with the physical Dirichlet-to-Neumann matrix.
 -/
+
+@[expose] public section
 
 noncomputable section
 

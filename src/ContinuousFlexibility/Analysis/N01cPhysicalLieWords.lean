@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cPhysicalFlowRadialRecursion
-import ContinuousFlexibility.Scalar.WeightedProductJets
+module
+
+public import ContinuousFlexibility.Analysis.N01cPhysicalFlowRadialRecursion
+public import ContinuousFlexibility.Scalar.WeightedProductJets
 
 /-!
 # Actual coordinate words for physical Lie derivatives
@@ -9,6 +11,8 @@ directions. Differentiating one factor prepends exactly one direction.
 The product rule retains repeated terms with coefficient one, so its
 finite indices carry the original distribution of spatial orders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.SelectedReferenceTransport
+module
+
+public import ContinuousFlexibility.Radial.SelectedReferenceTransport
 
 /-!
 # The radial equation on an actually rescaled reference interval
@@ -8,6 +10,8 @@ tail. These lemmas pass from that local identity to the actual derivatives
 in the Jacobi expression. The complete reference need not be a dilation.
 Both orientations use the same open-set and interval statements.
 -/
+
+@[expose] public section
 
 noncomputable section
 

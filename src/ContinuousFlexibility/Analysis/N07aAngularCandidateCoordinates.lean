@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aAngularReferenceJetEnvelopes
-import ContinuousFlexibility.Analysis.N07aAngularFixedVolume
-import ContinuousFlexibility.Analysis.N07aCanonicalSourceRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceJetEnvelopes
+public import ContinuousFlexibility.Analysis.N07aAngularFixedVolume
+public import ContinuousFlexibility.Analysis.N07aCanonicalSourceRegularity
 
 /-!
 # The actual canonical height of every physical candidate
@@ -9,6 +11,8 @@ Every decoded physical height has all material and angular source-graph
 levels after the actual current coordinate change. The proof uses its
 genuine spatial jets and the original period and reflection identities.
 -/
+
+@[expose] public section
 
 noncomputable section
 

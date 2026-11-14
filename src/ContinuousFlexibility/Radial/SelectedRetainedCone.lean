@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.SeedRetainedCone
-import ContinuousFlexibility.Radial.SeedNaturalState
-import ContinuousFlexibility.Radial.MorseSecondModeSmoothExtension
-import ContinuousFlexibility.Radial.SelectedNaturalJoin
+module
+
+public import ContinuousFlexibility.Radial.SeedRetainedCone
+public import ContinuousFlexibility.Radial.SeedNaturalState
+public import ContinuousFlexibility.Radial.MorseSecondModeSmoothExtension
+public import ContinuousFlexibility.Radial.SelectedNaturalJoin
 
 /-!
 # The same selected tail with an arbitrarily long retained first cone
@@ -12,6 +14,8 @@ At the original cone germ the profile is extended by that exact cone.
 Only farther inward than a freely chosen logarithmic length do the
 pure-mode and canonical-mode corrections begin.
 -/
+
+@[expose] public section
 
 noncomputable section
 

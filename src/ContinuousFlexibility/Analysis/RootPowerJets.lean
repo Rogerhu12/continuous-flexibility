@@ -1,7 +1,9 @@
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
-import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+public import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
 
 /-!
 # Derivatives of the real power used in a root coordinate
@@ -11,6 +13,8 @@ on the whole real line. At a positive argument it gives the precise scale
 of every jet. The finite collection of coefficients can then be bounded
 uniformly at any prescribed derivative order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsInversePointPrefix
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsInversePointPrefix
 
 /-!
 # Actual inverse-point data on every sufficiently small neighborhood
@@ -8,6 +10,8 @@ certificate. Genuine inverse towers are restricted to stronger low-order
 neighborhoods. Their derivatives stay unchanged, while monotonicity of
 the parameter grading supplies the stronger low and high conditions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

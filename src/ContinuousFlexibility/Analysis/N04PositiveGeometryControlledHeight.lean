@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledFamilyMaterial
-import ContinuousFlexibility.Analysis.N04RealizationPositiveHeightTaylorJets
-import ContinuousFlexibility.Analysis.N04RealizationPositiveHeightOneHigh
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledFamilyMaterial
+public import ContinuousFlexibility.Analysis.N04RealizationPositiveHeightTaylorJets
+public import ContinuousFlexibility.Analysis.N04RealizationPositiveHeightOneHigh
 
 /-!
 # The actual chosen height: mixed towers and one high material bounds
@@ -10,6 +12,8 @@ Taylor interpolation and exponential. The width, low logarithmic margin
 and numerical envelope come from the same controlled family. Both the
 height and its reciprocal retain one parameter height factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

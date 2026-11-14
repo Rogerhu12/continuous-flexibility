@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PrincipalPositiveReferenceJets
-import ContinuousFlexibility.Analysis.N01OriginalCoefficientTameBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalPositiveReferenceJets
+public import ContinuousFlexibility.Analysis.N01OriginalCoefficientTameBounds
 
 /-!
 # Reference physical coefficients at the same inverse point
@@ -9,6 +11,8 @@ original coefficients. Their physical spatial jets have uniform bounds
 from N01. Composing with the actual inverse point therefore costs only
 the reference inverse atoms and the fixed physical width of this piece.
 -/
+
+@[expose] public section
 
 noncomputable section
 

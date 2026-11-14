@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Geometry.Primitive
+module
+
+public import ContinuousFlexibility.Geometry.Primitive
 
 /-!
 # Actual coordinate pullback of planar one-forms
@@ -8,6 +10,8 @@ Exterior differentiation commutes with this pullback: the second derivative
 terms cancel by symmetry of the genuine second derivative. No independent
 coordinate jets or assumed pullback differentiation rule are used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

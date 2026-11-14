@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartFinitePlotFields
-import ContinuousFlexibility.Analysis.N04FlowTimeReversal
-import ContinuousFlexibility.Analysis.RootRescaledStoredFlow
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartFinitePlotFields
+public import ContinuousFlexibility.Analysis.N04FlowTimeReversal
+public import ContinuousFlexibility.Analysis.RootRescaledStoredFlow
 
 /-!
 # The actual forward and reversed root flows on a finite state plot
@@ -11,6 +13,8 @@ a smooth time change supplies global equations for the state variation
 argument. The endpoint is unchanged and the two endpoint maps are exact
 inverses. No derivative estimate on an artificial extension is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

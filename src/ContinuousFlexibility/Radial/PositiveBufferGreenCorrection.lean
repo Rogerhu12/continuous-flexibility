@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Radial.PositiveBufferEnergyGlobalData
-import ContinuousFlexibility.Radial.PositiveBufferGreenDataRegularity
-import ContinuousFlexibility.Radial.PositiveBufferFullInverse
-import ContinuousFlexibility.Radial.PositiveBufferGlobalRegularity
-import ContinuousFlexibility.Radial.PositiveBufferComparisonExteriorUniqueness
-import ContinuousFlexibility.Radial.PositiveBufferComparisonEnergyTrace
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferEnergyGlobalData
+public import ContinuousFlexibility.Radial.PositiveBufferGreenDataRegularity
+public import ContinuousFlexibility.Radial.PositiveBufferFullInverse
+public import ContinuousFlexibility.Radial.PositiveBufferGlobalRegularity
+public import ContinuousFlexibility.Radial.PositiveBufferComparisonExteriorUniqueness
+public import ContinuousFlexibility.Radial.PositiveBufferComparisonEnergyTrace
 
 /-!
 # The actual full-inverse correction of each Green column
@@ -12,6 +14,8 @@ The full inverse is applied to the constructed smooth commutator source.
 Its canonical energy representative is globally smooth, is homogeneous
 through both buffers, and satisfies the exterior conormal relation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

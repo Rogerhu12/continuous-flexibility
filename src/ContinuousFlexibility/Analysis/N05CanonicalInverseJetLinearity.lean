@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalInverseJetBounds
-import ContinuousFlexibility.Analysis.N05CanonicalFiniteBlockSums
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalInverseJetBounds
+public import ContinuousFlexibility.Analysis.N05CanonicalFiniteBlockSums
 
 /-!
 # Continuous linear restrictions of the actual fixed inverse jets
@@ -9,6 +11,8 @@ the fixed choices are genuine derivatives. Finite source truncations then
 give exact finite sums and converge to the jets of the original global
 inverse, without introducing another inverse or a second limiting output.
 -/
+
+@[expose] public section
 
 noncomputable section
 

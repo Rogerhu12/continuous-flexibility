@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N08OpticalSquareRoot
-import ContinuousFlexibility.Statements.Nonlinear
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
-import ContinuousFlexibility.Scalar.WeightedProductTower
-import Mathlib.Analysis.Calculus.MeanValue
+module
+
+public import ContinuousFlexibility.Analysis.N08OpticalSquareRoot
+public import ContinuousFlexibility.Statements.Nonlinear
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
+public import ContinuousFlexibility.Scalar.WeightedProductTower
+public import Mathlib.Analysis.Calculus.MeanValue
 
 /-!
 # Differences of the same genuine first jet
@@ -12,6 +14,8 @@ After a continuous scalar observation, the ordinary mean-value estimate
 therefore controls first-jet differences along a segment. This retains the
 original tower and makes no separate smooth-family assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

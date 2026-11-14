@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryActualCoordinateDirections
-import ContinuousFlexibility.Analysis.N04PositiveGeometryTransportMixedSamplePrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledReferenceInverse
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryActualCoordinateDirections
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryTransportMixedSamplePrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledReferenceInverse
 
 /-!
 # The sampled inverse chart at its fixed reference point
@@ -9,6 +11,8 @@ The fixed radial inverse changes only the material envelope. Its genuine
 mixed parameter jets retain the original transport prefix, including the
 coefficient one in the spatial contribution to the high index.
 -/
+
+@[expose] public section
 
 noncomputable section
 

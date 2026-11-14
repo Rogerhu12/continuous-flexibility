@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.Analysis
-import Mathlib.Analysis.SpecialFunctions.Pow.Real
-import Mathlib.Data.Finset.Max
+module
+
+public import ContinuousFlexibility.Statements.Analysis
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
+public import Mathlib.Data.Finset.Max
 
 /-!
 # One high factor from interpolation
@@ -10,6 +12,8 @@ interpolation exponents sum to at most one. The low base can absorb the
 fixed interpolation and point-evaluation losses independently of the
 number of differentiated factors.
 -/
+
+@[expose] public section
 
 noncomputable section
 

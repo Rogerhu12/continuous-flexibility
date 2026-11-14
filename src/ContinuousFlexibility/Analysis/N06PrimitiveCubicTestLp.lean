@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N06IntervalCubicPairing
-import ContinuousFlexibility.Analysis.N06PrimitiveC1Green
-import ContinuousFlexibility.Analysis.N06PrimitiveJetRescaling
-import ContinuousFlexibility.Analysis.N06CurrentPositiveRelativePairing
-import ContinuousFlexibility.Scalar.WeightedPartialIdentities
+module
+
+public import ContinuousFlexibility.Analysis.N06IntervalCubicPairing
+public import ContinuousFlexibility.Analysis.N06PrimitiveC1Green
+public import ContinuousFlexibility.Analysis.N06PrimitiveJetRescaling
+public import ContinuousFlexibility.Analysis.N06CurrentPositiveRelativePairing
+public import ContinuousFlexibility.Scalar.WeightedPartialIdentities
 
 /-!
 # Actual cubic tests on the original positive interval
@@ -14,6 +16,8 @@ actual physical source, the C1 reference operator, and the potential
 difference are L2.  The original two-endpoint cubic weight extends the
 compact weak equation to the actual averaged physical test.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06RootRegularTransport
-import ContinuousFlexibility.Analysis.N06RelativeBoundarySymmetry
-import Mathlib.Analysis.SpecialFunctions.Log.Deriv
+module
+
+public import ContinuousFlexibility.Analysis.N06RootRegularTransport
+public import ContinuousFlexibility.Analysis.N06RelativeBoundarySymmetry
+public import Mathlib.Analysis.SpecialFunctions.Log.Deriv
 
 /-!
 # The exact logarithmic height of a genuine root coordinate
@@ -11,6 +13,8 @@ root field and the product of the two actual scalar coefficients. The
 identities hold on the physical side and determine every ordinary
 boundary jet of the smooth extensions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

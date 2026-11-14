@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalTestDivergence
-import ContinuousFlexibility.Analysis.N07aCanonicalOpenCoefficients
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalTestDivergence
+public import ContinuousFlexibility.Analysis.N07aCanonicalOpenCoefficients
 
 /-!
 # The actual open-coefficient distribution equation gives its weak flux
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Analysis.N07aCanonicalOpenCoefficients
 Every coefficient is multiplied by a compact test before integration by
 parts. No global smooth extension of an open coefficient is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CircleAngularJetLinear
-import ContinuousFlexibility.Analysis.CircleAveragedComposition
-import Mathlib.Analysis.Calculus.Deriv.Add
-import Mathlib.Analysis.Calculus.Deriv.Mul
+module
+
+public import ContinuousFlexibility.Analysis.CircleAngularJetLinear
+public import ContinuousFlexibility.Analysis.CircleAveragedComposition
+public import Mathlib.Analysis.Calculus.Deriv.Add
+public import Mathlib.Analysis.Calculus.Deriv.Mul
 
 /-!
 # The actual parameter jets of circle chart composition
@@ -12,6 +14,8 @@ one term for each slot differentiating its field component n-1 times.
 All slots are represented by genuine multilinear maps; no formal jet
 or assumed expansion is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

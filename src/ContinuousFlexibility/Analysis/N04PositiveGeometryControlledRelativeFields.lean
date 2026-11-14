@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledFiniteCalculus
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRootFields
-import ContinuousFlexibility.Analysis.CanonicalRootFiniteEndpointBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledFiniteCalculus
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRootFields
+public import ContinuousFlexibility.Analysis.CanonicalRootFiniteEndpointBounds
 
 /-!
 # Polynomial finite bounds for the actual relative root fields
@@ -10,6 +12,8 @@ physical chart and height bounds into the relative endpoint data. Both
 relative coordinate directions are estimated, so the positive diagonal
 lower bound is derived from the true inverse first derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

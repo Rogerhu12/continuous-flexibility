@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ReferenceCoordinateScaffold
+module
+
+public import ContinuousFlexibility.Radial.ReferenceCoordinateScaffold
 
 /-!
 # Accumulating bounds after coordinate and height surgery
@@ -10,6 +12,8 @@ one common finite bound is used.  In the compact middle, smoothness and
 positivity give bounds for all jets, and local finiteness bounds the
 labels of the cells meeting that middle.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,9 +1,13 @@
-import ContinuousFlexibility.Analysis.N07aAngularReferenceTransport
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalEven
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceTransport
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalEven
 
 /-!
 # The same reference transport keeps the actual angular symmetries
 -/
+
+@[expose] public section
 
 noncomputable section
 

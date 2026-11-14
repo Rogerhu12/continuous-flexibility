@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsForwardFixedBase
-import ContinuousFlexibility.Analysis.CircleAverageCompositionSmoothTame
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsForwardFixedBase
+public import ContinuousFlexibility.Analysis.CircleAverageCompositionSmoothTame
 
 /-!
 # A common low base for the actual averaged circle composition
@@ -10,6 +12,8 @@ fact to the common-base forward certificate keeps the low base before
 every parameter order and the high loss before every spatial order.
 The final statement concerns every tower of the original averaged map.
 -/
+
+@[expose] public section
 
 noncomputable section
 

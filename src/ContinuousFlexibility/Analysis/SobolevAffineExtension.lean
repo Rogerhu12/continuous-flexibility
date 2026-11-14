@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SobolevAffineTransport
-import ContinuousFlexibility.Analysis.SobolevJetCompletion
-import Mathlib.Tactic.Ring
+module
+
+public import ContinuousFlexibility.Analysis.SobolevAffineTransport
+public import ContinuousFlexibility.Analysis.SobolevJetCompletion
+public import Mathlib.Tactic.Ring
 
 /-!
 # Transport of one common Sobolev extension by an affine orientation
@@ -10,6 +12,8 @@ therefore the finite Sobolev jet norm. Conjugating one smooth-core extension
 by an affine orientation gives a linear extension on the transported domain,
 with the same bound at every Sobolev order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

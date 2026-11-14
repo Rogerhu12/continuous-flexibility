@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadNegativeSplit
-import ContinuousFlexibility.Analysis.N04NegativeGeometryPhysicalAtomTowers
-import ContinuousFlexibility.Analysis.N04NegativeGeometryDataCollector
-import ContinuousFlexibility.Analysis.N04NegativeGeometryAuxiliary
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadNegativeSplit
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryPhysicalAtomTowers
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryDataCollector
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryAuxiliary
 
 /-!
 # Collecting the actual four negative chart atoms
@@ -12,6 +14,8 @@ is already proved on the whole fixed reference half. Thus the quantitative
 input needed for the four-atom interface consists only of positive-order
 parameter estimates. The first derivative recovers the reference difference.
 -/
+
+@[expose] public section
 
 noncomputable section
 

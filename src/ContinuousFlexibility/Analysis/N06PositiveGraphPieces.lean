@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06GraphMaterialBounds
-import ContinuousFlexibility.Analysis.N06MaterialJetRows
+module
+
+public import ContinuousFlexibility.Analysis.N06GraphMaterialBounds
+public import ContinuousFlexibility.Analysis.N06MaterialJetRows
 
 /-!
 # All positive canonical graph fields in the original weighted lp space
@@ -9,6 +11,8 @@ The physical source and height rows retain their original material weights;
 E0^A is placed on the graph fields to compensate the normalized cubic
 coefficient used by the original volume-source construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

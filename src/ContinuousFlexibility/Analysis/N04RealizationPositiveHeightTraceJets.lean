@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationLogHeightTraceRegularity
-import ContinuousFlexibility.Analysis.WholePositiveEndpointFields
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLogHeightTraceRegularity
+public import ContinuousFlexibility.Analysis.WholePositiveEndpointFields
 
 /-!
 # Logarithmic Taylor traces of the retained actual positive sources
@@ -9,6 +11,8 @@ proved root smoothness and positivity construct the logarithmic traces
 from the raw height-axis towers. The finite input degree may be three;
 neither a new source nor a smaller parameter domain is chosen here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OpticalCollarCutoff
+module
+
+public import ContinuousFlexibility.Analysis.OpticalCollarCutoff
 
 /-!
 # An actual uniformly controlled optical correction cutoff family
@@ -8,6 +10,8 @@ transition lies strictly inside each actual negative component, the
 reference speed has a fixed coefficient-power lower bound there, and
 all cutoff derivatives have fixed coefficient-power upper bounds.
 -/
+
+@[expose] public section
 
 noncomputable section
 

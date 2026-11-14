@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.HeightBandCount
-import ContinuousFlexibility.Radial.HeightSimultaneousSelection
+module
+
+public import ContinuousFlexibility.Radial.HeightBandCount
+public import ContinuousFlexibility.Radial.HeightSimultaneousSelection
 
 /-!
 # One height sequence for both endpoints
@@ -14,6 +16,8 @@ partition directly from a realized chain. The final selection theorem still
 has explicit analytic hypotheses about the incoming and natural states;
 those hypotheses are supplied by the concrete radial construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04RealizationLogHeightTraceRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLogHeightTraceRegularity
 
 /-!
 # The actual parameter jets of an angular trace
@@ -7,6 +9,8 @@ The existing mixed representation has the supplied angular tower at
 radial order zero and the zero tower at every positive radial order.
 Uniqueness identifies any genuine mixed tower with these same data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

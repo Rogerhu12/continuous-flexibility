@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsKernelTrace
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsKernelTrace
 
 /-!
 # Actual physical root coefficient traces with polynomial material cost
@@ -8,6 +10,8 @@ intrinsic angular derivatives. Summing its genuine parameter jets gives
 one common low base, a fixed spatial loss, and the original positive
 parameter height factor for the physical drift and speed ratio.
 -/
+
+@[expose] public section
 
 noncomputable section
 

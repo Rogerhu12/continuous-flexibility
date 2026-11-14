@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerLiouvillePhysicalOperators
+module
+
+public import ContinuousFlexibility.Radial.InnerLiouvillePhysicalOperators
 
 /-!
 # A buffer-supported leading field pays only the buffer velocity
@@ -7,6 +9,8 @@ The same actual field lift is used for the leading cutoff and the
 remainder. This refinement uses the smaller velocity bound only where
 the leading Lp vector is nonzero; no bound on the opposite cap is charged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N05CanonicalOutputChoice
-import ContinuousFlexibility.Analysis.N05ReferenceFullAngularSobolev
-import ContinuousFlexibility.Analysis.N05ReferenceNormalizerJets
-import ContinuousFlexibility.Analysis.N05ReferenceZeroRemainder
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalOutputChoice
+public import ContinuousFlexibility.Analysis.N05ReferenceFullAngularSobolev
+public import ContinuousFlexibility.Analysis.N05ReferenceNormalizerJets
+public import ContinuousFlexibility.Analysis.N05ReferenceZeroRemainder
 
 /-!
 # Actual angular output jets and their canonical L² representatives
@@ -11,6 +13,8 @@ periodic representative has a weighted physical bound and hence one
 canonical height sequence. Subtracting any multiple of the prescribed
 radial cutoff leaves these positive angular derivatives unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

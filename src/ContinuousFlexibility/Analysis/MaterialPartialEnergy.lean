@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.MaterialInverseEllJets
-import ContinuousFlexibility.Analysis.MaterialMixedMultiplier
-import ContinuousFlexibility.Analysis.PhysicalJetLinearity
+module
+
+public import ContinuousFlexibility.Analysis.MaterialInverseEllJets
+public import ContinuousFlexibility.Analysis.MaterialMixedMultiplier
+public import ContinuousFlexibility.Analysis.PhysicalJetLinearity
 
 /-!
 # Ordinary physical partial derivatives preserve the weighted energy class
@@ -11,6 +13,8 @@ weight term. Every derivative of the inverse length costs the same
 single power of M. Angular differentiation simply shifts the angular
 jet index. These identities concern the actual total partial derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

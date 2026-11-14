@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchedWeightMorseFibers
-import ContinuousFlexibility.Radial.ReferenceFiniteIndexFloor
+module
+
+public import ContinuousFlexibility.Radial.MatchedWeightMorseFibers
+public import ContinuousFlexibility.Radial.ReferenceFiniteIndexFloor
 
 /-!
 # Finite level multiplicity after the actual return-margin index floor
@@ -8,6 +10,8 @@ The fixed floor merges only finitely many of the original Morse levels.
 The middle cell and the two tails give at most 2 N + 3 cells at the
 merged level. Saturating cells leaves these indices unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

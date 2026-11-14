@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.JointJetInterpolationBudget
+module
+
+public import ContinuousFlexibility.Analysis.JointJetInterpolationBudget
 
 /-!
 # Complementary spatial products with one fixed low base
@@ -8,6 +10,8 @@ that depend on the parameter order enter only the common high index.
 This is the elementary estimate needed to multiply fixed-base mixed
 growth certificates without moving their parameter neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

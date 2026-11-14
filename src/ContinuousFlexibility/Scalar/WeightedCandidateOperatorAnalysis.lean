@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.WeightedCandidateOperators
-import ContinuousFlexibility.Scalar.WeightedScalarCandidateGerms
-import ContinuousFlexibility.Scalar.WeightedScalarOperatorJoint
+module
+
+public import ContinuousFlexibility.Scalar.WeightedCandidateOperators
+public import ContinuousFlexibility.Scalar.WeightedScalarCandidateGerms
+public import ContinuousFlexibility.Scalar.WeightedScalarOperatorJoint
 
 /-!
 # Actual candidate operator families and their common smooth domain
@@ -9,6 +11,8 @@ The concrete coefficient formulas supply all analytic assumptions used by
 the joint operator calculus. One intersection of four state neighborhoods
 works for both full operator parameter domains.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01LocalizedCoefficientBounds
-import ContinuousFlexibility.Analysis.N01ActualRootGeometry
-import ContinuousFlexibility.Analysis.PointwiseAffineMaterialJets
-import ContinuousFlexibility.Analysis.CylinderMixedJets
+module
+
+public import ContinuousFlexibility.Analysis.N01LocalizedCoefficientBounds
+public import ContinuousFlexibility.Analysis.N01ActualRootGeometry
+public import ContinuousFlexibility.Analysis.PointwiseAffineMaterialJets
+public import ContinuousFlexibility.Analysis.CylinderMixedJets
 
 /-!
 # Actual radial coefficient jets at every interior root
@@ -11,6 +13,8 @@ partition. The existing N01 coefficient estimate on that neighborhood
 then bounds all ordinary jets of the actual radial coefficient, with
 the original N01 loss and constants before the state and angle.
 -/
+
+@[expose] public section
 
 noncomputable section
 

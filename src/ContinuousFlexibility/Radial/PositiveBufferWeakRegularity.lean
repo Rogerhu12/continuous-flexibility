@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.BufferLocalPrimitive
-import ContinuousFlexibility.Radial.PositiveBufferRegularity
+module
+
+public import ContinuousFlexibility.Radial.BufferLocalPrimitive
+public import ContinuousFlexibility.Radial.PositiveBufferRegularity
 
 /-!
 # Local regularity of the actual weak Schrödinger equation
@@ -9,6 +11,8 @@ one-dimensional primitive theorem twice turns a weak equation with a
 continuous source into a classical equation. Smooth coefficients and source
 then give the smooth representatives required by positive-buffer surgery.
 -/
+
+@[expose] public section
 
 noncomputable section
 

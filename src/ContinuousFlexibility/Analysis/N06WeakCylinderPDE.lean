@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06WeakFiniteParseval
-import ContinuousFlexibility.Analysis.N06WeakAngularModes
-import ContinuousFlexibility.Radial.ReferenceCosineJacobi
+module
+
+public import ContinuousFlexibility.Analysis.N06WeakFiniteParseval
+public import ContinuousFlexibility.Analysis.N06WeakAngularModes
+public import ContinuousFlexibility.Radial.ReferenceCosineJacobi
 
 /-!
 # Actual cylinder weak equations give the original radial modal equations
@@ -10,6 +12,8 @@ are globally smooth, periodic, and compactly supported only in the radial
 variable, exactly as in the canonical test class. Fubini then gives the
 weak radial equation without imposing regularity on the L2 input fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 

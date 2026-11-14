@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderFourierAngular
-import ContinuousFlexibility.Analysis.OneHighCylinderFourierL2Derivative
-import Mathlib.Analysis.Calculus.ParametricIntegral
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderFourierAngular
+public import ContinuousFlexibility.Analysis.OneHighCylinderFourierL2Derivative
+public import Mathlib.Analysis.Calculus.ParametricIntegral
 
 /-!
 # Radial differentiation of the actual cylinder Fourier transform
@@ -9,6 +11,8 @@ Compactness of the angular circle permits differentiation of its genuine
 Fourier coefficient under the integral. The radial `L²` derivative theorem
 then supplies the exact physical multiplier on the mixed frequency space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

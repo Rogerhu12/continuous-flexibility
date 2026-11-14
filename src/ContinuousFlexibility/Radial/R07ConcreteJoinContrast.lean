@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.R07ChainIncoming
-import ContinuousFlexibility.Radial.R07JoinContrast
-import ContinuousFlexibility.Radial.MorseRealizedConnectorBounds
+module
+
+public import ContinuousFlexibility.Radial.R07ChainIncoming
+public import ContinuousFlexibility.Radial.R07JoinContrast
+public import ContinuousFlexibility.Radial.MorseRealizedConnectorBounds
 
 /-!
 # The contrast bound on the actual preceding connector
@@ -11,6 +13,8 @@ contrast is therefore uniform in the geometric placement. Monotonicity
 on the physical connector then bounds every intermediate height by its
 two endpoint heights, for either direction of traversal.
 -/
+
+@[expose] public section
 
 noncomputable section
 

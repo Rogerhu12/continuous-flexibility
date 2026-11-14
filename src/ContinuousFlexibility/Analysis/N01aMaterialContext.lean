@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.AffineMaterialFull
+module
+
+public import ContinuousFlexibility.Analysis.AffineMaterialFull
 
 /-!
 # Choosing the canonical material data for N01a
@@ -7,6 +9,8 @@ The explicit material construction is used so that the optical estimates
 can be compared with its sampled coefficient weight. The sampling collars
 are exactly those already provided by the accumulating profile.
 -/
+
+@[expose] public section
 
 noncomputable section
 

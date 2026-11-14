@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CanonicalWholePositiveRootMatching
-import ContinuousFlexibility.Analysis.CanonicalReferenceGaugeRootCircleJets
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalWholePositiveRootMatching
+public import ContinuousFlexibility.Analysis.CanonicalReferenceGaugeRootCircleJets
 
 /-!
 # The selected positive family's actual negative root first jets
@@ -10,6 +12,8 @@ the original stored half, and the already constructed finite matching
 gives first jets directly against that half. The original N01 witness
 and a possibly restricted atlas neighborhood are kept separate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

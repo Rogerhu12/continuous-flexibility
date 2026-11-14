@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06ReferenceNormalTransport
-import ContinuousFlexibility.Analysis.N05CanonicalPhysicalChange
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceNormalTransport
+public import ContinuousFlexibility.Analysis.N05CanonicalPhysicalChange
 
 /-!
 # Actual L2 control of the transported reference normal derivative
@@ -9,6 +11,8 @@ half-period piece. The inverse chart transports their measurable classes,
 and the genuine Jacobian formula controls their squares. Only the first
 radial coordinate and height bounds enter the estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

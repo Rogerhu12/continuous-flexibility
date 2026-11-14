@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06AngularJetParseval
-import ContinuousFlexibility.Analysis.N06CylinderLp
-import ContinuousFlexibility.Analysis.N06WeakGraph
+module
+
+public import ContinuousFlexibility.Analysis.N06AngularJetParseval
+public import ContinuousFlexibility.Analysis.N06CylinderLp
+public import ContinuousFlexibility.Analysis.N06WeakGraph
 
 /-!
 # Finite cylinder Parseval with merely L2 radial coefficients
@@ -9,6 +11,8 @@ Angular smoothness suffices for all pure angular derivatives. Radial
 continuity is unnecessary: the actual half-period volume norm is computed
 by Fubini from the L2 radial coefficients and the angular Gram matrix.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerGapDirichlet
+module
+
+public import ContinuousFlexibility.Radial.InnerGapDirichlet
 
 /-!
 # Support and physical tests for the positive-gap inverse
@@ -9,6 +11,8 @@ passes from the test core to its closure. The form graph also exposes
 the physical smooth tests and both energy coordinates for subsequent
 weak conormal-flux and finite-piece gluing arguments.
 -/
+
+@[expose] public section
 
 noncomputable section
 

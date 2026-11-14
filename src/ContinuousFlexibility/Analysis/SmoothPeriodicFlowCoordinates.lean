@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SmoothPeriodicScalarFlowEndpoint
-import ContinuousFlexibility.Analysis.ParameterizedCircleInverse
+module
+
+public import ContinuousFlexibility.Analysis.SmoothPeriodicScalarFlowEndpoint
+public import ContinuousFlexibility.Analysis.ParameterizedCircleInverse
 
 /-!
 # Actual inverse-flow coordinates
@@ -10,6 +12,8 @@ Composing a smooth boundary coordinate with this actual inverse gives
 the smooth coordinate used on the characteristic chart. Every flow
 regularity assertion in this construction is a conclusion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

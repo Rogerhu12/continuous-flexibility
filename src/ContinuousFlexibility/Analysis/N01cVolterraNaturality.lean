@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cFlowJetIdentification
+module
+
+public import ContinuousFlexibility.Analysis.N01cFlowJetIdentification
 
 /-!
 # Naturality of the genuine Volterra variations at one parameter value
@@ -8,6 +10,8 @@ parameter values are compared. The finite parameter map may therefore
 be compressed away from the base point. No global affine relation
 between the two trajectory families is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

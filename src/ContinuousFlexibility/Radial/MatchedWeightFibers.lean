@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.MatchedWeightBounds
-import Mathlib.Algebra.BigOperators.Group.Finset.Basic
-import Mathlib.Data.Set.Card
-import Mathlib.Topology.Algebra.InfiniteSum.Real
+module
+
+public import ContinuousFlexibility.Radial.MatchedWeightBounds
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+public import Mathlib.Data.Set.Card
+public import Mathlib.Topology.Algebra.InfiniteSum.Real
 
 /-!
 # Schur sums with finitely many cells at each level
@@ -12,6 +14,8 @@ factor in the row and column estimates. Both finiteness and the cardinality
 bound are explicit hypotheses; they are not inferred from
 `IsAccumulatingProfile`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

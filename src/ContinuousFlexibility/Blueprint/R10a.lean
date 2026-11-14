@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Blueprint.R10a.Regional
-import ContinuousFlexibility.Blueprint.R10a.Poisson
+module
+
+public import ContinuousFlexibility.Blueprint.R10a.Regional
+public import ContinuousFlexibility.Blueprint.R10a.Poisson
 
 /-!
 # Blueprint node R10a
@@ -12,6 +14,8 @@ Task file: `docs/tasks/R10a.md`. The frozen statement is assembled from
 the parameterized geometry, actual regional data, and Poisson correction.
 The regional construction uses the same reference and retained models at every frequency.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

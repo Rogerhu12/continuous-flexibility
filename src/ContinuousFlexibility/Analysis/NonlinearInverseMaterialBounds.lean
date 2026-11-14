@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.NonlinearInversePolynomialBounds
-import ContinuousFlexibility.Analysis.FlowJetMaterialClosure
+module
+
+public import ContinuousFlexibility.Analysis.NonlinearInversePolynomialBounds
+public import ContinuousFlexibility.Analysis.FlowJetMaterialClosure
 
 /-!
 # A fixed material loss for actual nonlinear inverse jets
@@ -9,6 +11,8 @@ and the original forward higher derivatives. Polynomial inverse jets
 are expanded before applying state interpolation, so one low order and
 one derivative loss work at every positive order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

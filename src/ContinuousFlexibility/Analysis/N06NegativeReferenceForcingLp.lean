@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06NegativeReferenceEquation
-import ContinuousFlexibility.Analysis.N06NegativeCurrentTestLp
-import ContinuousFlexibility.Analysis.MaterialHeightRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N06NegativeReferenceEquation
+public import ContinuousFlexibility.Analysis.N06NegativeCurrentTestLp
+public import ContinuousFlexibility.Analysis.MaterialHeightRegularity
 
 /-!
 # The actual negative reference equation has L2 principal forcing
@@ -15,6 +17,8 @@ Subtracting this genuine potential contribution from the genuine N05
 forcing gives the weak equation for the radial negative principal part.
 The potential is not assumed smooth, periodic or radial.
 -/
+
+@[expose] public section
 
 noncomputable section
 

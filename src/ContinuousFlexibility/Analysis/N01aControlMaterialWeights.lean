@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.AffineMaterialSampling
-import ContinuousFlexibility.Radial.ScaleSlowVariation
+module
+
+public import ContinuousFlexibility.Analysis.AffineMaterialSampling
+public import ContinuousFlexibility.Radial.ScaleSlowVariation
 
 /-!
 # Converting control bounds to the canonical sampled material weight
@@ -8,6 +10,8 @@ A linear change of the discrete physical index costs a fixed power of the
 coefficient weight. The actual affine material sampling bounds then absorb
 that power into the envelope used by the nonlinear statement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

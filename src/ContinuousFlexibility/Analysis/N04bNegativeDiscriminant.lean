@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04bNegativeProfile
+module
+
+public import ContinuousFlexibility.Analysis.N04bNegativeProfile
 
 /-!
 # The actual characteristic gap on every negative interior
@@ -8,6 +10,8 @@ determinant identity then gives strict hyperbolicity of the original
 type-corrected operator throughout each negative component, including
 the region outside any optical correction collar.
 -/
+
+@[expose] public section
 
 noncomputable section
 

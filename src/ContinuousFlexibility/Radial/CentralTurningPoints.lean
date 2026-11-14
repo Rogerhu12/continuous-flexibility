@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.CentralModel
+module
+
+public import ContinuousFlexibility.Radial.CentralModel
 
 /-!
 # The two simple turning points of the actual central profile
@@ -8,6 +10,8 @@ The derivatives below are derivatives with respect to the actual radius,
 using the constructed increasing radius and its smooth inverse. No
 closed-domain spectral or resolvent statement is asserted here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

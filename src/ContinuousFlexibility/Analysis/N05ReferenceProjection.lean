@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05ReferenceLeftChoice
-import ContinuousFlexibility.Radial.ReferenceGraphProjection
-import ContinuousFlexibility.Radial.ReferenceCommonInverse
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceLeftChoice
+public import ContinuousFlexibility.Radial.ReferenceGraphProjection
+public import ContinuousFlexibility.Radial.ReferenceCommonInverse
 
 /-!
 # The actual reference inverse commutes with finite angular projection
@@ -11,6 +13,8 @@ test functions project the maximum weak graph. Its uniqueness identifies
 the projected output with the same inverse applied to the projected source.
 The original bound then holds for this projection with its original constant.
 -/
+
+@[expose] public section
 
 noncomputable section
 

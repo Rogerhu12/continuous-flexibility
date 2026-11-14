@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.SelectedNaturalRobinInverse
-import ContinuousFlexibility.Radial.SelectedNaturalTailTransport
+module
+
+public import ContinuousFlexibility.Radial.SelectedNaturalRobinInverse
+public import ContinuousFlexibility.Radial.SelectedNaturalTailTransport
 
 /-!
 # The retained natural Robin line of the same quantified pair
@@ -10,6 +12,8 @@ pullback at the original cut. The original natural-line theorem therefore
 identifies the Robin row of the supplied homogeneous pair without fixing
 a sign for the normalized state.
 -/
+
+@[expose] public section
 
 noncomputable section
 

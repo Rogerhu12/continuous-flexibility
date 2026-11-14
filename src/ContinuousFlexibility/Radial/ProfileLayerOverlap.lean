@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.ProfileLayerGeometry
-import ContinuousFlexibility.Radial.ProfilePartitionBounds
-import Mathlib.MeasureTheory.Integral.Bochner.Set
-import Mathlib.Order.Interval.Finset.Nat
-import Lean.Elab.Tactic.Omega
+module
+
+public import ContinuousFlexibility.Radial.ProfileLayerGeometry
+public import ContinuousFlexibility.Radial.ProfilePartitionBounds
+public import Mathlib.MeasureTheory.Integral.Bochner.Set
+public import Mathlib.Order.Interval.Finset.Nat
+public import Lean.Elab.Tactic.Omega
 
 /-!
 # Finite overlap of endpoint layers
@@ -12,6 +14,8 @@ endpoint layer containing that point has index in the same fixed window
 around this cell's index. We count the layer indices, irrespective of the
 number of profile cells at any particular index.
 -/
+
+@[expose] public section
 
 open Set Filter MeasureTheory
 open ContinuousFlexibility.Analysis ContinuousFlexibility.Statements

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.L2BoundedMultiplier
-import ContinuousFlexibility.Analysis.L2BoundedKernel
+module
+
+public import ContinuousFlexibility.Analysis.L2BoundedMultiplier
+public import ContinuousFlexibility.Analysis.L2BoundedKernel
 
 /-!
 # The kernel of actual localized L² operators
@@ -8,6 +10,8 @@ Multiplication on the two sides of a Green operator multiplies the same
 kernel on its output and source variables.  The resulting pointwise bound
 therefore controls the norm of the actual localized operator.
 -/
+
+@[expose] public section
 
 noncomputable section
 

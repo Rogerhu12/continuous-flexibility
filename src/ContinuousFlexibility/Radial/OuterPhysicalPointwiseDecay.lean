@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterPhysicalTailGreenBounds
-import ContinuousFlexibility.Radial.OuterTailKernelDecay
+module
+
+public import ContinuousFlexibility.Radial.OuterPhysicalTailGreenBounds
+public import ContinuousFlexibility.Radial.OuterTailKernelDecay
 
 /-!
 # Pointwise decay of the same natural state and Green pair
@@ -8,6 +10,8 @@ The actual Poisson interpolants turn the preserved node contraction into
 pointwise estimates. The initial Dirichlet interval uses the same pair,
 so its mixed products retain the full relative attenuation product.
 -/
+
+@[expose] public section
 
 noncomputable section
 

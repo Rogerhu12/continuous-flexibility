@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SeeleyReferenceRadial
-import ContinuousFlexibility.Analysis.RootSmoothHeight
-import ContinuousFlexibility.Analysis.PositiveReferenceCylinder
+module
+
+public import ContinuousFlexibility.Analysis.SeeleyReferenceRadial
+public import ContinuousFlexibility.Analysis.RootSmoothHeight
+public import ContinuousFlexibility.Analysis.PositiveReferenceCylinder
 
 /-!
 # The actual height in the radial reference construction
@@ -11,6 +13,8 @@ square root of a times the derivative of the actual scalar coordinate.
 This identifies the endpoint height used by scalar interpolation; no
 equation for an arbitrarily extended height is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

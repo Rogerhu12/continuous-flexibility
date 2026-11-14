@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseChainParameters
-import Mathlib.Analysis.SpecialFunctions.Integrals.Basic
+module
+
+public import ContinuousFlexibility.Radial.MorseChainParameters
+public import Mathlib.Analysis.SpecialFunctions.Integrals.Basic
 
 /-!
 # The Morse travel integral between the actual turning points
@@ -8,6 +10,8 @@ The angle change of variables uses the positive quantity c + h cos θ.
 The reciprocal integral is evaluated on two half intervals, so the
 tangent substitution never meets its pole.
 -/
+
+@[expose] public section
 
 noncomputable section
 

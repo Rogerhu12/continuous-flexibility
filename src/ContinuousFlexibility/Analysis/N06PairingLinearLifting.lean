@@ -1,4 +1,6 @@
-import Mathlib.Analysis.Normed.Operator.Basic
+module
+
+public import Mathlib.Analysis.Normed.Operator.Basic
 
 /-!
 # A bounded linear map determined by separating linear pairings
@@ -8,6 +10,8 @@ is determined by a separating family of linear pairings. This avoids
 requiring intermediate choices of weak derivative representatives to
 depend linearly on the input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

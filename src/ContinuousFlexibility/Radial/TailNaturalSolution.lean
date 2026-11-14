@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.TailActualNaturalNodes
-import ContinuousFlexibility.Radial.TailNaturalInitialExtension
-import ContinuousFlexibility.Radial.TailNaturalIntegrability
-import ContinuousFlexibility.Radial.TailNaturalEntrance
+module
+
+public import ContinuousFlexibility.Radial.TailActualNaturalNodes
+public import ContinuousFlexibility.Radial.TailNaturalInitialExtension
+public import ContinuousFlexibility.Radial.TailNaturalIntegrability
+public import ContinuousFlexibility.Radial.TailNaturalEntrance
 
 /-!
 # Existence of the actual square-integrable natural solution
@@ -11,6 +13,8 @@ physical Poisson basis. The initial gap and the entrance extension preserve
 the actual equation and the node values. The same solution belongs to both
 weighted L¹ and L² and has the mass--resistance step decay.
 -/
+
+@[expose] public section
 
 noncomputable section
 

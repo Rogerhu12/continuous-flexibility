@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RootRegularizedFlow
-import ContinuousFlexibility.Analysis.N04FlowJetsTarget
+module
+
+public import ContinuousFlexibility.Analysis.RootRegularizedFlow
+public import ContinuousFlexibility.Analysis.N04FlowJetsTarget
 
 /-!
 # A common angular control for the actual rescaled root field
@@ -9,6 +11,8 @@ size. Uniform first angular derivatives of the actual coefficient fields
 then give a small angular Grönwall exponent. The collar is selected before
 the state, and no higher parameter derivative enters this exponent.
 -/
+
+@[expose] public section
 
 noncomputable section
 

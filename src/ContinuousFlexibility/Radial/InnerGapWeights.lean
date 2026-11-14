@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerGapDirichletSupport
-import ContinuousFlexibility.Radial.InnerGapPoissonL2
-import ContinuousFlexibility.Radial.InnerLocalizedWeights
+module
+
+public import ContinuousFlexibility.Radial.InnerGapDirichletSupport
+public import ContinuousFlexibility.Radial.InnerGapPoissonL2
+public import ContinuousFlexibility.Radial.InnerLocalizedWeights
 
 /-!
 # Exact cancellation of the weights on a positive gap
@@ -11,6 +13,8 @@ Dirichlet inverse commutes with this multiplication, and the weighted
 Poisson map cancels the scalar boundary weight exactly. These identities
 apply to either sign and incur no loss depending on the gap or cut count.
 -/
+
+@[expose] public section
 
 noncomputable section
 

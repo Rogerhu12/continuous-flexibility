@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedMonomialL2
-import Mathlib.MeasureTheory.Function.LpSeminorm.TriangleInequality
+module
+
+public import ContinuousFlexibility.Scalar.WeightedMonomialL2
+public import Mathlib.MeasureTheory.Function.LpSeminorm.TriangleInequality
 
 /-!
 # Actual finite Leibniz expansions for mixed cylinder jets
@@ -8,6 +10,8 @@ The finite term data are constructed before the input functions.  Repeated
 terms retain coefficient one: each differentiation records the factor hit.
 Every term has exactly the prescribed total radial and angular orders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

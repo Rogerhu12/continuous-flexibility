@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationDoubleExpansionHeight
-import ContinuousFlexibility.Analysis.N04RealizationMovingPointMixedBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationDoubleExpansionHeight
+public import ContinuousFlexibility.Analysis.N04RealizationMovingPointMixedBounds
 
 /-!
 # Height-sensitive mixed jets at the actual moving point
@@ -11,6 +13,8 @@ restricted word, at most K. Appended physical basis directions retain
 the original parameter arity, so positive parameter orders keep one
 height factor while order zero remains unweighted.
 -/
+
+@[expose] public section
 
 noncomputable section
 

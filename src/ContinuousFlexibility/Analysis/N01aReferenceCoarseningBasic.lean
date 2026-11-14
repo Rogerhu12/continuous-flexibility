@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01aCellCoarseningSeries
-import ContinuousFlexibility.Analysis.N01aReferencePartitionSquares
+module
+
+public import ContinuousFlexibility.Analysis.N01aCellCoarseningSeries
+public import ContinuousFlexibility.Analysis.N01aReferencePartitionSquares
 
 /-!
 # Coarsening a reference partition without changing its physical fields
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Analysis.N01aReferencePartitionSquares
 The relation records only the actual finite-fiber sum and the unchanged
 physical data. Geometric construction of the grouped cells is separate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

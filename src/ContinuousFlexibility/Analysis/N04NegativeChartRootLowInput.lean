@@ -1,11 +1,15 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartRootLowCoefficients
-import ContinuousFlexibility.Analysis.N04NegativeChartRootLowFlow
-import ContinuousFlexibility.Analysis.N04NegativeChartRootPositiveBand
-import ContinuousFlexibility.Analysis.N01RootLabelUniformJets
-import ContinuousFlexibility.Analysis.RootFieldLocalization
-import ContinuousFlexibility.Analysis.RootRescaledFieldJets
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootLowCoefficients
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootLowFlow
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootPositiveBand
+public import ContinuousFlexibility.Analysis.N01RootLabelUniformJets
+public import ContinuousFlexibility.Analysis.RootFieldLocalization
+public import ContinuousFlexibility.Analysis.RootRescaledFieldJets
 
 /-! The genuine same-family input bound for the actual positive root band. -/
+
+@[expose] public section
 
 noncomputable section
 

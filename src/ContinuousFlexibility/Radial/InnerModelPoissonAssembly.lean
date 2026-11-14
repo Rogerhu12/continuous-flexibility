@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.InnerModelPoissonNormalization
-import ContinuousFlexibility.Radial.InnerChainBoundaryHilbert
-import ContinuousFlexibility.Radial.InnerProjectedInverseBound
-import ContinuousFlexibility.Radial.InnerChainDiagonal
+module
+
+public import ContinuousFlexibility.Radial.InnerModelPoissonNormalization
+public import ContinuousFlexibility.Radial.InnerChainBoundaryHilbert
+public import ContinuousFlexibility.Radial.InnerProjectedInverseBound
+public import ContinuousFlexibility.Radial.InnerChainDiagonal
 
 /-!
 # Finite assembly of the actual model Poisson columns
@@ -11,6 +13,8 @@ weights and cut energies are normalized before summing over pieces.
 Orthogonality of the physical intervals and the exact chain incidence
 identity give constants independent of the number of retained cells.
 -/
+
+@[expose] public section
 
 noncomputable section
 

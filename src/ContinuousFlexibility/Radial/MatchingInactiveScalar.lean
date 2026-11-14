@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchingInverseFormula
-import ContinuousFlexibility.Radial.ModeWeakLinearity
+module
+
+public import ContinuousFlexibility.Radial.MatchingInverseFormula
+public import ContinuousFlexibility.Radial.ModeWeakLinearity
 
 /-!
 # The inactive scalar in the exact matching formula
@@ -9,6 +11,8 @@ equation. The frozen local uniqueness clauses force the matching formula
 to annihilate a purely scalar source. This is proved from the actual
 local graphs and is not added as a condition on the supplied inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

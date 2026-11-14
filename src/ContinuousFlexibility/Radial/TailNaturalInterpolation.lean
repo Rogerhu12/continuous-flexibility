@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.TailPoissonInterpolationBounds
-import ContinuousFlexibility.Radial.TailEdgeGluing
-import ContinuousFlexibility.Radial.TailClassicalRegularity
+module
+
+public import ContinuousFlexibility.Radial.TailPoissonInterpolationBounds
+public import ContinuousFlexibility.Radial.TailEdgeGluing
+public import ContinuousFlexibility.Radial.TailClassicalRegularity
 
 /-!
 # The actual differential equation of a matched node interpolant
@@ -11,6 +13,8 @@ closed edge. The actual node recurrence is exactly the matching condition
 for these fluxes, and the existing outward gluing operation yields a
 classical solution on the open tail.
 -/
+
+@[expose] public section
 
 noncomputable section
 

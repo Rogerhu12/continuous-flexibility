@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MatchedPhysicalSchurRows
+module
+
+public import ContinuousFlexibility.Radial.MatchedPhysicalSchurRows
 
 /-!
 # Actual weighted boundedness of the modal inverse from its raw blocks
@@ -7,6 +9,8 @@ The operator in the conclusion is the given continuous linear map.
 The assumptions concern norms of its actual local blocks and the one
 scalar border. Weighted L² membership of its output is proved.
 -/
+
+@[expose] public section
 
 noncomputable section
 

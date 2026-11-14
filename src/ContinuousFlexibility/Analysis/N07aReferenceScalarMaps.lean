@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aAngularReferenceInverse
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceInverse
 
 /-!
 # The three actual scalar functionals of the reference inverse
@@ -7,6 +9,8 @@ They are bounded projections of the prescribed inverse, with frequencies
 zero, one and zero.  Their band support follows from the proved physical
 reference graph projection, including the original border column.
 -/
+
+@[expose] public section
 
 noncomputable section
 

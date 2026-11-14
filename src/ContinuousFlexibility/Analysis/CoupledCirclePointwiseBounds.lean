@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SpacesTraceCircleBounds
+module
+
+public import ContinuousFlexibility.Analysis.SpacesTraceCircleBounds
 
 /-!
 # Uniform evaluation of the actual weighted circle jets
@@ -7,6 +9,8 @@ The estimate keeps one extra power of the sample weight available for a
 square-summable majorant. It is uniform in the evaluation angle, so it also
 applies after composition with a circle chart.
 -/
+
+@[expose] public section
 
 noncomputable section
 

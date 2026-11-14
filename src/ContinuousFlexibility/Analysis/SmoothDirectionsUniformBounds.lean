@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SmoothDirectionsLimitAssembly
-import Mathlib.Topology.MetricSpace.Equicontinuity
+module
+
+public import ContinuousFlexibility.Analysis.SmoothDirectionsLimitAssembly
+public import Mathlib.Topology.MetricSpace.Equicontinuity
 
 /-!
 # Uniform seminorm bounds for directional jet families
@@ -9,6 +11,8 @@ value theorem. Multilinearity controls variation of the directions.
 Both estimates use continuous seminorms, so they apply to the original
 locally convex space without replacing it by a normed completion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

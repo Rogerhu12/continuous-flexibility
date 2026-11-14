@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.MaterialMScale
+module
+
+public import ContinuousFlexibility.Analysis.MaterialMScale
 
 /-!
 # Material height weights under bounded coordinate changes
@@ -7,6 +9,8 @@ A bounded change of the nonnegative endpoint coordinate preserves the
 exact power of the height weight. The resulting quadratic exponential
 is absorbed by a fixed power of the actual material weight `E0`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06CurrentTestTensorGreen
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentTestTensorGreen
 
 /-!
 # Finite negative Green against actual current physical tests
@@ -9,6 +11,8 @@ has only the open smoothness and the closed Lipschitz traces derived from
 N04. Combining the radial and angular tensor identities proves the finite
 negative principal Green identity with the true two endpoint terms.
 -/
+
+@[expose] public section
 
 noncomputable section
 

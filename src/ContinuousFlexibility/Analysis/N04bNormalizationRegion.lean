@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ReferenceColumnSmooth
+module
+
+public import ContinuousFlexibility.Radial.ReferenceColumnSmooth
 
 /-!
 # An actual normalization region away from the negative components
@@ -10,6 +12,8 @@ closure is consequently one open normalization region containing the
 actual column support. Every negative physical piece misses this region,
 even when its artificial boundary moves.
 -/
+
+@[expose] public section
 
 noncomputable section
 

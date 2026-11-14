@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ActualPositiveReferenceInterpolation
-import ContinuousFlexibility.Analysis.FiniteFirstJetInverse
-import ContinuousFlexibility.Analysis.CanonicalWholePositiveRootMatching
+module
+
+public import ContinuousFlexibility.Analysis.ActualPositiveReferenceInterpolation
+public import ContinuousFlexibility.Analysis.FiniteFirstJetInverse
+public import ContinuousFlexibility.Analysis.CanonicalWholePositiveRootMatching
 
 /-!
 # Fixed aligned first jets of the actual positive reference chart
@@ -11,6 +13,8 @@ component reaches its genuine root jets by ordinary continuity. Thus
 the two scalar interpolation outputs give the full aligned chart and
 height first jets. Both normal alignments are fixed before the state.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.FixedCentralFirstInverse
-import ContinuousFlexibility.Radial.InnerMorseInnerChain
-import ContinuousFlexibility.Radial.InnerPhysicalFrozenInverse
-import ContinuousFlexibility.Radial.ReferenceFirstGapSlope
-import ContinuousFlexibility.Radial.FirstConeLayerSeparation
+module
+
+public import ContinuousFlexibility.Radial.FixedCentralFirstInverse
+public import ContinuousFlexibility.Radial.InnerMorseInnerChain
+public import ContinuousFlexibility.Radial.InnerPhysicalFrozenInverse
+public import ContinuousFlexibility.Radial.ReferenceFirstGapSlope
+public import ContinuousFlexibility.Radial.FirstConeLayerSeparation
 
 /-!
 # The actual first-band inner inverse in the frozen coordinates
@@ -13,6 +15,8 @@ gaps and their uniform logarithmic slope. The resulting inverse and all
 its representatives satisfy the original modal graph, with a cost fixed
 before the retained-cone length or either side dilation is chosen.
 -/
+
+@[expose] public section
 
 noncomputable section
 

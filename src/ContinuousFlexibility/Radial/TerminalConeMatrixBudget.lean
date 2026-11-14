@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.TerminalConeChoice
+module
+
+public import ContinuousFlexibility.Radial.TerminalConeChoice
 
 /-!
 # One first-band length after its inverse bound and selected margin
@@ -7,6 +9,8 @@ The inverse norm bound is fixed before this choice. A single small
 coefficient controls both actual cutoff errors, and one retained-cone
 length realizes that coefficient throughout the finite first band.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesCompactHeights
-import ContinuousFlexibility.Scalar.WeightedDecodeLift
+module
+
+public import ContinuousFlexibility.Analysis.SpacesCompactHeights
+public import ContinuousFlexibility.Scalar.WeightedDecodeLift
 
 /-!
 # Encoding actual compact physical sources
@@ -12,6 +14,8 @@ physical source kernel, with exact equality of its grading and physical norm.
 
 This construction uses neither a canonical chart nor a volume-space bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

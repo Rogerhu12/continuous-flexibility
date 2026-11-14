@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01EndpointScalarHeightBounds
-import ContinuousFlexibility.Analysis.N01HeightPlateauDirections
-import ContinuousFlexibility.Analysis.N01WeightedPlateauEnvelope
-import ContinuousFlexibility.Analysis.CircleEnergyEnvelope
+module
+
+public import ContinuousFlexibility.Analysis.N01EndpointScalarHeightBounds
+public import ContinuousFlexibility.Analysis.N01HeightPlateauDirections
+public import ContinuousFlexibility.Analysis.N01WeightedPlateauEnvelope
+public import ContinuousFlexibility.Analysis.CircleEnergyEnvelope
 
 /-!
 # Genuine circle membership of every positive pure scalar endpoint jet
@@ -12,6 +14,8 @@ height, with the trace removed by constant-height locality. The proof
 keeps the infinite component sum; a uniform pointwise bound alone is
 never used as a summability substitute.
 -/
+
+@[expose] public section
 
 noncomputable section
 

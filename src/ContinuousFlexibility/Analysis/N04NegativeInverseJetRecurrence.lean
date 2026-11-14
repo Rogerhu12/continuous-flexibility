@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeInverseImplicitIdentification
-import ContinuousFlexibility.Analysis.N04NegativeInverseSlotBudget
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeInverseImplicitIdentification
+public import ContinuousFlexibility.Analysis.N04NegativeInverseSlotBudget
 
 /-!
 # Exact recurrences of the genuine parameterized inverse
@@ -9,6 +11,8 @@ tower. At first order the target direction remains explicit. At higher
 orders the affine target disappears, leaving only original forward jets
 and strictly lower inverse jets in the ordered-partition formula.
 -/
+
+@[expose] public section
 
 noncomputable section
 

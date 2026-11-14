@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # Uniqueness of the actual canonical volume model
@@ -9,6 +11,8 @@ satisfying it are equal as data. Bounds, continuous maps and physical graph
 relations therefore transfer by this literal equality, with their norms
 and their represented canonical sequences unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

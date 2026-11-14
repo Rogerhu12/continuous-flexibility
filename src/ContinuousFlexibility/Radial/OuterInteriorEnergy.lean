@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OuterRealizedCellEnergy
+module
+
+public import ContinuousFlexibility.Radial.OuterRealizedCellEnergy
 
 /-!
 # Energy estimates at every point of a transition piece
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Radial.OuterRealizedCellEnergy
 The positive piece uses one regularized weight for the whole interval.
 The negative piece keeps its full weighted energy until the last step.
 -/
+
+@[expose] public section
 
 noncomputable section
 

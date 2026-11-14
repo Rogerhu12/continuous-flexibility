@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cPhysicalGraphJets
-import ContinuousFlexibility.Analysis.N01cPhysicalGraphTermBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01cPhysicalGraphJets
+public import ContinuousFlexibility.Analysis.N01cPhysicalGraphTermBounds
 
 /-!
 # Raw bounds for the complete genuine state-flow composition
@@ -9,6 +11,8 @@ finite outer-word sum costs only constants and material powers. Its
 spatial exponent is the original angular order plus a prefix-dependent
 multiple of the original state order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

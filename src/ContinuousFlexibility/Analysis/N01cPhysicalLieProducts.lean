@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
 
 /-!
 # Weighted finite products for the physical Lie expansion
@@ -7,6 +9,8 @@ Every radial endpoint power is attached to its own factor before the
 genuine parameter product theorem is applied. The separate spatial
 powers add exactly; only the finite material-envelope powers are enlarged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

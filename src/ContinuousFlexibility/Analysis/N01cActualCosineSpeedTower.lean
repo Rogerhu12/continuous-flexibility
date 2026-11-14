@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cEndpointCosineTower
-import ContinuousFlexibility.Analysis.N01cWholeSpeedPowerBounds
-import ContinuousFlexibility.Analysis.N01cStateInterpolation
+module
+
+public import ContinuousFlexibility.Analysis.N01cEndpointCosineTower
+public import ContinuousFlexibility.Analysis.N01cWholeSpeedPowerBounds
+public import ContinuousFlexibility.Analysis.N01cStateInterpolation
 
 /-!
 # The actual cosine speed on the original state space
@@ -10,6 +12,8 @@ angular state jets. Their endpoint estimates, together with the exact
 signed cosine formula, give joint time, state and direction continuity.
 Only the actual projective state topology is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

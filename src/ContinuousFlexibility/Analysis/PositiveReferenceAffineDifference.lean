@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PositiveReferenceIdentity
-import ContinuousFlexibility.Analysis.RadialPrimitiveJetBounds
+module
+
+public import ContinuousFlexibility.Analysis.PositiveReferenceIdentity
+public import ContinuousFlexibility.Analysis.RadialPrimitiveJetBounds
 
 /-!
 # The actual radial interpolation is affine in its endpoint slopes
@@ -9,6 +11,8 @@ and collar. Subtracting the unit reference removes the constant mass term.
 Thus the actual displacement is the radial primitive of a linear endpoint
 correction, with no new choice of width or normalization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

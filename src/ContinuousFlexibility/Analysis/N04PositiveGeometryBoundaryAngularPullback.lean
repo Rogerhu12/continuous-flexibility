@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryPlaneProjection
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryInversePrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryComposition
-import ContinuousFlexibility.Analysis.N04PositiveGeometryRootInverseLinearBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryPlaneProjection
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryInversePrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryComposition
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryRootInverseLinearBounds
 
 /-!
 # Finite angular pullback bounds from original source tensors
@@ -10,6 +12,8 @@ A triangular first inverse differential and the positive source tensors
 determine every required inverse jet. The partition formula then bounds
 the actual radial pullback derivative, preserving its angular reserve.
 -/
+
+@[expose] public section
 
 noncomputable section
 

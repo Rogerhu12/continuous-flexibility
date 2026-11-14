@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05PolynomialProbes
-import ContinuousFlexibility.Radial.RadialHeight
+module
+
+public import ContinuousFlexibility.Analysis.N05PolynomialProbes
+public import ContinuousFlexibility.Radial.RadialHeight
 
 /-!
 # Coefficient regularity forced by actual polynomial tests
@@ -9,6 +11,8 @@ That convention cannot be used to hide an irregular coefficient: the probe
 identities below force the relevant fluxes to be differentiable.  No regularity
 of the mixed or angular coefficient is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

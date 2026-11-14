@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N08ReferenceFlowVariation
-import ContinuousFlexibility.Analysis.N08Neighborhoods
-import ContinuousFlexibility.Analysis.N08StateLinearOperations
+module
+
+public import ContinuousFlexibility.Analysis.N08ReferenceFlowVariation
+public import ContinuousFlexibility.Analysis.N08Neighborhoods
+public import ContinuousFlexibility.Analysis.N08StateLinearOperations
 
 /-!
 # The genuine mixed height and parameter jet of the ordinary flow
@@ -10,6 +12,8 @@ parameter derivative is therefore exactly affine in that line parameter.
 Uniqueness of the real derivative identifies every supplied N01 second
 jet, with the height direction first and the construction parameter last.
 -/
+
+@[expose] public section
 
 noncomputable section
 

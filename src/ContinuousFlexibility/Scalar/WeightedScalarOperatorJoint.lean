@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.WeightedScalarOperatorGerms
-import ContinuousFlexibility.Scalar.WeightedScalarOperatorSmooth
-import ContinuousFlexibility.Scalar.WeightedHeightParameterPullback
+module
+
+public import ContinuousFlexibility.Scalar.WeightedScalarOperatorGerms
+public import ContinuousFlexibility.Scalar.WeightedScalarOperatorSmooth
+public import ContinuousFlexibility.Scalar.WeightedHeightParameterPullback
 
 /-!
 # Joint scalar operator families on the required product domains
@@ -9,6 +11,8 @@ The state domain may be restricted, while the common height and independent
 source height range over their full spaces. The same actual maps also
 have uniform germs at zero in those homogeneous arguments.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N03RootEndpointMaterialJets
-import ContinuousFlexibility.Analysis.N04RealizationRootJacobianKernel
+module
+
+public import ContinuousFlexibility.Analysis.N03RootEndpointMaterialJets
+public import ContinuousFlexibility.Analysis.N04RealizationRootJacobianKernel
 
 /-!
 # Material reciprocal Jacobians of the original root charts
@@ -10,6 +12,8 @@ formula therefore gives a material reciprocal determinant. The actual N03
 root-jet identification transfers this bound through an orientation of
 absolute value one; the state-dependent identification radius has no cost.
 -/
+
+@[expose] public section
 
 noncomputable section
 

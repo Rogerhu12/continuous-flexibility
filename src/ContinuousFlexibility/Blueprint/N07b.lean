@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07bBridgeNeighborhood
-import ContinuousFlexibility.Analysis.SolveReturnEquations
+module
+
+public import ContinuousFlexibility.Analysis.N07bBridgeNeighborhood
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # Blueprint node N07b
@@ -11,6 +13,8 @@ and the weak physical relation uses the full angular period of RadialTest.
 
 Source: `paper/flexible-surface-readable/08-stable-inverse.tex` lines 774–806.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

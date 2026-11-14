@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerSupportedWeights
-import ContinuousFlexibility.Radial.InnerChainDiagonal
+module
+
+public import ContinuousFlexibility.Radial.InnerSupportedWeights
+public import ContinuousFlexibility.Radial.InnerChainDiagonal
 
 /-!
 # Unit weights on the original physical and boundary spaces
@@ -8,6 +10,8 @@ The existing multipliers and boundary restrictions become the identity
 when their actual weight is one. These equalities are shared by the
 unweighted specialization and the local weighted estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

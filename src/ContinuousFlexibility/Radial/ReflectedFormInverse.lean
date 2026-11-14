@@ -1,8 +1,10 @@
-import Mathlib.Analysis.InnerProductSpace.LaxMilgram
-import Mathlib.Analysis.InnerProductSpace.Adjoint
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Ring
-import Mathlib.Tactic.Module
+module
+
+public import Mathlib.Analysis.InnerProductSpace.LaxMilgram
+public import Mathlib.Analysis.InnerProductSpace.Adjoint
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.Module
 
 /-!
 # Inverting a form by reflection in its low modes
@@ -15,6 +17,8 @@ reflection of the test argument makes the shifted form coercive. The
 Lax--Milgram inverse then solves the original form equation, with an actual
 `L²` bound `4 / Λ` independent of the form norm of the projection.
 -/
+
+@[expose] public section
 
 noncomputable section
 

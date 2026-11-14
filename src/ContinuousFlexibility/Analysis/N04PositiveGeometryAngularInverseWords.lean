@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsMixedWords
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsAngularGraph
-import ContinuousFlexibility.Analysis.N01cFiniteAffineJets
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsMixedWords
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsAngularGraph
+public import ContinuousFlexibility.Analysis.N01cFiniteAffineJets
 
 /-!
 # Saved words of the actual angular inverse
@@ -10,6 +12,8 @@ Its operator norm is a polynomial in the forward first-jet bound and
 the reciprocal slope. Higher inverse words then follow from the genuine
 inverse equation on the original parameter seminorm boxes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

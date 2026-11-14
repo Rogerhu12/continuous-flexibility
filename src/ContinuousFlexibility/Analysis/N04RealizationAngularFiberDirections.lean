@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04RealizationPositiveAngularInverse
-import ContinuousFlexibility.Analysis.N04RealizationJointMixedRegularity
-import ContinuousFlexibility.Analysis.AngularFiberEndpointJets
-import ContinuousFlexibility.Analysis.N01cPhysicalFlowGraph
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationPositiveAngularInverse
+public import ContinuousFlexibility.Analysis.N04RealizationJointMixedRegularity
+public import ContinuousFlexibility.Analysis.AngularFiberEndpointJets
+public import ContinuousFlexibility.Analysis.N01cPhysicalFlowGraph
 
 /-!
 # Actual fiber pullback and its finite boundary traces
@@ -12,6 +14,8 @@ pullback. Differentiating the resulting genuine joint tower and freezing
 the same endpoint gives the actual radial boundary traces used by the
 existing radial collar.
 -/
+
+@[expose] public section
 
 noncomputable section
 

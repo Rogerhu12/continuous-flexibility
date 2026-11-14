@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06NegativeReferenceForcingLp
-import ContinuousFlexibility.Analysis.N06WeakCylinderPDE
-import ContinuousFlexibility.Analysis.N06WeakModeRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N06NegativeReferenceForcingLp
+public import ContinuousFlexibility.Analysis.N06WeakCylinderPDE
+public import ContinuousFlexibility.Analysis.N06WeakModeRegularity
 
 /-!
 # Actual weak negative modes on the recorded canonical interval
@@ -15,6 +17,8 @@ original N05 graph. Their first derivatives are AC up to both recorded
 endpoints and their second derivatives are L2. No modal equation or trace
 matching condition is added to the original graph hypotheses.
 -/
+
+@[expose] public section
 
 noncomputable section
 

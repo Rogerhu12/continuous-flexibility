@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.LocalJointJetSeminormBounds
+module
+
+public import ContinuousFlexibility.Analysis.LocalJointJetSeminormBounds
 
 /-!
 # Joining both spatial variables to a genuine scalar parameter tower
@@ -8,6 +10,8 @@ first partial derivatives and uniform seminorm bounds for the supplied
 parameter towers. Local FTC first joins the radial variable and then
 the angular variable. No regularity of formal higher jets is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

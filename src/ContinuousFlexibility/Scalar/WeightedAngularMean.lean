@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.WeightedAngularMeanL2
-import ContinuousFlexibility.Scalar.WeightedAngularPrimitiveBounds
-import ContinuousFlexibility.Scalar.WeightedDecodeLift
+module
+
+public import ContinuousFlexibility.Scalar.WeightedAngularMeanL2
+public import ContinuousFlexibility.Scalar.WeightedAngularPrimitiveBounds
+public import ContinuousFlexibility.Scalar.WeightedDecodeLift
 
 /-!
 # The normalized angular mean as an actual weighted projection
@@ -10,6 +12,8 @@ positive angular jet vanishes. Hence every physical norm contracts at
 its original order. The lifted map is an idempotent continuous linear
 projection with base zero and loss zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N05ReferenceAngularIntegration
-import ContinuousFlexibility.Analysis.N05ReferenceAngularJetCells
-import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
-import ContinuousFlexibility.Radial.R11bWeakNormalLimit
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceAngularIntegration
+public import ContinuousFlexibility.Analysis.N05ReferenceAngularJetCells
+public import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
+public import ContinuousFlexibility.Radial.R11bWeakNormalLimit
 
 /-!
 # Reference angular weak jets and their actual L² limits
@@ -11,6 +13,8 @@ derivatives are the ones of the reference physical problem. Finite high
 projections satisfy this identity without radial smoothness. Physical
 L² convergence of a field and its jet preserves the same identity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

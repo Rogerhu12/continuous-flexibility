@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PolynomialJetComposition
-import ContinuousFlexibility.Analysis.ScalarRpowJetGrowth
+module
+
+public import ContinuousFlexibility.Analysis.PolynomialJetComposition
+public import ContinuousFlexibility.Analysis.ScalarRpowJetGrowth
 
 /-!
 # Powers of positive fields with component-power jet bounds
@@ -9,6 +11,8 @@ give fixed-power bounds for all Fréchet jets of a positive scalar field.
 The lower bound is quantitative; no compactness constant depending on
 an individual component is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

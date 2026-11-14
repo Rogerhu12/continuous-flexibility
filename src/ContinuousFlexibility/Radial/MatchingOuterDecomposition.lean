@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MatchingInnerDecomposition
-import ContinuousFlexibility.Radial.MatchingTraceCalculus
-import Mathlib.Tactic.Ring
+module
+
+public import ContinuousFlexibility.Radial.MatchingInnerDecomposition
+public import ContinuousFlexibility.Radial.MatchingTraceCalculus
+public import Mathlib.Tactic.Ring
 
 /-!
 # Outer inverse decomposition by the Poisson columns
@@ -10,6 +12,8 @@ supplied outer Poisson columns. The remainder belongs to the exact
 frozen separated graph, so local uniqueness identifies it with the
 outer inverse. No adjointness of the local inverse is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionRelativeDiscriminant
-import ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap
-import ContinuousFlexibility.Analysis.N01NegativeOpticalLower
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionRelativeDiscriminant
+public import ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap
+public import ContinuousFlexibility.Analysis.N01NegativeOpticalLower
 
 /-!
 # A common reference lower bound for the actual corrected field
@@ -12,6 +14,8 @@ discriminant retains one quarter of the original one; off the active
 patch it is unchanged. The N01 half-ball estimate then gives a uniform
 reference-relative lower bound throughout every negative component.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RootEvenInteriorBounds
-import ContinuousFlexibility.Analysis.RootExtensionPhysicalBounds
+module
+
+public import ContinuousFlexibility.Analysis.RootEvenInteriorBounds
+public import ContinuousFlexibility.Analysis.RootExtensionPhysicalBounds
 
 /-!
 # Genuine even root jets from input jets on the root axis
@@ -11,6 +13,8 @@ extension at the root removes that error. No inverse neighborhood radius
 appears in the constant, and no jet of the totalized raw boundary formula
 is substituted for a jet of the smooth extension.
 -/
+
+@[expose] public section
 
 noncomputable section
 

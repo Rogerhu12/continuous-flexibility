@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData
+module
+
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData
 
 /-!
 # The actual divided coefficients at the reference
@@ -9,6 +11,8 @@ including outside the open piece. Thus all three reference divided atoms
 have genuine zero spatial jets, without any endpoint or final-estimate
 hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

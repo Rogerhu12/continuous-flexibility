@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.TailMassResistanceData
-import ContinuousFlexibility.Radial.TailMassAverages
-import ContinuousFlexibility.Radial.TailTestPairing
+module
+
+public import ContinuousFlexibility.Radial.TailMassResistanceData
+public import ContinuousFlexibility.Radial.TailMassAverages
+public import ContinuousFlexibility.Radial.TailTestPairing
 
 /-!
 # The actual weighted mass cells
@@ -10,6 +12,8 @@ the corresponding open mass cells for `deepTailMeasure`. Thus their
 normalized averages form a bounded map on the actual weighted `L²` space.
 The offset parameter allows the first Dirichlet cell to be omitted.
 -/
+
+@[expose] public section
 
 noncomputable section
 

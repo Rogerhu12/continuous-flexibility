@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.TerminalCapEnergyError
+module
+
+public import ContinuousFlexibility.Radial.TerminalCapEnergyError
 
 /-!
 # The actual lift-source pairing
@@ -7,6 +9,8 @@ The commutator source of the same cutoff lift has pairing equal to the
 positive cutoff-energy integral. The only boundary assumption is that
 the cutoff derivative vanishes at the two integration endpoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

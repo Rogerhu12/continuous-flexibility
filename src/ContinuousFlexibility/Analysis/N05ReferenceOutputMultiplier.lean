@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R11bPhysicalPairing
-import ContinuousFlexibility.Radial.ReferenceCellAlgebra
+module
+
+public import ContinuousFlexibility.Radial.R11bPhysicalPairing
+public import ContinuousFlexibility.Radial.ReferenceCellAlgebra
 
 /-!
 # Coefficient multipliers in the actual reference output norm
@@ -8,6 +10,8 @@ A multiplier with a fixed exponential cell bound shifts the material
 exponent by exactly half that bound's exponent. Every integral and square
 sum here is the original physical localized norm, with no parity premise.
 -/
+
+@[expose] public section
 
 noncomputable section
 

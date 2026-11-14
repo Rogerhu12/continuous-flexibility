@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFourierInverseBasic
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierInverseBasic
 
 /-!
 # Derived low Sobolev geometry of the actual inverse
@@ -7,6 +9,8 @@ The inverse H³ bound uses only the forward H³ derivative defect and the
 positive forward Jacobian lower bound. In particular it is proved before
 the high-order inverse induction and is not assumed as additional geometry.
 -/
+
+@[expose] public section
 
 noncomputable section
 

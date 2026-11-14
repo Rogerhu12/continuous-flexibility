@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04SourceColumnsIdentities
-import ContinuousFlexibility.Analysis.N04NegativeChartData
+module
+
+public import ContinuousFlexibility.Analysis.N04SourceColumnsIdentities
+public import ContinuousFlexibility.Analysis.N04NegativeChartData
 
 /-!
 # The forward determinant in the two actual coordinate atoms
@@ -9,6 +11,8 @@ chart. The physical unit map contributes its physical width, so the
 forward determinant has the canonical/physical width ratio. All identities
 refer to the actual chart at the fixed physical unit point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.SeeleyJetExtension
-import Mathlib.MeasureTheory.Function.LpSeminorm.CompareExp
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
-import Mathlib.Tactic.Linarith
+module
+
+public import ContinuousFlexibility.Analysis.SeeleyJetExtension
+public import Mathlib.MeasureTheory.Function.LpSeminorm.CompareExp
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+public import Mathlib.Tactic.Linarith
 
 /-!
 # Sobolev half-line jets are bounded
@@ -15,6 +17,8 @@ Consequently, a smooth one-sided jet with every derivative in `L²` satisfies th
 boundedness hypotheses of Seeley's extension.  No extension across zero or
 global differentiability is assumed in obtaining these bounds.
 -/
+
+@[expose] public section
 
 noncomputable section
 

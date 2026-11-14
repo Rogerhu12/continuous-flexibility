@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchedModeDensityConversion
-import Mathlib.MeasureTheory.Function.LpSpace.Indicator
+module
+
+public import ContinuousFlexibility.Radial.MatchedModeDensityConversion
+public import Mathlib.MeasureTheory.Function.LpSpace.Indicator
 
 /-!
 # Physical cell operators for the actual modal inverse
@@ -14,6 +16,8 @@ minus theta times the physical source divided by the density, and theta
 times the resulting field. Their operator norms cost square roots of the
 cellwise reciprocal-density bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

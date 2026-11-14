@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.R11bEvenWeightedBessel
-import ContinuousFlexibility.Radial.R11bEvenModeRegularity
-import ContinuousFlexibility.Radial.R11bRadialCorrections
-import ContinuousFlexibility.Radial.ProfileScalarSquareAlgebra
+module
+
+public import ContinuousFlexibility.Radial.R11bEvenWeightedBessel
+public import ContinuousFlexibility.Radial.R11bEvenModeRegularity
+public import ContinuousFlexibility.Radial.R11bRadialCorrections
+public import ContinuousFlexibility.Radial.ProfileScalarSquareAlgebra
 
 /-!
 # Weighted source bounds for the actual even-mode forcing
@@ -10,6 +12,8 @@ The column occurs only in mode one. Its finite coefficient-square sum is
 bounded by the single physical scalar row, independently of the number of
 modes. The coefficient part is controlled by actual weighted cell Bessel.
 -/
+
+@[expose] public section
 
 noncomputable section
 

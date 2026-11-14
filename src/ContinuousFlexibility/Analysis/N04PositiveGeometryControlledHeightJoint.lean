@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledHeight
-import ContinuousFlexibility.Analysis.N04RealizationBoundaryTaylorDirections
-import ContinuousFlexibility.Analysis.SmoothDirectionsNormedComposition
-import ContinuousFlexibility.Analysis.N01cAngularJetTowers
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledHeight
+public import ContinuousFlexibility.Analysis.N04RealizationBoundaryTaylorDirections
+public import ContinuousFlexibility.Analysis.SmoothDirectionsNormedComposition
+public import ContinuousFlexibility.Analysis.N01cAngularJetTowers
 
 /-!
 # Genuine joint towers of the stored positive height and reciprocal
@@ -12,6 +14,8 @@ fixed cutoffs and exponential then construct the stored height on the
 whole state-spatial product. The constant logarithmic coefficient is
 retained, without normalizing the source height to one.
 -/
+
+@[expose] public section
 
 noncomputable section
 

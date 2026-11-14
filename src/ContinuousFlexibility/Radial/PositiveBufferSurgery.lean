@@ -1,6 +1,8 @@
-import Mathlib.Analysis.InnerProductSpace.Basic
-import Mathlib.LinearAlgebra.BilinearForm.Basic
-import Mathlib.Tactic.Abel
+module
+
+public import Mathlib.Analysis.InnerProductSpace.Basic
+public import Mathlib.LinearAlgebra.BilinearForm.Basic
+public import Mathlib.Tactic.Abel
 
 /-!
 # Exact Dirichlet subtraction in a symmetric energy space
@@ -11,6 +13,8 @@ their cut values produces the zero-trace inverse, and its uniqueness uses
 the given full inverse, without a positivity assumption on the interior
 potential or the bordered form.
 -/
+
+@[expose] public section
 
 noncomputable section
 

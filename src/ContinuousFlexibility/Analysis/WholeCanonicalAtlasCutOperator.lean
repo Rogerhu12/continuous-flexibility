@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.WholeCanonicalAtlasCuts
-import ContinuousFlexibility.Analysis.WholeCanonicalAtlasOperator
-import ContinuousFlexibility.Analysis.WholeCanonicalAtlasPrincipalDensity
-import ContinuousFlexibility.Analysis.N04ActualAtlasTransmission
+module
+
+public import ContinuousFlexibility.Analysis.WholeCanonicalAtlasCuts
+public import ContinuousFlexibility.Analysis.WholeCanonicalAtlasOperator
+public import ContinuousFlexibility.Analysis.WholeCanonicalAtlasPrincipalDensity
+public import ContinuousFlexibility.Analysis.N04ActualAtlasTransmission
 
 /-!
 # Complete cut and operator conditions on the actual whole atlas
@@ -11,6 +13,8 @@ coordinate operator identity, negative Airy density and the existing
 positive interior quotient. The conclusion concerns the same single
 record whose geometry is supplied; its fields are never replaced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

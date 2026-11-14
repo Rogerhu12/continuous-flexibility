@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01RootFactorPowerMaterialJets
-import ContinuousFlexibility.Analysis.N01RootDriftAxisMaterialJets
-import ContinuousFlexibility.Analysis.PointwiseProductPolynomialMaterialJets
+module
+
+public import ContinuousFlexibility.Analysis.N01RootFactorPowerMaterialJets
+public import ContinuousFlexibility.Analysis.N01RootDriftAxisMaterialJets
+public import ContinuousFlexibility.Analysis.PointwiseProductPolynomialMaterialJets
 
 /-!
 # Actual root speed powers with uniform material costs
@@ -11,6 +13,8 @@ The radial coefficient is pulled back only by a translation and the
 inward sign, whose linear part has norm one. No model radius or flow
 normalization enters the bound. The raw optical lower is still explicit.
 -/
+
+@[expose] public section
 
 noncomputable section
 

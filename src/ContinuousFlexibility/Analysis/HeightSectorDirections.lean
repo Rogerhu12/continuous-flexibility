@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SectorParameterGeometry
+module
+
+public import ContinuousFlexibility.Analysis.SectorParameterGeometry
 
 /-!
 # Genuine height and scalar directions in the sector space
@@ -7,6 +9,8 @@ The height direction is inserted into the existing physical sector.
 Its sector seminorm is exactly the height-pair seminorm.  The formulas
 below describe the actual lifted state, including the reference height.
 -/
+
+@[expose] public section
 
 noncomputable section
 

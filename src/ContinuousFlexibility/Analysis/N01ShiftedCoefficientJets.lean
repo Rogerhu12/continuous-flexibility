@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01LocalizedCoefficientBounds
-import ContinuousFlexibility.Analysis.RootShiftMixedJets
+module
+
+public import ContinuousFlexibility.Analysis.N01LocalizedCoefficientBounds
+public import ContinuousFlexibility.Analysis.RootShiftMixedJets
 
 /-!
 # Actual N01 coefficient jets in either oriented root coordinate
@@ -9,6 +11,8 @@ absolute values of every mixed jet. The fixed physical localization
 therefore gives one coefficient sequence before the state, retaining
 the original N01 loss without any new composition estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

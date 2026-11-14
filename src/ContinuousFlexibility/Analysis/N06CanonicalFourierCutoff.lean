@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06CylinderFourierCutoff
+module
+
+public import ContinuousFlexibility.Analysis.N06CylinderFourierCutoff
 
 /-!
 # Strong Fourier truncation of the exact canonical weak jet row
@@ -7,6 +9,8 @@ Every stored weak jet is approximated by the corresponding actual derivative
 of one finite Fourier polynomial of the zeroth field. The convergence is in
 the original canonical measure and the complete finite sum of L² jet norms.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CircleCompositionLineEnvelope
-import ContinuousFlexibility.Analysis.CircleJetAssembly
+module
+
+public import ContinuousFlexibility.Analysis.CircleCompositionLineEnvelope
+public import ContinuousFlexibility.Analysis.CircleJetAssembly
 
 /-!
 # Actual second-variation envelopes for joint chart composition
@@ -8,6 +10,8 @@ The moving outer field splits into its base value and its affine
 increment. Together with the finitely many direction fields this gives
 a single summable envelope for every angular and material-weight jet.
 -/
+
+@[expose] public section
 
 noncomputable section
 

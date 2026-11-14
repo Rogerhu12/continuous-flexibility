@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Scalar.WeightedCandidateOperatorAnalysis
-import ContinuousFlexibility.Scalar.WeightedCommonBall
-import ContinuousFlexibility.Scalar.WeightedHomogeneousFamilies
-import ContinuousFlexibility.Scalar.WeightedOperatorBounds
-import ContinuousFlexibility.Scalar.WeightedWitnessProperties
-import ContinuousFlexibility.Scalar.WeightedGeometry
+module
+
+public import ContinuousFlexibility.Scalar.WeightedCandidateOperatorAnalysis
+public import ContinuousFlexibility.Scalar.WeightedCommonBall
+public import ContinuousFlexibility.Scalar.WeightedHomogeneousFamilies
+public import ContinuousFlexibility.Scalar.WeightedOperatorBounds
+public import ContinuousFlexibility.Scalar.WeightedWitnessProperties
+public import ContinuousFlexibility.Scalar.WeightedGeometry
 
 /-!
 # The actual weighted scalar witness
@@ -13,6 +15,8 @@ The base and loss dominate the previously fixed orders, and a single state
 ball lies inside the geometric, scalar-composition, and operator domains.
 Every clause uses those same maps and that same ball.
 -/
+
+@[expose] public section
 
 noncomputable section
 

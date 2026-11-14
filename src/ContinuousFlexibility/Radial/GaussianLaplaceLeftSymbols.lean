@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.GaussianLaplaceLeftBounds
-import ContinuousFlexibility.Radial.RadialSymbolBounds
+module
+
+public import ContinuousFlexibility.Radial.GaussianLaplaceLeftBounds
+public import ContinuousFlexibility.Radial.RadialSymbolBounds
 
 /-!
 # Actual left Laplace--Gamma symbols on one fixed tail
@@ -9,6 +11,8 @@ comparison is identified with its homogeneous expression only on the
 positive half-line. Every derivative estimate comes from an actual
 shifted moment identity and the proved integral error bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

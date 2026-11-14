@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Scalar.Connection
+module
+
+public import ContinuousFlexibility.Scalar.Connection
 
 /-!
 # Actual parameter differentiation of the height residual
@@ -9,6 +11,8 @@ numerator and the inverse-discriminant factor along this family. The final
 result is a true `HasDerivAt` statement for the coordinate residual. It is
 not yet the divergence-form linearization asserted in the manuscript.
 -/
+
+@[expose] public section
 
 noncomputable section
 

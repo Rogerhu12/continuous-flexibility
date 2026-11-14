@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RadialReferencePotentialJetEnvelope
-import ContinuousFlexibility.Analysis.PositiveChartRangeGeometry
+module
+
+public import ContinuousFlexibility.Analysis.RadialReferencePotentialJetEnvelope
+public import ContinuousFlexibility.Analysis.PositiveChartRangeGeometry
 
 /-!
 # Finite jets of the displayed positive reference geometry
@@ -10,6 +12,8 @@ range certificate. Positive jets, reciprocal height, and interval costs
 come from the same finite material envelope. The source factors use the
 actual positive derivative of the inverse coordinate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

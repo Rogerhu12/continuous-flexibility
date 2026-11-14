@@ -1,5 +1,7 @@
-import Mathlib.Analysis.InnerProductSpace.Adjoint
-import Mathlib.Algebra.Order.BigOperators.Ring.Finset
+module
+
+public import Mathlib.Analysis.InnerProductSpace.Adjoint
+public import Mathlib.Algebra.Order.BigOperators.Ring.Finset
 
 /-!
 # Bounded overlap for the inner interface errors
@@ -9,6 +11,8 @@ number of blocks meeting a cut, rather than on the total number of cuts.
 The estimate applies to the nonsymmetric blocks obtained after conjugating
 by either weight. In the inner chain the overlap constant is two.
 -/
+
+@[expose] public section
 
 noncomputable section
 

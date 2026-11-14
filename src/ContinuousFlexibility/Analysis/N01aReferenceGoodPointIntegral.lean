@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01aReferenceGoodPointScales
-import ContinuousFlexibility.Analysis.N01aReferencePartitionSquares
+module
+
+public import ContinuousFlexibility.Analysis.N01aReferenceGoodPointScales
+public import ContinuousFlexibility.Analysis.N01aReferencePartitionSquares
 
 /-!
 # Weighted density on a compact right band
@@ -8,6 +10,8 @@ Only finitely many physical cells meet the band.  The partition square
 bound and finite integral sums therefore suffice to convert a summable
 weighted density into a quantitative band integral.
 -/
+
+@[expose] public section
 
 noncomputable section
 

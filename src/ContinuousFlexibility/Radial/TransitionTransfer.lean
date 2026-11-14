@@ -1,8 +1,10 @@
-import Mathlib.Analysis.Calculus.Deriv.MeanValue
-import Mathlib.Analysis.Calculus.Deriv.Slope
-import Mathlib.Analysis.SpecialFunctions.ExpDeriv
-import Mathlib.Analysis.SpecialFunctions.Log.Deriv
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+module
+
+public import Mathlib.Analysis.Calculus.Deriv.MeanValue
+public import Mathlib.Analysis.Calculus.Deriv.Slope
+public import Mathlib.Analysis.SpecialFunctions.ExpDeriv
+public import Mathlib.Analysis.SpecialFunctions.Log.Deriv
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 
 /-!
 # Transfer estimates for the transition inputs
@@ -17,6 +19,8 @@ Elementary ODE transfer bounds from `paper/flexible-surface-rewrite/06-global-re
   the energy `E = u'² + (1 + j² ρ) u²` of `u'' + j² ρ u = 0`.
 * `negative_integral_log_le`: the one-peak bound `∫ j²|ρ'|/(1+j²ρ) ≤ 2 log (1 + j² ρ(Xm))`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

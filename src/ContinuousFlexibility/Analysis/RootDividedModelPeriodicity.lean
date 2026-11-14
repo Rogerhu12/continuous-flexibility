@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01ScaledDividedFactorJets
-import ContinuousFlexibility.Analysis.RootDividedHeight
-import ContinuousFlexibility.Analysis.RootChartSymmetry
-import ContinuousFlexibility.Analysis.NeighborhoodCharacteristicSpeedExtension
+module
+
+public import ContinuousFlexibility.Analysis.N01ScaledDividedFactorJets
+public import ContinuousFlexibility.Analysis.RootDividedHeight
+public import ContinuousFlexibility.Analysis.RootChartSymmetry
+public import ContinuousFlexibility.Analysis.NeighborhoodCharacteristicSpeedExtension
 
 /-!
 # Periodicity of the actual divided root height
@@ -11,6 +13,8 @@ actual state height. Consequently the smooth divided root height and
 its inverse are periodic on their total domains. No regularity or
 quantitative estimate is assumed for this algebraic identity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.MaterialSampleCofinite
-import ContinuousFlexibility.Analysis.MaterialCoordinate
-import Mathlib.Analysis.SpecialFunctions.Pow.Asymptotics
+module
+
+public import ContinuousFlexibility.Analysis.MaterialSampleCofinite
+public import ContinuousFlexibility.Analysis.MaterialCoordinate
+public import Mathlib.Analysis.SpecialFunctions.Pow.Asymptotics
 
 /-!
 # Escape of the actual physical cells
@@ -11,6 +13,8 @@ labels force that same map to have finite fibres. The actual material
 endpoint formula then makes its envelope diverge and its inverse vanish.
 No new choice of physical cells or alignment with control labels is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

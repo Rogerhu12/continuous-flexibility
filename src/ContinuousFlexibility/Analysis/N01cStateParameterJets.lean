@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N01cStateSeminorms
-import ContinuousFlexibility.Analysis.N01cLinearContinuity
-import ContinuousFlexibility.Analysis.N01cCoefficientJetCalculus
-import ContinuousFlexibility.Analysis.StateProfileRegularity
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
-import Mathlib.Analysis.SpecialFunctions.ExpDeriv
+module
+
+public import ContinuousFlexibility.Analysis.N01cStateSeminorms
+public import ContinuousFlexibility.Analysis.N01cLinearContinuity
+public import ContinuousFlexibility.Analysis.N01cCoefficientJetCalculus
+public import ContinuousFlexibility.Analysis.StateProfileRegularity
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+public import Mathlib.Analysis.SpecialFunctions.ExpDeriv
 
 /-!
 # Parameter derivatives of the actual controlled profile
@@ -19,6 +21,8 @@ Their derivative identities are proved by ordinary real differentiation
 along affine lines; neither parameter smoothness nor a tame bound is an
 input hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

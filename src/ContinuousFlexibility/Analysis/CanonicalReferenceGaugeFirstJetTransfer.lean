@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CanonicalReferenceGaugeReconstruction
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalReferenceGaugeReconstruction
 
 /-!
 # First jets against the same actual negative chart
@@ -9,6 +11,8 @@ identified through its genuine closed inverse germs. The two fixed
 normal alignments are common outer maps, so they introduce no change
 to the selected transport, inverse, height, or evaluation point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

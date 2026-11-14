@@ -1,5 +1,9 @@
-import ContinuousFlexibility.Analysis.CircleWeakPrimitive
-import Mathlib.Topology.Instances.AddCircle.Defs
+module
+
+public import ContinuousFlexibility.Analysis.CircleWeakPrimitive
+public import Mathlib.Topology.Instances.AddCircle.Defs
+
+@[expose] public section
 
 open Set Filter MeasureTheory
 open scoped ContDiff ENNReal Topology BigOperators

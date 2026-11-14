@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Blueprint.CanonicalParts
+module
+
+public import ContinuousFlexibility.Blueprint.CanonicalParts
 
 /-!
 # The opposite root is outside the closed physical half
@@ -9,6 +11,8 @@ closed inverse identities, without a graph assumption on the cut.
 Consequently an actual characteristic approaching an outer endpoint
 eventually lies on the correct physical side.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N01FlowAngularVariation
-import ContinuousFlexibility.Analysis.PolarHeightCharacteristicVariation
-import ContinuousFlexibility.Scalar.S04CalculusProof
-import ContinuousFlexibility.Scalar.GreenIdentity
-import ContinuousFlexibility.Analysis.N01RadialFlow
-import Mathlib.Analysis.Normed.Group.Bounded
+module
+
+public import ContinuousFlexibility.Analysis.N01FlowAngularVariation
+public import ContinuousFlexibility.Analysis.PolarHeightCharacteristicVariation
+public import ContinuousFlexibility.Scalar.S04CalculusProof
+public import ContinuousFlexibility.Scalar.GreenIdentity
+public import ContinuousFlexibility.Analysis.N01RadialFlow
+public import Mathlib.Analysis.Normed.Group.Bounded
 
 /-!
 # Parameter and angle regularity of the actual characteristic speed
@@ -15,6 +17,8 @@ the parameter and physical point. Their genuine parameter derivatives
 therefore give continuous, uniformly bounded speed derivatives on every
 compact parameter and radial and angular box.
 -/
+
+@[expose] public section
 
 noncomputable section
 

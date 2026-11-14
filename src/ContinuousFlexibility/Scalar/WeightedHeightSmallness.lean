@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedHeightGerms
-import ContinuousFlexibility.Scalar.WeightedGeometryLowJets
+module
+
+public import ContinuousFlexibility.Scalar.WeightedHeightGerms
+public import ContinuousFlexibility.Scalar.WeightedGeometryLowJets
 
 /-!
 # Uniform pointwise smallness on an actual state neighborhood
@@ -8,6 +10,8 @@ The fixed fourth height seminorm controls the decoded field at every
 physical point. Therefore a continuous weighted state map vanishing at the
 center is uniformly small on one neighborhood, simultaneously at all points.
 -/
+
+@[expose] public section
 
 noncomputable section
 

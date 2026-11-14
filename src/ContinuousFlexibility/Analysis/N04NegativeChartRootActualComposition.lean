@@ -1,12 +1,16 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartRootComposition
-import ContinuousFlexibility.Analysis.N04NegativeChartRootRepresentative
-import ContinuousFlexibility.Analysis.N04NegativeChartRootLowInput
-import ContinuousFlexibility.Analysis.N04NegativeChartRootScale
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootComposition
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootRepresentative
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootLowInput
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootScale
 
 /-! The complete root displacement on the original sector plot.
 The low base and the actual material scale precede every state order.
 The field and label prefixes are aligned without replacing their
 per-state degree by the largest state order. -/
+
+@[expose] public section
 
 noncomputable section
 

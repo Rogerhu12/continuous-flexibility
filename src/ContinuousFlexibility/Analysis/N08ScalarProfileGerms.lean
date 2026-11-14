@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N08ScalarProfileAlgebra
-import ContinuousFlexibility.Scalar.WeightedOddHeightGerms
-import ContinuousFlexibility.Scalar.WeightedHeightGerms
+module
+
+public import ContinuousFlexibility.Analysis.N08ScalarProfileAlgebra
+public import ContinuousFlexibility.Scalar.WeightedOddHeightGerms
+public import ContinuousFlexibility.Scalar.WeightedHeightGerms
 
 /-!
 # Actual uniform towers for the controlled scalar formula
@@ -9,6 +11,8 @@ The proof is finite algebra in the actual spaces. Its common base and loss
 do not depend on the derivative order. The profile perturbation is allowed
 to have a weaker positive weight than the height and source spaces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

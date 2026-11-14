@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import Mathlib.Topology.Algebra.Module.ContinuousLinearMap.PiProd
-import Mathlib.Topology.Algebra.Module.ContinuousLinearMap.Restrict
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import Mathlib.Topology.Algebra.Module.ContinuousLinearMap.PiProd
+public import Mathlib.Topology.Algebra.Module.ContinuousLinearMap.Restrict
 
 /-!
 # Closed graph assembly for the actual canonical reference relation
@@ -10,6 +12,8 @@ inverse turns that literal relation into a closed submodule.  The relation
 is the carrier of the submodule; no physical equation is replaced by an
 inverse-image definition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

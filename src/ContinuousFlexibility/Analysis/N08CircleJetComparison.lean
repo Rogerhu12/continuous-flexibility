@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N08JetDifference
-import ContinuousFlexibility.Analysis.N08CircleDiagonalContinuity
+module
+
+public import ContinuousFlexibility.Analysis.N08JetDifference
+public import ContinuousFlexibility.Analysis.N08CircleDiagonalContinuity
 
 /-!
 # A quantitative comparison of the actual control diagonal
@@ -9,6 +11,8 @@ column. A scalar mean observation of that jet gives a Lipschitz estimate
 for each diagonal entry, with only a fixed material-envelope power. The
 order, radius and constant are chosen before the control label.
 -/
+
+@[expose] public section
 
 noncomputable section
 

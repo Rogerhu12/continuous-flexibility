@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aActualCanonicalSolutionData
-import ContinuousFlexibility.Analysis.N07aActualInverseVolume
-import ContinuousFlexibility.Analysis.N07aRelativeVolumeFirstJets
-import ContinuousFlexibility.Analysis.N07aReferenceOperatorIdentity
+module
+
+public import ContinuousFlexibility.Analysis.N07aActualCanonicalSolutionData
+public import ContinuousFlexibility.Analysis.N07aActualInverseVolume
+public import ContinuousFlexibility.Analysis.N07aRelativeVolumeFirstJets
+public import ContinuousFlexibility.Analysis.N07aReferenceOperatorIdentity
 
 /-!
 # One actual Banach family for the normal bootstrap
@@ -10,6 +12,8 @@ The base source is fixed once, extended by zero outside its legitimate
 neighborhood. Every higher source class and every weak jet concerns that
 same input to the prescribed relative and reference inverses.
 -/
+
+@[expose] public section
 
 noncomputable section
 

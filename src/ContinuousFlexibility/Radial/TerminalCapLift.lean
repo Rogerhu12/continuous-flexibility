@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.Radial
-import ContinuousFlexibility.Radial.Gauge
-import Mathlib.Analysis.Calculus.Deriv.Support
+module
+
+public import ContinuousFlexibility.Statements.Radial
+public import ContinuousFlexibility.Radial.Gauge
+public import Mathlib.Analysis.Calculus.Deriv.Support
 
 /-!
 # A normalized terminal cap lift and its actual residual
@@ -15,6 +17,8 @@ This file does not construct the cap, prove its attenuation, or assemble
 a global inverse. Those geometric and ODE inputs must concern the same
 functions and scale used here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

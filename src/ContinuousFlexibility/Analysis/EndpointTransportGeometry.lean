@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.PositiveFiberClosedGeometry
+module
+
+public import ContinuousFlexibility.Analysis.PositiveFiberClosedGeometry
 
 /-!
 # Actual whole-component transport geometry
@@ -8,6 +10,8 @@ displayed triangular chart and its displayed inverse therefore supply
 all open and closed geometry, symmetries, and genuine middle germs.
 This is a new reconstruction after the workspace reset.
 -/
+
+@[expose] public section
 
 noncomputable section
 

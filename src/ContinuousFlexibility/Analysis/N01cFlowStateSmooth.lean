@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cFlowAffineCompression
+module
+
+public import ContinuousFlexibility.Analysis.N01cFlowAffineCompression
 
 /-!
 # Genuine smooth state dependence of the classical trajectory family
@@ -10,6 +12,8 @@ then proves the true directional recurrence in the original state
 topology. This constructs a genuine SmoothDirections tower; no norm on
 the state space and no parameter derivative of the flow are assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07bCanonicalSourceJets
-import ContinuousFlexibility.Radial.ReferenceColumnSmooth
+module
+
+public import ContinuousFlexibility.Analysis.N07bCanonicalSourceJets
+public import ContinuousFlexibility.Radial.ReferenceColumnSmooth
 
 /-!
 # Smooth representatives of the actual reference forcing on one piece
@@ -15,6 +17,8 @@ All differential equalities are germ equalities of the actual slice
 derivatives. Neither smoothness of the global forcing nor membership in a
 canonical source space is an assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

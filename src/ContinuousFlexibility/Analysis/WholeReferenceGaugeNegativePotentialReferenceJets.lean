@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.ActualNegativeReferencePotentialMaterialJets
-import ContinuousFlexibility.Analysis.ActualNegativeLengthMaterialBounds
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
-import ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient
+module
+
+public import ContinuousFlexibility.Analysis.ActualNegativeReferencePotentialMaterialJets
+public import ContinuousFlexibility.Analysis.ActualNegativeLengthMaterialBounds
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+public import ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient
 
 /-!
 # The same whole atlas's negative reference potential atom
@@ -12,6 +14,8 @@ typed atlas. The unit coordinate has the true optical radius as slope;
 its positive powers are paid by the independently proved length bound.
 Only the material envelope on the right hand side is enlarged here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

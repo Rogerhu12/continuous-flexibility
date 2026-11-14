@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bStateProfileType
-import ContinuousFlexibility.Analysis.StateNeighborhood
+module
+
+public import ContinuousFlexibility.Analysis.N04bStateProfileType
+public import ContinuousFlexibility.Analysis.StateNeighborhood
 
 /-!
 # A common reference lower bound for the negative optical radicand
@@ -10,6 +12,8 @@ the state displacement gives a reference-relative lower bound on the
 half-radius ball. The radius is fixed before the negative component and
 the physical point; no componentwise infimum of state radii is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

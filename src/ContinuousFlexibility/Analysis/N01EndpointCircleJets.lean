@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01EndpointAngularJets
-import ContinuousFlexibility.Analysis.CircleJetAssembly
+module
+
+public import ContinuousFlexibility.Analysis.N01EndpointAngularJets
+public import ContinuousFlexibility.Analysis.CircleJetAssembly
 
 /-!
 # Closed-radius flow selectors as scalar multilinear circle jet families
@@ -11,6 +13,8 @@ the same towers; choosing `C.right` recovers the endpoint family.
 All downstream estimates use the original full flow intervals for
 localization, and the selector imposes no new analytic hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

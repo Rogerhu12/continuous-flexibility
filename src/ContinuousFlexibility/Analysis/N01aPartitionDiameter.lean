@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01aPartitionGrouping
+module
+
+public import ContinuousFlexibility.Analysis.N01aPartitionGrouping
 
 /-!
 # Diameter of a group at one endpoint
@@ -8,6 +10,8 @@ cell is at most its diameter farther from the selected endpoint than the
 cell's chosen point. Consequently every group has diameter at most twice
 the original scale bound, including the finitely many central scales.
 -/
+
+@[expose] public section
 
 noncomputable section
 

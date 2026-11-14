@@ -1,9 +1,13 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartInteriorTravelPrefix
-import ContinuousFlexibility.Analysis.N04NegativeChartCurrentPositiveBand
-import ContinuousFlexibility.Analysis.N04NegativeChartPositivePowerBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartInteriorTravelPrefix
+public import ContinuousFlexibility.Analysis.N04NegativeChartCurrentPositiveBand
+public import ContinuousFlexibility.Analysis.N04NegativeChartPositivePowerBounds
 
 /-! A single state neighborhood gives the actual interior travel a material
 value interval, while retaining every finite mixed prefix on that neighborhood. -/
+
+@[expose] public section
 
 noncomputable section
 

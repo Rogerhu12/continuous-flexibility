@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.Scalar
-import ContinuousFlexibility.Radial.FourierModes
-import Mathlib.Data.Finset.Interval
+module
+
+public import ContinuousFlexibility.Statements.Scalar
+public import ContinuousFlexibility.Radial.FourierModes
+public import Mathlib.Data.Finset.Interval
 
 /-!
 # The exact finite-angular obstruction target
@@ -9,6 +11,8 @@ This is the complete statement of Appendix `prop:obs-finite-square`.
 The object with finite Fourier support is `z²`, not necessarily `z`.
 The statement is a proposition definition; it is not an asserted theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

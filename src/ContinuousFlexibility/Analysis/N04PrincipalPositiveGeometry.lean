@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasOperator
-import ContinuousFlexibility.Analysis.N04RealizationPotentialIdentity
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasOperator
+public import ContinuousFlexibility.Analysis.N04RealizationPotentialIdentity
 
 /-!
 # The actual atlas geometry available to the principal subnode
@@ -11,6 +13,8 @@ and operator clauses for this same atlas, before any quantitative principal
 estimate is used.  Auxiliary-column replacement preserves every field that
 occurs here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

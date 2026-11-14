@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N07aInverseChartDifferentialDifference
-import ContinuousFlexibility.Analysis.N07aForwardChartBounds
-import ContinuousFlexibility.Analysis.N07aAngularReferenceSourceEnvelopes
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
-import ContinuousFlexibility.Analysis.NeumannPackage
+module
+
+public import ContinuousFlexibility.Analysis.N07aInverseChartDifferentialDifference
+public import ContinuousFlexibility.Analysis.N07aForwardChartBounds
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceSourceEnvelopes
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+public import ContinuousFlexibility.Analysis.NeumannPackage
 
 /-!
 # First forward differentials with their actual sampled envelope
@@ -13,6 +15,8 @@ smaller neighborhood makes the relative inverse differential small; its
 height gain is used only for that choice of neighborhood. The resulting
 bound for the actual forward differential retains its sampled E0 power.
 -/
+
+@[expose] public section
 
 noncomputable section
 

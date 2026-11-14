@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Scalar.Conservation
-import ContinuousFlexibility.Scalar.Normalization
-import ContinuousFlexibility.Radial.RadialHeight
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
+module
+
+public import ContinuousFlexibility.Scalar.Conservation
+public import ContinuousFlexibility.Scalar.Normalization
+public import ContinuousFlexibility.Radial.RadialHeight
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
 
 /-!
 # Conservation of the actual normalized height source
@@ -12,6 +14,8 @@ derivative of an actual flux one-form. Thus the removable value satisfies
 the same compatibility condition, without interchanging a parameter limit
 and an integral or postulating zero mean.
 -/
+
+@[expose] public section
 
 noncomputable section
 

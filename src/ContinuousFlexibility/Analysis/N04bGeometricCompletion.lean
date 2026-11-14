@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04bFieldRegularity
-import ContinuousFlexibility.Analysis.N04bCanonicalOperator
-import ContinuousFlexibility.Analysis.N04bPositiveDivision
+module
+
+public import ContinuousFlexibility.Analysis.N04bFieldRegularity
+public import ContinuousFlexibility.Analysis.N04bCanonicalOperator
+public import ContinuousFlexibility.Analysis.N04bPositiveDivision
 
 /-!
 # Completing an actual geometric atlas with its operator fields
@@ -15,6 +17,8 @@ This is an assembly lemma for the coordinate construction. Its geometric
 and principal-density inputs must still be established by that construction;
 it does not close the N04b blueprint by itself.
 -/
+
+@[expose] public section
 
 noncomputable section
 

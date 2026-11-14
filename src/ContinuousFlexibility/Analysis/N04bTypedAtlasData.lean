@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04bActualDomainGeometry
-import ContinuousFlexibility.Analysis.N04bReferenceMetadata
-import ContinuousFlexibility.Analysis.N04CanonicalAtlas
-import ContinuousFlexibility.Analysis.N04bCanonicalOperator
+module
+
+public import ContinuousFlexibility.Analysis.N04bActualDomainGeometry
+public import ContinuousFlexibility.Analysis.N04bReferenceMetadata
+public import ContinuousFlexibility.Analysis.N04CanonicalAtlas
+public import ContinuousFlexibility.Analysis.N04bCanonicalOperator
 
 /-!
 # The concrete typed atlas record
@@ -12,6 +14,8 @@ actual corrected travel chart. One equivalence indexes every field.
 Reference metadata use the specified optical cut, and the operator fields
 are the actual coordinate formulas for these very charts and heights.
 -/
+
+@[expose] public section
 
 noncomputable section
 

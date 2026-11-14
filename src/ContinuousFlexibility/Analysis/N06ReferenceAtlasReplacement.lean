@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06CanonicalProperties
-import ContinuousFlexibility.Analysis.N05ReferenceResidual
-import Mathlib.Analysis.Calculus.FDeriv.Congr
+module
+
+public import ContinuousFlexibility.Analysis.N06CanonicalProperties
+public import ContinuousFlexibility.Analysis.N05ReferenceResidual
+public import Mathlib.Analysis.Calculus.FDeriv.Congr
 
 /-!
 # Replacing current charts while retaining the original reference graph
@@ -13,6 +15,8 @@ Equality is needed only on the open reference pieces; arbitrary values of
 inverse charts at endpoints are not used. The construction of the
 replacement's N04 properties remains a separate obligation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

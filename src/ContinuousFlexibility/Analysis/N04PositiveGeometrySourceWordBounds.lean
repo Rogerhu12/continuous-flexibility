@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceJets
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryCompositionPrefixWordData
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceJets
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryCompositionPrefixWordData
 
 /-!
 # Composition bounds for the actual endpoint source
@@ -10,6 +12,8 @@ two factors to every positive source jet of order at most four. Material
 samples and seminorm windows are supplied separately by the sampled
 prefix construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

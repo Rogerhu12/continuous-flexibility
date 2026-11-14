@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesJetLimits
-import ContinuousFlexibility.Analysis.SpacesPhysicalUniqueness
+module
+
+public import ContinuousFlexibility.Analysis.SpacesJetLimits
+public import ContinuousFlexibility.Analysis.SpacesPhysicalUniqueness
 
 /-!
 # Smooth representatives of the physical weak jet limit
@@ -10,6 +12,8 @@ local integral norm; the cylinder estimate promotes the complete mixed
 jet tower to classical smoothness. Lebesgue differentiation identifies
 every resulting classical jet with its original weak `L²` class.
 -/
+
+@[expose] public section
 
 noncomputable section
 

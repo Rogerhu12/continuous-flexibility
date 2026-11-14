@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SeeleyPeriodicJetBounds
-import ContinuousFlexibility.Analysis.BoundaryTaylorExtension
+module
+
+public import ContinuousFlexibility.Analysis.SeeleyPeriodicJetBounds
+public import ContinuousFlexibility.Analysis.BoundaryTaylorExtension
 
 /-!
 # A fixed joint smooth extension of periodic half-plane fields
@@ -11,6 +13,8 @@ half-plane. Near the boundary the cutoff is one, so the two definitions
 have the same smooth neighborhood germ. The operator and coefficients
 are independent of every derivative order and of the angular period.
 -/
+
+@[expose] public section
 
 noncomputable section
 

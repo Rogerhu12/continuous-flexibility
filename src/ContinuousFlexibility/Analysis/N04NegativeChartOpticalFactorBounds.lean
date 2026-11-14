@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadStart
-import ContinuousFlexibility.Analysis.ActualNegativeOpticalRootDivision
-import ContinuousFlexibility.Analysis.PositivePowerPolynomialMaterialJets
-import ContinuousFlexibility.Analysis.CanonicalStateInterpolation
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadStart
+public import ContinuousFlexibility.Analysis.ActualNegativeOpticalRootDivision
+public import ContinuousFlexibility.Analysis.PositivePowerPolynomialMaterialJets
+public import ContinuousFlexibility.Analysis.CanonicalStateInterpolation
 
 /-!
 # Reference optical factors on the actual negative halves
@@ -11,6 +13,8 @@ order. The original full-half division theorem supplies its reciprocal
 bound at the sample stored by the actual atlas. Applying the polynomial
 power calculus at the zero auxiliary state introduces no collar radius.
 -/
+
+@[expose] public section
 
 noncomputable section
 

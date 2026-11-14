@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cPhysicalFlowPointJets
-import ContinuousFlexibility.Analysis.N01cPhysicalGraphNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N01cPhysicalFlowPointJets
+public import ContinuousFlexibility.Analysis.N01cPhysicalGraphNormalization
 
 /-!
 # The complete positive-radial flow jet at one physical point
@@ -8,6 +10,8 @@ The physical ODE supplies the actual tower. The pure-slot identity
 identifies that tower with the full ordered-partition graph derivative,
 whose raw bound is normalized once after all spatial orders are added.
 -/
+
+@[expose] public section
 
 noncomputable section
 

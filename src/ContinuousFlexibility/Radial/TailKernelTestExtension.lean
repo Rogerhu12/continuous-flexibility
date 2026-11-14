@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Statements.DeepTailOperator
-import Mathlib.Analysis.SpecialFunctions.SmoothTransition
-import Mathlib.MeasureTheory.Function.ConvergenceInMeasure
-import Mathlib.MeasureTheory.Integral.DominatedConvergence
+module
+
+public import ContinuousFlexibility.Statements.DeepTailOperator
+public import Mathlib.Analysis.SpecialFunctions.SmoothTransition
+public import Mathlib.MeasureTheory.Function.ConvergenceInMeasure
+public import Mathlib.MeasureTheory.Integral.DominatedConvergence
 
 /-!
 # Extending a kernel identity to the original test class
@@ -11,6 +13,8 @@ to one at every interior point. Multiplying an ordinary-support test by these
 cutoffs gives convergence in the actual weighted `L²` space. Row integrability
 then permits the same limit on the kernel side.
 -/
+
+@[expose] public section
 
 noncomputable section
 

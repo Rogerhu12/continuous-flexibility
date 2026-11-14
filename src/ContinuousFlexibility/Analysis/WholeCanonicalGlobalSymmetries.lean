@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.WholeCanonicalGlobalRegularity
-import ContinuousFlexibility.Analysis.CanonicalWholeNegativeSymmetries
-import ContinuousFlexibility.Analysis.WholeComponentLocalSymmetries
+module
+
+public import ContinuousFlexibility.Analysis.WholeCanonicalGlobalRegularity
+public import ContinuousFlexibility.Analysis.CanonicalWholeNegativeSymmetries
+public import ContinuousFlexibility.Analysis.WholeComponentLocalSymmetries
 
 /-!
 # Physical symmetries of the same globally selected relative fields
@@ -10,6 +12,8 @@ component and a positive field on its open component. Thus their actual
 symmetries on those sets suffice, without any condition on arbitrary
 totalized negative values elsewhere. The fallback is the identity/one.
 -/
+
+@[expose] public section
 
 noncomputable section
 

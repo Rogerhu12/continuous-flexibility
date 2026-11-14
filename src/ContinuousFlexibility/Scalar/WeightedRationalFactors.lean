@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Scalar.WeightedCoefficientFormulas
+module
+
+public import ContinuousFlexibility.Scalar.WeightedCoefficientFormulas
 
 /-!
 # Explicit small factors in the weighted scalar formulas
@@ -8,6 +10,8 @@ smooth on their positive domains. The identities below expose a discriminant,
 angular, profile, or normalized-Q defect in every difference from the reference
 value. They can therefore be estimated with one weighted height factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

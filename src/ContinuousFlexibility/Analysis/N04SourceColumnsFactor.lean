@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04SourceColumnsDeterminant
-import ContinuousFlexibility.Analysis.N04SourceColumnsSign
-import ContinuousFlexibility.Analysis.N04SourceColumnsReferences
-import ContinuousFlexibility.Analysis.N04SourceColumnsSmallness
-import ContinuousFlexibility.Analysis.N04SourceColumnsReciprocal
+module
+
+public import ContinuousFlexibility.Analysis.N04SourceColumnsDeterminant
+public import ContinuousFlexibility.Analysis.N04SourceColumnsSign
+public import ContinuousFlexibility.Analysis.N04SourceColumnsReferences
+public import ContinuousFlexibility.Analysis.N04SourceColumnsSmallness
+public import ContinuousFlexibility.Analysis.N04SourceColumnsReciprocal
 
 /-!
 # The source factor and its reciprocal
@@ -12,6 +14,8 @@ sign converts its absolute value to a fixed scalar multiple. The supplied
 pulled height then gives the source factor, and one zeroth-order relative
 estimate selects a single neighborhood for all reciprocal derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerBufferPoisson
-import ContinuousFlexibility.Radial.PositiveBufferComparison
-import ContinuousFlexibility.Radial.InnerBufferDerivative
+module
+
+public import ContinuousFlexibility.Radial.InnerBufferPoisson
+public import ContinuousFlexibility.Radial.PositiveBufferComparison
+public import ContinuousFlexibility.Radial.InnerBufferDerivative
 
 /-!
 # Exponential decay of the actual buffer column
@@ -10,6 +12,8 @@ the retained interval. The maximum principle applies to the very same
 Dirichlet buffer column used by compression. Its equation, endpoint values
 and positive potential give exponential decay.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.SelectedOuterGraphAssembly
-import ContinuousFlexibility.Radial.ModeTailCauchySystem
+module
+
+public import ContinuousFlexibility.Radial.SelectedOuterGraphAssembly
+public import ContinuousFlexibility.Radial.ModeTailCauchySystem
 
 /-!
 # Uniqueness in the frozen exterior separated graph
@@ -9,6 +11,8 @@ weak homogeneous equation gives the classical first-order system on each
 open tail. The constructed natural-line uniqueness then forces both
 components to vanish; the graph already makes the middle component zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

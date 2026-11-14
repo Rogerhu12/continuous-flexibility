@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cActualCosineSpeedTower
-import ContinuousFlexibility.Analysis.N01cEndpointRadialJointTowers
+module
+
+public import ContinuousFlexibility.Analysis.N01cActualCosineSpeedTower
+public import ContinuousFlexibility.Analysis.N01cEndpointRadialJointTowers
 
 /-!
 # Actual physical radial speed towers
@@ -8,6 +10,8 @@ The already constructed whole-speed regularity and distributed raw
 bounds yield genuine joint state-angle towers for every radial order at
 every interior physical radius, on exactly the same state neighbourhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

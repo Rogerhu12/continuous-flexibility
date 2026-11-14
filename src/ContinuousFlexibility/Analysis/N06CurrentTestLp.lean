@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06CurrentChartChange
-import ContinuousFlexibility.Analysis.N06WeakAngularCalculus
-import ContinuousFlexibility.Analysis.N04bBoundaryInverseRegularity
-import Mathlib.Analysis.Normed.Module.FiniteDimension
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentChartChange
+public import ContinuousFlexibility.Analysis.N06WeakAngularCalculus
+public import ContinuousFlexibility.Analysis.N04bBoundaryInverseRegularity
+public import Mathlib.Analysis.Normed.Module.FiniteDimension
 
 /-!
 # Actual current-coordinate test functions in the original L2 space
@@ -13,6 +15,8 @@ for the actual height and source transformations. The physical domain may
 have a moving cut; its reference radial rectangle is not used as a current
 compact domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

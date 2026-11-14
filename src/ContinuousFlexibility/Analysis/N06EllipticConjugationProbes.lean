@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06EllipticProbeRegularity
-import ContinuousFlexibility.Analysis.N05ReferenceQuadraticTests
+module
+
+public import ContinuousFlexibility.Analysis.N06EllipticProbeRegularity
+public import ContinuousFlexibility.Analysis.N05ReferenceQuadraticTests
 
 /-!
 # Genuine conjugation supplies the elliptic probe responses
@@ -8,6 +10,8 @@ Only the physical coefficients and the forward chart are assumed smooth.
 The canonical coefficients are initially arbitrary functions. Centered
 polynomials in the actual operator identity force their differentiability.
 -/
+
+@[expose] public section
 
 noncomputable section
 

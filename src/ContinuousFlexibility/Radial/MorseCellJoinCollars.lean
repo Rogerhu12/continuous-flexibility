@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MorseLeftCapBounds
-import Mathlib.Analysis.Calculus.InverseFunctionTheorem.Deriv
-import Mathlib.Analysis.Calculus.InverseFunctionTheorem.ContDiff
+module
+
+public import ContinuousFlexibility.Radial.MorseLeftCapBounds
+public import Mathlib.Analysis.Calculus.InverseFunctionTheorem.Deriv
+public import Mathlib.Analysis.Calculus.InverseFunctionTheorem.ContDiff
 
 /-!
 # Positive model collars at the physical joining cuts
@@ -12,6 +14,8 @@ and speed of order A^5. No sign assumptions are made on the solution before
 the Volterra estimate. These bounds control the actual log-height slope of
 the radial profile on the germs used in (rm8).
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

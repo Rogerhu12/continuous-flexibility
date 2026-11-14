@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsForwardBasis
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsOddPowerIdentity
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsForwardBasis
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsOddPowerIdentity
 
 /-!
 # All positive-order coordinate words of the same root model
@@ -9,6 +11,8 @@ power of the odd coefficient. A radial derivative therefore uses one
 fewer odd-power trace. The other coordinate uses the four even traces,
 and its pure angular words use the derivative of the original label.
 -/
+
+@[expose] public section
 
 noncomputable section
 

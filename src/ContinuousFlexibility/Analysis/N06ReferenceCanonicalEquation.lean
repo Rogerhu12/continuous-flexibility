@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06ReferenceWeakTransport
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceWeakTransport
 
 /-!
 # The original N05 graph has the canonical reference equation
@@ -9,6 +11,8 @@ resulting forcing keeps the original source and all three scalar columns,
 with the space model's actual left cutoff. This is a consequence of the
 frozen N05 graph, not an additional equation imposed on its elements.
 -/
+
+@[expose] public section
 
 noncomputable section
 

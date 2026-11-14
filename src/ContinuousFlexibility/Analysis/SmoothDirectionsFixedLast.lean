@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ScalarJetSchwarz
-import Mathlib.LinearAlgebra.Multilinear.Curry
+module
+
+public import ContinuousFlexibility.Analysis.ScalarJetSchwarz
+public import Mathlib.LinearAlgebra.Multilinear.Curry
 
 /-!
 # A fixed last derivative is an actual smooth directional tower
@@ -8,6 +10,8 @@ Fixing the last slot of the next multilinear jet preserves the genuine
 line recurrence. This supplies spatial derivatives of all parameter
 jets while keeping their parameter slots in their original order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryAngularPullback
-import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceForwardSamplePrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceBoundaryTraces
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsCoefficientFormula
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsMixedFormula
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryAngularPullback
+public import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceForwardSamplePrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceBoundaryTraces
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsCoefficientFormula
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsMixedFormula
 
 /-!
 # The stored coefficients from the actual source at its forward label
@@ -11,6 +13,8 @@ The original angular inverse and finite radial representative satisfy
 the required jet identities. Thus the finite pullback estimate applies
 to the literal coefficients of the retained controlled family.
 -/
+
+@[expose] public section
 
 noncomputable section
 

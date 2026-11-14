@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.RadialTargets
-import ContinuousFlexibility.Radial.SeedRadialContinuation
+module
+
+public import ContinuousFlexibility.Statements.RadialTargets
+public import ContinuousFlexibility.Radial.SeedRadialContinuation
 
 /-!
 # A natural tail continued inward to an exact cone
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Radial.SeedRadialContinuation
 The one-sided domain includes the entire inward ray. The original tail and
 its outward flat endpoint are retained exactly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01RadialCoefficientMaterialInverse
-import ContinuousFlexibility.Analysis.N01ActualRootGeometry
-import ContinuousFlexibility.Analysis.RootOpticalEndpointLower
-import ContinuousFlexibility.Analysis.RootCoefficientDivision
+module
+
+public import ContinuousFlexibility.Analysis.N01RadialCoefficientMaterialInverse
+public import ContinuousFlexibility.Analysis.N01ActualRootGeometry
+public import ContinuousFlexibility.Analysis.RootOpticalEndpointLower
+public import ContinuousFlexibility.Analysis.RootCoefficientDivision
 
 /-!
 # The actual root factor reciprocal from the component optical lower
@@ -13,6 +15,8 @@ ratios compare the speed with its reference value. The radial coefficient
 inverse then gives a material reciprocal bound for the actual divided
 factor. The qualitative strip radius has no inverse cost.
 -/
+
+@[expose] public section
 
 noncomputable section
 

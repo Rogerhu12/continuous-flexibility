@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.StateControlDecay
-import ContinuousFlexibility.Analysis.StateKappaBounds
-import ContinuousFlexibility.Blueprint.Statements
-import Mathlib.Analysis.Calculus.MeanValue
+module
+
+public import ContinuousFlexibility.Analysis.StateControlDecay
+public import ContinuousFlexibility.Analysis.StateKappaBounds
+public import ContinuousFlexibility.Blueprint.Statements
+public import Mathlib.Analysis.Calculus.MeanValue
 
 /-!
 # A linear endpoint factor in the actual control derivative
@@ -12,6 +14,8 @@ therefore gains the distance to the nearer endpoint from a second-jet
 bound. This is the endpoint factor needed when comparing the control
 perturbation to the reference optical Morse lower bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

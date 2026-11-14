@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Scalar.Connection
+module
+
+public import ContinuousFlexibility.Scalar.Connection
 
 /-!
 # Genuine flat germs of the height equation
@@ -8,6 +10,8 @@ They allow a globally smoothly extended analytic core to be enlarged to
 honest open flat collars, without identifying flat boundary jets with a
 constant germ at the original endpoint itself.
 -/
+
+@[expose] public section
 
 noncomputable section
 

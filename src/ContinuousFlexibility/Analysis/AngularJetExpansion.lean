@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SmoothDirectionsAngularJets
-import Mathlib.LinearAlgebra.Multilinear.Curry
+module
+
+public import ContinuousFlexibility.Analysis.SmoothDirectionsAngularJets
+public import Mathlib.LinearAlgebra.Multilinear.Curry
 
 /-!
 # Multilinear expansion of mixed parameter and angular jets
@@ -10,6 +12,8 @@ data and multilinear in the joint directions. Currying places each new
 parameter direction before the old directions, exactly as required by
 the directional derivative convention.
 -/
+
+@[expose] public section
 
 noncomputable section
 

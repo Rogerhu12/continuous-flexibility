@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.BoundaryTaylorExtension
-import Mathlib.Analysis.Calculus.Deriv.Add
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Ring
+module
+
+public import ContinuousFlexibility.Analysis.BoundaryTaylorExtension
+public import Mathlib.Analysis.Calculus.Deriv.Add
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
 
 /-!
 # Actual angular derivatives of a finite radial Taylor polynomial
@@ -10,6 +12,8 @@ Only the positive radial orders contribute to the difference from the
 boundary angular derivative. Their uniform first angular-derivative
 bound gives an error proportional to the chosen collar width.
 -/
+
+@[expose] public section
 
 noncomputable section
 

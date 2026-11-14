@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.CanonicalRootTravelDomain
-import ContinuousFlexibility.Analysis.RootAiryCoordinateIdentification
-import ContinuousFlexibility.Analysis.CharacteristicPairMaterialJets
-import ContinuousFlexibility.Analysis.AiryInteriorChartMaterialJets
-import ContinuousFlexibility.Analysis.CanonicalStateInterpolation
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalRootTravelDomain
+public import ContinuousFlexibility.Analysis.RootAiryCoordinateIdentification
+public import ContinuousFlexibility.Analysis.CharacteristicPairMaterialJets
+public import ContinuousFlexibility.Analysis.AiryInteriorChartMaterialJets
+public import ContinuousFlexibility.Analysis.CanonicalStateInterpolation
 
 /-!
 # Actual negative chart jets from the two actual first integrals
@@ -13,6 +15,8 @@ subtracting travel from the terminal constant changes no positive jet
 norm. The low order and derivative loss precede every component and
 every positive travel interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

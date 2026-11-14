@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CircleJetEncoding
-import ContinuousFlexibility.Analysis.SpacesCircleCylinder
-import Mathlib.Analysis.Fourier.AddCircle
+module
+
+public import ContinuousFlexibility.Analysis.CircleJetEncoding
+public import ContinuousFlexibility.Analysis.SpacesCircleCylinder
+public import Mathlib.Analysis.Fourier.AddCircle
 
 /-!
 # Fourier coefficients for the actual angular measure
@@ -8,6 +10,8 @@ import Mathlib.Analysis.Fourier.AddCircle
 The normalization is the one used by the prescribed circle norm: the
 angular interval has length `π`, and the Fourier modes have frequency `2 n`.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -18,7 +22,9 @@ namespace ContinuousFlexibility.Statements
 open Set Filter MeasureTheory
 open scoped ENNReal RealInnerProductSpace ComplexConjugate ContDiff
 
-private instance circleFourier_period_pos : Fact (0 < Real.pi) := ⟨Real.pi_pos⟩
+/-- The angular period `π` is positive. Public: a module does not see another module's
+private instances. -/
+instance circleFourier_period_pos : Fact (0 < Real.pi) := ⟨Real.pi_pos⟩
 
 /-- The complex Fourier mode on the angular circle of period `π`. -/
 def circleFourierWave (n : ℤ) (θ : ℝ) : ℂ :=

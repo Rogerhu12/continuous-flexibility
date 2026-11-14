@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerRadialAffineLift
-import ContinuousFlexibility.Radial.InnerFiniteWeakGluing
-import Mathlib.Analysis.InnerProductSpace.PiL2
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialAffineLift
+public import ContinuousFlexibility.Radial.InnerFiniteWeakGluing
+public import Mathlib.Analysis.InnerProductSpace.PiL2
 
 /-!
 # The actual finite physical weak inner problem
@@ -16,6 +18,8 @@ The gluing theorem proves that this global equation is equivalent to
 the local zero-endpoint equations and cancellation of the total weak
 outgoing flux.
 -/
+
+@[expose] public section
 
 noncomputable section
 

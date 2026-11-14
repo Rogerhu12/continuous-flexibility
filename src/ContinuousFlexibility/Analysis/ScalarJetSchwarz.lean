@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ProjectiveJetSchwarz
-import ContinuousFlexibility.Analysis.SmoothDirectionsScalarLine
+module
+
+public import ContinuousFlexibility.Analysis.ProjectiveJetSchwarz
+public import ContinuousFlexibility.Analysis.SmoothDirectionsScalarLine
 
 /-!
 # Scalar directional jets commute in every order
@@ -10,6 +12,8 @@ on that plane has a genuine Fréchet derivative, so Schwarz applies to
 any fixed tail of a scalar tower. Differentiating the resulting overlap
 identities moves the first direction to the last slot at every order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

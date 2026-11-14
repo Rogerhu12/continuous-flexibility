@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCompositionBudget
-import ContinuousFlexibility.Analysis.N07aSampleEnvelopes
+module
+
+public import ContinuousFlexibility.Analysis.N07aCompositionBudget
+public import ContinuousFlexibility.Analysis.N07aSampleEnvelopes
 
 /-!
 # The complete actual composition estimate
@@ -8,6 +10,8 @@ The actual Faà di Bruno terms are bounded before the finite sum is taken.
 The source block count and chart block charges share one derivative budget;
 the low parameter ball and loss are independent of the output order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

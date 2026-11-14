@@ -1,10 +1,12 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometryAuxiliary
-import ContinuousFlexibility.Analysis.N04NegativeGeometryReductions
-import ContinuousFlexibility.Analysis.N04RealizationLeadNegativeSplit
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeNegativeGeometryJets
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeNegativeReferenceRegularity
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeLengthReferenceJets
-import ContinuousFlexibility.Analysis.N07aInverseChartDisplacement
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryAuxiliary
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryReductions
+public import ContinuousFlexibility.Analysis.N04RealizationLeadNegativeSplit
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeNegativeGeometryJets
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeNegativeReferenceRegularity
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeLengthReferenceJets
+public import ContinuousFlexibility.Analysis.N07aInverseChartDisplacement
 
 /-!
 # Reference costs and uniform smallness for negative inversion
@@ -19,6 +21,8 @@ absorb a coefficient envelope only when choosing a neighborhood.  It
 does not replace an E0 polynomial in a final current-jet estimate by a
 subpower bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

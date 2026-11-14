@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsAxisJets
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsAxisJets
 
 /-!
 # Finite forward chart words without an angular lift value
@@ -7,6 +9,8 @@ Every positive-order chart word uses either a radial trace of the odd
 power and an even trace, or a derivative of the forward label slope.
 The pure angular case therefore needs no bound on the label itself.
 -/
+
+@[expose] public section
 
 noncomputable section
 

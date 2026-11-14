@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.StateNeighborhood
-import Mathlib.Topology.Algebra.Support
+module
+
+public import ContinuousFlexibility.Analysis.StateNeighborhood
+public import Mathlib.Topology.Algebra.Support
 
 /-!
 # The normalization support avoids every interior critical root
@@ -15,6 +17,8 @@ The reference column also vanishes off this same closed support, by
 locality of its actual derivatives. Thus `tsupport chi` is an actual
 compact forbidden set for later endpoint cutoff choices.
 -/
+
+@[expose] public section
 
 noncomputable section
 

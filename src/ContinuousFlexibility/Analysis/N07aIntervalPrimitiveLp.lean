@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.IntervalL1Primitive
-import ContinuousFlexibility.Analysis.SmoothCompactL2MeanDensity
+module
+
+public import ContinuousFlexibility.Analysis.IntervalL1Primitive
+public import ContinuousFlexibility.Analysis.SmoothCompactL2MeanDensity
 
 /-!
 # The actual integral primitive as a bounded map on interval L²
@@ -9,6 +11,8 @@ continuous representative and its distributional derivative are retained,
 and its L² norm is bounded by the norm of the original integrand. This is
 the integration map used to approximate a genuine second weak derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

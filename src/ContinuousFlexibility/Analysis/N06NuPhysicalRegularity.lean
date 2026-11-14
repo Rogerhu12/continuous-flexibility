@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06NuPhysicalSmooth
+module
+
+public import ContinuousFlexibility.Analysis.N06NuPhysicalSmooth
 
 /-!
 # Symmetry of the actual current nu column
@@ -7,6 +9,8 @@ The finite smooth representation and its scalar symmetry calculus are
 proved in N06NuPhysicalSmooth. This module identifies the actual coordinate
 reflection packet and transports it to the genuine nu column.
 -/
+
+@[expose] public section
 
 noncomputable section
 

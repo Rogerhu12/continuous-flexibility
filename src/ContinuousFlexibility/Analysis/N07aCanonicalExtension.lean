@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularClassical
-import ContinuousFlexibility.Analysis.N07aWeakRegularityAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularClassical
+public import ContinuousFlexibility.Analysis.N07aWeakRegularityAlgebra
 
 /-!
 # Extension of actual canonical L² classes to the cylinder
@@ -9,6 +11,8 @@ the original canonical pairing. Compact radial localization will use
 this map to transfer true weak derivatives to the cylinder, where the
 smooth reconstruction theorem applies.
 -/
+
+@[expose] public section
 
 noncomputable section
 

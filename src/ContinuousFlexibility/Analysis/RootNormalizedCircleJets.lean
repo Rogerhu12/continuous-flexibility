@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CircleLiftCompositionJets
-import ContinuousFlexibility.Analysis.RootInverseNormalizedBounds
+module
+
+public import ContinuousFlexibility.Analysis.CircleLiftCompositionJets
+public import ContinuousFlexibility.Analysis.RootInverseNormalizedBounds
 
 /-!
 # Actual angular normalization of the controlled root inverse
@@ -9,6 +11,8 @@ are composed before the root substitution. Their actual derivatives obey
 one common fixed loss. Restricting the angular representative to one
 period then supplies full ordinary root-input jets, including order zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.PositiveBufferEnergyGreenData
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferEnergyGreenData
 
 /-!
 # The constructed endpoint and Green data at both cuts
@@ -7,6 +9,8 @@ This record packages the actual variational profiles, their physical
 energies, the weighted energy columns and the smooth L² commutator
 sources. Every field is obtained from the constructions above.
 -/
+
+@[expose] public section
 
 noncomputable section
 

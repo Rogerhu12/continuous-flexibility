@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06RadialPrimitiveConstruction
+module
+
+public import ContinuousFlexibility.Analysis.N06RadialPrimitiveConstruction
 
 /-!
 # The constructed positive reference map, inverse and physical primitive bounds
@@ -13,6 +15,8 @@ The physical profile bounds and the two-root lower bound are explicit
 inputs. This theorem does not assert their uniform material dependence
 for the accumulating family of actual roots.
 -/
+
+@[expose] public section
 
 noncomputable section
 

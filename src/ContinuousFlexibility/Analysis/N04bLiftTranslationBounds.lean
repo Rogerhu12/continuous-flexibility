@@ -1,8 +1,10 @@
-import Mathlib.Dynamics.Circle.RotationNumber.TranslationNumber
-import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.FieldSimp
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Dynamics.Circle.RotationNumber.TranslationNumber
+public import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.Ring
 
 /-!
 # Translation-number bounds from an actual conjugacy defect
@@ -12,6 +14,8 @@ project has period π, so its translation number is π times that of the
 normalized lift. Conjugacy invariance and comparison with translations
 give a quantitative bound from a uniformly bounded conjugacy defect.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryActualFactorDirections
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledAngleWords
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRadialWords
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledAngularLower
-import ContinuousFlexibility.Analysis.N04PositiveGeometryPlaneSavedComposition
-import ContinuousFlexibility.Analysis.N04PositiveGeometryActualFactorPrefixData
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryActualFactorDirections
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledAngleWords
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRadialWords
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledAngularLower
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryPlaneSavedComposition
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryActualFactorPrefixData
 
 /-!
 # One material power for the four actual scalar factors
@@ -12,6 +14,8 @@ The endpoint packets have the same reserve and the same normalized
 power. Both radial kernels and the angular inverse retain their saved
 positive order. All constants are chosen before the component and state.
 -/
+
+@[expose] public section
 
 noncomputable section
 

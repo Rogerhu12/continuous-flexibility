@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchedInnerActualInverse
-import Mathlib.Data.Finset.Max
+module
+
+public import ContinuousFlexibility.Radial.MatchedInnerActualInverse
+public import Mathlib.Data.Finset.Max
 
 /-!
 # The actual matching source belongs to the finite-chain source space
@@ -11,6 +13,8 @@ one admissible scalar, is an element of the existing finite-chain Hilbert
 space. This gives the same-C inverse formula for the actual sourceInner
 input that occurs in the global matching formula.
 -/
+
+@[expose] public section
 
 noncomputable section
 

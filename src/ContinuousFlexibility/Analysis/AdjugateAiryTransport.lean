@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.AdjugatePrincipalField
-import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
-import Mathlib.Tactic.LinearCombination
+module
+
+public import ContinuousFlexibility.Analysis.AdjugatePrincipalField
+public import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
+public import Mathlib.Tactic.LinearCombination
 
 /-!
 # Actual characteristic first integrals of a forward Airy chart
@@ -11,6 +13,8 @@ adjugate effective field. The square root of the physical discriminant
 is derived from the determinant identity. No transport equation or flow
 endpoint formula is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

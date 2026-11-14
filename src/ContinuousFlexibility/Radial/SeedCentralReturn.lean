@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.SeedGluedNegativeCover
-import ContinuousFlexibility.Radial.CentralPhysicalTravel
-import ContinuousFlexibility.Radial.CentralTurningPoints
+module
+
+public import ContinuousFlexibility.Radial.SeedGluedNegativeCover
+public import ContinuousFlexibility.Radial.CentralPhysicalTravel
+public import ContinuousFlexibility.Radial.CentralTurningPoints
 
 /-!
 # The actual central negative component in the glued seed
@@ -9,6 +11,8 @@ The whole closed turning interval lies inside the retained germ, so both
 zero endpoint derivatives and the physical optical integral survive the
 gluing exactly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

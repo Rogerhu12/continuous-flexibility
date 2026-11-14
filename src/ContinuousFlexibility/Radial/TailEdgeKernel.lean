@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.TailEdgeEnergy
+module
+
+public import ContinuousFlexibility.Radial.TailEdgeEnergy
 
 /-!
 # Dirichlet Green and Poisson kernel comparisons
@@ -7,6 +9,8 @@ The three-point comparison is the pointwise bound used at each insertion
 of the potential in the Green series. The linear endpoint heights satisfy
 the corresponding two comparisons.
 -/
+
+@[expose] public section
 
 noncomputable section
 

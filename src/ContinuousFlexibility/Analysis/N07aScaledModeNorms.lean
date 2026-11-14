@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aModeProductBounds
+module
+
+public import ContinuousFlexibility.Analysis.N07aModeProductBounds
 
 /-!
 # The exact interval-length factors in the principal block estimate
@@ -7,6 +9,8 @@ The second derivative and first derivative in the mode energy are the
 affine normalizations of the original weak derivatives. These seven
 bounds keep that normalization when the cubic coefficient is restored.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06WeakFourierSymbol
-import ContinuousFlexibility.Analysis.N06FourierCutoff
-import Mathlib.MeasureTheory.Integral.DominatedConvergence
+module
+
+public import ContinuousFlexibility.Analysis.N06WeakFourierSymbol
+public import ContinuousFlexibility.Analysis.N06FourierCutoff
+public import Mathlib.MeasureTheory.Integral.DominatedConvergence
 
 /-!
 # Finite Fourier cutoffs on an actual product L² cylinder
@@ -10,6 +12,8 @@ imaginary parts belong to radial L², so every finite angular derivative of
 a cutoff is jointly L². Radial dominated convergence then proves strong
 convergence in the original product measure, with no smooth source assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

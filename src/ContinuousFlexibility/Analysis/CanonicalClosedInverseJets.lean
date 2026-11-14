@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bBoundaryInverseRegularity
-import ContinuousFlexibility.Analysis.CoordinatePrincipalDeterminant
+module
+
+public import ContinuousFlexibility.Analysis.N04bBoundaryInverseRegularity
+public import ContinuousFlexibility.Analysis.CoordinatePrincipalDeterminant
 
 /-!
 # Actual inverse germs and derivatives on the closed canonical strip
@@ -10,6 +12,8 @@ inverse. Together they give both inverse identities on full neighborhoods,
 and hence the ordinary derivative and Jacobian identities at boundary points.
 Only pointwise smoothness is used; no common open smoothness collar is inferred.
 -/
+
+@[expose] public section
 
 noncomputable section
 

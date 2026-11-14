@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ProjectiveNewtonSmoothing
+module
+
+public import ContinuousFlexibility.Analysis.ProjectiveNewtonSmoothing
 
 /-!
 # A closed low and high grade recurrence for Newton's method
@@ -7,6 +9,8 @@ The correction and residual estimates apply to the same smoothed update.
 The residual at an intermediate grade is controlled by decomposing it with
 the target smoothing operator. The high state grade then controls both tails.
 -/
+
+@[expose] public section
 
 noncomputable section
 

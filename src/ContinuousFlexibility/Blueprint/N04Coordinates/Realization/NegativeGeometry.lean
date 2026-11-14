@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadNegativeSplit
-import ContinuousFlexibility.Blueprint.N04Coordinates.Realization.NegativeGeometry.Chart
-import ContinuousFlexibility.Blueprint.N04Coordinates.Realization.NegativeGeometry.Height
-import ContinuousFlexibility.Blueprint.N04Coordinates.Realization.NegativeGeometry.Inverse
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadNegativeSplit
+public import ContinuousFlexibility.Blueprint.N04Coordinates.Realization.NegativeGeometry.Chart
+public import ContinuousFlexibility.Blueprint.N04Coordinates.Realization.NegativeGeometry.Height
+public import ContinuousFlexibility.Blueprint.N04Coordinates.Realization.NegativeGeometry.Inverse
 
 /-!
 # N04Coordinates-Realization: negative geometry
@@ -14,6 +16,8 @@ Source: paper/flexible-surface-readable/07-fixed-geometry.tex, lines 1545-1678 (
 It is assembled from the three subnodes in `NegativeGeometry/` (`n04Realization_negativeGeometry_of_split`).
 Task: docs/tasks/N04Realization-NegativeGeometry.md.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06StripPerturbation
-import ContinuousFlexibility.Analysis.CanonicalSourceMeasure
-import Mathlib.Analysis.Calculus.InverseFunctionTheorem.ContDiff
-import Mathlib.Analysis.Calculus.MeanValue
+module
+
+public import ContinuousFlexibility.Analysis.N06StripPerturbation
+public import ContinuousFlexibility.Analysis.CanonicalSourceMeasure
+public import Mathlib.Analysis.Calculus.InverseFunctionTheorem.ContDiff
+public import Mathlib.Analysis.Calculus.MeanValue
 
 /-!
 # Smooth inverse of the actual clamped strip perturbation
@@ -12,6 +14,8 @@ The inverse constructed in the preceding module therefore is smooth
 throughout the open strip. All domain and inverse identities refer to
 that same function.
 -/
+
+@[expose] public section
 
 noncomputable section
 

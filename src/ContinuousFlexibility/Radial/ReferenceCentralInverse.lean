@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ConnectedReferenceBorder
-import ContinuousFlexibility.Radial.CentralCompactColumnInverse
+module
+
+public import ContinuousFlexibility.Radial.ConnectedReferenceBorder
+public import ContinuousFlexibility.Radial.CentralCompactColumnInverse
 
 /-!
 # The same reference geometry and its true central inverse
@@ -9,6 +11,8 @@ pairing with the reference kernel determines the ordinary pairing with
 the central model kernel, including the amplitude factor. This supplies
 the nonorthogonality needed for the physical central inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

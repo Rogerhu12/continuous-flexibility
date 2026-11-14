@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06PhysicalReconstruction
-import Mathlib.MeasureTheory.Function.Jacobian
+module
+
+public import ContinuousFlexibility.Analysis.N06PhysicalReconstruction
+public import Mathlib.MeasureTheory.Function.Jacobian
 
 /-!
 # Transport of null exceptional sets by the actual canonical charts
@@ -9,6 +11,8 @@ null set is therefore null, which transfers almost-everywhere statements
 without assuming a representative is pointwise equal. This is used before
 passing canonical L² identities into physical distributional pairings.
 -/
+
+@[expose] public section
 
 noncomputable section
 

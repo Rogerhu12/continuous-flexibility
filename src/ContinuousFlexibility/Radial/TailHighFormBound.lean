@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.TailHighEnergyEstimate
-import ContinuousFlexibility.Radial.TailTestPairing
+module
+
+public import ContinuousFlexibility.Radial.TailHighEnergyEstimate
+public import ContinuousFlexibility.Radial.TailTestPairing
 
 /-!
 # The high-mode inequality in the actual weighted space
@@ -8,6 +10,8 @@ Finite mass--resistance estimates pass to compact tests on the complete tail.
 The first mass interval is controlled by the Dirichlet entrance when there is
 no initial gap; every other mass interval is controlled by its weighted mean.
 -/
+
+@[expose] public section
 
 noncomputable section
 

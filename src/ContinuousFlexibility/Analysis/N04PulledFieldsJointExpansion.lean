@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationJointMixedRegularity
-import ContinuousFlexibility.Analysis.N04RealizationDoubleExpansionHeight
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationJointMixedRegularity
+public import ContinuousFlexibility.Analysis.N04RealizationDoubleExpansionHeight
 
 /-!
 # Exact mixed expansion of any genuine joint tower
@@ -9,6 +11,8 @@ and angular parts. The actual mixed derivatives identify these three
 recursions with the double scalar expansion. No uniform bound on the
 raw jets, or special construction of the supplied tower, is required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

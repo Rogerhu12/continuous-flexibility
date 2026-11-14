@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.SmoothSobolevCore
-import Mathlib.Analysis.Normed.Lp.PiLp
-import Mathlib.Analysis.Normed.Operator.Extend
-import Mathlib.MeasureTheory.Function.LpSpace.Complete
-import Mathlib.Topology.Algebra.Module.Basic
+module
+
+public import ContinuousFlexibility.Analysis.SmoothSobolevCore
+public import Mathlib.Analysis.Normed.Lp.PiLp
+public import Mathlib.Analysis.Normed.Operator.Extend
+public import Mathlib.MeasureTheory.Function.LpSpace.Complete
+public import Mathlib.Topology.Algebra.Module.Basic
 
 /-!
 # Sobolev completions of actual smooth jets
@@ -17,6 +19,8 @@ A single linear map on smooth cores with a bound in this norm extends to a
 continuous linear map on each completed space.  The bound and agreement on the
 smooth core are proved for the constructed operator.
 -/
+
+@[expose] public section
 
 noncomputable section
 

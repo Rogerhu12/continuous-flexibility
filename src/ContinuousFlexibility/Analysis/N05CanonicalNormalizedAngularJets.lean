@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalSourceWeakClosure
-import ContinuousFlexibility.Analysis.N05CanonicalInverseDefinition
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalSourceWeakClosure
+public import ContinuousFlexibility.Analysis.N05CanonicalInverseDefinition
 
 /-!
 # Angular jets of the actual normalized canonical source
@@ -9,6 +11,8 @@ jet subtracts that same scalar times the actual angular derivative of ψ.
 Every finite family has a source bound at the same preassigned material
 order; only its norm constant depends on the retained angular order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

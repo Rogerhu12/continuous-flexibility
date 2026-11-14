@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.WeightedCoefficientFormulas
-import ContinuousFlexibility.Scalar.WeightedGeometryBounds
-import Mathlib.Tactic.FinCases
+module
+
+public import ContinuousFlexibility.Scalar.WeightedCoefficientFormulas
+public import ContinuousFlexibility.Scalar.WeightedGeometryBounds
+public import Mathlib.Tactic.FinCases
 
 /-!
 # Finite-jet formulas for the actual weighted scalar state
@@ -9,6 +11,8 @@ The normalized discriminant and `Q/w` defects below are explicit functions of
 the profile mean and the first two spatial height jets. The seven jet,
 coframe, and connection outputs are then written without a radial primitive.
 -/
+
+@[expose] public section
 
 noncomputable section
 

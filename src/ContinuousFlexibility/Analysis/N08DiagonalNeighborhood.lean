@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N08CircleDiagonalContinuity
-import ContinuousFlexibility.Analysis.TameJetLocalBounds
+module
+
+public import ContinuousFlexibility.Analysis.N08CircleDiagonalContinuity
+public import ContinuousFlexibility.Analysis.TameJetLocalBounds
 
 /-!
 # One actual neighborhood for every control diagonal entry
@@ -10,6 +12,8 @@ state neighborhood, with a prescribed minimum order and maximum radius.
 Finite-entry continuity and a uniform tail estimate can then be retained
 on the same neighborhood of the same actual diagonal.
 -/
+
+@[expose] public section
 
 noncomputable section
 

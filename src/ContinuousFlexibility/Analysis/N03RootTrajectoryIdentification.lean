@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.RootRescaledStoredFlow
-import ContinuousFlexibility.Analysis.RootLocalizedCharacteristicSpeed
-import ContinuousFlexibility.Analysis.N01ActualRootGeometry
+module
+
+public import ContinuousFlexibility.Analysis.RootRescaledStoredFlow
+public import ContinuousFlexibility.Analysis.RootLocalizedCharacteristicSpeed
+public import ContinuousFlexibility.Analysis.N01ActualRootGeometry
 
 /-!
 # The same controlled root flow identifies the actual N03 trajectories
@@ -11,6 +13,8 @@ positive comparison radius for each state and initial angle. It is only
 an identification radius: the previously chosen common δ and controlled
 family Θ are unchanged. Both roots use the same positive sqrt(δ) scale.
 -/
+
+@[expose] public section
 
 noncomputable section
 

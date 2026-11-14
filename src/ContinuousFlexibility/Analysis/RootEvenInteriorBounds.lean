@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.RootCoordinateJets
-import ContinuousFlexibility.Analysis.RootTaylorBounds
-import ContinuousFlexibility.Analysis.TaylorRemainderBounds
-import ContinuousFlexibility.Analysis.RootCompositionZeroOrder
-import Mathlib.Analysis.Normed.Module.Convex
+module
+
+public import ContinuousFlexibility.Analysis.RootCoordinateJets
+public import ContinuousFlexibility.Analysis.RootTaylorBounds
+public import ContinuousFlexibility.Analysis.TaylorRemainderBounds
+public import ContinuousFlexibility.Analysis.RootCompositionZeroOrder
+public import Mathlib.Analysis.Normed.Module.Convex
 
 /-!
 # Even root-substitution estimates at positive points
@@ -13,6 +15,8 @@ For the remainder, the source box intersected with a ball about the
 Taylor center supplies all hypotheses of the weighted composition
 estimate.  One scalar coordinate parameter treats both root signs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

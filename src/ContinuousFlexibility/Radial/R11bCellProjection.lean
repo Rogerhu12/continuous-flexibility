@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R11bCellBessel
+module
+
+public import ContinuousFlexibility.Radial.R11bCellBessel
 
 /-!
 # Finite angular projection preserves every weighted cell square bound
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Radial.R11bCellBessel
 Projection commutes pointwise with each radial localizer. The physical
 contraction therefore applies before summing any nonnegative cell weights.
 -/
+
+@[expose] public section
 
 noncomputable section
 

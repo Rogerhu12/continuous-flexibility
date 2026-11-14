@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientCurrent
-import ContinuousFlexibility.Analysis.N04PulledFieldsReferenceCoefficients
-import ContinuousFlexibility.Analysis.N04PulledFieldsPhysicalDifferenceCost
-import ContinuousFlexibility.Analysis.N04PulledFieldsFieldAssembly
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientCurrent
+public import ContinuousFlexibility.Analysis.N04PulledFieldsReferenceCoefficients
+public import ContinuousFlexibility.Analysis.N04PulledFieldsPhysicalDifferenceCost
+public import ContinuousFlexibility.Analysis.N04PulledFieldsFieldAssembly
 
 /-!
 # Assembly from the actual physical coefficient difference estimates
@@ -11,6 +13,8 @@ samples, their actual reference is restored, and moving-point composition
 gives the coefficient current data. The constructed two column families
 then supply the remaining clauses on the common neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

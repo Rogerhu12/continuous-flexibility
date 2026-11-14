@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01cPhysicalLieAngularExpansion
-import ContinuousFlexibility.Analysis.N01cPhysicalFlowGraph
-import ContinuousFlexibility.Analysis.N01cAngularJetTowers
-import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01cPhysicalLieAngularExpansion
+public import ContinuousFlexibility.Analysis.N01cPhysicalFlowGraph
+public import ContinuousFlexibility.Analysis.N01cAngularJetTowers
+public import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
 
 /-!
 # Genuine parameter towers for positive physical radial flow jets
@@ -12,6 +14,8 @@ Composition with the actual state-flow graph and the physical ODE then
 identify every positive radial mixed flow jet. The construction precedes
 every parameter order and uses no bound on the angle value of the lift.
 -/
+
+@[expose] public section
 
 noncomputable section
 

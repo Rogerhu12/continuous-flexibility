@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.TerminalActualCutoffColumns
-import ContinuousFlexibility.Radial.TerminalInnerPoissonColumns
+module
+
+public import ContinuousFlexibility.Radial.TerminalActualCutoffColumns
+public import ContinuousFlexibility.Radial.TerminalInnerPoissonColumns
 
 /-!
 # Actual regional data before the terminal Poisson correction
@@ -9,6 +11,8 @@ stand-in functions and physical cutoffs, and their measured source and
 energy bounds. It does not contain an inner Poisson function or a bound
 on its flux matrix. Those are constructed from these data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

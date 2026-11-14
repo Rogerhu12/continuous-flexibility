@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SmoothDirectionsAngularJets
+module
+
+public import ContinuousFlexibility.Analysis.SmoothDirectionsAngularJets
 
 /-!
 # Parameter jets with a local spatial label
@@ -8,6 +10,8 @@ seminorm bounds and continuity of the actual scalar functions imply
 continuity of their given parameter jets. No continuity of higher jets
 is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

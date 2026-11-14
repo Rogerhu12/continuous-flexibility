@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.CentralStatementBridges
-import ContinuousFlexibility.Statements.RadialTargets
+module
+
+public import ContinuousFlexibility.Radial.CentralStatementBridges
+public import ContinuousFlexibility.Statements.RadialTargets
 
 /-!
 # Uniform buffers for the genuine central quadratic potential
@@ -10,6 +12,8 @@ number 64. The final constructor retains the specified actual full
 inverse; parameter choice and its application to the physical column
 are separate from these geometric estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationFullWeightProductOneHigh
-import ContinuousFlexibility.Analysis.N04RealizationHeightMovingEvaluation
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationFullWeightProductOneHigh
+public import ContinuousFlexibility.Analysis.N04RealizationHeightMovingEvaluation
 
 /-!
 # The literal canonical source as the same two raw factors
@@ -9,6 +11,8 @@ factor. The whole-function identity holds on the actual open domain
 and therefore transports every spatial and parameter derivative.
 No chart, height, field, sample or neighborhood is selected again.
 -/
+
+@[expose] public section
 
 noncomputable section
 

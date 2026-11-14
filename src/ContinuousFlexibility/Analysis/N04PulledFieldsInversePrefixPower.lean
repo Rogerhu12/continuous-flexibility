@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationFixedBasePrefix
-import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationFixedBasePrefix
+public import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
 
 /-!
 # Fixed-base power bounds for scalar inverse prefixes
@@ -15,6 +17,8 @@ An arbitrary family index lets both inverse-coordinate atoms use one
 interpolation scale. In particular, no separate choice of scale for the
 radial and angular coordinates has to be compared afterwards.
 -/
+
+@[expose] public section
 
 noncomputable section
 

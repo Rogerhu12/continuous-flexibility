@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06WeakCubicSource
-import ContinuousFlexibility.Analysis.N06CanonicalTestSeparation
-import ContinuousFlexibility.Analysis.N06PairingLinearLifting
+module
+
+public import ContinuousFlexibility.Analysis.N06WeakCubicSource
+public import ContinuousFlexibility.Analysis.N06CanonicalTestSeparation
+public import ContinuousFlexibility.Analysis.N06PairingLinearLifting
 
 /-!
 # The continuous linear source determined by its actual weak equation
@@ -11,6 +13,8 @@ tests separate the original L2 classes, and the original forget map is
 injective, so the source is linear in the input. The construction retains
 the same physical source supplied by the five-field multiplication.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Blueprint.Statements
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
 
 /-!
 # Assembling the two regions of one matching datum
@@ -12,6 +14,8 @@ The equivalence only rearranges the actual graph, representative, equation
 and boundary clauses. It constructs neither a geometry nor a local inverse.
 The final helper adds the numerical matching clauses to these two outputs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

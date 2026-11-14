@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Scalar.WeightedGreen
+module
+
+public import ContinuousFlexibility.Scalar.WeightedGreen
 
 /-!
 # Physical source compatibility of the corrected linear operator
@@ -9,6 +11,8 @@ left endpoint; it is the decoded normal coefficient row that annihilates
 the boundary term.  Compatibility of a decoded linear output follows from
 the defining physical source functional.
 -/
+
+@[expose] public section
 
 noncomputable section
 

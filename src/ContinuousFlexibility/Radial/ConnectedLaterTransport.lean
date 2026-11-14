@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.SelectedLaterRetained
-import ContinuousFlexibility.Radial.ConnectedSelectedNaturalTransport
-import ContinuousFlexibility.Radial.SelectedBoundaryMargin
+module
+
+public import ContinuousFlexibility.Radial.SelectedLaterRetained
+public import ContinuousFlexibility.Radial.ConnectedSelectedNaturalTransport
+public import ContinuousFlexibility.Radial.SelectedBoundaryMargin
 
 /-!
 # Actual transport of the later incoming interval in one connected reference
@@ -11,6 +13,8 @@ are retained by proved geometry. The actual target profile has the required
 germ throughout that closed interval, so the incoming equation, endpoint
 jets, normalization, selected entry angle and natural tail all transport.
 -/
+
+@[expose] public section
 
 noncomputable section
 

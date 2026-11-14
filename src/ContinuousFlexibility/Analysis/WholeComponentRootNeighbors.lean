@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.WholeComponentCriticalCover
+module
+
+public import ContinuousFlexibility.Analysis.WholeComponentCriticalCover
 
 /-!
 # The positive neighbor of each actual negative root
@@ -8,6 +10,8 @@ negative endpoint. Taking the genuine positive connected component on
 that side forces its endpoint to be exactly the original root. This
 supplies the local two-piece geometry needed for finite jet gluing.
 -/
+
+@[expose] public section
 
 noncomputable section
 

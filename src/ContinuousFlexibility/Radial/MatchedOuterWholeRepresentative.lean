@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.OuterPhysicalRobinSolution
-import ContinuousFlexibility.Analysis.IntervalWeakReflection
-import ContinuousFlexibility.Radial.ModeLocalMeasure
+module
+
+public import ContinuousFlexibility.Radial.OuterPhysicalRobinSolution
+public import ContinuousFlexibility.Analysis.IntervalWeakReflection
+public import ContinuousFlexibility.Radial.ModeLocalMeasure
 
 /-!
 # The actual whole-outer representative in the frozen flux convention
@@ -9,6 +11,8 @@ This is a thin projection of the original all-source Robin graph theorem.
 On the open interval its continuous within flux is the ambient derivative
 flux, and the original one-sided entrance condition is retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

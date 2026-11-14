@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.CentralRadialClosedGraph
+module
+
+public import ContinuousFlexibility.Radial.CentralRadialClosedGraph
 
 /-!
 # Actual radial compact tests and distribution transport
@@ -8,6 +10,8 @@ the positive half-line. The forward test map is genuinely extended by
 zero outside that half-line. Both source pairings use the proved ordinary
 and spectral Jacobians, with the normalization factor twelve retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Contracts.MarkedCapInterior
-import ContinuousFlexibility.Geometry.GraphCapOutward
-import ContinuousFlexibility.Geometry.MarkedCapPhysicalNormals
+module
+
+public import ContinuousFlexibility.Contracts.MarkedCapInterior
+public import ContinuousFlexibility.Geometry.GraphCapOutward
+public import ContinuousFlexibility.Geometry.MarkedCapPhysicalNormals
 
 /-!
 # The actual outward normal of the marked graph-cap body
@@ -13,6 +15,8 @@ agree near the point even when the ambient deformation is not locally the
 identity. This identifies the previously constructed sphere normal with the
 outward orientation of the very same region whose volume was computed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

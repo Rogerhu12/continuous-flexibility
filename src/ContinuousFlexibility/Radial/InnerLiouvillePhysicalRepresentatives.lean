@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerLiouvillePhysicalOperators
+module
+
+public import ContinuousFlexibility.Radial.InnerLiouvillePhysicalOperators
 
 /-!
 # Representatives of the actual Liouville lift and source
@@ -8,6 +10,8 @@ maps on their genuine Lp quotients. The source coefficient is exactly
 12*sqrt(lam)*s*(R'/R)^2; the field coefficient is its energy-dual
 normalization 1/(sqrt(lam)*s).
 -/
+
+@[expose] public section
 
 noncomputable section
 

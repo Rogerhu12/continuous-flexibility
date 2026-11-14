@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06N05ModalTraces
-import ContinuousFlexibility.Analysis.N05N06ClosedChartBridge
+module
+
+public import ContinuousFlexibility.Analysis.N06N05ModalTraces
+public import ContinuousFlexibility.Analysis.N05N06ClosedChartBridge
 
 /-!
 # Original N05 modal transmission using only the actual closed pieces
@@ -10,6 +12,8 @@ piece, which is sufficient to compare one-sided modal representatives
 with the C1 representative forced by the original physical weak graph.
 Thus no global regularity premise on a physical pullback is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchedInnerPhysicalGraph
-import ContinuousFlexibility.Radial.InnerRadialActualInverse
+module
+
+public import ContinuousFlexibility.Radial.MatchedInnerPhysicalGraph
+public import ContinuousFlexibility.Radial.InnerRadialActualInverse
 
 /-!
 # The actual finite-chain inverse is the existing matching inverse
@@ -9,6 +11,8 @@ Its proved physical weak graph, followed by the frozen graph bridge and
 matching uniqueness, identifies its value with the same matching operator.
 No second inverse or source space is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

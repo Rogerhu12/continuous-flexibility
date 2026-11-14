@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CanonicalClosedSymmetry
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalClosedSymmetry
 
 /-!
 # Each true cut meets each fundamental reflection axis once
@@ -9,6 +11,8 @@ curve, even if the curve is not a graph over the physical angle. It
 provides the precise single exceptional radius when extending identities
 on a reflection axis from the two open halves.
 -/
+
+@[expose] public section
 
 noncomputable section
 

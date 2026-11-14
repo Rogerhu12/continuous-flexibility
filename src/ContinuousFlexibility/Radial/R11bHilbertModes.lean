@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.R11bHilbertDensity
-import ContinuousFlexibility.Radial.R11bAngularL2Bridge
-import ContinuousFlexibility.Radial.R11bInverseDensity
-import ContinuousFlexibility.Radial.R11bGlobalL2
+module
+
+public import ContinuousFlexibility.Radial.R11bHilbertDensity
+public import ContinuousFlexibility.Radial.R11bAngularL2Bridge
+public import ContinuousFlexibility.Radial.R11bInverseDensity
+public import ContinuousFlexibility.Radial.R11bGlobalL2
 
 /-!
 # Actual source and output coefficients in the radial Hilbert space
@@ -11,6 +13,8 @@ angular integral. The source argument also accepts an arbitrary L² angular
 factor, including sine modes. Output coefficients retain the full field;
 only the earlier inverse-density estimate uses the subtracted left tail.
 -/
+
+@[expose] public section
 
 noncomputable section
 

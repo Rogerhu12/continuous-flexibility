@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06RelativeChartHeightPatch
-import Mathlib.Analysis.Calculus.TangentCone.Real
+module
+
+public import ContinuousFlexibility.Analysis.N06RelativeChartHeightPatch
+public import Mathlib.Analysis.Calculus.TangentCone.Real
 
 /-!
 # Symmetry inherited by the actual relative boundary correction
@@ -11,6 +13,8 @@ the actual Taylor coefficients. The explicit relative patch preserves a
 common affine angular transformation law, including a periodic angular
 lift and even or odd reflection.
 -/
+
+@[expose] public section
 
 noncomputable section
 

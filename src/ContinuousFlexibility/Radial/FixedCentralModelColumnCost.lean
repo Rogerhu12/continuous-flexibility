@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.FixedCentralModelSmallError
-import ContinuousFlexibility.Radial.InnerModelPoissonNormalization
-import ContinuousFlexibility.Radial.InnerLiouvilleConormal
-import ContinuousFlexibility.Radial.MatchedInnerUnitWeights
+module
+
+public import ContinuousFlexibility.Radial.FixedCentralModelSmallError
+public import ContinuousFlexibility.Radial.InnerModelPoissonNormalization
+public import ContinuousFlexibility.Radial.InnerLiouvilleConormal
+public import ContinuousFlexibility.Radial.MatchedInnerUnitWeights
 
 /-!
 # Actual fixed-central Poisson column costs
@@ -10,6 +12,8 @@ The finite constant below uses only the already constructed model
 columns and the fixed model radius.  It is independent of every later
 radial gluing parameter.
 -/
+
+@[expose] public section
 
 noncomputable section
 

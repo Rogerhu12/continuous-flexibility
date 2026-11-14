@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
-import ContinuousFlexibility.Analysis.PositiveHeightTaylorInterpolation
-import Mathlib.Analysis.Calculus.IteratedDeriv.FaaDiBruno
-import Mathlib.Analysis.SpecialFunctions.Log.Deriv
+module
+
+public import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
+public import ContinuousFlexibility.Analysis.PositiveHeightTaylorInterpolation
+public import Mathlib.Analysis.Calculus.IteratedDeriv.FaaDiBruno
+public import Mathlib.Analysis.SpecialFunctions.Log.Deriv
 
 /-!
 # Genuine parameter towers of the actual logarithmic root traces
@@ -11,6 +13,8 @@ are inputs. Their angular parameter towers construct the logarithmic
 traces by the scalar partition formula at the actual root. Pointwise
 smoothness at the root suffices; no common spatial collar is selected.
 -/
+
+@[expose] public section
 
 noncomputable section
 

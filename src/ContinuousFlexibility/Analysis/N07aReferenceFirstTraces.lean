@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aArbitraryAngularProduct
-import ContinuousFlexibility.Analysis.N07aClosedAngularIntegrals
-import ContinuousFlexibility.Analysis.N07aClosedScalarTraces
+module
+
+public import ContinuousFlexibility.Analysis.N07aArbitraryAngularProduct
+public import ContinuousFlexibility.Analysis.N07aClosedAngularIntegrals
+public import ContinuousFlexibility.Analysis.N07aClosedScalarTraces
 
 /-!
 # First reference traces from the actual graph and closed side jets
@@ -9,6 +11,8 @@ Arbitrary angular product tests identify both value and radial first traces.
 The closed-side data are the genuine extensions of the interior jets; no trace
 or solution regularity is added to the frozen node statement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

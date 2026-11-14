@@ -1,5 +1,7 @@
-import Mathlib.Analysis.ODE.Gronwall
-import Mathlib.Topology.ContinuousMap.Compact
+module
+
+public import Mathlib.Analysis.ODE.Gronwall
+public import Mathlib.Topology.ContinuousMap.Compact
 
 /-!
 # Continuous parameter dependence of finite linear transport
@@ -10,6 +12,8 @@ Gronwall to the difference of two solution curves then proves continuity of
 the transported endpoint state.  No smooth or normed structure on the
 parameter space is required, and the solutions may be chosen arbitrarily.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01cParameterCalculus
-import ContinuousFlexibility.Analysis.N01cCompositionJetBounds
-import ContinuousFlexibility.Analysis.N01cMaterialAbsorption
-import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
+module
+
+public import ContinuousFlexibility.Analysis.N01cParameterCalculus
+public import ContinuousFlexibility.Analysis.N01cCompositionJetBounds
+public import ContinuousFlexibility.Analysis.N01cMaterialAbsorption
+public import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
 
 /-!
 # Finite products of genuine parameter jets
@@ -12,6 +14,8 @@ evaluated on a fixed compact cube. Rescaling the output restores each
 factor bound exactly once, preserving the separate assigned spatial orders
 needed by the subsequent interpolation estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

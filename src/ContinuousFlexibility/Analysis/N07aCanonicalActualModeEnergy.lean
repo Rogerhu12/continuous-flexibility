@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalUnitEnergy
-import ContinuousFlexibility.Analysis.N07aIntervalWeakUnique
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalUnitEnergy
+public import ContinuousFlexibility.Analysis.N07aIntervalWeakUnique
 
 /-!
 # Positive mode energy for the already existing second derivative
@@ -8,6 +10,8 @@ Uniqueness in the interval L² quotient identifies the derivative produced
 by the energy proof with the affine normalization of the original second
 normal derivative. Thus the estimate controls that same canonical field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06PositiveFiniteForcing
-import ContinuousFlexibility.Analysis.N06PositiveFullPeriodGreen
-import ContinuousFlexibility.Analysis.N06ReferenceUnitEquation
-import ContinuousFlexibility.Analysis.N06CurrentRelativeSourceIdentity
+module
+
+public import ContinuousFlexibility.Analysis.N06PositiveFiniteForcing
+public import ContinuousFlexibility.Analysis.N06PositiveFullPeriodGreen
+public import ContinuousFlexibility.Analysis.N06ReferenceUnitEquation
+public import ContinuousFlexibility.Analysis.N06CurrentRelativeSourceIdentity
 
 /-!
 # The actual positive finite core and its current Green source
@@ -17,6 +19,8 @@ minus reference forcing, plus cubic source, minus potential difference.
 All three current-minus-reference scalar columns have already been
 subtracted in the genuine current remainder.
 -/
+
+@[expose] public section
 
 noncomputable section
 

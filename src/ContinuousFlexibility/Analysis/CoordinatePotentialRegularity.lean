@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CoordinateOperatorConstruction
-import ContinuousFlexibility.Analysis.PointwiseCylinderJets
+module
+
+public import ContinuousFlexibility.Analysis.CoordinateOperatorConstruction
+public import ContinuousFlexibility.Analysis.PointwiseCylinderJets
 
 /-!
 # Smoothness of the actual transformed potential
@@ -9,6 +11,8 @@ nonzero absolute Jacobian, and then composed with the actual inverse.
 All smoothness statements are pointwise and do not choose a common
 neighborhood of infinite order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

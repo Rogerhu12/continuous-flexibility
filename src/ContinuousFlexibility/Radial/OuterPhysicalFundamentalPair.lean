@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.OuterWholeMeasure
-import ContinuousFlexibility.Radial.OuterPhysicalInverseGauge
-import ContinuousFlexibility.Radial.OuterGreenAssembly
+module
+
+public import ContinuousFlexibility.Radial.OuterWholeMeasure
+public import ContinuousFlexibility.Radial.OuterPhysicalInverseGauge
+public import ContinuousFlexibility.Radial.OuterGreenAssembly
 
 /-!
 # The actual homogeneous pair on a physical outer interval
@@ -9,6 +11,8 @@ Smoothness and nonvanishing of the core coefficients follow from the
 original profile.  The finite ODE construction therefore applies to the
 same physical natural and Dirichlet states on both ends.
 -/
+
+@[expose] public section
 
 noncomputable section
 

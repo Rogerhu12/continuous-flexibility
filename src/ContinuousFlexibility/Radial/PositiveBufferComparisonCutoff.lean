@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.PositiveBufferComparison
-import Mathlib.Analysis.SpecialFunctions.SmoothTransition
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
-import Mathlib.Analysis.Calculus.Deriv.Support
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferComparison
+public import Mathlib.Analysis.SpecialFunctions.SmoothTransition
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+public import Mathlib.Analysis.Calculus.Deriv.Support
 
 /-!
 # A universal inner cutoff and its commutator
@@ -10,6 +12,8 @@ The same fixed smooth transition is translated to the inner layer of
 every normalized buffer.  It equals one up to `σ + 2` and zero from
 `σ + 4` onwards.  Its derivative bounds are independent of `σ`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aNormalExpansionData
+module
+
+public import ContinuousFlexibility.Analysis.N07aNormalExpansionData
 
 /-!
 # Intrinsic coefficient derivatives in the normal expansion
@@ -9,6 +11,8 @@ interpolating products of the raw geometric jets. The other coefficients
 contain no derivative of a raw coefficient. The complete budget still
 does not exceed the output order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

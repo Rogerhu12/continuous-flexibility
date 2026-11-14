@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N07aAngularReferenceCandidate
-import ContinuousFlexibility.Analysis.N07aAngularReferenceSourceVolume
-import ContinuousFlexibility.Analysis.N07aAngularCandidateCoordinates
-import ContinuousFlexibility.Analysis.N07aAngularVolumeSequence
-import ContinuousFlexibility.Analysis.N07aAngularMaterialLowering
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceCandidate
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceSourceVolume
+public import ContinuousFlexibility.Analysis.N07aAngularCandidateCoordinates
+public import ContinuousFlexibility.Analysis.N07aAngularVolumeSequence
+public import ContinuousFlexibility.Analysis.N07aAngularMaterialLowering
 
 /-!
 # Every normalized physical height pair enters the actual N05 graph
@@ -13,6 +15,8 @@ lies in the original base source level. The natural physical graph and
 the original graph equivalence of N05 therefore give domain membership.
 The candidate need not satisfy a perturbed differential equation here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Scalar.WeightedHeightAlgebra
-import ContinuousFlexibility.Scalar.WeightedOddProductMap
-import ContinuousFlexibility.Scalar.WeightedAngularJetProduct
-import ContinuousFlexibility.Scalar.WeightedStateRegularity
+module
+
+public import ContinuousFlexibility.Scalar.WeightedHeightAlgebra
+public import ContinuousFlexibility.Scalar.WeightedOddProductMap
+public import ContinuousFlexibility.Scalar.WeightedAngularJetProduct
+public import ContinuousFlexibility.Scalar.WeightedStateRegularity
 
 /-!
 # Even primitives for the actual odd scalar algebra
@@ -10,6 +12,8 @@ Odd coefficients are represented by their even angular primitives. These
 operations retain the actual product decoder and never assert that an odd
 coefficient is an even height.
 -/
+
+@[expose] public section
 
 noncomputable section
 

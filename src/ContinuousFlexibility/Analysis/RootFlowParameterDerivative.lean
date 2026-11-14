@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.RootFlowSymmetry
-import ContinuousFlexibility.Analysis.ScalarFlowParameterDerivative
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
-import Mathlib.Analysis.SpecialFunctions.Integrals.Basic
+module
+
+public import ContinuousFlexibility.Analysis.RootFlowSymmetry
+public import ContinuousFlexibility.Analysis.ScalarFlowParameterDerivative
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+public import Mathlib.Analysis.SpecialFunctions.Integrals.Basic
 
 /-!
 # The actual root-parameter derivative at the zero parameters
@@ -14,6 +16,8 @@ therefore equals (2/3) c₀(0, θ).
 
 No parameter differentiability of the flow is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

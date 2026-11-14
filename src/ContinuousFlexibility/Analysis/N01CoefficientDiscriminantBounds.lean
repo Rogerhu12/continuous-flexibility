@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01LocalizedCoefficientBounds
-import ContinuousFlexibility.Analysis.CoefficientDiscriminantMaterialBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01LocalizedCoefficientBounds
+public import ContinuousFlexibility.Analysis.CoefficientDiscriminantMaterialBounds
 
 /-!
 # A common fixed loss for the actual N01 coefficient discriminant
@@ -9,6 +11,8 @@ or derivative order. Reference compactness constants and N01's material
 sample factors enter only the numerical constant chosen before the state.
 The actual discriminant is recovered from the fixed clamp by locality.
 -/
+
+@[expose] public section
 
 noncomputable section
 

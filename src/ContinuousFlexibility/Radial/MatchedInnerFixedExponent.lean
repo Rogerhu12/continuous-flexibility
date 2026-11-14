@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerCoefficientCosts
+module
+
+public import ContinuousFlexibility.Radial.InnerCoefficientCosts
 
 /-!
 # A fixed coarse exponent for every later actual inner inverse
@@ -9,6 +11,8 @@ constants into one additional coefficient power, uniformly over every
 later cell and every frequency at least one. The retained length is not
 used in the choice.
 -/
+
+@[expose] public section
 
 noncomputable section
 

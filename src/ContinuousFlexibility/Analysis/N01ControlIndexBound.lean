@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01ControlWeightConstraint
-import ContinuousFlexibility.Analysis.MaterialSampleDiscreteEnvelope
+module
+
+public import ContinuousFlexibility.Analysis.N01ControlWeightConstraint
+public import ContinuousFlexibility.Analysis.MaterialSampleDiscreteEnvelope
 
 /-!
 # Optical normalization controls the actual containing-cell index
@@ -10,6 +12,8 @@ a cubic exponential inequality in the two actual reference-cell indices.
 It follows that every cell containing the control component has index
 bounded by a fixed multiple of the control sample index plus one.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06FourierCutLinearity
-import ContinuousFlexibility.Analysis.N06ReferenceProjectionRepresentatives
-import ContinuousFlexibility.Analysis.N06MaterialJetRows
+module
+
+public import ContinuousFlexibility.Analysis.N06FourierCutLinearity
+public import ContinuousFlexibility.Analysis.N06ReferenceProjectionRepresentatives
+public import ContinuousFlexibility.Analysis.N06MaterialJetRows
 
 /-!
 # Projecting the true source while keeping its compatibility column
@@ -11,6 +13,8 @@ f - omega psi with the original column added back. Strong convergence
 and the alternate three-column formula are consequences of the actual
 linear cutoff, without any finite-spectrum assumption on psi.
 -/
+
+@[expose] public section
 
 noncomputable section
 

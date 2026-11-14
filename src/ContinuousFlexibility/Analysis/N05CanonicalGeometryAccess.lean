@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import Mathlib.Topology.Constructions.SumProd
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import Mathlib.Topology.Constructions.SumProd
 
 /-!
 # Access to current and reference canonical geometry
@@ -9,6 +11,8 @@ domain. Only at the reference state does `referenceDomain` identify them
 with a radial rectangle. The accessors below make that specialization
 explicit and keep the current-state domain in every general statement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

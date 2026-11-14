@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalSeparated
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalSeparated
 
 /-!
 # The actual sine representative of a differentiated input band
@@ -7,6 +9,8 @@ Weak uniqueness identifies the original angular derivatives with their
 separated cosine/sine representatives. The radial coefficient remains
 the original measurable L² coefficient throughout.
 -/
+
+@[expose] public section
 
 noncomputable section
 

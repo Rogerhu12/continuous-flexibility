@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MorseChainParameters
-import Mathlib.Analysis.SpecificLimits.Normed
-import Mathlib.Topology.Algebra.InfiniteSum.Real
+module
+
+public import ContinuousFlexibility.Radial.MorseChainParameters
+public import Mathlib.Analysis.SpecificLimits.Normed
+public import Mathlib.Topology.Algebra.InfiniteSum.Real
 
 /-!
 # Radius placement for both accumulating Morse ends
@@ -10,6 +12,8 @@ c min(A_n,A_{n+1})^12. The two outward recursions have opposite orientations.
 The logarithmic increments are absolutely summable, so normalizing the
 left radius factor achieves a prescribed positive left endpoint.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

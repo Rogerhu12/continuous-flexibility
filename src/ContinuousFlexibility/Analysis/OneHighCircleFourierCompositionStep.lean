@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFourierCompositionCalculus
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierCompositionCalculus
 
 /-!
 # The high-order step in tame circle composition
@@ -7,6 +9,8 @@ One differentiation leaves an actual binary product. The derivative trade
 between the outer function and the lift defect removes the apparently
 uncontrolled product of two high norms.
 -/
+
+@[expose] public section
 
 noncomputable section
 

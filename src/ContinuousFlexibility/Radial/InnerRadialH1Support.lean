@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerRadialAffineLift
-import ContinuousFlexibility.Radial.InnerPieceProjection
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialAffineLift
+public import ContinuousFlexibility.Radial.InnerPieceProjection
 
 /-!
 # Support of the actual physical first-order domain
@@ -10,6 +12,8 @@ The fixed affine lifts have the same support, so every full-domain field
 is supported in its genuine interval. This supplies the physical
 source/Poisson pairing used in the global adjoint identity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

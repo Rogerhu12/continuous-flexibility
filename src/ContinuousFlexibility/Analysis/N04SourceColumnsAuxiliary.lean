@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
 
 /-!
 # Auxiliary-column independence of the four source outputs
@@ -8,6 +10,8 @@ height and the two physical scalar columns used here.  The complete
 reference-jet hypothesis is not transported, since it also contains the
 auxiliary atom itself.
 -/
+
+@[expose] public section
 
 noncomputable section
 

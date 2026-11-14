@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06CanonicalTestTransport
-import ContinuousFlexibility.Analysis.CanonicalCoefficientIdentities
+module
+
+public import ContinuousFlexibility.Analysis.N06CanonicalTestTransport
+public import ContinuousFlexibility.Analysis.CanonicalCoefficientIdentities
 
 /-!
 # The actual operator on transported compact tests
@@ -10,6 +12,8 @@ germs therefore identify their divergences. Outside the piece the zero
 germ makes the divergence zero. The original canonical source and operator
 definitions then give their exact signed identity on the canonical piece.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ScalarPlaneJetRegularity
-import ContinuousFlexibility.Analysis.SmoothDirectionsAngularJets
+module
+
+public import ContinuousFlexibility.Analysis.ScalarPlaneJetRegularity
+public import ContinuousFlexibility.Analysis.SmoothDirectionsAngularJets
 
 /-!
 # Joint parameter-line and angular regularity of actual scalar towers
@@ -9,6 +11,8 @@ an ordinary smooth function on the plane formed by one parameter line
 and the angular coordinate. The parameter source keeps its original
 locally convex topology throughout.
 -/
+
+@[expose] public section
 
 noncomputable section
 

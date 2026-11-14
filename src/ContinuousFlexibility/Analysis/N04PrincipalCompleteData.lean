@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PrincipalDividedAtlas
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalDividedAtlas
 
 /-!
 # The complete principal-atom interface
@@ -7,6 +9,8 @@ The five undivided fields determine the three stored cubic quotients.
 The quotient construction keeps the same neighborhood, so all eight
 principal atoms have their exact frozen current-data interface together.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PositiveReferenceCoordinate
-import ContinuousFlexibility.Analysis.OneHighCircleFlowIntegral
+module
+
+public import ContinuousFlexibility.Analysis.PositiveReferenceCoordinate
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowIntegral
 
 /-!
 # Smooth positive radial interpolation with an angular parameter
@@ -10,6 +12,8 @@ parameter integration proves genuine joint smoothness. The prescribed
 mass is any fixed positive number, so this may be used inside a reference
 collar whose exit value is fixed before the varying state is chosen.
 -/
+
+@[expose] public section
 
 noncomputable section
 

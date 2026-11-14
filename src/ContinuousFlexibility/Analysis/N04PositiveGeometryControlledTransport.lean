@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.WholePositiveTransportAssembly
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledOneSidedTransport
+module
+
+public import ContinuousFlexibility.Analysis.WholePositiveTransportAssembly
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledOneSidedTransport
 
 /-!
 # The full positive coordinate and height family with a controlled inverse choice
@@ -11,6 +13,8 @@ reciprocal remain bounded by exp(2) times the square of the endpoint
 value envelope. Reference identity and every finite matching jet are
 unchanged; no exponential of a higher-jet bound is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

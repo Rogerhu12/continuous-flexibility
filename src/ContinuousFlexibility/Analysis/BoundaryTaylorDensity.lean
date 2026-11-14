@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.BoundaryTaylorMatching
-import ContinuousFlexibility.Analysis.PrincipalDensityBoundaryJets
+module
+
+public import ContinuousFlexibility.Analysis.BoundaryTaylorMatching
+public import ContinuousFlexibility.Analysis.PrincipalDensityBoundaryJets
 
 /-!
 # Principal-density matching for the actual boundary construction
@@ -13,6 +15,8 @@ gives matching principal-density jets at both ends. This statement is in
 physical coordinates; changing to canonical radial coordinates and the
 global invertibility of the constructed chart are separate steps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

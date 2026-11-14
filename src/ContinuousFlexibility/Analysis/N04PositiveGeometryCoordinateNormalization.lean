@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryAffineSpatialWords
-import ContinuousFlexibility.Analysis.N04PositiveGeometryFixedSpatialWords
-import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
-import ContinuousFlexibility.Analysis.JointMixedTransportCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryAffineSpatialWords
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryFixedSpatialWords
+public import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
+public import ContinuousFlexibility.Analysis.JointMixedTransportCalculus
 
 /-!
 # Fixed unit-coordinate normalizations of positive parameter jets
@@ -11,6 +13,8 @@ angular defects and fixed radial origins vanish in positive parameter
 derivatives. A radial division contributes only the displayed reciprocal
 width.
 -/
+
+@[expose] public section
 
 noncomputable section
 

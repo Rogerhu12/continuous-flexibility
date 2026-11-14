@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cDistributedRadialProducts
-import Mathlib.Analysis.SpecialFunctions.Pow.Real
+module
+
+public import ContinuousFlexibility.Analysis.N01cDistributedRadialProducts
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 
 /-!
 # Absorbing bounded exponent factors in genuine profile products
@@ -10,6 +12,8 @@ all remaining exponent factors use their uniform scalar bound.  This
 applies to every positive parameter order and keeps the exact height
 exponent; the number of factors changes only a numerical coefficient.
 -/
+
+@[expose] public section
 
 noncomputable section
 

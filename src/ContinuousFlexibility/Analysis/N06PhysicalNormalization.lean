@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06PhysicalPeriodicity
+module
+
+public import ContinuousFlexibility.Analysis.N06PhysicalPeriodicity
 
 /-!
 # The fixed physical normalization row under reconstruction
@@ -8,6 +10,8 @@ column. Reconstructing the same canonical unknown at two states therefore
 leaves the physical normalization row unchanged. This argument is pointwise
 on that support and does not assume a differential equation for the unknown.
 -/
+
+@[expose] public section
 
 noncomputable section
 

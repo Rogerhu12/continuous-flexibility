@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05CanonicalWeightedInverseJets
-import ContinuousFlexibility.Analysis.N05CanonicalJetAssembly
-import ContinuousFlexibility.Analysis.N05CanonicalZeroOrderInverse
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalWeightedInverseJets
+public import ContinuousFlexibility.Analysis.N05CanonicalJetAssembly
+public import ContinuousFlexibility.Analysis.N05CanonicalZeroOrderInverse
 
 /-!
 # All angular orders of the same inverse with material loss four
@@ -10,6 +12,8 @@ Its zero column is the original global inverse, its higher columns are
 its genuine weak derivatives, and its original three scalars satisfy the
 same source-level bound. The underlying inverse is never reselected.
 -/
+
+@[expose] public section
 
 noncomputable section
 

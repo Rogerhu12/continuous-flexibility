@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04bActualClosedTravel
-import ContinuousFlexibility.Analysis.N04bRootLiteralGerms
-import ContinuousFlexibility.Analysis.N04bInverseGermCongruence
+module
+
+public import ContinuousFlexibility.Analysis.N04bActualClosedTravel
+public import ContinuousFlexibility.Analysis.N04bRootLiteralGerms
+public import ContinuousFlexibility.Analysis.N04bInverseGermCongruence
 
 /-!
 # Named output properties of one genuinely constructed negative piece
@@ -10,6 +12,8 @@ constructions of the same cumulative N03 witness. This interface records
 the consequences proved for the literal pasted functions; it supplies no
 additional hypothesis to the upstream field construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

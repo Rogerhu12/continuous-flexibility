@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04FlowPolynomialBounds
-import ContinuousFlexibility.Analysis.FlowJetMaterialClosure
+module
+
+public import ContinuousFlexibility.Analysis.N04FlowPolynomialBounds
+public import ContinuousFlexibility.Analysis.FlowJetMaterialClosure
 
 /-!
 # The fixed-loss mixed scalar-flow target
@@ -10,6 +12,8 @@ monomial. The zeroth displacement uses the original speed integral,
 while every positive-order displacement uses the actual flow-jet
 polynomial plus the initial projection.
 -/
+
+@[expose] public section
 
 noncomputable section
 

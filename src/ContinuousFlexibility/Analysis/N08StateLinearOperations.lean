@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # Scalar multiplication through the specified real module
@@ -7,6 +9,8 @@ The state is a nested product of projective physical spaces. These wrappers
 use the already specified module structure directly, so writing an affine
 state line does not start a separate search for a scalar action.
 -/
+
+@[expose] public section
 
 noncomputable section
 

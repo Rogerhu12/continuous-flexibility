@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ActualPositiveReferenceMidpointMaterialData
-import ContinuousFlexibility.Analysis.PositiveReferenceTaylorAllOrderJets
+module
+
+public import ContinuousFlexibility.Analysis.ActualPositiveReferenceMidpointMaterialData
+public import ContinuousFlexibility.Analysis.PositiveReferenceTaylorAllOrderJets
 
 /-!
 # The same actual positive reference family at every spatial order
@@ -9,6 +11,8 @@ finite-data certificate is retained explicitly so that the prescribed
 geometry and value-cost factories use exactly the same width and fields.
 Later orders change only the material exponent and numerical constant.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R11bPhysicalCompleteness
+module
+
+public import ContinuousFlexibility.Radial.R11bPhysicalCompleteness
 
 /-!
 # Positive angular modes ignore an actual radial remainder
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Radial.R11bPhysicalCompleteness
 The claim is made almost everywhere in the radial variable. Its proof uses
 physical L² slices, so it does not assume integrability of exceptional rows.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

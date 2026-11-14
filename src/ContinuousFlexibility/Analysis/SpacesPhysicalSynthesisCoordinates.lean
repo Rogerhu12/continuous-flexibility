@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesPhysicalSynthesisRows
-import ContinuousFlexibility.Analysis.SpacesCylinderEvenJets
+module
+
+public import ContinuousFlexibility.Analysis.SpacesPhysicalSynthesisRows
+public import ContinuousFlexibility.Analysis.SpacesCylinderEvenJets
 
 /-!
 # Weighted coordinates of physical shell synthesis
@@ -9,6 +11,8 @@ bounded on the entire row Hilbert space, and signed angular evenization
 enforces the symmetry of the physical weak graph without increasing the
 coordinate norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

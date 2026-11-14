@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N07aMaterialEmbeddingLinear
-import ContinuousFlexibility.Analysis.N07aSchurLiftIdentity
-import ContinuousFlexibility.Analysis.N07aAngularCommutatorDomain
-import ContinuousFlexibility.Analysis.N07aAngularBandLift
-import ContinuousFlexibility.Analysis.N07aCircleCoefficientDecay
+module
+
+public import ContinuousFlexibility.Analysis.N07aMaterialEmbeddingLinear
+public import ContinuousFlexibility.Analysis.N07aSchurLiftIdentity
+public import ContinuousFlexibility.Analysis.N07aAngularCommutatorDomain
+public import ContinuousFlexibility.Analysis.N07aAngularBandLift
+public import ContinuousFlexibility.Analysis.N07aCircleCoefficientDecay
 
 /-!
 # Schur realization in the actual weighted source graph
@@ -12,6 +14,8 @@ map is injective. Their Riesz sum is identified with the same base
 operator after the genuine material inclusion. No unbounded series of
 vectors is inferred from a scalar weak sum.
 -/
+
+@[expose] public section
 
 noncomputable section
 

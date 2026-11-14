@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.IntervalCaccioppoli
+module
+
+public import ContinuousFlexibility.Analysis.IntervalCaccioppoli
 
 /-!
 # Caccioppoli on a measurable endpoint layer
@@ -8,6 +10,8 @@ The energy identity is supported by the cutoff and can consequently be
 integrated over any measurable subset containing its topological support.
 Coefficient bounds are required only on that subset.
 -/
+
+@[expose] public section
 
 open Set Filter MeasureTheory
 open scoped ContDiff Topology

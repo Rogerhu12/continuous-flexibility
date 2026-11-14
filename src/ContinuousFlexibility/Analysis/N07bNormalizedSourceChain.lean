@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07bNormalizedSourceChainCalculus
-import ContinuousFlexibility.Analysis.N07bAngularChainExpansion
-import ContinuousFlexibility.Analysis.N07bActualCanonicalSourceLift
+module
+
+public import ContinuousFlexibility.Analysis.N07bNormalizedSourceChainCalculus
+public import ContinuousFlexibility.Analysis.N07bAngularChainExpansion
+public import ContinuousFlexibility.Analysis.N07bActualCanonicalSourceLift
 
 /-!
 # The actual normalized source-coefficient recursion
@@ -14,6 +16,8 @@ All fields in this module depend only on the material data and actual
 chart geometry. They have no physical source argument. Positivity and
 local smoothness are consequences of the existing actual geometry.
 -/
+
+@[expose] public section
 
 noncomputable section
 

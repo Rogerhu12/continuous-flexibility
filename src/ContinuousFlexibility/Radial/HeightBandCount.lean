@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MorseTransitionBands
+module
+
+public import ContinuousFlexibility.Radial.MorseTransitionBands
 
 /-!
 # Counting the excluded heights over all frequency bands
@@ -10,6 +12,8 @@ over all pairs `(n, j)` of a band and an even frequency in it, are smaller than
 one once `c₀` is small.  This is the union bound of the flat-end chain section
 (`eq:rad-eq-rm21`, `eq:rad-eq-js13`).
 -/
+
+@[expose] public section
 
 noncomputable section
 

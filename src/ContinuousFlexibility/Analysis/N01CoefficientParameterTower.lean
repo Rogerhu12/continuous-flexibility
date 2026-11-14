@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SectorParameterGeometry
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
+module
+
+public import ContinuousFlexibility.Analysis.SectorParameterGeometry
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
 
 /-!
 # Actual coefficient towers in sector parameters
@@ -9,6 +11,8 @@ inclusion. The same one-high bound survives with its original spatial
 order budget. A canonical choice of genuine tower can therefore be used
 at every parameter order, by uniqueness, without changing the estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

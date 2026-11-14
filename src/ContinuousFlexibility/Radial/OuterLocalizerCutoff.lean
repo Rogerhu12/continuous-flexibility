@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterPhysicalBlockCover
-import ContinuousFlexibility.Radial.OuterEndpointDistances
+module
+
+public import ContinuousFlexibility.Radial.OuterPhysicalBlockCover
+public import ContinuousFlexibility.Radial.OuterEndpointDistances
 
 /-!
 # Uniform reverse localization beyond one actual outer cutoff
@@ -10,6 +12,8 @@ specified localizer therefore has a label to which the seam-region clause
 applies. This yields the same two-label displacement on ordinary deep
 edges, the complete initial interval, and the full compact core.
 -/
+
+@[expose] public section
 
 noncomputable section
 

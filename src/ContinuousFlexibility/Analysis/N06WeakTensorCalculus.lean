@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06UnitTestCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N06UnitTestCalculus
 
 /-!
 # Actual weak differentiation of finite radial/angular tensors
@@ -8,6 +10,8 @@ interval. Angular integration by parts only requires a smooth periodic
 angular factor; its radial coefficient remains an arbitrary L2 function.
 Fubini places both identities in the original cylinder window measure.
 -/
+
+@[expose] public section
 
 noncomputable section
 

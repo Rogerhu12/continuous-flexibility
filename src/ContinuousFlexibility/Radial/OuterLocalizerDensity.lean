@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OuterCellDensity
+module
+
+public import ContinuousFlexibility.Radial.OuterCellDensity
 
 /-!
 # The localized unweighted operator on the actual annulus
@@ -8,6 +10,8 @@ actual smooth localizer. The profile supplies its bound. Conjugating
 the weighted localized operator then preserves the actual integral
 kernel and costs only the two coefficient powers.
 -/
+
+@[expose] public section
 
 noncomputable section
 

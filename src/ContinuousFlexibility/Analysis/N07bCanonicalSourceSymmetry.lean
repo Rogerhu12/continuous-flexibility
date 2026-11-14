@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CanonicalStripGeometry
-import Mathlib.Analysis.Calculus.FDeriv.Add
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalStripGeometry
+public import Mathlib.Analysis.Calculus.FDeriv.Add
 
 /-!
 # Symmetry of the actual canonical source
@@ -10,6 +12,8 @@ for the actual Jacobian. These facts prove periodicity and reflection of
 the source formula on the canonical open piece. No property is asserted
 about the arbitrary totalized inverse outside that piece.
 -/
+
+@[expose] public section
 
 noncomputable section
 

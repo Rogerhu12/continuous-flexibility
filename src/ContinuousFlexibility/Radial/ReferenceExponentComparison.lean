@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ReferenceCellL2
-import ContinuousFlexibility.Radial.WeightKernelBounds
+module
+
+public import ContinuousFlexibility.Radial.ReferenceCellL2
+public import ContinuousFlexibility.Radial.WeightKernelBounds
 
 /-!
 # Inclusion of the reference domains at different exponents
@@ -9,6 +11,8 @@ Coefficient powers have opposite signs in the two norms. In particular,
 raising the output coefficient loss enlarges the output domain; it does
 not by itself transfer uniqueness of the maximal graph.
 -/
+
+@[expose] public section
 
 noncomputable section
 

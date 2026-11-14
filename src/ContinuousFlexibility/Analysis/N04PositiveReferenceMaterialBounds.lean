@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CanonicalPositiveReferenceFamily
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalPositiveReferenceFamily
 
 /-!
 # The quantitative certificate retained with a positive reference family
@@ -9,6 +11,8 @@ the genuine inverse use the same midpoint sample. This certificate is
 produced by the actual degree-three reference construction; it is not a
 current-state or transport assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

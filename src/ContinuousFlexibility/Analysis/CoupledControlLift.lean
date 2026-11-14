@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CoupledCircleMultiplier
-import ContinuousFlexibility.Analysis.CoupledControlAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.CoupledCircleMultiplier
+public import ContinuousFlexibility.Analysis.CoupledControlAlgebra
 
 /-!
 # Recovery of smooth controls from the actual circle space
@@ -10,6 +12,8 @@ diagonal inverse applied to the original weighted mean.  This recovers
 regular controls from the fixed-point identity without asserting that every
 element of the base control space has all weighted orders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

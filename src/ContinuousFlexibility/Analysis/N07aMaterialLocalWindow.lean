@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.MaterialLocalComparison
+module
+
+public import ContinuousFlexibility.Analysis.MaterialLocalComparison
 
 /-!
 # Material ratios on a short physical radial segment
@@ -8,6 +10,8 @@ Lipschitz. On a radial segment short compared with ell at its initial
 point, ell stays above half that value. The same bounds then compare H
 and M in both directions. No relation between discrete cell labels is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

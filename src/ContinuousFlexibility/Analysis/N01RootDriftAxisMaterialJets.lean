@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01CharacteristicDriftMaterialJets
-import ContinuousFlexibility.Analysis.N01ActualRootGeometry
-import ContinuousFlexibility.Analysis.PointwiseAffineMaterialJets
+module
+
+public import ContinuousFlexibility.Analysis.N01CharacteristicDriftMaterialJets
+public import ContinuousFlexibility.Analysis.N01ActualRootGeometry
+public import ContinuousFlexibility.Analysis.PointwiseAffineMaterialJets
 
 /-!
 # Actual drift jets on the two unit root axes
@@ -10,6 +12,8 @@ actual characteristic drift therefore has exactly the same material
 envelope on the root axis, before any arbitrary model collar or flow
 normalization is selected. The full ordinary jets include order zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

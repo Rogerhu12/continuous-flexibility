@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06NuSpatialCoordinateCompact
+module
+
+public import ContinuousFlexibility.Analysis.N06NuSpatialCoordinateCompact
 
 /-!
 # Full physical spatial smallness of the actual nu difference
@@ -10,6 +12,8 @@ The same bound controls every mixed radial/angular jet through order n.
 Outside the fixed chi support the actual difference vanishes on a
 neighborhood, so no extension of its finite formula is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

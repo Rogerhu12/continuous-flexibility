@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CircleReturnSmoothInverse
-import ContinuousFlexibility.Analysis.CircleJetClosedGraph
-import ContinuousFlexibility.Analysis.CircleWeightedEstimate
+module
+
+public import ContinuousFlexibility.Analysis.CircleReturnSmoothInverse
+public import ContinuousFlexibility.Analysis.CircleJetClosedGraph
+public import ContinuousFlexibility.Analysis.CircleWeightedEstimate
 
 /-!
 # The leading return operator on the actual weighted circle space
@@ -10,6 +12,8 @@ period. The even projection therefore contracts that norm. Applying this
 to each angular derivative gives a bound at every existing circle level,
 with no derivative or sample-weight loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

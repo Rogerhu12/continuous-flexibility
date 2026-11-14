@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.RetainedMorseMiddleGap
-import ContinuousFlexibility.Radial.InnerRadialActualPieces
+module
+
+public import ContinuousFlexibility.Radial.RetainedMorseMiddleGap
+public import ContinuousFlexibility.Radial.InnerRadialActualPieces
 
 /-!
 # Genuine positive-gap columns on the retained physical chain
@@ -9,6 +11,8 @@ types. Compactness chooses an auxiliary slope only to construct the
 same physical Dirichlet and Poisson maps. Their final norm estimates
 are supplied by the slope-independent Hardy inequalities.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.GaussianLaplace
-import ContinuousFlexibility.Radial.CentralTravelAngle
-import ContinuousFlexibility.Radial.Liouville
-import Mathlib.Analysis.Calculus.ContDiff.Operations
+module
+
+public import ContinuousFlexibility.Radial.GaussianLaplace
+public import ContinuousFlexibility.Radial.CentralTravelAngle
+public import ContinuousFlexibility.Radial.Liouville
+public import Mathlib.Analysis.Calculus.ContDiff.Operations
 
 /-!
 # The actual positive increasing central radius
@@ -12,6 +14,8 @@ proved integral derivatives and integration-by-parts recurrence.
 The full end expansions and the oscillator's closed spectral realization
 remain separate results; neither is assumed to construct this radius.
 -/
+
+@[expose] public section
 
 noncomputable section
 

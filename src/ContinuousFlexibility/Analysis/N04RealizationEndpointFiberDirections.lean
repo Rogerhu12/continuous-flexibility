@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04RealizationPositiveCollarDirections
-import ContinuousFlexibility.Analysis.N04RealizationPositiveCollarExit
-import ContinuousFlexibility.Analysis.N04RealizationRadialGlueDirections
-import ContinuousFlexibility.Analysis.EndpointFiberInterpolation
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationPositiveCollarDirections
+public import ContinuousFlexibility.Analysis.N04RealizationPositiveCollarExit
+public import ContinuousFlexibility.Analysis.N04RealizationRadialGlueDirections
+public import ContinuousFlexibility.Analysis.EndpointFiberInterpolation
 
 /-!
 # The actual whole radial fiber interpolation with state parameters
@@ -11,6 +13,8 @@ Their reference exits agree on radial intervals fixed before the state.
 The two actual glues therefore have genuine joint towers on the original
 state neighborhood times the whole physical plane.
 -/
+
+@[expose] public section
 
 noncomputable section
 

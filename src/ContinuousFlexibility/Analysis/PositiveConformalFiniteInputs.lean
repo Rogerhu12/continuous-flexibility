@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01PositiveCircleInputs
-import ContinuousFlexibility.Analysis.PositiveConformalDensityAlgebra
-import ContinuousFlexibility.Analysis.OneHighCompositionJets
-import ContinuousFlexibility.Analysis.CylinderMixedJetNorms
+module
+
+public import ContinuousFlexibility.Analysis.N01PositiveCircleInputs
+public import ContinuousFlexibility.Analysis.PositiveConformalDensityAlgebra
+public import ContinuousFlexibility.Analysis.OneHighCompositionJets
+public import ContinuousFlexibility.Analysis.CylinderMixedJetNorms
 
 /-!
 # Actual finite conformal inputs on a common positive neighborhood
@@ -16,6 +18,8 @@ coordinate chart is among the inputs.
 The final adapter retains the common neighborhood already selected from
 N01. Its constants precede the state and angle at each future endpoint.
 -/
+
+@[expose] public section
 
 noncomputable section
 

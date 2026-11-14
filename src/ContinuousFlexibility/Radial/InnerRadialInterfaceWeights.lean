@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerRadialActualInverse
-import ContinuousFlexibility.Radial.InnerRadialPoissonEnergy
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialActualInverse
+public import ContinuousFlexibility.Radial.InnerRadialPoissonEnergy
 
 /-!
 # The actual weighted interface from local model errors
@@ -15,6 +17,8 @@ diagonal. This identifies the local and global energy normalizations.
 The two weighted local errors then give both strict one-half estimates
 for the same assembled interface; global smallness is a conclusion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

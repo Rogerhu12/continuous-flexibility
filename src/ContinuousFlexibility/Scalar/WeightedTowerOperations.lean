@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Scalar.WeightedBilinearTower
+module
+
+public import ContinuousFlexibility.Scalar.WeightedBilinearTower
 
 /-!
 # Elementary uniform-tower operations for scalar state expressions
@@ -7,6 +9,8 @@ Pairing, constants, and scalar multiplication retain actual continuous
 multilinear derivatives.  Their fixed orders are independent of derivative
 order and are valid on the specified original open domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

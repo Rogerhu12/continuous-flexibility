@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ActualPositiveReferencePrincipalMaterialCost
-import ContinuousFlexibility.Analysis.WholeReferenceGaugePrincipalLower
+module
+
+public import ContinuousFlexibility.Analysis.ActualPositiveReferencePrincipalMaterialCost
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugePrincipalLower
 
 /-!
 # Reference principal certificate for the displayed material family
@@ -11,6 +13,8 @@ and those fields supply the physical costs of the whole atlas. The
 geometric certificate is for that very record, on its chosen smaller
 state neighborhood; the original typed atlas is retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

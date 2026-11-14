@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aNormalExpansionBound
-import ContinuousFlexibility.Analysis.N07aFiniteOneHighProduct
-import ContinuousFlexibility.Analysis.N07aSampleJetBounds
+module
+
+public import ContinuousFlexibility.Analysis.N07aNormalExpansionBound
+public import ContinuousFlexibility.Analysis.N07aFiniteOneHighProduct
+public import ContinuousFlexibility.Analysis.N07aSampleJetBounds
 
 /-!
 # One fixed tame loss for the complete normal expansion
@@ -10,6 +12,8 @@ jets with at most one normal derivative. Every coefficient product is
 interpolated as a whole. Its sampled envelope is retained until after
 the entire finite normal expansion is summed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

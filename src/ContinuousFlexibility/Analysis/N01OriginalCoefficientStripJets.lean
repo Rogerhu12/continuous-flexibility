@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01LocalizedCoefficientBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01LocalizedCoefficientBounds
 
 /-!
 # Actual original coefficient jets on a fixed radial strip
@@ -8,6 +10,8 @@ compactness constant before the state. On the inner strip the fixed
 clamp is exactly the identity, so locality transfers all its mixed jets
 to the actual original coefficients without changing the loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

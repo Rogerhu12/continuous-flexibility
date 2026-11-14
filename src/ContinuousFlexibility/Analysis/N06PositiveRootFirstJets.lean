@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06CharacteristicRootJets
-import ContinuousFlexibility.Analysis.ParameterizedPositiveEndpointGerms
-import ContinuousFlexibility.Analysis.BoundaryTaylorExtension
-import Mathlib.Analysis.SpecialFunctions.Log.Deriv
+module
+
+public import ContinuousFlexibility.Analysis.N06CharacteristicRootJets
+public import ContinuousFlexibility.Analysis.ParameterizedPositiveEndpointGerms
+public import ContinuousFlexibility.Analysis.BoundaryTaylorExtension
+public import Mathlib.Analysis.SpecialFunctions.Log.Deriv
 
 /-!
 # Positive interpolation of the actual characteristic-root first jets
@@ -17,6 +19,8 @@ condition is an input. The result supplies the root first jets needed
 for transmission; it does not assert global invertibility of this
 interpolation or identify an arbitrary existing canonical atlas with it.
 -/
+
+@[expose] public section
 
 noncomputable section
 

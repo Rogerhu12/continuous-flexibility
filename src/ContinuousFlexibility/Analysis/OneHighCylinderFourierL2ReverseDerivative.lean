@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderFourierL2Derivative
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderFourierL2Derivative
 
 /-!
 # Frequency regularity gives actual derivative membership
@@ -8,6 +10,8 @@ multiplier, it is square integrable. The inverse L2 transform supplies a
 candidate weak derivative. Compact smooth tests and integration by parts
 identify that candidate with the given actual derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

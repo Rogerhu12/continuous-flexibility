@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aActualMaterialComparison
-import ContinuousFlexibility.Analysis.N07aAngularPieceCover
-import ContinuousFlexibility.Analysis.N07aPhysicalPieceBound
+module
+
+public import ContinuousFlexibility.Analysis.N07aActualMaterialComparison
+public import ContinuousFlexibility.Analysis.N07aAngularPieceCover
+public import ContinuousFlexibility.Analysis.N07aPhysicalPieceBound
 
 /-!
 # Compact support and continuous bounds on the moving pieces
@@ -11,6 +13,8 @@ pieces on the derived material-ratio neighborhood. The counting measure
 uses the disjoint reference intervals; it does not identify them with the
 current domains.
 -/
+
+@[expose] public section
 
 noncomputable section
 

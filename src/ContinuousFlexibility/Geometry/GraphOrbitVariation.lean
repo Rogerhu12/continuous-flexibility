@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Geometry.RadialMetricRigidity
-import ContinuousFlexibility.Contracts.GraphFamilyImage
+module
+
+public import ContinuousFlexibility.Geometry.RadialMetricRigidity
+public import ContinuousFlexibility.Contracts.GraphFamilyImage
 
 /-!
 # The actual graph-disk orbit is nonconstant
@@ -9,6 +11,8 @@ The temporary constant-image hypothesis produces the genuine global map
 Euclidean inner-product preservation prove that it is an intrinsic isometry.
 Radial rigidity then contradicts the retained nonradial Core witness.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N06CurrentOperatorPeriodicity
-import ContinuousFlexibility.Analysis.N06CanonicalHeightGerm
-import ContinuousFlexibility.Analysis.N06FiniteSourceGeometry
-import ContinuousFlexibility.Analysis.N06PhysicalPeriodicity
-import ContinuousFlexibility.Analysis.N06CanonicalProperties
-import ContinuousFlexibility.Analysis.CanonicalCoefficientIdentities
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentOperatorPeriodicity
+public import ContinuousFlexibility.Analysis.N06CanonicalHeightGerm
+public import ContinuousFlexibility.Analysis.N06FiniteSourceGeometry
+public import ContinuousFlexibility.Analysis.N06PhysicalPeriodicity
+public import ContinuousFlexibility.Analysis.N06CanonicalProperties
+public import ContinuousFlexibility.Analysis.CanonicalCoefficientIdentities
 
 /-!
 # The genuine current canonical potential has period pi
@@ -15,6 +17,8 @@ N03 then forces its operator image to be periodic. The actual inverse
 chart and Jacobian lift transport this equality to the canonical cylinder.
 No smoothness or periodicity of the corrected b and c fields is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

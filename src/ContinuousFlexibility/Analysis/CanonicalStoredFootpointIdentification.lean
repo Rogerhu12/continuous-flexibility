@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CanonicalRootGaugeRigidity
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalRootGaugeRigidity
 
 /-!
 # The existing canonical first integrals along the stored N03 flow
@@ -10,6 +12,8 @@ injective. A separately established slice surjectivity gives the exact
 formula in terms of its actual `invFun`; no field realization or flow
 regularity theorem is assumed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

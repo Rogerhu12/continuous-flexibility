@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.SelectedReferenceTransport
-import ContinuousFlexibility.Radial.SelectedStateMargin
-import ContinuousFlexibility.Radial.StandInBoundarySlope
-import ContinuousFlexibility.Radial.R07AngleScale
-import ContinuousFlexibility.Radial.OuterNormalizedState
+module
+
+public import ContinuousFlexibility.Radial.SelectedReferenceTransport
+public import ContinuousFlexibility.Radial.SelectedStateMargin
+public import ContinuousFlexibility.Radial.StandInBoundarySlope
+public import ContinuousFlexibility.Radial.R07AngleScale
+public import ContinuousFlexibility.Radial.OuterNormalizedState
 
 /-!
 # The actual normalized boundary state and the selected margin
@@ -13,6 +15,8 @@ length. Its first coordinate may vanish. The stand-in logarithmic slope
 then gives the actual diagonal matching margin, with the fixed frame
 factor and no division by the natural solution's boundary value.
 -/
+
+@[expose] public section
 
 noncomputable section
 

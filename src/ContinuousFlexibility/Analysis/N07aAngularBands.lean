@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aAngularRealFourier
-import ContinuousFlexibility.Analysis.N07aAngularWeakFourier
-import ContinuousFlexibility.Analysis.N07aAngularEven
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularRealFourier
+public import ContinuousFlexibility.Analysis.N07aAngularWeakFourier
+public import ContinuousFlexibility.Analysis.N07aAngularEven
 
 /-!
 # Actual angular-frequency projections on each canonical source piece
@@ -10,6 +12,8 @@ projections on the original real `L²` class, preserve the frozen weak
 angular derivative and reflection conditions, and reconstruct the
 original class in its actual norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

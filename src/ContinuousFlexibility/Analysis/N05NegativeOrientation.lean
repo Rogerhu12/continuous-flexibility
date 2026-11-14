@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05TricomiNullCoordinates
-import ContinuousFlexibility.Analysis.N05DerivativeOrientation
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05TricomiNullCoordinates
+public import ContinuousFlexibility.Analysis.N05DerivativeOrientation
 
 /-!
 # Orientation of the actual reference null and radial coordinates
@@ -11,6 +13,8 @@ angular derivatives are positive.  The first principal identity makes the
 radial derivative of the canonical radius nonzero; the actual root and cut
 values then fix its sign on either half by one oriented mean-value argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

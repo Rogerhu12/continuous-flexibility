@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.MorseChainFlatExtension
-import Mathlib.Analysis.ODE.ExistUnique
-import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+module
+
+public import ContinuousFlexibility.Radial.MorseChainFlatExtension
+public import Mathlib.Analysis.ODE.ExistUnique
+public import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
 
 /-!
 # Smooth inward extension at a regular tail entrance
@@ -11,6 +13,8 @@ smooth neighborhood. We instead solve the regular linear flux system on
 both sides of the entrance, use uniqueness to identify its outward germ,
 and cut off the new inward part.
 -/
+
+@[expose] public section
 
 noncomputable section
 

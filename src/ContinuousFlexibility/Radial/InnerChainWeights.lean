@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerPiecewiseWeights
-import ContinuousFlexibility.Radial.InnerRadialFiniteWeakGraph
+module
+
+public import ContinuousFlexibility.Radial.InnerPiecewiseWeights
+public import ContinuousFlexibility.Radial.InnerRadialFiniteWeakGraph
 
 /-!
 # One positive weight on the actual finite radial chain
@@ -10,6 +12,8 @@ Interpolation is confined between the two buffer walls of each piece.
 Equal endpoint weights give an exactly constant gap, including both
 endpoints. The finite middle part is the special case with both values one.
 -/
+
+@[expose] public section
 
 noncomputable section
 

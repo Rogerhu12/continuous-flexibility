@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cOpticalMaterialBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01cOpticalMaterialBounds
 
 /-!
 # Affine square-root jets on a closed spatial set
@@ -10,6 +12,8 @@ on the displayed set. The actual directional tower is identified with
 the existing affine optical tower. No extension of a quantitative bound
 to an exterior collar is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

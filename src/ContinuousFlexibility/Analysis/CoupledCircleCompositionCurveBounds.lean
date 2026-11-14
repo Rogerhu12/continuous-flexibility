@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CoupledCircleCompositionParameter
-import ContinuousFlexibility.Analysis.SpacesLpCurveDerivative
+module
+
+public import ContinuousFlexibility.Analysis.CoupledCircleCompositionParameter
+public import ContinuousFlexibility.Analysis.SpacesLpCurveDerivative
 
 /-!
 # Summable majorants for affine chart curves
@@ -8,6 +10,8 @@ On every compact real parameter interval, each weighted jet has a
 common constant times the summable inverse material weight. These bounds
 apply to the actual angular L² classes used in each Hilbert row.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import Mathlib.Topology.Algebra.InfiniteSum.Real
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
-import Mathlib.Tactic.Linarith
+module
+
+public import Mathlib.Topology.Algebra.InfiniteSum.Real
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
+public import Mathlib.Tactic.Linarith
 
 /-!
 # Recovering square-summable node values from mass integrals
@@ -11,6 +13,8 @@ mass by the next cell integral and a strict contraction of the preceding
 node mass. Uniform bounds on finite partial sums then prove summability,
 without assuming it while summing the recurrence.
 -/
+
+@[expose] public section
 
 noncomputable section
 

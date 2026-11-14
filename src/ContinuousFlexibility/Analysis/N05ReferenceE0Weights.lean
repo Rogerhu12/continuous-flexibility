@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05MaterialCellCoordinates
-import Mathlib.Algebra.Order.Floor.Semiring
+module
+
+public import ContinuousFlexibility.Analysis.N05MaterialCellCoordinates
+public import Mathlib.Algebra.Order.Floor.Semiring
 
 /-!
 # The actual coefficient envelope at a reference cell
@@ -9,6 +11,8 @@ coordinate give an upper bound for the logarithm of the actual E0 weight.
 The compact middle is treated by continuity. This converts primitive
 geometry bounds at actual samples to the discrete reference envelope.
 -/
+
+@[expose] public section
 
 noncomputable section
 

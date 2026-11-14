@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04bRootInteriorRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N04bRootInteriorRegularity
 
 /-!
 # The two root coordinates of one actual travel chart
@@ -8,6 +10,8 @@ height and Jacobian relations hold throughout the full open travel strip,
 including points beyond either artificial half cut. No reference half or
 state-dependent domain is identified with another domain here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

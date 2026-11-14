@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalOpenProduct
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalOpenProduct
 
 /-!
 # The bounded jet algebra of actual open-piece coefficients
@@ -8,6 +10,8 @@ periodicity, and bounded spatial jets on one fixed piece. Derivative and
 multiplication operations use those same functions. No regularity of an
 unknown or extension of a coefficient across an endpoint is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

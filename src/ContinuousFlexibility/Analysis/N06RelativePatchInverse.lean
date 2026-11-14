@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06BoundaryPatchBounds
-import ContinuousFlexibility.Analysis.N06RelativeChartHeightPatch
-import ContinuousFlexibility.Analysis.N06SmoothStripInverse
-import Mathlib.Analysis.Normed.Operator.Prod
+module
+
+public import ContinuousFlexibility.Analysis.N06BoundaryPatchBounds
+public import ContinuousFlexibility.Analysis.N06RelativeChartHeightPatch
+public import ContinuousFlexibility.Analysis.N06SmoothStripInverse
+public import Mathlib.Analysis.Normed.Operator.Prod
 
 /-!
 # A smooth inverse for the actual relative unit-strip patch
@@ -12,6 +14,8 @@ derivative is estimated by those boundary jets and the chosen collar
 width. This supplies the small derivative hypothesis of the global strip
 inverse theorem and gives a nonzero Jacobian at the closed endpoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

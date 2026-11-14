@@ -1,12 +1,16 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartRootFlowFactory
-import ContinuousFlexibility.Analysis.N04NegativeChartRootLabelRepresentative
-import ContinuousFlexibility.Analysis.N04NegativeChartRootCoefficient
-import ContinuousFlexibility.Analysis.N04NegativeChartProjectionAffineBounds
-import ContinuousFlexibility.Analysis.N04NegativeChartPartialJets
-import ContinuousFlexibility.Analysis.N04NegativeChartInteriorRawBudget
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootFlowFactory
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootLabelRepresentative
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootCoefficient
+public import ContinuousFlexibility.Analysis.N04NegativeChartProjectionAffineBounds
+public import ContinuousFlexibility.Analysis.N04NegativeChartPartialJets
+public import ContinuousFlexibility.Analysis.N04NegativeChartInteriorRawBudget
 
 /-! One finite plot carries the actual divided fields, endpoint label and
 their single inverse flow on a common open convex state neighborhood. -/
+
+@[expose] public section
 
 noncomputable section
 

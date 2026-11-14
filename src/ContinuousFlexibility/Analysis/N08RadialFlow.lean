@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N08ReferenceFlow
-import ContinuousFlexibility.Analysis.StateControlCofiniteClosure
+module
+
+public import ContinuousFlexibility.Analysis.N08ReferenceFlow
+public import ContinuousFlexibility.Analysis.StateControlCofiniteClosure
 
 /-!
 # The ordinary flow on every zero-parameter state
@@ -9,6 +11,8 @@ profile. Its ordinary flow is the optical rotation of that same profile.
 Consequently the actual return residual depends only on the profile and
 left chart, and is independent of the height coordinate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

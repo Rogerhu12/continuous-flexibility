@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterInitialCore
-import ContinuousFlexibility.Radial.OuterOutwardTransfer
+module
+
+public import ContinuousFlexibility.Radial.OuterInitialCore
+public import ContinuousFlexibility.Radial.OuterOutwardTransfer
 
 /-!
 # Uniform actual core inputs, including the initial frequency band
@@ -9,6 +11,8 @@ allowed state scale, and every inward cut in the actual initial middle
 interval.  The initial band is handled by its fixed compact interval;
 all later bands use the quantitative Morse estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

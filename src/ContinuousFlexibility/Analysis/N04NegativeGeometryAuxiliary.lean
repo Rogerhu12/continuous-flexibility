@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
-import ContinuousFlexibility.Analysis.CanonicalAuxiliaryAtomPreservation
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
+public import ContinuousFlexibility.Analysis.CanonicalAuxiliaryAtomPreservation
 
 /-!
 # Auxiliary-column independence of negative geometry
@@ -9,6 +11,8 @@ by auxiliary-column replacement. Consequently one neighborhood proved at
 the zero auxiliary column works for every auxiliary column, with exactly
 the same selected-piece towers and estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

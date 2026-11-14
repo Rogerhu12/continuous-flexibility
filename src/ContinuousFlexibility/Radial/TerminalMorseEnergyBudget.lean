@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.TerminalMorseLiftEnergy
-import ContinuousFlexibility.Radial.TerminalMorseSourceBudget
+module
+
+public import ContinuousFlexibility.Radial.TerminalMorseLiftEnergy
+public import ContinuousFlexibility.Radial.TerminalMorseSourceBudget
 
 /-!
 # Fixed coefficient powers in the actual lift-energy error
@@ -9,6 +11,8 @@ The same stand-in slope lower bound removes the remaining inverse
 frequency square, leaving a seventeenth inverse power of A. The two
 attenuation factors come directly from the square of the same solution.
 -/
+
+@[expose] public section
 
 noncomputable section
 

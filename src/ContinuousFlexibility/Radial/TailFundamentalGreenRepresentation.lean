@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.TailResolventEntranceTrace
-import ContinuousFlexibility.Radial.TailFundamentalGreenKernel
-import ContinuousFlexibility.Radial.TailKernelTestExtension
-import ContinuousFlexibility.Analysis.OneSidedSmoothExtension
+module
+
+public import ContinuousFlexibility.Radial.TailResolventEntranceTrace
+public import ContinuousFlexibility.Radial.TailFundamentalGreenKernel
+public import ContinuousFlexibility.Radial.TailKernelTestExtension
+public import ContinuousFlexibility.Analysis.OneSidedSmoothExtension
 
 /-!
 # Identifying the actual fundamental Green kernel with the resolvent
@@ -12,6 +14,8 @@ Regularity at the entrance is recovered from its first-order equations, so
 natural-line uniqueness applies without an extra smoothness assumption on
 the graph solution.
 -/
+
+@[expose] public section
 
 noncomputable section
 

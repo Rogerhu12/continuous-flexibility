@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.PositiveReferenceFinitePrescribed
+module
+
+public import ContinuousFlexibility.Analysis.PositiveReferenceFinitePrescribed
 
 /-!
 # Explicit costs of the same prescribed reference interpolation
@@ -12,6 +14,8 @@ The last scalar lemma converts a supplied raw-data envelope into a
 material power. It does not assert that the endpoint data or the gap
 already have such an envelope for an arbitrary Through03 witness.
 -/
+
+@[expose] public section
 
 noncomputable section
 

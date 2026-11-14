@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.RootCharacteristicFactor
-import ContinuousFlexibility.Analysis.N04bCollarInverseGluing
-import ContinuousFlexibility.Geometry.PlanarOrientation
+module
+
+public import ContinuousFlexibility.Analysis.RootCharacteristicFactor
+public import ContinuousFlexibility.Analysis.N04bCollarInverseGluing
+public import ContinuousFlexibility.Geometry.PlanarOrientation
 
 /-!
 # Literal physical maps pasted at either root
@@ -11,6 +13,8 @@ positive side. On the other side they use the smooth extended root model.
 The inverse retains the actual physical inverse at positive canonical
 radius and uses the physical affine image of the collar inverse otherwise.
 -/
+
+@[expose] public section
 
 noncomputable section
 

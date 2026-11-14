@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchedRadiusGreenKernel
-import ContinuousFlexibility.Analysis.L2BoundedMultiplier
+module
+
+public import ContinuousFlexibility.Radial.MatchedRadiusGreenKernel
+public import ContinuousFlexibility.Analysis.L2BoundedMultiplier
 
 /-!
 # Exact multiplier transport by the actual radius isometry
@@ -8,6 +10,8 @@ This applies to the final reference localizers pulled back by dilation,
 including their finite core where the geometry coordinate need not be
 linear. The inverse and the supplied L² vectors are unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

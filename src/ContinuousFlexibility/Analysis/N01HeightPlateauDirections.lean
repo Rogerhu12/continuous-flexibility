@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01FlowGermLocality
-import ContinuousFlexibility.Analysis.N01PlateauEnergyEnvelope
+module
+
+public import ContinuousFlexibility.Analysis.N01FlowGermLocality
+public import ContinuousFlexibility.Analysis.N01PlateauEnergyEnvelope
 
 /-!
 # Actual physical height-pair localizations without a trace term
@@ -9,6 +11,8 @@ decoded Sobolev height alone therefore preserves every characteristic
 coefficient there, up to the harmless additive height constant. The
 resulting directions have zero trace and a summable physical envelope.
 -/
+
+@[expose] public section
 
 noncomputable section
 

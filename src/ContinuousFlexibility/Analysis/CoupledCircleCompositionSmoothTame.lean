@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CoupledCircleCompositionLocalTame
-import ContinuousFlexibility.Analysis.CoupledCircleJointJetDerivative
-import ContinuousFlexibility.Analysis.TamePairTopology
+module
+
+public import ContinuousFlexibility.Analysis.CoupledCircleCompositionLocalTame
+public import ContinuousFlexibility.Analysis.CoupledCircleJointJetDerivative
+public import ContinuousFlexibility.Analysis.TamePairTopology
 
 /-!
 # Joint smooth tameness of the actual circle composition
@@ -9,6 +11,8 @@ The kernel tower differentiates both the chart displacement and the outer
 circle function. Local affine estimates for these actual jets give the
 frozen homogeneous smooth-tame bounds in the original sum grading.
 -/
+
+@[expose] public section
 
 noncomputable section
 

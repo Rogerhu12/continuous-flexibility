@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06NormalizedRepresentation
-import ContinuousFlexibility.Analysis.N06ReferenceRemainderFields
-import ContinuousFlexibility.Analysis.N06ReferenceNuColumn
-import ContinuousFlexibility.Analysis.N06CanonicalDifference
+module
+
+public import ContinuousFlexibility.Analysis.N06NormalizedRepresentation
+public import ContinuousFlexibility.Analysis.N06ReferenceRemainderFields
+public import ContinuousFlexibility.Analysis.N06ReferenceNuColumn
+public import ContinuousFlexibility.Analysis.N06CanonicalDifference
 
 /-!
 # Exact cancellation of normalized reference source columns
@@ -12,6 +14,8 @@ supported in that region has exactly the same canonical source at every
 allowed state. In particular, the reference nu field has no coordinate
 variation, including at every mixed spatial jet order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

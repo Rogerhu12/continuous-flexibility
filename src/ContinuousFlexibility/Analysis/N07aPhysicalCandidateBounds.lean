@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aPhysicalEquationTransfer
-import ContinuousFlexibility.Analysis.N07aLinearPhysicalNorm
-import ContinuousFlexibility.Analysis.N07aScalarSolution
+module
+
+public import ContinuousFlexibility.Analysis.N07aPhysicalEquationTransfer
+public import ContinuousFlexibility.Analysis.N07aLinearPhysicalNorm
+public import ContinuousFlexibility.Analysis.N07aScalarSolution
 
 /-!
 # The actual physical candidate and its original one-high output grading
@@ -9,6 +11,8 @@ All material jets are integrable before the height decoder is used. The
 height pair preserves the actual left scalar, and compatibility removes
 the auxiliary scalar from the same equation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

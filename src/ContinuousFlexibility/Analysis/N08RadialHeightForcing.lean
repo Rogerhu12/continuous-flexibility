@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N08FlowHeightVariation
-import ContinuousFlexibility.Scalar.WeightedProductTower
+module
+
+public import ContinuousFlexibility.Analysis.N08FlowHeightVariation
+public import ContinuousFlexibility.Scalar.WeightedProductTower
 
 /-!
 # The positive radial forcing detected by N01's mixed flow jet
@@ -9,6 +11,8 @@ consideration. Its normalization can be corrected elsewhere. Equality of
 actual germs identifies the mixed jet with the optical forcing integral,
 and N01 bounds that same jet in its original cell and fixed input grades.
 -/
+
+@[expose] public section
 
 noncomputable section
 

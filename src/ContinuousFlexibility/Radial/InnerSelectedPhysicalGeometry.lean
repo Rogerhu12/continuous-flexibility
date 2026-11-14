@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerMorseAllBandsGeometry
-import ContinuousFlexibility.Radial.InnerRadialGapChartConstruction
-import ContinuousFlexibility.Radial.CentralRadius
+module
+
+public import ContinuousFlexibility.Radial.InnerMorseAllBandsGeometry
+public import ContinuousFlexibility.Radial.InnerRadialGapChartConstruction
+public import ContinuousFlexibility.Radial.CentralRadius
 
 /-!
 # The original selected tails in one physical reference
@@ -14,6 +16,8 @@ Only raw profile identities, ordering and positivity of the two fixed
 middle connectors are inputs. Finite chains and quantitative gap bounds
 are constructed from these data in the subsequent modules.
 -/
+
+@[expose] public section
 
 noncomputable section
 

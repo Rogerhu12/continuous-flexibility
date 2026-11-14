@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.ActualPositiveReferenceSourceMaterialData
-import ContinuousFlexibility.Analysis.RetainedPositiveEndpointHostSample
-import ContinuousFlexibility.Analysis.RetainedPositiveComponentMaterialWidth
-import ContinuousFlexibility.Analysis.RetainedPositiveComponentInteriorEndpoints
+module
+
+public import ContinuousFlexibility.Analysis.ActualPositiveReferenceSourceMaterialData
+public import ContinuousFlexibility.Analysis.RetainedPositiveEndpointHostSample
+public import ContinuousFlexibility.Analysis.RetainedPositiveComponentMaterialWidth
+public import ContinuousFlexibility.Analysis.RetainedPositiveComponentInteriorEndpoints
 
 /-!
 # Actual positive reference data at the same midpoint sample
@@ -12,6 +14,8 @@ sample, including the finitely many central pieces. One material power
 then controls both endpoint data and both width costs. The retained
 certificate and the same-component optical lower remain explicit.
 -/
+
+@[expose] public section
 
 noncomputable section
 

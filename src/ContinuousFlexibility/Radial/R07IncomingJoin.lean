@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R07IncomingFamily
-import ContinuousFlexibility.Radial.R07ConcreteJoinContrast
+module
+
+public import ContinuousFlexibility.Radial.R07IncomingFamily
+public import ContinuousFlexibility.Radial.R07ConcreteJoinContrast
 
 /-!
 # The actual incoming state after its preceding join
@@ -8,6 +10,8 @@ The numerical threshold is chosen before the geometry. The normalized
 physical join width cancels its radius, and its actual height contrast
 then gives the coordinate error required by simultaneous height selection.
 -/
+
+@[expose] public section
 
 noncomputable section
 

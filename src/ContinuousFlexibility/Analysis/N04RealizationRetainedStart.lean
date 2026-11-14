@@ -1,10 +1,12 @@
-import ContinuousFlexibility.Analysis.N05RetainedReferenceAssembly
-import ContinuousFlexibility.Analysis.N04RealizationRetainedPositiveEndpoints
-import ContinuousFlexibility.Analysis.N05RetainedOpticalLowerAdapter
-import ContinuousFlexibility.Analysis.N05RetainedN01a
-import ContinuousFlexibility.Analysis.N04RealizationRetainedN01
-import ContinuousFlexibility.Analysis.N04RealizationOpticalFieldGateway
-import ContinuousFlexibility.Analysis.N01ResidualSmoothTame
+module
+
+public import ContinuousFlexibility.Analysis.N05RetainedReferenceAssembly
+public import ContinuousFlexibility.Analysis.N04RealizationRetainedPositiveEndpoints
+public import ContinuousFlexibility.Analysis.N05RetainedOpticalLowerAdapter
+public import ContinuousFlexibility.Analysis.N05RetainedN01a
+public import ContinuousFlexibility.Analysis.N04RealizationRetainedN01
+public import ContinuousFlexibility.Analysis.N04RealizationOpticalFieldGateway
+public import ContinuousFlexibility.Analysis.N01ResidualSmoothTame
 
 /-!
 # One retained seed through the actual physical field construction
@@ -21,6 +23,8 @@ is `exists_n05_seedReferenceConstruction_of_retained`, followed by
 `SeedReferenceConstruction.exists_n05RetainedN01a` and the fixed-record
 `N01Properties.exists_returnEquation`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

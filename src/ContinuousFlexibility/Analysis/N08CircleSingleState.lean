@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N08CircleSingleDecay
-import ContinuousFlexibility.Analysis.N08CircleJetComparison
+module
+
+public import ContinuousFlexibility.Analysis.N08CircleSingleDecay
+public import ContinuousFlexibility.Analysis.N08CircleJetComparison
 
 /-!
 # One-label states in the actual nonlinear sector
@@ -8,6 +10,8 @@ Only the two circle coordinates are retained. Centering this projection
 at the reference state preserves the selected control and chart exactly.
 The complete state grading inherits the exact single-label decay.
 -/
+
+@[expose] public section
 
 noncomputable section
 

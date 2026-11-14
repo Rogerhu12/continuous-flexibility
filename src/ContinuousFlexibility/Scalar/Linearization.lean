@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.LinearizationAlgebra
-import Mathlib.Analysis.Calculus.FDeriv.Congr
+module
+
+public import ContinuousFlexibility.Scalar.LinearizationAlgebra
+public import Mathlib.Analysis.Calculus.FDeriv.Congr
 
 /-!
 # Divergence-form linearization of the actual height residual
@@ -8,6 +10,8 @@ The coefficients and all partial derivatives here are evaluated on actual
 height and profile functions. The algebraic drift identities are used only
 after the spatial derivative and mixed-partial identities have been proved.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.RadialAffineDensity
-import ContinuousFlexibility.Analysis.CylinderSobolev
-import Mathlib.Analysis.Calculus.ContDiff.Operations
+module
+
+public import ContinuousFlexibility.Analysis.RadialAffineDensity
+public import ContinuousFlexibility.Analysis.CylinderSobolev
+public import Mathlib.Analysis.Calculus.ContDiff.Operations
 
 /-!
 # One radial normalization for the two positive endpoints
@@ -10,6 +12,8 @@ In particular the normalized positive interval uses ξ on the left and
 1 - ξ on the right. Translation and unit reflection preserve every
 positive-order actual Fréchet jet norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

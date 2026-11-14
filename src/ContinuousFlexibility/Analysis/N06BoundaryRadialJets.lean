@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.BoundaryTaylorExtension
-import Mathlib.Analysis.Calculus.ContDiff.Basic
-import Mathlib.Analysis.Calculus.ContDiff.Comp
+module
+
+public import ContinuousFlexibility.Analysis.BoundaryTaylorExtension
+public import Mathlib.Analysis.Calculus.ContDiff.Basic
+public import Mathlib.Analysis.Calculus.ContDiff.Comp
 
 /-!
 # Actual boundary jets from smoothness on the boundary axis
@@ -11,6 +13,8 @@ of the chart. This module extracts the actual radial boundary derivatives
 and proves that they are smooth functions of the angular parameter using
 only that pointwise contract.
 -/
+
+@[expose] public section
 
 noncomputable section
 

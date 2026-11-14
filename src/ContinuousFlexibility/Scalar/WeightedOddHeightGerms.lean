@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.WeightedOddHeightAlgebra
-import ContinuousFlexibility.Scalar.WeightedAngularJetProductBounds
-import ContinuousFlexibility.Scalar.WeightedHeightGerms
+module
+
+public import ContinuousFlexibility.Scalar.WeightedOddHeightAlgebra
+public import ContinuousFlexibility.Scalar.WeightedAngularJetProductBounds
+public import ContinuousFlexibility.Scalar.WeightedHeightGerms
 
 /-!
 # Uniform tame germs for the actual odd scalar algebra
@@ -9,6 +11,8 @@ Odd fields are kept as decoded angular derivatives of even primitives.
 Their products use the proved continuous bilinear maps and the corresponding
 one-high-factor estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

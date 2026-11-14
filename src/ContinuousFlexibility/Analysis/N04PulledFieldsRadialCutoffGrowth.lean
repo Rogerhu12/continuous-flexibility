@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsActualTransportGrowth
-import ContinuousFlexibility.Analysis.JointMixedRadialScalar
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsActualTransportGrowth
+public import ContinuousFlexibility.Analysis.JointMixedRadialScalar
 
 /-!
 # The actual radial cutoff in fixed-base transport
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Analysis.JointMixedRadialScalar
 The cutoff contributes only its material coefficient bounds. Its
 parameter-independent joint tower therefore has zero parameter charge.
 -/
+
+@[expose] public section
 
 noncomputable section
 

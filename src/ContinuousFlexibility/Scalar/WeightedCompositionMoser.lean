@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedCompositionChainBounds
-import ContinuousFlexibility.Scalar.WeightedJetNorm
+module
+
+public import ContinuousFlexibility.Scalar.WeightedCompositionChainBounds
+public import ContinuousFlexibility.Scalar.WeightedJetNorm
 
 /-!
 # The zeroth scalar composition estimate with a common loss
@@ -9,6 +11,8 @@ the low-norm radius, or the output order. The outer radial weight is handled
 by its actual finite Leibniz formula. The resulting estimates prove both
 membership of the actual composition and its physical-norm Moser bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

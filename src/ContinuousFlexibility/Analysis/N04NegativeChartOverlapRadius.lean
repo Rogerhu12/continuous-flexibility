@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartRootScale
-import ContinuousFlexibility.Analysis.N04NegativeChartRootPositiveBand
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootScale
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootPositiveBand
 
 /-!
 # One overlap radius before all derivative orders
@@ -10,6 +12,8 @@ the same selected half sample. This radius can therefore be used by the
 root estimates and the interior estimates without an order-dependent
 choice of neighborhoods.
 -/
+
+@[expose] public section
 
 noncomputable section
 

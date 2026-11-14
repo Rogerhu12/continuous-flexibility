@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalCutoffColumn
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalCutoffColumn
 
 /-!
 # Green pairing including the actual potential
@@ -7,6 +9,8 @@ An open smooth comparison field need not have a global extension or an
 unweighted L² norm. Compact tests and the actual source column justify
 every integral and move the whole divergence-plus-potential expression.
 -/
+
+@[expose] public section
 
 noncomputable section
 

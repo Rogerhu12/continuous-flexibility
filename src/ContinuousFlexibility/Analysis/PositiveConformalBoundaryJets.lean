@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.PointwiseCylinderJets
-import ContinuousFlexibility.Analysis.BoundaryMixedJets
-import ContinuousFlexibility.Analysis.CylinderSobolev
+module
+
+public import ContinuousFlexibility.Analysis.PointwiseCylinderJets
+public import ContinuousFlexibility.Analysis.BoundaryMixedJets
+public import ContinuousFlexibility.Analysis.CylinderSobolev
 
 /-!
 # Finite conformal coordinate data at a regular positive boundary
@@ -14,6 +16,8 @@ degree equal to zero. No equation on an open collar is assumed or solved.
 Degree three is sufficient for the order-two principal-density matching
 used at an artificial endpoint of a positive component.
 -/
+
+@[expose] public section
 
 noncomputable section
 

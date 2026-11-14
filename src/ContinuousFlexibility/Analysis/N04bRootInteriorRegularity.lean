@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04bConstructedRootTransmission
-import ContinuousFlexibility.Analysis.N04bContinuousInverseGerm
-import ContinuousFlexibility.Geometry.PlanarOrientation
-import Mathlib.Analysis.SpecialFunctions.Pow.Continuity
+module
+
+public import ContinuousFlexibility.Analysis.N04bConstructedRootTransmission
+public import ContinuousFlexibility.Analysis.N04bContinuousInverseGerm
+public import ContinuousFlexibility.Geometry.PlanarOrientation
+public import Mathlib.Analysis.SpecialFunctions.Pow.Continuity
 
 /-!
 # Genuine interior germs of the explicit root travel formulas
@@ -10,6 +12,8 @@ The formulas extend across the artificial positive cut radius, since its
 travel value lies inside the full travel strip. Their actual derivatives,
 smooth height and actual inverse give a full inverse germ there.
 -/
+
+@[expose] public section
 
 noncomputable section
 

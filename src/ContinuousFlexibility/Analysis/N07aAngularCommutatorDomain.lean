@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aSchurCommutator
-import ContinuousFlexibility.Analysis.N07aAngularFrequency
+module
+
+public import ContinuousFlexibility.Analysis.N07aSchurCommutator
+public import ContinuousFlexibility.Analysis.N07aAngularFrequency
 
 /-!
 # The actual maximal angular domain of the constructed commutator
@@ -9,6 +11,8 @@ coordinates are square summable because the candidate is already a
 member of the prescribed source level.  This proves domain preservation
 and the exact commutator identity without assuming either conclusion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

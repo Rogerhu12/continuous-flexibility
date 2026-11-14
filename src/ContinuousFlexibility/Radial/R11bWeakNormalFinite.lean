@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R11bWeakNormalLimit
+module
+
+public import ContinuousFlexibility.Radial.R11bWeakNormalLimit
 
 /-!
 # Finite linearity of the actual weak normal derivative
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Radial.R11bWeakNormalLimit
 All sums here are sums of raw physical L² functions. Integrability of the
 test pairings justifies each finite interchange of sums and integrals.
 -/
+
+@[expose] public section
 
 noncomputable section
 

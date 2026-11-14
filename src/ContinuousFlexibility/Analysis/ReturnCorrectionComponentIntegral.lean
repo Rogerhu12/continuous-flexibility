@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionCoefficientRegularity
-import Mathlib.MeasureTheory.Integral.Bochner.Set
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionCoefficientRegularity
+public import Mathlib.MeasureTheory.Integral.Bochner.Set
 
 /-!
 # Componentwise source compatibility of the actual residual error
@@ -11,6 +13,8 @@ differential error vanishes on their complement. Countable additivity
 then gives the physical source-kernel identity without any hypothesis
 about smooth extension of the fluxes at the annulus endpoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

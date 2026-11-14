@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Milestones
-import ContinuousFlexibility.Scalar.Determinant
+module
+
+public import ContinuousFlexibility.Statements.Milestones
+public import ContinuousFlexibility.Scalar.Determinant
 
 /-!
 # Blueprint node S02
@@ -8,6 +10,8 @@ Source: `paper/flexible-surface-rewrite/03-height-equation.tex` lines 47–115 (
 
 Task file: `docs/tasks/S02.md`. The statement is frozen. Proved.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OuterLocalizationWeights
+module
+
+public import ContinuousFlexibility.Radial.OuterLocalizationWeights
 
 /-!
 # Algebra of uniform localized Green envelopes
@@ -7,6 +9,8 @@ Fixed numerical prefactors and bounded label shifts only change a fixed
 power of the coefficient weights. Products of two decays from the same
 entrance retain the full attenuation between their two endpoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

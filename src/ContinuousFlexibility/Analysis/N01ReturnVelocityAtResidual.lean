@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01ReturnVelocitySmoothTame
+module
+
+public import ContinuousFlexibility.Analysis.N01ReturnVelocitySmoothTame
 
 /-!
 # The actual velocity with the actual residual substituted
@@ -8,6 +10,8 @@ original circle model. Composing its genuine tower with the actual N02
 residual gives its state dependence after substitution. Fixed angular
 evaluations of both versions are retained for coefficient reconstruction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

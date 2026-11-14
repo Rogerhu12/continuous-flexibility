@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.WholePositiveTransportAssembly
-import ContinuousFlexibility.Analysis.CoordinatePrincipalDeterminant
+module
+
+public import ContinuousFlexibility.Analysis.WholePositiveTransportAssembly
+public import ContinuousFlexibility.Analysis.CoordinatePrincipalDeterminant
 
 /-!
 # Actual positive charts from the constructed whole-component transport
@@ -10,6 +12,8 @@ All assertions below concern these actual functions. They do not force
 unit principal density or assume the final canonical operator identity.
 This is a new reconstruction after the workspace reset.
 -/
+
+@[expose] public section
 
 noncomputable section
 

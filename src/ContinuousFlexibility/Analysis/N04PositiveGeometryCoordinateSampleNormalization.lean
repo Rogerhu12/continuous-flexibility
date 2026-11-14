@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryCoordinateNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryCoordinateNormalization
 
 /-!
 # Scalar budgets for the unit coordinate sample estimates
@@ -7,6 +9,8 @@ The interval geometry, pure-slot conversion and material arithmetic are
 proved without an atlas in context. The actual coordinate consumers
 only instantiate these estimates with their retained fields and sample.
 -/
+
+@[expose] public section
 
 noncomputable section
 

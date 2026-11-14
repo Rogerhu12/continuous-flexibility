@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartReturnCircleBounds
-import ContinuousFlexibility.Analysis.N04NegativeGeometryCorrectedFlowInverseCircle
-import ContinuousFlexibility.Analysis.N04bCharacteristicFirstIntegrals
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartReturnCircleBounds
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryCorrectedFlowInverseCircle
+public import ContinuousFlexibility.Analysis.N04bCharacteristicFirstIntegrals
 
 /-!
 # Fixed-base bounds for the actual interior first integral
@@ -11,6 +13,8 @@ lower bound `1 / 24`. Its actual inverse, followed by the actual left chart,
 has a circle displacement relative to the reference optical translation.
 The estimates are uniform in every closed-radius selector.
 -/
+
+@[expose] public section
 
 noncomputable section
 

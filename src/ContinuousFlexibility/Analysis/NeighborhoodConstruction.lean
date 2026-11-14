@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.NeighborhoodCommonBounds
-import ContinuousFlexibility.Analysis.NeighborhoodCharacteristicSpeedExtension
-import ContinuousFlexibility.Analysis.NeighborhoodCircleFlowRegularity
-import ContinuousFlexibility.Analysis.NeighborhoodFlowGeometry
-import ContinuousFlexibility.Analysis.NeighborhoodRootGerms
+module
+
+public import ContinuousFlexibility.Analysis.NeighborhoodCommonBounds
+public import ContinuousFlexibility.Analysis.NeighborhoodCharacteristicSpeedExtension
+public import ContinuousFlexibility.Analysis.NeighborhoodCircleFlowRegularity
+public import ContinuousFlexibility.Analysis.NeighborhoodFlowGeometry
+public import ContinuousFlexibility.Analysis.NeighborhoodRootGerms
 
 /-!
 # Construction of the common nonlinear neighborhood
@@ -13,6 +15,8 @@ return and right-chart inverses are installed without changing the profile
 or its controls. Strict support gives the exact reference germ at every
 root of the reference slope.
 -/
+
+@[expose] public section
 
 noncomputable section
 

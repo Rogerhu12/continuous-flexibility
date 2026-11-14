@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields
-import ContinuousFlexibility.Analysis.CanonicalRootTransportBoundary
-import ContinuousFlexibility.Analysis.N04bActualAtlasCuts
+module
+
+public import ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields
+public import ContinuousFlexibility.Analysis.CanonicalRootTransportBoundary
+public import ContinuousFlexibility.Analysis.N04bActualAtlasCuts
 
 /-!
 # Actual reference data at a negative root circle
@@ -11,6 +13,8 @@ The angular identity and the established cut orientation determine the
 strict sign of the actual radial derivative there. No radiality outside
 the negative component, or common smooth collar for all orders, is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

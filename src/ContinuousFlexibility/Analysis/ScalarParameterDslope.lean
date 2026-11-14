@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CompactParameterIntegral
-import ContinuousFlexibility.Analysis.ScalarParameterInverse
-import ContinuousFlexibility.Analysis.ReturnCorrectionDisplacementRegularity
+module
+
+public import ContinuousFlexibility.Analysis.CompactParameterIntegral
+public import ContinuousFlexibility.Analysis.ScalarParameterInverse
+public import ContinuousFlexibility.Analysis.ReturnCorrectionDisplacementRegularity
 
 /-!
 # The removable divided difference in a parameter family
@@ -10,6 +12,8 @@ jointly smooth. Integration along the segment between two variable
 arguments therefore proves parameter smoothness of the divided
 difference, including the locus where those arguments agree.
 -/
+
+@[expose] public section
 
 noncomputable section
 

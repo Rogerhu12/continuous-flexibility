@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06CurrentPositiveRelativePairing
-import ContinuousFlexibility.Analysis.N06PositiveFullPeriodTests
-import ContinuousFlexibility.Analysis.N06N05CurrentCubicPairing
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentPositiveRelativePairing
+public import ContinuousFlexibility.Analysis.N06PositiveFullPeriodTests
+public import ContinuousFlexibility.Analysis.N06N05CurrentCubicPairing
 
 /-!
 # Positive current Green for the original physical test class
@@ -11,6 +13,8 @@ RadialTest. The source on the operator side is the average of the true
 physical operator, by the positive N03 germs, rather than an assumed
 periodicity property of its bare coefficient fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 

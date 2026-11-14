@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFourierBasic
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierBasic
 
 /-!
 # Parseval for the physical circle Fourier norm
@@ -8,6 +10,8 @@ functions. They identify the order-zero frequency Sobolev norm with the
 ordinary normalized-Haar `L²` norm, and include the continuous-map form used
 for slices of a cylinder.
 -/
+
+@[expose] public section
 
 noncomputable section
 

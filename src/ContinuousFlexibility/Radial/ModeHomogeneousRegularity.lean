@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ModeWeakGreen
-import ContinuousFlexibility.Radial.ModeRegionalPairing
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+module
+
+public import ContinuousFlexibility.Radial.ModeWeakGreen
+public import ContinuousFlexibility.Radial.ModeRegionalPairing
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 
 /-!
 # Closed-interval C2 regularity for homogeneous modal solutions
@@ -10,6 +12,8 @@ continuous flux.  A continuous right-hand side makes this flux C1 up
 to both regular cuts, and division by the positive physical profile
 upgrades the representative to C2 on the closed interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06RootTraceFromInterior
-import ContinuousFlexibility.Analysis.N06WeakModeRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N06RootTraceFromInterior
+public import ContinuousFlexibility.Analysis.N06WeakModeRegularity
 
 /-!
 # Actual interface traces forced by the original weak modal equation
@@ -13,6 +15,8 @@ their own intervals play no role.
 This obtains transmission from the given distributional equation; it
 does not add matching traces to the domain as an assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

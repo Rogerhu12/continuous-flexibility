@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadNegativeSplit
-import ContinuousFlexibility.Analysis.N04NegativeChartRealization
-import ContinuousFlexibility.Analysis.N04NegativeChartAssembly
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadNegativeSplit
+public import ContinuousFlexibility.Analysis.N04NegativeChartRealization
+public import ContinuousFlexibility.Analysis.N04NegativeChartAssembly
 
 /-!
 # N04Coordinates-Realization, negative geometry: forward chart
@@ -13,6 +15,8 @@ The statement is defined in
 Source: paper/flexible-surface-readable/07-fixed-geometry.tex, lines 1545-1678.
 Task: docs/tasks/N04Realization-NegativeChart.md.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

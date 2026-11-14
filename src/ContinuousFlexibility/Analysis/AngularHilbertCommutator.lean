@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.AngularResolventDomains
-import ContinuousFlexibility.Analysis.AngularInverseEstimate
-import ContinuousFlexibility.Analysis.AngularRealInverseEstimate
+module
+
+public import ContinuousFlexibility.Analysis.AngularResolventDomains
+public import ContinuousFlexibility.Analysis.AngularInverseEstimate
+public import ContinuousFlexibility.Analysis.AngularRealInverseEstimate
 
 /-!
 # Regularity of an inverse from an angular commutator
@@ -11,6 +13,8 @@ given self-adjoint resolvent.  The common transport proof below serves
 both scalar fields; the public theorems use the proved real and complex
 coordinate estimates and have no decomposition or interpolation premise.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Blueprint.CanonicalParts
-import Mathlib.MeasureTheory.Measure.OpenPos
-import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
+module
+
+public import ContinuousFlexibility.Blueprint.CanonicalParts
+public import Mathlib.MeasureTheory.Measure.OpenPos
+public import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
 
 /-!
 # Genuine open pieces cannot contain the cut
@@ -11,6 +13,8 @@ that point would therefore meet both halves, contradicting disjointness.
 This recovers the negative paired pieces without assuming that the cut is
 a graph or that its image has already been proved to have measure zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

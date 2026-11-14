@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.PrincipalCoefficientPullback
+module
+
+public import ContinuousFlexibility.Analysis.PrincipalCoefficientPullback
 
 /-!
 # One radial affine normalization for both endpoint charts
@@ -7,6 +9,8 @@ The same formula covers radial reflection and translation. Its derivative
 and Jacobian are actual derivatives, so the principal density identities
 can be used with either endpoint's canonical coordinate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

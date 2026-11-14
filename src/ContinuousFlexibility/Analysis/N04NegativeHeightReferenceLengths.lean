@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04NegativeHeightReferenceData
-import ContinuousFlexibility.Analysis.N04NegativeHeightBasicData
-import ContinuousFlexibility.Analysis.ActualNegativeLengthMaterialBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeHeightReferenceData
+public import ContinuousFlexibility.Analysis.N04NegativeHeightBasicData
+public import ContinuousFlexibility.Analysis.ActualNegativeLengthMaterialBounds
 
 /-!
 # The fixed canonical scale in the negative-height numerator
@@ -9,6 +11,8 @@ The retained root chart has canonical left endpoint zero. Its actual
 canonical length has the original material estimate at the stored half
 sample, and hence supplies a fixed spatial factor in the current calculus.
 -/
+
+@[expose] public section
 
 noncomputable section
 

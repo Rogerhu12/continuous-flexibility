@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SpacesPhysicalCellBands
+module
+
+public import ContinuousFlexibility.Analysis.SpacesPhysicalCellBands
 
 /-!
 # Analysis decay of the actual physical Fourier bands
@@ -7,6 +9,8 @@ Three pure order-`s` jets control a band: the material weight, the radial
 derivative, and the angular derivative. Parseval and the exact physical
 Fourier symbols give the estimate with no derivative loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

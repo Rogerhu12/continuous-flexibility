@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.PhysicalJetClosedGraph
+module
+
+public import ContinuousFlexibility.Analysis.PhysicalJetClosedGraph
 
 /-!
 # Restriction and projective compatibility for the physical jet levels
@@ -7,6 +9,8 @@ Restriction deletes the coordinates of higher total order. It contracts
 the finite Hilbert product and preserves the actual unweighted weak
 derivatives recovered from the retained weighted coordinates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

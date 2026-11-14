@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07bFiniteGreen
-import ContinuousFlexibility.Analysis.N07bInteriorGreen
+module
+
+public import ContinuousFlexibility.Analysis.N07bFiniteGreen
+public import ContinuousFlexibility.Analysis.N07bInteriorGreen
 
 /-!
 # Interior Green symmetry at finite regularity
@@ -9,6 +11,8 @@ Compact support of the radial test removes all assumptions at the natural
 endpoints and outside the annulus. The coefficients need only one
 continuous derivative on the same open set.
 -/
+
+@[expose] public section
 
 noncomputable section
 

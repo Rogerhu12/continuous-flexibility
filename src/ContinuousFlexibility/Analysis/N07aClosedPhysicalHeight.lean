@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aClosedJets
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalRepresentative
+module
+
+public import ContinuousFlexibility.Analysis.N07aClosedJets
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalRepresentative
 
 /-!
 # Genuine closed physical heights from the canonical jet extension
@@ -8,6 +10,8 @@ The extension is composed with the actual chart on its actual state domain.
 Its restriction to that domain has the same values as the smooth decoder.
 Boundary smoothness is within the physical closure, not across its boundary.
 -/
+
+@[expose] public section
 
 noncomputable section
 

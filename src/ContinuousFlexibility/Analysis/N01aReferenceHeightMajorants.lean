@@ -1,8 +1,10 @@
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
-import Mathlib.Analysis.SpecialFunctions.Pow.Real
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Ring
-import Lean.Elab.Tactic.Omega
+module
+
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Ring
+public import Lean.Elab.Tactic.Omega
 
 /-!
 # Pointwise polynomial majorants for the actual reference equation
@@ -12,6 +14,8 @@ weight is raised to a larger integer power under products and finite sums.
 The differential-equation argument differentiates actual local identities;
 it never differentiates the majorizing inequality.
 -/
+
+@[expose] public section
 
 noncomputable section
 

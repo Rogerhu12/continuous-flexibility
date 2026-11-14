@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ReferenceCosineProjection
-import ContinuousFlexibility.Radial.ReferenceFourierL2
+module
+
+public import ContinuousFlexibility.Radial.ReferenceCosineProjection
+public import ContinuousFlexibility.Radial.ReferenceFourierL2
 
 /-!
 # Radial L² bounds for actual angular coefficients
@@ -8,6 +10,8 @@ Normalized angular coefficients are contractions on each radial fiber.
 Fubini transfers that estimate to arbitrary radial product measures and
 then to each frozen localized cell.
 -/
+
+@[expose] public section
 
 open Set Filter MeasureTheory
 open scoped Topology

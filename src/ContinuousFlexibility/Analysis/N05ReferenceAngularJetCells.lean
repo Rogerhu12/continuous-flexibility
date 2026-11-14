@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05ReferenceAngularJetBasis
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceAngularJetBasis
 
 /-!
 # Cell Parseval for actual finite angular derivatives
@@ -7,6 +9,8 @@ The field below uses ordinary iterated derivatives of the actual finite
 cosine projection. Orthogonality of the normalized derivative basis gives
 an exact cell square identity with the frequency power `(2 n)^(2 b)`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CirclePositiveInverseModel
-import ContinuousFlexibility.Analysis.CircleReturnBounded
+module
+
+public import ContinuousFlexibility.Analysis.CirclePositiveInverseModel
+public import ContinuousFlexibility.Analysis.CircleReturnBounded
 
 /-!
 # Uniform circle translations and the actual inverse lift
@@ -10,6 +12,8 @@ grading, is unchanged by translation. The inverse of a lift with travel
 `t` is the inverse of its zero-travel lift evaluated at `θ - t`.
 Consequently travel contributes no constant to inverse-composition bounds.
 -/
+
+@[expose] public section
 
 noncomputable section
 

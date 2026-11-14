@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cStateAngleGraphBudget
-import ContinuousFlexibility.Analysis.N01cPhysicalLieProducts
+module
+
+public import ContinuousFlexibility.Analysis.N01cStateAngleGraphBudget
+public import ContinuousFlexibility.Analysis.N01cPhysicalLieProducts
 
 /-!
 # A complete state-flow graph word estimate
@@ -9,6 +11,8 @@ ordered-partition chain formula. It multiplies the raw distributed powers
 before any one-high normalization. The complete word retains one height
 factor whenever the original state order is positive.
 -/
+
+@[expose] public section
 
 noncomputable section
 

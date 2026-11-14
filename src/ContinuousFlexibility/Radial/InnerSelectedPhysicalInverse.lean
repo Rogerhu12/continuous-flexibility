@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerSelectedPhysicalModels
-import ContinuousFlexibility.Radial.InnerRadialActualInverse
+module
+
+public import ContinuousFlexibility.Radial.InnerSelectedPhysicalModels
+public import ContinuousFlexibility.Radial.InnerRadialActualInverse
 
 /-!
 # One selected physical inverse for every weight
@@ -14,6 +16,8 @@ Both inverse identities concern the full physical weak graph, including
 the one central scalar equation and the actual matching fluxes. The
 Schur formula and Green reciprocity use this very same operator.
 -/
+
+@[expose] public section
 
 noncomputable section
 

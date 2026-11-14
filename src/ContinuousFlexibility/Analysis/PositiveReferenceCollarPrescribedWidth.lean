@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.PositiveReferenceCollarFactory
+module
+
+public import ContinuousFlexibility.Analysis.PositiveReferenceCollarFactory
 
 /-!
 # The actual positive collar at a prescribed admissible width
@@ -8,6 +10,8 @@ The width is supplied with its explicit finite-jet and mass margins;
 its displayed derivative lower bound is retained for later estimates.
 This file is a new reconstruction after the workspace reset.
 -/
+
+@[expose] public section
 
 noncomputable section
 

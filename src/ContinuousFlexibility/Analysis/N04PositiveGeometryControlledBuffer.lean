@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveQuantitativeNormalizationBuffer
-import ContinuousFlexibility.Analysis.RetainedPositiveComponentMaterialWidth
-import ContinuousFlexibility.Analysis.N04RealizationLeadAssembly
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveQuantitativeNormalizationBuffer
+public import ContinuousFlexibility.Analysis.RetainedPositiveComponentMaterialWidth
+public import ContinuousFlexibility.Analysis.N04RealizationLeadAssembly
 
 /-!
 # A normalization buffer with material costs on every gap
@@ -14,6 +16,8 @@ The buffer and its constant are selected before the state, parameter order,
 or output spatial order. They are constructed from the retained start; no
 estimate for a future transport is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

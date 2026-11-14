@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ZeroModeWeightedFlux
-import ContinuousFlexibility.Radial.ReferenceRadialCellBound
+module
+
+public import ContinuousFlexibility.Radial.ZeroModeWeightedFlux
+public import ContinuousFlexibility.Radial.ReferenceRadialCellBound
 
 /-!
 # Actual weighted zero-mode height bounds
@@ -9,6 +11,8 @@ endpoint. The weighted flux estimate controls its actual integral.
 The true partition then turns the cellwise bounds into weighted L2
 membership and one uniform energy estimate, including the left height.
 -/
+
+@[expose] public section
 
 noncomputable section
 

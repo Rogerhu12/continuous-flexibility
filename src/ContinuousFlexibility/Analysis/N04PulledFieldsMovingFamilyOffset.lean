@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsCompositionBudget
-import ContinuousFlexibility.Analysis.N04PulledFieldsCompositionCost
-import ContinuousFlexibility.Analysis.N04PulledFieldsMovingPointOffsetOneHigh
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsCompositionBudget
+public import ContinuousFlexibility.Analysis.N04PulledFieldsCompositionCost
+public import ContinuousFlexibility.Analysis.N04PulledFieldsMovingPointOffsetOneHigh
 
 /-!
 # Moving-point families with parameter-dependent physical offsets
@@ -10,6 +12,8 @@ each parameter prefix before choosing a spatial order. The inverse
 prefix and the physical prefix share one power scale. A single final
 normalization retains the exact sampled height and one high seminorm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

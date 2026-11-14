@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalEvenDensity
-import ContinuousFlexibility.Analysis.CircleJetEncoding
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalEvenDensity
+public import ContinuousFlexibility.Analysis.CircleJetEncoding
 
 /-!
 # Smooth angular jets in each actual canonical rectangle
@@ -8,6 +10,8 @@ The angular integration-by-parts formula is integrated in the radial
 variable. It identifies the ordinary smooth derivatives with the exact
 weak canonical derivatives used by the closed volume graph.
 -/
+
+@[expose] public section
 
 noncomputable section
 

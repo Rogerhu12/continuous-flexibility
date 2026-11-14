@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.TailClosedHighBound
+module
+
+public import ContinuousFlexibility.Radial.TailClosedHighBound
 
 /-!
 # Mass averages and admissible Dirichlet walls
@@ -8,6 +10,8 @@ lies wholly before or after the wall. Compact core vectors have nonzero mass
 averages in only finitely many cells; this makes their low-mode projections
 finite sums of smooth hats.
 -/
+
+@[expose] public section
 
 noncomputable section
 

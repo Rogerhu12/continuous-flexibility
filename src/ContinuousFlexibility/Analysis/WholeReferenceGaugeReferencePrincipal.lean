@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.RadialReferencePotentialGerms
-import ContinuousFlexibility.Analysis.WholePositiveReferencePrincipal
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeReferenceRadial
-import ContinuousFlexibility.Analysis.WholeCanonicalAtlasPrincipalDensity
+module
+
+public import ContinuousFlexibility.Analysis.RadialReferencePotentialGerms
+public import ContinuousFlexibility.Analysis.WholePositiveReferencePrincipal
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeReferenceRadial
+public import ContinuousFlexibility.Analysis.WholeCanonicalAtlasPrincipalDensity
 
 /-!
 # Qualitative reference principal fields on every actual whole piece
@@ -13,6 +15,8 @@ positive fields use the scalar formulas for the same chosen Y and H.
 This proves the qualitative first clause of ReferencePrincipal on the
 same atlas, independently of its remaining uniform endpoint lower bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

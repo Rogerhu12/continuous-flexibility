@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerSelectedInnerInverse
-import ContinuousFlexibility.Radial.InnerSelectedPhysicalConvention
-import ContinuousFlexibility.Radial.PositiveBufferR09
+module
+
+public import ContinuousFlexibility.Radial.InnerSelectedInnerInverse
+public import ContinuousFlexibility.Radial.InnerSelectedPhysicalConvention
+public import ContinuousFlexibility.Radial.PositiveBufferR09
 
 /-!
 # Lemma 6.3: the inner inverse with the original order of choices
@@ -15,6 +17,8 @@ one constant controls all bands and all positive even modes. The inverse
 is chosen before the weight exponent gamma and satisfies both inverse
 identities, the exact Schur formula, and both weighted estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

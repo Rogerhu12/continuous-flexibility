@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Geometry.SphereShapeCurvature
-import ContinuousFlexibility.Geometry.SphereArea
+module
+
+public import ContinuousFlexibility.Geometry.SphereShapeCurvature
+public import ContinuousFlexibility.Geometry.SphereArea
 
 /-!
 # The actual signed mean-curvature integral of the constructed sphere
@@ -10,6 +12,8 @@ Hausdorff measure is used for integration. The graph moves by a true ambient
 rotation and the cap is fixed. Identification of the constructed normal as
 outward belongs to the enclosed-region construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

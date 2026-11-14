@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N07aAngularReferenceJetEnvelopes
-import ContinuousFlexibility.Analysis.N07aAngularSampleHeightDecay
-import ContinuousFlexibility.Analysis.N07aCanonicalGreenPairing
-import ContinuousFlexibility.Analysis.N07aCompositionBudget
-import ContinuousFlexibility.Scalar.WeightedCutoffDerivative
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceJetEnvelopes
+public import ContinuousFlexibility.Analysis.N07aAngularSampleHeightDecay
+public import ContinuousFlexibility.Analysis.N07aCanonicalGreenPairing
+public import ContinuousFlexibility.Analysis.N07aCompositionBudget
+public import ContinuousFlexibility.Scalar.WeightedCutoffDerivative
 
 /-!
 # Genuine low physical jets of an arbitrary transported height pair
@@ -12,6 +14,8 @@ derivative of the prescribed cutoff is handled by its already constructed
 weighted height vector. The bounds below are therefore conclusions for
 the actual candidate, not regularity assumptions on a reference solution.
 -/
+
+@[expose] public section
 
 noncomputable section
 

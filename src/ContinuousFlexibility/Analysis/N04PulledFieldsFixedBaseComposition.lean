@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsFixedBaseFamily
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsFixedBaseFamily
 
 /-!
 # Composition without moving the common low base past the parameter order
@@ -8,6 +10,8 @@ composition uses the existing finite-partition theorem, whose interpolation
 base is chosen once before all parameter orders. Every output tower is the
 genuine chain-rule tower of the specified maps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

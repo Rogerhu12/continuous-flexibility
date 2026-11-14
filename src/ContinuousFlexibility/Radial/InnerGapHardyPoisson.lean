@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.RadialPositiveHardy
-import ContinuousFlexibility.Radial.InnerGapPoissonL2
+module
+
+public import ContinuousFlexibility.Radial.RadialPositiveHardy
+public import ContinuousFlexibility.Radial.InnerGapPoissonL2
 
 /-!
 # Hardy bounds for the actual gap Poisson map
@@ -8,6 +10,8 @@ The bound keeps the complete conormal matrix of the original columns.
 The only additional term is their actual left endpoint trace. It does
 not use a uniform positive lower bound on the logarithmic slope.
 -/
+
+@[expose] public section
 
 noncomputable section
 

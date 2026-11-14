@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.RadialTargets
-import ContinuousFlexibility.Radial.MorseChainParameters
+module
+
+public import ContinuousFlexibility.Statements.RadialTargets
+public import ContinuousFlexibility.Radial.MorseChainParameters
 
 /-!
 # Transition bands of the actual Morse scales
@@ -8,6 +10,8 @@ The least nonsquare choice determines the decreasing Morse parameters.
 The frequency thresholds exhaust the frequencies, and a uniform estimate
 controls every cell after a frequency's transition cell.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OuterWholeSource
+module
+
+public import ContinuousFlexibility.Radial.OuterWholeSource
 
 /-!
 # The same outer kernel as an entrance-based variation formula
@@ -8,6 +10,8 @@ the full natural pairing minus its initial primitive.  This identifies
 the already constructed L² operator with a single continuous one-sided
 representative for every L² source.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cStateAngleSmoothDirections
+module
+
+public import ContinuousFlexibility.Analysis.N01cStateAngleSmoothDirections
 
 /-!
 # Exact word identification for any genuine joint tower
@@ -8,6 +10,8 @@ actual angular state towers therefore identify every joint multilinear
 slot in its original order. No symmetry or joint-continuity assumption
 is added to those already genuine towers.
 -/
+
+@[expose] public section
 
 noncomputable section
 

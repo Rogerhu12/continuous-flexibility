@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ReferenceCosineL2
-import ContinuousFlexibility.Radial.ReferenceCirclePullback
-import Mathlib.MeasureTheory.Integral.DominatedConvergence
+module
+
+public import ContinuousFlexibility.Radial.ReferenceCosineL2
+public import ContinuousFlexibility.Radial.ReferenceCirclePullback
+public import Mathlib.MeasureTheory.Integral.DominatedConvergence
 
 /-!
 # Actual angular analysis of even periodic L² fields
@@ -9,6 +11,8 @@ The coefficients below are actual normalized angular integrals. Scalar
 Fourier Parseval and Fubini provide radial L² coefficients and the exact
 sum of their squared norms, for an arbitrary sigma-finite radial measure.
 -/
+
+@[expose] public section
 
 noncomputable section
 

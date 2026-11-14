@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Radial
-import ContinuousFlexibility.Radial.CentralStatementBridges
+module
+
+public import ContinuousFlexibility.Statements.Radial
+public import ContinuousFlexibility.Radial.CentralStatementBridges
 
 /-!
 # Flat extension of a specified natural second-mode solution
@@ -8,6 +10,8 @@ The physical flatness conclusion supplies one nonzero natural solution.
 Uniqueness of the natural line transfers its smooth endpoint extension
 to every specified natural solution, without replacing that solution.
 -/
+
+@[expose] public section
 
 noncomputable section
 

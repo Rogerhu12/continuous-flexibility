@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.R11bPartitionL2
-import ContinuousFlexibility.Radial.R11bWeightEmbedding
-import ContinuousFlexibility.Radial.ProfileScalarSquares
+module
+
+public import ContinuousFlexibility.Radial.R11bPartitionL2
+public import ContinuousFlexibility.Radial.R11bWeightEmbedding
+public import ContinuousFlexibility.Radial.ProfileScalarSquares
 
 /-!
 # Ordinary L2 control from output-weighted localized squares
@@ -9,6 +11,8 @@ The lower bound for the output weight uses the positive attenuation
 exponent. Its constant is uniform in the scalar field, the partition, and
 any Fourier mode. No count of cells with the same index is needed.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

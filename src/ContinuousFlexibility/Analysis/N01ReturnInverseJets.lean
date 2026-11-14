@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01OrdinaryFlowClosedJets
-import ContinuousFlexibility.Analysis.ScalarInverseMaterialJets
-import ContinuousFlexibility.Analysis.CanonicalReturnJacobianBounds
-import ContinuousFlexibility.Analysis.CanonicalStateInterpolation
+module
+
+public import ContinuousFlexibility.Analysis.N01OrdinaryFlowClosedJets
+public import ContinuousFlexibility.Analysis.ScalarInverseMaterialJets
+public import ContinuousFlexibility.Analysis.CanonicalReturnJacobianBounds
+public import ContinuousFlexibility.Analysis.CanonicalStateInterpolation
 
 /-!
 # Actual N01 return inverse jets with one state loss
@@ -14,6 +16,8 @@ Component constants are selected before the state and the angle; the
 common low order and loss are selected before the component. The first
 parameter-order loss is chosen once before every angular order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

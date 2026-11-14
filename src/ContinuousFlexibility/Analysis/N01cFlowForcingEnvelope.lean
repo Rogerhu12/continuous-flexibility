@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cCircleForcingProducts
-import ContinuousFlexibility.Analysis.N01cFlowForcingSobolev
+module
+
+public import ContinuousFlexibility.Analysis.N01cCircleForcingProducts
+public import ContinuousFlexibility.Analysis.N01cFlowForcingSobolev
 
 /-!
 # Retaining one material factor in the variational forcing
@@ -9,6 +11,8 @@ survives whether the one high Sobolev norm falls on that factor or on a
 lower variation. The remaining factors contribute only a polynomial in
 fixed lower spatial orders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

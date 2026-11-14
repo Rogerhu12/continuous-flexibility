@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N08ControlLocality
-import ContinuousFlexibility.Scalar.Conservation
+module
+
+public import ContinuousFlexibility.Analysis.N08ControlLocality
+public import ContinuousFlexibility.Scalar.Conservation
 
 /-!
 # Angular regularity of the actual characteristic speed
@@ -9,6 +11,8 @@ the radius alone.  Its angular factors are smooth on the geometric domain.
 Compact rectangles therefore give genuine Lipschitz bounds in angle even
 when the rectangle includes a turning point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

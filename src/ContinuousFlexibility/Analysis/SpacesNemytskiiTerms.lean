@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SpacesNemytskiiWeights
-import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
-import Mathlib.Algebra.BigOperators.Group.Finset.Piecewise
+module
+
+public import ContinuousFlexibility.Analysis.SpacesNemytskiiWeights
+public import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
+public import Mathlib.Algebra.BigOperators.Group.Finset.Piecewise
 
 /-!
 # Terms in a normalized composition jet
@@ -10,6 +12,8 @@ direction. Its radial coefficient retains exactly the power of `H`
 determined by the number of factors. This records the derivative budget
 needed for a fixed-loss tame estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ZeroModeEndpointWeight
-import ContinuousFlexibility.Radial.ReferenceRadialMeasureComparison
+module
+
+public import ContinuousFlexibility.Radial.ZeroModeEndpointWeight
+public import ContinuousFlexibility.Radial.ReferenceRadialMeasureComparison
 
 /-!
 # Endpoint L2 control from the frozen radial weighted measure
@@ -9,6 +11,8 @@ endpoint estimate into domination of the inverse-square-distance measure.
 This proves ordinary L2 integrability of the endpoint quotient for every
 member of the actual radial output space, including its measurability.
 -/
+
+@[expose] public section
 
 noncomputable section
 

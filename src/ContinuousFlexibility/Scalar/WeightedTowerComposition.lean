@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedTowerCompositionBounds
-import ContinuousFlexibility.Analysis.TameComposition
+module
+
+public import ContinuousFlexibility.Scalar.WeightedTowerCompositionBounds
+public import ContinuousFlexibility.Analysis.TameComposition
 
 /-!
 # Fixed-loss composition on the original open domain
@@ -9,6 +11,8 @@ composition tower.  A uniform bound on one fixed source seminorm suffices
 to add the two losses, without any dependence of the base or loss on the
 directional derivative order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

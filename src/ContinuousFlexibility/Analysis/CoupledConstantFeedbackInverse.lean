@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CoupledControlCircleInverse
-import ContinuousFlexibility.Analysis.CoupledControlNorms
+module
+
+public import ContinuousFlexibility.Analysis.CoupledControlCircleInverse
+public import ContinuousFlexibility.Analysis.CoupledControlNorms
 
 /-!
 # The feedback inverse on the original constant-circle space
@@ -9,6 +11,8 @@ constant control is recovered by the reciprocal diagonal from a smooth
 circle-valued response. Both inverse identities hold on the original
 constant-circle space, without a lift of arbitrary Banach controls.
 -/
+
+@[expose] public section
 
 noncomputable section
 

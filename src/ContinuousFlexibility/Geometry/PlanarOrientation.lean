@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Contracts.IsometricGraph
-import Mathlib.Topology.Order.IntermediateValue
+module
+
+public import ContinuousFlexibility.Contracts.IsometricGraph
+public import Mathlib.Topology.Order.IntermediateValue
 
 /-!
 # Orientation of a normalized smooth planar development
@@ -11,6 +13,8 @@ one there; connectedness of the plane then forces it to be positive
 everywhere. Orientation is a proved conclusion, not an additional field
 of the graph-development interface.
 -/
+
+@[expose] public section
 
 noncomputable section
 

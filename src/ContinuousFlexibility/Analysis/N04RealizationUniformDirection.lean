@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aFixedDirection
-import ContinuousFlexibility.Scalar.WeightedTowerCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N07aFixedDirection
+public import ContinuousFlexibility.Scalar.WeightedTowerCalculus
 
 /-!
 # A fixed derivative retains the uniform neighborhood
@@ -9,6 +11,8 @@ one-high estimate also remains uniform on the original domain, with
 the original base and loss. The fixed vector only changes the numerical
 constant at each spatial order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

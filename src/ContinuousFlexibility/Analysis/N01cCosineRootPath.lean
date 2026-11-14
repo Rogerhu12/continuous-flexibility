@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cEndpointDivision
-import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
-import Mathlib.Analysis.SpecialFunctions.Sqrt
+module
+
+public import ContinuousFlexibility.Analysis.N01cEndpointDivision
+public import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
+public import Mathlib.Analysis.SpecialFunctions.Sqrt
 
 /-!
 # A smooth compact coordinate for two simple roots
@@ -10,6 +12,8 @@ time. The signed sine factor gives a smooth extension of the transformed
 speed; equality with the original speed is used only on the physical
 half-period, where the sine has the required sign.
 -/
+
+@[expose] public section
 
 noncomputable section
 

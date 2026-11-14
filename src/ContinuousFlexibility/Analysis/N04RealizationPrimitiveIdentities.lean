@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07bReferenceGeometry
-import ContinuousFlexibility.Analysis.N07aAngularJacobianEnvelope
+module
+
+public import ContinuousFlexibility.Analysis.N07bReferenceGeometry
+public import ContinuousFlexibility.Analysis.N07aAngularJacobianEnvelope
 
 /-!
 # Primitive identities on the actual moving pieces
@@ -11,6 +13,8 @@ canonical source and the genuine inverse-chart Jacobian. Every local
 identity holds on a whole physical or material piece, before derivatives
 are transferred. No quantitative field estimate is an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

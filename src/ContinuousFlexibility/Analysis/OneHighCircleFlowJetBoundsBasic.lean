@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCompositionJets
-import Mathlib.Analysis.SpecialFunctions.ExpDeriv
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCompositionJets
+public import Mathlib.Analysis.SpecialFunctions.ExpDeriv
 
 /-!
 # A linear highest-jet bound in the actual chain rule
@@ -9,6 +11,8 @@ highest inner derivative linearly. Every other block size is strictly
 smaller than the total order. This is the triangular structure used to
 bound the low flow jets from an integral of speed derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

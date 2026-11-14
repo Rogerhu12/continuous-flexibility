@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01EndpointStateIncrement
-import ContinuousFlexibility.Analysis.N01EndpointPositiveCircleMember
+module
+
+public import ContinuousFlexibility.Analysis.N01EndpointStateIncrement
+public import ContinuousFlexibility.Analysis.N01EndpointPositiveCircleMember
 
 /-!
 # The actual zero-order endpoint difference belongs to the circle model
@@ -9,6 +11,8 @@ scalar parameter. The second segment has a fixed physical height, so
 one summable plateau energy controls the entire segment. Both pieces
 are differences of the actual endpoint fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 

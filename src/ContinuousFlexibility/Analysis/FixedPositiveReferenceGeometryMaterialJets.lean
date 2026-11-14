@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.PositiveReferenceGeometryJetEnvelope
+module
+
+public import ContinuousFlexibility.Analysis.PositiveReferenceGeometryJetEnvelope
 
 /-!
 # Geometric material jets for one fixed positive reference family
@@ -7,6 +9,8 @@ The low interval cost and every forward/inverse jet belong to the same
 coordinate and height. A finite prefix changes numerical constants only;
 the original sample weight, family and interpolation width are retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

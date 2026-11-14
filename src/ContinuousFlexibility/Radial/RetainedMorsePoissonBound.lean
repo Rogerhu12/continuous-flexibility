@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.RetainedMorseModelChart
-import ContinuousFlexibility.Radial.InnerMorsePhysicalPoisson
-import ContinuousFlexibility.Radial.MatchedInnerUnitWeights
+module
+
+public import ContinuousFlexibility.Radial.RetainedMorseModelChart
+public import ContinuousFlexibility.Radial.InnerMorsePhysicalPoisson
+public import ContinuousFlexibility.Radial.MatchedInnerUnitWeights
 
 /-!
 # The original normalized Morse Poisson estimate on the retained profile
@@ -9,6 +11,8 @@ The two independent radial dilations cancel in the logarithmic
 velocity. The original localized witness and its normalized remainder
 are kept unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

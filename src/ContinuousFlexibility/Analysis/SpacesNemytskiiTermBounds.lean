@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesNemytskiiTerms
-import ContinuousFlexibility.Analysis.SpacesNemytskiiProducts
+module
+
+public import ContinuousFlexibility.Analysis.SpacesNemytskiiTerms
+public import ContinuousFlexibility.Analysis.SpacesNemytskiiProducts
 
 /-!
 # Fixed-loss bounds for composition terms
@@ -8,6 +10,8 @@ Every term with at least one height factor has a bounded radial coefficient
 when the height exponent is positive. Its weighted L² norm is therefore
 controlled by the finite-product interpolation estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

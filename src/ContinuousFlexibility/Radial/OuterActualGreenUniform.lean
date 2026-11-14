@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.OuterActualGreenData
-import ContinuousFlexibility.Radial.OuterDeepUniform
-import ContinuousFlexibility.Radial.OuterPhysicalTailBasisNorm
+module
+
+public import ContinuousFlexibility.Radial.OuterActualGreenData
+public import ContinuousFlexibility.Radial.OuterDeepUniform
+public import ContinuousFlexibility.Radial.OuterPhysicalTailBasisNorm
 
 /-!
 # Uniform actual outer Green data from the realized Morse family
@@ -11,6 +13,8 @@ frequency, endpoint, middle cut and allowed state scale. Every tail,
 basis, homogeneous pair and inverse is then constructed on the actual
 profile. No deep hypothesis or final norm estimate is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

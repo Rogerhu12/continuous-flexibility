@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.MatchedInnerActualWeights
-import ContinuousFlexibility.Radial.MatchedInnerUnitWeights
-import ContinuousFlexibility.Radial.InnerRadialDirichletWeights
-import ContinuousFlexibility.Radial.InnerRadialWeightedPoisson
-import ContinuousFlexibility.Radial.InnerRadialInterfaceWeights
+module
+
+public import ContinuousFlexibility.Radial.MatchedInnerActualWeights
+public import ContinuousFlexibility.Radial.MatchedInnerUnitWeights
+public import ContinuousFlexibility.Radial.InnerRadialDirichletWeights
+public import ContinuousFlexibility.Radial.InnerRadialWeightedPoisson
+public import ContinuousFlexibility.Radial.InnerRadialInterfaceWeights
 
 /-!
 # Local physical estimates for the same weighted inner inverse
@@ -13,6 +15,8 @@ weight constancy. All global weighted Dirichlet, Poisson and interface
 bounds are derived for one actual chain C. The constants remain explicit
 and may be fixed before the chain geometry is chosen.
 -/
+
+@[expose] public section
 
 noncomputable section
 

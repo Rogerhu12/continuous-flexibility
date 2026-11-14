@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerBufferBarrier
-import ContinuousFlexibility.Radial.InnerBufferL2
-import Mathlib.Analysis.Calculus.Deriv.Support
+module
+
+public import ContinuousFlexibility.Radial.InnerBufferBarrier
+public import ContinuousFlexibility.Radial.InnerBufferL2
+public import Mathlib.Analysis.Calculus.Deriv.Support
 
 /-!
 # The actual exponentially small cutoff source
@@ -11,6 +13,8 @@ whose model-coordinate length is exactly 1 / mass. Combining this fact
 with the exponential and derivative estimates of the same buffer column
 gives its mass^(3/2) * exp (-action) L² bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

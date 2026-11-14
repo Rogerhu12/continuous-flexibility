@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.MatchedOuterFixedPointBounds
-import ContinuousFlexibility.Radial.MatchedOuterRadiusLocalized
-import ContinuousFlexibility.Radial.MatchedOuterRadiusCells
-import ContinuousFlexibility.Radial.MatchedOuterWholeModalBounds
+module
+
+public import ContinuousFlexibility.Radial.MatchedOuterFixedPointBounds
+public import ContinuousFlexibility.Radial.MatchedOuterRadiusLocalized
+public import ContinuousFlexibility.Radial.MatchedOuterRadiusCells
+public import ContinuousFlexibility.Radial.MatchedOuterWholeModalBounds
 
 /-!
 # Full L² localized estimates after the actual retained dilation
@@ -11,6 +13,8 @@ kernel at the regular cut. Its compact-core and deep-tail point bounds
 control every cell of the original transported inverse and the supplied
 matching-normalized natural column. No smooth-source restriction occurs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

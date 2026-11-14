@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.TailSmoothResistanceStep
-import ContinuousFlexibility.Radial.TailMassResistanceData
-import ContinuousFlexibility.Radial.TailFormCore
+module
+
+public import ContinuousFlexibility.Radial.TailSmoothResistanceStep
+public import ContinuousFlexibility.Radial.TailMassResistanceData
+public import ContinuousFlexibility.Radial.TailFormCore
 
 /-!
 # Actual smooth low-mode hats on the tail
@@ -9,6 +11,8 @@ One chosen smooth resistance step is shared by the two hats incident to
 each gap. Consecutive hats are differences of these same steps; their sum
 on a gap therefore has the exact affine interpolation formula.
 -/
+
+@[expose] public section
 
 noncomputable section
 

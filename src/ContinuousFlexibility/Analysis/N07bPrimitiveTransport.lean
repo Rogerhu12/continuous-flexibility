@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07bTransportReferenceGraph
-import ContinuousFlexibility.Analysis.N07bReferencePieceRegularity
-import ContinuousFlexibility.Analysis.MaterialHeightRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N07bTransportReferenceGraph
+public import ContinuousFlexibility.Analysis.N07bReferencePieceRegularity
+public import ContinuousFlexibility.Analysis.MaterialHeightRegularity
 
 /-!
 # The actual reference representative from primitive transport geometry
@@ -16,6 +18,8 @@ canonical height, and its actual reference forcing has the smooth closed-piece
 representatives used by the canonical energy construction. No graph or
 canonical-space membership is a premise.
 -/
+
+@[expose] public section
 
 noncomputable section
 

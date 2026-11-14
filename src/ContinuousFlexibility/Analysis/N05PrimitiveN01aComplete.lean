@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N05RetainedReferenceAssembly
-import ContinuousFlexibility.Analysis.N05RetainedOpticalLowerAdapter
-import ContinuousFlexibility.Analysis.N05RetainedN01a
-import Lean.Util.CollectAxioms
+module
+
+public import ContinuousFlexibility.Analysis.N05RetainedReferenceAssembly
+public import ContinuousFlexibility.Analysis.N05RetainedOpticalLowerAdapter
+public import ContinuousFlexibility.Analysis.N05RetainedN01a
+public import Lean.Util.CollectAxioms
 
 /-!
 # Primitive geometry on one actual retained reference
@@ -15,6 +17,8 @@ tails and finite central part, not inferred from `N01PartA`.
 The retained R11a/R12 assembly completes its own `Γ.reference`; the adapter
 preserves that reference and its selected raw index formula.
 -/
+
+@[expose] public section
 
 noncomputable section
 

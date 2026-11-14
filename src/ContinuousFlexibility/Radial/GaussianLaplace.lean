@@ -1,11 +1,13 @@
-import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
-import Mathlib.Analysis.Calculus.ParametricIntegral
-import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
-import Mathlib.Analysis.Calculus.Deriv.MeanValue
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
-import Mathlib.Tactic.Positivity
-import Mathlib.Tactic.Ring
-import Mathlib.Tactic.Linarith
+module
+
+public import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
+public import Mathlib.Analysis.Calculus.ParametricIntegral
+public import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
+public import Mathlib.Analysis.Calculus.Deriv.MeanValue
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+public import Mathlib.Tactic.Positivity
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.Linarith
 
 /-!
 # The convergent Laplace--Gaussian moments of the central radius
@@ -14,6 +16,8 @@ The integral is over the actual positive half-line. Euler's Gamma
 integrability gives a global majorant; differentiation is justified by
 the dominated-derivative theorem, rather than postulated for the integral.
 -/
+
+@[expose] public section
 
 noncomputable section
 

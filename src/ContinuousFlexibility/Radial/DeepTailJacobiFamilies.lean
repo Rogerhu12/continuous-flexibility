@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.DeepTailJacobiData
-import ContinuousFlexibility.Radial.DeepTailPoissonFamilies
-import ContinuousFlexibility.Radial.TailNaturalNodeContinuity
+module
+
+public import ContinuousFlexibility.Radial.DeepTailJacobiData
+public import ContinuousFlexibility.Radial.DeepTailPoissonFamilies
+public import ContinuousFlexibility.Radial.TailNaturalNodeContinuity
 
 /-!
 # Continuous actual Jacobi coefficients
@@ -8,6 +10,8 @@ import ContinuousFlexibility.Radial.TailNaturalNodeContinuity
 The flux coefficients involve only the fixed physical edges and the
 density.  No continuity of the auxiliary mass-interval split is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

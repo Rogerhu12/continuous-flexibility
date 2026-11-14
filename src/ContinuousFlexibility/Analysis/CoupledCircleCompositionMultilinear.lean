@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CoupledCircleCompositionCurveDerivative
-import ContinuousFlexibility.Analysis.CoupledCircleAngularDerivative
-import ContinuousFlexibility.Analysis.SpacesNemytskiiSmooth
+module
+
+public import ContinuousFlexibility.Analysis.CoupledCircleCompositionCurveDerivative
+public import ContinuousFlexibility.Analysis.CoupledCircleAngularDerivative
+public import ContinuousFlexibility.Analysis.SpacesNemytskiiSmooth
 
 /-!
 # Multilinear circle kernels and their joint continuity
@@ -10,6 +12,8 @@ The genuine derivative in the chart parameter, together with the local
 product bounds, proves joint continuity in the original projective
 topology.
 -/
+
+@[expose] public section
 
 noncomputable section
 

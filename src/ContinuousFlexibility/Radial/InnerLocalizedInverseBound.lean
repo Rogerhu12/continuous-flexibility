@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerCouplingBound
-import ContinuousFlexibility.Radial.InnerPiecewiseWeights
-import ContinuousFlexibility.Radial.InnerCoefficientCosts
+module
+
+public import ContinuousFlexibility.Radial.InnerCouplingBound
+public import ContinuousFlexibility.Radial.InnerPiecewiseWeights
+public import ContinuousFlexibility.Radial.InnerCoefficientCosts
 
 /-!
 # The localized coefficient loss does not enlarge the Poisson correction
@@ -9,6 +11,8 @@ The loss multiplier has norm at most one. Applying it to the same Schur
 inverse therefore leaves the frequency-decaying correction bound intact.
 Only the local Dirichlet part pays the fixed coefficient exponent.
 -/
+
+@[expose] public section
 
 noncomputable section
 

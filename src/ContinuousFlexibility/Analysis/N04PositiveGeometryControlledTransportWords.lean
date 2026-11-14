@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledFactorWords
-import ContinuousFlexibility.Analysis.N04PositiveGeometryPlaneSavedTransportComposition
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledFactorWords
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryPlaneSavedTransportComposition
 
 /-!
 # Saved words of the two displayed whole-component transports
@@ -9,6 +11,8 @@ graph. The inverse composes the inverse angle with the inverse radial
 graph. Their actual geometry keeps every moving radius on the same
 closed physical slab.
 -/
+
+@[expose] public section
 
 noncomputable section
 

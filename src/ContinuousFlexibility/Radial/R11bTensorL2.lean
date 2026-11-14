@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R11bModeL2
+module
+
+public import ContinuousFlexibility.Radial.R11bModeL2
 
 /-!
 # Actual product L² tensors
@@ -7,6 +9,8 @@ Separate square-integrable radial and angular factors define an actual
 product L² function. Its squared norm and cross inner product factor into
 the corresponding ordinary integrals.
 -/
+
+@[expose] public section
 
 noncomputable section
 

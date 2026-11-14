@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import ContinuousFlexibility.Scalar.SecondProduct
-import ContinuousFlexibility.Scalar.Linearization
-import Mathlib.Tactic.LinearCombination
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import ContinuousFlexibility.Scalar.SecondProduct
+public import ContinuousFlexibility.Scalar.Linearization
+public import Mathlib.Tactic.LinearCombination
 
 /-!
 # Principal coefficients from the actual operator identity
@@ -15,6 +17,8 @@ identity. The resulting three tests recover the symmetric principal density
 The identity is proved from actual derivatives. It is not an assumed
 transformation rule for independent coordinate jets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

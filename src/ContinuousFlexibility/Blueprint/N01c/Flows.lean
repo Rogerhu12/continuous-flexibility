@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cOrdinaryFlowBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01cOrdinaryFlowBounds
 
 /-!
 # N01c: variations of the ordinary flows
@@ -7,6 +9,8 @@ The actual angular and radial variations satisfy their estimates on one
 common neighborhood. The coefficient estimate and the geometric clauses
 restrict to that same neighborhood, yielding the complete N01 package.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

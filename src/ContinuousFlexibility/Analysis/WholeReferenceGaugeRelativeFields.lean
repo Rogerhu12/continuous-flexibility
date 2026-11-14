@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData
+module
+
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData
 
 /-!
 # The original relative fields in the reference-gauged whole atlas
@@ -7,6 +9,8 @@ The fixed reference chart and height cancel from the actual current-point,
 reference-point and height-ratio definitions. The same relative maps and
 height remain in the record; no new family or width is selected.
 -/
+
+@[expose] public section
 
 noncomputable section
 

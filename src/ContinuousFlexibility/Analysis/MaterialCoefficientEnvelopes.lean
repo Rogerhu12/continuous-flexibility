@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.MaterialDivergenceEnvelopes
+module
+
+public import ContinuousFlexibility.Analysis.MaterialDivergenceEnvelopes
 
 /-!
 # Common source envelopes with material coefficient growth
@@ -8,6 +10,8 @@ of the material weight. The height family supplies every weighted jet,
 so this growth still gives a common L² envelope for the actual fluxes
 and their symmetric divergence.
 -/
+
+@[expose] public section
 
 noncomputable section
 

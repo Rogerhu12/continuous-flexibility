@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bRootOrientation
-import ContinuousFlexibility.Analysis.N04PositiveComponents
+module
+
+public import ContinuousFlexibility.Analysis.N04bRootOrientation
+public import ContinuousFlexibility.Analysis.N04PositiveComponents
 
 /-!
 # Selecting the actual field of a whole component
@@ -10,6 +12,8 @@ cannot share an endpoint. The selection below therefore retains the
 actual closed root values. On a positive component it selects the
 unique positive field. The choice depends only on the physical radius.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CircleCompositionJetModels
-import ContinuousFlexibility.Analysis.CircleFiniteEnergyEnvelopes
+module
+
+public import ContinuousFlexibility.Analysis.CircleCompositionJetModels
+public import ContinuousFlexibility.Analysis.CircleFiniteEnergyEnvelopes
 
 /-!
 # Summable envelopes along actual affine chart lines
@@ -9,6 +11,8 @@ moves along a genuine affine line, whose angular jets are uniformly
 bounded on the unit parameter interval. The remaining factors are
 uniformly smooth multipliers.
 -/
+
+@[expose] public section
 
 noncomputable section
 

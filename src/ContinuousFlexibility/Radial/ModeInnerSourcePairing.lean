@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ModeRegionSources
-import ContinuousFlexibility.Radial.ModeRegionalPairing
+module
+
+public import ContinuousFlexibility.Radial.ModeRegionSources
+public import ContinuousFlexibility.Radial.ModeRegionalPairing
 
 /-!
 # Pairings for the constructed inner source restriction
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Radial.ModeRegionalPairing
 These localization identities use the actual indicator projection,
 without assuming the matching object whose existence is being proved.
 -/
+
+@[expose] public section
 
 noncomputable section
 

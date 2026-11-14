@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CircleCompositionJetModels
+module
+
+public import ContinuousFlexibility.Analysis.CircleCompositionJetModels
 
 /-!
 # Fixed-order and tame bounds for finite actual circle products
@@ -7,6 +9,8 @@ The number of factors is fixed before the output order. Coarse bounds
 are used for projective continuity, while the second estimate retains
 affine high-order growth on every low-seminorm box.
 -/
+
+@[expose] public section
 
 noncomputable section
 

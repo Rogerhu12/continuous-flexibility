@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04bActualAtlasCuts
-import ContinuousFlexibility.Analysis.CanonicalRootTransportBoundary
-import ContinuousFlexibility.Analysis.OpenGermBoundaryJets
+module
+
+public import ContinuousFlexibility.Analysis.N04bActualAtlasCuts
+public import ContinuousFlexibility.Analysis.CanonicalRootTransportBoundary
+public import ContinuousFlexibility.Analysis.OpenGermBoundaryJets
 
 /-!
 # Boundary jets of any matched model equal the stored atlas jets
@@ -10,6 +12,8 @@ chart and height on the positive collar. Their ordinary boundary jets
 therefore agree, independently of which smooth root model the atlas
 construction selected. No common collar in the state parameter is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

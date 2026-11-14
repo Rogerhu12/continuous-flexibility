@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeHeightCurrentData
-import ContinuousFlexibility.Analysis.N04NegativeHeightParameterInterpolation
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeHeightCurrentData
+public import ContinuousFlexibility.Analysis.N04NegativeHeightParameterInterpolation
 
 /-!
 # One uniform neighborhood for normalized negative height factors
@@ -8,6 +10,8 @@ The sampled material height absorbs the coefficient envelope at order
 zero. Thus a single finite seminorm and a positive radius make an actual
 current difference uniformly small on all selected pieces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

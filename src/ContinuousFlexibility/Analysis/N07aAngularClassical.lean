@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalWeakJets
-import ContinuousFlexibility.Analysis.SpacesCylinderIntegration
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalWeakJets
+public import ContinuousFlexibility.Analysis.SpacesCylinderIntegration
 
 /-!
 # Classical test jets in the actual canonical weak graph
@@ -9,6 +11,8 @@ support removes the difference between the full cylinder measure and the
 canonical interval measure. Classical integration by parts therefore
 gives the same weak relation used by the frozen volume graph.
 -/
+
+@[expose] public section
 
 noncomputable section
 

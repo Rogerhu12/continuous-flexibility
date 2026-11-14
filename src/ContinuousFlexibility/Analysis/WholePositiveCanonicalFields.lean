@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.WholePositiveChartGeometry
-import ContinuousFlexibility.Analysis.CoordinateOperatorConstruction
-import ContinuousFlexibility.Analysis.CanonicalCoefficientIdentities
+module
+
+public import ContinuousFlexibility.Analysis.WholePositiveChartGeometry
+public import ContinuousFlexibility.Analysis.CoordinateOperatorConstruction
+public import ContinuousFlexibility.Analysis.CanonicalCoefficientIdentities
 
 /-!
 # Actual fields of a whole positive canonical piece
@@ -11,6 +13,8 @@ open, closed, and normalization clauses follow from these actual maps.
 The coefficient and potential fields use the actual coordinate formulas.
 At the reference member they retain the physical coefficient field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

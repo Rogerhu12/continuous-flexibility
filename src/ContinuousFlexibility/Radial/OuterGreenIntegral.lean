@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterKernelL2
-import Mathlib.Topology.Order.Lattice
+module
+
+public import ContinuousFlexibility.Radial.OuterKernelL2
+public import Mathlib.Topology.Order.Lattice
 
 /-!
 # The normalized outer Green kernel and its core operator
@@ -10,6 +12,8 @@ construction, with its mass estimate proved explicitly.  The tail algebra
 proves the Dirichlet-plus-rank-one decomposition without division by any
 boundary value.
 -/
+
+@[expose] public section
 
 noncomputable section
 

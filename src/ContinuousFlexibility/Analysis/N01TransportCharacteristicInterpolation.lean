@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01CharacteristicJointGrowth
-import ContinuousFlexibility.Analysis.N01TransportAngularInterpolation
-import ContinuousFlexibility.Analysis.WeightedJointMixedInterpolation
+module
+
+public import ContinuousFlexibility.Analysis.N01CharacteristicJointGrowth
+public import ContinuousFlexibility.Analysis.N01TransportAngularInterpolation
+public import ContinuousFlexibility.Analysis.WeightedJointMixedInterpolation
 
 /-!
 # Characteristic interpolation on the full correction parameter space
@@ -11,6 +13,8 @@ bound, with the same base and loss. Uniqueness then transfers this bound
 to any supplied actual tower. A single interpolation step gives the
 primitive mixed bounds used by the radial transport recurrence.
 -/
+
+@[expose] public section
 
 noncomputable section
 

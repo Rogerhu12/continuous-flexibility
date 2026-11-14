@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06NormalizerDomain
+module
+
+public import ContinuousFlexibility.Analysis.N06NormalizerDomain
 
 /-!
 # Every original weighted estimate survives normalizer reselection
@@ -10,6 +12,8 @@ old output plus its compatibility scalar times this fixed direction.
 The original three exponents and every material and angular order are
 retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

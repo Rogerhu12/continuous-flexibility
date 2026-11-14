@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06NegativeFiniteIdentification
-import ContinuousFlexibility.Analysis.N06NegativeFullPeriodGreen
-import ContinuousFlexibility.Analysis.N06CurrentRelativeSourceIdentity
-import ContinuousFlexibility.Analysis.N06CutTransmissionJets
+module
+
+public import ContinuousFlexibility.Analysis.N06NegativeFiniteIdentification
+public import ContinuousFlexibility.Analysis.N06NegativeFullPeriodGreen
+public import ContinuousFlexibility.Analysis.N06CurrentRelativeSourceIdentity
+public import ContinuousFlexibility.Analysis.N06CutTransmissionJets
 
 /-!
 # The actual negative finite core and its current Green source
@@ -16,6 +18,8 @@ The resulting Green formula applies to an arbitrary common finite set
 of modes and every original full-period physical test. No finite support
 of the raw source, added weak equation, or endpoint inverse is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

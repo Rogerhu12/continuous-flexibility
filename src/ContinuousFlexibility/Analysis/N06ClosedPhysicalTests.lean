@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N06NamedPhysicalRelation
-import ContinuousFlexibility.Analysis.N06PhysicalHeightAffinePairing
-import ContinuousFlexibility.Analysis.N06PhysicalTestCoordinates
-import ContinuousFlexibility.Analysis.N06CurrentPhysicalTests
-import ContinuousFlexibility.Analysis.N06ControlledPieceFiniteness
+module
+
+public import ContinuousFlexibility.Analysis.N06NamedPhysicalRelation
+public import ContinuousFlexibility.Analysis.N06PhysicalHeightAffinePairing
+public import ContinuousFlexibility.Analysis.N06PhysicalTestCoordinates
+public import ContinuousFlexibility.Analysis.N06CurrentPhysicalTests
+public import ContinuousFlexibility.Analysis.N06ControlledPieceFiniteness
 
 /-!
 # Closedness of the actual current physical weak equation
@@ -18,6 +20,8 @@ coefficients are the literal physical cutoff, nu, and psi pairings.
 Taking the intersection over the original test space proves closedness;
 no periodicity of the corrected coefficients is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

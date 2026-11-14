@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.BoundaryTaylorExtension
-import Mathlib.Topology.Algebra.Support
+module
+
+public import ContinuousFlexibility.Analysis.BoundaryTaylorExtension
+public import Mathlib.Topology.Algebra.Support
 
 /-!
 # Small endpoint cutoffs for the positive reference construction
@@ -10,6 +12,8 @@ allows a field smooth on the actual collar to be clipped into a globally
 smooth field, without assuming a common smooth neighborhood from a
 single pointwise smoothness hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

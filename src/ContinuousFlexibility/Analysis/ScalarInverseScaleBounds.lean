@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ScalarInverseJetBounds
+module
+
+public import ContinuousFlexibility.Analysis.ScalarInverseJetBounds
 
 /-!
 # Inverse jets with their exact scale exponents
@@ -8,6 +10,8 @@ Conjugating a scalar diffeomorphism by a dilation turns a bound of order
 then gives the same exponent for the actual inverse. Only forward jets
 through the requested order are used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aNuProfileTame
-import ContinuousFlexibility.Scalar.WeightedHeightParameterPullback
-import ContinuousFlexibility.Scalar.WeightedCommonHeightCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N07aNuProfileTame
+public import ContinuousFlexibility.Scalar.WeightedHeightParameterPullback
+public import ContinuousFlexibility.Scalar.WeightedCommonHeightCalculus
 
 /-!
 # The border-only scalar state has a genuine tame parameterization
@@ -10,6 +12,8 @@ No optical control is needed for the distinguished column. The map into
 the existing weighted scalar state is assembled from the actual compact
 profile germ and fixed coordinate projections.
 -/
+
+@[expose] public section
 
 noncomputable section
 

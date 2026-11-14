@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.IntervalWeakPrimitive
-import Mathlib.MeasureTheory.Integral.Prod
+module
+
+public import ContinuousFlexibility.Analysis.IntervalWeakPrimitive
+public import Mathlib.MeasureTheory.Integral.Prod
 
 /-!
 # Integral primitives of integrable functions
@@ -9,6 +11,8 @@ does not replace an integrable function by a pointwise differentiable one.
 The final lemma gives an actual derivative when the integrand has a
 continuous representative on the open interval.
 -/
+
+@[expose] public section
 
 open Set Filter MeasureTheory
 open scoped ContDiff Topology

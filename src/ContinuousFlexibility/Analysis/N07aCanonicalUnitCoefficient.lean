@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalOpenCoefficients
-import ContinuousFlexibility.Statements.N07aCanonicalGeometry
-import Mathlib.Analysis.Calculus.Deriv.CompMul
-import Mathlib.Analysis.Calculus.Deriv.Shift
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalOpenCoefficients
+public import ContinuousFlexibility.Statements.N07aCanonicalGeometry
+public import Mathlib.Analysis.Calculus.Deriv.CompMul
+public import Mathlib.Analysis.Calculus.Deriv.Shift
 
 /-!
 # Actual coefficients from unit-piece geometric jets
@@ -11,6 +13,8 @@ unit-strip bounds in the primitive geometry supply the bounded interior
 jet algebra on the original canonical interval. No extension through a
 piece endpoint is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

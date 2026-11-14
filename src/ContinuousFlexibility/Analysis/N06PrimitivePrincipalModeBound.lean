@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06PrimitivePrincipalSource
-import ContinuousFlexibility.Analysis.N07aActualPrincipalBlock
-import ContinuousFlexibility.Analysis.N07aModeEnergyNorm
-import ContinuousFlexibility.Analysis.N07aAngularBlockWeights
+module
+
+public import ContinuousFlexibility.Analysis.N06PrimitivePrincipalSource
+public import ContinuousFlexibility.Analysis.N07aActualPrincipalBlock
+public import ContinuousFlexibility.Analysis.N07aModeEnergyNorm
+public import ContinuousFlexibility.Analysis.N07aAngularBlockWeights
 
 /-!
 # Actual principal blocks with the reference mode energy inserted
@@ -11,6 +13,8 @@ sixth power of the actual interval length, and the L2 mode conversion
 has its square root.  The resulting material envelope is subpower and
 independent of the input and current state.
 -/
+
+@[expose] public section
 
 noncomputable section
 

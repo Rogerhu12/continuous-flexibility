@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01EndpointSmoothTame
-import ContinuousFlexibility.Analysis.N01FlowSmallness
-import ContinuousFlexibility.Analysis.N02ChartError
-import ContinuousFlexibility.Analysis.CirclePositiveInverseModel
+module
+
+public import ContinuousFlexibility.Analysis.N01EndpointSmoothTame
+public import ContinuousFlexibility.Analysis.N01FlowSmallness
+public import ContinuousFlexibility.Analysis.N02ChartError
+public import ContinuousFlexibility.Analysis.CirclePositiveInverseModel
 
 /-!
 # The actual return residual as an element of the circle model
@@ -12,6 +14,8 @@ perturbation u. Its odd part is the right chart perturbation, and inverse
 composition of its even part is exactly the prescribed return residual.
 Every operation takes place in the original physical circle model.
 -/
+
+@[expose] public section
 
 noncomputable section
 

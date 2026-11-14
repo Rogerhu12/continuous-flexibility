@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R11bFiniteSource
+module
+
+public import ContinuousFlexibility.Radial.R11bFiniteSource
 
 /-!
 # Exact selected coefficients of compatible finite sources
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Radial.R11bFiniteSource
 The coefficient is extracted from the ordinary angular integral. No
 uniqueness or reconstruction statement is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

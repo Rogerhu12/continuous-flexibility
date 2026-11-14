@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CircleStripAngularInterpolation
-import ContinuousFlexibility.Analysis.N01ResidualUniformBounds
-import ContinuousFlexibility.Analysis.N01ReturnTransportSpatialTowers
-import ContinuousFlexibility.Analysis.MaterialSampleDiscreteEnvelope
+module
+
+public import ContinuousFlexibility.Analysis.CircleStripAngularInterpolation
+public import ContinuousFlexibility.Analysis.N01ResidualUniformBounds
+public import ContinuousFlexibility.Analysis.N01ReturnTransportSpatialTowers
+public import ContinuousFlexibility.Analysis.MaterialSampleDiscreteEnvelope
 
 /-!
 # The actual angular boundary estimates for the transport system
@@ -12,6 +14,8 @@ families. The independent displacement retains its positive sample
 height; the bounded height factors of the other two fields are absorbed
 only into numerical constants.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.R11bHomogeneousMode
-import ContinuousFlexibility.Radial.R11bWeakModes
-import ContinuousFlexibility.Analysis.IntervalWeakPotential
+module
+
+public import ContinuousFlexibility.Radial.R11bHomogeneousMode
+public import ContinuousFlexibility.Radial.R11bWeakModes
+public import ContinuousFlexibility.Analysis.IntervalWeakPotential
 
 /-!
 # Modal uniqueness for strict interior physical tests
@@ -10,6 +12,8 @@ lies inside the core. Compression extends that equation to the exact frozen
 modal test domain. The given inverse then proves uniqueness without any
 assumption on the output cell exponent.
 -/
+
+@[expose] public section
 
 noncomputable section
 

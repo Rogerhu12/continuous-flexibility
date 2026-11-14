@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06FiniteModes
+module
+
+public import ContinuousFlexibility.Analysis.N06FiniteModes
 
 /-!
 # The positive-cylinder graph estimate for actual finite Fourier fields
@@ -7,6 +9,8 @@ The two orthonormal angular families are derivative partners. The estimate
 below is stated entirely with the actual radial and angular partials of the
 synthesized field, and with ordinary square integrals on the cylinder.
 -/
+
+@[expose] public section
 
 noncomputable section
 

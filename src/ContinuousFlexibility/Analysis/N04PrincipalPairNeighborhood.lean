@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PrincipalPairValue
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalPairValue
 
 /-!
 # Inverting a paired family on one smaller sector neighborhood
@@ -7,6 +9,8 @@ The sampled material envelope makes the value difference small relative
 to the reference denominator simultaneously on every selected piece.
 The radius is chosen before the reciprocal tower orders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

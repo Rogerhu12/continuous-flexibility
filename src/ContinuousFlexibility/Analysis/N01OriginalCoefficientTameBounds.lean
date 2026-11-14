@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01OriginalCoefficientSpatialJets
-import ContinuousFlexibility.Analysis.MaterialSampleDiscreteEnvelope
-import ContinuousFlexibility.Analysis.N01CoefficientJointTower
-import ContinuousFlexibility.Analysis.JointJetSpatialRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N01OriginalCoefficientSpatialJets
+public import ContinuousFlexibility.Analysis.MaterialSampleDiscreteEnvelope
+public import ContinuousFlexibility.Analysis.N01CoefficientJointTower
+public import ContinuousFlexibility.Analysis.JointJetSpatialRegularity
 
 /-!
 # Fixed-loss bounds for every actual original coefficient mixed jet
@@ -13,6 +15,8 @@ loss remain the original N01 orders. At parameter order zero the actual
 reference jets are restored; positive orders are exactly the increment
 jets and retain their homogeneous one-high bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

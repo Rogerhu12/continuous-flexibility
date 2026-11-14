@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PrincipalWeightedPrefix
-import ContinuousFlexibility.Analysis.N04PrincipalTowerValue
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalWeightedPrefix
+public import ContinuousFlexibility.Analysis.N04PrincipalTowerValue
 
 /-!
 # Passing between the frozen current-data clause and weighted towers
@@ -8,6 +10,8 @@ The algebra is carried out on a fixed open parameter domain. The final
 neighborhood restriction supplies the unit low-seminorm bound and the
 value estimate, without changing the atlas or its reference family.
 -/
+
+@[expose] public section
 
 noncomputable section
 

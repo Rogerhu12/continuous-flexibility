@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.Graded
+module
+
+public import ContinuousFlexibility.Analysis.Graded
 
 /-!
 # Fixed-loss tame linear estimates and actual continuity
@@ -13,6 +15,8 @@ The closure rules below track losses and base orders explicitly. They do
 not construct smoothing operators, tame nonlinear calculus, or a
 Nash–Moser iteration, and do not instantiate weighted Sobolev operators.
 -/
+
+@[expose] public section
 
 noncomputable section
 

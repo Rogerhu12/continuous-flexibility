@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.OuterPhysicalRobinInverse
-import ContinuousFlexibility.Radial.OuterEndpointBracket
-import ContinuousFlexibility.Radial.OuterRobinJacobiPairing
+module
+
+public import ContinuousFlexibility.Radial.OuterPhysicalRobinInverse
+public import ContinuousFlexibility.Radial.OuterEndpointBracket
+public import ContinuousFlexibility.Radial.OuterRobinJacobiPairing
 
 /-!
 # Exact assertions for the same actual outer inverse
@@ -9,6 +11,8 @@ The bounded operator, weak graph, canonical kernel representative,
 entrance traces, endpoint bracket, and original Jacobi pairing below
 all belong to one `OuterPhysicalRobinInverse` certificate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06CubicCutoffLp
-import ContinuousFlexibility.Analysis.N06LocalClosedCubicPairing
-import ContinuousFlexibility.Analysis.N06N05PositiveCubicSourceMap
-import ContinuousFlexibility.Radial.R11bWeakNormalLimit
+module
+
+public import ContinuousFlexibility.Analysis.N06CubicCutoffLp
+public import ContinuousFlexibility.Analysis.N06LocalClosedCubicPairing
+public import ContinuousFlexibility.Analysis.N06N05PositiveCubicSourceMap
+public import ContinuousFlexibility.Radial.R11bWeakNormalLimit
 
 /-!
 # Closed-cylinder tests for the same positive cubic source map
@@ -13,6 +15,8 @@ test is extended from a closed-cylinder neighborhood; the divided
 coefficients need smoothness and bounded first jets only on the open
 cylinder. Neither endpoint vanishing nor evenness of the test is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

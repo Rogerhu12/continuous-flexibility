@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06ReferenceChartNuSource
-import ContinuousFlexibility.Analysis.N06FiniteSourceNormalization
-import ContinuousFlexibility.Analysis.N06ScalarColumns
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceChartNuSource
+public import ContinuousFlexibility.Analysis.N06FiniteSourceNormalization
+public import ContinuousFlexibility.Analysis.N06ScalarColumns
 
 /-!
 # The current nu source for a chart fixed on the actual cutoff support
@@ -12,6 +14,8 @@ constructed reference-chart source is exactly the actual current nu
 column difference. The existing N05 inverse supplies its actual mu scalar
 and gives a bounded endomorphism of the same source space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

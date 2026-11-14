@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.Graded
-import Mathlib.Analysis.Calculus.LineDeriv.Basic
-import Mathlib.Analysis.Calculus.Deriv.Linear
+module
+
+public import ContinuousFlexibility.Analysis.Graded
+public import Mathlib.Analysis.Calculus.LineDeriv.Basic
+public import Mathlib.Analysis.Calculus.Deriv.Linear
 
 /-!
 # Genuine curve and line derivatives in projective Fréchet spaces
@@ -17,6 +19,8 @@ Bastiani chain rule from mere existence of line derivatives. Joint
 continuity of the derivative in the base point and direction remains a
 separate hypothesis in the eventual nonlinear calculus.
 -/
+
+@[expose] public section
 
 noncomputable section
 

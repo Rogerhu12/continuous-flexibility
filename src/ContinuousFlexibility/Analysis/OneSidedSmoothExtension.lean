@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.FlatExtension
-import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
-import Mathlib.Analysis.Calculus.SmoothSeries
-import Mathlib.Analysis.SpecificLimits.Basic
+module
+
+public import ContinuousFlexibility.Analysis.FlatExtension
+public import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
+public import Mathlib.Analysis.Calculus.SmoothSeries
+public import Mathlib.Analysis.SpecificLimits.Basic
 
 /-!
 # Smooth extension across one regular endpoint
@@ -11,6 +13,8 @@ smaller scales. Their lower derivatives are uniformly small, while the
 specified derivative at the origin is unchanged. This supplies a single
 smooth function realizing all prescribed endpoint jets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

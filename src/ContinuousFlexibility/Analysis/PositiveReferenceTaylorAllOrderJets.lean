@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.RadialTaylorSliceJetEnvelope
-import ContinuousFlexibility.Analysis.PositiveReferenceTaylorPrescribedWidth
-import ContinuousFlexibility.Analysis.PositiveReferenceSlopeAllOrderJets
-import ContinuousFlexibility.Analysis.PositiveReferenceHeightAllOrderJets
+module
+
+public import ContinuousFlexibility.Analysis.RadialTaylorSliceJetEnvelope
+public import ContinuousFlexibility.Analysis.PositiveReferenceTaylorPrescribedWidth
+public import ContinuousFlexibility.Analysis.PositiveReferenceSlopeAllOrderJets
+public import ContinuousFlexibility.Analysis.PositiveReferenceHeightAllOrderJets
 
 /-!
 # All orders at the same displayed reference Taylor width
@@ -10,6 +12,8 @@ The finite degree and its actual width are fixed from the low endpoint
 data. A later derivative order enlarges only a numerical upper bound.
 The integral coordinate and clipped-log height remain the same functions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

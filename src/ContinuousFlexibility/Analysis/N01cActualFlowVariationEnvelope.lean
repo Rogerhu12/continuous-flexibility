@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cActualFlowForcingEnvelope
-import ContinuousFlexibility.Analysis.N01cActualFlowCoefficientEnvelope
-import ContinuousFlexibility.Analysis.N01cFlowLinearFamilyEnvelope
+module
+
+public import ContinuousFlexibility.Analysis.N01cActualFlowForcingEnvelope
+public import ContinuousFlexibility.Analysis.N01cActualFlowCoefficientEnvelope
+public import ContinuousFlexibility.Analysis.N01cFlowLinearFamilyEnvelope
 
 /-!
 # The actual positive variation on its original unit ball
@@ -9,6 +11,8 @@ The actual forcing estimate and the actual linear equation are now
 combined. The polynomial degree depends only on the current state
 order. No spatial derivative order enters the exponential constant.
 -/
+
+@[expose] public section
 
 noncomputable section
 

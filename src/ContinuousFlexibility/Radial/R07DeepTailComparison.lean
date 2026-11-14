@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R07DeepTailChainIntegrals
-import ContinuousFlexibility.Radial.R07DeepTailRawBounds
+module
+
+public import ContinuousFlexibility.Radial.R07DeepTailChainIntegrals
+public import ContinuousFlexibility.Radial.R07DeepTailRawBounds
 
 /-!
 # Comparing every physical frequency with the normalized frequency two
@@ -9,6 +11,8 @@ all mass and resistance integrals differ from their frequency-two values
 by factors between `exp (-1)` and `exp 1`. This includes the complete
 initial resistance interval at the left endpoint.
 -/
+
+@[expose] public section
 
 noncomputable section
 

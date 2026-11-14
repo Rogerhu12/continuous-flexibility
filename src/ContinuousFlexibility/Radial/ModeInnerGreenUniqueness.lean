@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ModeWeakGreen
-import ContinuousFlexibility.Radial.ModeInnerSourcePairing
-import ContinuousFlexibility.Radial.ModeRegionWeakEquation
+module
+
+public import ContinuousFlexibility.Radial.ModeWeakGreen
+public import ContinuousFlexibility.Radial.ModeInnerSourcePairing
+public import ContinuousFlexibility.Radial.ModeRegionWeakEquation
 
 /-!
 # The actual inner right inverse determines every frozen weak solution
@@ -11,6 +13,8 @@ the actual scalar rows make this graph symmetric. Pairing the difference
 of two solutions with a right-inverse solution proves uniqueness without
 assuming that the arbitrary frozen solution lies in another energy domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

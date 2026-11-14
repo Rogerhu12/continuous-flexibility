@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerGapPoissonDomain
-import ContinuousFlexibility.Radial.InnerGapPhysicalWeak
-import ContinuousFlexibility.Radial.InnerGapWeakFlux
+module
+
+public import ContinuousFlexibility.Radial.InnerGapPoissonDomain
+public import ContinuousFlexibility.Radial.InnerGapPhysicalWeak
+public import ContinuousFlexibility.Radial.InnerGapWeakFlux
 
 /-!
 # Actual positive-gap Poisson equations and canonical weak flux
@@ -10,6 +12,8 @@ every test in the common H¹ zero-endpoint domain. The full outward
 matrix is then the weak flux computed using the fixed affine hats:
 Poisson columns and affine hats differ by actual zero-endpoint tests.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterPhysicalHilbert
-import ContinuousFlexibility.Radial.TailDeepInverse
+module
+
+public import ContinuousFlexibility.Radial.OuterPhysicalHilbert
+public import ContinuousFlexibility.Radial.TailDeepInverse
 
 /-!
 # The actual physical Dirichlet inverse on the deep tail
@@ -8,6 +10,8 @@ The operator is obtained from the constructed deep-tail Friedrichs inverse
 by the exact physical Hilbert isometry. Its norm is at most 64/j^4. The
 factor 12 is retained in both the graph and the differential identity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

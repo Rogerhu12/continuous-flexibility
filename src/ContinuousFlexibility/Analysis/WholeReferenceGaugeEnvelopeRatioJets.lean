@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ActualNegativeEnvelopeRatioJets
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+module
+
+public import ContinuousFlexibility.Analysis.ActualNegativeEnvelopeRatioJets
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
 
 /-!
 # The actual negative E0 reference ratio atoms
@@ -9,6 +11,8 @@ The fixed whole atlas keeps its original negative halves and cell samples.
 The explicitly enlarged envelope is evaluated as a new scalar function;
 neither its ratios nor their derivatives are identified with the old ones.
 -/
+
+@[expose] public section
 
 noncomputable section
 

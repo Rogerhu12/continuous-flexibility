@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsForwardModel
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledHeightTrace
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsForwardModel
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledHeightTrace
 
 /-!
 # Genuine full jets of the original root chart
@@ -9,6 +11,8 @@ Its finite trace formulas construct the actual chart's parameter tower.
 The fixed inverse radial linear map restores the original physical
 coordinate and preserves the complete ordered-word budget.
 -/
+
+@[expose] public section
 
 noncomputable section
 

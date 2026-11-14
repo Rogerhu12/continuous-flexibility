@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06PositiveClippedJets
-import ContinuousFlexibility.Analysis.N06PositiveReferenceHeightBounds
+module
+
+public import ContinuousFlexibility.Analysis.N06PositiveClippedJets
+public import ContinuousFlexibility.Analysis.N06PositiveReferenceHeightBounds
 
 /-!
 # Polynomial finite jets of the actual positive reference height
@@ -10,6 +12,8 @@ actual height stays bounded by the endpoint value bounds, so applying
 the exponential chain rule introduces no uncontrolled exponential of
 the derivative bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

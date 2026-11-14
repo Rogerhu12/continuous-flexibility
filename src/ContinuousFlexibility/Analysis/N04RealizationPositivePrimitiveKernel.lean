@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ParameterizedPositiveReference
+module
+
+public import ContinuousFlexibility.Analysis.ParameterizedPositiveReference
 
 /-!
 # The existing positive primitive with finite-dimensional parameters
@@ -7,6 +9,8 @@ Fixed-interval integration and the moving-endpoint primitive are the
 proved compact-parameter operations. This applies them to the same
 normalized slope, before composing with any topological state map.
 -/
+
+@[expose] public section
 
 noncomputable section
 

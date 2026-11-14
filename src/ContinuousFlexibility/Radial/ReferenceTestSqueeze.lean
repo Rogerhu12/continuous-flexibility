@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.ReferenceNaturalKernel
-import Mathlib.Analysis.Calculus.Deriv.Mul
-import Mathlib.Analysis.SpecificLimits.Basic
-import Mathlib.MeasureTheory.Integral.DominatedConvergence
+module
+
+public import ContinuousFlexibility.Radial.ReferenceNaturalKernel
+public import Mathlib.Analysis.Calculus.Deriv.Mul
+public import Mathlib.Analysis.SpecificLimits.Basic
+public import Mathlib.MeasureTheory.Integral.DominatedConvergence
 
 /-!
 # Extending radial tests by an affine squeeze
@@ -13,6 +15,8 @@ expansion factors lie in [1,2] and tend to one, so the tests and their
 first two derivatives have uniform bounds on the closed interval. This
 extends every L¹ scalar Jacobi pairing by dominated convergence.
 -/
+
+@[expose] public section
 
 noncomputable section
 

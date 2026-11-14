@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06AiryPhysicalGerm
+module
+
+public import ContinuousFlexibility.Analysis.N06AiryPhysicalGerm
 
 /-!
 # Uniform physical endpoint jets from the same realized Morse profile
@@ -10,6 +12,8 @@ slope and height jets, and their reciprocal bounds, with one coefficient
 power selected before either root or any model index. No endpoint jet
 estimate is an additional hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionBufferedCollars
-import ContinuousFlexibility.Analysis.N01FlowInverseJetBounds
-import ContinuousFlexibility.Analysis.NonlinearNeighborhoodRestriction
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionBufferedCollars
+public import ContinuousFlexibility.Analysis.N01FlowInverseJetBounds
+public import ContinuousFlexibility.Analysis.NonlinearNeighborhoodRestriction
 
 /-!
 # One common buffered cutoff and uniform inverse neighborhood
@@ -11,6 +13,8 @@ gives the common first-angular-derivative bounds required by the genuine
 selector-uniform circle estimates. Any previously constructed N02
 operator is retained by `N02Properties.restrict_neighborhood`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

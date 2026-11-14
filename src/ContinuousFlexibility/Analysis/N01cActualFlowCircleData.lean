@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cActualFlowSmoothDirections
-import ContinuousFlexibility.Analysis.N01cFlowVariationCircleData
-import ContinuousFlexibility.Analysis.N01cStateAngleIdentification
+module
+
+public import ContinuousFlexibility.Analysis.N01cActualFlowSmoothDirections
+public import ContinuousFlexibility.Analysis.N01cFlowVariationCircleData
+public import ContinuousFlexibility.Analysis.N01cStateAngleIdentification
 
 /-!
 # Circle variation data of the supplied ordinary flow
@@ -14,6 +16,8 @@ The circle linear equation and Sobolev estimate therefore apply to those
 actual jets. Neither a flow parameter derivative nor a flow norm estimate
 is an input. The speed tower is the internal actual-speed input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

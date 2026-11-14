@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets
-import ContinuousFlexibility.Analysis.N08MaterialWeightIntegrability
-import ContinuousFlexibility.Scalar.WeightedAngularPrimitiveBounds
-import ContinuousFlexibility.Scalar.WeightedJetNorm
+module
+
+public import ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets
+public import ContinuousFlexibility.Analysis.N08MaterialWeightIntegrability
+public import ContinuousFlexibility.Scalar.WeightedAngularPrimitiveBounds
+public import ContinuousFlexibility.Scalar.WeightedJetNorm
 
 /-!
 # Uniform height norms from a positive radial decay margin
@@ -11,6 +13,8 @@ The family index carries no topology or norm. Ordinary jets bounded by
 The positive margin supplies an actual square-integrable majorant on the
 whole material cylinder.
 -/
+
+@[expose] public section
 
 noncomputable section
 

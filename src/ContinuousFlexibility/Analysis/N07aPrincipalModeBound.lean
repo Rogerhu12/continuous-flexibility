@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aScaledModeNorms
-import ContinuousFlexibility.Analysis.N07aActualPrincipalRows
+module
+
+public import ContinuousFlexibility.Analysis.N07aScaledModeNorms
+public import ContinuousFlexibility.Analysis.N07aActualPrincipalRows
 
 /-!
 # A principal block is controlled by its original weak mode energy
@@ -8,6 +10,8 @@ This estimate consumes the actual first and second weak derivatives.
 The eight divergence terms are bounded with their correct affine length
 factors and the cubic rows of the same coefficient multipliers.
 -/
+
+@[expose] public section
 
 noncomputable section
 

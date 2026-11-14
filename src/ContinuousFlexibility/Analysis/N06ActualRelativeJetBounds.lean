@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06CurrentScalarPairing
-import ContinuousFlexibility.Analysis.N06FiniteReferenceColumns
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentScalarPairing
+public import ContinuousFlexibility.Analysis.N06FiniteReferenceColumns
 
 /-!
 # The actual finite jet input for the N06 relative operator
@@ -8,6 +10,8 @@ These definitions are extracted verbatim from the relative assembly. They
 refer only to the existing coefficient and scalar-column fields, and carry
 no inverse, geometry-reconstruction, or final operator estimate assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

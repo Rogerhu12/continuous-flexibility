@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedCandidateDecoding
-import ContinuousFlexibility.Scalar.WeightedScalarError
+module
+
+public import ContinuousFlexibility.Scalar.WeightedCandidateDecoding
+public import ContinuousFlexibility.Scalar.WeightedScalarError
 
 /-!
 # Concrete operator and error candidates with exact physical decoders
@@ -8,6 +10,8 @@ The three coefficient heights determine the actual corrected operator on the
 common height space. The normalized type perturbation determines the correction
 error as a linear map in each of its two independent height arguments.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04bContinuousInverseGerm
+module
+
+public import ContinuousFlexibility.Analysis.N04bContinuousInverseGerm
 
 /-!
 # Transporting inverse germs to globally specified pasted functions
@@ -7,6 +9,8 @@ Agreement of both functions in the relevant neighborhoods preserves the
 actual inverse germ. A fresh inverse-function-theorem chart uses the
 literal new forward function globally.
 -/
+
+@[expose] public section
 
 noncomputable section
 

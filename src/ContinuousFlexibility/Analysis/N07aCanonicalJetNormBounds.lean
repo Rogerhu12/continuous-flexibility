@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalJetRealization
-import Mathlib.Algebra.Order.BigOperators.Ring.Finset
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalJetRealization
+public import Mathlib.Algebra.Order.BigOperators.Ring.Finset
 
 /-!
 # Quantitative bounds for the actual canonical jet arrays
@@ -8,6 +10,8 @@ The exact canonical rectangle measure supplies its square-root factor.
 Finite jet arrays and the outer square-summable sequence retain explicit
 bounds, which are applied to the complete sampled source envelope.
 -/
+
+@[expose] public section
 
 noncomputable section
 

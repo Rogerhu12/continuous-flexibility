@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bNegativePairGeometry
-import ContinuousFlexibility.Analysis.CharacteristicPrincipalDensity
+module
+
+public import ContinuousFlexibility.Analysis.N04bNegativePairGeometry
+public import ContinuousFlexibility.Analysis.CharacteristicPrincipalDensity
 
 /-!
 # Domain fields of a constructed negative root piece
@@ -9,6 +11,8 @@ symmetry. The physical component supplies annular containment and its
 negative type. These facts assemble exactly the domain fields required by
 CanonicalGeometry, with one Bool parameter for both halves.
 -/
+
+@[expose] public section
 
 noncomputable section
 

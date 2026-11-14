@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.InnerPositiveGap
-import ContinuousFlexibility.Statements.Radial
-import Mathlib.MeasureTheory.Function.L2Space
-import Mathlib.MeasureTheory.Function.LpSeminorm.Indicator
-import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
+module
+
+public import ContinuousFlexibility.Radial.InnerPositiveGap
+public import ContinuousFlexibility.Statements.Radial
+public import Mathlib.MeasureTheory.Function.L2Space
+public import Mathlib.MeasureTheory.Function.LpSeminorm.Indicator
+public import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
 
 /-!
 # Local fields in the actual radial L² measure
@@ -12,6 +14,8 @@ norm is computed from the physical density `12 * D.w r / r²`, with
 no new abstract source measure and no comparison-norm hypothesis.
 Only continuity on the closed interval is needed for the local field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

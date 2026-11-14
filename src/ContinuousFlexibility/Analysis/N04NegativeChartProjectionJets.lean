@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.RootChartWithin
-import ContinuousFlexibility.Analysis.SolveNewtonBridge
-import ContinuousFlexibility.Analysis.TameProductDirections
-import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
+module
+
+public import ContinuousFlexibility.Analysis.RootChartWithin
+public import ContinuousFlexibility.Analysis.SolveNewtonBridge
+public import ContinuousFlexibility.Analysis.TameProductDirections
+public import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
 
 /-!
 # State jets commute with the two root projections
@@ -11,6 +13,8 @@ fixed linear combinations of two evaluations. Their genuine parameter
 jets are therefore the same projections of the input jets. This does not
 construct a degree-one periodic extension of a positive-order state jet.
 -/
+
+@[expose] public section
 
 noncomputable section
 

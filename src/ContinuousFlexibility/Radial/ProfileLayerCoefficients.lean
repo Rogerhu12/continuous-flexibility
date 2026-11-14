@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ProfileLayerGeometry
-import ContinuousFlexibility.Radial.ProfileLayerWeights
-import ContinuousFlexibility.Analysis.IntervalLayerCutoffDeriv
+module
+
+public import ContinuousFlexibility.Radial.ProfileLayerGeometry
+public import ContinuousFlexibility.Radial.ProfileLayerWeights
+public import ContinuousFlexibility.Analysis.IntervalLayerCutoffDeriv
 
 /-!
 # Uniform coefficient bounds on endpoint layers
@@ -10,6 +12,8 @@ inverse, the angular potential and the first cutoff derivative below a
 single `A * exp (T * radialQ n)`. This is the fixed coefficient cost in the
 layer Caccioppoli estimate.
 -/
+
+@[expose] public section
 
 open Set Real
 open ContinuousFlexibility.Statements ContinuousFlexibility.Analysis

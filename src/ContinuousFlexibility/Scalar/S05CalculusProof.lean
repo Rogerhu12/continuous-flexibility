@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.S05StateDerivative
-import ContinuousFlexibility.Scalar.RectangleParameterIntegral
+module
+
+public import ContinuousFlexibility.Scalar.S05StateDerivative
+public import ContinuousFlexibility.Scalar.RectangleParameterIntegral
 
 /-!
 # Completion of the scalar type-correction calculus
@@ -11,6 +13,8 @@ compatibility and the corrected determinant identify the characteristic roots.
 Finally the integral form of smooth division resolves a simple radial zero,
 producing one positive smooth square-root factor on either signed side.
 -/
+
+@[expose] public section
 
 noncomputable section
 

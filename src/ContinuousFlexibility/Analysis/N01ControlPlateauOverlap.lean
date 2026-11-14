@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01ControlLengthBound
-import ContinuousFlexibility.Analysis.MaterialPlateauRadialLoss
-import ContinuousFlexibility.Analysis.DisjointIntervalPacking
+module
+
+public import ContinuousFlexibility.Analysis.N01ControlLengthBound
+public import ContinuousFlexibility.Analysis.MaterialPlateauRadialLoss
+public import ContinuousFlexibility.Analysis.DisjointIntervalPacking
 
 /-!
 # Quantitative overlap of the expanded control plateaus
@@ -11,6 +13,8 @@ quantity. The original components are pairwise disjoint and lie in the
 annulus. Lebesgue interval packing therefore bounds the number of
 overlapping expanded supports by one fixed endpoint-weight power.
 -/
+
+@[expose] public section
 
 noncomputable section
 

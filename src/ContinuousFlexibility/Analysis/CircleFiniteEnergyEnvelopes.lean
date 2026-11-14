@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CircleEnergyEnvelope
+module
+
+public import ContinuousFlexibility.Analysis.CircleEnergyEnvelope
 
 /-!
 # Finite sums of circle energy envelopes at different orders
@@ -7,6 +9,8 @@ Keeping each input order until after the sum over circles allows a later
 interpolation estimate to use the actual derivative-order budget. No
 summability assumption is made on the number of circle labels.
 -/
+
+@[expose] public section
 
 noncomputable section
 

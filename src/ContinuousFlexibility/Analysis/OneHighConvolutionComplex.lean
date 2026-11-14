@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighConvolutionFinite
-import Mathlib.Analysis.Convolution
+module
+
+public import ContinuousFlexibility.Analysis.OneHighConvolutionFinite
+public import Mathlib.Analysis.Convolution
 
 /-!
 # Complex convolution and the positive Young estimate
@@ -8,6 +10,8 @@ The complex convolution is the actual Bochner convolution. Its pointwise
 extended norm is bounded by the positive convolution already estimated
 above. This gives genuine `L¹` and `L²` membership with the exact constants.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # Exact isometries between weight labels of the canonical jet model
@@ -7,6 +9,8 @@ The underlying weak-jet graph is identical at every material and height
 weight. Its norm is inherited from the same canonical lp space. The
 physical forget maps retain their different scalar weights explicitly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N06FiniteSourceGeometry
-import ContinuousFlexibility.Analysis.N06ReferenceRemainderFields
-import ContinuousFlexibility.Analysis.N06ReferenceNuColumn
-import ContinuousFlexibility.Analysis.MaterialHeightRegularity
-import ContinuousFlexibility.Radial.ReferenceColumnSmooth
+module
+
+public import ContinuousFlexibility.Analysis.N06FiniteSourceGeometry
+public import ContinuousFlexibility.Analysis.N06ReferenceRemainderFields
+public import ContinuousFlexibility.Analysis.N06ReferenceNuColumn
+public import ContinuousFlexibility.Analysis.MaterialHeightRegularity
+public import ContinuousFlexibility.Radial.ReferenceColumnSmooth
 
 /-!
 # The three actual reference columns have one compact physical support
@@ -14,6 +16,8 @@ cutoff and physical-space hypotheses. A finite set of intersecting atlas
 pieces and finite angular jet bounds then produce all three actual source
 elements through the finite local source construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

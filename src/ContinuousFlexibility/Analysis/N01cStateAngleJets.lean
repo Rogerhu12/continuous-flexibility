@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cJointJetContinuity
-import Mathlib.LinearAlgebra.Multilinear.Curry
+module
+
+public import ContinuousFlexibility.Analysis.N01cJointJetContinuity
+public import Mathlib.LinearAlgebra.Multilinear.Curry
 
 /-!
 # Multilinear state-and-angle jets
@@ -10,6 +12,8 @@ the appropriate angular derivative, times the remaining scalar slots.
 The finite sum is a continuous multilinear map in the original
 topological state space. Pure mixed slots recover exactly one word.
 -/
+
+@[expose] public section
 
 noncomputable section
 

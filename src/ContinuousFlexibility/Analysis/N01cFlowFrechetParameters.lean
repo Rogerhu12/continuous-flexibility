@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cFlowParameterSmooth
+module
+
+public import ContinuousFlexibility.Analysis.N01cFlowParameterSmooth
 
 /-!
 # Genuine Fréchet regularity in finite-dimensional speed parameters
@@ -15,6 +17,8 @@ not any of its parameter derivatives.  The compact time-change theorem
 retains this explicit continuity hypothesis; no existence or parameter
 regularity of a trajectory family is encoded in the speed assumptions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

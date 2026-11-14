@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
 
 /-!
 # Compatibility of a reference-aware realization split
@@ -13,6 +15,8 @@ This module defines proposed obligations under a separate namespace and
 proves their conditional assembly into `N04RealizationCurrentObligation`.
 It changes no frozen definition and does not close a blueprint node.
 -/
+
+@[expose] public section
 
 noncomputable section
 

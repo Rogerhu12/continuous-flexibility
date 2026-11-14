@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.TerminalMorseBoundarySlopeLower
-import ContinuousFlexibility.Radial.TerminalCapSourceEnergy
+module
+
+public import ContinuousFlexibility.Radial.TerminalMorseBoundarySlopeLower
+public import ContinuousFlexibility.Radial.TerminalCapSourceEnergy
 
 /-!
 # The actual terminal Morse lift energy
@@ -9,6 +11,8 @@ The constructed cutoff has its proved constant endpoint germs, so its
 boundary energy is exactly the normalized outward slope of the same
 stand-in. The remaining term is the actual positive cutoff integral.
 -/
+
+@[expose] public section
 
 noncomputable section
 

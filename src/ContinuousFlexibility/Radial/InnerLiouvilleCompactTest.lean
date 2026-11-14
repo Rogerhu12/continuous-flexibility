@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerLiouvilleEnergyDomain
-import ContinuousFlexibility.Radial.InnerWeakGreen
+module
+
+public import ContinuousFlexibility.Radial.InnerLiouvilleEnergyDomain
+public import ContinuousFlexibility.Radial.InnerWeakGreen
 
 /-!
 # Genuine compact physical tests and their normalized model tests
@@ -10,6 +12,8 @@ that interval using the actual inverse radius. The original
 Schrodinger energy core is then populated by the resulting smooth
 function and its actual derivative and potential coordinate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

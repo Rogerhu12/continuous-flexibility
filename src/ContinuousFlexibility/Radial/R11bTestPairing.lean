@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R11bLocalL2
-import Mathlib.MeasureTheory.Integral.IntegrableOn
+module
+
+public import ContinuousFlexibility.Radial.R11bLocalL2
+public import Mathlib.MeasureTheory.Integral.IntegrableOn
 
 /-!
 # Integrability of compact radial test pairings
@@ -9,6 +11,8 @@ with every continuous test supported in such a subset. The proof uses the
 actual product on the physical strip: Hölder on the compact restriction,
 followed by extension through its measurable indicator.
 -/
+
+@[expose] public section
 
 noncomputable section
 

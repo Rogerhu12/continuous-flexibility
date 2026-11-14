@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationPrimitiveDirectionClosure
-import ContinuousFlexibility.Analysis.N04RealizationPrimitiveInitialClosure
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationPrimitiveDirectionClosure
+public import ContinuousFlexibility.Analysis.N04RealizationPrimitiveInitialClosure
 
 /-!
 # Collecting the fifteen actual primitive fields
@@ -8,6 +10,8 @@ The finite factor certificate controls the nine direction components,
 three normalized initial factors, and three reference multipliers on
 the same material piece. No new coordinate representative is chosen.
 -/
+
+@[expose] public section
 
 noncomputable section
 

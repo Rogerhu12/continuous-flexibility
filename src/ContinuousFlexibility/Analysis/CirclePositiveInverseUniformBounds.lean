@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CircleInverseUniformGrowth
-import ContinuousFlexibility.Analysis.CircleCompositionUniformBounds
-import ContinuousFlexibility.Analysis.TameInverseUniformBounds
-import ContinuousFlexibility.Analysis.CirclePositiveInverseSmoothTame
+module
+
+public import ContinuousFlexibility.Analysis.CircleInverseUniformGrowth
+public import ContinuousFlexibility.Analysis.CircleCompositionUniformBounds
+public import ContinuousFlexibility.Analysis.TameInverseUniformBounds
+public import ContinuousFlexibility.Analysis.CirclePositiveInverseSmoothTame
 
 /-!
 # Uniform one-high bounds for the canonical positive inverse
@@ -13,6 +15,8 @@ estimates. A single open set with half the lower bound contains all
 such points. The proof estimates the actual finite inverse expressions
 on that set and identifies their jets by uniqueness.
 -/
+
+@[expose] public section
 
 noncomputable section
 

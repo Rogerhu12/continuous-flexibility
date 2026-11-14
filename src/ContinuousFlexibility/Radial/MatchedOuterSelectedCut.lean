@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterTransitionCoordinates
-import ContinuousFlexibility.Radial.R07ChainIncoming
+module
+
+public import ContinuousFlexibility.Radial.OuterTransitionCoordinates
+public import ContinuousFlexibility.Radial.R07ChainIncoming
 
 /-!
 # The selected matching join is the actual outer-core endpoint
@@ -9,6 +11,8 @@ preceding retained cell.  The existing glue endpoint identity identifies
 it exactly with the endpoint used by the quantitative whole Green
 estimate.  No transfer through the preceding long cap is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

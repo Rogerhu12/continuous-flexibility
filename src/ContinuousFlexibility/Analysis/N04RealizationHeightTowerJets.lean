@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cPhysicalHeightBounds
-import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
-import ContinuousFlexibility.Scalar.WeightedTowerCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N01cPhysicalHeightBounds
+public import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
+public import ContinuousFlexibility.Scalar.WeightedTowerCalculus
 
 /-!
 # Physical mixed jets of one genuine height-valued tower
@@ -10,6 +12,8 @@ height. Applying those fixed continuous linear functionals to the
 supplied tower retains its genuine parameter derivatives and its exact
 material height power. No spatial or parameter neighborhood is changed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

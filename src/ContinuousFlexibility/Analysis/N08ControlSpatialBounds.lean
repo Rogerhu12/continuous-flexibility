@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N08ControlLabelDecay
-import ContinuousFlexibility.Analysis.N08SamplePointWeights
-import ContinuousFlexibility.Scalar.WeightedReferenceCoefficients
+module
+
+public import ContinuousFlexibility.Analysis.N08ControlLabelDecay
+public import ContinuousFlexibility.Analysis.N08SamplePointWeights
+public import ContinuousFlexibility.Scalar.WeightedReferenceCoefficients
 
 /-!
 # Actual spatial bounds for normalized control profiles
@@ -9,6 +11,8 @@ The genuine N01 coefficient derivative first bounds `w` times a control
 profile. The actual reciprocal reference jets recover that same profile by
 Leibniz's formula, at the evaluation point and independently of its label.
 -/
+
+@[expose] public section
 
 noncomputable section
 

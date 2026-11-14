@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MorseDarbouxGround
-import ContinuousFlexibility.Radial.MorseWeylSequence
-import ContinuousFlexibility.Radial.MorseWeylExclusion
+module
+
+public import ContinuousFlexibility.Radial.MorseDarbouxGround
+public import ContinuousFlexibility.Radial.MorseWeylSequence
+public import ContinuousFlexibility.Radial.MorseWeylExclusion
 
 /-!
 # Subthreshold Morse levels and their simplicity
@@ -10,6 +12,8 @@ subthreshold eigenvector to a ground vector in finitely many steps.
 The positive factor norm makes each nonground lowering step injective
 on the eigenspace.
 -/
+
+@[expose] public section
 
 noncomputable section
 

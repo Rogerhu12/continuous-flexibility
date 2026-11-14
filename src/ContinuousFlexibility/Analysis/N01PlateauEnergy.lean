@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01ControlPlateauOverlap
-import ContinuousFlexibility.Analysis.MaterialPlateauLocalization
-import ContinuousFlexibility.Analysis.MaterialCutoffJetEnergy
+module
+
+public import ContinuousFlexibility.Analysis.N01ControlPlateauOverlap
+public import ContinuousFlexibility.Analysis.MaterialPlateauLocalization
+public import ContinuousFlexibility.Analysis.MaterialCutoffJetEnergy
 
 /-!
 # Summing actual N01 plateau-localized height energies
@@ -9,6 +11,8 @@ Both the cutoff derivatives and the support overlap are controlled at
 the actual material point. Their costs are two additional material
 orders, independent of the derivative order and of the height field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

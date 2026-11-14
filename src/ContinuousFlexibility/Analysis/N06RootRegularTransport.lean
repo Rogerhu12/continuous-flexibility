@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bRootBoundaryGeometry
-import Mathlib.Topology.Order.Basic
+module
+
+public import ContinuousFlexibility.Analysis.N04bRootBoundaryGeometry
+public import Mathlib.Topology.Order.Basic
 
 /-!
 # Regular transport equations for the actual root even and odd fields
@@ -15,6 +17,8 @@ extend to the actual root by continuity. Differentiating them gives a
 finite boundary-jet recursion with positive divisor n + 3/2, so higher
 root jets need not be introduced as independent data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

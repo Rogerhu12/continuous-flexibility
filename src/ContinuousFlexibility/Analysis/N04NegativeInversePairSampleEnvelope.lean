@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04NegativeInverseForwardBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeInverseForwardBounds
 
 /-!
 # Preserve the parameter height while changing retained samples
@@ -8,6 +10,8 @@ The zero and positive parameter orders use the existing sample transfer
 with height exponents zero and three quarters. A common coefficient and
 exponent package both cases without changing that height exponent.
 -/
+
+@[expose] public section
 
 noncomputable section
 

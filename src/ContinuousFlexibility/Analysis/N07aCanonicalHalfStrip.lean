@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import Mathlib.Topology.Order.IntermediateValue
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import Mathlib.Topology.Order.IntermediateValue
 
 /-!
 # The actual reflected canonical chart preserves a fundamental half strip
@@ -9,6 +11,8 @@ an interior point from crossing either one. The intermediate value theorem
 therefore identifies the actual image of `0 < θ ≤ π`. This is the geometric
 step needed to use ordinary plane change of variables for rough functions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

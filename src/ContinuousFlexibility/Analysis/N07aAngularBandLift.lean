@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularJetBands
-import ContinuousFlexibility.Analysis.N07aAngularBandDerivative
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularJetBands
+public import ContinuousFlexibility.Analysis.N07aAngularBandDerivative
 
 /-!
 # Actual higher-level realization of one angular band
@@ -9,6 +11,8 @@ on the original real canonical pieces. The construction is square
 summable over every radial component and belongs to the frozen volume
 graph. Truncating it returns the original projected source.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cControlledFields
-import ContinuousFlexibility.Analysis.N01cNormalizedCoefficients
+module
+
+public import ContinuousFlexibility.Analysis.N01cControlledFields
+public import ContinuousFlexibility.Analysis.N01cNormalizedCoefficients
 
 /-!
 # Actual coefficient fields with one common distributed spatial bound
@@ -9,6 +11,8 @@ space. Its scalar value identities are definitionally the original
 normalized formulas. The final specialization retains the actual state
 profile and physical polar inputs on the same neighbourhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

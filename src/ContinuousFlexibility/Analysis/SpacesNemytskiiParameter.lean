@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesNemytskiiKernels
-import ContinuousFlexibility.Analysis.SpacesParameterJets
+module
+
+public import ContinuousFlexibility.Analysis.SpacesNemytskiiKernels
+public import ContinuousFlexibility.Analysis.SpacesParameterJets
 
 /-!
 # Parameter derivatives of the actual composition kernels
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Analysis.SpacesParameterJets
 On every affine base curve the next normalized kernel is the actual
 derivative. Parameter differentiation commutes with all spatial jets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.TailEdgeFluxBounds
-import Mathlib.Tactic.LinearCombination
+module
+
+public import ContinuousFlexibility.Radial.TailEdgeFluxBounds
+public import Mathlib.Tactic.LinearCombination
 
 /-!
 # The explicit classical Dirichlet kernel on one edge
@@ -9,6 +11,8 @@ off-diagonal flux coefficient. Their product at the ordered pair of points
 therefore gives a symmetric, jointly continuous kernel. Splitting its integral
 at the evaluation point proves the actual inhomogeneous differential equation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

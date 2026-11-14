@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01FlowHeightScaling
-import ContinuousFlexibility.Analysis.SmoothDirectionsLocalDirections
+module
+
+public import ContinuousFlexibility.Analysis.N01FlowHeightScaling
+public import ContinuousFlexibility.Analysis.SmoothDirectionsLocalDirections
 
 /-!
 # Actual localization of height directions in every N01 parameter jet
@@ -10,6 +12,8 @@ require a cutoff-modified base state to belong to the N01 neighborhood.
 Actual ODE locality identifies their angular-flow functions; the genuine
 directional tower then identifies every further mixed parameter jet.
 -/
+
+@[expose] public section
 
 noncomputable section
 

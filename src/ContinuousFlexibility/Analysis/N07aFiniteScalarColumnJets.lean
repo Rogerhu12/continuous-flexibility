@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aSampleLinearJets
+module
+
+public import ContinuousFlexibility.Analysis.N07aSampleLinearJets
 
 /-!
 # Low-source scalar coefficients multiplying actual finite-piece columns
@@ -7,6 +9,8 @@ Finite physical support supplies arbitrary material weights without a
 height loss. Only a scalar low-source estimate is needed; no linearity
 or differentiability in the source parameter is asserted or used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

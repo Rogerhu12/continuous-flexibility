@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerCentralModelEnvelope
-import ContinuousFlexibility.Radial.InnerLiouvilleConormal
+module
+
+public import ContinuousFlexibility.Radial.InnerCentralModelEnvelope
+public import ContinuousFlexibility.Radial.InnerLiouvilleConormal
 
 /-!
 # The actual central physical Poisson columns at scale j⁻¹
@@ -10,6 +12,8 @@ scalar. The middle weight equals one, so either global weight sign is
 covered by the same result. The leading estimate and the small
 remainder are both derived from the actual central construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

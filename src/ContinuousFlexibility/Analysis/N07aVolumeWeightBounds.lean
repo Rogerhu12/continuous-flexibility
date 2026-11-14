@@ -1,7 +1,11 @@
-import ContinuousFlexibility.Analysis.N07aVolumeCell
-import ContinuousFlexibility.Analysis.N07aModeBudgetMaterial
+module
+
+public import ContinuousFlexibility.Analysis.N07aVolumeCell
+public import ContinuousFlexibility.Analysis.N07aModeBudgetMaterial
 
 /-! Exact volume weights in the relative-source block estimate. -/
+
+@[expose] public section
 
 noncomputable section
 

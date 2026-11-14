@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06ReferenceRootTransmission
-import ContinuousFlexibility.Radial.R07NaturalLineNormalization
-import ContinuousFlexibility.Scalar.Conservation
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceRootTransmission
+public import ContinuousFlexibility.Radial.R07NaturalLineNormalization
+public import ContinuousFlexibility.Scalar.Conservation
 
 /-!
 # Root traces from the actual one-sided piece interiors
@@ -11,6 +13,8 @@ are not required to agree. Continuity and uniqueness of one-sided
 derivatives identify the actual endpoint values and radial first jets,
 which then give the shared canonical traces and current conormals.
 -/
+
+@[expose] public section
 
 noncomputable section
 

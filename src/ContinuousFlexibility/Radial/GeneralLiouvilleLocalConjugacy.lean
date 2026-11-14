@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.GeneralLiouvilleTransport
+module
+
+public import ContinuousFlexibility.Radial.GeneralLiouvilleTransport
 
 /-!
 # Liouville conjugacy on the actual radius range
@@ -7,6 +9,8 @@ The model height gives a radial height through the genuine inverse radius
 coordinate. The flux and second derivative are computed on that range using
 local smoothness at every radius in the image.
 -/
+
+@[expose] public section
 
 noncomputable section
 

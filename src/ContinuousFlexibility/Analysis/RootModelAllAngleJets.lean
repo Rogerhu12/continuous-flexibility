@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.RootDividedModelMaterialJets
-import ContinuousFlexibility.Analysis.RootDividedModelPeriodicity
-import ContinuousFlexibility.Analysis.PeriodicOrdinaryJetBounds
-import ContinuousFlexibility.Analysis.RootChartExtensionGeometry
+module
+
+public import ContinuousFlexibility.Analysis.RootDividedModelMaterialJets
+public import ContinuousFlexibility.Analysis.RootDividedModelPeriodicity
+public import ContinuousFlexibility.Analysis.PeriodicOrdinaryJetBounds
+public import ContinuousFlexibility.Analysis.RootChartExtensionGeometry
 
 /-!
 # Actual root model jets at every angle
@@ -10,6 +12,8 @@ The positive-order chart jets and every height and inverse-height jet
 extend from one period to all angles. The chart's zeroth-order lift is
 deliberately absent. No constant, neighborhood or loss is changed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

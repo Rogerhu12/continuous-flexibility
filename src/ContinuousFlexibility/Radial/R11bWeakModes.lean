@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R11bFourierTests
+module
+
+public import ContinuousFlexibility.Radial.R11bFourierTests
 
 /-!
 # The scalar weak equations obtained from the actual reference graph
@@ -8,6 +10,8 @@ a cosine produces the ordinary radial Jacobi equation. The border occurs only
 in mode two. Testing an angular weak derivative against a sine gives the
 corresponding first-order coefficient identity, with its actual sign.
 -/
+
+@[expose] public section
 
 noncomputable section
 

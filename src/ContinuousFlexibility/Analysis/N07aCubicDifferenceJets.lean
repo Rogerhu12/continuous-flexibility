@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aActualCubicFactors
-import ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient
+module
+
+public import ContinuousFlexibility.Analysis.N07aActualCubicFactors
+public import ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient
 
 /-!
 # First jets of the actual cubic difference
@@ -8,6 +10,8 @@ Differentiation on the open unit strip retains the precise powers of the
 endpoint weight. These identities use the divided atoms already present
 in the canonical geometry, without extending them across an endpoint.
 -/
+
+@[expose] public section
 
 noncomputable section
 

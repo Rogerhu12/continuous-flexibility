@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.HermiteBasis
-import ContinuousFlexibility.Radial.CentralSpectralGap
+module
+
+public import ContinuousFlexibility.Radial.HermiteBasis
+public import ContinuousFlexibility.Radial.CentralSpectralGap
 
 /-!
 # Closure of the finite central Hermite differential graph
@@ -13,6 +15,8 @@ This identifies the closure of this specific core graph. Identification
 with the full distribution domain or the Friedrichs realization is a
 separate obligation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

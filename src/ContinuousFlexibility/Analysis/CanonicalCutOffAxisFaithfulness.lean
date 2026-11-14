@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N03OffAxisOperatorRegularity
-import ContinuousFlexibility.Analysis.ClosureOperatorFaithfulness
-import ContinuousFlexibility.Analysis.CanonicalCutCoefficientMatching
-import ContinuousFlexibility.Analysis.NegativeCanonicalFaithfulness
+module
+
+public import ContinuousFlexibility.Analysis.N03OffAxisOperatorRegularity
+public import ContinuousFlexibility.Analysis.ClosureOperatorFaithfulness
+public import ContinuousFlexibility.Analysis.CanonicalCutCoefficientMatching
+public import ContinuousFlexibility.Analysis.NegativeCanonicalFaithfulness
 
 /-!
 # The actual stored operator is faithful on the non-axis cut
@@ -12,6 +14,8 @@ action and coefficient equality extend to the cut by genuine limits.
 Thus both closed effective fields have the stored coefficient values
 there. No all-domain regularity of the stored field is an extra premise.
 -/
+
+@[expose] public section
 
 noncomputable section
 

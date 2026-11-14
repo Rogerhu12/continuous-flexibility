@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.PositiveBufferFullForm
-import Mathlib.LinearAlgebra.BilinearMap
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferFullForm
+public import Mathlib.LinearAlgebra.BilinearMap
 
 /-!
 # Lifting the given full inverse to the genuine energy domain
@@ -9,6 +11,8 @@ energy coordinates are uniquely determined by the actual field, so lifting
 it preserves linearity. No new inverse or invertibility assumption is
 introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

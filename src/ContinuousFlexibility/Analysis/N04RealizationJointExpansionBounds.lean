@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.LocalJointJetSeminormBounds
-import ContinuousFlexibility.Analysis.TameMultilinearNormalization
+module
+
+public import ContinuousFlexibility.Analysis.LocalJointJetSeminormBounds
+public import ContinuousFlexibility.Analysis.TameMultilinearNormalization
 
 /-!
 # Weighted bounds for the existing joint spatial expansion
@@ -9,6 +11,8 @@ to angle. A physical direction receives one prescribed spatial factor;
 the parameter directions use their two supplied seminorm bounds. The
 original mixed jets and the original multilinear expansion are retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

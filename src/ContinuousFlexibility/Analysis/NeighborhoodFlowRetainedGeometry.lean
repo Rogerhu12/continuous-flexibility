@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.NeighborhoodConstruction
+module
+
+public import ContinuousFlexibility.Analysis.NeighborhoodConstruction
 
 /-!
 # Relative installation of the actual ordinary flows
@@ -8,6 +10,8 @@ reference, material data, physical spaces and six static geometry fields
 retained. Only the three displayed flow and inverse fields are installed.
 The proof is the existing N01b construction before its existential wrapper.
 -/
+
+@[expose] public section
 
 noncomputable section
 

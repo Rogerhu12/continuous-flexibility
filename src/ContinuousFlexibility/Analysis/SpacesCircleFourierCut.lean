@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesCircleFourierTransform
-import ContinuousFlexibility.Analysis.SpacesCircleFrequencyBands
+module
+
+public import ContinuousFlexibility.Analysis.SpacesCircleFourierTransform
+public import ContinuousFlexibility.Analysis.SpacesCircleFrequencyBands
 
 /-!
 # Bounded angular Fourier jet projections
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Analysis.SpacesCircleFrequencyBands
 The operators are defined by genuine smooth real Fourier polynomials. Their
 bounds follow from the exact Fourier isometry and the finite spectral symbol.
 -/
+
+@[expose] public section
 
 noncomputable section
 

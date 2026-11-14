@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Scalar.WeightedMaterialRadiusJets
+module
+
+public import ContinuousFlexibility.Scalar.WeightedMaterialRadiusJets
 
 /-!
 # Material-coordinate bounds for a uniformly controlled family
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Scalar.WeightedMaterialRadiusJets
 The actual radius has bounded jets of every order. Composing with it
 preserves an arbitrary pointwise majorant, uniformly over the family index.
 -/
+
+@[expose] public section
 
 noncomputable section
 

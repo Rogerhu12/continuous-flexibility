@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Statements.RadialTargets
-import Mathlib.MeasureTheory.Function.LpSpace.Indicator
-import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
+module
+
+public import ContinuousFlexibility.Statements.RadialTargets
+public import Mathlib.MeasureTheory.Function.LpSpace.Indicator
+public import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
 
 /-!
 # Measure and source pairings for the matched modal graph
@@ -10,6 +12,8 @@ The Hilbert measure has exactly the same null sets as Lebesgue measure on
 the open radial interval. Source pairings are genuine integrable functions,
 including for tests whose ordinary support accumulates at an endpoint.
 -/
+
+@[expose] public section
 
 noncomputable section
 

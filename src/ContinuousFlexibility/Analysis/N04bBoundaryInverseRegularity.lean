@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import Mathlib.Topology.Closure
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import Mathlib.Topology.Closure
 
 /-!
 # Genuine closed inverse and pullback regularity
@@ -9,6 +11,8 @@ controls the stored inverse on the whole canonical closed strip, including
 the ordinary derivatives used in transmission. Interior points use the
 open inverse chart; boundary points use the genuine inverse germ.
 -/
+
+@[expose] public section
 
 noncomputable section
 

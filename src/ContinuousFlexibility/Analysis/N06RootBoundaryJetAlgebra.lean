@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06RelativeBoundarySymmetry
-import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
+module
+
+public import ContinuousFlexibility.Analysis.N06RelativeBoundarySymmetry
+public import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
 
 /-!
 # Boundary algebra for the regular root transport system
@@ -10,6 +12,8 @@ multiplier n + a. Products with an angular derivative are expressed
 using only the actual radial trace jets and their ordinary angular
 derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

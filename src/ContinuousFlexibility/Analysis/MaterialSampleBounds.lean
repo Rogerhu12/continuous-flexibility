@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Statements.Analysis
+module
+
+public import ContinuousFlexibility.Statements.Analysis
 
 /-!
 # Sampled material weights and coefficient absorption
@@ -7,6 +9,8 @@ The sample points belong to the actual physical interval. The material
 envelope bounds every coefficient power, and every positive height power
 absorbs that envelope, uniformly over the interval and all its samples.
 -/
+
+@[expose] public section
 
 noncomputable section
 

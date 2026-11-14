@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aBaseInverse
-import ContinuousFlexibility.Analysis.N07bScalarInverseWeak
-import ContinuousFlexibility.Analysis.N07bWeakSourceUniqueness
+module
+
+public import ContinuousFlexibility.Analysis.N07aBaseInverse
+public import ContinuousFlexibility.Analysis.N07bScalarInverseWeak
+public import ContinuousFlexibility.Analysis.N07bWeakSourceUniqueness
 
 /-!
 # Identifying the actual represented scalar solution
@@ -10,6 +12,8 @@ N06's physical weak relation determines its current source uniquely. The
 two existing inverse identities then identify the entire graph element,
 including all three scalar coordinates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

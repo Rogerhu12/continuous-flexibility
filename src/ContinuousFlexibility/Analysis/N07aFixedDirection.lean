@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
-import Mathlib.Algebra.BigOperators.Fin
-import Mathlib.LinearAlgebra.Multilinear.Curry
+module
+
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
+public import Mathlib.Algebra.BigOperators.Fin
+public import Mathlib.LinearAlgebra.Multilinear.Curry
 
 /-!
 # A fixed directional derivative of a genuine smooth tame tower
@@ -9,6 +11,8 @@ The fixed direction occupies the last slot. New derivatives are prepended,
 so the tower recurrence is inherited literally and needs no interchange
 of directional derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ScalarInverseScaleBounds
-import ContinuousFlexibility.Analysis.CircleCompositionTameBounds
+module
+
+public import ContinuousFlexibility.Analysis.ScalarInverseScaleBounds
+public import ContinuousFlexibility.Analysis.CircleCompositionTameBounds
 
 /-!
 # Interpolated positive jets of actual inverse circle lifts
@@ -10,6 +12,8 @@ conjugation by dilation gives exactly the same cost for the inverse.
 The family index is arbitrary, so the constants are uniform on a fixed
 low-seminorm neighborhood and across all circle labels.
 -/
+
+@[expose] public section
 
 noncomputable section
 

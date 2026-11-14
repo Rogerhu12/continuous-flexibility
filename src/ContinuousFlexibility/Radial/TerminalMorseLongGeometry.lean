@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.TerminalMorseShortCap
+module
+
+public import ContinuousFlexibility.Radial.TerminalMorseShortCap
 
 /-!
 # The actual positive portion and cutoff window of a long Morse cap
@@ -8,6 +10,8 @@ mass lower bound is used only after the fixed offset log 4. The actual
 relations between A and B give an absolute action bound on a fixed
 fraction of the long cap, including a complete derivative window.
 -/
+
+@[expose] public section
 
 noncomputable section
 

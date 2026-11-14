@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.ProjectiveDifferential
-import Mathlib.Topology.Algebra.Module.Multilinear.Basic
-import Mathlib.Data.Fin.VecNotation
-import Mathlib.Tactic.FinCases
-import Mathlib.Tactic.Module
+module
+
+public import ContinuousFlexibility.Analysis.ProjectiveDifferential
+public import Mathlib.Topology.Algebra.Module.Multilinear.Basic
+public import Mathlib.Data.Fin.VecNotation
+public import Mathlib.Tactic.FinCases
+public import Mathlib.Tactic.Module
 
 /-!
 # Actual continuous multilinear jets in projective Fréchet spaces
@@ -17,6 +19,8 @@ The quadratic example has its actual first and second derivatives, and
 all derivatives of order at least three are proved to be zero. This does
 not prove a general higher-order nonlinear chain rule or Schwarz theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

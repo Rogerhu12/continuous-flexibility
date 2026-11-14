@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.CircleCompositionSmoothTame
-import ContinuousFlexibility.Analysis.CircleInverseFamilyTame
-import ContinuousFlexibility.Analysis.TameInverseInitialContinuity
-import ContinuousFlexibility.Analysis.TameInverseTheorem
-import ContinuousFlexibility.Analysis.NonlinearNeighborhoodRestriction
+module
+
+public import ContinuousFlexibility.Analysis.CircleCompositionSmoothTame
+public import ContinuousFlexibility.Analysis.CircleInverseFamilyTame
+public import ContinuousFlexibility.Analysis.TameInverseInitialContinuity
+public import ContinuousFlexibility.Analysis.TameInverseTheorem
+public import ContinuousFlexibility.Analysis.NonlinearNeighborhoodRestriction
 
 /-!
 # Smooth tame composition with the actual inverse circle lift
@@ -13,6 +15,8 @@ resolvent identity give the hypotheses of the genuine inverse-family
 theorem. The low seminorm order is chosen before the positive derivative
 bound, the size of the local box, and the output order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

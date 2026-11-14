@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.WeakDivergenceRegularity
-import ContinuousFlexibility.Analysis.IntervalWeakPotential
-import Mathlib.MeasureTheory.Function.LpSeminorm.CompareExp
+module
+
+public import ContinuousFlexibility.Radial.WeakDivergenceRegularity
+public import ContinuousFlexibility.Analysis.IntervalWeakPotential
+public import Mathlib.MeasureTheory.Function.LpSeminorm.CompareExp
 
 /-!
 # Regularity of the actual weak modal equation
@@ -11,6 +13,8 @@ the smooth radial leading coefficient does not vanish on the closed interval.
 The representative and its derivatives are obtained from the actual weak
 equation. No derivative of the original measurable representative is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.PositiveBufferComparisonUniqueness
-import ContinuousFlexibility.Radial.PositiveBufferComparisonDomains
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferComparisonUniqueness
+public import ContinuousFlexibility.Radial.PositiveBufferComparisonDomains
 
 /-!
 # Exterior uniqueness at both physical buffer ends
@@ -8,6 +10,8 @@ The outward coordinate is the reflection of the existing normalized
 inward coordinate. Ordinary derivatives at the cut transform with its
 nonzero slope, so the physical conormal relation follows at either end.
 -/
+
+@[expose] public section
 
 noncomputable section
 

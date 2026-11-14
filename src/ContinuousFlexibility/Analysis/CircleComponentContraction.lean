@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CircleDifferentialOperators
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
+module
+
+public import ContinuousFlexibility.Analysis.CircleDifferentialOperators
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
 
 /-!
 # Componentwise contractions in the original circle space
@@ -9,6 +11,8 @@ without changing any derivative or sample-weight order. In particular,
 the values of one fixed radial cutoff at any selector of radii define
 an actual continuous linear contraction, uniformly in that selector.
 -/
+
+@[expose] public section
 
 noncomputable section
 

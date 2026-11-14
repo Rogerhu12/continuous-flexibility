@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterEntranceVariation
-import ContinuousFlexibility.Radial.OuterFirstOrderRegularity
+module
+
+public import ContinuousFlexibility.Radial.OuterEntranceVariation
+public import ContinuousFlexibility.Radial.OuterFirstOrderRegularity
 
 /-!
 # One-sided C¹ regularity of the full-source Green representative
@@ -8,6 +10,8 @@ The value and flux extend continuously to the regular entrance.  Their
 relation uses the within-derivative there, so no extension of the source
 or the solution across that entrance is required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

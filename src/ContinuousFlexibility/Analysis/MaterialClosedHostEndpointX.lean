@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.MaterialCellEndpointModels
-import Mathlib.Topology.Order.OrderClosed
+module
+
+public import ContinuousFlexibility.Analysis.MaterialCellEndpointModels
+public import Mathlib.Topology.Order.OrderClosed
 
 /-!
 # The actual host-cell coordinate bound at a closed endpoint
@@ -9,6 +11,8 @@ uniform cell-index bound at both interior endpoints by continuity. The
 sample and original cell are retained; neither endpoint is required to
 belong to that open cell.
 -/
+
+@[expose] public section
 
 noncomputable section
 

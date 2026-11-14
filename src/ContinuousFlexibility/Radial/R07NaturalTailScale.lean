@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.RadialTargets
-import Mathlib.MeasureTheory.Measure.WithDensity
+module
+
+public import ContinuousFlexibility.Statements.RadialTargets
+public import Mathlib.MeasureTheory.Measure.WithDensity
 
 /-!
 # Positive scalar invariance of the actual natural tail
@@ -10,6 +12,8 @@ leaves the actual smooth, nonzero natural solution space unchanged.  These
 identities require only the coefficient equality on the open tail; no choice
 of a solution or a boundary line is incorporated into their hypotheses.
 -/
+
+@[expose] public section
 
 noncomputable section
 

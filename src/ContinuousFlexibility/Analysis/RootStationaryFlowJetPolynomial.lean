@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04FlowPolynomialBounds
-import ContinuousFlexibility.Analysis.RootFlowSymmetry
+module
+
+public import ContinuousFlexibility.Analysis.N04FlowPolynomialBounds
+public import ContinuousFlexibility.Analysis.RootFlowSymmetry
 
 /-!
 # Root-axis flow jets without a parameter-box radius
@@ -13,6 +15,8 @@ trajectory. Its raw-jet variables retain the existing derivative weights.
 The final adapter obtains both identities from the actual unscaled
 root-regularized ODE.
 -/
+
+@[expose] public section
 
 noncomputable section
 

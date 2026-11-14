@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aPhysicalPairingLinear
-import ContinuousFlexibility.Analysis.N07aReferenceTestOperator
-import ContinuousFlexibility.Analysis.N07aReferenceNuColumn
+module
+
+public import ContinuousFlexibility.Analysis.N07aPhysicalPairingLinear
+public import ContinuousFlexibility.Analysis.N07aReferenceTestOperator
+public import ContinuousFlexibility.Analysis.N07aReferenceNuColumn
 
 /-!
 # The reference graph tested by an actual even pullback
@@ -9,6 +11,8 @@ N03 is applied only to the genuinely even compact height test it accepts.
 The actual zero return residual and ν-column derivative identify its
 operator and border term with the original radial reference graph.
 -/
+
+@[expose] public section
 
 noncomputable section
 

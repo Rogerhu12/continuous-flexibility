@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ReturnFlowInverseRegularity
+module
+
+public import ContinuousFlexibility.Analysis.ReturnFlowInverseRegularity
 
 /-!
 # Actual inverse curves in a smooth scalar parameter family
@@ -9,6 +11,8 @@ smoothness, and differentiating the genuine inverse identity gives
 the parameter derivative. Neither conclusion assumes inverse
 regularity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

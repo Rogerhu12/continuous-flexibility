@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsJointTransportPower
-import ContinuousFlexibility.Analysis.N04PulledFieldsPowerGrowthMono
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsJointTransportPower
+public import ContinuousFlexibility.Analysis.N04PulledFieldsPowerGrowthMono
 
 /-!
 # Fixed-base growth of the actual transported velocity
@@ -9,6 +11,8 @@ bounded height is absorbed in the drift, while the second copy retains
 one full height factor in the velocity. Three independent low orders
 are combined before any parameter order is selected.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PointwiseMaterialJetOperations
-import Mathlib.Analysis.Normed.Operator.Prod
+module
+
+public import ContinuousFlexibility.Analysis.PointwiseMaterialJetOperations
+public import Mathlib.Analysis.Normed.Operator.Prod
 
 /-!
 # The true half-sum and half-difference of characteristic labels
@@ -8,6 +10,8 @@ Subtracting the linear angle from both labels makes their half-sum and
 half-difference bounded objects. Two fixed contractions give their
 ordinary jets without introducing any new state order or loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

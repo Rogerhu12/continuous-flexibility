@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04RealizationOneEndpointCubicJets
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationOneEndpointCubicJets
 
 /-!
 # Actual parameter jets after both cubic divisions
@@ -9,6 +11,8 @@ second division. Applying the same one-endpoint theorem twice gives six
 radial orders of loss, with no change to the parameter neighborhood and
 no angular loss. The output is the original field in the factorization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

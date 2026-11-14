@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # Physical pieces for the coordinate stage
@@ -7,6 +9,8 @@ These are actual intervals and their orientation. Their geometry is proved
 from the profile and the negative components, before any chart is chosen.
 The two halves of each negative component retain a named cut pair.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Analysis
 

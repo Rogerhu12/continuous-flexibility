@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aShiftedInterpolation
-import ContinuousFlexibility.Analysis.TameLocalCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N07aShiftedInterpolation
+public import ContinuousFlexibility.Analysis.TameLocalCalculus
 
 /-!
 # One high state or source factor in an arbitrary finite jet product
@@ -8,6 +10,8 @@ The fixed offset is absorbed by interpolation before any product is
 estimated. The same low state neighborhood works for every number of
 factors and every total order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

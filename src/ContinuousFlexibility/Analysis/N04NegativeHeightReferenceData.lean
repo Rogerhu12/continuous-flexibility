@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04NegativeHeightCurrentData
-import ContinuousFlexibility.Analysis.N04NegativeHeightRadialFamilies
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeNegativeGeometryJets
-import ContinuousFlexibility.Analysis.N01OriginalCoefficientGlobalJets
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeHeightCurrentData
+public import ContinuousFlexibility.Analysis.N04NegativeHeightRadialFamilies
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeNegativeGeometryJets
+public import ContinuousFlexibility.Analysis.N01OriginalCoefficientGlobalJets
 
 /-!
 # Reference data for the negative-height calculation
@@ -12,6 +14,8 @@ The physical radial coefficient has a simpler reference bound: its actual
 reference jets are uniformly bounded on the fixed annulus, and the unit
 pullback uses only a bounded physical half length.
 -/
+
+@[expose] public section
 
 noncomputable section
 

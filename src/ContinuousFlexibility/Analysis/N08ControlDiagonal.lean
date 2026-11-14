@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SpacesCircleSpectral
-import ContinuousFlexibility.Statements.Nonlinear
-import Mathlib.Analysis.Normed.Operator.Mul
+module
+
+public import ContinuousFlexibility.Analysis.SpacesCircleSpectral
+public import ContinuousFlexibility.Statements.Nonlinear
+public import Mathlib.Analysis.Normed.Operator.Mul
 
 /-!
 # Actual diagonal operators on the control Hilbert space
@@ -10,6 +12,8 @@ the actual `ControlBanach` space.  A lower absolute bound of `1/2`
 constructs the reciprocal multiplier, with both inverse identities and
 operator norms at most two.
 -/
+
+@[expose] public section
 
 noncomputable section
 

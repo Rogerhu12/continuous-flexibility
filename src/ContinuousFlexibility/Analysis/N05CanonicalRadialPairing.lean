@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05CanonicalRadialTestDerivative
-import ContinuousFlexibility.Analysis.N05CanonicalAngularPairing
-import ContinuousFlexibility.Scalar.Conservation
-import ContinuousFlexibility.Scalar.WeightedPartialIdentities
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05CanonicalRadialTestDerivative
+public import ContinuousFlexibility.Analysis.N05CanonicalAngularPairing
+public import ContinuousFlexibility.Scalar.Conservation
+public import ContinuousFlexibility.Scalar.WeightedPartialIdentities
 
 /-!
 # The genuine canonical first radial weak derivative
@@ -13,6 +15,8 @@ integrable L² pairings; the logarithmic-height correction is eliminated
 pointwise before integration, so no separate coefficient integrability is
 assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

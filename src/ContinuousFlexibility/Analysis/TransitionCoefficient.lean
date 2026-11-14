@@ -1,5 +1,7 @@
-import Mathlib.Data.Real.Basic
-import Mathlib.Tactic.Linarith
+module
+
+public import Mathlib.Data.Real.Basic
+public import Mathlib.Tactic.Linarith
 
 /-!
 # Absorbing an intermediate coefficient by the extra travel distance
@@ -9,6 +11,8 @@ the interval between their endpoints, the sum of the two distances has
 an extra term. Slow variation of the coefficient scale pays its cost
 from exactly that extra distance, preserving the full endpoint decay.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Analysis
 

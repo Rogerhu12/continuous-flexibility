@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ProjectiveNewtonRapidDecay
-import Mathlib.Analysis.Calculus.UniformLimitsDeriv
-import Mathlib.Analysis.Normed.Group.FunctionSeries
+module
+
+public import ContinuousFlexibility.Analysis.ProjectiveNewtonRapidDecay
+public import Mathlib.Analysis.Calculus.UniformLimitsDeriv
+public import Mathlib.Analysis.Normed.Group.FunctionSeries
 
 /-!
 # Decay of parameter derivatives on inner intervals
@@ -10,6 +12,8 @@ by the size of the curve and its second derivative. A step that decreases
 with the smoothing scale converts rapid decay and a coarse growth bound
 into rapid decay for the next derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

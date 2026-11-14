@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bRotationVariationBound
-import Mathlib.Analysis.Calculus.Deriv.Slope
+module
+
+public import ContinuousFlexibility.Analysis.N04bRotationVariationBound
+public import Mathlib.Analysis.Calculus.Deriv.Slope
 
 /-!
 # The actual first variation of the physical translation number
@@ -10,6 +12,8 @@ constant Fourier coefficient is that derivative. The initial translation
 and the uniform remainder are inputs about the actual family of maps;
 no derivative of the translation number is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationColumnPhysicalJets
-import ContinuousFlexibility.Analysis.N04RealizationHeightFieldPowerBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationColumnPhysicalJets
+public import ContinuousFlexibility.Analysis.N04RealizationHeightFieldPowerBounds
 
 /-!
 # Actual physical column prefixes on one common neighborhood
@@ -10,6 +12,8 @@ restricted to the same sector neighborhood. Every finite spatial and
 parameter prefix retains the full physical height gain, ready for the
 proved transfer to the same material sample.
 -/
+
+@[expose] public section
 
 noncomputable section
 

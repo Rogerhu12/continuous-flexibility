@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowIntegral
-import ContinuousFlexibility.Analysis.OneHighCircleFlowMinkowski
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
-import Mathlib.Analysis.Normed.Operator.Mul
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowIntegral
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowMinkowski
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+public import Mathlib.Analysis.Normed.Operator.Mul
 
 /-!
 # Actual angular jets and Sobolev bounds of a compact parameter integral
@@ -12,6 +14,8 @@ to a flow kernel after clamping time to its original closed interval.
 The derivative identities are derived by differentiation under the
 compact integral, then the verified circle Minkowski bound is applied.
 -/
+
+@[expose] public section
 
 noncomputable section
 

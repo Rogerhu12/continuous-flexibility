@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N01CoefficientValueJets
-import ContinuousFlexibility.Analysis.N01OpticalCollarPositivity
-import ContinuousFlexibility.Analysis.MaterialSampleDiscreteEnvelope
-import ContinuousFlexibility.Analysis.LocalMixedProductBounds
-import ContinuousFlexibility.Analysis.SolveReturnEquations
+module
+
+public import ContinuousFlexibility.Analysis.N01CoefficientValueJets
+public import ContinuousFlexibility.Analysis.N01OpticalCollarPositivity
+public import ContinuousFlexibility.Analysis.MaterialSampleDiscreteEnvelope
+public import ContinuousFlexibility.Analysis.LocalMixedProductBounds
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # Actual original coefficient jets throughout the annulus
@@ -12,6 +14,8 @@ removes its sample factor uniformly over the actual partition. Reference
 jets use one fixed radial compact set, independently of all components.
 No root chart, strip radius, or reciprocal coefficient bound is selected.
 -/
+
+@[expose] public section
 
 noncomputable section
 

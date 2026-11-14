@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.IntervalWeakPrimitive
-import ContinuousFlexibility.Radial.MatchedModeSeparatedTests
-import ContinuousFlexibility.Radial.MatchingKernel
+module
+
+public import ContinuousFlexibility.Analysis.IntervalWeakPrimitive
+public import ContinuousFlexibility.Radial.MatchedModeSeparatedTests
+public import ContinuousFlexibility.Radial.MatchingKernel
 
 /-!
 # The physical modal equation from the actual weak flux
@@ -9,6 +11,8 @@ The variation-of-parameters representative has a weak derivative for its
 true flux. Integration by parts gives the second-order equation, and the
 existing interval closure retains every test in the frozen modal graph.
 -/
+
+@[expose] public section
 
 noncomputable section
 

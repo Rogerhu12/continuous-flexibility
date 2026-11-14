@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartOpticalSpeedBounds
-import ContinuousFlexibility.Analysis.N01cFiniteAffineSpeedFactors
-import ContinuousFlexibility.Analysis.N01cComponentSpeedPeriodicity
-import ContinuousFlexibility.Analysis.N01ActualRootGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartOpticalSpeedBounds
+public import ContinuousFlexibility.Analysis.N01cFiniteAffineSpeedFactors
+public import ContinuousFlexibility.Analysis.N01cComponentSpeedPeriodicity
+public import ContinuousFlexibility.Analysis.N01ActualRootGeometry
 
 /-!
 # Actual divided characteristic fields on a complete negative half
@@ -11,6 +13,8 @@ factors times the actual affine optical square root. These same fields
 are smooth at every point of the closed half on every finite state plot.
 No extension radius enters their definitions or their physical identities.
 -/
+
+@[expose] public section
 
 noncomputable section
 

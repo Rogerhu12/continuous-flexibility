@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsControlled
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsBoundaryData
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsControlled
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsBoundaryData
 
 /-!
 # The radial factors of the stored positive transports
@@ -9,6 +11,8 @@ radial inverse. Their finite kernel packets contain precisely the stored
 pulled-back endpoint coefficients. These identities make the kernel
 estimates applicable to the same transport used by the atlas.
 -/
+
+@[expose] public section
 
 noncomputable section
 

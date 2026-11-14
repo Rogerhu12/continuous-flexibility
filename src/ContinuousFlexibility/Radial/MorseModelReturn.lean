@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.SeedMorseEntrance
-import ContinuousFlexibility.Radial.CentralPhysicalTravel
-import ContinuousFlexibility.Radial.MorseParameterBridges
-import ContinuousFlexibility.Radial.MorseRealizationBasic
+module
+
+public import ContinuousFlexibility.Radial.SeedMorseEntrance
+public import ContinuousFlexibility.Radial.CentralPhysicalTravel
+public import ContinuousFlexibility.Radial.MorseParameterBridges
+public import ContinuousFlexibility.Radial.MorseRealizationBasic
 
 /-!
 # Actual Morse turning components and their physical return integrals
@@ -10,6 +12,8 @@ All statements concern an arbitrary realized chain and its actual profile.
 The coordinate signs, physical component, travel integral, and cell label
 are derived from the realization equations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationFiniteScalarComposition
-import ContinuousFlexibility.Analysis.N04RealizationParameterRescale
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationFiniteScalarComposition
+public import ContinuousFlexibility.Analysis.N04RealizationParameterRescale
 
 /-!
 # Scalar composition with a finite parameter loss
@@ -8,6 +10,8 @@ The same rescaling of every direction removes the interpolation cost
 linear in the parameter order. Restoring the directions charges that
 cost once at the order of the resulting genuine multilinear map.
 -/
+
+@[expose] public section
 
 noncomputable section
 

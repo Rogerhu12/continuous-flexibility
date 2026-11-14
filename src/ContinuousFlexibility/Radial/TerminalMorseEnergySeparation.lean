@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.TerminalMorseLiftEnergy
+module
+
+public import ContinuousFlexibility.Radial.TerminalMorseLiftEnergy
 
 /-!
 # Separation of the two actual terminal cutoff lifts
@@ -7,6 +9,8 @@ The left cutoff is zero beyond its layer and the right cutoff is zero
 before its layer. The physical order of those layers therefore separates
 their closed supports, their actual mixed energy, and their source pairing.
 -/
+
+@[expose] public section
 
 noncomputable section
 

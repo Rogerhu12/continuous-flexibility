@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.TerminalLiftBoundaryTrace
+module
+
+public import ContinuousFlexibility.Radial.TerminalLiftBoundaryTrace
 
 /-!
 # The actual inner Poisson matrix and its two-factor error
@@ -8,6 +10,8 @@ Green's identity measures their physical conormal flux. The exact
 lift-source pairing is supplied by the proved cutoff-energy identity
 and support separation, not by prescribing a new energy matrix.
 -/
+
+@[expose] public section
 
 noncomputable section
 

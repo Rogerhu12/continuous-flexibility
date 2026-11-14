@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Statements.Scalar
-import ContinuousFlexibility.Scalar.RectangleParameterIntegral
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+module
+
+public import ContinuousFlexibility.Statements.Scalar
+public import ContinuousFlexibility.Scalar.RectangleParameterIntegral
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 
 /-!
 # Smooth finite-parameter scalar jets
@@ -11,6 +13,8 @@ partial derivatives below are derivatives of the actual sliced functions,
 not independently chosen jet fields.  Local smoothness suffices throughout;
 the only coordinate restriction is that the radius be nonzero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,12 @@
-import ContinuousFlexibility.Analysis.SectorParameterGeometry
-import ContinuousFlexibility.Analysis.TameSmoothingCalculus
+module
+
+public import ContinuousFlexibility.Analysis.SectorParameterGeometry
+public import ContinuousFlexibility.Analysis.TameSmoothingCalculus
 
 /-! The actual sector smoothing family supplies interpolation for the
 parameter grading used by the negative-height calculation. -/
+
+@[expose] public section
 
 noncomputable section
 

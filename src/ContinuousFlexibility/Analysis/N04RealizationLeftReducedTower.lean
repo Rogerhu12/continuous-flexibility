@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationNuResidualTower
-import ContinuousFlexibility.Analysis.N04RealizationLeftColumnIdentities
-import ContinuousFlexibility.Scalar.WeightedGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationNuResidualTower
+public import ContinuousFlexibility.Analysis.N04RealizationLeftColumnIdentities
+public import ContinuousFlexibility.Scalar.WeightedGeometry
 
 /-!
 # A uniform tower for the reduced left-height column
@@ -10,6 +12,8 @@ geometry neighborhood. Its fixed left-height derivative has the same
 uniform base and loss. The decoder is identified by a genuine derivative
 of the same scalar residual, with the angular correction exactly zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

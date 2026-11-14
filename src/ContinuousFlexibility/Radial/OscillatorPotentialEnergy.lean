@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OscillatorClosedForm
-import ContinuousFlexibility.Radial.CentralRadialWeightedInverse
+module
+
+public import ContinuousFlexibility.Radial.OscillatorClosedForm
+public import ContinuousFlexibility.Radial.CentralRadialWeightedInverse
 
 /-!
 # The actual absolute-potential energy domain
@@ -9,6 +11,8 @@ renamed position coordinate. Bounded measurable coordinate maps identify
 its weak-derivative graph with the physical position energy graph. No
 smoothness of the absolute-potential multiplier is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

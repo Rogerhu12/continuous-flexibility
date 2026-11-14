@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryCoefficientPlaneWords
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledFiniteCalculus
-import ContinuousFlexibility.Analysis.PolynomialJetComposition
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryCoefficientPlaneWords
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledFiniteCalculus
+public import ContinuousFlexibility.Analysis.PolynomialJetComposition
 
 /-!
 # One sample envelope for finite coefficient kernels on the plane
@@ -10,6 +12,8 @@ set before choosing a state, a word or its directions. All coefficients
 and finite partition factors are absorbed into one material power; the
 parameter height and the saved word cost remain outside that power.
 -/
+
+@[expose] public section
 
 noncomputable section
 

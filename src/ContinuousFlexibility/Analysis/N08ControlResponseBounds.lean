@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N08ControlColumnExtraction
+module
+
+public import ContinuousFlexibility.Analysis.N08ControlColumnExtraction
 
 /-!
 # Composing a smoothing control column with the existing scalar inverse
@@ -8,6 +10,8 @@ Consequently the inverse-family estimate retains one high state factor,
 instead of multiplying two such factors. The result includes every output
 order, including those below the base of the inverse estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

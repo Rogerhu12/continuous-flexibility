@@ -1,7 +1,11 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartInteriorBudget
-import ContinuousFlexibility.Analysis.N04NegativeChartPolarization
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartInteriorBudget
+public import ContinuousFlexibility.Analysis.N04NegativeChartPolarization
 
 /-! Arbitrary parameter directions preserve the actual fractional interior budget. -/
+
+@[expose] public section
 
 noncomputable section
 

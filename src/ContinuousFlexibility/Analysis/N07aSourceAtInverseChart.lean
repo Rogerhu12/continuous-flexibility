@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aActualMaterialComparison
-import ContinuousFlexibility.Analysis.N07aSourceFrechetDecay
-import ContinuousFlexibility.Analysis.SolveReturnEquations
+module
+
+public import ContinuousFlexibility.Analysis.N07aActualMaterialComparison
+public import ContinuousFlexibility.Analysis.N07aSourceFrechetDecay
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # Actual source jets at the true inverse-chart points
@@ -9,6 +11,8 @@ The derived current-domain material certificate compares the actual
 inverse-chart point with the sampled weights. Its powers remain a single
 subpower envelope at each order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

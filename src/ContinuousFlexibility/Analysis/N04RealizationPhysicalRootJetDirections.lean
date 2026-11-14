@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N04RealizationRootAbsorbedJoint
-import ContinuousFlexibility.Analysis.N04RealizationJointSpatialEvaluation
-import ContinuousFlexibility.Analysis.N06RootPhysicalSmallness
-import ContinuousFlexibility.Analysis.SectorParameterGeometry
-import ContinuousFlexibility.Analysis.SmoothDirectionsNormedComposition
-import ContinuousFlexibility.Analysis.TameTransfer
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationRootAbsorbedJoint
+public import ContinuousFlexibility.Analysis.N04RealizationJointSpatialEvaluation
+public import ContinuousFlexibility.Analysis.N06RootPhysicalSmallness
+public import ContinuousFlexibility.Analysis.SectorParameterGeometry
+public import ContinuousFlexibility.Analysis.SmoothDirectionsNormedComposition
+public import ContinuousFlexibility.Analysis.TameTransfer
 
 /-!
 # Genuine state and angle jets of actual physical root coefficients
@@ -14,6 +16,8 @@ point in that locus. Ordinary spatial jets are then restricted to that
 same root, and the existing physical germ identifies the actual fields.
 No parameter regularity of a chosen root-coordinate extension is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

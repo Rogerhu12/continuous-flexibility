@@ -1,11 +1,13 @@
-import ContinuousFlexibility.Analysis.N01OriginalCoefficientTameBounds
-import ContinuousFlexibility.Analysis.N01NeighborhoodRestriction
-import ContinuousFlexibility.Analysis.MixedJointTameBounds
-import ContinuousFlexibility.Analysis.JointMixedTameBounds
-import ContinuousFlexibility.Analysis.WeightedJointProducts
-import ContinuousFlexibility.Analysis.WeightedJointPowers
-import ContinuousFlexibility.Analysis.TameSmoothingCalculus
-import ContinuousFlexibility.Analysis.ActualRadialCellComparison
+module
+
+public import ContinuousFlexibility.Analysis.N01OriginalCoefficientTameBounds
+public import ContinuousFlexibility.Analysis.N01NeighborhoodRestriction
+public import ContinuousFlexibility.Analysis.MixedJointTameBounds
+public import ContinuousFlexibility.Analysis.JointMixedTameBounds
+public import ContinuousFlexibility.Analysis.WeightedJointProducts
+public import ContinuousFlexibility.Analysis.WeightedJointPowers
+public import ContinuousFlexibility.Analysis.TameSmoothingCalculus
+public import ContinuousFlexibility.Analysis.ActualRadialCellComparison
 
 /-!
 # Actual characteristic speeds with a fixed joint derivative loss
@@ -18,6 +20,8 @@ minus characteristic speed. Every resulting constant is uniform in the
 component label and physical point; the fixed component powers are
 retained explicitly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

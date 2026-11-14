@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aAngularWeights
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularWeights
 
 /-!
 # Splitting the actual output jet weight across angular blocks
@@ -8,6 +10,8 @@ frequency difference.  Consequently a high input norm only requires a
 fixed low coefficient order; the other summand has one high coefficient
 norm and the original input norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

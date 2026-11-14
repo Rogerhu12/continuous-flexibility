@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerRadialActualPieces
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialActualPieces
 
 /-!
 # Local weak realizations from the actual model/gap dictionary
@@ -8,6 +10,8 @@ same physical Dirichlet and Poisson maps recorded by its coefficients.
 The homogeneous realization also supplies its complete conormal block.
 These are proved outputs, not assumptions of finite-chain assembly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

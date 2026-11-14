@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05CanonicalAngularJetChoice
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalAngularJetChoice
 
 /-!
 # Assembling the actual finite angular family
@@ -7,6 +9,8 @@ Each square-summable column is inserted into the genuine finite Hilbert
 row. Their finite sum gives the literal canonical jet space, with the
 expected coordinates and an explicit norm bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

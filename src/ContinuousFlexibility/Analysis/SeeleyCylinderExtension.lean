@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.SeeleyCoefficients
-import ContinuousFlexibility.Analysis.SeeleyJetExtension
-import Mathlib.Analysis.Calculus.FDeriv.Partial
-import Mathlib.Analysis.Calculus.ContDiff.FiniteDimension
+module
+
+public import ContinuousFlexibility.Analysis.SeeleyCoefficients
+public import ContinuousFlexibility.Analysis.SeeleyJetExtension
+public import Mathlib.Analysis.Calculus.FDeriv.Partial
+public import Mathlib.Analysis.Calculus.ContDiff.FiniteDimension
 
 /-!
 # A joint smooth Seeley extension on the cylinder
@@ -13,6 +15,8 @@ Joint continuity of the extended jets then proves actual differentiability
 on the product, including the entire boundary line. This constructs one
 jointly smooth function, not a collection of unrelated slice extensions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

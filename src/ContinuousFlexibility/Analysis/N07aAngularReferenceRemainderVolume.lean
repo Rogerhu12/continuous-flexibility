@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aAngularReferenceLowJets
-import ContinuousFlexibility.Analysis.N07aAngularReferenceDifferentialJets
-import ContinuousFlexibility.Analysis.N07aAngularReferenceSourceEnvelopes
-import ContinuousFlexibility.Analysis.N07aAngularFixedVolume
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceLowJets
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceDifferentialJets
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceSourceEnvelopes
+public import ContinuousFlexibility.Analysis.N07aAngularFixedVolume
 
 /-!
 # The reference remainder source is in the actual canonical source graph
@@ -10,6 +12,8 @@ For an arbitrary physical height pair, the reference C¹ realization has
 the same actual remainder on each open piece. Its genuine differential
 source keeps all sampled material powers and every angular jet.
 -/
+
+@[expose] public section
 
 noncomputable section
 

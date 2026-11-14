@@ -1,6 +1,8 @@
-import Mathlib.Topology.Bases
-import Mathlib.Topology.Instances.Real.Lemmas
-import Mathlib.Topology.Order.IntermediateValue
+module
+
+public import Mathlib.Topology.Bases
+public import Mathlib.Topology.Instances.Real.Lemmas
+public import Mathlib.Topology.Order.IntermediateValue
 
 /-!
 # The positive components of a continuous radial coefficient
@@ -13,6 +15,8 @@ disjoint, and covers the positive set exactly.
 Endpoints are allowed to equal the endpoints of the ambient interval.
 No claim of compact containment is implicit in this decomposition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06CurrentPositiveOperatorTest
-import ContinuousFlexibility.Analysis.N06CurrentPositiveFiniteGreen
-import ContinuousFlexibility.Analysis.N06CurrentCubicTestPairing
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentPositiveOperatorTest
+public import ContinuousFlexibility.Analysis.N06CurrentPositiveFiniteGreen
+public import ContinuousFlexibility.Analysis.N06CurrentCubicTestPairing
 
 /-!
 # Actual positive relative source pairings
@@ -12,6 +14,8 @@ signs required by the original equation. For the finite modes of the
 existing weak graph package, the remaining term is exactly the reference
 Green boundary term. No boundary trace of an infinite sum is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05SchurMembership
-import Mathlib.Analysis.Normed.Operator.BoundedLinearMaps
-import Mathlib.Topology.Algebra.InfiniteSum.Module
+module
+
+public import ContinuousFlexibility.Analysis.N05SchurMembership
+public import Mathlib.Analysis.Normed.Operator.BoundedLinearMaps
+public import Mathlib.Topology.Algebra.InfiniteSum.Module
 
 /-!
 # The operator defined by a Schur-bounded matrix of actual blocks
@@ -9,6 +11,8 @@ Each output coordinate is the convergent series of the given blocks.
 The Schur membership theorem places these coordinates in the target lp
 space, after which the same bound makes their linear map continuous.
 -/
+
+@[expose] public section
 
 noncomputable section
 

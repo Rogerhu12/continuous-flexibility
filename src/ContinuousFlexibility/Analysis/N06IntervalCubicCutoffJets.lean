@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.DegenerateEnergy
-import ContinuousFlexibility.Radial.TailKernelTestExtension
-import ContinuousFlexibility.Radial.InnerBufferSource
+module
+
+public import ContinuousFlexibility.Analysis.DegenerateEnergy
+public import ContinuousFlexibility.Radial.TailKernelTestExtension
+public import ContinuousFlexibility.Radial.InnerBufferSource
 
 /-!
 # Actual interval cubic weights absorb the interior cutoff derivatives
@@ -10,6 +12,8 @@ second derivatives have their genuine scaled transition formulas. Away
 from the two endpoint layers the cutoff has constant germ one. Thus
 `d^2 * chi'` and `d^3 * chi''` are uniformly of order `1 / (n + 1)`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

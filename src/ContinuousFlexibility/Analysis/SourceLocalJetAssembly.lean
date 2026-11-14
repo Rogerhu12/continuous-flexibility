@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.PhysicalJetCompatibility
-import ContinuousFlexibility.Analysis.ProjectiveJetLocalContinuity
-import ContinuousFlexibility.Analysis.SourceLocalSmoothTameBounds
-import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
+module
+
+public import ContinuousFlexibility.Analysis.PhysicalJetCompatibility
+public import ContinuousFlexibility.Analysis.ProjectiveJetLocalContinuity
+public import ContinuousFlexibility.Analysis.SourceLocalSmoothTameBounds
+public import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
 
 /-!
 # Source towers with order-dependent local norm bounds
@@ -12,6 +14,8 @@ point and target level uses only the next derivative on one open convex
 neighborhood. No common neighborhood for infinitely many orders is
 assumed or selected.
 -/
+
+@[expose] public section
 
 noncomputable section
 

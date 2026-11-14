@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.InteriorScalarFlowJets
-import ContinuousFlexibility.Analysis.OneSidedOrdinaryJets
+module
+
+public import ContinuousFlexibility.Analysis.InteriorScalarFlowJets
+public import ContinuousFlexibility.Analysis.OneSidedOrdinaryJets
 
 /-!
 # A fixed smooth speed extension retaining every interior jet
@@ -9,6 +11,8 @@ the flow. Thus all ordinary derivatives, including at the two visited
 endpoints, agree with the original speed. No derivative of the clamp
 appears in the raw-flow estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

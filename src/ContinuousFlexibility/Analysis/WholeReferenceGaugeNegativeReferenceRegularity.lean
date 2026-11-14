@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ActualNegativeReferenceGeometryFields
-import ContinuousFlexibility.Analysis.ActualNegativeReferencePotentialGerms
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeNegativeAtomTransport
+module
+
+public import ContinuousFlexibility.Analysis.ActualNegativeReferenceGeometryFields
+public import ContinuousFlexibility.Analysis.ActualNegativeReferencePotentialGerms
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeNegativeAtomTransport
 
 /-!
 # Qualitative reference atoms on the same negative pieces
@@ -9,6 +11,8 @@ The stored scalar slices are smooth on their true open intervals. The
 actual field identities make their unit atoms radial, including the
 potential. These qualitative conclusions need no optical lower bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

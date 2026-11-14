@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06PositiveCurrentTestLp
-import ContinuousFlexibility.Analysis.CanonicalPrincipalCoefficients
-import ContinuousFlexibility.Analysis.N06RootBoundaryCancellation
+module
+
+public import ContinuousFlexibility.Analysis.N06PositiveCurrentTestLp
+public import ContinuousFlexibility.Analysis.CanonicalPrincipalCoefficients
+public import ContinuousFlexibility.Analysis.N06RootBoundaryCancellation
 
 /-!
 # The actual normal density at a turning root
@@ -12,6 +14,8 @@ negative side. The existing negative normal-form theorem applies there.
 Continuity of the true forward coordinate density then gives its closed
 normal row `(1,0)`, without assuming smoothness on the whole negative piece.
 -/
+
+@[expose] public section
 
 noncomputable section
 

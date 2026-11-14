@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerDirichletDomain
+module
+
+public import ContinuousFlexibility.Radial.InnerDirichletDomain
 
 /-!
 # Supported representatives of the actual interval energy core
@@ -8,6 +10,8 @@ Smoothness implies that the derivative also vanishes off the closed
 interval; its two endpoints have zero Lebesgue measure. Both L²
 coordinates therefore have the actual open-interval indicator form.
 -/
+
+@[expose] public section
 
 noncomputable section
 

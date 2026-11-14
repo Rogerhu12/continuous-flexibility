@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.PointwiseMaterialJetOperations
+module
+
+public import ContinuousFlexibility.Analysis.PointwiseMaterialJetOperations
 
 /-!
 # Actual ordinary jets under a fixed affine pullback
@@ -7,6 +9,8 @@ The affine coordinate map contributes its operator norm to the power of
 the spatial order, and no state derivative loss. The proof only needs
 ordinary smoothness at the evaluation point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

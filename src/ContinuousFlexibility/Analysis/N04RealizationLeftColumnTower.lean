@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeftReducedTower
-import ContinuousFlexibility.Analysis.N04RealizationUniformAffineFamily
-import ContinuousFlexibility.Analysis.N04RealizationUniformSector
-import ContinuousFlexibility.Analysis.N07aNuSource
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeftReducedTower
+public import ContinuousFlexibility.Analysis.N04RealizationUniformAffineFamily
+public import ContinuousFlexibility.Analysis.N04RealizationUniformSector
+public import ContinuousFlexibility.Analysis.N07aNuSource
 
 /-!
 # The actual current left column with a uniform sector tower
@@ -11,6 +13,8 @@ column. One sector neighborhood supports the entire tower. Its decoder
 equals the current physical divergence on the annulus and vanishes with
 that divergence outside the annulus.
 -/
+
+@[expose] public section
 
 noncomputable section
 

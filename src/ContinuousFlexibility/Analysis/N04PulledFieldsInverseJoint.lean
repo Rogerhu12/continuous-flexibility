@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsReferenceCost
-import ContinuousFlexibility.Analysis.N04RealizationMixedJointDirections
-import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsReferenceCost
+public import ContinuousFlexibility.Analysis.N04RealizationMixedJointDirections
+public import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
 
 /-!
 # The genuine inverse-point joint tower
@@ -14,6 +16,8 @@ The resulting point is exactly `G.pulledPoint`; no inverse, coordinate,
 or parameter-space representation is reselected.  This module provides
 joint regularity, not an estimate for a composed physical coefficient.
 -/
+
+@[expose] public section
 
 noncomputable section
 

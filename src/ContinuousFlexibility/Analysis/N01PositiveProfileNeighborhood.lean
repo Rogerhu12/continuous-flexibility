@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.StateNeighborhood
-import ContinuousFlexibility.Analysis.StateProfileRegularity
-import Mathlib.Topology.Algebra.Support
+module
+
+public import ContinuousFlexibility.Analysis.StateNeighborhood
+public import ContinuousFlexibility.Analysis.StateProfileRegularity
+public import Mathlib.Topology.Algebra.Support
 
 /-!
 # One positive-profile neighborhood for every positive component
@@ -14,6 +16,8 @@ open positive region. The original state grading controls the real
 coordinate, so the original base and one smaller radius work for every
 positive component simultaneously.
 -/
+
+@[expose] public section
 
 noncomputable section
 

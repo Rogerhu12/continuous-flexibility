@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06CutSaturatedSupport
-import ContinuousFlexibility.Analysis.N07aAngularPieceCover
+module
+
+public import ContinuousFlexibility.Analysis.N06CutSaturatedSupport
+public import ContinuousFlexibility.Analysis.N07aAngularPieceCover
 
 /-!
 # Finite physical support on the retained canonical atlas
@@ -8,6 +10,8 @@ Primitive reference jets make the original reference intervals locally
 finite. Adding both halves of each original negative component gives the
 same state-independent support envelope for every actual moving cut.
 -/
+
+@[expose] public section
 
 noncomputable section
 

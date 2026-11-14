@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFourierComposition
-import ContinuousFlexibility.Analysis.OneHighCircleInverseBounds
-import ContinuousFlexibility.Analysis.OneHighCircleReciprocal
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierComposition
+public import ContinuousFlexibility.Analysis.OneHighCircleInverseBounds
+public import ContinuousFlexibility.Analysis.OneHighCircleReciprocal
 
 /-!
 # The genuine inverse defect as a reciprocal composition
@@ -9,6 +11,8 @@ The derivative defect of the actual inverse is identified pointwise with
 the reciprocal function of the forward defect, composed with that inverse.
 The scalar Moser estimate then applies uniformly to the outer function.
 -/
+
+@[expose] public section
 
 noncomputable section
 

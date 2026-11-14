@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.TailNaturalNodeLine
-import Mathlib.Analysis.Real.Sqrt
-import Mathlib.Tactic.LinearCombination
+module
+
+public import ContinuousFlexibility.Radial.TailNaturalNodeLine
+public import Mathlib.Analysis.Real.Sqrt
+public import Mathlib.Tactic.LinearCombination
 
 /-!
 # Uniqueness of the square-summable natural node line
@@ -12,6 +14,8 @@ Consequently every square-summable solution is proportional to a
 nonvanishing natural solution. The same result applies after any node,
 which is the form needed for columns of the inverse matrix.
 -/
+
+@[expose] public section
 
 noncomputable section
 

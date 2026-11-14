@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryFormulaAlgebra
-import ContinuousFlexibility.Analysis.N01cPhysicalGraphJets
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryFormulaAlgebra
+public import ContinuousFlexibility.Analysis.N01cPhysicalGraphJets
 
 /-!
 # The eight literal boundary formulas with one spatial order coefficient
@@ -8,6 +10,8 @@ Input and output towers are genuine derivatives of the displayed
 functions. The finite intrinsic reserve is three; the variable angular
 order and the original parameter order remain separate throughout.
 -/
+
+@[expose] public section
 
 noncomputable section
 

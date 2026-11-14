@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01aCellCoarseningSeries
-import ContinuousFlexibility.Statements.Radial
-import Mathlib.Order.OrderIsoNat
-import Mathlib.Data.Set.Finite.Lattice
+module
+
+public import ContinuousFlexibility.Analysis.N01aCellCoarseningSeries
+public import ContinuousFlexibility.Statements.Radial
+public import Mathlib.Order.OrderIsoNat
+public import Mathlib.Data.Set.Finite.Lattice
 
 /-!
 # Grouping radial cells by scale and endpoint
@@ -11,6 +13,8 @@ scale and the endpoint nearest that point. The nonempty tags are enumerated
 in increasing order. Thus there are at most two coarse cells at each scale,
 while every original localizer belongs to exactly one finite group.
 -/
+
+@[expose] public section
 
 noncomputable section
 

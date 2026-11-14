@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartFieldPrefix
-import ContinuousFlexibility.Analysis.N04RealizationJointMixedRegularity
-import ContinuousFlexibility.Analysis.N04NegativeChartRootFlowFactory
-import ContinuousFlexibility.Analysis.CylinderMixedJets
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartFieldPrefix
+public import ContinuousFlexibility.Analysis.N04RealizationJointMixedRegularity
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootFlowFactory
+public import ContinuousFlexibility.Analysis.CylinderMixedJets
 
 /-!
 # The actual coefficient prefixes on their finite state representatives
@@ -11,6 +13,8 @@ same genuine jets. Thus the constructed representatives inherit the
 sharp coefficient bounds on the physical half. Only the two spatial
 coordinates contribute to the operator-norm constant.
 -/
+
+@[expose] public section
 
 noncomputable section
 

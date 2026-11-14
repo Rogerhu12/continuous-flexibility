@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CoupledCircleParameterIndependence
+module
+
+public import ContinuousFlexibility.Analysis.CoupledCircleParameterIndependence
 
 /-!
 # The four columns of the same genuine residual jet
@@ -7,6 +9,8 @@ All column identities refer to one N08 directional tower. They can therefore
 be added by the linearity of its first jet. This also transports that jet to
 the ambient state line without asserting ambient smoothness off the sector.
 -/
+
+@[expose] public section
 
 noncomputable section
 

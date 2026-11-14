@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ModeRegionWeakEquation
+module
+
+public import ContinuousFlexibility.Radial.ModeRegionWeakEquation
 
 /-!
 # Actual exterior restrictions of modal weak solutions
@@ -7,6 +9,8 @@ These are statements about the constructed indicator operators. In particular,
 no local inverse or matching realization is assumed. The exterior extension
 keeps the two cut values and is zero on the open inner interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

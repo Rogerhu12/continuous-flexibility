@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalModeEquation
-import ContinuousFlexibility.Analysis.N07aIntervalEquationUnit
-import ContinuousFlexibility.Analysis.N07aReferenceUnitJets
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalModeEquation
+public import ContinuousFlexibility.Analysis.N07aIntervalEquationUnit
+public import ContinuousFlexibility.Analysis.N07aReferenceUnitJets
 
 /-!
 # Actual cosine modes on the unit interval
@@ -9,6 +11,8 @@ These are genuine L² classes of the prescribed canonical representatives.
 Affine normalization retains the exact interval length in both weak
 derivatives and the second-order equation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

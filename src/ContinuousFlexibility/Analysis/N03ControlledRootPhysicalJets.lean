@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01ControlledRootModel
-import ContinuousFlexibility.Analysis.N03UniformRootBandGeometry
-import ContinuousFlexibility.Analysis.N03FixedRootOrdinaryJets
-import ContinuousFlexibility.Analysis.RootPhysicalJetTransfer
+module
+
+public import ContinuousFlexibility.Analysis.N01ControlledRootModel
+public import ContinuousFlexibility.Analysis.N03UniformRootBandGeometry
+public import ContinuousFlexibility.Analysis.N03FixedRootOrdinaryJets
+public import ContinuousFlexibility.Analysis.RootPhysicalJetTransfer
 
 /-!
 # Actual stored root fields on a uniform physical collar
@@ -13,6 +15,8 @@ stored chart, height and inverse height at every angle, including the
 root. The original scale and flow are retained. All low orders and
 losses precede the component, and all collar constants precede states.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CircleSobolevPointwise
-import Mathlib.Analysis.Calculus.ContDiff.Bounds
+module
+
+public import ContinuousFlexibility.Analysis.CircleSobolevPointwise
+public import Mathlib.Analysis.Calculus.ContDiff.Bounds
 
 /-!
 # Finite component energies and composition of actual angular jets
@@ -9,6 +11,8 @@ component.  The full component energy controls both, while preserving the
 sample-weight exponent.  The ordinary higher chain rule therefore gives a
 composition estimate before summing over the infinitely many circles.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Blueprint.Statements
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
 
 /-!
 # Geometry is preserved by replacing only operator fields
@@ -9,6 +11,8 @@ The geometry structure is nevertheless indexed by the whole data record;
 its proof must be transported by its fields rather than by definitional
 equality of the two structure types.
 -/
+
+@[expose] public section
 
 noncomputable section
 

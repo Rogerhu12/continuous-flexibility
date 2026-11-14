@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07bPiecewiseCanonicalLift
-import ContinuousFlexibility.Analysis.N07bSourceBoundChangeVariables
-import ContinuousFlexibility.Analysis.N07bAtlasEnergy
+module
+
+public import ContinuousFlexibility.Analysis.N07bPiecewiseCanonicalLift
+public import ContinuousFlexibility.Analysis.N07bSourceBoundChangeVariables
+public import ContinuousFlexibility.Analysis.N07bAtlasEnergy
 
 /-!
 # Integrating a common physical majorant for piecewise canonical jets
@@ -10,6 +12,8 @@ Jacobian-weighted physical integral. A single integrable physical majorant
 then sums over the disjoint current atlas. No bound on how many pieces
 have a given material cell label is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationPotentialParameterPrefix
-import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationPotentialParameterPrefix
+public import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
 
 /-!
 # One high seminorm after a finite parameter prefix
@@ -9,6 +11,8 @@ Its cost is assigned to each parameter slot before multiplying the raw
 fields. The enlarged high order absorbs the total cost, while the given
 low order and the actual parameter neighborhood are retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

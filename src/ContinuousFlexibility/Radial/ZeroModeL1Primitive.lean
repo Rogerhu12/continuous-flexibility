@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ZeroModePrimitive
-import ContinuousFlexibility.Radial.IntervalWeakPrimitive
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
+module
+
+public import ContinuousFlexibility.Radial.ZeroModePrimitive
+public import ContinuousFlexibility.Radial.IntervalWeakPrimitive
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
 
 /-!
 # The actual zero-mode primitives for integrable sources
@@ -13,6 +15,8 @@ continuous on the closed interval and C1 in its interior.
 The integral identity uses the general L1 primitive theorem. No
 approximation by smooth sources or endpoint trace assumption is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

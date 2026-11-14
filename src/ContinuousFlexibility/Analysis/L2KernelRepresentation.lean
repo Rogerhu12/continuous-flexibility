@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.L2KernelExtension
-import Mathlib.Analysis.Distribution.AEEqOfIntegralContDiff
-import Mathlib.Analysis.InnerProductSpace.Projection.Submodule
-import Mathlib.MeasureTheory.Function.L2Space
-import Mathlib.MeasureTheory.Function.LpSpace.Indicator
+module
+
+public import ContinuousFlexibility.Analysis.L2KernelExtension
+public import Mathlib.Analysis.Distribution.AEEqOfIntegralContDiff
+public import Mathlib.Analysis.InnerProductSpace.Projection.Submodule
+public import Mathlib.MeasureTheory.Function.L2Space
+public import Mathlib.MeasureTheory.Function.LpSpace.Indicator
 
 /-!
 # Extending a kernel representation from smooth tests to all L² sources
@@ -12,6 +14,8 @@ compact tests in an open set of full measure are dense in the actual L²
 space. Square-integrable kernel rows give continuous source pairings, so
 the operator's test representation extends to every L² source.
 -/
+
+@[expose] public section
 
 noncomputable section
 

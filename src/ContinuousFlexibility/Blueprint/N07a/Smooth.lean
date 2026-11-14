@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aActualForward
-import ContinuousFlexibility.Analysis.N07aInverseFromForward
-import ContinuousFlexibility.Analysis.N07aStageRestriction
+module
+
+public import ContinuousFlexibility.Analysis.N07aActualForward
+public import ContinuousFlexibility.Analysis.N07aInverseFromForward
+public import ContinuousFlexibility.Analysis.N07aStageRestriction
 
 /-!
 # N07a: the smooth tame family of the same physical inverse
@@ -8,6 +10,8 @@ import ContinuousFlexibility.Analysis.N07aStageRestriction
 Source: `paper/flexible-surface-readable/08-stable-inverse.tex` lines 790–815.
 Task: `docs/tasks/N07a-Smooth.md`.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

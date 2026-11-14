@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderDerivativeMultiplier
-import ContinuousFlexibility.Analysis.OneHighCylinderFourierInverseKernel
-import Mathlib.Analysis.Calculus.ParametricIntegral
-import Mathlib.Analysis.Fourier.FourierTransformDeriv
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderDerivativeMultiplier
+public import ContinuousFlexibility.Analysis.OneHighCylinderFourierInverseKernel
+public import Mathlib.Analysis.Calculus.ParametricIntegral
+public import Mathlib.Analysis.Fourier.FourierTransformDeriv
 
 /-!
 # Genuine coordinate derivatives of the mixed inverse integral
@@ -10,6 +12,8 @@ Differentiation under the full mixed integral is justified by an integrable
 first frequency moment. The derivative bound is independent of the physical
 point because every inverse Fourier character has norm one.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07bCanonicalAEPullback
-import ContinuousFlexibility.Analysis.N07bDivergenceTests
-import ContinuousFlexibility.Analysis.N07bRawRepresentationIntegrability
+module
+
+public import ContinuousFlexibility.Analysis.N07bCanonicalAEPullback
+public import ContinuousFlexibility.Analysis.N07bDivergenceTests
+public import ContinuousFlexibility.Analysis.N07bRawRepresentationIntegrability
 
 /-!
 # The physical weak relation determines its canonical source
@@ -15,6 +17,8 @@ This proves source uniqueness for the repaired full-period N06 relation.
 It does not assert that a current smooth solution belongs to the reference
 closed graph; that domain inclusion is a separate analytic obligation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

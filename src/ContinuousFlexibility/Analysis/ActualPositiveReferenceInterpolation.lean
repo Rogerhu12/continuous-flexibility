@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ActualPositiveReferenceEndpointData
-import ContinuousFlexibility.Analysis.PositiveReferenceFiniteRadialJets
+module
+
+public import ContinuousFlexibility.Analysis.ActualPositiveReferenceEndpointData
+public import ContinuousFlexibility.Analysis.PositiveReferenceFiniteRadialJets
 
 /-!
 # A fixed positive reference map from the actual certified neighbors
@@ -10,6 +12,8 @@ genuine map to the canonical interval (0,1), with positive reference
 height and the prescribed ordinary joint jets at both endpoint circles.
 The height is exactly one on the specified closed forbidden set.
 -/
+
+@[expose] public section
 
 noncomputable section
 

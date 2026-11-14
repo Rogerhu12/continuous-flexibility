@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06ReferenceModalPullback
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceModalPullback
 
 /-!
 # Physical transmission of the original canonical modal representatives
@@ -8,6 +10,8 @@ reconstructions represent the same Fourier coefficients of its actual
 remainder, so their interface jets match by the original weak graph.
 No extra matching condition is imposed on the canonical domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

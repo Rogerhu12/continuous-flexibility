@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesCompactHeights
-import ContinuousFlexibility.Analysis.N06FiniteReferenceColumns
+module
+
+public import ContinuousFlexibility.Analysis.SpacesCompactHeights
+public import ContinuousFlexibility.Analysis.N06FiniteReferenceColumns
 
 /-!
 # A genuine normalizer inside the actual normalization region
@@ -10,6 +12,8 @@ there. A smooth transition inside a compact subinterval gives a radial
 source of integral one. The exact original height-model decoder realizes
 that source, without adding a support assumption on the old psi.
 -/
+
+@[expose] public section
 
 noncomputable section
 

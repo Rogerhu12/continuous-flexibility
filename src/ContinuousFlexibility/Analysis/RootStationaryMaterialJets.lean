@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.RootStationaryFlowJetPolynomial
-import ContinuousFlexibility.Analysis.RootRescaledFieldJets
-import ContinuousFlexibility.Analysis.FlowJetMaterialClosure
+module
+
+public import ContinuousFlexibility.Analysis.RootStationaryFlowJetPolynomial
+public import ContinuousFlexibility.Analysis.RootRescaledFieldJets
+public import ContinuousFlexibility.Analysis.FlowJetMaterialClosure
 
 /-!
 # Material bounds for the actual root-axis flow jets
@@ -12,6 +14,8 @@ state seminorm with a single common loss. No parameter-box radius,
 common profile-germ radius, or chosen normalization scale enters these
 estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

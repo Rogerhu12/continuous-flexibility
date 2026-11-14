@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N07aAngularClassicalEquation
-import ContinuousFlexibility.Analysis.N07aAngularInnerIntervals
-import ContinuousFlexibility.Analysis.N07aAngularNuRegularity
-import ContinuousFlexibility.Analysis.N07aLeadingRegularity
-import ContinuousFlexibility.Analysis.N07aPeriodicRadialPairing
-import ContinuousFlexibility.Analysis.N07aPhysicalTestSupport
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularClassicalEquation
+public import ContinuousFlexibility.Analysis.N07aAngularInnerIntervals
+public import ContinuousFlexibility.Analysis.N07aAngularNuRegularity
+public import ContinuousFlexibility.Analysis.N07aLeadingRegularity
+public import ContinuousFlexibility.Analysis.N07aPeriodicRadialPairing
+public import ContinuousFlexibility.Analysis.N07aPhysicalTestSupport
 
 /-!
 # A genuine smooth physical candidate satisfies the required compact pairings
@@ -13,6 +15,8 @@ annulus by the actual N01/N03 construction. Interior Green pairing applies
 to every pulled canonical test. The full physical mean is converted only
 after the compact products have been proved integrable.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.WholePositivePrincipalJetMatching
-import ContinuousFlexibility.Analysis.PositiveConformalCanonicalExtension
+module
+
+public import ContinuousFlexibility.Analysis.WholePositivePrincipalJetMatching
+public import ContinuousFlexibility.Analysis.PositiveConformalCanonicalExtension
 
 /-!
 # A genuine smooth representative of the positive principal difference
@@ -13,6 +15,8 @@ the entire closed component, so all its true endpoint jets are retained.
 No unit determinant, unit principal field or vanishing jet is an input.
 Ambient endpoints are not covered by this buffered extension lemma.
 -/
+
+@[expose] public section
 
 noncomputable section
 

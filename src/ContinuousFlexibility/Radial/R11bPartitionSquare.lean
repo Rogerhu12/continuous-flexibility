@@ -1,6 +1,8 @@
-import Mathlib.Algebra.Order.BigOperators.Ring.Finset
-import Mathlib.Data.Set.Card
-import Mathlib.Topology.Algebra.InfiniteSum.Real
+module
+
+public import Mathlib.Algebra.Order.BigOperators.Ring.Finset
+public import Mathlib.Data.Set.Card
+public import Mathlib.Topology.Algebra.InfiniteSum.Real
 
 /-!
 # Pointwise square control for a partition with bounded overlap
@@ -10,6 +12,8 @@ squares of its localized pieces. The bound uses the number of nonzero
 localizers at the point, without a bound on the number of cells at a level.
 The result also holds for signed localizers whose sum is one.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

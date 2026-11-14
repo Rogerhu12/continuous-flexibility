@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aVolumeLinearLift
-import ContinuousFlexibility.Analysis.N07aAngularMaterialEmbedding
-import ContinuousFlexibility.Analysis.N07aAngularCanonicalProjection
+module
+
+public import ContinuousFlexibility.Analysis.N07aVolumeLinearLift
+public import ContinuousFlexibility.Analysis.N07aAngularMaterialEmbedding
+public import ContinuousFlexibility.Analysis.N07aAngularCanonicalProjection
 
 /-!
 # The genuine material inclusion as a bounded linear map
@@ -9,6 +11,8 @@ This packages the already constructed contractive inclusion without
 changing its representative.  It intertwines the actual angular bands,
 as required to identify a Schur lift with the original base operator.
 -/
+
+@[expose] public section
 
 noncomputable section
 

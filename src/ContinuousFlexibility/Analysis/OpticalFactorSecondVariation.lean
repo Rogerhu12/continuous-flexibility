@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OpticalTravelSecondVariation
+module
+
+public import ContinuousFlexibility.Analysis.OpticalTravelSecondVariation
 
 /-!
 # Second variation with a fixed possibly vanishing optical factor
@@ -9,6 +11,8 @@ uniformly positive on a common parameter interval.  Thus both actual
 parameter derivatives are obtained on the full closed radial interval,
 including its turning points.
 -/
+
+@[expose] public section
 
 noncomputable section
 

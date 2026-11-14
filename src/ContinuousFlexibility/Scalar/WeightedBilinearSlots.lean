@@ -1,6 +1,8 @@
-import Mathlib.Topology.Algebra.Module.Multilinear.Basic
-import Mathlib.Analysis.Normed.Field.Basic
-import Mathlib.Tactic.FinCases
+module
+
+public import Mathlib.Topology.Algebra.Module.Multilinear.Basic
+public import Mathlib.Analysis.Normed.Field.Basic
+public import Mathlib.Tactic.FinCases
 
 /-!
 # Fixing one input of a genuine continuous bilinear map
@@ -8,6 +10,8 @@ import Mathlib.Tactic.FinCases
 These are actual continuous linear maps in the original topologies. They
 avoid imposing a separate topology on a curried operator space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

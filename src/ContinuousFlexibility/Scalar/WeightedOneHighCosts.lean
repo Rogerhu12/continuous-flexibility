@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedTowerCalculus
-import Mathlib.Algebra.BigOperators.Fin
+module
+
+public import ContinuousFlexibility.Scalar.WeightedTowerCalculus
+public import Mathlib.Algebra.BigOperators.Fin
 
 /-!
 # Finite one-high costs on a fixed neighbourhood
@@ -8,6 +10,8 @@ These identities separate one coefficient factor from the directional
 factors. The coefficient's low norm is bounded uniformly on the domain;
 its high norm contributes exactly one high base-point term.
 -/
+
+@[expose] public section
 
 noncomputable section
 

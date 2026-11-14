@@ -1,8 +1,10 @@
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
-import Mathlib.Analysis.Calculus.MeanValue
-import Mathlib.Analysis.SpecialFunctions.Integrals.Basic
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
-import Mathlib.Topology.Order.OrderClosed
+module
+
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+public import Mathlib.Analysis.Calculus.MeanValue
+public import Mathlib.Analysis.SpecialFunctions.Integrals.Basic
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+public import Mathlib.Topology.Order.OrderClosed
 
 /-!
 # Quantitative division by the distance to an optical root
@@ -12,6 +14,8 @@ bound uses the second derivative of the original function, including at the
 root. The last two lemmas locate an equal-travel cut and convert a lower
 bound using both roots into a lower bound using either root distance.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05CanonicalPhysicalRepresentatives
-import ContinuousFlexibility.Analysis.N05PhysicalGraphUniqueness
-import ContinuousFlexibility.Analysis.N05ReferenceNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalPhysicalRepresentatives
+public import ContinuousFlexibility.Analysis.N05PhysicalGraphUniqueness
+public import ContinuousFlexibility.Analysis.N05ReferenceNormalization
 
 /-!
 # Identification of the physical representatives of a canonical graph
@@ -11,6 +13,8 @@ the canonical source representatives determines the full physical source.
 Compatibility and the fixed physical inverse then identify the auxiliary
 scalar, metric scalar and physical height.
 -/
+
+@[expose] public section
 
 noncomputable section
 

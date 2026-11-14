@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N08ControlSpatialBounds
+module
+
+public import ContinuousFlexibility.Analysis.N08ControlSpatialBounds
 
 /-!
 # Positive actual spatial gain for weak control profiles
@@ -7,6 +9,8 @@ Multiplying the actual-cell bound and the independent control-label bound
 removes every high label order. The estimate keeps positive decay at both
 the actual evaluation point and the control label.
 -/
+
+@[expose] public section
 
 noncomputable section
 

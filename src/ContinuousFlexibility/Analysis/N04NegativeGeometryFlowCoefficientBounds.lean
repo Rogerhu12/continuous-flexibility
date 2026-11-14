@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometrySpatialFlowPrefix
-import ContinuousFlexibility.Analysis.WeightedJetComposition
-import ContinuousFlexibility.Analysis.N07bFiniteJetAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometrySpatialFlowPrefix
+public import ContinuousFlexibility.Analysis.WeightedJetComposition
+public import ContinuousFlexibility.Analysis.N07bFiniteJetAlgebra
 
 /-!
 # Spatial powers for the actual linearization along a root flow
@@ -11,6 +13,8 @@ exactly the requested output order. The angular linearization is the
 actual directional derivative of the original field along its actual
 flow, so no bound for a candidate linear coefficient is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

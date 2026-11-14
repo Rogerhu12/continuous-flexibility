@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseSecondModeScalarBounds
-import Mathlib.Analysis.SpecialFunctions.Pow.Asymptotics
+module
+
+public import ContinuousFlexibility.Radial.MorseSecondModeScalarBounds
+public import Mathlib.Analysis.SpecialFunctions.Pow.Asymptotics
 
 /-!
 # Uniform deep inequalities on a realized Morse tail
@@ -8,6 +10,8 @@ The physical smallness and separation estimates hold after one finite
 discard, simultaneously for both orientations. The proof keeps the
 actual integrals and the frozen Morse mass/resistance constants.
 -/
+
+@[expose] public section
 
 noncomputable section
 

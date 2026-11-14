@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Geometry.SphereMetric
-import ContinuousFlexibility.Geometry.SurfaceReparametrization
-import Mathlib.LinearAlgebra.Trace
+module
+
+public import ContinuousFlexibility.Geometry.SphereMetric
+public import ContinuousFlexibility.Geometry.SurfaceReparametrization
+public import Mathlib.LinearAlgebra.Trace
 
 /-!
 # The actual shape operator on the standard sphere's tangent bundle
@@ -10,6 +12,8 @@ with its unit normal. Its Weingarten equation uses the genuine manifold
 differential. Smoothness is proved in the actual endomorphism bundle; no norm
 or artificial trivialization is installed on the tangent fibers.
 -/
+
+@[expose] public section
 
 noncomputable section
 

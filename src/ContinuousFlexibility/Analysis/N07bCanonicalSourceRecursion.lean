@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07bCanonicalInverseAngle
-import ContinuousFlexibility.Analysis.N07bCanonicalSourceJets
-import ContinuousFlexibility.Analysis.BoundaryMixedJets
+module
+
+public import ContinuousFlexibility.Analysis.N07bCanonicalInverseAngle
+public import ContinuousFlexibility.Analysis.N07bCanonicalSourceJets
+public import ContinuousFlexibility.Analysis.BoundaryMixedJets
 
 /-!
 # Physical recursion for the actual canonical angular source jets
@@ -14,6 +16,8 @@ Smoothness of all recursive expressions follows from Part A and physical
 smoothness on the closed piece. No derivative formula or uniform geometric
 bound is added as a hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Statements.RadialTargets
-import ContinuousFlexibility.Analysis.OneSidedSmoothExtension
-import ContinuousFlexibility.Radial.MorseChainFlatExtension
-import ContinuousFlexibility.Radial.CentralStatementBridges
-import ContinuousFlexibility.Radial.SeedPairGluing
+module
+
+public import ContinuousFlexibility.Statements.RadialTargets
+public import ContinuousFlexibility.Analysis.OneSidedSmoothExtension
+public import ContinuousFlexibility.Radial.MorseChainFlatExtension
+public import ContinuousFlexibility.Radial.CentralStatementBridges
+public import ContinuousFlexibility.Radial.SeedPairGluing
 
 /-!
 # Smooth extensions and regular entrance equations for radial tails
@@ -11,6 +13,8 @@ A regular entrance and an endpoint-flat germ give a global smooth
 outward zero extension. These local analytic facts do not depend on
 the quantitative construction that produces the flat germ.
 -/
+
+@[expose] public section
 
 noncomputable section
 

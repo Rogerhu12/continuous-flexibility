@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aAngularClassical
-import ContinuousFlexibility.Analysis.N07aWeakRegularityAlgebra
-import ContinuousFlexibility.Analysis.SpacesLpRestriction
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularClassical
+public import ContinuousFlexibility.Analysis.N07aWeakRegularityAlgebra
+public import ContinuousFlexibility.Analysis.SpacesLpRestriction
 
 /-!
 # Restricting the actual canonical weak jets to a smaller radial interval
@@ -9,6 +11,8 @@ The operator is the existing measure-dominated L² restriction. Compact
 tests on the smaller strip are also tests on the larger one, and their
 pairings agree exactly. No boundary value or matching trace is involved.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RootChartExtensionGeometry
-import ContinuousFlexibility.Analysis.N04FlowInverseGeometry
+module
+
+public import ContinuousFlexibility.Analysis.RootChartExtensionGeometry
+public import ContinuousFlexibility.Analysis.N04FlowInverseGeometry
 
 /-!
 # The reciprocal determinant of the same unit root chart
@@ -10,6 +12,8 @@ reciprocal Jacobian bound. This part uses only already available root
 flow and chart APIs; the actual atlas material producer supplies its
 component data separately.
 -/
+
+@[expose] public section
 
 noncomputable section
 

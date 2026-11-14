@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.InverseChartFieldJetBounds
-import ContinuousFlexibility.Analysis.PositiveChartJacobianJets
-import ContinuousFlexibility.Analysis.PointwiseJacobianReciprocalJets
-import ContinuousFlexibility.Analysis.PlanarInverseJacobianMaterialJets
+module
+
+public import ContinuousFlexibility.Analysis.InverseChartFieldJetBounds
+public import ContinuousFlexibility.Analysis.PositiveChartJacobianJets
+public import ContinuousFlexibility.Analysis.PointwiseJacobianReciprocalJets
+public import ContinuousFlexibility.Analysis.PlanarInverseJacobianMaterialJets
 
 /-!
 # Actual inverse fields from physical coefficient, chart, and height jets
@@ -12,6 +14,8 @@ The nine primitive fields then feed the existing transformed-field
 polynomial estimate. All losses and low orders precede component
 constants; no inverse or transformed-field jet estimate is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

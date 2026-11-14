@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Statements.N06PrimitiveGeometryBridge
-import ContinuousFlexibility.Analysis.N07aOpenDivergenceExpansion
-import ContinuousFlexibility.Analysis.N07aCanonicalCoefficientDifference
-import ContinuousFlexibility.Analysis.N07aReferenceOpenCoefficients
+module
+
+public import ContinuousFlexibility.Statements.N06PrimitiveGeometryBridge
+public import ContinuousFlexibility.Analysis.N07aOpenDivergenceExpansion
+public import ContinuousFlexibility.Analysis.N07aCanonicalCoefficientDifference
+public import ContinuousFlexibility.Analysis.N07aReferenceOpenCoefficients
 
 /-!
 # Actual principal jet algebra before constructing a relative inverse
@@ -13,6 +15,8 @@ operator identification is deliberately a later client of this algebra.
 When the upstream module is integrated, these declarations must have one
 owner and that module can import this compatibility layer.
 -/
+
+@[expose] public section
 
 noncomputable section
 

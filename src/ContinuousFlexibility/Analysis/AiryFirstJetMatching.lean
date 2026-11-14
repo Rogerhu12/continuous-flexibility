@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.AdjugateAiryTransport
-import ContinuousFlexibility.Geometry.Primitive
-import ContinuousFlexibility.Geometry.PlanarOrientation
+module
+
+public import ContinuousFlexibility.Analysis.AdjugateAiryTransport
+public import ContinuousFlexibility.Geometry.Primitive
+public import ContinuousFlexibility.Geometry.PlanarOrientation
 
 /-!
 # Matching actual Airy first integrals at a reflected cut
@@ -9,6 +11,8 @@ Both signs of the characteristic first integral are treated by one real
 parameter. A reflected radial chart derivative is exactly compensated by
 reversing the Airy travel coordinate on the right half.
 -/
+
+@[expose] public section
 
 noncomputable section
 

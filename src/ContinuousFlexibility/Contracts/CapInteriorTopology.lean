@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Contracts.CapInteriorClosure
-import Mathlib.Analysis.Normed.Module.Connected
-import Mathlib.LinearAlgebra.Dimension.Constructions
+module
+
+public import ContinuousFlexibility.Contracts.CapInteriorClosure
+public import Mathlib.Analysis.Normed.Module.Connected
+public import Mathlib.LinearAlgebra.Dimension.Constructions
 
 /-!
 # The actual cap body has one connected inside and one connected exterior
@@ -11,6 +13,8 @@ The resulting ball uses the product max norm on `ℂ × ℝ`; no Euclidean metri
 identity for `PolarPoint` is asserted. These are properties of the actual cap
 body, before the moving graph and the marker are inserted.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04RealizationMaterialTransfer
-import ContinuousFlexibility.Analysis.MaterialSampleRadialPolynomial
-import ContinuousFlexibility.Analysis.ActualRadialCellComparison
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationMaterialTransfer
+public import ContinuousFlexibility.Analysis.MaterialSampleRadialPolynomial
+public import ContinuousFlexibility.Analysis.ActualRadialCellComparison
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # Exact physical height weights for the correction strips
@@ -11,6 +13,8 @@ uniformly close to the control label by N01. Consequently the original
 circle sample height and any fixed containing-cell radial loss transfer
 to the actual physical point with the same positive height exponent.
 -/
+
+@[expose] public section
 
 noncomputable section
 

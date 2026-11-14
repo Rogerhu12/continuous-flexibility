@@ -1,5 +1,7 @@
-import Mathlib.Analysis.SpecialFunctions.Pow.Real
-import Mathlib.Tactic
+module
+
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
+public import Mathlib.Tactic
 
 /-!
 # Weighted scalar bounds for finite transport recurrences
@@ -11,6 +13,8 @@ counts occurrences of the independent residual. Multiplication adds
 both counts, so a recurrence with exactly one charged factor retains its
 original small material weight.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CoordinateCompositionMaterialBounds
-import Mathlib.Analysis.Calculus.IteratedDeriv.WithinZpow
-import Mathlib.Analysis.Calculus.Deriv.Abs
+module
+
+public import ContinuousFlexibility.Analysis.CoordinateCompositionMaterialBounds
+public import Mathlib.Analysis.Calculus.IteratedDeriv.WithinZpow
+public import Mathlib.Analysis.Calculus.Deriv.Abs
 
 /-!
 # Actual reciprocal jets from an absolute lower bound
@@ -14,6 +16,8 @@ Composition with an actual scalar field then has one common low order
 and fixed loss. Applied to the actual plane Jacobian, this supplies the
 reciprocal primitive without assuming its higher jets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

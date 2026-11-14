@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.LogSlopeConnector
-import ContinuousFlexibility.Radial.MorsePositiveJoin
+module
+
+public import ContinuousFlexibility.Radial.LogSlopeConnector
+public import ContinuousFlexibility.Radial.MorsePositiveJoin
 
 /-!
 # Quantitative interpolation of a second-mode logarithmic slope
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Radial.MorsePositiveJoin
 One estimate treats both cone slopes and both ends of the annulus.
 The cutoff is constant on neighborhoods of the retained and cone sides.
 -/
+
+@[expose] public section
 
 noncomputable section
 

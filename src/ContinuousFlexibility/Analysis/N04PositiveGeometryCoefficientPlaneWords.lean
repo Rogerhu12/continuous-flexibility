@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryPlaneWords
-import ContinuousFlexibility.Analysis.N04PositiveGeometrySavedKernelWords
-import ContinuousFlexibility.Scalar.WeightedTowerCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryPlaneWords
+public import ContinuousFlexibility.Analysis.N04PositiveGeometrySavedKernelWords
+public import ContinuousFlexibility.Scalar.WeightedTowerCalculus
 
 /-!
 # The actual finite coefficient packet on the plane
@@ -10,6 +12,8 @@ This operation retains both parameter seminorm boxes and the saved
 positive spatial order. A finite kernel can then be applied to this
 same genuine packet tower.
 -/
+
+@[expose] public section
 
 noncomputable section
 

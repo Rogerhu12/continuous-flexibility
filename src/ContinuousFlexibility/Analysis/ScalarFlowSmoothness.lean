@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.AngularRegularityIntegral
+module
+
+public import ContinuousFlexibility.Analysis.AngularRegularityIntegral
 
 /-!
 # Smooth angular dependence from the actual variational equation
@@ -8,6 +10,8 @@ the derivative of the flow is the exponential of a radial primitive.
 All operations in that formula preserve continuous angular derivatives.
 No radial differentiability is used in this induction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aCircleBlockBounds
-import ContinuousFlexibility.Analysis.N07aMixedLocalCalculus
-import ContinuousFlexibility.Statements.N07aCanonicalGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N07aCircleBlockBounds
+public import ContinuousFlexibility.Analysis.N07aMixedLocalCalculus
+public import ContinuousFlexibility.Statements.N07aCanonicalGeometry
 
 /-!
 # Actual unit-coordinate coefficient rows
@@ -9,6 +11,8 @@ Spatial jets on the open unit strip restrict to smooth periodic circle
 rows. The prescribed current-minus-reference geometric jets therefore
 give the actual Fourier coefficient bounds used in the block proof.
 -/
+
+@[expose] public section
 
 noncomputable section
 

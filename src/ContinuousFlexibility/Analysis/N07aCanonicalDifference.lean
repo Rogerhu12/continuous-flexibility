@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import ContinuousFlexibility.Scalar.Linearization
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import ContinuousFlexibility.Scalar.Linearization
 
 /-!
 # Exact local differences of the canonical operator
@@ -8,6 +10,8 @@ The negative-piece difference is the actual potential multiplier. The
 source identities retain the current coordinate and height factors, so a
 moving auxiliary column is never silently replaced by its reference value.
 -/
+
+@[expose] public section
 
 noncomputable section
 

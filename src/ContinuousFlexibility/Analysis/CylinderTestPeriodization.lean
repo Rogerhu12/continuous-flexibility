@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CylinderTestPairing
-import Mathlib.Algebra.Order.ToIntervalMod
-import Mathlib.MeasureTheory.Function.LpSpace.Indicator
+module
+
+public import ContinuousFlexibility.Analysis.CylinderTestPairing
+public import Mathlib.Algebra.Order.ToIntervalMod
+public import Mathlib.MeasureTheory.Function.LpSpace.Indicator
 
 /-!
 # Periodic extension from the cylinder to the plane
@@ -9,6 +11,8 @@ The half-open angular tiles are disjoint and each carries the actual
 cylinder measure under translation. Compactly supported tests can be
 summed over the translates and transferred to the defining weak equations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

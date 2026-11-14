@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.SeedConnectorReconstruction
-import ContinuousFlexibility.Radial.MorseJoinActualGerms
+module
+
+public import ContinuousFlexibility.Radial.SeedConnectorReconstruction
+public import ContinuousFlexibility.Radial.MorseJoinActualGerms
 
 /-!
 # A positive logarithmic profile extending one regular germ
@@ -9,6 +11,8 @@ derivative is positive everywhere and equals one off a compact interval.
 Its primitive has the original full germ and exact affine ends.  This
 prepares an inward cone without imposing any condition on the solution.
 -/
+
+@[expose] public section
 
 noncomputable section
 

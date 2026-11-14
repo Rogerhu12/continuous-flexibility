@@ -1,8 +1,10 @@
-import Mathlib.Analysis.InnerProductSpace.LaxMilgram
-import Mathlib.Analysis.InnerProductSpace.Adjoint
-import Mathlib.Analysis.Normed.Operator.Bilinear
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Analysis.InnerProductSpace.LaxMilgram
+public import Mathlib.Analysis.InnerProductSpace.Adjoint
+public import Mathlib.Analysis.Normed.Operator.Bilinear
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
 
 /-!
 # A coercive closed-energy inverse from Lax-Milgram
@@ -16,6 +18,8 @@ The construction assumes neither an inverse nor solvability of the form
 equation. A closed physical form supplies E and the norm/coercivity
 identities used below.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.NeighborhoodStateBounds
-import ContinuousFlexibility.Analysis.CanonicalPrincipalCoefficients
+module
+
+public import ContinuousFlexibility.Analysis.NeighborhoodStateBounds
+public import ContinuousFlexibility.Analysis.CanonicalPrincipalCoefficients
 
 /-!
 # The actual physical coefficients at the reference state
@@ -10,6 +12,8 @@ Its genuine derivatives identify the corrected physical coefficients with
 w, zero, and w'/r. The N03 correction agrees with those germs on every
 actual positive piece.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesPhysicalEncode
-import ContinuousFlexibility.Analysis.SpacesPhysicalUniqueness
+module
+
+public import ContinuousFlexibility.Analysis.SpacesPhysicalEncode
+public import ContinuousFlexibility.Analysis.SpacesPhysicalUniqueness
 
 /-!
 # Actual weighted coordinates of every frozen Sobolev model
@@ -9,6 +11,8 @@ Uniqueness of the original weak derivatives then identifies every higher
 coordinate with the actual weighted mixed derivative. This supplies the
 coordinate identity used when lifting genuine parameter towers.
 -/
+
+@[expose] public section
 
 noncomputable section
 

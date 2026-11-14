@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01RadialCoefficientPowerMaterialJets
-import ContinuousFlexibility.Analysis.PointwiseProductPolynomialMaterialJets
-import ContinuousFlexibility.Analysis.N04bOpticalCoefficientVariation
-import ContinuousFlexibility.Analysis.OneSidedOrdinaryJets
+module
+
+public import ContinuousFlexibility.Analysis.N01RadialCoefficientPowerMaterialJets
+public import ContinuousFlexibility.Analysis.PointwiseProductPolynomialMaterialJets
+public import ContinuousFlexibility.Analysis.N04bOpticalCoefficientVariation
+public import ContinuousFlexibility.Analysis.OneSidedOrdinaryJets
 
 /-!
 # Uniform material jets of the actual characteristic drift
@@ -11,6 +13,8 @@ The already proved inverse-radial material tower and global b tower are
 multiplied at the actual point, preserving one high state seminorm.
 The same original neighborhood and genuine component host are retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

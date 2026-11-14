@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SourceSmoothTameBounds
-import ContinuousFlexibility.Analysis.MaterialDivergenceNormBounds
+module
+
+public import ContinuousFlexibility.Analysis.SourceSmoothTameBounds
+public import ContinuousFlexibility.Analysis.MaterialDivergenceNormBounds
 
 /-!
 # Local physical-norm estimates give the original source tame grading
@@ -8,6 +10,8 @@ Monotonicity of the actual weighted jet norm controls every lower
 projective level at the same output order. The low order, loss, and
 neighborhood from the local one-high estimate are therefore preserved.
 -/
+
+@[expose] public section
 
 noncomputable section
 

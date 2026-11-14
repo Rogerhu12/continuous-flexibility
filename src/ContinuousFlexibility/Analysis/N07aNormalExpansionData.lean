@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aWeakNormalBootstrap
-import Mathlib.Algebra.BigOperators.Ring.List
+module
+
+public import ContinuousFlexibility.Analysis.N07aWeakNormalBootstrap
+public import Mathlib.Algebra.BigOperators.Ring.List
 
 /-!
 # The finite expansion of the normal recurrence
@@ -11,6 +13,8 @@ an angular derivative of the solution or its first normal derivative,
 or a derivative of the original source. Its total derivative budget
 includes every coefficient factor; source leaves cost two extra orders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

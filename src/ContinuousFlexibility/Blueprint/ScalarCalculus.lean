@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Blueprint.Statements
-import ContinuousFlexibility.Scalar.S03CalculusProof
-import ContinuousFlexibility.Scalar.S04CalculusProof
-import ContinuousFlexibility.Scalar.S05CalculusProof
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
+public import ContinuousFlexibility.Scalar.S03CalculusProof
+public import ContinuousFlexibility.Scalar.S04CalculusProof
+public import ContinuousFlexibility.Scalar.S05CalculusProof
 
 /-!
 # Blueprint node ScalarCalculus
@@ -12,6 +14,8 @@ Source: `paper/flexible-surface-readable/03-height-equation.tex` lines 23–189 
 
 Task file: `docs/tasks/ScalarCalculus.md`. The statement is frozen.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Geometry.MarkerAmbientDeformation
-import ContinuousFlexibility.Contracts.GraphCapFrontier
-import ContinuousFlexibility.Geometry.SphereCapGluing
+module
+
+public import ContinuousFlexibility.Geometry.MarkerAmbientDeformation
+public import ContinuousFlexibility.Contracts.GraphCapFrontier
+public import ContinuousFlexibility.Geometry.SphereCapGluing
 
 /-!
 # The actual inside after inserting the fixed marker
@@ -12,6 +14,8 @@ homeomorphisms preserve boundedness, give finite positive volume.
 The complete marked frontier, volume identity and outward identification
 are assembled from this same body, length and marker parameters.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.ProjectiveDifferential
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
-import Mathlib.Topology.Compactness.Compact
-import Mathlib.Analysis.Convex.Basic
+module
+
+public import ContinuousFlexibility.Analysis.ProjectiveDifferential
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+public import Mathlib.Topology.Compactness.Compact
+public import Mathlib.Analysis.Convex.Basic
 
 /-!
 # Nonlinear curve chain rules with a projective Fréchet source
@@ -17,6 +19,8 @@ We first prove the Banach-output result and then assemble the actual
 projective-output chain rule in all Banach coordinates. Higher Bastiani
 derivatives and tame nonlinear estimates are not constructed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

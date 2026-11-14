@@ -1,7 +1,9 @@
-import Mathlib.Analysis.Calculus.ContDiff.Basic
-import Mathlib.Analysis.Calculus.FDeriv.Congr
-import Mathlib.Analysis.Calculus.TangentCone.Prod
-import Mathlib.Analysis.Calculus.TangentCone.Real
+module
+
+public import Mathlib.Analysis.Calculus.ContDiff.Basic
+public import Mathlib.Analysis.Calculus.FDeriv.Congr
+public import Mathlib.Analysis.Calculus.TangentCone.Prod
+public import Mathlib.Analysis.Calculus.TangentCone.Real
 
 /-!
 # Ordinary derivatives determined from one side
@@ -13,6 +15,8 @@ derivative of a differentiable comparison map.  Applying this fact to each
 iterated derivative handles functions whose one-sided smooth extension need
 not be smooth as a function on the whole ambient space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

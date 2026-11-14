@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06PrimitivePrincipalReflection
-import ContinuousFlexibility.Analysis.N06WeightedHeight
-import ContinuousFlexibility.Analysis.N06CubicDifferential
+module
+
+public import ContinuousFlexibility.Analysis.N06PrimitivePrincipalReflection
+public import ContinuousFlexibility.Analysis.N06WeightedHeight
+public import ContinuousFlexibility.Analysis.N06CubicDifferential
 
 /-!
 # The actual principal source and its continuous test functionals
@@ -10,6 +12,8 @@ compact pairing depends only on the original N05 inverse height.  Test
 separation therefore proves linearity without assuming that the chosen
 weak derivative representatives depend continuously on the input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

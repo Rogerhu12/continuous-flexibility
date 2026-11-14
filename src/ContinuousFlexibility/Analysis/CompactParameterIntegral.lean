@@ -1,7 +1,9 @@
-import Mathlib.Analysis.Calculus.ContDiff.Convolution
-import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
-import Mathlib.Tactic
+module
+
+public import Mathlib.Analysis.Calculus.ContDiff.Convolution
+public import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
+public import Mathlib.Tactic
 
 /-!
 # Smooth dependence of a compact parameter integral
@@ -11,6 +13,8 @@ parameter-dependent convolution. This uses the existing finite-order
 convolution theorem and needs smoothness only on an open neighborhood
 of the integration interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

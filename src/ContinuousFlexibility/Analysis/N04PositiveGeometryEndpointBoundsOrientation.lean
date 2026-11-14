@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsOrientationDirections
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsOrientationDirections
 
 /-!
 # Inward radial orientation preserves the actual normalized prefix
@@ -7,6 +9,8 @@ The original physical trace bound is transported by the fixed inward
 orientation. Its selected low base, spatial loss and material cost are
 unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

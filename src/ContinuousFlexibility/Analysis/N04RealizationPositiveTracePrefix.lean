@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04RealizationLogHeightTraceBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLogHeightTraceBounds
 
 /-!
 # One finite envelope for both actual positive logarithmic traces
@@ -8,6 +10,8 @@ prefixes are collected before either endpoint family is supplied. The
 original raw towers are only restricted to their required radial prefix;
 no source, parameter domain or endpoint is selected again.
 -/
+
+@[expose] public section
 
 noncomputable section
 

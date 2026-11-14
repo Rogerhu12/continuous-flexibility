@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerPositiveExtension
-import ContinuousFlexibility.Radial.MorseRadiusODE
-import ContinuousFlexibility.Radial.Gauge
+module
+
+public import ContinuousFlexibility.Radial.InnerPositiveExtension
+public import ContinuousFlexibility.Radial.MorseRadiusODE
+public import ContinuousFlexibility.Radial.Gauge
 
 /-!
 # The actual radial flux initial-value problem on an inner interval
@@ -11,6 +13,8 @@ coefficient, agree with the physical expressions at every retained point.
 Consequently the solution has its actual conormal flux and satisfies the
 actual radial Jacobi equation, including both retained endpoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

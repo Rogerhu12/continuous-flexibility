@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R11bGlobalL2
-import ContinuousFlexibility.Radial.ReferenceCellAlgebra
+module
+
+public import ContinuousFlexibility.Radial.R11bGlobalL2
+public import ContinuousFlexibility.Radial.ReferenceCellAlgebra
 
 /-!
 # Uniqueness of the auxiliary source scalar
@@ -9,6 +11,8 @@ positive-weight source membership supplies the integrability needed to
 compare a.e. representatives; no identity of total integrals is used
 without that premise.
 -/
+
+@[expose] public section
 
 noncomputable section
 

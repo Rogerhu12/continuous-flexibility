@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Blueprint.Statements
-import ContinuousFlexibility.Radial.PositiveBufferR09
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
+public import ContinuousFlexibility.Radial.PositiveBufferR09
 
 /-!
 # Blueprint node R09
@@ -12,6 +14,8 @@ Task file: `docs/tasks/R09.md`.
 The proof constructs the actual interval inverse, endpoint profiles,
 Poisson columns and conormal estimates with the frozen statement.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06PrincipalDensitySymmetry
-import ContinuousFlexibility.Analysis.N06CurrentOperatorPeriodicity
+module
+
+public import ContinuousFlexibility.Analysis.N06PrincipalDensitySymmetry
+public import ContinuousFlexibility.Analysis.N06CurrentOperatorPeriodicity
 
 /-!
 # The actual positive canonical coefficients have the required symmetries
@@ -9,6 +11,8 @@ original ones. Their periodicity and the original N03 reflection signs
 pass through the genuine forward density. The inverse chart is used only
 to choose an interior physical preimage of an interior canonical point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

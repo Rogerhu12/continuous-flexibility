@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Statements.ScalarWeighted
+module
+
+public import ContinuousFlexibility.Statements.ScalarWeighted
 
 /-!
 # Reduced formulas for the actual corrected scalar coefficient
@@ -8,6 +10,8 @@ The remaining expression separates the reference profile from the normalized
 denominators. These are identities of the coefficients in the frozen scalar
 statement, obtained from their actual definitions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

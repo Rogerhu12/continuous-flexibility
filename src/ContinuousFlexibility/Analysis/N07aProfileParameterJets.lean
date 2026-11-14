@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N07aProfileHeight
-import ContinuousFlexibility.Analysis.N07aPhysicalJetTowers
-import ContinuousFlexibility.Analysis.SolveNewtonBridge
-import ContinuousFlexibility.Analysis.SolveStateSpaces
-import ContinuousFlexibility.Scalar.WeightedSmoothTameLinear
+module
+
+public import ContinuousFlexibility.Analysis.N07aProfileHeight
+public import ContinuousFlexibility.Analysis.N07aPhysicalJetTowers
+public import ContinuousFlexibility.Analysis.SolveNewtonBridge
+public import ContinuousFlexibility.Analysis.SolveStateSpaces
+public import ContinuousFlexibility.Scalar.WeightedSmoothTameLinear
 
 /-!
 # The genuine N01 parameter tower of the actual profile
@@ -11,6 +13,8 @@ The q=0 coefficient slice is pulled back by the fixed projection which
 sets q to zero. This gives the ordinary spatial-jet towers of the actual
 profile difference, with exactly the N01 base and loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

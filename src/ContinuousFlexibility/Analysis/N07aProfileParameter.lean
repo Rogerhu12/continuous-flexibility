@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aProfileParameterJets
-import ContinuousFlexibility.Analysis.N07aHeightFamilyTame
+module
+
+public import ContinuousFlexibility.Analysis.N07aProfileParameterJets
+public import ContinuousFlexibility.Analysis.N07aHeightFamilyTame
 
 /-!
 # Smooth tameness of the actual controlled profile in the frozen height model
@@ -8,6 +10,8 @@ This instantiates the physical-family lifting theorem with the genuine
 N01 q=0 coefficient towers. Its values are the actual profile differences,
 and its base and derivative loss are the ones already given by N01.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06ReferenceNegativeInverse
-import ContinuousFlexibility.Analysis.N06NegativeReferenceEquation
-import ContinuousFlexibility.Radial.MatchingCutoffTests
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceNegativeInverse
+public import ContinuousFlexibility.Analysis.N06NegativeReferenceEquation
+public import ContinuousFlexibility.Radial.MatchingCutoffTests
 
 /-!
 # The actual reciprocal reference height solves the negative scalar ODE
@@ -14,6 +16,8 @@ The second-derivative bound extends to the genuine closed inverse germs
 by continuity.  The potential bound remains indexed by the actual
 `K.cell`; no identification with a physical profile cell is made here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

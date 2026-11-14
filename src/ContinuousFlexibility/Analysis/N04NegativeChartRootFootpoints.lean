@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartControlledCollar
-import ContinuousFlexibility.Analysis.N04NegativeChartRootFlowSymmetry
-import ContinuousFlexibility.Analysis.N03FixedRootInverseIdentification
-import ContinuousFlexibility.Analysis.N04bRootTravelMatching
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartControlledCollar
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootFlowSymmetry
+public import ContinuousFlexibility.Analysis.N03FixedRootInverseIdentification
+public import ContinuousFlexibility.Analysis.N04bRootTravelMatching
 
 /-!
 # The supplied root flow has the literal corrected footpoints
@@ -11,6 +13,8 @@ All initial angles agree with the stored corrected flow on the entire
 normalized closed interval. The inverse is the same reversed flow already
 used for estimates. The right endpoint retains its exact travel shift.
 -/
+
+@[expose] public section
 
 noncomputable section
 

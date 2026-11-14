@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.PointwiseProductMaterialJets
-import ContinuousFlexibility.Analysis.FlowJetMaterialClosure
-import ContinuousFlexibility.Analysis.FlowJetPartitionPolynomial
+module
+
+public import ContinuousFlexibility.Analysis.PointwiseProductMaterialJets
+public import ContinuousFlexibility.Analysis.FlowJetMaterialClosure
+public import ContinuousFlexibility.Analysis.FlowJetPartitionPolynomial
 
 /-!
 # Polynomial material cost of a product at one actual point
@@ -9,6 +11,8 @@ The genuine local Leibniz inequality records derivative weights i and
 n-i, including zero-order factors. The existing weighted polynomial
 closure therefore keeps one common state loss at every output order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

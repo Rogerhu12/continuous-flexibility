@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cWholeSpeedPowerBounds
-import ContinuousFlexibility.Analysis.N01cBoundsRestriction
+module
+
+public import ContinuousFlexibility.Analysis.N01cWholeSpeedPowerBounds
+public import ContinuousFlexibility.Analysis.N01cBoundsRestriction
 
 /-!
 # Restricting the actual endpoint power control
@@ -9,6 +11,8 @@ restricted to the smaller open set, and uniqueness identifies every
 genuine tower used to evaluate its raw estimate. No extension of a tower
 from the smaller domain is required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

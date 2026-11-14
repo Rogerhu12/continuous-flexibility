@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06PositiveCubicPairing
-import ContinuousFlexibility.Analysis.N06WeakCubicSourceMap
+module
+
+public import ContinuousFlexibility.Analysis.N06PositiveCubicPairing
+public import ContinuousFlexibility.Analysis.N06WeakCubicSourceMap
 
 /-!
 # The actual positive cubic source as a continuous linear map
@@ -10,6 +12,8 @@ their material bound and the actual cubic pairing give a unique bounded
 linear source map on the original volume level. Its constant precedes
 the perturbing coefficient family and its smallness parameter.
 -/
+
+@[expose] public section
 
 noncomputable section
 

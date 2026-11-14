@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.RetainedPositiveComponentClassification
-import ContinuousFlexibility.Analysis.RetainedMorsePositiveGapEndpointX
-import ContinuousFlexibility.Analysis.PositiveComponentMaterialCell
+module
+
+public import ContinuousFlexibility.Analysis.RetainedPositiveComponentClassification
+public import ContinuousFlexibility.Analysis.RetainedMorsePositiveGapEndpointX
+public import ContinuousFlexibility.Analysis.PositiveComponentMaterialCell
 
 /-!
 # Actual retained positive endpoints and their own midpoint
@@ -11,6 +13,8 @@ two endpoint differences have one finite maximum. This gives a single
 endpoint-to-midpoint coordinate bound on the same retained reference.
 Neither a whole-component cell nor a new component numbering is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

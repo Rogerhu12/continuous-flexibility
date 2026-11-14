@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ScalarTransportSystemBounds
+module
+
+public import ContinuousFlexibility.Analysis.ScalarTransportSystemBounds
 
 /-!
 # Parameter charges in the genuine transport recurrence
@@ -7,6 +9,8 @@ A fixed charge per parameter slot is additive over the actual Leibniz
 partitions. Radial induction therefore preserves `a + b + shift * n`,
 with no increase of the low grading as the spatial order grows.
 -/
+
+@[expose] public section
 
 noncomputable section
 

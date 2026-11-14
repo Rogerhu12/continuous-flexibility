@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06CanonicalCosineCutoff
-import ContinuousFlexibility.Analysis.N06WeakFiniteGraph
+module
+
+public import ContinuousFlexibility.Analysis.N06CanonicalCosineCutoff
+public import ContinuousFlexibility.Analysis.N06WeakFiniteGraph
 
 /-!
 # Exact tail identities for the same cosine coefficients and graph fields
@@ -10,6 +12,8 @@ finite syntheses, of their angular jets, and of all five graph fields.
 These pointwise identities give exact differences of the original L2
 classes and of the full finite jet squared norms.
 -/
+
+@[expose] public section
 
 noncomputable section
 

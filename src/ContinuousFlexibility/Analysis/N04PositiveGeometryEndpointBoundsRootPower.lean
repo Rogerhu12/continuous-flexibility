@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsRootShiftPower
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsRootShiftPower
 
 /-!
 # Distributed angular powers for the actual finite radial root inputs
@@ -9,6 +11,8 @@ determine the spatial scale in each product. The same base is selected
 before every parameter prefix. The input maps are the literal four
 normalized height fields multiplied by the original scalar parameter.
 -/
+
+@[expose] public section
 
 noncomputable section
 

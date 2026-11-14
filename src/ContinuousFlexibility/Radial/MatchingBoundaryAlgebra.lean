@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.RadialTargets
-import Mathlib.Tactic.Ring
-import Mathlib.Tactic.Linarith
+module
+
+public import ContinuousFlexibility.Statements.RadialTargets
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.Linarith
 
 /-!
 # Values, fluxes, and uniqueness in the matching system
@@ -10,6 +12,8 @@ The inner state is (x, Db x - h). A two-sided inverse of A Db - B
 makes these states equal and determines both coefficient vectors.
 No diagonal entry of A or B is divided by.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Statements
 

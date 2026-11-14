@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ParameterizedCircleInverse
+module
+
+public import ContinuousFlexibility.Analysis.ParameterizedCircleInverse
 
 /-!
 # The actual first differential of a scalar family inverse
@@ -8,6 +10,8 @@ true right-inverse equation controls the inverse differential by the
 original first differential and the original angular lower bound. The
 parameter space can contain both independent root parameters.
 -/
+
+@[expose] public section
 
 noncomputable section
 

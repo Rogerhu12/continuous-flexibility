@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ReferenceRadialWeighted
-import ContinuousFlexibility.Radial.MorseChainScales
-import ContinuousFlexibility.Analysis.WeightedEndpointTrace
+module
+
+public import ContinuousFlexibility.Radial.ReferenceRadialWeighted
+public import ContinuousFlexibility.Radial.MorseChainScales
+public import ContinuousFlexibility.Analysis.WeightedEndpointTrace
 
 /-!
 # From scalar reference weights to genuine flat endpoints
@@ -11,6 +13,8 @@ Consequently a positive weighted L² norm supplies the integral hypotheses
 of the endpoint-trace theorem. This applies at every derivative order and
 does not prescribe endpoint values.
 -/
+
+@[expose] public section
 
 noncomputable section
 

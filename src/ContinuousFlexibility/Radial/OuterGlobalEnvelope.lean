@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterEnvelope
-import ContinuousFlexibility.Radial.OuterKernelEnvelopeAlgebra
+module
+
+public import ContinuousFlexibility.Radial.OuterEnvelope
+public import ContinuousFlexibility.Radial.OuterKernelEnvelopeAlgebra
 
 /-!
 # Common envelope for the whole natural vector and Green operator
@@ -8,6 +10,8 @@ One quadratic constant absorbs the core mass, natural Poisson norm and
 unit-state propagation. The action factor remains separate and has the
 first power for the natural solution and the second for the inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

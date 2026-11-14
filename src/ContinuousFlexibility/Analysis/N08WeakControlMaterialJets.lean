@@ -1,7 +1,11 @@
-import ContinuousFlexibility.Analysis.N08WeakControlProfile
-import ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets
+module
+
+public import ContinuousFlexibility.Analysis.N08WeakControlProfile
+public import ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets
 
 /-! # The generic material-jet estimates for the actual weak control series -/
+
+@[expose] public section
 
 noncomputable section
 

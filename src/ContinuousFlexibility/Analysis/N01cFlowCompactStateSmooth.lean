@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cFlowStateSmooth
+module
+
+public import ContinuousFlexibility.Analysis.N01cFlowStateSmooth
 
 /-!
 # State smoothness at every original closed-interval time
@@ -9,6 +11,8 @@ actual time derivative. The full real-time Volterra construction then
 applies, and surjectivity of the same compact time change returns every
 original time, including both endpoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

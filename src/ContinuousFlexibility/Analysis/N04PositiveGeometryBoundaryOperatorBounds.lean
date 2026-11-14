@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryMultilinearKernel
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryMultilinearKernel
 
 /-!
 # Actual boundary operator evaluation with angular reserves
@@ -7,6 +9,8 @@ These finite kernel consumers keep both the original state arity and
 the reserved angular order. They apply to genuine operator towers,
 including the operators in the actual finite inverse recurrence.
 -/
+
+@[expose] public section
 
 noncomputable section
 

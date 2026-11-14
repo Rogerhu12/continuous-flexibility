@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05ReferenceEndpointWeights
-import Mathlib.Algebra.Order.Floor.Ring
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceEndpointWeights
+public import Mathlib.Algebra.Order.Floor.Ring
 
 /-!
 # The material logarithm on a bounded shift of a reference index
@@ -8,6 +10,8 @@ The real endpoint coordinate is bracketed between consecutive integers.
 The already proved discrete slow variation then controls its discrepancy
 from the reference material weight by a coefficient exponent.
 -/
+
+@[expose] public section
 
 noncomputable section
 

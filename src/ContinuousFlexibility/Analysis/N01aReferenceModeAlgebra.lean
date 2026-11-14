@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01aReferenceModeL2
+module
+
+public import ContinuousFlexibility.Analysis.N01aReferenceModeL2
 
 /-!
 # Almost-everywhere linearity of reference modes
@@ -7,6 +9,8 @@ The statements use actual representatives and the product measure, so
 linearity is asserted on the radial full-measure set where the angular
 integrals exist.
 -/
+
+@[expose] public section
 
 noncomputable section
 

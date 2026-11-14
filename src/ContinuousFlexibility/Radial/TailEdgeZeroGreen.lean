@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.TailEdgeKernel
+module
+
+public import ContinuousFlexibility.Radial.TailEdgeKernel
 
 /-!
 # The zero-potential Green solution on one edge
@@ -7,6 +9,8 @@ Splitting the kernel at the evaluation point gives two ordinary integrals.
 Their actual derivatives prove the inhomogeneous Dirichlet equation and
 the endpoint flux formulas.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.IntervalACDerivative
-import ContinuousFlexibility.Radial.OuterNormalizedState
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
+module
+
+public import ContinuousFlexibility.Analysis.IntervalACDerivative
+public import ContinuousFlexibility.Radial.OuterNormalizedState
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
 
 /-!
 # Variation of parameters for locally integrable sources
@@ -12,6 +14,8 @@ function.  The resulting derivative identity therefore holds at every
 point.  In particular the exact entrance traces remain valid for L²
 sources, without assuming a continuous forcing term.
 -/
+
+@[expose] public section
 
 noncomputable section
 

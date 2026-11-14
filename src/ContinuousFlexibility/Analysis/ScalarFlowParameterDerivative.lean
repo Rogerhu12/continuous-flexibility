@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ScalarTrajectorySecant
-import Mathlib.Analysis.Calculus.Deriv.Slope
+module
+
+public import ContinuousFlexibility.Analysis.ScalarTrajectorySecant
+public import Mathlib.Analysis.Calculus.Deriv.Slope
 
 /-!
 # A genuine external-parameter derivative of a scalar flow
@@ -11,6 +13,8 @@ gives the limit of the exact difference quotient. The trajectory is
 assumed continuous in the parameter, but its parameter derivative is a
 conclusion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

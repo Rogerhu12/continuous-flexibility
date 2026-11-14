@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.PrincipalCoefficientPullback
-import ContinuousFlexibility.Analysis.BoundaryMixedJets
-import ContinuousFlexibility.Analysis.FiniteRadialJets
-import Mathlib.Analysis.Calculus.Deriv.Abs
+module
+
+public import ContinuousFlexibility.Analysis.PrincipalCoefficientPullback
+public import ContinuousFlexibility.Analysis.BoundaryMixedJets
+public import ContinuousFlexibility.Analysis.FiniteRadialJets
+public import Mathlib.Analysis.Calculus.Deriv.Abs
 
 /-!
 # Actual principal-density jets from matched coordinates and heights
@@ -16,6 +18,8 @@ nonzero at the point where division is differentiated.
 No coefficient matching or boundary vanishing is supplied as an input:
 it is derived from the actual coordinate and height jets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

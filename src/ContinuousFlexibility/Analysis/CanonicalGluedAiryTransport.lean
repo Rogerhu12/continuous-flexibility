@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CanonicalGluedAiryFirstJets
-import ContinuousFlexibility.Analysis.CanonicalCutOffAxisFaithfulness
-import ContinuousFlexibility.Analysis.CanonicalCutOrientation
-import ContinuousFlexibility.Analysis.ReversedAiryTransport
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalGluedAiryFirstJets
+public import ContinuousFlexibility.Analysis.CanonicalCutOffAxisFaithfulness
+public import ContinuousFlexibility.Analysis.CanonicalCutOrientation
+public import ContinuousFlexibility.Analysis.ReversedAiryTransport
 
 /-!
 # The genuine glued integral transports the stored characteristic field
@@ -12,6 +14,8 @@ same equality. The glued ordinary derivative and the orientation of each
 half then give the characteristic transport equation throughout the
 component except at cut points on the reflection axes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

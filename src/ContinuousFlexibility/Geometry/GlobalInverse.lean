@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.Coordinates
-import Mathlib.Topology.Maps.Proper.CompactlyGenerated
+module
+
+public import ContinuousFlexibility.Scalar.Coordinates
+public import Mathlib.Topology.Maps.Proper.CompactlyGenerated
 
 /-!
 # Proper planar developments
@@ -9,6 +11,8 @@ proper. This is the first global reconstruction step of Section 2. It does
 not assume that an annulus is convex or that its connection has a global
 real-valued primitive.
 -/
+
+@[expose] public section
 
 noncomputable section
 

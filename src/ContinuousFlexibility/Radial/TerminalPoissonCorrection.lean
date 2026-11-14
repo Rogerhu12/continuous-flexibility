@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ModeCoreSource
+module
+
+public import ContinuousFlexibility.Radial.ModeCoreSource
 
 /-!
 # The actual inner Poisson correction
@@ -8,6 +10,8 @@ Poisson column in the frozen weak equation. The scalar row, outer
 support and boundary values are verified on actual representatives.
 The correction pairing has one norm factor from each source column.
 -/
+
+@[expose] public section
 
 noncomputable section
 

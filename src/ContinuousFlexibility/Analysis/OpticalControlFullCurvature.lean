@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OpticalControlRatio
-import ContinuousFlexibility.Analysis.OpticalFactorSecondVariation
-import ContinuousFlexibility.Analysis.N01RadialFlow
+module
+
+public import ContinuousFlexibility.Analysis.OpticalControlRatio
+public import ContinuousFlexibility.Analysis.OpticalFactorSecondVariation
+public import ContinuousFlexibility.Analysis.N01RadialFlow
 
 /-!
 # Full-component optical curvature under the exact N01 support condition
@@ -11,6 +13,8 @@ derivative is the actual full travel derivative.  Unit normalization
 forces a quantitative product lower bound for the control derivative
 and that second derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

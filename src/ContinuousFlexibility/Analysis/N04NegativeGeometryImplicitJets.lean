@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cFlowHighestVariation
+module
+
+public import ContinuousFlexibility.Analysis.N01cFlowHighestVariation
 
 /-!
 # Continuous multilinear candidates for an actual implicit family
@@ -12,6 +14,8 @@ assumed parameter derivative of the solution.
 This module proves joint continuity and the exact algebraic highest-term
 identity. Identification with actual derivatives is a separate step.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N03ErrorWeightedJets
-import ContinuousFlexibility.Analysis.N02ResidualValueBounds
+module
+
+public import ContinuousFlexibility.Analysis.N03ErrorWeightedJets
+public import ContinuousFlexibility.Analysis.N02ResidualValueBounds
 
 /-!
 # The actual residual substituted into the N03 source error
@@ -10,6 +12,8 @@ therefore preserves a fixed loss and one high factor. The two height-test
 grades remain explicit; no localization in the residual or positive
 material-height gain is asserted.
 -/
+
+@[expose] public section
 
 noncomputable section
 

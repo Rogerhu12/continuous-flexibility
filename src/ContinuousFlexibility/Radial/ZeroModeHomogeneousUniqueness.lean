@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ZeroModeEndpointExclusion
-import ContinuousFlexibility.Radial.ZeroModeResistanceGrowth
+module
+
+public import ContinuousFlexibility.Radial.ZeroModeEndpointExclusion
+public import ContinuousFlexibility.Radial.ZeroModeResistanceGrowth
 
 /-!
 # Uniqueness of the homogeneous zero channel in the actual output space
@@ -13,6 +15,8 @@ The left endpoint constant in `OutputRealization` is retained throughout;
 the proof never assumes that the uncorrected height belongs to the
 weighted L2 space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

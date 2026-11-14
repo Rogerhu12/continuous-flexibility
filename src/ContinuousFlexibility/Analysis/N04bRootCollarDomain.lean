@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04bRootLiteralMaps
-import ContinuousFlexibility.Analysis.N04bRootTravelClosed
-import ContinuousFlexibility.Analysis.N04bRootTravelDifferential
+module
+
+public import ContinuousFlexibility.Analysis.N04bRootLiteralMaps
+public import ContinuousFlexibility.Analysis.N04bRootTravelClosed
+public import ContinuousFlexibility.Analysis.N04bRootTravelDifferential
 
 /-!
 # Root-radius bounds identify the actual moving half
@@ -9,6 +11,8 @@ The coordinate bound is applied to the literal travel chart. It yields
 membership of the genuine moving half, rather than of a preassigned
 radial rectangle. The closure can meet only its own physical root.
 -/
+
+@[expose] public section
 
 noncomputable section
 

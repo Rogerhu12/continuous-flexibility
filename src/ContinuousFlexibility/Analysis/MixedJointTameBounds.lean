@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.JointJetSpatialRegularity
-import ContinuousFlexibility.Analysis.WeightedJointComposition
-import ContinuousFlexibility.Analysis.TameMultilinearNormalization
+module
+
+public import ContinuousFlexibility.Analysis.JointJetSpatialRegularity
+public import ContinuousFlexibility.Analysis.WeightedJointComposition
+public import ContinuousFlexibility.Analysis.TameMultilinearNormalization
 
 /-!
 # A fixed joint-order budget from the actual mixed parameter jets
@@ -13,6 +15,8 @@ resulting constant is independent of the spatial point and of any
 additional component label. Spatial coordinates of the base point do
 not enter the grading.
 -/
+
+@[expose] public section
 
 noncomputable section
 

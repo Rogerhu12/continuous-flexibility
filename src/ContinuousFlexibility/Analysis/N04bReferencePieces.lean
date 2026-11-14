@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04bReferenceHalves
+module
+
+public import ContinuousFlexibility.Analysis.N04bReferenceHalves
 
 /-!
 # Reference piece metadata with arbitrary interior negative cuts
@@ -8,6 +10,8 @@ equivalence with ℕ indexes both this reference metadata and the later
 moving physical domains. The exceptional set is countable; retaining the
 old exceptional radii does not constrain the new interval endpoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

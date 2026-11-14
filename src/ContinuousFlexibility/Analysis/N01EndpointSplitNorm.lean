@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01EndpointSplitEnergy
-import ContinuousFlexibility.Analysis.CircleTwoEnergyEnvelope
+module
+
+public import ContinuousFlexibility.Analysis.N01EndpointSplitEnergy
+public import ContinuousFlexibility.Analysis.CircleTwoEnergyEnvelope
 
 /-!
 # Actual endpoint estimates with the angular-material budget intact
@@ -9,6 +11,8 @@ The low localized slot costs base+c+6, whereas the high localized slot
 costs b+loss+d+c+6, with d fixed for each parameter order. The numerical
 constant is independent of the state and all directions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

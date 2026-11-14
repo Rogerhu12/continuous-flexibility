@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01SingleComponentInterpolation
+module
+
+public import ContinuousFlexibility.Analysis.N01SingleComponentInterpolation
 
 /-!
 # The actual cutoff velocity jointly in state, radius and angle
@@ -8,6 +10,8 @@ inverse and the actual flow inverse. The same variable-radius cutoff
 then multiplies the exact old-flow slope. All operations take place in
 the original circle model; the final decoder is the existing velocity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

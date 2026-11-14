@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.OuterDeepUniformProduct
-import ContinuousFlexibility.Radial.OuterPhysicalKernelEnvelope
-import ContinuousFlexibility.Radial.OuterPhysicalNaturalEnvelope
-import ContinuousFlexibility.Radial.OuterLocalizerCutoff
+module
+
+public import ContinuousFlexibility.Radial.OuterDeepUniformProduct
+public import ContinuousFlexibility.Radial.OuterPhysicalKernelEnvelope
+public import ContinuousFlexibility.Radial.OuterPhysicalNaturalEnvelope
+public import ContinuousFlexibility.Radial.OuterLocalizerCutoff
 
 /-!
 # The original localizers in the actual physical tail envelopes
@@ -11,6 +13,8 @@ localizers. Initial resistance points and node points use the same
 cover, so no cell is assumed to lie in a single open edge. The resulting
 coefficient exponents are chosen before the profile and frequency.
 -/
+
+@[expose] public section
 
 noncomputable section
 

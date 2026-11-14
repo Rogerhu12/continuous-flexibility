@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.SelectedIncomingMetadata
-import ContinuousFlexibility.Radial.SelectedFirstBandMetadata
-import ContinuousFlexibility.Radial.SelectedBandMetadata
-import ContinuousFlexibility.Radial.SelectedActualEntry
+module
+
+public import ContinuousFlexibility.Radial.SelectedIncomingMetadata
+public import ContinuousFlexibility.Radial.SelectedFirstBandMetadata
+public import ContinuousFlexibility.Radial.SelectedBandMetadata
+public import ContinuousFlexibility.Radial.SelectedActualEntry
 
 /-!
 # Choosing the actual selected tail after quantitative parameters
@@ -16,6 +18,8 @@ The conclusion keeps one selected object, its canonical entrances, the
 first band containing mode two, and the actual geometry used to build it.
 To meet an arbitrary lower bound Cmin, call this theorem with max 1000 Cmin.
 -/
+
+@[expose] public section
 
 noncomputable section
 

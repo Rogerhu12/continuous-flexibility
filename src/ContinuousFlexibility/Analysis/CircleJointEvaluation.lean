@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CircleAngularJetLinear
-import ContinuousFlexibility.Analysis.SmoothDirectionsJointAngular
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
-import ContinuousFlexibility.Analysis.SolveNewtonBridge
+module
+
+public import ContinuousFlexibility.Analysis.CircleAngularJetLinear
+public import ContinuousFlexibility.Analysis.SmoothDirectionsJointAngular
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
+public import ContinuousFlexibility.Analysis.SolveNewtonBridge
 
 /-!
 # Actual joint circle evaluation in the projective topology
@@ -12,6 +14,8 @@ of a fixed angular order. This proves joint continuity when the angle
 and the circle element vary, and the genuine angular hierarchy then
 gives the complete joint directional tower.
 -/
+
+@[expose] public section
 
 noncomputable section
 

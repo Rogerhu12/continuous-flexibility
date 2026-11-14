@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06LeftColumnJets
-import ContinuousFlexibility.Analysis.N06CompactCoefficientDifference
+module
+
+public import ContinuousFlexibility.Analysis.N06LeftColumnJets
+public import ContinuousFlexibility.Analysis.N06CompactCoefficientDifference
 
 /-!
 # Linear smallness of the genuine left-column difference
@@ -9,6 +11,8 @@ fixed compact support. The exact flux-jet formula and the proved N01
 coefficient estimate give a bound for every angular derivative through
 a fixed order. No current chart or final operator bound is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

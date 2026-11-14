@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cVolterraNaturality
-import Mathlib.Analysis.Calculus.BumpFunction.FiniteDimension
+module
+
+public import ContinuousFlexibility.Analysis.N01cVolterraNaturality
+public import Mathlib.Analysis.Calculus.BumpFunction.FiniteDimension
 
 /-!
 # Finite affine flow germs inside the actual state neighbourhood
@@ -11,6 +13,8 @@ compression. The global finite-parameter theorem therefore applies to
 actual trajectories. Local equality of the speeds identifies their jets,
 and Volterra naturality transfers the result to the original state.
 -/
+
+@[expose] public section
 
 noncomputable section
 

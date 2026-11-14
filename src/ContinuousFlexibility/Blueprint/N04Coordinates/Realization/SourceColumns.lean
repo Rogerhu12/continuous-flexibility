@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04SourceColumnsAssembly
+module
+
+public import ContinuousFlexibility.Analysis.N04SourceColumnsAssembly
 
 /-!
 # N04Coordinates-Realization: source factors and columns
@@ -10,6 +12,8 @@ The statement is defined in
 Source: paper/flexible-surface-readable/07-fixed-geometry.tex, lines 1252-1265 and 1654-1677.
 Task: docs/tasks/N04Realization-SourceColumns.md.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

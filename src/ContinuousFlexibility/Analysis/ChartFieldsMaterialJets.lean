@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PositiveChartJacobianJets
-import ContinuousFlexibility.Analysis.InverseChartFieldJetBounds
+module
+
+public import ContinuousFlexibility.Analysis.PositiveChartJacobianJets
+public import ContinuousFlexibility.Analysis.InverseChartFieldJetBounds
 
 /-!
 # Actual canonical fields from chart, inverse, height, and raw coefficients
@@ -10,6 +12,8 @@ feed the established potential/density closure. All losses and low
 orders precede the component constants. No zeroth-order angular lift,
 reciprocal-derivative, or canonical-field bound is supplied.
 -/
+
+@[expose] public section
 
 noncomputable section
 

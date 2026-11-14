@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ScalarInverseJetBounds
-import ContinuousFlexibility.Analysis.N01FlowSmallness
-import ContinuousFlexibility.Analysis.ReturnCorrectionResidualPeriodicity
+module
+
+public import ContinuousFlexibility.Analysis.ScalarInverseJetBounds
+public import ContinuousFlexibility.Analysis.N01FlowSmallness
+public import ContinuousFlexibility.Analysis.ReturnCorrectionResidualPeriodicity
 
 /-!
 # Uniform angular jets of the actual N01 flow and its inverse
@@ -12,6 +14,8 @@ angular derivative below by one half. The actual fiberwise inverse and
 the specified endpoint inverse then have uniformly bounded positive-order
 angular jets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

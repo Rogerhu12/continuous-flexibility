@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.OuterWholeKernelRepresentation
-import ContinuousFlexibility.Radial.OuterFundamentalKernel
-import ContinuousFlexibility.Radial.OuterFirstOrderRegularity
+module
+
+public import ContinuousFlexibility.Radial.OuterWholeKernelRepresentation
+public import ContinuousFlexibility.Radial.OuterFundamentalKernel
+public import ContinuousFlexibility.Radial.OuterFirstOrderRegularity
 
 /-!
 # One canonical Green kernel on the whole outer interval
@@ -10,6 +12,8 @@ min/max kernel.  Row integrability is proved from the compact core, the
 actual Poisson vector and the deep Dirichlet rows.  No bounded whole
 integral operator or whole inverse is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

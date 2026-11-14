@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aMixedCoefficientOperator
-import ContinuousFlexibility.Scalar.WeightedHeightParameterPullback
+module
+
+public import ContinuousFlexibility.Analysis.N07aMixedCoefficientOperator
+public import ContinuousFlexibility.Scalar.WeightedHeightParameterPullback
 
 /-!
 # Smooth tame dependence of the actual mixed-weight divergence operator
@@ -8,6 +10,8 @@ Every term below is one of the established multiplication or fixed
 differentiation maps. The conclusion concerns the prescribed operator,
 with an unrestricted common-height argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

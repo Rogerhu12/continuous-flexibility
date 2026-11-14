@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseAssociatedOperator
-import ContinuousFlexibility.Radial.MorseSmoothCore
+module
+
+public import ContinuousFlexibility.Radial.MorseAssociatedOperator
+public import ContinuousFlexibility.Radial.MorseSmoothCore
 
 /-!
 # The weak Morse equation on the actual physical energy domain
@@ -10,6 +12,8 @@ form graph for a vector that already has an actual physical energy lift.
 This does not identify the maximal distributional domain in L², or assert
 that the compact smooth functions are an operator graph core.
 -/
+
+@[expose] public section
 
 noncomputable section
 

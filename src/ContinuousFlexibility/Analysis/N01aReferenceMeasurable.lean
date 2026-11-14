@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01aReferencePairing
-import Mathlib.MeasureTheory.Function.ConvergenceInMeasure
+module
+
+public import ContinuousFlexibility.Analysis.N01aReferencePairing
+public import Mathlib.MeasureTheory.Function.ConvergenceInMeasure
 
 /-!
 # Measurability supplied by the actual smooth graph core
@@ -8,6 +10,8 @@ Integrability of a square alone does not imply measurability of its signed
 square root.  The smooth-core approximation supplies the missing sign
 information by convergence in measure.
 -/
+
+@[expose] public section
 
 noncomputable section
 

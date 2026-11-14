@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04bActualAtlasGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N04bActualAtlasGeometry
 
 /-!
 # Actual formula germs retained by the final atlas
@@ -8,6 +10,8 @@ hypotheses on an arbitrary atlas. They retain the physical chart and
 height germs on the entire negative component, the genuine closed
 inverse, and both positive-radius cut germs needed by transmission.
 -/
+
+@[expose] public section
 
 noncomputable section
 

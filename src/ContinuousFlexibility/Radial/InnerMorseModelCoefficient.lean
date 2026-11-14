@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerMorseCompressionConstruction
+module
+
+public import ContinuousFlexibility.Radial.InnerMorseCompressionConstruction
 
 /-!
 # One Morse coefficient including both weight ratios
@@ -10,6 +12,8 @@ model costs, the actual whole-cell velocity, both cut weight ratios,
 and the inverse square root of the inward energy. Its eighth power
 still fits the fixed exponent eighty used in the ordered choices.
 -/
+
+@[expose] public section
 
 noncomputable section
 

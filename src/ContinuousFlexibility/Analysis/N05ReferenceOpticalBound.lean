@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05OpticalLipschitz
-import ContinuousFlexibility.Analysis.N05ReferenceNegativeDensity
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05OpticalLipschitz
+public import ContinuousFlexibility.Analysis.N05ReferenceNegativeDensity
 
 /-!
 # Optical control of the actual negative Jacobian and density
@@ -10,6 +12,8 @@ handles the right root, with the genuine interval integral unchanged.
 The analytic input is a Lipschitz bound for the actual profile radicand;
 neither a chart derivative bound nor an inverse root slope is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

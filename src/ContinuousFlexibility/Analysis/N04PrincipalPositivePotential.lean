@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PrincipalPositiveFormula
-import ContinuousFlexibility.Analysis.N07aCanonicalOpenTests
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalPositiveFormula
+public import ContinuousFlexibility.Analysis.N07aCanonicalOpenTests
 
 /-!
 # The positive potential in reciprocal-height flux form
@@ -9,6 +11,8 @@ potential as the pulled height times the divergence of the reciprocal
 pulled height. On the positive unit interval this is a sum of two first
 mixed derivatives of products of the principal fields and height jets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

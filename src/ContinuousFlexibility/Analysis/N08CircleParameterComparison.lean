@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N08HeightRescale
+module
+
+public import ContinuousFlexibility.Analysis.N08HeightRescale
 
 /-!
 # Parameter comparison from a small actual localized height
@@ -8,6 +10,8 @@ be read from the same N02 first jet. The smallness of the localized
 total height is used explicitly to keep both new states in that jet's
 domain; proximity of the original state alone would not suffice.
 -/
+
+@[expose] public section
 
 noncomputable section
 

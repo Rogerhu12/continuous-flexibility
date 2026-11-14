@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cFlowNumericConstants
-import ContinuousFlexibility.Analysis.OneHighCircleFlowReferenceNorms
-import ContinuousFlexibility.Analysis.OneHighCircleFourierLiftBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01cFlowNumericConstants
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowReferenceNorms
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierLiftBounds
 
 /-!
 # Uniform zero-parameter circle-flow growth
@@ -9,6 +11,8 @@ These estimates concern the supplied classical trajectories. The low
 integrated speed norm is bounded once. Every high estimate then uses the
 actual reference norm of that speed and the actual derivative defect.
 -/
+
+@[expose] public section
 
 noncomputable section
 

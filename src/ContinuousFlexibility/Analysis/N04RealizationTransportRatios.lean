@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aActualMaterialComparison
-import ContinuousFlexibility.Analysis.StateNeighborhood
-import Mathlib.MeasureTheory.Measure.OpenPos
+module
+
+public import ContinuousFlexibility.Analysis.N07aActualMaterialComparison
+public import ContinuousFlexibility.Analysis.StateNeighborhood
+public import Mathlib.MeasureTheory.Measure.OpenPos
 
 /-!
 # Material weight ratios for the actual reference transport
@@ -15,6 +17,8 @@ The neighborhood restriction is chosen before the state and before the global
 transport. Thus these estimates apply to the same transport already furnished
 by the qualitative construction, without choosing a replacement witness.
 -/
+
+@[expose] public section
 
 noncomputable section
 

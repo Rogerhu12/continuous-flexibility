@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.CentralAuxiliaryBorder
+module
+
+public import ContinuousFlexibility.Radial.CentralAuxiliaryBorder
 
 /-!
 # Actual compact columns in the central radial Hilbert space
@@ -9,6 +11,8 @@ change proves membership in the weighted `L²` space and identifies its
 row with the ordinary radial integral.  These statements apply to the
 metric-variation column constructed in `CentralTrueBorder`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

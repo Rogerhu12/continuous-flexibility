@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06WeakCylinderPDE
+module
+
+public import ContinuousFlexibility.Analysis.N06WeakCylinderPDE
 
 /-!
 # Calculus of the genuine unit-cylinder tests
@@ -7,6 +9,8 @@ The compact radial support makes multiplication by a coefficient smooth
 on the open strip into a globally smooth test. No extension of the
 coefficient through a degenerate endpoint is required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

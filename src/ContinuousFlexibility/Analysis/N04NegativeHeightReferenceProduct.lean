@@ -1,7 +1,11 @@
-import ContinuousFlexibility.Analysis.N04NegativeHeightCurrentData
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeHeightCurrentData
 
 /-! Products of selected reference fields retain the same sampled
 coefficient envelope. The two spatial orders are counted only once. -/
+
+@[expose] public section
 
 noncomputable section
 

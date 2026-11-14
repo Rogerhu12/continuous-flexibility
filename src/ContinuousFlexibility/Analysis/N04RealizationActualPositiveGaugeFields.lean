@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData
-import ContinuousFlexibility.Analysis.PositiveReferenceCylinder
-import ContinuousFlexibility.Analysis.N04RealizationPotentialIdentity
+module
+
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData
+public import ContinuousFlexibility.Analysis.PositiveReferenceCylinder
+public import ContinuousFlexibility.Analysis.N04RealizationPotentialIdentity
 
 /-!
 # The actual positive fields at the same inverse point
@@ -11,6 +13,8 @@ pullback formula at their own actual inverse point. The constant-test
 operator identity then identifies the stored positive potential using
 these same fields and the stored principal coefficients.
 -/
+
+@[expose] public section
 
 noncomputable section
 

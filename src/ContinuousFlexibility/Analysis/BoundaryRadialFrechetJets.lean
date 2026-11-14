@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.BoundaryMixedJets
-import Mathlib.Analysis.Calculus.ContDiff.Operations
+module
+
+public import ContinuousFlexibility.Analysis.BoundaryMixedJets
+public import Mathlib.Analysis.Calculus.ContDiff.Operations
 
 /-!
 # Finite radial matching preserves the actual boundary Fréchet jets
@@ -9,6 +11,8 @@ zero-jet theorem for the difference therefore identifies the full
 Fréchet jets, with no factor or loss in derivative order. Both fields
 are smooth on the given genuine open collar.
 -/
+
+@[expose] public section
 
 noncomputable section
 

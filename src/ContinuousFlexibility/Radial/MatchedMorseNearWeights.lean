@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerWeightRatios
+module
+
+public import ContinuousFlexibility.Radial.InnerWeightRatios
 
 /-!
 # Fixed coefficient costs for neighboring physical labels
@@ -7,6 +9,8 @@ The true localizer and retained-piece indices differ by at most two.
 One fixed coefficient power therefore absorbs their weight comparison
 while preserving the exact signed attenuation exponent.
 -/
+
+@[expose] public section
 
 noncomputable section
 

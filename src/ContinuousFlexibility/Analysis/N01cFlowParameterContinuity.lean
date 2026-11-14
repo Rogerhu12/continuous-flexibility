@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cFlowVariation
-import ContinuousFlexibility.Analysis.OneHighCircleFlowContinuity
+module
+
+public import ContinuousFlexibility.Analysis.N01cFlowVariation
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowContinuity
 
 /-!
 # Parameter continuity obtained from the actual time ODE
@@ -16,6 +18,8 @@ are ordinary compact bounds; obtaining the N01 coefficient-power and
 one-high-factor estimates still requires the geometric speed bounds and root
 regularization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

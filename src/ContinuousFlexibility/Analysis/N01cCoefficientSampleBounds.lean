@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cMaterialShiftComparison
-import ContinuousFlexibility.Analysis.N01cWeightAbsorption
-import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N01cMaterialShiftComparison
+public import ContinuousFlexibility.Analysis.N01cWeightAbsorption
+public import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
 
 /-!
 # Coefficient sample bounds on an arbitrary parameter space
@@ -9,6 +11,8 @@ The finite coefficient index, the physical cell comparison and the final
 common multiplier are handled before any concrete state space is supplied.
 The actual directional towers are retained throughout the transport.
 -/
+
+@[expose] public section
 
 noncomputable section
 

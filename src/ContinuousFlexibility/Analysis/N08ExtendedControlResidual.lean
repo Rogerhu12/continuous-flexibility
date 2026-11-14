@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N08ExtendedLogProfile
-import ContinuousFlexibility.Analysis.N08ActualScalarResidual
+module
+
+public import ContinuousFlexibility.Analysis.N08ExtendedLogProfile
+public import ContinuousFlexibility.Analysis.N08ActualScalarResidual
 
 /-!
 # The actual scalar residual with an independent weak control
@@ -9,6 +11,8 @@ exponentiation. The height variables are unchanged. Finite weighted scalar
 calculus and the actual source projection give one uniform tame germ, and
 physical circle controls recover exactly the original residual lines.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Geometry.CartesianDevelopment
-import Mathlib.Analysis.Normed.Module.Connected
-import Mathlib.Analysis.Complex.Basic
-import Mathlib.LinearAlgebra.Complex.FiniteDimensional
+module
+
+public import ContinuousFlexibility.Geometry.CartesianDevelopment
+public import Mathlib.Analysis.Normed.Module.Connected
+public import Mathlib.Analysis.Complex.Basic
+public import Mathlib.LinearAlgebra.Complex.FiniteDimensional
 
 /-!
 # Connected exteriors for Cartesian reconstruction
@@ -9,6 +11,8 @@ import Mathlib.LinearAlgebra.Complex.FiniteDimensional
 The norm in this file is used only to specify an exterior and a compact support region.
 No norm is identified with the coordinate-square metric on `PolarPoint`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

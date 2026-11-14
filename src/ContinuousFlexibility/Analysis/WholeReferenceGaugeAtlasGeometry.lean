@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData
+module
+
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData
 
 /-!
 # Geometry of the same atlas after the fixed reference gauge
@@ -9,6 +11,8 @@ certificate composes with the actual relative maps. Normalization follows
 from the original equality of the current and reference relative fields,
 so the fixed reference map is not required to be the identity there.
 -/
+
+@[expose] public section
 
 noncomputable section
 

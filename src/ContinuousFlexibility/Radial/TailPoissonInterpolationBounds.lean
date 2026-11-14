@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.TailActualNodeCoefficients
+module
+
+public import ContinuousFlexibility.Radial.TailActualNodeCoefficients
 
 /-!
 # Weighted bounds for actual Poisson interpolation
@@ -7,6 +9,8 @@ Each physical interpolant uses the same canonical Poisson pair as the
 tridiagonal coefficients. Exact resistance-coordinate transport turns the
 local bounds into estimates for the original density and physical interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

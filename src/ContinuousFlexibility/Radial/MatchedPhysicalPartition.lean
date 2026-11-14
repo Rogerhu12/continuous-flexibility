@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchedPhysicalCellOperators
-import ContinuousFlexibility.Radial.MatchedPartitionReconstruction
+module
+
+public import ContinuousFlexibility.Radial.MatchedPhysicalCellOperators
+public import ContinuousFlexibility.Radial.MatchedPartitionReconstruction
 
 /-!
 # Physical inputs for the actual block reconstruction
@@ -10,6 +12,8 @@ the genuine density conversion and cell map gives precisely the modal
 partition piece. The resulting finite block applications converge to the
 existing operator, including one separate scalar border contribution.
 -/
+
+@[expose] public section
 
 noncomputable section
 

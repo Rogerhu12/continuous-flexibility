@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedDecodedProductMap
-import ContinuousFlexibility.Scalar.WeightedBilinearTower
+module
+
+public import ContinuousFlexibility.Scalar.WeightedDecodedProductMap
+public import ContinuousFlexibility.Scalar.WeightedBilinearTower
 
 /-!
 # Fixed-neighborhood towers for actual weighted multiplication
@@ -9,6 +11,8 @@ from the physical weighted jets.  Its uniform derivative tower has the same
 base and loss on every chosen low-seminorm ball, including all derivative
 orders and the original model topology.
 -/
+
+@[expose] public section
 
 noncomputable section
 

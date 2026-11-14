@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedProductJets
-import ContinuousFlexibility.Scalar.WeightedWeightShift
+module
+
+public import ContinuousFlexibility.Scalar.WeightedProductJets
+public import ContinuousFlexibility.Scalar.WeightedWeightShift
 
 /-!
 # Actual finite products in the weighted height model
@@ -10,6 +12,8 @@ The zero-loss inclusion then returns the actual product to the original
 nonnegative weight.  All functions retain the prescribed parity, period, and
 support before they are lifted by the frozen decoder.
 -/
+
+@[expose] public section
 
 noncomputable section
 

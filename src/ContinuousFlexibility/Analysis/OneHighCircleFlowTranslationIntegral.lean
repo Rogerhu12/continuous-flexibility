@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowTranslationFamilies
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowTranslationFamilies
 
 /-!
 # The genuine integral equation for translation displacement
@@ -8,6 +10,8 @@ Subtracting an integrable scalar reference changes only the zeroth jet.
 The resulting Sobolev integral inequality therefore follows from the
 actual flow equation for arbitrary integrable reference speeds.
 -/
+
+@[expose] public section
 
 noncomputable section
 

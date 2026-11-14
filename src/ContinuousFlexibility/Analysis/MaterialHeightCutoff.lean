@@ -1,10 +1,12 @@
-import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
-import Mathlib.Analysis.Calculus.Deriv.Support
-import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
-import Mathlib.Analysis.Normed.Group.Bounded
-import Mathlib.MeasureTheory.Function.LpSeminorm.SMul
-import Mathlib.MeasureTheory.Function.LpSeminorm.TriangleInequality
+module
+
+public import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+public import Mathlib.Analysis.Calculus.Deriv.Support
+public import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
+public import Mathlib.Analysis.Normed.Group.Bounded
+public import Mathlib.MeasureTheory.Function.LpSeminorm.SMul
+public import Mathlib.MeasureTheory.Function.LpSeminorm.TriangleInequality
 
 /-!
 # Localization of actual weighted heights
@@ -14,6 +16,8 @@ coordinate.  The actual mixed derivatives satisfy the ordinary finite
 Leibniz formula, so every weighted L² jet remains integrable.  A compact
 cutoff can be chosen to equal one on any closed interior component.
 -/
+
+@[expose] public section
 
 noncomputable section
 

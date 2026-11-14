@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.N06Parts
-import ContinuousFlexibility.Analysis.N06PrimitiveCanonicalRelative
+module
+
+public import ContinuousFlexibility.Statements.N06Parts
+public import ContinuousFlexibility.Analysis.N06PrimitiveCanonicalRelative
 
 /-!
 # N06: the actual canonical relative operator
@@ -8,6 +10,8 @@ Source: `paper/flexible-surface-readable/08-stable-inverse.tex` lines 319–489,
 using the controlled coordinates of section 7 on the same N05 construction.
 Task: `docs/tasks/N06-CanonicalRelative.md`.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

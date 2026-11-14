@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsCorrectionCircleFixedBase
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsCorrectionCircleFixedBase
 
 /-!
 # Fixed-base estimates for the actual correction velocity
@@ -9,6 +11,8 @@ same cutoff derivative. The N02 decoder identity then substitutes the
 retained actual residual. Neither step changes the low base with the
 parameter order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

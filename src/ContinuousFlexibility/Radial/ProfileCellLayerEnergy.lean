@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ProfileScalarSquares
-import ContinuousFlexibility.Radial.ProfileWeightedPartition
-import ContinuousFlexibility.Radial.ProfileLayerOverlap
+module
+
+public import ContinuousFlexibility.Radial.ProfileScalarSquares
+public import ContinuousFlexibility.Radial.ProfileWeightedPartition
+public import ContinuousFlexibility.Radial.ProfileLayerOverlap
 
 /-!
 # Comparing scalar cell energy with one cutoff energy per index
@@ -10,6 +12,8 @@ The partition square bound is used within each fiber. Thus the resulting
 cutoff energy contains one term for each index, even if many profile cells
 share that index.
 -/
+
+@[expose] public section
 
 open Set Filter MeasureTheory
 open ContinuousFlexibility.Analysis ContinuousFlexibility.Statements

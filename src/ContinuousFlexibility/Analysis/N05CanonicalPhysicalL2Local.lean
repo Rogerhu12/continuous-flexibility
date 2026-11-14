@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05CanonicalPhysicalCoefficient
-import ContinuousFlexibility.Radial.ReferenceGraphNorms
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05CanonicalPhysicalCoefficient
+public import ContinuousFlexibility.Radial.ReferenceGraphNorms
 
 /-!
 # Local physical endpoint L² control from a canonical height representative
@@ -9,6 +11,8 @@ The actual chart transfers measurability as well as null sets. Combining
 its genuine change-of-variables formula with the proved coefficient bound
 gives a uniform square-integral estimate on every physical piece.
 -/
+
+@[expose] public section
 
 noncomputable section
 

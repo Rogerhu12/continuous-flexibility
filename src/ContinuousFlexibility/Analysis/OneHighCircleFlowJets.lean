@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowTimeChange
-import ContinuousFlexibility.Analysis.CylinderMixedJets
-import Mathlib.Topology.Maps.Proper.Basic
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowTimeChange
+public import ContinuousFlexibility.Analysis.CylinderMixedJets
+public import Mathlib.Topology.Maps.Proper.Basic
 
 /-!
 # Continuous actual angular jets at the time endpoints
@@ -11,6 +13,8 @@ Consequently continuity of the actual angular jets of the smooth
 time-changed family descends to the original closed time strip. This
 avoids differentiating an inverse of the flat time change.
 -/
+
+@[expose] public section
 
 noncomputable section
 

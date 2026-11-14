@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.ActualNegativeOpticalRootDivision
-import ContinuousFlexibility.Analysis.ActualNegativeReferenceAiryHeight
-import ContinuousFlexibility.Analysis.OpticalHalfAiryHeightMaterialJets
-import ContinuousFlexibility.Analysis.ReferenceInverseProfileMaterialJets
-import ContinuousFlexibility.Analysis.MaterialGlobalEndpointModels
-import Mathlib.Topology.Order.Compact
+module
+
+public import ContinuousFlexibility.Analysis.ActualNegativeOpticalRootDivision
+public import ContinuousFlexibility.Analysis.ActualNegativeReferenceAiryHeight
+public import ContinuousFlexibility.Analysis.OpticalHalfAiryHeightMaterialJets
+public import ContinuousFlexibility.Analysis.ReferenceInverseProfileMaterialJets
+public import ContinuousFlexibility.Analysis.MaterialGlobalEndpointModels
+public import Mathlib.Topology.Order.Compact
 
 /-!
 # Actual reference height jets on the complete negative half
@@ -14,6 +16,8 @@ representative, and the actual half are fixed before asking for a jet.
 All costs are paid at the original half sample. The raw optical lower
 bound remains explicit until supplied by the retained construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.LogSlopeConnector
-import ContinuousFlexibility.Radial.SeedPairGluing
-import ContinuousFlexibility.Radial.SeedCentralPair
+module
+
+public import ContinuousFlexibility.Radial.LogSlopeConnector
+public import ContinuousFlexibility.Radial.SeedPairGluing
+public import ContinuousFlexibility.Radial.SeedCentralPair
 
 /-!
 # Quantitative lower bounds for the actual radial profile
@@ -8,6 +10,8 @@ import ContinuousFlexibility.Radial.SeedCentralPair
 The inequality is kept without division.  It is invariant under the
 positive profile rescalings used in the common reference construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.CoupledFeedbackSmallness
-import ContinuousFlexibility.Analysis.CoupledFeedbackRegularization
-import ContinuousFlexibility.Analysis.CoupledConstantFeedbackTame
-import ContinuousFlexibility.Analysis.CoupledRecoveredInverseSmooth
-import ContinuousFlexibility.Analysis.CoupledN09Assembly
+module
+
+public import ContinuousFlexibility.Analysis.CoupledFeedbackSmallness
+public import ContinuousFlexibility.Analysis.CoupledFeedbackRegularization
+public import ContinuousFlexibility.Analysis.CoupledConstantFeedbackTame
+public import ContinuousFlexibility.Analysis.CoupledRecoveredInverseSmooth
+public import ContinuousFlexibility.Analysis.CoupledN09Assembly
 
 /-!
 # One common neighborhood for the actual coupled inverse
@@ -12,6 +14,8 @@ output order is chosen. The recovered map keeps its original guard; only
 the neighborhood in the conclusion is restricted. The remaining chart
 input is the smooth tame property of the actual chart increment.
 -/
+
+@[expose] public section
 
 noncomputable section
 

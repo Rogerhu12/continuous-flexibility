@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06WeakCylinderGraph
+module
+
+public import ContinuousFlexibility.Analysis.N06WeakCylinderGraph
 
 /-!
 # One family of weak modal representatives for every finite cutoff
@@ -7,6 +9,8 @@ The actual cylinder equation gives all countably many modal equations.
 Choosing their H2 representatives once makes every finite reconstruction
 and every finite tail use the same radial functions and derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerRadialL2Mass
-import Mathlib.MeasureTheory.Integral.Bochner.Set
-import Mathlib.Analysis.InnerProductSpace.Adjoint
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialL2Mass
+public import Mathlib.MeasureTheory.Integral.Bochner.Set
+public import Mathlib.Analysis.InnerProductSpace.Adjoint
 
 /-!
 # Restriction and its actual zero extension in real L²
@@ -9,6 +11,8 @@ Restriction uses mathlib's existing continuous linear map. Its Hilbert
 adjoint is proved to be extension by zero. These maps connect a retained
 cell to the same ambient physical measure without changing that measure.
 -/
+
+@[expose] public section
 
 noncomputable section
 

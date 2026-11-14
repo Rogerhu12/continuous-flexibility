@@ -1,5 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aHeightChartComposition
-import ContinuousFlexibility.Analysis.N07aSampleLinearJets
+module
+
+public import ContinuousFlexibility.Analysis.N07aHeightChartComposition
+public import ContinuousFlexibility.Analysis.N07aSampleLinearJets
+
+@[expose] public section
 
 noncomputable section
 

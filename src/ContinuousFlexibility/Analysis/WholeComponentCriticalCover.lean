@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.WholeComponentFieldSelection
-import ContinuousFlexibility.Analysis.PositiveComponentAdjacency
+module
+
+public import ContinuousFlexibility.Analysis.WholeComponentFieldSelection
+public import ContinuousFlexibility.Analysis.PositiveComponentAdjacency
 
 /-!
 # Whole components cover every physical radius
@@ -10,6 +12,8 @@ the absence of other nearby zeros forces the original critical point
 to be one of that component's true endpoints. Thus closed negative
 components and open positive components cover the whole annulus.
 -/
+
+@[expose] public section
 
 noncomputable section
 

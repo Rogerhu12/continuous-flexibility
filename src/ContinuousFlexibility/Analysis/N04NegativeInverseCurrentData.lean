@@ -1,9 +1,13 @@
-import ContinuousFlexibility.Analysis.N04NegativeInverseCurrentTowers
-import ContinuousFlexibility.Analysis.N04SourceColumnsPrefix
-import ContinuousFlexibility.Analysis.N04NegativeInversePrefixPower
-import ContinuousFlexibility.Analysis.SectorParameterGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeInverseCurrentTowers
+public import ContinuousFlexibility.Analysis.N04SourceColumnsPrefix
+public import ContinuousFlexibility.Analysis.N04NegativeInversePrefixPower
+public import ContinuousFlexibility.Analysis.SectorParameterGeometry
 
 /-! Finite prefixes of selected current jets with one fixed low order. -/
+
+@[expose] public section
 
 noncomputable section
 

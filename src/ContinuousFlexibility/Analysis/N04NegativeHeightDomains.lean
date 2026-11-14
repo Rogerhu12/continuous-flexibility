@@ -1,6 +1,10 @@
-import ContinuousFlexibility.Analysis.N04NegativeHeightCurrentData
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeHeightCurrentData
 
 /-! Domain restrictions shared by scalar compositions and products. -/
+
+@[expose] public section
 
 noncomputable section
 

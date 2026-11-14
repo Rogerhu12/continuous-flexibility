@@ -1,4 +1,6 @@
-import Mathlib.Analysis.ODE.ExistUnique
+module
+
+public import Mathlib.Analysis.ODE.ExistUnique
 
 /-!
 # Actual scalar flows on a prescribed bounded time interval
@@ -12,6 +14,8 @@ The family theorem makes the choices for every external parameter and
 initial angle. It does not assume a parameterized flow as input, and it
 does not assert parameter smoothness or high-order estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SmoothCompactL2MeanDensity
-import ContinuousFlexibility.Radial.ReferenceWeightedCompact
-import Mathlib.Analysis.Calculus.BumpFunction.Normed
+module
+
+public import ContinuousFlexibility.Analysis.SmoothCompactL2MeanDensity
+public import ContinuousFlexibility.Radial.ReferenceWeightedCompact
+public import Mathlib.Analysis.Calculus.BumpFunction.Normed
 
 /-!
 # Exact zero-mean radial source approximation
@@ -9,6 +11,8 @@ A fixed unit-integral bump repairs the ordinary zero-mode compatibility
 condition after smooth weighted approximation. The integral error tends to
 zero independently of the singular Hilbert weight.
 -/
+
+@[expose] public section
 
 noncomputable section
 

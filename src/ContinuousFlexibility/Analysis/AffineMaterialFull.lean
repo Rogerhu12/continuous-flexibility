@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.AffineMaterialSampling
-import ContinuousFlexibility.Analysis.MaterialRadialExpansion
+module
+
+public import ContinuousFlexibility.Analysis.AffineMaterialSampling
+public import ContinuousFlexibility.Analysis.MaterialRadialExpansion
 
 /-!
 # The material coordinates and weights for an accumulating radial profile
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Analysis.MaterialRadialExpansion
 The affine scalar construction and the actual trace scaffold give one
 material data witness satisfying every clause of the W01 target.
 -/
+
+@[expose] public section
 
 noncomputable section
 

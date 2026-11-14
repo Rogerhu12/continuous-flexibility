@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.OuterGreenIntegral
-import ContinuousFlexibility.Analysis.L2KernelRepresentation
-import Mathlib.MeasureTheory.Integral.Prod
+module
+
+public import ContinuousFlexibility.Radial.OuterGreenIntegral
+public import ContinuousFlexibility.Analysis.L2KernelRepresentation
+public import Mathlib.MeasureTheory.Integral.Prod
 
 /-!
 # Symmetry of the actual all-source Green operator
@@ -9,6 +11,8 @@ Fubini is used first for two smooth compact interior tests, where the
 double integrand has compact support and is integrable. Density and the
 bounded operator then extend the identity to all of weighted L².
 -/
+
+@[expose] public section
 
 noncomputable section
 

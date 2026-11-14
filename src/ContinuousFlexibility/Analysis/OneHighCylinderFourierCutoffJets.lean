@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderFourierCutoff
-import ContinuousFlexibility.Analysis.OneHighCylinderFourierInverseDerivatives
-import ContinuousFlexibility.Analysis.OneHighCylinderFourierInverseL2
-import ContinuousFlexibility.Analysis.OneHighCylinderSobolevJetsBasic
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderFourierCutoff
+public import ContinuousFlexibility.Analysis.OneHighCylinderFourierInverseDerivatives
+public import ContinuousFlexibility.Analysis.OneHighCylinderFourierInverseL2
+public import ContinuousFlexibility.Analysis.OneHighCylinderSobolevJetsBasic
 
 /-!
 # Genuine smooth cylinder approximants from finite frequency data
@@ -11,6 +13,8 @@ original data supplies every moment on bounded frequency support. Thus every
 displayed jet is an actual coordinate derivative of the inverse integral.
 No derivative membership of the original data is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

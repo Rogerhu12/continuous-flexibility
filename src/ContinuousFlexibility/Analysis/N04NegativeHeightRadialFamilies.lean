@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometrySpatialRegularity
-import ContinuousFlexibility.Analysis.N01CoefficientParameterTower
-import ContinuousFlexibility.Analysis.N01CoefficientJointTower
-import ContinuousFlexibility.Analysis.N04RealizationCubicRegularity
-import ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometrySpatialRegularity
+public import ContinuousFlexibility.Analysis.N01CoefficientParameterTower
+public import ContinuousFlexibility.Analysis.N01CoefficientJointTower
+public import ContinuousFlexibility.Analysis.N04RealizationCubicRegularity
+public import ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient
 
 /-!
 # The physical radial coefficient on a retained negative half
@@ -13,6 +15,8 @@ difference tower, multiplied only by a fixed power of the half length.
 All fields here use the stored physical endpoints, independently of the
 moving artificial cut and of the auxiliary column.
 -/
+
+@[expose] public section
 
 noncomputable section
 

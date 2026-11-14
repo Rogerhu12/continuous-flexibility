@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsJointExpansion
-import ContinuousFlexibility.Analysis.N04PulledFieldsInverseSlotBounds
-import ContinuousFlexibility.Analysis.N04RealizationFixedSpatialProduct
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsJointExpansion
+public import ContinuousFlexibility.Analysis.N04PulledFieldsInverseSlotBounds
+public import ContinuousFlexibility.Analysis.N04RealizationFixedSpatialProduct
 
 /-!
 # Actual mixed bounds on the original pure joint words
@@ -10,6 +12,8 @@ uniform seminorm premise is needed because the supplied joint tower
 already belongs to the same actual function. A fixed spatial multiplier
 also keeps every parameter derivative on the current factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

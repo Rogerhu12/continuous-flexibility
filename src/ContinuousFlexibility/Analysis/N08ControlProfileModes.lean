@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N08ControlBasis
-import ContinuousFlexibility.Analysis.N08ProfileJetBounds
+module
+
+public import ContinuousFlexibility.Analysis.N08ControlBasis
+public import ContinuousFlexibility.Analysis.N08ProfileJetBounds
 
 /-!
 # The genuine weighted single-control profile modes
@@ -8,6 +10,8 @@ The physical constant circle basis realizes a weighted unit control exactly.
 Applying the N01 profile-jet estimate to this same basis gives estimates at
 the actual reference cell containing the evaluation point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

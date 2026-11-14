@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.TameLocalCalculus
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
-import ContinuousFlexibility.Analysis.TameMultilinearNormalization
+module
+
+public import ContinuousFlexibility.Analysis.TameLocalCalculus
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
+public import ContinuousFlexibility.Analysis.TameMultilinearNormalization
 
 /-!
 # Joint local tame growth and homogeneous jet bounds
@@ -10,6 +12,8 @@ equivalent. Joint local growth is convenient for composing expressions;
 multilinear normalization recovers precisely the one-high-factor estimate
 in `SmoothTameOn`, on one fixed low-order neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

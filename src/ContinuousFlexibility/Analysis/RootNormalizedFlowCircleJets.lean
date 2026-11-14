@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.RootNormalizedCircleJets
+module
+
+public import ContinuousFlexibility.Analysis.RootNormalizedCircleJets
 
 /-!
 # Normalized input jets from the actual controlled root flow
@@ -8,6 +10,8 @@ The original angular normalization gives its own displacement jets. Both
 are combined by the fixed-loss composition estimate, with one low state
 order chosen before the component-dependent numerical majorants.
 -/
+
+@[expose] public section
 
 noncomputable section
 

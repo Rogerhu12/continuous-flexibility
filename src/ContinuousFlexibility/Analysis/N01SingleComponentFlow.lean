@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01FlowSpatialJets
-import ContinuousFlexibility.Analysis.CircleSingleComponentJets
-import ContinuousFlexibility.Analysis.N01SelectorInverse
-import ContinuousFlexibility.Analysis.NormedSmoothDirections
+module
+
+public import ContinuousFlexibility.Analysis.N01FlowSpatialJets
+public import ContinuousFlexibility.Analysis.CircleSingleComponentJets
+public import ContinuousFlexibility.Analysis.N01SelectorInverse
+public import ContinuousFlexibility.Analysis.NormedSmoothDirections
 
 /-!
 # A varying radius in one component of the actual flow
@@ -12,6 +14,8 @@ included in that one component. This gives a genuine joint state and
 radius tower for the actual inverse flow on an interior positive
 discriminant strip, without postulating any inverse parameter regularity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

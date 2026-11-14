@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aPhysicalLpFamilyTame
-import ContinuousFlexibility.Analysis.N07aAngularPrimitiveOn
+module
+
+public import ContinuousFlexibility.Analysis.N07aPhysicalLpFamilyTame
+public import ContinuousFlexibility.Analysis.N07aAngularPrimitiveOn
 
 /-!
 # Actual parameter towers for the odd coefficient's even primitive
@@ -9,6 +11,8 @@ map applied to an original L² jet, or the original jet with one fewer
 angular derivative. The closed Sobolev graphs then give the genuine height
 tower, with the original one-high base and loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

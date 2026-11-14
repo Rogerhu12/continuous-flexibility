@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Geometry.SphereCapGluing
-import ContinuousFlexibility.Geometry.SphereImmersion
-import Mathlib.Geometry.Manifold.VectorBundle.Riemannian
-import Mathlib.Geometry.Manifold.ContMDiffMFDeriv
+module
+
+public import ContinuousFlexibility.Geometry.SphereCapGluing
+public import ContinuousFlexibility.Geometry.SphereImmersion
+public import Mathlib.Geometry.Manifold.VectorBundle.Riemannian
+public import Mathlib.Geometry.Manifold.ContMDiffMFDeriv
 
 /-!
 # The actual pullback metric of the constructed sphere family
@@ -10,6 +12,8 @@ All forms below use the genuine vector-valued manifold differential into E3.
 The north-side formula is the proved graph pullback tensor; the south-side
 germ is phase independent. No chord-distance isometry is substituted for it.
 -/
+
+@[expose] public section
 
 noncomputable section
 

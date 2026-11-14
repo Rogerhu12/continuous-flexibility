@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06PositiveDividedRegularity
-import ContinuousFlexibility.Analysis.N06PhysicalPeriodicity
+module
+
+public import ContinuousFlexibility.Analysis.N06PositiveDividedRegularity
+public import ContinuousFlexibility.Analysis.N06PhysicalPeriodicity
 
 /-!
 # Symmetries of the genuine forward principal density
@@ -9,6 +11,8 @@ its actual local equivariance. Periodicity and reflection of the density
 then follow from the physical coefficient symmetries. Both statements
 concern forward derivatives at interior physical points.
 -/
+
+@[expose] public section
 
 noncomputable section
 

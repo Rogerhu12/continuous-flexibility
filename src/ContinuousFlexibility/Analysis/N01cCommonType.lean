@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cRelativeControl
-import ContinuousFlexibility.Analysis.N01cShiftedSampleWeights
-import ContinuousFlexibility.Analysis.N01cStateSeminorms
+module
+
+public import ContinuousFlexibility.Analysis.N01cRelativeControl
+public import ContinuousFlexibility.Analysis.N01cShiftedSampleWeights
+public import ContinuousFlexibility.Analysis.N01cStateSeminorms
 
 /-!
 # A common type neighbourhood from quantitative reference nondegeneracy
@@ -11,6 +13,8 @@ interface. The actual control second-jet estimate, its endpoint factor,
 the actual circle-mean estimate, and material absorption then give one
 radius for all components and every low state order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

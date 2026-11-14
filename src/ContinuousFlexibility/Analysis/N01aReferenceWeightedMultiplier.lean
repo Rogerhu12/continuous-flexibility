@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01aReferenceWeightedMode
+module
+
+public import ContinuousFlexibility.Analysis.N01aReferenceWeightedMode
 
 /-!
 # Actual radial multipliers controlled by the reference weights
@@ -7,6 +9,8 @@ A pointwise cell bound for a multiplier is converted into genuine physical
 L² membership by the original partition. In particular, the cosine mode
 then gives ordinary radial L² membership with no alternative norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

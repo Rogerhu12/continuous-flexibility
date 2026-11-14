@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 
 /-!
 # The angular period in the physical distributional graph
@@ -12,6 +14,8 @@ over a half-period introduces an artificial boundary at angles zero and pi.
 The constant unknown and the test `sin` exhibit the error already for the
 angular second derivative. This audit is independent of any blueprint node.
 -/
+
+@[expose] public section
 
 noncomputable section
 

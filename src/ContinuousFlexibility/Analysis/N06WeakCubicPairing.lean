@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06WeakDivergencePairing
-import ContinuousFlexibility.Analysis.N06CubicMultipliers
-import ContinuousFlexibility.Analysis.N06WeakFiniteGraph
+module
+
+public import ContinuousFlexibility.Analysis.N06WeakDivergencePairing
+public import ContinuousFlexibility.Analysis.N06CubicMultipliers
+public import ContinuousFlexibility.Analysis.N06WeakFiniteGraph
 
 /-!
 # The genuine cubic perturbation paired with finite weak Fourier fields
@@ -11,6 +13,8 @@ already estimated in L2. The radial representatives need only C1, an AC
 first derivative, and an L2 second derivative. Coefficients are smooth
 only on the open unit strip.
 -/
+
+@[expose] public section
 
 noncomputable section
 

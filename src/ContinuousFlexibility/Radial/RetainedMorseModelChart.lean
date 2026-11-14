@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.SelectedRetainedMorseProfile
-import ContinuousFlexibility.Radial.InnerMorsePhysicalChart
+module
+
+public import ContinuousFlexibility.Radial.SelectedRetainedMorseProfile
+public import ContinuousFlexibility.Radial.InnerMorsePhysicalChart
 
 /-!
 # Actual Morse charts on the retained reference
@@ -10,6 +12,8 @@ its localized inverse, and its columns are unchanged. The coefficient
 identity is proved on the new physical profile, without assuming that
 the whole new reference realizes the original Morse chain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

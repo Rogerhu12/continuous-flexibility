@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsSpatial
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeMaterialSamples
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsSpatial
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeMaterialSamples
 
 /-!
 # The actual sample and moving inverse point belong to the same piece
@@ -9,6 +11,8 @@ before any auxiliary-column replacement. Replacement preserves the
 physical domains, stored cells and sample points. Its one constant thus
 works for every auxiliary column and every actual pulled point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.AngularFiberFiniteJetBounds
-import ContinuousFlexibility.Analysis.FiniteInversePolynomialEnvelope
+module
+
+public import ContinuousFlexibility.Analysis.AngularFiberFiniteJetBounds
+public import ContinuousFlexibility.Analysis.FiniteInversePolynomialEnvelope
 
 /-!
 # Fixed polynomial costs for the actual angular inverse pullback
@@ -10,6 +12,8 @@ The actual composition partition formula and a finite sum yield one
 coefficient and exponent before M, the angular lower bound, or any field.
 No angular lift value or higher inverse-jet estimate is an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

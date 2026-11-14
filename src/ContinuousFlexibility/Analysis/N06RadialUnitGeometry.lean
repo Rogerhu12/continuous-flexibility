@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06RadialPrimitiveBounds
+module
+
+public import ContinuousFlexibility.Analysis.N06RadialPrimitiveBounds
 
 /-!
 # The unit graph geometry of a controlled radial family
@@ -9,6 +11,8 @@ gives the precise geometric package used by the positive weak graph theorem.
 The multiplicative constant and material exponent remain independent; no
 lower bound by one is required for the material envelope.
 -/
+
+@[expose] public section
 
 noncomputable section
 

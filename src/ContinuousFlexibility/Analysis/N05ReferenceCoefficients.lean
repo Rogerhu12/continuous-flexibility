@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CoefficientRigidity
-import ContinuousFlexibility.Analysis.N05LocalEvenTests
+module
+
+public import ContinuousFlexibility.Analysis.N05CoefficientRigidity
+public import ContinuousFlexibility.Analysis.N05LocalEvenTests
 
 /-!
 # Identifying the corrected reference coefficients on genuine local tests
@@ -10,6 +12,8 @@ the reflection circles.  Polynomial probes therefore force the corrected
 mixed and angular coefficients to be the radial ones; their regularity is
 a conclusion, not an extra frozen hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

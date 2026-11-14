@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.SelectedTailRadiusMeasure
-import ContinuousFlexibility.Radial.SelectedReferenceEquation
-import ContinuousFlexibility.Radial.ModeWeakLinearity
-import ContinuousFlexibility.Analysis.L2MeasureCongr
+module
+
+public import ContinuousFlexibility.Radial.SelectedTailRadiusMeasure
+public import ContinuousFlexibility.Radial.SelectedReferenceEquation
+public import ContinuousFlexibility.Radial.ModeWeakLinearity
+public import ContinuousFlexibility.Analysis.L2MeasureCongr
 
 /-!
 # The actual unitary transport of a tail inverse to the selected reference
@@ -10,6 +12,8 @@ The profile law gives the measure factor β after the radial Jacobian.
 Consequently the unitary pullback is √β times composition with κ. The
 normalized Jacobi expression is unchanged by that same coordinate law.
 -/
+
+@[expose] public section
 
 noncomputable section
 

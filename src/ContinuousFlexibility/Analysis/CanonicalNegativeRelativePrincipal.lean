@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.RelativePrincipalCoefficients
-import ContinuousFlexibility.Analysis.ActualNegativePrincipalDensity
-import ContinuousFlexibility.Analysis.CanonicalClosedTransport
-import ContinuousFlexibility.Analysis.StateNeighborhood
-import ContinuousFlexibility.Analysis.SolveReturnEquations
+module
+
+public import ContinuousFlexibility.Analysis.RelativePrincipalCoefficients
+public import ContinuousFlexibility.Analysis.ActualNegativePrincipalDensity
+public import ContinuousFlexibility.Analysis.CanonicalClosedTransport
+public import ContinuousFlexibility.Analysis.StateNeighborhood
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # Actual negative reference-to-current principal transport
@@ -12,6 +14,8 @@ Airy density is supplied by the actual characteristic construction, not
 by assuming PartB or the desired relative coefficient match.  One Bool
 parameter covers both root-adjacent negative halves.
 -/
+
+@[expose] public section
 
 noncomputable section
 

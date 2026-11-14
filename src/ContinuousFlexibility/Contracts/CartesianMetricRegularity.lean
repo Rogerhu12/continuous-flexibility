@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Contracts.CartesianMetric
-import ContinuousFlexibility.Geometry.CartesianMetricCoframe
+module
+
+public import ContinuousFlexibility.Contracts.CartesianMetric
+public import ContinuousFlexibility.Geometry.CartesianMetricCoframe
 
 /-!
 # Global regularity and positivity of the actual Cartesian remainder
@@ -9,6 +11,8 @@ the center is proved from its actual constant/zero exterior extensions;
 positivity away from the center is transported by the actual polar
 derivative, not imposed as a new assumption on a Cartesian matrix.
 -/
+
+@[expose] public section
 
 noncomputable section
 

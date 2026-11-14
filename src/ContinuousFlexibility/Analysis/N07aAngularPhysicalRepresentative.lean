@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aAngularPullbackJets
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularPullbackJets
 
 /-!
 # The same rough representatives on the actual physical pieces
@@ -8,6 +10,8 @@ the actual chart and gauge.  Their a.e. values are identified with the
 original height remainder and source in `HasCanonicalRepresentation`.
 Their physical angular jets are L² by the preceding true pullback result.
 -/
+
+@[expose] public section
 
 noncomputable section
 

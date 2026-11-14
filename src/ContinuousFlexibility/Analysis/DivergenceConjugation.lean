@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.PrincipalCoefficientPullback
+module
+
+public import ContinuousFlexibility.Analysis.PrincipalCoefficientPullback
 
 /-!
 # Actual height conjugation of a divergence operator
@@ -7,6 +9,8 @@ The scalar conjugation formula is a product-rule identity for the actual
 height and test function. It produces both the weighted principal density
 and the potential before any change of coordinates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

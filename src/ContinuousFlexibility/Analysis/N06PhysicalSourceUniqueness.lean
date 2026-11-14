@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06PhysicalRepresentativeUniqueness
-import ContinuousFlexibility.Analysis.N06PhysicalPeriodicity
+module
+
+public import ContinuousFlexibility.Analysis.N06PhysicalRepresentativeUniqueness
+public import ContinuousFlexibility.Analysis.N06PhysicalPeriodicity
 
 /-!
 # Almost-everywhere uniqueness of the actual physical source
@@ -9,6 +11,8 @@ Their actual periodicity and nonvanishing make this transform injective
 on periodic physical representatives, first on each piece and then on
 the whole a.e. piece cover.
 -/
+
+@[expose] public section
 
 noncomputable section
 

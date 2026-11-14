@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.MatchedOuterPhysicalFlux
-import ContinuousFlexibility.Radial.MatchedOuterSeparatedInverse
-import ContinuousFlexibility.Radial.MatchedOuterTraceTransport
-import ContinuousFlexibility.Radial.MatchedModeSeparatedTests
-import ContinuousFlexibility.Radial.MatchedPiecesAssembly
+module
+
+public import ContinuousFlexibility.Radial.MatchedOuterPhysicalFlux
+public import ContinuousFlexibility.Radial.MatchedOuterSeparatedInverse
+public import ContinuousFlexibility.Radial.MatchedOuterTraceTransport
+public import ContinuousFlexibility.Radial.MatchedModeSeparatedTests
+public import ContinuousFlexibility.Radial.MatchedPiecesAssembly
 
 /-!
 # Identifying the retained exterior inverse with its actual Green operator
@@ -16,6 +18,8 @@ with that same pair of Green operators.
 Only equality of the Robin lines is needed: normalizing the natural
 state with the opposite orientation does not change the conclusion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

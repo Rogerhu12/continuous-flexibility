@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedUniformTameGermOperations
-import ContinuousFlexibility.Scalar.WeightedNeighborhood
+module
+
+public import ContinuousFlexibility.Scalar.WeightedUniformTameGermOperations
+public import ContinuousFlexibility.Scalar.WeightedNeighborhood
 
 /-!
 # One common ball for the three scalar realizations
@@ -9,6 +11,8 @@ uniform germs. One final choice of base, loss and radius retains all three
 towers, meets any prescribed additional neighborhood, and dominates the
 fixed orders needed by the linear and bilinear families.
 -/
+
+@[expose] public section
 
 noncomputable section
 

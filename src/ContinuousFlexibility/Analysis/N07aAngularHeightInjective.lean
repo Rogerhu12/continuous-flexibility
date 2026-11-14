@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aAngularCandidateCoordinates
-import ContinuousFlexibility.Analysis.N07aPhysicalPieceBound
-import ContinuousFlexibility.Analysis.N07bAtlasAEPullback
-import ContinuousFlexibility.Analysis.N07aAngularInnerIntervals
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularCandidateCoordinates
+public import ContinuousFlexibility.Analysis.N07aPhysicalPieceBound
+public import ContinuousFlexibility.Analysis.N07bAtlasAEPullback
+public import ContinuousFlexibility.Analysis.N07aAngularInnerIntervals
 
 /-!
 # The actual canonical height coordinates determine the physical height
@@ -11,6 +13,8 @@ vanishes throughout the open strip. The actual inverse chart and positive
 height recover the physical function on each piece. Original null-set
 coverage and continuity then recover every interface as well.
 -/
+
+@[expose] public section
 
 noncomputable section
 

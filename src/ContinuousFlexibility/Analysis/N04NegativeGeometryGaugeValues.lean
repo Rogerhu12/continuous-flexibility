@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometryHeightPerturbation
-import ContinuousFlexibility.Analysis.SectorParameterGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryHeightPerturbation
+public import ContinuousFlexibility.Analysis.SectorParameterGeometry
 
 /-!
 # Exact positive-piece values of an admissible gauge
@@ -10,6 +12,8 @@ height.  A reference chart carries every physical interior point to a
 point of the canonical unit strip, with exactly the prescribed inverse
 image.  These facts require no parameter-smoothness assertion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

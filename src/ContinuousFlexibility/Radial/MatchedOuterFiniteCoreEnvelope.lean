@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterWholeKernelBounds
-import ContinuousFlexibility.Radial.WeightKernelBounds
+module
+
+public import ContinuousFlexibility.Radial.OuterWholeKernelBounds
+public import ContinuousFlexibility.Radial.WeightKernelBounds
 
 /-!
 # Spatial decay across a fixed outer core
@@ -9,6 +11,8 @@ bounded, while the same actual natural column and Dirichlet kernel have
 the deep-tail decay. The original four-block identity then gives the
 full spatial envelope, including the two mixed blocks.
 -/
+
+@[expose] public section
 
 noncomputable section
 

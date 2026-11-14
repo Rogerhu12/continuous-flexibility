@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06RootSpeedJets
-import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
-import Mathlib.Analysis.Calculus.IteratedDeriv.FaaDiBruno
+module
+
+public import ContinuousFlexibility.Analysis.N06RootSpeedJets
+public import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
+public import Mathlib.Analysis.Calculus.IteratedDeriv.FaaDiBruno
 
 /-!
 # Actual finite jets of the fractional powers used in the root germ
@@ -9,6 +11,8 @@ Both the value and reciprocal of the positive input are bounded. This
 controls the actual powers through exponents three, so the chain rule
 gives a fixed polynomial estimate for all powers in `[-1,1]`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

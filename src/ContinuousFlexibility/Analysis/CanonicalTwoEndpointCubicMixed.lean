@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CanonicalTwoEndpointCubic
-import ContinuousFlexibility.Analysis.CanonicalCubicJets
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalTwoEndpointCubic
+public import ContinuousFlexibility.Analysis.CanonicalCubicJets
 
 /-!
 # Mixed jets of cubic division at both ends of a cylinder
@@ -9,6 +11,8 @@ for the second endpoint.  Actual vanishing slice jets are transported through
 the first division.  The resulting estimate loses six radial derivatives and
 has constant `1 / 36`, independent of the angular order and interval length.
 -/
+
+@[expose] public section
 
 noncomputable section
 

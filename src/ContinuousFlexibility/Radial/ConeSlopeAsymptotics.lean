@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.SeedConeModes
-import ContinuousFlexibility.Radial.SeedConnectorInterpolation
+module
+
+public import ContinuousFlexibility.Radial.SeedConeModes
+public import ContinuousFlexibility.Radial.SeedConnectorInterpolation
 
 /-!
 # Nonvanishing and C1 control of actual cone modes
@@ -8,6 +10,8 @@ The signed frequency treats both ends simultaneously.  Factoring out the
 dominant exponential leaves q*exp(-2*s*y), which tends to zero as s*y
 tends to positive infinity.  No global nonvanishing assumption is made.
 -/
+
+@[expose] public section
 
 noncomputable section
 

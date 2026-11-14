@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06CubicCutoffJets
-import ContinuousFlexibility.Analysis.N06CubicDifferential
-import ContinuousFlexibility.Radial.RadialHeight
+module
+
+public import ContinuousFlexibility.Analysis.N06CubicCutoffJets
+public import ContinuousFlexibility.Analysis.N06CubicDifferential
+public import ContinuousFlexibility.Radial.RadialHeight
 
 /-!
 # The genuine cubic cutoff commutator
@@ -11,6 +13,8 @@ first derivatives of the divided coefficients. The weighted cutoff
 estimate therefore controls the error without extending those
 coefficients through either endpoint.
 -/
+
+@[expose] public section
 
 noncomputable section
 

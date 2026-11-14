@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OuterJoinFrequency
+module
+
+public import ContinuousFlexibility.Radial.OuterJoinFrequency
 
 /-!
 # Uniform transfer bounds for the actual ordinary transition core
@@ -7,6 +9,8 @@ The preceding physical connector and all three retained-cell pieces
 are assembled before estimating the actual state.  The quadratic
 constant is independent of the cell index, frequency, and heights.
 -/
+
+@[expose] public section
 
 noncomputable section
 

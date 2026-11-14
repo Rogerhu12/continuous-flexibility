@@ -1,11 +1,13 @@
-import ContinuousFlexibility.Statements.Radial
-import ContinuousFlexibility.Analysis.BastianiCurveChain
-import ContinuousFlexibility.Analysis.ExponentialSequenceSpace
-import ContinuousFlexibility.Analysis.MaterialIntervalWeights
-import ContinuousFlexibility.Analysis.TameLinear
-import Mathlib.Analysis.InnerProductSpace.PiL2
-import Mathlib.MeasureTheory.Function.L2Space
-import Mathlib.Topology.Algebra.Module.Multilinear.Basic
+module
+
+public import ContinuousFlexibility.Statements.Radial
+public import ContinuousFlexibility.Analysis.BastianiCurveChain
+public import ContinuousFlexibility.Analysis.ExponentialSequenceSpace
+public import ContinuousFlexibility.Analysis.MaterialIntervalWeights
+public import ContinuousFlexibility.Analysis.TameLinear
+public import Mathlib.Analysis.InnerProductSpace.PiL2
+public import Mathlib.MeasureTheory.Function.L2Space
+public import Mathlib.Topology.Algebra.Module.Multilinear.Basic
 
 /-!
 # Precise analysis targets, without proofs of the targets
@@ -18,6 +20,8 @@ as an arbitrary predicate supplied by a caller.
 Paper correspondence: section 7, lines 22--156; section 8, lines 523--550;
 section 9, lines 183--196.  A definition of a target proves no existence.
 -/
+
+@[expose] public section
 
 noncomputable section
 

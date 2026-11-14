@@ -1,10 +1,12 @@
-import ContinuousFlexibility.Analysis.N04bActualAtlasInteriorCompletion
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData
-import ContinuousFlexibility.Analysis.ActualNegativeLengthMaterialBounds
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
-import ContinuousFlexibility.Analysis.LocalMixedProductBounds
-import ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+module
+
+public import ContinuousFlexibility.Analysis.N04bActualAtlasInteriorCompletion
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData
+public import ContinuousFlexibility.Analysis.ActualNegativeLengthMaterialBounds
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+public import ContinuousFlexibility.Analysis.LocalMixedProductBounds
+public import ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
 
 /-!
 # Four actual negative principal atoms
@@ -16,6 +18,8 @@ are therefore `1`, `1`, `0`, and minus the actual optical radius times the
 unit radial coordinate. The radius cost is paid at the original half's
 stored material sample. No full-half height estimate is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

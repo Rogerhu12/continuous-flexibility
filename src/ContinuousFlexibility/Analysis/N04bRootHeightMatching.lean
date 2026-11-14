@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04bRootTravelMatching
-import ContinuousFlexibility.Analysis.N04bRootHeightSymmetry
-import ContinuousFlexibility.Analysis.N04bConstructedRootDensity
+module
+
+public import ContinuousFlexibility.Analysis.N04bRootTravelMatching
+public import ContinuousFlexibility.Analysis.N04bRootHeightSymmetry
+public import ContinuousFlexibility.Analysis.N04bConstructedRootDensity
 
 /-!
 # Actual matching of the smooth root chart and height
@@ -11,6 +13,8 @@ actual corrected characteristic half-gap, so the smooth height quotient
 also equals the explicit global interior height. These identities provide
 the overlap equalities needed for literal chart and height gluing.
 -/
+
+@[expose] public section
 
 noncomputable section
 

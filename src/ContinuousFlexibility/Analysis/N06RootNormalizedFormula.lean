@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06RootFiniteFields
-import ContinuousFlexibility.Analysis.N06FiniteJetDifference
+module
+
+public import ContinuousFlexibility.Analysis.N06RootFiniteFields
+public import ContinuousFlexibility.Analysis.N06FiniteJetDifference
 
 /-!
 # The root formula with its actual normalized denominator
@@ -9,6 +11,8 @@ replaces the flat denominator Q by Q/w. N01 bounds this denominator away
 from zero uniformly over all roots. Consequently all finite derivatives
 of this exact root formula have uniform bounds on bounded input packets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

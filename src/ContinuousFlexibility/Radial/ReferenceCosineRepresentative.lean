@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ReferenceCosineL2
-import ContinuousFlexibility.Radial.ReferenceCirclePullback
+module
+
+public import ContinuousFlexibility.Radial.ReferenceCosineL2
+public import ContinuousFlexibility.Radial.ReferenceCirclePullback
 
 /-!
 # Pointwise even and periodic representatives of cosine synthesis
@@ -10,6 +12,8 @@ Averaging a representative with its reflection then gives a pointwise
 even representative, and pullback from the period-π circle gives exact
 π-periodicity on the whole physical plane.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CanonicalReturnJacobianBounds
-import ContinuousFlexibility.Analysis.CircleInverseExistence
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalReturnJacobianBounds
+public import ContinuousFlexibility.Analysis.CircleInverseExistence
 
 /-!
 # Explicit interpolation for the corrected return flow
@@ -13,6 +15,8 @@ This module constructs the flow candidate and proves these properties.
 It does not identify the candidate with an arbitrary previously supplied
 return correction or assert the coefficient and error estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

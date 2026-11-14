@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04bCutVariationTests
-import ContinuousFlexibility.Scalar.WeightedCompactRadial
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Analysis.N04bCutVariationTests
+public import ContinuousFlexibility.Scalar.WeightedCompactRadial
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # Actual weighted height directions for the cut-variation tests
@@ -10,6 +12,8 @@ Its surjective decoder therefore provides a genuine HeightPair with zero
 cutoff component. The resulting direction is available for every choice
 of physical spaces satisfying the frozen contract.
 -/
+
+@[expose] public section
 
 noncomputable section
 

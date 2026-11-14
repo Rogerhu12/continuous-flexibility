@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchedMorseLocalizerWeights
-import ContinuousFlexibility.Radial.RetainedMorseInnerGeometry
+module
+
+public import ContinuousFlexibility.Radial.MatchedMorseLocalizerWeights
+public import ContinuousFlexibility.Radial.RetainedMorseInnerGeometry
 
 /-!
 # Actual localizers in the original retained chain
@@ -8,6 +10,8 @@ The original retained geometry is definitionally the scaled chain used
 by the physical window theorem. This wrapper keeps that object and
 records the canonical old labels before the reference index floor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

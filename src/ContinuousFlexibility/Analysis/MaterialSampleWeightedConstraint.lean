@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.MaterialSampleBalancedConstraint
+module
+
+public import ContinuousFlexibility.Analysis.MaterialSampleBalancedConstraint
 
 /-!
 # Full weighted sample comparison with a fixed loss
@@ -9,6 +11,8 @@ The remaining order-dependent factor then uses the balanced material
 comparison with one extra order, so the final loss is independent of
 the requested differentiability order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

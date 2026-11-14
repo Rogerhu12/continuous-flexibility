@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.ModeOuterPoisson
-import ContinuousFlexibility.Radial.MatchingTraceCalculus
-import ContinuousFlexibility.Radial.SelectedBoundaryMargin
-import ContinuousFlexibility.Radial.R07CapPullback
+module
+
+public import ContinuousFlexibility.Radial.ModeOuterPoisson
+public import ContinuousFlexibility.Radial.MatchingTraceCalculus
+public import ContinuousFlexibility.Radial.SelectedBoundaryMargin
+public import ContinuousFlexibility.Radial.R07CapPullback
 
 /-!
 # The actual normalized exterior Poisson pair
@@ -11,6 +13,8 @@ and by the square root of the physical matching scale. Its chosen closed
 outer half-line supplies the representative; the other side and the open
 inner interval are zero. Both frozen traces are proved for every cut.
 -/
+
+@[expose] public section
 
 noncomputable section
 

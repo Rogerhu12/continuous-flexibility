@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseCellJoinCollars
-import Mathlib.Analysis.SpecialFunctions.ExpDeriv
+module
+
+public import ContinuousFlexibility.Radial.MorseCellJoinCollars
+public import Mathlib.Analysis.SpecialFunctions.ExpDeriv
 
 /-!
 # Fixed-order derivatives on the actual Morse model
@@ -9,6 +11,8 @@ equation. They are uniform over the Morse parameters, after factoring
 out the indicated powers of the small parameter when converting to
 ordinary physical-radius derivatives.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

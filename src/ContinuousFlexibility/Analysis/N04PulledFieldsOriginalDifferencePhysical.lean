@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationCoefficientAnnularTowers
-import ContinuousFlexibility.Analysis.N04PulledFieldsStripPhysicalCost
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationCoefficientAnnularTowers
+public import ContinuousFlexibility.Analysis.N04PulledFieldsStripPhysicalCost
 
 /-!
 # Full physical height for the actual original coefficient increment
@@ -9,6 +11,8 @@ chosen at the physical point. Material transfer moves the complete
 height and exponential cost to that point. The original low grading
 and loss remain fixed for every parameter order and every coefficient.
 -/
+
+@[expose] public section
 
 noncomputable section
 

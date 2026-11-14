@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PositiveHeightTaylorInterpolation
-import ContinuousFlexibility.Analysis.AngularTaylorPolynomial
+module
+
+public import ContinuousFlexibility.Analysis.PositiveHeightTaylorInterpolation
+public import ContinuousFlexibility.Analysis.AngularTaylorPolynomial
 
 /-!
 # Value bounds for the actual logarithmic height interpolation
@@ -9,6 +11,8 @@ logarithmic polynomial within one of its boundary value. Bounds for
 the given height and its reciprocal therefore yield a polynomial
 amplitude bound for the constructed height and its reciprocal.
 -/
+
+@[expose] public section
 
 noncomputable section
 

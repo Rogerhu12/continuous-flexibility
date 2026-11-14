@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01aMaterialContext
-import ContinuousFlexibility.Analysis.N01aControlMaterialWeights
+module
+
+public import ContinuousFlexibility.Analysis.N01aMaterialContext
+public import ContinuousFlexibility.Analysis.N01aControlMaterialWeights
 
 /-!
 # Comparing optical lower weights on overlapping actual cells
@@ -9,6 +11,8 @@ index-coordinate discrepancy. Hence two cells meeting at one point have
 indices differing by a uniform additive constant. A negative envelope
 power at either index is controlled by one negative power at the other.
 -/
+
+@[expose] public section
 
 noncomputable section
 

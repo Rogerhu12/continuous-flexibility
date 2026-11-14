@@ -1,11 +1,13 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05ReferenceZeroRemainder
-import ContinuousFlexibility.Analysis.N05CanonicalRadialField
-import ContinuousFlexibility.Analysis.N05ReferenceOutputWeightInclusion
-import ContinuousFlexibility.Analysis.N05ReferenceCutoffNormalBounds
-import ContinuousFlexibility.Analysis.N05CanonicalOutputReflection
-import ContinuousFlexibility.Analysis.N05CanonicalOutputBlock
-import ContinuousFlexibility.Radial.R11bAngularFrequencySource
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05ReferenceZeroRemainder
+public import ContinuousFlexibility.Analysis.N05CanonicalRadialField
+public import ContinuousFlexibility.Analysis.N05ReferenceOutputWeightInclusion
+public import ContinuousFlexibility.Analysis.N05ReferenceCutoffNormalBounds
+public import ContinuousFlexibility.Analysis.N05CanonicalOutputReflection
+public import ContinuousFlexibility.Analysis.N05CanonicalOutputBlock
+public import ContinuousFlexibility.Radial.R11bAngularFrequencySource
 
 /-!
 # The genuine first normal jet of the fixed canonical inverse
@@ -16,6 +18,8 @@ Their true coordinate field realizes the fixed canonical radial derivative,
 with one material shift chosen before all endpoint and material exponents.
 The local estimate retains its original endpoint exponential.
 -/
+
+@[expose] public section
 
 noncomputable section
 

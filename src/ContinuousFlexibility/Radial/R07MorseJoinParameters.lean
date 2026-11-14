@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R07LogGermParameter
-import ContinuousFlexibility.Radial.MorseChainProfileGluing
+module
+
+public import ContinuousFlexibility.Radial.R07LogGermParameter
+public import ContinuousFlexibility.Radial.MorseChainProfileGluing
 
 /-!
 # The height parameters of the chosen Morse joins
@@ -9,6 +11,8 @@ values on each physical join nevertheless have a fixed formula in the two
 logarithmic cell amplitudes.  This file proves that fact for the existing
 family, rather than adding any continuity or equivariance hypotheses to it.
 -/
+
+@[expose] public section
 
 noncomputable section
 

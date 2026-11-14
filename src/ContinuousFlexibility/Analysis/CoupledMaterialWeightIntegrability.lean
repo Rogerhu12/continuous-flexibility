@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Scalar.WeightedMaterialScale
-import ContinuousFlexibility.Scalar.WeightedWeightShiftJets
-import ContinuousFlexibility.Analysis.CylinderTestPairing
-import Mathlib.MeasureTheory.Function.JacobianOneDim
-import Mathlib.MeasureTheory.Function.LpSeminorm.Prod
+module
+
+public import ContinuousFlexibility.Scalar.WeightedMaterialScale
+public import ContinuousFlexibility.Scalar.WeightedWeightShiftJets
+public import ContinuousFlexibility.Analysis.CylinderTestPairing
+public import Mathlib.MeasureTheory.Function.JacobianOneDim
+public import Mathlib.MeasureTheory.Function.LpSeminorm.Prod
 
 /-!
 # Integrability of positive material weights
@@ -13,6 +15,8 @@ makes `ell ∘ radius` integrable on the entire material line. Any positive
 power of `H` is bounded by a constant times this scale: the reciprocal
 scale costs one envelope power, which the positive weight absorbs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

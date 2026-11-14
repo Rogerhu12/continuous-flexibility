@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterPhysicalTailOutward
-import ContinuousFlexibility.Radial.TailFundamentalStates
+module
+
+public import ContinuousFlexibility.Radial.OuterPhysicalTailOutward
+public import ContinuousFlexibility.Radial.TailFundamentalStates
 
 /-!
 # The actual natural and Dirichlet physical tail basis
@@ -9,6 +11,8 @@ recurrence. The independent Dirichlet state is the forward recurrence
 from R06b. Their entrance gauges are reciprocal, so the physical natural
 value is one and the physical outward Dirichlet flux is exactly one.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseSecondModeDeepInequalities
-import ContinuousFlexibility.Radial.MorseSecondModeLocalization
+module
+
+public import ContinuousFlexibility.Radial.MorseSecondModeDeepInequalities
+public import ContinuousFlexibility.Radial.MorseSecondModeLocalization
 
 /-!
 # The deep-tail hypotheses for actual second-mode Morse coordinates
@@ -8,6 +10,8 @@ The finite discard is common to both orientations. Inward enlargement
 of the discarded prefix remains possible, which permits any previously
 specified natural solution to be restricted to the resulting tail.
 -/
+
+@[expose] public section
 
 noncomputable section
 

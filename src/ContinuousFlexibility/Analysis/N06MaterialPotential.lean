@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06WeakAngularMultiplierMap
-import ContinuousFlexibility.Analysis.N06VolumeLevelTransfer
-import ContinuousFlexibility.Analysis.SpacesCylinderEvenJets
+module
+
+public import ContinuousFlexibility.Analysis.N06WeakAngularMultiplierMap
+public import ContinuousFlexibility.Analysis.N06VolumeLevelTransfer
+public import ContinuousFlexibility.Analysis.SpacesCylinderEvenJets
 
 /-!
 # A material-small potential between the actual volume weight levels
@@ -9,6 +11,8 @@ The coefficient's H^beta factor absorbs a fixed material loss. Only the
 identity isometry of stored weak jets is used to change weight labels;
 the compensating material factor remains in the physical multiplier.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedPointwise
-import ContinuousFlexibility.Analysis.MaterialOrdinaryJets
+module
+
+public import ContinuousFlexibility.Scalar.WeightedPointwise
+public import ContinuousFlexibility.Analysis.MaterialOrdinaryJets
 
 /-!
 # Quantitative ordinary jets of decoded weighted heights
@@ -10,6 +12,8 @@ formula uses only finitely many jets, all controlled by the input grading at
 `M`.  These are pointwise estimates; no estimate for a high output Sobolev norm
 is inferred from them.
 -/
+
+@[expose] public section
 
 noncomputable section
 

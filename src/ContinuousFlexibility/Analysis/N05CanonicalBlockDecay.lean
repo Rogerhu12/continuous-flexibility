@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalInverseBlock
-import ContinuousFlexibility.Analysis.N05InnerExponentBlocks
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalInverseBlock
+public import ContinuousFlexibility.Analysis.N05InnerExponentBlocks
 
 /-!
 # Two endpoint estimates for the same actual canonical block
@@ -9,6 +11,8 @@ exponent unchanged. Enlarging only the coefficient powers gives common
 weights at both endpoints. Their numerical combination then controls
 every inner conjugating exponent for the same fixed global inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.RootPhysicalCharacteristicFlow
-import ContinuousFlexibility.Analysis.ActualRootChart
-import ContinuousFlexibility.Geometry.Primitive
-import Mathlib.Analysis.Calculus.Deriv.Basic
-import Mathlib.Analysis.Calculus.Deriv.Prod
+module
+
+public import ContinuousFlexibility.Analysis.RootPhysicalCharacteristicFlow
+public import ContinuousFlexibility.Analysis.ActualRootChart
+public import ContinuousFlexibility.Geometry.Primitive
+public import Mathlib.Analysis.Calculus.Deriv.Basic
+public import Mathlib.Analysis.Calculus.Deriv.Prod
 
 /-!
 # The actual root inverse coordinates satisfy transport
@@ -14,6 +16,8 @@ Differentiating that identity at a positive radial coordinate gives the
 transport equation for the actual Fréchet partials. The angular partial
 is positive by the true inverse derivative formula.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R07Assembly
+module
+
+public import ContinuousFlexibility.Radial.R07Assembly
 
 /-!
 # Selected-tail assembly that retains the prescribed data
@@ -9,6 +11,8 @@ families, so callers can recover the prescribed chain, entries and Cstar.
 An index-dependent angle bound is retained in addition to the positive
 uniform minimum required by IsSelectedTail.
 -/
+
+@[expose] public section
 
 noncomputable section
 

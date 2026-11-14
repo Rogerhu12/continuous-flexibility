@@ -1,7 +1,9 @@
-import Mathlib.Analysis.ODE.ExistUnique
-import Mathlib.Analysis.Calculus.Deriv.Prod
-import Mathlib.Analysis.Normed.Group.Bounded
-import Mathlib.Topology.Order.ProjIcc
+module
+
+public import Mathlib.Analysis.ODE.ExistUnique
+public import Mathlib.Analysis.Calculus.Deriv.Prod
+public import Mathlib.Analysis.Normed.Group.Bounded
+public import Mathlib.Topology.Order.ProjIcc
 
 /-!
 # Actual solutions of a linear equation on a finite interval
@@ -11,6 +13,8 @@ state for a bounded linear field. Joining finitely many such solutions gives
 an actual solution on every compact interval. All derivatives below are
 two-sided, including at the joins and the two ends of the requested interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

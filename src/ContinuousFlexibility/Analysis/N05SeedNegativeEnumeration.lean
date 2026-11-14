@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05SeedNegativeEnumerationGeometry
-import ContinuousFlexibility.Radial.MorseChainPartitionData
+module
+
+public import ContinuousFlexibility.Analysis.N05SeedNegativeEnumerationGeometry
+public import ContinuousFlexibility.Radial.MorseChainPartitionData
 
 /-!
 # An explicit enumeration of the actual seed's negative components
@@ -8,6 +10,8 @@ Slot zero is the central component.  The remaining slots use precisely
 the same two-tail enumeration as the original Morse partition, beginning
 at the actual retained model index.  No cell-index estimate is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

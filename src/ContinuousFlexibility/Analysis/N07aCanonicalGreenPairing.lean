@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalOpenTests
-import ContinuousFlexibility.Analysis.N07aWeakDivergenceEquation
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalOpenTests
+public import ContinuousFlexibility.Analysis.N07aWeakDivergenceEquation
 
 /-!
 # Interior Green pairing on the actual canonical cylinder
@@ -8,6 +10,8 @@ The coefficients and the smooth comparison field need only be smooth on
 the open canonical piece. Every differentiated product contains a compact
 canonical test, so no boundary trace or global extension is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.N06PrimitiveGeometryBridge
-import ContinuousFlexibility.Analysis.N06ActualEndpointFirstJets
-import ContinuousFlexibility.Analysis.N06AtlasTransmissionJets
+module
+
+public import ContinuousFlexibility.Statements.N06PrimitiveGeometryBridge
+public import ContinuousFlexibility.Analysis.N06ActualEndpointFirstJets
+public import ContinuousFlexibility.Analysis.N06AtlasTransmissionJets
 
 /-!
 # Primitive forward jets give the actual atlas transmission records
@@ -16,6 +18,8 @@ Its boundary values identify the primitive endpoint labels with those
 flags. No new atlas, inverse, material estimate, or weak equation is
 assumed. Artificial cuts continue to use the original N04 cut law.
 -/
+
+@[expose] public section
 
 noncomputable section
 

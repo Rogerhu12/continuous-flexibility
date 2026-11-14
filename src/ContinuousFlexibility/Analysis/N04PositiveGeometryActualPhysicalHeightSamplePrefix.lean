@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryActualPhysicalHeightDirections
-import ContinuousFlexibility.Analysis.N04PositiveGeometryActualHeightSamplePrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledReferenceHeight
-import ContinuousFlexibility.Analysis.N04PositiveGeometryTransportSamplePrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometryAffineSpatialWords
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryActualPhysicalHeightDirections
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryActualHeightSamplePrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledReferenceHeight
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryTransportSamplePrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryAffineSpatialWords
 
 /-!
 # The actual physical height on the unit strip
@@ -11,6 +13,8 @@ The `Q` prefix and the inverse-transport prefix are aligned without
 enlarging the parameter order. The fixed physical interval map adds
 only a scalar coefficient before the normalized joint estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

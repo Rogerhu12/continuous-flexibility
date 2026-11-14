@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06WeakTensorCalculus
-import ContinuousFlexibility.Radial.R11bFiniteSynthesis
-import ContinuousFlexibility.Radial.R11bPhysicalPairing
+module
+
+public import ContinuousFlexibility.Analysis.N06WeakTensorCalculus
+public import ContinuousFlexibility.Radial.R11bFiniteSynthesis
+public import ContinuousFlexibility.Radial.R11bPhysicalPairing
 
 /-!
 # Physical first-order integration by parts with true boundary values
@@ -10,6 +12,8 @@ ones. Tests may be nonzero at both radial endpoints. Absolute continuity
 of each radial coefficient is sufficient; no smooth radial approximation
 or prescribed trace is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

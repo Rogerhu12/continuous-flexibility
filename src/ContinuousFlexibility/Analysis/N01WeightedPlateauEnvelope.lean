@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01WeightedPlateauEnergy
-import ContinuousFlexibility.Analysis.N01PlateauEnergyEnvelope
-import ContinuousFlexibility.Analysis.FinitePhysicalEnergyBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01WeightedPlateauEnergy
+public import ContinuousFlexibility.Analysis.N01PlateauEnergyEnvelope
+public import ContinuousFlexibility.Analysis.FinitePhysicalEnergyBounds
 
 /-!
 # A summable physical localization envelope with sample material powers
@@ -9,6 +11,8 @@ The estimate is uniform in the decoded height. For local grading s and
 sample material degree d, the actual input grading is s+d+5. The five
 additional orders are independent of s and d.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularPieceCover
-import Mathlib.Topology.Algebra.InfiniteSum.ENNReal
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularPieceCover
+public import Mathlib.Topology.Algebra.InfiniteSum.ENNReal
 
 /-!
 # Summability of the common piece samples from the reference partition
@@ -10,6 +12,8 @@ have total length at most `b-a`. The current atlas has the same piece
 indices and samples, so the original sequence of pieces,
 without any grouping by `K.cell`, has a summable inverse material weight.
 -/
+
+@[expose] public section
 
 noncomputable section
 

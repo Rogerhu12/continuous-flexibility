@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerMorseScaledPhysicalChart
-import ContinuousFlexibility.Radial.InnerMorsePhysicalPoisson
+module
+
+public import ContinuousFlexibility.Radial.InnerMorseScaledPhysicalChart
+public import ContinuousFlexibility.Radial.InnerMorsePhysicalPoisson
 
 /-!
 # Scaled Morse columns with the actual physical interpolation
@@ -10,6 +12,8 @@ same selected model. Positive radius and height dilations add no
 constant: the velocity, cap ratio and normalized model remainder are
 unchanged. Both weight signs are covered by the same real exponent.
 -/
+
+@[expose] public section
 
 noncomputable section
 

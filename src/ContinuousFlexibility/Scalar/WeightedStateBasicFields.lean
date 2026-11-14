@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.WeightedStatePrimitives
-import ContinuousFlexibility.Scalar.WeightedOddHeightAlgebra
-import ContinuousFlexibility.Scalar.WeightedScalarPowerMap
+module
+
+public import ContinuousFlexibility.Scalar.WeightedStatePrimitives
+public import ContinuousFlexibility.Scalar.WeightedOddHeightAlgebra
+public import ContinuousFlexibility.Scalar.WeightedScalarPowerMap
 
 /-!
 # Actual weighted basic fields of the scalar state
@@ -9,6 +11,8 @@ The reference profile acts on decaying heights and odd primitives. The
 discriminant and normalized Q defects are genuine elements of the given
 height space, expressed only through actual finite spatial derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

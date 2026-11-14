@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.AngularRawSpectrum
-import ContinuousFlexibility.Analysis.AngularRealCoefficients
-import ContinuousFlexibility.Analysis.AngularFrequencyPositivity
+module
+
+public import ContinuousFlexibility.Analysis.AngularRawSpectrum
+public import ContinuousFlexibility.Analysis.AngularRealCoefficients
+public import ContinuousFlexibility.Analysis.AngularFrequencyPositivity
 
 /-!
 # The commutator inverse lemma for a given unbounded operator
@@ -12,6 +14,8 @@ the full spectral coordinates.  The commutator hypothesis uses the
 original operator's domain and action.  No shifted inverse, spectral
 decomposition, positivity, or inverse regularity is an extra premise.
 -/
+
+@[expose] public section
 
 noncomputable section
 

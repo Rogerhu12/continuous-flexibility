@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06LeftColumnPhysical
-import ContinuousFlexibility.Analysis.N06NuPhysicalSmooth
-import ContinuousFlexibility.Scalar.WeightedDifferentiationSupport
-import ContinuousFlexibility.Scalar.Conservation
+module
+
+public import ContinuousFlexibility.Analysis.N06LeftColumnPhysical
+public import ContinuousFlexibility.Analysis.N06NuPhysicalSmooth
+public import ContinuousFlexibility.Scalar.WeightedDifferentiationSupport
+public import ContinuousFlexibility.Scalar.Conservation
 
 /-!
 # Symmetries of the actual corrected left column
@@ -11,6 +13,8 @@ height. N03 supplies the reflection signs of the corrected coefficients.
 The cutoff fluxes are smooth and vanish outside the original annulus,
 so their actual partial derivatives retain the required even symmetry.
 -/
+
+@[expose] public section
 
 noncomputable section
 

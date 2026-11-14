@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularBands
-import ContinuousFlexibility.Analysis.N07aAngularGraph
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularBands
+public import ContinuousFlexibility.Analysis.N07aAngularGraph
 
 /-!
 # Frequency projections on the prescribed canonical volume graph
@@ -10,6 +12,8 @@ the original weak graph and its angular reflection. Its restriction to
 each given `VolumeModelData.level` is therefore a genuine orthogonal
 projection of that Hilbert space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

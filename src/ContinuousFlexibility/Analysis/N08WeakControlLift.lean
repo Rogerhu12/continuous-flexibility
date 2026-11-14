@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N08WeakControlHeightBounds
-import ContinuousFlexibility.Analysis.N08RadialFamilyLift
+module
+
+public import ContinuousFlexibility.Analysis.N08WeakControlHeightBounds
+public import ContinuousFlexibility.Analysis.N08RadialFamilyLift
 
 /-!
 # The actual smoothing map from weak controls to weighted heights
@@ -8,6 +10,8 @@ The constructed continuous linear map realizes the literal optical-control
 series. Every output grading is bounded by the same weak input norm, and
 restricting a physical circle control recovers its original profile sum.
 -/
+
+@[expose] public section
 
 noncomputable section
 

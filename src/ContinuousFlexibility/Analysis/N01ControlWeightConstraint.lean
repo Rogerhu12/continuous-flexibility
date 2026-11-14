@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01ControlCellBounds
-import ContinuousFlexibility.Analysis.N01ControlFlowBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01ControlCellBounds
+public import ContinuousFlexibility.Analysis.N01ControlFlowBounds
 
 /-!
 # The actual-cell weight constraint forced by optical normalization
@@ -10,6 +12,8 @@ optical curvature inequality. The resulting weight constraint holds for
 any reference cell containing the negative component, without identifying
 that cell with the control's own weight label.
 -/
+
+@[expose] public section
 
 noncomputable section
 

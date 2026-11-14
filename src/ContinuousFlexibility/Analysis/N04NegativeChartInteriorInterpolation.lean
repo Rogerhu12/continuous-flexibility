@@ -1,7 +1,11 @@
-import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
-import ContinuousFlexibility.Analysis.N04NegativeChartTransportAngularBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
+public import ContinuousFlexibility.Analysis.N04NegativeChartTransportAngularBounds
 
 /-! Two scalar steps preserve the common interior interpolation budget. -/
+
+@[expose] public section
 
 noncomputable section
 

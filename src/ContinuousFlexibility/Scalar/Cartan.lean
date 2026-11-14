@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.Connection
-import ContinuousFlexibility.Scalar.CoframeDerivatives
+module
+
+public import ContinuousFlexibility.Scalar.Connection
+public import ContinuousFlexibility.Scalar.CoframeDerivatives
 
 /-!
 # Cartan structure equations of the actual remainder coframe
@@ -8,6 +10,8 @@ With `η₁=A dr`, `η₂=B dr+C dθ`, the manuscript's convention is
 `dη₁=α∧η₂` and `dη₂=-α∧η₁`. The two theorems below prove these
 equations for actual differentiable height functions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

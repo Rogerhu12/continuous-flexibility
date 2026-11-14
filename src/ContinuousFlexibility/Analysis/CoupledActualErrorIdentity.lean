@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CoupledRecoveredFirstJet
-import Mathlib.Analysis.Calculus.FDeriv.Congr
+module
+
+public import ContinuousFlexibility.Analysis.CoupledRecoveredFirstJet
+public import Mathlib.Analysis.Calculus.FDeriv.Congr
 
 /-!
 # Specializing the independent error to the actual residual
@@ -8,6 +10,8 @@ The independent formulas are specialized only here. Equality of the scalar
 source on the open annulus identifies its actual Fréchet angular divergence;
 the N08 circle identity identifies the return residual in the other row.
 -/
+
+@[expose] public section
 
 noncomputable section
 

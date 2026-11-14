@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MatchedPhysicalSchurRows
+module
+
+public import ContinuousFlexibility.Radial.MatchedPhysicalSchurRows
 
 /-!
 # Density conversion for all four actual physical channels
@@ -9,6 +11,8 @@ density cost. This includes the two border channels and the scalar block,
 so bounds obtained from the actual matching formula apply directly to
 the raw kernel used by the weighted Schur test.
 -/
+
+@[expose] public section
 
 noncomputable section
 

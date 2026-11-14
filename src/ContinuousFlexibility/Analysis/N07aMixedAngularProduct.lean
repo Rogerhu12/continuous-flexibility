@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aMixedHeightMultiplication
-import ContinuousFlexibility.Scalar.WeightedAngularJetProduct
+module
+
+public import ContinuousFlexibility.Analysis.N07aMixedHeightMultiplication
+public import ContinuousFlexibility.Scalar.WeightedAngularJetProduct
 
 /-!
 # Products of odd angular jets at different height weights
@@ -9,6 +11,8 @@ product gives the product of the two first angular derivatives. This
 uses only the original even height spaces and retains the unknown's
 weight, with a continuous linear map at each fixed coefficient.
 -/
+
+@[expose] public section
 
 noncomputable section
 

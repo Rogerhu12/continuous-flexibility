@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledEndpoints
-import ContinuousFlexibility.Analysis.N04RealizationPositiveSampleTransfer
-import ContinuousFlexibility.Analysis.N01cMaterialAbsorption
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledEndpoints
+public import ContinuousFlexibility.Analysis.N04RealizationPositiveSampleTransfer
+public import ContinuousFlexibility.Analysis.N01cMaterialAbsorption
 
 /-!
 # The exact height gain at the retained positive sample
@@ -10,6 +12,8 @@ height exponent transfers to the already selected midpoint cell. The same
 sample height has a global upper bound, needed when a finite product keeps
 one copy of that height gain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

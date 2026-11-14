@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.TameUniformSmoothFamily
-import ContinuousFlexibility.Analysis.TameFixedBaseCompositionBounds
+module
+
+public import ContinuousFlexibility.Analysis.TameUniformSmoothFamily
+public import ContinuousFlexibility.Analysis.TameFixedBaseCompositionBounds
 
 /-!
 # Genuine families with one low base at every parameter order
@@ -9,6 +11,8 @@ base before all parameter orders. Each high loss is selected before the
 spatial order and low-box radius. The elementary closure lemmas preserve
 these quantifiers; they do not infer bounds from qualitative smoothness.
 -/
+
+@[expose] public section
 
 noncomputable section
 

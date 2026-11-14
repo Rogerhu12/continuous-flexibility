@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveComponentRecognition
-import ContinuousFlexibility.Analysis.RetainedMorsePositiveGapCoordinates
-import ContinuousFlexibility.Radial.RetainedMorseGapSlope
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveComponentRecognition
+public import ContinuousFlexibility.Analysis.RetainedMorsePositiveGapCoordinates
+public import ContinuousFlexibility.Radial.RetainedMorseGapSlope
 
 /-!
 # The actual positive components of the retained Morse tails
@@ -11,6 +13,8 @@ transport that statement, including both zero endpoints. The displayed
 physical interval is therefore one complete positive component of the
 same reference, without changing its component indexing.
 -/
+
+@[expose] public section
 
 noncomputable section
 

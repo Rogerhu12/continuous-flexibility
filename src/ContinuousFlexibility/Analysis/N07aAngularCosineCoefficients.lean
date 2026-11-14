@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aAngularEven
-import ContinuousFlexibility.Radial.ReferenceCosineAlgebra
-import ContinuousFlexibility.Radial.ReferenceCosineParseval
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularEven
+public import ContinuousFlexibility.Radial.ReferenceCosineAlgebra
+public import ContinuousFlexibility.Radial.ReferenceCosineParseval
 
 /-!
 # The same angular bands in the physical and canonical Fourier conventions
@@ -11,14 +13,14 @@ even, `π`-periodic fields the two normalizations agree, with the usual
 `sqrt 2` factor for positive cosine modes.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 namespace ContinuousFlexibility.Statements
 
 open Set Filter MeasureTheory ContinuousFlexibility.Radial
 open scoped ComplexConjugate ContDiff
-
-private instance : Fact (0 < Real.pi) := ⟨Real.pi_pos⟩
 
 theorem n07aCircleFourierCoeff_interval (f : ℝ → ℝ) (n : ℤ) :
     circleFourierCoeff f n = ((Real.pi⁻¹ : ℝ) : ℂ) *

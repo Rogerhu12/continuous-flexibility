@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N06ActualRelativeJetBounds
-import ContinuousFlexibility.Analysis.N06PrimitiveFiniteSupport
-import ContinuousFlexibility.Analysis.N06LeftColumnSources
-import ContinuousFlexibility.Analysis.N06ActualPotentialMultiplier
-import ContinuousFlexibility.Analysis.N06FiniteLocalSourceColumns
+module
+
+public import ContinuousFlexibility.Analysis.N06ActualRelativeJetBounds
+public import ContinuousFlexibility.Analysis.N06PrimitiveFiniteSupport
+public import ContinuousFlexibility.Analysis.N06LeftColumnSources
+public import ContinuousFlexibility.Analysis.N06ActualPotentialMultiplier
+public import ContinuousFlexibility.Analysis.N06FiniteLocalSourceColumns
 
 /-!
 # Actual scalar and potential differences on the retained N05 graph
@@ -12,6 +14,8 @@ reference jets provide their finite common support envelope; their
 ordinary angular jet bounds then construct sources in the same level.
 The signed potential multiplier uses the actual reference inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

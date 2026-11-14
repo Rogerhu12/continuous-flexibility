@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N07aActualRelativeWeightedBlocks
-import ContinuousFlexibility.Analysis.N07aWeightedCommutatorOperators
-import ContinuousFlexibility.Analysis.N07aUniformAngularInverse
-import ContinuousFlexibility.Analysis.N07aAngularMaterialLift
-import ContinuousFlexibility.Analysis.N07aParameterNeighborhood
-import ContinuousFlexibility.Statements.N07aRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N07aActualRelativeWeightedBlocks
+public import ContinuousFlexibility.Analysis.N07aWeightedCommutatorOperators
+public import ContinuousFlexibility.Analysis.N07aUniformAngularInverse
+public import ContinuousFlexibility.Analysis.N07aAngularMaterialLift
+public import ContinuousFlexibility.Analysis.N07aParameterNeighborhood
+public import ContinuousFlexibility.Statements.N07aRegularity
 
 /-!
 # All weighted orders of the original N06 inverse
@@ -14,6 +16,8 @@ bounded commutator. One low-order neighborhood makes the inverse
 constants uniform; subtraction supplies the material weight without
 changing the inverse or its forgotten source.
 -/
+
+@[expose] public section
 
 noncomputable section
 

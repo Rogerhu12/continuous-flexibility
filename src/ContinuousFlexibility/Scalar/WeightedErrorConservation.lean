@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.WeightedStateRegularity
-import ContinuousFlexibility.Scalar.WeightedStateFlatness
-import ContinuousFlexibility.Scalar.S05StateDerivative
+module
+
+public import ContinuousFlexibility.Scalar.WeightedStateRegularity
+public import ContinuousFlexibility.Scalar.WeightedStateFlatness
+public import ContinuousFlexibility.Scalar.S05StateDerivative
 
 /-!
 # Physical source compatibility of the independent correction error
@@ -11,6 +13,8 @@ angular derivative has zero integral.  The radial integral is unchanged
 by the two endpoint values.  Thus no extension of the singular type
 coefficient across a flat endpoint is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

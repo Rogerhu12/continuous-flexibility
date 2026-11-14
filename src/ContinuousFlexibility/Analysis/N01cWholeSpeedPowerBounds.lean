@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cNormalizedSpeedPowerBounds
-import ContinuousFlexibility.Analysis.N01cEndpointSamplePowerBounds
-import ContinuousFlexibility.Analysis.N01cOpticalEndpointPowerBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01cNormalizedSpeedPowerBounds
+public import ContinuousFlexibility.Analysis.N01cEndpointSamplePowerBounds
+public import ContinuousFlexibility.Analysis.N01cOpticalEndpointPowerBounds
 
 /-!
 # Actual whole-speed towers and unnormalized endpoint estimates
@@ -11,6 +13,8 @@ multiplier and optical root are combined before any multilinear
 normalization or reference subtraction. The state neighbourhood and all
 physical component samples are unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

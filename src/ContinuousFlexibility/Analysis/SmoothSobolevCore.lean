@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SobolevHalfLineJets
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
-import Mathlib.MeasureTheory.Function.LpSeminorm.SMul
+module
+
+public import ContinuousFlexibility.Analysis.SobolevHalfLineJets
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+public import Mathlib.MeasureTheory.Function.LpSeminorm.SMul
 
 /-!
 # Smooth cores with their actual Sobolev derivatives
@@ -12,6 +14,8 @@ the specified set is irrelevant; the extension respects equality on the
 domain. The Sobolev completions identify the resulting zero-seminorm
 representatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.DeepTailPhysicalPoisson
-import ContinuousFlexibility.Radial.TailMassResistanceData
+module
+
+public import ContinuousFlexibility.Radial.DeepTailPhysicalPoisson
+public import ContinuousFlexibility.Radial.TailMassResistanceData
 
 /-!
 # Comparing an actual tail solution with its endpoint interpolation
@@ -8,6 +10,8 @@ The positive right Poisson function gives Dirichlet uniqueness. Thus the
 pointwise Poisson bounds control every actual natural solution, rather
 than only a separately chosen model solution.
 -/
+
+@[expose] public section
 
 noncomputable section
 

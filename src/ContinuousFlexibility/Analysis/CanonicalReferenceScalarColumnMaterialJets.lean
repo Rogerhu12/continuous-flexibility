@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CanonicalReferenceScalarColumnIdentities
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalReferenceScalarColumnIdentities
 
 /-!
 # Uniform jets of the two actual scalar reference columns
@@ -8,6 +10,8 @@ order. Their material estimates and true physical range supply a common
 bound for both physical columns. The numerical constant is selected
 before any atlas, enumeration or field-identification proof is supplied.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N01cActualFlowAngularPrefix
-import ContinuousFlexibility.Analysis.N01cActualFlowLowBounds
-import ContinuousFlexibility.Analysis.N01cCommonCosineTowers
-import ContinuousFlexibility.Analysis.N01cOrdinaryFlowZeroAngularBounds
-import ContinuousFlexibility.Analysis.N01cSpeedBoundsRestriction
+module
+
+public import ContinuousFlexibility.Analysis.N01cActualFlowAngularPrefix
+public import ContinuousFlexibility.Analysis.N01cActualFlowLowBounds
+public import ContinuousFlexibility.Analysis.N01cCommonCosineTowers
+public import ContinuousFlexibility.Analysis.N01cOrdinaryFlowZeroAngularBounds
+public import ContinuousFlexibility.Analysis.N01cSpeedBoundsRestriction
 
 /-!
 # Positive state prefixes of the actual zero-radial flow family
@@ -18,6 +20,8 @@ subsequent stronger-base, smaller-radius neighbourhood. The witness
 tower for each physical point is canonical and precedes the state-order
 quantifier.
 -/
+
+@[expose] public section
 
 noncomputable section
 

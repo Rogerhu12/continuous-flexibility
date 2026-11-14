@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ReferenceModerateCoefficients
-import Mathlib.Analysis.Calculus.MeanValue
+module
+
+public import ContinuousFlexibility.Radial.ReferenceModerateCoefficients
+public import Mathlib.Analysis.Calculus.MeanValue
 
 /-!
 # The actual optical radicand has a cell coefficient-power Lipschitz bound
@@ -9,6 +11,8 @@ The actual identity `F = -w' * r⁻¹ * w⁻¹` and the product rule express
 mean-value estimate first uses the open cell inclusion supplied by return
 margins, then continuity extends the same constant to both endpoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

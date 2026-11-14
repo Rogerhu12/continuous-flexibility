@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularReferenceRadialGreen
-import ContinuousFlexibility.Analysis.N07aAngularReferenceTestParts
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceRadialGreen
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceTestParts
 
 /-!
 # The transported field satisfies the actual maximum reference equation
@@ -8,6 +10,8 @@ This is the original full-period RadialTest identity. The continuous
 first jet removes interface flux jumps; the second normal derivative is
 used only on actual open pieces and as the integrable right derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

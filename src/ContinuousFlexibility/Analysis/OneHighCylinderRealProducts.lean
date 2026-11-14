@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderRealSobolev
-import ContinuousFlexibility.Analysis.OneHighCylinderDerivativeProducts
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderRealSobolev
+public import ContinuousFlexibility.Analysis.OneHighCylinderDerivativeProducts
 
 /-!
 # The actual derivative-product estimate for real cylinder functions
@@ -8,6 +10,8 @@ Canonical complexification transfers the full finite-Sobolev estimate to real
 functions. Repeated inputs and selected components retain explicit constants
 depending only on the prescribed Fourier L¹ bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

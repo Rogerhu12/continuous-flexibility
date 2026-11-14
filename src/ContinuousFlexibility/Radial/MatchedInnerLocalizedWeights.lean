@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchedInnerLocalWeightedInverse
-import ContinuousFlexibility.Radial.InnerSupportedWeightProducts
+module
+
+public import ContinuousFlexibility.Radial.MatchedInnerLocalWeightedInverse
+public import ContinuousFlexibility.Radial.InnerSupportedWeightProducts
 
 /-!
 # The same inner inverse with its actual output coefficient loss
@@ -10,6 +12,8 @@ Dirichlet estimate after this loss. Its norm is at most one, so the
 already normalized Poisson correction costs no more. No global weighted
 operator estimate is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

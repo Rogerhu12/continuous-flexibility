@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01JetBounds
-import ContinuousFlexibility.Analysis.N01CommonRootCharacteristicStrip
-import ContinuousFlexibility.Analysis.CanonicalFieldJetReduction
-import ContinuousFlexibility.Analysis.ReferenceCircleFlow
+module
+
+public import ContinuousFlexibility.Analysis.N01JetBounds
+public import ContinuousFlexibility.Analysis.N01CommonRootCharacteristicStrip
+public import ContinuousFlexibility.Analysis.CanonicalFieldJetReduction
+public import ContinuousFlexibility.Analysis.ReferenceCircleFlow
 
 /-!
 # Actual coefficient values and spatial regularity from N01
@@ -12,6 +14,8 @@ Its existing common base and loss are retained exactly. Positivity
 in the same sector neighborhood also gives actual coefficient
 smoothness throughout the physical annulus.
 -/
+
+@[expose] public section
 
 noncomputable section
 

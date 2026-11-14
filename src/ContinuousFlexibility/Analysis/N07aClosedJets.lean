@@ -1,13 +1,15 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalMixedPointwise
-import ContinuousFlexibility.Analysis.N07aMixedLocalCalculus
-import ContinuousFlexibility.Analysis.N07aCanonicalOpenTests
-import Mathlib.Analysis.Calculus.FDeriv.Extend
-import Mathlib.Analysis.Calculus.Deriv.Comp
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
-import Mathlib.Analysis.Normed.Operator.Prod
-import Mathlib.Analysis.Calculus.TangentCone.Prod
-import Mathlib.Analysis.Calculus.TangentCone.Real
-import Mathlib.Topology.MetricSpace.Lipschitz
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalMixedPointwise
+public import ContinuousFlexibility.Analysis.N07aMixedLocalCalculus
+public import ContinuousFlexibility.Analysis.N07aCanonicalOpenTests
+public import Mathlib.Analysis.Calculus.FDeriv.Extend
+public import Mathlib.Analysis.Calculus.Deriv.Comp
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+public import Mathlib.Analysis.Normed.Operator.Prod
+public import Mathlib.Analysis.Calculus.TangentCone.Prod
+public import Mathlib.Analysis.Calculus.TangentCone.Real
+public import Mathlib.Topology.MetricSpace.Lipschitz
 
 /-!
 # Compatible closed jets from bounded smooth interior jets
@@ -17,6 +19,8 @@ these extensions agree with the next extended jets relative to the closed
 strip. This constructs genuine one-sided jets without asserting that the
 chosen extensions are differentiable outside the strip.
 -/
+
+@[expose] public section
 
 noncomputable section
 

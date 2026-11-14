@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.TameForwardJetUniformBounds
-import ContinuousFlexibility.Analysis.CoupledCircleCompositionCurveDerivative
-import ContinuousFlexibility.Analysis.CircleTranslationUniformBounds
-import ContinuousFlexibility.Analysis.TameMultilinearNormalization
+module
+
+public import ContinuousFlexibility.Analysis.TameForwardJetUniformBounds
+public import ContinuousFlexibility.Analysis.CoupledCircleCompositionCurveDerivative
+public import ContinuousFlexibility.Analysis.CircleTranslationUniformBounds
+public import ContinuousFlexibility.Analysis.TameMultilinearNormalization
 
 /-!
 # Fixed low-base bounds for the actual shifted forward family
@@ -10,6 +12,8 @@ The ordered derivatives of the given genuine tower are the existing
 composition kernels. Only the source is normalized; parameter increments
 stay in one fixed low-seminorm ball. Translation costs no grading order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

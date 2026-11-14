@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.DeepTailPhysicalWeights
+module
+
+public import ContinuousFlexibility.Radial.DeepTailPhysicalWeights
 
 /-!
 # Coefficient bounds from a controlled endpoint-exponent difference
@@ -8,6 +10,8 @@ It suffices that their cubic endpoint exponents differ by a coefficient
 exponent at the sampled index. Slow variation of `radialQ` then controls
 coefficient powers in both directions, without spending endpoint decay.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aGeometryLengthBounds
-import ContinuousFlexibility.Analysis.N07aSampleJetBounds
+module
+
+public import ContinuousFlexibility.Analysis.N07aGeometryLengthBounds
+public import ContinuousFlexibility.Analysis.N07aSampleJetBounds
 
 /-!
 # Actual raw atoms on the original canonical intervals
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Analysis.N07aSampleJetBounds
 The inverse affine rescaling transfers the genuine unit-strip jets, with
 all interval factors retained inside sampled subpower envelopes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

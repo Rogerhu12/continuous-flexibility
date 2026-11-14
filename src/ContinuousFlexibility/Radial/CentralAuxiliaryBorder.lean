@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.CentralRadialWeakTransport
-import Mathlib.Analysis.Calculus.BumpFunction.Normed
-import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
+module
+
+public import ContinuousFlexibility.Radial.CentralRadialWeakTransport
+public import Mathlib.Analysis.Calculus.BumpFunction.Normed
+public import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
 
 /-!
 # A genuine compact auxiliary border for the central second mode
@@ -10,6 +12,8 @@ weighted-Hilbert representatives have fixed images under every positive
 height scaling. This is the auxiliary border, not the later column obtained
 by differentiating the final metric.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.R11bFourierReconstruction
-import ContinuousFlexibility.Radial.R11bEvenSeriesRepresentative
-import ContinuousFlexibility.Radial.R11bWeakNormalTensor
-import ContinuousFlexibility.Radial.R11bWeakNormalFinite
-import ContinuousFlexibility.Radial.R11bWeightedCellClosure
+module
+
+public import ContinuousFlexibility.Radial.R11bFourierReconstruction
+public import ContinuousFlexibility.Radial.R11bEvenSeriesRepresentative
+public import ContinuousFlexibility.Radial.R11bWeakNormalTensor
+public import ContinuousFlexibility.Radial.R11bWeakNormalFinite
+public import ContinuousFlexibility.Radial.R11bWeightedCellClosure
 
 /-!
 # Reconstruction of the actual weighted normal derivative
@@ -11,6 +13,8 @@ Radial C1 mode representatives yield exact weak derivative identities for
 finite sums. Physical L² convergence passes those identities to the limit,
 and bounded weighted cell sums give the full output realization.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

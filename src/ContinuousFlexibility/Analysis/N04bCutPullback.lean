@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Scalar.HeightDerivatives
-import Mathlib.Analysis.Calculus.Deriv.Comp
-import Mathlib.Analysis.Calculus.FDeriv.Add
-import Mathlib.Analysis.Calculus.FDeriv.Mul
-import Mathlib.Tactic.FieldSimp
-import Mathlib.Tactic.Ring
+module
+
+public import ContinuousFlexibility.Scalar.HeightDerivatives
+public import Mathlib.Analysis.Calculus.Deriv.Comp
+public import Mathlib.Analysis.Calculus.FDeriv.Add
+public import Mathlib.Analysis.Calculus.FDeriv.Mul
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.Ring
 
 /-!
 # The actual first derivative of two gauged travel pullbacks
@@ -12,6 +14,8 @@ One signed coordinate formula treats the two sides of a cut. At the common
 travel value the coordinate derivatives are opposite. The common scalar
 gauge supplies the lower-left entry of the transmission matrix.
 -/
+
+@[expose] public section
 
 noncomputable section
 

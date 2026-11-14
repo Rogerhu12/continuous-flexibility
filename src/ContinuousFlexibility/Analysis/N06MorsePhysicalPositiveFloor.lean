@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06MorsePositiveFloor
-import Mathlib.Analysis.Calculus.MeanValue
+module
+
+public import ContinuousFlexibility.Analysis.N06MorsePositiveFloor
+public import Mathlib.Analysis.Calculus.MeanValue
 
 /-!
 # Physical distance lower bounds on the actual positive Morse caps
@@ -11,6 +13,8 @@ retained indices. The estimate covers the whole cap, including the part
 away from its root, rather than relying on compactness separately on each
 model interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeNegativeAtomTransport
-import ContinuousFlexibility.Analysis.CanonicalAuxiliaryAtomPreservation
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeNegativeAtomTransport
+public import ContinuousFlexibility.Analysis.CanonicalAuxiliaryAtomPreservation
 
 /-!
 # The negative part of a Realization gauge is the retained typed atlas
@@ -15,6 +17,8 @@ a negative piece are exactly those of the original negative half.  This
 is a reduction of the actual functions, not an estimate for a different
 choice of chart or inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

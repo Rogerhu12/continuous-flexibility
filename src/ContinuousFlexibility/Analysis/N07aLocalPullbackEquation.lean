@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aNormalRecurrence
-import ContinuousFlexibility.Analysis.N07bInteriorGreen
-import ContinuousFlexibility.Scalar.WeightedPartialIdentities
+module
+
+public import ContinuousFlexibility.Analysis.N07aNormalRecurrence
+public import ContinuousFlexibility.Analysis.N07bInteriorGreen
+public import ContinuousFlexibility.Scalar.WeightedPartialIdentities
 
 /-!
 # The physical divergence equation in one genuine local chart
@@ -10,6 +12,8 @@ the forward coordinate map. Both sides of a moving cut can therefore use
 the same smooth coefficients after pullback by one local inverse. No
 regularity or transformed equation for the solution is built into them.
 -/
+
+@[expose] public section
 
 noncomputable section
 

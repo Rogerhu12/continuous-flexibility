@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04bRootHeightMatching
+module
+
+public import ContinuousFlexibility.Analysis.N04bRootHeightMatching
 
 /-!
 # Actual matched collars at both physical roots
@@ -9,6 +11,8 @@ positive smooth height. On the physical side both functions agree with
 the actual global travel construction. Every input is from Through03,
 the physical/material data, or raw coefficient regularity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

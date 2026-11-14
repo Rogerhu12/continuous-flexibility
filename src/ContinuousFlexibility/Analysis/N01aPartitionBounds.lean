@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01aPartitionProperties
-import ContinuousFlexibility.Analysis.N01aPartitionDiameter
-import ContinuousFlexibility.Radial.ScaleSlowVariation
+module
+
+public import ContinuousFlexibility.Analysis.N01aPartitionProperties
+public import ContinuousFlexibility.Analysis.N01aPartitionDiameter
+public import ContinuousFlexibility.Radial.ScaleSlowVariation
 
 /-!
 # Accumulating-profile bounds for the grouped partition
@@ -9,6 +11,8 @@ The coefficient sequence is enlarged by a factor of two. All physical
 fields and every old cell's scale remain unchanged. This gives a new
 accumulating profile with at most two enumerated cells per scale.
 -/
+
+@[expose] public section
 
 noncomputable section
 
