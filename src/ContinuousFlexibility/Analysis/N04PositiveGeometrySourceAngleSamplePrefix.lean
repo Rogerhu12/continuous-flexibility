@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceTraceSamplePrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryBudget
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceTraceSamplePrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryBudget
 
 /-!
 # One sampled prefix for all actual angular source traces
@@ -8,6 +10,8 @@ The displacement at order zero and the four positive radial traces use
 one low order and one later shift. Only their angular horizons change;
 the actual traces, sample and height factor are retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

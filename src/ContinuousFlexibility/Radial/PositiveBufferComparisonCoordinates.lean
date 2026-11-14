@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.PositiveBufferComparisonAffine
-import ContinuousFlexibility.Radial.PositiveBufferGeometry
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferComparisonAffine
+public import ContinuousFlexibility.Radial.PositiveBufferGeometry
 
 /-!
 # Analytic changes to the common buffer coordinate
@@ -8,6 +10,8 @@ The inward coordinate is the existing `positiveBufferPoint`.  This file
 specializes the affine calculus and energy substitution to that coordinate
 and records its inverse, so the same construction applies at both cuts.
 -/
+
+@[expose] public section
 
 noncomputable section
 

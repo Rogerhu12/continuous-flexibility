@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N06CurrentInverseTestJets
-import ContinuousFlexibility.Analysis.N06PositiveCurrentTestLp
-import ContinuousFlexibility.Analysis.N06CubicDifferential
-import ContinuousFlexibility.Radial.MatchingCutoffTests
-import Mathlib.Analysis.Calculus.FDeriv.Measurable
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentInverseTestJets
+public import ContinuousFlexibility.Analysis.N06PositiveCurrentTestLp
+public import ContinuousFlexibility.Analysis.N06CubicDifferential
+public import ContinuousFlexibility.Radial.MatchingCutoffTests
+public import Mathlib.Analysis.Calculus.FDeriv.Measurable
 
 /-!
 # Actual current operator tests on negative pieces
@@ -16,6 +18,8 @@ bound controls V. Measurability of the totalized actual Frechet derivative
 supplies measurability of the physical differential expression without a
 regularity premise on the corrected coefficient fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 

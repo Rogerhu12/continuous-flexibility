@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsBoundaryData
-import ContinuousFlexibility.Analysis.AngularInverseFirstDerivative
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsBoundaryData
+public import ContinuousFlexibility.Analysis.AngularInverseFirstDerivative
 
 /-!
 # Actual triangular angular inverse data at a positive endpoint
@@ -9,6 +11,8 @@ derivative and the radial derivative of the supplied source angle. The
 finite inverse recurrence can therefore use these original boundary
 data, without introducing a new inverse-Jacobian regularity premise.
 -/
+
+@[expose] public section
 
 noncomputable section
 

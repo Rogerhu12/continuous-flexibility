@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import ContinuousFlexibility.Analysis.MaterialSampleBounds
-import ContinuousFlexibility.Analysis.N01JetBounds
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import ContinuousFlexibility.Analysis.MaterialSampleBounds
+public import ContinuousFlexibility.Analysis.N01JetBounds
 
 /-!
 # Enlarging the coefficient envelope without changing the physical spaces
@@ -12,6 +14,8 @@ model is larger than two, so all prescribed endpoint formulas are retained.
 Only the bookkeeping envelope changes: physical and circle norms, sample
 points, the state space and every geometric field are the same.
 -/
+
+@[expose] public section
 
 noncomputable section
 

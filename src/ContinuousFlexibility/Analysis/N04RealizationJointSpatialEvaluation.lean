@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SmoothDirectionsFixedLast
-import ContinuousFlexibility.Analysis.N01cFiniteAffineJets
+module
+
+public import ContinuousFlexibility.Analysis.SmoothDirectionsFixedLast
+public import ContinuousFlexibility.Analysis.N01cFiniteAffineJets
 
 /-!
 # Fixed spatial jet evaluations on an arbitrary open joint domain
@@ -8,6 +10,8 @@ A finite affine restriction recovers the actual ordinary spatial jets.
 It is enough that the supplied joint tower is defined on an open set;
 no product neighborhood or new convexity assumption is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

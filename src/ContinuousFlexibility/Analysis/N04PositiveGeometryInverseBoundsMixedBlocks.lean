@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsMixedFormula
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsMixedFormula
 
 /-!
 # The surviving original-state blocks in an inverse partition
@@ -7,6 +9,8 @@ The state output of a fiber-preserving map is affine. Hence a selected
 state block is zero except for one original state slot. Every remaining
 block is precisely the actual spatial-output derivative of the inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

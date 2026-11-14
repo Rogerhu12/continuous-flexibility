@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerSquareDensity
-import ContinuousFlexibility.Radial.MorseCellLiouville
+module
+
+public import ContinuousFlexibility.Radial.InnerSquareDensity
+public import ContinuousFlexibility.Radial.MorseCellLiouville
 
 /-!
 # The physical measure under a retained Liouville coordinate
@@ -9,6 +11,8 @@ identity is for the restriction of the actual radialHilbertMeasure D.
 The inverse coordinate is the existing invFunOn coordinate of that
 same radius and interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

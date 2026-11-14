@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.MorseRadiusODE
-import ContinuousFlexibility.Radial.MorseJoinActualGerms
-import ContinuousFlexibility.Radial.Liouville
-import ContinuousFlexibility.Statements.RadialTargets
+module
+
+public import ContinuousFlexibility.Radial.MorseRadiusODE
+public import ContinuousFlexibility.Radial.MorseJoinActualGerms
+public import ContinuousFlexibility.Radial.Liouville
+public import ContinuousFlexibility.Statements.RadialTargets
 
 /-!
 # Smooth radial initial value problems on a retained interval
@@ -16,6 +18,8 @@ turns the radial equation into a scalar second-order equation with a
 smooth potential. Only the germs near the retained interval are extended;
 the original radial profile and its equation remain unchanged there.
 -/
+
+@[expose] public section
 
 noncomputable section
 

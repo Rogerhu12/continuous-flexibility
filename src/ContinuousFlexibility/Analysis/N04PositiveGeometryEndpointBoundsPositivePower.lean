@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryKernelBounds
-import ContinuousFlexibility.Analysis.PositivePowerPolynomialMaterialJets
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryKernelBounds
+public import ContinuousFlexibility.Analysis.PositivePowerPolynomialMaterialJets
 
 /-!
 # Positive powers preserve the finite root word budget
@@ -8,6 +10,8 @@ The ordinary outer derivatives are bounded explicitly by the value and
 its reciprocal. The genuine composition formula then preserves the
 original angular reserve and the complete positive-parameter height.
 -/
+
+@[expose] public section
 
 noncomputable section
 

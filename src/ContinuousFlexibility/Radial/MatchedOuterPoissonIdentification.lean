@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MatchingOuterDecomposition
+module
+
+public import ContinuousFlexibility.Radial.MatchingOuterDecomposition
 
 /-!
 # Identifying the actual outer Poisson columns
@@ -9,6 +11,8 @@ The proof uses the actual outer inverse and its separated-graph
 uniqueness. Thus quantitative bounds for a constructed physical
 candidate apply to that same matching column.
 -/
+
+@[expose] public section
 
 noncomputable section
 

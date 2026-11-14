@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01ControlCoefficientVariation
+module
+
+public import ContinuousFlexibility.Analysis.N01ControlCoefficientVariation
 
 /-!
 # A quantitative control-derivative bound on the actual radial cell
@@ -9,6 +11,8 @@ singleton-circle grading contributes precisely one negative power of the
 control sample's height weight.  No incidence between a control label and
 a reference cell is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

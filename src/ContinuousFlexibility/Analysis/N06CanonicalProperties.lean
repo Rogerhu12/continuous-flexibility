@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Blueprint.CanonicalParts
+module
+
+public import ContinuousFlexibility.Blueprint.CanonicalParts
 
 /-!
 # The qualitative coordinate clauses of the actual N04 construction
@@ -7,6 +9,8 @@ The reusable coordinate identities take the independently named qualitative
 parts. They are literal conjuncts of the frozen cumulative N04 properties.
 No coordinate witness is replaced by these projections.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Statements
 

@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N01cCoefficientBaseSelection
-import ContinuousFlexibility.Analysis.N01cCoefficientTameBounds
-import ContinuousFlexibility.Analysis.SectorParameterGeometry
-import ContinuousFlexibility.Analysis.CanonicalFieldJetReduction
-import ContinuousFlexibility.Analysis.N07aNeighborhood
-import ContinuousFlexibility.Analysis.MixedDerivativeLocality
+module
+
+public import ContinuousFlexibility.Analysis.N01cCoefficientBaseSelection
+public import ContinuousFlexibility.Analysis.N01cCoefficientTameBounds
+public import ContinuousFlexibility.Analysis.SectorParameterGeometry
+public import ContinuousFlexibility.Analysis.CanonicalFieldJetReduction
+public import ContinuousFlexibility.Analysis.N07aNeighborhood
+public import ContinuousFlexibility.Analysis.MixedDerivativeLocality
 
 /-!
 # Actual positive physical coefficients on one fixed sector neighborhood
@@ -17,6 +19,8 @@ The affine sector inclusion preserves the grading exactly.
 The result retains the distributed spatial exponent and the full
 positive-parameter height gain before any canonical composition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Geometry.SphereCoordinates
-import ContinuousFlexibility.Geometry.CapSphereProfile
-import ContinuousFlexibility.Geometry.GraphCapAttachment
-import ContinuousFlexibility.Geometry.MarkedCapDisk
+module
+
+public import ContinuousFlexibility.Geometry.SphereCoordinates
+public import ContinuousFlexibility.Geometry.CapSphereProfile
+public import ContinuousFlexibility.Geometry.GraphCapAttachment
+public import ContinuousFlexibility.Geometry.MarkedCapDisk
 
 /-!
 # Gluing the actual graph family to a cap on the standard sphere
@@ -11,6 +13,8 @@ The cap profile supplies equality on an entire neighborhood of each equatorial
 point. The generic collar statement below is instantiated with both constructed
 caps, rather than being an unproved existence input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

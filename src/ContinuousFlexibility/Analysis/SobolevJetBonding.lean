@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SobolevJetCompletion
-import Mathlib.Data.Fin.Embedding
+module
+
+public import ContinuousFlexibility.Analysis.SobolevJetCompletion
+public import Mathlib.Data.Fin.Embedding
 
 /-!
 # Compatibility of the Sobolev completions
@@ -10,6 +12,8 @@ finite `L²` products.  Extensions of one fixed smooth-core map commute with
 these bonding operators, so the extensions at all Sobolev orders form one
 compatible family.
 -/
+
+@[expose] public section
 
 noncomputable section
 

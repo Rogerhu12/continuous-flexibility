@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.N07aCanonicalGeometry
-import ContinuousFlexibility.Analysis.N07aIntervalOpenEnergy
+module
+
+public import ContinuousFlexibility.Statements.N07aCanonicalGeometry
+public import ContinuousFlexibility.Analysis.N07aIntervalOpenEnergy
 
 /-!
 # The actual reference coefficients in unit radial coordinates
@@ -9,6 +11,8 @@ potential and angular principal coefficient acquire the square interval
 length when the reference equation is written on the unit interval.
 The quotient uses the already controlled actual inverse-leading atom.
 -/
+
+@[expose] public section
 
 noncomputable section
 

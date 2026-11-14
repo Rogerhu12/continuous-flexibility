@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MorseModelReturn
+module
+
+public import ContinuousFlexibility.Radial.MorseModelReturn
 
 /-!
 # Quantitative curvature of the actual Morse turning roots
@@ -13,6 +15,8 @@ its actual amplitude choices, and the original smooth physical profile. It
 does not assume a canonical coordinate bound. The frozen `IsRadialReference`
 predicate alone does not retain the Morse-realization premise used here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

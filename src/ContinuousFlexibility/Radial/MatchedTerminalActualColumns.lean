@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchedTerminalExternalColumns
-import ContinuousFlexibility.Radial.MatchedInnerActualSource
+module
+
+public import ContinuousFlexibility.Radial.MatchedTerminalExternalColumns
+public import ContinuousFlexibility.Radial.MatchedInnerActualSource
 
 /-!
 # The terminal correction uses the same actual finite-chain inverse
@@ -9,6 +11,8 @@ supported Hilbert space. Frozen uniqueness identifies its correction
 with C.inverse for that same chain C. No Poisson or inverse identity
 is added as an assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

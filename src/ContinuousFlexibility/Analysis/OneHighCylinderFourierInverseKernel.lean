@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderFourierInversion
-import ContinuousFlexibility.Analysis.OneHighCircleFourierSeries
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderFourierInversion
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierSeries
 
 /-!
 # The actual inverse kernel on the cylinder
@@ -10,6 +12,8 @@ inverse real Fourier integrals. In particular this integral reconstructs
 every continuous square-integrable function with integrable actual Fourier
 transform, without any physical `L¹` or support hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

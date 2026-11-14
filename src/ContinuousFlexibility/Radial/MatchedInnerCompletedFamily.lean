@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.MatchedRetainedInnerEnvelope
-import ContinuousFlexibility.Radial.MatchedInnerFirstBand
-import ContinuousFlexibility.Radial.MatchedMorseInitialWindow
-import ContinuousFlexibility.Radial.MatchedFiniteEnvelope
-import ContinuousFlexibility.Radial.R11aRetainedFamily
+module
+
+public import ContinuousFlexibility.Radial.MatchedRetainedInnerEnvelope
+public import ContinuousFlexibility.Radial.MatchedInnerFirstBand
+public import ContinuousFlexibility.Radial.MatchedMorseInitialWindow
+public import ContinuousFlexibility.Radial.MatchedFiniteEnvelope
+public import ContinuousFlexibility.Radial.R11aRetainedFamily
 
 /-!
 # Uniform actual inner channels of the completed retained family
@@ -13,6 +15,8 @@ finite first band is combined with these estimates only afterwards.
 All operators and both columns are those of the same completed W/G
 family, and the channel labels remain the original canonical labels.
 -/
+
+@[expose] public section
 
 noncomputable section
 

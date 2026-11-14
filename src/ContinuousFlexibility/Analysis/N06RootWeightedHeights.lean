@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06RootNormalizedPacket
+module
+
+public import ContinuousFlexibility.Analysis.N06RootNormalizedPacket
 
 /-!
 # Material decay of the actual normalized root height jets
@@ -9,6 +11,8 @@ preserves H^(3/4) M. This decay is needed before the root collar and
 reference-geometry costs are absorbed; a uniform unweighted bound alone
 would not suffice for that step.
 -/
+
+@[expose] public section
 
 noncomputable section
 

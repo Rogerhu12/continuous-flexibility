@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07bFiniteRadialGreen
-import ContinuousFlexibility.Analysis.N06AngularMeanBridge
-import ContinuousFlexibility.Radial.FourierOrthogonality
+module
+
+public import ContinuousFlexibility.Analysis.N07bFiniteRadialGreen
+public import ContinuousFlexibility.Analysis.N06AngularMeanBridge
+public import ContinuousFlexibility.Radial.FourierOrthogonality
 
 /-!
 # Compatibility of the reference PDE at finite regularity
@@ -15,6 +17,8 @@ the genuine field `radialPDE u + μ * referenceColumn * cosineMode 2` satisfies
 the physical compatibility condition. No zero-integral hypothesis or
 infinite-order regularity of the height is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

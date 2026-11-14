@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R07DeepTailBounds
+module
+
+public import ContinuousFlexibility.Radial.R07DeepTailBounds
 
 /-!
 # A uniformly valid deep tail for each fixed physical frequency
@@ -8,6 +10,8 @@ It is chosen before the height sequence. The natural solution obtained
 there can subsequently be continued across the finitely many preceding
 cells to any prescribed transition entrance.
 -/
+
+@[expose] public section
 
 noncomputable section
 

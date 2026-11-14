@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SpacesCircleBandAnalysis
+module
+
+public import ContinuousFlexibility.Analysis.SpacesCircleBandAnalysis
 
 /-!
 # The concrete circle tame retraction
@@ -9,6 +11,8 @@ The synthesis map takes all actual weighted derivatives of each band. The
 complete band sum reconstructs every coordinate of the given closed-graph
 projective limit. Analysis has loss zero and synthesis has loss one.
 -/
+
+@[expose] public section
 
 noncomputable section
 

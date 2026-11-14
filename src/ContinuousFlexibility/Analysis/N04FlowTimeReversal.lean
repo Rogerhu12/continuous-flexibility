@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04FlowQualitative
+module
+
+public import ContinuousFlexibility.Analysis.N04FlowQualitative
 
 /-!
 # Actual inverse flows and preservation of the material inputs
@@ -9,6 +11,8 @@ ODE identifies the reversed endpoint map as both a left and a right
 inverse of the original endpoint map. Thus the fixed-loss flow theorem
 applies to actual inverse maps with the original material constants.
 -/
+
+@[expose] public section
 
 noncomputable section
 

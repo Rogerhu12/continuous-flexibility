@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06PrimitiveActualOperator
-import ContinuousFlexibility.Analysis.N06PrimitiveRelativePhysicalRelation
-import ContinuousFlexibility.Analysis.N06PrimitiveRelativeFamily
+module
+
+public import ContinuousFlexibility.Analysis.N06PrimitiveActualOperator
+public import ContinuousFlexibility.Analysis.N06PrimitiveRelativePhysicalRelation
+public import ContinuousFlexibility.Analysis.N06PrimitiveRelativeFamily
 
 /-!
 # Canonical relative operators from the retained primitive geometry
@@ -14,6 +16,8 @@ conclusion of `N06CanonicalRelativeStatement`.
 The primitive construction facts remain explicit inputs here. This leaf
 does not alter a frozen statement or replace K, V, B, or the neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

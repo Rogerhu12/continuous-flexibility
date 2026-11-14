@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.TameLocalCalculus
+module
+
+public import ContinuousFlexibility.Analysis.TameLocalCalculus
 
 /-!
 # The topology of the sum grading on a product
@@ -8,6 +10,8 @@ sum grading generates the same topology: a coordinate seminorm is bounded
 by the sum at its own index, and that sum is bounded by twice the maximum
 of its two coordinate seminorms. No monotonicity assumption is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

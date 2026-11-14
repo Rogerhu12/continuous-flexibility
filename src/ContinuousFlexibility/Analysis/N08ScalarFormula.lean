@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.StateControlCofiniteClosure
-import ContinuousFlexibility.Scalar.WeightedResidualFormulas
+module
+
+public import ContinuousFlexibility.Analysis.StateControlCofiniteClosure
+public import ContinuousFlexibility.Scalar.WeightedResidualFormulas
 
 /-!
 # Finite spatial jets of the actual controlled scalar residual
@@ -10,6 +12,8 @@ residual depends only on the profile and the first two spatial jets of the
 height increment. This identifies the two normalizations, including `q = 0`,
 without adding a condition on the primitive's value.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01FlowCircleUniformBounds
-import ContinuousFlexibility.Analysis.CircleUniformFamilyOperations
-import ContinuousFlexibility.Analysis.N01ReturnVelocitySmoothTame
-import ContinuousFlexibility.Analysis.ReturnChartUniformBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01FlowCircleUniformBounds
+public import ContinuousFlexibility.Analysis.CircleUniformFamilyOperations
+public import ContinuousFlexibility.Analysis.N01ReturnVelocitySmoothTame
+public import ContinuousFlexibility.Analysis.ReturnChartUniformBounds
 
 /-!
 # Uniform bounds for the actual return coordinates and divided difference
@@ -11,6 +13,8 @@ positive constants used by every inverse. The estimates follow the
 existing circle-valued definitions, through the actual transported
 chart, residual, inverse coordinate and divided-difference average.
 -/
+
+@[expose] public section
 
 noncomputable section
 

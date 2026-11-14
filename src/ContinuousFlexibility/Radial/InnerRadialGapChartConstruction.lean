@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerRadialActualPieces
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialActualPieces
 
 /-!
 # Actual positive-gap charts from the original coefficients
@@ -8,6 +10,8 @@ Their boundary and differential equations are proved there, rather than
 stored as new assumptions. For an actual profile the surrounding positive
 range and global nonnegativity follow directly from its original geometry.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,12 @@
-import ContinuousFlexibility.Analysis.N07aStateSampleFrechetBounds
-import ContinuousFlexibility.Analysis.N07aStateSampleJetProducts
-import ContinuousFlexibility.Analysis.N07aCompositionBudget
+module
+
+public import ContinuousFlexibility.Analysis.N07aStateSampleFrechetBounds
+public import ContinuousFlexibility.Analysis.N07aStateSampleJetProducts
+public import ContinuousFlexibility.Analysis.N07aCompositionBudget
 
 /-! Composition estimates on the actual state-dependent source domain. -/
+
+@[expose] public section
 
 noncomputable section
 

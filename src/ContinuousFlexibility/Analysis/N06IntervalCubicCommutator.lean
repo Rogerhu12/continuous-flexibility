@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06IntervalCubicCutoffJets
-import ContinuousFlexibility.Analysis.N06OpenCubicTestCutoff
+module
+
+public import ContinuousFlexibility.Analysis.N06IntervalCubicCutoffJets
+public import ContinuousFlexibility.Analysis.N06OpenCubicTestCutoff
 
 /-!
 # The cubic cutoff commutator for an actual radial weight
@@ -9,6 +11,8 @@ A bound for the actual radial weight and its derivative controls the
 commutator on any original canonical interval. Only the test germ is
 used; no endpoint extension of its coefficients is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

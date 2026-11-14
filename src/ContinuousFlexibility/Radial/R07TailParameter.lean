@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R07JoinParameterJets
+module
+
+public import ContinuousFlexibility.Radial.R07JoinParameterJets
 
 /-!
 # Joint continuity of the actual glued profile on either fixed tail
@@ -9,6 +11,8 @@ the actual joins have the previously proved smooth two-amplitude formula.
 Pasting on this fixed locally finite collection of closed intervals therefore
 gives joint continuity of every spatial jet, including at all seams.
 -/
+
+@[expose] public section
 
 noncomputable section
 

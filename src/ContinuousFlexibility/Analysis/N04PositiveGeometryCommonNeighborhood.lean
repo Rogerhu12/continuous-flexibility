@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryActualFactorDirections
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryActualFactorDirections
 
 /-!
 # One neighborhood for the controlled family and all actual factors
@@ -7,6 +9,8 @@ Restriction preserves each fixed-state root model and the ordinary
 angular Jacobian bounds. The common neighborhood is selected before
 any parameter prefix or spatial order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

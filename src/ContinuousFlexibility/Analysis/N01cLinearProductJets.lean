@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
+module
+
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
 
 /-!
 # Exact parameter jets of products of scalar linear functionals
@@ -9,6 +11,8 @@ directional derivatives and vanishing at every higher order. Uniqueness
 identifies these formulas with any already constructed smooth directional
 tower for the same actual function on its open domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

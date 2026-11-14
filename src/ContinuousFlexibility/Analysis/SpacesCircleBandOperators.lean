@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SpacesCircleFourierCut
+module
+
+public import ContinuousFlexibility.Analysis.SpacesCircleFourierCut
 
 /-!
 # Joint circle band operators and reconstruction
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Analysis.SpacesCircleFourierCut
 These are actual operators on the angular `L²` spaces. The full countable
 band decomposition reconstructs the function and every smooth derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerIntervalTrace
+module
+
+public import ContinuousFlexibility.Radial.InnerIntervalTrace
 
 /-!
 # First-order integration by parts on the original closed model domain
@@ -8,6 +10,8 @@ continuity. The auxiliary test is any smooth function at the closed
 interval; it need not vanish at the endpoints because the domain
 coordinate does.
 -/
+
+@[expose] public section
 
 noncomputable section
 

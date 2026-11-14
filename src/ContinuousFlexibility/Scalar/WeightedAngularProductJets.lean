@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedDecodedProduct
-import ContinuousFlexibility.Scalar.WeightedDifferentiationPullback
+module
+
+public import ContinuousFlexibility.Scalar.WeightedDecodedProduct
+public import ContinuousFlexibility.Scalar.WeightedDifferentiationPullback
 
 /-!
 # Weighted jets of an even field times an angular derivative
@@ -9,6 +11,8 @@ with one angular derivative on the second factor. A finite Leibniz expansion
 therefore has total input order at most one more than the output order.
 The actual cylinder L² monomial estimate keeps one common base and loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

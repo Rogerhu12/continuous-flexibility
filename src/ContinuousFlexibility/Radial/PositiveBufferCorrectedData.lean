@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.PositiveBufferFullForm
-import ContinuousFlexibility.Radial.PositiveBufferTraceMap
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferFullForm
+public import ContinuousFlexibility.Radial.PositiveBufferTraceMap
 
 /-!
 # Concrete normalized corrected Green data
@@ -9,6 +11,8 @@ representatives have the same true traces and the actual homogeneous
 equation. The conormal and form identities retain the normalization by
 the sum of the finite and exterior conormals.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cReferenceDifferenceBounds
-import ContinuousFlexibility.Analysis.ProjectiveMultilinearCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N01cReferenceDifferenceBounds
+public import ContinuousFlexibility.Analysis.ProjectiveMultilinearCalculus
 
 /-!
 # Joint jet evaluation continuity from the next actual derivative
@@ -11,6 +13,8 @@ direction slots. Thus finite-plane continuity in the external variables
 and locally uniform seminorm bounds imply the joint continuity required
 by the Volterra construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

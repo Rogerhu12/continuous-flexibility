@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aAngularCell
-import ContinuousFlexibility.Analysis.N07aAngularLpScale
-import ContinuousFlexibility.Analysis.SpacesTorusCut
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularCell
+public import ContinuousFlexibility.Analysis.N07aAngularLpScale
+public import ContinuousFlexibility.Analysis.SpacesTorusCut
 
 /-!
 # Fourier coordinates of the actual canonical source classes
@@ -11,6 +13,8 @@ isometry. Its outer `lp` version therefore retains all radial pieces and
 their actual norms. The range still records real-valuedness; no complex
 source or finite-dimensional radial reduction is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

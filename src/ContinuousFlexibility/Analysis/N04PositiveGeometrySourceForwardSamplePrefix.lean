@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceSamplePrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometryRootForwardLabelSamplePrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryBudget
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceSamplePrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryRootForwardLabelSamplePrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryBudget
 
 /-!
 # Original source jets at the forward root label
@@ -9,6 +11,8 @@ The angular pullback coefficients use the source at the actual forward
 label. One saved angular order pays for this substitution. Its slope
 shares the same high denominator, sample and final parameter shift.
 -/
+
+@[expose] public section
 
 noncomputable section
 

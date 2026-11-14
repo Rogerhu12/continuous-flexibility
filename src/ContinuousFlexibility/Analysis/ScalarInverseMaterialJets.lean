@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.NonlinearInverseMaterialBounds
-import ContinuousFlexibility.Analysis.FlowJetLinearization
-import ContinuousFlexibility.Analysis.ParameterizedScalarInverse
+module
+
+public import ContinuousFlexibility.Analysis.NonlinearInverseMaterialBounds
+public import ContinuousFlexibility.Analysis.FlowJetLinearization
+public import ContinuousFlexibility.Analysis.ParameterizedScalarInverse
 
 /-!
 # Material jets of an actual scalar inverse displacement
@@ -10,6 +12,8 @@ differential is bounded separately, and every higher differential is
 obtained from the existing nonlinear inverse polynomial. The zeroth
 displacement is transported by the right-inverse identity itself.
 -/
+
+@[expose] public section
 
 noncomputable section
 

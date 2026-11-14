@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CanonicalFixedGeometryDifferenceJets
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalFixedGeometryDifferenceJets
 
 /-!
 # Ordinary regularity of the actual static geometric and material atoms
@@ -8,6 +10,8 @@ actual positive smooth material functions therefore give smooth lengths,
 scales and ratios, including their inverses. Their angular period follows
 from radiality. No quantitative reference-jet bound is assumed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

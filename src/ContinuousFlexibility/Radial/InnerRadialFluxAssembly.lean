@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerRadialDirichletPoisson
-import ContinuousFlexibility.Radial.InnerChainBoundaryHilbert
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialDirichletPoisson
+public import ContinuousFlexibility.Radial.InnerChainBoundaryHilbert
 
 /-!
 # The actual finite conormal matrix
@@ -9,6 +11,8 @@ as the weak graph. This identifies the canonical Poisson conormal
 functional with the full sum of restricted local DtN operators. No
 off-diagonal gap entry or central scalar contribution is discarded.
 -/
+
+@[expose] public section
 
 noncomputable section
 

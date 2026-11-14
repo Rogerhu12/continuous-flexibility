@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R11bWeightedBessel
+module
+
+public import ContinuousFlexibility.Radial.R11bWeightedBessel
 
 /-!
 # Actual weighted squares of individual angular modes
@@ -7,6 +9,8 @@ These quantities are the original localized radial square integrals with
 the output weights. A.e. proportionality of the coefficient functions
 scales the whole square series by the scalar squared.
 -/
+
+@[expose] public section
 
 noncomputable section
 

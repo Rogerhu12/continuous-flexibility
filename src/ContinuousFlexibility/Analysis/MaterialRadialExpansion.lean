@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.MaterialLogJets
+module
+
+public import ContinuousFlexibility.Analysis.MaterialLogJets
 
 /-!
 # Ordinary radial derivatives in the actual material coordinate
@@ -8,6 +10,8 @@ global material variable. Their recurrence is obtained by differentiating
 the actual finite expansion. The only growing factor is the inverse
 physical density scale raised to the radial derivative order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

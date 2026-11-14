@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cInverseProfileParameters
-import ContinuousFlexibility.Analysis.N01cProfileBaseBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01cInverseProfileParameters
+public import ContinuousFlexibility.Analysis.N01cProfileBaseBounds
 
 /-!
 # Material bounds for the actual reciprocal profile towers
@@ -14,6 +16,8 @@ Every positive parameter derivative retains the full H^(3/4) weight and
 only level-zero state direction factors.  The ordinary base jets require
 only an E0 envelope bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

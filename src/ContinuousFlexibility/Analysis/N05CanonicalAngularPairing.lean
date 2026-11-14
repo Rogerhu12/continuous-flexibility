@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05CanonicalAngularTransport
-import ContinuousFlexibility.Analysis.N05PeriodicPhysicalL2Norm
-import ContinuousFlexibility.Analysis.N05CanonicalOutputChange
-import ContinuousFlexibility.Analysis.N05CanonicalTests
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05CanonicalAngularTransport
+public import ContinuousFlexibility.Analysis.N05PeriodicPhysicalL2Norm
+public import ContinuousFlexibility.Analysis.N05CanonicalOutputChange
+public import ContinuousFlexibility.Analysis.N05CanonicalTests
 
 /-!
 # Actual angular weak derivatives after the canonical height transform
@@ -12,6 +14,8 @@ test. The physical mean uses a full period while the canonical measure uses
 a half period; their pairing differs by exactly pi. This identifies the
 canonical weak derivative of the actual height transform, including odd jets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

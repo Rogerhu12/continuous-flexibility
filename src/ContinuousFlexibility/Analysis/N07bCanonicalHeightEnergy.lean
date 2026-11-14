@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07bCanonicalSourceEnergy
+module
+
+public import ContinuousFlexibility.Analysis.N07bCanonicalSourceEnergy
 
 /-!
 # The physical energy of the canonical unknown
@@ -8,6 +10,8 @@ This identifies the actual zeroth-order energy needed for membership in the
 fixed reference domain. As with the source formula, integrability is asserted
 only in the norm corollary, where it is an explicit hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

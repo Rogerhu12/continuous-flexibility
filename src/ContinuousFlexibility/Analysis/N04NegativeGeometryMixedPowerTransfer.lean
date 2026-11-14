@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
-import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
-import ContinuousFlexibility.Analysis.MixedDerivativeLocality
+module
+
+public import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
+public import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
+public import ContinuousFlexibility.Analysis.MixedDerivativeLocality
 
 /-!
 # Affine transport of actual mixed power bounds
@@ -9,6 +11,8 @@ An inclusion preserving the grading transports every supplied tower by
 uniqueness. The physical domain may be restricted at the same time; its
 material weights and distributed spatial exponent remain unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

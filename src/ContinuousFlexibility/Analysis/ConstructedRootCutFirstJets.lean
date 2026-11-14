@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04bConstructedRootTransmission
-import ContinuousFlexibility.Analysis.N04bRootInteriorRegularity
-import Mathlib.Analysis.Calculus.FDeriv.Pow
-import Mathlib.Analysis.SpecialFunctions.Sqrt
+module
+
+public import ContinuousFlexibility.Analysis.N04bConstructedRootTransmission
+public import ContinuousFlexibility.Analysis.N04bRootInteriorRegularity
+public import Mathlib.Analysis.Calculus.FDeriv.Pow
+public import Mathlib.Analysis.SpecialFunctions.Sqrt
 
 /-!
 # Forward first jets at the genuine middle travel cut
@@ -11,6 +13,8 @@ Their signed radial derivatives agree after reversal. The height jump
 follows by differentiating the exact identity h²(a v) = sqrt(ξ), so no
 trace of an unconstrained inverse or transmission identity is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

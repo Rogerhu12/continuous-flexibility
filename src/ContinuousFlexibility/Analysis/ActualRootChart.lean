@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RootChartWithin
-import ContinuousFlexibility.Analysis.RootInverseParameterDerivative
+module
+
+public import ContinuousFlexibility.Analysis.RootChartWithin
+public import ContinuousFlexibility.Analysis.RootInverseParameterDerivative
 
 /-!
 # The actual inverse-flow root chart
@@ -12,6 +14,8 @@ angular derivative, and positive Jacobian within the physical half-plane.
 
 A smooth extension across that half-plane boundary is not asserted here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aProfileNu
-import ContinuousFlexibility.Analysis.N07aNuSupport
-import ContinuousFlexibility.Analysis.SpacesCompactHeights
+module
+
+public import ContinuousFlexibility.Analysis.N07aProfileNu
+public import ContinuousFlexibility.Analysis.N07aNuSupport
+public import ContinuousFlexibility.Analysis.SpacesCompactHeights
 
 /-!
 # The actual border column in the existing scalar state model
@@ -10,6 +12,8 @@ Off that support both residuals are independent of the border parameter.
 Thus the genuine distinguished column is the derivative of the existing
 weighted scalar residual with its literal compact border-profile input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

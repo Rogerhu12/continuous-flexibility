@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06NormalizerRetype
-import ContinuousFlexibility.Analysis.N06NormalizerGraphShear
-import ContinuousFlexibility.Analysis.N06CompatibilityFourierSource
+module
+
+public import ContinuousFlexibility.Analysis.N06NormalizerRetype
+public import ContinuousFlexibility.Analysis.N06NormalizerGraphShear
+public import ContinuousFlexibility.Analysis.N06CompatibilityFourierSource
 
 /-!
 # The source shear is exactly the new physical reference relation
@@ -11,6 +13,8 @@ lambda times the old-minus-new normalizer, so the compatible source in
 ReferenceGraph is unchanged. The underlying height representation and
 all material parameters are the original ones.
 -/
+
+@[expose] public section
 
 noncomputable section
 

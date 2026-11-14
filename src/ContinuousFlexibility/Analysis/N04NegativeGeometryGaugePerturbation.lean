@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometryHeightPerturbation
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryHeightPerturbation
 
 /-!
 # Admissible gauges with a discontinuous interior height choice
@@ -8,6 +10,8 @@ variable. Switching between the identity multiplier at scalar parameter
 zero and a fixed interior multiplier elsewhere preserves admissibility.
 The last theorem records the resulting exact change of the pulled height.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04FlowPolynomialBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04FlowPolynomialBounds
 
 /-!
 # Exact spatial powers for the actual regularized flow
@@ -9,6 +11,8 @@ therefore preserves precisely that weight. Only the finite prefix being
 estimated enters the numerical cost; higher raw bounds merely provide a
 bound for the smooth field outside the prefix.
 -/
+
+@[expose] public section
 
 noncomputable section
 

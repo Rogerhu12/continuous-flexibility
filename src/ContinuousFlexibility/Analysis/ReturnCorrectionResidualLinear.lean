@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ReturnCoefficientParity
-import ContinuousFlexibility.Analysis.N01ReturnChartC1
-import Mathlib.Analysis.Calculus.DSlope
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCoefficientParity
+public import ContinuousFlexibility.Analysis.N01ReturnChartC1
+public import Mathlib.Analysis.Calculus.DSlope
 
 /-!
 # The actual correction as a linear function of an independent residual
@@ -12,6 +14,8 @@ displacement, velocity increment, drift increment, and speed increment.
 The divided difference equals the manuscript's derivative integral,
 including at zero residual, by the actual N01 inverse regularity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

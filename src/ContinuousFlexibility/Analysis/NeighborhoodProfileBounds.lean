@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.NeighborhoodStateBounds
-import ContinuousFlexibility.Analysis.StateControlCofiniteClosure
-import Mathlib.Analysis.Normed.Group.Bounded
+module
+
+public import ContinuousFlexibility.Analysis.NeighborhoodStateBounds
+public import ContinuousFlexibility.Analysis.StateControlCofiniteClosure
+public import Mathlib.Analysis.Normed.Group.Bounded
 
 /-!
 # Uniform size of the actual exponential profile perturbation
@@ -10,6 +12,8 @@ their cofinite decay with the finitely many remaining indices gives a uniform
 operator bound for the actual disjoint control sum.  No relation between a
 control interval and a reference cell is added to the nonlinear hypotheses.
 -/
+
+@[expose] public section
 
 noncomputable section
 

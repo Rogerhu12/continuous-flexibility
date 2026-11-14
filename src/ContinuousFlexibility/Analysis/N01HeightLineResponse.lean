@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01FlowHeightResponse
-import ContinuousFlexibility.Analysis.N01FlowMixedParameterBound
+module
+
+public import ContinuousFlexibility.Analysis.N01FlowHeightResponse
+public import ContinuousFlexibility.Analysis.N01FlowMixedParameterBound
 
 /-!
 # Mixed response on an actual height-only state line
@@ -9,6 +11,8 @@ coordinates fixed. The actual first q response is linear in that height.
 Its ordinary state derivative is therefore the integral of the height
 direction's characteristic response, at every partial-return radius.
 -/
+
+@[expose] public section
 
 noncomputable section
 

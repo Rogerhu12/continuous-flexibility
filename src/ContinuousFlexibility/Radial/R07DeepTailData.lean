@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R07DeepTailChange
-import ContinuousFlexibility.Radial.MorseCellMassTravel
+module
+
+public import ContinuousFlexibility.Radial.R07DeepTailChange
+public import ContinuousFlexibility.Radial.MorseCellMassTravel
 
 /-!
 # The actual deep-tail data attached to a realized Morse chain
@@ -14,6 +16,8 @@ All fields below are explicit functions of the given realized chain and its
 physical profile.  The geometric and integral lemmas do not assert the
 smallness or large-product estimates of `DeepTailHypotheses`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

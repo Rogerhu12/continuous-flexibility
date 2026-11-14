@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.FiniteFullJetMatching
-import ContinuousFlexibility.Analysis.OneSidedOrdinaryJets
-import ContinuousFlexibility.Analysis.BoundaryTaylorExtension
+module
+
+public import ContinuousFlexibility.Analysis.FiniteFullJetMatching
+public import ContinuousFlexibility.Analysis.OneSidedOrdinaryJets
+public import ContinuousFlexibility.Analysis.BoundaryTaylorExtension
 
 /-!
 # Ordinary finite jets at an actual boundary
@@ -9,6 +11,8 @@ An equation on an adjacent open set reaches every finite ordinary jet
 at a smooth closure point. Common precomposition then restricts these
 jets to the actual radial curve, including its zero order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

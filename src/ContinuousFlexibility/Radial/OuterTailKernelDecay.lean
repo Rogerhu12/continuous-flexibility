@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.OuterDecayProducts
-import ContinuousFlexibility.Radial.TailFundamentalGreenBounds
-import ContinuousFlexibility.Radial.TailFundamentalStates
+module
+
+public import ContinuousFlexibility.Radial.OuterDecayProducts
+public import ContinuousFlexibility.Radial.TailFundamentalGreenBounds
+public import ContinuousFlexibility.Radial.TailFundamentalStates
 
 /-!
 # The actual tail kernel with a uniform prefactor
@@ -9,6 +11,8 @@ The same two fundamental states are evaluated at the two physical points.
 Their explicit normalized node estimate gives the numerical prefactor 144,
 before the physical mass-resistance products are converted to cubic decay.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05ReferenceOutputAngularWeak
-import ContinuousFlexibility.Analysis.N05ReferenceFullAngularSobolev
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceOutputAngularWeak
+public import ContinuousFlexibility.Analysis.N05ReferenceFullAngularSobolev
 
 /-!
 # Reconstructing all positive angular jets of an actual output
@@ -8,6 +10,8 @@ The high spectral energy and the original low-mode energy control an
 actual periodic weak jet. This statement applies equally to the physical
 inverse and to its previously identified normal derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

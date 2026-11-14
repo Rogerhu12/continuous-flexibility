@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Scalar.WeightedSmoothTameLinear
-import ContinuousFlexibility.Scalar.WeightedOddHeightAlgebra
-import ContinuousFlexibility.Scalar.WeightedAngularProductGerms
-import ContinuousFlexibility.Scalar.WeightedProductTower
+module
+
+public import ContinuousFlexibility.Scalar.WeightedSmoothTameLinear
+public import ContinuousFlexibility.Scalar.WeightedOddHeightAlgebra
+public import ContinuousFlexibility.Scalar.WeightedAngularProductGerms
+public import ContinuousFlexibility.Scalar.WeightedProductTower
 
 /-!
 # Actual height products on unchanged smooth tame domains
@@ -10,6 +12,8 @@ The three bilinear height operations act on arbitrary common open source
 domains. The domain is retained, so independent height parameters can
 range over their entire spaces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

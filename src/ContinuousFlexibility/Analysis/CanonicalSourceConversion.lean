@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OpenDomainSourcePairing
-import ContinuousFlexibility.Analysis.CanonicalAngularStripMeasure
-import ContinuousFlexibility.Analysis.CanonicalStripGeometry
+module
+
+public import ContinuousFlexibility.Analysis.OpenDomainSourcePairing
+public import ContinuousFlexibility.Analysis.CanonicalAngularStripMeasure
+public import ContinuousFlexibility.Analysis.CanonicalStripGeometry
 
 /-!
 # Canonical source conversion on the actual physical domain
@@ -9,6 +11,8 @@ The state-dependent open domain and the true inverse on the fixed
 canonical strip supply the planar change of variables. Intersecting an
 arbitrary physical set with an angular boundary line is still null.
 -/
+
+@[expose] public section
 
 noncomputable section
 

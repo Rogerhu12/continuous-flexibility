@@ -1,7 +1,9 @@
-import Mathlib.Analysis.Calculus.Deriv.Slope
-import Mathlib.Analysis.Calculus.MeanValue
-import Mathlib.Topology.MetricSpace.Pseudo.Basic
-import Mathlib.Topology.UniformSpace.Cauchy
+module
+
+public import Mathlib.Analysis.Calculus.Deriv.Slope
+public import Mathlib.Analysis.Calculus.MeanValue
+public import Mathlib.Topology.MetricSpace.Pseudo.Basic
+public import Mathlib.Topology.UniformSpace.Cauchy
 
 /-!
 # Derivatives of a pointwise limit with uniform first-order remainders
@@ -11,6 +13,8 @@ point to be Cauchy. Their limit is the derivative of the pointwise limit.
 No convergence of the derivatives is assumed. This is the scalar step
 used to transfer interior directional jets to a continuous endpoint.
 -/
+
+@[expose] public section
 
 noncomputable section
 

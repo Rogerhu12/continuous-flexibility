@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N05ReferenceEndpointWeights
-import Mathlib.Algebra.BigOperators.Group.Finset.Basic
-import Mathlib.Data.Set.Card
-import Mathlib.Topology.Algebra.InfiniteSum.Real
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceEndpointWeights
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+public import Mathlib.Data.Set.Card
+public import Mathlib.Topology.Algebra.InfiniteSum.Real
 
 /-!
 # Summing over actual finite index fibers
@@ -11,6 +13,8 @@ for the size of each fiber transfers a summable numerical majorant to the
 piece family. The reciprocal discrete material weight is summable even
 when fiber cardinalities grow by a fixed coefficient power.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientVariation
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientVariation
 
 /-!
 # The mixed scalar and height response of the radial coefficient
@@ -7,6 +9,8 @@ The height increment at the reference state need not vanish.  Differentiating
 the actual scalar-parameter derivative once in a height direction removes
 that reference increment and gives the same nonzero radial response.
 -/
+
+@[expose] public section
 
 noncomputable section
 

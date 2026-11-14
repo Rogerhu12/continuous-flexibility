@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.RadialReferencePrincipalJetEnvelope
-import ContinuousFlexibility.Analysis.ReferencePrincipalPhysicalMaterialJets
-import ContinuousFlexibility.Analysis.PositiveChartRangeGeometry
+module
+
+public import ContinuousFlexibility.Analysis.RadialReferencePrincipalJetEnvelope
+public import ContinuousFlexibility.Analysis.ReferencePrincipalPhysicalMaterialJets
+public import ContinuousFlexibility.Analysis.PositiveChartRangeGeometry
 
 /-!
 # Principal bounds for the already chosen positive reference family
@@ -10,6 +12,8 @@ Their genuine inverse is used literally. The physical reciprocal profile
 is bounded using its actual cells and transported to the original positive
 midpoint sample. Only numerical finite-prefix bounds are chosen here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07bFiniteJetAlgebra
-import ContinuousFlexibility.Analysis.N07bAngularChainExpansion
+module
+
+public import ContinuousFlexibility.Analysis.N07bFiniteJetAlgebra
+public import ContinuousFlexibility.Analysis.N07bAngularChainExpansion
 
 /-!
 # Finite jets of a three-branch scalar coefficient recursion
@@ -9,6 +11,8 @@ every recursively generated coefficient is proved by induction, retaining
 the full invariant `j + n <= b`. The functions and derivatives are actual
 functions on an open set; equalities on that set are differentiated there.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Scalar.FormPullback
-import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
-import Mathlib.Tactic.FieldSimp
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.NormNum
-import Mathlib.Tactic.Ring
+module
+
+public import ContinuousFlexibility.Scalar.FormPullback
+public import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.Ring
 
 /-!
 # Reference Liouville charts on compact radial pieces
@@ -18,6 +20,8 @@ the state-dependent characteristic coordinates or the Tricomi operator in
 Part B is made here. Closed physical endpoints are regular because the
 reference density is positive there; the chart itself is globally smooth.
 -/
+
+@[expose] public section
 
 noncomputable section
 

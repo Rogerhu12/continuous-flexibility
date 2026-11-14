@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N03NegativePotentialPhysicalJets
-import ContinuousFlexibility.Analysis.N03CoefficientFDerivJets
-import ContinuousFlexibility.Analysis.CanonicalCutPartitionTopology
-import ContinuousFlexibility.Analysis.N01ControlledRootInput
+module
+
+public import ContinuousFlexibility.Analysis.N03NegativePotentialPhysicalJets
+public import ContinuousFlexibility.Analysis.N03CoefficientFDerivJets
+public import ContinuousFlexibility.Analysis.CanonicalCutPartitionTopology
+public import ContinuousFlexibility.Analysis.N01ControlledRootInput
 
 /-!
 # From the two physical halves to every negative canonical potential
@@ -13,6 +15,8 @@ negative indices identifies every negative piece with a genuine cut
 half, and the actual inverse-field closure then gives the required
 potential estimates on one common state neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

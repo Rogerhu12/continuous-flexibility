@@ -1,10 +1,12 @@
-import ContinuousFlexibility.Analysis.ActualNegativeReferenceHeightProfileJets
-import ContinuousFlexibility.Analysis.ActualNegativeLengthMaterialBounds
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
-import ContinuousFlexibility.Analysis.LocalMixedProductBounds
-import ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient
-import ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets
+module
+
+public import ContinuousFlexibility.Analysis.ActualNegativeReferenceHeightProfileJets
+public import ContinuousFlexibility.Analysis.ActualNegativeLengthMaterialBounds
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+public import ContinuousFlexibility.Analysis.LocalMixedProductBounds
+public import ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient
+public import ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets
 
 /-!
 # Ten actual negative geometric atoms at the original sample
@@ -12,6 +14,8 @@ import ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets
 Only the material envelope is enlarged. The chart, inverse, height, true
 optical radius, physical half and stored sample remain those of the same K.
 -/
+
+@[expose] public section
 
 noncomputable section
 

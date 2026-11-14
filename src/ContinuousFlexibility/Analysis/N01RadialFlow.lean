@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.RadialHeight
-import ContinuousFlexibility.Analysis.StateControlCofiniteClosure
-import ContinuousFlexibility.Analysis.OpticalTravelVariation
+module
+
+public import ContinuousFlexibility.Radial.RadialHeight
+public import ContinuousFlexibility.Analysis.StateControlCofiniteClosure
+public import ContinuousFlexibility.Analysis.OpticalTravelVariation
 
 /-!
 # The actual radial coefficients and ordinary flow at zero residual parameter
@@ -11,6 +13,8 @@ the ordinary flow in N01 is the initial angle minus the actual partial
 optical travel.  The last lemmas specialize this identity to an actual
 single-kappa path without any assumption on its weighted norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

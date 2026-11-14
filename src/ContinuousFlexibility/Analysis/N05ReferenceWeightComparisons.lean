@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05ReferenceEndpointWeights
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceEndpointWeights
 
 /-!
 # The actual endpoint weight in reference cell coordinates
@@ -7,6 +9,8 @@ The error in the cubic endpoint exponent is absorbed by one material
 envelope, in both directions. The exponent is arbitrary and the material
 loss does not grow with it; only the multiplicative constant changes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

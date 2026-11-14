@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06H2Approximation
-import ContinuousFlexibility.Analysis.N06WeightedLpLimits
-import ContinuousFlexibility.Analysis.N06DegenerateGraph
-import ContinuousFlexibility.Statements.N06Parts
+module
+
+public import ContinuousFlexibility.Analysis.N06H2Approximation
+public import ContinuousFlexibility.Analysis.N06WeightedLpLimits
+public import ContinuousFlexibility.Analysis.N06DegenerateGraph
+public import ContinuousFlexibility.Statements.N06Parts
 
 /-!
 # The positive-cylinder graph estimate for actual weak solutions
@@ -10,6 +12,8 @@ Closed-interval regularity supplies the same almost-everywhere representative.
 Its H2 approximation transfers the smooth estimate, with precisely the same
 constant and without imposing endpoint conditions on the original solution.
 -/
+
+@[expose] public section
 
 noncomputable section
 

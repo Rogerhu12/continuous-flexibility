@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N03CoefficientProbeSelection
+module
+
+public import ContinuousFlexibility.Analysis.N03CoefficientProbeSelection
 
 /-!
 # One ordinary state neighborhood for the corrected coefficient jets
@@ -9,6 +11,8 @@ state grading. A single half-radius choice controls the sum of the state
 and scalar seminorms and transports every component and derivative order
 without altering the derivative loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

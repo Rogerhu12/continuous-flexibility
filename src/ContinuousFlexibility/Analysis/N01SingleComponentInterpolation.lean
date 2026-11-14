@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01SingleComponentFlow
-import ContinuousFlexibility.Analysis.CircleSmoothDirectionsOperations
+module
+
+public import ContinuousFlexibility.Analysis.N01SingleComponentFlow
+public import ContinuousFlexibility.Analysis.CircleSmoothDirectionsOperations
 
 /-!
 # The same cutoff interpolation with a varying physical radius
@@ -9,6 +11,8 @@ actual interpolation used in the corrected flow, with the supplied
 cutoff evaluated at the variable radius. Positivity follows from the
 original return-chart identities and the cutoff range.
 -/
+
+@[expose] public section
 
 noncomputable section
 

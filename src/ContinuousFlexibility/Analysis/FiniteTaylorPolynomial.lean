@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.IteratedFDerivSymmetry
-import Mathlib.Analysis.Analytic.IteratedFDeriv
-import Mathlib.Analysis.Calculus.MeanValue
+module
+
+public import ContinuousFlexibility.Analysis.IteratedFDerivSymmetry
+public import Mathlib.Analysis.Analytic.IteratedFDeriv
+public import Mathlib.Analysis.Calculus.MeanValue
 
 /-!
 # Finite Taylor polynomials of smooth real functions
@@ -12,6 +14,8 @@ The top derivative is constant on the whole space and all higher
 derivatives vanish. The construction needs neither analyticity of the
 original function nor completeness of its target.
 -/
+
+@[expose] public section
 
 noncomputable section
 

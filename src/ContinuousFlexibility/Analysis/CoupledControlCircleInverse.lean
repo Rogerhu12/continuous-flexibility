@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CoupledConstantCircle
-import ContinuousFlexibility.Analysis.CoupledInverseContinuity
+module
+
+public import ContinuousFlexibility.Analysis.CoupledConstantCircle
+public import ContinuousFlexibility.Analysis.CoupledInverseContinuity
 
 /-!
 # The diagonal inverse on the closed constant-circle space
@@ -11,6 +13,8 @@ the same factor two controls every order. Hamilton's inverse-family theorem
 therefore needs no separate assumption of parameter continuity in an
 operator-norm topology.
 -/
+
+@[expose] public section
 
 noncomputable section
 

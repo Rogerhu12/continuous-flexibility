@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderPlancherel
-import ContinuousFlexibility.Analysis.OneHighCircleFourierProduct
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderPlancherel
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierProduct
 
 /-!
 # Linearity of the actual mixed Fourier transform
@@ -9,6 +11,8 @@ This follows from the actual angular coefficient functional and the radial
 L2 Fourier map. In particular, Plancherel applies to differences without
 assuming physical or frequency L1 integrability.
 -/
+
+@[expose] public section
 
 noncomputable section
 

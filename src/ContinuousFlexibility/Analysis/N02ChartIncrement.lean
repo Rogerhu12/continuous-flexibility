@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CircleCompositionModel
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Analysis.CircleCompositionModel
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # The actual chart increment in the physical circle model
@@ -8,6 +10,8 @@ Composition with the decoded left chart defines the linear increment
 required by N02 at every state. It retains the odd sector whenever the
 state chart is odd, and its fixed-chart operator has one level of loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

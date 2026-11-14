@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.FourierOrthogonality
-import Mathlib.MeasureTheory.Function.L2Space
+module
+
+public import ContinuousFlexibility.Radial.FourierOrthogonality
+public import Mathlib.MeasureTheory.Function.L2Space
 
 /-!
 # The actual normalized angular integral as an L² inner product
@@ -9,6 +11,8 @@ This identifies the existing angularAverage and angularPairing with genuine
 integrals and L² inner products, so finite Hilbert-space estimates apply
 directly to the manuscript's coefficient normalization.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

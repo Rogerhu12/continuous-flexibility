@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.AngularTaylorPolynomial
-import ContinuousFlexibility.Analysis.PositiveEndpointCutoff
+module
+
+public import ContinuousFlexibility.Analysis.AngularTaylorPolynomial
+public import ContinuousFlexibility.Analysis.PositiveEndpointCutoff
 
 /-!
 # A positive angular Taylor patch at one endpoint
@@ -9,6 +11,8 @@ The positive radial orders are small after the fixed collar is chosen.
 This separates angular positivity from potentially large radial
 derivatives of the cutoff.
 -/
+
+@[expose] public section
 
 noncomputable section
 

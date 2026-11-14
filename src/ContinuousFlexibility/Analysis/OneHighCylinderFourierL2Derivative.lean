@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderFourierL2Inversion
-import Mathlib.MeasureTheory.Integral.IntegralEqImproper
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderFourierL2Inversion
+public import Mathlib.MeasureTheory.Integral.IntegralEqImproper
 
 /-!
 # Actual radial derivatives under the `L²` Fourier transform
@@ -10,6 +12,8 @@ three product integrability conditions, so no boundary decay or physical
 `L¹` hypothesis is added. The Fourier multiplier identity follows by
 testing against compactly supported smooth functions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

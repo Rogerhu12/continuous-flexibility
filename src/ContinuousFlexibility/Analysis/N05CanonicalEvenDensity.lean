@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalTestDensity
-import ContinuousFlexibility.Analysis.SpacesCylinderEvenJets
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalTestDensity
+public import ContinuousFlexibility.Analysis.SpacesCylinderEvenJets
 
 /-!
 # Closure of actual even canonical test functions
@@ -9,6 +11,8 @@ compact radial support of a canonical test. Its continuous L² action
 therefore shows that the closure of the even tests is exactly the
 reflection-fixed subspace, without a supplied density hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04bOperatorGerms
-import Mathlib.Analysis.Calculus.ContDiff.Operations
-import Mathlib.Tactic.FieldSimp
-import Mathlib.Tactic.Ring
+module
+
+public import ContinuousFlexibility.Analysis.N04bOperatorGerms
+public import Mathlib.Analysis.Calculus.ContDiff.Operations
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.Ring
 
 /-!
 # Localizing an actual canonical operator identity
@@ -14,6 +16,8 @@ whole germ, and operator locality transfers both divergence evaluations.
 Neither stored coefficient field is required to be differentiable. The
 result concerns interior points of open chart domains.
 -/
+
+@[expose] public section
 
 noncomputable section
 

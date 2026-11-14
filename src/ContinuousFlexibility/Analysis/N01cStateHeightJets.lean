@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cPhysicalHeightJets
-import ContinuousFlexibility.Analysis.MaterialHeightRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N01cPhysicalHeightJets
+public import ContinuousFlexibility.Analysis.MaterialHeightRegularity
 
 /-!
 # Continuous-linear physical jets of the actual state height direction
@@ -11,6 +13,8 @@ needed by the nonlinear coefficient formula are obtained by the actual
 coordinate differentiation and quotient rules.  Their parameter towers
 are defined on the full joint state/real-parameter space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

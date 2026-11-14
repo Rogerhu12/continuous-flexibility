@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aSampleLinearJets
-import ContinuousFlexibility.Analysis.N07aCanonicalRepresentationPairing
+module
+
+public import ContinuousFlexibility.Analysis.N07aSampleLinearJets
+public import ContinuousFlexibility.Analysis.N07aCanonicalRepresentationPairing
 
 /-!
 # Bounded open coefficients supplied by the actual source-linear estimates
@@ -8,6 +10,8 @@ Every fixed input gives the same original scalar function and its actual
 mixed jets. Pointwise estimates on the open piece imply precisely the
 boundedness required to form its genuine L² classes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

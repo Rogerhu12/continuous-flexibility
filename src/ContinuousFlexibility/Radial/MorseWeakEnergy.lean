@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.MorseModel
-import Mathlib.Analysis.Distribution.AEEqOfIntegralContDiff
-import Mathlib.Analysis.InnerProductSpace.PiL2
-import Mathlib.Analysis.InnerProductSpace.Projection.Submodule
-import Mathlib.Analysis.Normed.Operator.NormedSpace
+module
+
+public import ContinuousFlexibility.Radial.MorseModel
+public import Mathlib.Analysis.Distribution.AEEqOfIntegralContDiff
+public import Mathlib.Analysis.InnerProductSpace.PiL2
+public import Mathlib.Analysis.InnerProductSpace.Projection.Submodule
+public import Mathlib.Analysis.Normed.Operator.NormedSpace
 
 /-!
 # The actual weak physical Morse energy space
@@ -12,6 +14,8 @@ and multiplication by `exp (-x)` are characterized by actual smooth compact
 tests. Their graph is proved closed; no closed-operator or spectral hypothesis
 is part of the construction. The physical Morse form is built on this graph.
 -/
+
+@[expose] public section
 
 noncomputable section
 

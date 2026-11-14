@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.SmoothDirectionsFixedLast
-import ContinuousFlexibility.Analysis.ScalarPlaneJetRegularity
-import ContinuousFlexibility.Analysis.MixedDerivativeLocality
-import ContinuousFlexibility.Analysis.MixedDerivativeHierarchy
-import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
+module
+
+public import ContinuousFlexibility.Analysis.SmoothDirectionsFixedLast
+public import ContinuousFlexibility.Analysis.ScalarPlaneJetRegularity
+public import ContinuousFlexibility.Analysis.MixedDerivativeLocality
+public import ContinuousFlexibility.Analysis.MixedDerivativeHierarchy
+public import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
 
 /-!
 # Spatial regularity of the actual joint directional jets
@@ -13,6 +15,8 @@ induction yields spatial smoothness without an extra regularity
 assumption. Fixing one spatial direction in the last slot gives the
 same derivatives while preserving the order of the parameter inputs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aGeometryJetBounds
-import ContinuousFlexibility.Analysis.N07aSampleEnvelopes
-import ContinuousFlexibility.Analysis.N07aCurrentPrincipalBounds
+module
+
+public import ContinuousFlexibility.Analysis.N07aGeometryJetBounds
+public import ContinuousFlexibility.Analysis.N07aSampleEnvelopes
+public import ContinuousFlexibility.Analysis.N07aCurrentPrincipalBounds
 
 /-!
 # Actual interval lengths as sampled subpower envelopes
@@ -8,6 +10,8 @@ import ContinuousFlexibility.Analysis.N07aCurrentPrincipalBounds
 These bounds come from the reference raw geometric jets. In particular
 no lower bound E0 ≥ 1 or independent interval-size hypothesis is added.
 -/
+
+@[expose] public section
 
 noncomputable section
 

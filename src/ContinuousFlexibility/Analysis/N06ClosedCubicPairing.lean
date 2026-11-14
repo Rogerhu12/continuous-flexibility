@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06FiniteWeakGreen
-import ContinuousFlexibility.Analysis.N06WeakCubicLimit
-import ContinuousFlexibility.Analysis.N06HalfPhysicalPairing
-import ContinuousFlexibility.Analysis.N06UnitWeakGraphData
+module
+
+public import ContinuousFlexibility.Analysis.N06FiniteWeakGreen
+public import ContinuousFlexibility.Analysis.N06WeakCubicLimit
+public import ContinuousFlexibility.Analysis.N06HalfPhysicalPairing
+public import ContinuousFlexibility.Analysis.N06UnitWeakGraphData
 
 /-!
 # Cubic perturbation pairings for tests nonzero at the endpoints
@@ -11,6 +13,8 @@ endpoint values therefore vanish for every finite C1/H2 field. The
 resulting finite identity passes to the same original L2 value and five
 graph limits. No boundary trace of the infinite reconstruction is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

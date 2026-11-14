@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06AiryRadialGerm
-import ContinuousFlexibility.Analysis.N06RootSpeedExtension
+module
+
+public import ContinuousFlexibility.Analysis.N06AiryRadialGerm
+public import ContinuousFlexibility.Analysis.N06RootSpeedExtension
 
 /-!
 # The genuine reference Airy principal normal form
@@ -9,6 +11,8 @@ On its actual root collar it agrees with the physical speed factor.
 The true derivative identity therefore gives radial principal coefficient
 one and angular coefficient minus the new radial coordinate, on both sides.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aNormalizedSpaces
+module
+
+public import ContinuousFlexibility.Analysis.N07aNormalizedSpaces
 
 /-!
 # Gradings of the normalized scalar-inverse parameters
@@ -7,6 +9,8 @@ The sector parameter and its two evaluation products use the exact sum
 gradings in the frozen scalar-inverse target. Naming them keeps later
 operator statements from repeatedly elaborating the nested state kernel.
 -/
+
+@[expose] public section
 
 noncomputable section
 

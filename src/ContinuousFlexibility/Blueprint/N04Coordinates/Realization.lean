@@ -1,14 +1,16 @@
-import ContinuousFlexibility.Blueprint.Statements
-import ContinuousFlexibility.Analysis.N04FlowJetsTarget
-import ContinuousFlexibility.Analysis.N04RealizationLeadOptical
-import ContinuousFlexibility.Analysis.N04RealizationLeadReference
-import ContinuousFlexibility.Analysis.N04RealizationLeadSample
-import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentProof
-import ContinuousFlexibility.Blueprint.N04Coordinates.Realization.PositiveGeometry
-import ContinuousFlexibility.Blueprint.N04Coordinates.Realization.NegativeGeometry
-import ContinuousFlexibility.Blueprint.N04Coordinates.Realization.PulledFields
-import ContinuousFlexibility.Blueprint.N04Coordinates.Realization.SourceColumns
-import ContinuousFlexibility.Blueprint.N04Coordinates.Realization.Principal
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
+public import ContinuousFlexibility.Analysis.N04FlowJetsTarget
+public import ContinuousFlexibility.Analysis.N04RealizationLeadOptical
+public import ContinuousFlexibility.Analysis.N04RealizationLeadReference
+public import ContinuousFlexibility.Analysis.N04RealizationLeadSample
+public import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentProof
+public import ContinuousFlexibility.Blueprint.N04Coordinates.Realization.PositiveGeometry
+public import ContinuousFlexibility.Blueprint.N04Coordinates.Realization.NegativeGeometry
+public import ContinuousFlexibility.Blueprint.N04Coordinates.Realization.PulledFields
+public import ContinuousFlexibility.Blueprint.N04Coordinates.Realization.SourceColumns
+public import ContinuousFlexibility.Blueprint.N04Coordinates.Realization.Principal
 
 /-!
 # N04Coordinates: controlled coordinate realization
@@ -35,6 +37,8 @@ in particular lines 1211–1760.
 Task: docs/tasks/N04Coordinates-Realization.md; subnodes:
 docs/tasks/N04Realization-*.md.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

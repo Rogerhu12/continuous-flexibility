@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N07aAngularReferenceSource
-import ContinuousFlexibility.Analysis.N07aAngularReferenceFlux
-import ContinuousFlexibility.Analysis.N07aPhysicalPieceBound
-import ContinuousFlexibility.Radial.ReferenceCosineJacobi
-import ContinuousFlexibility.Radial.R11bPhysicalPairing
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceSource
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceFlux
+public import ContinuousFlexibility.Analysis.N07aPhysicalPieceBound
+public import ContinuousFlexibility.Radial.ReferenceCosineJacobi
+public import ContinuousFlexibility.Radial.R11bPhysicalPairing
 
 /-!
 # Actual radial and angular parts of the reference source
@@ -11,6 +13,8 @@ The interface set is null by the original canonical cover. On every open
 piece the measurable reference source is the actual right flux derivative
 plus the true angular second derivative. The latter has zero circle mean.
 -/
+
+@[expose] public section
 
 noncomputable section
 

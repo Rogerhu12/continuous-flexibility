@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PhysicalTopology
-import ContinuousFlexibility.Analysis.CircleMultilinearRealization
+module
+
+public import ContinuousFlexibility.Analysis.PhysicalTopology
+public import ContinuousFlexibility.Analysis.CircleMultilinearRealization
 
 /-!
 # Continuous multilinear realization in the physical source kernel
@@ -8,6 +10,8 @@ Every scalar jet is realized in the supplied height model and its actual
 compatibility kernel. The physical norm identity and a product seminorm
 bound prove continuity in each coordinate of the given projective limit.
 -/
+
+@[expose] public section
 
 noncomputable section
 

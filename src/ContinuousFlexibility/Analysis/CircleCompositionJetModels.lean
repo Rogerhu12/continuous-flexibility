@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CircleCompositionMixedJets
-import ContinuousFlexibility.Analysis.CircleDifferentialOperators
-import ContinuousFlexibility.Analysis.CircleProductSmoothTame
+module
+
+public import ContinuousFlexibility.Analysis.CircleCompositionMixedJets
+public import ContinuousFlexibility.Analysis.CircleDifferentialOperators
+public import ContinuousFlexibility.Analysis.CircleProductSmoothTame
 
 /-!
 # Actual model values of all chart-composition parameter jets
@@ -10,6 +12,8 @@ circle space. Finite products start with an actual circle vector, so
 the construction never requires the constant sequence of circle fields
 to have finite weighted energy.
 -/
+
+@[expose] public section
 
 noncomputable section
 

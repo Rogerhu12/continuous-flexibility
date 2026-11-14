@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06CurrentNegativeGreen
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentNegativeGreen
 
 /-!
 # Actual negative operator pairings and the original graph approximation
@@ -10,6 +12,8 @@ family extracted from the original N05 graph gives finite actual-operator
 pairings and their L2 bulk limit. No equation, trace matching, or regularity
 of the bare physical coefficient fields is supplied as an extra input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import Mathlib.Algebra.BigOperators.Intervals
-import Mathlib.Basic.Real.Basic
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Algebra.BigOperators.Intervals
+public import Mathlib.Basic.Real.Basic
+public import Mathlib.Tactic.Ring
 
 /-!
 # Products of one-step node decay estimates
@@ -8,6 +10,8 @@ import Mathlib.Tactic.Ring
 The interval product retains the individual edge factors, as required by
 the localized tail Green estimate.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

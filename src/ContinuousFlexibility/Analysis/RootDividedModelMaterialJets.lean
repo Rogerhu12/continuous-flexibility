@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RootChartPointwiseMaterialJets
-import ContinuousFlexibility.Analysis.RootDividedHeightMaterialJets
+module
+
+public import ContinuousFlexibility.Analysis.RootChartPointwiseMaterialJets
+public import ContinuousFlexibility.Analysis.RootDividedHeightMaterialJets
 
 /-!
 # One fixed-loss estimate for the actual divided root model
@@ -9,6 +11,8 @@ low order and loss. The three quantitative inputs are the genuine even
 field, odd coefficient, and divided determinant. The actual chart,
 Jacobian, height and inverse height are all conclusions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

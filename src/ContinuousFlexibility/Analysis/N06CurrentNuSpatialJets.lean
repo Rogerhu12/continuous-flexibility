@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06NuSpatialDifference
-import ContinuousFlexibility.Analysis.N06NuPhysicalRegularity
-import ContinuousFlexibility.Analysis.N06SourceSpatialTransport
-import ContinuousFlexibility.Analysis.N06FiniteSourceNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N06NuSpatialDifference
+public import ContinuousFlexibility.Analysis.N06NuPhysicalRegularity
+public import ContinuousFlexibility.Analysis.N06SourceSpatialTransport
+public import ContinuousFlexibility.Analysis.N06FiniteSourceNormalization
 
 /-!
 # Actual current nu source jets from primitive spatial geometry
@@ -15,6 +17,8 @@ uniform bound for actual forward-chart weight and adjugate spatial jets
 on the fixed chi support. It is stated explicitly and is not claimed as
 a consequence of N04's separate, fixed-state smoothness assertions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

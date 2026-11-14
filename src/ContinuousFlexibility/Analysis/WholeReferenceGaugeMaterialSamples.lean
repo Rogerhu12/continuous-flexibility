@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ActualNegativeMaterialSamples
-import ContinuousFlexibility.Analysis.PositiveComponentMaterialDecay
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData
+module
+
+public import ContinuousFlexibility.Analysis.ActualNegativeMaterialSamples
+public import ContinuousFlexibility.Analysis.PositiveComponentMaterialDecay
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData
 
 /-!
 # Material samples of the same reference-gauged whole atlas
@@ -11,6 +13,8 @@ One endpoint-coordinate comparison therefore controls the real sample of
 every current piece, before the state, component, gauge and physical point.
 No point-to-sample reverse coefficient bound on positive pieces is asserted.
 -/
+
+@[expose] public section
 
 noncomputable section
 

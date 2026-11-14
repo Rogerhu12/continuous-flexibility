@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cPhysicalGraphNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N01cPhysicalGraphNormalization
 
 /-!
 # Uniform constants for a finite physical mixed-derivative prefix
@@ -7,6 +9,8 @@ The common high index is already fixed by the spatial cutoff and the
 parameter prefix. Only the two scalar material constants are enlarged
 over the finitely many positive radial and positive parameter orders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

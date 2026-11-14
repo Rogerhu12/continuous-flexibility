@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06Neighborhood
-import Mathlib.Analysis.Calculus.MeanValue
+module
+
+public import ContinuousFlexibility.Analysis.N06Neighborhood
+public import Mathlib.Analysis.Calculus.MeanValue
 
 /-!
 # Small current coefficient jets from the N01 directional estimates
@@ -9,6 +11,8 @@ actual coefficient difference instead follows from its vanishing at the
 reference state and the genuine first derivative along the state segment.
 The argument retains the factor `H^(3/4)` and the fixed coefficient power.
 -/
+
+@[expose] public section
 
 noncomputable section
 

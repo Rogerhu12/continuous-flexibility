@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.PositiveBufferEnergyExterior
-import ContinuousFlexibility.Radial.PositiveBufferGeometry
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferEnergyExterior
+public import ContinuousFlexibility.Radial.PositiveBufferGeometry
 
 /-!
 # The finite and exterior profiles of the frozen buffer data
@@ -10,6 +12,8 @@ their physical conormal coefficients, and uniform comparison with the
 barrier masses.  The only upper-potential information used is the given
 bound in the cut layers.
 -/
+
+@[expose] public section
 
 noncomputable section
 

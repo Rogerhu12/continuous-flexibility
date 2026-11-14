@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentData
-import ContinuousFlexibility.Analysis.N04PulledFieldsDifferenceData
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentData
+public import ContinuousFlexibility.Analysis.N04PulledFieldsDifferenceData
 
 /-!
 # Current jet data from the genuine positive parameter jets
@@ -11,6 +13,8 @@ factor, and its spatial loss is the single loss of parameter order one.
 Positive parameter orders are unchanged by subtraction of the reference;
 the zeroth order follows from the value bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

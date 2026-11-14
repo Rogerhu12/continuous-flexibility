@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aIntervalCoefficientExhaustion
+module
+
+public import ContinuousFlexibility.Analysis.N07aIntervalCoefficientExhaustion
 
 /-!
 # The cubic graph estimate with only open-interval coefficient smoothness
@@ -8,6 +10,8 @@ approximated. Their genuine inset approximants retain the lower cylinder
 weight and the same quantitative bounds, and dominated L² convergence
 identifies the limit with the prescribed actual differential expression.
 -/
+
+@[expose] public section
 
 noncomputable section
 

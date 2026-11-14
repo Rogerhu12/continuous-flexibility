@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.LogPolynomialEnvelope
-import ContinuousFlexibility.Analysis.OneSidedEndpointHeight
+module
+
+public import ContinuousFlexibility.Analysis.LogPolynomialEnvelope
+public import ContinuousFlexibility.Analysis.OneSidedEndpointHeight
 
 /-!
 # Finite logarithmic endpoint jets from actual positive height jets
@@ -8,6 +10,8 @@ The scalar logarithm envelope is evaluated at each genuine root point.
 The one-sided smoothness identifies its radial trace with the ordinary
 jet there; no smooth extension outside the physical strip is required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

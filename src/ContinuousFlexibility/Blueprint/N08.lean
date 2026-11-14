@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Blueprint.Statements
-import ContinuousFlexibility.Analysis.N08Assembly
-import ContinuousFlexibility.Analysis.N08CircleUniform
-import ContinuousFlexibility.Analysis.N08ParameterRestriction
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
+public import ContinuousFlexibility.Analysis.N08Assembly
+public import ContinuousFlexibility.Analysis.N08CircleUniform
+public import ContinuousFlexibility.Analysis.N08ParameterRestriction
 
 /-!
 # Blueprint node N08
@@ -14,6 +16,8 @@ Task file: `docs/tasks/N08.md`. The actual residual, control columns, and
 uniform diagonal are assembled on one common neighborhood. All previous
 stages retain the same reference, physical spaces, and scalar inverse.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

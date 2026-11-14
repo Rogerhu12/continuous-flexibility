@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01CorrectionOriginalFactorGrowth
-import ContinuousFlexibility.Analysis.N04PulledFieldsFixedBaseMixedGrowth
+module
+
+public import ContinuousFlexibility.Analysis.N01CorrectionOriginalFactorGrowth
+public import ContinuousFlexibility.Analysis.N04PulledFieldsFixedBaseMixedGrowth
 
 /-!
 # The actual original polynomial factors on one parameter neighborhood
@@ -10,6 +12,8 @@ uniform joint growth with one fixed base. The exact identity
 genuine original towers are retained, on the original sector parameter
 space, before any parameter order or spatial loss is selected.
 -/
+
+@[expose] public section
 
 noncomputable section
 

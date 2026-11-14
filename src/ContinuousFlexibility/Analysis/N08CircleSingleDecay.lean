@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N08CircleSingle
+module
+
+public import ContinuousFlexibility.Analysis.N08CircleSingle
 
 /-!
 # Arbitrary envelope decay from one retained circle
@@ -7,6 +9,8 @@ Increasing the material exponent of each angular jet embeds the order
 `s` energy into the order `s + N` energy. Retaining one label therefore
 gains the exact factor `M_m ^ (-N)` in every actual projective grading.
 -/
+
+@[expose] public section
 
 noncomputable section
 

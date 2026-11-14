@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bRootCutHeight
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Analysis.N04bRootCutHeight
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # The root-cut identity for the actual canonical-height definition
@@ -11,6 +13,8 @@ no transmission equation. One side parameter handles both endpoints.
 The result does not identify the moving physical cut X(T/2, θ) with a
 state-independent radial circle.
 -/
+
+@[expose] public section
 
 noncomputable section
 

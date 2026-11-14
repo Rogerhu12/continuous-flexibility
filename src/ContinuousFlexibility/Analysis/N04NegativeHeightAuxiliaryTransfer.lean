@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometryAuxiliary
-import ContinuousFlexibility.Analysis.N04RealizationLeadNegativeSplit
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryAuxiliary
+public import ContinuousFlexibility.Analysis.N04RealizationLeadNegativeSplit
 
 /-!
 # One negative-height neighborhood for every auxiliary column
@@ -9,6 +11,8 @@ nor the actual height families.  A current-data certificate obtained at
 one auxiliary column therefore transfers with its entire neighborhood,
 its genuine directional towers and every quantitative constant.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,9 +1,11 @@
-import Mathlib.Analysis.Normed.Module.Seminorm.Basic
-import Mathlib.Topology.Algebra.Module.Multilinear.Basic
-import Mathlib.Topology.Order.OrderClosed
-import Mathlib.Topology.Instances.Real.Lemmas
-import Mathlib.Tactic.Positivity
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Analysis.Normed.Module.Seminorm.Basic
+public import Mathlib.Topology.Algebra.Module.Multilinear.Basic
+public import Mathlib.Topology.Order.OrderClosed
+public import Mathlib.Topology.Instances.Real.Lemmas
+public import Mathlib.Tactic.Positivity
+public import Mathlib.Tactic.Ring
 
 /-!
 # Homogeneous normalization of local multilinear estimates
@@ -14,6 +16,8 @@ of the low seminorm; passing to `δ = 0` is an actual continuous limit.
 The explicit normalization constant depends only on the arity, radius and
 original bound, so the result is uniform in families of multilinear maps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

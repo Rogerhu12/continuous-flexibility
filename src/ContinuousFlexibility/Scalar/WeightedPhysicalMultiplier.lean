@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.WeightedRadialMultiplier
-import ContinuousFlexibility.Scalar.WeightedJetNormOperator
-import ContinuousFlexibility.Scalar.WeightedCoefficientAlgebra
+module
+
+public import ContinuousFlexibility.Scalar.WeightedRadialMultiplier
+public import ContinuousFlexibility.Scalar.WeightedJetNormOperator
+public import ContinuousFlexibility.Scalar.WeightedCoefficientAlgebra
 
 /-!
 # Actual physical radial multiplication on the weighted spaces
@@ -10,6 +12,8 @@ material-coordinate derivatives are controlled by the actual subpower
 envelope. Multiplication preserves the original zero extension and has
 loss one and base zero in every weighted height model.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04RealizationFiniteScalarComposition
-import ContinuousFlexibility.Analysis.N04RealizationParameterRescale
-import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
-import ContinuousFlexibility.Analysis.N01cOuterDenominatorJets
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationFiniteScalarComposition
+public import ContinuousFlexibility.Analysis.N04RealizationParameterRescale
+public import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
+public import ContinuousFlexibility.Analysis.N01cOuterDenominatorJets
 
 /-!
 # Scalar kernels with a finite parameter cost
@@ -12,6 +14,8 @@ then leaves one high seminorm and preserves the positive parameter height
 factor. The original low order, spatial domain, and parameter neighborhood
 are retained throughout.
 -/
+
+@[expose] public section
 
 noncomputable section
 

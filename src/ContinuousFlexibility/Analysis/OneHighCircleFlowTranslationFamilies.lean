@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowCircleFamilies
-import ContinuousFlexibility.Analysis.OneHighCircleFlowReferenceIntegrability
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowCircleFamilies
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowReferenceIntegrability
 
 /-!
 # Actual translation-displacement circle jets
@@ -9,6 +11,8 @@ periodic. Subtracting the primitive of an angle-independent reference
 speed gives precisely the displacement from the reference translation.
 All circle representatives use the existing canonical periodic jets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

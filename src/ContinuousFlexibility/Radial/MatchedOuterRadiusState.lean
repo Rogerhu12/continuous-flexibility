@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OuterFundamentalPair
+module
+
+public import ContinuousFlexibility.Radial.OuterFundamentalPair
 
 /-!
 # The same outer fundamental states after a radius dilation
@@ -10,6 +12,8 @@ the actual profile and derivative laws and scales the boundary parameter
 by profile height alone. No new Morse realization or deep-tail basis is
 introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

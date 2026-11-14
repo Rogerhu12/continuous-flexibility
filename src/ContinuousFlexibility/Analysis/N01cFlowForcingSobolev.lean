@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cCircleForcingProducts
-import ContinuousFlexibility.Analysis.N01cFlowForcingExpansion
+module
+
+public import ContinuousFlexibility.Analysis.N01cCircleForcingProducts
+public import ContinuousFlexibility.Analysis.N01cFlowForcingExpansion
 
 /-!
 # Sobolev one-high products for the genuine truncated flow forcing
@@ -11,6 +13,8 @@ the qualitative smooth periodic factors; no flow or forcing size estimate
 is assumed. Substitution of the speed estimates and the strict lower-order
 induction then leaves the common-base state interpolation step.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFourierCompositionLow
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierCompositionLow
 
 /-!
 # Canonical derivative defects of circle lifts
@@ -7,6 +9,8 @@ The geometry entering all tame constants is the periodic function `h' - 1`.
 Its continuous circle jets are constructed from the actual derivative of the
 smooth degree-one lift, and are shared with the flow estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

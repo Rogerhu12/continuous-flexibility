@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aIntervalPrimitiveLp
-import Mathlib.Topology.Sequences
+module
+
+public import ContinuousFlexibility.Analysis.N07aIntervalPrimitiveLp
+public import Mathlib.Topology.Sequences
 
 /-!
 # Smooth approximation of the actual interval second-derivative graph
@@ -10,6 +12,8 @@ the integration constants are recovered from the weak identities. Thus the
 approximants converge in all three L² coordinates without an endpoint
 boundary condition or a supplied smooth representative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

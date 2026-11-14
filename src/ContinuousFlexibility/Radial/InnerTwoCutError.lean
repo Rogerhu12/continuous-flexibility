@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerInterfaceInverse
-import Mathlib.Analysis.Normed.Lp.PiLp
+module
+
+public import ContinuousFlexibility.Radial.InnerInterfaceInverse
+public import Mathlib.Analysis.Normed.Lp.PiLp
 
 /-!
 # From the two cut entries to the Euclidean error norm
@@ -9,6 +11,8 @@ The operator norm estimate below applies to arbitrary real entries,
 including the nonsymmetric matrices produced by weight conjugation.
 Its constant is independent of the number of pieces in the inner region.
 -/
+
+@[expose] public section
 
 noncomputable section
 

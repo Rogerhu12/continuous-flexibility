@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PositiveEndpointCutoff
-import Mathlib.Analysis.Calculus.ContDiff.Operations
+module
+
+public import ContinuousFlexibility.Analysis.PositiveEndpointCutoff
+public import Mathlib.Analysis.Calculus.ContDiff.Operations
 
 /-!
 # Globalizing a genuinely smooth cylinder collar
@@ -10,6 +12,8 @@ whole boundary circle, so every actual boundary jet is unchanged.
 The auxiliary collar may depend on the field: no derivative of its
 cutoff enters the endpoint jet identities or their numerical bounds.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.ReferenceCosineParseval
-import ContinuousFlexibility.Radial.ReferenceCosineAlgebra
-import ContinuousFlexibility.Radial.ReferenceWeightedProduct
-import Mathlib.MeasureTheory.Integral.DominatedConvergence
+module
+
+public import ContinuousFlexibility.Radial.ReferenceCosineParseval
+public import ContinuousFlexibility.Radial.ReferenceCosineAlgebra
+public import ContinuousFlexibility.Radial.ReferenceWeightedProduct
+public import Mathlib.MeasureTheory.Integral.DominatedConvergence
 
 /-!
 # Convergence of finite even-cosine projections
@@ -10,6 +12,8 @@ The exact angular Parseval identity gives a nonnegative projection error
 bounded by the original fiber energy. Dominated convergence for the actual
 radial marginal then proves convergence in the frozen weighted Hilbert norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

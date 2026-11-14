@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerSelectedDirichletCosts
-import ContinuousFlexibility.Radial.InnerSelectedInterfaceEstimates
-import ContinuousFlexibility.Radial.InnerCoefficientCosts
+module
+
+public import ContinuousFlexibility.Radial.InnerSelectedDirichletCosts
+public import ContinuousFlexibility.Radial.InnerSelectedInterfaceEstimates
+public import ContinuousFlexibility.Radial.InnerCoefficientCosts
 
 /-!
 # Constants for both estimates of the same inner inverse
@@ -10,6 +12,8 @@ the localized estimate may depend on the chosen first index, while
 the coarse exponent absorbs all multiplicative constants uniformly
 over the later transition index and frequency.
 -/
+
+@[expose] public section
 
 noncomputable section
 

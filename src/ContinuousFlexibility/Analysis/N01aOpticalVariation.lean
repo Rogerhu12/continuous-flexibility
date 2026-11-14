@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01aOpticalSupport
+module
+
+public import ContinuousFlexibility.Analysis.N01aOpticalSupport
 
 /-!
 # The signed variation of the actual interior control
@@ -8,6 +10,8 @@ derivative of the fixed step along that radicand. Its endpoint difference
 is zero. The remaining integral is nonnegative and will be bounded below
 using a quantitative interval around a maximum of the radicand.
 -/
+
+@[expose] public section
 
 noncomputable section
 

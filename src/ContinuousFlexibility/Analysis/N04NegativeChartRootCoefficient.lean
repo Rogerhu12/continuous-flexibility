@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartRootIdentification
-import ContinuousFlexibility.Analysis.N04NegativeGeometryChartTowers
-import ContinuousFlexibility.Analysis.N04NegativeGeometryRootCollarTowers
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootIdentification
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryChartTowers
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryRootCollarTowers
 
 /-!
 # The actual divided root travel coefficient
@@ -11,6 +13,8 @@ positive root band. A supplied inverse-flow representative identifies it
 with the odd projection; subtracting the initial angle leaves this odd
 projection unchanged. No positivity of an arbitrary extension is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

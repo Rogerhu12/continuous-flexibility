@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01EndpointCircleJets
-import ContinuousFlexibility.Analysis.N01FlowSamplePrefactor
-import ContinuousFlexibility.Analysis.TameMultilinearNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N01EndpointCircleJets
+public import ContinuousFlexibility.Analysis.N01FlowSamplePrefactor
+public import ContinuousFlexibility.Analysis.TameMultilinearNormalization
 
 /-!
 # The chosen endpoint jets with their exact circle weights
@@ -9,6 +11,8 @@ Every angular N01 estimate retains its original one-high expression.
 The complete height and material prefactor costs one material order,
 uniformly in both the angular order and the number of parameter slots.
 -/
+
+@[expose] public section
 
 noncomputable section
 

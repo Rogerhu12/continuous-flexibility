@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N01ReturnVelocityAtResidual
-import ContinuousFlexibility.Analysis.N01CoefficientParameterTower
-import ContinuousFlexibility.Analysis.ReturnCorrectionCoefficientAlgebra
-import ContinuousFlexibility.Analysis.ReturnCorrectionCoefficientJetSymmetry
-import ContinuousFlexibility.Analysis.SmoothDirectionsNormedComposition
+module
+
+public import ContinuousFlexibility.Analysis.N01ReturnVelocityAtResidual
+public import ContinuousFlexibility.Analysis.N01CoefficientParameterTower
+public import ContinuousFlexibility.Analysis.ReturnCorrectionCoefficientAlgebra
+public import ContinuousFlexibility.Analysis.ReturnCorrectionCoefficientJetSymmetry
+public import ContinuousFlexibility.Analysis.SmoothDirectionsNormedComposition
 
 /-!
 # Genuine parameter towers for the actual corrected coefficient error
@@ -13,6 +15,8 @@ actual N02 residual is substituted before differentiating. The square
 root is used only on the proved positive transition region; inactive
 points have the identically zero tower.
 -/
+
+@[expose] public section
 
 noncomputable section
 

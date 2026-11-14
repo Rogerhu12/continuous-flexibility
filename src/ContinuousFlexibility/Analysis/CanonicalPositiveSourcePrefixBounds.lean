@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CanonicalPositiveSourceJetBounds
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalPositiveSourceJetBounds
 
 /-!
 # A single high-data envelope for the retained endpoint family
@@ -8,6 +10,8 @@ grading. It supplies the positive coordinate and full height jets needed
 at any requested order. This operation never selects an interpolation
 width, changes its fixed construction order, or changes the stored atlas.
 -/
+
+@[expose] public section
 
 noncomputable section
 

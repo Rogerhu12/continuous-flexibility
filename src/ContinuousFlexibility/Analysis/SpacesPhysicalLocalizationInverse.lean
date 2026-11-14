@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SpacesPhysicalLocalization
-import ContinuousFlexibility.Analysis.SpacesPhysicalSynthesisRows
-import Mathlib.MeasureTheory.Integral.DominatedConvergence
+module
+
+public import ContinuousFlexibility.Analysis.SpacesPhysicalLocalization
+public import ContinuousFlexibility.Analysis.SpacesPhysicalSynthesisRows
+public import Mathlib.MeasureTheory.Integral.DominatedConvergence
 
 /-!
 # Exact reconstruction after localization and envelope gluing
@@ -9,6 +11,8 @@ The radial partition sums to one and each envelope equals one on its
 partition function. Dominated convergence transfers that identity to the
 actual cylinder inner product, proving the Hilbert-space reconstruction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

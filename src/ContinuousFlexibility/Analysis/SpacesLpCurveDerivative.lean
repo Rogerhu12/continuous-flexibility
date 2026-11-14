@@ -1,7 +1,9 @@
-import Mathlib.Analysis.Calculus.Deriv.Slope
-import Mathlib.Analysis.Calculus.MeanValue
-import Mathlib.MeasureTheory.Function.L2Space
-import Mathlib.MeasureTheory.Integral.DominatedConvergence
+module
+
+public import Mathlib.Analysis.Calculus.Deriv.Slope
+public import Mathlib.Analysis.Calculus.MeanValue
+public import Mathlib.MeasureTheory.Function.L2Space
+public import Mathlib.MeasureTheory.Integral.DominatedConvergence
 
 /-!
 # Derivatives of dominated curves in the actual `L²` space
@@ -12,6 +14,8 @@ pointwise difference quotient, the mean value theorem, and dominated
 convergence for its squared residual. No continuity of the derivative is
 assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

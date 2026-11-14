@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PositiveReferenceCoordinate
-import ContinuousFlexibility.Analysis.PositiveReferenceHeight
+module
+
+public import ContinuousFlexibility.Analysis.PositiveReferenceCoordinate
+public import ContinuousFlexibility.Analysis.PositiveReferenceHeight
 
 /-!
 # Quantitative bounds for the actual positive reference interpolation
@@ -10,6 +12,8 @@ length control this normalizer and the resulting coordinate slope,
 including its reciprocal. The height estimate uses the actual
 logarithmic interpolation and does not replace it by a proposed gauge.
 -/
+
+@[expose] public section
 
 noncomputable section
 

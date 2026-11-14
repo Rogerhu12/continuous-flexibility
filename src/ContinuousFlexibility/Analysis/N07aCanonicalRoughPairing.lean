@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aCurrentPhysicalGeometry
-import Mathlib.MeasureTheory.Function.Jacobian
-import Mathlib.LinearAlgebra.Basis.Fin
+module
+
+public import ContinuousFlexibility.Analysis.N07aCurrentPhysicalGeometry
+public import Mathlib.MeasureTheory.Function.Jacobian
+public import Mathlib.LinearAlgebra.Basis.Fin
 
 /-!
 # Rough pairing through the actual canonical chart
@@ -10,6 +12,8 @@ ordinary plane change-of-variables theorem therefore extends the original
 smooth pairing identity to arbitrary representatives, with an exact
 integrability equivalence. No regularity of the unknown is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCurrentPrincipalBounds
-import ContinuousFlexibility.Analysis.N07aNeighborhood
+module
+
+public import ContinuousFlexibility.Analysis.N07aCurrentPrincipalBounds
+public import ContinuousFlexibility.Analysis.N07aNeighborhood
 
 /-!
 # Positivity of the actual current canonical leading coefficient
@@ -8,6 +10,8 @@ The reference inverse-coefficient bound and the genuine H^(3/4) difference
 gain give one neighborhood for every piece. No lower bound E0 ≥ 1 and no
 positivity certificate for a new coefficient are used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

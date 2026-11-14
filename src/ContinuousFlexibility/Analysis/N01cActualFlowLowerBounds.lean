@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cFlowVariationInput
-import ContinuousFlexibility.Analysis.N01cFlowOrderConstants
-import ContinuousFlexibility.Analysis.N01cMaterialAbsorption
+module
+
+public import ContinuousFlexibility.Analysis.N01cFlowVariationInput
+public import ContinuousFlexibility.Analysis.N01cFlowOrderConstants
+public import ContinuousFlexibility.Analysis.N01cMaterialAbsorption
 
 /-!
 # The actual strict lower forcing factors
@@ -10,6 +12,8 @@ Their already normalized bounds are restricted to the original unit
 directions. Global material absorption is permitted for these lower
 factors because the forcing head retains its own material weight.
 -/
+
+@[expose] public section
 
 noncomputable section
 

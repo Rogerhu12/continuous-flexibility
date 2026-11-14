@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06MorsePositiveComponent
+module
+
+public import ContinuousFlexibility.Analysis.N06MorsePositiveComponent
 
 /-!
 # Actual cell labels across a positive Morse gap
@@ -8,6 +10,8 @@ seam blocks numbered n and n + 1. The realization certificate supplies
 an original open cell at each physical point. No single cell is asserted
 to contain the entire positive component.
 -/
+
+@[expose] public section
 
 noncomputable section
 

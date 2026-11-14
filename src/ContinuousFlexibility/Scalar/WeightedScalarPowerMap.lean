@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.WeightedCompositionGerm
-import ContinuousFlexibility.Scalar.WeightedHeightAlgebra
-import ContinuousFlexibility.Scalar.WeightedPowerExtension
+module
+
+public import ContinuousFlexibility.Scalar.WeightedCompositionGerm
+public import ContinuousFlexibility.Scalar.WeightedHeightAlgebra
+public import ContinuousFlexibility.Scalar.WeightedPowerExtension
 
 /-!
 # Actual weighted scalar power perturbations
@@ -10,6 +12,8 @@ interval its decoder is the literal power minus its constant background.
 Every state germ vanishing at its center inherits the same genuine uniform
 tame-germ property.
 -/
+
+@[expose] public section
 
 noncomputable section
 

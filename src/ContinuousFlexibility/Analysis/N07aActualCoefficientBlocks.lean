@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aUnitCoefficientRows
+module
+
+public import ContinuousFlexibility.Analysis.N07aUnitCoefficientRows
 
 /-!
 # Fourier blocks of the actual geometric coefficient differences
@@ -7,6 +9,8 @@ The bounds below are extracted from the original current geometric
 jets. They keep the exact H^(3/4) gain and exactly one state seminorm.
 The derivative loss is fixed; no relative-operator estimate is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledHeightTrace
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsAxisJets
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledHeightTrace
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsAxisJets
 
 /-!
 # The original stored height has genuine full spatial jet towers
@@ -9,6 +11,8 @@ At each state its single unit model identifies every basis word of the
 stored height. The fixed inverse radial linear map returns the original
 physical jet without a parameter-dependent choice of extension.
 -/
+
+@[expose] public section
 
 noncomputable section
 

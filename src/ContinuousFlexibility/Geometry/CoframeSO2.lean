@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Geometry.CoframeRotationAlgebra
-import ContinuousFlexibility.Geometry.GaugeConnection
+module
+
+public import ContinuousFlexibility.Geometry.CoframeRotationAlgebra
+public import ContinuousFlexibility.Geometry.GaugeConnection
 
 /-!
 # Angle-free SO(2) connection calculus
@@ -8,6 +10,8 @@ The Maurer--Cartan form `C dS - S dC` is constructed with actual partial
 derivatives. Its exterior derivative vanishes when `C²+S²=1` locally.
 No single-valued angle or primitive on an annulus is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

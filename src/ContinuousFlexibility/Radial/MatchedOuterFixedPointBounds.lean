@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Radial.MatchedOuterCompactLabels
-import ContinuousFlexibility.Radial.MatchedOuterFiniteCoreEnvelope
-import ContinuousFlexibility.Radial.MatchedOuterLocalizerBounds
-import ContinuousFlexibility.Radial.OuterGreenAssembly
-import ContinuousFlexibility.Radial.OuterWholeMeasure
-import ContinuousFlexibility.Radial.MatchedModeLocalization
+module
+
+public import ContinuousFlexibility.Radial.MatchedOuterCompactLabels
+public import ContinuousFlexibility.Radial.MatchedOuterFiniteCoreEnvelope
+public import ContinuousFlexibility.Radial.MatchedOuterLocalizerBounds
+public import ContinuousFlexibility.Radial.OuterGreenAssembly
+public import ContinuousFlexibility.Radial.OuterWholeMeasure
+public import ContinuousFlexibility.Radial.MatchedModeLocalization
 
 /-!
 # Fixed-frequency envelopes for the actual whole pair
@@ -13,6 +15,8 @@ The compact core costs a constant, while the tail keeps the full action
 decay. The localizers may be those of the final retained reference:
 only their genuine equality on the deep tail is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

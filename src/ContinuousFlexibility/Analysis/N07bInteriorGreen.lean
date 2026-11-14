@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07bPhysicalGreen
-import ContinuousFlexibility.Analysis.N07bDivergenceTests
-import ContinuousFlexibility.Analysis.IntervalWeakPrimitive
+module
+
+public import ContinuousFlexibility.Analysis.N07bPhysicalGreen
+public import ContinuousFlexibility.Analysis.N07bDivergenceTests
+public import ContinuousFlexibility.Analysis.IntervalWeakPrimitive
 
 /-!
 # Green symmetry using only interior coefficient regularity
@@ -12,6 +14,8 @@ Only the coefficients on the open annulus and their angular seam values
 are used. No smooth extension of the coefficients to the physical endpoints
 is imposed or inferred from the frozen nonlinear data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

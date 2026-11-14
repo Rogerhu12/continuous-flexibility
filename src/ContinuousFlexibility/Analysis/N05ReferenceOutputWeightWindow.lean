@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05ReferenceSourceWeightGap
-import ContinuousFlexibility.Analysis.N05ReferencePieceCoefficients
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceSourceWeightGap
+public import ContinuousFlexibility.Analysis.N05ReferencePieceCoefficients
 
 /-!
 # The output endpoint factor on a nearby actual cell
@@ -8,6 +10,8 @@ The endpoint exponential attached to a piece is retained explicitly. The
 endpoint-exponent window moves it to an actual reference cell at the cost of
 a coefficient power, including any prescribed output material exponent.
 -/
+
+@[expose] public section
 
 noncomputable section
 

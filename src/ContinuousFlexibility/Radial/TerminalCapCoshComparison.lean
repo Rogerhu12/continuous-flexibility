@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.DirichletRiccatiComparison
-import Mathlib.Analysis.SpecialFunctions.Trigonometric.DerivHyp
+module
+
+public import ContinuousFlexibility.Radial.DirichletRiccatiComparison
+public import Mathlib.Analysis.SpecialFunctions.Trigonometric.DerivHyp
 
 /-!
 # Growth after entering the positive part of a cap
@@ -10,6 +12,8 @@ positive mass lower bound. This does not require that lower bound near
 the original Dirichlet endpoint, where a Morse turning point has zero
 potential.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06ReferenceNormalProjection
-import ContinuousFlexibility.Radial.R11bPhysicalCompleteness
-import ContinuousFlexibility.Radial.ReferenceCommonInverse
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceNormalProjection
+public import ContinuousFlexibility.Radial.R11bPhysicalCompleteness
+public import ContinuousFlexibility.Radial.ReferenceCommonInverse
 
 /-!
 # The physical normal derivative is independent of the weighted realization
@@ -11,6 +13,8 @@ normal coefficients agree by the weak equation. Even Fourier completeness
 therefore identifies the full L2 fields, and the original weighted output
 norms transfer without changing the selected representative or constant.
 -/
+
+@[expose] public section
 
 noncomputable section
 

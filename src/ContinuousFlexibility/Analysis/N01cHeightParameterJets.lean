@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01cHeightSeminorms
-import ContinuousFlexibility.Analysis.N01cLinearContinuity
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
-import ContinuousFlexibility.Scalar.WeightedFieldRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N01cHeightSeminorms
+public import ContinuousFlexibility.Analysis.N01cLinearContinuity
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
+public import ContinuousFlexibility.Scalar.WeightedFieldRegularity
 
 /-!
 # Actual continuous-linear height-jet evaluations
@@ -13,6 +15,8 @@ height. Continuity follows from the quantitative two-derivative estimate,
 with no assumed continuity of derivative evaluation. Finite tuples and
 their directional towers retain these exact evaluation formulas.
 -/
+
+@[expose] public section
 
 noncomputable section
 

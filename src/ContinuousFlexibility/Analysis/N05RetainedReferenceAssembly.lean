@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.R11aActualAssembly
-import ContinuousFlexibility.Radial.N05FixedReferenceRetention
-import Lean.Util.CollectAxioms
+module
+
+public import ContinuousFlexibility.Radial.R11aActualAssembly
+public import ContinuousFlexibility.Radial.N05FixedReferenceRetention
+public import Lean.Util.CollectAxioms
 
 /-!
 # Retaining the actual R11a geometry through radial-reference completion
@@ -23,6 +25,8 @@ The closed inputs are supplied by `r11a_closed_regional_inputs`, whose
 proof uses the proved R06a/R06b/R06c nodes and `r09Statement`. No open
 Blueprint theorem is applied.
 -/
+
+@[expose] public section
 
 noncomputable section
 

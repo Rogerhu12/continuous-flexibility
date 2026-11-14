@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledMovingAffine
-import ContinuousFlexibility.Analysis.N01cFiniteAffineMixedJets
-import ContinuousFlexibility.Analysis.TameMultilinearNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledMovingAffine
+public import ContinuousFlexibility.Analysis.N01cFiniteAffineMixedJets
+public import ContinuousFlexibility.Analysis.TameMultilinearNormalization
 
 /-!
 # Returning the finite-slice estimate to the original unit directions
@@ -10,6 +12,8 @@ ball lies in both original seminorm boxes. The coordinate vectors that
 recover the prescribed directions cost only `(n+1)^n`, independently of
 the low state order and the common high radius.
 -/
+
+@[expose] public section
 
 noncomputable section
 

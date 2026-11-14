@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aActualChartDifferentials
-import ContinuousFlexibility.Analysis.N07aClosedPhysicalHeight
-import ContinuousFlexibility.Analysis.N04bBoundaryInverseRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N07aActualChartDifferentials
+public import ContinuousFlexibility.Analysis.N07aClosedPhysicalHeight
+public import ContinuousFlexibility.Analysis.N04bBoundaryInverseRegularity
 
 /-!
 # Closed chart differentials and the actual transport first jet
@@ -10,6 +12,8 @@ by continuity of the genuine boundary inverse germs. The global primitive
 transport therefore has the same invertible first jet as each actual
 piece transition at every interior reference boundary point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aNormalRecurrence
-import Mathlib.Algebra.BigOperators.Fin
+module
+
+public import ContinuousFlexibility.Analysis.N07aNormalRecurrence
+public import Mathlib.Algebra.BigOperators.Fin
 
 /-!
 # Exact evaluation of the finite normal expansion
@@ -10,6 +12,8 @@ Together with `n07aNormalExpansion_safe`, this gives a finite expansion
 whose unknown leaves have at most one normal derivative and whose full
 coefficient/source derivative budget is bounded by the output order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

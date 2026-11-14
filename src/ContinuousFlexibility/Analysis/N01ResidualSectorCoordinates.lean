@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01ResidualCircleModel
+module
+
+public import ContinuousFlexibility.Analysis.N01ResidualCircleModel
 
 /-!
 # The return residual in the original affine state coordinates
@@ -8,6 +10,8 @@ a sector state supplies its unique sector parameter, so the circle-valued
 construction defines a map on the original state space and decodes to the
 frozen returnResidualField on every admissible sector state.
 -/
+
+@[expose] public section
 
 noncomputable section
 

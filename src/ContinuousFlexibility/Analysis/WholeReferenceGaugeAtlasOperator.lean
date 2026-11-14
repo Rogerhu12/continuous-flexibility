@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData
-import ContinuousFlexibility.Analysis.WholeCanonicalAtlasOperator
+module
+
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData
+public import ContinuousFlexibility.Analysis.WholeCanonicalAtlasOperator
 
 /-!
 # Actual operator fields after inserting the fixed reference gauge
@@ -9,6 +11,8 @@ are defined by the coordinate formula for the new raw chart and height.
 The operator identity therefore follows from their actual geometry and
 the original physical coefficient regularity at the true inverse image.
 -/
+
+@[expose] public section
 
 noncomputable section
 

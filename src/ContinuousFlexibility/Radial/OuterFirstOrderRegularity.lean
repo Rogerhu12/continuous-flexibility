@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterFirstOrderState
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
+module
+
+public import ContinuousFlexibility.Radial.OuterFirstOrderState
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
 
 /-!
 # Regularity of the actual outer value/flux system
@@ -8,6 +10,8 @@ Smooth coefficients bootstrap the actual component derivatives to every
 finite order.  The physical system also recovers the original Jacobi
 equation directly from its genuine conormal flux.
 -/
+
+@[expose] public section
 
 noncomputable section
 

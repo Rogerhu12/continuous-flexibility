@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterPhysicalGaugeBounds
-import ContinuousFlexibility.Radial.OuterInitialResistanceBounds
+module
+
+public import ContinuousFlexibility.Radial.OuterPhysicalGaugeBounds
+public import ContinuousFlexibility.Radial.OuterInitialResistanceBounds
 
 /-!
 # A common pointwise estimate including the initial interval
@@ -8,6 +10,8 @@ The initial interval is assigned the first tail label. Ordinary closed
 edges retain their actual labels. This cover includes the entrance and
 every node, and its Green bound uses the same constructed basis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

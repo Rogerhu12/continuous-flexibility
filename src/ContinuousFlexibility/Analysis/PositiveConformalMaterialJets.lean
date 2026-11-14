@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PositiveConformalFiniteInputs
-import ContinuousFlexibility.Analysis.CoordinateCompositionMaterialBounds
+module
+
+public import ContinuousFlexibility.Analysis.PositiveConformalFiniteInputs
+public import ContinuousFlexibility.Analysis.CoordinateCompositionMaterialBounds
 
 /-!
 # All actual conformal-input jets with one fixed derivative loss
@@ -11,6 +13,8 @@ existing ordered-partition interpolation theorem then keeps one high
 state factor. The common low order and loss precede the value bounds,
 the coefficient family, the physical point, and the derivative order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

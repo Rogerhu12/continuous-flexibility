@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchedMorseSignedWeights
-import ContinuousFlexibility.Radial.MatchedInnerWeightTransport
+module
+
+public import ContinuousFlexibility.Radial.MatchedMorseSignedWeights
+public import ContinuousFlexibility.Radial.MatchedInnerWeightTransport
 
 /-!
 # The same signed finite-chain inverse in the actual matching norm
@@ -9,6 +11,8 @@ equivalences used on the original mode pair. Frozen uniqueness then
 identifies the same C.inverse with the final M.innerInverse. The sole
 change of Hilbert versus maximum pair norm costs sqrt 2.
 -/
+
+@[expose] public section
 
 noncomputable section
 

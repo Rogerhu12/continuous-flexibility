@@ -1,11 +1,13 @@
-import ContinuousFlexibility.Scalar.Coordinates
-import Mathlib.Analysis.Calculus.FDeriv.Symmetric
-import Mathlib.Analysis.Calculus.FDeriv.Pow
-import Mathlib.Analysis.Calculus.Deriv.Inv
-import Mathlib.Analysis.Calculus.ContDiff.Operations
-import Mathlib.Tactic.FieldSimp
-import Mathlib.Tactic.Ring
-import Mathlib.Tactic.NormNum
+module
+
+public import ContinuousFlexibility.Scalar.Coordinates
+public import Mathlib.Analysis.Calculus.FDeriv.Symmetric
+public import Mathlib.Analysis.Calculus.FDeriv.Pow
+public import Mathlib.Analysis.Calculus.Deriv.Inv
+public import Mathlib.Analysis.Calculus.ContDiff.Operations
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.NormNum
 
 /-!
 # Actual coordinate derivatives of a height
@@ -16,6 +18,8 @@ All partial derivatives are evaluations of mathlib's Frechet derivative.
 No independent jet or unproved mixed-derivative hypothesis is substituted
 for a derivative of the height.
 -/
+
+@[expose] public section
 
 noncomputable section
 

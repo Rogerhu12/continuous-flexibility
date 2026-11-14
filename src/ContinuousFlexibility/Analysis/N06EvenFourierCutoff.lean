@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06CylinderFourierCutoff
-import ContinuousFlexibility.Analysis.CylinderTestPairing
-import ContinuousFlexibility.Radial.ReferenceCosineProjection
-import Mathlib.MeasureTheory.Group.MeasurableEquiv
+module
+
+public import ContinuousFlexibility.Analysis.N06CylinderFourierCutoff
+public import ContinuousFlexibility.Analysis.CylinderTestPairing
+public import ContinuousFlexibility.Radial.ReferenceCosineProjection
+public import Mathlib.MeasureTheory.Group.MeasurableEquiv
 
 /-!
 # The actual even Fourier cutoff in the normalized cosine basis
@@ -11,6 +13,8 @@ the original Fourier coefficients real. Pairing the positive and negative
 frequencies then identifies the same finite polynomial with the normalized
 mean/cosine synthesis, including all actual angular derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

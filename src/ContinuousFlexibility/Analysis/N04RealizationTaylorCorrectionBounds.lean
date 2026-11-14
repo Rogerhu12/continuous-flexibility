@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationPositiveHeightTaylorJets
-import ContinuousFlexibility.Analysis.N06BoundaryPatchBounds
-import ContinuousFlexibility.Analysis.N07aMixedLocalCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationPositiveHeightTaylorJets
+public import ContinuousFlexibility.Analysis.N06BoundaryPatchBounds
+public import ContinuousFlexibility.Analysis.N07aMixedLocalCalculus
 
 /-!
 # The fixed Taylor correction as an actual parameter-linear operator
@@ -11,6 +13,8 @@ parameter jet into a finite linear combination of the supplied angular
 trace jets. The compiled uniform radial-factor bound displays the full
 inverse-width cost and introduces no new parameter loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerBufferFullInverse
-import ContinuousFlexibility.Radial.InnerMorseCapScale
+module
+
+public import ContinuousFlexibility.Radial.InnerBufferFullInverse
+public import ContinuousFlexibility.Radial.InnerMorseCapScale
 
 /-!
 # Actual Morse cut models for positive-buffer compression
@@ -13,6 +15,8 @@ buffer layers; in particular the long-cap mass need not be at least one.
 The full-line inverse is supplied by the actual nonsquare Morse spectral
 theorem, and the uniform layer constant is four.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04NegativeHeightReferenceIdentity
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeHeightReferenceIdentity
 
 /-!
 # Reference-normalized formulas for the negative height
@@ -8,6 +10,8 @@ the square of the fixed reference height both equal one at the reference
 state.  Taking their square roots therefore leaves only scalar operations
 near one; all large or small reference height scales stay in fixed factors.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.SimpleKernelBorderInverse
-import ContinuousFlexibility.Radial.CentralRadialClosedGraph
+module
+
+public import ContinuousFlexibility.Radial.SimpleKernelBorderInverse
+public import ContinuousFlexibility.Radial.CentralRadialClosedGraph
 
 /-!
 # The central inverse with any nonorthogonal symmetric column
@@ -11,6 +13,8 @@ The column may therefore be the actual compact metric variation, rather
 than the earlier auxiliary bump.  Both inverse identities use the same
 closed differential graph as the spectral construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

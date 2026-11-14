@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CircleInverseDerivativeBounds
-import ContinuousFlexibility.Analysis.OrdinaryFlowJacobianBounds
+module
+
+public import ContinuousFlexibility.Analysis.CircleInverseDerivativeBounds
+public import ContinuousFlexibility.Analysis.OrdinaryFlowJacobianBounds
 
 /-!
 # Jacobians of the actual return coordinates
@@ -10,6 +12,8 @@ composed with that inverse, so its derivative is an average of two positive
 products. This supplies a uniform lower bound before differentiating the
 right inverse. All bounds hold on the same common state neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ReferenceRawKernelSchur
-import ContinuousFlexibility.Radial.MatchedPhysicalChannelComparison
-import ContinuousFlexibility.Radial.InnerWeightL2
+module
+
+public import ContinuousFlexibility.Radial.ReferenceRawKernelSchur
+public import ContinuousFlexibility.Radial.MatchedPhysicalChannelComparison
+public import ContinuousFlexibility.Radial.InnerWeightL2
 
 /-!
 # Actual cell blocks from the two physical weight signs
@@ -11,6 +13,8 @@ realizations of the same operator imply exponential off-diagonal decay
 of its actual localizer blocks. Output and input weights may differ:
 this retains the fixed output coefficient loss in the inner inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

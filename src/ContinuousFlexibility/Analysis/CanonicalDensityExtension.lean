@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CanonicalInteriorInverse
-import ContinuousFlexibility.Analysis.PlanarInverseRegularity
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalInteriorInverse
+public import ContinuousFlexibility.Analysis.PlanarInverseRegularity
 
 /-!
 # Actual canonical density extensions at an endpoint
@@ -11,6 +13,8 @@ neighborhood. Values of the chosen total inverse at the boundary are
 irrelevant. A common open smoothness domain for the constructed chart
 and its nonzero Jacobian gives a genuinely smooth extension on a ball.
 -/
+
+@[expose] public section
 
 noncomputable section
 

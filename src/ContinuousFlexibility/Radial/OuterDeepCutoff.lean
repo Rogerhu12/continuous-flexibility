@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OuterEndpointDistances
+module
+
+public import ContinuousFlexibility.Radial.OuterEndpointDistances
 
 /-!
 # One deep cutoff for all frequencies below the transition threshold
@@ -8,6 +10,8 @@ therefore satisfies the R07 density-comparison condition simultaneously
 for every `2 ≤ j < q_n`, once `n` is large enough. The cutoff is chosen
 before the frequency, and both initial resistance conventions are retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ReferenceCosineAnalysis
-import ContinuousFlexibility.Radial.ReferenceCosineRepresentative
+module
+
+public import ContinuousFlexibility.Radial.ReferenceCosineAnalysis
+public import ContinuousFlexibility.Radial.ReferenceCosineRepresentative
 
 /-!
 # Reconstruction in the actual physical L² space
@@ -9,6 +11,8 @@ radial coefficient pairing. Applying it to the convergent synthesized
 series and using Parseval proves that analysis followed by synthesis
 equals the original L² vector. Thus reconstruction is a conclusion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

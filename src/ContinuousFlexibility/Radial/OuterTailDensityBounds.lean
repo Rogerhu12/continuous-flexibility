@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R07DeepTailComparison
-import ContinuousFlexibility.Radial.DeepTailPhysicalFlatness
+module
+
+public import ContinuousFlexibility.Radial.R07DeepTailComparison
+public import ContinuousFlexibility.Radial.DeepTailPhysicalFlatness
 
 /-!
 # Uniform gauge and reciprocal density on an actual physical tail
@@ -8,6 +10,8 @@ The logarithmic entrance condition controls the frequency-dependent gauge
 on the whole tail.  Combining it with the actual cell coefficient bounds
 gives reciprocal-density estimates with constants independent of frequency.
 -/
+
+@[expose] public section
 
 noncomputable section
 

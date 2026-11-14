@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aLocalizedWeakJets
+module
+
+public import ContinuousFlexibility.Analysis.N07aLocalizedWeakJets
 
 /-!
 # Classical first jets of a localized canonical weak class
@@ -7,6 +9,8 @@ The cylinder reconstruction identifies the genuine first derivatives of
 the smooth localized representative with the product-rule weak classes.
 This is used to identify classical jets after gluing the local pieces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

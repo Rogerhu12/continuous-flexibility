@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.HeightBandCount
-import ContinuousFlexibility.Radial.HeightJoinTransfer
+module
+
+public import ContinuousFlexibility.Radial.HeightBandCount
+public import ContinuousFlexibility.Radial.HeightJoinTransfer
 
 /-!
 # Uniform smallness of the transfer across a preceding join
@@ -15,6 +17,8 @@ The estimates here do not distinguish left and right. They use the
 minimum radius of the interval and the absolute distance traversed,
 as does `joinState_transfer`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

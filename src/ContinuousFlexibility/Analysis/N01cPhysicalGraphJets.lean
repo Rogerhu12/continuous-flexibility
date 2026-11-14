@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cPhysicalFlowGraph
-import ContinuousFlexibility.Analysis.N01cStateAngleGraphBudget
+module
+
+public import ContinuousFlexibility.Analysis.N01cPhysicalFlowGraph
+public import ContinuousFlexibility.Analysis.N01cStateAngleGraphBudget
 
 /-!
 # Actual ordered-partition words of the state-flow graph
@@ -9,6 +11,8 @@ The state projection is the identity at order one and zero at higher
 orders. Its size is therefore controlled by the original directions,
 while its angular component is the actual angular-state flow jet.
 -/
+
+@[expose] public section
 
 noncomputable section
 

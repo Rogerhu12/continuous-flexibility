@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06CompactCanonicalTraces
-import ContinuousFlexibility.Analysis.N06NegativeBulkLimits
-import ContinuousFlexibility.Analysis.N06CurrentTestTensorGreen
-import ContinuousFlexibility.Analysis.N06CanonicalTestSeparation
+module
+
+public import ContinuousFlexibility.Analysis.N06CompactCanonicalTraces
+public import ContinuousFlexibility.Analysis.N06NegativeBulkLimits
+public import ContinuousFlexibility.Analysis.N06CurrentTestTensorGreen
+public import ContinuousFlexibility.Analysis.N06CanonicalTestSeparation
 
 /-!
 # Finite negative height identifies the actual principal forcing
@@ -13,6 +15,8 @@ principal source. The proof uses the original weak equation and L2 test
 separation, and does not assume a finite raw source or discard its scalar
 columns.
 -/
+
+@[expose] public section
 
 noncomputable section
 

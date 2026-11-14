@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06NuFiniteSmooth
-import ContinuousFlexibility.Analysis.N06StateHeightJetBounds
-import ContinuousFlexibility.Analysis.SpacesTorusWaves
+module
+
+public import ContinuousFlexibility.Analysis.N06NuFiniteSmooth
+public import ContinuousFlexibility.Analysis.N06StateHeightJetBounds
+public import ContinuousFlexibility.Analysis.SpacesTorusWaves
 
 /-!
 # Actual angular jets of the finite nu coordinates
@@ -10,6 +12,8 @@ jets are expressed in ordinary mixed derivatives of the same stateU, so
 the fixed original seminorm estimates apply without a smooth-source or
 independent-jet replacement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

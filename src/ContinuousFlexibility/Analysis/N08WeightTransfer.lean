@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Scalar.WeightedReferenceBounds
+module
+
+public import ContinuousFlexibility.Scalar.WeightedReferenceBounds
 
 /-!
 # Transferring control-label losses to a physical height weight
@@ -8,6 +10,8 @@ to invert the endpoint formula or compare numerical cell indices. Raising
 the comparison to a positive power pays for a prescribed negative label
 weight; the remaining positive label power absorbs every envelope loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

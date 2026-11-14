@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01RootFieldLocalization
-import ContinuousFlexibility.Analysis.RootPhysicalCharacteristicFlow
+module
+
+public import ContinuousFlexibility.Analysis.N01RootFieldLocalization
+public import ContinuousFlexibility.Analysis.RootPhysicalCharacteristicFlow
 
 /-!
 # The localized root field is the actual oriented characteristic speed
@@ -9,6 +11,8 @@ quadratic-form speed directly. This includes the root itself and uses
 the true positive square-root factor. No corrected-operator regularity
 certificate or characteristic-flow identification is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

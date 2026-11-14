@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.FiniteFourierProjection
-import ContinuousFlexibility.Radial.R11bAngularL2Bridge
-import ContinuousFlexibility.Radial.R11bTensorL2
+module
+
+public import ContinuousFlexibility.Radial.FiniteFourierProjection
+public import ContinuousFlexibility.Radial.R11bAngularL2Bridge
+public import ContinuousFlexibility.Radial.R11bTensorL2
 
 /-!
 # Finite angular projection in the actual physical L² space
@@ -9,6 +11,8 @@ The coefficient functions are ordinary angular integrals. Fubini gives
 almost-everywhere interval L² sections, so the finite angular contraction
 integrates to the physical product measure without extra regularity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

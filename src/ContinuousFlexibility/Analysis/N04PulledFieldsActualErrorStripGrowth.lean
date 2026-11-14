@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsActualPolynomialGrowth
-import ContinuousFlexibility.Analysis.N04PulledFieldsActualVelocityMixedGrowth
-import ContinuousFlexibility.Analysis.N04PulledFieldsErrorJoint
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsActualPolynomialGrowth
+public import ContinuousFlexibility.Analysis.N04PulledFieldsActualVelocityMixedGrowth
+public import ContinuousFlexibility.Analysis.N04PulledFieldsErrorJoint
 
 /-!
 # Actual coefficient-error growth on the retained optical strips
@@ -10,6 +12,8 @@ transport estimate. The literal correction polynomial then gives the
 two error coefficients. All primitive data come from the retained
 optical cutoff; no coefficient estimate is assumed in this assembly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

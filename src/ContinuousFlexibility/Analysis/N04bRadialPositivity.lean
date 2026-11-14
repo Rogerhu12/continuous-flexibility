@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import Mathlib.Tactic.NormNum
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import Mathlib.Tactic.NormNum
 
 /-!
 # Positivity already supplied by the cumulative N03 witness
@@ -8,6 +10,8 @@ The radial coefficient is fixed by N03. Its positivity follows from
 the actual N01 profile, height-Q and polar-discriminant inequalities,
 without a regularity assumption on the stored mixed or angular field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

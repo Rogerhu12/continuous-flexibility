@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceHeightJets
-import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceJets
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledHeightJoint
-import ContinuousFlexibility.Analysis.N04PositiveGeometryRightSource
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceHeightJets
+public import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceJets
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledHeightJoint
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryRightSource
 
 /-!
 # Actual source and interpolation height towers
@@ -11,6 +13,8 @@ The finite source-height ratio and its reciprocal therefore have genuine
 joint radial traces without any assumed endpoint tower. These traces
 feed the original controlled interpolation and its existing mixed jets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

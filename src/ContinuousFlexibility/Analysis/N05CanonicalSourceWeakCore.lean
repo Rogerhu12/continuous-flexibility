@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05CanonicalAngularColumns
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalAngularColumns
 
 /-!
 # Physical weak angular identities on the actual smooth canonical core
@@ -8,6 +10,8 @@ Their fixed physical representatives agree almost everywhere with the
 ordinary derivatives of the genuine radial transport. Physical L² pairings
 then identify their full-period weak angular jets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

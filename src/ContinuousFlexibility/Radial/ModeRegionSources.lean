@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MatchingGraphRestrictions
+module
+
+public import ContinuousFlexibility.Radial.MatchingGraphRestrictions
 
 /-!
 # Actual Hilbert-space source restrictions
@@ -7,6 +9,8 @@ The two source maps are constructed from measurable indicators. Their
 coefficients, scalar rows, complementary decomposition and support are
 proved without assuming a matching realization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

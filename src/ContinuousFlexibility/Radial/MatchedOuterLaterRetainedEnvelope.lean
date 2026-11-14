@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MatchedOuterFixedRetainedEnvelope
-import ContinuousFlexibility.Radial.MatchedOuterSelectedBounds
-import ContinuousFlexibility.Radial.MatchedOuterRadiusCells
+module
+
+public import ContinuousFlexibility.Radial.MatchedOuterFixedRetainedEnvelope
+public import ContinuousFlexibility.Radial.MatchedOuterSelectedBounds
+public import ContinuousFlexibility.Radial.MatchedOuterRadiusCells
 
 /-!
 # One outer envelope after the uniform selected threshold
@@ -9,6 +11,8 @@ The constants precede all frequencies. Every later matching cut lies in
 the exact retained radius chart, so the already proved physical whole
 bounds transport isometrically, for every original localizer.
 -/
+
+@[expose] public section
 
 noncomputable section
 

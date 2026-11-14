@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.FiniteFirstJetInverse
-import ContinuousFlexibility.Analysis.WholePositiveReferenceGauge
+module
+
+public import ContinuousFlexibility.Analysis.FiniteFirstJetInverse
+public import ContinuousFlexibility.Analysis.WholePositiveReferenceGauge
 
 /-!
 # Raw first jets after a fixed reference gauge
@@ -11,6 +13,8 @@ raw current chart and height first jets at the actual current point.
 The reference chart functions may already include the two fixed normal
 translations and orientations; no state-dependent alignment is chosen.
 -/
+
+@[expose] public section
 
 noncomputable section
 

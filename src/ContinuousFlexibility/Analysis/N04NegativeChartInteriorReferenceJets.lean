@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartInteriorReference
-import ContinuousFlexibility.Analysis.N07aReferenceReturn
-import ContinuousFlexibility.Analysis.N01cStateHeightJets
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartInteriorReference
+public import ContinuousFlexibility.Analysis.N07aReferenceReturn
+public import ContinuousFlexibility.Analysis.N01cStateHeightJets
 
 /-!
 # Spatial jets of the actual oriented reference travel in the interior
@@ -11,6 +13,8 @@ height factor. Positive radial travel jets are the preceding speed jets;
 positive angular jets vanish. The zeroth jet uses the actual total travel.
 Both orientations and every material overlap radius use the same argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01aOpticalVariation
-import Mathlib.Analysis.Calculus.MeanValue
+module
+
+public import ContinuousFlexibility.Analysis.N01aOpticalVariation
+public import Mathlib.Analysis.Calculus.MeanValue
 
 /-!
 # A quantitative interval on which the optical control is active
@@ -9,6 +11,8 @@ level. A bound for its first derivative supplies an interval of controlled
 length around such a point. Integrating the positive variation kernel on
 that interval gives a lower bound for the normalizing denominator.
 -/
+
+@[expose] public section
 
 noncomputable section
 

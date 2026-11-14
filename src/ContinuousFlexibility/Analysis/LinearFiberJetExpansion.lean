@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SmoothDirectionsAngularJets
-import Mathlib.LinearAlgebra.Multilinear.Curry
+module
+
+public import ContinuousFlexibility.Analysis.SmoothDirectionsAngularJets
+public import Mathlib.LinearAlgebra.Multilinear.Curry
 
 /-!
 # Genuine jet formulas for a family that is linear in its fiber
@@ -10,6 +12,8 @@ jet. The recursion below constructs algebraic multilinear maps before
 any continuity or norm estimate is imposed. Scalar testing proves the
 actual derivative recurrence, including affine variation of the fiber.
 -/
+
+@[expose] public section
 
 noncomputable section
 

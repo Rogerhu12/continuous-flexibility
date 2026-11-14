@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasOperator
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeRelativeFields
-import ContinuousFlexibility.Analysis.N01OpticalCollarPositivity
+module
+
+public import ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasOperator
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeRelativeFields
+public import ContinuousFlexibility.Analysis.N01OpticalCollarPositivity
 
 /-!
 # Actual positive reference principal fields in the new whole atlas
@@ -12,6 +14,8 @@ strict positivity and radiality on each positive canonical piece. The
 uniform material lower bound for the angular coefficient is a separate
 quantitative obligation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

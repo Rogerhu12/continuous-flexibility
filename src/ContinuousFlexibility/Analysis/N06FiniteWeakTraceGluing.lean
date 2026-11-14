@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06WeakTraceIdentification
-import ContinuousFlexibility.Radial.RadialGreenBoundary
-import Mathlib.Algebra.BigOperators.Fin
+module
+
+public import ContinuousFlexibility.Analysis.N06WeakTraceIdentification
+public import ContinuousFlexibility.Radial.RadialGreenBoundary
+public import Mathlib.Algebra.BigOperators.Fin
 
 /-!
 # The literal weak equation across finitely many interfaces
@@ -14,6 +16,8 @@ true endpoint Wronskian. Matching values and physical fluxes cancel every
 internal boundary term. Summing the actual interval integrals gives the
 full-interval distributional equation, with no global equation assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

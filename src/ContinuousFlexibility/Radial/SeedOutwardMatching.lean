@@ -1,8 +1,12 @@
-import ContinuousFlexibility.Radial.SeedRadialContinuation
-import ContinuousFlexibility.Radial.SeedPairGluing
-import ContinuousFlexibility.Statements.RadialTargets
+module
+
+public import ContinuousFlexibility.Radial.SeedRadialContinuation
+public import ContinuousFlexibility.Radial.SeedPairGluing
+public import ContinuousFlexibility.Statements.RadialTargets
 
 /-! # Matching a continued solution on a genuine outward collar -/
+
+@[expose] public section
 
 noncomputable section
 

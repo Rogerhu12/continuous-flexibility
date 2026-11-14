@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionSourceUnitGrowth
-import ContinuousFlexibility.Analysis.PhysicalMultilinearNormalization
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionSourceUnitGrowth
+public import ContinuousFlexibility.Analysis.PhysicalMultilinearNormalization
 
 /-!
 # Local one-high estimates for the actual source jets
@@ -10,6 +12,8 @@ directions. Algebraic multilinear normalization then restores every
 direction with the exact one-high expression. The derivative loss and
 low order are fixed before the output order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

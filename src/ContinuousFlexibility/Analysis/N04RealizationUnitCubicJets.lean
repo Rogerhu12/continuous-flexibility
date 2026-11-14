@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04RealizationTwoEndpointCubicJets
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationTwoEndpointCubicJets
 
 /-!
 # The exact affine cost in divided coefficient jets
@@ -9,6 +11,8 @@ quantitative conclusion; it does not depend on the requested spatial or
 parameter order. A material estimate for that fixed factor can therefore
 be supplied separately by the actual atlas.
 -/
+
+@[expose] public section
 
 noncomputable section
 

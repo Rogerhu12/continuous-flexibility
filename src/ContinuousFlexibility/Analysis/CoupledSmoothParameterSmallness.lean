@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CoupledControlSmallness
-import ContinuousFlexibility.Analysis.TameInverseExpressions
+module
+
+public import ContinuousFlexibility.Analysis.CoupledControlSmallness
+public import ContinuousFlexibility.Analysis.TameInverseExpressions
 
 /-!
 # Uniform smallness from an actual smooth linear family
@@ -9,6 +11,8 @@ continuous linear map in its independent input. Its joint continuity is
 part of the genuine smooth tower. The real mean-value argument therefore
 applies without any operator-norm continuity assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MorseRealizationBasic
+module
+
+public import ContinuousFlexibility.Radial.MorseRealizationBasic
 
 /-!
 # Completing radial cells along intervals of one index
@@ -8,6 +10,8 @@ An interval covered pointwise by cells with one index is then contained
 in one completed cell.  The full accumulating-profile contract survives
 with at most a factor five in its constants.
 -/
+
+@[expose] public section
 
 noncomputable section
 

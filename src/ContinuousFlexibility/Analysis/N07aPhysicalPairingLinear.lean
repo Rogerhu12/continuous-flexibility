@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aPhysicalCanonicalPairing
-import ContinuousFlexibility.Analysis.N07aCanonicalDifference
+module
+
+public import ContinuousFlexibility.Analysis.N07aPhysicalCanonicalPairing
+public import ContinuousFlexibility.Analysis.N07aCanonicalDifference
 
 /-!
 # Linear source pairings with their actual integrability
@@ -8,6 +10,8 @@ The physical functions may be rough. Their source transforms paired with
 one compact canonical test are integrable, so the true chart formula
 proves linearity of the full-period physical pairing.
 -/
+
+@[expose] public section
 
 noncomputable section
 

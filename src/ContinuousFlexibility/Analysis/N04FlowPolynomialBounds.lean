@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04FlowJetGronwall
-import ContinuousFlexibility.Analysis.ScalarFlowTriangularJets
-import ContinuousFlexibility.Analysis.FlowJetPartitionPolynomial
+module
+
+public import ContinuousFlexibility.Analysis.N04FlowJetGronwall
+public import ContinuousFlexibility.Analysis.ScalarFlowTriangularJets
+public import ContinuousFlexibility.Analysis.FlowJetPartitionPolynomial
 
 /-!
 # Polynomial bounds for every actual mixed spatial flow jet
@@ -11,6 +13,8 @@ bounds, field, and chosen solution. Only the angular integral bound
 enters its exponential coefficients; all original parameter derivatives
 remain polynomial variables with their exact derivative weights.
 -/
+
+@[expose] public section
 
 noncomputable section
 

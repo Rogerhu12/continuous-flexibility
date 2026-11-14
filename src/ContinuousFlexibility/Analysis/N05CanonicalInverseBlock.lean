@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05CanonicalSourceSingle
-import ContinuousFlexibility.Analysis.N05CanonicalInverseDefinition
-import ContinuousFlexibility.Analysis.N05CanonicalOutputBlock
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalSourceSingle
+public import ContinuousFlexibility.Analysis.N05CanonicalInverseDefinition
+public import ContinuousFlexibility.Analysis.N05CanonicalOutputBlock
 
 /-!
 # Actual raw endpoint blocks of the fixed canonical inverse
@@ -10,6 +12,8 @@ a single canonical L² input. Its source uses the same actual auxiliary
 integral and normalizer at every endpoint. The physical inverse and selected
 left constant then give a uniform endpoint square bound on that very block.
 -/
+
+@[expose] public section
 
 noncomputable section
 

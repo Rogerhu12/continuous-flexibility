@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Radial.OuterUniformCoreState
-import ContinuousFlexibility.Radial.OuterActualCoreInputs
-import ContinuousFlexibility.Radial.OuterActualCoreMeasure
-import ContinuousFlexibility.Radial.OuterPhysicalRobinInverse
-import ContinuousFlexibility.Radial.OuterGlobalEnvelope
-import ContinuousFlexibility.Radial.R07DeepTailData
+module
+
+public import ContinuousFlexibility.Radial.OuterUniformCoreState
+public import ContinuousFlexibility.Radial.OuterActualCoreInputs
+public import ContinuousFlexibility.Radial.OuterActualCoreMeasure
+public import ContinuousFlexibility.Radial.OuterPhysicalRobinInverse
+public import ContinuousFlexibility.Radial.OuterGlobalEnvelope
+public import ContinuousFlexibility.Radial.R07DeepTailData
 
 /-!
 # The same actual outer basis, natural vector and Green operator
@@ -13,6 +15,8 @@ basis, the whole homogeneous pair, and the operator with their single
 canonical kernel. The quantitative constructor inserts the proved
 Morse-core estimates, rather than assuming core value or mass bounds.
 -/
+
+@[expose] public section
 
 noncomputable section
 

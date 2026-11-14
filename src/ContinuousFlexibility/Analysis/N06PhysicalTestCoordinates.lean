@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05CanonicalTests
-import ContinuousFlexibility.Analysis.N06ScalarColumns
-import ContinuousFlexibility.Analysis.N06FinitePieceTests
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalTests
+public import ContinuousFlexibility.Analysis.N06ScalarColumns
+public import ContinuousFlexibility.Analysis.N06FinitePieceTests
 
 /-!
 # Continuous test coordinates of the original graph and source
@@ -13,6 +15,8 @@ are continuous projections of the original graph. These maps make every
 finite collection of actual L2 test pairings a closed condition on the
 same graph and source spaces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

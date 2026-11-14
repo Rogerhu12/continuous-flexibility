@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ReturnChartUniformBounds
-import ContinuousFlexibility.Analysis.ReturnCorrectionSmallness
+module
+
+public import ContinuousFlexibility.Analysis.ReturnChartUniformBounds
+public import ContinuousFlexibility.Analysis.ReturnCorrectionSmallness
 
 /-!
 # All angular jets of the actual initial displacement
@@ -9,6 +11,8 @@ including the return radii by continuity. Together with the decoded left
 chart this bounds `K-id`. Thus adding its zeroth order to the positive
 chart jets requires no N02 realization or additional boundedness premise.
 -/
+
+@[expose] public section
 
 noncomputable section
 

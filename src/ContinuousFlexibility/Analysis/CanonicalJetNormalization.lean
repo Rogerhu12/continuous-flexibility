@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Blueprint.CanonicalParts
-import ContinuousFlexibility.Analysis.N04bGeometryPreservation
+module
+
+public import ContinuousFlexibility.Blueprint.CanonicalParts
+public import ContinuousFlexibility.Analysis.N04bGeometryPreservation
 
 /-!
 # Normalizing the unused canonical jets
@@ -14,6 +16,8 @@ This reduction does not assert the geometric jet estimate. It separates that
 estimate from the arbitrary values of fields which the geometric identities
 do not constrain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

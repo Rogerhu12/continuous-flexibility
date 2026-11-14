@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07bReferencePDEPullback
+module
+
+public import ContinuousFlexibility.Analysis.N07bReferencePDEPullback
 
 /-!
 # The finite material seeds of the actual reference expression
@@ -9,6 +11,8 @@ coefficient is determined by the geometry before the scalar is supplied,
 and the material jet in each term has order at most two. Further current
 angular derivatives can therefore use the same general chain expansion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

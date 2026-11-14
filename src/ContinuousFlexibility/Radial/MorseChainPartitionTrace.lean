@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseChainPartitionBounds
-import ContinuousFlexibility.Radial.MorseChainPartitionData
+module
+
+public import ContinuousFlexibility.Radial.MorseChainPartitionBounds
+public import ContinuousFlexibility.Radial.MorseChainPartitionData
 
 /-!
 # Trace intervals for the actual radial partition
@@ -8,6 +10,8 @@ Each trace interval lies strictly between two actual successive seams,
 or inside the finite middle gap. The same intervals lie in the actual
 windows and have the quantitative widths of the radial contract.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

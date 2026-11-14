@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.OuterInteriorEnergy
-import ContinuousFlexibility.Radial.OuterCellScale
-import Mathlib.Topology.Order.IntermediateValue
+module
+
+public import ContinuousFlexibility.Radial.OuterInteriorEnergy
+public import ContinuousFlexibility.Radial.OuterCellScale
+public import Mathlib.Topology.Order.IntermediateValue
 
 /-!
 # Pointwise growth through a complete retained Morse cell
@@ -10,6 +12,8 @@ the negative component.  The actual radius chart is surjective onto
 its retained physical interval, so the same estimate holds for every
 actual physical state there.
 -/
+
+@[expose] public section
 
 noncomputable section
 

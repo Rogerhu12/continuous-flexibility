@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MatchedTailTestDensity
+module
+
+public import ContinuousFlexibility.Radial.MatchedTailTestDensity
 
 /-!
 # From the actual tail kernel to an all-source localized operator bound
@@ -8,6 +10,8 @@ Multiplication by the output localizer then gives the norm of the localized
 operator. Compact smooth tests are dense in the actual tail space, so the
 bound holds for every input to the existing continuous inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

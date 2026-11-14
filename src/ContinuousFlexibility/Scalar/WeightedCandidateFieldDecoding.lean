@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.WeightedScalarCandidates
-import ContinuousFlexibility.Scalar.WeightedStateCoefficientFormulas
-import ContinuousFlexibility.Scalar.WeightedResidualFormulas
+module
+
+public import ContinuousFlexibility.Scalar.WeightedScalarCandidates
+public import ContinuousFlexibility.Scalar.WeightedStateCoefficientFormulas
+public import ContinuousFlexibility.Scalar.WeightedResidualFormulas
 
 /-!
 # Literal decoders of the finite scalar candidate fields
@@ -9,6 +11,8 @@ The four actual range bounds are used only to identify the globally smooth
 power extensions with the required roots and reciprocals. All other
 identities are global algebraic identities of the actual decoders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

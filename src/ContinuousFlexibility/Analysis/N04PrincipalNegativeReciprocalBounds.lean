@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PrincipalNegativeReciprocalOneHigh
-import ContinuousFlexibility.Analysis.N04PrincipalWeightedPrefix
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalNegativeReciprocalOneHigh
+public import ContinuousFlexibility.Analysis.N04PrincipalWeightedPrefix
 
 /-!
 # Reciprocal closure of full mixed jet bounds
@@ -8,6 +10,8 @@ One uniform inverse-value envelope suffices. The source losses can
 depend on the parameter order: finite-prefix interpolation fixes the
 low order first, and reciprocal composition changes only the high loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

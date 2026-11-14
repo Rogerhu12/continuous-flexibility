@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cFlowParameterContinuity
-import Mathlib.Topology.UniformSpace.HeineCantor
+module
+
+public import ContinuousFlexibility.Analysis.N01cFlowParameterContinuity
+public import Mathlib.Topology.UniformSpace.HeineCantor
 
 /-!
 # Actual periodic flows with arbitrary topological parameters
@@ -13,6 +15,8 @@ parameter/time continuity. The final wrapper includes the initial angle.
 Only the speed slices are assumed smooth. No parameter derivative, norm,
 local compactness or pre-existing joint continuity of the flows is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

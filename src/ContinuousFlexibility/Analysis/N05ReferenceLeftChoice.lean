@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05ReferenceLeftConstant
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceLeftConstant
 
 /-!
 # One left constant for all positive reference exponents
@@ -8,6 +10,8 @@ output has any positive-weight realization, uniqueness identifies the
 selection with its left constant. Every reference inverse estimate can
 therefore use this same selection without changing its bound constant.
 -/
+
+@[expose] public section
 
 noncomputable section
 

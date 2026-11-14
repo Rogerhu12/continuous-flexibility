@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCoefficientParameterJets
-import ContinuousFlexibility.Analysis.N07aHeightFamilyTame
+module
+
+public import ContinuousFlexibility.Analysis.N07aCoefficientParameterJets
+public import ContinuousFlexibility.Analysis.N07aHeightFamilyTame
 
 /-!
 # The two actual diagonal coefficient families in Height
@@ -8,6 +10,8 @@ The same construction handles both diagonal slots. The coefficient field,
 its decoder, and every parameter derivative are those of N01; the final
 closed-graph lift preserves N01's original fixed base and loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

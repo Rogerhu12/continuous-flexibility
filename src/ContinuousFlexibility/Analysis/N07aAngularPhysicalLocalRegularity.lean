@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N07aAngularOpenRegularity
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalPairing
-import ContinuousFlexibility.Analysis.N07aAngularInteriorCoefficient
-import ContinuousFlexibility.Analysis.N07aAngularInnerIntervals
-import ContinuousFlexibility.Analysis.N07aAngularDistributionRestriction
-import ContinuousFlexibility.Analysis.N07aCanonicalPieceReconstruction
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularOpenRegularity
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalPairing
+public import ContinuousFlexibility.Analysis.N07aAngularInteriorCoefficient
+public import ContinuousFlexibility.Analysis.N07aAngularInnerIntervals
+public import ContinuousFlexibility.Analysis.N07aAngularDistributionRestriction
+public import ContinuousFlexibility.Analysis.N07aCanonicalPieceReconstruction
 
 /-!
 # Interior regularity of the original physical weak equation
@@ -15,6 +17,8 @@ second-normal primitive recovers one radial derivative on a smaller
 interval, and the open bootstrap then supplies every mixed derivative of
 the same L² class. No interface traces are required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

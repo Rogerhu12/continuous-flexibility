@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Contracts.CapInteriorClosure
-import ContinuousFlexibility.Contracts.GraphBoundaryNormals
+module
+
+public import ContinuousFlexibility.Contracts.CapInteriorClosure
+public import ContinuousFlexibility.Contracts.GraphBoundaryNormals
 
 /-!
 # Actual outward normal rays for the unmarked cap disk
@@ -8,6 +10,8 @@ The solid is the existing capRevolutionInterior. The two flat pieces include
 their turning circles. On the middle wall, the actual normal ray has a radial
 defining function with positive derivative. No outwardness is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

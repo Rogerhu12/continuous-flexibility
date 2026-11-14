@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06AngularMeanBridge
-import ContinuousFlexibility.Analysis.CanonicalSourceConversion
-import ContinuousFlexibility.Radial.R11bPhysicalPairing
+module
+
+public import ContinuousFlexibility.Analysis.N06AngularMeanBridge
+public import ContinuousFlexibility.Analysis.CanonicalSourceConversion
+public import ContinuousFlexibility.Radial.R11bPhysicalPairing
 
 /-!
 # Physical weak pairings on the actual canonical half-period
@@ -10,6 +12,8 @@ periodic integrands. Actual integrability is retained when applying Fubini.
 A function supported on one physical piece can then be paired in the
 original canonical measure by the genuine coordinate change.
 -/
+
+@[expose] public section
 
 noncomputable section
 

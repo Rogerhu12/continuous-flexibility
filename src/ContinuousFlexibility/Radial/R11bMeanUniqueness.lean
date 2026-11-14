@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Radial.R11bZeroMode
-import ContinuousFlexibility.Radial.R11bInverseDensity
-import ContinuousFlexibility.Radial.R11bAngularL2Bridge
-import ContinuousFlexibility.Radial.R11bGlobalL2
-import ContinuousFlexibility.Analysis.EndpointWeakUniqueness
-import ContinuousFlexibility.Analysis.IntervalWeakPotential
+module
+
+public import ContinuousFlexibility.Radial.R11bZeroMode
+public import ContinuousFlexibility.Radial.R11bInverseDensity
+public import ContinuousFlexibility.Radial.R11bAngularL2Bridge
+public import ContinuousFlexibility.Radial.R11bGlobalL2
+public import ContinuousFlexibility.Analysis.EndpointWeakUniqueness
+public import ContinuousFlexibility.Analysis.IntervalWeakPotential
 
 /-!
 # Zero angular channel uniqueness on the maximum physical graph
@@ -13,6 +15,8 @@ tail the chosen left cutoff is zero, so the actual angular mean itself has
 finite inverse-coefficient L² norm. Endpoint resistance then excludes both
 homogeneous zero-mode constants.
 -/
+
+@[expose] public section
 
 noncomputable section
 

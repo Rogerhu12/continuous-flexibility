@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.OscillatorKernel
-import ContinuousFlexibility.Radial.HermitePolynomial
-import Mathlib.Algebra.Polynomial.Roots
+module
+
+public import ContinuousFlexibility.Radial.OscillatorKernel
+public import ContinuousFlexibility.Radial.HermitePolynomial
+public import Mathlib.Algebra.Polynomial.Roots
 
 /-!
 # Actual Hermite--Gaussian oscillator eigenfunctions
@@ -9,6 +11,8 @@ The functions are built from mathlib's Hermite polynomials and the actual
 Gaussian. Their derivative equations and `L²` conditions are proved below.
 No complete basis or closed-domain spectral representation is postulated.
 -/
+
+@[expose] public section
 
 noncomputable section
 

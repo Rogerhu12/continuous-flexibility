@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bRootTravelCharts
-import ContinuousFlexibility.Analysis.N04bTravelHalfClosure
+module
+
+public import ContinuousFlexibility.Analysis.N04bRootTravelCharts
+public import ContinuousFlexibility.Analysis.N04bTravelHalfClosure
 
 /-!
 # Root travel coordinates on the actual closed half intervals
@@ -8,6 +10,8 @@ The same root powers and one orientation involution used in the interior
 give the genuine closed-strip bijections. The root zero and middle cut are
 included; no endpoint inverse value is supplied as a new assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

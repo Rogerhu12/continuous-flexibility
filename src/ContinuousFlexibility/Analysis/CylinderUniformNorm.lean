@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CylinderTestPairing
+module
+
+public import ContinuousFlexibility.Analysis.CylinderTestPairing
 
 /-!
 # Explicit cylinder norm bounds from radial support and actual jets
@@ -7,6 +9,8 @@ The cylinder measure of a radial strip is its radial length times pi.
 Uniform bounds on a function supported in that strip therefore give its
 actual L2 norm. The finite jet sum then gives the exact physical norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

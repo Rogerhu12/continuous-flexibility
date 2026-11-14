@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularPeriodMeasure
-import ContinuousFlexibility.Radial.ReferenceCosineParseval
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularPeriodMeasure
+public import ContinuousFlexibility.Radial.ReferenceCosineParseval
 
 /-!
 # The full physical angular mean from a genuine half-period pairing
@@ -8,6 +10,8 @@ The physical weak graph uses the normalized full `2π` mean. For a genuine
 `π`-periodic integrable function this is exactly `π⁻¹` times the canonical
 half-period integral. Integrability is established before Fubini is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

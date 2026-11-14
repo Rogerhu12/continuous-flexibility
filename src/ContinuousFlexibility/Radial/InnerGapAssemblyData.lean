@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerGapPoissonL2
-import ContinuousFlexibility.Radial.InnerReferenceNormalization
-import ContinuousFlexibility.Radial.InnerRadialFiniteWeakGraph
+module
+
+public import ContinuousFlexibility.Radial.InnerGapPoissonL2
+public import ContinuousFlexibility.Radial.InnerReferenceNormalization
+public import ContinuousFlexibility.Radial.InnerRadialFiniteWeakGraph
 
 /-!
 # Actual positive-gap blocks in the full reference interface
@@ -10,6 +12,8 @@ Poisson columns. Matrix positivity, reference positivity, and the
 quadratic-form identities are derived below. The two off-diagonal
 entries of every gap matrix remain in the reference matrix.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.OuterActualGreenData
-import ContinuousFlexibility.Radial.OuterLocalizedOperator
-import ContinuousFlexibility.Radial.OuterMorsePointLabels
-import ContinuousFlexibility.Radial.OuterWholeLocalizerDensity
+module
+
+public import ContinuousFlexibility.Radial.OuterActualGreenData
+public import ContinuousFlexibility.Radial.OuterLocalizedOperator
+public import ContinuousFlexibility.Radial.OuterMorsePointLabels
+public import ContinuousFlexibility.Radial.OuterWholeLocalizerDensity
 
 /-!
 # Localizing the same actual Morse outer inverse
@@ -12,6 +14,8 @@ the two actual multiplier compositions with the constructed Robin inverse.
 Every exponent below is fixed by the point exponent, common coefficient
 bounds and common endpoints, before the profile or frequency is chosen.
 -/
+
+@[expose] public section
 
 noncomputable section
 

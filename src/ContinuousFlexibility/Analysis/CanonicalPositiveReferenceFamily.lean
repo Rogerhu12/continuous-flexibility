@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ActualPositiveReferenceInterpolation
+module
+
+public import ContinuousFlexibility.Analysis.ActualPositiveReferenceInterpolation
 
 /-!
 # One fixed radial reference family with its actual endpoint jets
@@ -8,6 +10,8 @@ family is selected once, before the state. This qualitative existence
 result retains the exact finite jets for subsequent geometry assembly;
 it does not assign material bounds to the interpolation widths.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.CentralTrueBorder
+module
+
+public import ContinuousFlexibility.Radial.CentralTrueBorder
 
 /-!
 # Locality of the genuine metric border
@@ -7,6 +9,8 @@ A compact metric control only uses the profile and kernel near its closed
 support.  This gives global equality of the resulting actual columns, even
 when the profiles have different values outside that neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

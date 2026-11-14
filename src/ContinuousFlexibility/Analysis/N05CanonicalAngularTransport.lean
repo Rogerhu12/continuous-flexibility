@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05CanonicalSourceLift
-import ContinuousFlexibility.Analysis.N05ReferenceNormalizerJets
-import ContinuousFlexibility.Geometry.EuclideanRigidity
-import Mathlib.Analysis.Calculus.Deriv.Abs
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05CanonicalSourceLift
+public import ContinuousFlexibility.Analysis.N05ReferenceNormalizerJets
+public import ContinuousFlexibility.Geometry.EuclideanRigidity
+public import Mathlib.Analysis.Calculus.Deriv.Abs
 
 /-!
 # Angular transport through the actual reference coordinates
@@ -12,6 +14,8 @@ every angular derivative. Canonical compact tests pull back to actual
 physical tests. Their angular jets therefore satisfy the full-period weak
 identity and belong to every fixed reference source weight.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsOddTraces
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsOddTraces
 
 /-!
 # Positive powers of the actual unit odd trace
@@ -8,6 +10,8 @@ radial traces agree with the literal boundary formulas, so every real
 power through radial order three has the already constructed actual
 trace. No parameter regularity of the chosen flow is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

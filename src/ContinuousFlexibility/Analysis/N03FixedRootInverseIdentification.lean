@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N03FixedRootFlowIdentification
-import ContinuousFlexibility.Analysis.N03RootReanchoring
-import ContinuousFlexibility.Analysis.RootRescaledInverseSample
-import ContinuousFlexibility.Analysis.N01RootLabels
+module
+
+public import ContinuousFlexibility.Analysis.N03FixedRootFlowIdentification
+public import ContinuousFlexibility.Analysis.N03RootReanchoring
+public import ContinuousFlexibility.Analysis.RootRescaledInverseSample
+public import ContinuousFlexibility.Analysis.N01RootLabels
 
 /-!
 # Actual inverse footpoints throughout the fixed root band
@@ -11,6 +13,8 @@ point of the entire band. No continuity limit, angle neighborhood, or
 state-dependent radius is used. The actual endpoint reanchoring keeps
 the right-root travel offset and the original scale δ exactly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

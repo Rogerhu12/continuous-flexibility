@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N08ScalarFormula
-import ContinuousFlexibility.Scalar.WeightedSourceIntegral
+module
+
+public import ContinuousFlexibility.Analysis.N08ScalarFormula
+public import ContinuousFlexibility.Scalar.WeightedSourceIntegral
 
 /-!
 # Conservation of the actual controlled scalar residual
@@ -10,6 +12,8 @@ The discriminant equals one at both endpoints. N01 supplies its positivity
 in the open annulus, so the genuine normalized conservation theorem applies
 to every parameter, including the removable value at zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

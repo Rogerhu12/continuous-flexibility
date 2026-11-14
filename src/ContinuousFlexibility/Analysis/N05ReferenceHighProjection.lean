@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05ReferenceProjection
-import ContinuousFlexibility.Radial.ReferenceSmoothCore
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceProjection
+public import ContinuousFlexibility.Radial.ReferenceSmoothCore
 
 /-!
 # Uniform high angular blocks of the actual reference inverse
@@ -10,6 +12,8 @@ frequencies. Linearity and uniqueness identify its inverse with the same
 block of the original output. The original estimate has the same constant
 and the same coefficient exponents on every such block.
 -/
+
+@[expose] public section
 
 noncomputable section
 

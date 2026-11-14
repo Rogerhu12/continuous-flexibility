@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06NuSpatialCalculus
-import ContinuousFlexibility.Analysis.N06NuPhysicalSmooth
+module
+
+public import ContinuousFlexibility.Analysis.N06NuSpatialCalculus
+public import ContinuousFlexibility.Analysis.N06NuPhysicalSmooth
 
 /-!
 # The genuine polar height packet in full spatial jets
@@ -9,6 +11,8 @@ physical height and in the two scalar parameters. Its full spatial jets
 cost exactly two derivatives of that height. All reciprocal-radius
 factors are controlled on the original fixed positive radial interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

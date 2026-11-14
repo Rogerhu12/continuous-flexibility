@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bRootLiteralMaps
-import ContinuousFlexibility.Analysis.N04bContinuousInverseGerm
+module
+
+public import ContinuousFlexibility.Analysis.N04bRootLiteralMaps
+public import ContinuousFlexibility.Analysis.N04bContinuousInverseGerm
 
 /-!
 # Smoothness and full inverse germs of the literal pasted maps
@@ -10,6 +12,8 @@ injectivity identifies the positive inverse with the collar inverse.
 The inverse function theorem is then applied to the literal pasted chart,
 so its partial homeomorphism has precisely that global forward function.
 -/
+
+@[expose] public section
 
 noncomputable section
 

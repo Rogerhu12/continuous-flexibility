@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04SourceColumnsCollectorBounds
-import ContinuousFlexibility.Analysis.SectorParameterGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N04SourceColumnsCollectorBounds
+public import ContinuousFlexibility.Analysis.SectorParameterGeometry
 
 /-!
 # Selected-piece current data from genuine positive-order towers
@@ -9,6 +11,8 @@ Higher positive derivatives retain the same sampled height factor, and the
 zeroth tower follows from that value estimate. Every input and every tower
 is restricted to the selected pieces, including when the predicate is empty.
 -/
+
+@[expose] public section
 
 noncomputable section
 

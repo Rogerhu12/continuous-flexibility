@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalUnitModes
-import ContinuousFlexibility.Analysis.N07aPositiveWeakMode
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalUnitModes
+public import ContinuousFlexibility.Analysis.N07aPositiveWeakMode
 
 /-!
 # Positive energy of the actual canonical modes
@@ -8,6 +10,8 @@ The source in the scalar energy estimate is constructed from the original
 canonical right-hand side. Its potential term is an actual bounded L²
 multiplier. All constants come from the primitive reference geometry.
 -/
+
+@[expose] public section
 
 noncomputable section
 

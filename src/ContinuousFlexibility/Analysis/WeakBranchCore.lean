@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.NonlinearCompletion
-import ContinuousFlexibility.Radial.FourierOrthogonality
+module
+
+public import ContinuousFlexibility.Statements.NonlinearCompletion
+public import ContinuousFlexibility.Radial.FourierOrthogonality
 
 /-!
 # An actual annular core from a weak-branch point with smooth extensions
@@ -8,6 +10,8 @@ The two global regularity hypotheses concern the profile and the decoded
 height at one point of the same weak branch. The profile, height, endpoint
 constants and nonradial witness are constructed from that point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

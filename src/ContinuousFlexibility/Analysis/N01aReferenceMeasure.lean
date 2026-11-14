@@ -1,9 +1,13 @@
-import ContinuousFlexibility.Analysis.N01aReferenceCellSquares
-import Mathlib.MeasureTheory.Integral.Prod
+module
+
+public import ContinuousFlexibility.Analysis.N01aReferenceCellSquares
+public import Mathlib.MeasureTheory.Integral.Prod
 
 /-!
 # The physical measure and the actual reference cell integrals
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07bCanonicalHeightEnergy
-import ContinuousFlexibility.Analysis.N07bCanonicalSourceIntegrability
-import ContinuousFlexibility.Analysis.N07bCanonicalSourceSymmetry
-import ContinuousFlexibility.Analysis.N07bVolumeUnknownSequence
+module
+
+public import ContinuousFlexibility.Analysis.N07bCanonicalHeightEnergy
+public import ContinuousFlexibility.Analysis.N07bCanonicalSourceIntegrability
+public import ContinuousFlexibility.Analysis.N07bCanonicalSourceSymmetry
+public import ContinuousFlexibility.Analysis.N07bVolumeUnknownSequence
 
 /-!
 # Actual canonical height classes and their zeroth-order volume lift
@@ -12,6 +14,8 @@ prescribed volume model and the exact physical square-energy series. The
 series remains an explicit analytic input, to be proved from geometric
 bounds; this module does not assert fixed-domain membership.
 -/
+
+@[expose] public section
 
 noncomputable section
 

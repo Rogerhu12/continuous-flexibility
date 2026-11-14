@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.FixedCentralModelColumnCost
-import ContinuousFlexibility.Radial.InnerCentralPhysicalPoisson
+module
+
+public import ContinuousFlexibility.Radial.FixedCentralModelColumnCost
+public import ContinuousFlexibility.Radial.InnerCentralPhysicalPoisson
 
 /-!
 # The actual fixed central chart has a uniform weighted Poisson cost
@@ -8,6 +10,8 @@ The chart is the original fixedCentralPhysicalModelChart. The stronger
 remainder chosen before the geometry removes the polynomial frequency
 cost, for both signs of any actual weight equal to one in the center.
 -/
+
+@[expose] public section
 
 noncomputable section
 

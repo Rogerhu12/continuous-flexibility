@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.TailLowHats
-import ContinuousFlexibility.Radial.TailFiniteCoefficientBounds
-import ContinuousFlexibility.Radial.TailHighFormBound
+module
+
+public import ContinuousFlexibility.Radial.TailLowHats
+public import ContinuousFlexibility.Radial.TailFiniteCoefficientBounds
+public import ContinuousFlexibility.Radial.TailHighFormBound
 
 /-!
 # Finite sums of the actual smooth low hats
@@ -9,6 +11,8 @@ The exact cell and gap formulas identify the physical mass and derivative
 energy of every finite linear combination. The estimates are independent
 of the support and of the position of a finite Dirichlet wall.
 -/
+
+@[expose] public section
 
 noncomputable section
 

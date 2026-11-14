@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CylinderMixedJets
-import ContinuousFlexibility.Analysis.FlatCylinderExtension
-import ContinuousFlexibility.Analysis.MaterialEndpointDecay
+module
+
+public import ContinuousFlexibility.Analysis.CylinderMixedJets
+public import ContinuousFlexibility.Analysis.FlatCylinderExtension
+public import ContinuousFlexibility.Analysis.MaterialEndpointDecay
 
 /-!
 # Flat extension from ordinary material-weighted jet bounds
@@ -11,6 +13,8 @@ At each finite order, one common neighborhood works for every coordinate
 jet. The actual Fréchet jets therefore satisfy the quadratic bound for
 smooth zero extension.
 -/
+
+@[expose] public section
 
 noncomputable section
 

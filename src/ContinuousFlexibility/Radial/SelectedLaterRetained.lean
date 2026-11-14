@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.SelectedActualEntry
-import ContinuousFlexibility.Radial.R07MiddlePreservation
+module
+
+public import ContinuousFlexibility.Radial.SelectedActualEntry
+public import ContinuousFlexibility.Radial.R07MiddlePreservation
 
 /-!
 # The actual later matching interval lies in the retained tail
@@ -10,6 +12,8 @@ entire closed cut-to-entry interval of every later band inside the open
 tail retained by R08. Its actual join is included by the selected order.
 No retained-position hypothesis on these three points is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

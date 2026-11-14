@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.JointJetSpatialRegularity
-import ContinuousFlexibility.Analysis.PhysicalJetLinearity
-import ContinuousFlexibility.Analysis.MaterialMixedMultiplier
+module
+
+public import ContinuousFlexibility.Analysis.JointJetSpatialRegularity
+public import ContinuousFlexibility.Analysis.PhysicalJetLinearity
+public import ContinuousFlexibility.Analysis.MaterialMixedMultiplier
 
 /-!
 # Actual mixed jets on one parameter line
@@ -11,6 +13,8 @@ three-index Leibniz formula.  The formula keeps parameter order and
 spatial order separate, which is needed when a fixed parameter order is
 estimated uniformly at every spatial order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

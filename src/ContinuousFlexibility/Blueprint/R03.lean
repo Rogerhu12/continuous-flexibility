@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Milestones
-import ContinuousFlexibility.Radial.CentralFullStatement
+module
+
+public import ContinuousFlexibility.Statements.Milestones
+public import ContinuousFlexibility.Radial.CentralFullStatement
 
 /-!
 # Blueprint node R03
@@ -8,6 +10,8 @@ Source: `paper/flexible-surface-rewrite/04-designing-the-profile.tex` lines 177â
 
 Task file: `docs/tasks/R03.md`. The statement is frozen. Proved.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

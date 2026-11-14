@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.FixedCentralModelColumnCost
-import ContinuousFlexibility.Radial.FirstCentralGapInverse
+module
+
+public import ContinuousFlexibility.Radial.FixedCentralModelColumnCost
+public import ContinuousFlexibility.Radial.FirstCentralGapInverse
 
 /-!
 # A fixed central model gives the actual three-piece inverse
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Radial.FirstCentralGapInverse
 Both positive gaps are constructed on the original reference.  Their
 lengths and the two radial dilations do not enter the norm constant.
 -/
+
+@[expose] public section
 
 noncomputable section
 

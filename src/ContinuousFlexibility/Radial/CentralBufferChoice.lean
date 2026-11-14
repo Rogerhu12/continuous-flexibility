@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.CentralBufferGeometry
-import ContinuousFlexibility.Radial.CentralBufferInverses
-import ContinuousFlexibility.Radial.CentralModelPhysicalColumn
+module
+
+public import ContinuousFlexibility.Radial.CentralBufferGeometry
+public import ContinuousFlexibility.Radial.CentralBufferInverses
+public import ContinuousFlexibility.Radial.CentralModelPhysicalColumn
 
 /-!
 # Choosing one actual central truncation for every even mode
@@ -11,6 +13,8 @@ uniformly for every positive even frequency. The radius can exceed any
 specified lower bound. Its containment in a separately connected radial
 central patch is a different geometric assertion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

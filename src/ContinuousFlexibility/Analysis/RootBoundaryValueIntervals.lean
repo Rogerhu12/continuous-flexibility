@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RootSmoothHeight
-import ContinuousFlexibility.Analysis.RootChartSymmetry
+module
+
+public import ContinuousFlexibility.Analysis.RootSmoothHeight
+public import ContinuousFlexibility.Analysis.RootChartSymmetry
 
 /-!
 # Actual positive value intervals at the root
@@ -9,6 +11,8 @@ Consequently fixed positive intervals for the original coefficient and
 the true odd root value, together with h′ ∈ [1/4,4], supply all value
 intervals used in the height-jet composition estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

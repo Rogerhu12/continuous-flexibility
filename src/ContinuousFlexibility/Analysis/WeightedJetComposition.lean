@@ -1,7 +1,9 @@
-import Mathlib.Analysis.Calculus.ContDiff.Bounds
-import Mathlib.Tactic.FieldSimp
-import Lean.Elab.Tactic.Omega
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Analysis.Calculus.ContDiff.Bounds
+public import Mathlib.Tactic.FieldSimp
+public import Lean.Elab.Tactic.Omega
+public import Mathlib.Tactic.Ring
 
 /-!
 # A scale-invariant composition estimate for finite jets
@@ -11,6 +13,8 @@ singular coordinate map. Rescaling the intermediate space reduces this
 statement to mathlib's ordinary composition estimate. The coordinate map
 only needs to be smooth on an open set containing the evaluation point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

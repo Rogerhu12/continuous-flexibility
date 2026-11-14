@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalSourceVolume
-import ContinuousFlexibility.Statements.N07aRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalSourceVolume
+public import ContinuousFlexibility.Statements.N07aRegularity
 
 /-!
 # The same relative inverse applied to the actual physical source
@@ -8,6 +10,8 @@ The base source is chosen once. All higher source realizations have the
 same image under forget, so the angular theorem applies to exactly that
 base input. A fixed low-order ball bounds its base norm uniformly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

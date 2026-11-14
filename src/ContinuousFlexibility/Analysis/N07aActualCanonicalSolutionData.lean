@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCurrentQualitativeRegularity
-import ContinuousFlexibility.Analysis.N07aScalarSourceTerminal
+module
+
+public import ContinuousFlexibility.Analysis.N07aCurrentQualitativeRegularity
+public import ContinuousFlexibility.Analysis.N07aScalarSourceTerminal
 
 /-!
 # The actual canonical solution family consumed by physical reconstruction
@@ -9,6 +11,8 @@ source sequence below are definitions from that source, rather than
 independently chosen representatives. The record collects the exact
 weak relation and the fixed-loss estimates for its smooth decoder.
 -/
+
+@[expose] public section
 
 noncomputable section
 

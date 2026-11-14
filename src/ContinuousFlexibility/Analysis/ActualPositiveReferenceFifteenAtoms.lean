@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ActualPositiveReferenceFiveAtoms
-import ContinuousFlexibility.Analysis.WholeReferenceGaugePositiveGeometryJets
+module
+
+public import ContinuousFlexibility.Analysis.ActualPositiveReferenceFiveAtoms
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugePositiveGeometryJets
 
 /-!
 # One actual positive family and fifteen reference atoms
@@ -11,6 +13,8 @@ geometric atoms. Only the numerical envelope is enlarged, after the
 spatial order is fixed; the degree, width, coordinate and height remain
 exactly the original ones.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometryCoefficientTowers
-import ContinuousFlexibility.Analysis.N01ReturnTransportSpatialTowers
-import ContinuousFlexibility.Analysis.N04bReferenceActualTravel
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryCoefficientTowers
+public import ContinuousFlexibility.Analysis.N01ReturnTransportSpatialTowers
+public import ContinuousFlexibility.Analysis.N04bReferenceActualTravel
 
 /-!
 # The three actual fields in the interior transport system
@@ -10,6 +12,8 @@ pulled residual are the retained correction fields. The centered first
 integral subtracts its genuine reference value, which is exactly the
 reference optical translation plus the angle.
 -/
+
+@[expose] public section
 
 noncomputable section
 

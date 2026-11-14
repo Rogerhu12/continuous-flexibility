@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionTransportEquations
-import ContinuousFlexibility.Analysis.SolveReturnEquations
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionTransportEquations
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # Actual transport identities on the original sector parameter
@@ -8,6 +10,8 @@ The original N01 slope and the N02 residual-substituted displacement
 satisfy the same radial system. These identities keep the actual sector
 lift and the supplied residual, without adding a residual parameter.
 -/
+
+@[expose] public section
 
 noncomputable section
 

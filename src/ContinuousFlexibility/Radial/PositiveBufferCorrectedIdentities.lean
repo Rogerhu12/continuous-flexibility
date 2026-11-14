@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.PositiveBufferGreenCorrection
-import ContinuousFlexibility.Radial.PositiveBufferComparisonGreenBoundary
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferGreenCorrection
+public import ContinuousFlexibility.Radial.PositiveBufferComparisonGreenBoundary
 
 /-!
 # Exact identities of the normalized corrected Green columns
@@ -8,6 +10,8 @@ The corrected columns have the true bordered energy delta identity,
 globally smooth retained representatives, and the physical exterior
 conormal correction at both cuts.
 -/
+
+@[expose] public section
 
 noncomputable section
 

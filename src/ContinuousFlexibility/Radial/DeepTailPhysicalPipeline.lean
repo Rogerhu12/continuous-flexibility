@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Blueprint.Statements
-import ContinuousFlexibility.Radial.DeepTailPhysicalBounds
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
+public import ContinuousFlexibility.Radial.DeepTailPhysicalBounds
 
 /-!
 # The physical part of the R06 pipeline
@@ -9,6 +11,8 @@ preserve the full operator conclusion. Its actual natural line then gives
 physical flatness, while the source identity follows from the same
 physical coordinate relation.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

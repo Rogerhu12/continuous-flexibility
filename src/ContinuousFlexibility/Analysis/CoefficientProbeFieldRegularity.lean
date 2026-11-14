@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N03CoefficientProbeIdentity
-import ContinuousFlexibility.Analysis.MaterialHeightRegularity
-import ContinuousFlexibility.Analysis.LocalMixedProductBounds
-import ContinuousFlexibility.Scalar.WeightedDifferentiationSupport
+module
+
+public import ContinuousFlexibility.Analysis.N03CoefficientProbeIdentity
+public import ContinuousFlexibility.Analysis.MaterialHeightRegularity
+public import ContinuousFlexibility.Analysis.LocalMixedProductBounds
+public import ContinuousFlexibility.Scalar.WeightedDifferentiationSupport
 
 /-!
 # Actual smooth probe fields and their two angular centers
@@ -13,6 +15,8 @@ axis values everywhere while leaving the entire germ unchanged wherever
 those values already vanish. Evenness and periodicity give the true first
 angular zero jets without differentiating any stored coefficient.
 -/
+
+@[expose] public section
 
 noncomputable section
 

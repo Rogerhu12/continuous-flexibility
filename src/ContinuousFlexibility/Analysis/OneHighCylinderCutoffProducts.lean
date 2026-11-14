@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderInverseProducts
-import ContinuousFlexibility.Analysis.OneHighCylinderFourierCutoffJets
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderInverseProducts
+public import ContinuousFlexibility.Analysis.OneHighCylinderFourierCutoffJets
 
 /-!
 # Uniform one-high bounds for genuine cutoff derivative products
@@ -8,6 +10,8 @@ Every cutoff derivative is the actual inverse of its multiplied frequency
 cutoff. The positive convolution estimate bounds their physical product
 uniformly by the original uncut Fourier-L1 and Sobolev norms.
 -/
+
+@[expose] public section
 
 noncomputable section
 

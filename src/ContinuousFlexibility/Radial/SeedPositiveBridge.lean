@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.SeedCentralCutoff
-import Mathlib.Analysis.SpecialFunctions.Exp
+module
+
+public import ContinuousFlexibility.Radial.SeedCentralCutoff
+public import Mathlib.Analysis.SpecialFunctions.Exp
 
 /-!
 # A positive bridge from the decaying cone mode to the growing cone mode
@@ -10,6 +12,8 @@ The uniform cutoff construction makes both endpoint slopes exact without
 losing positivity. This also covers a tail whose auxiliary cone solution
 has only the exceptional pure mode; no first-band assumption is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

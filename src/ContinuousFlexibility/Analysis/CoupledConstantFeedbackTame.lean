@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CoupledConstantFeedbackInverse
-import ContinuousFlexibility.Analysis.CoupledRegularizingEstimates
+module
+
+public import ContinuousFlexibility.Analysis.CoupledConstantFeedbackInverse
+public import ContinuousFlexibility.Analysis.CoupledRegularizingEstimates
 
 /-!
 # Smooth tame recovery of the constant control
@@ -9,6 +11,8 @@ orders come from the smoothing response in the recovery equation. Its
 resulting tame estimate and the two actual inverse identities give joint
 continuity and the full Hamilton inverse-family conclusion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

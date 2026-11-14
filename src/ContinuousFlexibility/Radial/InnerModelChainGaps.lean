@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerModelChainGeometry
+module
+
+public import ContinuousFlexibility.Radial.InnerModelChainGeometry
 
 /-!
 # Gap indices and adjacency in the flattened physical chain
@@ -7,6 +9,8 @@ Models are the odd pieces and gaps are the even pieces. These formulas
 identify both cut incidences and the terminal half-gaps without adding
 extra boundary variables or assuming a pre-existing piece partition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

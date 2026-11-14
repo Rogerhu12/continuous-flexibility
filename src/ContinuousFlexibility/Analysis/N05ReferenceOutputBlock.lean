@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05ReferenceOutputWeightWindow
-import ContinuousFlexibility.Analysis.N05ReferencePieceIndexBounds
-import ContinuousFlexibility.Radial.R11bPhysicalMultiplier
-import ContinuousFlexibility.Radial.ReferenceCellAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05ReferenceOutputWeightWindow
+public import ContinuousFlexibility.Analysis.N05ReferencePieceIndexBounds
+public import ContinuousFlexibility.Radial.R11bPhysicalMultiplier
+public import ContinuousFlexibility.Radial.ReferenceCellAlgebra
 
 /-!
 # A physical output bound on one actual canonical piece
@@ -12,6 +14,8 @@ factor of that piece is retained on the left, so this estimate can be used
 at both reference exponents for the same output. No endpoint attenuation
 is spent in passing from the localized physical norms to the piece.
 -/
+
+@[expose] public section
 
 noncomputable section
 

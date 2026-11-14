@@ -1,10 +1,12 @@
-import ContinuousFlexibility.Analysis.CoupledCircleAverageSmooth
-import ContinuousFlexibility.Analysis.CoupledCircleProductSmooth
-import ContinuousFlexibility.Analysis.CoupledPhysicalTameComposition
-import ContinuousFlexibility.Analysis.CoupledNeighborhoodRestriction
-import ContinuousFlexibility.Analysis.SolveReturnEquations
-import ContinuousFlexibility.Analysis.SpacesCircleParity
-import ContinuousFlexibility.Scalar.WeightedSmoothTameLinear
+module
+
+public import ContinuousFlexibility.Analysis.CoupledCircleAverageSmooth
+public import ContinuousFlexibility.Analysis.CoupledCircleProductSmooth
+public import ContinuousFlexibility.Analysis.CoupledPhysicalTameComposition
+public import ContinuousFlexibility.Analysis.CoupledNeighborhoodRestriction
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
+public import ContinuousFlexibility.Analysis.SpacesCircleParity
+public import ContinuousFlexibility.Scalar.WeightedSmoothTameLinear
 
 /-!
 # Joint smooth tameness of the given return error
@@ -14,6 +16,8 @@ projections give the independent bilinear error formula. On the original
 sector neighborhood, the N02 decoder identifies this expression with the
 supplied return error. Every residual argument remains unrestricted.
 -/
+
+@[expose] public section
 
 noncomputable section
 

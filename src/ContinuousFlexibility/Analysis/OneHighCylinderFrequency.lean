@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.OneHighFrequencyEmbedding
-import ContinuousFlexibility.Analysis.OneHighCircleFourierWeights
-import Mathlib.Analysis.SpecialFunctions.ImproperIntegrals
-import Mathlib.MeasureTheory.Function.L2Space
-import Mathlib.MeasureTheory.Integral.Prod
+module
+
+public import ContinuousFlexibility.Analysis.OneHighFrequencyEmbedding
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierWeights
+public import Mathlib.Analysis.SpecialFunctions.ImproperIntegrals
+public import Mathlib.MeasureTheory.Function.L2Space
+public import Mathlib.MeasureTheory.Integral.Prod
 
 /-!
 # The mixed frequency measure of a cylinder
@@ -15,6 +17,8 @@ The square of the inverse order-two weight is dominated by a product of
 one-dimensional integrable functions. This is the dimension-two part of the
 Fourier embedding estimate, with no restriction on the frequency support.
 -/
+
+@[expose] public section
 
 noncomputable section
 

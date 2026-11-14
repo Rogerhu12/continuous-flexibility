@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseJoinPhysicalJets
-import ContinuousFlexibility.Radial.MorseJoinHeightContrast
+module
+
+public import ContinuousFlexibility.Radial.MorseJoinPhysicalJets
+public import ContinuousFlexibility.Radial.MorseJoinHeightContrast
 
 /-!
 # Index-dependent physical jets in the Morse chain
@@ -8,6 +10,8 @@ The adjacent-index comparison preserves the principal height exponent.
 The actual connector widths and logarithmic height gap determine a
 common scale for all the physical derivative estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

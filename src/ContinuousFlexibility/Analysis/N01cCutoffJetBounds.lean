@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cPhysicalHeightBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01cPhysicalHeightBounds
 
 /-!
 # Positive-order cutoff jets with the original height weight
@@ -8,6 +10,8 @@ are supported in the compact set supplied by CutoffConditions. Dividing
 by any fixed positive material height weight on that compact set gives
 a uniform bound, including at all higher derivative orders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

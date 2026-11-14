@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.SolveStateSpaces
-import ContinuousFlexibility.Analysis.StateKappaBounds
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
-import ContinuousFlexibility.Analysis.TameTransfer
-import ContinuousFlexibility.Analysis.N01cBoundsRestriction
-import ContinuousFlexibility.Analysis.N07aNeighborhood
+module
+
+public import ContinuousFlexibility.Analysis.SolveStateSpaces
+public import ContinuousFlexibility.Analysis.StateKappaBounds
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
+public import ContinuousFlexibility.Analysis.TameTransfer
+public import ContinuousFlexibility.Analysis.N01cBoundsRestriction
+public import ContinuousFlexibility.Analysis.N07aNeighborhood
 
 /-!
 # Restricting the common nonlinear neighborhood
@@ -13,6 +15,8 @@ require a higher low order.  Every property already constructed through N05
 is retained on that same neighborhood.  No change of the canonical charts,
 the source spaces, or the reference graph is involved.
 -/
+
+@[expose] public section
 
 noncomputable section
 

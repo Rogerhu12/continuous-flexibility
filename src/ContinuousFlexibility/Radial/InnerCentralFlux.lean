@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.CentralRadiusMetric
-import ContinuousFlexibility.Radial.PositiveBufferGeometry
-import Mathlib.Data.Matrix.Mul
+module
+
+public import ContinuousFlexibility.Radial.CentralRadiusMetric
+public import ContinuousFlexibility.Radial.PositiveBufferGeometry
+public import Mathlib.Data.Matrix.Mul
 
 /-!
 # The exact central radial flux dictionary
@@ -10,6 +12,8 @@ the diagonal drift with the same outward sign as the model derivative.
 The final estimates use the R09 comparison of alpha_in with the mass;
 the drift is retained in the positive reference diagonal.
 -/
+
+@[expose] public section
 
 noncomputable section
 

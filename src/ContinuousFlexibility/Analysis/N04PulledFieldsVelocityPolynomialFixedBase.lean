@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsPolynomialFixedBase
-import ContinuousFlexibility.Analysis.N01CorrectionCoefficientPolynomialGrowth
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsPolynomialFixedBase
+public import ContinuousFlexibility.Analysis.N01CorrectionCoefficientPolynomialGrowth
 
 /-!
 # Reflection and the actual velocity correction polynomial
@@ -9,6 +11,8 @@ coefficient formula preserve one common low base. The supplied output
 tower is unchanged; in particular the two velocity inputs may be the
 same actual N02-substituted velocity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

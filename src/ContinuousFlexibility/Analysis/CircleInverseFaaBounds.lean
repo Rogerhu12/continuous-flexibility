@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CircleCompositionFaaBounds
+module
+
+public import ContinuousFlexibility.Analysis.CircleCompositionFaaBounds
 
 /-!
 # Circle composition estimates with inverse-jet order budgets
@@ -8,6 +10,8 @@ each Faà di Bruno partition contributes exactly `R^(b-length)` at
 angular order b. The outer field keeps its own component energy and
 its own derivative order through the sum over circle labels.
 -/
+
+@[expose] public section
 
 noncomputable section
 

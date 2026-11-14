@@ -1,9 +1,11 @@
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
-import Mathlib.Analysis.Calculus.Deriv.Slope
-import Mathlib.Tactic.FieldSimp
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Positivity
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
+public import Mathlib.Analysis.Calculus.Deriv.Slope
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Positivity
+public import Mathlib.Tactic.Ring
 
 /-!
 # Uniform first variation of an actual flow about a radial speed
@@ -20,6 +22,8 @@ remainder, or parameter regularity of a chosen chart is assumed. Applying
 these lemmas to an N04b witness still requires constructing the actual
 trajectories and proving their integral equations and velocity bounds.
 -/
+
+@[expose] public section
 
 noncomputable section
 

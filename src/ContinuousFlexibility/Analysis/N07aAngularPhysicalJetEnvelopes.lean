@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aAngularFixedJetEnvelope
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalCoefficients
-import ContinuousFlexibility.Analysis.N07aCanonicalAtomBounds
-import ContinuousFlexibility.Analysis.N07aCoordinateJetNorms
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularFixedJetEnvelope
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalCoefficients
+public import ContinuousFlexibility.Analysis.N07aCanonicalAtomBounds
+public import ContinuousFlexibility.Analysis.N07aCoordinateJetNorms
 
 /-!
 # Physical chart and height jets at a fixed parameter
@@ -12,6 +14,8 @@ nonlinear inverse-chart point. Reference and current raw atoms use the same affi
 the reference rectangle. These estimates do not assert bounds on a
 state-dependent current physical piece.
 -/
+
+@[expose] public section
 
 noncomputable section
 

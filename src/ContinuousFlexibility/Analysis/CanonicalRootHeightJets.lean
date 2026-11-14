@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CanonicalRootRelativeJets
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalRootRelativeJets
 
 /-!
 # Jets of the actual relative root height
@@ -8,6 +10,8 @@ is evaluated at the genuine relative transport, whose image stays on
 that same root circle. One product-composition estimate covers the
 height ratio and its reciprocal without an additional inverse estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

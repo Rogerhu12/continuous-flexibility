@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentData
-import ContinuousFlexibility.Analysis.N04PrincipalDividedCore
-import ContinuousFlexibility.Analysis.N07aParameterGrading
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentData
+public import ContinuousFlexibility.Analysis.N04PrincipalDividedCore
+public import ContinuousFlexibility.Analysis.N07aParameterGrading
 
 /-!
 # Current jet data through the actual cubic quotient
@@ -12,6 +14,8 @@ current value and parameter estimates to the stored quotient with six
 additional radial orders. Pieces on which the divided atom is zero are
 handled in the same family, so the tower is defined on every piece.
 -/
+
+@[expose] public section
 
 noncomputable section
 

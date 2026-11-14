@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerWeakGreen
+module
+
+public import ContinuousFlexibility.Radial.InnerWeakGreen
 
 /-!
 # The two actual weak outgoing fluxes
@@ -9,6 +11,8 @@ the same boundary values. Consequently the actual R09 Dirichlet inverse
 has forced flux equal to the negative adjoint of its own Poisson columns,
 for all supported L² sources and the original single scalar row.
 -/
+
+@[expose] public section
 
 noncomputable section
 

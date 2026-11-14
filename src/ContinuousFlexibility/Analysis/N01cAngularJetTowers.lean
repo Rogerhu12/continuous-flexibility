@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cParameterCalculus
-import Mathlib.Analysis.Calculus.IteratedDeriv.Defs
+module
+
+public import ContinuousFlexibility.Analysis.N01cParameterCalculus
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Defs
 
 /-!
 # Actual angular derivatives of a joint directional tower
@@ -10,6 +12,8 @@ unit angle direction, this gives the actual iterated angular derivatives
 of a jointly smooth state-and-angle function. Restricting the angle then
 gives genuine state towers without putting a norm on the state space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

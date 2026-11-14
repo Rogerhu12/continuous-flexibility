@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Geometry.CapDiskOutward
-import ContinuousFlexibility.Geometry.OutwardNormalRays
-import ContinuousFlexibility.Geometry.SphereNormals
-import ContinuousFlexibility.Contracts.GraphCapHomeomorph
+module
+
+public import ContinuousFlexibility.Geometry.CapDiskOutward
+public import ContinuousFlexibility.Geometry.OutwardNormalRays
+public import ContinuousFlexibility.Geometry.SphereNormals
+public import ContinuousFlexibility.Contracts.GraphCapHomeomorph
 
 /-!
 # Actual outward normals of the moving graph and the whole unmarked cap
@@ -16,6 +18,8 @@ same Euclidean normal rays. The closed graph disk includes the common rim.
 All statements retain the same given cap length and actual bottom-height gap.
 The inserted marker and the final marked inside region are separate steps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesMollifierL1
-import ContinuousFlexibility.Analysis.SpacesLpOverlap
+module
+
+public import ContinuousFlexibility.Analysis.SpacesMollifierL1
+public import ContinuousFlexibility.Analysis.SpacesLpOverlap
 
 /-!
 # Actual planar L² estimates for normalized convolution
@@ -9,6 +11,8 @@ kernel of mass one satisfies a squared-error estimate, proved from the
 nonnegative weighted variance and Fubini. The proof also establishes
 square integrability of the convolution residual.
 -/
+
+@[expose] public section
 
 noncomputable section
 

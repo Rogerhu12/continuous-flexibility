@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderCoefficients
-import ContinuousFlexibility.Analysis.OneHighCylinderFrequency
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderCoefficients
+public import ContinuousFlexibility.Analysis.OneHighCylinderFrequency
 
 /-!
 # Plancherel for the actual cylinder Fourier transform
@@ -9,6 +11,8 @@ interchanges the real and integer frequency variables, and the genuine radial
 `L²` Fourier isometry preserves each angular mode. All frequency membership is
 obtained from square integrability of the original physical function.
 -/
+
+@[expose] public section
 
 noncomputable section
 

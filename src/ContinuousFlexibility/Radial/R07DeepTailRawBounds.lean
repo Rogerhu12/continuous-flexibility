@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R07DeepTailNumerics
+module
+
+public import ContinuousFlexibility.Radial.R07DeepTailNumerics
 
 /-!
 # Uniform products of the actual radial masses and resistances
@@ -7,6 +9,8 @@ These estimates are direct consequences of `MorseMassResistanceBounds`.
 All amplitude factors cancel at a single index; adjacent ratios are
 controlled by the numerical estimates of the prescribed Morse chain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

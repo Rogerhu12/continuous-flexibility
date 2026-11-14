@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01aReferenceSquareBounds
-import Mathlib.MeasureTheory.Function.L2Space
+module
+
+public import ContinuousFlexibility.Analysis.N01aReferenceSquareBounds
+public import Mathlib.MeasureTheory.Function.L2Space
 
 /-!
 # Uniform testing bounds for actual radial sources
@@ -9,6 +11,8 @@ to the actual iterated integrals even before measurability of the signed
 source is known.  Its absolute value is measurable as the square root of
 its integrable square.
 -/
+
+@[expose] public section
 
 noncomputable section
 

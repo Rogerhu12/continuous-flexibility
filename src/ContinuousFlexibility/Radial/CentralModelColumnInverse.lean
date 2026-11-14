@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.SimpleKernelBorderInverse
-import ContinuousFlexibility.Radial.CentralStatementBridges
-import ContinuousFlexibility.Statements.RadialTargets
+module
+
+public import ContinuousFlexibility.Radial.SimpleKernelBorderInverse
+public import ContinuousFlexibility.Radial.CentralStatementBridges
+public import ContinuousFlexibility.Statements.RadialTargets
 
 /-!
 # The true column inverse for the ordinary central model
@@ -10,6 +12,8 @@ Schrodinger operator used in R09. It uses the original finite-Hermite
 closed graph and the existing bridge to the frozen weak differential
 graph. The radial weighted operator is not used here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06FiniteCylinder
-import ContinuousFlexibility.Radial.ReferenceCosineAlgebra
-import ContinuousFlexibility.Radial.ReferenceCosineParseval
+module
+
+public import ContinuousFlexibility.Analysis.N06FiniteCylinder
+public import ContinuousFlexibility.Radial.ReferenceCosineAlgebra
+public import ContinuousFlexibility.Radial.ReferenceCosineParseval
 
 /-!
 # The graph estimate in the actual even π-periodic Fourier sector
@@ -9,6 +11,8 @@ The existing normalized mean/cosine basis is paired with the negative sine
 family. A constant at index zero completes that partner family; its
 frequency is zero, so it contributes nothing to actual derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

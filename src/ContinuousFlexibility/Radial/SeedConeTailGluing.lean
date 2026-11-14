@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.SeedConeTail
-import ContinuousFlexibility.Radial.SeedConeProfileExtension
-import ContinuousFlexibility.Radial.SeedGlobalRadialContinuation
-import ContinuousFlexibility.Radial.SeedOutwardMatching
-import ContinuousFlexibility.Radial.SeedOrientedGluing
+module
+
+public import ContinuousFlexibility.Radial.SeedConeTail
+public import ContinuousFlexibility.Radial.SeedConeProfileExtension
+public import ContinuousFlexibility.Radial.SeedGlobalRadialContinuation
+public import ContinuousFlexibility.Radial.SeedOutwardMatching
+public import ContinuousFlexibility.Radial.SeedOrientedGluing
 
 /-!
 # Gluing a smooth natural tail to its inward cone continuation
@@ -10,6 +12,8 @@ import ContinuousFlexibility.Radial.SeedOrientedGluing
 This construction depends only on the ordinary smooth tail and its Cauchy
 data. The Morse endpoint machinery is used separately to supply those inputs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cCoefficientTameBounds
-import ContinuousFlexibility.Analysis.N01cCharacteristicSpeedTameBounds
-import ContinuousFlexibility.Analysis.N01cOrdinaryFlowBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01cCoefficientTameBounds
+public import ContinuousFlexibility.Analysis.N01cCharacteristicSpeedTameBounds
+public import ContinuousFlexibility.Analysis.N01cOrdinaryFlowBounds
 
 /-!
 # N01c on a fixed primitive witness
@@ -13,6 +15,8 @@ primitive certificate is returned beside the N01 conclusion.
 This leaf targets the N01c parameter-order flow-loss interface. It does
 not turn that interface into a loss uniform in the parameter order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

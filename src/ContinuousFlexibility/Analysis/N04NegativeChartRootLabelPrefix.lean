@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartRootLabelAngularPrefix
-import ContinuousFlexibility.Analysis.N04NegativeChartRootLabelCircleBounds
-import ContinuousFlexibility.Analysis.N04NegativeChartInteriorMaterial
-import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootLabelAngularPrefix
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootLabelCircleBounds
+public import ContinuousFlexibility.Analysis.N04NegativeChartInteriorMaterial
+public import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
 
 /-!
 # Fractional prefixes for the literal endpoint labels
@@ -12,6 +14,8 @@ displacements are the decoders of the same fixed-base circle family.
 The value bound is unweighted; every positive state jet keeps one copy
 of the height at the exact selected negative half sample.
 -/
+
+@[expose] public section
 
 noncomputable section
 

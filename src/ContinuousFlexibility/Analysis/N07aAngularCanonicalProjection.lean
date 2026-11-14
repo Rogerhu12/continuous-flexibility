@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aAngularJetBands
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularJetBands
 
 /-!
 # Angular projection on the actual canonical fields and scalar unknowns
@@ -8,6 +10,8 @@ The componentwise band commutes with the prescribed material weight in
 frequencies `0`, `1`, `0`, respectively: the middle component multiplies
 the physical `cos(2θ)` border column.
 -/
+
+@[expose] public section
 
 noncomputable section
 

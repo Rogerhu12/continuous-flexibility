@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ProjectiveJetEvaluation
-import ContinuousFlexibility.Scalar.WeightedHomogeneousFamilies
+module
+
+public import ContinuousFlexibility.Analysis.ProjectiveJetEvaluation
+public import ContinuousFlexibility.Scalar.WeightedHomogeneousFamilies
 
 /-!
 # The actual control column of a uniform directional tower
@@ -10,6 +12,8 @@ estimate supplies one fixed loss for every output order. Monotonicity
 extends that estimate below the original base order, and translation of
 the state seminorm gives the centered bound used in the nonlinear task.
 -/
+
+@[expose] public section
 
 noncomputable section
 

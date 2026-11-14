@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.IntervalWeakPotentialRegularity
+module
+
+public import ContinuousFlexibility.Analysis.IntervalWeakPotentialRegularity
 
 /-!
 # Subtracting a smooth offset from an actual primitive flux
@@ -7,6 +9,8 @@ The offset is subtracted from the C¹ representative, and its exact Jacobi
 forcing is subtracted from the source. The primitive constant changes by the
 offset flux at the base point. This will retain the original left-tail datum.
 -/
+
+@[expose] public section
 
 noncomputable section
 

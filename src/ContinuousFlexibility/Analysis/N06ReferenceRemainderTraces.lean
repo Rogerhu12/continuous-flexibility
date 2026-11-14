@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06ReferenceGraphRootTraces
-import ContinuousFlexibility.Analysis.N06ReferenceRemainderFields
-import ContinuousFlexibility.Radial.R11bRemainderModes
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceGraphRootTraces
+public import ContinuousFlexibility.Analysis.N06ReferenceRemainderFields
+public import ContinuousFlexibility.Radial.R11bRemainderModes
 
 /-!
 # Interface traces after subtracting the actual space cutoff
@@ -11,6 +13,8 @@ Subtracting any smooth radial field changes only the mean channel and
 preserves its physical value and derivative matching. This applies on the
 original N05 graph, without identifying the space cutoff with `D.chiLeft`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

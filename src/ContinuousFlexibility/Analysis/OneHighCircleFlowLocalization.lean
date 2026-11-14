@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowTimeChange
-import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowTimeChange
+public import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
 
 /-!
 # Localization of a circle speed to its original time neighborhood
@@ -9,6 +11,8 @@ takes every real time into the given open strip. Composing the original
 speed with this clamp gives a globally smooth periodic speed without
 changing any angular slice or angular derivative on the original interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

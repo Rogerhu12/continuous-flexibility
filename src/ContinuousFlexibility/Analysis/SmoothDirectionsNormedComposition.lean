@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.NormedSmoothDirections
-import ContinuousFlexibility.Analysis.TameJetComposition
-import ContinuousFlexibility.Analysis.TameProductDirections
+module
+
+public import ContinuousFlexibility.Analysis.NormedSmoothDirections
+public import ContinuousFlexibility.Analysis.TameJetComposition
+public import ContinuousFlexibility.Analysis.TameProductDirections
 
 /-!
 # Composition into a normed target from topological parameters
@@ -10,6 +12,8 @@ tower followed by an ordinary smooth map on an open normed domain.
 Every summand is differentiated along the actual parameter curve. This
 allows scalar coefficient operations on the original parameter space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

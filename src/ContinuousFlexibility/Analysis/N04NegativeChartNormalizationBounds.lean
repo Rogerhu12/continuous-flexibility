@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartWidths
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartWidths
 
 /-!
 # The cost of normalizing both actual coordinate fields
@@ -7,6 +9,8 @@ The physical width enters once per radial derivative. The canonical
 inverse width enters only in the radial coordinate. Both are controlled
 at the same old negative-half sample, with no change to the state loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

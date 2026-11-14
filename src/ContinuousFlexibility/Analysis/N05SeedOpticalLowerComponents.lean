@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05SeedOpticalLowerTransport
+module
+
+public import ContinuousFlexibility.Analysis.N05SeedOpticalLowerTransport
 
 /-!
 # Exhaustion of the actual seed's negative components
@@ -7,6 +9,8 @@ The pointwise three-piece construction and uniqueness of a negative
 component identify its whole interval with one retained Morse interval
 or the retained central interval. No new enumeration is chosen.
 -/
+
+@[expose] public section
 
 noncomputable section
 

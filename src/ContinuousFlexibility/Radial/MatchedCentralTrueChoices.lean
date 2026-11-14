@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.FixedCentralModelSmallError
-import ContinuousFlexibility.Radial.MatchedCentralTrueEnvelope
-import ContinuousFlexibility.Radial.FixedCentralBorder
-import ContinuousFlexibility.Radial.CentralModelSlopeWindow
-import ContinuousFlexibility.Radial.InnerBufferLocalizedConstruction
+module
+
+public import ContinuousFlexibility.Radial.FixedCentralModelSmallError
+public import ContinuousFlexibility.Radial.MatchedCentralTrueEnvelope
+public import ContinuousFlexibility.Radial.FixedCentralBorder
+public import ContinuousFlexibility.Radial.CentralModelSlopeWindow
+public import ContinuousFlexibility.Radial.InnerBufferLocalizedConstruction
 
 /-!
 # A true central model chosen before the retained tails
@@ -12,6 +14,8 @@ radius and actual localized witnesses are then chosen uniformly over
 all even frequencies. No later reference, retained length or number of
 Morse pieces occurs in these choices.
 -/
+
+@[expose] public section
 
 noncomputable section
 

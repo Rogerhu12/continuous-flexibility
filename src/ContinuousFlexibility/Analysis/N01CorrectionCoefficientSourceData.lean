@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01CorrectionCoefficientJets
-import ContinuousFlexibility.Analysis.ReturnDivergenceMembership
+module
+
+public import ContinuousFlexibility.Analysis.N01CorrectionCoefficientJets
+public import ContinuousFlexibility.Analysis.ReturnDivergenceMembership
 
 /-!
 # Source symmetry of the actual correction coefficient jets
@@ -9,6 +11,8 @@ used in the return construction. Their proved reflection and period
 identities give precisely the symmetry required by the physical
 divergence realization at every parameter order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

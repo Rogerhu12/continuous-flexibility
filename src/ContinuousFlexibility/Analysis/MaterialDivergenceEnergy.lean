@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.MaterialCoefficientMultipliers
-import ContinuousFlexibility.Analysis.MaterialPartialEnergy
+module
+
+public import ContinuousFlexibility.Analysis.MaterialCoefficientMultipliers
+public import ContinuousFlexibility.Analysis.MaterialPartialEnergy
 
 /-!
 # Weighted material energy of a physical divergence error
@@ -10,6 +12,8 @@ preserve that class by the exact material identities. Consequently the
 symmetric divergence error with two such coefficients has every
 weighted physical jet in L². No independent formal jet is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

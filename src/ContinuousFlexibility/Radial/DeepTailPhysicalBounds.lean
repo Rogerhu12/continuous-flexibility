@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.DeepTailPhysicalFlatness
-import ContinuousFlexibility.Radial.DeepTailEdgeFluxBounds
+module
+
+public import ContinuousFlexibility.Radial.DeepTailPhysicalFlatness
+public import ContinuousFlexibility.Radial.DeepTailEdgeFluxBounds
 
 /-!
 # From the actual natural line to physical flatness
@@ -9,6 +11,8 @@ actual flux estimate supply the two initial bounds for the physical flux
 system. Compactness controls the nonsingular gauge factors, and the
 previous physical-jet and extension results give the frozen conclusion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

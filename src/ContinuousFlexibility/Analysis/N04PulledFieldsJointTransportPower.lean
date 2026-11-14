@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsTransportPowerGrowth
-import ContinuousFlexibility.Analysis.N04PulledFieldsTransportParameterBudget
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsTransportPowerGrowth
+public import ContinuousFlexibility.Analysis.N04PulledFieldsTransportParameterBudget
 
 /-!
 # Actual transport jets with a fixed parameter charge
@@ -8,6 +10,8 @@ The exact radial transport identities are evaluated in the parameter
 budget recurrence. A common low grading is retained. Only the high loss
 and the charge per parameter slot depend on the finite parameter prefix.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.ActualPositiveReferenceInverseMaterialJets
-import ContinuousFlexibility.Analysis.ActualPositiveReferencePrescribedFamily
-import ContinuousFlexibility.Analysis.WholeReferenceGaugePositivePrincipalJets
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeFixedPotentialReferenceJets
+module
+
+public import ContinuousFlexibility.Analysis.ActualPositiveReferenceInverseMaterialJets
+public import ContinuousFlexibility.Analysis.ActualPositiveReferencePrescribedFamily
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugePositivePrincipalJets
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeFixedPotentialReferenceJets
 
 /-!
 # One displayed positive family and its five coefficient atoms
@@ -13,6 +15,8 @@ width, coordinate and height. Its finite certificate, full endpoint jet
 matching and all-order forward/inverse bounds are retained. The four
 principal atoms and the potential use that same family in the same atlas.
 -/
+
+@[expose] public section
 
 noncomputable section
 

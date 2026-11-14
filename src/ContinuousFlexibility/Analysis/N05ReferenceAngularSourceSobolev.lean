@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N05ReferenceAngularWeakCoefficients
-import ContinuousFlexibility.Analysis.N05ReferenceAngularWeighted
-import ContinuousFlexibility.Analysis.N05ReferenceAngularJetCells
-import ContinuousFlexibility.Radial.R11bWeightedBessel
-import ContinuousFlexibility.Radial.R11bGlobalL2
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceAngularWeakCoefficients
+public import ContinuousFlexibility.Analysis.N05ReferenceAngularWeighted
+public import ContinuousFlexibility.Analysis.N05ReferenceAngularJetCells
+public import ContinuousFlexibility.Radial.R11bWeightedBessel
+public import ContinuousFlexibility.Radial.R11bGlobalL2
 
 /-!
 # Actual weak source jets supply the angular square sum
@@ -12,6 +14,8 @@ or compatibility requirement on that field. The weak coefficient identity
 then gives summability and the bound for the original source coefficients.
 Thus the angular source hypothesis is expressed in physical Sobolev terms.
 -/
+
+@[expose] public section
 
 noncomputable section
 

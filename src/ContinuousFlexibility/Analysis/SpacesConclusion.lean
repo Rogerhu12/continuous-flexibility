@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SpacesAssembly
-import ContinuousFlexibility.Analysis.SpacesPhysicalRetraction
-import ContinuousFlexibility.Analysis.SpacesNemytskiiSmooth
+module
+
+public import ContinuousFlexibility.Analysis.SpacesAssembly
+public import ContinuousFlexibility.Analysis.SpacesPhysicalRetraction
+public import ContinuousFlexibility.Analysis.SpacesNemytskiiSmooth
 
 /-!
 # The exact weighted-space statement
@@ -8,6 +10,8 @@ import ContinuousFlexibility.Analysis.SpacesNemytskiiSmooth
 The concrete physical and circle retractions, all prescribed decoded
 operations, and the full smooth-composition tower supply every clause of W02.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Statements
 

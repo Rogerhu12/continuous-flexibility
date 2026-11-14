@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RootRegularizedFlow
-import Mathlib.Tactic.Ring
+module
+
+public import ContinuousFlexibility.Analysis.RootRegularizedFlow
+public import Mathlib.Tactic.Ring
 
 /-!
 # Reflection of the actual root-regularized flow
@@ -10,6 +12,8 @@ Uniqueness transfers this symmetry to every actual solution family.
 The angular Lipschitz bound needed for uniqueness is derived from the
 actual derivative of the smooth periodic field on one compact period.
 -/
+
+@[expose] public section
 
 noncomputable section
 

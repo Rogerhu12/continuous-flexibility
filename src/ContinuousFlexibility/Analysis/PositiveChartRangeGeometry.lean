@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.WholePositiveCanonicalFields
-import ContinuousFlexibility.Analysis.PositiveReferenceCylinder
+module
+
+public import ContinuousFlexibility.Analysis.WholePositiveCanonicalFields
+public import ContinuousFlexibility.Analysis.PositiveReferenceCylinder
 
 /-!
 # Positive charts with distinct physical and canonical intervals
@@ -9,6 +11,8 @@ the physical and canonical endpoints separate and has no identity
 normalization in the middle. The existing scalar reference interpolation
 supplies it directly, in particular for canonical interval (0, 1).
 -/
+
+@[expose] public section
 
 noncomputable section
 

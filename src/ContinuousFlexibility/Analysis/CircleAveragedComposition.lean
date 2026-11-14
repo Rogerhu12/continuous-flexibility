@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CircleParameterIntegral
-import ContinuousFlexibility.Analysis.CircleWeightedProduct
+module
+
+public import ContinuousFlexibility.Analysis.CircleParameterIntegral
+public import ContinuousFlexibility.Analysis.CircleWeightedProduct
 
 /-!
 # Averaging actual chart compositions on the unit segment
@@ -9,6 +11,8 @@ The same bounds hold for every lift theta + travel + a e(theta),
 0 <= a <= 1.  Parameter integration consequently defines a linear
 operator in the original weighted circle model.
 -/
+
+@[expose] public section
 
 noncomputable section
 

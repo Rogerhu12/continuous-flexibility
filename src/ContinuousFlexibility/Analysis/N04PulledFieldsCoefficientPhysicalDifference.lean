@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientDifferenceIdentity
-import ContinuousFlexibility.Analysis.N04PulledFieldsActualErrorPhysical
-import ContinuousFlexibility.Analysis.N04PulledFieldsPhysicalDifferenceCost
-import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientCurrent
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientDifferenceIdentity
+public import ContinuousFlexibility.Analysis.N04PulledFieldsActualErrorPhysical
+public import ContinuousFlexibility.Analysis.N04PulledFieldsPhysicalDifferenceCost
+public import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientCurrent
 
 /-!
 # Full physical height for the retained corrected coefficients
@@ -12,6 +14,8 @@ these estimates on one low box, uniformly for all three coefficients.
 Only the final step enlarges the material envelope; the physical point
 and the reference coefficient remain unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

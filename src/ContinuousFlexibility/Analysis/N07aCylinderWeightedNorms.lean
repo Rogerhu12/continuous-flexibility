@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalModeEnergySum
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalModeEnergySum
 
 /-!
 # Weighted derivative norms controlled by the actual cylinder energy
@@ -7,6 +9,8 @@ All multipliers act on the original interval L² classes. These five
 bounds are precisely the weights in the expanded cubic principal
 difference, so no higher Hessian graph needs to be constructed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

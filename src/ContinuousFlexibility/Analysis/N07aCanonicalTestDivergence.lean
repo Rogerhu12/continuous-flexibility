@@ -1,6 +1,10 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalGreenPairing
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalGreenPairing
 
 /-! # Canonical divergence preserves compact canonical tests -/
+
+@[expose] public section
 
 noncomputable section
 

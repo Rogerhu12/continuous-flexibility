@@ -1,10 +1,12 @@
-import Mathlib.Analysis.SpecialFunctions.Trigonometric.Bounds
-import Mathlib.NumberTheory.Real.Irrational
-import Mathlib.Algebra.Order.Round
-import Mathlib.Tactic.FieldSimp
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.NormNum
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Analysis.SpecialFunctions.Trigonometric.Bounds
+public import Mathlib.NumberTheory.Real.Irrational
+public import Mathlib.Algebra.Order.Round
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.Ring
 
 /-!
 # Characteristic small divisor of the central model
@@ -13,6 +15,8 @@ Section 4, immediately after `eq:rad-eq-sc6b`, uses the angle
 `T = π/(2√2)`. This file proves an actual sine lower bound for every
 positive integer frequency, separately from any spectral gap assertion.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

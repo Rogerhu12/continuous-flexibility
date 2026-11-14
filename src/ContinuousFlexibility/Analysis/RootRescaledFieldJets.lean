@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RootRescaledAngularControl
-import ContinuousFlexibility.Analysis.LinearWeightedCompositionJets
+module
+
+public import ContinuousFlexibility.Analysis.RootRescaledAngularControl
+public import ContinuousFlexibility.Analysis.LinearWeightedCompositionJets
 
 /-!
 # Actual spatial jets of the rescaled root field
@@ -10,6 +12,8 @@ polynomial prefactors are linear functions with a uniformly bounded
 value on the parameter box. The resulting estimate uses coefficient
 jets only through the requested order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

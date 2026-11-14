@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CoupledCircleCompositionMultilinear
-import ContinuousFlexibility.Analysis.TameJetLocalBounds
+module
+
+public import ContinuousFlexibility.Analysis.CoupledCircleCompositionMultilinear
+public import ContinuousFlexibility.Analysis.TameJetLocalBounds
 
 /-!
 # Local affine growth of circle composition kernels
@@ -8,6 +10,8 @@ A bounded low-seminorm box controls all low factors. Each kernel then
 has affine growth in one high seminorm, with the original fixed loss.
 The final homogeneous jet estimates follow from multilinear normalization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

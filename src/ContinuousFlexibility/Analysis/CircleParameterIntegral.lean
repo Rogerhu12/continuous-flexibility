@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.AngularRegularityIntegral
-import ContinuousFlexibility.Analysis.CircleEnergyPointwiseBounds
+module
+
+public import ContinuousFlexibility.Analysis.AngularRegularityIntegral
+public import ContinuousFlexibility.Analysis.CircleEnergyPointwiseBounds
 
 /-!
 # Parameter integrals of actual weighted circle fields
@@ -9,6 +11,8 @@ integral.  A bound by the complete energy of the same input component
 survives integration on the unit interval, so the complete sum over
 circles remains finite.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterOutwardGreenTransport
-import ContinuousFlexibility.Radial.TailGreenL2Representation
+module
+
+public import ContinuousFlexibility.Radial.OuterOutwardGreenTransport
+public import ContinuousFlexibility.Radial.TailGreenL2Representation
 
 /-!
 # The actual deep Dirichlet kernel used by the whole outer inverse
@@ -8,6 +10,8 @@ The natural and Dirichlet states are the actual recurrence solutions.
 The inverse is the actual Friedrichs inverse.  Their all-L² kernel
 identity is proved and transported to the outward physical measure.
 -/
+
+@[expose] public section
 
 noncomputable section
 

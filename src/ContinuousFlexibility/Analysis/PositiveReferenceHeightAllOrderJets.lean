@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.PositiveCutoffAllOrderJets
-import ContinuousFlexibility.Analysis.PositiveReferenceValueEnvelope
-import ContinuousFlexibility.Analysis.LogPolynomialEnvelope
-import ContinuousFlexibility.Analysis.ExpPolynomialEnvelope
+module
+
+public import ContinuousFlexibility.Analysis.PositiveCutoffAllOrderJets
+public import ContinuousFlexibility.Analysis.PositiveReferenceValueEnvelope
+public import ContinuousFlexibility.Analysis.LogPolynomialEnvelope
+public import ContinuousFlexibility.Analysis.ExpPolynomialEnvelope
 
 /-!
 # All orders of the same positive reference height
@@ -11,6 +13,8 @@ Its exponent has polynomial jets, while the exponential amplitude is
 bounded by the actual endpoint values. The reciprocal is handled by
 the same argument with the exponent negated.
 -/
+
+@[expose] public section
 
 noncomputable section
 

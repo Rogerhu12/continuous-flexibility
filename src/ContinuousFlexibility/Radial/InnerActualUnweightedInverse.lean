@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerRadialWeightedInverse
-import ContinuousFlexibility.Radial.InnerRadialDirichletWeights
-import ContinuousFlexibility.Radial.MatchedInnerUnitWeights
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialWeightedInverse
+public import ContinuousFlexibility.Radial.InnerRadialDirichletWeights
+public import ContinuousFlexibility.Radial.MatchedInnerUnitWeights
 
 /-!
 # The actual finite-chain inverse with unit physical weights
@@ -9,6 +11,8 @@ The model errors and the complete positive gap matrices control the same
 physical Schur inverse. Local normalized model columns and a uniform
 positive gap slope give a norm bound independent of the number of pieces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

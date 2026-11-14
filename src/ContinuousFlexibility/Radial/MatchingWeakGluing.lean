@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.MatchingCutoffTests
-import ContinuousFlexibility.Radial.ModeTestIntegrability
-import ContinuousFlexibility.Radial.ModeCompactLocal
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
+module
+
+public import ContinuousFlexibility.Radial.MatchingCutoffTests
+public import ContinuousFlexibility.Radial.ModeTestIntegrability
+public import ContinuousFlexibility.Radial.ModeCompactLocal
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
 
 /-!
 # Gluing the frozen modal weak equation across interior cuts
@@ -11,6 +13,8 @@ Cutoff decomposition therefore reduces the global frozen weak equation
 to the inner and outer equations and two equations in neighborhoods of
 the matching cuts. Tests may approach the radial endpoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

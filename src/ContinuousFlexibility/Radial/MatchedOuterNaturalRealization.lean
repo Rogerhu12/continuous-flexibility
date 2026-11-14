@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchedOuterNaturalColumns
-import ContinuousFlexibility.Radial.MatchedPiecesAssembly
+module
+
+public import ContinuousFlexibility.Radial.MatchedOuterNaturalColumns
+public import ContinuousFlexibility.Radial.MatchedPiecesAssembly
 
 /-!
 # The natural-column clauses of the same matching datum
@@ -11,6 +13,8 @@ modal equations and both cut traces, including when an entrance value is
 zero. The final theorem fills the fifth group of MatchingOuterRealizations
 using only the constructor's field identities.
 -/
+
+@[expose] public section
 
 noncomputable section
 

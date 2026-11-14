@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CoupledDerivativeIdentity
+module
+
+public import ContinuousFlexibility.Analysis.CoupledDerivativeIdentity
 
 /-!
 # Assembling the exact N10 error identity
@@ -7,6 +9,8 @@ The independent error formulas and their regularity supply the remaining
 data. The two genuine line derivatives follow from the recovered N09
 increment and the actual N08 residual tower.
 -/
+
+@[expose] public section
 
 noncomputable section
 

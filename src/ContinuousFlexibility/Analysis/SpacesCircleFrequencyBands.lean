@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesCircleSpectral
-import ContinuousFlexibility.Analysis.SpacesCircleFourierJets
+module
+
+public import ContinuousFlexibility.Analysis.SpacesCircleSpectral
+public import ContinuousFlexibility.Analysis.SpacesCircleFourierJets
 
 /-!
 # Joint discrete-weight and angular-frequency bands
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Analysis.SpacesCircleFourierJets
 A band is defined by `max M (2 |n|)`. Its angular index set is finite, even
 when infinitely many circle rows share the same discrete weight.
 -/
+
+@[expose] public section
 
 noncomputable section
 

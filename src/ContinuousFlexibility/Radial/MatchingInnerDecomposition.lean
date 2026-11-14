@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MatchingGraphRepresentatives
-import ContinuousFlexibility.Radial.ModeGraphAlgebra
-import Mathlib.Tactic.FieldSimp
+module
+
+public import ContinuousFlexibility.Radial.MatchingGraphRepresentatives
+public import ContinuousFlexibility.Radial.ModeGraphAlgebra
+public import Mathlib.Tactic.FieldSimp
 
 /-!
 # Local inverse decomposition by the Poisson columns
@@ -11,6 +13,8 @@ identifies the remaining part with the supplied local inverse.
 The source is arbitrary, so the result applies both to kernel vectors
 and to the smooth core used in the global inverse argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

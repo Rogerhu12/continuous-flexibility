@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01RootSpeedJetBounds
-import ContinuousFlexibility.Analysis.N01RootDriftJetBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01RootSpeedJetBounds
+public import ContinuousFlexibility.Analysis.N01RootDriftJetBounds
 
 /-!
 # One common fixed loss for both actual normalized root fields
@@ -11,6 +13,8 @@ constant selected before the state. The root itself is an interior
 point of this genuine smooth strip; no totalized one-sided derivative
 is substituted for its ordinary derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

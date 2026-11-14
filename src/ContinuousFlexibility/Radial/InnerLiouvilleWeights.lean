@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerLiouvillePoissonTransport
-import ContinuousFlexibility.Radial.InnerLiouvilleLeadingTransport
-import ContinuousFlexibility.Radial.InnerLocalizedWeights
+module
+
+public import ContinuousFlexibility.Radial.InnerLiouvillePoissonTransport
+public import ContinuousFlexibility.Radial.InnerLiouvilleLeadingTransport
+public import ContinuousFlexibility.Radial.InnerLocalizedWeights
 
 /-!
 # Actual weights commute with Liouville transport by pullback
@@ -10,6 +12,8 @@ Lp quotients. This lets the leading buffer keep its own cut weight and
 its small local velocity, while the same remainder pays only its cell's
 weight ratio.
 -/
+
+@[expose] public section
 
 noncomputable section
 

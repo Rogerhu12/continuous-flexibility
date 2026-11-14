@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04NegativeInverseJointPrefixes
-import ContinuousFlexibility.Analysis.N04NegativeInverseOutputAtoms
-import ContinuousFlexibility.Analysis.N04NegativeInverseReferenceBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeInverseJointPrefixes
+public import ContinuousFlexibility.Analysis.N04NegativeInverseOutputAtoms
+public import ContinuousFlexibility.Analysis.N04NegativeInverseReferenceBounds
 
 /-!
 # Collect genuine point and height joint estimates
@@ -11,6 +13,8 @@ joint prefixes into all three current-data fields on the same fixed
 neighborhood. Fixed physical normalization costs are absorbed only in
 the polynomial E0 coefficient.
 -/
+
+@[expose] public section
 
 noncomputable section
 

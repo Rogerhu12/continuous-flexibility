@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aReferenceOpenCoefficients
-import ContinuousFlexibility.Analysis.N07aModeBudgetMaterial
+module
+
+public import ContinuousFlexibility.Analysis.N07aReferenceOpenCoefficients
+public import ContinuousFlexibility.Analysis.N07aModeBudgetMaterial
 
 /-!
 # The actual source in the reference mode equation
@@ -8,6 +10,8 @@ The original potential and all three original scalar columns are kept in
 the source.  Its norm is controlled by the genuine field, source and
 column classes; no homogeneous reference equation is substituted for it.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N07aNuParameterTame
-import ContinuousFlexibility.Analysis.N07aFixedDirection
-import ContinuousFlexibility.Analysis.SolveTameSubspace
-import ContinuousFlexibility.Scalar.WeightedRealization
-import Mathlib.Analysis.Calculus.Deriv.Shift
+module
+
+public import ContinuousFlexibility.Analysis.N07aNuParameterTame
+public import ContinuousFlexibility.Analysis.N07aFixedDirection
+public import ContinuousFlexibility.Analysis.SolveTameSubspace
+public import ContinuousFlexibility.Scalar.WeightedRealization
+public import Mathlib.Analysis.Calculus.Deriv.Shift
 
 /-!
 # The distinguished scalar column as an actual source-valued family
@@ -12,6 +14,8 @@ profile. Its genuine directional tower supplies the fixed border derivative.
 The same physical conservation functional annihilates this derivative, so
 the codomain is the prescribed Source kernel without changing its decoder.
 -/
+
+@[expose] public section
 
 noncomputable section
 

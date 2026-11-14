@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerLiouvilleIntervalMeasure
-import ContinuousFlexibility.Radial.InnerL2Restriction
+module
+
+public import ContinuousFlexibility.Radial.InnerLiouvilleIntervalMeasure
+public import ContinuousFlexibility.Radial.InnerL2Restriction
 
 /-!
 # The normalized L² equivalence on a retained physical cell
@@ -9,6 +11,8 @@ Surjectivity uses the genuine retained inverse coordinate, so the
 construction also applies when the extended Morse radius turns outside
 the retained interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

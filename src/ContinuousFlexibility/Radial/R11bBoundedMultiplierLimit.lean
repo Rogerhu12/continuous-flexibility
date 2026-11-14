@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R11bTensorL2
+module
+
+public import ContinuousFlexibility.Radial.R11bTensorL2
 
 /-!
 # Bounded multiplication preserves strong L² limits
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Radial.R11bTensorL2
 All functions below are actual measurable representatives. The norm estimate
 is proved on their Lp classes from the pointwise multiplication bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

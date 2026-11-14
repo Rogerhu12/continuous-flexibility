@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01aReferenceNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N01aReferenceNormalization
 
 /-!
 # The actual inverse at a pure normalization source
@@ -8,6 +10,8 @@ Applying the existing reference inverse above the working exponent produces
 an actual distributional solution and its weighted first normal derivative.
 No identification with the reference eigenfunction is assumed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

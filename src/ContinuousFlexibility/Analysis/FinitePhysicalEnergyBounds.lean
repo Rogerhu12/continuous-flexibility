@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.PhysicalGradeEnergy
+module
+
+public import ContinuousFlexibility.Analysis.PhysicalGradeEnergy
 
 /-!
 # Finite physical jet sums with arbitrary component weights
@@ -7,6 +9,8 @@ This is a finite-index calculation in the nonnegative extended reals.
 Component weights stay outside the actual L2 norms. A common bound for
 every jet of total order at most s controls the sum of all levels up to s.
 -/
+
+@[expose] public section
 
 noncomputable section
 

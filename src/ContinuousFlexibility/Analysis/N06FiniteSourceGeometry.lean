@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06FiniteLocalSourceColumns
-import ContinuousFlexibility.Analysis.N06PhysicalPeriodicity
-import ContinuousFlexibility.Analysis.CanonicalStripGeometry
-import Mathlib.Analysis.Calculus.Deriv.Abs
+module
+
+public import ContinuousFlexibility.Analysis.N06FiniteLocalSourceColumns
+public import ContinuousFlexibility.Analysis.N06PhysicalPeriodicity
+public import ContinuousFlexibility.Analysis.CanonicalStripGeometry
+public import Mathlib.Analysis.Calculus.Deriv.Abs
 
 /-!
 # Actual canonical source fields and finite physical support
@@ -11,6 +13,8 @@ chart, height and Jacobian clauses. Physical radial support can meet only
 the explicitly listed intersecting pieces. Finiteness of that set is an
 input about the atlas; it is not inferred from the frozen N04 clauses.
 -/
+
+@[expose] public section
 
 noncomputable section
 

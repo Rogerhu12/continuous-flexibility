@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasOperator
-import ContinuousFlexibility.Analysis.CanonicalSourceConversion
-import ContinuousFlexibility.Analysis.CanonicalNeighborhoodRestriction
+module
+
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasOperator
+public import ContinuousFlexibility.Analysis.CanonicalSourceConversion
+public import ContinuousFlexibility.Analysis.CanonicalNeighborhoodRestriction
 
 /-!
 # Cut operator conditions and source pairing for the reference-gauged atlas
@@ -11,6 +13,8 @@ their own interior quotients. The original negative witness is retained
 when the common state neighborhood is restricted. Source pairing follows
 from the geometry of this same record on its actual domains.
 -/
+
+@[expose] public section
 
 noncomputable section
 

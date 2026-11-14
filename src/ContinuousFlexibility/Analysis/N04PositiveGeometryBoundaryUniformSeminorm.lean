@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryFormulaPrefix
-import ContinuousFlexibility.Analysis.N01cGradedJetContinuity
-import ContinuousFlexibility.Analysis.SmoothDirectionsBoundedLimit
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryFormulaPrefix
+public import ContinuousFlexibility.Analysis.N01cGradedJetContinuity
+public import ContinuousFlexibility.Analysis.SmoothDirectionsBoundedLimit
 
 /-!
 # Uniform angular seminorm bounds from saved endpoint words
@@ -10,6 +12,8 @@ angular order. Taking the normalization radius to be one plus the high
 seminorm gives linear growth, and genuine multilinearity restores the
 product of direction seminorms, including seminorm kernels.
 -/
+
+@[expose] public section
 
 noncomputable section
 

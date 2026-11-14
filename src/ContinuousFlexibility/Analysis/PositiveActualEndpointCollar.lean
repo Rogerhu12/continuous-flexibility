@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.CylinderEndpointLocalization
-import ContinuousFlexibility.Analysis.PositiveEndpointRadialNormalization
-import ContinuousFlexibility.Analysis.AngularFiberFiniteJetBounds
-import ContinuousFlexibility.Analysis.PositiveReferenceCollarFactory
-import ContinuousFlexibility.Analysis.PositiveFiberCoordinates
-import ContinuousFlexibility.Analysis.BoundaryRadialFrechetJets
+module
+
+public import ContinuousFlexibility.Analysis.CylinderEndpointLocalization
+public import ContinuousFlexibility.Analysis.PositiveEndpointRadialNormalization
+public import ContinuousFlexibility.Analysis.AngularFiberFiniteJetBounds
+public import ContinuousFlexibility.Analysis.PositiveReferenceCollarFactory
+public import ContinuousFlexibility.Analysis.PositiveFiberCoordinates
+public import ContinuousFlexibility.Analysis.BoundaryRadialFrechetJets
 
 /-!
 # A positive endpoint collar from actual root fields
@@ -18,6 +20,8 @@ The right endpoint is reflected and translated explicitly. The output
 has the actual global smooth inverse, matches the original normalized
 radial jets, and equals the fixed reference chart as a joint exit germ.
 -/
+
+@[expose] public section
 
 noncomputable section
 

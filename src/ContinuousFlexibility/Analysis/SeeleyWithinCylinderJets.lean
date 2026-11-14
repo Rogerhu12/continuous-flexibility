@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.SeeleyCylinderExtension
-import Mathlib.Analysis.Calculus.FDeriv.Symmetric
-import Mathlib.Analysis.Calculus.TangentCone.Prod
-import Mathlib.Analysis.Calculus.TangentCone.Real
+module
+
+public import ContinuousFlexibility.Analysis.SeeleyCylinderExtension
+public import Mathlib.Analysis.Calculus.FDeriv.Symmetric
+public import Mathlib.Analysis.Calculus.TangentCone.Prod
+public import Mathlib.Analysis.Calculus.TangentCone.Real
 
 /-!
 # Joint extension from actual derivatives within the half-plane
@@ -13,6 +15,8 @@ directions commute, including at its boundary. Only bounds on these
 actual within-jets are additional input; no derivative of an extension
 and no smoothness outside the half-plane is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07bReferencePullback
-import ContinuousFlexibility.Radial.R11bPhysicalPairing
+module
+
+public import ContinuousFlexibility.Analysis.N07bReferencePullback
+public import ContinuousFlexibility.Radial.R11bPhysicalPairing
 
 /-!
 # A regular reference representative from actual geometric transition maps
@@ -13,6 +15,8 @@ The representative agrees a.e. with the already defined raw reference
 pullback, including on the full physical angular period. Consequently the
 normalization row is preserved without an extra row or integrability premise.
 -/
+
+@[expose] public section
 
 noncomputable section
 

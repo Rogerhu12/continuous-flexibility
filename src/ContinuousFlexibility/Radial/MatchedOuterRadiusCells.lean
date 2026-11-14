@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchedRadiusMultipliers
-import ContinuousFlexibility.Radial.MatchedOuterModalCells
+module
+
+public import ContinuousFlexibility.Radial.MatchedRadiusMultipliers
+public import ContinuousFlexibility.Radial.MatchedOuterModalCells
 
 /-!
 # Exact localization under the retained radius isometry
@@ -9,6 +11,8 @@ coordinate identity intertwines the existing multipliers and the
 existing transported inverse, hence preserves every localized norm.
 Only points in the actual whole-tail measure are used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

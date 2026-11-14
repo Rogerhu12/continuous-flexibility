@@ -1,11 +1,13 @@
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
-import Mathlib.Analysis.Calculus.Deriv.MeanValue
-import Mathlib.Analysis.Real.Sqrt
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
-import Mathlib.Topology.Order.Compact
-import Mathlib.Tactic.FieldSimp
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Positivity
+module
+
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+public import Mathlib.Analysis.Calculus.Deriv.MeanValue
+public import Mathlib.Analysis.Real.Sqrt
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+public import Mathlib.Topology.Order.Compact
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Positivity
 
 /-!
 # One normal derivative on an interval without boundary conditions
@@ -26,6 +28,8 @@ manuscript.  No boundary data are imposed.
   bounded by `K`, the first and second derivatives are controlled by `F` and
   `(1 + j²)`-weighted (resp. `(1 + j²)²`-weighted) `L²` norms of `u`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

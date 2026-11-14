@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CircleAngularJetLinear
-import ContinuousFlexibility.Analysis.CircleEnergyDifferentiation
-import ContinuousFlexibility.Analysis.ScalarDerivativeLimit
+module
+
+public import ContinuousFlexibility.Analysis.CircleAngularJetLinear
+public import ContinuousFlexibility.Analysis.CircleEnergyDifferentiation
+public import ContinuousFlexibility.Analysis.ScalarDerivativeLimit
 
 /-!
 # Full circle derivatives from actual scalar second variations
@@ -10,6 +12,8 @@ jet by its exact material weight. A summable energy envelope for the
 second variation then gives convergence of the entire circle-valued
 difference quotient in every projective norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.IntervalLayerEnergy
-import ContinuousFlexibility.Radial.ProfileLayerCoefficients
-import ContinuousFlexibility.Radial.ProfileLayerOverlap
+module
+
+public import ContinuousFlexibility.Analysis.IntervalLayerEnergy
+public import ContinuousFlexibility.Radial.ProfileLayerCoefficients
+public import ContinuousFlexibility.Radial.ProfileLayerOverlap
 
 /-!
 # The actual profile equation on one endpoint layer
@@ -8,6 +10,8 @@ import ContinuousFlexibility.Radial.ProfileLayerOverlap
 The coefficient constants depend on the profile alone. In particular the
 Fourier parameter occurs only in the explicit factor `1 + j^2`.
 -/
+
+@[expose] public section
 
 open Set Filter MeasureTheory Real
 open ContinuousFlexibility.Analysis ContinuousFlexibility.Statements

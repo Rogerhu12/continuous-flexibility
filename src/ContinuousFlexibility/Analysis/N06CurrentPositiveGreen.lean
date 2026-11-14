@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06CurrentWeightedTraceGreen
-import ContinuousFlexibility.Analysis.N06WeakCylinderPDE
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentWeightedTraceGreen
+public import ContinuousFlexibility.Analysis.N06WeakCylinderPDE
 
 /-!
 # Positive reference Green against actual current physical tests
@@ -10,6 +12,8 @@ the closed AC radial formula with the genuine periodic angular formula
 gives the positive sign and both actual boundary terms. No smoothness of
 the totalized inverse at the endpoints is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

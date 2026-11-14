@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cWeightAbsorption
+module
+
+public import ContinuousFlexibility.Analysis.N01cWeightAbsorption
 
 /-!
 # The polynomial envelope of the forcing head
@@ -8,6 +10,8 @@ fixed low outer norm times the derivative defect. If the defect has a
 fixed additive loss, this is one requested-order aggregate times one
 fixed-order aggregate. The original material weight is retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

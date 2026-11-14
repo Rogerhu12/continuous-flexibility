@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06CurrentNegativePairing
-import ContinuousFlexibility.Analysis.N06FullCanonicalPairing
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentNegativePairing
+public import ContinuousFlexibility.Analysis.N06FullCanonicalPairing
 
 /-!
 # The true two-half negative Green identity
@@ -10,6 +12,8 @@ averaging `L phi` and applying `L` to the averaged test is exactly the
 actual potential translation defect. This file keeps that term explicitly;
 it does not assume periodicity of the bare physical operator or potential.
 -/
+
+@[expose] public section
 
 noncomputable section
 

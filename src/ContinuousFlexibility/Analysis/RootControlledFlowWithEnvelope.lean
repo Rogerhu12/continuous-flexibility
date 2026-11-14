@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RootControlledFlow
-import ContinuousFlexibility.Analysis.RootFieldLocalization
+module
+
+public import ContinuousFlexibility.Analysis.RootControlledFlow
+public import ContinuousFlexibility.Analysis.RootFieldLocalization
 
 /-!
 # Controlled root flows retaining the material envelope
@@ -10,6 +12,8 @@ costs only the inverse input radius and a fixed power of that same weight.
 The actual periodic flow and its entire displacement jet tower are then
 supplied by the existing Picard and flow-jet theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

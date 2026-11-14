@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFourierProduct
-import ContinuousFlexibility.Analysis.OneHighCircleFourierWeightArithmetic
-import ContinuousFlexibility.Analysis.OneHighCircleSobolevJetsBasic
-import ContinuousFlexibility.Analysis.OneHighConvolutionYoung
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierProduct
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierWeightArithmetic
+public import ContinuousFlexibility.Analysis.OneHighCircleSobolevJetsBasic
+public import ContinuousFlexibility.Analysis.OneHighConvolutionYoung
 
 /-!
 # The whole Sobolev product estimate on a circle
@@ -11,6 +13,8 @@ factor at a time. Young's inequality then gives the two-factor Sobolev estimate
 directly, with the explicit constant `2 ^ s` and without a finite Fourier
 support hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

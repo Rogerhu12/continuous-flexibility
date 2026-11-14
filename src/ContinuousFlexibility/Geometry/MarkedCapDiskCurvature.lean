@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Geometry.MarkedCapDisk
-import ContinuousFlexibility.Geometry.CapDiskNormal
-import ContinuousFlexibility.Geometry.MarkedCap
-import ContinuousFlexibility.Geometry.SurfaceReparametrization
+module
+
+public import ContinuousFlexibility.Geometry.MarkedCapDisk
+public import ContinuousFlexibility.Geometry.CapDiskNormal
+public import ContinuousFlexibility.Geometry.MarkedCap
+public import ContinuousFlexibility.Geometry.SurfaceReparametrization
 
 /-!
 # The actual normal and curvature peak of the marked cap
@@ -13,6 +15,8 @@ and the compact curvature bound of the unmarked cap identify its curvature.
 The choice of marker strength precedes the choice of its support radius.
 Identification as the outward normal of the completed sphere is separate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

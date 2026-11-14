@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Statements.RadialTargets
+module
+
+public import ContinuousFlexibility.Statements.RadialTargets
 
 /-!
 # One-coordinate exclusion for the Morse height choice
@@ -7,6 +9,8 @@ The height parameter changes the second component of the outgoing state.
 The public angle is computed with the Euclidean length of both states.
 A small angle confines the height parameter to an interval of controlled length.
 -/
+
+@[expose] public section
 
 noncomputable section
 

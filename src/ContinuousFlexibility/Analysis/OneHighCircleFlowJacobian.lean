@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowContinuity
-import ContinuousFlexibility.Analysis.OneHighCircleFlowSpeedNorms
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowContinuity
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowSpeedNorms
 
 /-!
 # Sobolev control of the genuine flow Jacobian
@@ -9,6 +11,8 @@ equation. Here the actual `H¹` norm of the speed's angular derivative
 supplies its time-integrable envelope. No variational equation, joint
 flow regularity, or frequency estimate is an additional premise.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerModelPoissonNormalization
-import ContinuousFlexibility.Radial.InnerModelFluxError
-import ContinuousFlexibility.Radial.InnerOrderedChoices
+module
+
+public import ContinuousFlexibility.Radial.InnerModelPoissonNormalization
+public import ContinuousFlexibility.Radial.InnerModelFluxError
+public import ContinuousFlexibility.Radial.InnerOrderedChoices
 
 /-!
 # Raw coefficient bounds give the model exponential envelopes
@@ -10,6 +12,8 @@ constant, velocity and local weight ratio. The estimates below derive
 the compression tolerance and the actual normalized Poisson remainder;
 they do not assume smallness of either constructed operator.
 -/
+
+@[expose] public section
 
 noncomputable section
 

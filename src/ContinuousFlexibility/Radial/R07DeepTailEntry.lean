@@ -1,10 +1,14 @@
-import ContinuousFlexibility.Radial.R07DeepTailData
-import ContinuousFlexibility.Radial.R07ChainIncoming
-import ContinuousFlexibility.Radial.MorseChainProfileGluing
+module
+
+public import ContinuousFlexibility.Radial.R07DeepTailData
+public import ContinuousFlexibility.Radial.R07ChainIncoming
+public import ContinuousFlexibility.Radial.MorseChainProfileGluing
 
 /-!
 # Ordering the deep entrance beyond a prescribed cell
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Geometry.CoframeSO2
+module
+
+public import ContinuousFlexibility.Geometry.CoframeSO2
 
 /-!
 # Curvature is independent of an oriented metric coframe
@@ -7,6 +9,8 @@ Equal quadratic metrics and equal orientation determine actual smooth relative
 SO(2) coefficients. The two Cartan connections then differ by `C dS - S dC`,
 whose actual exterior derivative vanishes. No global angle is required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

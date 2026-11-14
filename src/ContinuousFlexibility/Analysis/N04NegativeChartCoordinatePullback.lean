@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04RealizationCubicRegularity
-import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
-import ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient
-import ContinuousFlexibility.Analysis.MixedDerivativeLocality
-import ContinuousFlexibility.Analysis.N01cHeightParameterJets
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationCubicRegularity
+public import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
+public import ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient
+public import ContinuousFlexibility.Analysis.MixedDerivativeLocality
+public import ContinuousFlexibility.Analysis.N01cHeightParameterJets
 
 /-!
 # The exact positive jets of the normalized coordinate atoms
@@ -12,6 +14,8 @@ fixed in the state. Hence normalization contributes just one width
 coefficient to each positive parameter jet. The same statement treats
 the radial coordinate and the angle defect, with their genuine towers.
 -/
+
+@[expose] public section
 
 noncomputable section
 

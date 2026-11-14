@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.BufferIntervalDomain
-import ContinuousFlexibility.Radial.PositiveBufferTraceMap
+module
+
+public import ContinuousFlexibility.Radial.BufferIntervalDomain
+public import ContinuousFlexibility.Radial.PositiveBufferTraceMap
 
 /-!
 # Compact smooth tests determine the actual energy form
@@ -9,6 +11,8 @@ product. The coordinate homeomorphism transfers that exact density to the
 Hilbert energy space. Consequently a compact-test Green identity extends to
 every actual energy field, including point evaluation at the cut.
 -/
+
+@[expose] public section
 
 noncomputable section
 

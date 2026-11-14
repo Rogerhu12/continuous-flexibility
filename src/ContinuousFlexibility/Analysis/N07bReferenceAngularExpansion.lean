@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07bReferenceAngularBound
+module
+
+public import ContinuousFlexibility.Analysis.N07bReferenceAngularBound
 
 /-!
 # Actual reference PDE and its current angular derivatives
@@ -9,6 +11,8 @@ vector gives exactly the coefficients estimated in `ReferenceAngularBound`.
 The finite expansion is proved here, rather than assumed as a forcing
 identity. Every resulting material jet has order at most `j + 2`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

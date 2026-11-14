@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryRootInverseDifferentialDirections
-import ContinuousFlexibility.Analysis.N04PositiveGeometryStoredForwardJets
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryInversePlanePrefix
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryRootInverseDifferentialDirections
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryStoredForwardJets
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryInversePlanePrefix
 
 /-!
 # Genuine finite jets of the original canonical inverse
@@ -9,6 +11,8 @@ The original chart and inverse satisfy genuine inverse germs at the
 canonical zero edge. The actual triangular differential and forward
 jets at the inverse root label construct its full jets through order four.
 -/
+
+@[expose] public section
 
 noncomputable section
 

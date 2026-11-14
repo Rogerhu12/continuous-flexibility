@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.BoundaryMixedJets
-import ContinuousFlexibility.Analysis.BoundaryTaylorHeight
+module
+
+public import ContinuousFlexibility.Analysis.BoundaryMixedJets
+public import ContinuousFlexibility.Analysis.BoundaryTaylorHeight
 
 /-!
 # Actual coordinate and height matching at both boundary circles
@@ -11,6 +13,8 @@ actual constructions match every angular derivative of the prescribed
 radial boundary jets. The coordinate construction uses degree four and
 the height construction degree three in the application.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryLabelSamplePrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledForwardLabelPrefix
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryLabelSamplePrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledForwardLabelPrefix
 
 /-!
 # A common sampled prefix for the forward label and its slope
@@ -8,6 +10,8 @@ The low base is fixed before the parameter prefix. Reindexing each
 angular horizon aligns both the high seminorm and the denominator of
 the normalized power. Only positive words of the angular lift are used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

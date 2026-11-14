@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05CanonicalTests
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalTests
 
 /-!
 # The canonical weak angular jet graph is closed
@@ -7,6 +9,8 @@ The evenness equation and all weak angular derivative equations are kept
 literally. They are intersections of kernels of continuous linear maps on
 the actual outer lp and inner finite L² products.
 -/
+
+@[expose] public section
 
 noncomputable section
 

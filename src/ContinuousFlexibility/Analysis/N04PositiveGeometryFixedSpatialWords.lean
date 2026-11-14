@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.NormedSmoothDirections
-import ContinuousFlexibility.Analysis.N04PositiveGeometryAtomDirections
-import ContinuousFlexibility.Analysis.N01cStateAngleSelections
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
+module
+
+public import ContinuousFlexibility.Analysis.NormedSmoothDirections
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryAtomDirections
+public import ContinuousFlexibility.Analysis.N01cStateAngleSelections
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
 
 /-!
 # Fixed spatial terms vanish in every positive state word
@@ -10,6 +12,8 @@ Subtracting the angle or a fixed radial origin leaves the joint words
 used for positive parameter jets unchanged. No bound on an unwrapped
 angle value is required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

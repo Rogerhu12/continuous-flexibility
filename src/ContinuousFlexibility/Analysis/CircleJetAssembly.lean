@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CircleTaylorDifferentiation
-import ContinuousFlexibility.Analysis.ProjectiveJetContinuity
+module
+
+public import ContinuousFlexibility.Analysis.CircleTaylorDifferentiation
+public import ContinuousFlexibility.Analysis.ProjectiveJetContinuity
 
 /-!
 # Circle-valued directional towers from actual weighted scalar jets
@@ -10,6 +12,8 @@ The seminorm estimates then give joint continuity in the base point and
 all directions. No circle-valued differentiability is assumed in this
 assembly step.
 -/
+
+@[expose] public section
 
 noncomputable section
 

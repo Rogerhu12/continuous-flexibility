@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.R11bLeftCorrection
-import ContinuousFlexibility.Radial.R11bZeroMode
-import ContinuousFlexibility.Radial.R11bHilbertRepresentatives
-import ContinuousFlexibility.Radial.ProfileScalarSquares
+module
+
+public import ContinuousFlexibility.Radial.R11bLeftCorrection
+public import ContinuousFlexibility.Radial.R11bZeroMode
+public import ContinuousFlexibility.Radial.R11bHilbertRepresentatives
+public import ContinuousFlexibility.Radial.ProfileScalarSquares
 
 /-!
 # Scalar weighted norms of the actual compact corrections
@@ -10,6 +12,8 @@ Radial fields have precisely the scalar cell square, since the normalized
 mean of a constant is itself. Both the border forcing and the derivative
 of the left-tail cutoff therefore have every required coefficient weight.
 -/
+
+@[expose] public section
 
 noncomputable section
 

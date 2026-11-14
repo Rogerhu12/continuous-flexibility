@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MorseNoWeylResolvent
+module
+
+public import ContinuousFlexibility.Radial.MorseNoWeylResolvent
 
 /-!
 # Quantitative zero inverse from an actual Morse eigenvalue gap
@@ -8,6 +10,8 @@ If a symmetric inverse has norm `M`, the square of that inverse minus
 gap gives positive lower bounds at the two energies `±M⁻¹`. Their product
 would bound the square away from `M²`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

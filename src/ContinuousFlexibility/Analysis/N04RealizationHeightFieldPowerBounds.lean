@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationHeightFieldJets
-import ContinuousFlexibility.Analysis.N04RealizationHeightPowerBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationHeightFieldJets
+public import ContinuousFlexibility.Analysis.N04RealizationHeightPowerBounds
 
 /-!
 # One interpolation choice for actual decoded fields
@@ -9,6 +11,8 @@ the retained height field, and its actual physical formula. This permits
 several actual fields with the same original uniform tower bounds to use
 one interpolation choice and one subsequently restricted neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

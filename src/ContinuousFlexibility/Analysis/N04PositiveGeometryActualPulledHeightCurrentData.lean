@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryActualPulledHeightSamplePrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledGauge
-import ContinuousFlexibility.Analysis.N04PositiveGeometryCurrentJointPowers
-import ContinuousFlexibility.Analysis.N04PositiveGeometryGaugeRegularity
-import ContinuousFlexibility.Analysis.N04PrincipalPositiveIndex
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryActualPulledHeightSamplePrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledGauge
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryCurrentJointPowers
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryGaugeRegularity
+public import ContinuousFlexibility.Analysis.N04PrincipalPositiveIndex
 
 /-!
 # Current data for the actual positive pulled height
@@ -12,6 +14,8 @@ Its pulled height is therefore exactly the controlled field already
 estimated at the fixed reference inverse. The same low neighborhood
 works for every auxiliary column and every derivative order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

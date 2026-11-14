@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OuterCompactCore
+module
+
+public import ContinuousFlexibility.Radial.OuterCompactCore
 
 /-!
 # The initial transition core
@@ -8,6 +10,8 @@ may be any point of the actual middle interval between the two first
 retained cells.  Both initial cores lie in one fixed regular compact
 interval, ending at the actual right natural-tail mass entrance.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Radial.InnerRadialWeakTranspose
-import ContinuousFlexibility.Radial.ModeInnerHilbertProjection
-import ContinuousFlexibility.Radial.ModeInnerSourcePairing
-import ContinuousFlexibility.Radial.ModeWeakRegularity
-import ContinuousFlexibility.Radial.ModeWeakGreen
-import ContinuousFlexibility.Radial.ModeCoreGraph
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialWeakTranspose
+public import ContinuousFlexibility.Radial.ModeInnerHilbertProjection
+public import ContinuousFlexibility.Radial.ModeInnerSourcePairing
+public import ContinuousFlexibility.Radial.ModeWeakRegularity
+public import ContinuousFlexibility.Radial.ModeWeakGreen
+public import ContinuousFlexibility.Radial.ModeCoreGraph
 
 /-!
 # Classical endpoint values of the actual finite weak graph
@@ -13,6 +15,8 @@ allows smooth tests with zero endpoint values and arbitrary endpoint
 derivatives. Applied to the C¹ representative furnished by the weak
 equation, Green's formula forces both actual endpoint values to vanish.
 -/
+
+@[expose] public section
 
 noncomputable section
 

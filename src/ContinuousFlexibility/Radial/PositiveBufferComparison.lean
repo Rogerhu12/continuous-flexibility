@@ -1,6 +1,8 @@
-import Mathlib.Analysis.Convex.Deriv
-import Mathlib.Analysis.SpecialFunctions.ExpDeriv
-import Mathlib.Topology.Order.Compact
+module
+
+public import Mathlib.Analysis.Convex.Deriv
+public import Mathlib.Analysis.SpecialFunctions.ExpDeriv
+public import Mathlib.Topology.Order.Compact
 
 /-!
 # Classical comparison in a positive buffer
@@ -10,6 +12,8 @@ coordinate interval.  Composing with the inward coordinate at either cut
 uses the same statements at both ends of a buffer.  No solution-existence
 or weak-domain assertion is assumed implicitly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MatchedOuterWholeHilbert
-import ContinuousFlexibility.Radial.MatchedOuterSideGlue
-import ContinuousFlexibility.Radial.ModeRegionSources
+module
+
+public import ContinuousFlexibility.Radial.MatchedOuterWholeHilbert
+public import ContinuousFlexibility.Radial.MatchedOuterSideGlue
+public import ContinuousFlexibility.Radial.ModeRegionSources
 
 /-!
 # The physical separated inverse from the two whole-tail operators
@@ -10,6 +12,8 @@ and coordinate isometry, then extended by zero. Their sum, with scalar
 coordinate zero, is the single exterior inverse used by the matching data.
 The source projection leaves this same operator unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

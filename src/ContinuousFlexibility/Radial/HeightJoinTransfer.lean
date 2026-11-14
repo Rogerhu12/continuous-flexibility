@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.Gauge
-import Mathlib.Analysis.ODE.Gronwall
+module
+
+public import ContinuousFlexibility.Radial.Gauge
+public import Mathlib.Analysis.ODE.Gronwall
 
 /-!
 # Transfer of the boundary state across a short positive join
@@ -15,6 +17,8 @@ This file formalizes the elementary transfer estimate of paper §5, eqs. (js5)�
 * `joinState_transfer` and `joinState_transfer_coord`: the transfer estimate in the max norm
   on `ℝ × ℝ`, and its coordinatewise form.
 -/
+
+@[expose] public section
 
 noncomputable section
 

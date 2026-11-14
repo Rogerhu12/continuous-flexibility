@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.RootCompositionIntegral
-import Mathlib.Analysis.Calculus.ContDiff.Operations
-import Mathlib.Algebra.Group.EvenFunction
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
-import Mathlib.Analysis.Calculus.Deriv.Prod
+module
+
+public import ContinuousFlexibility.Analysis.RootCompositionIntegral
+public import Mathlib.Analysis.Calculus.ContDiff.Operations
+public import Mathlib.Algebra.Group.EvenFunction
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+public import Mathlib.Analysis.Calculus.Deriv.Prod
 
 /-!
 # Smooth division in an odd scalar variable
@@ -13,6 +15,8 @@ function has an even divided difference.  The same construction applied to
 the last partial derivative of an even function removes the apparent
 singularity in differentiation after a root substitution.
 -/
+
+@[expose] public section
 
 noncomputable section
 

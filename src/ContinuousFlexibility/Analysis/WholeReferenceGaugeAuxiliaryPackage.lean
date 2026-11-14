@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CanonicalAuxiliaryAtomPreservation
-import ContinuousFlexibility.Analysis.CanonicalAuxiliaryReferenceJets
-import ContinuousFlexibility.Analysis.CanonicalAuxiliaryDifferenceJets
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalAuxiliaryAtomPreservation
+public import ContinuousFlexibility.Analysis.CanonicalAuxiliaryReferenceJets
+public import ContinuousFlexibility.Analysis.CanonicalAuxiliaryDifferenceJets
 
 /-!
 # One auxiliary column for the actual whole reference-gauged atlas
@@ -11,6 +13,8 @@ geometric function.  The same column has the reference bounds and zero
 current difference tower proved earlier.  Material enlargement is an
 explicit returned operation, not a floor imposed on the original E0.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N08CircleHeightLocality
-import ContinuousFlexibility.Analysis.N08CircleJetComparison
-import ContinuousFlexibility.Analysis.N08FlowHeightVariation
+module
+
+public import ContinuousFlexibility.Analysis.N08CircleHeightLocality
+public import ContinuousFlexibility.Analysis.N08CircleJetComparison
+public import ContinuousFlexibility.Analysis.N08FlowHeightVariation
 
 /-!
 # Comparing different parameters through the same height derivative
@@ -10,6 +12,8 @@ Changing that height at a fixed nonzero parameter reproduces the original
 scaled height up to a constant. The actual flow locality theorem therefore
 identifies the same control diagonal, with no new derivative hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

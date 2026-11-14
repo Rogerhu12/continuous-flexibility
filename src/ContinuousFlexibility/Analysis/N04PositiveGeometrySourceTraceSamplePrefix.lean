@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceBoundaryTraces
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceBoundaryTraces
 
 /-!
 # Sampled positive radial source traces
@@ -7,6 +9,8 @@ The fixed radial unit-vector evaluation and either coordinate projection
 have norm at most one. The original source prefix therefore supplies all
 positive endpoint traces with the same low order, shift and sample.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalInverseNormal
-import ContinuousFlexibility.Analysis.N05CanonicalNormalizedAngularJets
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalInverseNormal
+public import ContinuousFlexibility.Analysis.N05CanonicalNormalizedAngularJets
 
 /-!
 # Actual first normal derivatives on every stronger source level
@@ -9,6 +11,8 @@ physical first-normal estimate applies to the normalized source used by the
 fixed global inverse. The material shift and piece coefficient power are
 chosen before the source level and its finite angular order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

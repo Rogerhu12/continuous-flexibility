@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.IntervalWeakPrimitiveStrict
-import Mathlib.Analysis.Calculus.ContDiff.Operations
-import Mathlib.Analysis.Calculus.Deriv.Mul
-import Mathlib.Tactic.FieldSimp
+module
+
+public import ContinuousFlexibility.Radial.IntervalWeakPrimitiveStrict
+public import Mathlib.Analysis.Calculus.ContDiff.Operations
+public import Mathlib.Analysis.Calculus.Deriv.Mul
+public import Mathlib.Tactic.FieldSimp
 
 /-!
 # One-dimensional weak divergence regularity
@@ -15,6 +17,8 @@ Only smooth compact tests whose topological support lies strictly inside
 the interval are used. The proof constructs compact primitives of
 zero weighted-mean tests and then applies the weak fundamental theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

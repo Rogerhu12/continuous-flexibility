@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.MaterialCoefficientMultipliers
-import ContinuousFlexibility.Analysis.ReturnCoefficientLocalBounds
-import ContinuousFlexibility.Analysis.TameMultilinearNormalization
+module
+
+public import ContinuousFlexibility.Analysis.MaterialCoefficientMultipliers
+public import ContinuousFlexibility.Analysis.ReturnCoefficientLocalBounds
+public import ContinuousFlexibility.Analysis.TameMultilinearNormalization
 
 /-!
 # The exact spatial budget under the material coordinate
@@ -12,6 +14,8 @@ order. The constant precedes the coefficient, the point, and its bound.
 In particular neither the derivative loss nor a material weight exponent
 changes when an actual coefficient tower is pulled back.
 -/
+
+@[expose] public section
 
 noncomputable section
 

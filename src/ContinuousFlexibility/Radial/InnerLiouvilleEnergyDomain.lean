@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerLiouvilleEnergyLift
-import ContinuousFlexibility.Radial.InnerRadialH1Density
+module
+
+public import ContinuousFlexibility.Radial.InnerLiouvilleEnergyLift
+public import ContinuousFlexibility.Radial.InnerRadialH1Density
 
 /-!
 # The actual model energy closure maps to the physical H1 closure
@@ -10,6 +12,8 @@ normalized derivative, and uses physical endpoint-cutoff density.
 Continuity then carries the entire original model closure into the
 same physical zero-endpoint domain used by finite-chain gluing.
 -/
+
+@[expose] public section
 
 noncomputable section
 

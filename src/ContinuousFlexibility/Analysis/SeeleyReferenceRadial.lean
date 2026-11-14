@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SeeleyRootReflection
-import ContinuousFlexibility.Analysis.RootReferenceRadial
+module
+
+public import ContinuousFlexibility.Analysis.SeeleyRootReflection
+public import ContinuousFlexibility.Analysis.RootReferenceRadial
 
 /-!
 # The actual radial reference chart after fixed Seeley extension
@@ -10,6 +12,8 @@ its extended root chart is therefore a scalar radial coordinate paired
 with the unchanged angle. No equation for the extended coefficients on
 the reflected side is inferred from these symmetry identities.
 -/
+
+@[expose] public section
 
 noncomputable section
 

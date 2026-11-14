@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N08ActualScalarResidual
-import ContinuousFlexibility.Analysis.N08SectorParameterChart
-import ContinuousFlexibility.Analysis.N08CircleResidual
-import ContinuousFlexibility.Analysis.N08ReferenceFlow
-import ContinuousFlexibility.Scalar.WeightedSmoothTameAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.N08ActualScalarResidual
+public import ContinuousFlexibility.Analysis.N08SectorParameterChart
+public import ContinuousFlexibility.Analysis.N08CircleResidual
+public import ContinuousFlexibility.Analysis.N08ReferenceFlow
+public import ContinuousFlexibility.Scalar.WeightedSmoothTameAlgebra
 
 /-!
 # The genuine joint residual and its scalar column
@@ -11,6 +13,8 @@ The scalar and circle fields use the same physical data. A single smaller
 state neighborhood carries the actual nu derivative on the full ambient
 space and the joint smooth-tame tower on the closed sector chart.
 -/
+
+@[expose] public section
 
 noncomputable section
 

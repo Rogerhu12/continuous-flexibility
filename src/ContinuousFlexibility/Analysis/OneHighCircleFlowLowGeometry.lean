@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowLowGeometryBasic
-import ContinuousFlexibility.Analysis.OneHighCircleFlowJetBounds
-import ContinuousFlexibility.Analysis.OneHighCircleFourierLiftGeometry
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowLowGeometryBasic
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowJetBounds
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierLiftGeometry
 
 /-!
 # The genuine low `H³` geometry bound for a circle flow
@@ -10,6 +12,8 @@ envelope supplied by `H⁴(Gθ)`. The existing endpoint-derivative comparison
 then bounds the actual `H³` norm of `Θθ - 1`. The resulting explicit
 constant depends only on the period and `Λ₄`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

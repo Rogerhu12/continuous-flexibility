@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.SelectedFirstCutoffBounds
-import ContinuousFlexibility.Radial.FirstConeLayerSeparation
-import ContinuousFlexibility.Radial.TerminalPhysicalCutoffGeometry
+module
+
+public import ContinuousFlexibility.Radial.SelectedFirstCutoffBounds
+public import ContinuousFlexibility.Radial.FirstConeLayerSeparation
+public import ContinuousFlexibility.Radial.TerminalPhysicalCutoffGeometry
 
 /-!
 # The actual first-band cutoffs between the two matching joins
@@ -11,6 +13,8 @@ cutoff equals one near its own unchanged matching join. The actual
 incoming solutions satisfy their equation wherever these cutoffs enter
 the inner interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

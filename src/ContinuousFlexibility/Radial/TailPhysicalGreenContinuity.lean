@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.TailClampedResistance
-import ContinuousFlexibility.Radial.TailParameterFixedPoint
-import Mathlib.MeasureTheory.Integral.DominatedConvergence
+module
+
+public import ContinuousFlexibility.Radial.TailClampedResistance
+public import ContinuousFlexibility.Radial.TailParameterFixedPoint
+public import Mathlib.MeasureTheory.Integral.DominatedConvergence
 
 /-!
 # Parameter continuity on a fixed physical edge
@@ -11,6 +13,8 @@ kernel is evaluated at the actual resistance integrals of its two
 arguments.  Joint continuity then passes to the integral operator in the
 supremum norm on the fixed physical interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

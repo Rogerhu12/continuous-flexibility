@@ -1,8 +1,12 @@
-import ContinuousFlexibility.Radial.SeedPositiveLogExtension
+module
+
+public import ContinuousFlexibility.Radial.SeedPositiveLogExtension
 
 /-!
 # A positive radial profile with a prescribed germ and exact cone ends
 -/
+
+@[expose] public section
 
 noncomputable section
 

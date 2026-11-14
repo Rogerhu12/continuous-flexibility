@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ModeTestIntegrability
+module
+
+public import ContinuousFlexibility.Radial.ModeTestIntegrability
 
 /-!
 # Linear and closed modal weak graphs
@@ -7,6 +9,8 @@ The frozen weak equation is expressed using genuine Hilbert test vectors.
 This proves linearity and closure in the existing Lp product topology;
 neither property relies on arithmetic with undefined Bochner integrals.
 -/
+
+@[expose] public section
 
 noncomputable section
 

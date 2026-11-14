@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.TameLocalCalculus
+module
+
+public import ContinuousFlexibility.Analysis.TameLocalCalculus
 
 /-!
 # Linear coordinate maps for local tame calculus
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Analysis.TameLocalCalculus
 Projections, injections and finite tuple coordinates have zero derivative
 loss for the sum gradings used in the local estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

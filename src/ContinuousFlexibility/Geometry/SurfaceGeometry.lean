@@ -1,11 +1,13 @@
-import ContinuousFlexibility.Geometry.GraphEmbedding
-import Mathlib.Analysis.Calculus.FDeriv.Symmetric
-import Mathlib.Analysis.Calculus.FDeriv.CompCLM
-import Mathlib.Analysis.InnerProductSpace.Calculus
-import Mathlib.Analysis.Normed.Affine.Isometry
-import Mathlib.LinearAlgebra.Matrix.PosDef
-import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
-import Mathlib.LinearAlgebra.Matrix.Trace
+module
+
+public import ContinuousFlexibility.Geometry.GraphEmbedding
+public import Mathlib.Analysis.Calculus.FDeriv.Symmetric
+public import Mathlib.Analysis.Calculus.FDeriv.CompCLM
+public import Mathlib.Analysis.InnerProductSpace.Calculus
+public import Mathlib.Analysis.Normed.Affine.Isometry
+public import Mathlib.LinearAlgebra.Matrix.PosDef
+public import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
+public import Mathlib.LinearAlgebra.Matrix.Trace
 
 /-!
 # Coordinate surface geometry from actual derivatives
@@ -17,6 +19,8 @@ the equivalent relation `I * S = II`; its invertibility is proved for
 immersions. Ambient orthogonal maps transport the supplied normal, including
 reflections. No outward orientation or global surface integral is asserted.
 -/
+
+@[expose] public section
 
 noncomputable section
 

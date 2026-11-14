@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MorseRealizedConnectorBounds
+module
+
+public import ContinuousFlexibility.Radial.MorseRealizedConnectorBounds
 
 /-!
 # Splitting the resistance interval of a realized Morse chain
@@ -8,6 +10,8 @@ connector in increasing physical radius. The first left interval has
 a zero-length connector. Positivity on the actual radial core provides
 integrability of the inverse density and preserves the cap lower bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

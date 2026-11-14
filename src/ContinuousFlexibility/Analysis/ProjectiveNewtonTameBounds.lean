@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ProjectiveNewtonEstimate
-import ContinuousFlexibility.Statements.Analysis
+module
+
+public import ContinuousFlexibility.Analysis.ProjectiveNewtonEstimate
+public import ContinuousFlexibility.Statements.Analysis
 
 /-!
 # Tame bounds for a smoothed Newton step
@@ -10,6 +12,8 @@ then controls the second jet uniformly along the whole closed segment. These
 bounds estimate both the smoothing defect and the Taylor remainder in the
 actual Newton residual.
 -/
+
+@[expose] public section
 
 noncomputable section
 

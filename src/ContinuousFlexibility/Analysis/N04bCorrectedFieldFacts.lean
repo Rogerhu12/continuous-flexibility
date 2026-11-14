@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionOperatorComparison
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionOperatorComparison
 
 /-!
 # Spatial regularity of the explicit optical return correction
@@ -8,6 +10,8 @@ not infer regularity of an arbitrary frozen N03 coefficient witness.
 The full discriminant statement isolates the remaining original-field
 positivity premise away from the active cutoff collars.
 -/
+
+@[expose] public section
 
 noncomputable section
 

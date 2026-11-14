@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SmoothDirectionsLocalLabels
-import Mathlib.Topology.Order.ProjIcc
+module
+
+public import ContinuousFlexibility.Analysis.SmoothDirectionsLocalLabels
+public import Mathlib.Topology.Order.ProjIcc
 
 /-!
 # Local spatial differentiation of actual parameter jets
@@ -8,6 +10,8 @@ The angular fundamental theorem is used only on a closed subinterval of
 the spatial domain. Clamping the label supplies global continuity for
 the integral argument without assuming derivatives at the endpoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

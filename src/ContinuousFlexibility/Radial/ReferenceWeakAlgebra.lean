@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ReferenceTestIntegrability
+module
+
+public import ContinuousFlexibility.Radial.ReferenceTestIntegrability
 
 /-!
 # Algebra and representative invariance of the actual weak pairing
@@ -7,6 +9,8 @@ The addition rules use genuine integrability of the test products.
 Consequently they apply on the repaired local L² domain and do not
 depend on totalized integrals of nonmeasurable representatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

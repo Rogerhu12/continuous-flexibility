@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N03ControlledRootUnitIdentification
-import ContinuousFlexibility.Analysis.N01RootChartAxisMaterialJets
-import ContinuousFlexibility.Analysis.N01RootDividedHeightMaterialJets
-import ContinuousFlexibility.Analysis.RootUnitPhysicalJetTransfer
-import ContinuousFlexibility.Analysis.N04FlowJetsProof
+module
+
+public import ContinuousFlexibility.Analysis.N03ControlledRootUnitIdentification
+public import ContinuousFlexibility.Analysis.N01RootChartAxisMaterialJets
+public import ContinuousFlexibility.Analysis.N01RootDividedHeightMaterialJets
+public import ContinuousFlexibility.Analysis.RootUnitPhysicalJetTransfer
+public import ContinuousFlexibility.Analysis.N04FlowJetsProof
 
 /-!
 # Material root jets of the original stored negative atlas
@@ -14,6 +16,8 @@ material jets pass through that identity and the inward orientation of
 norm one. The explicit optical lower condition is still required on the
 same component and actual containing cell.
 -/
+
+@[expose] public section
 
 noncomputable section
 

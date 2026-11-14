@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N03InteriorFirstIntegralJets
-import ContinuousFlexibility.Analysis.InteriorLabelAngularBounds
-import ContinuousFlexibility.Analysis.RootScaledAngularBounds
+module
+
+public import ContinuousFlexibility.Analysis.N03InteriorFirstIntegralJets
+public import ContinuousFlexibility.Analysis.InteriorLabelAngularBounds
+public import ContinuousFlexibility.Analysis.RootScaledAngularBounds
 
 /-!
 # Actual first-integral angular bounds throughout a negative interior
@@ -10,6 +12,8 @@ uniformly positive section derivative. The actual interior inverse
 flow propagates this bound to the original glued first integrals. The
 constants depend only on the two actual angular-control exponents.
 -/
+
+@[expose] public section
 
 noncomputable section
 

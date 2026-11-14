@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.TailActualPoissonEdge
-import ContinuousFlexibility.Radial.TailDeepEdgeBounds
-import ContinuousFlexibility.Radial.TailEdgeFluxBounds
+module
+
+public import ContinuousFlexibility.Radial.TailActualPoissonEdge
+public import ContinuousFlexibility.Radial.TailDeepEdgeBounds
+public import ContinuousFlexibility.Radial.TailEdgeFluxBounds
 
 /-!
 # The actual interior tridiagonal coefficients
@@ -9,6 +11,8 @@ The coefficients below use the single Poisson pair chosen on each actual
 edge. The interior diagonal is indexed by the preceding edge: its index `n`
 belongs to the node `n + 1`. No entrance condition is imposed by this file.
 -/
+
+@[expose] public section
 
 noncomputable section
 

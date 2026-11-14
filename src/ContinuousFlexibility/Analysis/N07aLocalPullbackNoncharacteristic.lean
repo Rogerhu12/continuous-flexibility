@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aLocalPullbackEquation
-import ContinuousFlexibility.Analysis.N07aClosedChartDifferentials
+module
+
+public import ContinuousFlexibility.Analysis.N07aLocalPullbackEquation
+public import ContinuousFlexibility.Analysis.N07aClosedChartDifferentials
 
 /-!
 # The actual negative normal symbol, including the moving cut
@@ -9,6 +11,8 @@ ungauged pullback. Its value and first derivatives vanish at the testing
 point, so the height contributes exactly its square. The identity then
 extends to the canonical closure using the stored boundary inverse germs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

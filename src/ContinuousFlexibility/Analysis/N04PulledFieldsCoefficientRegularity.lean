@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04bOpticalFieldRealization
-import ContinuousFlexibility.Analysis.N04RealizationCoefficientAnnularTowers
-import ContinuousFlexibility.Analysis.N04RealizationJointMixedRegularity
-import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
-import ContinuousFlexibility.Analysis.N01cPhysicalFlowGraph
+module
+
+public import ContinuousFlexibility.Analysis.N04bOpticalFieldRealization
+public import ContinuousFlexibility.Analysis.N04RealizationCoefficientAnnularTowers
+public import ContinuousFlexibility.Analysis.N04RealizationJointMixedRegularity
+public import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
+public import ContinuousFlexibility.Analysis.N01cPhysicalFlowGraph
 
 /-!
 # Genuine mixed towers for the retained corrected coefficients
@@ -16,6 +18,8 @@ physical field, on its original state neighborhood and whole annulus.
 The local material estimate is retained with its actual quantifiers.  It
 does not by itself assert one neighborhood for every parameter order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

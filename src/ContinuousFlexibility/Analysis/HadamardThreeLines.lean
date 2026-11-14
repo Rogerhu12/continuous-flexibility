@@ -1,5 +1,7 @@
-import Mathlib.Analysis.Complex.Hadamard
-import Mathlib.Analysis.Normed.Operator.Basic
+module
+
+public import Mathlib.Analysis.Complex.Hadamard
+public import Mathlib.Analysis.Normed.Operator.Basic
 
 /-!
 # Hadamard interpolation for operator families
@@ -15,6 +17,8 @@ spectral powers in operator norm.  `DiffContOnCl` means complex differentiabilit
 on the open strip and continuity on its closure.  Neither endpoint constant is
 required to be strictly positive.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Analysis
 

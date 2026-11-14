@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N07aMaterialJetFunctional
-import ContinuousFlexibility.Analysis.N07aLpDirectionalTower
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
-import ContinuousFlexibility.Scalar.WeightedAngularPrimitiveBounds
-import ContinuousFlexibility.Scalar.WeightedTowerCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N07aMaterialJetFunctional
+public import ContinuousFlexibility.Analysis.N07aLpDirectionalTower
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
+public import ContinuousFlexibility.Scalar.WeightedAngularPrimitiveBounds
+public import ContinuousFlexibility.Scalar.WeightedTowerCalculus
 
 /-!
 # Actual material-coordinate parameter towers
@@ -11,6 +13,8 @@ The finite material formula is applied to the genuine towers of ordinary
 physical jets. The original output is identified with the actual weighted
 jet. The same fixed linear formula then controls every parameter order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N08WeightConjugation
-import ContinuousFlexibility.Scalar.WeightedBinaryProduct
-import ContinuousFlexibility.Scalar.WeightedProductTower
-import ContinuousFlexibility.Scalar.WeightedUniformTameGermOperations
-import ContinuousFlexibility.Scalar.WeightedWeightShift
+module
+
+public import ContinuousFlexibility.Analysis.N08WeightConjugation
+public import ContinuousFlexibility.Scalar.WeightedBinaryProduct
+public import ContinuousFlexibility.Scalar.WeightedProductTower
+public import ContinuousFlexibility.Scalar.WeightedUniformTameGermOperations
+public import ContinuousFlexibility.Scalar.WeightedWeightShift
 
 /-!
 # Actual multiplication with unequal physical weights
@@ -12,6 +14,8 @@ has weight equal to the sum of the inputs, and agrees with every multiplication
 realizing the physical decoder in `IsPhysicalSpaces`. This also gives a single
 base and loss for its actual directional tower.
 -/
+
+@[expose] public section
 
 noncomputable section
 

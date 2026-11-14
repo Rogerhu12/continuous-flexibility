@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N01LeftChartJets
-import ContinuousFlexibility.Analysis.N01cStateSeminorms
-import ContinuousFlexibility.Analysis.MaterialSampleShift
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N01LeftChartJets
+public import ContinuousFlexibility.Analysis.N01cStateSeminorms
+public import ContinuousFlexibility.Analysis.MaterialSampleShift
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
 
 /-!
 # Circle bounds at the actual negative-component sample
@@ -13,6 +15,8 @@ N01 index comparison transfers the positive height weight between these
 samples at a coefficient-envelope cost. Angular evaluation then costs one
 grading order, uniformly in the component and evaluation angle.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06CurrentShiftedTestLp
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentShiftedTestLp
 
 /-!
 # Actual tests for the current physical weak residual
@@ -9,6 +11,8 @@ give all four transformed L2 tests used in the two half-period pairings.
 Neither their support nor their square integrability is supplied as an
 extra hypothesis to the final physical residual.
 -/
+
+@[expose] public section
 
 noncomputable section
 

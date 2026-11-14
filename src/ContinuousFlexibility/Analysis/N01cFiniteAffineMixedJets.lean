@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cFiniteAffineJets
-import ContinuousFlexibility.Analysis.N01cOpticalMixedJets
+module
+
+public import ContinuousFlexibility.Analysis.N01cFiniteAffineJets
+public import ContinuousFlexibility.Analysis.N01cOpticalMixedJets
 
 /-!
 # Finite affine identification of mixed state and angular derivatives
@@ -8,6 +10,8 @@ Only the finite real parameter spaces are normed. Genuine state towers
 on the original topological state space are identified on those affine
 restrictions, where ordinary mixed derivative commutation applies.
 -/
+
+@[expose] public section
 
 noncomputable section
 

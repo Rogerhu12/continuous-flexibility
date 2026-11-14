@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CanonicalNegativeTravelTransition
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalNegativeTravelTransition
 
 /-!
 # Symmetries of the actual common negative transport
@@ -8,6 +10,8 @@ reflection. Their genuine inverse therefore transports these symmetries
 to the whole negative component. The height ratio uses the actual
 coefficient amplitude, whose periodicity and parity are retained by N03.
 -/
+
+@[expose] public section
 
 noncomputable section
 

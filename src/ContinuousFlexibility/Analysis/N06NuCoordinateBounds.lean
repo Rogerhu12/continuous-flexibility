@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06NuCoordinateJets
-import ContinuousFlexibility.Analysis.N06Neighborhood
-import ContinuousFlexibility.Analysis.NeighborhoodProfileBounds
+module
+
+public import ContinuousFlexibility.Analysis.N06NuCoordinateJets
+public import ContinuousFlexibility.Analysis.N06Neighborhood
+public import ContinuousFlexibility.Analysis.NeighborhoodProfileBounds
 
 /-!
 # Fixed-seminorm bounds for differences of actual nu-coordinate jets
@@ -10,6 +12,8 @@ angular jets therefore have a uniform linear difference bound in the
 original state grading, with order j+4. No smallness of a source-space
 element or an independently prescribed jet is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06FiniteBoundaryMatching
-import ContinuousFlexibility.Analysis.N06CanonicalBoundaryValue
+module
+
+public import ContinuousFlexibility.Analysis.N06FiniteBoundaryMatching
+public import ContinuousFlexibility.Analysis.N06CanonicalBoundaryValue
 
 /-!
 # First jets at the actual non-artificial endpoints
@@ -18,6 +20,8 @@ These conclusions concern each piece separately. They do not assert
 that independently chosen neighboring charts share the same angular
 label, height, or radial scale.
 -/
+
+@[expose] public section
 
 noncomputable section
 

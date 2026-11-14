@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.TameUniformGrowth
+module
+
+public import ContinuousFlexibility.Analysis.TameUniformGrowth
 
 /-!
 # Uniform bounded-low-seminorm estimates for indexed actual maps
@@ -9,6 +11,8 @@ the selector. These are estimates of specified functions on a specified
 domain, with no smoothness or derivative hypotheses hidden in the
 definition. Finite algebra and composition retain this order of choices.
 -/
+
+@[expose] public section
 
 noncomputable section
 

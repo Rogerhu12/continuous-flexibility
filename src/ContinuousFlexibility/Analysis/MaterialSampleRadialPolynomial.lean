@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.MaterialSampleShift
-import ContinuousFlexibility.Analysis.MaterialSampleBounds
+module
+
+public import ContinuousFlexibility.Analysis.MaterialSampleShift
+public import ContinuousFlexibility.Analysis.MaterialSampleBounds
 
 /-!
 # Radial losses retain a polynomial material envelope
@@ -8,6 +10,8 @@ The comparison is uniform over the actual material cells. It stops at
 `E0`, rather than replacing that power by the larger `M` envelope. This
 keeps the weight required by the canonical primitive estimates visible.
 -/
+
+@[expose] public section
 
 noncomputable section
 

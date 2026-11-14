@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.NonlinearInverseJetTriangle
-import ContinuousFlexibility.Analysis.N04RealizationPlaneJetDirections
-import ContinuousFlexibility.Analysis.TameProductDirections
+module
+
+public import ContinuousFlexibility.Analysis.NonlinearInverseJetTriangle
+public import ContinuousFlexibility.Analysis.N04RealizationPlaneJetDirections
+public import ContinuousFlexibility.Analysis.TameProductDirections
 
 /-!
 # The oriented triangular inverse differential
@@ -9,6 +11,8 @@ The radial orientation occurs in the first diagonal entry. The two
 orientation factors cancel in the lower off-diagonal entry. Genuine
 scalar coefficient towers therefore construct the full operator tower.
 -/
+
+@[expose] public section
 
 noncomputable section
 

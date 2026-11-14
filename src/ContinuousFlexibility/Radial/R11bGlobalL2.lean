@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R11bPhysicalPairing
-import ContinuousFlexibility.Radial.R11bPartitionL2
+module
+
+public import ContinuousFlexibility.Radial.R11bPhysicalPairing
+public import ContinuousFlexibility.Radial.R11bPartitionL2
 
 /-!
 # Physical L² bounds from positive radial attenuation
@@ -9,6 +11,8 @@ The overlap bound controls the physical square integral by the sum of the
 localized square integrals. This argument uses no bound on the number of
 cells having a given index.
 -/
+
+@[expose] public section
 
 noncomputable section
 

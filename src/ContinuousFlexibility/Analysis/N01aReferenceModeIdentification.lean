@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01aReferenceModeConvergence
-import ContinuousFlexibility.Analysis.N01aReferenceTestExtension
+module
+
+public import ContinuousFlexibility.Analysis.N01aReferenceModeConvergence
+public import ContinuousFlexibility.Analysis.N01aReferenceTestExtension
 
 /-!
 # Identification of the pure-row inverse's actual second mode
@@ -8,6 +10,8 @@ The smooth-core closure, ordinary-support natural tests, and true border
 determine the mode.  Weighted membership of the eigenfunction is not an
 input to this argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

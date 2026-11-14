@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentData
-import ContinuousFlexibility.Analysis.N04RealizationFixedSpatialProduct
-import ContinuousFlexibility.Analysis.N07aParameterGrading
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentData
+public import ContinuousFlexibility.Analysis.N04RealizationFixedSpatialProduct
+public import ContinuousFlexibility.Analysis.N07aParameterGrading
 
 /-!
 # Regularity retained by the current jet interface
@@ -10,6 +12,8 @@ the fixed reference jets recovers the tower of the current family itself.
 The selected tower is immaterial: uniqueness transports every estimate to
 any other genuine tower of the same scalar jet.
 -/
+
+@[expose] public section
 
 noncomputable section
 

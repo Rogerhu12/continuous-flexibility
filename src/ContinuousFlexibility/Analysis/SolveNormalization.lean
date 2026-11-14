@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.MaterialHeightRegularity
-import ContinuousFlexibility.Analysis.TameTransfer
-import Mathlib.Analysis.LocallyConvex.Barrelled
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
-import Mathlib.Topology.Baire.CompleteMetrizable
-import Mathlib.MeasureTheory.Integral.DominatedConvergence
+module
+
+public import ContinuousFlexibility.Analysis.MaterialHeightRegularity
+public import ContinuousFlexibility.Analysis.TameTransfer
+public import Mathlib.Analysis.LocallyConvex.Barrelled
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+public import Mathlib.Topology.Baire.CompleteMetrizable
+public import Mathlib.MeasureTheory.Integral.DominatedConvergence
 
 /-!
 # The continuous normalization row for the nonlinear solve
@@ -13,6 +15,8 @@ The continuity proof uses point evaluations on a compact rectangle and the
 uniform boundedness principle on the physical Fréchet space. This avoids
 introducing a second realization of the weighted Sobolev spaces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

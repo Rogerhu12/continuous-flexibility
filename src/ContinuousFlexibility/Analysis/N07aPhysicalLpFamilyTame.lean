@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aHeightFamilyTame
+module
+
+public import ContinuousFlexibility.Analysis.N07aHeightFamilyTame
 
 /-!
 # Fixed-loss L² towers for actual physical jets
@@ -8,6 +10,8 @@ field. It is used for the mixed coefficient before angular integration.
 The tower and its norm estimate are obtained from the original spatial
 jet towers and their one-high physical decay estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

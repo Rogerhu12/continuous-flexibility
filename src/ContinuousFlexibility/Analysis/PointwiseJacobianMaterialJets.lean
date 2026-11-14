@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.PointwiseMaterialJetOperations
-import ContinuousFlexibility.Geometry.EuclideanRigidity
-import Mathlib.Analysis.Normed.Operator.Prod
+module
+
+public import ContinuousFlexibility.Analysis.PointwiseMaterialJetOperations
+public import ContinuousFlexibility.Geometry.EuclideanRigidity
+public import Mathlib.Analysis.Normed.Operator.Prod
 
 /-!
 # Actual planar Jacobian jets from actual chart jets
@@ -9,6 +11,8 @@ Taking the four entries of the true derivative costs one order. The two
 products in the determinant then use the common product interpolation
 loss. No Jacobian jet estimate is an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

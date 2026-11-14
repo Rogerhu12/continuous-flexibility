@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedJetNorm
-import ContinuousFlexibility.Scalar.WeightedDecodeLift
+module
+
+public import ContinuousFlexibility.Scalar.WeightedJetNorm
+public import ContinuousFlexibility.Scalar.WeightedDecodeLift
 
 /-!
 # Passing uniform jet estimates to an actual field operation
@@ -8,6 +10,8 @@ The constant for a physical norm is selected from its finite set of jet
 indices before the input field is chosen. The input order is the output
 order plus the one fixed loss in the supplied jet estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

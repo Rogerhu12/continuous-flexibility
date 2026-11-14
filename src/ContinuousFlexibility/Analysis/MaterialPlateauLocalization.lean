@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.MaterialPlateauRadialLoss
-import ContinuousFlexibility.Analysis.MaterialPlateauSize
-import ContinuousFlexibility.Analysis.MaterialPlateauJets
-import ContinuousFlexibility.Analysis.MaterialHeightCutoff
+module
+
+public import ContinuousFlexibility.Analysis.MaterialPlateauRadialLoss
+public import ContinuousFlexibility.Analysis.MaterialPlateauSize
+public import ContinuousFlexibility.Analysis.MaterialPlateauJets
+public import ContinuousFlexibility.Analysis.MaterialHeightCutoff
 
 /-!
 # Actual plateau localization of an arbitrary physical height
@@ -11,6 +13,8 @@ Every fixed derivative of this multiplier is bounded by one material
 weight, uniformly over actual containing cells. Multiplication preserves
 the physical height model and the full open component germ.
 -/
+
+@[expose] public section
 
 noncomputable section
 

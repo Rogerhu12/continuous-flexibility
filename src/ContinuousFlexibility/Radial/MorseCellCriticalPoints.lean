@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MorseCellJoinCollars
+module
+
+public import ContinuousFlexibility.Radial.MorseCellJoinCollars
 
 /-!
 # The actual simple critical points of a Morse model profile
@@ -8,6 +10,8 @@ physical height. Differentiating its model pullback at a root gives
 the ordinary physical second derivative, with the correct positive
 radius and speed factors.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

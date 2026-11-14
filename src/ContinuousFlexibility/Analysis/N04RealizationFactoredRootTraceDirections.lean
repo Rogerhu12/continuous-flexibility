@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04RealizationPhysicalRootJetDirections
-import ContinuousFlexibility.Analysis.N06BoundaryRadialJets
-import ContinuousFlexibility.Analysis.N06RootPhysicalFiniteJets
-import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationPhysicalRootJetDirections
+public import ContinuousFlexibility.Analysis.N06BoundaryRadialJets
+public import ContinuousFlexibility.Analysis.N06RootPhysicalFiniteJets
+public import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
 
 /-!
 # Actual inward root traces and the fixed reference speed factor
@@ -11,6 +13,8 @@ The speed factor is the existing reference factor, whose ordinary jets
 are independent of the state. Finite Leibniz sums preserve the same
 state-angle neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

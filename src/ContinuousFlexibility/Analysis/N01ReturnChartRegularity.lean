@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ReturnChartDifferentiation
+module
+
+public import ContinuousFlexibility.Analysis.ReturnChartDifferentiation
 
 /-!
 # Scalar return-chart regularity already implied by N01
@@ -9,6 +11,8 @@ actual return and its specified inverse are differentiable without any
 endpoint limiting argument.  These facts supply the scalar regularity
 hypotheses needed to differentiate the actual chart residual.
 -/
+
+@[expose] public section
 
 noncomputable section
 

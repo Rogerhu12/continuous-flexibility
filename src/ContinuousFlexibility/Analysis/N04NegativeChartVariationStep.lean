@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartVariationForcing
-import ContinuousFlexibility.Analysis.N04NegativeGeometryLinearVariationBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartVariationForcing
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryLinearVariationBounds
 
 /-!
 # The actual positive-state variation step with all spatial derivatives
@@ -11,6 +13,8 @@ marked product estimate and variation of constants retain one external
 weight, while every state-order spatial power remains outside the
 polynomial material envelope.
 -/
+
+@[expose] public section
 
 noncomputable section
 

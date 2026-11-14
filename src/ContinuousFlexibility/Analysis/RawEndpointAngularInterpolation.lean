@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.EndpointAngularInterpolation
-import ContinuousFlexibility.Analysis.OneSidedBoundaryTaylorRepresentative
-import ContinuousFlexibility.Analysis.BoundaryRadialFrechetJets
-import ContinuousFlexibility.Analysis.CylinderMixedJetNorms
+module
+
+public import ContinuousFlexibility.Analysis.EndpointAngularInterpolation
+public import ContinuousFlexibility.Analysis.OneSidedBoundaryTaylorRepresentative
+public import ContinuousFlexibility.Analysis.BoundaryRadialFrechetJets
+public import ContinuousFlexibility.Analysis.CylinderMixedJetNorms
 
 /-!
 # Angular interpolation from finite jets of the actual endpoint fields
@@ -11,6 +13,8 @@ the supplied endpoint fields produce the finite coefficient estimates.
 Radial matching then identifies their full ordinary boundary jets.
 This is reconstructed source, with an explicitly displayed family width.
 -/
+
+@[expose] public section
 
 noncomputable section
 

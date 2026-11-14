@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CoupledCircleCompositionMultilinear
-import ContinuousFlexibility.Scalar.WeightedSmoothTameAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.CoupledCircleCompositionMultilinear
+public import ContinuousFlexibility.Scalar.WeightedSmoothTameAlgebra
 
 /-!
 # Actual circle multiplication from the composition kernels
@@ -8,6 +10,8 @@ The kernel with zero chart and one direction factor is pointwise
 multiplication. Its existing one-high estimate gives the genuine bilinear
 map a smooth tame tower without another weighted product construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

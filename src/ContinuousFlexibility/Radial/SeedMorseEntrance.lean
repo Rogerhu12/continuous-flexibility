@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.SeedSelectedTailEntry
-import ContinuousFlexibility.Radial.MorseChainScales
-import ContinuousFlexibility.Radial.MorseCellMassTravel
+module
+
+public import ContinuousFlexibility.Radial.SeedSelectedTailEntry
+public import ContinuousFlexibility.Radial.MorseChainScales
+public import ContinuousFlexibility.Radial.MorseCellMassTravel
 
 /-!
 # Positive profile derivatives at the inward Morse seams
@@ -9,6 +11,8 @@ The profile identity is differentiated on the open cell and extended by
 continuity to its endpoints. Thus both inward cuts have strictly positive
 profile derivative, including the first cell on each side.
 -/
+
+@[expose] public section
 
 noncomputable section
 

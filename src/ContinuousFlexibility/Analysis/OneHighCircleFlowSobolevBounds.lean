@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowSourceEstimate
-import ContinuousFlexibility.Analysis.OneHighCircleFlowSobolevIntegral
-import ContinuousFlexibility.Analysis.OneHighCircleFlowLowGeometry
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowSourceEstimate
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowSobolevIntegral
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowLowGeometry
 
 /-!
 # Genuine high Sobolev bounds for the circle flow
@@ -11,6 +13,8 @@ Gronwall inequality. Both low geometric inputs to composition have
 already been derived from the same integrated speed norm. Consequently
 the final constant depends only on the period, the order, and Λ₄.
 -/
+
+@[expose] public section
 
 noncomputable section
 

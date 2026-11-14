@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighConvolutionKernel
-import Mathlib.Algebra.BigOperators.Group.Finset.Piecewise
+module
+
+public import ContinuousFlexibility.Analysis.OneHighConvolutionKernel
+public import Mathlib.Algebra.BigOperators.Group.Finset.Piecewise
 
 /-!
 # Young's inequality for any positive number of factors
@@ -8,6 +10,8 @@ Every distinguished factor can occupy the `L²` position; all remaining factors
 contribute their `L¹` norms. No restriction on the location of the high factor
 or on the supports of the frequency functions is imposed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

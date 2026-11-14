@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.ContinuousTimeAngularFlow
-import ContinuousFlexibility.Analysis.PolarCharacteristicAngularRegularity
-import ContinuousFlexibility.Analysis.NeighborhoodCharacteristicSpeedExtension
-import ContinuousFlexibility.Analysis.N01CoefficientValueJets
+module
+
+public import ContinuousFlexibility.Analysis.ContinuousTimeAngularFlow
+public import ContinuousFlexibility.Analysis.PolarCharacteristicAngularRegularity
+public import ContinuousFlexibility.Analysis.NeighborhoodCharacteristicSpeedExtension
+public import ContinuousFlexibility.Analysis.N01CoefficientValueJets
 
 /-!
 # Genuine angular regularity at the ordinary return endpoints
@@ -12,6 +14,8 @@ control interval. Its square-root factor is only used continuously in
 time. The existing ordinary time equation then implies actual smooth
 angular slices and continuity of every angular jet on the closed strip.
 -/
+
+@[expose] public section
 
 noncomputable section
 

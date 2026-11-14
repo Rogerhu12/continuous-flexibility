@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.MorseChainSelectedJets
-import ContinuousFlexibility.Radial.MorseChainPartitionTrace
-import ContinuousFlexibility.Radial.MorseCellCriticalPoints
-import ContinuousFlexibility.Radial.MorseCellMassTravel
+module
+
+public import ContinuousFlexibility.Radial.MorseChainSelectedJets
+public import ContinuousFlexibility.Radial.MorseChainPartitionTrace
+public import ContinuousFlexibility.Radial.MorseCellCriticalPoints
+public import ContinuousFlexibility.Radial.MorseCellMassTravel
 
 /-!
 # Realization of the accumulating Morse chain
@@ -10,6 +12,8 @@ The geometry, analytic estimates and all stationary-point assertions
 refer to one selected profile. In particular the local critical-point
 calculation applies to its actual full germs, including the seams.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

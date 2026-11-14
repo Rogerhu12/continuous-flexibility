@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerWeightL2
-import ContinuousFlexibility.Radial.InnerRadialFiniteWeakGraph
+module
+
+public import ContinuousFlexibility.Radial.InnerWeightL2
+public import ContinuousFlexibility.Radial.InnerRadialFiniteWeakGraph
 
 /-!
 # The actual signed radial potential on a finite piece
@@ -9,6 +11,8 @@ measure. Its finite bound follows from compactness and positivity of
 w on the retained closed interval. No sign of w' and no uniform final
 inverse estimate is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

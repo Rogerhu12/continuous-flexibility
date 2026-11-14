@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.IntervalWeakPrimitive
-import Mathlib.Analysis.Calculus.Deriv.Support
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
-import Mathlib.Tactic.FieldSimp
+module
+
+public import ContinuousFlexibility.Analysis.IntervalWeakPrimitive
+public import Mathlib.Analysis.Calculus.Deriv.Support
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
+public import Mathlib.Tactic.FieldSimp
 
 /-!
 # Homogeneous weak divergence equations on an interval
@@ -15,6 +17,8 @@ distribution-valued derivative is needed.
 The coefficient may vanish at the endpoints. All regularity assertions are
 local to the open interval.
 -/
+
+@[expose] public section
 
 open Set Filter MeasureTheory
 open scoped ContDiff Topology

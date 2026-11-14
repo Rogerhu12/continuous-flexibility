@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07bInverseDirection
-import ContinuousFlexibility.Analysis.N07bMaterialAngularChain
+module
+
+public import ContinuousFlexibility.Analysis.N07bInverseDirection
+public import ContinuousFlexibility.Analysis.N07bMaterialAngularChain
 
 /-!
 # Weighted material calculus for arbitrary geometric directions
@@ -9,6 +11,8 @@ terms. Their coefficients depend only on the geometric vector field and
 the previous coefficient. The same identity therefore handles the two
 reference directions and every subsequent current angular derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

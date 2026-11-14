@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aClosedRectangleJets
-import ContinuousFlexibility.Analysis.N07aNormalRecurrence
+module
+
+public import ContinuousFlexibility.Analysis.N07aClosedRectangleJets
+public import ContinuousFlexibility.Analysis.N07aNormalRecurrence
 
 /-!
 # Transmission of genuine closed jets across a noncharacteristic interface
@@ -10,6 +12,8 @@ within Taylor jets. Equality of the value and first differential then
 determines every normal jet, while angular differentiation determines
 the mixed jets. No smooth extension of either solution is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aAngularWeightedSolution
-import ContinuousFlexibility.Analysis.N07aAngularMaterialLowering
-import ContinuousFlexibility.Analysis.N07aAngularGraph
-import ContinuousFlexibility.Analysis.N07aReferenceFiniteJets
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularWeightedSolution
+public import ContinuousFlexibility.Analysis.N07aAngularMaterialLowering
+public import ContinuousFlexibility.Analysis.N07aAngularGraph
+public import ContinuousFlexibility.Analysis.N07aReferenceFiniteJets
 
 /-!
 # The two terminal normal orders of the same Banach solution
@@ -10,6 +12,8 @@ The fixed real material loss of N05 is paid by its natural ceiling once.
 All lower material and angular realizations retain the exact same forget
 map. The first radial class remains the original weak derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

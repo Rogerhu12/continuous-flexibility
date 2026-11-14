@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CircleChartCompositionJets
-import ContinuousFlexibility.Analysis.CylinderMixedJets
+module
+
+public import ContinuousFlexibility.Analysis.CircleChartCompositionJets
+public import ContinuousFlexibility.Analysis.CylinderMixedJets
 
 /-!
 # Ordinary mixed derivatives of the actual composition jets
@@ -9,6 +11,8 @@ parameter and angle. The already proved commutation of the actual
 cylinder partial derivatives therefore identifies every angular jet of
 the parameter derivative, rather than postulating mixed derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

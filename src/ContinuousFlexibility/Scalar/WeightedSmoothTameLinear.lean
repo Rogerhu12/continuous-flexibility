@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedSmoothTameAlgebra
-import ContinuousFlexibility.Scalar.WeightedUniformTameGermOperations
+module
+
+public import ContinuousFlexibility.Scalar.WeightedSmoothTameAlgebra
+public import ContinuousFlexibility.Scalar.WeightedUniformTameGermOperations
 
 /-!
 # Linear operations on the full scalar product domains
@@ -8,6 +10,8 @@ The coordinate projections have zero loss for the prescribed sum grading.
 Postcomposition by a fixed tame linear map retains the original domain,
 including unrestricted independent operator arguments.
 -/
+
+@[expose] public section
 
 noncomputable section
 

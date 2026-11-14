@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06ReferenceAngularNormalBounds
-import ContinuousFlexibility.Analysis.N05ReferenceAngularSourceSobolev
-import ContinuousFlexibility.Analysis.N05ReferenceFullAngularSobolev
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceAngularNormalBounds
+public import ContinuousFlexibility.Analysis.N05ReferenceAngularSourceSobolev
+public import ContinuousFlexibility.Analysis.N05ReferenceFullAngularSobolev
 
 /-!
 # All angular orders of the actual physical normal derivative
@@ -15,6 +17,8 @@ retains the original material exponents at every order.
 No canonical coordinate, radial smoothness of the source, or spectral
 summability assumption is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

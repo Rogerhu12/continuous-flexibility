@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05ReferenceAngularJetCells
-import Mathlib.Topology.Algebra.InfiniteSum.Ring
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceAngularJetCells
+public import Mathlib.Topology.Algebra.InfiniteSum.Ring
 
 /-!
 # Weighted Parseval for actual finite angular jets
@@ -8,6 +10,8 @@ This identity uses any radial cell weights. Individual singleton series
 suffice for summability of the finite derivative field, so no extra
 derivative membership assumption is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

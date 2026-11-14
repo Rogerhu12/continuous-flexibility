@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.FirstDerivativeGluing
+module
+
+public import ContinuousFlexibility.Analysis.FirstDerivativeGluing
 
 /-!
 # First-derivative gluing across the omitted interface of two open pieces
@@ -8,6 +10,8 @@ Openness and disjointness identify every relative boundary point with
 that interface. This supplies the closure hypotheses required for genuine
 first-derivative gluing, without any parametrization of the interface.
 -/
+
+@[expose] public section
 
 noncomputable section
 

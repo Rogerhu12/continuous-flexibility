@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bActualTravelChart
-import ContinuousFlexibility.Analysis.N04bConstructedRootTransmission
+module
+
+public import ContinuousFlexibility.Analysis.N04bActualTravelChart
+public import ContinuousFlexibility.Analysis.N04bConstructedRootTransmission
 
 /-!
 # Transmission at the actual moving middle curve
@@ -9,6 +11,8 @@ differentiability and positivity used in the root-height calculation.
 The remaining inputs identify the literal atlas maps with their already
 constructed formulas near the positive cut radius.
 -/
+
+@[expose] public section
 
 noncomputable section
 

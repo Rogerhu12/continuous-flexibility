@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aNeighborhood
-import ContinuousFlexibility.Analysis.N06Neighborhood
+module
+
+public import ContinuousFlexibility.Analysis.N07aNeighborhood
+public import ContinuousFlexibility.Analysis.N06Neighborhood
 
 /-!
 # The same cumulative construction on a smaller neighborhood
@@ -8,6 +10,8 @@ All geometric functions, graph spaces and inverses are unchanged. The
 original estimates restrict to a stronger fixed low norm and a smaller
 positive radius; genuine derivative towers are restricted as towers.
 -/
+
+@[expose] public section
 
 noncomputable section
 

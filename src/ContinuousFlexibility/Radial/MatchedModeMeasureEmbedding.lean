@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.ReferenceRadialMeasureComparison
-import ContinuousFlexibility.Radial.MatchedModeLocalization
-import ContinuousFlexibility.Radial.ZeroModeEndpointWeight
-import ContinuousFlexibility.Radial.ModeTestIntegrability
+module
+
+public import ContinuousFlexibility.Radial.ReferenceRadialMeasureComparison
+public import ContinuousFlexibility.Radial.MatchedModeLocalization
+public import ContinuousFlexibility.Radial.ZeroModeEndpointWeight
+public import ContinuousFlexibility.Radial.ModeTestIntegrability
 
 /-!
 # Embedding the actual radial weights into the modal Hilbert space
@@ -10,6 +12,8 @@ Positive attenuation controls the model measure for every output loss.
 For sources, one fixed sufficiently large coefficient exponent controls
 the reciprocal density uniformly for every nonnegative attenuation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

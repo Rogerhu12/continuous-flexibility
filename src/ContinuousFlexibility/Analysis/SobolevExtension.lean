@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.IntervalSobolevExtension
+module
+
+public import ContinuousFlexibility.Analysis.IntervalSobolevExtension
 
 /-!
 # Universal extension on half-lines and intervals
@@ -14,6 +16,8 @@ input on the domain, and are genuine right inverses of restriction. Neither
 an extension theorem nor a family of order-dependent extension operators is
 assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

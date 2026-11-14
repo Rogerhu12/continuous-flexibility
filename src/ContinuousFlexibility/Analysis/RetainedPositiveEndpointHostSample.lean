@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.RetainedPositiveEndpointMidpointX
-import ContinuousFlexibility.Analysis.MaterialClosedHostEndpointX
-import ContinuousFlexibility.Analysis.MaterialSampleBounds
+module
+
+public import ContinuousFlexibility.Analysis.RetainedPositiveEndpointMidpointX
+public import ContinuousFlexibility.Analysis.MaterialClosedHostEndpointX
+public import ContinuousFlexibility.Analysis.MaterialSampleBounds
 
 /-!
 # Original negative host samples at the true positive midpoint
@@ -11,6 +13,8 @@ whole-family endpoint-to-midpoint bound then compares the original
 host sample with any cell containing the actual positive midpoint.
 The central exceptions and both tails use this same argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

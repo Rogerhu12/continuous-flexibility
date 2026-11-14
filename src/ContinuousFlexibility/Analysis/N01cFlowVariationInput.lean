@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cActualFlowForcingComposition
-import ContinuousFlexibility.Analysis.N01cFlowSlotBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01cActualFlowForcingComposition
+public import ContinuousFlexibility.Analysis.N01cFlowSlotBounds
 
 /-!
 # Indices for uniform estimates on the actual finite flow plots
@@ -10,6 +12,8 @@ constructed actual coefficient, forcing factor, or ordinary variation.
 Grouping the indices keeps existential constants outside the concrete
 state-space representation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

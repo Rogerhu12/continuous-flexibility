@@ -1,4 +1,6 @@
-import Mathlib.Tactic
+module
+
+public import Mathlib.Tactic
 
 /-!
 # One common high order for the masked moving-point estimate
@@ -7,6 +9,8 @@ The inverse prefix is requested through `N`; its denominator uses
 `top + 1`. Both inverse and physical high orders fit into `s + loss`,
 where the loss is selected before the spatial order `s`.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Analysis
 

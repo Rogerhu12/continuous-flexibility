@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.WeightedDifferentiationAlgebra
-import ContinuousFlexibility.Scalar.WeightedJetNorm
-import ContinuousFlexibility.Scalar.WeightedDecodeLift
+module
+
+public import ContinuousFlexibility.Scalar.WeightedDifferentiationAlgebra
+public import ContinuousFlexibility.Scalar.WeightedJetNorm
+public import ContinuousFlexibility.Scalar.WeightedDecodeLift
 
 /-!
 # The second angular derivative on the actual weighted spaces
@@ -10,6 +12,8 @@ map has one fixed loss of two and base zero, for every real weight exponent.
 It is lifted through the given decoder and is continuous in the original
 projective topology.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientRegularity
-import ContinuousFlexibility.Analysis.N01OriginalCoefficientTameBounds
-import ContinuousFlexibility.Analysis.N05ReferenceResidual
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientRegularity
+public import ContinuousFlexibility.Analysis.N01OriginalCoefficientTameBounds
+public import ContinuousFlexibility.Analysis.N05ReferenceResidual
 
 /-!
 # The retained coefficient jets at the actual reference
@@ -11,6 +13,8 @@ coefficient with its original reference coefficient on the open annulus.
 Consequently the existing uniform reference spatial bounds apply before
 any inverse-chart substitution or material-envelope transfer.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06CylinderGraphJets
+module
+
+public import ContinuousFlexibility.Analysis.N06CylinderGraphJets
 
 /-!
 # The actual five multipliers of a cubic divergence perturbation
@@ -7,6 +9,8 @@ The genuine cubic differential expression is a sum of five products with
 the weighted graph fields. Pure angular jets commute with this factorization,
 including its radial square-root weights.
 -/
+
+@[expose] public section
 
 noncomputable section
 

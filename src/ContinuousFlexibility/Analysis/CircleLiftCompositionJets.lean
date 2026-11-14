@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CoordinateCompositionMaterialBounds
-import ContinuousFlexibility.Analysis.FlowJetLinearization
+module
+
+public import ContinuousFlexibility.Analysis.CoordinateCompositionMaterialBounds
+public import ContinuousFlexibility.Analysis.FlowJetLinearization
 
 /-!
 # Fixed-loss jets of actual circle-lift compositions
@@ -9,6 +11,8 @@ The inner map is measured by its displacement from a fixed linear angular
 projection. The actual composition has the same form. The partition
 estimate and interpolation preserve one high state factor at every order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

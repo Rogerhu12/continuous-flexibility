@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ActualNegativeReferenceInverseMaterialJets
-import ContinuousFlexibility.Analysis.ActualNegativeReferenceGeometryFields
+module
+
+public import ContinuousFlexibility.Analysis.ActualNegativeReferenceInverseMaterialJets
+public import ContinuousFlexibility.Analysis.ActualNegativeReferenceGeometryFields
 
 /-!
 # Actual height-profile products on the original negative half
@@ -8,6 +10,8 @@ All powers use the stored height, and composition uses the stored inverse.
 The physical profile or its reciprocal is estimated at the actual point
 before transport to the original half sample. The optical host is separate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

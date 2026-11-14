@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aPhysicalRemainder
-import ContinuousFlexibility.Analysis.N07aCorrectedForward
+module
+
+public import ContinuousFlexibility.Analysis.N07aPhysicalRemainder
+public import ContinuousFlexibility.Analysis.N07aCorrectedForward
 
 /-!
 # The actual height pair keeps the original equation
@@ -8,6 +10,8 @@ Equality on the open core preserves both derivatives of the original
 divergence operator. Source compatibility then removes the actual auxiliary
 column using Q(psi)=1, after the genuine height member has been constructed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

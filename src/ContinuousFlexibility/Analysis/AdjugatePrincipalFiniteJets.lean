@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.AdjugatePrincipalField
-import ContinuousFlexibility.Analysis.FiniteFullJetMatching
-import ContinuousFlexibility.Analysis.CanonicalFieldJetReduction
+module
+
+public import ContinuousFlexibility.Analysis.AdjugatePrincipalField
+public import ContinuousFlexibility.Analysis.FiniteFullJetMatching
+public import ContinuousFlexibility.Analysis.CanonicalFieldJetReduction
 
 /-!
 # Actual adjugate principal jets from matched transport and height
@@ -10,6 +12,8 @@ point. Matching the transport through order n+1 and the height through
 order n therefore matches the full ordinary principal jets through n.
 The proof uses only the forward maps at the boundary.
 -/
+
+@[expose] public section
 
 noncomputable section
 

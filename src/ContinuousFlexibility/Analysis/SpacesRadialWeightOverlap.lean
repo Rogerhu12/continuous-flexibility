@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesRadialOverlap
-import ContinuousFlexibility.Analysis.MaterialLocalComparison
+module
+
+public import ContinuousFlexibility.Analysis.SpacesRadialOverlap
+public import ContinuousFlexibility.Analysis.MaterialLocalComparison
 
 /-!
 # Weighted localization and gluing estimates
@@ -9,6 +11,8 @@ and throughout a fixed-width cell. Combining this comparison with the
 actual support and derivative bounds of the radial cutoffs controls the
 square sum of every weighted localization or gluing multiplier.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import Mathlib.Topology.Compactness.Compact
-import Mathlib.Analysis.Normed.Group.Basic
-import Mathlib.Algebra.Order.BigOperators.Group.Finset
+module
+
+public import Mathlib.Topology.Compactness.Compact
+public import Mathlib.Analysis.Normed.Group.Basic
+public import Mathlib.Algebra.Order.BigOperators.Group.Finset
 
 /-!
 # Bounds on a compact set from interior local bounds
@@ -9,6 +11,8 @@ A function need not have prescribed boundary values. Bounds on its values
 in an arbitrary subset, valid near each point of a compact set, admit one
 bound on the part of that subset lying in the compact set.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Analysis
 

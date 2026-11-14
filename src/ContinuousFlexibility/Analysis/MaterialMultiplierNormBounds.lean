@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.MaterialMixedMultiplier
-import ContinuousFlexibility.Analysis.PhysicalGradeEnergy
-import ContinuousFlexibility.Analysis.CylinderUniformNorm
-import ContinuousFlexibility.Analysis.MaterialRadiusJets
+module
+
+public import ContinuousFlexibility.Analysis.MaterialMixedMultiplier
+public import ContinuousFlexibility.Analysis.PhysicalGradeEnergy
+public import ContinuousFlexibility.Analysis.CylinderUniformNorm
+public import ContinuousFlexibility.Analysis.MaterialRadiusJets
 
 /-!
 # Multiplier estimates with the full mixed derivative budget
@@ -11,6 +13,8 @@ is the fixed material-weight loss. The finite constants depend only on
 the output order. In particular, the estimate does not raise every
 height factor to the largest order before interpolation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

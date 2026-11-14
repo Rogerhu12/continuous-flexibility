@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OneHighCircleSobolevJets
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleSobolevJets
 
 /-!
 # Algebra of the physical circle Sobolev norms
@@ -7,6 +9,8 @@ These norm estimates retain the actual Fourier/Bessel representation.
 Finiteness is either explicit or obtained from an actual continuous
 derivative tower. The embedding constant depends only on the fixed period.
 -/
+
+@[expose] public section
 
 noncomputable section
 

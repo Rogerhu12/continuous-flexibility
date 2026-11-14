@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N05SeedOpticalLowerAssembly
-import ContinuousFlexibility.Analysis.N01aOpticalProfile
-import ContinuousFlexibility.Analysis.AffineMaterialSampling
-import ContinuousFlexibility.Blueprint.Statements
+module
+
+public import ContinuousFlexibility.Analysis.N05SeedOpticalLowerAssembly
+public import ContinuousFlexibility.Analysis.N01aOpticalProfile
+public import ContinuousFlexibility.Analysis.AffineMaterialSampling
+public import ContinuousFlexibility.Blueprint.Statements
 
 /-!
 # The retained seed's actual material primitive certificate
@@ -12,6 +14,8 @@ and converted to that host's affine sample. The strict border support is
 already part of the same radial-reference witness. This draft uses the
 additive N01PrimitiveGeometry definition in the per-k companion patch.
 -/
+
+@[expose] public section
 
 noncomputable section
 

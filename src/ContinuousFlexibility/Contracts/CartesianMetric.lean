@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Contracts.CartesianHeight
-import ContinuousFlexibility.Geometry.FlatDevelopment
-import ContinuousFlexibility.Geometry.CartesianCoframe
+module
+
+public import ContinuousFlexibility.Contracts.CartesianHeight
+public import ContinuousFlexibility.Geometry.FlatDevelopment
+public import ContinuousFlexibility.Geometry.CartesianCoframe
 
 /-!
 # The actual rotational metric in Cartesian coordinates
@@ -10,6 +12,8 @@ on the product coordinate space. Its polar pullback and the height pullback
 are proved for actual derivatives, so the Cartesian remainder is the same
 tensor as the positive polar remainder of the analytic core.
 -/
+
+@[expose] public section
 
 noncomputable section
 

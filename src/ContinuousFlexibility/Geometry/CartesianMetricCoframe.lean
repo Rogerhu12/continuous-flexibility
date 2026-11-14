@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Geometry.CartesianCoframe
-import Mathlib.Analysis.SpecialFunctions.Sqrt
+module
+
+public import ContinuousFlexibility.Geometry.CartesianCoframe
+public import Mathlib.Analysis.SpecialFunctions.Sqrt
 
 /-!
 # A global Cartesian coframe of a positive matrix metric
@@ -8,6 +10,8 @@ The Cholesky formulas use only the actual Cartesian metric entries. They
 therefore extend across the center without choosing a polar angle. The
 connection is solved from the actual exterior derivatives of this coframe.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCompositionJets
-import Mathlib.Analysis.Calculus.ContDiff.Operations
-import Lean.Elab.Tactic.Omega
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCompositionJets
+public import Mathlib.Analysis.Calculus.ContDiff.Operations
+public import Lean.Elab.Tactic.Omega
 
 /-!
 # Removing the linear part in the actual higher chain rule
@@ -10,6 +12,8 @@ Fréchet derivative has zero first derivative. Its higher derivatives
 equal the original field derivatives. Thus its actual composition
 formula involves only partitions with at least two blocks.
 -/
+
+@[expose] public section
 
 noncomputable section
 

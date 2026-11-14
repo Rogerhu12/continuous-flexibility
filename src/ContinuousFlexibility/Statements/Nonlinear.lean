@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Statements.Analysis
-import ContinuousFlexibility.Contracts.Annular
-import ContinuousFlexibility.Scalar.NormalizedConservation
-import ContinuousFlexibility.Scalar.TypeCorrection
-import ContinuousFlexibility.Scalar.FormPullback
-import Mathlib.Topology.OpenPartialHomeomorph.Defs
+module
+
+public import ContinuousFlexibility.Statements.Analysis
+public import ContinuousFlexibility.Contracts.Annular
+public import ContinuousFlexibility.Scalar.NormalizedConservation
+public import ContinuousFlexibility.Scalar.TypeCorrection
+public import ContinuousFlexibility.Scalar.FormPullback
+public import Mathlib.Topology.OpenPartialHomeomorph.Defs
 
 /-!
 # Concrete nonlinear targets N01--N12 and X02
@@ -16,6 +18,8 @@ The scalar residual is the project's actual removable height residual.
 Paper correspondence: section 7, lines 208--715; section 8; section 9;
 section 10, lines 19--317.  N12 is unconditionally `Nonempty FlatAnnularCore`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

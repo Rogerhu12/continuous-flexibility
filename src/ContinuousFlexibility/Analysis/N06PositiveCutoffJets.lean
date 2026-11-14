@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.PositiveEndpointCutoff
-import ContinuousFlexibility.Analysis.N06RadialGeometryJets
-import Mathlib.Analysis.Calculus.Deriv.Support
+module
+
+public import ContinuousFlexibility.Analysis.PositiveEndpointCutoff
+public import ContinuousFlexibility.Analysis.N06RadialGeometryJets
+public import Mathlib.Analysis.Calculus.Deriv.Support
 
 /-!
 # Uniform scaled jets of the actual endpoint cutoff
@@ -10,6 +12,8 @@ Its derivatives have fixed bounds; affine rescaling introduces precisely
 the inverse collar width to the corresponding power. In particular a
 polynomial bound for that reciprocal controls all finite cutoff jets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

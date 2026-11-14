@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05CanonicalInverseDefinition
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalInverseDefinition
 
 /-!
 # Linearity of the fixed source selection on actual volume levels
@@ -8,6 +10,8 @@ representatives therefore identify the corresponding physical sources
 almost everywhere. Positive weaker source membership justifies integrating
 that identity, so the actual auxiliary correction is linear as well.
 -/
+
+@[expose] public section
 
 noncomputable section
 

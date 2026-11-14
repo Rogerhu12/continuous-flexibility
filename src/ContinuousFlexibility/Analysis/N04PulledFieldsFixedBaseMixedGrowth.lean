@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.FlatMixedDiagonalOperations
+module
+
+public import ContinuousFlexibility.Analysis.FlatMixedDiagonalOperations
 
 /-!
 # Mixed growth with one low base for every parameter order
@@ -7,6 +9,8 @@ The low parameter seminorm is chosen once. Each finite parameter prefix
 may have its own spatial loss, chosen before the spatial order. This
 retains the flat component factor of the actual coefficient correction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

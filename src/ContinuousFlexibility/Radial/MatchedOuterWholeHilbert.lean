@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterWholeMeasure
-import ContinuousFlexibility.Analysis.L2RestrictionSplit
+module
+
+public import ContinuousFlexibility.Radial.OuterWholeMeasure
+public import ContinuousFlexibility.Analysis.L2RestrictionSplit
 
 /-!
 # The actual whole-tail restriction and physical extension
@@ -8,6 +10,8 @@ The existing coordinate isometry reflects the restricted physical measure
 and its L² classes together. Restriction is contractive and extension is
 isometric. Their representative identities hold for every L² source.
 -/
+
+@[expose] public section
 
 noncomputable section
 

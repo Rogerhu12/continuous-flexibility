@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.TameInverseBounds
-import ContinuousFlexibility.Analysis.TameUniformGrowth
+module
+
+public import ContinuousFlexibility.Analysis.TameInverseBounds
+public import ContinuousFlexibility.Analysis.TameUniformGrowth
 
 /-!
 # Uniform bounded-set estimates for genuine inverse-family jets
@@ -9,6 +11,8 @@ Estimating those same expressions by uniform low-seminorm growth retains
 the order of all quantifiers: the low order and loss precede the radius,
 the target order, and every base point and directional argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

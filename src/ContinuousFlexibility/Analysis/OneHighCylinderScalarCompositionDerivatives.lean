@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderCompositionL2
-import ContinuousFlexibility.Analysis.OneHighCylinderRealProducts
-import ContinuousFlexibility.Analysis.OneHighCircleRepeatedProducts
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderCompositionL2
+public import ContinuousFlexibility.Analysis.OneHighCylinderRealProducts
+public import ContinuousFlexibility.Analysis.OneHighCircleRepeatedProducts
 
 /-!
 # Finite-energy derivatives of scalar cylinder compositions
@@ -9,6 +11,8 @@ Every positive derivative through the fixed high order is controlled by
 the same input H^s norm. This also supplies all lower derivative membership
 needed by the actual Fourier endpoint comparison.
 -/
+
+@[expose] public section
 
 noncomputable section
 

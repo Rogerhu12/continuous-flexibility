@@ -1,7 +1,11 @@
-import ContinuousFlexibility.Analysis.N08CellLayerTest
-import ContinuousFlexibility.Analysis.N08LayerCutoffJets
+module
+
+public import ContinuousFlexibility.Analysis.N08CellLayerTest
+public import ContinuousFlexibility.Analysis.N08LayerCutoffJets
 
 /-! # Uniform ordinary jets and exact support of the radial cell tests -/
+
+@[expose] public section
 
 noncomputable section
 

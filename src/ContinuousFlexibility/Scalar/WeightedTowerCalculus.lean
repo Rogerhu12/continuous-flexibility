@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.ScalarWeighted
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
-import ContinuousFlexibility.Analysis.TameTransfer
+module
+
+public import ContinuousFlexibility.Statements.ScalarWeighted
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
+public import ContinuousFlexibility.Analysis.TameTransfer
 
 /-!
 # Fixed-neighbourhood scalar derivative towers
@@ -10,6 +12,8 @@ for the entire directional tower.  These closure lemmas retain those quantifiers
 In particular, a merely local `SmoothTameOn` estimate is never promoted to a
 uniform estimate.  The input is always the actual uniform tower bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

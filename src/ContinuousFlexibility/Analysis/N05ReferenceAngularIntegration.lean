@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesCircleFourierJets
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
+module
+
+public import ContinuousFlexibility.Analysis.SpacesCircleFourierJets
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
 
 /-!
 # Angular integration by parts on an arbitrary period
@@ -8,6 +10,8 @@ The reference graph uses a full period of length `2π`. This form of the
 ordinary periodic integration identity keeps the period explicit and
 works for every derivative order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

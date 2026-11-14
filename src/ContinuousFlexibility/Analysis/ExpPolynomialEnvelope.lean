@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCompositionJets
-import Mathlib.Analysis.SpecialFunctions.ExpDeriv
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCompositionJets
+public import Mathlib.Analysis.SpecialFunctions.ExpDeriv
 
 /-!
 # Fixed finite-jet bounds for an actual exponential
@@ -9,6 +11,8 @@ derivatives of the exponent enter the polynomial factor, so a large
 constant logarithmic offset does not enter the derivative envelope.
 This is a new reconstruction after the workspace reset.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartInteriorPrefix
-import ContinuousFlexibility.Analysis.N04NegativeChartInteriorReferenceJets
-import ContinuousFlexibility.Analysis.N04RealizationCubicRegularity
-import ContinuousFlexibility.Analysis.FlatMixedDiagonalOperations
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartInteriorPrefix
+public import ContinuousFlexibility.Analysis.N04NegativeChartInteriorReferenceJets
+public import ContinuousFlexibility.Analysis.N04RealizationCubicRegularity
+public import ContinuousFlexibility.Analysis.FlatMixedDiagonalOperations
 
 /-!
 # The actual positive travel input on the material interior
@@ -13,6 +15,8 @@ the first-integral defect and its angular reflection. Positive parameter
 orders retain exactly one height weight; order zero uses the fixed
 reference material bound and the global height ceiling.
 -/
+
+@[expose] public section
 
 noncomputable section
 

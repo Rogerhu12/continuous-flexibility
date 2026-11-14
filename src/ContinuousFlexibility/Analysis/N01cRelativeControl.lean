@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cSpatialCoefficients
-import ContinuousFlexibility.Analysis.N01cControlEndpointFactor
+module
+
+public import ContinuousFlexibility.Analysis.N01cSpatialCoefficients
+public import ContinuousFlexibility.Analysis.N01cControlEndpointFactor
 
 /-!
 # The actual logarithmic control on a negative component
@@ -11,6 +13,8 @@ the exact optical-square formula and the relative perturbation criterion.
 The endpoint estimate is a numerical consequence of a reference optical
 lower bound and the already proved linear endpoint factor for controls.
 -/
+
+@[expose] public section
 
 noncomputable section
 

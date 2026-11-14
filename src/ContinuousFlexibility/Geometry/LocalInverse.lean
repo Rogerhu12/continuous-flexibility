@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Scalar.Coordinates
-import ContinuousFlexibility.Scalar.Positivity
-import Mathlib.Analysis.Calculus.InverseFunctionTheorem.ContDiff
-import Mathlib.Topology.Algebra.Module.FiniteDimension
+module
+
+public import ContinuousFlexibility.Scalar.Coordinates
+public import ContinuousFlexibility.Scalar.Positivity
+public import Mathlib.Analysis.Calculus.InverseFunctionTheorem.ContDiff
+public import Mathlib.Topology.Algebra.Module.FiniteDimension
 
 /-!
 # Local inversion of a planar development
@@ -12,6 +14,8 @@ The actual inverse function theorem then supplies an open partial
 homeomorphism and a smooth local inverse. The coordinate square sum is never
 replaced by the default product norm on `PolarPoint`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationInverseJetFormula
-import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
-import ContinuousFlexibility.Scalar.WeightedTowerOperations
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationInverseJetFormula
+public import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
+public import ContinuousFlexibility.Scalar.WeightedTowerOperations
 
 /-!
 # Genuine parameter towers for a finite prefix of boundary inverse jets
@@ -11,6 +13,8 @@ inverse differential and finite forward jets at the same inverse point.
 The local inverse formula determines every higher inverse jet without
 requiring parameter regularity of a chosen root extension.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.MatchedInnerSmoothTests
-import ContinuousFlexibility.Radial.MatchedInnerSmoothGreen
-import ContinuousFlexibility.Radial.InnerRadialH1Support
-import ContinuousFlexibility.Radial.InnerRadialPotentialGraph
-import ContinuousFlexibility.Radial.ModeCoreSource
+module
+
+public import ContinuousFlexibility.Radial.MatchedInnerSmoothTests
+public import ContinuousFlexibility.Radial.MatchedInnerSmoothGreen
+public import ContinuousFlexibility.Radial.InnerRadialH1Support
+public import ContinuousFlexibility.Radial.InnerRadialPotentialGraph
+public import ContinuousFlexibility.Radial.ModeCoreSource
 
 /-!
 # Actual smooth tests and cancellation on the finite physical chain
@@ -12,6 +14,8 @@ Hilbert space. Their true endpoint values put them in the finite weak
 domain. Smooth Green identities against arbitrary domain elements then
 cancel at every internal cut, with the actual endpoint normalization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

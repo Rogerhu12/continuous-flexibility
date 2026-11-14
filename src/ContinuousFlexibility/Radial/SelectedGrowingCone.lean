@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R07ConeSolution
-import ContinuousFlexibility.Radial.SeedOrientedGluing
+module
+
+public import ContinuousFlexibility.Radial.R07ConeSolution
+public import ContinuousFlexibility.Radial.SeedOrientedGluing
 
 /-!
 # Exact continuation of the selected growing mode along the retained cone
@@ -11,6 +13,8 @@ Consequently the old join and entrance states are preserved exactly.
 No propagation from the central model through a positive connector is
 needed for this compactly supported terminal lift.
 -/
+
+@[expose] public section
 
 noncomputable section
 

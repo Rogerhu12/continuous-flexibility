@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.Gauge
-import Mathlib.Analysis.Calculus.MeanValue
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+module
+
+public import ContinuousFlexibility.Radial.Gauge
+public import Mathlib.Analysis.Calculus.MeanValue
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 
 /-!
 # The outer Green kernel of the radial Jacobi operator
@@ -30,6 +32,8 @@ which is the original-source inverse `G_o f` of `eq:outer-robin-new`.  The kerne
 integral itself is not formalized here.  Nothing in this file asserts the
 existence of the homogeneous solutions `U`, `V`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

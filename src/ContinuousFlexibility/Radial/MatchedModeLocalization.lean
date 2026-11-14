@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.ModeLocalMeasure
-import ContinuousFlexibility.Radial.MorseChainScales
-import Mathlib.Analysis.Normed.Operator.Mul
-import Mathlib.Analysis.Normed.Operator.Prod
-import Mathlib.MeasureTheory.Function.Holder
+module
+
+public import ContinuousFlexibility.Radial.ModeLocalMeasure
+public import ContinuousFlexibility.Radial.MorseChainScales
+public import Mathlib.Analysis.Normed.Operator.Mul
+public import Mathlib.Analysis.Normed.Operator.Prod
+public import Mathlib.MeasureTheory.Function.Holder
 
 /-!
 # Actual modal cell localizers
@@ -13,6 +15,8 @@ not counted once for every radial cell. The coefficient bound on reciprocal
 density follows from the frozen profile bounds and is independent of the
 frequency.
 -/
+
+@[expose] public section
 
 noncomputable section
 

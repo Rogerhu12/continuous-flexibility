@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aAngularFixedJetEnvelope
-import ContinuousFlexibility.Analysis.N07aLinearJetVolumeBounds
-import ContinuousFlexibility.Analysis.N07aCompositionBudget
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularFixedJetEnvelope
+public import ContinuousFlexibility.Analysis.N07aLinearJetVolumeBounds
+public import ContinuousFlexibility.Analysis.N07aCompositionBudget
 
 /-!
 # Actual volume membership from fixed-parameter spatial envelopes
@@ -9,6 +11,8 @@ Apply the genuine source-linear producer to scalar multiples of the one
 displayed field. This uses its actual angular jets and all material orders;
 no uniform estimate in a varying nonlinear parameter is assumed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

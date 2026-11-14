@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartCircleCompositionBounds
-import ContinuousFlexibility.Analysis.N04NegativeChartFixedBaseFamilies
-import ContinuousFlexibility.Analysis.N04NegativeGeometryInverseCircleCompositionBounds
-import ContinuousFlexibility.Analysis.CircleUniformFamilyOperations
-import ContinuousFlexibility.Analysis.TameSmoothingCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartCircleCompositionBounds
+public import ContinuousFlexibility.Analysis.N04NegativeChartFixedBaseFamilies
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryInverseCircleCompositionBounds
+public import ContinuousFlexibility.Analysis.CircleUniformFamilyOperations
+public import ContinuousFlexibility.Analysis.TameSmoothingCalculus
 
 /-!
 # Fixed-base calculus for the actual circle maps
@@ -11,6 +13,8 @@ Forward composition uses the explicit full-jet bound. Positive inverse
 composition uses the actual inverse-family theorem. Both operations keep
 the common source base before all parameter and angular orders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

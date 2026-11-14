@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06CubicCutoffLp
-import ContinuousFlexibility.Analysis.N06NegativeCurrentTestLp
-import ContinuousFlexibility.Analysis.N06PhysicalPairingLimits
+module
+
+public import ContinuousFlexibility.Analysis.N06CubicCutoffLp
+public import ContinuousFlexibility.Analysis.N06NegativeCurrentTestLp
+public import ContinuousFlexibility.Analysis.N06PhysicalPairingLimits
 
 /-!
 # Cubic test cutoffs with only open-strip smoothness
@@ -11,6 +13,8 @@ Three genuine L2 test jets control the cutoff commutator, since the cubic
 weights absorb the radial cutoff derivatives. Compact canonical tests
 then converge in the actual cubic operator pairing.
 -/
+
+@[expose] public section
 
 noncomputable section
 

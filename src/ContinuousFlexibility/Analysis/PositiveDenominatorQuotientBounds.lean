@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.PositiveRootRecoveryBounds
+module
+
+public import ContinuousFlexibility.Analysis.PositiveRootRecoveryBounds
 
 /-!
 # Actual quotient jets with a positive denominator
@@ -7,6 +9,8 @@ Only the denominator is clamped. The numerator may have either sign.
 On a fixed value rectangle this constructs a genuine smooth quotient
 extension and bounds its actual derivatives before selecting the state.
 -/
+
+@[expose] public section
 
 noncomputable section
 

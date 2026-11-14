@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryStoredForwardJets
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsOddPowerPrefix
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryStoredForwardJets
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsOddPowerPrefix
 
 /-!
 # Sampled prefixes of the original full forward chart jets
@@ -9,6 +11,8 @@ parameter shifts. Their angular horizons are enlarged before applying
 their bounds, making the high denominator exactly common. The fixed
 physical unscale preserves the resulting reserve-one word estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

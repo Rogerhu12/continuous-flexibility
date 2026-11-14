@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedSmoothTameLinear
-import ContinuousFlexibility.Scalar.WeightedHeightAlgebra
+module
+
+public import ContinuousFlexibility.Scalar.WeightedSmoothTameLinear
+public import ContinuousFlexibility.Scalar.WeightedHeightAlgebra
 
 /-!
 # Pulling actual height families back to product parameter spaces
@@ -8,6 +10,8 @@ A state family can be evaluated on the first factor while the second
 factor ranges freely. The source grading is exactly the prescribed sum
 grading, with zero projection loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

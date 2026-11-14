@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Geometry.EuclideanRigidityCoordinates
-import Mathlib.Analysis.Calculus.MeanValue
-import Mathlib.Topology.Order.IntermediateValue
+module
+
+public import ContinuousFlexibility.Geometry.EuclideanRigidityCoordinates
+public import Mathlib.Analysis.Calculus.MeanValue
+public import Mathlib.Topology.Order.IntermediateValue
 
 /-!
 # Actual planar Euclidean rigidity and normalized uniqueness
@@ -10,6 +12,8 @@ actual derivative preserves the coordinate Euclidean pairing is proved affine
 on a connected open set. The proof does not assume a rigidity conclusion or
 choose a global angle.
 -/
+
+@[expose] public section
 
 noncomputable section
 

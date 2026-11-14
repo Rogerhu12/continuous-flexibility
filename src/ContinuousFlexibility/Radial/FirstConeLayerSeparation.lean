@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.SelectedSideTransport
+module
+
+public import ContinuousFlexibility.Radial.SelectedSideTransport
 
 /-!
 # The first cutoff layers and central column are separated on one geometry
@@ -8,6 +10,8 @@ Any closed cutoff layer contained between the retained inner point and
 the old cut lies strictly inside the matching interval. The full left
 and right caps are separated from the central column as well.
 -/
+
+@[expose] public section
 
 noncomputable section
 

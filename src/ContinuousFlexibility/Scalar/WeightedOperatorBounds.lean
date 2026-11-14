@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedStateTopology
-import ContinuousFlexibility.Scalar.WeightedTowerCalculus
+module
+
+public import ContinuousFlexibility.Scalar.WeightedStateTopology
+public import ContinuousFlexibility.Scalar.WeightedTowerCalculus
 
 /-!
 # Fixed-order bookkeeping for the final scalar operator estimates
@@ -8,6 +10,8 @@ These monotonicity facts permit one final enlargement of the common base
 and loss. The value bound is read directly from order zero of the actual
 uniform derivative tower.
 -/
+
+@[expose] public section
 
 noncomputable section
 

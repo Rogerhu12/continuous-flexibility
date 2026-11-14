@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CanonicalPrimitivePreservation
-import ContinuousFlexibility.Analysis.SolveReturnEquations
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalPrimitivePreservation
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # Preserving the complete primitive payload through operator normalization
@@ -10,6 +12,8 @@ state, every actual geometric atom is therefore the same complete function.
 This equality preserves the spatial jets and their genuine directional tower,
 with their original loss quantifiers and on the original neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

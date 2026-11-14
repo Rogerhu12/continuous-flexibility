@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N01cRetainedReferenceCompletion
-import ContinuousFlexibility.Radial.MatchedChannelEnvelope
-import ContinuousFlexibility.Radial.MatchedFiniteEnvelope
-import ContinuousFlexibility.Radial.MatchedFlooredRawEnvelope
-import ContinuousFlexibility.Radial.MatchingInverseTheorem
+module
+
+public import ContinuousFlexibility.Analysis.N01cRetainedReferenceCompletion
+public import ContinuousFlexibility.Radial.MatchedChannelEnvelope
+public import ContinuousFlexibility.Radial.MatchedFiniteEnvelope
+public import ContinuousFlexibility.Radial.MatchedFlooredRawEnvelope
+public import ContinuousFlexibility.Radial.MatchingInverseTheorem
 
 /-!
 # The four actual regional estimates on the retained reference
@@ -14,6 +16,8 @@ The actual index floor then costs only exp(S N), including the one scalar
 channel. The already proved physical Schur construction supplies the
 same inverse at the three frozen exponents.
 -/
+
+@[expose] public section
 
 noncomputable section
 

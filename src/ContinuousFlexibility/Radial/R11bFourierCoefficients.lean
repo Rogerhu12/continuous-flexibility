@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.EvenFourierBasis
-import ContinuousFlexibility.Radial.R11bModeL2
-import ContinuousFlexibility.Radial.R11bPhysicalCompleteness
-import Mathlib.Topology.Algebra.InfiniteSum.Real
+module
+
+public import ContinuousFlexibility.Radial.EvenFourierBasis
+public import ContinuousFlexibility.Radial.R11bModeL2
+public import ContinuousFlexibility.Radial.R11bPhysicalCompleteness
+public import Mathlib.Topology.Algebra.InfiniteSum.Real
 
 /-!
 # Square summability of actual even Fourier coefficients
@@ -10,6 +12,8 @@ Finite Bessel inequalities are integrated in the radial variable. All
 coefficients are the original normalized angular integrals of the field.
 The zero coefficient is the mean, and no pointwise Fourier convergence is used.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

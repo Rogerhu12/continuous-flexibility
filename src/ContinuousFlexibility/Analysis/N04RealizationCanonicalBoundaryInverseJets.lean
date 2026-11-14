@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04RealizationInverseBoundaryDirections
-import ContinuousFlexibility.Analysis.CanonicalClosedInverseJets
-import Mathlib.Analysis.Calculus.ContDiff.Operations
-import Mathlib.Analysis.Normed.Operator.BoundedLinearMaps
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationInverseBoundaryDirections
+public import ContinuousFlexibility.Analysis.CanonicalClosedInverseJets
+public import Mathlib.Analysis.Calculus.ContDiff.Operations
+public import Mathlib.Analysis.Normed.Operator.BoundedLinearMaps
 
 /-!
 # Finite parameter jets of the stored closed-strip inverse
@@ -12,6 +14,8 @@ the two true inverse identities, including at boundary points. Hence only
 raw forward boundary jets are parameter inputs; the inverse family and
 its derivatives remain the stored functions on the same parameter domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

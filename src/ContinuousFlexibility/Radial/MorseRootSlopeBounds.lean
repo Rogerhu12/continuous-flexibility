@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MorseCellCriticalPoints
+module
+
+public import ContinuousFlexibility.Radial.MorseCellCriticalPoints
 
 /-!
 # The quantitative simple-root scale of an actual Morse height
@@ -9,6 +11,8 @@ second derivative; the remaining denominator is the cube of the physical
 model speed. These identities also apply to a glued profile with the same
 local germ.
 -/
+
+@[expose] public section
 
 noncomputable section
 

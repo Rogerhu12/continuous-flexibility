@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01RootOddPowerMaterialJets
-import ContinuousFlexibility.Analysis.PointwiseProductMaterialJets
-import Mathlib.Data.Nat.Choose.Sum
+module
+
+public import ContinuousFlexibility.Analysis.N01RootOddPowerMaterialJets
+public import ContinuousFlexibility.Analysis.PointwiseProductMaterialJets
+public import Mathlib.Data.Nat.Choose.Sum
 
 /-!
 # Actual root-chart jets without a localization-radius cost
@@ -11,6 +13,8 @@ Leibniz inequality costs only a finite binomial sum. The angular lift is
 handled through its displacement at positive jet orders, so its
 unbounded zero-order angular coordinate is never estimated.
 -/
+
+@[expose] public section
 
 noncomputable section
 

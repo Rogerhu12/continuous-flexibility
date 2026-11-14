@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.MaterialComponentEnergy
-import ContinuousFlexibility.Analysis.N01cHeightSeminorms
+module
+
+public import ContinuousFlexibility.Analysis.MaterialComponentEnergy
+public import ContinuousFlexibility.Analysis.N01cHeightSeminorms
 
 /-!
 # Exact physical jet energy and the supplied projective grading
@@ -8,6 +10,8 @@ The finite jet sum is the square of the actual level norm. Individual
 jets are controlled by the grading at their total order, and the sum of
 the level energies up to an order controls that entire grading.
 -/
+
+@[expose] public section
 
 noncomputable section
 

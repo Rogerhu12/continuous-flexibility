@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05ReferenceAngularCoefficientEnergy
-import ContinuousFlexibility.Radial.R11bProductSeries
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceAngularCoefficientEnergy
+public import ContinuousFlexibility.Radial.R11bProductSeries
 
 /-!
 # Strong weighted reconstruction of the actual high angular jets
@@ -8,6 +10,8 @@ Square summability of the genuine singleton jet energies reconstructs an
 actual weighted L² field. The ordinary finite angular derivatives converge
 to it strongly, and its weighted energy is exactly the summed energy.
 -/
+
+@[expose] public section
 
 noncomputable section
 

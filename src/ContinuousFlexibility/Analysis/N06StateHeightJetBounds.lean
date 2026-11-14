@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.NeighborhoodStateBounds
-import ContinuousFlexibility.Analysis.SolveNormalization
-import ContinuousFlexibility.Analysis.SpacesCylinderEvenJets
+module
+
+public import ContinuousFlexibility.Analysis.NeighborhoodStateBounds
+public import ContinuousFlexibility.Analysis.SolveNormalization
+public import ContinuousFlexibility.Analysis.SpacesCylinderEvenJets
 
 /-!
 # Uniform mixed jets of the original state height
@@ -10,6 +12,8 @@ of S.chiLeft. Each fixed mixed derivative is bounded by the original state
 grading at order a+b+2. Linearity gives the identical bound for differences
 of two states. The cutoff in this argument remains the actual S.chiLeft.
 -/
+
+@[expose] public section
 
 noncomputable section
 

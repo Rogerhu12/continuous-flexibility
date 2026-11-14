@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RootHeightPointwiseMaterialJets
-import ContinuousFlexibility.Analysis.RootBoundaryValueIntervals
+module
+
+public import ContinuousFlexibility.Analysis.RootHeightPointwiseMaterialJets
+public import ContinuousFlexibility.Analysis.RootBoundaryValueIntervals
 
 /-!
 # Root chart and height bounds from actual inverse input fields
@@ -9,6 +11,8 @@ enter the derivative hypotheses. The odd root lower bound and the true
 angular normalization derivative supply every positive value interval
 needed by the power and reciprocal estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

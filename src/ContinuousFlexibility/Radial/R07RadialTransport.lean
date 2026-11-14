@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.R07LinearTransport
-import ContinuousFlexibility.Statements.RadialTargets
-import Mathlib.Analysis.Normed.Operator.Prod
+module
+
+public import ContinuousFlexibility.Radial.R07LinearTransport
+public import ContinuousFlexibility.Statements.RadialTargets
+public import Mathlib.Analysis.Normed.Operator.Prod
 
 /-!
 # Continuous finite transport of actual radial Cauchy data
@@ -12,6 +14,8 @@ continuous dependence of the endpoint Cauchy data of any smooth solution
 family.  This applies to solutions chosen by the radial initial-value
 existence theorem as well as to continuations of the natural tail.
 -/
+
+@[expose] public section
 
 noncomputable section
 

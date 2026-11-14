@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.TameInterpolationProducts
-import ContinuousFlexibility.Analysis.TameMultilinearNormalization
-import ContinuousFlexibility.Analysis.TameLocalCalculus
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Analysis.TameInterpolationProducts
+public import ContinuousFlexibility.Analysis.TameMultilinearNormalization
+public import ContinuousFlexibility.Analysis.TameLocalCalculus
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # Fixed-loss interpolation for coefficient jets times a height factor
@@ -11,6 +13,8 @@ balls. A coefficient one-high estimate and its complementary height
 order then have affine growth in one common high grading. Unit bounds
 are used only on directions, before multilinear normalization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

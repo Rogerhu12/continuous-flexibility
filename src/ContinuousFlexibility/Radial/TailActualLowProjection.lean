@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.TailLowSynthesisForm
-import ContinuousFlexibility.Radial.TailCoreAverages
+module
+
+public import ContinuousFlexibility.Radial.TailLowSynthesisForm
+public import ContinuousFlexibility.Radial.TailCoreAverages
 
 /-!
 # The actual low-mode projection
@@ -10,6 +12,8 @@ core the averages have finite support, so this projection preserves the
 core. Its complementary part has zero average on every active mass cell.
 The two quantitative energy estimates therefore apply to all form vectors.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
-import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
+module
+
+public import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
+public import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
 
 /-!
 # Point bounds after subtraction of a fixed spatial reference
@@ -10,6 +12,8 @@ mixed-power estimate; the zeroth jet uses the actual first derivative
 along the reference segment. Every transport of a chosen tower is
 performed before specialization to the physical state space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

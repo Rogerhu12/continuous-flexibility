@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryFormulaAlgebra
-import ContinuousFlexibility.Analysis.N01cFiniteParameterProducts
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryFormulaAlgebra
+public import ContinuousFlexibility.Analysis.N01cFiniteParameterProducts
 
 /-!
 # Finite products with the same root angular reserve
@@ -8,6 +10,8 @@ The number of radial factors is finite. Their genuine joint towers are
 multiplied before estimating them, and the common word budget survives
 each product without charging the reserved angular orders repeatedly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

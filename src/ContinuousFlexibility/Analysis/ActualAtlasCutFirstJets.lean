@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.ConstructedRootCutFirstJets
-import ContinuousFlexibility.Analysis.N04bActualAtlasCuts
-import ContinuousFlexibility.Analysis.N04bActualCharacteristics
-import ContinuousFlexibility.Analysis.WholeCanonicalAtlasData
+module
+
+public import ContinuousFlexibility.Analysis.ConstructedRootCutFirstJets
+public import ContinuousFlexibility.Analysis.N04bActualAtlasCuts
+public import ContinuousFlexibility.Analysis.N04bActualCharacteristics
+public import ContinuousFlexibility.Analysis.WholeCanonicalAtlasData
 
 /-!
 # The actual atlas has the forward first jets at every middle cut
@@ -12,6 +14,8 @@ negative component. This gives the new forward transmission condition
 directly, and the whole-component enumeration retains exactly these
 negative fields and cuts.
 -/
+
+@[expose] public section
 
 noncomputable section
 

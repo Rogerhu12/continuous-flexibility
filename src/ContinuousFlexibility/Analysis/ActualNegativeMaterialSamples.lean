@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CanonicalNegativeMaterialTransport
-import ContinuousFlexibility.Analysis.MaterialOneSidedEndpointComparison
-import ContinuousFlexibility.Analysis.MaterialSampleBounds
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalNegativeMaterialTransport
+public import ContinuousFlexibility.Analysis.MaterialOneSidedEndpointComparison
+public import ContinuousFlexibility.Analysis.MaterialSampleBounds
 
 /-!
 # The actual negative atlas samples
@@ -11,6 +13,8 @@ negative component. Its sample nevertheless stays a uniformly bounded
 endpoint-coordinate distance from every point of that closed component.
 All comparisons below retain this exact stored sample and material data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

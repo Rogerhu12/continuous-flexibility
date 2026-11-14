@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.Liouville
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
+module
+
+public import ContinuousFlexibility.Radial.Liouville
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
 
 /-!
 # Source and Hilbert pairings under a radius change
@@ -8,6 +10,8 @@ These are genuine finite-interval change-of-variables theorems for the
 two measures in the manuscript. Endpoint limits, full-line Hilbert-space
 isomorphisms, and closed-operator realizations remain separate tasks.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

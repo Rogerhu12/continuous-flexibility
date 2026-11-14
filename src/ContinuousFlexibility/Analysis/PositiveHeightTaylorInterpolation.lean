@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.PositiveFiberInterpolationSymmetry
-import ContinuousFlexibility.Analysis.PointwiseCylinderJets
-import ContinuousFlexibility.Analysis.BoundaryTaylorHeight
-import ContinuousFlexibility.Analysis.PositiveEndpointCutoff
+module
+
+public import ContinuousFlexibility.Analysis.PositiveFiberInterpolationSymmetry
+public import ContinuousFlexibility.Analysis.PointwiseCylinderJets
+public import ContinuousFlexibility.Analysis.BoundaryTaylorHeight
+public import ContinuousFlexibility.Analysis.PositiveEndpointCutoff
 
 /-!
 # Positive finite height matching on freely chosen endpoint collars
@@ -12,6 +14,8 @@ automatic. Pointwise infinite smoothness of the two raw boundary circles
 is sufficient for the angular Taylor data; no common infinite-order
 neighborhood is extracted from a pointwise hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

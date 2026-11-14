@@ -1,9 +1,13 @@
-import ContinuousFlexibility.Analysis.N04bActualClosedTravel
-import ContinuousFlexibility.Analysis.N04bRootCollarDomain
+module
+
+public import ContinuousFlexibility.Analysis.N04bActualClosedTravel
+public import ContinuousFlexibility.Analysis.N04bRootCollarDomain
 
 /-!
 # Actual interior regularity used by the negative-piece construction
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01CoefficientSmallness
-import ContinuousFlexibility.Analysis.N01FlowAngularSmoothness
-import ContinuousFlexibility.Analysis.N01RadialFlow
-import Mathlib.Topology.Order.OrderClosed
+module
+
+public import ContinuousFlexibility.Analysis.N01CoefficientSmallness
+public import ContinuousFlexibility.Analysis.N01FlowAngularSmoothness
+public import ContinuousFlexibility.Analysis.N01RadialFlow
+public import Mathlib.Topology.Order.OrderClosed
 
 /-!
 # Actual ordinary flows remain uniformly close to the reference flow
@@ -12,6 +14,8 @@ neighborhood. Continuity of the actual angular jets extends the interior
 tower estimates to both return radii. Material absorption then yields
 uniform quantitative bounds for the value and angular derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

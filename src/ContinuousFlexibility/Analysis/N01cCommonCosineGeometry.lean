@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cCosineLowGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N01cCosineLowGeometry
 
 /-!
 # One common neighbourhood for the actual compact flow geometry
@@ -7,6 +9,8 @@ Only the fixed physical angular order five is used to choose the base.
 The quotient positivity radius is chosen once from the primitive optical
 geometry. All higher flow estimates therefore share this same domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

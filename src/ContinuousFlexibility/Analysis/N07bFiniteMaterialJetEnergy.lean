@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07bMaterialJetEnergy
-import ContinuousFlexibility.Radial.R11bPartitionSquare
-import Mathlib.MeasureTheory.Integral.Bochner.Set
+module
+
+public import ContinuousFlexibility.Analysis.N07bMaterialJetEnergy
+public import ContinuousFlexibility.Radial.R11bPartitionSquare
+public import Mathlib.MeasureTheory.Integral.Bochner.Set
 
 /-!
 # Energy of an arbitrary finite material-jet expansion
@@ -11,6 +13,8 @@ Its physical majorant is a finite sum of genuine material-jet energy
 densities, integrable on every subdomain of the physical core cylinder.
 No membership of the expanded expression is an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

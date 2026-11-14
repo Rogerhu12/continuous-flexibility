@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularJetBands
-import Mathlib.Analysis.InnerProductSpace.Projection.Submodule
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularJetBands
+public import Mathlib.Analysis.InnerProductSpace.Projection.Submodule
 
 /-!
 # The actual source level as a full Hilbert sum of angular bands
@@ -9,6 +11,8 @@ Their completeness and totality follow from the genuine weak-graph
 projection constructed earlier. The resulting equivalence is onto; no
 unproved spectral realization property is included in its hypotheses.
 -/
+
+@[expose] public section
 
 noncomputable section
 

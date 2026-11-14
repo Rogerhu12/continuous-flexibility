@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01aOpticalCutoff
+module
+
+public import ContinuousFlexibility.Analysis.N01aOpticalCutoff
 
 /-!
 # Interior support of the quantitative optical control
@@ -7,6 +9,8 @@ The cutoff is applied to the actual optical radicand. Since that radicand
 vanishes at both turning points, extension by zero is smooth on the whole
 line and has compact support strictly inside the component.
 -/
+
+@[expose] public section
 
 noncomputable section
 

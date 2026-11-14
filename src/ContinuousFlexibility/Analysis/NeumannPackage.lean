@@ -1,7 +1,9 @@
-import Mathlib.Analysis.Normed.Ring.Units
-import Mathlib.Analysis.Normed.Operator.NormedSpace
-import Mathlib.Analysis.Normed.Operator.CompleteCodomain
-import Mathlib.Analysis.SpecificLimits.Normed
+module
+
+public import Mathlib.Analysis.Normed.Ring.Units
+public import Mathlib.Analysis.Normed.Operator.NormedSpace
+public import Mathlib.Analysis.Normed.Operator.CompleteCodomain
+public import Mathlib.Analysis.SpecificLimits.Normed
 
 /-!
 # Neumann inverse package
@@ -12,6 +14,8 @@ uniqueness, Lipschitz dependence on `R`, the perturbation statement for an inver
 operator (paper §8, `eq:rewrite-base-relative`, `eq:current-fixed-domain-factorization`), and the
 parametric control inverse of paper §9.
 -/
+
+@[expose] public section
 
 
 noncomputable section

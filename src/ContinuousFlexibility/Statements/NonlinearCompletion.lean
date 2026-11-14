@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # Actual existence and doubled-weight completion targets
@@ -8,6 +10,8 @@ N11 constructs one common reference, material and function-space realization
 instead of assuming that those realizations have instances. N12 is unconditional.
 All strengthened branch assertions concern the very same weak branch.
 -/
+
+@[expose] public section
 
 noncomputable section
 

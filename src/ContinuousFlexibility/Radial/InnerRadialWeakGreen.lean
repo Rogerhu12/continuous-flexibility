@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerRadialDirichletPoisson
-import Mathlib.Analysis.InnerProductSpace.Adjoint
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialDirichletPoisson
+public import Mathlib.Analysis.InnerProductSpace.Adjoint
 
 /-!
 # Actual weak Green identity and forced Poisson flux
@@ -13,6 +15,8 @@ Consequently the actual Dirichlet forced flux is minus the pairing with
 the very same actual Poisson realization, for arbitrary L² sources.
 No global Green or adjoint-flux identity is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

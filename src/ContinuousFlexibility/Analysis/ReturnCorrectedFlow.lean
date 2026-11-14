@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionAlgebra
-import ContinuousFlexibility.Analysis.ReturnChartDifferentiation
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionAlgebra
+public import ContinuousFlexibility.Analysis.ReturnChartDifferentiation
 
 /-!
 # The actual cutoff-corrected characteristic flow
@@ -16,6 +18,8 @@ it is not silently inferred from pointwise derivatives of a totalized
 derivative operator. The scalar smoothness and continuity composition
 lemmas below use the same actual flow formula.
 -/
+
+@[expose] public section
 
 noncomputable section
 

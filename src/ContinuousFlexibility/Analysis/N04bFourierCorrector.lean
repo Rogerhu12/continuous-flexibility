@@ -1,9 +1,11 @@
-import Mathlib.Analysis.SpecialFunctions.Trigonometric.Bounds
-import Mathlib.NumberTheory.Real.Irrational
-import Mathlib.Tactic.LinearCombination
-import Mathlib.Tactic.FieldSimp
-import Mathlib.Tactic.Positivity
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Analysis.SpecialFunctions.Trigonometric.Bounds
+public import Mathlib.NumberTheory.Real.Irrational
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.Positivity
+public import Mathlib.Tactic.Ring
 
 /-!
 # An explicit finite-Fourier corrector for a nonresonant translation
@@ -14,6 +16,8 @@ sin(T) ≠ 0, and irrationality of T/π is more than sufficient.
 Both the physical period π and its normalized period-one version are
 given explicitly, with a uniform Lipschitz bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

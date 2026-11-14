@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05ReferenceNegativeRadial
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05ReferenceNegativeRadial
 
 /-!
 # The actual negative reference height is radial
@@ -9,6 +11,8 @@ identified chart radius is radial.  The exact determinant identity thus
 fixes the positive fourth power of the height.  Closed smoothness extends
 the resulting radial height identity to both physical endpoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

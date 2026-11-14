@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PhysicalJetBonding
-import ContinuousFlexibility.Scalar.WeightedTowerCalculus
+module
+
+public import ContinuousFlexibility.Analysis.PhysicalJetBonding
+public import ContinuousFlexibility.Scalar.WeightedTowerCalculus
 
 /-!
 # Exact physical norms and lifts through the Sobolev decoder
@@ -13,6 +15,8 @@ Continuity of a lifted linear field map is then proved from physical-norm
 estimates in the actual projective topology.  No inverse continuity for the
 pointwise topology on all scalar fields is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

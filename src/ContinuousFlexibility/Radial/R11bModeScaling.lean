@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R11bModeUniqueness
+module
+
+public import ContinuousFlexibility.Radial.R11bModeUniqueness
 
 /-!
 # Proportionality of actual reference-graph modes
@@ -8,6 +10,8 @@ when the two physical graphs use different positive weight exponents. In
 the bordered mode, the scalar row datum must have the same proportionality.
 The proof subtracts the actual weak equations and applies modal uniqueness.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

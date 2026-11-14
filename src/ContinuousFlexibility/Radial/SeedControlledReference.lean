@@ -1,13 +1,15 @@
-import ContinuousFlexibility.Radial.SeedCentralControl
-import ContinuousFlexibility.Radial.ConnectedReferenceBorder
-import ContinuousFlexibility.Radial.SeedConeTailConstruction
-import ContinuousFlexibility.Radial.SeedPureTailConstruction
-import ContinuousFlexibility.Radial.SeedPureTailCanonical
-import ContinuousFlexibility.Radial.SeedGluedPairConstruction
-import ContinuousFlexibility.Radial.TwoTailReferenceAssembly
-import ContinuousFlexibility.Radial.SeedReturnMargins
-import ContinuousFlexibility.Radial.OpenComponentTransport
-import ContinuousFlexibility.Radial.MorseRealizationBasic
+module
+
+public import ContinuousFlexibility.Radial.SeedCentralControl
+public import ContinuousFlexibility.Radial.ConnectedReferenceBorder
+public import ContinuousFlexibility.Radial.SeedConeTailConstruction
+public import ContinuousFlexibility.Radial.SeedPureTailConstruction
+public import ContinuousFlexibility.Radial.SeedPureTailCanonical
+public import ContinuousFlexibility.Radial.SeedGluedPairConstruction
+public import ContinuousFlexibility.Radial.TwoTailReferenceAssembly
+public import ContinuousFlexibility.Radial.SeedReturnMargins
+public import ContinuousFlexibility.Radial.OpenComponentTransport
+public import ContinuousFlexibility.Radial.MorseRealizationBasic
 
 /-!
 # Building the connected reference with prescribed central data
@@ -17,6 +19,8 @@ tail S, central cutoff K and cone-head length q are inputs.  No second selected
 tail is chosen, and the central profile and kernel have scale and amplitude
 one on the entire prescribed retained patch.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowLocalNorms
-import ContinuousFlexibility.Analysis.OneHighCircleFlowTranslationBounds
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowLocalNorms
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowTranslationBounds
 
 /-!
 # Circle-flow bounds from smoothness on a time neighborhood
@@ -9,6 +11,8 @@ closed time interval. A constructed localization transfers the existing
 flow proofs without changing any trajectory, angular derivative, or speed
 norm used in the result. The constants contain no localization margin.
 -/
+
+@[expose] public section
 
 noncomputable section
 

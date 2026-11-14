@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsSampleTransport
-import ContinuousFlexibility.Analysis.N04PulledFieldsSampleCost
-import ContinuousFlexibility.Analysis.N04RealizationMaterialTransfer
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsSampleTransport
+public import ContinuousFlexibility.Analysis.N04PulledFieldsSampleCost
+public import ContinuousFlexibility.Analysis.N04RealizationMaterialTransfer
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
 
 /-!
 # Physical coefficient costs at the retained sample
@@ -11,6 +13,8 @@ above. At parameter order zero the uniform reference coefficient is
 added separately. This avoids transferring an unweighted physical
 envelope by a one-sided endpoint comparison.
 -/
+
+@[expose] public section
 
 noncomputable section
 

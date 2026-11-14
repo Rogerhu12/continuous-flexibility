@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cTopologicalParameterIntegral
-import ContinuousFlexibility.Analysis.N01cFlowParameterSmooth
-import ContinuousFlexibility.Analysis.TameJetComposition
+module
+
+public import ContinuousFlexibility.Analysis.N01cTopologicalParameterIntegral
+public import ContinuousFlexibility.Analysis.N01cFlowParameterSmooth
+public import ContinuousFlexibility.Analysis.TameJetComposition
 
 /-!
 # Volterra solution maps on topological parameter spaces
@@ -11,6 +13,8 @@ Volterra map has joint continuity in parameters, time and all directions,
 solves the actual linear time equation, and is its unique zero-initial
 solution. No parameter derivative of a trajectory is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

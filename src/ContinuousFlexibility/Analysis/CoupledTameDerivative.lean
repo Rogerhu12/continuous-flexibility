@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CoupledTameDerivativeExpressions
-import ContinuousFlexibility.Analysis.TameInverseBounds
-import ContinuousFlexibility.Analysis.TamePairTopology
+module
+
+public import ContinuousFlexibility.Analysis.CoupledTameDerivativeExpressions
+public import ContinuousFlexibility.Analysis.TameInverseBounds
+public import ContinuousFlexibility.Analysis.TamePairTopology
 
 /-!
 # The joint derivative of a smooth tame map
@@ -9,6 +11,8 @@ Ordered expressions construct all genuine directional derivatives of
 `(x,v) ↦ Df(x)[v]`.  Their joint local tame bounds are then normalized to
 the same homogeneous one-high-factor bounds as in `SmoothTameOn`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

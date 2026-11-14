@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cStateParameterJets
-import ContinuousFlexibility.Analysis.N01cFullNeighborhood
-import Mathlib.Algebra.Order.BigOperators.Ring.Finset
+module
+
+public import ContinuousFlexibility.Analysis.N01cStateParameterJets
+public import ContinuousFlexibility.Analysis.N01cFullNeighborhood
+public import Mathlib.Algebra.Order.BigOperators.Ring.Finset
 
 /-!
 # Raw products for the actual controlled profile
@@ -15,6 +17,8 @@ bound.  N01b controls its base-point profile factor on the same full state
 neighbourhood.  No relation between a control's assigned cell and its
 spatial support is assumed in this module.
 -/
+
+@[expose] public section
 
 noncomputable section
 

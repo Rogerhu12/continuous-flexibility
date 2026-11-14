@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CoupledControlAlgebra
-import ContinuousFlexibility.Analysis.SolveStateSpaces
+module
+
+public import ContinuousFlexibility.Analysis.CoupledControlAlgebra
+public import ContinuousFlexibility.Analysis.SolveStateSpaces
 
 /-!
 # Base control norms and continuous restriction
@@ -8,6 +10,8 @@ The diagonal lower bound controls the stored inverse on the actual control
 Banach space.  The continuous weighted restriction has a bound by one
 finite circle grading, obtained from the original seminorm topology.
 -/
+
+@[expose] public section
 
 noncomputable section
 

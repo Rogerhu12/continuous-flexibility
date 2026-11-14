@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ReferenceWeightedRadialBase
-import Mathlib.Algebra.Order.BigOperators.Ring.Finset
+module
+
+public import ContinuousFlexibility.Radial.ReferenceWeightedRadialBase
+public import Mathlib.Algebra.Order.BigOperators.Ring.Finset
 
 /-!
 # Cellwise comparison with the actual radial weighted measure
@@ -9,6 +11,8 @@ cellwise density bound into a measure comparison. The overlap constant
 is chosen before the exponents and before the density, so the comparison
 preserves uniformity of analytic estimates over an exponent interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

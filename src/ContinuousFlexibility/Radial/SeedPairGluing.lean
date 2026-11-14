@@ -1,9 +1,13 @@
-import ContinuousFlexibility.Radial.ReferenceCoordinate
-import ContinuousFlexibility.Radial.MorseChainLocalGluing
+module
+
+public import ContinuousFlexibility.Radial.ReferenceCoordinate
+public import ContinuousFlexibility.Radial.MorseChainLocalGluing
 
 /-!
 # Local gluing and exact rescaling of radial seed pairs
 -/
+
+@[expose] public section
 
 noncomputable section
 

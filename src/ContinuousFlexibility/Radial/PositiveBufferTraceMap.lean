@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.PositiveBufferEnergySpace
-import ContinuousFlexibility.Radial.BufferTraceBound
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferEnergySpace
+public import ContinuousFlexibility.Radial.BufferTraceBound
 
 /-!
 # Actual continuous trace maps on the weighted energy domain
@@ -9,6 +11,8 @@ the actual weak energy field. The representative respects linear
 operations, and its values are bounded linear functionals on the energy
 space. This is the trace used in Green-column subtraction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

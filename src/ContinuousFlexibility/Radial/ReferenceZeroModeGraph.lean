@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ReferenceLocalL2
-import ContinuousFlexibility.Radial.ZeroModeWeakRegularity
-import Mathlib.Analysis.Calculus.Deriv.Support
+module
+
+public import ContinuousFlexibility.Radial.ReferenceLocalL2
+public import ContinuousFlexibility.Radial.ZeroModeWeakRegularity
+public import Mathlib.Analysis.Calculus.Deriv.Support
 
 /-!
 # The actual zero channel of the two-dimensional weak graph
@@ -10,6 +12,8 @@ Their angularly constant channel has no border term. The resulting weak
 equation is then restricted to interior intervals and joined to the
 locally integrable zero-mode regularity theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

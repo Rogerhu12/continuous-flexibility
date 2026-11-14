@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MorseDiscreteSpectrum
-import ContinuousFlexibility.Radial.MorseParameterBridges
-import ContinuousFlexibility.Radial.MorseQuantitativeResolvent
+module
+
+public import ContinuousFlexibility.Radial.MorseDiscreteSpectrum
+public import ContinuousFlexibility.Radial.MorseParameterBridges
+public import ContinuousFlexibility.Radial.MorseQuantitativeResolvent
 
 /-!
 # The full Morse model target
@@ -8,6 +10,8 @@ import ContinuousFlexibility.Radial.MorseQuantitativeResolvent
 The actual spectrum, the quantitative inverse at zero, and the return
 angle use the same nonsquare integer parameter.
 -/
+
+@[expose] public section
 
 noncomputable section
 

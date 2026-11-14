@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.PositiveBufferComparisonAffine
-import Mathlib.MeasureTheory.Function.L2Space
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferComparisonAffine
+public import Mathlib.MeasureTheory.Function.L2Space
 
 /-!
 # Actual L² scaling in a buffer coordinate
@@ -7,6 +9,8 @@ import Mathlib.MeasureTheory.Function.L2Space
 The Jacobian is retained in the norm of the genuine `Lp` element.  These
 lemmas apply to the Green profile and to its cutoff commutator.
 -/
+
+@[expose] public section
 
 noncomputable section
 

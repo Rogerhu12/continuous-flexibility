@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04SourceColumnsPrefix
-import ContinuousFlexibility.Analysis.N04SourceColumnsProduct
+module
+
+public import ContinuousFlexibility.Analysis.N04SourceColumnsPrefix
+public import ContinuousFlexibility.Analysis.N04SourceColumnsProduct
 
 /-!
 # Products of full current families
@@ -10,6 +12,8 @@ at every positive parameter order, since every such term differentiates
 at least one factor. The uniform bound on the height absorbs additional
 height factors without changing the one-high grading.
 -/
+
+@[expose] public section
 
 noncomputable section
 

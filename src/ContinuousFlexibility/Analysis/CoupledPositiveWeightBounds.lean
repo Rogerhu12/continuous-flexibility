@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedReferenceBounds
-import ContinuousFlexibility.Scalar.WeightedMaterialRadiusJets
+module
+
+public import ContinuousFlexibility.Scalar.WeightedReferenceBounds
+public import ContinuousFlexibility.Scalar.WeightedMaterialRadiusJets
 
 /-!
 # Moving a sample estimate to the actual radial point
@@ -8,6 +10,8 @@ The endpoint comparison is made inside the actual reference cell. Compact
 local finiteness supplies one constant on the remaining middle interval.
 Control interval placement is not involved.
 -/
+
+@[expose] public section
 
 noncomputable section
 

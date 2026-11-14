@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerCentralCompressionConstruction
+module
+
+public import ContinuousFlexibility.Radial.InnerCentralCompressionConstruction
 
 /-!
 # Closed central Poisson and conormal error envelopes
@@ -11,6 +13,8 @@ two-cut error have a common fixed-degree exponential envelope. The
 final choice theorem constructs these objects and proves their
 smallness, rather than assuming either normalized estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

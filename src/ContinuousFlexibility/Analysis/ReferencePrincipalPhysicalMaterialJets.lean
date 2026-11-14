@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ReferenceInverseProfileMaterialJets
-import ContinuousFlexibility.Radial.ReferenceModerateCoefficients
-import Mathlib.Topology.Order.Compact
+module
+
+public import ContinuousFlexibility.Analysis.ReferenceInverseProfileMaterialJets
+public import ContinuousFlexibility.Radial.ReferenceModerateCoefficients
+public import Mathlib.Topology.Order.Compact
 
 /-!
 # Physical factors of the same positive reference principal fields
@@ -10,6 +12,8 @@ closed annulus. Only the reciprocal profile uses the actual cell bounds.
 The three factors are combined at the unchanged positive midpoint sample,
 with any already selected scaled material envelope C0 * E0.
 -/
+
+@[expose] public section
 
 noncomputable section
 

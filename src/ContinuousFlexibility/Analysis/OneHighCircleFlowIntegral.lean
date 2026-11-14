@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.RectangleParameterIntegral
-import Mathlib.Analysis.Calculus.ParametricIntervalIntegral
+module
+
+public import ContinuousFlexibility.Scalar.RectangleParameterIntegral
+public import Mathlib.Analysis.Calculus.ParametricIntervalIntegral
 
 /-!
 # Smooth dependence of compact interval integrals on their parameters
@@ -11,6 +13,8 @@ The parameter spaces used for circle flows are `ℝ` and `ℝ × ℝ`; the
 statements work in any finite-dimensional real normed parameter space.
 The smooth fixed-interval statement reuses the compact-parameter API.
 -/
+
+@[expose] public section
 
 noncomputable section
 

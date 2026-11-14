@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartProjectionMixedBounds
-import ContinuousFlexibility.Analysis.N01cFiniteAffineJets
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartProjectionMixedBounds
+public import ContinuousFlexibility.Analysis.N01cFiniteAffineJets
 
 /-!
 # Root projection bounds from a finite parameter representative
@@ -8,6 +10,8 @@ The globally smooth inverse coordinate is needed only on a finite plot.
 The output is a jet of the actual function on its original parameter
 sector, obtained by the exact affine pullback of its joint tower.
 -/
+
+@[expose] public section
 
 noncomputable section
 

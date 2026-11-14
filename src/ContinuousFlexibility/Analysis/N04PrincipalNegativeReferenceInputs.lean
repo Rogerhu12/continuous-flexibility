@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PrincipalNegativePotential
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
-import ContinuousFlexibility.Analysis.SpacesCylinderEvenJets
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalNegativePotential
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+public import ContinuousFlexibility.Analysis.SpacesCylinderEvenJets
 
 /-!
 # Fixed inputs of the negative unit potential
@@ -10,6 +12,8 @@ canonical radial coordinate on a negative piece is the negative of its
 reference angular principal coefficient. Both therefore carry the
 actual stored sample envelope, with no comparison between pieces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bRootFlowIdentification
-import Mathlib.Analysis.SpecialFunctions.Pow.Continuity
+module
+
+public import ContinuousFlexibility.Analysis.N04bRootFlowIdentification
+public import Mathlib.Analysis.SpecialFunctions.Pow.Continuity
 
 /-!
 # Closed joint regularity of the actual root flow and its inverse
@@ -10,6 +12,8 @@ stored flow and its chosen inverse are continuous jointly on the closed
 physical collar. The inverse is jointly smooth at positive radial
 points. All statements follow from the actual root equation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

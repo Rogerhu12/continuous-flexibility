@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CoupledFirstJetColumns
+module
+
+public import ContinuousFlexibility.Analysis.CoupledFirstJetColumns
 
 /-!
 # The recovered increment in the genuine first jet
@@ -8,6 +10,8 @@ identify one and the same first directional derivative. The error entries
 are independent source and even-circle values with the exact physical
 formulas; no differentiability of a proposed formal linearization is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

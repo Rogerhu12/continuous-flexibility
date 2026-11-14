@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CanonicalWholeNegativeTransport
-import ContinuousFlexibility.Analysis.CanonicalNegativeTravelSymmetries
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalWholeNegativeTransport
+public import ContinuousFlexibility.Analysis.CanonicalNegativeTravelSymmetries
 
 /-!
 # The true closed negative transport has the physical symmetries
@@ -9,6 +11,8 @@ formulas in the open component and are ordinarily smooth at both roots.
 Continuity extends their actual periodicity and reflection to those roots.
 No value of the totalized travel inverse at a root is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

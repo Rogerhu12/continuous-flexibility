@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01aReferenceNormalWeighted
+module
+
+public import ContinuousFlexibility.Analysis.N01aReferenceNormalWeighted
 
 /-!
 # The reference eigenfunction and its actual first derivative at the spare exponent
@@ -7,6 +9,8 @@ Both weighted realizations follow from the one inverse at the pure row and
 its frozen first-normal estimate.  They use the original physical cells,
 the same coefficient weight, and zero free-left constants.
 -/
+
+@[expose] public section
 
 noncomputable section
 

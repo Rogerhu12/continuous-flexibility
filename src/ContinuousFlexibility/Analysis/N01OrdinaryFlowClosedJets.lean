@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01OrdinaryFlowAngularRegularity
-import ContinuousFlexibility.Analysis.CanonicalVariationBounds
-import ContinuousFlexibility.Analysis.SolveReturnEquations
-import Mathlib.Topology.Order.DenselyOrdered
+module
+
+public import ContinuousFlexibility.Analysis.N01OrdinaryFlowAngularRegularity
+public import ContinuousFlexibility.Analysis.CanonicalVariationBounds
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
+public import Mathlib.Topology.Order.DenselyOrdered
 
 /-!
 # The actual N01 angular bounds at closed return endpoints
@@ -11,6 +13,8 @@ jets continuous. The existing interior first-variation estimate therefore
 passes to both endpoints with exactly the same material constant, grading,
 base, and first-parameter loss, chosen before every angular order. No endpoint estimate is supplied as an additional input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01ReferenceFlowJetBounds
-import ContinuousFlexibility.Analysis.N01FlowJointSmoothness
-import ContinuousFlexibility.Analysis.ActualRadialCellComparison
+module
+
+public import ContinuousFlexibility.Analysis.N01ReferenceFlowJetBounds
+public import ContinuousFlexibility.Analysis.N01FlowJointSmoothness
+public import ContinuousFlexibility.Analysis.ActualRadialCellComparison
 
 /-!
 # Mixed and Fréchet jets of the actual flow on optical collars
@@ -11,6 +13,8 @@ weights, and material height absorption removes its sample factors.
 Adding the actual reference-flow jets gives fixed component-power
 bounds for every positive-order jet of the actual flow.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderDerivativeMultiplier
-import Mathlib.MeasureTheory.Function.LpSeminorm.Indicator
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderDerivativeMultiplier
+public import Mathlib.MeasureTheory.Function.LpSeminorm.Indicator
 
 /-!
 # Bounded physical-frequency cutoffs on the cylinder
@@ -8,6 +10,8 @@ Only the requested finite Sobolev membership is used for contraction.
 Independently, bounded frequency support supplies every derivative moment
 needed to construct genuine smooth inverse approximants.
 -/
+
+@[expose] public section
 
 noncomputable section
 

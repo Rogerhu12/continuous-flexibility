@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryStoredInverseJets
-import ContinuousFlexibility.Analysis.N04PositiveGeometryReferenceForwardJets
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryComposition
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryTraceOperations
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryStoredInverseJets
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryReferenceForwardJets
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryComposition
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryTraceOperations
 
 /-!
 # Full finite jets of the retained positive endpoint source
@@ -11,6 +13,8 @@ reference chart. Its genuine positive spatial jets use the already
 constructed full inverse jets and fixed reference jets. The actual
 unwrapped value is never an input to this construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

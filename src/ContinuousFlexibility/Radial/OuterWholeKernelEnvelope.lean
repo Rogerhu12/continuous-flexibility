@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OuterWholeKernelBounds
+module
+
+public import ContinuousFlexibility.Radial.OuterWholeKernelBounds
 
 /-!
 # Full cubic localization for the whole normalized Green pair
@@ -7,6 +9,8 @@ The actual block identity combines with coefficient bounds and the two
 natural decays from the same entrance. The action factor remains squared,
 and the exponent between the two position labels remains unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

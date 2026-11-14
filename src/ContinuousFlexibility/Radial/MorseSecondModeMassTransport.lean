@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MorseSecondModeCoordinates
+module
+
+public import ContinuousFlexibility.Radial.MorseSecondModeCoordinates
 
 /-!
 # Physical mass and resistance of the actual second-mode tail
@@ -7,6 +9,8 @@ The exact substitution formulas are applied to the Morse mass intervals
 and to the resistance interval following each mass interval in outward order.
 On the left this is the original J_(n+1), including its positive connector.
 -/
+
+@[expose] public section
 
 noncomputable section
 

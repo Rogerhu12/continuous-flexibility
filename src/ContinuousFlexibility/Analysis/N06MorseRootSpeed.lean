@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06MorseRootCollar
-import ContinuousFlexibility.Analysis.N06RootSpeedJets
+module
+
+public import ContinuousFlexibility.Analysis.N06MorseRootCollar
+public import ContinuousFlexibility.Analysis.N06RootSpeedJets
 
 /-!
 # Uniform finite jets of the actual Morse reference root speed
@@ -9,6 +11,8 @@ realized physical profile. This file discharges all primitive inputs of
 the speed estimate, including reciprocal radius, height, and divided
 derivative bounds. The resulting constants are selected before any root.
 -/
+
+@[expose] public section
 
 noncomputable section
 

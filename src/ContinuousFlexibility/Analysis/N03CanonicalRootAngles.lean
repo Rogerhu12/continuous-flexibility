@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CanonicalCharacteristicEndpointTransport
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalCharacteristicEndpointTransport
 
 /-!
 # The two N03 trajectories have the canonical endpoint translations
@@ -7,6 +9,8 @@ The plus trajectory is the actual reflected minus trajectory, using the
 stored N03 coefficient parities. Applying full-component transport gives
 both boundary-angle translation identities on the existing construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CoupledCircleCompositionCurveBounds
-import ContinuousFlexibility.Analysis.CoupledCircleLpDerivative
-import ContinuousFlexibility.Analysis.SpacesNemytskiiCurveDerivative
+module
+
+public import ContinuousFlexibility.Analysis.CoupledCircleCompositionCurveBounds
+public import ContinuousFlexibility.Analysis.CoupledCircleLpDerivative
+public import ContinuousFlexibility.Analysis.SpacesNemytskiiCurveDerivative
 
 /-!
 # Derivatives in the actual circle projective space
@@ -9,6 +11,8 @@ Dominated differentiation applies to each angular L² coordinate. The
 inverse material weight is summable, so the canonical series of Hilbert
 rows can then be differentiated in the original outer lp space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

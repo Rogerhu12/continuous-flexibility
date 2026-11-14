@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01ReturnVelocitySmoothTame
-import ContinuousFlexibility.Analysis.NormedSmoothDirections
+module
+
+public import ContinuousFlexibility.Analysis.N01ReturnVelocitySmoothTame
+public import ContinuousFlexibility.Analysis.NormedSmoothDirections
 
 /-!
 # Genuine circle calculus with arbitrary topological parameters
@@ -9,6 +11,8 @@ a tame estimate for the parameter map being composed. This is useful
 when a physical radius is one of the parameters and uniform estimates
 are proved separately from the original mixed N01 bounds.
 -/
+
+@[expose] public section
 
 noncomputable section
 

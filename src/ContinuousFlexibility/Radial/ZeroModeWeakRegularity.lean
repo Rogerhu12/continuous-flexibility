@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ModeWeakRegularity
-import ContinuousFlexibility.Radial.ZeroModePrimitive
+module
+
+public import ContinuousFlexibility.Radial.ModeWeakRegularity
+public import ContinuousFlexibility.Radial.ZeroModePrimitive
 
 /-!
 # Weak homogeneous zero modes on the whole open core
@@ -10,6 +12,8 @@ Their fluxes are locally constant, hence the field is almost everywhere
 an affine function of the genuine resistance primitive. No differentiability
 of the original representative is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

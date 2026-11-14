@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01FlowConstantDirections
-import ContinuousFlexibility.Analysis.N01SingletonControl
+module
+
+public import ContinuousFlexibility.Analysis.N01FlowConstantDirections
+public import ContinuousFlexibility.Analysis.N01SingletonControl
 
 /-!
 # The exact physical directions seen by one characteristic component
@@ -9,6 +11,8 @@ component control vanishes. The actual profile sees only its own kappa
 value. Together with height locality modulo constants this removes the
 border, chart and trace directions from the actual flow tower.
 -/
+
+@[expose] public section
 
 noncomputable section
 

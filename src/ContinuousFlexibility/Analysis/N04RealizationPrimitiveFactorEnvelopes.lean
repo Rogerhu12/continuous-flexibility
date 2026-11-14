@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04RealizationPrimitiveMaterialJets
-import ContinuousFlexibility.Analysis.N04RealizationPrimitiveFactors
-import ContinuousFlexibility.Analysis.N04RealizationChartAtomEnvelopes
-import ContinuousFlexibility.Analysis.N04RealizationMaterialSampleEnvelopes
-import ContinuousFlexibility.Analysis.N06FiniteSourceGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationPrimitiveMaterialJets
+public import ContinuousFlexibility.Analysis.N04RealizationPrimitiveFactors
+public import ContinuousFlexibility.Analysis.N04RealizationChartAtomEnvelopes
+public import ContinuousFlexibility.Analysis.N04RealizationMaterialSampleEnvelopes
+public import ContinuousFlexibility.Analysis.N06FiniteSourceGeometry
 
 /-!
 # Actual chart and source factors for primitive material jets
@@ -12,6 +14,8 @@ canonical image. Current and reference fields use the same canonical
 point. Only positive coordinate jets are used, and sampled and pointwise
 coefficient costs are kept together until the final material conversion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

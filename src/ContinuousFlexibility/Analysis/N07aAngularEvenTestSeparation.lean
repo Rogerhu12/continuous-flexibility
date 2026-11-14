@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularEven
-import ContinuousFlexibility.Analysis.N07aCanonicalWeakJets
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularEven
+public import ContinuousFlexibility.Analysis.N07aCanonicalWeakJets
 
 /-!
 # Even compact tests separate the actual even canonical L² classes
@@ -8,6 +10,8 @@ Reflection preserves the prescribed half-period measure. Averaging a
 canonical test with its reflection therefore preserves its pairing with
 an even L² class. The already proved full test separation then applies.
 -/
+
+@[expose] public section
 
 noncomputable section
 

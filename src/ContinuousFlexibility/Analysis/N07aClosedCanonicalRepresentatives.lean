@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aClosedJets
-import ContinuousFlexibility.Analysis.N07aCanonicalSmoothJets
+module
+
+public import ContinuousFlexibility.Analysis.N07aClosedJets
+public import ContinuousFlexibility.Analysis.N07aCanonicalSmoothJets
 
 /-!
 # Closed jets of the same canonical smooth decoder
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Analysis.N07aCanonicalSmoothJets
 The choices below extend the actual mixed L² jets of the original unknown.
 No boundary values of the arbitrary total decoder enter the construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

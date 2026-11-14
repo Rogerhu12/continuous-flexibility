@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsAngularSmall
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsKernelSlope
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsRadial
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsAngularSmall
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsKernelSlope
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsRadial
 
 /-!
 # The finite coefficient kernel of the actual angular interpolation
@@ -11,6 +13,8 @@ uniform material powers; only the displayed reciprocal angular width
 is charged. The unwrapped angle is added afterwards and is never put
 inside a coefficient envelope.
 -/
+
+@[expose] public section
 
 noncomputable section
 

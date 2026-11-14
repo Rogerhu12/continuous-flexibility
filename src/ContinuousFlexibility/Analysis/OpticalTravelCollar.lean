@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OpticalTravelVariation
-import Mathlib.Analysis.Calculus.MeanValue
+module
+
+public import ContinuousFlexibility.Analysis.OpticalTravelVariation
+public import Mathlib.Analysis.Calculus.MeanValue
 
 /-!
 # A quantitative interior optical collar from travel and a derivative bound
@@ -10,6 +12,8 @@ interior collar on which the speed remains bounded below. The width is
 expressed in the travel lower bound, component length, and derivative
 bound, so polynomial coefficient bounds can be substituted directly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

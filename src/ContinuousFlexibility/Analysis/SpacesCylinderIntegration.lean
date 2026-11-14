@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CylinderTestPairing
-import Mathlib.MeasureTheory.Integral.IntegralEqImproper
+module
+
+public import ContinuousFlexibility.Analysis.CylinderTestPairing
+public import Mathlib.MeasureTheory.Integral.IntegralEqImproper
 
 /-!
 # Integration by parts for actual cylinder tests
@@ -9,6 +11,8 @@ periodicity removes the boundary term between `0` and `π`. Iterating
 these two ordinary one-variable identities proves the exact weak mixed
 derivative relation used by the physical graph.
 -/
+
+@[expose] public section
 
 noncomputable section
 

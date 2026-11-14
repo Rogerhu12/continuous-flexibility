@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CoupledCircleCompositionKernels
+module
+
+public import ContinuousFlexibility.Analysis.CoupledCircleCompositionKernels
 
 /-!
 # Realization of circle composition kernels
@@ -7,6 +9,8 @@ Each kernel is realized through the original circle model. The decoder
 identity and its injectivity determine the element uniquely, and the
 weighted estimates pass to every projective seminorm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

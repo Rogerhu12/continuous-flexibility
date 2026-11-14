@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsMovingFamilyOffset
-import ContinuousFlexibility.Analysis.N04PulledFieldsInversePointData
-import ContinuousFlexibility.Analysis.N04PulledFieldsSampleTransport
-import ContinuousFlexibility.Analysis.N04PulledFieldsCurrentData
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsMovingFamilyOffset
+public import ContinuousFlexibility.Analysis.N04PulledFieldsInversePointData
+public import ContinuousFlexibility.Analysis.N04PulledFieldsSampleTransport
+public import ContinuousFlexibility.Analysis.N04PulledFieldsCurrentData
 
 /-!
 # Actual current data from physical prefixes and inverse-point data
@@ -12,6 +14,8 @@ depending on the parameter order. The independently constructed inverse
 prefix and masked composition then give the actual pulled derivatives.
 Integration of the first derivative supplies the full reference difference.
 -/
+
+@[expose] public section
 
 noncomputable section
 

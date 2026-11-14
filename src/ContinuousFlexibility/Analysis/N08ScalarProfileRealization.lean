@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N08ScalarProfileGerms
-import ContinuousFlexibility.Analysis.N08ScalarHeightParameter
-import ContinuousFlexibility.Analysis.N08SourceProjection
+module
+
+public import ContinuousFlexibility.Analysis.N08ScalarProfileGerms
+public import ContinuousFlexibility.Analysis.N08ScalarHeightParameter
+public import ContinuousFlexibility.Analysis.N08SourceProjection
 
 /-!
 # The weaker-weight scalar formula realizes the actual N08 field
@@ -11,6 +13,8 @@ discriminant bounds in N01 supply exactly the range needed by the scalar
 power extension. Conservation then identifies the globally projected
 source with this same field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

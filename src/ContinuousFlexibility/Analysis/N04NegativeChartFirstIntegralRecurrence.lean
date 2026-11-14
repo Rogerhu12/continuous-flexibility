@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04bCharacteristicFirstIntegralsTransport
-import ContinuousFlexibility.Analysis.JointMixedTransportCalculus
-import ContinuousFlexibility.Analysis.ScalarTransportSystemBounds
-import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
+module
+
+public import ContinuousFlexibility.Analysis.N04bCharacteristicFirstIntegralsTransport
+public import ContinuousFlexibility.Analysis.JointMixedTransportCalculus
+public import ContinuousFlexibility.Analysis.ScalarTransportSystemBounds
+public import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
 
 /-!
 # The actual transport equation for a centered first integral
@@ -11,6 +13,8 @@ equal to the speed difference. Differentiating the genuine joint tower
 gives the exact radial recurrence, with its original state, radial and
 angular Leibniz indices.
 -/
+
+@[expose] public section
 
 noncomputable section
 

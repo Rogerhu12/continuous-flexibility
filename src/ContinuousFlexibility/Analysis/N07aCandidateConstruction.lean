@@ -1,10 +1,12 @@
-import ContinuousFlexibility.Analysis.N07aActualCanonicalSolutionData
-import ContinuousFlexibility.Analysis.N07aPhysicalSolutionFamily
-import ContinuousFlexibility.Analysis.N07aPhysicalReconstructionJets
-import ContinuousFlexibility.Analysis.N07aPhysicalCandidateBounds
-import ContinuousFlexibility.Analysis.N07aNuSource
-import ContinuousFlexibility.Analysis.N07aParameterNeighborhood
-import ContinuousFlexibility.Analysis.SolveResidualSpaces
+module
+
+public import ContinuousFlexibility.Analysis.N07aActualCanonicalSolutionData
+public import ContinuousFlexibility.Analysis.N07aPhysicalSolutionFamily
+public import ContinuousFlexibility.Analysis.N07aPhysicalReconstructionJets
+public import ContinuousFlexibility.Analysis.N07aPhysicalCandidateBounds
+public import ContinuousFlexibility.Analysis.N07aNuSource
+public import ContinuousFlexibility.Analysis.N07aParameterNeighborhood
+public import ContinuousFlexibility.Analysis.SolveResidualSpaces
 
 /-!
 # The same canonical inverse gives the actual physical candidate family
@@ -13,6 +15,8 @@ The canonical representative, the true chart and the original height
 factor are used in sequence. One fixed low-order neighborhood controls
 the complete reconstruction and the genuine distinguished Source column.
 -/
+
+@[expose] public section
 
 noncomputable section
 

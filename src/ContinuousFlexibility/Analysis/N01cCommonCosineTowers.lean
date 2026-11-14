@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N01cActualCosineSpeedTower
-import ContinuousFlexibility.Analysis.N01cCoefficientBaseSelection
-import ContinuousFlexibility.Analysis.N01cBoundsRestriction
-import ContinuousFlexibility.Analysis.N01cSpeedTowerRestriction
-import ContinuousFlexibility.Analysis.N01cOrdinarySpeedJointTowers
+module
+
+public import ContinuousFlexibility.Analysis.N01cActualCosineSpeedTower
+public import ContinuousFlexibility.Analysis.N01cCoefficientBaseSelection
+public import ContinuousFlexibility.Analysis.N01cBoundsRestriction
+public import ContinuousFlexibility.Analysis.N01cSpeedTowerRestriction
+public import ContinuousFlexibility.Analysis.N01cOrdinarySpeedJointTowers
 
 /-!
 # One common actual cosine-speed tower neighbourhood
@@ -12,6 +14,8 @@ positive endpoint quotient. Smoothing supplies one interpolation base.
 Taking the minimum of the two radii and the original radius gives all
 component towers on the same original state neighbourhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

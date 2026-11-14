@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderPureJets
-import ContinuousFlexibility.Analysis.OneHighCompositionJets
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderPureJets
+public import ContinuousFlexibility.Analysis.OneHighCompositionJets
 
 /-!
 # Actual derivative formulas for smooth composition on the cylinder
@@ -9,6 +11,8 @@ pointwise Faà di Bruno bounds involve only the genuine input jets. Local
 smoothness of the outer function at the actual input values suffices here;
 the convex region through zero is used separately for the zeroth derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerSelectedMorseEstimates
-import ContinuousFlexibility.Radial.InnerMorseInnerSupportedWeights
-import ContinuousFlexibility.Radial.InnerMorseInnerInterfaceEstimates
+module
+
+public import ContinuousFlexibility.Radial.InnerSelectedMorseEstimates
+public import ContinuousFlexibility.Radial.InnerMorseInnerSupportedWeights
+public import ContinuousFlexibility.Radial.InnerMorseInnerInterfaceEstimates
 
 /-!
 # Uniform weighted estimates for the selected physical models
@@ -10,6 +12,8 @@ piecewise multiplier at its stored physical walls. The constants do
 not depend on the number of retained cells, the even frequency, or
 the weight exponent. No local column bound is an input here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

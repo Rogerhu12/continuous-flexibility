@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalNormalBlockDecay
-import ContinuousFlexibility.Analysis.N05CanonicalSampleBlockWeights
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalNormalBlockDecay
+public import ContinuousFlexibility.Analysis.N05CanonicalSampleBlockWeights
 
 /-!
 # The actual loss-four kernel for all canonical normal blocks
@@ -9,6 +11,8 @@ The same global inverse and its fixed normal angular jet satisfy the two-endpoin
 estimate. Fine logarithmic comparison gives the unchanged material powers
 `t - 4` and `-t`, uniformly over the retained angular coordinates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

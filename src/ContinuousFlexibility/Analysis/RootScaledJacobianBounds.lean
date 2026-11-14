@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RootScaledAngularBounds
-import ContinuousFlexibility.Analysis.RootSmoothHeight
+module
+
+public import ContinuousFlexibility.Analysis.RootScaledAngularBounds
+public import ContinuousFlexibility.Analysis.RootSmoothHeight
 
 /-!
 # A true uniform Jacobian lower bound on the normalized root band
@@ -10,6 +12,8 @@ divided by the square root of the smooth radial factor. The apparent
 sqrt(x) cancels exactly. Positive value bounds therefore give a lower
 bound selected before the state, without a state-dependent collar.
 -/
+
+@[expose] public section
 
 noncomputable section
 

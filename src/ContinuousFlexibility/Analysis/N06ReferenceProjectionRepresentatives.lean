@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06ReferenceProjectionTransport
-import ContinuousFlexibility.Analysis.N06CanonicalProperties
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceProjectionTransport
+public import ContinuousFlexibility.Analysis.N06CanonicalProperties
 
 /-!
 # Original L2 cutoffs represent actual physical reference projections
@@ -10,6 +12,8 @@ its local L2 information comes from the given canonical representation.
 All scalar columns can therefore be retained separately, including an
 arbitrary original compatibility field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

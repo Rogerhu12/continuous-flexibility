@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OuterGreenAssembly
+module
+
+public import ContinuousFlexibility.Radial.OuterGreenAssembly
 
 /-!
 # The normalized natural solution in the whole Hilbert space
@@ -7,6 +9,8 @@ The core restriction and the exact deep Poisson multiple give one actual
 L² vector.  This proves both full square integrability and the quantitative
 norm used in the complementary Robin trace.
 -/
+
+@[expose] public section
 
 noncomputable section
 

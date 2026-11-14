@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedDecodeLift
-import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
+module
+
+public import ContinuousFlexibility.Scalar.WeightedDecodeLift
+public import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
 
 /-!
 # Exact changes of weight for the physical models
@@ -10,6 +12,8 @@ well as the model; it is distinct from the inclusion that keeps a field fixed
 and lowers its weight. This permits products with unequal input weights to be
 reduced to the existing sum-weight product estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N06LeftColumnHalfPairing
-import ContinuousFlexibility.Analysis.N06EvenHalfTests
-import ContinuousFlexibility.Analysis.N06CurrentTestAveraging
-import ContinuousFlexibility.Analysis.N06CurrentOperatorLinearity
-import ContinuousFlexibility.Analysis.N06PhysicalHeightAffinePairing
+module
+
+public import ContinuousFlexibility.Analysis.N06LeftColumnHalfPairing
+public import ContinuousFlexibility.Analysis.N06EvenHalfTests
+public import ContinuousFlexibility.Analysis.N06CurrentTestAveraging
+public import ContinuousFlexibility.Analysis.N06CurrentOperatorLinearity
+public import ContinuousFlexibility.Analysis.N06PhysicalHeightAffinePairing
 
 /-!
 # The genuine left-column pairing for every original physical test
@@ -14,6 +16,8 @@ uses the recovered piecewise operator linearity, N03's exact parity, and
 integrability proved from the original canonical L2 transforms. The
 compact even test pairing therefore proves the full original identity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

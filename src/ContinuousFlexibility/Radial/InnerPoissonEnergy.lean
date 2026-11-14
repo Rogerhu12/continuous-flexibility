@@ -1,9 +1,11 @@
-import Mathlib.Analysis.InnerProductSpace.Basic
-import Mathlib.Analysis.Normed.Operator.Bilinear
-import Mathlib.Analysis.SpecialFunctions.Exp
-import Mathlib.LinearAlgebra.Projection
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Analysis.InnerProductSpace.Basic
+public import Mathlib.Analysis.Normed.Operator.Bilinear
+public import Mathlib.Analysis.SpecialFunctions.Exp
+public import Mathlib.LinearAlgebra.Projection
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
 
 /-!
 # The inner Poisson correction and its energy matrix
@@ -21,6 +23,8 @@ trace and flux satisfy the full Green formula. The error estimate retains
 one residual factor from each column, as in `eq:rad-eq-tm6` and
 `eq:rad-eq-tm7` of the readable manuscript.
 -/
+
+@[expose] public section
 
 noncomputable section
 

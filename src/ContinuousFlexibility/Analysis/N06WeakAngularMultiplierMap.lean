@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06WeakAngularMultiplier
+module
+
+public import ContinuousFlexibility.Analysis.N06WeakAngularMultiplier
 
 /-!
 # The continuous linear weak angular multiplier
@@ -7,6 +9,8 @@ The actual product in the selected volume level is unique because its
 original forget map is injective. This proves linearity of the constructed
 weak product and retains its explicit operator norm and every binomial jet.
 -/
+
+@[expose] public section
 
 noncomputable section
 

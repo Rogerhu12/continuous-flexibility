@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.MaterialScalarPowerJets
-import ContinuousFlexibility.Analysis.MaterialEndpointWeightTransport
+module
+
+public import ContinuousFlexibility.Analysis.MaterialScalarPowerJets
+public import ContinuousFlexibility.Analysis.MaterialEndpointWeightTransport
 
 /-!
 # Actual envelope ratios on bounded endpoint-coordinate displacements
@@ -8,6 +10,8 @@ The original E0 is only positive. Its proved fixed scaled lower bound
 raises possibly negative exponents before the actual endpoint comparison.
 All constants precede both physical points and the sample denominator.
 -/
+
+@[expose] public section
 
 noncomputable section
 

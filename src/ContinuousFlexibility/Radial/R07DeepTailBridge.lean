@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.RadialTargets
-import Mathlib.MeasureTheory.Function.LocallyIntegrable
+module
+
+public import ContinuousFlexibility.Statements.RadialTargets
+public import Mathlib.MeasureTheory.Function.LocallyIntegrable
 
 /-!
 # From the physical deep-tail output to the natural radial line
@@ -14,6 +16,8 @@ one Boolean-oriented logarithmic coordinate.
 The construction and estimates of a `DeepTailData` satisfying the hypotheses
 of `R06` are not assumed to follow merely from this conversion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PositiveConformalDensityAlgebra
-import ContinuousFlexibility.Geometry.EuclideanRigidity
+module
+
+public import ContinuousFlexibility.Analysis.PositiveConformalDensityAlgebra
+public import ContinuousFlexibility.Geometry.EuclideanRigidity
 
 /-!
 # The actual principal density of the finite conformal construction
@@ -10,6 +12,8 @@ radial jets. Degree n+1 suffices through order n. The matrix fields need
 only be smooth at the boundary points; all neighborhoods used below
 come from ordinary continuity and positivity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

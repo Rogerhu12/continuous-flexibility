@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.AdjugateAiryTransport
-import ContinuousFlexibility.Geometry.Primitive
-import Mathlib.Analysis.Calculus.Deriv.MeanValue
+module
+
+public import ContinuousFlexibility.Analysis.AdjugateAiryTransport
+public import ContinuousFlexibility.Geometry.Primitive
+public import Mathlib.Analysis.Calculus.Deriv.MeanValue
 
 /-!
 # Half-strip holonomy from an actual Airy chart and actual trajectories
@@ -11,6 +13,8 @@ roundtrip conjugate to translation by minus twice the Airy travel width.
 The root angular normalization cancels; no equality with another half's
 boundary normalization and no prescribed boundary inverse are used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

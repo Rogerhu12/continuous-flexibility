@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PositiveReferenceIdentity
-import ContinuousFlexibility.Analysis.PositiveReferenceHeight
+module
+
+public import ContinuousFlexibility.Analysis.PositiveReferenceIdentity
+public import ContinuousFlexibility.Analysis.PositiveReferenceHeight
 
 /-!
 # Numerical bounds for the same reference coordinate and height
@@ -9,6 +11,8 @@ and middle cutoff mass. The derivative bound is a convex combination
 bound. The logarithmic height construction preserves polynomial value
 and reciprocal bounds, without exponentiating a polynomial jet bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

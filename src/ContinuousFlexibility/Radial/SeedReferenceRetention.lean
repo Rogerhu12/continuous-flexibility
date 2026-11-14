@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Radial.SeedPreparedTail
-import ContinuousFlexibility.Radial.SeedConeTailConstruction
-import ContinuousFlexibility.Radial.SeedPureTailConstruction
-import ContinuousFlexibility.Radial.SeedPureTailCanonical
-import ContinuousFlexibility.Radial.SeedGluedPairConstruction
-import ContinuousFlexibility.Radial.SeedReturnMargins
+module
+
+public import ContinuousFlexibility.Radial.SeedPreparedTail
+public import ContinuousFlexibility.Radial.SeedConeTailConstruction
+public import ContinuousFlexibility.Radial.SeedPureTailConstruction
+public import ContinuousFlexibility.Radial.SeedPureTailCanonical
+public import ContinuousFlexibility.Radial.SeedGluedPairConstruction
+public import ContinuousFlexibility.Radial.SeedReturnMargins
 
 /-!
 # The actual seed with its selected model and cell transport
@@ -14,6 +16,8 @@ coordinate and finite index floor of its final cells. Its inhabitant is
 constructed below from R07, retaining the quantitative model and cell
 transport on the resulting reference for the downstream constructions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

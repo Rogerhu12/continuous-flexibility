@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.SolveNewtonBridge
-import ContinuousFlexibility.Analysis.SolveTameSubspace
-import ContinuousFlexibility.Scalar.WeightedSmoothTameAlgebra
-import ContinuousFlexibility.Scalar.WeightedSmoothTameLinear
+module
+
+public import ContinuousFlexibility.Analysis.SolveNewtonBridge
+public import ContinuousFlexibility.Analysis.SolveTameSubspace
+public import ContinuousFlexibility.Scalar.WeightedSmoothTameAlgebra
+public import ContinuousFlexibility.Scalar.WeightedSmoothTameLinear
 
 /-!
 # Smooth tame substitution of an actual residual into an operator
@@ -10,6 +12,8 @@ This is the composition step for the N02/N03 return correction. The
 subspace target is included in its complete projective ambient space for
 composition, then restricted back to the same closed subspace.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MorseCellLiouville
+module
+
+public import ContinuousFlexibility.Radial.MorseCellLiouville
 
 /-!
 # Smooth representatives through both retained endpoints
@@ -9,6 +11,8 @@ derived from the retained positivity hypotheses. This avoids extending
 the endpoint inverse by an arbitrary constant and proves genuine local
 smoothness and derivatives at both cuts.
 -/
+
+@[expose] public section
 
 noncomputable section
 

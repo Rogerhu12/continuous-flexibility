@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01EndpointSplitNorm
-import ContinuousFlexibility.Analysis.CircleFiniteEnergyEnvelopes
-import ContinuousFlexibility.Analysis.CircleJetBonding
+module
+
+public import ContinuousFlexibility.Analysis.N01EndpointSplitNorm
+public import ContinuousFlexibility.Analysis.CircleFiniteEnergyEnvelopes
+public import ContinuousFlexibility.Analysis.CircleJetBonding
 
 /-!
 # The finite jet sum of the physical circle norm
@@ -9,6 +11,8 @@ The infinite component sum is retained inside each weighted jet norm.
 Only the finite angular-material index set is estimated by a sum of
 separate norms.
 -/
+
+@[expose] public section
 
 noncomputable section
 

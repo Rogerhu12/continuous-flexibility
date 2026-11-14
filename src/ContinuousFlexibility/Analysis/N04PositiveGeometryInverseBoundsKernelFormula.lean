@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsRadial
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsKernelCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsRadial
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsKernelCalculus
 
 /-!
 # The literal finite radial collar as a scalar integral
@@ -10,6 +12,8 @@ gives the displayed polynomial slope.  This identifies the existing
 collar, including its fixed normalization, with an explicit integral
 formula suitable for uniform coefficient and radial jet estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import Mathlib.Analysis.SpecialFunctions.SmoothTransition
-import Mathlib.Analysis.Calculus.Deriv.Support
-import Mathlib.Topology.Algebra.Support
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Positivity
+module
+
+public import Mathlib.Analysis.SpecialFunctions.SmoothTransition
+public import Mathlib.Analysis.Calculus.Deriv.Support
+public import Mathlib.Topology.Algebra.Support
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Positivity
 
 /-!
 # Smooth cutoffs for two endpoint layers
@@ -12,6 +14,8 @@ the distance to the endpoints lies in `[δ, Δ]`, and its topological support
 lies in the enlarged layer `[δ / 2, 2 * Δ]`. It is independent of any given
 partition of unity and therefore requires no derivatives of that partition.
 -/
+
+@[expose] public section
 
 open Set
 open scoped ContDiff

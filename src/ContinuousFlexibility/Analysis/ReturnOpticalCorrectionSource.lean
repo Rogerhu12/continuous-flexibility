@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ReturnOpticalCutoffPatching
-import ContinuousFlexibility.Analysis.N01OpticalCollarPositivity
+module
+
+public import ContinuousFlexibility.Analysis.ReturnOpticalCutoffPatching
+public import ContinuousFlexibility.Analysis.N01OpticalCollarPositivity
 
 /-!
 # Actual optical-cutoff error and source compatibility
@@ -12,6 +14,8 @@ the original residual and height spaces, and has zero physical source
 integral. Weighted jet integrability is isolated as the remaining
 source-membership condition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

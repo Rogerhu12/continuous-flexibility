@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.PositiveBufferComparisonGreen
-import ContinuousFlexibility.Radial.PositiveBufferComparisonDomains
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferComparisonGreen
+public import ContinuousFlexibility.Radial.PositiveBufferComparisonDomains
 
 /-!
 # The physical cutoff source and its exponential norm bound
@@ -9,6 +11,8 @@ normalized commutator.  The Green normalization divides by the genuine
 sum of conormal energies.  The length Jacobian then gives `sqrt mass`
 in the error estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

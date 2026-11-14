@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.PositiveBufferEnergyMass
-import ContinuousFlexibility.Radial.PositiveBufferComparisonDomains
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferEnergyMass
+public import ContinuousFlexibility.Radial.PositiveBufferComparisonDomains
 
 /-!
 # Normalizing the actual endpoint profiles
@@ -9,6 +11,8 @@ coordinate and the reflected outward coordinate. Ordinary derivatives,
 the homogeneous equation and the conormal normalization are transported
 with the actual affine slopes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

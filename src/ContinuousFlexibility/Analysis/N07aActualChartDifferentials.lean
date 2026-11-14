@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalAtomBounds
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalAtomBounds
 
 /-!
 # Differential inverse identities on the actual physical pieces
@@ -7,6 +9,8 @@ These identities use the two genuine inverse relations on their open
 domains. They do not identify a current physical piece with a reference
 rectangle.
 -/
+
+@[expose] public section
 
 noncomputable section
 

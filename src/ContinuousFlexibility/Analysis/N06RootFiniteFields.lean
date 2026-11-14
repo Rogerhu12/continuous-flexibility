@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06NuPhysicalSmooth
-import ContinuousFlexibility.Analysis.NeighborhoodCharacteristicSpeedExtension
-import ContinuousFlexibility.Analysis.RootCharacteristicFactor
+module
+
+public import ContinuousFlexibility.Analysis.N06NuPhysicalSmooth
+public import ContinuousFlexibility.Analysis.NeighborhoodCharacteristicSpeedExtension
+public import ContinuousFlexibility.Analysis.RootCharacteristicFactor
 
 /-!
 # The actual root fields as finite functions of the original state
@@ -11,6 +13,8 @@ height packet already used for the physical nu column. These are exact
 germ identities for the original state height, so they identify every
 ordinary spatial derivative at the root.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cCircleLinearVariationBounds
-import ContinuousFlexibility.Analysis.OneHighCircleFlowSpeedNorms
+module
+
+public import ContinuousFlexibility.Analysis.N01cCircleLinearVariationBounds
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowSpeedNorms
 
 /-!
 # The Sobolev bound from a genuine smooth linear variational equation
@@ -9,6 +11,8 @@ scalar equation alone supplies every time equation required by the
 Sobolev estimate.  All circle functions are the existing canonical
 descents of the actual angular derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MorseRealizedCellBounds
+module
+
+public import ContinuousFlexibility.Radial.MorseRealizedCellBounds
 
 /-!
 # Physical integrals of the realized model charts
@@ -7,6 +9,8 @@ The model integrals depend only on the fixed chain data. The actual
 physical profile contributes exactly its height amplitude to mass and
 the reciprocal amplitude to resistance.
 -/
+
+@[expose] public section
 
 noncomputable section
 

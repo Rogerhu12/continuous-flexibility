@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Contracts.CapInteriorProfile
-import Mathlib.Topology.Homeomorph.Lemmas
-import Mathlib.Analysis.Normed.Module.RCLike.Real
+module
+
+public import ContinuousFlexibility.Contracts.CapInteriorProfile
+public import Mathlib.Topology.Homeomorph.Lemmas
+public import Mathlib.Analysis.Normed.Module.RCLike.Real
 
 /-!
 # A continuous closed-height extension of the actual cap wall
@@ -11,6 +13,8 @@ continuous total inverse, including the two end heights where the unconstrained
 `invFun` need not select the limiting point of a plateau. The resulting wall
 agrees with the actual interior wall at every strict interior height.
 -/
+
+@[expose] public section
 
 noncomputable section
 

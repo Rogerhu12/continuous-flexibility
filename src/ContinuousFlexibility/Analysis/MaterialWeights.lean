@@ -1,5 +1,7 @@
-import Mathlib.Analysis.SpecialFunctions.Pow.Continuity
-import Mathlib.Topology.Order.Compact
+module
+
+public import Mathlib.Analysis.SpecialFunctions.Pow.Continuity
+public import Mathlib.Topology.Order.Compact
 
 /-!
 # The actual material weights and their envelopes
@@ -13,6 +15,8 @@ global for `x ≥ 0`.
 No discrete profile comparison, weighted Sobolev estimate, or endpoint
 coordinate identification is assumed or proved here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

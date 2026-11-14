@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
 
 /-!
 # Choosing a common coefficient base through an opaque conclusion
@@ -8,6 +10,8 @@ an arbitrary seminormed real module. The conclusion is passed as a
 predicate of the base and loss, so specialization to the actual state
 space does not repeat the existential construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

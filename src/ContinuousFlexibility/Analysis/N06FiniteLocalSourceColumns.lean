@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06FiniteSourceColumns
-import ContinuousFlexibility.Analysis.N06WeakAngularMultiplier
+module
+
+public import ContinuousFlexibility.Analysis.N06FiniteSourceColumns
+public import ContinuousFlexibility.Analysis.N06WeakAngularMultiplier
 
 /-!
 # Finite source columns smooth only on their actual open strips
@@ -10,6 +12,8 @@ then inserts the actual coefficient fields. No smooth extension across a
 canonical boundary is assumed. Vanishing on inactive pieces is required
 only inside their canonical open strips.
 -/
+
+@[expose] public section
 
 noncomputable section
 

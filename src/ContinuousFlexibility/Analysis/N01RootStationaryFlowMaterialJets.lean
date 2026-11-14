@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01RootSpeedPowerMaterialJets
-import ContinuousFlexibility.Analysis.N01RootFieldLocalization
-import ContinuousFlexibility.Analysis.RootFlowParameterUnscale
-import ContinuousFlexibility.Analysis.RootStationaryInverseMaterialJets
+module
+
+public import ContinuousFlexibility.Analysis.N01RootSpeedPowerMaterialJets
+public import ContinuousFlexibility.Analysis.N01RootFieldLocalization
+public import ContinuousFlexibility.Analysis.RootFlowParameterUnscale
+public import ContinuousFlexibility.Analysis.RootStationaryInverseMaterialJets
 
 /-!
 # The same actual root flow with uniform zero-axis material costs
@@ -12,6 +14,8 @@ unit scale. Its forward and actual circle-inverse jets follow from the
 stationary ODE estimates. No inverse model radius or normalization scale
 is charged. The raw optical lower remains an explicit same-witness input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

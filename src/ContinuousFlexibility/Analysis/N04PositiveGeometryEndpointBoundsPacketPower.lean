@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsRootShiftPower
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsPacketDirections
-import ContinuousFlexibility.Analysis.N01cMixedPowerAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsRootShiftPower
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsPacketDirections
+public import ContinuousFlexibility.Analysis.N01cMixedPowerAlgebra
 
 /-!
 # Distributed bounds for every actual absorbed packet coordinate
@@ -10,6 +12,8 @@ variable coordinates are the original quadratic height inputs. A
 single interpolation base controls a fixed radial and intrinsic angular
 prefix, while every further angular derivative pays only its own order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

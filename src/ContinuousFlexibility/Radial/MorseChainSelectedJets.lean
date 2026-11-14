@@ -1,6 +1,10 @@
-import ContinuousFlexibility.Radial.MorseChainProfileGluing
-import ContinuousFlexibility.Radial.MorseChainJetScales
-import ContinuousFlexibility.Radial.MorseChainPartitionData
+module
+
+public import ContinuousFlexibility.Radial.MorseChainProfileGluing
+public import ContinuousFlexibility.Radial.MorseChainJetScales
+public import ContinuousFlexibility.Radial.MorseChainPartitionData
+
+@[expose] public section
 
 noncomputable section
 

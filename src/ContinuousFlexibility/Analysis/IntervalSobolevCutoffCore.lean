@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.IntervalSobolevCutoffBounds
-import ContinuousFlexibility.Analysis.SmoothSobolevCore
+module
+
+public import ContinuousFlexibility.Analysis.IntervalSobolevCutoffBounds
+public import ContinuousFlexibility.Analysis.SmoothSobolevCore
 
 /-!
 # A fixed interval cutoff as a linear map of actual smooth Sobolev cores
@@ -8,6 +10,8 @@ The map acts on functions by multiplication with one fixed cutoff. Its domain
 and codomain use actual within-derivatives and Lebesgue `L²` norms. No Sobolev
 order occurs in the definition of the map.
 -/
+
+@[expose] public section
 
 noncomputable section
 

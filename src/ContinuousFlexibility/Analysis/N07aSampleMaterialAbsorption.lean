@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aActualMaterialComparison
+module
+
+public import ContinuousFlexibility.Analysis.N07aActualMaterialComparison
 
 /-!
 # Absorbing the complete piece envelope without changing height weight
@@ -7,6 +9,8 @@ The two extra material orders are fixed. All geometric factors, including
 the comparison between sampled and physical weights, enter the same
 subpower envelope before its single material power is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

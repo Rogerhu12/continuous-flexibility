@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.HeterogeneousBilinearTameBounds
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Analysis.HeterogeneousBilinearTameBounds
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # A residual-preserving bound for the actual N03 error
@@ -10,6 +12,8 @@ two different spaces. The neighborhood and loss below are chosen once,
 before the output order, residual and test; no constant independent of
 the residual is added.
 -/
+
+@[expose] public section
 
 noncomputable section
 

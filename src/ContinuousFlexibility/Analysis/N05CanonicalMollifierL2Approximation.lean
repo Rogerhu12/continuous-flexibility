@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalMollifierL2Estimate
-import ContinuousFlexibility.Analysis.PhysicalJetMollification
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalMollifierL2Estimate
+public import ContinuousFlexibility.Analysis.PhysicalJetMollification
 
 /-!
 # Strong local L² approximation by smooth compact kernels
@@ -9,6 +11,8 @@ integrable planar function on each compact set. The periodic planar
 representative of every actual cylinder L² class satisfies the required
 local square integrability, so this applies to all its weak angular jets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

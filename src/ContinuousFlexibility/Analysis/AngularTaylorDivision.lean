@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.AngularSimpleDivisionBounds
-import ContinuousFlexibility.Analysis.SmoothCompactIntervalIntegral
+module
+
+public import ContinuousFlexibility.Analysis.AngularSimpleDivisionBounds
+public import ContinuousFlexibility.Analysis.SmoothCompactIntervalIntegral
 
 /-!
 # A genuine smooth angular Taylor quotient
@@ -10,6 +12,8 @@ actual angular derivative. Applying the same construction twice gives
 the quotient for a squared zero. These are definitions and exact
 factorizations, not smoothness assumptions on a stored coefficient.
 -/
+
+@[expose] public section
 
 noncomputable section
 

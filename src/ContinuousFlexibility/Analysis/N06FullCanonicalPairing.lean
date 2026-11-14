@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06FiniteCanonicalPairing
-import ContinuousFlexibility.Analysis.N06FullPhysicalPairing
+module
+
+public import ContinuousFlexibility.Analysis.N06FiniteCanonicalPairing
+public import ContinuousFlexibility.Analysis.N06FullPhysicalPairing
 
 /-!
 # Full physical means in the original finite canonical coordinates
@@ -9,6 +11,8 @@ can be arbitrary. Both angular halves are retained through its average.
 This includes the genuine current operator test without requiring any
 periodicity of the corrected physical coefficients.
 -/
+
+@[expose] public section
 
 noncomputable section
 

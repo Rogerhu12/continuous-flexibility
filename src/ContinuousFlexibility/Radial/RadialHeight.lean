@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.FourierModes
-import ContinuousFlexibility.Scalar.Normalization
-import Mathlib.Analysis.Calculus.Deriv.Prod
+module
+
+public import ContinuousFlexibility.Radial.FourierModes
+public import ContinuousFlexibility.Scalar.Normalization
+public import Mathlib.Analysis.Calculus.Deriv.Prod
 
 /-!
 # The actual radial height as a zero-residual base point
@@ -10,6 +12,8 @@ Its actual polar derivatives give discriminant one and zero numerator.
 The genuine parameter derivative and removable normalized residual are
 then identified with the actual two-dimensional radial Jacobi operator.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

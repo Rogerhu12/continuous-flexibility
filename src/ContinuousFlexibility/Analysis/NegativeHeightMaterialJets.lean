@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PositivePowerMaterialJets
-import ContinuousFlexibility.Analysis.PointwiseMaterialJetOperations
+module
+
+public import ContinuousFlexibility.Analysis.PositivePowerMaterialJets
+public import ContinuousFlexibility.Analysis.PointwiseMaterialJetOperations
 
 /-!
 # Actual negative height jets from the determinant ratio
@@ -10,6 +12,8 @@ one common derivative loss. The discriminant upper bound is derived
 from the original coefficient values on a fixed low seminorm ball;
 neither height jets nor discriminant jets are quantitative inputs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

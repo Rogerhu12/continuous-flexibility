@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalRepresentationPairing
-import ContinuousFlexibility.Analysis.N07aCanonicalGreenPairing
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalRepresentationPairing
+public import ContinuousFlexibility.Analysis.N07aCanonicalGreenPairing
 
 /-!
 # The actual L² classes of the bounded open coefficient jets
@@ -8,6 +10,8 @@ Interior integration by parts identifies the angular graph with the
 original classical derivatives. The representatives are never replaced
 by an assumed smooth extension across an endpoint.
 -/
+
+@[expose] public section
 
 noncomputable section
 

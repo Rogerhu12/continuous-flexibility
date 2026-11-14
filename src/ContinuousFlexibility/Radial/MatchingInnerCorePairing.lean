@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.ModeCoreGraph
-import ContinuousFlexibility.Radial.ModeRegionalPairing
-import ContinuousFlexibility.Radial.ModeWeakGreen
-import ContinuousFlexibility.Radial.MatchingSourcePairing
+module
+
+public import ContinuousFlexibility.Radial.ModeCoreGraph
+public import ContinuousFlexibility.Radial.ModeRegionalPairing
+public import ContinuousFlexibility.Radial.ModeWeakGreen
+public import ContinuousFlexibility.Radial.MatchingSourcePairing
 
 /-!
 # Inner Poisson reciprocity for the actual smooth source
@@ -12,6 +14,8 @@ conormal flux. The proof uses the finite weak Green identity on the
 regular inner interval and the frozen representative, row and trace
 clauses of the local realizations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

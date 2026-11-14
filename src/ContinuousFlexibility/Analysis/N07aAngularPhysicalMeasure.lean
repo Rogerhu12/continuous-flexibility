@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalRoughPairing
-import ContinuousFlexibility.Analysis.N07aGeometryOpenCoefficients
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalRoughPairing
+public import ContinuousFlexibility.Analysis.N07aGeometryOpenCoefficients
 
 /-!
 # The actual physical measure and rough chart pullback
@@ -10,6 +12,8 @@ pulls back to equality of the original physical representatives.  A bound
 for the inverse Jacobian gives the corresponding L² pullback; the final
 lemma supplies a qualitative bound from the closed current atlas geometry.
 -/
+
+@[expose] public section
 
 noncomputable section
 

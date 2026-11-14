@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06AiryNormalForm
+module
+
+public import ContinuousFlexibility.Analysis.N06AiryNormalForm
 
 /-!
 # The actual physical orientation of the new reference Airy germ
@@ -9,6 +11,8 @@ of a positive component includes a second factor `ι` and has derivative
 `Ξ'`. The physical height uses that same absolute Jacobian. Unit reflection
 and translation preserve all ordinary scalar jet bounds below.
 -/
+
+@[expose] public section
 
 noncomputable section
 

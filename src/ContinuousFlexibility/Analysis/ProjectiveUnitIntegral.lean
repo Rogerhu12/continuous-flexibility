@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.ProjectiveJets
-import Mathlib.Analysis.Calculus.ParametricIntervalIntegral
-import Mathlib.MeasureTheory.Integral.DominatedConvergence
-import Mathlib.Tactic.Linarith
+module
+
+public import ContinuousFlexibility.Analysis.ProjectiveJets
+public import Mathlib.Analysis.Calculus.ParametricIntervalIntegral
+public import Mathlib.MeasureTheory.Integral.DominatedConvergence
+public import Mathlib.Tactic.Linarith
 
 /-!
 # Compact parameter integration in the actual projective limit
@@ -11,6 +13,8 @@ commute with these integrals, so the result is an element of the existing
 projective limit. Joint continuity and multilinearity are proved in its
 original product topology; no norm is imposed on the parameter space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

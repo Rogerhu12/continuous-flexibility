@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07bCanonicalInverseAngle
-import ContinuousFlexibility.Analysis.BoundaryMixedJets
+module
+
+public import ContinuousFlexibility.Analysis.N07bCanonicalInverseAngle
+public import ContinuousFlexibility.Analysis.BoundaryMixedJets
 
 /-!
 # Differentiation in every actual inverse chart direction
@@ -9,6 +11,8 @@ coordinate directions, and arbitrary linear combinations of them, use the
 same inverse-germ proof. This is the coordinate calculus needed when the
 reference differential expression is pulled back through a current chart.
 -/
+
+@[expose] public section
 
 noncomputable section
 

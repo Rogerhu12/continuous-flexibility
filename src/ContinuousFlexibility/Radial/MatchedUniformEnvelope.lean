@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchedModeCellBounds
-import ContinuousFlexibility.Radial.MatchedTransitionEnvelope
+module
+
+public import ContinuousFlexibility.Radial.MatchedModeCellBounds
+public import ContinuousFlexibility.Radial.MatchedTransitionEnvelope
 
 /-!
 # Uniform spatial decay of the actual matching formula
@@ -9,6 +11,8 @@ external columns, and the actual matching margin. Combining the existing
 matching formula with the extra travel distance removes the transition
 index from the final envelope. No bound for the whole inverse is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

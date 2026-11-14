@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalModel
-import ContinuousFlexibility.Analysis.N05CanonicalLpMaps
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalModel
+public import ContinuousFlexibility.Analysis.N05CanonicalLpMaps
 
 /-!
 # Piecewise scalar multipliers on canonical angular jets
@@ -8,6 +10,8 @@ A bounded scalar on each piece multiplies every angular jet on that piece.
 The weak derivative equations and evenness condition are preserved literally.
 The zero-jet projection also gives a bounded map to the unweighted L² sequence.
 -/
+
+@[expose] public section
 
 noncomputable section
 

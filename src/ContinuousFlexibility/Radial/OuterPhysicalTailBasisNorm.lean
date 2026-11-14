@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterPhysicalInverseGauge
-import ContinuousFlexibility.Radial.OuterNaturalPhysicalAllIndices
+module
+
+public import ContinuousFlexibility.Radial.OuterPhysicalInverseGauge
+public import ContinuousFlexibility.Radial.OuterNaturalPhysicalAllIndices
 
 /-!
 # The constructed natural basis has the full physical quantitative norm
@@ -8,6 +10,8 @@ The norm belongs to the same outward Hilbert space and the same actual
 natural solution used in the Green basis. The bound applies to every
 positive transition index, with a constant uniform in all height choices.
 -/
+
+@[expose] public section
 
 noncomputable section
 

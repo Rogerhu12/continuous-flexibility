@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SmoothDirectionsUnitIntegral
-import ContinuousFlexibility.Analysis.TameJetLocalBounds
-import Mathlib.Tactic.Abel
+module
+
+public import ContinuousFlexibility.Analysis.SmoothDirectionsUnitIntegral
+public import ContinuousFlexibility.Analysis.TameJetLocalBounds
+public import Mathlib.Tactic.Abel
 
 /-!
 # Fixed-loss tameness of compactly averaged linear pullbacks
@@ -10,6 +12,8 @@ preserves each homogeneous jet estimate. Compactness selects finitely
 many neighborhoods along the image of the reference point. Their finite
 maximum loss and finite minimum radius are chosen before the output order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

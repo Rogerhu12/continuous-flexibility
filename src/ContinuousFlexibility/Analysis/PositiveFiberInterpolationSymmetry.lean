@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.PositiveReferenceCollarFactory
+module
+
+public import ContinuousFlexibility.Analysis.PositiveReferenceCollarFactory
 
 /-!
 # Angular symmetries of the actual positive interpolation
@@ -8,6 +10,8 @@ angles. Thus any pointwise angular invariance of the supplied endpoint
 fields is retained, including periodicity and evenness. The radial jets
 and finite Taylor polynomials retain the same invariance.
 -/
+
+@[expose] public section
 
 noncomputable section
 

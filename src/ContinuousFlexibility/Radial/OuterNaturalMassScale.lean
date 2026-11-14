@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.OuterCoreMassScale
-import ContinuousFlexibility.Radial.MorseTransitionBands
-import ContinuousFlexibility.Radial.MorseRetainedRadiusModelBounds
+module
+
+public import ContinuousFlexibility.Radial.OuterCoreMassScale
+public import ContinuousFlexibility.Radial.MorseTransitionBands
+public import ContinuousFlexibility.Radial.MorseRetainedRadiusModelBounds
 
 /-!
 # The actual first mass in the normalized radial gauge
@@ -11,6 +13,8 @@ integral below. On an actual mass interval the radius is within O(A)
 of its right turning radius. Hence j²A ≤ 1 controls this normalized
 density uniformly, including a left entrance in the preceding gap.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import ContinuousFlexibility.Analysis.SpacesTorusCellLp
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import ContinuousFlexibility.Analysis.SpacesTorusCellLp
 
 /-!
 # Exact torus coordinates of a canonical source piece
@@ -9,6 +11,8 @@ by its area, its actual measure is transported to the normalized torus by
 an explicit affine chart. These maps act on the existing `Lp` classes;
 no pointwise representative or radial regularity is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

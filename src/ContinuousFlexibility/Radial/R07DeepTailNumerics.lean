@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseJoinHeightContrast
-import ContinuousFlexibility.Radial.MorseRealizationBasic
+module
+
+public import ContinuousFlexibility.Radial.MorseJoinHeightContrast
+public import ContinuousFlexibility.Radial.MorseRealizationBasic
 
 /-!
 # Numerical products on a fixed-frequency deep tail
@@ -9,6 +11,8 @@ The same estimates therefore cover the original and shifted left indexing.
 They are uniform over every admissible height sequence, and retain the
 quadratic logarithmic gain required by the physical flatness statement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

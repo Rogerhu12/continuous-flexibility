@@ -1,7 +1,11 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryStoredHeightSamplePrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometryReferenceForwardJets
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryStoredHeightSamplePrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryReferenceForwardJets
 
 /-! # The actual reference height powers at the root circles -/
+
+@[expose] public section
 
 noncomputable section
 

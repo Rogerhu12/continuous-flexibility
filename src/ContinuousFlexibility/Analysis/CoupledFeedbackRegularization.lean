@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CoupledControlCircleDerivative
-import ContinuousFlexibility.Analysis.CoupledControlAlgebra
-import ContinuousFlexibility.Analysis.CoupledNeighborhoodRestriction
-import ContinuousFlexibility.Analysis.CoupledRegularizingEstimates
+module
+
+public import ContinuousFlexibility.Analysis.CoupledControlCircleDerivative
+public import ContinuousFlexibility.Analysis.CoupledControlAlgebra
+public import ContinuousFlexibility.Analysis.CoupledNeighborhoodRestriction
+public import ContinuousFlexibility.Analysis.CoupledRegularizingEstimates
 
 /-!
 # The actual feedback gains every circle order
@@ -13,6 +15,8 @@ neighborhood. This estimate supplies the regularity of the recovered
 constant control without assigning higher circle orders to arbitrary
 elements of the base control space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

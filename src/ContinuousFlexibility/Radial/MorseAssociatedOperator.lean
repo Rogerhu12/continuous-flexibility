@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MorseWeakEnergy
-import Mathlib.Analysis.InnerProductSpace.LaxMilgram
-import Mathlib.Analysis.InnerProductSpace.Adjoint
+module
+
+public import ContinuousFlexibility.Radial.MorseWeakEnergy
+public import Mathlib.Analysis.InnerProductSpace.LaxMilgram
+public import Mathlib.Analysis.InnerProductSpace.Adjoint
 
 /-!
 # The graph associated with the actual Morse form
@@ -10,6 +12,8 @@ Lax--Milgram inverse gives its shifted resolvent, closedness and maximal graph
 adjoint property. No compact form-core identification, Friedrichs claim, or
 classification of the Morse spectrum is made here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

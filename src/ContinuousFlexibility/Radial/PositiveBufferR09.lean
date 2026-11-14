@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.PositiveBufferCompression
-import ContinuousFlexibility.Radial.PositiveBufferCorrectedConstruction
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferCompression
+public import ContinuousFlexibility.Radial.PositiveBufferCorrectedConstruction
 
 /-!
 # Cutting a full inverse inside a positive buffer
@@ -8,6 +10,8 @@ The constants are chosen before the buffer data. Actual variational
 profiles and actual Green columns supply every hypothesis of the exact
 compression assembly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

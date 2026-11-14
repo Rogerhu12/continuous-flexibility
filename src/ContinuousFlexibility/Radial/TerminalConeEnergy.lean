@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.TerminalConeCutoff
-import ContinuousFlexibility.Radial.TerminalCapSourceEnergy
+module
+
+public import ContinuousFlexibility.Radial.TerminalConeCutoff
+public import ContinuousFlexibility.Radial.TerminalCapSourceEnergy
 
 /-!
 # Energy of the actual first-cone cutoff
@@ -8,6 +10,8 @@ The error is supported on the same fixed-ratio layer as the actual
 Hilbert source. Its integral on the whole cap is therefore the layer
 integral. Boundary normalization cancels radius and profile height.
 -/
+
+@[expose] public section
 
 noncomputable section
 

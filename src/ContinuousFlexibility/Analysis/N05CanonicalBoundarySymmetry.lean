@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05ReferenceSymbolClosure
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceSymbolClosure
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 
 /-!
 # Period and reflection identities on the actual closed canonical pieces
@@ -8,6 +10,8 @@ The current-state identities extend from the actual open physical domain to
 its closure. The fixed radial interval is used only after specialization to
 the reference state through the stored `referenceDomain` identity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

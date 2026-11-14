@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.WeightedSmoothTameAlgebra
-import ContinuousFlexibility.Analysis.CoupledPhysicalTameComposition
-import ContinuousFlexibility.Analysis.CoupledControlResponseSmooth
+module
+
+public import ContinuousFlexibility.Scalar.WeightedSmoothTameAlgebra
+public import ContinuousFlexibility.Analysis.CoupledPhysicalTameComposition
+public import ContinuousFlexibility.Analysis.CoupledControlResponseSmooth
 
 /-!
 # Smooth scalar action on the actual output spaces
@@ -9,6 +11,8 @@ The independent real parameter multiplies the recovered scalar error.
 The same continuous bilinear action supplies its full directional tower,
 and composition keeps the whole given parameter domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

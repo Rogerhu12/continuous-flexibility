@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.CentralBorderLocality
-import ContinuousFlexibility.Radial.ReferenceTrueBorder
+module
+
+public import ContinuousFlexibility.Radial.CentralBorderLocality
+public import ContinuousFlexibility.Radial.ReferenceTrueBorder
 
 /-!
 # A central border fixed before choosing the connected reference
@@ -10,6 +12,8 @@ normalized metric control, physical column and model inverse constants
 therefore precede every later choice of the retained central window.
 Installing this same control preserves the physical column globally.
 -/
+
+@[expose] public section
 
 noncomputable section
 

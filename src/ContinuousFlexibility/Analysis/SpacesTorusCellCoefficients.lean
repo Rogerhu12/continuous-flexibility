@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SpacesTorusCellDerivatives
+module
+
+public import ContinuousFlexibility.Analysis.SpacesTorusCellDerivatives
 
 /-!
 # Exact localized cell coefficients
@@ -8,6 +10,8 @@ identities for the actual normalized torus chart. The radial support lies
 strictly inside the cell, so all mixed derivatives have the required
 vanishing boundary values.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.BufferIntervalTrace
+module
+
+public import ContinuousFlexibility.Radial.BufferIntervalTrace
 
 /-!
 # Local primitives for positive-buffer regularity
@@ -7,6 +9,8 @@ Compact tests may be confined to one open interval. A zero weak derivative
 then detects a constant on that interval, and subtracting an actual integral
 primitive gives the local regularity statement needed by the ODE argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

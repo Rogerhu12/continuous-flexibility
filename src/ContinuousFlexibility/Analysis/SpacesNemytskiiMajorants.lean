@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SpacesNemytskiiKernels
+module
+
+public import ContinuousFlexibility.Analysis.SpacesNemytskiiKernels
 
 /-!
 # Integrable bounds on affine parameter intervals
@@ -8,6 +10,8 @@ factor in L² and bound every remaining factor pointwise. This gives an
 actual common L² majorant for every weighted spatial jet along a bounded
 affine parameter interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

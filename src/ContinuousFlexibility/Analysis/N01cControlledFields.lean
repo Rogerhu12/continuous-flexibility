@@ -1,4 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cCoefficientPolarPowerInputs
+module
+
+public import ContinuousFlexibility.Analysis.N01cCoefficientPolarPowerInputs
+
+@[expose] public section
 
 noncomputable section
 

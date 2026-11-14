@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerRadialSmoothGreen
-import ContinuousFlexibility.Radial.InnerRadialWeakLinearity
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialSmoothGreen
+public import ContinuousFlexibility.Radial.InnerRadialWeakLinearity
 
 /-!
 # Smooth Green tests against the actual closed first-order domain
@@ -9,6 +11,8 @@ physical zero-endpoint closure. Adding the fixed affine lift restores
 exactly the two canonical boundary traces. The smooth solution, signed
 potential and source remain the original physical ones.
 -/
+
+@[expose] public section
 
 noncomputable section
 

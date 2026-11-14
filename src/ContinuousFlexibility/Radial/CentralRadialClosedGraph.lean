@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.CentralRadialHilbert
-import ContinuousFlexibility.Radial.CentralRadialWeightedInverse
+module
+
+public import ContinuousFlexibility.Radial.CentralRadialHilbert
+public import ContinuousFlexibility.Radial.CentralRadialWeightedInverse
 
 /-!
 # The actual normalized central radial weak graph
@@ -9,6 +11,8 @@ Lebesgue L² data: multiplication of the source by `nu` is not a domain
 assumption. The inverse weight is a bounded actual multiplier, justified
 by the global lower bound from the constructed radius.
 -/
+
+@[expose] public section
 
 noncomputable section
 

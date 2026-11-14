@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.InnerLiouvilleUnitSolution
-import ContinuousFlexibility.Radial.InnerLiouvillePoissonEquation
-import ContinuousFlexibility.Radial.InnerLiouvilleConormal
-import ContinuousFlexibility.Radial.InnerModelFluxError
+module
+
+public import ContinuousFlexibility.Radial.InnerLiouvilleUnitSolution
+public import ContinuousFlexibility.Radial.InnerLiouvillePoissonEquation
+public import ContinuousFlexibility.Radial.InnerLiouvilleConormal
+public import ContinuousFlexibility.Radial.InnerModelFluxError
 
 /-!
 # The actual model weak flux is the same physical compression matrix
@@ -11,6 +13,8 @@ classical outward conormal. The density drift is kept in the diagonal
 kappa, so the remaining matrix is exactly the physical flux error of
 the original localized R09 construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

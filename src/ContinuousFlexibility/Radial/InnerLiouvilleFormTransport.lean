@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Radial.InnerLiouvilleGradientPairing
-import ContinuousFlexibility.Radial.InnerLiouvillePotentialTransport
-import ContinuousFlexibility.Radial.InnerLiouvilleTestTransport
-import ContinuousFlexibility.Radial.InnerLiouvilleBorderTransport
-import ContinuousFlexibility.Radial.InnerEnergyFirstOrderPairing
-import ContinuousFlexibility.Radial.InnerModelCoreCoordinates
+module
+
+public import ContinuousFlexibility.Radial.InnerLiouvilleGradientPairing
+public import ContinuousFlexibility.Radial.InnerLiouvillePotentialTransport
+public import ContinuousFlexibility.Radial.InnerLiouvilleTestTransport
+public import ContinuousFlexibility.Radial.InnerLiouvilleBorderTransport
+public import ContinuousFlexibility.Radial.InnerEnergyFirstOrderPairing
+public import ContinuousFlexibility.Radial.InnerModelCoreCoordinates
 
 /-!
 # The actual closed weak form under Liouville transport
@@ -13,6 +15,8 @@ integration by parts on the original closed model domain restores
 s''/s. Together with the actual signed-potential identity this gives
 the original model form, with the same physical source and scalar row.
 -/
+
+@[expose] public section
 
 noncomputable section
 

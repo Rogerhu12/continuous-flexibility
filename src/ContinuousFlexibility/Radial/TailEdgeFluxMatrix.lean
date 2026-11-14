@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.TailEdgePoissonComparison
-import Mathlib.Analysis.Calculus.Deriv.MeanValue
+module
+
+public import ContinuousFlexibility.Radial.TailEdgePoissonComparison
+public import Mathlib.Analysis.Calculus.Deriv.MeanValue
 
 /-!
 # The exact outward flux matrix on one tail edge
@@ -8,6 +10,8 @@ The two Poisson heights solve the same homogeneous equation. Their endpoint
 derivatives are given by the zero-potential Green formula, and conservation of
 their Wronskian identifies the two off-diagonal entries.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.TravelStripAngularInverse
-import ContinuousFlexibility.Geometry.PlanarOrientation
-import Mathlib.Topology.Order.IntermediateValue
-import Mathlib.Tactic.Linarith
+module
+
+public import ContinuousFlexibility.Analysis.TravelStripAngularInverse
+public import ContinuousFlexibility.Geometry.PlanarOrientation
+public import Mathlib.Topology.Order.IntermediateValue
+public import Mathlib.Tactic.Linarith
 
 /-!
 # A global inverse for a full travel-coordinate strip
@@ -16,6 +18,8 @@ inverse function theorem.
 This is a statement about the full negative component. It does not identify
 a fixed radial half-cut with a moving travel-time half-cut.
 -/
+
+@[expose] public section
 
 noncomputable section
 

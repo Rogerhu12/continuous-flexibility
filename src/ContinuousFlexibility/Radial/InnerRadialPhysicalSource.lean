@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.InnerAdmissibleSource
-import ContinuousFlexibility.Radial.InnerRadialH1Support
-import ContinuousFlexibility.Radial.InnerRadialLocalRealization
-import ContinuousFlexibility.Radial.InnerBorderTransport
+module
+
+public import ContinuousFlexibility.Radial.InnerAdmissibleSource
+public import ContinuousFlexibility.Radial.InnerRadialH1Support
+public import ContinuousFlexibility.Radial.InnerRadialLocalRealization
+public import ContinuousFlexibility.Radial.InnerBorderTransport
 
 /-!
 # The actual supported inner source and physical field realization
@@ -15,6 +17,8 @@ A broken weak field is realized by the sum of its supported value
 coordinates and its one central scalar. The defining domain and row
 conditions prove that this field belongs to the same source space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

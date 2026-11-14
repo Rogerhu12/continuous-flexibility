@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cFlowVariationInput
-import ContinuousFlexibility.Analysis.N01cActualFlowDefectBounds
-import ContinuousFlexibility.Analysis.N01cFlowHeadEnvelope
+module
+
+public import ContinuousFlexibility.Analysis.N01cFlowVariationInput
+public import ContinuousFlexibility.Analysis.N01cActualFlowDefectBounds
+public import ContinuousFlexibility.Analysis.N01cFlowHeadEnvelope
 
 /-!
 # The actual forcing head on one common neighbourhood
@@ -10,6 +12,8 @@ bound supply the two inputs to actual circle composition. The loss is
 chosen before the spatial order, and every finite parameter plot shares
 the same constants.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryFiniteKernelBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryFiniteKernelBounds
 
 /-!
 # The exact original-state budget in an inverse partition
@@ -8,6 +10,8 @@ carry the genuine inverse jets, each saving one spatial order. The
 outer derivative and those blocks therefore pay the original spatial
 order exactly once. The same split preserves one height factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

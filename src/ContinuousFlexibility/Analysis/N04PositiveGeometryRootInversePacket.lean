@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryRootInverseLinearBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryRootInverseLinearBounds
 
 /-!
 # The abstract scalar packet for an inverse root differential
@@ -7,6 +9,8 @@ All moving-point and word calculations are performed with four opaque
 scalar functions. The actual root formulas enter only through a later
 pointwise equality, so these calculations do not unfold a state chart.
 -/
+
+@[expose] public section
 
 noncomputable section
 

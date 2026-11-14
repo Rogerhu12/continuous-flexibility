@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalAtomBounds
-import ContinuousFlexibility.Analysis.N07aCoordinateJetNorms
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalAtomBounds
+public import ContinuousFlexibility.Analysis.N07aCoordinateJetNorms
 
 /-!
 # Positive order jets of the original inverse chart
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Analysis.N07aCoordinateJetNorms
 The true inverse chart is recovered from its normalized radial component
 and angle defect. Its first derivative is charged in one fixed offset.
 -/
+
+@[expose] public section
 
 noncomputable section
 

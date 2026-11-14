@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import ContinuousFlexibility.Scalar.GreenIdentity
-import Mathlib.Analysis.Calculus.FDeriv.Equiv
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import ContinuousFlexibility.Scalar.GreenIdentity
+public import Mathlib.Analysis.Calculus.FDeriv.Equiv
 
 /-!
 # Angular symmetry of the actual original coefficients
@@ -10,6 +12,8 @@ The totalized derivative therefore has the expected signed symmetry even
 at points where it is not differentiable. The three original coefficients
 inherit even, odd, even symmetry directly from their defining formulas.
 -/
+
+@[expose] public section
 
 noncomputable section
 

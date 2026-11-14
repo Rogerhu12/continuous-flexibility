@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.WeightedEndpointTrace
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
+module
+
+public import ContinuousFlexibility.Analysis.WeightedEndpointTrace
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
 
 /-!
 # A genuine global C1 representative of a bounded-jet interval function
@@ -8,6 +10,8 @@ The actual first derivative is extended continuously using its integrable
 second derivative. Integrating that extension and matching one constant
 constructs the global C1 function. No totalized endpoint value is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

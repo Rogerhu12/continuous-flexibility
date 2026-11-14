@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cMixedPowerComposition
-import ContinuousFlexibility.Analysis.N01cStateHeightJets
+module
+
+public import ContinuousFlexibility.Analysis.N01cMixedPowerComposition
+public import ContinuousFlexibility.Analysis.N01cStateHeightJets
 
 /-!
 # Radial inputs for the coefficient algebra
@@ -9,6 +11,8 @@ distributed mixed-jet bound at any fixed interpolation base and loss.
 The only angular jets are zero. The construction also adjoins a scalar
 parameter through the genuine linear projection.
 -/
+
+@[expose] public section
 
 noncomputable section
 

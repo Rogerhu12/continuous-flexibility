@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bRootCutPowers
-import Mathlib.Analysis.Calculus.FDeriv.Congr
+module
+
+public import ContinuousFlexibility.Analysis.N04bRootCutPowers
+public import Mathlib.Analysis.Calculus.FDeriv.Congr
 
 /-!
 # Transmission for the actual root height and physical pullback
@@ -10,6 +12,8 @@ construction. The proof identifies u / h with the gauged travel pullback
 on a neighborhood of the positive cut radius and uses its actual
 Fréchet derivative. The physical cut is X(T/2, θ).
 -/
+
+@[expose] public section
 
 noncomputable section
 

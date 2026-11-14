@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.InnerInterfaceInverse
-import Mathlib.Analysis.InnerProductSpace.Adjoint
-import Mathlib.Analysis.InnerProductSpace.Symmetric
-import Mathlib.Tactic.Ring
+module
+
+public import ContinuousFlexibility.Radial.InnerInterfaceInverse
+public import Mathlib.Analysis.InnerProductSpace.Adjoint
+public import Mathlib.Analysis.InnerProductSpace.Symmetric
+public import Mathlib.Tactic.Ring
 
 /-!
 # The inner Poisson correction and its Green identities
@@ -18,6 +20,8 @@ the space of broken fields with matching values; the global domain is
 selected by vanishing total outward flux. No inverse property of the
 assembled operator is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

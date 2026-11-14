@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.PositiveComponentEndpoints
-import Mathlib.Analysis.Calculus.DSlope
-import Mathlib.Topology.Order.Compact
+module
+
+public import ContinuousFlexibility.Analysis.PositiveComponentEndpoints
+public import Mathlib.Analysis.Calculus.DSlope
+public import Mathlib.Topology.Order.Compact
 
 /-!
 # A physical lower coefficient on one actual positive component
@@ -11,6 +13,8 @@ including at that endpoint. Compactness gives one positive coefficient
 for this component. This qualitative coefficient is used only for the
 finite central exceptions; no uniform tail estimate is inferred here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

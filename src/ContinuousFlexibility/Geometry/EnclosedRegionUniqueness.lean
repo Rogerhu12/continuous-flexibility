@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Geometry.OutwardNormalRays
-import ContinuousFlexibility.Geometry.SphereCongruenceCurvature
-import Mathlib.Topology.Connected.Basic
-import Mathlib.Topology.Bornology.Basic
+module
+
+public import ContinuousFlexibility.Geometry.OutwardNormalRays
+public import ContinuousFlexibility.Geometry.SphereCongruenceCurvature
+public import Mathlib.Topology.Connected.Basic
+public import Mathlib.Topology.Bornology.Basic
 
 /-!
 # Identification of the bounded inside and its outward unit normal
@@ -11,6 +13,8 @@ open inside regions. At a genuine immersed sphere, two outward unit normals for
 the same region are equal as full functions. This allows the derivative and the
 Weingarten shape operator to be compared after the actual normal is identified.
 -/
+
+@[expose] public section
 
 noncomputable section
 

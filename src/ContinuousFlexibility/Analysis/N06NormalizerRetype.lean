@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06NormalizerSupport
-import ContinuousFlexibility.Analysis.SpacesSources
+module
+
+public import ContinuousFlexibility.Analysis.N06NormalizerSupport
+public import ContinuousFlexibility.Analysis.SpacesSources
 
 /-!
 # Retaining the actual construction when the normalizer is replaced
@@ -9,6 +11,8 @@ circle, cutoff and compatibility functional are the original ones.
 Parameterized records are copied field by field; their physical fields,
 state neighborhoods and source spaces retain their original definitions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

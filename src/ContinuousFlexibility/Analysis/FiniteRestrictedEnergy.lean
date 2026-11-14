@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RestrictedOverlapEnergy
-import Mathlib.Algebra.Order.Chebyshev
+module
+
+public import ContinuousFlexibility.Analysis.RestrictedOverlapEnergy
+public import Mathlib.Algebra.Order.Chebyshev
 
 /-!
 # Finite jet estimates inside an actual measurable support
@@ -7,6 +9,8 @@ import Mathlib.Algebra.Order.Chebyshev
 A pointwise squared estimate on the full support gives the corresponding
 L2 energy estimate without replacing a local energy by a global norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

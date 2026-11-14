@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionPatching
-import Mathlib.Analysis.Calculus.FDeriv.Equiv
-import Mathlib.Analysis.Calculus.FDeriv.Add
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionPatching
+public import Mathlib.Analysis.Calculus.FDeriv.Equiv
+public import Mathlib.Analysis.Calculus.FDeriv.Add
 
 /-!
 # Reflection parity of the actual return-corrected coefficients
@@ -11,6 +13,8 @@ where the derivative is totalized to zero. Consequently the coefficient
 parity is global, as required by N03, and does not require extending an
 interior smoothness hypothesis to the turning points or annulus endpoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

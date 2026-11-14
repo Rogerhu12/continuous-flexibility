@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01EndpointScalarCircleMember
-import ContinuousFlexibility.Analysis.N01EndpointSplitNorm
+module
+
+public import ContinuousFlexibility.Analysis.N01EndpointScalarCircleMember
+public import ContinuousFlexibility.Analysis.N01EndpointSplitNorm
 
 /-!
 # Pure scalar endpoint jets with separate physical orders
@@ -8,6 +10,8 @@ The Euler identity supplies a genuine localized copy of the actual
 height. Its low and high energies keep the material order separate from
 the angular order until after their infinite component sums.
 -/
+
+@[expose] public section
 
 noncomputable section
 

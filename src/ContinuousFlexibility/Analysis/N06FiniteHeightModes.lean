@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06ReferenceModeTransport
-import ContinuousFlexibility.Analysis.N06CanonicalGraphFourierCore
-import ContinuousFlexibility.Radial.ReferenceCosineAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceModeTransport
+public import ContinuousFlexibility.Analysis.N06CanonicalGraphFourierCore
+public import ContinuousFlexibility.Radial.ReferenceCosineAlgebra
 
 /-!
 # The original finite height core uses the actual modal representatives
@@ -11,6 +13,8 @@ Fourier coefficients, including the C1/H2 representatives extracted from
 the same N05 graph, reconstruct a finite-core height with the same finite
 set of frequencies. No radial smoothness or finite raw forcing is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

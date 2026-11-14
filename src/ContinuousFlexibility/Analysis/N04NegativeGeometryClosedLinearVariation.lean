@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometryLinearVariationBounds
-import ContinuousFlexibility.Analysis.N04FlowJetEquations
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryLinearVariationBounds
+public import ContinuousFlexibility.Analysis.N04FlowJetEquations
 
 /-!
 # Linear variation estimates on the original closed time interval
@@ -13,6 +15,8 @@ The time change and its first derivative bound are fixed before every
 spatial order. The forcing weight is retained exactly once, and the
 result applies at every original time, including both endpoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

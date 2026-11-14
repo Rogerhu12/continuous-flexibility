@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PrincipalCoreData
-import ContinuousFlexibility.Analysis.N04PrincipalPositivePeriodicity
-import ContinuousFlexibility.Analysis.N04PrincipalNegativePeriodicity
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalCoreData
+public import ContinuousFlexibility.Analysis.N04PrincipalPositivePeriodicity
+public import ContinuousFlexibility.Analysis.N04PrincipalNegativePeriodicity
 
 /-!
 # Periodicity of the five principal fields on the whole atlas
@@ -11,6 +13,8 @@ the pulled-height potential formula preserves the same period. The
 paired bounds supply exactly the spatial regularity needed by the
 positive flux identity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

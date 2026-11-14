@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N08JointResidual
-import ContinuousFlexibility.Analysis.N08ColumnData
-import ContinuousFlexibility.Analysis.N08ControlInverseResponse
+module
+
+public import ContinuousFlexibility.Analysis.N08JointResidual
+public import ContinuousFlexibility.Analysis.N08ColumnData
+public import ContinuousFlexibility.Analysis.N08ControlInverseResponse
 
 /-!
 # Combining the actual residual and control estimates on one neighborhood
@@ -10,6 +12,8 @@ estimates have already been constructed. This assembly lemma combines them
 with the numerical uniform bound for the same actual circle diagonal. It
 keeps the physical spaces, scalar inverse, and all derivative identities.
 -/
+
+@[expose] public section
 
 noncomputable section
 

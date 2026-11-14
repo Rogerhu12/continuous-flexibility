@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
-import ContinuousFlexibility.Analysis.N07aAngularJacobianEnvelope
-import ContinuousFlexibility.Scalar.WeightedPartialIdentities
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
+public import ContinuousFlexibility.Analysis.N07aAngularJacobianEnvelope
+public import ContinuousFlexibility.Scalar.WeightedPartialIdentities
 
 /-!
 # Source atoms in the same inverse-chart coordinates
@@ -16,6 +18,8 @@ The scalar columns are exact products of this source factor and the physical
 fields already pulled back in the subnode interface.  Every identity applies
 to the current and reference state of the same atlas.
 -/
+
+@[expose] public section
 
 noncomputable section
 

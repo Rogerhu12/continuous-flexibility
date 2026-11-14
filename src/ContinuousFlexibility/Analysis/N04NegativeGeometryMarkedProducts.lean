@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometryLinearVariationBounds
-import ContinuousFlexibility.Analysis.N01cFlowForcingEnvelope
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryLinearVariationBounds
+public import ContinuousFlexibility.Analysis.N01cFlowForcingEnvelope
 
 /-!
 # Spatial products with one retained forcing weight
@@ -9,6 +11,8 @@ distinguished factor then retains its entire amplitude, independently
 of which factor receives a high derivative. This applies to the finite
 products in the genuine state-variation forcing.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cFlowParameterContinuity
-import ContinuousFlexibility.Analysis.OneHighCircleFlowTimeChange
+module
+
+public import ContinuousFlexibility.Analysis.N01cFlowParameterContinuity
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowTimeChange
 
 /-!
 # Genuine smooth dependence of a classical trajectory on a scalar parameter
@@ -16,6 +18,8 @@ assumed jointly smooth in its scalar parameter, time and angle; applying
 this result to the annular family still requires the genuine smooth
 regularized speed on its state neighbourhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

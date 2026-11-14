@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowJetEquations
-import ContinuousFlexibility.Analysis.OneHighCircleFlowMinkowski
-import ContinuousFlexibility.Analysis.OneHighCircleFourierLiftGeometry
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowJetEquations
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowMinkowski
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierLiftGeometry
 
 /-!
 # Canonical circle families for the genuine flow integral equations
@@ -11,6 +13,8 @@ families are set to zero outside that interval only to give the time
 integrals total real-domain functions. All identities and continuity
 statements used below are proved on the original interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

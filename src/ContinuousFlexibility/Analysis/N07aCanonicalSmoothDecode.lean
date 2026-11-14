@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalPieceReconstruction
-import ContinuousFlexibility.Analysis.N07aAngularEven
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalPieceReconstruction
+public import ContinuousFlexibility.Analysis.N07aAngularEven
 
 /-!
 # Linear decoding of the actual smooth canonical weak classes
@@ -8,6 +10,8 @@ The representative is unique on the open piece and is set to zero
 outside it. Consequently the reconstruction is linear and preserves
 the actual angular reflection condition of the frozen volume graph.
 -/
+
+@[expose] public section
 
 noncomputable section
 

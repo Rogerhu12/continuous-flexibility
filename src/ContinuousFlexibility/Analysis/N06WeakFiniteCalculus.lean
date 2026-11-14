@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06WeakPartialProduct
+module
+
+public import ContinuousFlexibility.Analysis.N06WeakPartialProduct
 
 /-!
 # The actual six weak partial fields of the finite cosine synthesis
@@ -8,6 +10,8 @@ derivative determines the value, two first partials, and three second
 partials. All six are genuine L2 functions and satisfy the original
 distributional identities on the entire unit test class.
 -/
+
+@[expose] public section
 
 noncomputable section
 

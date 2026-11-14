@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryJointLinearWords
-import ContinuousFlexibility.Analysis.N04PositiveGeometryAngularInverseWords
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryJointLinearWords
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryAngularInverseWords
 
 /-!
 # Finite saved-word bounds on a physical plane region
@@ -8,6 +10,8 @@ This predicate records only positive genuine joint orders. Its parameter
 arity, two seminorm boxes and single height factor are unchanged by
 pairing, angular inversion and moving-point composition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

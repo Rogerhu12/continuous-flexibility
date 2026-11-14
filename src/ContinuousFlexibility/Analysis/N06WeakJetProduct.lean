@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06WeakAngularMultiplier
+module
+
+public import ContinuousFlexibility.Analysis.N06WeakAngularMultiplier
 
 /-!
 # Products of weak jets with a common reflection sign
@@ -8,6 +10,8 @@ no evenness assumption. A coefficient with the same reflection sign as
 its zeroth field makes an even product. This covers both even times even
 and odd times odd, without introducing a new source space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06CurrentTestLp
-import ContinuousFlexibility.Analysis.N06CanonicalTestOperator
-import ContinuousFlexibility.Analysis.StateControlCofiniteClosure
-import ContinuousFlexibility.Analysis.NeighborhoodCharacteristicSpeedExtension
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentTestLp
+public import ContinuousFlexibility.Analysis.N06CanonicalTestOperator
+public import ContinuousFlexibility.Analysis.StateControlCofiniteClosure
+public import ContinuousFlexibility.Analysis.NeighborhoodCharacteristicSpeedExtension
 
 /-!
 # The actual current operator on a positive closed physical piece
@@ -16,6 +18,8 @@ zero germ, as does its actual differential expression. This proves L2
 membership of the transformed operator test without a smooth-coefficient
 assumption on the correction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

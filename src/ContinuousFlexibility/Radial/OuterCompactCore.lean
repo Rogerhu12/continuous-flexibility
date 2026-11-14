@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterFullCoreTransfer
-import ContinuousFlexibility.Radial.OuterFullCoreMass
+module
+
+public import ContinuousFlexibility.Radial.OuterFullCoreTransfer
+public import ContinuousFlexibility.Radial.OuterFullCoreMass
 
 /-!
 # Uniform finite-frequency estimates on a fixed regular compact interval
@@ -8,6 +10,8 @@ This is the finite initial-cell input.  The constants are actual
 coefficient integrals on a fixed compact subset of the annulus, and
 are independent of the solution and of the frequency in the finite band.
 -/
+
+@[expose] public section
 
 noncomputable section
 

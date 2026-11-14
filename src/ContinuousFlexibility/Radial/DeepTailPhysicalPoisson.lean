@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.DeepTailEdgeCoordinates
-import ContinuousFlexibility.Radial.TailPhysicalGreenContinuity
-import ContinuousFlexibility.Radial.DeepTailEdgeUniqueness
+module
+
+public import ContinuousFlexibility.Radial.DeepTailEdgeCoordinates
+public import ContinuousFlexibility.Radial.TailPhysicalGreenContinuity
+public import ContinuousFlexibility.Radial.DeepTailEdgeUniqueness
 
 /-!
 # Poisson functions on the original tail edge
@@ -9,6 +11,8 @@ The resistance-coordinate Poisson functions are pulled back by the actual
 integral of the reciprocal density. The resulting functions retain their
 physical integral equation, endpoint fluxes, and differential equation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

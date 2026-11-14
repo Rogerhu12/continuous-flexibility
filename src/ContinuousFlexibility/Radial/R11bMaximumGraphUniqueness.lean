@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.R11bModeUniqueness
-import ContinuousFlexibility.Radial.R11bMeanUniqueness
-import ContinuousFlexibility.Radial.R11bPhysicalCompleteness
-import ContinuousFlexibility.Radial.R11bWeightMonotonicity
+module
+
+public import ContinuousFlexibility.Radial.R11bModeUniqueness
+public import ContinuousFlexibility.Radial.R11bMeanUniqueness
+public import ContinuousFlexibility.Radial.R11bPhysicalCompleteness
+public import ContinuousFlexibility.Radial.R11bWeightMonotonicity
 
 /-!
 # Uniqueness on every positively attenuated maximum graph
@@ -11,6 +13,8 @@ zero channel is determined by endpoint resistance. Actual angular
 completeness then identifies the original measurable physical fields. The
 argument is independent of the coefficient exponents in the cell weights.
 -/
+
+@[expose] public section
 
 noncomputable section
 

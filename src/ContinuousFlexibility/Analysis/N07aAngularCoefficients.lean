@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aAngularFourier
-import ContinuousFlexibility.Analysis.N07aAngularCharacters
-import ContinuousFlexibility.Analysis.N07aAngularPairing
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularFourier
+public import ContinuousFlexibility.Analysis.N07aAngularCharacters
+public import ContinuousFlexibility.Analysis.N07aAngularPairing
 
 /-!
 # The true weak angular derivative in actual Fourier coordinates
@@ -10,6 +12,8 @@ Fourier Hilbert space. The interval area cancels between a source and its
 weak derivative, leaving exactly the angular symbol `2 I n`. The radial
 Fourier index is arbitrary throughout.
 -/
+
+@[expose] public section
 
 noncomputable section
 

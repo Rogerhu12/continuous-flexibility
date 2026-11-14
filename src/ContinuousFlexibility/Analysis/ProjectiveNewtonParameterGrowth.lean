@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ProjectiveCurveIteratedChain
-import ContinuousFlexibility.Analysis.ProjectiveParameterDerivativeDecay
-import Mathlib.Topology.UniformSpace.CompactConvergence
+module
+
+public import ContinuousFlexibility.Analysis.ProjectiveCurveIteratedChain
+public import ContinuousFlexibility.Analysis.ProjectiveParameterDerivativeDecay
+public import Mathlib.Topology.UniformSpace.CompactConvergence
 
 /-!
 # Parameter derivative growth of the fixed Newton iteration
@@ -8,6 +10,8 @@ import Mathlib.Topology.UniformSpace.CompactConvergence
 The geometric increase of the smoothing index absorbs the linear
 recurrence for the highest parameter derivative at each order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

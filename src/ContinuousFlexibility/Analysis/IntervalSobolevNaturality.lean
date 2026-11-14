@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.IntervalSobolevExtension
-import ContinuousFlexibility.Analysis.SeeleyNaturality
+module
+
+public import ContinuousFlexibility.Analysis.IntervalSobolevExtension
+public import ContinuousFlexibility.Analysis.SeeleyNaturality
 
 /-!
 # The interval extension preserves closed linear relations
@@ -9,6 +11,8 @@ Each endpoint cutoff vanishes before leaving that interval, so arbitrary values
 of the chosen representatives outside the domain play no role.  The two
 reflected pieces preserve the relation, as does their sum.
 -/
+
+@[expose] public section
 
 noncomputable section
 

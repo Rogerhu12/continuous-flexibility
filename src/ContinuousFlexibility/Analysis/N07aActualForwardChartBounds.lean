@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N07aActualForwardDifferentialBound
-import ContinuousFlexibility.Analysis.N07aInverseChartBounds
-import ContinuousFlexibility.Analysis.N07aInverseJetBudget
-import ContinuousFlexibility.Analysis.N06Neighborhood
-import ContinuousFlexibility.Analysis.N07aParameterNeighborhood
+module
+
+public import ContinuousFlexibility.Analysis.N07aActualForwardDifferentialBound
+public import ContinuousFlexibility.Analysis.N07aInverseChartBounds
+public import ContinuousFlexibility.Analysis.N07aInverseJetBudget
+public import ContinuousFlexibility.Analysis.N06Neighborhood
+public import ContinuousFlexibility.Analysis.N07aParameterNeighborhood
 
 /-!
 # All forward-chart jets on the actual moving domains
@@ -12,6 +14,8 @@ inverse relations and the uniform first forward bound supply the finite
 inverse-jet formula. A single final interpolation gives one loss for all
 positive spatial derivative orders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

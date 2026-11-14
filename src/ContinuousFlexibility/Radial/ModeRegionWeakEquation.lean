@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ModeRegionSources
+module
+
+public import ContinuousFlexibility.Radial.ModeRegionSources
 
 /-!
 # Weak equations for the constructed regional sources
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Radial.ModeRegionSources
 These identities concern the concrete indicator operators. They do not
 assume any clause of MatchingLocalRealizations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

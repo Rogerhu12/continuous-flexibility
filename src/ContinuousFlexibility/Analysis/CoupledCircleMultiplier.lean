@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SolveCircleProjection
-import ContinuousFlexibility.Analysis.CircleJetEncoding
+module
+
+public import ContinuousFlexibility.Analysis.SolveCircleProjection
+public import ContinuousFlexibility.Analysis.CircleJetEncoding
 
 /-!
 # Bounded component multipliers in the physical circle space
@@ -10,6 +12,8 @@ in any of the actual circle models, with the same bound at every order.
 The angular-constant recovery therefore does not assume that an arbitrary
 base-space control already has all weighted orders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

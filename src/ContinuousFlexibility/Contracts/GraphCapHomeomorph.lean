@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Contracts.CapInteriorTopology
-import ContinuousFlexibility.Contracts.GraphCapInterior
+module
+
+public import ContinuousFlexibility.Contracts.CapInteriorTopology
+public import ContinuousFlexibility.Contracts.GraphCapInterior
 
 /-!
 # A genuine ambient homeomorphism inserting the moving central graph
@@ -11,6 +13,8 @@ body, so both components of the complement have their actual topology. This
 does not yet insert the fixed curvature marker or identify the whole frontier
 with the final marked sphere.
 -/
+
+@[expose] public section
 
 noncomputable section
 

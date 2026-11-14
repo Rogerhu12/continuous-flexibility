@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseChainLocalGluing
-import Mathlib.Analysis.Calculus.Deriv.Basic
+module
+
+public import ContinuousFlexibility.Radial.MorseChainLocalGluing
+public import Mathlib.Analysis.Calculus.Deriv.Basic
 
 /-!
 # Gluing actual tail solutions by matching value and flux
@@ -9,6 +11,8 @@ pieces have matching values and first derivatives, without requiring equality
 of their germs outside the edge. At a node the two closed-edge derivatives
 combine to give the derivative on a full neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

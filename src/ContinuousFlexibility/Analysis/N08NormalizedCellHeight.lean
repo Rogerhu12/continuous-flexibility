@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N08NormalizedCellProfile
-import ContinuousFlexibility.Analysis.N08RadialPositiveWeightBounds
-import ContinuousFlexibility.Scalar.WeightedDecodeLift
+module
+
+public import ContinuousFlexibility.Analysis.N08NormalizedCellProfile
+public import ContinuousFlexibility.Analysis.N08RadialPositiveWeightBounds
+public import ContinuousFlexibility.Scalar.WeightedDecodeLift
 
 /-!
 # Uniformly bounded actual height directions with positive cell slope
@@ -9,6 +11,8 @@ The same realized height family works at every grading. Its decoded radial
 function and its genuine derivative are fixed before choosing a negative
 component or a requested norm order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

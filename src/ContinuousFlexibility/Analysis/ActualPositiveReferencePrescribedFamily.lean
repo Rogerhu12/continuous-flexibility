@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CanonicalPositiveReferenceFamily
-import ContinuousFlexibility.Analysis.PositiveReferenceFinitePrescribed
-import ContinuousFlexibility.Analysis.PositiveComponentMaterialCell
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalPositiveReferenceFamily
+public import ContinuousFlexibility.Analysis.PositiveReferenceFinitePrescribed
+public import ContinuousFlexibility.Analysis.PositiveComponentMaterialCell
 
 /-!
 # Actual finite reference family for the displayed material width
@@ -10,6 +12,8 @@ This proof fixes its original C0 and B, the actual midpoint cell and the
 actual endpoint sources. The resulting Y and H are exactly its displayed
 Taylor interpolation; no qualitative family is selected in their place.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N06CurrentInverseTestJets
-import ContinuousFlexibility.Analysis.N05CanonicalBoundarySymmetry
-import Mathlib.Analysis.Calculus.MeanValue
-import Mathlib.Topology.MetricSpace.Lipschitz
-import Mathlib.MeasureTheory.Function.AbsolutelyContinuous
-import ContinuousFlexibility.Analysis.N05N06ClosedChartBridge
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentInverseTestJets
+public import ContinuousFlexibility.Analysis.N05CanonicalBoundarySymmetry
+public import Mathlib.Analysis.Calculus.MeanValue
+public import Mathlib.Topology.MetricSpace.Lipschitz
+public import Mathlib.MeasureTheory.Function.AbsolutelyContinuous
+public import ContinuousFlexibility.Analysis.N05N06ClosedChartBridge
 
 /-!
 # Genuine closed traces of the current transformed physical test
@@ -15,6 +17,8 @@ Lipschitz extension supplies global representatives with the correct
 closed traces. Their physical values use the actual closed moving domain
 and the two genuine closed inverse identities.
 -/
+
+@[expose] public section
 
 noncomputable section
 

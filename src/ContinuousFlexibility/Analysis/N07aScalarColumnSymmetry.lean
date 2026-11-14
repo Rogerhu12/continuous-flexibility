@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCoefficientSymmetry
-import ContinuousFlexibility.Scalar.Normalization
+module
+
+public import ContinuousFlexibility.Analysis.N07aCoefficientSymmetry
+public import ContinuousFlexibility.Scalar.Normalization
 
 /-!
 # Reflection of the actual scalar columns
@@ -9,6 +11,8 @@ including at points where the derivatives are totalized.  Thus the ν
 derivative and the corrected cutoff divergence are even functions before
 they are sent through the actual canonical coordinate map.
 -/
+
+@[expose] public section
 
 noncomputable section
 

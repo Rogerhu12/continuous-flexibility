@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderPlancherel
-import ContinuousFlexibility.Analysis.OneHighCylinderFourierL2Inversion
-import Mathlib.MeasureTheory.Integral.Bochner.SumMeasure
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderPlancherel
+public import ContinuousFlexibility.Analysis.OneHighCylinderFourierL2Inversion
+public import Mathlib.MeasureTheory.Integral.Bochner.SumMeasure
 
 /-!
 # Pointwise inversion and the Fourier `L¹` bound on the cylinder
@@ -10,6 +12,8 @@ Fubini gives integrability of every integer Fourier mode. The actual radial
 sum is bounded by the mixed Fourier `L¹` norm, so ordinary circle inversion
 recovers the original continuous cylinder function.
 -/
+
+@[expose] public section
 
 noncomputable section
 

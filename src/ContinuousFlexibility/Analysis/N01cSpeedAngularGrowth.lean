@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cSpeedLowBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01cSpeedLowBounds
 
 /-!
 # Actual angular speed growth on the original common neighbourhood
@@ -7,6 +9,8 @@ The zero parameter jet is evaluated at its genuine value. The complete
 material weight is bounded on the radial core, so a spatial order changes
 only the constant and the high grading index, never the common base.
 -/
+
+@[expose] public section
 
 noncomputable section
 

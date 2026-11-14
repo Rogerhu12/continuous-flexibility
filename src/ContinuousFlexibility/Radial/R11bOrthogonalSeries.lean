@@ -1,5 +1,7 @@
-import Mathlib.Analysis.InnerProductSpace.Subspace
-import Mathlib.Topology.Algebra.InfiniteSum.Real
+module
+
+public import Mathlib.Analysis.InnerProductSpace.Subspace
+public import Mathlib.Topology.Algebra.InfiniteSum.Real
 
 /-!
 # Square-summable orthogonal vectors
@@ -8,6 +10,8 @@ The one-dimensional spans turn a pairwise orthogonal family of vectors,
 including zero vectors, into mathlib's orthogonal family of subspaces.
 This supplies strong summability and the exact squared norm of the sum.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryComposition
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryTraceOperations
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsPlaneJets
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryComposition
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryTraceOperations
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsPlaneJets
 
 /-!
 # Uniform finite plane composition bounds
@@ -10,6 +12,8 @@ specializing to any atlas. The finite basis argument is likewise carried
 out for abstract plane maps, so actual source estimates use one bound
 field without rewriting a dependent composition certificate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

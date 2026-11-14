@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06WeakAngularLeibniz
-import ContinuousFlexibility.Analysis.N06MaterialAbsorption
-import ContinuousFlexibility.Analysis.CylinderTestPairing
+module
+
+public import ContinuousFlexibility.Analysis.N06WeakAngularLeibniz
+public import ContinuousFlexibility.Analysis.N06MaterialAbsorption
+public import ContinuousFlexibility.Analysis.CylinderTestPairing
 
 /-!
 # Bounded multiplication on the actual finite weak angular source level
@@ -11,6 +13,8 @@ arbitrary member of the original weak-jet subspace. The finite binomial
 construction has a uniform piece norm bound, which sums in the original
 canonical volume norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

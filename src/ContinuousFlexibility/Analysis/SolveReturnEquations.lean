@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Blueprint.Statements
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
 
 /-!
 # Recovering the actual equations from the coupled residual
@@ -9,6 +11,8 @@ and the equivalence in N02 supplies both actual characteristic-return equations.
 This module also checks the sector and neighborhood when passing from the
 linear sector coordinates back to the affine state coordinates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

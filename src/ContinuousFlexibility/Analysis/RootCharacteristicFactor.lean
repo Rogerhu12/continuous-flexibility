@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.S05CalculusProof
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Ring
+module
+
+public import ContinuousFlexibility.Scalar.S05CalculusProof
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
 
 /-!
 # The actual factored characteristic field at a simple root
@@ -10,6 +12,8 @@ derivative. The remaining factors are the actual discriminant and height Q.
 The numerical bounds below come from the N01 intervals for Q/w and D.
 This module does not assert a common root germ for a corrected N03 operator.
 -/
+
+@[expose] public section
 
 noncomputable section
 

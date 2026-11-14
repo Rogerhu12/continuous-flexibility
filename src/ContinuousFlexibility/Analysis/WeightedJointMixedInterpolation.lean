@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CircleUniformAngularInterpolation
-import ContinuousFlexibility.Analysis.JointMixedTameBounds
-import ContinuousFlexibility.Analysis.JointMixedDiagonalCalculus
+module
+
+public import ContinuousFlexibility.Analysis.CircleUniformAngularInterpolation
+public import ContinuousFlexibility.Analysis.JointMixedTameBounds
+public import ContinuousFlexibility.Analysis.JointMixedDiagonalCalculus
 
 /-!
 # One interpolation scale for actual mixed characteristic jets
@@ -10,6 +12,8 @@ orders are absorbed in one low order. Spatial restriction inserts only
 the two fixed unit directions. Interpolation therefore charges exactly
 the total spatial order, while retaining the component weight power.
 -/
+
+@[expose] public section
 
 noncomputable section
 

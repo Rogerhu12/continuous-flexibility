@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CircleInverseCompositionGrowth
-import ContinuousFlexibility.Analysis.CircleCompositionJetModels
+module
+
+public import ContinuousFlexibility.Analysis.CircleInverseCompositionGrowth
+public import ContinuousFlexibility.Analysis.CircleCompositionJetModels
 
 /-!
 # The actual inverse lift and its circle composition operator
@@ -10,6 +12,8 @@ its two-sided smooth inverse. Its uniform angular jets realize inverse
 composition in the supplied circle model, without assuming membership of
 the inverse lift itself.
 -/
+
+@[expose] public section
 
 noncomputable section
 

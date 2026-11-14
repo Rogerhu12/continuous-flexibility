@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAffineTower
-import ContinuousFlexibility.Scalar.WeightedTowerCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N07aAffineTower
+public import ContinuousFlexibility.Scalar.WeightedTowerCalculus
 
 /-!
 # Uniform bounds on the actual affine parameter slice
@@ -9,6 +11,8 @@ base and loss. Translation changes only the numerical constant, and a
 grading contraction introduces no additional loss or order-dependent
 neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,11 @@
-import ContinuousFlexibility.Radial.SeedMorseEntrance
-import ContinuousFlexibility.Radial.MorseSecondModeLocalization
+module
+
+public import ContinuousFlexibility.Radial.SeedMorseEntrance
+public import ContinuousFlexibility.Radial.MorseSecondModeLocalization
 
 /-! # A selected second-mode pair with ordered regular entrances -/
+
+@[expose] public section
 
 noncomputable section
 

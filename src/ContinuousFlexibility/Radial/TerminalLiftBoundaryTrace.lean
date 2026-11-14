@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.TerminalPoissonFluxIdentity
-import ContinuousFlexibility.Radial.TerminalCapLift
-import ContinuousFlexibility.Radial.StandInBoundarySlope
+module
+
+public import ContinuousFlexibility.Radial.TerminalPoissonFluxIdentity
+public import ContinuousFlexibility.Radial.TerminalCapLift
+public import ContinuousFlexibility.Radial.StandInBoundarySlope
 
 /-!
 # Boundary traces of the actual terminal lifts
@@ -9,6 +11,8 @@ Constant cutoff germs preserve the normalized value and the physical
 outward slope at the lift's own matching cut. The zero germ at the other
 cut gives both zero value and zero conormal flux.
 -/
+
+@[expose] public section
 
 noncomputable section
 

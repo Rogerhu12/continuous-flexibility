@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07bFiniteTransportBounds
-import ContinuousFlexibility.Analysis.N07bFiniteMaterialExtension
-import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
-import ContinuousFlexibility.Analysis.MaterialOrdinaryJets
+module
+
+public import ContinuousFlexibility.Analysis.N07bFiniteTransportBounds
+public import ContinuousFlexibility.Analysis.N07bFiniteMaterialExtension
+public import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
+public import ContinuousFlexibility.Analysis.MaterialOrdinaryJets
 
 /-!
 # Finite material decay of the actual transported remainder
@@ -13,6 +15,8 @@ extension uses C³ interior regularity and bounds only through order two.
 The geometric weight comparison is an explicit hypothesis; no source,
 operator-domain, or norm conclusion is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

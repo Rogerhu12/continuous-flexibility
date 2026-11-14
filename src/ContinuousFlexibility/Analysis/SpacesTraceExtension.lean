@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesTracePacketEstimates
-import ContinuousFlexibility.Analysis.SpacesPhysicalDecode
+module
+
+public import ContinuousFlexibility.Analysis.SpacesTracePacketEstimates
+public import ContinuousFlexibility.Analysis.SpacesPhysicalDecode
 
 /-!
 # The actual right inverse of the sample trace
@@ -8,6 +10,8 @@ The locally finite material packets are restored to the physical annulus.
 They interpolate the prescribed sample values exactly, and their full
 physical norms are controlled by circle norms with one fixed loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

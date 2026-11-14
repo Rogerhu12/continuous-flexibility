@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CylinderTestPairing
-import Mathlib.Analysis.InnerProductSpace.Adjoint
-import Mathlib.Analysis.InnerProductSpace.l2Space
+module
+
+public import ContinuousFlexibility.Analysis.CylinderTestPairing
+public import Mathlib.Analysis.InnerProductSpace.Adjoint
+public import Mathlib.Analysis.InnerProductSpace.l2Space
 
 /-!
 # Circle data inside the fixed model Banach space
@@ -12,6 +14,8 @@ the fixed `PhysicalModelBanach`. Its Hilbert adjoint is a contractive left
 inverse. This supplies the Banach-space change needed by the circle Fourier
 retraction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

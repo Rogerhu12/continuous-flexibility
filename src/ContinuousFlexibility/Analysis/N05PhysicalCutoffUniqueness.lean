@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGraphRepresentatives
-import ContinuousFlexibility.Analysis.N05ReferenceLeftConstant
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGraphRepresentatives
+public import ContinuousFlexibility.Analysis.N05ReferenceLeftConstant
 
 /-!
 # The canonical left scalar is fixed by physical endpoint integrability
@@ -9,6 +11,8 @@ left tail is sufficient: the reciprocal square root of the profile times
 that cutoff cannot lie in L². Two physical remainders with this endpoint
 integrability therefore have the same left scalar.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerRadialWeightedPoisson
-import ContinuousFlexibility.Radial.InnerRadialGapHardy
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialWeightedPoisson
+public import ContinuousFlexibility.Radial.InnerRadialGapHardy
 
 /-!
 # Hardy energy on actual gap columns and their common cut diagonal
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Radial.InnerRadialGapHardy
 Every gap keeps its full Dirichlet-to-Neumann matrix.  The extra left
 endpoint term is charged exactly once to the adjacent internal cut.
 -/
+
+@[expose] public section
 
 noncomputable section
 

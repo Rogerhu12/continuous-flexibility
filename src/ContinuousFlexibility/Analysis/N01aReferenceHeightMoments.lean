@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01aReferenceHeightWeights
-import ContinuousFlexibility.Analysis.N01aReferenceWeightedMultiplier
-import Mathlib.MeasureTheory.Function.JacobianOneDim
+module
+
+public import ContinuousFlexibility.Analysis.N01aReferenceHeightWeights
+public import ContinuousFlexibility.Analysis.N01aReferenceWeightedMultiplier
+public import Mathlib.MeasureTheory.Function.JacobianOneDim
 
 /-!
 # Material-coordinate square moments of a weighted radial output
@@ -9,6 +11,8 @@ The change of variables is performed with the actual affine material
 coordinate and its proved derivative. The square-root density multiplier
 is exactly the Jacobian needed for Lebesgue measure in the material line.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CanonicalStoredSliceBijection
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalStoredSliceBijection
 
 /-!
 # Recovering the actual negative chart from stored characteristic footpoints
@@ -9,6 +11,8 @@ radial travel backwards from the full N01 travel. The footpoints here are
 those of the original stored N03 flow, whose slice bijectivity was proved
 from the existing canonical geometry.
 -/
+
+@[expose] public section
 
 noncomputable section
 

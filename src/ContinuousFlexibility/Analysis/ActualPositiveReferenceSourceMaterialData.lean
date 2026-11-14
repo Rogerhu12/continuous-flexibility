@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ActualReferenceRootFiniteMaterialData
-import ContinuousFlexibility.Analysis.ActualPositiveReferenceEndpointData
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+module
+
+public import ContinuousFlexibility.Analysis.ActualReferenceRootFiniteMaterialData
+public import ContinuousFlexibility.Analysis.ActualPositiveReferenceEndpointData
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
 
 /-!
 # Material data of the actual interior positive reference source
@@ -11,6 +13,8 @@ has absolute value one. The original height is unchanged. Thus the
 proved raw root envelope controls the exact scalar data consumed by the
 prescribed positive reference interpolation, without changing the host.
 -/
+
+@[expose] public section
 
 noncomputable section
 

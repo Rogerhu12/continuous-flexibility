@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ModeRegionSources
-import Mathlib.Analysis.InnerProductSpace.ProdL2
-import Mathlib.Topology.Algebra.Module.ClosedSubmodule
+module
+
+public import ContinuousFlexibility.Radial.ModeRegionSources
+public import Mathlib.Analysis.InnerProductSpace.ProdL2
+public import Mathlib.Topology.Algebra.Module.ClosedSubmodule
 
 /-!
 # Actual supported source projection for the inner inverse
@@ -14,6 +16,8 @@ or estimate is included in this criterion.
 An operator on that same subspace extends by the proved projection and inclusion.
 Passing to the frozen ordinary product costs at most the fixed factor sqrt 2.
 -/
+
+@[expose] public section
 
 noncomputable section
 

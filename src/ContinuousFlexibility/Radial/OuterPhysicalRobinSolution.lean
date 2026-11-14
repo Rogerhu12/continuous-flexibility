@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterGreenSplit
-import ContinuousFlexibility.Radial.OuterRobinWeakGraph
+module
+
+public import ContinuousFlexibility.Radial.OuterGreenSplit
+public import ContinuousFlexibility.Radial.OuterRobinWeakGraph
 
 /-!
 # The actual physical Green solution and its Robin trace
@@ -9,6 +11,8 @@ kernel gives a C¹ one-sided representative.  Its conormal flux satisfies
 the original Jacobi equation weakly, its normalized Robin trace vanishes,
 and the complementary trace is the natural L² pairing divided by λ.
 -/
+
+@[expose] public section
 
 noncomputable section
 

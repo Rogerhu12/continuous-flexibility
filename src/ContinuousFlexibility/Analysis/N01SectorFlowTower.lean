@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SectorParameterGeometry
-import ContinuousFlexibility.Analysis.N01FlowAngularSmoothness
+module
+
+public import ContinuousFlexibility.Analysis.SectorParameterGeometry
+public import ContinuousFlexibility.Analysis.N01FlowAngularSmoothness
 
 /-!
 # The actual N01 flow tower in sector coordinates
@@ -8,6 +10,8 @@ Affine restriction keeps both the genuine directional derivatives and
 the precise one-high-factor weight. Angular jets of the same actual
 flow are continuous up to the closed radial endpoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

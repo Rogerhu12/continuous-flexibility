@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cLinearProductJets
-import ContinuousFlexibility.Analysis.N01cPolarJetBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01cLinearProductJets
+public import ContinuousFlexibility.Analysis.N01cPolarJetBounds
 
 /-!
 # One-high bounds for the genuine q times height parameter towers
@@ -14,6 +16,8 @@ The actual joint-state specializations retain H^(3/4) and the original
 E0 power. A fixed reference state contributes only its fixed-order
 seminorm to the constant.
 -/
+
+@[expose] public section
 
 noncomputable section
 

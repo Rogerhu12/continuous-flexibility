@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularInverse
-import ContinuousFlexibility.Analysis.N07aAngularSpectralBounds
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularInverse
+public import ContinuousFlexibility.Analysis.N07aAngularSpectralBounds
 
 /-!
 # Uniform inverse constants from the actual one-high graph estimates
@@ -8,6 +10,8 @@ Only the order-zero state size enters the inverse constant. A finite
 monotone envelope preserves the single high state factor, and the output
 is the same bounded inverse in the actual higher source graph.
 -/
+
+@[expose] public section
 
 noncomputable section
 

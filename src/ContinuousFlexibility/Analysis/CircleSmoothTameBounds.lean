@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CircleJetAssembly
-import ContinuousFlexibility.Analysis.SmoothTameOneHigh
+module
+
+public import ContinuousFlexibility.Analysis.CircleJetAssembly
+public import ContinuousFlexibility.Analysis.SmoothTameOneHigh
 
 /-!
 # Sharp physical circle norms imply the frozen smooth tame bounds
@@ -8,6 +10,8 @@ The target grading is a finite maximum of physical circle norms. Taking
 a finite sum of the numerical constants preserves the previously fixed
 loss and low input order. The genuine tower is unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

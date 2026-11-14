@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import Mathlib.Data.Fin.Embedding
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import Mathlib.Data.Fin.Embedding
 
 /-!
 # The actual canonical angular graph across Sobolev orders
@@ -9,6 +11,8 @@ outer `lp` and inner `PiLp` spaces. They preserve the actual weak derivative
 relations and angular reflection in `canonicalVolumeGraph`. No spectral or
 regularity certificate is added to `IsVolumeModel`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

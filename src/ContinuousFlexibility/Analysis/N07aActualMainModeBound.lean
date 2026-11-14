@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aRelativeMainIdentity
-import ContinuousFlexibility.Analysis.N07aActualPrincipalBlock
-import ContinuousFlexibility.Analysis.N07aModeEnergyNorm
+module
+
+public import ContinuousFlexibility.Analysis.N07aRelativeMainIdentity
+public import ContinuousFlexibility.Analysis.N07aActualPrincipalBlock
+public import ContinuousFlexibility.Analysis.N07aModeEnergyNorm
 
 /-!
 # The mode bound for the actual relative source without its scalar columns
@@ -10,6 +12,8 @@ energy.  Both ordinary blocks and frequency-commutator blocks retain a
 positive height gain.  All geometric factors are collected into actual
 sample subpower envelopes before the outer weighted estimate is taken.
 -/
+
+@[expose] public section
 
 noncomputable section
 

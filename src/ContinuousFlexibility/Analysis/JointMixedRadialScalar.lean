@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.JointMixedDiagonalCalculus
-import ContinuousFlexibility.Analysis.N01CoefficientMixedBounds
+module
+
+public import ContinuousFlexibility.Analysis.JointMixedDiagonalCalculus
+public import ContinuousFlexibility.Analysis.N01CoefficientMixedBounds
 
 /-!
 # Actual mixed jets of a parameter-independent radial cutoff
@@ -9,6 +11,8 @@ genuine tower therefore has no positive pure-parameter jets. Angular
 derivatives also vanish, leaving exactly the ordinary radial derivative.
 This gives the degree-zero cutoff factors in the transport recurrence.
 -/
+
+@[expose] public section
 
 noncomputable section
 

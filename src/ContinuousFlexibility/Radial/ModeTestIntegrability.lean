@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ModeDensityDerivative
-import Mathlib.MeasureTheory.Function.LpSeminorm.CompareExp
+module
+
+public import ContinuousFlexibility.Radial.ModeDensityDerivative
+public import Mathlib.MeasureTheory.Function.LpSeminorm.CompareExp
 
 /-!
 # Integrable modal weak tests
@@ -9,6 +11,8 @@ uses the global Glaeser estimate for the nonnegative profile, so ordinary
 support at the singular radial endpoints is sufficient. Both sides of the
 weak equation are bounded linear pairings on the modal Hilbert space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

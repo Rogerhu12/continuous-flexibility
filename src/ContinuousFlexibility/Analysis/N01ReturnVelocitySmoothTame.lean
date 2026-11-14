@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01ReturnVelocityCircle
+module
+
+public import ContinuousFlexibility.Analysis.N01ReturnVelocityCircle
 
 /-!
 # Full parameter tameness of the actual cutoff velocity
@@ -9,6 +11,8 @@ towers, the exact divided-difference displacement, and the same cutoff
 multiplier give the original velocity jointly in the state and the
 independent residual. The resulting scalar tower also varies the angle.
 -/
+
+@[expose] public section
 
 noncomputable section
 

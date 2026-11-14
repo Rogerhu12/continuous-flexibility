@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseTransitionBands
-import ContinuousFlexibility.Radial.R07DeepTailBounds
+module
+
+public import ContinuousFlexibility.Radial.MorseTransitionBands
+public import ContinuousFlexibility.Radial.R07DeepTailBounds
 
 /-!
 # Fine action bounds for the actual physical deep tail
@@ -9,6 +11,8 @@ square root of log(A/B). The adjacent mass and gap indices are treated
 separately, so the estimate is uniform over the whole upper frequency
 band and includes the left initial resistance interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

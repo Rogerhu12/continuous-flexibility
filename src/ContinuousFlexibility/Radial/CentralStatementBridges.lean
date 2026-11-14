@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Statements.Radial
-import ContinuousFlexibility.Radial.OscillatorPotentialEnergy
-import ContinuousFlexibility.Radial.CentralRadialHilbert
-import ContinuousFlexibility.Radial.CentralLeftAsymptotics
-import ContinuousFlexibility.Radial.CentralRightAsymptotics
-import ContinuousFlexibility.Radial.CentralTurningPoints
+module
+
+public import ContinuousFlexibility.Statements.Radial
+public import ContinuousFlexibility.Radial.OscillatorPotentialEnergy
+public import ContinuousFlexibility.Radial.CentralRadialHilbert
+public import ContinuousFlexibility.Radial.CentralLeftAsymptotics
+public import ContinuousFlexibility.Radial.CentralRightAsymptotics
+public import ContinuousFlexibility.Radial.CentralTurningPoints
 
 /-!
 # Exact bridges to the frozen central-model statement
@@ -13,6 +15,8 @@ actual absolute-potential domain. All domain, core and distribution clauses
 are retained. The final R03 conjunction is assembled only after every clause
 has been proved for its stated test class.
 -/
+
+@[expose] public section
 
 noncomputable section
 

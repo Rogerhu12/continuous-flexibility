@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N07aAngularDivergencePrimitive
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalCoefficients
-import ContinuousFlexibility.Analysis.N07aOpenNormalBootstrap
-import ContinuousFlexibility.Analysis.N07aOpenDistributionFlux
-import ContinuousFlexibility.Analysis.N07aCanonicalRepresentationPairing
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularDivergencePrimitive
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalCoefficients
+public import ContinuousFlexibility.Analysis.N07aOpenNormalBootstrap
+public import ContinuousFlexibility.Analysis.N07aOpenDistributionFlux
+public import ContinuousFlexibility.Analysis.N07aCanonicalRepresentationPairing
 
 /-!
 # The actual interior distribution equation supplies every weak jet
@@ -12,6 +14,8 @@ with compact tests are genuine global tests, so the first weak radial
 and angular jets determine the actual flux equation without extending a
 coefficient across either radial endpoint.
 -/
+
+@[expose] public section
 
 noncomputable section
 

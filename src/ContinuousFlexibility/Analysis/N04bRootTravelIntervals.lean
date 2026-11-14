@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bRootCutPowers
-import ContinuousFlexibility.Analysis.N04bMovingDomains
+module
+
+public import ContinuousFlexibility.Analysis.N04bRootCutPowers
+public import ContinuousFlexibility.Analysis.N04bMovingDomains
 
 /-!
 # The actual root coordinate on either travel half
@@ -8,6 +10,8 @@ The root coordinate (3s/2)^(2/3) and the already defined root travel
 (2/3)ξ^(3/2) are genuine inverses on their positive intervals.
 One involution treats the two travel orientations uniformly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N03InteriorChartJets
-import ContinuousFlexibility.Analysis.CanonicalCutFullFaithfulness
-import ContinuousFlexibility.Analysis.InteriorTravelJacobian
+module
+
+public import ContinuousFlexibility.Analysis.N03InteriorChartJets
+public import ContinuousFlexibility.Analysis.CanonicalCutFullFaithfulness
+public import ContinuousFlexibility.Analysis.InteriorTravelJacobian
 
 /-!
 # A quantitative Jacobian for the actual two negative charts
@@ -11,6 +13,8 @@ the actual chart germ give the same absolute determinant formula on
 both halves. Numerical speed and angular lower bounds then imply the
 required lower bound for the actual chart, without a Jacobian premise.
 -/
+
+@[expose] public section
 
 noncomputable section
 

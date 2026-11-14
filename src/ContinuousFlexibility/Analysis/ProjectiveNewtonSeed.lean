@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ProjectiveNewtonSchedule
-import ContinuousFlexibility.Analysis.ProjectiveNewtonTameData
+module
+
+public import ContinuousFlexibility.Analysis.ProjectiveNewtonSchedule
+public import ContinuousFlexibility.Analysis.ProjectiveNewtonTameData
 
 /-!
 # The initial parameter interval and the Newton domain
@@ -8,6 +10,8 @@ The finite correction budget proves the domain conditions before the
 recurrence is used at each step. The initial scale and the parameter
 interval are chosen once for the entire family of iterates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

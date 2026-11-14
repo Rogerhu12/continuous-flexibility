@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
-import ContinuousFlexibility.Analysis.N04RealizationLeadOptical
-import ContinuousFlexibility.Analysis.SpacesCutoff
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
+public import ContinuousFlexibility.Analysis.N04RealizationLeadOptical
+public import ContinuousFlexibility.Analysis.SpacesCutoff
 
 /-!
 # Admissible gauges exist independently of the open current-jet statements
@@ -13,6 +15,8 @@ Every retained start has a positive component, since its reference profile
 vanishes at the left endpoint and is positive in the annulus.  The reference
 family certificate makes its displayed height strictly positive everywhere.
 -/
+
+@[expose] public section
 
 noncomputable section
 

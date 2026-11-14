@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07bHeightRadialMembers
+module
+
+public import ContinuousFlexibility.Analysis.N07bHeightRadialMembers
 
 /-!
 # Natural radial classes from actual continuous fields and material decay
@@ -8,6 +10,8 @@ endpoints and outside the annulus are not used for measurability or L2
 membership.  The source compatibility condition remains the actual physical
 integral, and the output uses the prescribed left constant.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryReferenceAtoms
-import ContinuousFlexibility.Analysis.N04PositiveGeometryGaugeRegularity
-import ContinuousFlexibility.Analysis.N04PrincipalPositivePairInputs
-import ContinuousFlexibility.Analysis.N04PrincipalPositiveIndex
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryReferenceAtoms
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryGaugeRegularity
+public import ContinuousFlexibility.Analysis.N04PrincipalPositivePairInputs
+public import ContinuousFlexibility.Analysis.N04PrincipalPositiveIndex
 
 /-!
 # Paired inputs for the positive geometry collector
@@ -10,6 +12,8 @@ An individual current atom and the supplied material certificate give its
 paired tower. The fixed width factor uses the original positive component
 and sample. Neither construction assumes the complete geometry interface.
 -/
+
+@[expose] public section
 
 noncomputable section
 

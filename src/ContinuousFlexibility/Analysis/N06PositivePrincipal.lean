@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N05ReferenceSymbols
-import ContinuousFlexibility.Analysis.N06NuFiniteJets
-import ContinuousFlexibility.Analysis.NeighborhoodProfileBounds
-import ContinuousFlexibility.Scalar.TypeCorrection
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceSymbols
+public import ContinuousFlexibility.Analysis.N06NuFiniteJets
+public import ContinuousFlexibility.Analysis.NeighborhoodProfileBounds
+public import ContinuousFlexibility.Scalar.TypeCorrection
 
 /-!
 # Positivity of the actual corrected principal form
@@ -16,6 +18,8 @@ The final algebraic lemmas apply to actual Frechet coordinate partials,
 so a nonzero forward Jacobian gives two strictly positive coordinate
 responses.
 -/
+
+@[expose] public section
 
 noncomputable section
 

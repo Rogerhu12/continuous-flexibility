@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import Mathlib.Analysis.Calculus.Deriv.Inverse
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
-import Mathlib.Topology.DiscreteSubset
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import Mathlib.Analysis.Calculus.Deriv.Inverse
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+public import Mathlib.Topology.DiscreteSubset
 
 /-!
 # Turning roots are finite on every compact interior interval
@@ -10,6 +12,8 @@ This geometric fact follows from the actual nondegeneracy clause of the
 reference profile. It is separate from local finiteness of an arbitrary
 canonical piece cover: that cover could still subdivide a sign interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

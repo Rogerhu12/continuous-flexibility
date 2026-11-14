@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderSobolevJetsBasic
-import Mathlib.Analysis.Calculus.FDeriv.Partial
-import Mathlib.Analysis.Calculus.ContDiff.Comp
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
-import Mathlib.Analysis.Complex.RealDeriv
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderSobolevJetsBasic
+public import Mathlib.Analysis.Calculus.FDeriv.Partial
+public import Mathlib.Analysis.Calculus.ContDiff.Comp
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+public import Mathlib.Analysis.Complex.RealDeriv
 
 /-!
 # Smoothness and actual coordinate derivatives of cylinder jets
@@ -11,6 +13,8 @@ The continuous coordinate derivative tower implies ordinary joint smoothness
 of its periodic lift. This supplies smooth-composition arguments without a
 new smoothness assumption or an extra family of formal derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

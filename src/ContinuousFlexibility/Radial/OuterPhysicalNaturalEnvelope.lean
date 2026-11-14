@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterTailPointwiseBounds
-import ContinuousFlexibility.Radial.OuterKernelEnvelopeAlgebra
+module
+
+public import ContinuousFlexibility.Radial.OuterTailPointwiseBounds
+public import ContinuousFlexibility.Radial.OuterKernelEnvelopeAlgebra
 
 /-!
 # Uniform pointwise decay of the actual normalized natural solution
@@ -9,6 +11,8 @@ on the actual short tail. This removes all frequency-dependent entrance
 normalizations from the relative pointwise decay, including the initial
 resistance interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

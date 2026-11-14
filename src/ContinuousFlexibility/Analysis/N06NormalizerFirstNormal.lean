@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06NormalizerWeights
-import ContinuousFlexibility.Analysis.N06WeakAngularLeibniz
+module
+
+public import ContinuousFlexibility.Analysis.N06NormalizerWeights
+public import ContinuousFlexibility.Analysis.N06WeakAngularLeibniz
 
 /-!
 # The original weak first normal derivative under a normalizer change
@@ -10,6 +12,8 @@ new normal field is the corresponding linear combination in the actual
 volume space. Linearity is proved using the original canonical test
 pairings, without differentiating L2 representatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData
+module
+
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData
 
 /-!
 # Every actual atom on a retained negative half
@@ -8,6 +10,8 @@ field, potential, endpoints and sample. Therefore all thirty-three atom
 functions are copied, at every state and every point. This identity also
 applies after enlarging only the material envelope.
 -/
+
+@[expose] public section
 
 noncomputable section
 

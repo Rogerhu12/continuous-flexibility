@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Geometry.CapDisk
-import ContinuousFlexibility.Geometry.MarkerBump
-import ContinuousFlexibility.Geometry.PlanarRotations
-import Mathlib.Analysis.Calculus.LocalExtr.Basic
+module
+
+public import ContinuousFlexibility.Geometry.CapDisk
+public import ContinuousFlexibility.Geometry.MarkerBump
+public import ContinuousFlexibility.Geometry.PlanarRotations
+public import Mathlib.Analysis.Calculus.LocalExtr.Basic
 
 /-!
 # A marker inserted into the actual top collar of the cap
@@ -11,6 +13,8 @@ duplicated on the bottom disk with the same planar projection. The chosen
 center is `(R + L / 8, 0)`, and the elliptic coefficients are fixed to `1,2`.
 This file does not assert the final closed-surface curvature comparison.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.ReferenceModeComparison
-import ContinuousFlexibility.Radial.ReferenceTestSqueeze
-import ContinuousFlexibility.Radial.ReferenceGraphInterior
-import ContinuousFlexibility.Radial.ReferenceModerateCoefficients
+module
+
+public import ContinuousFlexibility.Radial.ReferenceModeComparison
+public import ContinuousFlexibility.Radial.ReferenceTestSqueeze
+public import ContinuousFlexibility.Radial.ReferenceGraphInterior
+public import ContinuousFlexibility.Radial.ReferenceModerateCoefficients
 
 /-!
 # Positive weighted decay of the actual homogeneous profile
@@ -14,6 +16,8 @@ and weak derivative uniqueness identify its normal coefficient with
 phi'. Thus both weighted assertions follow from the original inverses,
 without an extra cutoff-support or decay hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

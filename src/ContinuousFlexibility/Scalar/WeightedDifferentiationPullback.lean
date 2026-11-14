@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.WeightedMaterialScale
-import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
-import ContinuousFlexibility.Radial.RadialHeight
+module
+
+public import ContinuousFlexibility.Scalar.WeightedMaterialScale
+public import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
+public import ContinuousFlexibility.Radial.RadialHeight
 
 /-!
 # Pullbacks of the actual ordinary coordinate derivatives
@@ -10,6 +12,8 @@ actual derivative. The radial formula retains both the inverse scale and
 the derivative of the logarithmic height weight. Angular differentiation
 commutes with the radial weight.
 -/
+
+@[expose] public section
 
 noncomputable section
 

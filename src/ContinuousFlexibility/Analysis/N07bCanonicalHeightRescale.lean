@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07bCanonicalSourceEnergy
+module
+
+public import ContinuousFlexibility.Analysis.N07bCanonicalSourceEnergy
 
 /-!
 # Positive piecewise constant height rescaling
@@ -11,6 +13,8 @@ Only the height field is changed. This module makes no preservation claim
 for Part B, the canonical operator, N05, or N06, and does not assert a
 counterexample to the existential N07b statement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,10 @@
-import ContinuousFlexibility.Analysis.N04NegativeHeightLinearSpatial
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeHeightLinearSpatial
 
 /-! Addition, angular differentiation and equality of fixed reference data. -/
+
+@[expose] public section
 
 noncomputable section
 

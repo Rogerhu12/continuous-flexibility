@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01ReturnDisplacementCircle
-import ContinuousFlexibility.Analysis.CircleAverageCompositionSmoothTame
-import ContinuousFlexibility.Analysis.CircleProductSmoothTame
-import ContinuousFlexibility.Analysis.TameLocalLinear
+module
+
+public import ContinuousFlexibility.Analysis.N01ReturnDisplacementCircle
+public import ContinuousFlexibility.Analysis.CircleAverageCompositionSmoothTame
+public import ContinuousFlexibility.Analysis.CircleProductSmoothTame
+public import ContinuousFlexibility.Analysis.TameLocalLinear
 
 /-!
 # Full smooth tameness of the actual independent-residual displacement
@@ -12,6 +14,8 @@ their genuine circle-space towers. This proves the original divided
 difference displacement jointly smooth tame in the state and the
 independent residual. Decoding also gives the true joint angle tower.
 -/
+
+@[expose] public section
 
 noncomputable section
 

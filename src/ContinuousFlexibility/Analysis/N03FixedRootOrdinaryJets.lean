@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N03FixedRootHeightIdentity
-import ContinuousFlexibility.Analysis.N01ScaledDividedFactorJets
-import ContinuousFlexibility.Analysis.RootChartExtensionGeometry
-import ContinuousFlexibility.Analysis.OpenGermBoundaryJets
+module
+
+public import ContinuousFlexibility.Analysis.N03FixedRootHeightIdentity
+public import ContinuousFlexibility.Analysis.N01ScaledDividedFactorJets
+public import ContinuousFlexibility.Analysis.RootChartExtensionGeometry
+public import ContinuousFlexibility.Analysis.OpenGermBoundaryJets
 
 /-!
 # Ordinary jets of the actual chart and height on a fixed root band
@@ -12,6 +14,8 @@ actual closed-domain regularity. The new height is the divided formula,
 so no derivative of a singular quotient is assumed. The same flow,
 scale, state and physical half are retained throughout.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04bFlowFirstVariation
+module
+
+public import ContinuousFlexibility.Analysis.N04bFlowFirstVariation
 
 /-!
 # Endpoint derivatives from the uniform flow remainder
@@ -8,6 +10,8 @@ by the nonzero parameter. The uniform velocity expansion and the actual
 integral equations are still explicit hypotheses; no N04b trajectory or
 parameter regularity of a chart is asserted by this file.
 -/
+
+@[expose] public section
 
 noncomputable section
 

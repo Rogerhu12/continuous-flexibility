@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05ReferenceOutputBlock
-import ContinuousFlexibility.Analysis.N05CanonicalOutputChange
-import ContinuousFlexibility.Analysis.N05CanonicalSourceCoefficient
-import ContinuousFlexibility.Analysis.N05ReferenceCutoffChange
-import ContinuousFlexibility.Radial.ReferenceGraphNorms
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05ReferenceOutputBlock
+public import ContinuousFlexibility.Analysis.N05CanonicalOutputChange
+public import ContinuousFlexibility.Analysis.N05CanonicalSourceCoefficient
+public import ContinuousFlexibility.Analysis.N05ReferenceCutoffChange
+public import ContinuousFlexibility.Radial.ReferenceGraphNorms
 
 /-!
 # The actual canonical output block with its endpoint factor
@@ -12,6 +14,8 @@ The square of the actual height transform is integrated with its genuine
 Jacobian density. The physical piece estimate then retains the endpoint
 factor needed to compare the two bounds for the same inverse output.
 -/
+
+@[expose] public section
 
 noncomputable section
 

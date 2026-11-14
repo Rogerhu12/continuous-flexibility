@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01ReturnInverseCircle
-import ContinuousFlexibility.Analysis.CircleComponentContraction
+module
+
+public import ContinuousFlexibility.Analysis.N01ReturnInverseCircle
+public import ContinuousFlexibility.Analysis.CircleComponentContraction
 
 /-!
 # The same cutoff interpolation and its actual inverse in the circle model
@@ -10,6 +12,8 @@ The resulting affine lift is exactly the interpolation used by the
 corrected flow. Its inverse displacement and its joint parameter-angle
 tower are obtained on the original N01 sector neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

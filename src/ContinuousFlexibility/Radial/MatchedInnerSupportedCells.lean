@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchedSupportedColumnCells
-import ContinuousFlexibility.Radial.MatchedInnerWeightTransport
+module
+
+public import ContinuousFlexibility.Radial.MatchedSupportedColumnCells
+public import ContinuousFlexibility.Radial.MatchedInnerWeightTransport
 
 /-!
 # The actual inner cell kernel with finite-region weights
@@ -10,6 +12,8 @@ only compared where the actual localizer is nonzero in that region. In particula
 unchanged extension by one outside the finite chain causes no loss or
 additional hypothesis. The frequency scalar gate is retained throughout.
 -/
+
+@[expose] public section
 
 noncomputable section
 

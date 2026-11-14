@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01ReturnMargins
-import ContinuousFlexibility.Analysis.OpticalTravelVariation
-import Mathlib.Analysis.SpecialFunctions.Trigonometric.Bounds
+module
+
+public import ContinuousFlexibility.Analysis.N01ReturnMargins
+public import ContinuousFlexibility.Analysis.OpticalTravelVariation
+public import Mathlib.Analysis.SpecialFunctions.Trigonometric.Bounds
 
 /-!
 # A positive lower bound for the actual optical travel
@@ -9,6 +11,8 @@ The frequency-one return margin bounds the positive optical travel from
 below at a genuine containing radial cell. This uses only the radial
 reference and control geometry, independently of flow differentiation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

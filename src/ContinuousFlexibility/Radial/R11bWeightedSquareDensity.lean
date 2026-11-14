@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R11bPartitionL2
+module
+
+public import ContinuousFlexibility.Radial.R11bPartitionL2
 
 /-!
 # Real weighted square densities and Tonelli
@@ -7,6 +9,8 @@ A summable family of nonnegative ordinary integrals has an integrable real
 pointwise sum. The proof passes through the nonnegative extended-real sum,
 whose finiteness almost everywhere also handles the real tsum's junk value.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

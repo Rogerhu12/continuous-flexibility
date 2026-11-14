@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterFullCore
-import ContinuousFlexibility.Radial.OuterTransferNorm
+module
+
+public import ContinuousFlexibility.Radial.OuterFullCore
+public import ContinuousFlexibility.Radial.OuterTransferNorm
 
 /-!
 # The actual continuous linear core transfer and its inverse
@@ -9,6 +11,8 @@ a compact subinterval of the regular physical annulus.  The transfer
 is constructed by solving the actual value/flux system for every
 initial state before its operator norm is estimated.
 -/
+
+@[expose] public section
 
 noncomputable section
 

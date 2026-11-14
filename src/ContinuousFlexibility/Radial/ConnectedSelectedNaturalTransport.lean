@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.ConnectedReferenceBorder
-import ContinuousFlexibility.Radial.SelectedNaturalTailTransport
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
-import Mathlib.Order.Interval.Set.LinearOrder
-import Mathlib.Topology.Order.DenselyOrdered
+module
+
+public import ContinuousFlexibility.Radial.ConnectedReferenceBorder
+public import ContinuousFlexibility.Radial.SelectedNaturalTailTransport
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+public import Mathlib.Order.Interval.Set.LinearOrder
+public import Mathlib.Topology.Order.DenselyOrdered
 
 /-!
 # Actual retained tails of one connected selected reference
@@ -18,6 +20,8 @@ Validity and retention of the chosen entrance are explicit inputs. In
 particular, no unconditional validity of the entry at the initial chain
 index is inferred from a frequency band that might be empty.
 -/
+
+@[expose] public section
 
 noncomputable section
 

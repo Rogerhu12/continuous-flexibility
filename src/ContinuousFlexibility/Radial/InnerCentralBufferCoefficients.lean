@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerCentralBufferData
-import ContinuousFlexibility.Radial.InnerCentralFlux
+module
+
+public import ContinuousFlexibility.Radial.InnerCentralBufferData
+public import ContinuousFlexibility.Radial.InnerCentralFlux
 
 /-!
 # Central raw coefficient bounds with the actual density drift
@@ -10,6 +12,8 @@ cut energy. It grows at most linearly in the far cut, whereas the
 actual action grows quadratically in that cut. The comparison input
 for the inward energy is exactly the mass/C lower bound supplied by R09.
 -/
+
+@[expose] public section
 
 noncomputable section
 

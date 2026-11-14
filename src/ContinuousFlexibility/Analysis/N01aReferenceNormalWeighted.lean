@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01aReferenceNormalPairing
+module
+
+public import ContinuousFlexibility.Analysis.N01aReferenceNormalPairing
 
 /-!
 # Weighted cells of the actual derivative of the eigenfunction
@@ -8,6 +10,8 @@ Testing the weak normal equation with interior cutoffs of
 Only the square-integrability that is actually present in the frozen
 normal estimate is used for its supplied derivative representative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

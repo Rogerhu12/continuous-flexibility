@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N07aAngularPieceInterfaces
-import ContinuousFlexibility.Analysis.N07aAngularReferenceSymmetry
-import ContinuousFlexibility.Analysis.N07bReferenceTransport
-import ContinuousFlexibility.Analysis.N07bReferencePieceRegularity
-import ContinuousFlexibility.Analysis.MaterialHeightRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularPieceInterfaces
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceSymmetry
+public import ContinuousFlexibility.Analysis.N07bReferenceTransport
+public import ContinuousFlexibility.Analysis.N07bReferencePieceRegularity
+public import ContinuousFlexibility.Analysis.MaterialHeightRegularity
 
 /-!
 # A genuine C¹ reference realization from the geometric transport
@@ -13,6 +15,8 @@ each reference piece the field is the actual current-chart pullback, whose
 closed-piece smoothness follows from the stored boundary inverse germs.
 The actual current pieces may have curved, state-dependent boundaries.
 -/
+
+@[expose] public section
 
 noncomputable section
 

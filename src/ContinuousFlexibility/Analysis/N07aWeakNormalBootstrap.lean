@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aWeakRegularityAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.N07aWeakRegularityAlgebra
 
 /-!
 # Qualitative normal bootstrap in the actual canonical weak space
@@ -9,6 +11,8 @@ The finite sum is built from the actual bounded coefficient multipliers
 and prescribed weak jets; its regularity is proved by the weak jet
 algebra rather than assumed of the solution.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedGeometryLowJets
-import ContinuousFlexibility.Scalar.WeightedStateFlatness
+module
+
+public import ContinuousFlexibility.Scalar.WeightedGeometryLowJets
+public import ContinuousFlexibility.Scalar.WeightedStateFlatness
 
 /-!
 # Geometry of the actual weighted scalar state on one common ball
@@ -9,6 +11,8 @@ It is chosen once at input order four, before every output derivative order.
 All smoothness, endpoint and positivity clauses are those of the frozen
 `ScalarStateGeometry` definition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

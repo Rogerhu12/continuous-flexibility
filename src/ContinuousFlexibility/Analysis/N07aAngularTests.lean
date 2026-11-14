@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import ContinuousFlexibility.Analysis.SpacesCircleFourierJets
-import ContinuousFlexibility.Analysis.SpacesTorusWaves
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import ContinuousFlexibility.Analysis.SpacesCircleFourierJets
+public import ContinuousFlexibility.Analysis.SpacesTorusWaves
 
 /-!
 # Actual Fourier tests for the canonical weak angular derivative
@@ -10,6 +12,8 @@ Fourier waves are admissible canonical tests. The defining weak equation
 therefore gives the Fourier multiplier `(2 I n)^j`, without imposing any
 radial regularity on the source or its weak derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

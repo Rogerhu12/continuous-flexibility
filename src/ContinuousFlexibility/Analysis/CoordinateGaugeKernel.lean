@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SquareDensityIsometry
-import ContinuousFlexibility.Analysis.CoordinateL2Isometry
+module
+
+public import ContinuousFlexibility.Analysis.SquareDensityIsometry
+public import ContinuousFlexibility.Analysis.CoordinateL2Isometry
 
 /-!
 # Integral kernels under an exact coordinate and gauge isometry
@@ -9,6 +11,8 @@ the exact square-density change of measure, so no bounded reciprocal
 multiplier is required.  Both the all-source formula and the individual
 L² kernel rows are transported.
 -/
+
+@[expose] public section
 
 noncomputable section
 

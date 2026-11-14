@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.EffectiveCoefficientProbeIdentity
+module
+
+public import ContinuousFlexibility.Analysis.EffectiveCoefficientProbeIdentity
 
 /-!
 # The actual N03 error determines two effective coefficient numerators
@@ -9,6 +11,8 @@ operator is used only where its actual action equals the stored corrected
 operator. In particular this statement does not assert a common physical
 domain for a family of effective fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 

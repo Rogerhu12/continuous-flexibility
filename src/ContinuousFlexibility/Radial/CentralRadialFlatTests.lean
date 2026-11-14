@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.CentralRadialWeakTransport
+module
+
+public import ContinuousFlexibility.Radial.CentralRadialWeakTransport
 
 /-!
 # Radial tests whose support can approach zero
@@ -8,6 +10,8 @@ The Gaussian in the actual radius controls the pullback of these larger
 tests. In mode two the already proved compact core then extends the weak
 pairing to their genuine whole-line differential graph pairs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

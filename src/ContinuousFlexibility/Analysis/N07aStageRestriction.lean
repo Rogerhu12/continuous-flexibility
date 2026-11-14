@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.N07aRegularity
-import ContinuousFlexibility.Analysis.N07aNeighborhood
+module
+
+public import ContinuousFlexibility.Statements.N07aRegularity
+public import ContinuousFlexibility.Analysis.N07aNeighborhood
 
 /-!
 # Restricting the actual N07a intermediate conclusions
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Analysis.N07aNeighborhood
 Only the low-order neighborhood is changed. All inverse maps, source
 classes and estimates remain those already proved on the larger domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

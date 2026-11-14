@@ -1,8 +1,12 @@
-import ContinuousFlexibility.Analysis.N01cCosineSpeedParameterBounds
-import ContinuousFlexibility.Analysis.N01cFlowSlotBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01cCosineSpeedParameterBounds
+public import ContinuousFlexibility.Analysis.N01cFlowSlotBounds
 
 /-! Finite prefixes of actual cosine-speed state derivatives, with one
 additive loss chosen before the spatial order and unchanged low base. -/
+
+@[expose] public section
 
 noncomputable section
 

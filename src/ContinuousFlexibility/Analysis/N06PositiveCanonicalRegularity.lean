@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06EllipticConjugationProbes
-import ContinuousFlexibility.Analysis.N06PositivePrincipal
-import ContinuousFlexibility.Analysis.N06TurningRootDensity
-import Mathlib.Analysis.Calculus.Deriv.Abs
+module
+
+public import ContinuousFlexibility.Analysis.N06EllipticConjugationProbes
+public import ContinuousFlexibility.Analysis.N06PositivePrincipal
+public import ContinuousFlexibility.Analysis.N06TurningRootDensity
+public import Mathlib.Analysis.Calculus.Deriv.Abs
 
 /-!
 # Actual positive canonical coefficients are smooth
@@ -13,6 +15,8 @@ then expresses those functions as smooth forward jets composed with the
 original inverse chart. The final neighbourhood is chosen from the original
 cutoff data, rather than from an additional canonical regularity hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

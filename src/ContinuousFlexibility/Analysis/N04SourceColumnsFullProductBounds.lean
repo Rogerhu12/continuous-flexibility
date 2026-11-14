@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04SourceColumnsFullProduct
+module
+
+public import ContinuousFlexibility.Analysis.N04SourceColumnsFullProduct
 
 /-!
 # Fixed low order for products of full current towers
@@ -7,6 +9,8 @@ All factors are interpolated on one finite prefix. Their height gain is
 used only for positive parameter derivatives, as required by the actual
 reference-plus-difference estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

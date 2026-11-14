@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.R07PhysicalNormalization
-import ContinuousFlexibility.Radial.R07NaturalContinuation
-import ContinuousFlexibility.Radial.R07RadialTransport
-import ContinuousFlexibility.Radial.R07HeightCubeExtension
+module
+
+public import ContinuousFlexibility.Radial.R07PhysicalNormalization
+public import ContinuousFlexibility.Radial.R07NaturalContinuation
+public import ContinuousFlexibility.Radial.R07RadialTransport
+public import ContinuousFlexibility.Radial.R07HeightCubeExtension
 
 /-!
 # A continuous family of actual outgoing natural solutions
@@ -11,6 +13,8 @@ representatives, continued to a fixed matching radius, and transported by
 the actual radial equation.  This constructs the outgoing state used in
 height selection rather than assuming a continuous choice of that state.
 -/
+
+@[expose] public section
 
 noncomputable section
 

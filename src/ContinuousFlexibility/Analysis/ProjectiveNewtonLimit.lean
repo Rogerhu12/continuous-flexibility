@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ProjectiveNewtonRecurrence
-import Mathlib.Topology.Algebra.InfiniteSum.Real
+module
+
+public import ContinuousFlexibility.Analysis.ProjectiveNewtonRecurrence
+public import Mathlib.Topology.Algebra.InfiniteSum.Real
 
 /-!
 # Convergence and residual closure of the actual Newton iterates
@@ -9,6 +11,8 @@ sequence in the compatible Banach coordinates. A fixed closed margin
 keeps the limit inside the open Newton cylinder. Forward smoothing and
 strong approximation make every sufficiently high base grade separating.
 -/
+
+@[expose] public section
 
 noncomputable section
 

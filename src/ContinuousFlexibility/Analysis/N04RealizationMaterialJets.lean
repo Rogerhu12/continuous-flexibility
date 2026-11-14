@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationPrimitiveClosure
-import ContinuousFlexibility.Analysis.N04RealizationMaterialSampleEnvelopes
-import ContinuousFlexibility.Analysis.N06Neighborhood
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationPrimitiveClosure
+public import ContinuousFlexibility.Analysis.N04RealizationMaterialSampleEnvelopes
+public import ContinuousFlexibility.Analysis.N06Neighborhood
 
 /-!
 # The complete actual primitive material-jet certificate
@@ -11,6 +13,8 @@ chart and atom estimates construct the factor certificate there; the
 fifteen fields are collected before the actual sample cost is converted
 to the physical point. The records and their samples never change.
 -/
+
+@[expose] public section
 
 noncomputable section
 

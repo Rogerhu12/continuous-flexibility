@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.FixedCentralBorder
-import ContinuousFlexibility.Radial.CentralBufferChoice
-import ContinuousFlexibility.Radial.ModeCoreSource
-import ContinuousFlexibility.Radial.InnerRadialActualPieces
+module
+
+public import ContinuousFlexibility.Radial.FixedCentralBorder
+public import ContinuousFlexibility.Radial.CentralBufferChoice
+public import ContinuousFlexibility.Radial.ModeCoreSource
+public import ContinuousFlexibility.Radial.InnerRadialActualPieces
 
 /-!
 # The fixed true column as an actual central model chart
@@ -11,6 +13,8 @@ Liouville image is transported back by the inverse-adjoint map, and the
 result is proved equal to the reference's genuine `matchingBorderVector`.
 No replacement by the auxiliary R03 column occurs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

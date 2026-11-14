@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CircleEnergyEnvelope
-import ContinuousFlexibility.Analysis.CircleSingletonControl
+module
+
+public import ContinuousFlexibility.Analysis.CircleEnergyEnvelope
+public import ContinuousFlexibility.Analysis.CircleSingletonControl
 
 /-!
 # Smooth angular fields supported on a single circle
@@ -8,6 +10,8 @@ Varying one return radius only changes its actual circle component.
 This elementary finite-support realization is used for local spatial
 regularity; no uniformity in the chosen component is asserted or needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

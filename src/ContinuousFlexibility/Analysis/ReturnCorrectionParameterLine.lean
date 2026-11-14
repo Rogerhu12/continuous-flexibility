@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01ReturnChartParameterLine
-import ContinuousFlexibility.Analysis.ScalarParameterDslope
+module
+
+public import ContinuousFlexibility.Analysis.N01ReturnChartParameterLine
+public import ContinuousFlexibility.Analysis.ScalarParameterDslope
 
 /-!
 # Parameter lines of the actual frozen optical correction
@@ -11,6 +13,8 @@ All inverse maps and the divided difference are the actual maps in the
 correction, including at zero residual. Only the value of the given
 cutoff at the selected radius enters the interpolation argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

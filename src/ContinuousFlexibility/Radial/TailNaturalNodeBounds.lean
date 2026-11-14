@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.TailNodeUniqueness
-import ContinuousFlexibility.Radial.TailNodeProducts
+module
+
+public import ContinuousFlexibility.Radial.TailNodeUniqueness
+public import ContinuousFlexibility.Radial.TailNodeProducts
 
 /-!
 # Mass and resistance bounds for the natural node line
@@ -9,6 +11,8 @@ an upper coupling bound. The two neighboring mass--resistance inequalities
 then give the continued-fraction smallness conditions, the physical node
 decay, and summability in the weighted mass norm of exponent one.
 -/
+
+@[expose] public section
 
 noncomputable section
 

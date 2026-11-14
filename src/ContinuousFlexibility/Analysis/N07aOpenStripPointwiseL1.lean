@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aOpenIntervalPointwise
-import ContinuousFlexibility.Analysis.CylinderMixedJets
+module
+
+public import ContinuousFlexibility.Analysis.N07aOpenIntervalPointwise
+public import ContinuousFlexibility.Analysis.CylinderMixedJets
 
 /-!
 # The four true L¹ jets controlling an interior point of an open strip
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Analysis.CylinderMixedJets
 All uses of the fundamental theorem take place in an interior compact
 rectangle. The constants depend only on its radial length.
 -/
+
+@[expose] public section
 
 noncomputable section
 

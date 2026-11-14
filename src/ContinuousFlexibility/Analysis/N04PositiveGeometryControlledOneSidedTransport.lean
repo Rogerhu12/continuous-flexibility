@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneSidedWholeComponentTransport
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledWholeTransport
+module
+
+public import ContinuousFlexibility.Analysis.OneSidedWholeComponentTransport
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledWholeTransport
 
 /-!
 # Polynomial inverse choice for the actual one-sided endpoint fields
@@ -9,6 +11,8 @@ jets. They now feed the polynomial whole-component factory. The new
 coefficient and degree are selected before all endpoint data and states;
 no common infinite-order collar is assumed or manufactured.
 -/
+
+@[expose] public section
 
 noncomputable section
 

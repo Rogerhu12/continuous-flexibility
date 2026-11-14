@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerRadialInterfaceWeights
-import ContinuousFlexibility.Radial.InnerRadialWeightedPoisson
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialInterfaceWeights
+public import ContinuousFlexibility.Radial.InnerRadialWeightedPoisson
 
 /-!
 # Weighted bounds for the same actual finite-chain inverse
@@ -10,6 +12,8 @@ adjoints occur in the weak inverse, rather than separate norm witnesses.
 An output coefficient-loss contraction preserves the frequency-decaying
 correction. Thus the same inverse serves both coarse and localized bounds.
 -/
+
+@[expose] public section
 
 noncomputable section
 

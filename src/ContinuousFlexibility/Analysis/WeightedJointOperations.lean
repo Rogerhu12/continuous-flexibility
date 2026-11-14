@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.WeightedJointComposition
-import ContinuousFlexibility.Analysis.TameUniformFamilyJets
-import Mathlib.Topology.MetricSpace.ProperSpace
+module
+
+public import ContinuousFlexibility.Analysis.WeightedJointComposition
+public import ContinuousFlexibility.Analysis.TameUniformFamilyJets
+public import Mathlib.Topology.MetricSpace.ProperSpace
 
 /-!
 # Operations on joint growth with one high parameter factor
@@ -11,6 +13,8 @@ on a finite-dimensional target preserve unweighted joint growth by the
 fixed interpolation budget. This supplies the discriminant polynomial
 before taking its positive square root.
 -/
+
+@[expose] public section
 
 noncomputable section
 

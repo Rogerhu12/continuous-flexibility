@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OscillatorClosedGraph
+module
+
+public import ContinuousFlexibility.Radial.OscillatorClosedGraph
 
 /-!
 # Adjoint maximality and kernels of the central Hermite graph
@@ -12,6 +14,8 @@ differential pairs used by the inverse construction.
 These results support R03.02 and R03.05. They do not identify the graph
 with a distribution or Friedrichs domain; those require separate bridges.
 -/
+
+@[expose] public section
 
 noncomputable section
 

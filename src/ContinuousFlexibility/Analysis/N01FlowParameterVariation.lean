@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01RadialFlow
-import ContinuousFlexibility.Analysis.SmoothDirectionsMixedScalarLine
-import ContinuousFlexibility.Analysis.ScalarFlowParameterVariation
-import ContinuousFlexibility.Analysis.TameLocalCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N01RadialFlow
+public import ContinuousFlexibility.Analysis.SmoothDirectionsMixedScalarLine
+public import ContinuousFlexibility.Analysis.ScalarFlowParameterVariation
+public import ContinuousFlexibility.Analysis.TameLocalCalculus
 
 /-!
 # Actual parameter derivatives of the N01 ordinary flow
@@ -13,6 +15,8 @@ identifies the derivative at the terminal radius from actual derivatives
 of the characteristic speed. The speed hypotheses concern concrete
 functions and their ordinary finite-dimensional derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

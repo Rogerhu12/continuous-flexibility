@@ -1,11 +1,13 @@
-import ContinuousFlexibility.Statements.Scalar
-import ContinuousFlexibility.Statements.ScalarWeighted
-import ContinuousFlexibility.Statements.FiniteFourier
-import ContinuousFlexibility.Statements.RadialTargets
-import ContinuousFlexibility.Statements.Analysis
-import ContinuousFlexibility.Statements.Nonlinear
-import ContinuousFlexibility.Statements.NonlinearCompletion
-import ContinuousFlexibility.Statements.MainGeometry
+module
+
+public import ContinuousFlexibility.Statements.Scalar
+public import ContinuousFlexibility.Statements.ScalarWeighted
+public import ContinuousFlexibility.Statements.FiniteFourier
+public import ContinuousFlexibility.Statements.RadialTargets
+public import ContinuousFlexibility.Statements.Analysis
+public import ContinuousFlexibility.Statements.Nonlinear
+public import ContinuousFlexibility.Statements.NonlinearCompletion
+public import ContinuousFlexibility.Statements.MainGeometry
 
 /-!
 # Exhaustive typed registry of the 58 blueprint milestone goals
@@ -14,6 +16,8 @@ Every entry reduces to an explicit closed proposition. This registry asserts
 no milestone proposition: constructing its type is separate from proving it.
 MAIN has no analytic input and expands to `Nonempty ClosedBending`.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Statements
 

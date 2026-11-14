@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05ReferenceNegativeHeight
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05ReferenceNegativeHeight
 
 /-!
 # Exact densities on the actual negative reference pieces
@@ -9,6 +11,8 @@ Its actual Jacobian is therefore the actual derivative of its radial slice.
 The closed principal-symbol and determinant identities fix both the height
 normalization and the physical density, including at the two endpoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

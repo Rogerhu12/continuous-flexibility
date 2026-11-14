@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01FlowParameterVariation
-import ContinuousFlexibility.Analysis.PolarHeightCharacteristicVariation
+module
+
+public import ContinuousFlexibility.Analysis.N01FlowParameterVariation
+public import ContinuousFlexibility.Analysis.PolarHeightCharacteristicVariation
 
 /-!
 # The actual height response of the N01 return flow
@@ -9,6 +11,8 @@ with the integral of the actual height-speed variation along the radial
 optical trajectory. The formula uses the N01 flow itself and the exact
 polar characteristic coefficients.
 -/
+
+@[expose] public section
 
 noncomputable section
 

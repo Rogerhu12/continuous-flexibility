@@ -1,5 +1,7 @@
-import Mathlib.Analysis.Normed.Lp.lpSpace
-import ContinuousFlexibility.Analysis.NeumannPackage
+module
+
+public import Mathlib.Analysis.Normed.Lp.lpSpace
+public import ContinuousFlexibility.Analysis.NeumannPackage
 
 /-!
 # Tridiagonal diagonal-dominance inverse on `ℓ²(ℕ)`
@@ -18,6 +20,8 @@ the sequences (hence "independently of the number of edges").
 * `jacobiOp_exists_inverse` is the dominance theorem, and `jacobiOp_neg_exists_inverse` its
   version for the sign pattern `-(∑ b_n a_n² + 2 ∑ c_n a_n a_{n+1})` of the paper.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PositiveConformalJetTransfer
-import ContinuousFlexibility.Geometry.PlanarOrientation
+module
+
+public import ContinuousFlexibility.Analysis.PositiveConformalJetTransfer
+public import ContinuousFlexibility.Geometry.PlanarOrientation
 
 /-!
 # A global representative of the actual positive canonical density
@@ -12,6 +14,8 @@ identity proves the Jacobian nonzero, so the extended canonical density
 is globally smooth and has the actual germs on the canonical closed strip.
 Finite conformal matching supplies its zero jets through order two.
 -/
+
+@[expose] public section
 
 noncomputable section
 

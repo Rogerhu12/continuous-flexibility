@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MorseCellMassResistanceBounds
+module
+
+public import ContinuousFlexibility.Radial.MorseCellMassResistanceBounds
 
 /-!
 # Model estimates after normalizing a retained radius
@@ -7,6 +9,8 @@ The prescribed speed is relative to the radius at the right turning point.
 Dividing by that positive radius puts any realized cell into the normalized
 initial-value problem used by the finite-cell estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

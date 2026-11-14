@@ -1,6 +1,8 @@
-import Mathlib.Analysis.Calculus.Deriv.MeanValue
-import Mathlib.Analysis.Calculus.Deriv.Pow
-import Mathlib.Analysis.SpecialFunctions.ExpDeriv
+module
+
+public import Mathlib.Analysis.Calculus.Deriv.MeanValue
+public import Mathlib.Analysis.Calculus.Deriv.Pow
+public import Mathlib.Analysis.SpecialFunctions.ExpDeriv
 
 /-!
 # Uniqueness with differential equations only in the open interval
@@ -10,6 +12,8 @@ their time equations are specified only in the interior.  A squared
 difference multiplied by an exponential proves uniqueness in precisely
 that setting, without assuming an extra derivative at either endpoint.
 -/
+
+@[expose] public section
 
 noncomputable section
 

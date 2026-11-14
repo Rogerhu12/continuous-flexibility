@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Contracts.GraphCylinderVolume
-import Mathlib.Analysis.Calculus.Deriv.Slope
+module
+
+public import ContinuousFlexibility.Contracts.GraphCylinderVolume
+public import Mathlib.Analysis.Calculus.Deriv.Slope
 
 /-!
 # Actual inward and outward normal rays at the graph boundary
@@ -9,6 +11,8 @@ subgraph, rather than supplied as a name or an unverified orientation field.
 The eventual full cap-inside region must still be identified with this region
 near its central graph portion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

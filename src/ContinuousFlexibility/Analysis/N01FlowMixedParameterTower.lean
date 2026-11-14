@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01SectorFlowTower
-import ContinuousFlexibility.Analysis.SmoothDirectionsLocalLabels
-import ContinuousFlexibility.Analysis.N01OpticalCollarJetBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01SectorFlowTower
+public import ContinuousFlexibility.Analysis.SmoothDirectionsLocalLabels
+public import ContinuousFlexibility.Analysis.N01OpticalCollarJetBounds
 
 /-!
 # Actual mixed flow towers in sector coordinates
@@ -11,6 +13,8 @@ uniform seminorm bound for every angular label. These local bounds are
 used for genuine joint radial and state differentiability; the sharper
 original spatial budget remains available in the weighted theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

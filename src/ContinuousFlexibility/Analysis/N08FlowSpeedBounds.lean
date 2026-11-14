@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N08CharacteristicVariation
-import ContinuousFlexibility.Scalar.S04CalculusProof
-import Mathlib.Analysis.Calculus.ContDiff.RCLike
+module
+
+public import ContinuousFlexibility.Analysis.N08CharacteristicVariation
+public import ContinuousFlexibility.Scalar.S04CalculusProof
+public import Mathlib.Analysis.Calculus.ContDiff.RCLike
 
 /-!
 # Parameter and angular bounds for the factored actual speed
@@ -10,6 +12,8 @@ with the height parameter or angle. The remaining factors are jointly
 smooth. Compact boxes therefore provide the uniform Lipschitz domination
 needed to differentiate the actual flow's integral equation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

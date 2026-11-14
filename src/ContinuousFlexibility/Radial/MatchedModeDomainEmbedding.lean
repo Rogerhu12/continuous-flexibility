@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.MatchedModeMeasureEmbedding
-import ContinuousFlexibility.Radial.MatchedModeGraphRealization
-import ContinuousFlexibility.Radial.ReferenceSourceCosine
-import Mathlib.MeasureTheory.Function.LpSeminorm.Prod
+module
+
+public import ContinuousFlexibility.Radial.MatchedModeMeasureEmbedding
+public import ContinuousFlexibility.Radial.MatchedModeGraphRealization
+public import ContinuousFlexibility.Radial.ReferenceSourceCosine
+public import Mathlib.MeasureTheory.Function.LpSeminorm.Prod
 
 /-!
 # The frozen weighted domains supply the actual modal L² vectors
@@ -11,6 +13,8 @@ Hilbert measure. The smooth left height can then be restored there.
 A fixed source coefficient threshold gives every normalized source mode
 in the same space, so cosine projection has no extra L² assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cCosineFlowIdentities
-import ContinuousFlexibility.Analysis.OneHighCircleFlowInterior
-import Mathlib.Analysis.SpecialFunctions.Trigonometric.InverseDeriv
+module
+
+public import ContinuousFlexibility.Analysis.N01cCosineFlowIdentities
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowInterior
+public import Mathlib.Analysis.SpecialFunctions.Trigonometric.InverseDeriv
 
 /-!
 # Interior spatial regularity of the supplied ordinary flow
@@ -10,6 +12,8 @@ physical interior point. Pulling back the genuine compact-flow
 regularity therefore gives the actual radial and angular regularity of
 the original ordinary trajectories.
 -/
+
+@[expose] public section
 
 noncomputable section
 

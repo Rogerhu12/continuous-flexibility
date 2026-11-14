@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06MorsePositiveComponent
-import Mathlib.Analysis.Calculus.Deriv.MeanValue
+module
+
+public import ContinuousFlexibility.Analysis.N06MorsePositiveComponent
+public import Mathlib.Analysis.Calculus.Deriv.MeanValue
 
 /-!
 # A quantitative width for the actual positive Morse gaps
@@ -9,6 +11,8 @@ every retained model from below. The fixed short left cap therefore has
 a physical width bounded below by a coefficient power. Each positive
 gap contains one such actual cap, on either physical tail.
 -/
+
+@[expose] public section
 
 noncomputable section
 

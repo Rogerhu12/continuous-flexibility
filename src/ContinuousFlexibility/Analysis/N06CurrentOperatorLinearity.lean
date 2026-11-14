@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06CurrentPositiveOperatorTest
-import ContinuousFlexibility.Analysis.N06EllipticConjugationProbes
-import ContinuousFlexibility.Analysis.N06CurrentOperatorReflection
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentPositiveOperatorTest
+public import ContinuousFlexibility.Analysis.N06EllipticConjugationProbes
+public import ContinuousFlexibility.Analysis.N06CurrentOperatorReflection
 
 /-!
 # True current operator linearity and reflection averaging
@@ -15,6 +17,8 @@ Reflection covariance is a separate exact identity: reflection is a
 continuous linear equivalence, so the totalized derivatives transform
 correctly without any coefficient regularity assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

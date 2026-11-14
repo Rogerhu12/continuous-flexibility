@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ReferenceRadialCellBound
-import ContinuousFlexibility.Radial.WeightKernelBounds
-import Mathlib.Analysis.Normed.Group.Bounded
+module
+
+public import ContinuousFlexibility.Radial.ReferenceRadialCellBound
+public import ContinuousFlexibility.Radial.WeightKernelBounds
+public import Mathlib.Analysis.Normed.Group.Bounded
 
 /-!
 # The compact correction from the endpoint step to the actual border
@@ -11,6 +13,8 @@ vanishes in both endpoint collars, hence meets only finitely many cells.
 Its actual weighted radial L² norm is uniformly bounded for gamma in
 [0,1] and every nonnegative output coefficient loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

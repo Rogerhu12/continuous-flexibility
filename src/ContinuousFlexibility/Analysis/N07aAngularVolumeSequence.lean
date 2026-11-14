@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularEndpointFlux
-import ContinuousFlexibility.Analysis.N07aVolumeWeightBounds
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularEndpointFlux
+public import ContinuousFlexibility.Analysis.N07aVolumeWeightBounds
 
 /-!
 # Positive height weight gives the genuine unweighted canonical sequence
@@ -8,6 +10,8 @@ The material envelope already bounds H^γ M^(−t) for every real t and
 positive γ. Thus forgetting any such volume level has a true outer ℓ²
 representative, as required by the original canonical unknown space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

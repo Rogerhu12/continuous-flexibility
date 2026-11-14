@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01EndpointZeroGrowth
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N01EndpointZeroGrowth
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
 
 /-!
 # Fixed-base estimates for every genuine endpoint circle tower
@@ -9,6 +11,8 @@ orders. We keep that order when passing to the circle grading and to any
 given genuine tower. Constants precede both the closed-radius selector and
 the tower; no derivative family is selected separately at different orders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

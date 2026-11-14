@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07bActualCanonicalSourceLift
+module
+
+public import ContinuousFlexibility.Analysis.N07bActualCanonicalSourceLift
 
 /-!
 # The prescribed source level from piecewise smooth representatives
@@ -9,6 +11,8 @@ canonical cylinder. These extensions give local L² jets; periodic Green
 identities and summability then put the actual jets in the same chosen
 volume model. No global smoothness of the forcing is required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

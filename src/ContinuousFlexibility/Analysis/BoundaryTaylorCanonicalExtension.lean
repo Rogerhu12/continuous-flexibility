@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.BoundaryTaylorPrincipalRemainder
-import ContinuousFlexibility.Analysis.CanonicalDensityExtension
+module
+
+public import ContinuousFlexibility.Analysis.BoundaryTaylorPrincipalRemainder
+public import ContinuousFlexibility.Analysis.CanonicalDensityExtension
 
 /-!
 # Canonical zero jets for the actual boundary Taylor construction
@@ -9,6 +11,8 @@ height. The root normal form gives physical zero jets, then a genuine
 local inverse transports them. Its interior agreement with invFunOn
 identifies the extension with the actual canonical numerator.
 -/
+
+@[expose] public section
 
 noncomputable section
 

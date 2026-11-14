@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ReferenceGraphNorms
-import ContinuousFlexibility.Radial.R11bRadialTests
+module
+
+public import ContinuousFlexibility.Radial.ReferenceGraphNorms
+public import ContinuousFlexibility.Radial.R11bRadialTests
 
 /-!
 # Closure of the actual radial weak graph
@@ -8,6 +10,8 @@ The differential expression remains the one in the frozen statement.
 Physical L² convergence passes through its test pairings and the actual
 border row; the graph is not redefined as the range of an inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

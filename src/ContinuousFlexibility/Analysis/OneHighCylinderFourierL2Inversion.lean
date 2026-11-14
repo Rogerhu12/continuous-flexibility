@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.OneHighFrequencyNorms
-import Mathlib.Analysis.Fourier.LpSpace
-import Mathlib.MeasureTheory.Function.LpSeminorm.LpNorm
-import Mathlib.MeasureTheory.Measure.OpenPos
+module
+
+public import ContinuousFlexibility.Analysis.OneHighFrequencyNorms
+public import Mathlib.Analysis.Fourier.LpSpace
+public import Mathlib.MeasureTheory.Function.LpSeminorm.LpNorm
+public import Mathlib.MeasureTheory.Measure.OpenPos
 
 /-!
 # Pointwise inversion from an integrable actual `L²` Fourier transform
@@ -12,6 +14,8 @@ tempered distributions and the classical Fourier pairing identify the
 continuous inverse integral with the original function. No physical `L¹`
 or compact-support hypothesis is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

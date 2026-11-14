@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.WeightedDifferentiationJets
-import ContinuousFlexibility.Scalar.WeightedDifferentiationAlgebra
-import ContinuousFlexibility.Scalar.WeightedJetNorm
+module
+
+public import ContinuousFlexibility.Scalar.WeightedDifferentiationJets
+public import ContinuousFlexibility.Scalar.WeightedDifferentiationAlgebra
+public import ContinuousFlexibility.Scalar.WeightedJetNorm
 
 /-!
 # The actual radial derivative as a tame continuous linear map
@@ -9,6 +11,8 @@ The fixed loss of two in the weighted jet estimate is summed in the
 physical norm and transferred through the original Sobolev decoder.
 Every real weight exponent has the same base zero and loss two.
 -/
+
+@[expose] public section
 
 noncomputable section
 

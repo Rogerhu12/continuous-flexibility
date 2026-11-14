@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MorseAdjacentScaleBounds
+module
+
+public import ContinuousFlexibility.Radial.MorseAdjacentScaleBounds
 
 /-!
 # Adjacent scales in the transition-glue transfer estimate
@@ -8,6 +10,8 @@ height and one arrival height.  Its scale is bounded by the smaller of
 the two adjacent Morse coefficients, so the preceding glue can be
 charged to the action of the transition cell itself.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometryImplicitJets
-import ContinuousFlexibility.Analysis.N04NegativeGeometryFiniteAffineDirections
-import ContinuousFlexibility.Analysis.N01cFiniteAffineJets
-import ContinuousFlexibility.Analysis.N04NegativeGeometryPlanarParameterInverse
-import ContinuousFlexibility.Analysis.CircleSmoothDirectionsOperations
-import ContinuousFlexibility.Analysis.TameProductDirections
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryImplicitJets
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryFiniteAffineDirections
+public import ContinuousFlexibility.Analysis.N01cFiniteAffineJets
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryPlanarParameterInverse
+public import ContinuousFlexibility.Analysis.CircleSmoothDirectionsOperations
+public import ContinuousFlexibility.Analysis.TameProductDirections
 
 /-!
 # Genuine implicit towers from finite affine inverse germs
@@ -16,6 +18,8 @@ inverse linearization proves the recursive formula.  Joint evaluation
 continuity then supplies a genuine tower on the original parameter
 topology.
 -/
+
+@[expose] public section
 
 noncomputable section
 

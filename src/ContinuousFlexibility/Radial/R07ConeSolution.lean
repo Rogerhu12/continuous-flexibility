@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R07RadialUniqueness
-import ContinuousFlexibility.Radial.R07ConeGeometry
+module
+
+public import ContinuousFlexibility.Radial.R07RadialUniqueness
+public import ContinuousFlexibility.Radial.R07ConeGeometry
 
 /-!
 # The actual incoming solution on a cone head
@@ -9,6 +11,8 @@ the radius. A smooth global extension of the radius supplies a smooth
 representative for finite-interval uniqueness; the actual profile is used
 throughout the radial initial value problem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

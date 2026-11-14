@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CanonicalCubicMixed
-import ContinuousFlexibility.Analysis.CanonicalCubicPointwise
-import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
-import ContinuousFlexibility.Analysis.SmoothCompactIntervalIntegral
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalCubicMixed
+public import ContinuousFlexibility.Analysis.CanonicalCubicPointwise
+public import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
+public import ContinuousFlexibility.Analysis.SmoothCompactIntervalIntegral
 
 /-!
 # Mixed cubic-division estimates on a cylinder
@@ -12,6 +14,8 @@ then gives a fixed loss of three radial derivatives, at every mixed order.
 The pointwise estimate includes the removable endpoint and has constant
 `1 / 6`, independently of the derivative order and the interval length.
 -/
+
+@[expose] public section
 
 noncomputable section
 

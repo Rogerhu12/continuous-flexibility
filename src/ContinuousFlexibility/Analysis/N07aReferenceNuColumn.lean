@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aReferenceReturn
-import ContinuousFlexibility.Radial.ReferenceCosineTests
+module
+
+public import ContinuousFlexibility.Analysis.N07aReferenceReturn
+public import ContinuousFlexibility.Radial.ReferenceCosineTests
 
 /-!
 # The genuine reference ν column
@@ -9,6 +11,8 @@ Varying only ν changes the reference profile to w exp(ν χ). Differentiating
 that explicit operator at zero gives L'₂[w χ] φ, exactly the fixed border
 column in the reference graph, with its physical cosine mode.
 -/
+
+@[expose] public section
 
 noncomputable section
 

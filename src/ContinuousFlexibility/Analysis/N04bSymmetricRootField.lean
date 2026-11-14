@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04bRootFieldExtension
-import ContinuousFlexibility.Analysis.N04bActualCharacteristics
-import Mathlib.Tactic.LinearCombination
+module
+
+public import ContinuousFlexibility.Analysis.N04bRootFieldExtension
+public import ContinuousFlexibility.Analysis.N04bActualCharacteristics
+public import Mathlib.Tactic.LinearCombination
 
 /-!
 # Symmetric global factors of the actual root characteristic field
@@ -11,6 +13,8 @@ because N03 interchanges the two physical characteristic speeds under
 angular reflection. No division by the square-root coordinate is used,
 so the identities continue to hold at the root itself.
 -/
+
+@[expose] public section
 
 noncomputable section
 

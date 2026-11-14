@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MorseWeylExclusion
+module
+
+public import ContinuousFlexibility.Radial.MorseWeylExclusion
 
 /-!
 # Inverting the actual Morse graph below the Weyl threshold
@@ -8,6 +10,8 @@ range by graph adjointness. A normalized residual sequence is then weakly
 null and would contradict Weyl exclusion. The resulting lower bound and
 graph closedness give surjectivity and a continuous linear inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.MaterialCellEndpointModels
-import ContinuousFlexibility.Analysis.MaterialSampleRadialPolynomial
+module
+
+public import ContinuousFlexibility.Analysis.MaterialCellEndpointModels
+public import ContinuousFlexibility.Analysis.MaterialSampleRadialPolynomial
 
 /-!
 # A discrete radial loss at an actual physical point
@@ -8,6 +10,8 @@ The fixed endpoint model and the genuine cell-index error turn every
 fixed radial coefficient power into a fixed power of E0 at any point of
 that cell. The point is not replaced by the chosen material sample.
 -/
+
+@[expose] public section
 
 noncomputable section
 

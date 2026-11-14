@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N01EndpointSplitNorm
-import ContinuousFlexibility.Analysis.N01EndpointPositiveCircleMember
-import ContinuousFlexibility.Analysis.CircleWeightedJetNormSum
-import ContinuousFlexibility.Analysis.LocalizedJetInterpolation
-import ContinuousFlexibility.Analysis.TameSmoothingCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N01EndpointSplitNorm
+public import ContinuousFlexibility.Analysis.N01EndpointPositiveCircleMember
+public import ContinuousFlexibility.Analysis.CircleWeightedJetNormSum
+public import ContinuousFlexibility.Analysis.LocalizedJetInterpolation
+public import ContinuousFlexibility.Analysis.TameSmoothingCalculus
 
 /-!
 # Local growth of endpoint jets with a state slot on one common box
@@ -12,6 +14,8 @@ interpolation. One low order works for all parameter orders. Each
 parameter order has its own loss, fixed before the size of the
 base-point box and before the spatial output order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

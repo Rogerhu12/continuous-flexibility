@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsRadial
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledOneSidedTransport
-import ContinuousFlexibility.Analysis.N04RealizationOneSidedTransportDirections
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsRadial
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledOneSidedTransport
+public import ContinuousFlexibility.Analysis.N04RealizationOneSidedTransportDirections
 
 /-!
 # Both actual positive transports from the original endpoint towers
@@ -11,6 +13,8 @@ traces feed the finite scalar inverse kernel. Thus the inverse transport
 has a joint tower on the original state space, using exactly the same
 stored widths as the forward map and with no inverse tower as input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

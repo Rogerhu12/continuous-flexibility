@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Statements.RadialTargets
-import ContinuousFlexibility.Radial.MorseFullStatement
-import ContinuousFlexibility.Radial.CentralStatementBridges
-import ContinuousFlexibility.Radial.MorseRealizationBasic
-import Mathlib.Analysis.Normed.Operator.Prod
+module
+
+public import ContinuousFlexibility.Statements.RadialTargets
+public import ContinuousFlexibility.Radial.MorseFullStatement
+public import ContinuousFlexibility.Radial.CentralStatementBridges
+public import ContinuousFlexibility.Radial.MorseRealizationBasic
+public import Mathlib.Analysis.Normed.Operator.Prod
 
 /-!
 # Actual full-model inverses for the buffer construction
@@ -13,6 +15,8 @@ does not change the operator bound. This supplies the full-line inverse
 clause of the compression hypotheses from the proved Morse and central
 spectral theorems, before any cap, action, or error estimate is chosen.
 -/
+
+@[expose] public section
 
 noncomputable section
 

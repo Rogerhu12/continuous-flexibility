@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Statements.Analysis
+module
+
+public import ContinuousFlexibility.Statements.Analysis
 
 /-!
 # The scalar material coordinate and weights on a physical interval
@@ -7,6 +9,8 @@ An affine change of radius transports the actual unit-interval model.
 The density scale changes with the interval length; the three weights
 and the material coordinate are pulled back without rescaling.
 -/
+
+@[expose] public section
 
 noncomputable section
 

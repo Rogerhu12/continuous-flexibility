@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ModeCoreSource
+module
+
+public import ContinuousFlexibility.Radial.ModeCoreSource
 
 /-!
 # Linear algebra of the bordered modal graph
@@ -7,6 +9,8 @@ The ordinary border row is a Hilbert pairing, so its additivity and scalar
 linearity are genuine integral identities. The full graph and inner
 Dirichlet graph inherit the corresponding algebraic closure properties.
 -/
+
+@[expose] public section
 
 noncomputable section
 

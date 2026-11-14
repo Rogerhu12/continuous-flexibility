@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N04SourceColumnsGeometry
-import ContinuousFlexibility.Analysis.N04SourceColumnsLinear
-import ContinuousFlexibility.Analysis.N04SourceColumnsReferenceProduct
-import ContinuousFlexibility.Analysis.N04SourceColumnsReferenceReciprocal
-import ContinuousFlexibility.Analysis.N07aCurrentPhysicalGeometry
-import ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient
+module
+
+public import ContinuousFlexibility.Analysis.N04SourceColumnsGeometry
+public import ContinuousFlexibility.Analysis.N04SourceColumnsLinear
+public import ContinuousFlexibility.Analysis.N04SourceColumnsReferenceProduct
+public import ContinuousFlexibility.Analysis.N04SourceColumnsReferenceReciprocal
+public import ContinuousFlexibility.Analysis.N07aCurrentPhysicalGeometry
+public import ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient
 
 /-!
 # Reference envelopes for the supplied pulled families
@@ -14,6 +16,8 @@ bounded by the reference Jacobian atom.  The exact source identity then
 recovers the pulled height, and the exact column identities recover the
 two pulled columns.  No current output jet is used in these estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

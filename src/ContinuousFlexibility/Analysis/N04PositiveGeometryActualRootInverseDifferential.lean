@@ -1,10 +1,12 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryRootInverseLinear
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsCommonContext
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsOddPowerIdentity
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsPlaneJets
-import ContinuousFlexibility.Analysis.N06CharacteristicRootJets
-import ContinuousFlexibility.Analysis.CanonicalClosedInverseJets
-import ContinuousFlexibility.Analysis.CircleInverseExistence
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryRootInverseLinear
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsCommonContext
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsOddPowerIdentity
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsPlaneJets
+public import ContinuousFlexibility.Analysis.N06CharacteristicRootJets
+public import ContinuousFlexibility.Analysis.CanonicalClosedInverseJets
+public import ContinuousFlexibility.Analysis.CircleInverseExistence
 
 /-!
 # The original root chart and its inverse first derivative
@@ -14,6 +16,8 @@ columns are expressed in the actual odd and even boundary traces. The
 stored canonical inverse then has the triangular differential at the
 inverse of the actual root label, with the same radial orientation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

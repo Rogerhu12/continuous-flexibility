@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsErrorJoint
-import ContinuousFlexibility.Analysis.N04PulledFieldsOriginalJoint
-import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientReconstruction
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsErrorJoint
+public import ContinuousFlexibility.Analysis.N04PulledFieldsOriginalJoint
+public import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientReconstruction
 
 /-!
 # Joint towers of the retained physical coefficients
@@ -9,6 +11,8 @@ The original coefficients and the actual correction error are combined
 as literal functions before any inverse-chart substitution. This keeps
 the whole physical annulus available for every moving chart point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

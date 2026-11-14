@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.TerminalMorseSourceNormalization
+module
+
+public import ContinuousFlexibility.Radial.TerminalMorseSourceNormalization
 
 /-!
 # A lower bound for the same terminal stand-in slope
@@ -8,6 +10,8 @@ Its fixed endpoint values give a secant lower bound at the normalized
 endpoint. The actual cap length, radius, and speed then give a uniform
 inverse-power lower bound for the normalized outward slope.
 -/
+
+@[expose] public section
 
 noncomputable section
 

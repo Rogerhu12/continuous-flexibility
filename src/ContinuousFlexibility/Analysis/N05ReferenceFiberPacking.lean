@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N05ReferenceHeightWindow
-import ContinuousFlexibility.Analysis.N05PhysicalPieces
-import Mathlib.Data.Set.Card
-import Mathlib.MeasureTheory.Measure.Real
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceHeightWindow
+public import ContinuousFlexibility.Analysis.N05PhysicalPieces
+public import Mathlib.Data.Set.Card
+public import Mathlib.MeasureTheory.Measure.Real
 
 /-!
 # Finite reference-piece packing from existing N04 geometry
@@ -10,6 +12,8 @@ Disjoint actual reference intervals with an explicit positive width
 have finite fibers and a quantitative count. This module uses only
 the current N04 geometry; no primitive-jet certificate is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

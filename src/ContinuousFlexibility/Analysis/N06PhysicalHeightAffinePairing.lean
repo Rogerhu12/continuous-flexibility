@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06FullCanonicalPairing
-import ContinuousFlexibility.Analysis.N06PhysicalReconstruction
+module
+
+public import ContinuousFlexibility.Analysis.N06FullCanonicalPairing
+public import ContinuousFlexibility.Analysis.N06PhysicalReconstruction
 
 /-!
 # The actual affine height in the full physical pairing
@@ -11,6 +13,8 @@ current height transform of `S.chiLeft`. Only after these facts are
 proved do we split the physical pairing into its canonical part and
 the affine scalar term. The paired function need not be periodic.
 -/
+
+@[expose] public section
 
 noncomputable section
 

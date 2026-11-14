@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometrySpatialFlowPrefix
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometrySpatialFlowPrefix
 
 /-!
 # Spatial flow powers using only one physical radial fiber
@@ -8,6 +10,8 @@ angle on their trajectory. A smooth extension may be used to construct
 the actual local flow, but no estimate outside the physical half enters
 its spatial jet bound. The original whole-box theorem is unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

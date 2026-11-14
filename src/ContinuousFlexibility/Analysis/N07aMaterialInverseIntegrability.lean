@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aMaterialIntegrability
+module
+
+public import ContinuousFlexibility.Analysis.N07aMaterialIntegrability
 
 /-!
 # A square-integrable majorant without spending height weight
@@ -8,6 +10,8 @@ changing variables by the supplied material coordinate, M⁻² therefore
 has a bounded density on the finite physical interval. This is the
 majorant used when the input and output have the same height exponent.
 -/
+
+@[expose] public section
 
 noncomputable section
 

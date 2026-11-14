@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SmoothCompactL2Density
-import ContinuousFlexibility.Scalar.WeightedAngularPrimitiveL2
-import Mathlib.Analysis.Normed.Operator.Extend
+module
+
+public import ContinuousFlexibility.Analysis.SmoothCompactL2Density
+public import ContinuousFlexibility.Scalar.WeightedAngularPrimitiveL2
+public import Mathlib.Analysis.Normed.Operator.Extend
 
 /-!
 # The actual angular primitive as a cylinder L² operator
@@ -11,6 +13,8 @@ L² space retains the integral formula for every smooth representative.
 This is the fixed operator used on the genuine parameter towers of the
 mixed coefficient; no parameter derivative is exchanged with an integral.
 -/
+
+@[expose] public section
 
 noncomputable section
 

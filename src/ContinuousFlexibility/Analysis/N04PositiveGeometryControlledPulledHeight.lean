@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledHeight
-import ContinuousFlexibility.Analysis.N04PositiveGeometryReferencePullbackCosts
-import ContinuousFlexibility.Analysis.N04RealizationPositiveGaugeHeightBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledHeight
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryReferencePullbackCosts
+public import ContinuousFlexibility.Analysis.N04RealizationPositiveGaugeHeightBounds
 
 /-!
 # The chosen positive height at its actual inverse point
@@ -10,6 +12,8 @@ the pulled height. The fixed reference height and inverse contribute
 their already retained material costs. The remaining parameter jets
 are those of the same stored Taylor height and its reciprocal.
 -/
+
+@[expose] public section
 
 noncomputable section
 

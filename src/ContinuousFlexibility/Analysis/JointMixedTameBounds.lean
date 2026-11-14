@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.MixedJointTameBounds
-import ContinuousFlexibility.Analysis.PhysicalJetLinearity
+module
+
+public import ContinuousFlexibility.Analysis.MixedJointTameBounds
+public import ContinuousFlexibility.Analysis.PhysicalJetLinearity
 
 /-!
 # Recovering the mixed one-high bounds from the actual joint tower
@@ -10,6 +12,8 @@ factor. At fixed parameter arity `n`, a joint loss `L` therefore gives
 the mixed loss `n + L`. Algebraic multilinearity of the actual mixed
 derivative then removes the unit-direction restriction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

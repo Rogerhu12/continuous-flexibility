@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # Extracting the actual principal symbol in reference coordinates
@@ -9,6 +11,8 @@ divergence operator. Thus a coordinate identity on smooth functions
 determines the transported principal form; no independent coordinate jets
 or assumed principal-symbol transformation are introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeHeightUnitIdentity
-import ContinuousFlexibility.Analysis.N04NegativeHeightRadialFamilies
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeHeightUnitIdentity
+public import ContinuousFlexibility.Analysis.N04NegativeHeightRadialFamilies
 
 /-!
 # The literal negative height atoms as regularized scalar formulas
@@ -8,6 +10,8 @@ All inputs are fields already belonging to the same gauge.  The formula
 is evaluated on the fixed reference half and holds before selecting the
 auxiliary column.
 -/
+
+@[expose] public section
 
 noncomputable section
 

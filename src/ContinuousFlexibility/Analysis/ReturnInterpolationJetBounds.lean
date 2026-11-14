@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ReturnChartUniformBounds
+module
+
+public import ContinuousFlexibility.Analysis.ReturnChartUniformBounds
 
 /-!
 # Uniform angular jets of the actual interpolation inverse
@@ -8,6 +10,8 @@ derivative interval and the same finite-order angular bounds. Thus a
 radial cutoff can choose its value freely in that interval without
 changing these angular estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

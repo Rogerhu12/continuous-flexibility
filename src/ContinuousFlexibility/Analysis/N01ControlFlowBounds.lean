@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01ControlCoefficientVariation
-import ContinuousFlexibility.Analysis.OpticalControlFullCurvature
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
-import Mathlib.MeasureTheory.Integral.DominatedConvergence
+module
+
+public import ContinuousFlexibility.Analysis.N01ControlCoefficientVariation
+public import ContinuousFlexibility.Analysis.OpticalControlFullCurvature
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+public import Mathlib.MeasureTheory.Integral.DominatedConvergence
 
 /-!
 # Optical curvature bounds from the actual N01 flow tower
@@ -11,6 +13,8 @@ optical travel. Its second scalar derivative is the genuine second jet
 from N01. The bound is uniform in the radial point and therefore extends
 to the full travel by continuity of the curvature integral.
 -/
+
+@[expose] public section
 
 noncomputable section
 

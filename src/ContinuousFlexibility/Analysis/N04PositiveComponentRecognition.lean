@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveComponents
-import Mathlib.Data.Set.Finite.Lattice
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveComponents
+public import Mathlib.Data.Set.Finite.Lattice
 
 /-!
 # Recognizing positive components by their actual endpoints
@@ -9,6 +11,8 @@ connected component. Distinct positive components have distinct left
 endpoints, so finitely many exceptional left endpoints account for only
 finitely many components and give one reciprocal-width bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

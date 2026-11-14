@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06CurrentPositiveFiniteGreen
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentPositiveFiniteGreen
 
 /-!
 # Actual positive Green formulas with a C1 radial coefficient
@@ -9,6 +11,8 @@ weighted test flux lies in L2 and its closed represented flux is absolutely
 continuous. The same actual endpoint Green formulas therefore apply on
 the original interval without requiring a smooth extension of that coefficient.
 -/
+
+@[expose] public section
 
 noncomputable section
 

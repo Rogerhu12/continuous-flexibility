@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionCoefficientJetSymmetry
-import ContinuousFlexibility.Analysis.ReturnOpticalCutoffPatching
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionCoefficientJetSymmetry
+public import ContinuousFlexibility.Analysis.ReturnOpticalCutoffPatching
 
 /-!
 # Spatial support and locality of the actual coefficient parameter jets
@@ -9,6 +11,8 @@ transfers a spatially local identity of the actual coefficient maps to
 every parameter order. The zero neighborhoods are uniform over the
 parameter domain because the cutoff family is independent of state.
 -/
+
+@[expose] public section
 
 noncomputable section
 

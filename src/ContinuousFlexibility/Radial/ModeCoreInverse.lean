@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.BorderedCoreInverse
-import ContinuousFlexibility.Radial.ModeCoreGraph
+module
+
+public import ContinuousFlexibility.Radial.BorderedCoreInverse
+public import ContinuousFlexibility.Radial.ModeCoreGraph
 
 /-!
 # From exact smooth-core inversion to the frozen modal inverse
@@ -9,6 +11,8 @@ differential sources. The inactive scalar is temporarily extended by the
 identity, so that the same bounded-adjoint argument applies at every mode.
 The conclusion is exactly ModeInverseProperties on the original space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

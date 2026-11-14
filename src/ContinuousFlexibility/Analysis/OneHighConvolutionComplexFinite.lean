@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighConvolutionComplex
-import ContinuousFlexibility.Analysis.OneHighConvolutionProducts
+module
+
+public import ContinuousFlexibility.Analysis.OneHighConvolutionComplex
+public import ContinuousFlexibility.Analysis.OneHighConvolutionProducts
 
 /-!
 # Actual complex convolution of any positive number of factors
@@ -9,6 +11,8 @@ under the corresponding genuine endpoint memberships. Its extended norm
 is bounded by the full positive convolution, including for arbitrary
 pointwise nonnegative majorants.
 -/
+
+@[expose] public section
 
 noncomputable section
 

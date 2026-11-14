@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.MatchedOuterGreenIdentification
-import ContinuousFlexibility.Radial.MatchedOuterPoissonOrientation
-import ContinuousFlexibility.Radial.MatchedPhysicalChannelComparison
-import ContinuousFlexibility.Radial.MatchedPhysicalScalarGate
-import ContinuousFlexibility.Radial.MatchingInverseFormula
+module
+
+public import ContinuousFlexibility.Radial.MatchedOuterGreenIdentification
+public import ContinuousFlexibility.Radial.MatchedOuterPoissonOrientation
+public import ContinuousFlexibility.Radial.MatchedPhysicalChannelComparison
+public import ContinuousFlexibility.Radial.MatchedPhysicalScalarGate
+public import ContinuousFlexibility.Radial.MatchingInverseFormula
 
 /-!
 # Whole-tail estimates for the same actual matching data
@@ -12,6 +14,8 @@ the stored exterior inverse and Poisson columns. Restriction, extension,
 the outer source projection and the scalar gate then give the exact
 channels consumed by the matching formula.
 -/
+
+@[expose] public section
 
 noncomputable section
 

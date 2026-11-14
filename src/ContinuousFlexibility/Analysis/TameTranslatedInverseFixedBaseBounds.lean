@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.TameInverseFixedBaseBounds
-import ContinuousFlexibility.Analysis.SolveNewtonBridge
-import ContinuousFlexibility.Analysis.N01cStateSeminorms
+module
+
+public import ContinuousFlexibility.Analysis.TameInverseFixedBaseBounds
+public import ContinuousFlexibility.Analysis.SolveNewtonBridge
+public import ContinuousFlexibility.Analysis.N01cStateSeminorms
 
 /-!
 # Fixed-base bounds for translated instances of one inverse family
@@ -9,6 +11,8 @@ The common domain, the two original inverse identities, and the forward
 and value estimates are supplied on abstract data. All choices of bases,
 losses and constants precede the concrete realization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

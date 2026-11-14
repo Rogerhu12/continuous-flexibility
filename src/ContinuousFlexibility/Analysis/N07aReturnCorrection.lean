@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aParameterGrading
-import ContinuousFlexibility.Analysis.SolveReturnEquations
+module
+
+public import ContinuousFlexibility.Analysis.N07aParameterGrading
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # The actual return correction in the normalized forward operator
@@ -13,6 +15,8 @@ No forward equation or parameter estimate is introduced as an assumption
 here: the decoder and the tame assertion are consequences of the frozen
 N02 and N03 properties.
 -/
+
+@[expose] public section
 
 noncomputable section
 

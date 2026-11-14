@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R11bProductSeries
+module
+
+public import ContinuousFlexibility.Radial.R11bProductSeries
 
 /-!
 # Lp limits of the original finite product sums
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Radial.R11bProductSeries
 Named raw sums and explicit toLp parameters keep elaboration independent of
 the proof term used to establish membership. The limit is the tensor series.
 -/
+
+@[expose] public section
 
 noncomputable section
 

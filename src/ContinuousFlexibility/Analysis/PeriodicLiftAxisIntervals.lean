@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ParameterizedCircleInverse
+module
+
+public import ContinuousFlexibility.Analysis.ParameterizedCircleInverse
 
 /-!
 # Angular intervals from actual axis fibers
@@ -8,6 +10,8 @@ a fixed level consists only of that same point, the lift cannot cross
 that level on either side. This requires no monotonicity assumption and
 will be applied to the angular component of a two-dimensional inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

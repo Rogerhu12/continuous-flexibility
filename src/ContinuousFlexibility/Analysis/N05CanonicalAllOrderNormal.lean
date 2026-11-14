@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalWeightedNormalJets
-import ContinuousFlexibility.Analysis.N05CanonicalJetAssembly
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalWeightedNormalJets
+public import ContinuousFlexibility.Analysis.N05CanonicalJetAssembly
 
 /-!
 # Every normal Sobolev order of the same inverse with material loss four
@@ -8,6 +10,8 @@ Weighted angular columns of the fixed radial derivative assemble into the
 actual volume graph. Its forgotten zero column retains the original weak
 radial test identity, with one more angular derivative on the source.
 -/
+
+@[expose] public section
 
 noncomputable section
 

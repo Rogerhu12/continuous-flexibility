@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.TameInverseFamily
+module
+
+public import ContinuousFlexibility.Analysis.TameInverseFamily
 
 /-!
 # Expressions for all derivatives of an inverse family
@@ -9,6 +11,8 @@ expressions in these operations are closed under differentiation.  The
 codomain is `Y × Z`, which allows both operations to belong to one expression
 type without dependent output casts.
 -/
+
+@[expose] public section
 
 noncomputable section
 

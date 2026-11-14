@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ControlCellEndpointBounds
-import ContinuousFlexibility.Radial.WeightKernelBounds
+module
+
+public import ContinuousFlexibility.Analysis.ControlCellEndpointBounds
+public import ContinuousFlexibility.Radial.WeightKernelBounds
 
 /-!
 # Actual material heights in the natural radial weights
@@ -9,6 +11,8 @@ the number of cells at a fixed index.  We first compare the logarithm of the
 actual height with the cubic discrete exponent.  Every strictly smaller
 height exponent then absorbs any fixed natural material weight.
 -/
+
+@[expose] public section
 
 noncomputable section
 

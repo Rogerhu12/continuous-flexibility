@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N01EndpointOneHigh
-import ContinuousFlexibility.Analysis.N01EndpointSecondEnvelope
-import ContinuousFlexibility.Analysis.N01EndpointZeroCircleMember
-import ContinuousFlexibility.Analysis.CirclePositiveJetAssembly
-import ContinuousFlexibility.Analysis.SmoothDirectionsGluing
+module
+
+public import ContinuousFlexibility.Analysis.N01EndpointOneHigh
+public import ContinuousFlexibility.Analysis.N01EndpointSecondEnvelope
+public import ContinuousFlexibility.Analysis.N01EndpointZeroCircleMember
+public import ContinuousFlexibility.Analysis.CirclePositiveJetAssembly
+public import ContinuousFlexibility.Analysis.SmoothDirectionsGluing
 
 /-!
 # The actual endpoint flow in the physical circle topology
@@ -12,6 +14,8 @@ weighted Taylor estimates give genuine projective line derivatives on
 each bounded low-order box. Their unique towers agree on overlaps and
 therefore give one smooth tower on the full original sector domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

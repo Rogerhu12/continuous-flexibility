@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.OuterRealizedCellEnergy
-import ContinuousFlexibility.Radial.OuterCoreIntervals
-import ContinuousFlexibility.Radial.OuterJoinTransfer
+module
+
+public import ContinuousFlexibility.Radial.OuterRealizedCellEnergy
+public import ContinuousFlexibility.Radial.OuterCoreIntervals
+public import ContinuousFlexibility.Radial.OuterJoinTransfer
 
 /-!
 # Transfer across the actual glue and retained transition cell
@@ -9,6 +11,8 @@ The ordinary physical state is used throughout.  The core is split at
 the actual matched seam, and the same two-direction estimate covers both
 ends of the annulus.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01aComponentCountingHosts
-import ContinuousFlexibility.Analysis.N01aWeightedEnumerationBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01aComponentCountingHosts
+public import ContinuousFlexibility.Analysis.N01aWeightedEnumerationBounds
 
 /-!
 # A quantitatively ordered enumeration of the negative components
@@ -9,6 +11,8 @@ index in one compact interior set. Their host weights are therefore
 proper. Actual good-point decay then gives a bijection whose host indices
 grow at most linearly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

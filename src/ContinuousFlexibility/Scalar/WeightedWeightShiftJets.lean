@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedRadialMultiplier
-import ContinuousFlexibility.Analysis.MaterialOrdinaryJets
+module
+
+public import ContinuousFlexibility.Scalar.WeightedRadialMultiplier
+public import ContinuousFlexibility.Analysis.MaterialOrdinaryJets
 
 /-!
 # Lowering the weight exponent of actual physical jets
@@ -9,6 +11,8 @@ The ratio of the two material pullbacks is the positive radial multiplier
 multiplier is globally bounded.  The radial multiplier estimate therefore
 preserves the physical jet order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

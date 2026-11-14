@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
-import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
+public import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
 
 /-!
 # Recovering raw geometry costs from the same reference certificate
@@ -12,6 +14,8 @@ is the reference input required before moving-point composition.
 This module does not assert that the qualitative reference-family
 predicate supplies `ReferenceJets`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

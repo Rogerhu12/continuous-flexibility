@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CircleNonlinearRealization
-import ContinuousFlexibility.Analysis.SmoothDirectionsUniformBounds
+module
+
+public import ContinuousFlexibility.Analysis.CircleNonlinearRealization
+public import ContinuousFlexibility.Analysis.SmoothDirectionsUniformBounds
 
 /-!
 # Continuous multilinear realization in the actual circle model
@@ -8,6 +10,8 @@ Scalar multilinear field identities lift through the injective decoder.
 Continuity is proved in every projective coordinate using a continuous
 seminorm product bound and the exact telescoping multilinear identity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

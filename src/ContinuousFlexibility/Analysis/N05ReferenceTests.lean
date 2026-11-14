@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05ReferenceResidual
-import ContinuousFlexibility.Analysis.SpacesCompactHeights
-import Mathlib.Analysis.Calculus.FDeriv.Congr
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceResidual
+public import ContinuousFlexibility.Analysis.SpacesCompactHeights
+public import Mathlib.Analysis.Calculus.FDeriv.Congr
 
 /-!
 # Actual compact tests for the reference correction
@@ -10,6 +12,8 @@ physical height model.  The reference operator identity therefore applies to
 these concrete fields.  Locality is proved for the actual Frechet divergence,
 without imposing unrecorded regularity on the corrected coefficients.
 -/
+
+@[expose] public section
 
 noncomputable section
 

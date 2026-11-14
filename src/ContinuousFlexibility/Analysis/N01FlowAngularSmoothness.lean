@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01FlowAngularVariation
-import ContinuousFlexibility.Analysis.ScalarFlowSmoothness
+module
+
+public import ContinuousFlexibility.Analysis.N01FlowAngularVariation
+public import ContinuousFlexibility.Analysis.ScalarFlowSmoothness
 
 /-!
 # Smooth angular dependence of the actual N01 flow
@@ -10,6 +12,8 @@ continuous after the radial coordinate is clamped to the closed component.
 The scalar variational bootstrap therefore proves smoothness of the actual
 endpoint return, with no extra regularity premise.
 -/
+
+@[expose] public section
 
 noncomputable section
 

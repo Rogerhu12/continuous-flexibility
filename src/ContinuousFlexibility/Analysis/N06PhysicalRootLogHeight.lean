@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06RootLogHeight
-import ContinuousFlexibility.Analysis.N06FactoredRootJetSmallness
-import ContinuousFlexibility.Analysis.N01RadialFlow
-import ContinuousFlexibility.Analysis.SolveReturnEquations
+module
+
+public import ContinuousFlexibility.Analysis.N06RootLogHeight
+public import ContinuousFlexibility.Analysis.N06FactoredRootJetSmallness
+public import ContinuousFlexibility.Analysis.N01RadialFlow
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # Cancellation of the actual height denominator in root heights
@@ -14,6 +16,8 @@ log-heights therefore differ by one half log(discriminant) and one sixth
 of the difference of the logarithms of their actual odd fields. N01
 supplies the local admissibility needed for every boundary jet.
 -/
+
+@[expose] public section
 
 noncomputable section
 

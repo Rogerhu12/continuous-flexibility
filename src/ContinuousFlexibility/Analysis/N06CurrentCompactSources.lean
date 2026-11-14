@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06CurrentSourceJets
-import ContinuousFlexibility.Analysis.N06FinitePhysicalPartition
-import ContinuousFlexibility.Analysis.N06NuPhysicalRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentSourceJets
+public import ContinuousFlexibility.Analysis.N06FinitePhysicalPartition
+public import ContinuousFlexibility.Analysis.N06NuPhysicalRegularity
 
 /-!
 # Actual current compact sources in the original volume model
@@ -16,6 +18,8 @@ the physical compatibility field. These are existence and finite-norm
 results at a fixed state; uniform perturbative smallness is a separate
 question.
 -/
+
+@[expose] public section
 
 noncomputable section
 

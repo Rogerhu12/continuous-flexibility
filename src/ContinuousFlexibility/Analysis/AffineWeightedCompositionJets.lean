@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.LinearWeightedCompositionJets
+module
+
+public import ContinuousFlexibility.Analysis.LinearWeightedCompositionJets
 
 /-!
 # Actual jets of an affine weighted pullback
@@ -8,6 +10,8 @@ only the numerical sequence: every derivative of the original scalar
 field through the requested order still occurs linearly. This supplies
 the field of a scalar flow whose endpoint radius is an external parameter.
 -/
+
+@[expose] public section
 
 noncomputable section
 

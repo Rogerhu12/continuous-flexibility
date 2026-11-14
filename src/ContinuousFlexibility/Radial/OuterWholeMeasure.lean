@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterTotalMass
-import ContinuousFlexibility.Radial.OuterOutwardHilbert
+module
+
+public import ContinuousFlexibility.Radial.OuterTotalMass
+public import ContinuousFlexibility.Radial.OuterOutwardHilbert
 
 /-!
 # The physical measure on one entire outer interval
@@ -8,6 +10,8 @@ The core and deep tail use the same restricted radial Hilbert measure,
 reflected together when the chosen end is the left end.  Cutting off the
 closed core gives exactly the already constructed deep-tail measure.
 -/
+
+@[expose] public section
 
 noncomputable section
 

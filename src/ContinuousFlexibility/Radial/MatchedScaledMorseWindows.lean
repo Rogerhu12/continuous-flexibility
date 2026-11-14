@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MatchedMorsePullbackWindows
+module
+
+public import ContinuousFlexibility.Radial.MatchedMorsePullbackWindows
 
 /-!
 # Physical cell and gap windows under the two true radius dilations
@@ -8,6 +10,8 @@ Whole physical cells and their intervening gaps satisfy nested seam
 bounds. These bounds apply to retained cuts by interval inclusion;
 neither an inverse estimate nor a replacement geometry is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

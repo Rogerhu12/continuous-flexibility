@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PointwiseMaterialJetOperations
-import Mathlib.Topology.Instances.Real.Lemmas
+module
+
+public import ContinuousFlexibility.Analysis.PointwiseMaterialJetOperations
+public import Mathlib.Topology.Instances.Real.Lemmas
 
 /-!
 # Ordinary jets on one angular period
@@ -9,6 +11,8 @@ transports its positive-order jets; its unbounded zeroth-order angle
 is never part of this estimate. Only smoothness at the evaluation
 points is used for the lift statement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

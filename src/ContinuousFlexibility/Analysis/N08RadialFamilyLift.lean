@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N08RadialFamilyHeightBounds
-import ContinuousFlexibility.Scalar.WeightedDecodeLift
+module
+
+public import ContinuousFlexibility.Analysis.N08RadialFamilyHeightBounds
+public import ContinuousFlexibility.Scalar.WeightedDecodeLift
 
 /-!
 # Exact Sobolev realization of a decaying radial linear family
@@ -8,6 +10,8 @@ The field is lifted through the actual decoder after proving its physical
 membership and all norm bounds. This applies equally to a scalar cutoff
 direction, a weak control vector, or their product.
 -/
+
+@[expose] public section
 
 noncomputable section
 

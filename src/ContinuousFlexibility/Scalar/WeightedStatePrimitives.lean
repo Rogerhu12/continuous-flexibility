@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Scalar.WeightedHeightAlgebra
-import ContinuousFlexibility.Scalar.WeightedDifferentiation
-import ContinuousFlexibility.Scalar.WeightedAngularDifferentiation
-import ContinuousFlexibility.Scalar.WeightedAngularMean
-import ContinuousFlexibility.Scalar.WeightedCutoffDerivative
-import ContinuousFlexibility.Scalar.WeightedStateJetFormulas
+module
+
+public import ContinuousFlexibility.Scalar.WeightedHeightAlgebra
+public import ContinuousFlexibility.Scalar.WeightedDifferentiation
+public import ContinuousFlexibility.Scalar.WeightedAngularDifferentiation
+public import ContinuousFlexibility.Scalar.WeightedAngularMean
+public import ContinuousFlexibility.Scalar.WeightedCutoffDerivative
+public import ContinuousFlexibility.Scalar.WeightedStateJetFormulas
 
 /-!
 # Actual linear ingredients of the finite scalar formulas
@@ -13,6 +15,8 @@ angular primitives are genuine continuous linear maps in the original
 weighted model. Their fixed tame losses are recorded before any nonlinear
 state formula is assembled.
 -/
+
+@[expose] public section
 
 noncomputable section
 

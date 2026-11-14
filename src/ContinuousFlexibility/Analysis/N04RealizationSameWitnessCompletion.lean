@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04RealizationMaterialJets
-import ContinuousFlexibility.Analysis.N04RealizationJetCompletion
-import ContinuousFlexibility.Analysis.N04RealizationTransportJets
-import ContinuousFlexibility.Analysis.CanonicalNeighborhoodRestriction
-import ContinuousFlexibility.Analysis.N06Neighborhood
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationMaterialJets
+public import ContinuousFlexibility.Analysis.N04RealizationJetCompletion
+public import ContinuousFlexibility.Analysis.N04RealizationTransportJets
+public import ContinuousFlexibility.Analysis.CanonicalNeighborhoodRestriction
+public import ContinuousFlexibility.Analysis.N06Neighborhood
 
 /-!
 # Completing the retained coordinate witness on one neighborhood
@@ -13,6 +15,8 @@ constructed global transport gives the transport certificate. Their common
 restriction retains every preceding nonlinear property and all six primitive
 geometry clauses for the same normalized coordinate data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,10 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryPlaneSavedPrefix
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryPlaneSavedPrefix
 
 /-! # Finite saved-word prefixes under actual composition and inversion -/
+
+@[expose] public section
 
 noncomputable section
 

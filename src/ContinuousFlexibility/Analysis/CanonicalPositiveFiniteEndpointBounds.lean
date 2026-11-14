@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CanonicalRootFiniteEndpointBounds
-import ContinuousFlexibility.Analysis.CanonicalWholePositiveTransport
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalRootFiniteEndpointBounds
+public import ContinuousFlexibility.Analysis.CanonicalWholePositiveTransport
 
 /-!
 # Derived finite bounds for the actual positive endpoint sources
@@ -9,6 +11,8 @@ neighbor uses its actual opposite root; an ambient end uses identity and
 height one. The numerical lower/upper envelopes combine the two ends,
 without changing the stored atlas or requiring a common material cell.
 -/
+
+@[expose] public section
 
 noncomputable section
 

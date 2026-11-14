@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01FlowLocalizedDirections
-import ContinuousFlexibility.Analysis.N01FlowGermLocality
+module
+
+public import ContinuousFlexibility.Analysis.N01FlowLocalizedDirections
+public import ContinuousFlexibility.Analysis.N01FlowGermLocality
 
 /-!
 # Local height directions modulo constants in the genuine flow tower
@@ -9,6 +11,8 @@ derivatives therefore depend only on the physical height direction
 modulo an additive constant. This module proves that statement first
 for parameter lines and then for every further mixed derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

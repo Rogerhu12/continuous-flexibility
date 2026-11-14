@@ -1,6 +1,10 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryMoving
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryMoving
 
 /-! # Changing a boundary word budget with a common normalized power -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R07DeepTailBridge
+module
+
+public import ContinuousFlexibility.Radial.R07DeepTailBridge
 
 /-!
 # Comparing the physical deep-tail densities at different frequencies
@@ -10,6 +12,8 @@ the exact density ratio and its bounds from a logarithmic radius estimate.
 Thus a bound for `j^2 * |log (r / r_endpoint)|` is a concrete analytic input,
 rather than being silently inferred from the frequency-two estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

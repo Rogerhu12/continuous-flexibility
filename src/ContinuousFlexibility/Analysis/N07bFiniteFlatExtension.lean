@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.FlatCylinderExtension
+module
+
+public import ContinuousFlexibility.Analysis.FlatCylinderExtension
 
 /-!
 # Finite-order zero extension for reference transport
@@ -9,6 +11,8 @@ an actual global C² extension. The finite-order theorem below retains
 exactly those derivative and decay requirements; it never promotes them
 to infinite regularity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

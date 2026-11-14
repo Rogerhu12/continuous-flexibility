@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04RealizationPlaneJetDirections
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryKernelBounds
-import ContinuousFlexibility.Analysis.RootUnitPhysicalJetTransfer
-import ContinuousFlexibility.Analysis.N06BoundaryRadialJets
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationPlaneJetDirections
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryKernelBounds
+public import ContinuousFlexibility.Analysis.RootUnitPhysicalJetTransfer
+public import ContinuousFlexibility.Analysis.N06BoundaryRadialJets
 
 /-!
 # Finite plane evaluations and the original multilinear jets
@@ -10,6 +12,8 @@ Coordinate words recover the existing multilinear map and its genuine
 parameter tower. Their bounds cost only the number of words. Fixed unit
 root orientations preserve the complete ordered-word budget.
 -/
+
+@[expose] public section
 
 noncomputable section
 

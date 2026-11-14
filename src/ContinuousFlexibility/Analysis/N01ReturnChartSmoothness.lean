@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01FlowAngularSmoothness
+module
+
+public import ContinuousFlexibility.Analysis.N01FlowAngularSmoothness
 
 /-!
 # Smoothness of the specified N01 return charts and residual
@@ -8,6 +10,8 @@ derivative and the specified inverse identities imply smoothness of the
 actual inverse by induction on derivative order.  This propagates through
 the odd right chart, its inverse, and the even return residual.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometryRootProfileJoint
-import ContinuousFlexibility.Analysis.N01ActualRootGeometry
-import ContinuousFlexibility.Analysis.RootShiftMixedJets
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryRootProfileJoint
+public import ContinuousFlexibility.Analysis.N01ActualRootGeometry
+public import ContinuousFlexibility.Analysis.RootShiftMixedJets
 
 /-!
 # A common actual collar at every negative turning root
@@ -9,6 +11,8 @@ The divided reference derivative and its collar are chosen from the
 proved N01 common root-strip theorem, before the state. The data below
 retain its literal profile identity and positive factored-speed bounds.
 -/
+
+@[expose] public section
 
 noncomputable section
 

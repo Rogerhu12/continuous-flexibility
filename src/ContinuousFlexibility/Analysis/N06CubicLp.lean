@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06CubicDifferential
-import ContinuousFlexibility.Radial.R11bTensorL2
+module
+
+public import ContinuousFlexibility.Analysis.N06CubicDifferential
+public import ContinuousFlexibility.Radial.R11bTensorL2
 
 /-!
 # The cubic perturbation estimate in the actual L² space
@@ -9,6 +11,8 @@ the corresponding Hilbert norm bound. The cubic differential estimate supplies e
 five such weighted derivative fields. The measure is arbitrary, so the same result applies
 to canonical-piece measures and cylinder measures without changing the source model.
 -/
+
+@[expose] public section
 
 noncomputable section
 

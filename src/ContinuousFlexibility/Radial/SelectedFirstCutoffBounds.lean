@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.SelectedFirstConeProfile
-import ContinuousFlexibility.Radial.TerminalConeLayer
+module
+
+public import ContinuousFlexibility.Radial.SelectedFirstConeProfile
+public import ContinuousFlexibility.Radial.TerminalConeLayer
 
 /-!
 # Actual first-band source and energy on a retained reference
@@ -8,6 +10,8 @@ The layer, stand-in, cone coefficient and boundary normalization all come
 from the same retained pair. Its depth can be selected after the finite
 first band is fixed, without replacing the old natural solutions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

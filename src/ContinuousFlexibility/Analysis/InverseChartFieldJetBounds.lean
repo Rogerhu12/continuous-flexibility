@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CoordinateFieldJetBounds
-import ContinuousFlexibility.Analysis.CoordinateCompositionMaterialBounds
-import ContinuousFlexibility.Analysis.CylinderMixedJetNorms
+module
+
+public import ContinuousFlexibility.Analysis.CoordinateFieldJetBounds
+public import ContinuousFlexibility.Analysis.CoordinateCompositionMaterialBounds
+public import ContinuousFlexibility.Analysis.CylinderMixedJetNorms
 
 /-!
 # Fixed-loss bounds after the actual inverse coordinate map
@@ -15,6 +17,8 @@ output order. The hypotheses concern the nine actual primitive fields
 and the actual inverse jets; no canonical potential or principal
 coefficient estimate is an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

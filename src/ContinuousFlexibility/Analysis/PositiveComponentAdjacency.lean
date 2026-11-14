@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.PositiveComponentEndpoints
-import ContinuousFlexibility.Statements.Nonlinear
-import Mathlib.Analysis.Calculus.Deriv.Slope
+module
+
+public import ContinuousFlexibility.Analysis.PositiveComponentEndpoints
+public import ContinuousFlexibility.Statements.Nonlinear
+public import Mathlib.Analysis.Calculus.Deriv.Slope
 
 /-!
 # The actual negative neighbor of an interior positive endpoint
@@ -11,6 +13,8 @@ its zero endpoint must be the original positive endpoint. Both ends
 are handled by the same Boolean statement. Ambient endpoints remain
 the separate identity case.
 -/
+
+@[expose] public section
 
 noncomputable section
 

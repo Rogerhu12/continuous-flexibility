@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CylinderSobolev
+module
+
+public import ContinuousFlexibility.Analysis.CylinderSobolev
 
 /-!
 # Point evaluation on a closed subinterval of a smooth open interval
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Analysis.CylinderSobolev
 The estimate uses the real derivative and the real interval integrals.
 No smooth extension, endpoint value, or trace hypothesis is required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

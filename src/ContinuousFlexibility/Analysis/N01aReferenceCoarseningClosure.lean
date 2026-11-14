@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01aReferenceCoarseningDifferences
+module
+
+public import ContinuousFlexibility.Analysis.N01aReferenceCoarseningDifferences
 
 /-!
 # Graph topology under coarsening with measurable source representatives
@@ -8,6 +10,8 @@ stated explicitly. It is a property of the actual source representatives,
 not an assumed norm comparison. All norm comparisons used below have been
 proved from the finite-fiber localizer formula.
 -/
+
+@[expose] public section
 
 noncomputable section
 

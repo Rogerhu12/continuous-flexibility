@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalInverseAngularJets
-import ContinuousFlexibility.Analysis.N05CanonicalSourceSingleJetBounds
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalInverseAngularJets
+public import ContinuousFlexibility.Analysis.N05CanonicalSourceSingleJetBounds
 
 /-!
 # Actual endpoint blocks for every retained canonical angular jet
@@ -8,6 +10,8 @@ Every output is a fixed weak jet of the same literal global inverse of
 the single zero column. The derivative sources can have either parity.
 The endpoint exponent and the two physical material orders are unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

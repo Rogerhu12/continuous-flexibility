@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.HeightSelectionPrinciple
-import ContinuousFlexibility.Radial.MorseHeightAngleExclusion
+module
+
+public import ContinuousFlexibility.Radial.HeightSelectionPrinciple
+public import ContinuousFlexibility.Radial.MorseHeightAngleExclusion
 
 /-!
 # All matching angles at once
@@ -22,6 +24,8 @@ The conclusion selects one sequence of heights for which every angle sine is
 at least `δ k`.  The public angle is `Statements.radialAngleSine`, the one used
 in `Statements.IsSelectedTail`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

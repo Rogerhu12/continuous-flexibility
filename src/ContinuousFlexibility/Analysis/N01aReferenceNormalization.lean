@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import ContinuousFlexibility.Radial.ReferenceCellAlgebra
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import ContinuousFlexibility.Radial.ReferenceCellAlgebra
 
 /-!
 # Normalization of the reference height
@@ -8,6 +10,8 @@ The positive cosine modes are normalized for the actual angular average in
 the radial statement.  Consequently the true border already normalizes the
 reference height; there is no second choice of a scalar normalization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

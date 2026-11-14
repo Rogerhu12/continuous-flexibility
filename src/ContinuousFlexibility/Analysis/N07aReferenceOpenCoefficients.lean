@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalRepresentationPairing
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalRepresentationPairing
 
 /-!
 # The actual reference coefficients as open bounded-jet functions
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Analysis.N07aCanonicalRepresentationPairing
 The reference record is constructed directly from the primitive reference
 atoms. It uses no perturbed state or small-neighborhood premise.
 -/
+
+@[expose] public section
 
 noncomputable section
 

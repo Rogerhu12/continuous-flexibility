@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07bCanonicalSourceLinear
-import ContinuousFlexibility.Analysis.N07bTransportReferenceGraph
+module
+
+public import ContinuousFlexibility.Analysis.N07bCanonicalSourceLinear
+public import ContinuousFlexibility.Analysis.N07bTransportReferenceGraph
 
 /-!
 # The complete reference source from its bulk and compact corrections
@@ -10,6 +12,8 @@ sources, so the same reference source encoder supplies their volume
 representatives. Linearity and the actual radial PDE identity assemble the
 complete forcing without assuming that it is globally smooth.
 -/
+
+@[expose] public section
 
 noncomputable section
 

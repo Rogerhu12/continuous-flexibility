@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04SourceColumnsFullProductBounds
-import ContinuousFlexibility.Analysis.N04SourceColumnsReferenceProduct
-import ContinuousFlexibility.Analysis.N04SourceColumnsCollector
-import ContinuousFlexibility.Analysis.N04SourceColumnsLinear
-import ContinuousFlexibility.Analysis.N07aInverseChartDisplacement
+module
+
+public import ContinuousFlexibility.Analysis.N04SourceColumnsFullProductBounds
+public import ContinuousFlexibility.Analysis.N04SourceColumnsReferenceProduct
+public import ContinuousFlexibility.Analysis.N04SourceColumnsCollector
+public import ContinuousFlexibility.Analysis.N04SourceColumnsLinear
+public import ContinuousFlexibility.Analysis.N07aInverseChartDisplacement
 
 /-!
 # Multiplication in the current source interface
@@ -12,6 +14,8 @@ base. The full current product has the correct height gain at every
 positive parameter order. Its first derivative then recovers the exact
 reference difference, including the vanishing value estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

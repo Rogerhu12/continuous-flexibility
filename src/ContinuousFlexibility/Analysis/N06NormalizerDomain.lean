@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06NormalizerRelation
-import ContinuousFlexibility.Analysis.N06NormalizerGraphTransport
+module
+
+public import ContinuousFlexibility.Analysis.N06NormalizerRelation
+public import ContinuousFlexibility.Analysis.N06NormalizerGraphTransport
 
 /-!
 # The transported canonical domain and its original source projection
@@ -9,6 +11,8 @@ new physical relation. Its inverse is the old inverse followed by the
 source-preserving graph equivalence. Material exponents are copied
 unchanged. The all-level estimates are transported separately.
 -/
+
+@[expose] public section
 
 noncomputable section
 

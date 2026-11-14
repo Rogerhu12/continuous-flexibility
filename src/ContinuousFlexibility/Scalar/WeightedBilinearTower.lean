@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Scalar.WeightedTowerCalculus
+module
+
+public import ContinuousFlexibility.Scalar.WeightedTowerCalculus
 
 /-!
 # Uniform towers for actual continuous bilinear maps
@@ -8,6 +10,8 @@ are the value, its bilinear first variation, and its symmetrized second
 variation; every higher order is zero.  A single low-seminorm bound on the
 domain makes the estimate uniform on that entire domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

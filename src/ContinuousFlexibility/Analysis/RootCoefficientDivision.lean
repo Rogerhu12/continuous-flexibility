@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.RootCoefficientFactorization
-import ContinuousFlexibility.Analysis.MixedSimpleDivisionBounds
-import ContinuousFlexibility.Analysis.OneHighCircleFlowLocalization
-import ContinuousFlexibility.Analysis.PhysicalTransmissionTrace
+module
+
+public import ContinuousFlexibility.Analysis.RootCoefficientFactorization
+public import ContinuousFlexibility.Analysis.MixedSimpleDivisionBounds
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowLocalization
+public import ContinuousFlexibility.Analysis.PhysicalTransmissionTrace
 
 /-!
 # Actual fixed-loss division of the root coefficient discriminant
@@ -12,6 +14,8 @@ the original coefficient discriminant on the inner strip. Its mixed
 jets there are therefore the original coefficient jets, and the first
 Taylor integral gives a true loss of one, including at the root circle.
 -/
+
+@[expose] public section
 
 noncomputable section
 

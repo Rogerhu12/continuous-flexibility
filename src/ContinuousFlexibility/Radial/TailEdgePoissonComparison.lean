@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.TailEdgePerturbedGreen
+module
+
+public import ContinuousFlexibility.Radial.TailEdgePerturbedGreen
 
 /-!
 # Pointwise bounds for the perturbed Green and Poisson functions
@@ -7,6 +9,8 @@ The three-point kernel comparison makes the interval between the
 unperturbed solution and its scaled majorant invariant under the actual
 integral iteration. The bounds pass to its fixed point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import Mathlib.Analysis.Calculus.Deriv.MeanValue
-import Mathlib.Topology.Order.DenselyOrdered
+module
+
+public import Mathlib.Analysis.Calculus.Deriv.MeanValue
+public import Mathlib.Topology.Order.DenselyOrdered
 
 /-!
 # Angular derivative bounds at radial endpoints
@@ -11,6 +13,8 @@ without assuming that the derivative is jointly continuous there: first pass
 the corresponding increment bounds to the radial limit, then take the angular
 difference quotient.  One argument treats both radial endpoints.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Analysis
 

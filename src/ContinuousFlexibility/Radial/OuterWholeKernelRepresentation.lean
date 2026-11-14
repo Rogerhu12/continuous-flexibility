@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterWholeGreenOperator
-import Mathlib.MeasureTheory.Integral.Bochner.Set
+module
+
+public import ContinuousFlexibility.Radial.OuterWholeGreenOperator
+public import Mathlib.MeasureTheory.Integral.Bochner.Set
 
 /-!
 # The actual whole operator in integral coordinates
@@ -9,6 +11,8 @@ original core interval.  Both restrictions of the assembled operator
 therefore have explicit representatives on the original weighted measure.
 These identities hold for every L² source.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseChainParameters
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+module
+
+public import ContinuousFlexibility.Radial.MorseChainParameters
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 
 /-!
 # Actual coefficient moments on the Morse mass interval
@@ -9,6 +11,8 @@ actual right zero of the Morse coefficient. The finite-interval
 identities retain the end terms. They are independent of radius
 positivity and of the subsequent short join.
 -/
+
+@[expose] public section
 
 noncomputable section
 

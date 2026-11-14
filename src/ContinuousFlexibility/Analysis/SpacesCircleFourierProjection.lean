@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesCircleFourierJets
-import ContinuousFlexibility.Analysis.SpacesCircleSpectral
+module
+
+public import ContinuousFlexibility.Analysis.SpacesCircleFourierJets
+public import ContinuousFlexibility.Analysis.SpacesCircleSpectral
 
 /-!
 # Finite angular Fourier projections
@@ -8,6 +10,8 @@ Symmetric frequency sets preserve real-valued functions. The projection
 formulas below are exact Fourier coefficient identities, not approximation
 assumptions supplied by a caller.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
 
 /-!
 # The current obligation from its split
@@ -11,6 +13,8 @@ The geometry and field data remain conditional on the same atlas's reference
 jets until the parent supplies that certificate. All neighborhood choices
 still precede the auxiliary column.
 -/
+
+@[expose] public section
 
 noncomputable section
 

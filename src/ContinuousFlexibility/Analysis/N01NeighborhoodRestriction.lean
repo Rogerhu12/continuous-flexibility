@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SolveStateSpaces
-import ContinuousFlexibility.Analysis.MaterialSampleCofinite
-import ContinuousFlexibility.Analysis.N01cBoundsRestriction
+module
+
+public import ContinuousFlexibility.Analysis.SolveStateSpaces
+public import ContinuousFlexibility.Analysis.MaterialSampleCofinite
+public import ContinuousFlexibility.Analysis.N01cBoundsRestriction
 
 /-!
 # Restricting the common N01 neighborhood
@@ -11,6 +13,8 @@ derivatives themselves are retained; only their open domain is restricted.
 This permits a later uniform geometric smallness estimate to choose its
 neighborhood without replacing any of the actual returns.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CoupledScalarTypeCoefficient
-import ContinuousFlexibility.Analysis.CoupledNeighborhoodRestriction
+module
+
+public import ContinuousFlexibility.Analysis.CoupledScalarTypeCoefficient
+public import ContinuousFlexibility.Analysis.CoupledNeighborhoodRestriction
 
 /-!
 # The actual normalized coefficient of the coupled scalar error
@@ -9,6 +11,8 @@ They identify the weak-height construction with the literal coefficient
 `w₀ B - (1 + w₀²) / r`. Its actual directional tower is smooth tame on one
 smaller sector neighborhood. No additional coefficient realization is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

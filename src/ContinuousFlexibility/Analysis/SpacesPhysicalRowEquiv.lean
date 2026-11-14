@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SpacesPhysicalSynthesisRows
+module
+
+public import ContinuousFlexibility.Analysis.SpacesPhysicalSynthesisRows
 
 /-!
 # Integer cells and the fixed natural-number row model
@@ -7,6 +9,8 @@ Reindexing a square-summable family along an equivalence preserves its
 Hilbert norm. We apply this to the integer radial cells to use exactly
 the fixed `PhysicalModelBanach` from the statement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

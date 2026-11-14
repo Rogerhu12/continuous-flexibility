@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Radial.ReferenceCoordinate
-import Mathlib.Analysis.SpecialFunctions.SmoothTransition
-import Mathlib.Analysis.Calculus.Deriv.Slope
-import Mathlib.Analysis.Calculus.Deriv.Inverse
-import Mathlib.Analysis.Calculus.MeanValue
-import Mathlib.Topology.Order.IntermediateValue
+module
+
+public import ContinuousFlexibility.Radial.ReferenceCoordinate
+public import Mathlib.Analysis.SpecialFunctions.SmoothTransition
+public import Mathlib.Analysis.Calculus.Deriv.Slope
+public import Mathlib.Analysis.Calculus.Deriv.Inverse
+public import Mathlib.Analysis.Calculus.MeanValue
+public import Mathlib.Topology.Order.IntermediateValue
 
 /-!
 # A smooth coordinate with independent linear tails
@@ -14,6 +16,8 @@ at least A.  The inverse is therefore smooth.  The transition occurs
 only inside [c,d], and both coordinate directions are globally
 Lipschitz.
 -/
+
+@[expose] public section
 
 noncomputable section
 

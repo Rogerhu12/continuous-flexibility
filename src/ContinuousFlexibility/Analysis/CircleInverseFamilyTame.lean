@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CircleInverseModel
-import ContinuousFlexibility.Analysis.TameMultilinearNormalization
+module
+
+public import ContinuousFlexibility.Analysis.CircleInverseModel
+public import ContinuousFlexibility.Analysis.TameMultilinearNormalization
 
 /-!
 # Homogeneous tame bounds for the actual inverse composition family
@@ -8,6 +10,8 @@ The joint low-seminorm growth estimate is normalized only in the outer
 field. This produces the frozen linear-family bound with one high factor
 and a loss chosen before the output order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

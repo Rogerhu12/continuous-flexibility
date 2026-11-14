@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerRadialBrokenSpace
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialBrokenSpace
 
 /-!
 # The actual internal trace and the local uniqueness kernel
@@ -9,6 +11,8 @@ Dirichlet values put every piece in its actual zero-endpoint closure.
 Consequently piecewise Dirichlet uniqueness implies uniqueness of the
 whole broken weak graph at zero source and zero trace.
 -/
+
+@[expose] public section
 
 noncomputable section
 

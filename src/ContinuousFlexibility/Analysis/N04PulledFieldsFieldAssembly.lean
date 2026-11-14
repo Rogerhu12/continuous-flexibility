@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsColumnCurrent
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsColumnCurrent
 
 /-!
 # A common neighborhood for all five retained physical fields
@@ -8,6 +10,8 @@ The coefficient neighborhood is intersected with it once, before
 choosing a field. Monotonicity retains the actual towers and the
 original sample costs on that common neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

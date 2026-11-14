@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cOneHighProducts
-import ContinuousFlexibility.Analysis.N01cStateSeminorms
+module
+
+public import ContinuousFlexibility.Analysis.N01cOneHighProducts
+public import ContinuousFlexibility.Analysis.N01cStateSeminorms
 
 /-!
 # Fixed-base normalization for the higher flow variations
@@ -16,6 +18,8 @@ linear variational equation and the finite forcing products. The same
 constants work at every larger low base, so independently chosen common
 neighbourhoods can be restricted before this normalization is applied.
 -/
+
+@[expose] public section
 
 noncomputable section
 

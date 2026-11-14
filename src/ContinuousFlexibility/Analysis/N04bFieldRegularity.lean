@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # Raw corrected fields for the qualitative canonical construction
@@ -12,6 +14,8 @@ the corrected characteristic equation and exact returns, and the bilinear
 source error. Spatial regularity of an arbitrary stored corrected field is
 not inferred merely from regularity of the decoded source error.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Statements
 

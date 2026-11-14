@@ -1,10 +1,12 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRootEndpoints
-import ContinuousFlexibility.Analysis.N04RealizationLeadAssembly
-import ContinuousFlexibility.Analysis.N04bActualAtlasInteriorCompletion
-import ContinuousFlexibility.Analysis.CanonicalPositiveSourceInteriorDivision
-import ContinuousFlexibility.Analysis.CanonicalWholePositiveTransport
-import ContinuousFlexibility.Analysis.RetainedPositiveEndpointHostSample
-import ContinuousFlexibility.Analysis.RetainedPositiveComponentInteriorEndpoints
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRootEndpoints
+public import ContinuousFlexibility.Analysis.N04RealizationLeadAssembly
+public import ContinuousFlexibility.Analysis.N04bActualAtlasInteriorCompletion
+public import ContinuousFlexibility.Analysis.CanonicalPositiveSourceInteriorDivision
+public import ContinuousFlexibility.Analysis.CanonicalWholePositiveTransport
+public import ContinuousFlexibility.Analysis.RetainedPositiveEndpointHostSample
+public import ContinuousFlexibility.Analysis.RetainedPositiveComponentInteriorEndpoints
 
 /-!
 # Actual positive endpoint inputs at their own midpoint samples
@@ -15,6 +17,8 @@ original host sample with the positive midpoint sample. Thus one smaller
 neighborhood and one material power provide all finite interpolation
 inputs of the original atlas, uniformly over every positive component.
 -/
+
+@[expose] public section
 
 noncomputable section
 

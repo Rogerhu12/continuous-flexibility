@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CircleSmoothReconstruction
+module
+
+public import ContinuousFlexibility.Analysis.CircleSmoothReconstruction
 
 /-!
 # Continuous evaluation from two angular L² classes
@@ -7,6 +9,8 @@ The actual value class and its weak first derivative determine point
 values through three continuous L² pairings. This finite-level lemma is
 independent of the unfinished higher-jet evaluation construction.
 -/
+
+@[expose] public section
 
 open Set Filter MeasureTheory
 open scoped ContDiff ENNReal RealInnerProductSpace Topology

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01NormalizedRadialCoefficientJets
-import ContinuousFlexibility.Analysis.RootCoefficientValueBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01NormalizedRadialCoefficientJets
+public import ContinuousFlexibility.Analysis.RootCoefficientValueBounds
 
 /-!
 # State-independent values of the actual normalized radial coefficient
@@ -9,6 +11,8 @@ reference bounds for the original radial coefficient. Dividing by the
 fixed radial normalization δ keeps a positive interval common to every
 sector state and every lifted angle.
 -/
+
+@[expose] public section
 
 noncomputable section
 

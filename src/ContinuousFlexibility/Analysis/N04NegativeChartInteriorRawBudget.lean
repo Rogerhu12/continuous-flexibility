@@ -1,9 +1,13 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartInteriorSectorControl
-import ContinuousFlexibility.Analysis.N04NegativeChartInteriorInterpolation
-import ContinuousFlexibility.Analysis.N04NegativeChartActualTransport
-import ContinuousFlexibility.Analysis.N04NegativeGeometryFlowBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartInteriorSectorControl
+public import ContinuousFlexibility.Analysis.N04NegativeChartInteriorInterpolation
+public import ContinuousFlexibility.Analysis.N04NegativeChartActualTransport
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryFlowBounds
 
 /-! Fractional interior bounds for the actual raw speed and its reference difference. -/
+
+@[expose] public section
 
 noncomputable section
 

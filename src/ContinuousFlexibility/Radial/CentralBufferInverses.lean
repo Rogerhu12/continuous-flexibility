@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.CentralModelColumnInverse
+module
+
+public import ContinuousFlexibility.Radial.CentralModelColumnInverse
 
 /-!
 # One finite full-model inverse bound for all positive even modes
@@ -7,6 +9,8 @@ The mode-two map is the actual true-column inverse. The higher modes
 reuse the already proved central resolvent; adjoining their required
 zero scalar does not enlarge its norm. No spectral inverse is reproved.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
-import Mathlib.MeasureTheory.Measure.Real
-import Mathlib.Data.Set.Card
+module
+
+public import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
+public import Mathlib.MeasureTheory.Measure.Real
+public import Mathlib.Data.Set.Card
 
 /-!
 # Packing disjoint intervals with a positive minimum length
@@ -9,6 +11,8 @@ Finite additivity of actual Lebesgue measure bounds the sum of the
 interval lengths. If a selected label set had infinitely many elements,
 finite subsets of arbitrary cardinality would contradict that bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

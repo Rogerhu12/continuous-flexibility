@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SpacesTraceExtension
+module
+
+public import ContinuousFlexibility.Analysis.SpacesTraceExtension
 
 /-!
 # The split tame trace between the exact models
@@ -7,6 +9,8 @@ The concrete interpolating packets define a continuous linear right inverse
 on the even circle subspace. Both maps satisfy grading estimates with fixed
 loss three, for every exact choice of the physical and circle models.
 -/
+
+@[expose] public section
 
 noncomputable section
 

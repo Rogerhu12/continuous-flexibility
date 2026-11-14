@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aPrincipalJetBounds
-import ContinuousFlexibility.Analysis.N07aSampleJetAlgebra
-import ContinuousFlexibility.Analysis.N07aCurrentQualitativeRegularity
-import ContinuousFlexibility.Analysis.SolveStateSpaces
+module
+
+public import ContinuousFlexibility.Analysis.N07aPrincipalJetBounds
+public import ContinuousFlexibility.Analysis.N07aSampleJetAlgebra
+public import ContinuousFlexibility.Analysis.N07aCurrentQualitativeRegularity
+public import ContinuousFlexibility.Analysis.SolveStateSpaces
 
 /-!
 # The six actual normal coefficients have one fixed loss
@@ -9,6 +11,8 @@ import ContinuousFlexibility.Analysis.SolveStateSpaces
 The coefficients in the exact weak-to-classical normal equation are
 identified with the same principal functions used by the raw geometry.
 -/
+
+@[expose] public section
 
 noncomputable section
 

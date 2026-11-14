@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneSidedBoundaryJets
-import ContinuousFlexibility.Analysis.PositiveFiberInterpolationSymmetry
-import ContinuousFlexibility.Analysis.AngularTaylorPolynomial
+module
+
+public import ContinuousFlexibility.Analysis.OneSidedBoundaryJets
+public import ContinuousFlexibility.Analysis.PositiveFiberInterpolationSymmetry
+public import ContinuousFlexibility.Analysis.AngularTaylorPolynomial
 
 /-!
 # Global Taylor representatives of genuine one-sided boundary fields
@@ -9,6 +11,8 @@ The angular coefficients are the actual radial derivatives at the root
 circle.  The source needs only pointwise smoothness on that circle.
 Equations on one open side determine the same boundary coefficients.
 -/
+
+@[expose] public section
 
 noncomputable section
 

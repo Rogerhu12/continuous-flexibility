@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ParametricSpatialIntegralJets
-import Mathlib.Topology.Maps.Proper.Basic
+module
+
+public import ContinuousFlexibility.Analysis.ParametricSpatialIntegralJets
+public import Mathlib.Topology.Maps.Proper.Basic
 
 /-!
 # Spatial jets on a closed time interval
@@ -10,6 +12,8 @@ maps descend that continuity without differentiating the inverse time
 map. A continuous time clamp then permits the already proved actual
 derivative-under-integral theorem on the original interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

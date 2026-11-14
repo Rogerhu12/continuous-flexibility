@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ReferenceGraphNorms
-import ContinuousFlexibility.Radial.R11bPhysicalPairing
+module
+
+public import ContinuousFlexibility.Radial.ReferenceGraphNorms
+public import ContinuousFlexibility.Radial.R11bPhysicalPairing
 
 /-!
 # Passage of Green reciprocity from a smooth core to the weighted graph
@@ -8,6 +10,8 @@ The physical pairing is continuous when both entries converge in L².
 The already established physical square bounds transfer the actual graph
 norm convergence to that Hilbert topology, including both scalar components.
 -/
+
+@[expose] public section
 
 noncomputable section
 

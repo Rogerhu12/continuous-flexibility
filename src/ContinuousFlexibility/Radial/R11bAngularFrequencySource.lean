@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.R11bFiniteSourceScalar
-import ContinuousFlexibility.Radial.R11bFiniteSourceModes
-import ContinuousFlexibility.Radial.R11bAngularDerivativeModes
-import ContinuousFlexibility.Radial.R11bGlobalL2
+module
+
+public import ContinuousFlexibility.Radial.R11bFiniteSourceScalar
+public import ContinuousFlexibility.Radial.R11bFiniteSourceModes
+public import ContinuousFlexibility.Radial.R11bAngularDerivativeModes
+public import ContinuousFlexibility.Radial.R11bGlobalL2
 
 /-!
 # Actual compatible sources for finite angular frequency estimates
@@ -10,6 +12,8 @@ The field is synthesized from negative sine coefficients of the supplied
 weak angular derivative. The critical scalar row is scaled by two exactly
 when the frequency-two channel is selected.
 -/
+
+@[expose] public section
 
 noncomputable section
 

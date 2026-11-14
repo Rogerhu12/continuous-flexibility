@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalJetEnvelopes
-import ContinuousFlexibility.Analysis.N07aAngularReferenceTransport
-import ContinuousFlexibility.Analysis.N07aInverseChartBounds
-import ContinuousFlexibility.Analysis.N07aSourceAtInverseChart
-import ContinuousFlexibility.Analysis.N07aAngularJacobianEnvelope
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalJetEnvelopes
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceTransport
+public import ContinuousFlexibility.Analysis.N07aInverseChartBounds
+public import ContinuousFlexibility.Analysis.N07aSourceAtInverseChart
+public import ContinuousFlexibility.Analysis.N07aAngularJacobianEnvelope
 
 /-!
 # Actual reference transport retains a positive material height gain
@@ -12,6 +14,8 @@ transport has genuine physical derivatives of every order. Their sampled
 coefficient envelope is subpower, while the original H^(3/4) factor is
 retained. This uses the physical height inverse at its actual point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

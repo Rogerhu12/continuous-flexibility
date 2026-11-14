@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometryImplicitJets
-import ContinuousFlexibility.Analysis.N04NegativeGeometryFiniteAffineDirections
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryImplicitJets
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryFiniteAffineDirections
 
 /-!
 # Genuine parameter towers of actual implicit solutions
@@ -10,6 +12,8 @@ joint continuity then gives one all-order tower on the original
 topological parameter domain. Neither an inverse parameter tower nor
 an inverse jet estimate is an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

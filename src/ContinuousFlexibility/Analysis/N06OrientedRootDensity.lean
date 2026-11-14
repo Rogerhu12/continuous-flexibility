@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06FiniteCurrentBoundaryGluing
-import ContinuousFlexibility.Analysis.N06PositiveBoundaryPrincipal
-import ContinuousFlexibility.Analysis.N06PositiveDividedRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N06FiniteCurrentBoundaryGluing
+public import ContinuousFlexibility.Analysis.N06PositiveBoundaryPrincipal
+public import ContinuousFlexibility.Analysis.N06PositiveDividedRegularity
 
 /-!
 # The actual signed radial factor and the finite Green endpoint row
@@ -12,6 +14,8 @@ slope, the transported normal row is the positive reference radial
 coefficient or the negative normal-form coefficient one. These are
 derived boundary densities, not assigned values of a totalized inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

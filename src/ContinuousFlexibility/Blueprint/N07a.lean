@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Blueprint.Statements
-import ContinuousFlexibility.Blueprint.N07a.Angular
-import ContinuousFlexibility.Blueprint.N07a.Linear
-import ContinuousFlexibility.Blueprint.N07a.Smooth
-import ContinuousFlexibility.Analysis.N07aConstructionRestriction
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
+public import ContinuousFlexibility.Blueprint.N07a.Angular
+public import ContinuousFlexibility.Blueprint.N07a.Linear
+public import ContinuousFlexibility.Blueprint.N07a.Smooth
+public import ContinuousFlexibility.Analysis.N07aConstructionRestriction
 
 /-!
 # Blueprint node N07a
@@ -14,6 +16,8 @@ statement and the original N06 construction are retained throughout.
 Source: `paper/flexible-surface-readable/08-stable-inverse.tex` lines 489–815.
 Task file: `docs/tasks/N07a.md`.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

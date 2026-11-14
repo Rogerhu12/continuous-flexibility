@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06PrimitiveActualJetIdentities
-import ContinuousFlexibility.Analysis.N06MaterialAbsorption
+module
+
+public import ContinuousFlexibility.Analysis.N06PrimitiveActualJetIdentities
+public import ContinuousFlexibility.Analysis.N06MaterialAbsorption
 
 /-!
 # Primitive geometric jets give the actual relative jets
@@ -11,6 +13,8 @@ The original material hypothesis absorbs the scalar-column weight. The
 result applies to every finite set of pieces, chosen after the constants.
 No N06 inverse or relative operator estimate is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

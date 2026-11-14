@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06CurrentTestTraces
-import ContinuousFlexibility.Analysis.N06RootTransmissionJets
-import ContinuousFlexibility.Analysis.PrincipalCoefficientPullback
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentTestTraces
+public import ContinuousFlexibility.Analysis.N06RootTransmissionJets
+public import ContinuousFlexibility.Analysis.PrincipalCoefficientPullback
 
 /-!
 # The actual root Green density from forward first jets
@@ -15,6 +17,8 @@ throughout. The physical root circle belongs to the actual closed domain;
 no fixed radial shape of a moving negative half is required. No smoothness
 of the physical coefficient fields is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

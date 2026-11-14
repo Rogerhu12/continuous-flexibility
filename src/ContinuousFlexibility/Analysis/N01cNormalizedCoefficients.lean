@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cHeightGeometry
-import ContinuousFlexibility.Analysis.N01cFullNeighborhood
+module
+
+public import ContinuousFlexibility.Analysis.N01cHeightGeometry
+public import ContinuousFlexibility.Analysis.N01cFullNeighborhood
 
 /-!
 # Normalized formulas for the actual nonlinear coefficients
@@ -11,6 +13,8 @@ coefficient and expresses it using this normalized denominator. The
 remaining square-root denominator is controlled by the original D bounds.
 These are identities for the original coefficients.
 -/
+
+@[expose] public section
 
 noncomputable section
 

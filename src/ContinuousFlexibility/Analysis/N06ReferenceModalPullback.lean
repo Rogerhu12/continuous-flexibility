@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06ReferenceModeTransport
-import ContinuousFlexibility.Analysis.N06ReferenceRemainderTraces
-import ContinuousFlexibility.Analysis.N05N06ClosedChartBridge
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceModeTransport
+public import ContinuousFlexibility.Analysis.N06ReferenceRemainderTraces
+public import ContinuousFlexibility.Analysis.N05N06ClosedChartBridge
 
 /-!
 # The actual canonical modes pull back to the physical reference modes
@@ -11,6 +13,8 @@ integrability almost everywhere. Consequently a canonical modal
 representative, composed with the actual radial chart and multiplied by
 its actual height, represents the same physical Fourier mode.
 -/
+
+@[expose] public section
 
 noncomputable section
 

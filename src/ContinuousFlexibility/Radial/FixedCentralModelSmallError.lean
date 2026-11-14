@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.FixedCentralModelChart
-import ContinuousFlexibility.Radial.InnerCentralFlux
-import ContinuousFlexibility.Radial.InnerCentralCapScale
-import ContinuousFlexibility.Radial.InnerModelFluxError
+module
+
+public import ContinuousFlexibility.Radial.FixedCentralModelChart
+public import ContinuousFlexibility.Radial.InnerCentralFlux
+public import ContinuousFlexibility.Radial.InnerCentralCapScale
+public import ContinuousFlexibility.Radial.InnerModelFluxError
 
 /-!
 # Small conormal errors for the fixed original central column
@@ -10,6 +12,8 @@ The full inverse is fixed before the common model radius.  The radius
 then simultaneously satisfies the original R09 compression hypothesis,
 absorbs the true density drift, and makes the actual two-cut errors small.
 -/
+
+@[expose] public section
 
 noncomputable section
 

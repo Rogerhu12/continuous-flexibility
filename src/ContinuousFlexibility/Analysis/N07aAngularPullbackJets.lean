@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalCoefficients
-import ContinuousFlexibility.Analysis.N07aCanonicalGreenPairing
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalCoefficients
+public import ContinuousFlexibility.Analysis.N07aCanonicalGreenPairing
 
 /-!
 # Angular L² jets of the actual chart pullback
@@ -9,6 +11,8 @@ simultaneously over all canonical mixed derivatives gives every physical
 angular derivative in L². Thus no periodic radial extension or regularity
 certificate for the pulled-back unknown is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06N05CurrentRootTransmission
-import ContinuousFlexibility.Analysis.N06CurrentClosedTestJets
-import ContinuousFlexibility.Analysis.N05N06ClosedChartBridge
+module
+
+public import ContinuousFlexibility.Analysis.N06N05CurrentRootTransmission
+public import ContinuousFlexibility.Analysis.N06CurrentClosedTestJets
+public import ContinuousFlexibility.Analysis.N05N06ClosedChartBridge
 
 /-!
 # Actual first jets at a negative middle cut
@@ -16,6 +18,8 @@ affine probe, then gives the canonical relation without any cut first-jet
 record. A separate geometric specialization retains the general genuine
 first-jet reconstruction algebra.
 -/
+
+@[expose] public section
 
 noncomputable section
 

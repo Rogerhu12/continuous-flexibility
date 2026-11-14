@@ -1,9 +1,13 @@
-import ContinuousFlexibility.Analysis.N07aSampleJetBounds
-import ContinuousFlexibility.Analysis.CylinderMixedJets
+module
+
+public import ContinuousFlexibility.Analysis.N07aSampleJetBounds
+public import ContinuousFlexibility.Analysis.CylinderMixedJets
 
 /-!
 # Fréchet operator norms of the actual sampled scalar jets
 -/
+
+@[expose] public section
 
 noncomputable section
 

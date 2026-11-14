@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.SelectedBoundaryRadiusScale
-import ContinuousFlexibility.Radial.ModeRegionSources
-import ContinuousFlexibility.Radial.R07DeepTailChange
+module
+
+public import ContinuousFlexibility.Radial.SelectedBoundaryRadiusScale
+public import ContinuousFlexibility.Radial.ModeRegionSources
+public import ContinuousFlexibility.Radial.R07DeepTailChange
 
 /-!
 # Matching data at the actual two selected cuts
@@ -9,6 +11,8 @@ The common constructor fixes the physical cuts, source restrictions,
 boundary scales and diagonal boundary rows before installing the two
 regional inverses. Both frequency cases use this same record.
 -/
+
+@[expose] public section
 
 noncomputable section
 

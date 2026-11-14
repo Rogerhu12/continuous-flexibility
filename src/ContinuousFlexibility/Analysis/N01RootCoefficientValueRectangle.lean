@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01LocalizedCoefficientBounds
-import ContinuousFlexibility.Analysis.RootCoefficientDivision
-import ContinuousFlexibility.Analysis.RootCoefficientValueBounds
-import ContinuousFlexibility.Analysis.RootShiftMixedJets
+module
+
+public import ContinuousFlexibility.Analysis.N01LocalizedCoefficientBounds
+public import ContinuousFlexibility.Analysis.RootCoefficientDivision
+public import ContinuousFlexibility.Analysis.RootCoefficientValueBounds
+public import ContinuousFlexibility.Analysis.RootShiftMixedJets
 
 /-!
 # A positive value rectangle common to all N01 states at one root
@@ -11,6 +13,8 @@ minimized on a compact radial interval. N01's numerical Q/w and D bounds
 then put the actual divided determinant and radial coefficient in one
 positive rectangle, chosen before the state and angle.
 -/
+
+@[expose] public section
 
 noncomputable section
 

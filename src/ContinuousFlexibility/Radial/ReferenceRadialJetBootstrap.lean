@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ReferenceModerateCoefficients
-import ContinuousFlexibility.Radial.ReferenceRadialEndpoint
+module
+
+public import ContinuousFlexibility.Radial.ReferenceModerateCoefficients
+public import ContinuousFlexibility.Radial.ReferenceRadialEndpoint
 
 /-!
 # Differentiating the actual radial equation in the weighted spaces
@@ -11,6 +13,8 @@ under differentiation by the original inhomogeneous radial equation.
 This proves all-order weighted membership from u, u', and the forcing jets,
 without assuming any higher-order estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionSourceNormBounds
-import ContinuousFlexibility.Analysis.SourceLocalJetAssembly
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionSourceNormBounds
+public import ContinuousFlexibility.Analysis.SourceLocalJetAssembly
 
 /-!
 # The source-valued tame tower of the actual symmetric divergence
@@ -10,6 +12,8 @@ weighted parameter derivatives, second-variation envelopes and source
 compatibility are all supplied by the preceding calculus. The result
 uses the original projective source topology and its actual grading.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06WeakGraphCompletion
-import ContinuousFlexibility.Analysis.N06WeakTensorCalculus
-import ContinuousFlexibility.Analysis.N06WeakAngularCalculus
-import ContinuousFlexibility.Radial.R11bWeakNormalLimit
+module
+
+public import ContinuousFlexibility.Analysis.N06WeakGraphCompletion
+public import ContinuousFlexibility.Analysis.N06WeakTensorCalculus
+public import ContinuousFlexibility.Analysis.N06WeakAngularCalculus
+public import ContinuousFlexibility.Radial.R11bWeakNormalLimit
 
 /-!
 # The graph limits retain their actual weak angular jets
@@ -10,6 +12,8 @@ Each weighted radial coefficient is merely L2. Periodic angular integration
 by parts nevertheless proves every finite field identity. The original
 canonical L2 limits retain those identities by continuity of test pairing.
 -/
+
+@[expose] public section
 
 noncomputable section
 

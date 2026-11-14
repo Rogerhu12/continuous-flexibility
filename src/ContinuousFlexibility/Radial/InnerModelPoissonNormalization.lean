@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerModelPoissonBound
+module
+
+public import ContinuousFlexibility.Radial.InnerModelPoissonBound
 
 /-!
 # The actual physical cut normalization of model Poisson columns
@@ -8,6 +10,8 @@ The velocity-to-mass bound controls the leading term. The remainder
 retains its exact exponential envelope until the ordered choices make
 its frequency multiple small.
 -/
+
+@[expose] public section
 
 noncomputable section
 

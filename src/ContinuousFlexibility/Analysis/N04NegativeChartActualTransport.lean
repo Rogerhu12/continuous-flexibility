@@ -1,9 +1,13 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartInteriorTowers
-import ContinuousFlexibility.Analysis.N04NegativeChartFirstIntegralRecurrence
-import ContinuousFlexibility.Analysis.N01ReturnTransportRecurrences
-import ContinuousFlexibility.Analysis.N07aReferenceReturn
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartInteriorTowers
+public import ContinuousFlexibility.Analysis.N04NegativeChartFirstIntegralRecurrence
+public import ContinuousFlexibility.Analysis.N01ReturnTransportRecurrences
+public import ContinuousFlexibility.Analysis.N07aReferenceReturn
 
 /-! The literal full-component towers satisfy the three radial recurrences. -/
+
+@[expose] public section
 
 noncomputable section
 

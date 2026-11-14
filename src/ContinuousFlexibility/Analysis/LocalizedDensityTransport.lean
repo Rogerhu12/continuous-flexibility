@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.L2BoundedMultiplier
-import ContinuousFlexibility.Analysis.SquareDensityIsometry
+module
+
+public import ContinuousFlexibility.Analysis.L2BoundedMultiplier
+public import ContinuousFlexibility.Analysis.SquareDensityIsometry
 
 /-!
 # Localized inverse kernels under a change of density
@@ -9,6 +11,8 @@ kernel by the two reciprocal square-root density multipliers. The theorem
 uses bounds only on those localized multipliers. No global reciprocal
 density bound is asserted or required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

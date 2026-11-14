@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.SelectedOutwardRegionMeasure
-import ContinuousFlexibility.Radial.TailGreenAllSources
-import ContinuousFlexibility.Radial.OuterFirstOrderRegularity
-import ContinuousFlexibility.Analysis.CoordinateGaugeKernel
+module
+
+public import ContinuousFlexibility.Radial.SelectedOutwardRegionMeasure
+public import ContinuousFlexibility.Radial.TailGreenAllSources
+public import ContinuousFlexibility.Radial.OuterFirstOrderRegularity
+public import ContinuousFlexibility.Analysis.CoordinateGaugeKernel
 
 /-!
 # The actual weighted physical Dirichlet kernel
@@ -10,6 +12,8 @@ The exact logarithmic isometry transports the proved Friedrichs inverse
 and its all-source representation. The factor twelve is retained, giving
 the physical unit-flux kernel Q(min x y) P(max x y).
 -/
+
+@[expose] public section
 
 noncomputable section
 

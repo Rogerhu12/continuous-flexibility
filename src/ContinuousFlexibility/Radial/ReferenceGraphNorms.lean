@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R11bGlobalL2
-import ContinuousFlexibility.Radial.ReferenceCellAlgebra
+module
+
+public import ContinuousFlexibility.Radial.R11bGlobalL2
+public import ContinuousFlexibility.Radial.ReferenceCellAlgebra
 
 /-!
 # Physical square bounds for the reference graph norms
@@ -8,6 +10,8 @@ Positive attenuation controls the ordinary physical L² norm.  The output
 estimate includes the actual left constant and its fixed cutoff.  These
 bounds make distributional testing continuous in the frozen graph norms.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06ReferenceSourceJets
-import ContinuousFlexibility.Analysis.N06CanonicalProperties
-import ContinuousFlexibility.Analysis.N06ControlledPieceFiniteness
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceSourceJets
+public import ContinuousFlexibility.Analysis.N06CanonicalProperties
+public import ContinuousFlexibility.Analysis.N06ControlledPieceFiniteness
 
 /-!
 # Constructing the three reference columns in the selected source scale
@@ -11,6 +13,8 @@ angular jet bounds are proved here from the original geometric data.
 Neither source membership nor a bound on canonical source jets is an
 input. All resulting elements belong to the same selected volume model.
 -/
+
+@[expose] public section
 
 noncomputable section
 

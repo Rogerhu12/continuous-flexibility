@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CircleEnergyPointwiseBounds
-import ContinuousFlexibility.Analysis.MaterialComponentEnergy
+module
+
+public import ContinuousFlexibility.Analysis.CircleEnergyPointwiseBounds
+public import ContinuousFlexibility.Analysis.MaterialComponentEnergy
 
 /-!
 # Circle realization from summable physical energy envelopes
@@ -9,6 +11,8 @@ fields together. The weighted circle estimate only needs a summable
 component energy envelope. This module keeps that envelope through the
 infinite sum and gives both membership and the actual physical norm bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

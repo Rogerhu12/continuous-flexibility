@@ -1,7 +1,9 @@
-import Mathlib.Analysis.Fourier.AddCircle
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
-import Mathlib.Analysis.PSeries
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.Periodic
+module
+
+public import Mathlib.Analysis.Fourier.AddCircle
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+public import Mathlib.Analysis.PSeries
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.Periodic
 
 /-!
 # Fourier coefficients of actual smooth circle functions
@@ -10,6 +12,8 @@ This file obtains rapid coefficient summability from genuine smoothness and
 periodicity.  The coefficients are mathlib's integral Fourier coefficients,
 and the derivative identity is integration by parts on a full period.
 -/
+
+@[expose] public section
 
 noncomputable section
 

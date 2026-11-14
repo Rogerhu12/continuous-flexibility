@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerRadialPotentialGraph
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialPotentialGraph
 
 /-!
 # Actual local Dirichlet existence implies zero-kernel uniqueness
@@ -8,6 +10,8 @@ for each genuine physical L² source and scalar row. The actual signed
 potential is symmetric. This forces the value and scalar to vanish;
 testing the homogeneous equation by itself then kills its gradient.
 -/
+
+@[expose] public section
 
 noncomputable section
 

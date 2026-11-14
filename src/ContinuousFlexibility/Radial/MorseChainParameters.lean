@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MorseChainScales
+module
+
+public import ContinuousFlexibility.Radial.MorseChainScales
 
 /-!
 # The actual parameters and turning points of the Morse cells
@@ -7,6 +9,8 @@ These are the parameters from the least nonsquare choices in Section 5.
 The estimates apply to the actual definitions in `Statements.Radial`.
 No radius solution, positivity of its derivative, or gluing is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

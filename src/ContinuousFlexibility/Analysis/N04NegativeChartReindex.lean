@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometryReductions
-import Mathlib.Basic.Denumerable
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryReductions
+public import Mathlib.Basic.Denumerable
 
 /-!
 # Reindexing only the selected negative pieces
@@ -9,6 +11,8 @@ on that enumeration therefore applies to every listed piece without making
 any assertion about the unrelated positive atlas. Both directions of the
 transport preserve the original material sample and actual scalar function.
 -/
+
+@[expose] public section
 
 noncomputable section
 

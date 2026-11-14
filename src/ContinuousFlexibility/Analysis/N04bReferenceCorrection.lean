@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01RadialFlow
-import ContinuousFlexibility.Analysis.ReturnCorrectedFlow
+module
+
+public import ContinuousFlexibility.Analysis.N01RadialFlow
+public import ContinuousFlexibility.Analysis.ReturnCorrectedFlow
 
 /-!
 # The actual correction preserves the radial reference flow
@@ -13,6 +15,8 @@ explicit corrected flow agrees with the original flow for every cutoff.
 This is a property of the actual optical construction. It introduces no
 canonical-coordinate or normal-form hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerRadialDirichletPoisson
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialDirichletPoisson
 
 /-!
 # Both inverse identities on the actual finite weak inner domain
@@ -9,6 +11,8 @@ interface operator then gives a global weak solution. The reverse
 identity holds on the true zero-total-flux domain by the proved local
 uniqueness kernel, not by an assumed global inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

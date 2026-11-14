@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.SpacesInterpolationProducts
-import ContinuousFlexibility.Analysis.TameTopologicalComposition
-import ContinuousFlexibility.Analysis.TameMultilinearNormalization
-import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
+module
+
+public import ContinuousFlexibility.Analysis.SpacesInterpolationProducts
+public import ContinuousFlexibility.Analysis.TameTopologicalComposition
+public import ContinuousFlexibility.Analysis.TameMultilinearNormalization
+public import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
 
 /-!
 # Ordered-partition composition with one fixed low base
@@ -10,6 +12,8 @@ The public finite-product interpolation theorem is applied to the original
 inputs. Parameter-order losses are assigned differential orders in that
 product. They never become additional low-neighborhood hypotheses.
 -/
+
+@[expose] public section
 
 noncomputable section
 

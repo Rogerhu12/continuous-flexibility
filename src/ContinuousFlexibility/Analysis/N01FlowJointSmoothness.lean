@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CompactParameterIntegral
-import ContinuousFlexibility.Analysis.ReturnCorrectionCoefficientRegularity
+module
+
+public import ContinuousFlexibility.Analysis.CompactParameterIntegral
+public import ContinuousFlexibility.Analysis.ReturnCorrectionCoefficientRegularity
 
 /-!
 # Joint smoothness of the actual N01 flow away from a zero discriminant
@@ -10,6 +12,8 @@ and the radial ODE improve joint Cⁿ regularity to Cⁿ⁺¹. The induction is
 local in the open set where the actual characteristic discriminant is
 positive; no smoothness of a square root at a turning point is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

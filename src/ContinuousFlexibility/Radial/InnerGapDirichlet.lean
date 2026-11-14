@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.InnerGapEnergyCoordinates
-import ContinuousFlexibility.Radial.InnerCoerciveGradient
-import Mathlib.Topology.Algebra.Module.ClosedSubmodule
-import Mathlib.Analysis.InnerProductSpace.Subspace
-import Mathlib.Analysis.Calculus.Deriv.Support
+module
+
+public import ContinuousFlexibility.Radial.InnerGapEnergyCoordinates
+public import ContinuousFlexibility.Radial.InnerCoerciveGradient
+public import Mathlib.Topology.Algebra.Module.ClosedSubmodule
+public import Mathlib.Analysis.InnerProductSpace.Subspace
+public import Mathlib.Analysis.Calculus.Deriv.Support
 
 /-!
 # The actual positive-gap Dirichlet inverse for arbitrary L² forcing
@@ -16,6 +18,8 @@ Lax-Milgram then constructs a single continuous linear inverse for every
 physical L² source. The graph equivalence retains the zero-Dirichlet
 closed form domain, and its norm bound has the required j⁻² scale.
 -/
+
+@[expose] public section
 
 noncomputable section
 

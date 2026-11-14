@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bReferenceHalves
-import ContinuousFlexibility.Analysis.PositiveComponentEndpoints
+module
+
+public import ContinuousFlexibility.Analysis.N04bReferenceHalves
+public import ContinuousFlexibility.Analysis.PositiveComponentEndpoints
 
 /-!
 # A reference partition by whole positive components
@@ -9,6 +11,8 @@ Each positive connected component contributes exactly one interval. The
 only omitted radii are actual critical points and negative cuts; no
 positive subdivision grid or artificial endpoint is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

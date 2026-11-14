@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import Mathlib.Analysis.Calculus.BumpFunction.FiniteDimension
-import Mathlib.Analysis.SpecificLimits.Basic
-import Mathlib.MeasureTheory.Integral.DominatedConvergence
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import Mathlib.Analysis.Calculus.BumpFunction.FiniteDimension
+public import Mathlib.Analysis.SpecificLimits.Basic
+public import Mathlib.MeasureTheory.Integral.DominatedConvergence
 
 /-!
 # Smooth radial exhaustion of a canonical interval
@@ -12,6 +14,8 @@ interior point. Dominated convergence therefore removes the compact
 radial support from the separated Fourier tests without adding boundary
 regularity to a source class.
 -/
+
+@[expose] public section
 
 noncomputable section
 

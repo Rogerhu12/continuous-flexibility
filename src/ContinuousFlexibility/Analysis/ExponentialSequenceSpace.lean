@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.Graded
-import Mathlib.Analysis.Normed.Lp.lpSpace
-import Mathlib.Analysis.SpecialFunctions.Exp
+module
+
+public import ContinuousFlexibility.Analysis.Graded
+public import Mathlib.Analysis.Normed.Lp.lpSpace
+public import Mathlib.Analysis.SpecialFunctions.Exp
 
 /-!
 # An actual exponential sequence model and its smoothing operators
@@ -19,6 +21,8 @@ This canonical sequence model does not identify the manuscript's weighted
 Sobolev spaces with a sequence-space retract, and does not implement a
 Nash–Moser iteration.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06PositiveGraphPieces
+module
+
+public import ContinuousFlexibility.Analysis.N06PositiveGraphPieces
 
 /-!
 # Actual weak PDE data produce the all-piece positive graph package
@@ -9,6 +11,8 @@ and the material growth of its constant. They are not claimed as
 consequences of N04. Given these geometric facts, the original volume
 rows and the actual canonical weak PDE supply every graph witness.
 -/
+
+@[expose] public section
 
 noncomputable section
 

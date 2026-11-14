@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aNeighborhood
-import ContinuousFlexibility.Analysis.MaterialSampleBounds
+module
+
+public import ContinuousFlexibility.Analysis.N07aNeighborhood
+public import ContinuousFlexibility.Analysis.MaterialSampleBounds
 
 /-!
 # One actual neighborhood controls every current atom
@@ -8,6 +10,8 @@ The zero-order current estimate and the material height gain give a
 uniform radius for all pieces and atoms. The smaller neighborhood keeps
 the actual directional tower by restriction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

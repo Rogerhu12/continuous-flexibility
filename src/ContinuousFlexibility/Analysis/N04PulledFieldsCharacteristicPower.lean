@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsTransportPowerGrowth
-import ContinuousFlexibility.Analysis.N04PulledFieldsFixedBasePrefixRadius
-import ContinuousFlexibility.Analysis.WeightedJointMixedInterpolation
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsTransportPowerGrowth
+public import ContinuousFlexibility.Analysis.N04PulledFieldsFixedBasePrefixRadius
+public import ContinuousFlexibility.Analysis.WeightedJointMixedInterpolation
 
 /-!
 # Characteristic powers with one low grading before all orders
@@ -10,6 +12,8 @@ parameter and spatial orders. Fixed-base interpolation assigns the
 parameter part to the finite prefix charge, preserving one low grading
 for every parameter order and every spatial order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

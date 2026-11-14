@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04bSqrtAffine
-import Mathlib.Tactic.FieldSimp
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Ring
+module
+
+public import ContinuousFlexibility.Analysis.N04bSqrtAffine
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
 
 /-!
 # An affine optical radicand cannot cross zero smoothly
@@ -12,6 +14,8 @@ affine radicand stays positive along a segment on which its actual square
 root is differentiable at every parameter. No positivity is assumed away
 from the initial parameter.
 -/
+
+@[expose] public section
 
 noncomputable section
 

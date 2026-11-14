@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N01CoefficientParameterTower
-import ContinuousFlexibility.Analysis.N01CoefficientMixedBounds
-import ContinuousFlexibility.Analysis.N01SectorFlowTower
-import ContinuousFlexibility.Analysis.SmoothDirectionsSpatialJets
-import ContinuousFlexibility.Analysis.MixedDerivativeHierarchy
+module
+
+public import ContinuousFlexibility.Analysis.N01CoefficientParameterTower
+public import ContinuousFlexibility.Analysis.N01CoefficientMixedBounds
+public import ContinuousFlexibility.Analysis.N01SectorFlowTower
+public import ContinuousFlexibility.Analysis.SmoothDirectionsSpatialJets
+public import ContinuousFlexibility.Analysis.MixedDerivativeHierarchy
 
 /-!
 # Actual spatial derivatives of the original N01 coefficient towers
@@ -14,6 +16,8 @@ their genuine spatial derivatives with the towers of coefficientFamily
 at the corresponding mixed orders. No continuity of higher parameter
 jets is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R11bCellBessel
+module
+
+public import ContinuousFlexibility.Radial.R11bCellBessel
 
 /-!
 # Weighted Bessel bounds for the original modal coefficients
@@ -7,6 +9,8 @@ A finite family of coefficient-square series is controlled directly by the
 weighted cell-square series of the physical field. The output specialization
 retains the actual remainder and its original output norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

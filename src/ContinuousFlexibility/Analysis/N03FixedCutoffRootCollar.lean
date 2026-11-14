@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionPatching
-import ContinuousFlexibility.Analysis.N01ActualRootGeometry
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionPatching
+public import ContinuousFlexibility.Analysis.N01ActualRootGeometry
 
 /-!
 # A state-independent uncorrected band at each actual root
@@ -12,6 +14,8 @@ this same band for every state and every angle. The band is selected
 before either of those variables, and can be required to lie below any
 previously selected positive root scale.
 -/
+
+@[expose] public section
 
 noncomputable section
 

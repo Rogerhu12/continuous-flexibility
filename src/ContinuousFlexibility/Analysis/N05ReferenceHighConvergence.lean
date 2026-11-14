@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05ReferenceHighProjection
-import ContinuousFlexibility.Radial.R11bFourierReconstruction
-import ContinuousFlexibility.Radial.R11bLpConvergence
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceHighProjection
+public import ContinuousFlexibility.Radial.R11bFourierReconstruction
+public import ContinuousFlexibility.Radial.R11bLpConvergence
 
 /-!
 # The actual high cosine cuts converge to the original high field
@@ -9,6 +11,8 @@ The normalized even basis used in the physical reconstruction is exactly
 the reference basis. Removing its first two terms identifies the limit
 of the higher projections with the original field minus its low projection.
 -/
+
+@[expose] public section
 
 noncomputable section
 

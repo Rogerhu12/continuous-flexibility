@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SeeleyJetExtension
-import Mathlib.Topology.Algebra.InfiniteSum.Module
+module
+
+public import ContinuousFlexibility.Analysis.SeeleyJetExtension
+public import Mathlib.Topology.Algebra.InfiniteSum.Module
 
 /-!
 # Seeley extension respects linear maps and closed derivative graphs
@@ -11,6 +13,8 @@ continues to satisfy that relation after extension.  This applies to a closed
 angular derivative graph on circle-valued slices, including unbounded angular
 derivatives, without replacing an isotropic Sobolev order by twice that order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

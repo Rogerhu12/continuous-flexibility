@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N05CanonicalSourceLinearity
-import ContinuousFlexibility.Analysis.N05PhysicalGraphUniqueness
-import ContinuousFlexibility.Analysis.N05ReferenceScalarLinearity
-import Mathlib.Analysis.Normed.Operator.ContinuousLinearMap
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalSourceLinearity
+public import ContinuousFlexibility.Analysis.N05PhysicalGraphUniqueness
+public import ContinuousFlexibility.Analysis.N05ReferenceScalarLinearity
+public import Mathlib.Analysis.Normed.Operator.ContinuousLinearMap
 
 /-!
 # Continuous linear restrictions of the fixed canonical inverse
@@ -11,6 +13,8 @@ physical inverse. The selected endpoint scalar and the unique canonical L²
 sequence then transfer this linearity to the fixed global canonical map.
 Its existing square bound makes each stronger volume restriction continuous.
 -/
+
+@[expose] public section
 
 noncomputable section
 

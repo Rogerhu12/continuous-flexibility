@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06PrimitiveReferenceTransport
-import ContinuousFlexibility.Analysis.N06CutTransmissionJets
-import ContinuousFlexibility.Analysis.N05N06ClosedChartBridge
+module
+
+public import ContinuousFlexibility.Analysis.N06PrimitiveReferenceTransport
+public import ContinuousFlexibility.Analysis.N06CutTransmissionJets
+public import ContinuousFlexibility.Analysis.N05N06ClosedChartBridge
 
 /-!
 # The original graph's modal root and cut traces from primitive radiality
@@ -14,6 +16,8 @@ representative through its genuine closed inverse.
 There is no material-label, coordinate-cost, matching, or PDE hypothesis
 beyond the original graph and the primitive reference radial identities.
 -/
+
+@[expose] public section
 
 noncomputable section
 

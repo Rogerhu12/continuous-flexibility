@@ -1,9 +1,11 @@
-import Mathlib.Analysis.Complex.Hadamard
-import Mathlib.Analysis.Normed.Lp.lpSpace
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.NormNum
-import Mathlib.Tactic.Positivity
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Analysis.Complex.Hadamard
+public import Mathlib.Analysis.Normed.Lp.lpSpace
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.Positivity
+public import Mathlib.Tactic.Ring
 
 /-!
 # Three-lines interpolation for diagonal Hilbert scales
@@ -14,6 +16,8 @@ argument only needs complex normed spaces.  The input and output spectral
 projections are independent.  This permits passage to an infinite Hilbert
 sum without assuming that an operator preserves a finite spectral cutoff.
 -/
+
+@[expose] public section
 
 noncomputable section
 

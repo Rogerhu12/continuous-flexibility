@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
 
 /-!
 # Interior height freedom in the admissible positive transport
@@ -12,6 +14,8 @@ The last two lemmas identify the pulled positive height exactly. In this
 expression the relative transport and its inverse cancel; an interior
 height multiplier therefore remains visible after pulling back.
 -/
+
+@[expose] public section
 
 noncomputable section
 

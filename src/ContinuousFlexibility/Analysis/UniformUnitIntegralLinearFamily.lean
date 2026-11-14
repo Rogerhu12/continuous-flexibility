@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.TameUnitIntegralLinearFamily
+module
+
+public import ContinuousFlexibility.Analysis.TameUnitIntegralLinearFamily
 
 /-!
 # Uniform jet bounds under unit-interval averaging
@@ -8,6 +10,8 @@ arbitrary bounded low-seminorm sets, a contracting family of linear
 pullbacks and its integral preserve those very same orders. The
 constants are chosen before the point and all directional arguments.
 -/
+
+@[expose] public section
 
 noncomputable section
 

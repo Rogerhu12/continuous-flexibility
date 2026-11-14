@@ -1,7 +1,11 @@
-import ContinuousFlexibility.Analysis.N01cBoundsRestriction
+module
+
+public import ContinuousFlexibility.Analysis.N01cBoundsRestriction
 
 /-! Combine the zero-radial and positive-radial parameter estimates without
 moving the common controlling order inside the parameter quantifier. -/
+
+@[expose] public section
 
 noncomputable section
 

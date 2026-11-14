@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.ScalarForcedLinearODE
-import ContinuousFlexibility.Scalar.RectangleParameterIntegral
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
-import Mathlib.Tactic.Ring
+module
+
+public import ContinuousFlexibility.Analysis.ScalarForcedLinearODE
+public import ContinuousFlexibility.Scalar.RectangleParameterIntegral
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+public import Mathlib.Tactic.Ring
 
 /-!
 # Exact secant equations for two scalar trajectories
@@ -13,6 +15,8 @@ the trajectory difference. Different vector fields produce a genuine
 forcing term. No derivative of a trajectory in an external parameter is
 assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

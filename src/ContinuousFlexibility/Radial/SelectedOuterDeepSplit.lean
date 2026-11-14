@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R07DeepTailPhysical
-import ContinuousFlexibility.Radial.R07DeepTailEntry
+module
+
+public import ContinuousFlexibility.Radial.R07DeepTailPhysical
+public import ContinuousFlexibility.Radial.R07DeepTailEntry
 
 /-!
 # An actual deep split beyond a fixed selected matching cut
@@ -10,6 +12,8 @@ closed interval is a compact subset of the actual core, and the remaining
 tail has the complete R06 hypotheses and physical identification. One
 depth works for both orientations and for every admissible height sequence.
 -/
+
+@[expose] public section
 
 noncomputable section
 

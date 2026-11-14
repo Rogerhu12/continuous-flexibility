@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06RootPhysicalWeightedSmallness
-import ContinuousFlexibility.Analysis.RootCoefficientDivision
-import ContinuousFlexibility.Analysis.RootDividedHeight
+module
+
+public import ContinuousFlexibility.Analysis.N06RootPhysicalWeightedSmallness
+public import ContinuousFlexibility.Analysis.RootCoefficientDivision
+public import ContinuousFlexibility.Analysis.RootDividedHeight
 
 /-!
 # The actual root discriminant and the unit height formula
@@ -11,6 +13,8 @@ is a product of the odd coefficient, the fixed radial radicand, and
 the physical discriminant. No parameter regularity of a chosen root
 flow is needed for these identities.
 -/
+
+@[expose] public section
 
 noncomputable section
 

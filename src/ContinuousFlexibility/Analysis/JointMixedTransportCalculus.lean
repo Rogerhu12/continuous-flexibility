@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.JointMixedDiagonalCalculus
-import ContinuousFlexibility.Analysis.SmoothDirectionsNormedComposition
+module
+
+public import ContinuousFlexibility.Analysis.JointMixedDiagonalCalculus
+public import ContinuousFlexibility.Analysis.SmoothDirectionsNormedComposition
 
 /-!
 # Actual mixed transport recurrences
@@ -9,6 +11,8 @@ and angle.  The finite sums below are the actual derivatives of genuine
 joint towers.  Their indices record separately the parameter order and
 the two spatial orders; no formal jet is substituted for a derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowLocalBounds
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowLocalBounds
 
 /-!
 # Literal local-time supremum bounds
@@ -8,6 +10,8 @@ The displayed circle functions are the canonical actual derivative defect
 and translation displacement. The constants use only the original
 locally smooth speed's integrated norms.
 -/
+
+@[expose] public section
 
 noncomputable section
 

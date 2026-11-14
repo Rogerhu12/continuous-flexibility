@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesPhysicalCellPolynomials
-import ContinuousFlexibility.Analysis.SpacesPhysicalEncode
+module
+
+public import ContinuousFlexibility.Analysis.SpacesPhysicalCellPolynomials
+public import ContinuousFlexibility.Analysis.SpacesPhysicalEncode
 
 /-!
 # Evenization of actual cylinder jets
@@ -8,6 +10,8 @@ Angular reflection is an isometry of the prescribed cylinder measure.
 Its signed average contracts every derivative coordinate and is exactly
 the mixed derivative of the smooth even average of a cylinder function.
 -/
+
+@[expose] public section
 
 noncomputable section
 

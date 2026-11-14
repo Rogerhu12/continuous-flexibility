@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04bPositiveRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N04bPositiveRegularity
 
 /-!
 # Actual determinant germs at the physical roots
@@ -9,6 +11,8 @@ The N01 profile germ fixes its zero, independently of the height state.
 No regularity of an arbitrary stored corrected field is assumed in this
 germ comparison.
 -/
+
+@[expose] public section
 
 noncomputable section
 

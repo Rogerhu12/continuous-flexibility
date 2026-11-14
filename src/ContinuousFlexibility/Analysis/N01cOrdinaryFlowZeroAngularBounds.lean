@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01cSpeedAngularGrowth
-import ContinuousFlexibility.Analysis.N01cFlowZeroAngularGrowth
-import ContinuousFlexibility.Analysis.N01cCommonCosineGeometry
-import ContinuousFlexibility.Analysis.N01cPhysicalFlowRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N01cSpeedAngularGrowth
+public import ContinuousFlexibility.Analysis.N01cFlowZeroAngularGrowth
+public import ContinuousFlexibility.Analysis.N01cCommonCosineGeometry
+public import ContinuousFlexibility.Analysis.N01cPhysicalFlowRegularity
 
 /-!
 # Actual zero-parameter angular flow estimates
@@ -11,6 +13,8 @@ Their derivative defect obeys the proved circle Sobolev estimate, with
 the low constant chosen once from the actual common geometry. A closed
 surjective time change then gives every physical-radius angular bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

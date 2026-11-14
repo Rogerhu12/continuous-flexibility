@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionCoefficientRegularity
-import ContinuousFlexibility.Analysis.N01OpticalSpeedJetBounds
-import ContinuousFlexibility.Analysis.N01OpticalCollarPositivity
-import ContinuousFlexibility.Analysis.MixedDerivativeLocality
-import ContinuousFlexibility.Analysis.PolynomialJetComposition
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionCoefficientRegularity
+public import ContinuousFlexibility.Analysis.N01OpticalSpeedJetBounds
+public import ContinuousFlexibility.Analysis.N01OpticalCollarPositivity
+public import ContinuousFlexibility.Analysis.MixedDerivativeLocality
+public import ContinuousFlexibility.Analysis.PolynomialJetComposition
 
 /-!
 # Uniform spatial jets of the actual original coefficients
@@ -13,6 +15,8 @@ The reference coefficients are the radial functions w, 0, and w'/r,
 whose jets are uniformly bounded on the compact annulus. This yields
 uniform ordinary mixed and Fréchet jets of the original coefficients.
 -/
+
+@[expose] public section
 
 noncomputable section
 

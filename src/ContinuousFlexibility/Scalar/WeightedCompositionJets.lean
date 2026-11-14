@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedProductJets
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+module
+
+public import ContinuousFlexibility.Scalar.WeightedProductJets
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
 
 /-!
 # Finite chain rules for the actual mixed cylinder derivatives
@@ -9,6 +11,8 @@ Each differentiation either hits the outer scalar derivative or one of the
 inner jets. This records the full chain rule with coefficient one, including
 repeated terms, and retains the exact total spatial order of every term.
 -/
+
+@[expose] public section
 
 noncomputable section
 

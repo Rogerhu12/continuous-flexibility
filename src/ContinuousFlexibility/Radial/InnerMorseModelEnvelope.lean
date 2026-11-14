@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerMorseModelCoefficient
-import ContinuousFlexibility.Radial.InnerMorseWeights
+module
+
+public import ContinuousFlexibility.Radial.InnerMorseModelCoefficient
+public import ContinuousFlexibility.Radial.InnerMorseWeights
 
 /-!
 # Closed normalized envelopes for the actual Morse models
@@ -11,6 +13,8 @@ conjugation signs. A single fixed coefficient exponent eighty controls
 both quantities, and the ordered choice constructs the same model
 while suppressing its error and its frequency times the remainder.
 -/
+
+@[expose] public section
 
 noncomputable section
 

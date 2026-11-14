@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04bCanonicalOperator
-import ContinuousFlexibility.Analysis.StateControlCofiniteClosure
-import ContinuousFlexibility.Analysis.MaterialHeightRegularity
-import ContinuousFlexibility.Scalar.TypeCorrection
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N04bCanonicalOperator
+public import ContinuousFlexibility.Analysis.StateControlCofiniteClosure
+public import ContinuousFlexibility.Analysis.MaterialHeightRegularity
+public import ContinuousFlexibility.Scalar.TypeCorrection
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 
 /-!
 # Actual coefficient regularity on positive canonical pieces
@@ -13,6 +15,8 @@ away from zero. N03 identifies the corrected coefficients with their
 original germs on the nonnegative region. Thus the positive-piece
 canonical operator identity needs no additional regularity assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

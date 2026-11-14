@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.TerminalCapLift
-import ContinuousFlexibility.Radial.ModeSmoothWeakEquation
-import ContinuousFlexibility.Radial.ModeRegionWeakEquation
-import ContinuousFlexibility.Radial.MatchingTraceCalculus
+module
+
+public import ContinuousFlexibility.Radial.TerminalCapLift
+public import ContinuousFlexibility.Radial.ModeSmoothWeakEquation
+public import ContinuousFlexibility.Radial.ModeRegionWeakEquation
+public import ContinuousFlexibility.Radial.MatchingTraceCalculus
 
 /-!
 # Actual regional terminal lifts
@@ -11,6 +13,8 @@ the inner interval. Its representative retains the two boundary traces
 and is identically zero outside that interval. The actual commutator
 source gives the frozen weak equation, with its scalar component zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

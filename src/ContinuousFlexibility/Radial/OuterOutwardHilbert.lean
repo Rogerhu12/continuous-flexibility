@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OuterPhysicalInverse
+module
+
+public import ContinuousFlexibility.Radial.OuterPhysicalInverse
 
 /-!
 # The physical inverse in the outward radial coordinate
@@ -7,6 +9,8 @@ At the left endpoint the outward coordinate is minus the original
 radius. Both the measure and the operator are reflected together.
 The reflection has absolute Jacobian one and gives an actual L2 isometry.
 -/
+
+@[expose] public section
 
 noncomputable section
 

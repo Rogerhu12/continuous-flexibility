@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ReferenceRowAlgebra
-import ContinuousFlexibility.Radial.ReferenceHomogeneousUniqueness
+module
+
+public import ContinuousFlexibility.Radial.ReferenceRowAlgebra
+public import ContinuousFlexibility.Radial.ReferenceHomogeneousUniqueness
 
 /-!
 # Linearity and uniqueness of the actual reference weak graph
@@ -9,6 +11,8 @@ test pairings and the integrable border row. At positive attenuation,
 the graph is a linear relation, and the proved homogeneous kernel
 criterion supplies uniqueness for every source.
 -/
+
+@[expose] public section
 
 noncomputable section
 

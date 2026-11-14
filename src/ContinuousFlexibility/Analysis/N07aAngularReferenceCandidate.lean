@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aAngularReferenceC1
-import ContinuousFlexibility.Analysis.N07aAngularReferenceCandidateBounds
-import ContinuousFlexibility.Analysis.N07aAngularReferenceNaturalGraph
-import ContinuousFlexibility.Analysis.N07aAngularNormalizationTransport
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceC1
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceCandidateBounds
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceNaturalGraph
+public import ContinuousFlexibility.Analysis.N07aAngularNormalizationTransport
 
 /-!
 # Every normalized physical candidate has a genuine natural reference realization
@@ -11,6 +13,8 @@ Its first jets match at every original interface, its physical differential
 source has the genuine compatibility integral, and all real natural cell
 weights follow from the strict material height margin.
 -/
+
+@[expose] public section
 
 noncomputable section
 

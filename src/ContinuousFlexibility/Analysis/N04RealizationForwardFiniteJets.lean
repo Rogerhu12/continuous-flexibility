@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.FiniteInverseMaterialBounds
-import ContinuousFlexibility.Analysis.N04RealizationForwardE0Bounds
-import ContinuousFlexibility.Analysis.N04RealizationInverseE0Bounds
-import ContinuousFlexibility.Analysis.N07aActualChartDifferentials
-import ContinuousFlexibility.Analysis.StateNeighborhood
+module
+
+public import ContinuousFlexibility.Analysis.FiniteInverseMaterialBounds
+public import ContinuousFlexibility.Analysis.N04RealizationForwardE0Bounds
+public import ContinuousFlexibility.Analysis.N04RealizationInverseE0Bounds
+public import ContinuousFlexibility.Analysis.N07aActualChartDifferentials
+public import ContinuousFlexibility.Analysis.StateNeighborhood
 
 /-!
 # Finite forward jets on the actual moving physical pieces
@@ -13,6 +15,8 @@ jet prefix on that same neighborhood. The sampled E0 power is retained,
 and the state dependence is a finite polynomial at a finite grading order.
 No zeroth-order bound on the unwrapped angular coordinate is required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

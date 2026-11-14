@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryActualCoefficientWords
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryActualCoefficientWords
 
 /-!
 # One actual sampled prefix for the four retained pullback coefficients
@@ -7,6 +9,8 @@ The finite inverse and composition constants are selected before the
 component and state. The source tensors and forward slope already have
 one common high denominator, so no additional angular shift is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

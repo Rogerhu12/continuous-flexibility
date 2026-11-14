@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bActualTravelChart
-import ContinuousFlexibility.Analysis.N04bReferenceTravelCut
+module
+
+public import ContinuousFlexibility.Analysis.N04bActualTravelChart
+public import ContinuousFlexibility.Analysis.N04bReferenceTravelCut
 
 /-!
 # The actual reference travel chart is the radial optical chart
@@ -9,6 +11,8 @@ before canonical coordinates are introduced. Its literal chosen angular
 inverse is the opposite translation. The actual normalized first integrals
 therefore give the optical travel and the unchanged angular coordinate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

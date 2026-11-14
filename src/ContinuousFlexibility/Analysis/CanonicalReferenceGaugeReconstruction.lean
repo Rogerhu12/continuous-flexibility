@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CanonicalActualEndpointFields
-import ContinuousFlexibility.Analysis.WholePositiveReferenceGaugeFirstJets
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalActualEndpointFields
+public import ContinuousFlexibility.Analysis.WholePositiveReferenceGaugeFirstJets
 
 /-!
 # The stored closed atlas fields in the reference gauge
@@ -9,6 +11,8 @@ and its actual inverse reconstruct the stored current chart and height
 on a full ordinary neighborhood. This identifies the negative-side
 terms of the first-jet transfer without assuming a raw matching target.
 -/
+
+@[expose] public section
 
 noncomputable section
 

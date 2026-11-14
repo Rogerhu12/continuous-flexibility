@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.TravelStripAngularInverse
-import ContinuousFlexibility.Scalar.Conservation
+module
+
+public import ContinuousFlexibility.Analysis.TravelStripAngularInverse
+public import ContinuousFlexibility.Scalar.Conservation
 
 /-!
 # First integrals from the actual inverse characteristic flow
@@ -10,6 +12,8 @@ in the interior. Composing that inverse with the left angular normalization
 defines the first integral; no inverse regularity or coordinate conclusion
 is included among the hypotheses.
 -/
+
+@[expose] public section
 
 noncomputable section
 

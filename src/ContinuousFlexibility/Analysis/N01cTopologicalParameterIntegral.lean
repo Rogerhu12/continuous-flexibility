@@ -1,5 +1,7 @@
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
-import Mathlib.Topology.UniformSpace.HeineCantor
+module
+
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
+public import Mathlib.Topology.UniformSpace.HeineCantor
 
 /-!
 # Compact-time integrals with arbitrary topological parameters
@@ -9,6 +11,8 @@ continuity of its actual interval integral. The parameter space has no
 norm or local compactness hypothesis. The primitive wrapper also allows
 the time endpoint to vary, by the actual affine change of variables.
 -/
+
+@[expose] public section
 
 noncomputable section
 

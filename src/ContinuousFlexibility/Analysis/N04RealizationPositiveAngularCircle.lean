@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationPositiveCircleInverse
-import ContinuousFlexibility.Analysis.PositiveAngularTaylorInterpolation
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationPositiveCircleInverse
+public import ContinuousFlexibility.Analysis.PositiveAngularTaylorInterpolation
 
 /-!
 # The finite angular interpolation in the original circle model
@@ -9,6 +11,8 @@ The radial coefficients are the actual fixed Taylor and cutoff factors.
 The resulting circle tower decodes to the literal interpolation, with
 the original state domain and collar width.
 -/
+
+@[expose] public section
 
 noncomputable section
 

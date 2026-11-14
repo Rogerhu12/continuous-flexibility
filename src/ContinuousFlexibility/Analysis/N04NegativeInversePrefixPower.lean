@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.JointJetInterpolationBudget
-import ContinuousFlexibility.Analysis.TameMultilinearNormalization
-import ContinuousFlexibility.Statements.Nonlinear
-import ContinuousFlexibility.Analysis.N04RealizationFullWeightProductOneHigh
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+module
+
+public import ContinuousFlexibility.Analysis.JointJetInterpolationBudget
+public import ContinuousFlexibility.Analysis.TameMultilinearNormalization
+public import ContinuousFlexibility.Statements.Nonlinear
+public import ContinuousFlexibility.Analysis.N04RealizationFullWeightProductOneHigh
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
 
 /-!
 # One saved spatial derivative in finite inverse prefixes
@@ -15,6 +17,8 @@ prefix; the positive parameter losses change only the prefix shift.
 The scalar adapter preserves the complete external weight, including
 the sampled height factor at every positive parameter order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

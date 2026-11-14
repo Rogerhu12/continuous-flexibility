@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.OneSidedOrdinaryJets
-import ContinuousFlexibility.Analysis.RootCompositionZeroOrder
-import Mathlib.Analysis.Normed.Operator.Prod
-import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
-import Mathlib.Tactic.Ring
+module
+
+public import ContinuousFlexibility.Analysis.OneSidedOrdinaryJets
+public import ContinuousFlexibility.Analysis.RootCompositionZeroOrder
+public import Mathlib.Analysis.Normed.Operator.Prod
+public import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+public import Mathlib.Tactic.Ring
 
 /-!
 # Ordinary root jets at the boundary
@@ -14,6 +16,8 @@ its input. The one-sided comparison lemmas then bound the ordinary jets
 that occur in `CSBound`, including when the root formulas are not smooth
 across the boundary as functions on the whole plane.
 -/
+
+@[expose] public section
 
 noncomputable section
 

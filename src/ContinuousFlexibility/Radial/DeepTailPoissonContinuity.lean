@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.DeepTailPhysicalPoisson
-import ContinuousFlexibility.Radial.TailPhysicalGreenContraction
+module
+
+public import ContinuousFlexibility.Radial.DeepTailPhysicalPoisson
+public import ContinuousFlexibility.Radial.TailPhysicalGreenContraction
 
 /-!
 # Continuous actual Poisson functions and their flux matrices
@@ -8,6 +10,8 @@ The physical integral equation identifies every Poisson bundle with the
 unique fixed point on one fixed space of continuous edge functions.
 The endpoint flux coefficients are then continuous scalar mass pairings.
 -/
+
+@[expose] public section
 
 noncomputable section
 

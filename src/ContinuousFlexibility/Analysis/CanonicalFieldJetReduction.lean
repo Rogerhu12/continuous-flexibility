@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CanonicalCoefficientIdentities
-import ContinuousFlexibility.Analysis.CanonicalTwoEndpointCubicMixed
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalCoefficientIdentities
+public import ContinuousFlexibility.Analysis.CanonicalTwoEndpointCubicMixed
 
 /-!
 # Actual canonical field jets from explicit source and numerator data
@@ -10,6 +12,8 @@ all three positive divided coefficients.  Their estimate uses actual
 endpoint zero jets and a numerical bound for the numerator with six more
 radial derivatives.  No quantitative canonical-bound predicate is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

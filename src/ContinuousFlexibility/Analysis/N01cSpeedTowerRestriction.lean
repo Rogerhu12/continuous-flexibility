@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cVolterraStateJets
-import ContinuousFlexibility.Analysis.N01cStateSeminorms
+module
+
+public import ContinuousFlexibility.Analysis.N01cVolterraStateJets
+public import ContinuousFlexibility.Analysis.N01cStateSeminorms
 
 /-!
 # Restricting a genuine time-indexed speed tower
@@ -8,6 +10,8 @@ A smaller open state domain retains every original multilinear map.
 The time, state and direction evaluation continuity is simply restricted
 to the same smaller product domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientRegularity
-import ContinuousFlexibility.Analysis.N04PulledFieldsOpenZeroGluing
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsCoefficientRegularity
+public import ContinuousFlexibility.Analysis.N04PulledFieldsOpenZeroGluing
 
 /-!
 # The actual correction error has a joint tower on the whole annulus
@@ -10,6 +12,8 @@ coefficient tower is genuine. On the zero region the literal error vanishes
 for every state and residual. Uniqueness glues these towers before the
 actual N02 residual is substituted into the state graph.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MorseModelReturn
+module
+
+public import ContinuousFlexibility.Radial.MorseModelReturn
 
 /-!
 # Ordering of the actual retained Morse components
@@ -7,6 +9,8 @@ The strict order of the realized joins separates successive model
 intervals. It also places every closed turning interval in the original
 outward tail, without assuming a stronger construction witness.
 -/
+
+@[expose] public section
 
 noncomputable section
 

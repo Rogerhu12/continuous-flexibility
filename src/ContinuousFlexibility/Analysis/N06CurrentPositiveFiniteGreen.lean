@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06CurrentPositiveGreen
-import ContinuousFlexibility.Analysis.N06UnitWeakGraphData
-import ContinuousFlexibility.Analysis.N06CutTransmissionJets
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentPositiveGreen
+public import ContinuousFlexibility.Analysis.N06UnitWeakGraphData
+public import ContinuousFlexibility.Analysis.N06CutTransmissionJets
 
 /-!
 # Finite positive Green with the actual modal forcing
@@ -11,6 +13,8 @@ with its actual forcing synthesis and both weighted endpoint Wronskians.
 The final theorem uses the existing weak graph package and its original
 modal ODE; no smooth radial source or new operator is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

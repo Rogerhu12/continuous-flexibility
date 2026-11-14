@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.SelectedSideTransport
-import ContinuousFlexibility.Radial.R07MiddlePreservation
+module
+
+public import ContinuousFlexibility.Radial.SelectedSideTransport
+public import ContinuousFlexibility.Radial.R07MiddlePreservation
 
 /-!
 # Every original Morse cell on the same retained reference
@@ -10,6 +12,8 @@ first cut. The retained pair then supplies its actual profile germ,
 with the radius and height factors belonging to that side of the pair.
 No realization of the entire new reference by the old chain is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

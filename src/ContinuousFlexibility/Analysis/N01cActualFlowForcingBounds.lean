@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cActualFlowCircleData
-import ContinuousFlexibility.Analysis.N01cFlowVariationForcingBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01cActualFlowCircleData
+public import ContinuousFlexibility.Analysis.N01cFlowVariationForcingBounds
 
 /-!
 # Actual ordinary-flow forcing factors and their Sobolev estimate
@@ -9,6 +11,8 @@ supplied ordinary trajectories. Their speed factor is the original
 cosine speed tower times the fixed time derivative. Every nonconstant
 lower factor is an actual lower state derivative of the same flow.
 -/
+
+@[expose] public section
 
 noncomputable section
 

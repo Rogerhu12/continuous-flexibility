@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ReferenceZeroModeUniqueness
-import ContinuousFlexibility.Radial.MatchedModeDomainEmbedding
-import ContinuousFlexibility.Radial.ReferenceTestIntegrability
+module
+
+public import ContinuousFlexibility.Radial.ReferenceZeroModeUniqueness
+public import ContinuousFlexibility.Radial.MatchedModeDomainEmbedding
+public import ContinuousFlexibility.Radial.ReferenceTestIntegrability
 
 /-!
 # Triviality of the actual homogeneous reference graph
@@ -11,6 +13,8 @@ including the border scalar at frequency two. The zero channel is
 excluded by its actual endpoint norm. Local cosine completeness then
 gives equality of the physical field almost everywhere.
 -/
+
+@[expose] public section
 
 noncomputable section
 

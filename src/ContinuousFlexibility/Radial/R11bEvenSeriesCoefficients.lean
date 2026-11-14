@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R11bEvenPartialSums
-import ContinuousFlexibility.Radial.R11bCoefficientContinuity
+module
+
+public import ContinuousFlexibility.Radial.R11bEvenPartialSums
+public import ContinuousFlexibility.Radial.R11bCoefficientContinuity
 
 /-!
 # Actual coefficients of an L² even Fourier series
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Radial.R11bCoefficientContinuity
 Continuity of each coefficient map passes the finite integral identity to
 the strong Hilbert-space limit. No pointwise convergence of the series is used.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

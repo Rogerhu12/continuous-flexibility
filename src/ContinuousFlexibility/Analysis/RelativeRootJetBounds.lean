@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CoordinateCompositionMaterialBounds
-import ContinuousFlexibility.Analysis.PlanarInverseJacobianMaterialJets
-import ContinuousFlexibility.Analysis.PointwiseProductMaterialJets
-import ContinuousFlexibility.Analysis.PointwiseMaterialJetOperations
+module
+
+public import ContinuousFlexibility.Analysis.CoordinateCompositionMaterialBounds
+public import ContinuousFlexibility.Analysis.PlanarInverseJacobianMaterialJets
+public import ContinuousFlexibility.Analysis.PointwiseProductMaterialJets
+public import ContinuousFlexibility.Analysis.PointwiseMaterialJetOperations
 
 /-!
 # Fixed-loss bounds for actual relative root maps and height products
@@ -11,6 +13,8 @@ introduce no bound on the zeroth-order angular lift. Every low order and
 loss is selected before the numerical component envelopes and Jacobian
 lower bound. Scalar values are handled by their actual zeroth-order jets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

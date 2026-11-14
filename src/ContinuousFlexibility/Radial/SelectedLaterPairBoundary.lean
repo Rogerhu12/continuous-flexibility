@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.SelectedFirstNaturalTransport
-import ContinuousFlexibility.Radial.SelectedLaterPhysicalIncoming
-import ContinuousFlexibility.Radial.SelectedLaterJoinAngle
-import ContinuousFlexibility.Radial.SelectedBoundaryRadiusScale
+module
+
+public import ContinuousFlexibility.Radial.SelectedFirstNaturalTransport
+public import ContinuousFlexibility.Radial.SelectedLaterPhysicalIncoming
+public import ContinuousFlexibility.Radial.SelectedLaterJoinAngle
+public import ContinuousFlexibility.Radial.SelectedBoundaryRadiusScale
 
 /-!
 # Later boundary data for the retained pair's actual dilation
@@ -11,6 +13,8 @@ join. The fixed pair's own radius and height factors transport its state,
 so the terminal cap, inner chain and outer Robin condition use the same
 two physical cuts.
 -/
+
+@[expose] public section
 
 noncomputable section
 

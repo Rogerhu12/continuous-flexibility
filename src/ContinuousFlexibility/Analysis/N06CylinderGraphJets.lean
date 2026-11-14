@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06AngularJetParseval
-import ContinuousFlexibility.Analysis.N06CylinderLp
-import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
+module
+
+public import ContinuousFlexibility.Analysis.N06AngularJetParseval
+public import ContinuousFlexibility.Analysis.N06CylinderLp
+public import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
 
 /-!
 # The positive-cylinder graph bound at the fixed angular source order
@@ -10,6 +12,8 @@ The scalar mode estimate can therefore be summed with the genuine finite
 jet weight. Its constant is independent of the number of Fourier modes
 and of the fixed angular order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

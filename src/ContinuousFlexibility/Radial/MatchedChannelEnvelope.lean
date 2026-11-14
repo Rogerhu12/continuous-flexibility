@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MatchedUniformEnvelope
-import ContinuousFlexibility.Radial.MatchedPhysicalChannelComparison
-import ContinuousFlexibility.Radial.MatchedPhysicalScalarGate
+module
+
+public import ContinuousFlexibility.Radial.MatchedUniformEnvelope
+public import ContinuousFlexibility.Radial.MatchedPhysicalChannelComparison
+public import ContinuousFlexibility.Radial.MatchedPhysicalScalarGate
 
 /-!
 # The actual channel and scalar gate in the matching estimate
@@ -10,6 +12,8 @@ after every actual channel. Consequently the two column estimates already
 control both rows in the matching formula. This is the channel form used by
 the common inverse construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

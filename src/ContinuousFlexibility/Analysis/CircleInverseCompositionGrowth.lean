@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CircleInverseInterpolatedJets
-import ContinuousFlexibility.Analysis.CircleInverseFaaBounds
+module
+
+public import ContinuousFlexibility.Analysis.CircleInverseInterpolatedJets
+public import ContinuousFlexibility.Analysis.CircleInverseFaaBounds
 
 /-!
 # Fixed-loss local growth of actual inverse composition
@@ -9,6 +11,8 @@ component energies. All finite terms are interpolated against one high
 seminorm before a homogeneous linear-family estimate is extracted.
 The loss is fixed before the output order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

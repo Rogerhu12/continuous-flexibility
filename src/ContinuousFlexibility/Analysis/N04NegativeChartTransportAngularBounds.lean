@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartCircleStateBudget
-import ContinuousFlexibility.Analysis.N04NegativeChartTransportCircleBounds
-import ContinuousFlexibility.Analysis.N04NegativeChartFirstIntegralCircleBounds
-import ContinuousFlexibility.Analysis.N04NegativeChartInteriorTowers
-import ContinuousFlexibility.Analysis.N01TransportAngularInterpolation
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartCircleStateBudget
+public import ContinuousFlexibility.Analysis.N04NegativeChartTransportCircleBounds
+public import ContinuousFlexibility.Analysis.N04NegativeChartFirstIntegralCircleBounds
+public import ContinuousFlexibility.Analysis.N04NegativeChartInteriorTowers
+public import ContinuousFlexibility.Analysis.N01TransportAngularInterpolation
 
 /-!
 # The actual angular inputs with a common state-order budget
@@ -12,6 +14,8 @@ radius selector families. Each low order is chosen before every state
 prefix. The slope has its constant reference value; the correction and
 first-integral defect keep the positive circle sample height.
 -/
+
+@[expose] public section
 
 noncomputable section
 

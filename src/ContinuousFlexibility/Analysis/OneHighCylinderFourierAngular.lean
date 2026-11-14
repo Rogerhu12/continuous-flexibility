@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderPlancherel
-import ContinuousFlexibility.Analysis.OneHighCircleFourierDerivative
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderPlancherel
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierDerivative
 
 /-!
 # Angular differentiation of the actual cylinder Fourier transform
@@ -9,6 +11,8 @@ slice. Passing that identity through the genuine radial `L²` Fourier
 isometry gives the physical angular multiplier almost everywhere on the
 full mixed frequency space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

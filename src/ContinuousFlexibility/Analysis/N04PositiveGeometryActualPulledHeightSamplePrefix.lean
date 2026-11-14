@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryActualPulledHeightDirections
-import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceHeightSamplePrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryFormulaPrefix
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryActualPulledHeightDirections
+public import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceHeightSamplePrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryFormulaPrefix
 
 /-!
 # Sampled mixed derivatives of the actual pulled height
@@ -9,6 +11,8 @@ The fixed reference inverse is already included in the controlled pulled
 height estimate. The genuine raw source traces discharge its remaining
 input, on a single low neighborhood chosen before all derivative orders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

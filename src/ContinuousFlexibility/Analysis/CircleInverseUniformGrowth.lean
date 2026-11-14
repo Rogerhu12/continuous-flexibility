@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.TameUniformGrowth
-import ContinuousFlexibility.Analysis.CircleInverseFamilyTame
-import ContinuousFlexibility.Analysis.CirclePositiveLiftDomain
+module
+
+public import ContinuousFlexibility.Analysis.TameUniformGrowth
+public import ContinuousFlexibility.Analysis.CircleInverseFamilyTame
+public import ContinuousFlexibility.Analysis.CirclePositiveLiftDomain
 
 /-!
 # Uniform growth of the actual inverse and a common positive domain
@@ -11,6 +13,8 @@ growth bound for each fixed positive lower bound. A common open domain
 with half the lower bound contains every lift satisfying the original
 bound; this domain is independent of any subsequent radius selector.
 -/
+
+@[expose] public section
 
 noncomputable section
 

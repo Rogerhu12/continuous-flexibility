@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.WeightedDecodedProductMap
-import ContinuousFlexibility.Scalar.WeightedProductTower
-import ContinuousFlexibility.Scalar.WeightedUniformTameGermOperations
+module
+
+public import ContinuousFlexibility.Scalar.WeightedDecodedProductMap
+public import ContinuousFlexibility.Scalar.WeightedProductTower
+public import ContinuousFlexibility.Scalar.WeightedUniformTameGermOperations
 
 /-!
 # The actual product retains both input weights
@@ -10,6 +12,8 @@ Here that estimate is realized as a continuous bilinear map into the sum-weight
 model. In particular, two fields of weight `3/8` give a source field of weight
 `3/4`; no weight is discarded when the product is encoded.
 -/
+
+@[expose] public section
 
 noncomputable section
 

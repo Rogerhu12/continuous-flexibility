@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06OriginalPositiveGraphFamily
-import ContinuousFlexibility.Analysis.N06PositiveFiniteCoreGreen
-import ContinuousFlexibility.Analysis.N06NegativeFiniteCoreGreen
-import ContinuousFlexibility.Analysis.N06FiniteHeightModes
+module
+
+public import ContinuousFlexibility.Analysis.N06OriginalPositiveGraphFamily
+public import ContinuousFlexibility.Analysis.N06PositiveFiniteCoreGreen
+public import ContinuousFlexibility.Analysis.N06NegativeFiniteCoreGreen
+public import ContinuousFlexibility.Analysis.N06FiniteHeightModes
 
 /-!
 # One actual finite modal family for every canonical piece
@@ -16,6 +18,8 @@ for these same finite C1 values. The result retains the modal coefficient
 identities needed by the existing reference/current transmission proofs;
 no matching trace or global physical equation is imposed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

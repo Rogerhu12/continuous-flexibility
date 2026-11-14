@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryKernelBounds
-import ContinuousFlexibility.Analysis.N06BoundaryRadialJets
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryKernelBounds
+public import ContinuousFlexibility.Analysis.N06BoundaryRadialJets
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
 
 /-!
 # The finite radial product in the actual height
@@ -10,6 +12,8 @@ Only the odd and discriminant traces carry state and angle variables.
 The exact double Leibniz sum preserves every reserved angular order and
 the original parameter-height weight.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularReferenceDecomposition
-import ContinuousFlexibility.Radial.R11bRadialTests
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceDecomposition
+public import ContinuousFlexibility.Radial.R11bRadialTests
 
 /-!
 # Actual piecewise reference jets supply the physical integrability
@@ -10,6 +12,8 @@ their L¹ membership follows from the finite physical annulus measure.
 The continuous first derivative inherits the same bound at interfaces
 from the original a.e. radial cover.
 -/
+
+@[expose] public section
 
 noncomputable section
 

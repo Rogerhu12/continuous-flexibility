@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.IntervalWeakPrimitive
-import Mathlib.Topology.Order.Compact
+module
+
+public import ContinuousFlexibility.Radial.IntervalWeakPrimitive
+public import Mathlib.Topology.Order.Compact
 
 /-!
 # Weak primitives using tests compactly inside the interval
@@ -8,6 +10,8 @@ These variants need only tests whose topological support lies in the open
 interval. This permits multiplication by coefficients known smooth only
 on that open interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

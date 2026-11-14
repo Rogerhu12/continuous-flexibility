@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04RealizationJointMixedRegularity
-import ContinuousFlexibility.Analysis.N04bRootHeightSymmetry
-import ContinuousFlexibility.Analysis.N01cParameterCalculus
-import ContinuousFlexibility.Analysis.SmoothDirectionsNormedComposition
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationJointMixedRegularity
+public import ContinuousFlexibility.Analysis.N04bRootHeightSymmetry
+public import ContinuousFlexibility.Analysis.N01cParameterCalculus
+public import ContinuousFlexibility.Analysis.SmoothDirectionsNormedComposition
 
 /-!
 # Actual Jacobian towers from the two chart components
@@ -11,6 +13,8 @@ The determinant is then the displayed two-product formula. Positivity
 permits the absolute value and reciprocal used by the geometric atoms,
 without introducing independent determinant jets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

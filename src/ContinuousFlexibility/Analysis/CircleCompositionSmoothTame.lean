@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CircleCompositionLocalTame
+module
+
+public import ContinuousFlexibility.Analysis.CircleCompositionLocalTame
 
 /-!
 # Joint smooth tame chart composition in the actual circle space
@@ -9,6 +11,8 @@ the low seminorm is bounded by one plus its value at the center. Applying
 this elementary conversion on abstract spaces preserves the fixed loss
 without unfolding the concrete projective circle model.
 -/
+
+@[expose] public section
 
 noncomputable section
 

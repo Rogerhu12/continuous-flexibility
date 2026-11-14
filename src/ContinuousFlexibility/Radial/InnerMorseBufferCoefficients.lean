@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerMorseBufferBounds
+module
+
+public import ContinuousFlexibility.Radial.InnerMorseBufferBounds
 
 /-!
 # Raw coefficient costs for the actual Morse buffers
@@ -9,6 +11,8 @@ fixed polynomial cost in the actual integer parameter. This cost is
 bounded by a fixed ninth power of the manuscript's coefficient weight,
 before the starting index or the frequency band is selected.
 -/
+
+@[expose] public section
 
 noncomputable section
 

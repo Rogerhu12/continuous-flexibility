@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CoordinateDivergenceIdentity
-import ContinuousFlexibility.Analysis.PrincipalDensityBoundaryJets
+module
+
+public import ContinuousFlexibility.Analysis.CoordinateDivergenceIdentity
+public import ContinuousFlexibility.Analysis.PrincipalDensityBoundaryJets
 
 /-!
 # Explicit coefficient and potential fields for an actual coordinate map
@@ -8,6 +10,8 @@ The canonical fields are defined by the physical principal density composed
 with an actual inverse chart. Their regularity and full operator identity
 are consequences of these formulas and the local inverse identity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05NegativeTravel
+module
+
+public import ContinuousFlexibility.Analysis.N05NegativeTravel
 
 /-!
 # The actual negative root chart is the identity
@@ -8,6 +10,8 @@ time after subtracting the identity.  The frozen irrationality margin makes
 these periods incommensurable.  Closed reflection fixes its additive
 constant, yielding the actual identity chart at either physical root.
 -/
+
+@[expose] public section
 
 noncomputable section
 

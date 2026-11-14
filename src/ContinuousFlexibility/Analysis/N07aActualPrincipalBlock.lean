@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aPrincipalModeBound
+module
+
+public import ContinuousFlexibility.Analysis.N07aPrincipalModeBound
 
 /-!
 # The principal blocks of the actual relative operator
@@ -7,6 +9,8 @@ The estimates are obtained from the original current geometric jets,
 the exact N04 cubic factor, and the original weak mode energy. The same
 bound controls the frequency commutator, with a fixed additional loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

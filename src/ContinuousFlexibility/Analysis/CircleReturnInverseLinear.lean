@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CircleReturnL2
-import ContinuousFlexibility.Analysis.CircleReturnSmoothInverse
+module
+
+public import ContinuousFlexibility.Analysis.CircleReturnL2
+public import ContinuousFlexibility.Analysis.CircleReturnSmoothInverse
 
 /-!
 # The canonical return inverse on the full smooth circle space
@@ -9,6 +11,8 @@ are the actual integral coefficients, so addition and scalar multiplication
 hold on this full domain.  The inverse identities specialize to the smooth
 odd domain and the smooth even zero-mean target.
 -/
+
+@[expose] public section
 
 noncomputable section
 

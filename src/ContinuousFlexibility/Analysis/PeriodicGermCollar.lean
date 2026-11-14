@@ -1,5 +1,7 @@
-import Mathlib.Topology.MetricSpace.Thickening
-import Mathlib.Topology.Instances.Real.Lemmas
+module
+
+public import Mathlib.Topology.MetricSpace.Thickening
+public import Mathlib.Topology.Instances.Real.Lemmas
 
 /-!
 # Uniform periodic collars from actual local neighborhoods
@@ -8,6 +10,8 @@ This generic compactness lemma is factored from RootUniformCollar.
 It uses one compact angular period and does not depend on root charts,
 Seeley extensions, or canonical coordinate data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

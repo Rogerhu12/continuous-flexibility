@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SmoothDirectionsLocalDirections
+module
+
+public import ContinuousFlexibility.Analysis.SmoothDirectionsLocalDirections
 
 /-!
 # Euler identities in an actual directional tower
@@ -8,6 +10,8 @@ derivative. Multiplying the kth scalar jet by the kth power of the line
 parameter then gives a nonsingular bound by one mixed height jet. The
 argument includes a zero scalar parameter and never divides by it.
 -/
+
+@[expose] public section
 
 noncomputable section
 

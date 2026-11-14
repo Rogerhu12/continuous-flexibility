@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.StateKappaBounds
-import ContinuousFlexibility.Analysis.CylinderSobolev
-import ContinuousFlexibility.Analysis.CircleModelRealization
-import ContinuousFlexibility.Analysis.CircleJetClosedGraph
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
-import Mathlib.Algebra.Order.ToIntervalMod
+module
+
+public import ContinuousFlexibility.Analysis.StateKappaBounds
+public import ContinuousFlexibility.Analysis.CylinderSobolev
+public import ContinuousFlexibility.Analysis.CircleModelRealization
+public import ContinuousFlexibility.Analysis.CircleJetClosedGraph
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+public import Mathlib.Algebra.Order.ToIntervalMod
 
 /-!
 # Pointwise angular jets in the actual weighted circle model
@@ -13,6 +15,8 @@ give a uniform Sobolev evaluation bound on one period.  Extracting an
 actual angular jet from the complete circle energy then bounds every
 decoded derivative by the existing grading and its sample weight.
 -/
+
+@[expose] public section
 
 noncomputable section
 

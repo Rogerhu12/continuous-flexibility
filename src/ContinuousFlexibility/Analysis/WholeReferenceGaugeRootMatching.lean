@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeRootFirstJets
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeRootInterfaces
+module
+
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeRootFirstJets
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeRootInterfaces
 
 /-!
 # Root transmission for the same actual reference-gauged whole atlas
@@ -11,6 +13,8 @@ come from the actual reference interpolation and the already selected
 relative family. The original negative atlas is never reconstructed on
 the smaller neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

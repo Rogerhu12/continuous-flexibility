@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.MaterialSampleIndexModels
+module
+
+public import ContinuousFlexibility.Analysis.MaterialSampleIndexModels
 
 /-!
 # Global comparison with the actual endpoint models
@@ -7,6 +9,8 @@ The finitely many samples outside the exact endpoint formulas are covered
 by positive constants. The same endpoint coordinate then controls all
 three weights at every sample, with one uniform coordinate-index error.
 -/
+
+@[expose] public section
 
 noncomputable section
 

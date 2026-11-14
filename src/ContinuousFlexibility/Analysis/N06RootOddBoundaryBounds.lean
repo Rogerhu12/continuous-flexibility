@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06PhysicalRootLogHeight
-import ContinuousFlexibility.Analysis.N06PositiveLogFiniteJets
-import ContinuousFlexibility.Analysis.N06RootLabelJets
-import ContinuousFlexibility.Analysis.N06MaterialAbsorption
+module
+
+public import ContinuousFlexibility.Analysis.N06PhysicalRootLogHeight
+public import ContinuousFlexibility.Analysis.N06PositiveLogFiniteJets
+public import ContinuousFlexibility.Analysis.N06RootLabelJets
+public import ContinuousFlexibility.Analysis.N06MaterialAbsorption
 
 /-!
 # Weighted angular jets of the true root odd-field logarithm
@@ -18,6 +20,8 @@ bound, and no uniform bound on an arbitrary angular gauge is assumed.
 This file addresses radial order zero; higher radial orders also involve
 the relative radial jets of the fixed reference speed factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

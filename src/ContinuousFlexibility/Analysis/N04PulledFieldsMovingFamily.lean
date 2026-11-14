@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsCompositionBudget
-import ContinuousFlexibility.Analysis.N04PulledFieldsCompositionCost
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsCompositionBudget
+public import ContinuousFlexibility.Analysis.N04PulledFieldsCompositionCost
 
 /-!
 # Uniform positive jets of genuine moving-point families
@@ -10,6 +12,8 @@ high loss is selected before the spatial order. Exact mixed expansions,
 the masked composition and one final normalization give the sampled
 height factor with a single high seminorm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

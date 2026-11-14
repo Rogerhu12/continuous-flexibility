@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MorseDarbouxIntertwining
+module
+
+public import ContinuousFlexibility.Radial.MorseDarbouxIntertwining
 
 /-!
 # Ground states of the Morse partner family
@@ -7,6 +9,8 @@ The annihilation equation has an integrating factor on the entire line.
 Compact primitives of zero-integral tests detect that the resulting
 locally integrable function is almost everywhere constant.
 -/
+
+@[expose] public section
 
 noncomputable section
 

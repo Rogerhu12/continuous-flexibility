@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.WeakBranchCore
+module
+
+public import ContinuousFlexibility.Analysis.WeakBranchCore
 
 /-!
 # An annular core from one nonzero solution
@@ -11,6 +13,8 @@ state; endpoint constants and nonradiality are then constructed from them.
 
 This is the pointwise form of the construction in `WeakBranchCore`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

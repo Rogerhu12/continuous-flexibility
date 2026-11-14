@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CanonicalWholePositiveTransport
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalWholePositiveTransport
 
 /-!
 # Angular positivity for the same selected positive transport
@@ -8,6 +10,8 @@ Their existing finite representatives preserve those exact positive
 jets. The original angular interpolation theorem therefore proves
 positivity for the displayed width, with no new choice of controls.
 -/
+
+@[expose] public section
 
 noncomputable section
 

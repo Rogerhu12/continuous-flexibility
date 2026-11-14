@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aAngularFixedJetOperations
-import ContinuousFlexibility.Analysis.N07aActualChartDifferentials
-import ContinuousFlexibility.Analysis.CanonicalSourceMeasure
-import ContinuousFlexibility.Geometry.EuclideanRigidity
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularFixedJetOperations
+public import ContinuousFlexibility.Analysis.N07aActualChartDifferentials
+public import ContinuousFlexibility.Analysis.CanonicalSourceMeasure
+public import ContinuousFlexibility.Geometry.EuclideanRigidity
 
 /-!
 # Fixed-state envelopes for the genuine inverse Jacobian
@@ -11,6 +13,8 @@ absolute value costs no derivative at a nonzero Jacobian, since its sign
 is constant in a neighborhood of each point. These facts apply on the
 actual canonical domain and do not sample a fixed physical rectangle.
 -/
+
+@[expose] public section
 
 noncomputable section
 

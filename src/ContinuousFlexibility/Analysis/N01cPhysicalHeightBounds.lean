@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cPhysicalHeightJets
+module
+
+public import ContinuousFlexibility.Analysis.N01cPhysicalHeightJets
 
 /-!
 # Ordinary physical height jets with the actual E0 coefficient weight
@@ -12,6 +14,8 @@ The envelope `M` is not used to enlarge the coefficient weight.  Finite
 collections of `E0` powers can be combined because `E0 ≥ 1` near the
 endpoints and `E0` is positive and continuous on the compact middle.
 -/
+
+@[expose] public section
 
 noncomputable section
 

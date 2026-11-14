@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Radial
-import ContinuousFlexibility.Radial.WeightKernelBounds
+module
+
+public import ContinuousFlexibility.Statements.Radial
+public import ContinuousFlexibility.Radial.WeightKernelBounds
 
 /-!
 # Scalar scales for good points near the right endpoint
@@ -8,6 +10,8 @@ The lower endpoint-distance estimate forces every cell meeting a thin right
 band to have large physical index.  The cubic output weight then dominates
 the fixed coefficient weight uniformly on that band.
 -/
+
+@[expose] public section
 
 noncomputable section
 

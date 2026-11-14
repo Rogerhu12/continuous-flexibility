@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CoupledCircleJointJetAlgebra
-import ContinuousFlexibility.Analysis.TameJetComposition
-import ContinuousFlexibility.Statements.Analysis
+module
+
+public import ContinuousFlexibility.Analysis.CoupledCircleJointJetAlgebra
+public import ContinuousFlexibility.Analysis.TameJetComposition
+public import ContinuousFlexibility.Statements.Analysis
 
 /-!
 # Genuine joint derivatives of the circle kernel tower
@@ -9,6 +11,8 @@ The coefficient derivative changes the chart. Linearity accounts for
 the single possible derivative of the outer function. All limits take
 place in the original topological target.
 -/
+
+@[expose] public section
 
 noncomputable section
 

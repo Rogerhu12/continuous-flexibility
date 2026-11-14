@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aReferenceFiniteJets
-import ContinuousFlexibility.Analysis.N07aCanonicalSmoothJets
+module
+
+public import ContinuousFlexibility.Analysis.N07aReferenceFiniteJets
+public import ContinuousFlexibility.Analysis.N07aCanonicalSmoothJets
 
 /-!
 # Bounds for the actual volume jets and their smooth representatives
@@ -8,6 +10,8 @@ The same weighted jet array supplies both the genuine weak derivative
 and its norm bound. The smooth decoder's actual derivative represents
 that class, so no independent choice of a high-order jet is made.
 -/
+
+@[expose] public section
 
 noncomputable section
 

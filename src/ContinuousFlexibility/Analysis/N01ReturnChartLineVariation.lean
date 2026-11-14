@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01FlowChartIndependence
-import ContinuousFlexibility.Analysis.ReturnChartVariation
+module
+
+public import ContinuousFlexibility.Analysis.N01FlowChartIndependence
+public import ContinuousFlexibility.Analysis.ReturnChartVariation
 
 /-!
 # The actual chart-line derivative of the return residual
@@ -10,6 +12,8 @@ the sector.  ODE uniqueness makes the actual minus return and its specified
 inverse constant on that interval.  Consequently the earlier scalar
 inverse calculation applies to the actual N01 right-chart inverse family.
 -/
+
+@[expose] public section
 
 noncomputable section
 

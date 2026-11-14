@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Scalar.WeightedMonomialL2
+module
+
+public import ContinuousFlexibility.Scalar.WeightedMonomialL2
 
 /-!
 # Fixed-loss bounds for actual material jet families
@@ -9,6 +11,8 @@ the decoded field, as well as derivatives of its normalized pullback.
 All constants from individual spatial orders are absorbed after the common
 interpolation base and loss have been fixed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

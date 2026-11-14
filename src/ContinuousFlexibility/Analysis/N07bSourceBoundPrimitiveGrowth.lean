@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07bSourceBoundPrimitiveJets
-import ContinuousFlexibility.Analysis.N07bSourceBoundNeighborhood
-import ContinuousFlexibility.Scalar.WeightedCoefficientAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.N07bSourceBoundPrimitiveJets
+public import ContinuousFlexibility.Analysis.N07bSourceBoundNeighborhood
+public import ContinuousFlexibility.Scalar.WeightedCoefficientAlgebra
 
 /-!
 # Uniform source coefficient bounds from primitive geometric growth
@@ -15,6 +17,8 @@ The geometric growth predicates below are explicit hypotheses, not fields
 silently extracted from frozen `N04PartA`. They contain no source function,
 Banach inverse, or estimate on any recursively generated coefficient.
 -/
+
+@[expose] public section
 
 noncomputable section
 

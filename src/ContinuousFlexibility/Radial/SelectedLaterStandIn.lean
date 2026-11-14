@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R07ChainIncoming
-import ContinuousFlexibility.Radial.StandInBoundarySlope
+module
+
+public import ContinuousFlexibility.Radial.R07ChainIncoming
+public import ContinuousFlexibility.Radial.StandInBoundarySlope
 
 /-!
 # The actual later stand-in has positive normalized slope at the join
@@ -10,6 +12,8 @@ radial equation on the complete cut-to-entry interval, identify the
 stand-in. Pullback through the realized cap and Riccati comparison give
 the positive normalized slope and its upper bound one half.
 -/
+
+@[expose] public section
 
 noncomputable section
 

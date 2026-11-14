@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ProjectiveJetEvaluation
+module
+
+public import ContinuousFlexibility.Analysis.ProjectiveJetEvaluation
 
 /-!
 # First and second jets of a composition
@@ -9,6 +11,8 @@ given domain. The actual directional quotient limits hold on arbitrary
 open domains, using one convex neighborhood of the outer base point
 for both limits.
 -/
+
+@[expose] public section
 
 noncomputable section
 

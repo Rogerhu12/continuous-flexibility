@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05ReferenceOutputAngularWeak
-import ContinuousFlexibility.Analysis.N05ReferenceAngularWeighted
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceOutputAngularWeak
+public import ContinuousFlexibility.Analysis.N05ReferenceAngularWeighted
 
 /-!
 # Actual weak angular jets of the original high inverse output
@@ -9,6 +11,8 @@ finite projections converge to the original output minus its first two
 angular modes. The closed physical weak identity consequently identifies
 the reconstructed jet as a derivative of that very field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N03NegativeInteriorJets
-import ContinuousFlexibility.Analysis.InteriorSpeedLocalization
-import ContinuousFlexibility.Analysis.N04bActualCharacteristics
+module
+
+public import ContinuousFlexibility.Analysis.N03NegativeInteriorJets
+public import ContinuousFlexibility.Analysis.InteriorSpeedLocalization
+public import ContinuousFlexibility.Analysis.N04bActualCharacteristics
 
 /-!
 # Quantified actual flows on every fixed negative interior
@@ -11,6 +13,8 @@ actual forward and inverse flows, with one common state neighborhood
 and derivative loss. Every spatial estimate follows from the actual
 corrected coefficients; no flow derivative tower is an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

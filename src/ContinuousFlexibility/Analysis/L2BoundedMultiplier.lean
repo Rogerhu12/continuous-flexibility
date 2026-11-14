@@ -1,4 +1,6 @@
-import Mathlib.MeasureTheory.Function.L2Space
+module
+
+public import Mathlib.MeasureTheory.Function.L2Space
 
 /-!
 # Actual bounded real multiplication on L2
@@ -7,6 +9,8 @@ A measurable real multiplier with an almost-everywhere bound gives a
 continuous linear map on the actual L2 space. Its representatives,
 operator norm, composition, and symmetry are proved explicitly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

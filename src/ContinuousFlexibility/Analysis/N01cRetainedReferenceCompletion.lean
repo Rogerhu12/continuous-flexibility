@@ -1,8 +1,12 @@
-import ContinuousFlexibility.Blueprint.R11b
-import ContinuousFlexibility.Blueprint.R12
-import ContinuousFlexibility.Radial.ReferenceMatchedFamily
+module
+
+public import ContinuousFlexibility.Blueprint.R11b
+public import ContinuousFlexibility.Blueprint.R12
+public import ContinuousFlexibility.Radial.ReferenceMatchedFamily
 
 /-! # Completing the inverse on a specified reference -/
+
+@[expose] public section
 
 noncomputable section
 

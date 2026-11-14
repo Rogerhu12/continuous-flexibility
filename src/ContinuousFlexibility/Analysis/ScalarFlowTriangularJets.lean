@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.FlowJetLinearization
-import Mathlib.Analysis.Calculus.Deriv.Prod
-import Mathlib.Analysis.Normed.Operator.Prod
+module
+
+public import ContinuousFlexibility.Analysis.FlowJetLinearization
+public import Mathlib.Analysis.Calculus.Deriv.Prod
+public import Mathlib.Analysis.Normed.Operator.Prod
 
 /-!
 # Triangular mixed jets of an augmented scalar flow
@@ -10,6 +12,8 @@ linearized scalar field therefore acts on the highest flow jet only
 through the angular derivative. All remaining terms involve lower
 flow jets and original field jets, with their exact partition orders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

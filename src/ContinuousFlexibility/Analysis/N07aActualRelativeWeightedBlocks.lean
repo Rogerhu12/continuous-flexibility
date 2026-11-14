@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aActualMainWeightedLift
-import ContinuousFlexibility.Analysis.N07aActualScalarWeightedLift
+module
+
+public import ContinuousFlexibility.Analysis.N07aActualMainWeightedLift
+public import ContinuousFlexibility.Analysis.N07aActualScalarWeightedLift
 
 /-!
 # Genuine weighted blocks of the original N06 relative operator
@@ -9,6 +11,8 @@ in the actual volume graph. The forgotten field is the original N06
 operator between its actual angular projections, including the actual
 frequency difference for commutator blocks.
 -/
+
+@[expose] public section
 
 noncomputable section
 

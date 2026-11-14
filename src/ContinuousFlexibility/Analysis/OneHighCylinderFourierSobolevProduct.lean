@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderFourierProducts
-import ContinuousFlexibility.Analysis.OneHighCylinderSobolevWeights
-import ContinuousFlexibility.Analysis.OneHighConvolutionYoung
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderFourierProducts
+public import ContinuousFlexibility.Analysis.OneHighCylinderSobolevWeights
+public import ContinuousFlexibility.Analysis.OneHighConvolutionYoung
 
 /-!
 # The finite-order physical cylinder Sobolev product estimate
@@ -10,6 +12,8 @@ the genuine mixed convolution. Young's inequality gives the complete
 two-factor estimate and output Sobolev membership from actual finite
 input norms, without derivatives or an all-order regularity hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

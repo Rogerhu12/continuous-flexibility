@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CanonicalGluedAiryTransport
-import ContinuousFlexibility.Analysis.CanonicalGluedAiryEndpointTrace
-import ContinuousFlexibility.Analysis.CanonicalCutAxis
-import ContinuousFlexibility.Analysis.TwoExceptionalRadiiTrace
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalGluedAiryTransport
+public import ContinuousFlexibility.Analysis.CanonicalGluedAiryEndpointTrace
+public import ContinuousFlexibility.Analysis.CanonicalCutAxis
+public import ContinuousFlexibility.Analysis.TwoExceptionalRadiiTrace
 
 /-!
 # Full-component transport along an actual characteristic
@@ -12,6 +14,8 @@ possibly at the two fixed radii where the cut meets the fundamental axes.
 The two exceptional-radius theorem then equates the genuine endpoint
 traces. No bound on the number of cut crossings is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

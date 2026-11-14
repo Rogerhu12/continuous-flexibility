@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ReferenceCosineCoefficients
+module
+
+public import ContinuousFlexibility.Radial.ReferenceCosineCoefficients
 
 /-!
 # Finite angular projections in the frozen weighted norms
@@ -7,6 +9,8 @@ A radial multiplier commutes with angular projection. Applying the fiber
 contraction to each localized field proves contraction for every cell and
 for either sign of the coefficient exponent.
 -/
+
+@[expose] public section
 
 open Set Filter MeasureTheory
 open scoped Topology

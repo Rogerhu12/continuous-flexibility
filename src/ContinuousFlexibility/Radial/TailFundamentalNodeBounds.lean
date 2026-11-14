@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.TailActualNodeCoefficients
-import ContinuousFlexibility.Radial.TailNaturalNodeBounds
+module
+
+public import ContinuousFlexibility.Radial.TailActualNodeCoefficients
+public import ContinuousFlexibility.Radial.TailNaturalNodeBounds
 
 /-!
 # Bounds for the node values of the fundamental Green kernel
@@ -10,6 +12,8 @@ recurrence for the diagonal products of the two fundamental solutions.
 This yields the Green product bound without assuming a node operator
 representation for the differential resolvent.
 -/
+
+@[expose] public section
 
 noncomputable section
 

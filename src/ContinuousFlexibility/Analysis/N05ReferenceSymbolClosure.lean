@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N05ReferenceCanonicalSymbols
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Geometry.EuclideanRigidity
-import Mathlib.Topology.Order.DenselyOrdered
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceCanonicalSymbols
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Geometry.EuclideanRigidity
+public import Mathlib.Topology.Order.DenselyOrdered
 
 /-!
 # Extending the actual reference symbols to the closed physical pieces
@@ -11,6 +13,8 @@ circles.  Continuity of the actual chart and height extends these identities
 first through every reflection circle, then to both physical endpoints.
 No regularity of the corrected coefficients at exceptional points is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

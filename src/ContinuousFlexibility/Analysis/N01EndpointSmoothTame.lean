@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01EndpointZeroGrowth
+module
+
+public import ContinuousFlexibility.Analysis.N01EndpointZeroGrowth
 
 /-!
 # Closed-radius flow displacements are smooth tame in the circle model
@@ -9,6 +11,8 @@ sector neighborhood. Each local tame estimate uses a fixed low order
 and a fixed loss before the output order is chosen. The reference
 subtraction is the actual reference flow at the same selected radii.
 -/
+
+@[expose] public section
 
 noncomputable section
 

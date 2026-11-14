@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.PositiveBufferIntervalFormBridge
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferIntervalFormBridge
 
 /-!
 # Adjoint restriction of zero-trace energy fields
@@ -6,6 +8,8 @@ Both fields may initially extend beyond the retained interval. Restriction acts
 on their actual derivatives and potential weights, is self-adjoint for the
 physical form, and preserves the admissible scalar border coordinate.
 -/
+
+@[expose] public section
 noncomputable section
 namespace ContinuousFlexibility.Radial
 open Real Set Filter MeasureTheory

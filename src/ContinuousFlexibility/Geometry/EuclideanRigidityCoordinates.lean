@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Geometry.CoframeCurvature
-import ContinuousFlexibility.Geometry.FlatDevelopment
-import ContinuousFlexibility.Scalar.FormPullback
+module
+
+public import ContinuousFlexibility.Geometry.CoframeCurvature
+public import ContinuousFlexibility.Geometry.FlatDevelopment
+public import ContinuousFlexibility.Scalar.FormPullback
 
 /-!
 # Actual coordinate derivatives for planar Euclidean rigidity
@@ -9,6 +11,8 @@ The relative SO(2) coefficients are actual partial derivatives. Their
 Cauchy--Riemann relations follow from the actual derivative metric and its
 orientation, and the second-derivative argument uses genuine mixed partials.
 -/
+
+@[expose] public section
 
 noncomputable section
 

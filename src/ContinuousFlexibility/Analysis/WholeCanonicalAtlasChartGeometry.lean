@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.WholeCanonicalAtlasData
+module
+
+public import ContinuousFlexibility.Analysis.WholeCanonicalAtlasData
 
 /-!
 # Open and closed chart fields of the whole-component atlas
@@ -7,6 +9,8 @@ Negative halves retain their actual stored functions and domains. Positive
 pieces use the proved global inverse transport and its reciprocal height.
 Every statement here is about the single atlas data constructor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

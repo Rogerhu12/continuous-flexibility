@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularGraph
-import ContinuousFlexibility.Analysis.SpacesTraceRestriction
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularGraph
+public import ContinuousFlexibility.Analysis.SpacesTraceRestriction
 
 /-!
 # Forgetting a nonnegative material weight in the actual source graph
@@ -9,6 +11,8 @@ on piece `m` by the actual scalar `M(sample(cell m)) ^ (-t)`.  Since the
 material function is at least one, this map is contractive for `t ≥ 0`.
 No comparison of unrelated model norms is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

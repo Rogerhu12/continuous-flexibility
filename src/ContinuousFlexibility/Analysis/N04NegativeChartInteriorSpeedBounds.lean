@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartControlledCollar
-import ContinuousFlexibility.Analysis.N01cCommonWholeSpeedBounds
-import ContinuousFlexibility.Analysis.SectorParameterGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartControlledCollar
+public import ContinuousFlexibility.Analysis.N01cCommonWholeSpeedBounds
+public import ContinuousFlexibility.Analysis.SectorParameterGeometry
 
 /-!
 # The actual original speed on the material interior
@@ -10,6 +12,8 @@ interpolation exponent. The common material collar pays the endpoint
 denominator at the actual selected half sample. The affine sector lift
 preserves every low and high parameter seminorm exactly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

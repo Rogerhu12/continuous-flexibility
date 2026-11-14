@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowTranslationSource
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowTranslationSource
 
 /-!
 # Uniform Sobolev comparison with the reference translation
@@ -9,6 +11,8 @@ The explicit constant depends only on the period, the Sobolev order,
 Λ₄, and the integrated H³ difference norm. The reference speed's mean
 rotation never enters this constant.
 -/
+
+@[expose] public section
 
 noncomputable section
 

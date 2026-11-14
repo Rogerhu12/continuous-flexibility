@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PositiveEndpointCutoff
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
+module
+
+public import ContinuousFlexibility.Analysis.PositiveEndpointCutoff
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
 
 /-!
 # Endpoint mass estimates for positive interpolation
@@ -10,6 +12,8 @@ and denominator of the reference interpolation normalizer positive by
 an actual choice of a small radius; no lower bound on component widths is
 required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

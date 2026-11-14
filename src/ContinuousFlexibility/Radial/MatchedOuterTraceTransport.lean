@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchedOuterWithinReflection
-import ContinuousFlexibility.Radial.OuterNormalizedState
+module
+
+public import ContinuousFlexibility.Radial.MatchedOuterWithinReflection
+public import ContinuousFlexibility.Radial.OuterNormalizedState
 
 /-!
 # The frozen exterior flux and the actual outward Robin state
@@ -9,6 +11,8 @@ outward coordinate for an arbitrary representative. The square-root
 normalization in the frozen matching row is exactly a nonzero multiple
 of the Robin pairing for the first-order flux scaled by the boundary scale.
 -/
+
+@[expose] public section
 
 noncomputable section
 

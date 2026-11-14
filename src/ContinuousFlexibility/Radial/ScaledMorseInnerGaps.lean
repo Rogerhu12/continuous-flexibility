@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ScaledMorseInnerGeometry
-import ContinuousFlexibility.Radial.InnerMorseInnerGaps
+module
+
+public import ContinuousFlexibility.Radial.ScaledMorseInnerGeometry
+public import ContinuousFlexibility.Radial.InnerMorseInnerGaps
 
 /-!
 # Exact gaps after independent radius dilations
@@ -8,6 +10,8 @@ Each endpoint is computed from the same finite chain. The terminal and
 tail gaps are scaled on their own side; the two middle gaps meet the
 already fixed central model endpoints in the new radius coordinate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

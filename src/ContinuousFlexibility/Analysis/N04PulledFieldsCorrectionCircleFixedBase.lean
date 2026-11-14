@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsReturnCircleFixedBase
-import ContinuousFlexibility.Analysis.N04PulledFieldsCircleProductFixedBase
-import ContinuousFlexibility.Analysis.N01TransportAngularInterpolation
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsReturnCircleFixedBase
+public import ContinuousFlexibility.Analysis.N04PulledFieldsCircleProductFixedBase
+public import ContinuousFlexibility.Analysis.N01TransportAngularInterpolation
 
 /-!
 # Fixed-base bounds for the actual correction displacement
@@ -10,6 +12,8 @@ right return chart, cutoff interpolation and two positive inverses produce
 the same displacement as the existing correction construction. The common
 base survives each of these finite operations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

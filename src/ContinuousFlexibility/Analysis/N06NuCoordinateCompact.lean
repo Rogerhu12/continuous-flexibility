@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06NuStateSegments
+module
+
+public import ContinuousFlexibility.Analysis.N06NuStateSegments
 
 /-!
 # Uniform finite packets of actual nu-coordinate jets
@@ -8,6 +10,8 @@ bounded on one ball in the original state seminorm. Their differences
 retain a linear factor in that same seminorm and in the actual q change.
 The radial coefficients are bounded on the fixed compact radial interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

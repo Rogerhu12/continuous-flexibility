@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveNormalizationBuffer
-import Mathlib.Topology.MetricSpace.Thickening
-import Mathlib.Tactic.Linarith
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveNormalizationBuffer
+public import Mathlib.Topology.MetricSpace.Thickening
+public import Mathlib.Tactic.Linarith
 
 /-!
 # Quantitative normalization buffers on the actual positive components
@@ -10,6 +12,8 @@ every component it meets. Four points at one fixed fraction of each component
 span therefore give the existing buffer record with uniform lower bounds on
 all five consecutive gaps. Ambient endpoints are included.
 -/
+
+@[expose] public section
 
 noncomputable section
 

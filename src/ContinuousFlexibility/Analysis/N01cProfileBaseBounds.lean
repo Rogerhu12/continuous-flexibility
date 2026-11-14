@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cProfileMaterialBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01cProfileMaterialBounds
 
 /-!
 # Base-state radial profile bounds on the original neighbourhood
@@ -9,6 +11,8 @@ the material axioms, so the actual finite exponential majorant has only a
 reference-profile E0 power left.  The same N01b neighbourhood bounds the
 actual exponential by two.
 -/
+
+@[expose] public section
 
 noncomputable section
 

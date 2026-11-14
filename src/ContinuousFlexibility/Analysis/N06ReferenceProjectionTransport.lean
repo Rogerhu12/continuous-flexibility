@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06ReferenceModeTransport
-import ContinuousFlexibility.Analysis.N06GlobalFourierApproximants
-import ContinuousFlexibility.Radial.ReferenceGraphProjection
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceModeTransport
+public import ContinuousFlexibility.Analysis.N06GlobalFourierApproximants
+public import ContinuousFlexibility.Radial.ReferenceGraphProjection
 
 /-!
 # The actual reference chart commutes with physical angular projection
@@ -12,6 +14,8 @@ identifies the canonical half-period L2 cutoff with that full-period
 physical projection. No finite spectrum of the compatibility column or
 of an inverse image is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

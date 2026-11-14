@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07bReferenceMaterialSeeds
-import ContinuousFlexibility.Analysis.N07bNormalizedDirectionChain
-import ContinuousFlexibility.Radial.ReferenceColumnSmooth
+module
+
+public import ContinuousFlexibility.Analysis.N07bReferenceMaterialSeeds
+public import ContinuousFlexibility.Analysis.N07bNormalizedDirectionChain
+public import ContinuousFlexibility.Radial.ReferenceColumnSmooth
 
 /-!
 # Actual reference transition geometry and its primitive fields
@@ -12,6 +14,8 @@ The fifteen scalar primitive fields agree with the analysis normalizers,
 direction components and reference multipliers used in the finite expansion.
 No coefficient regularity or membership conclusion is an additional input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

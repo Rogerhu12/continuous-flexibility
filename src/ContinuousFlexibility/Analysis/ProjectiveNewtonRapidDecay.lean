@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ProjectiveNewtonSeed
+module
+
+public import ContinuousFlexibility.Analysis.ProjectiveNewtonSeed
 
 /-!
 # Improving the Newton residual decay on a fixed parameter interval
@@ -8,6 +10,8 @@ the next smoothing index. The resulting gain in the tail exponent improves
 the low residual bound. A new finite-grade constant can require discarding a
 finite prefix, which is absorbed by the coefficient of the improved rate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

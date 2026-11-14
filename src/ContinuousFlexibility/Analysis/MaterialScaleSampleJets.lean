@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.MaterialScalePhysicalJets
-import ContinuousFlexibility.Analysis.MaterialEndpointWeightTransport
-import ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient
-import ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets
+module
+
+public import ContinuousFlexibility.Analysis.MaterialScalePhysicalJets
+public import ContinuousFlexibility.Analysis.MaterialEndpointWeightTransport
+public import ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient
+public import ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets
 
 /-!
 # The actual scale jets at a nearby physical sample
@@ -10,6 +12,8 @@ A genuine bounded endpoint-coordinate displacement transfers the pure
 physical E0 cost to the same sample. Affine unit rescaling then pays only
 a positive power of the physical width. Neither sample nor scale changes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

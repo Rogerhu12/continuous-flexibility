@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CircleModelRealization
+module
+
+public import ContinuousFlexibility.Analysis.CircleModelRealization
 
 /-!
 # Realizing bilinear operators in the supplied circle model
@@ -7,6 +9,8 @@ A bilinear family of actual weighted fields lifts through the injective
 decoder.  Linearity is proved from the physical decoder identities in both
 arguments, so the result lives in the supplied model without a new space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

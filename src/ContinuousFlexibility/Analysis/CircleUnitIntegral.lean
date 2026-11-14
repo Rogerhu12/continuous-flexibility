@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ProjectiveUnitIntegral
-import ContinuousFlexibility.Analysis.CircleJetEvaluation
-import ContinuousFlexibility.Analysis.CircleModelRealization
+module
+
+public import ContinuousFlexibility.Analysis.ProjectiveUnitIntegral
+public import ContinuousFlexibility.Analysis.CircleJetEvaluation
+public import ContinuousFlexibility.Analysis.CircleModelRealization
 
 /-!
 # Parameter integration and the actual circle decoder
@@ -10,6 +12,8 @@ by the value and first angular derivative in level one. This finite-level
 formula proves that the existing decoder commutes with projective
 parameter integration, without replacing the circle model.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneSidedWholeComponentTransport
-import ContinuousFlexibility.Analysis.TaylorReferenceIdentity
-import ContinuousFlexibility.Analysis.PositiveReferenceIdentity
+module
+
+public import ContinuousFlexibility.Analysis.OneSidedWholeComponentTransport
+public import ContinuousFlexibility.Analysis.TaylorReferenceIdentity
+public import ContinuousFlexibility.Analysis.PositiveReferenceIdentity
 
 /-!
 # Exact reference identity of the displayed whole-component transport
@@ -10,6 +12,8 @@ Their radial integral has unit physical slope and its prescribed mass
 is the interval width. Both pointwise inverses are consequently the
 identity as well. No estimate on an unspecified transport is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

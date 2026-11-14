@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.BoundaryTaylorExtension
-import Mathlib.Analysis.Calculus.IteratedDeriv.FaaDiBruno
+module
+
+public import ContinuousFlexibility.Analysis.BoundaryTaylorExtension
+public import Mathlib.Analysis.Calculus.IteratedDeriv.FaaDiBruno
 
 /-!
 # Actual mixed jets on a boundary circle
@@ -10,6 +12,8 @@ identification with the actual mixed derivatives is proved on an open
 neighborhood of the boundary circle, using the symmetry of the second
 Fréchet derivative of the successive partial derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

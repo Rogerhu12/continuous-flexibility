@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aAngularBandLift
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularBandLift
 
 /-!
 # Exact fixed-band source norms and uniform angular-order comparison
@@ -8,6 +10,8 @@ Comparing its exact band weights with the generic angular Sobolev weight
 gives constants independent of the base derivative order and of the
 number or geometry of radial components.
 -/
+
+@[expose] public section
 
 noncomputable section
 

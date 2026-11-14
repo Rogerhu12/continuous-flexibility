@@ -1,5 +1,7 @@
-import Mathlib.Analysis.Calculus.ContDiff.Basic
-import Mathlib.Analysis.Asymptotics.Lemmas
+module
+
+public import Mathlib.Analysis.Calculus.ContDiff.Basic
+public import Mathlib.Analysis.Asymptotics.Lemmas
 
 /-!
 # Smooth zero extension across the ends of a cylinder
@@ -9,6 +11,8 @@ for every jet near the boundary proves differentiability of each extended
 jet there, with zero derivative. The argument also works with additional
 normed-space variables carried in the second coordinate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

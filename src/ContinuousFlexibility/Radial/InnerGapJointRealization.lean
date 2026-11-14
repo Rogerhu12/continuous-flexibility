@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerGapWeakFlux
-import ContinuousFlexibility.Radial.InnerGapRadialDomain
+module
+
+public import ContinuousFlexibility.Radial.InnerGapWeakFlux
+public import ContinuousFlexibility.Radial.InnerGapRadialDomain
 
 /-!
 # One actual positive-gap Dirichlet/Poisson/flux realization
@@ -9,6 +11,8 @@ same actual Poisson columns in μ_D, and the full outward flux matrix.
 In particular the weak conormal identities use a single closed-domain
 solution witness for each arbitrary L² source.
 -/
+
+@[expose] public section
 
 noncomputable section
 

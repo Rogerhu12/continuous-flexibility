@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cOpticalNumericEnvelopes
-import ContinuousFlexibility.Analysis.N01cMixedPowerAlgebra
-import ContinuousFlexibility.Analysis.N01cCommonType
+module
+
+public import ContinuousFlexibility.Analysis.N01cOpticalNumericEnvelopes
+public import ContinuousFlexibility.Analysis.N01cMixedPowerAlgebra
+public import ContinuousFlexibility.Analysis.N01cCommonType
 
 /-!
 # Material bounds for the genuine optical-root parameter towers
@@ -11,6 +13,8 @@ the finite scalar coefficients are absorbed into the material envelope.
 The parameter set and the controlling seminorm do not depend on either
 derivative order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N08ControlSpatialBounds
-import ContinuousFlexibility.Analysis.N08MaterialFamilyBounds
-import ContinuousFlexibility.Scalar.WeightedWeightShiftJets
+module
+
+public import ContinuousFlexibility.Analysis.N08ControlSpatialBounds
+public import ContinuousFlexibility.Analysis.N08MaterialFamilyBounds
+public import ContinuousFlexibility.Scalar.WeightedWeightShiftJets
 
 /-!
 # Decaying material jets of the actual radial family
@@ -10,6 +12,8 @@ to the actual material radius preserves ordinary decay, and derivatives of
 the normalizing height factor preserve its power. A remaining positive
 power absorbs every material-envelope order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

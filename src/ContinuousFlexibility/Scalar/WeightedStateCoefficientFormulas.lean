@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Scalar.WeightedStateJetFormulas
+module
+
+public import ContinuousFlexibility.Scalar.WeightedStateJetFormulas
 
 /-!
 # Reference-separated formulas for the three scalar coefficients
@@ -8,6 +10,8 @@ the profile mean and its first radial derivative, the mixed height jet, and
 smooth functions of the normalized discriminant and `Q/w` defects. The type
 coefficient is factored on the open annulus, without extending it by itself.
 -/
+
+@[expose] public section
 
 noncomputable section
 

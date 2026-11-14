@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OuterDeepGeometry
+module
+
+public import ContinuousFlexibility.Radial.OuterDeepGeometry
 
 /-!
 # Physical cell labels of the actual Morse deep tail
@@ -8,6 +10,8 @@ On the left the outward edge crosses the next retained right endpoint:
 its mass and glue have the current label, and its terminal cap has the
 next label. The initial left edge has exactly the same two-label split.
 -/
+
+@[expose] public section
 
 noncomputable section
 

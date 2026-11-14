@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
-import ContinuousFlexibility.Analysis.MixedDerivativeLocality
-import ContinuousFlexibility.Analysis.N01cHeightParameterJets
+module
+
+public import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
+public import ContinuousFlexibility.Analysis.MixedDerivativeLocality
+public import ContinuousFlexibility.Analysis.N01cHeightParameterJets
 
 /-!
 # Linearity of the actual material jets on the supplied height space
@@ -10,6 +12,8 @@ mixed derivative. The resulting maps evaluate the actual weighted jets,
 so linear difference quotients can be estimated without replacing those
 jets by formal derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

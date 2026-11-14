@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowCircleFamilies
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowCircleFamilies
 
 /-!
 # The true flow equation in physical Sobolev norm
@@ -7,6 +9,8 @@ The integral equation for each actual angular jet descends to its
 canonical circle representative. The proven Minkowski bound then gives
 the Sobolev integral inequality for the derivative defect itself.
 -/
+
+@[expose] public section
 
 noncomputable section
 

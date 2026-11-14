@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ControlCellEndpointBounds
-import ContinuousFlexibility.Analysis.MaterialHeightRegularity
-import ContinuousFlexibility.Analysis.StateControlDecay
+module
+
+public import ContinuousFlexibility.Analysis.ControlCellEndpointBounds
+public import ContinuousFlexibility.Analysis.MaterialHeightRegularity
+public import ContinuousFlexibility.Analysis.StateControlDecay
 
 /-!
 # Smoothness at the endpoints of the controlled profile
@@ -10,6 +12,8 @@ The material height weight tends to zero in both collars, so the control sum
 extends smoothly by zero. Applied at a nonzero point of the actual weak
 branch, this gives the smooth profile needed for the geometric core.
 -/
+
+@[expose] public section
 
 noncomputable section
 

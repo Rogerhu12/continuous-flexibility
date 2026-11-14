@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.AngularTaylorDivision
-import ContinuousFlexibility.Analysis.DoubledSineFactor
-import ContinuousFlexibility.Analysis.LocalMixedProductBounds
+module
+
+public import ContinuousFlexibility.Analysis.AngularTaylorDivision
+public import ContinuousFlexibility.Analysis.DoubledSineFactor
+public import ContinuousFlexibility.Analysis.LocalMixedProductBounds
 
 /-!
 # Actual smooth removal of a sine factor or its square
@@ -11,6 +13,8 @@ The fixed smooth inverse of sin(2x)/x identifies this definition with a
 globally smooth expression on a neighborhood of each zero. No continuity
 or differentiability of a prospective stored coefficient is an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

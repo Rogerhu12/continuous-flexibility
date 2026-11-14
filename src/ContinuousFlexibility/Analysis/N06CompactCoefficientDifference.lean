@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06CurrentJetBounds
-import ContinuousFlexibility.Radial.ReferenceCellL2
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentJetBounds
+public import ContinuousFlexibility.Radial.ReferenceCellL2
 
 /-!
 # Actual coefficient differences on a fixed compact radial set
@@ -10,6 +12,8 @@ into one fixed seminorm bound on any compact radial support. No atlas
 comparison, current chart regularity, or proposed operator estimate is
 an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

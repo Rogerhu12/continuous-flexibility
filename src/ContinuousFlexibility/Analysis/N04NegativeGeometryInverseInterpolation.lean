@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CanonicalStateInterpolation
-import ContinuousFlexibility.Analysis.N01cStateSeminorms
-import ContinuousFlexibility.Analysis.SectorParameterGeometry
-import ContinuousFlexibility.Analysis.TameSmoothingCalculus
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalStateInterpolation
+public import ContinuousFlexibility.Analysis.N01cStateSeminorms
+public import ContinuousFlexibility.Analysis.SectorParameterGeometry
+public import ContinuousFlexibility.Analysis.TameSmoothingCalculus
 
 /-!
 # Interpolation for the inverse-circle parameter grading
@@ -10,6 +12,8 @@ Restriction of a grading to a linear subspace preserves its interpolation
 constants. Applying this abstract fact avoids expanding the physical-state
 products in the scalar interpolation argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

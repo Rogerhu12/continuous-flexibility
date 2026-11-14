@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N06WeakCubicPairing
-import ContinuousFlexibility.Analysis.N06CubicMultiplierSymmetry
-import ContinuousFlexibility.Analysis.N06CanonicalCosineCutoff
-import ContinuousFlexibility.Analysis.N06WeakCylinderGraph
-import ContinuousFlexibility.Analysis.N06GraphCauchy
-import ContinuousFlexibility.Radial.R11bWeakNormalLimit
+module
+
+public import ContinuousFlexibility.Analysis.N06WeakCubicPairing
+public import ContinuousFlexibility.Analysis.N06CubicMultiplierSymmetry
+public import ContinuousFlexibility.Analysis.N06CanonicalCosineCutoff
+public import ContinuousFlexibility.Analysis.N06WeakCylinderGraph
+public import ContinuousFlexibility.Analysis.N06GraphCauchy
+public import ContinuousFlexibility.Radial.R11bWeakNormalLimit
 
 /-!
 # The actual cubic distributional equation after strong graph completion
@@ -14,6 +16,8 @@ the five tests on the right are the same cubic multipliers times that
 test. The canonical theorem obtains convergence of the original value
 from its already proved cosine truncation and the same mode representatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

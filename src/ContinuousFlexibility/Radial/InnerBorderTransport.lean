@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.InnerDisjointPieces
-import ContinuousFlexibility.Statements.RadialTargets
-import Mathlib.Analysis.InnerProductSpace.Adjoint
-import Mathlib.Tactic.NormNum
-import Mathlib.Tactic.Ring
+module
+
+public import ContinuousFlexibility.Radial.InnerDisjointPieces
+public import ContinuousFlexibility.Statements.RadialTargets
+public import Mathlib.Analysis.InnerProductSpace.Adjoint
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.Ring
 
 /-!
 # Transport from the inner Hilbert source to the stated mode pair
@@ -17,6 +19,8 @@ and its Green pairing. No differential graph or final reference column is
 introduced here, so the same transport applies to the temporary inner
 border as well as to the final mode-pair representation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

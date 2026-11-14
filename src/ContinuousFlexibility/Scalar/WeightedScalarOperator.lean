@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Scalar.WeightedCommonHeightCalculus
-import ContinuousFlexibility.Scalar.WeightedBilinearSlots
-import ContinuousFlexibility.Scalar.WeightedOddProductMap
-import ContinuousFlexibility.Scalar.WeightedAngularJetProduct
-import ContinuousFlexibility.Scalar.GreenIdentity
+module
+
+public import ContinuousFlexibility.Scalar.WeightedCommonHeightCalculus
+public import ContinuousFlexibility.Scalar.WeightedBilinearSlots
+public import ContinuousFlexibility.Scalar.WeightedOddProductMap
+public import ContinuousFlexibility.Scalar.WeightedAngularJetProduct
+public import ContinuousFlexibility.Scalar.GreenIdentity
 
 /-!
 # The actual corrected operator from its three weighted coefficients
@@ -12,6 +14,8 @@ angular derivative of an even primitive. Applying the actual radial and
 second angular derivative maps therefore gives a continuous linear operator
 on the common height domain, including its free cutoff constant.
 -/
+
+@[expose] public section
 
 noncomputable section
 

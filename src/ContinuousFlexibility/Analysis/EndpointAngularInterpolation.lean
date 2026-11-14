@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PrescribedEndpointWidth
-import ContinuousFlexibility.Analysis.PositiveSymmetricFiberFactory
+module
+
+public import ContinuousFlexibility.Analysis.PrescribedEndpointWidth
+public import ContinuousFlexibility.Analysis.PositiveSymmetricFiberFactory
 
 /-!
 # Explicit angular collars separated from the middle interval
@@ -9,6 +11,8 @@ finite numerical input. The same width works before a family member
 is chosen. The joint middle germ is the actual angular projection.
 This file is reconstructed after the workspace reset.
 -/
+
+@[expose] public section
 
 noncomputable section
 

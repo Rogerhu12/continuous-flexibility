@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.IntervalWeakPrimitive
-import Mathlib.MeasureTheory.Measure.OpenPos
-import Mathlib.Analysis.Calculus.Deriv.Support
+module
+
+public import ContinuousFlexibility.Analysis.IntervalWeakPrimitive
+public import Mathlib.MeasureTheory.Measure.OpenPos
+public import Mathlib.Analysis.Calculus.Deriv.Support
 
 /-!
 # Compact radial tests with independent half-interval variations
@@ -11,6 +13,8 @@ normalization, two disjoint tests produce zero total weighted variation
 and a nonzero variation on the left half. This is a scalar fact about the
 actual integrals; it does not assert a counterexample to the N04b endpoint.
 -/
+
+@[expose] public section
 
 noncomputable section
 

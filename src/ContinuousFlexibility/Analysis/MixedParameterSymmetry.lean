@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SmoothDirectionsPermutationSymmetry
-import ContinuousFlexibility.Analysis.JointMixedTameBounds
+module
+
+public import ContinuousFlexibility.Analysis.SmoothDirectionsPermutationSymmetry
+public import ContinuousFlexibility.Analysis.JointMixedTameBounds
 
 /-!
 # Symmetry of actual mixed parameter multilinear maps
@@ -8,6 +10,8 @@ Permutation symmetry holds at every spatial point of the open domain.
 Locality of ordinary mixed derivatives therefore preserves the same
 symmetry after radial and angular differentiation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.InnerRadialDomainPairing
-import ContinuousFlexibility.Radial.InnerRadialSmoothTestDomain
-import ContinuousFlexibility.Radial.InnerRadialH1Support
-import ContinuousFlexibility.Radial.ModeTestIntegrability
-import ContinuousFlexibility.Radial.ModeRegionalPairing
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialDomainPairing
+public import ContinuousFlexibility.Radial.InnerRadialSmoothTestDomain
+public import ContinuousFlexibility.Radial.InnerRadialH1Support
+public import ContinuousFlexibility.Radial.ModeTestIntegrability
+public import ContinuousFlexibility.Radial.ModeRegionalPairing
 
 /-!
 # Transposing the actual physical weak graph
@@ -12,6 +14,8 @@ one smooth test. The actual signed-potential relation then gives the
 Jacobi operator in the frozen modal convention. All identities are in
 the original radial L² measure, for arbitrary weak field coordinates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

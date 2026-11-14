@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsWeightedEvaluationPower
-import ContinuousFlexibility.Analysis.CircleSobolevPointwise
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsWeightedEvaluationPower
+public import ContinuousFlexibility.Analysis.CircleSobolevPointwise
 
 /-!
 # Angular power bounds with one low order for a circle family
@@ -8,6 +10,8 @@ The circle evaluation loss is added to the loss sequence before the low
 order is chosen. A finite parameter prefix then pays one power per
 parameter derivative. The sample-height factor survives evaluation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

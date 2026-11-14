@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Scalar.WeightedPhysicalMultiplier
+module
+
+public import ContinuousFlexibility.Scalar.WeightedPhysicalMultiplier
 
 /-!
 # Uniform constants for families of actual radial multipliers
@@ -7,6 +9,8 @@ The finite Leibniz constants are selected before the family index. The
 same is true when the jet estimates are assembled into a physical norm,
 and when that norm is read in an actual Sobolev realization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

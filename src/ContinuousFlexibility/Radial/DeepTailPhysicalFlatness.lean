@@ -1,10 +1,12 @@
-import ContinuousFlexibility.Radial.DeepTailPhysicalCoefficients
-import ContinuousFlexibility.Radial.DeepTailPhysicalDecay
-import ContinuousFlexibility.Radial.DeepTailPhysicalLift
-import ContinuousFlexibility.Radial.DeepTailPhysicalExtension
-import ContinuousFlexibility.Radial.TailMassResistanceData
-import ContinuousFlexibility.Radial.MorseChainFlatExtension
-import Mathlib.Algebra.Order.Group.Pointwise.Interval
+module
+
+public import ContinuousFlexibility.Radial.DeepTailPhysicalCoefficients
+public import ContinuousFlexibility.Radial.DeepTailPhysicalDecay
+public import ContinuousFlexibility.Radial.DeepTailPhysicalLift
+public import ContinuousFlexibility.Radial.DeepTailPhysicalExtension
+public import ContinuousFlexibility.Radial.TailMassResistanceData
+public import ContinuousFlexibility.Radial.MorseChainFlatExtension
+public import Mathlib.Algebra.Order.Group.Pointwise.Interval
 
 /-!
 # Flatness in the original physical radius
@@ -14,6 +16,8 @@ Their inherited profile-distance bounds turn the cubic attenuation into
 quadratic bounds independent of the cell index. Continuity fills the nodes
 that are omitted from the open-cell localization convention.
 -/
+
+@[expose] public section
 
 noncomputable section
 

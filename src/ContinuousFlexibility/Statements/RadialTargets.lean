@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Statements.Radial
+module
+
+public import ContinuousFlexibility.Statements.Radial
 
 /-!
 # Remaining radial milestone targets
@@ -7,6 +9,8 @@ Every declaration ending in `Statement` is a closed proposition to be proved.
 The auxiliary records contain concrete functions and numbers; their properties
 are expanded below and are not supplied as arbitrary proposition fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 

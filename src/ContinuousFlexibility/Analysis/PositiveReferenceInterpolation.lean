@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PositiveReferenceCoordinate
-import ContinuousFlexibility.Analysis.PositiveReferenceHeight
+module
+
+public import ContinuousFlexibility.Analysis.PositiveReferenceCoordinate
+public import ContinuousFlexibility.Analysis.PositiveReferenceHeight
 
 /-!
 # A genuine positive reference interpolation from local endpoint data
@@ -10,6 +12,8 @@ result includes the actual global coordinate inverse and the logarithmic
 height, with both endpoint germs and avoidance of a closed forbidden set.
 No endpoint mass bound or proposed diffeomorphism is an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

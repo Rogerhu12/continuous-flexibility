@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bCharacteristicFirstIntegrals
-import ContinuousFlexibility.Analysis.RootPhysicalTransport
+module
+
+public import ContinuousFlexibility.Analysis.N04bCharacteristicFirstIntegrals
+public import ContinuousFlexibility.Analysis.RootPhysicalTransport
 
 /-!
 # Transport and reflection of the actual characteristic first integrals
@@ -10,6 +12,8 @@ its transport equation when the drift is odd and the speed is even. The
 normalizations at both physical endpoints are proved from the exact return
 identity of the same forward flow.
 -/
+
+@[expose] public section
 
 noncomputable section
 

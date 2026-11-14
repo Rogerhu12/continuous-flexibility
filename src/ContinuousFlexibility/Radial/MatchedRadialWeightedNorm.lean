@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.ReferenceWeightedRadialBase
-import ContinuousFlexibility.Radial.ReferenceRadialMeasureComparison
-import ContinuousFlexibility.Radial.MatchedPhysicalPartition
-import ContinuousFlexibility.Radial.WeightKernelBounds
+module
+
+public import ContinuousFlexibility.Radial.ReferenceWeightedRadialBase
+public import ContinuousFlexibility.Radial.ReferenceRadialMeasureComparison
+public import ContinuousFlexibility.Radial.MatchedPhysicalPartition
+public import ContinuousFlexibility.Radial.WeightKernelBounds
 
 /-!
 # Actual radial weighted norms and physical partition inputs
@@ -10,6 +12,8 @@ The cell energies here are integrals for the existing weighted radial
 measure. Their sum is exactly its squared L² norm. This identifies the
 numeric sequence used in the Schur test with the physical source norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

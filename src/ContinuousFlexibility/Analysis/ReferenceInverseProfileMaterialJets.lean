@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.MaterialPointRadialPolynomial
-import ContinuousFlexibility.Analysis.MaterialEndpointWeightTransport
-import ContinuousFlexibility.Analysis.RetainedPositiveIntervalEndpointX
-import ContinuousFlexibility.Radial.ReferenceCellL2
-import ContinuousFlexibility.Radial.CentralStatementBridges
-import ContinuousFlexibility.Radial.MorseChainScales
+module
+
+public import ContinuousFlexibility.Analysis.MaterialPointRadialPolynomial
+public import ContinuousFlexibility.Analysis.MaterialEndpointWeightTransport
+public import ContinuousFlexibility.Analysis.RetainedPositiveIntervalEndpointX
+public import ContinuousFlexibility.Radial.ReferenceCellL2
+public import ContinuousFlexibility.Radial.CentralStatementBridges
+public import ContinuousFlexibility.Radial.MorseChainScales
 
 /-!
 # Actual reciprocal-profile jets at the retained positive sample
@@ -14,6 +16,8 @@ the evaluation point. The retained positive interval then transports
 its point envelope to the original midpoint sample. No compact bound
 for the reciprocal profile at the ambient endpoints is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

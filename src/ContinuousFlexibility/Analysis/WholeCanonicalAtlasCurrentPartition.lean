@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.WholeCanonicalAtlasData
-import ContinuousFlexibility.Analysis.N04bActualTypedAtlas
+module
+
+public import ContinuousFlexibility.Analysis.WholeCanonicalAtlasData
+public import ContinuousFlexibility.Analysis.N04bActualTypedAtlas
 
 /-!
 # The actual moving partition with whole positive components
@@ -10,6 +12,8 @@ old planar null set therefore still gives coverage; actual negative-half
 uniqueness, component disjointness and the two signs give uniqueness.
 No radial graph is assigned to a moving cut.
 -/
+
+@[expose] public section
 
 noncomputable section
 

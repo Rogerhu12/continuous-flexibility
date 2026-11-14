@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFourierBasic
-import Mathlib.Analysis.LConvolution
-import Mathlib.Topology.Algebra.InfiniteSum.Ring
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierBasic
+public import Mathlib.Analysis.LConvolution
+public import Mathlib.Topology.Algebra.InfiniteSum.Ring
 
 /-!
 # Multiplication and actual circle Fourier convolution
@@ -9,6 +11,8 @@ Absolute summability of one factor gives its uniformly convergent Fourier
 series. Applying the continuous Fourier-coefficient functional to that series
 after multiplication proves the full, infinite convolution formula.
 -/
+
+@[expose] public section
 
 noncomputable section
 

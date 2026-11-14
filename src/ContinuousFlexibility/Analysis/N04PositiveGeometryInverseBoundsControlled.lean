@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryForwardKernelSlab
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledFamilyMaterial
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryForwardKernelSlab
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledFamilyMaterial
 
 /-!
 # The actual controlled family's finite radial inverse kernel
@@ -10,6 +12,8 @@ bound, selected before both the positive component and the free finite
 coefficient vector. The actual pulled-back endpoint coefficients lie
 strictly inside this domain on the chosen state neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

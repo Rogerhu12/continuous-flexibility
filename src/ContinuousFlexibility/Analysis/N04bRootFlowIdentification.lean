@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CharacteristicODEUniqueness
-import ContinuousFlexibility.Analysis.RootPhysicalTransport
-import ContinuousFlexibility.Analysis.SmoothPeriodicScalarFlowEndpoint
+module
+
+public import ContinuousFlexibility.Analysis.CharacteristicODEUniqueness
+public import ContinuousFlexibility.Analysis.RootPhysicalTransport
+public import ContinuousFlexibility.Analysis.SmoothPeriodicScalarFlowEndpoint
 
 /-!
 # Identifying a stored physical root flow with the constructed flow
@@ -17,6 +19,8 @@ the smooth periodic factors in the actual root speed
 d(r, θ) + σ sqrt(r) c₀(r, θ). Producing such extended factors from a
 corrected physical coefficient germ remains a separate construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

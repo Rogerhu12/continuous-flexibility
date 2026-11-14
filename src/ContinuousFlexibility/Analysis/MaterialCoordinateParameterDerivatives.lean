@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.MixedDerivativeHierarchy
-import ContinuousFlexibility.Analysis.MixedJetParameterDerivatives
-import ContinuousFlexibility.Analysis.MaterialRadiusJets
+module
+
+public import ContinuousFlexibility.Analysis.MixedDerivativeHierarchy
+public import ContinuousFlexibility.Analysis.MixedJetParameterDerivatives
+public import ContinuousFlexibility.Analysis.MaterialRadiusJets
 
 /-!
 # Parameter differentiation after the actual material coordinate
@@ -10,6 +12,8 @@ only on the fixed radius map. This exact formula commutes a parameter
 derivative through every material mixed derivative. The input consists
 of genuine ordinary mixed derivatives of the original spatial fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 

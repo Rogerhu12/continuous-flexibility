@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.IrrationalLiftRigidity
-import ContinuousFlexibility.Analysis.CircleInverseExistence
+module
+
+public import ContinuousFlexibility.Analysis.IrrationalLiftRigidity
+public import ContinuousFlexibility.Analysis.CircleInverseExistence
 
 /-!
 # Two-return rigidity of actual boundary circle lifts
@@ -9,6 +11,8 @@ Only the left reference lift needs its explicit continuous inverse; the
 right reference lift is used through injectivity. This avoids assuming
 any regularity of a supplied right inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

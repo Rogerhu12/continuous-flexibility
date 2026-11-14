@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeRelativeFields
+module
+
+public import ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeRelativeFields
 
 /-!
 # Actual reference radiality of the whole reference-gauged atlas
@@ -10,6 +12,8 @@ The actual inverse inherits radiality from the genuine inverse laws on
 the reference pieces; no property of a total inverse outside its domain
 is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

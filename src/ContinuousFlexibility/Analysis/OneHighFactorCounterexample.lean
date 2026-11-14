@@ -1,11 +1,13 @@
-import Mathlib.Analysis.Calculus.ContDiff.Operations
-import Mathlib.Analysis.Calculus.Deriv.Add
-import Mathlib.Analysis.Calculus.Deriv.Mul
-import Mathlib.Analysis.Calculus.Deriv.Pow
-import Mathlib.Analysis.Real.Sqrt
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.NormNum
+module
+
+public import Mathlib.Analysis.Calculus.ContDiff.Operations
+public import Mathlib.Analysis.Calculus.Deriv.Add
+public import Mathlib.Analysis.Calculus.Deriv.Mul
+public import Mathlib.Analysis.Calculus.Deriv.Pow
+public import Mathlib.Analysis.Real.Sqrt
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.NormNum
 
 /-!
 # The missing base-point control in the composition estimate
@@ -24,6 +26,8 @@ shows that first-derivative control cannot be omitted.
 The corrected composition estimate must control the first derivative
 along the segments from zero to the input range, also at order zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.SelectedFixedBandAssembly
+module
+
+public import ContinuousFlexibility.Radial.SelectedFixedBandAssembly
 
 /-!
 # Selected-tail assembly retaining solution metadata
@@ -9,6 +11,8 @@ families, so callers can recover the prescribed chain, entries and Cstar.
 An index-dependent angle bound and an arbitrary proved property of each
 actual pair of solutions are retained along with IsSelectedTail.
 -/
+
+@[expose] public section
 
 noncomputable section
 

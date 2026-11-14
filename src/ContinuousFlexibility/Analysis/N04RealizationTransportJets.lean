@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationSampleWeight
-import ContinuousFlexibility.Analysis.N07aAngularReferenceJetEnvelopes
-import ContinuousFlexibility.Analysis.CanonicalActualWholeGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationSampleWeight
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceJetEnvelopes
+public import ContinuousFlexibility.Analysis.CanonicalActualWholeGeometry
 
 /-!
 # Quantitative bounds for the same global reference transport
@@ -17,6 +19,8 @@ envelope. Global C3 regularity extends the estimates through order two across
 the radial interfaces. The final theorem attaches all four quantitative
 bounds to the already constructed qualitative transport on one neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

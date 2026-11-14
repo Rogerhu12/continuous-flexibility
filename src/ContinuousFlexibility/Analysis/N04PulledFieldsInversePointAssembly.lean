@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsInverseAffineBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsInverseAffineBounds
 
 /-!
 # Abstract assembly of the two inverse-coordinate prefixes
@@ -7,6 +9,8 @@ All coefficient arithmetic and prefix choices are made before the
 concrete physical parameter grading is substituted. The two scalar
 towers reconstruct any genuine tower of the same affine inverse point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

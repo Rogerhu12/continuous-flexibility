@@ -1,8 +1,12 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import Mathlib.MeasureTheory.Measure.OpenPos
-import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import Mathlib.MeasureTheory.Measure.OpenPos
+public import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
 
 /-! Continuous bounds extend through the null complement of the actual reference pieces. -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aActualCubicFactors
-import ContinuousFlexibility.Analysis.CanonicalFieldJetReduction
-import ContinuousFlexibility.Analysis.StateNeighborhood
+module
+
+public import ContinuousFlexibility.Analysis.N07aActualCubicFactors
+public import ContinuousFlexibility.Analysis.CanonicalFieldJetReduction
+public import ContinuousFlexibility.Analysis.StateNeighborhood
 
 /-!
 # The actual cubic factor before the quantitative N04 certificate
@@ -10,6 +12,8 @@ this factorization. The divided field is the original field of the same
 atlas. Its reference value vanishes on the open cylinder. No part of
 the quantitative N04 estimate or CurrentJets is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

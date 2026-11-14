@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04bOpticalCutoffData
-import ContinuousFlexibility.Analysis.N04bOriginalType
-import ContinuousFlexibility.Analysis.SolveReturnEquations
+module
+
+public import ContinuousFlexibility.Analysis.N04bOpticalCutoffData
+public import ContinuousFlexibility.Analysis.N04bOriginalType
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # Source and flow inputs from the same actual optical cutoff
@@ -10,6 +12,8 @@ positive collar. That whole open collar has the quantitative coefficient
 lower bounds from the optical construction, including states outside the
 sector. The same cutoff retains the strict corrected gap after shrinking.
 -/
+
+@[expose] public section
 
 noncomputable section
 

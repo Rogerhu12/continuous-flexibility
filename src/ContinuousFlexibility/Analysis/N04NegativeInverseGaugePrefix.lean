@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04NegativeInverseNormalizedPair
-import ContinuousFlexibility.Analysis.N04NegativeInverseActualSystem
-import ContinuousFlexibility.Analysis.N04NegativeInverseCoefficientBounds
-import ContinuousFlexibility.Analysis.N04NegativeInverseJointPrefixes
-import ContinuousFlexibility.Analysis.N04NegativeInverseOutputAtoms
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeInverseNormalizedPair
+public import ContinuousFlexibility.Analysis.N04NegativeInverseActualSystem
+public import ContinuousFlexibility.Analysis.N04NegativeInverseCoefficientBounds
+public import ContinuousFlexibility.Analysis.N04NegativeInverseJointPrefixes
+public import ContinuousFlexibility.Analysis.N04NegativeInverseOutputAtoms
 
 /-!
 # Closing the inverse and pulled-height joint prefixes
@@ -11,6 +13,8 @@ The forward interface is expressed on the actual inverse image in the
 original physical component. The common state neighborhood and its low
 grading are fixed before the parameter and spatial orders are chosen.
 -/
+
+@[expose] public section
 
 noncomputable section
 

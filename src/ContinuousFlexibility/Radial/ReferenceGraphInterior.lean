@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ReferenceGraphCoefficients
-import ContinuousFlexibility.Radial.ReferenceColumnSmooth
-import ContinuousFlexibility.Analysis.IntervalWeakODE
+module
+
+public import ContinuousFlexibility.Radial.ReferenceGraphCoefficients
+public import ContinuousFlexibility.Radial.ReferenceColumnSmooth
+public import ContinuousFlexibility.Analysis.IntervalWeakODE
 
 /-!
 # Smooth interior representatives of actual reference coefficients
@@ -10,6 +12,8 @@ equation. Two integral primitives and ordinary ODE regularity produce a
 smooth representative, and distributional uniqueness identifies its
 ordinary derivative with the projected first-normal derivative.
 -/
+
+@[expose] public section
 
 open Set Filter MeasureTheory
 open scoped ContDiff Topology

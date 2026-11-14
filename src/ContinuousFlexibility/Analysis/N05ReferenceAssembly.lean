@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05ReferenceInterface
-import ContinuousFlexibility.Analysis.N05ClosedGraphAssembly
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceInterface
+public import ContinuousFlexibility.Analysis.N05ClosedGraphAssembly
 
 /-!
 # Assembling the frozen N05 domain from its analytic inverse and uniqueness
@@ -8,6 +10,8 @@ The graph carrier is the original physical relation. Its closedness and the
 two inverse identities follow from the separately proved characterization.
 All endpoint, material and angular estimates retain the same global inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

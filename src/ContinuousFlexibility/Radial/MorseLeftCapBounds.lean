@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseLeftCapIntegrals
-import ContinuousFlexibility.Radial.MorseRightCapBounds
+module
+
+public import ContinuousFlexibility.Radial.MorseLeftCapIntegrals
+public import ContinuousFlexibility.Radial.MorseRightCapBounds
 
 /-!
 # The left part of the actual Morse cell
@@ -9,6 +11,8 @@ on its sign. The two signed coefficient integrals give the left initial
 expansions in (rm6a), and the two turning points then control the velocity.
 The same initial-value solution can be used on the retained right cap.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

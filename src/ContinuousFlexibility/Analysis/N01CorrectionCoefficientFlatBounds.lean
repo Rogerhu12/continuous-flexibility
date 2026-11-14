@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01CorrectionCoefficientSmoothJets
-import ContinuousFlexibility.Analysis.N01FlowRadialSamplePrefactor
-import ContinuousFlexibility.Analysis.MaterialSampleDiscreteEnvelope
-import ContinuousFlexibility.Analysis.MaterialCoordinateJetBudget
+module
+
+public import ContinuousFlexibility.Analysis.N01CorrectionCoefficientSmoothJets
+public import ContinuousFlexibility.Analysis.N01FlowRadialSamplePrefactor
+public import ContinuousFlexibility.Analysis.MaterialSampleDiscreteEnvelope
+public import ContinuousFlexibility.Analysis.MaterialCoordinateJetBudget
 
 /-!
 # Flat strip estimates for the actual correction coefficients
@@ -12,6 +14,8 @@ the material loss remains zero. The same raw coefficient jets are then
 patched by their proved vanishing off the cutoff strips and pulled back
 to the material coordinate without changing their derivative budget.
 -/
+
+@[expose] public section
 
 noncomputable section
 

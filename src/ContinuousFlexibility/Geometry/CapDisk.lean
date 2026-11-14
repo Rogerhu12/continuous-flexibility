@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Geometry.CapRevolution
-import ContinuousFlexibility.Contracts.CartesianMetricRegularity
+module
+
+public import ContinuousFlexibility.Geometry.CapRevolution
+public import ContinuousFlexibility.Contracts.CartesianMetricRegularity
 
 /-!
 # The actual cap disk, including its smooth axis
@@ -9,6 +11,8 @@ axis to the attaching rim. Near the axis the formula is exactly a linear
 horizontal disk, so no differentiability of the radius at zero is assumed.
 The marker placement and gluing to the moving graph remain later steps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

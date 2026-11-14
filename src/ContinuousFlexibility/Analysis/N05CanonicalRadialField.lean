@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N05ReferenceZeroRemainder
-import ContinuousFlexibility.Analysis.N05ReferenceNormalFieldBounds
-import ContinuousFlexibility.Analysis.N05CanonicalRadialJetChoice
-import ContinuousFlexibility.Analysis.N05CanonicalRadialPairing
-import ContinuousFlexibility.Analysis.N05CanonicalOutputChoice
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceZeroRemainder
+public import ContinuousFlexibility.Analysis.N05ReferenceNormalFieldBounds
+public import ContinuousFlexibility.Analysis.N05CanonicalRadialJetChoice
+public import ContinuousFlexibility.Analysis.N05CanonicalRadialPairing
+public import ContinuousFlexibility.Analysis.N05CanonicalOutputChoice
 
 /-!
 # The actual weighted physical field realizes the fixed canonical radial jet
@@ -12,6 +14,8 @@ piece. Its weak canonical derivative is identified with one fixed L²
 sequence, and the material shift is chosen before any endpoint exponent
 or angular order. No parity hypothesis is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

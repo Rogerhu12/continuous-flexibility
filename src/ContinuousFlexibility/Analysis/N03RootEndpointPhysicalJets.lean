@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N03StateRootBandIdentification
-import ContinuousFlexibility.Analysis.N01ControlledRootModel
-import ContinuousFlexibility.Analysis.RootPhysicalJetTransfer
-import ContinuousFlexibility.Analysis.N04FlowJetsProof
+module
+
+public import ContinuousFlexibility.Analysis.N03StateRootBandIdentification
+public import ContinuousFlexibility.Analysis.N01ControlledRootModel
+public import ContinuousFlexibility.Analysis.RootPhysicalJetTransfer
+public import ContinuousFlexibility.Analysis.N04FlowJetsProof
 
 /-!
 # Uniform ordinary jets at the actual stored root circles
@@ -12,6 +14,8 @@ chart and height on a band which may depend on the state. Only the root
 point is used below, so the identification radius does not enter any
 constant. No fixed-cutoff representation of the correction is required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

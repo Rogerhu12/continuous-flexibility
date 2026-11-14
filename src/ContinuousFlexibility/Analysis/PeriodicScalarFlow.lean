@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.ScalarFlowExistence
-import Mathlib.Analysis.Calculus.MeanValue
-import Mathlib.Analysis.Normed.Group.Bounded
-import Mathlib.Topology.Instances.Real.Lemmas
+module
+
+public import ContinuousFlexibility.Analysis.ScalarFlowExistence
+public import Mathlib.Analysis.Calculus.MeanValue
+public import Mathlib.Analysis.Normed.Group.Bounded
+public import Mathlib.Topology.Instances.Real.Lemmas
 
 /-!
 # Actual flows of periodic scalar vector fields
@@ -15,6 +17,8 @@ interval. Uniqueness then proves that a full turn of the initial angle
 gives a full turn of the solution, independently of the choices made by
 the existence theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

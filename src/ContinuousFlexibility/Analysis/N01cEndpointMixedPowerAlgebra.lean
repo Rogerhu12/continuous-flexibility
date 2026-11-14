@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cMixedPowerAlgebra
-import ContinuousFlexibility.Analysis.N01cHeightParameterJets
+module
+
+public import ContinuousFlexibility.Analysis.N01cMixedPowerAlgebra
+public import ContinuousFlexibility.Analysis.N01cHeightParameterJets
 
 /-!
 # Endpoint weights in the actual spatial-parameter product formula
@@ -9,6 +11,8 @@ before multiplication. The finite-dimensional parameter product theorem
 is then applied to their scalar rescalings. Every spatial order remains
 in its original interpolation power.
 -/
+
+@[expose] public section
 
 noncomputable section
 

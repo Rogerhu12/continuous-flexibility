@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cFiniteAffineInputs
-import ContinuousFlexibility.Analysis.N01cNormalizedSpeedPowerBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01cFiniteAffineInputs
+public import ContinuousFlexibility.Analysis.N01cNormalizedSpeedPowerBounds
 
 /-!
 # Joint finite-affine smoothness of the actual normalized speed factors
@@ -9,6 +11,8 @@ fields. Their finite-affine restrictions are jointly smooth with the
 physical point. The original N01b inequalities keep the two actual
 denominators away from zero on the same neighbourhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

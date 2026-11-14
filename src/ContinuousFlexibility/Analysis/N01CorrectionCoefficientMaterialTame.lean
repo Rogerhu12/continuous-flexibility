@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01CorrectionCoefficientPolynomialGrowth
-import ContinuousFlexibility.Analysis.N01TransportVelocityMixedGrowth
+module
+
+public import ContinuousFlexibility.Analysis.N01CorrectionCoefficientPolynomialGrowth
+public import ContinuousFlexibility.Analysis.N01TransportVelocityMixedGrowth
 
 /-!
 # Actual material tame bounds for the same correction coefficient jets
@@ -11,6 +13,8 @@ the actual support identity and the material coordinate estimate transfer
 that factor to the original smooth coefficient family.  Its flatness
 absorbs the radial weight without an order-dependent material loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

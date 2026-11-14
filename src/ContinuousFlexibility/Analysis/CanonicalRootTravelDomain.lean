@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CanonicalStoredTravelCoordinates
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalStoredTravelCoordinates
 
 /-!
 # A quantitative travel criterion for the correct moving half
@@ -9,6 +11,8 @@ strictly smaller than the cut travel must belong to that root's open
 half. This criterion can be applied on a state-independent root band;
 it does not infer a uniform band from pointwise boundary continuity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

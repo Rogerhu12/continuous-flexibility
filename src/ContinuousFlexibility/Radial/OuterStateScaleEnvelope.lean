@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterEnvelope
-import ContinuousFlexibility.Radial.MorseChainScales
+module
+
+public import ContinuousFlexibility.Radial.OuterEnvelope
+public import ContinuousFlexibility.Radial.MorseChainScales
 
 /-!
 # The reciprocal actual state scale fits the common envelope
@@ -8,6 +10,8 @@ The amplitude lower bound is uniform over the height cube. Together
 with the permitted amplitude-to-state-scale ratio it gives one explicit
 envelope exponent, independent of the frequency and all height choices.
 -/
+
+@[expose] public section
 
 noncomputable section
 

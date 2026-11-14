@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.MaterialHeightCutoff
-import ContinuousFlexibility.Analysis.CylinderTestPairing
+module
+
+public import ContinuousFlexibility.Analysis.MaterialHeightCutoff
+public import ContinuousFlexibility.Analysis.CylinderTestPairing
 
 /-!
 # Compact radial tests in the actual height model
@@ -10,6 +12,8 @@ The proof checks every actual weighted mixed jet after material pullback.
 In particular a smooth radial primitive can be localized while keeping
 its values on an entire closed characteristic component.
 -/
+
+@[expose] public section
 
 noncomputable section
 

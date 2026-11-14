@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCircleRealSobolev
-import Mathlib.Topology.Algebra.Group.Quotient
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleRealSobolev
+public import Mathlib.Topology.Algebra.Group.Quotient
 
 /-!
 # Continuity of the actual circle Sobolev norms in a parameter
@@ -9,6 +11,8 @@ zeroth and highest actual derivatives. The reverse triangle inequality
 therefore proves its continuity for a continuous family of derivative
 towers. Periodic smooth real lifts provide these towers canonically.
 -/
+
+@[expose] public section
 
 noncomputable section
 

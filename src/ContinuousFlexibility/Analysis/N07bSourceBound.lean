@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07bSourceBoundSummation
-import ContinuousFlexibility.Analysis.SolveStateSpaces
-import ContinuousFlexibility.Scalar.WeightedPointwise
+module
+
+public import ContinuousFlexibility.Analysis.N07bSourceBoundSummation
+public import ContinuousFlexibility.Analysis.SolveStateSpaces
+public import ContinuousFlexibility.Scalar.WeightedPointwise
 
 /-!
 # Geometric source coefficient conditions
@@ -10,6 +12,8 @@ multiplier with the actual Jacobian and height-ratio weight. The source
 lift used by the final proof is constructed directly from primitive jet
 bounds in `N07bSourceBoundPrimitiveLift`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

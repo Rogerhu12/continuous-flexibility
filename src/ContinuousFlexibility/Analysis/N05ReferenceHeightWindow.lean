@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05ReferenceE0Weights
-import ContinuousFlexibility.Analysis.N05ReferenceEndpointWeights
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceE0Weights
+public import ContinuousFlexibility.Analysis.N05ReferenceEndpointWeights
 
 /-!
 # Cubic reference windows from actual height ratios
@@ -9,6 +11,8 @@ the difference of cubic endpoint exponents. The coefficient error on the
 active cell is absorbed using slow variation of Q relative to S. No fixed
 bound for the difference of the cell indices is asserted or used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesCylinderIntegration
-import ContinuousFlexibility.Analysis.PhysicalJetBonding
+module
+
+public import ContinuousFlexibility.Analysis.SpacesCylinderIntegration
+public import ContinuousFlexibility.Analysis.PhysicalJetBonding
 
 /-!
 # Encoding every height member in the actual physical weak graph
@@ -8,6 +10,8 @@ All coordinates are the prescribed weighted mixed derivatives as actual
 `L²` classes. The smooth cylinder integration-by-parts identity proves
 graph membership, and coordinate deletion proves projective compatibility.
 -/
+
+@[expose] public section
 
 noncomputable section
 

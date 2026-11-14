@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.FixedPositiveReferencePotentialMaterialJets
-import ContinuousFlexibility.Analysis.WholePositiveReferencePotentialJets
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+module
+
+public import ContinuousFlexibility.Analysis.FixedPositiveReferencePotentialMaterialJets
+public import ContinuousFlexibility.Analysis.WholePositiveReferencePotentialJets
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
 
 /-!
 # The potential atom of one fixed positive reference family
@@ -9,6 +11,8 @@ The coordinate, height, original cell and normalized material data are
 already selected. The same fields are used in the actual whole atlas and
 in every derivative estimate. This proof selects numerical constants only.
 -/
+
+@[expose] public section
 
 noncomputable section
 

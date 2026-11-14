@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.CentralPositionInverse
+module
+
+public import ContinuousFlexibility.Radial.CentralPositionInverse
 
 /-!
 # Position weights for the actual mode-two reduced inverse
@@ -7,6 +9,8 @@ The same closed differential and physical energy graphs are used at
 frequency two. The genuine normalized Gaussian projection is retained
 in every source equation; it is removed only through proved orthogonality.
 -/
+
+@[expose] public section
 
 noncomputable section
 

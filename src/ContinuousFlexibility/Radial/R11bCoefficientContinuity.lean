@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.R11bPhysicalCompleteness
-import ContinuousFlexibility.Radial.R11bLpConvergence
-import Mathlib.Topology.MetricSpace.Lipschitz
+module
+
+public import ContinuousFlexibility.Radial.R11bPhysicalCompleteness
+public import ContinuousFlexibility.Radial.R11bLpConvergence
+public import Mathlib.Topology.MetricSpace.Lipschitz
 
 /-!
 # Continuity of actual product L² coefficients
@@ -8,6 +10,8 @@ import Mathlib.Topology.MetricSpace.Lipschitz
 A unit L² angular factor defines a contraction from product L² to radial
 L². Its value on an actual representative is the original angular integral.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

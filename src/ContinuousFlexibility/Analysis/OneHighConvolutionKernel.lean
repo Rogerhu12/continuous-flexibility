@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighConvolutionYoung
-import Mathlib.Algebra.BigOperators.Fin
+module
+
+public import ContinuousFlexibility.Analysis.OneHighConvolutionYoung
+public import Mathlib.Algebra.BigOperators.Fin
 
 /-!
 # Nonempty convolution and its frequency integrand
@@ -8,6 +10,8 @@ An iterated fiber integral represents a convolution of any positive number of
 frequency factors. Keeping the full integrand visible permits a pointwise
 one-high-factor inequality before any frequency variables are integrated out.
 -/
+
+@[expose] public section
 
 noncomputable section
 

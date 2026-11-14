@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterGreenKernel
-import Mathlib.Analysis.Real.Sqrt
+module
+
+public import ContinuousFlexibility.Radial.OuterGreenKernel
+public import Mathlib.Analysis.Real.Sqrt
 
 /-!
 # Full-state normalization at the outer entrance
@@ -13,6 +15,8 @@ exactly and gives both boundary traces of variation of parameters.
 The ordinary product type has the maximum norm.  All Euclidean assertions
 in this file are therefore explicit coordinate identities.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalSourceBounds
-import ContinuousFlexibility.Analysis.N07aCurrentPhysicalGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalSourceBounds
+public import ContinuousFlexibility.Analysis.N07aCurrentPhysicalGeometry
+
+@[expose] public section
 
 noncomputable section
 

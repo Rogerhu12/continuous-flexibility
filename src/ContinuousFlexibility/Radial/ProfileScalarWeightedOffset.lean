@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.ProfileScalarWeightedCaccioppoli
-import ContinuousFlexibility.Radial.ProfileScalarSquareAlgebra
-import ContinuousFlexibility.Radial.ProfileLeftOffsetFlux
-import ContinuousFlexibility.Radial.R11bRadialCorrections
+module
+
+public import ContinuousFlexibility.Radial.ProfileScalarWeightedCaccioppoli
+public import ContinuousFlexibility.Radial.ProfileScalarSquareAlgebra
+public import ContinuousFlexibility.Radial.ProfileLeftOffsetFlux
+public import ContinuousFlexibility.Radial.R11bRadialCorrections
 
 /-!
 # Weighted first-normal estimate with the left-tail constant
@@ -12,6 +14,8 @@ derivative is recovered by adding the compact cutoff derivative. The
 output exponent loss is the same uniform loss as in the estimate without
 an offset; only the constant may depend on the attenuation exponent.
 -/
+
+@[expose] public section
 
 open Set Filter MeasureTheory Real
 open ContinuousFlexibility.Analysis ContinuousFlexibility.Statements

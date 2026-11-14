@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N01aNegativeComponentGeometry
-import ContinuousFlexibility.Analysis.N01cMorseComponentClassification
-import ContinuousFlexibility.Analysis.N01cOpticalCellComparison
-import ContinuousFlexibility.Radial.SeedCentralReturn
-import ContinuousFlexibility.Radial.MorseChainPartitionData
-import ContinuousFlexibility.Radial.MorseSecondModeGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N01aNegativeComponentGeometry
+public import ContinuousFlexibility.Analysis.N01cMorseComponentClassification
+public import ContinuousFlexibility.Analysis.N01cOpticalCellComparison
+public import ContinuousFlexibility.Radial.SeedCentralReturn
+public import ContinuousFlexibility.Radial.MorseChainPartitionData
+public import ContinuousFlexibility.Radial.MorseSecondModeGeometry
 
 /-!
 # Enumerating the actual retained components with their original labels
@@ -13,6 +15,8 @@ Morse chains occupy the same Bool-times-Nat slots as the reference
 partition.  A control's actual containing cell may differ from the
 model cell, but their shared interior point bounds the index difference.
 -/
+
+@[expose] public section
 
 noncomputable section
 

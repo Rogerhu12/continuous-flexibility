@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N08CircleDiagonal
-import ContinuousFlexibility.Analysis.N08ControlProfileModes
-import ContinuousFlexibility.Analysis.N08RadialFlow
-import ContinuousFlexibility.Analysis.SpacesCompactHeights
+module
+
+public import ContinuousFlexibility.Analysis.N08CircleDiagonal
+public import ContinuousFlexibility.Analysis.N08ControlProfileModes
+public import ContinuousFlexibility.Analysis.N08RadialFlow
+public import ContinuousFlexibility.Analysis.SpacesCompactHeights
 
 /-!
 # The actual control diagonal at the reference state
@@ -11,6 +13,8 @@ the optical rotation of the perturbed profile.  The normalization of the
 control in N01 therefore computes its return derivative.  The physical
 input and output weights cancel exactly, giving diagonal entry one.
 -/
+
+@[expose] public section
 
 noncomputable section
 

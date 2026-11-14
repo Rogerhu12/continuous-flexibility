@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04SourceColumnsData
-import ContinuousFlexibility.Analysis.AngularSimpleDivisionBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04SourceColumnsData
+public import ContinuousFlexibility.Analysis.AngularSimpleDivisionBounds
 
 /-!
 # Spatial differentiation of scalar current-jet data
@@ -8,6 +10,8 @@ Taking `r` radial and `t` angular derivatives costs exactly `r+t` in the
 fixed loss. The parameter neighborhood and its low seminorm are unchanged.
 The witness differentiates the actual current-minus-reference field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

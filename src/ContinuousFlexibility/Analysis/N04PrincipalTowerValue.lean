@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PrincipalJetRegularity
-import ContinuousFlexibility.Analysis.N04RealizationDifferenceValue
-import ContinuousFlexibility.Analysis.SectorParameterGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalJetRegularity
+public import ContinuousFlexibility.Analysis.N04RealizationDifferenceValue
+public import ContinuousFlexibility.Analysis.SectorParameterGeometry
 
 /-!
 # Recovering the vanishing value estimate from the first parameter jet
@@ -10,6 +12,8 @@ genuine parameter towers. Their value difference is then estimated along
 the reference segment. Only parameter order one is used, on the same
 neighborhood, so this step makes no order-dependent neighborhood choice.
 -/
+
+@[expose] public section
 
 noncomputable section
 

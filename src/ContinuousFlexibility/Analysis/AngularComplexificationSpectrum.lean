@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.AngularComplexification
-import Mathlib.Analysis.InnerProductSpace.Adjoint
-import Mathlib.Algebra.Algebra.Spectrum.Basic
-import Mathlib.Topology.Algebra.Module.ContinuousLinearMap.RestrictScalars
+module
+
+public import ContinuousFlexibility.Analysis.AngularComplexification
+public import Mathlib.Analysis.InnerProductSpace.Adjoint
+public import Mathlib.Algebra.Algebra.Spectrum.Basic
+public import Mathlib.Topology.Algebra.Module.ContinuousLinearMap.RestrictScalars
 
 /-!
 # Injectivity, self-adjointness, and real spectrum under complexification
@@ -10,6 +12,8 @@ A complex inverse is compressed to the original real space by taking the
 real component after applying it to a real-axis vector.  The two inverse
 identities follow directly, without an invariant-subspace hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

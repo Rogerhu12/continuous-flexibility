@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionVelocityBounds
-import ContinuousFlexibility.Analysis.N01OpticalCollarPositivity
-import ContinuousFlexibility.Analysis.MaterialSampleShift
-import ContinuousFlexibility.Analysis.N01ControlIndexBound
-import ContinuousFlexibility.Analysis.N01FlowJointRegularity
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionVelocityBounds
+public import ContinuousFlexibility.Analysis.N01OpticalCollarPositivity
+public import ContinuousFlexibility.Analysis.MaterialSampleShift
+public import ContinuousFlexibility.Analysis.N01ControlIndexBound
+public import ContinuousFlexibility.Analysis.N01FlowJointRegularity
 
 /-!
 # A single neighborhood preserves the actual corrected speed gap
@@ -14,6 +16,8 @@ The correction velocity is consequently smaller than half the original
 half-gap on every transition support after one common shrinking of the
 N01 neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

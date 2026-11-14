@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Contracts.CartesianMetric
-import Mathlib.Analysis.InnerProductSpace.PiL2
+module
+
+public import ContinuousFlexibility.Contracts.CartesianMetric
+public import Mathlib.Analysis.InnerProductSpace.PiL2
 
 /-!
 # The actual Euclidean three-dimensional graph embedding
@@ -9,6 +11,8 @@ product. Smoothness and the topological embedding need no metric hypothesis.
 Injectivity of the differential is obtained separately from the actual metric
 identity, or from differentiability of the planar inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

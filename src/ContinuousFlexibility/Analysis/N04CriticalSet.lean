@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Statements.Radial
-import Mathlib.Analysis.Calculus.Deriv.Inverse
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
-import Mathlib.Topology.DiscreteSubset
-import Mathlib.Topology.Bases
-import Mathlib.MeasureTheory.Measure.Typeclasses.NullSingletonClass
+module
+
+public import ContinuousFlexibility.Statements.Radial
+public import Mathlib.Analysis.Calculus.Deriv.Inverse
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+public import Mathlib.Topology.DiscreteSubset
+public import Mathlib.Topology.Bases
+public import Mathlib.MeasureTheory.Measure.Typeclasses.NullSingletonClass
 
 /-!
 # The exceptional critical radii of the reference profile
@@ -12,6 +14,8 @@ The profile specification makes every interior critical point simple.
 Consequently its critical set is discrete, countable, and Lebesgue null.
 No analyticity of the smooth accumulating profile is used.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Analysis
 

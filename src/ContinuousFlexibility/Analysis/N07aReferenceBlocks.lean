@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aVolumeCell
-import ContinuousFlexibility.Analysis.N07aTwoWeightNumerics
+module
+
+public import ContinuousFlexibility.Analysis.N07aVolumeCell
+public import ContinuousFlexibility.Analysis.N07aTwoWeightNumerics
 
 /-!
 # Off-diagonal blocks of the actual reference inverse
@@ -9,6 +11,8 @@ on one cell belongs to all three weighted spaces after the explicit change
 of weight. Comparing the two output representations gives the logarithmic
 height decay for that same inverse, with no additional operator assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

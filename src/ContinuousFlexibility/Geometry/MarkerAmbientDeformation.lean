@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Contracts.GraphCapHomeomorph
-import ContinuousFlexibility.Geometry.MarkedCapDisk
-import ContinuousFlexibility.Geometry.GraphCapAttachment
+module
+
+public import ContinuousFlexibility.Contracts.GraphCapHomeomorph
+public import ContinuousFlexibility.Geometry.MarkedCapDisk
+public import ContinuousFlexibility.Geometry.GraphCapAttachment
 
 /-!
 # A fixed actual ambient deformation inserting the cap marker
@@ -14,6 +16,8 @@ is fixed because its height equals the scaling center, not because the ambient
 map is locally the identity. No transport of Euclidean normals is asserted.
 The actual marked inside region is constructed separately by integration.
 -/
+
+@[expose] public section
 
 noncomputable section
 

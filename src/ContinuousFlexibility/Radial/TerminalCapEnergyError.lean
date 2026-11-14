@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.TerminalCapEnergy
+module
+
+public import ContinuousFlexibility.Radial.TerminalCapEnergy
 
 /-!
 # Two attenuation factors in the actual lift energy
@@ -8,6 +10,8 @@ the actual stand-in value on the cutoff layer. The resulting exponential
 is exp(-2 action), because the energy contains the square of that value.
 Disjoint closed cutoff supports also give exact off-diagonal orthogonality.
 -/
+
+@[expose] public section
 
 noncomputable section
 

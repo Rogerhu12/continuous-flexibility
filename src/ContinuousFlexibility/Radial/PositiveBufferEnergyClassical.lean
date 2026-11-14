@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.PositiveBufferEnergyIntegral
-import ContinuousFlexibility.Radial.PositiveBufferWeakRegularity
-import ContinuousFlexibility.Radial.PositiveBufferSmoothExtension
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferEnergyIntegral
+public import ContinuousFlexibility.Radial.PositiveBufferWeakRegularity
+public import ContinuousFlexibility.Radial.PositiveBufferSmoothExtension
 
 /-!
 # Classical representatives of stationary buffer profiles
@@ -10,6 +12,8 @@ Schrödinger equation.  Local regularity and ordinary scalar ODE uniqueness
 then supply smooth profiles through finite endpoints, and smoothness on
 every open part of a stationary region.
 -/
+
+@[expose] public section
 
 noncomputable section
 

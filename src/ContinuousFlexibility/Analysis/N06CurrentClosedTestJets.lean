@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06CurrentTestTraces
-import ContinuousFlexibility.Analysis.N06RootTransmissionJets
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentTestTraces
+public import ContinuousFlexibility.Analysis.N06RootTransmissionJets
 
 /-!
 # Actual closed test jets and the moving canonical cut law
@@ -13,6 +15,8 @@ A smooth affine probe with the same physical first jet also extends that
 law to any physical function differentiable at the actual cut point.
 No transmission condition for the function is added as an assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

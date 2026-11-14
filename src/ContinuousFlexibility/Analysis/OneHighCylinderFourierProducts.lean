@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighConvolutionCharacter
-import ContinuousFlexibility.Analysis.OneHighCylinderFourierInverseL2
+module
+
+public import ContinuousFlexibility.Analysis.OneHighConvolutionCharacter
+public import ContinuousFlexibility.Analysis.OneHighCylinderFourierInverseL2
 
 /-!
 # Actual cylinder multiplication and mixed convolution
@@ -9,6 +11,8 @@ Its frequency membership, inverse construction, and pointwise inverse
 identity prove physical product membership and the exact Fourier identity.
 No physical radial integrability or support assumption is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.WeightedCompositionTower
-import ContinuousFlexibility.Scalar.WeightedDecodedProduct
-import ContinuousFlexibility.Scalar.WeightedOneHighCosts
+module
+
+public import ContinuousFlexibility.Scalar.WeightedCompositionTower
+public import ContinuousFlexibility.Scalar.WeightedDecodedProduct
+public import ContinuousFlexibility.Scalar.WeightedOneHighCosts
 
 /-!
 # From value estimates to a uniform scalar composition tower
@@ -11,6 +13,8 @@ At directional order k, the actual decoded derivative is F^(k)(u) times the
 k directions. Subtracting F^(k)(0) supplies one genuine height coefficient;
 its low norm is bounded on the original common neighbourhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

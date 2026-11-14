@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01aReferenceHeightMaterialJets
-import ContinuousFlexibility.Analysis.N01aReferenceHeightMoments
+module
+
+public import ContinuousFlexibility.Analysis.N01aReferenceHeightMaterialJets
+public import ContinuousFlexibility.Analysis.N01aReferenceHeightMoments
 
 /-!
 # Square integrability of the actual weighted radial reference jets
@@ -8,6 +10,8 @@ The two output realizations provide the zeroth and first radial moments.
 The actual Jacobi equation and coordinate chain rule supply every higher
 jet, so no regularity or high-jet integrability is added as a premise.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R11bHilbertRepresentatives
+module
+
+public import ContinuousFlexibility.Radial.R11bHilbertRepresentatives
 
 /-!
 # Homogeneous physical mode uniqueness from the given modal inverse
@@ -8,6 +10,8 @@ scalar. The raw function is lifted to the actual radial Hilbert space, and
 the modal inverse's maximal-graph uniqueness then excludes every homogeneous
 solution satisfying the corresponding row.
 -/
+
+@[expose] public section
 
 noncomputable section
 

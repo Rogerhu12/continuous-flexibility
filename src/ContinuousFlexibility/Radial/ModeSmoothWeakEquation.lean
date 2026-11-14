@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ModeCoreGraph
+module
+
+public import ContinuousFlexibility.Radial.ModeCoreGraph
 
 /-!
 # From the actual differential expression to the frozen weak equation
@@ -8,6 +10,8 @@ globally smooth lift therefore satisfies the exact modal weak equation
 on every region where its pointwise source equation holds. The test
 condition is the ordinary support condition in the frozen definition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

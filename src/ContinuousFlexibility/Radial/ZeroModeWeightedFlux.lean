@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ReferenceRadialKernelPairing
-import ContinuousFlexibility.Radial.ZeroModeWeightKernel
-import ContinuousFlexibility.Radial.ZeroModeWeakEquation
+module
+
+public import ContinuousFlexibility.Radial.ReferenceRadialKernelPairing
+public import ContinuousFlexibility.Radial.ZeroModeWeightKernel
+public import ContinuousFlexibility.Radial.ZeroModeWeakEquation
 
 /-!
 # Weighted estimates for the actual zero-mode flux
@@ -11,6 +13,8 @@ source pairing control it uniformly. Integrating the resulting flux
 quotient gives the actual finite left height, without an extra regularity
 assumption on the source.
 -/
+
+@[expose] public section
 
 noncomputable section
 

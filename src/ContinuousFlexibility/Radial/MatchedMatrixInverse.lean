@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchingMatrixAlgebra
-import ContinuousFlexibility.Blueprint.Statements
+module
+
+public import ContinuousFlexibility.Radial.MatchingMatrixAlgebra
+public import ContinuousFlexibility.Blueprint.Statements
 
 /-!
 # The inverse of the two-cut matching matrix
@@ -9,6 +11,8 @@ invertibility of the matching matrix. The operator estimate already proved
 in MatchingMatrixAlgebra gives the stronger entry bound 2 / margin;
 the statement layer asks only for 4 / margin.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderSobolevJetsBasic
-import ContinuousFlexibility.Analysis.OneHighCylinderFourierReverseDerivative
-import ContinuousFlexibility.Analysis.OneHighCylinderDerivativeMultiplier
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderSobolevJetsBasic
+public import ContinuousFlexibility.Analysis.OneHighCylinderFourierReverseDerivative
+public import ContinuousFlexibility.Analysis.OneHighCylinderDerivativeMultiplier
 
 /-!
 # Finite Sobolev regularity of actual mixed jets
@@ -10,6 +12,8 @@ frequency membership, induction proves L2 membership of every actual mixed
 derivative of total order at most s. The exact physical multiplier and the
 derivative L2 bound are proved at the same time.
 -/
+
+@[expose] public section
 
 noncomputable section
 

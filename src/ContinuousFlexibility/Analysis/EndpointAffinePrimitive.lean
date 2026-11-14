@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.EndpointPrimitive
-import Mathlib.MeasureTheory.Function.L2Space
+module
+
+public import ContinuousFlexibility.Analysis.EndpointPrimitive
+public import Mathlib.MeasureTheory.Function.L2Space
 
 /-!
 # Weighted exclusion of homogeneous endpoint solutions
@@ -8,6 +10,8 @@ An affine function of the reciprocal-coefficient primitive cannot have finite
 square integral with reciprocal weight unless both affine coefficients vanish.
 This is the endpoint uniqueness mechanism for the weak zero angular channel.
 -/
+
+@[expose] public section
 
 noncomputable section
 

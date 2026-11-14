@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PositiveFiberCoordinates
-import ContinuousFlexibility.Analysis.CanonicalEndpointInverse
+module
+
+public import ContinuousFlexibility.Analysis.PositiveFiberCoordinates
+public import ContinuousFlexibility.Analysis.CanonicalEndpointInverse
 
 /-!
 # Closed geometry and symmetries of positive fiber coordinates
@@ -9,6 +11,8 @@ The resulting actual global inverse maps the closed strips as well as the
 open strips. Periodicity and reflection are inherited from the two scalar
 fields, and their genuine global inverse supplies the boundary inverse germ.
 -/
+
+@[expose] public section
 
 noncomputable section
 

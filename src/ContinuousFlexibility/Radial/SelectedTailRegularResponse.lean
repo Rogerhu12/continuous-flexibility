@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.SelectedRadialOuterInverse
-import ContinuousFlexibility.Radial.SelectedTailInverseRadius
-import Mathlib.Analysis.Calculus.TangentCone.Real
+module
+
+public import ContinuousFlexibility.Radial.SelectedRadialOuterInverse
+public import ContinuousFlexibility.Radial.SelectedTailInverseRadius
+public import Mathlib.Analysis.Calculus.TangentCone.Real
 
 /-!
 # The actual half-closed exterior representative and its Robin trace
@@ -9,6 +11,8 @@ The physical endpoint stays open. Only the regular matching cut is
 included. Reflection and the actual radius/height dilation preserve the
 one-sided derivative used in the frozen matching graph.
 -/
+
+@[expose] public section
 
 noncomputable section
 

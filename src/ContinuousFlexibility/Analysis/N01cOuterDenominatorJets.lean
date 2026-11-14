@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cFullNeighborhood
-import Mathlib.Analysis.Calculus.ContDiff.Comp
-import Mathlib.Analysis.Calculus.ContDiff.Operations
+module
+
+public import ContinuousFlexibility.Analysis.N01cFullNeighborhood
+public import Mathlib.Analysis.Calculus.ContDiff.Comp
+public import Mathlib.Analysis.Calculus.ContDiff.Operations
 
 /-!
 # Uniform outer jets at the actual normalized denominators
@@ -15,6 +17,8 @@ These are bounds for the outer scalar functions. The chain rule must
 still include every spatial and parameter derivative of their actual
 arguments; this module does not assume or assert those composed bounds.
 -/
+
+@[expose] public section
 
 noncomputable section
 

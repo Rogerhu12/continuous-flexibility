@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighConvolutionFinite
-import Mathlib.Data.Finset.Lattice.Fold
-import Mathlib.MeasureTheory.Function.LpSeminorm.TriangleInequality
+module
+
+public import ContinuousFlexibility.Analysis.OneHighConvolutionFinite
+public import Mathlib.Data.Finset.Lattice.Fold
+public import Mathlib.MeasureTheory.Function.LpSeminorm.TriangleInequality
 
 /-!
 # Arbitrary-arity one-high-factor frequency estimates
@@ -10,6 +12,8 @@ of the weights raised to the total allowed order. Applying this inside the
 actual convolution integral, and then Young's inequality, gives exactly one
 weighted `L²` factor in each term and unweighted `L¹` norms for every other factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

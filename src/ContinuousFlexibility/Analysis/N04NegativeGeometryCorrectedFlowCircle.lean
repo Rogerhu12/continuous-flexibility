@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01InterpolationInverseCircle
-import ContinuousFlexibility.Analysis.ReturnCorrectedFlow
+module
+
+public import ContinuousFlexibility.Analysis.N01InterpolationInverseCircle
+public import ContinuousFlexibility.Analysis.ReturnCorrectedFlow
 
 /-!
 # The actual corrected flow as one circle-valued family
@@ -9,6 +11,8 @@ given circle model. Their affine lift is the literal corrected flow,
 so the genuine circle tower also supplies its state-and-angle tower.
 The radius selector is arbitrary but fixed in this construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

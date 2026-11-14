@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowJets
-import ContinuousFlexibility.Analysis.OneHighCircleFlowInterior
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowJets
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowInterior
 
 /-!
 # The genuine equations of the angular flow jets
@@ -10,6 +12,8 @@ angular jet equation. Compact time reparametrization also proves the
 continuity of its source at the endpoints, so the fundamental theorem of
 calculus applies on the entire original interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

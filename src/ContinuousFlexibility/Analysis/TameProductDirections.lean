@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.TameJetLocalBounds
-import ContinuousFlexibility.Analysis.ProjectiveCurveIteratedChain
+module
+
+public import ContinuousFlexibility.Analysis.TameJetLocalBounds
+public import ContinuousFlexibility.Analysis.ProjectiveCurveIteratedChain
 
 /-!
 # Products of genuine smooth tame maps
@@ -8,6 +10,8 @@ The jets and their directional limits are paired in the actual product
 topology. The common local jet bound then gives the exact homogeneous
 estimate for the sum grading on the product.
 -/
+
+@[expose] public section
 
 noncomputable section
 

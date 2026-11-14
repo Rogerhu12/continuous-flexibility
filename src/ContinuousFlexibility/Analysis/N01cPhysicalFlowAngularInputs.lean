@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cGraphInputInterpolation
-import ContinuousFlexibility.Analysis.N01cPhysicalGraphNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N01cGraphInputInterpolation
+public import ContinuousFlexibility.Analysis.N01cPhysicalGraphNormalization
 
 /-!
 # Fixed interpolation and finite angular flow inputs
@@ -8,6 +10,8 @@ The low base is chosen before all parameter and spatial orders.
 Zero-parameter angular factors use one fixed offset. Positive parameter
 factors keep their prefix loss in the spatial exponent.
 -/
+
+@[expose] public section
 
 noncomputable section
 

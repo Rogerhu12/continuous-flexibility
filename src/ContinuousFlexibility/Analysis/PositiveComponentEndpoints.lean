@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveNormalizationBuffer
-import ContinuousFlexibility.Statements.Radial
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveNormalizationBuffer
+public import ContinuousFlexibility.Statements.Radial
 
 /-!
 # The two kinds of positive-component endpoints
@@ -9,6 +11,8 @@ true zero of the radial coefficient in the ambient open interval. For
 the actual profile, every interior endpoint is therefore a simple root.
 No adjacent negative component is silently imposed at an ambient end.
 -/
+
+@[expose] public section
 
 noncomputable section
 

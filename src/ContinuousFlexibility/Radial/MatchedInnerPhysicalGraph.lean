@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.MatchedInnerFiniteEquation
-import ContinuousFlexibility.Radial.MatchedInnerH1Traces
-import ContinuousFlexibility.Radial.InnerRadialPhysicalSchur
-import ContinuousFlexibility.Radial.MatchingGraphRepresentatives
+module
+
+public import ContinuousFlexibility.Radial.MatchedInnerFiniteEquation
+public import ContinuousFlexibility.Radial.MatchedInnerH1Traces
+public import ContinuousFlexibility.Radial.InnerRadialPhysicalSchur
+public import ContinuousFlexibility.Radial.MatchingGraphRepresentatives
 
 /-!
 # The actual finite Hilbert graph satisfies the frozen inner graph
@@ -11,6 +13,8 @@ source or operator. Its finite weak equation gives the true modal equation;
 regularity supplies a C¹ representative, and the actual H¹ traces prove
 both Dirichlet endpoint values. The single scalar is retained at j = 2.
 -/
+
+@[expose] public section
 
 noncomputable section
 

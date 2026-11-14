@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.SelectedRetainedPair
-import ContinuousFlexibility.Radial.SeedFixedBorderGeometry
+module
+
+public import ContinuousFlexibility.Radial.SelectedRetainedPair
+public import ContinuousFlexibility.Radial.SeedFixedBorderGeometry
 
 /-!
 # The retained first cones and fixed border on one common reference
@@ -8,6 +10,8 @@ The selected sequence, desired first-cone length, central model window and
 fixed border are all inputs. The theorem retains the actual pair used by
 the construction and identifies the final reference functions with it.
 -/
+
+@[expose] public section
 
 noncomputable section
 

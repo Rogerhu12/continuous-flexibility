@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.MaterialSampleBalancedConstraint
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Analysis.MaterialSampleBalancedConstraint
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # One fixed material order from the actual control-label constraint
@@ -9,6 +11,8 @@ reindexing used here is the bounded index displacement already present
 in N01; the cell on the right may be an independently supplied actual
 containing radial cell.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R11bDensityL2
+module
+
+public import ContinuousFlexibility.Radial.R11bDensityL2
 
 /-!
 # Quotients and bounded densities in physical L²
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Radial.R11bDensityL2
 Division by a positive density is transferred exactly to the inverse
 square-root multiplier. Bounded nonnegative densities preserve L² membership.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06NegativeFiniteCoreGreen
-import ContinuousFlexibility.Analysis.N06ActualNegativeSourceIdentity
+module
+
+public import ContinuousFlexibility.Analysis.N06NegativeFiniteCoreGreen
+public import ContinuousFlexibility.Analysis.N06ActualNegativeSourceIdentity
 
 /-!
 # The negative finite Green formula on the original atlas
@@ -8,6 +10,8 @@ Use the actual zero principal source on negative pieces. The original N05
 weak equation still identifies the complete forcing, with all three scalar
 columns. Every interval and both boundary terms remain unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

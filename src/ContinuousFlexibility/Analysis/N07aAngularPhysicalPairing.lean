@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalPatch
-import ContinuousFlexibility.Analysis.N07aPeriodicRadialPairing
-import ContinuousFlexibility.Analysis.N07aCanonicalTestOperator
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalPatch
+public import ContinuousFlexibility.Analysis.N07aPeriodicRadialPairing
+public import ContinuousFlexibility.Analysis.N07aCanonicalTestOperator
 
 /-!
 # Restricting the original physical weak equation to an inner strip
@@ -10,6 +12,8 @@ Actual local L² representatives and compact tests give integrability,
 after which the exact half-period pairing gives the original distribution
 equation on an arbitrary inner physical interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

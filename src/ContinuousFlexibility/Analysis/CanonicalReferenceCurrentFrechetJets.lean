@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CanonicalReferenceCurrentAbsoluteJets
-import ContinuousFlexibility.Analysis.CylinderMixedJets
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalReferenceCurrentAbsoluteJets
+public import ContinuousFlexibility.Analysis.CylinderMixedJets
 
 /-!
 # Actual unit-atom Frechet jets with the original fixed state loss
@@ -8,6 +10,8 @@ The current certificate already supplies smoothness on the actual unit
 strip. The mixed envelope is chosen once at order N and used for every
 Frechet order k at most N, retaining its sample, exponent and state order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

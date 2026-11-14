@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.WholeCanonicalAtlasReferencePartition
-import ContinuousFlexibility.Analysis.WholeCanonicalGlobalSymmetries
+module
+
+public import ContinuousFlexibility.Analysis.WholeCanonicalAtlasReferencePartition
+public import ContinuousFlexibility.Analysis.WholeCanonicalGlobalSymmetries
 
 /-!
 # The global relative fields on the reference pieces of the same atlas
@@ -11,6 +13,8 @@ same actual travel transition and height ratio. On a positive piece the
 reference identity and the actual inverse law identify the fields of the
 same atlas record. No agreement conclusion is supplied as a hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

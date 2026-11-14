@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterDeepLocalization
-import ContinuousFlexibility.Radial.OuterOutwardHilbert
+module
+
+public import ContinuousFlexibility.Radial.OuterDeepLocalization
+public import ContinuousFlexibility.Radial.OuterOutwardHilbert
 
 /-!
 # Actual seam windows in the outward physical coordinate
@@ -9,6 +11,8 @@ incident block length. Thus a cell of known physical label can only meet
 its own seam block and the two neighboring blocks. These are geometric
 statements about the specified cell, not existential covering labels.
 -/
+
+@[expose] public section
 
 noncomputable section
 

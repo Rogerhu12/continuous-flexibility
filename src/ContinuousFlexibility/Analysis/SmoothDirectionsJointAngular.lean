@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.AngularJetExpansion
-import ContinuousFlexibility.Analysis.ScalarPlaneJetRegularity
+module
+
+public import ContinuousFlexibility.Analysis.AngularJetExpansion
+public import ContinuousFlexibility.Analysis.ScalarPlaneJetRegularity
 
 /-!
 # Genuine joint parameter and angular directional towers
@@ -10,6 +12,8 @@ finite multilinear expansions and ordinary calculus on each parameter
 line crossed with the angular coordinate. No norm is placed on the
 original parameter space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

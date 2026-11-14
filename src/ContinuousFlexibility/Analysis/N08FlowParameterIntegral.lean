@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.ProjectiveJetEvaluation
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
-import Mathlib.Analysis.Calculus.ParametricIntervalIntegral
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+module
+
+public import ContinuousFlexibility.Analysis.ProjectiveJetEvaluation
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
+public import Mathlib.Analysis.Calculus.ParametricIntervalIntegral
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 
 /-!
 # Parameter differentiation of an actual integral trajectory
@@ -11,6 +13,8 @@ ordinary differential equation in the open interval. Its parameter
 derivative is obtained by differentiating that integral identity. No
 parameter variational differential equation is an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

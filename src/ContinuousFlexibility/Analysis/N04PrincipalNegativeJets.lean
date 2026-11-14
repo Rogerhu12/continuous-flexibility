@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
-import ContinuousFlexibility.Analysis.N04PrincipalPositiveGeometry
-import ContinuousFlexibility.Analysis.ReturnCorrectionCoefficientJetSupport
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
+public import ContinuousFlexibility.Analysis.N04PrincipalPositiveGeometry
+public import ContinuousFlexibility.Analysis.ReturnCorrectionCoefficientJetSupport
 
 /-!
 # The stationary negative principal and divided atoms
@@ -11,6 +13,8 @@ the reference therefore have zero spatial and parameter jets.  The final
 packaging lemma accepts a tower on every piece and uses it on the pieces of
 its predicate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

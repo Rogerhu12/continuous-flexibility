@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04FlowJetsProof
+module
+
+public import ContinuousFlexibility.Analysis.N04FlowJetsProof
 
 /-!
 # N04Coordinates: actual mixed-parameter flow estimates
@@ -13,6 +15,8 @@ Source: paper/flexible-surface-readable/07-fixed-geometry.tex,
 the general-state flow and geometric-jet lemmas, lines 1531–1703.
 Task: docs/tasks/N04Coordinates-FlowJets.md.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

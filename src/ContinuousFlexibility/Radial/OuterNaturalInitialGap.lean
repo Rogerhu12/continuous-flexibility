@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.TailRegularIntervalState
-import ContinuousFlexibility.Radial.TailNaturalEntrance
-import ContinuousFlexibility.Radial.OuterNaturalNorm
+module
+
+public import ContinuousFlexibility.Radial.TailRegularIntervalState
+public import ContinuousFlexibility.Radial.TailNaturalEntrance
+public import ContinuousFlexibility.Radial.OuterNaturalNorm
 
 /-!
 # The quantitative initial resistance gap
@@ -10,6 +12,8 @@ The actual Poisson coupling bounds give a lower bound for its entrance
 value in terms of the outgoing mass flux, and a uniform bound throughout
 that initial interval after normalizing at the entrance.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,11 @@
-import ContinuousFlexibility.Analysis.N08WeakControlMaterialJets
-import ContinuousFlexibility.Analysis.N08RadialFamilyHeightBounds
+module
+
+public import ContinuousFlexibility.Analysis.N08WeakControlMaterialJets
+public import ContinuousFlexibility.Analysis.N08RadialFamilyHeightBounds
 
 /-! # Actual weighted height membership and norms of weak control profiles -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.TerminalRegionalData
-import ContinuousFlexibility.Radial.MatchedInnerExternalDecomposition
-import ContinuousFlexibility.Radial.MatchedModeWeightedCells
+module
+
+public import ContinuousFlexibility.Radial.TerminalRegionalData
+public import ContinuousFlexibility.Radial.MatchedInnerExternalDecomposition
+public import ContinuousFlexibility.Radial.MatchedModeWeightedCells
 
 /-!
 # The original terminal cutoff columns in the matching data
@@ -10,6 +12,8 @@ TerminalRegionalData. The frozen uniqueness identifies their actual
 Dirichlet correction with M.innerPoisson, for both endpoints at once.
 The source estimate below uses its proved support and measured norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

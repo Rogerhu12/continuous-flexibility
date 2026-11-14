@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CircleReturnAlgebra
-import Mathlib.Analysis.Calculus.SmoothSeries
-import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
+module
+
+public import ContinuousFlexibility.Analysis.CircleReturnAlgebra
+public import Mathlib.Analysis.Calculus.SmoothSeries
+public import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
 
 /-!
 # Infinite series for the circle return inverse
@@ -15,6 +17,8 @@ Identification of those coefficients for an arbitrary physical circle
 function, and the weighted sequence-of-circles norm estimate, are separate
 steps in the construction of `ReturnEquationData`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

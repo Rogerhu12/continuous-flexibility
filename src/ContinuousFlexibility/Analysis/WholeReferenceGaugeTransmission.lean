@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeRootMatching
+module
+
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeRootMatching
 
 /-!
 # Root and cut transmission of the same reference-gauged atlas
@@ -9,6 +11,8 @@ restricted to the smaller neighborhood while retaining the original K.
 Together with the separately proved raw root matching, they give the
 three clauses of the transmission predicate for the same record.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalMeasure
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalPatch
-import ContinuousFlexibility.Analysis.N07bAtlasAEPullback
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalMeasure
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalPatch
+public import ContinuousFlexibility.Analysis.N07bAtlasAEPullback
 
 /-!
 # The actual physical source is determined by its canonical source classes
@@ -11,6 +13,8 @@ piece. The original a.e. physical cover then gives the same equality on
 every inner strip, with no integrability or regularity premise on the
 arbitrarily chosen rough representative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

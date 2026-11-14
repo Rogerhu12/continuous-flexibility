@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowConstantJets
-import ContinuousFlexibility.Analysis.OneHighCircleFourierRealAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowConstantJets
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierRealAlgebra
 
 /-!
 # Integrability after subtracting an arbitrary reference speed
@@ -9,6 +11,8 @@ Sobolev norm in the time and constant parameters proves measurability;
 the endpoint-jet bound supplies an integrable majorant. No regularity
 of the reference beyond its stated integrability is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

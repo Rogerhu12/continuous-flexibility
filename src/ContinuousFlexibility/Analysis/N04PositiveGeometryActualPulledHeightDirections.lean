@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryActualHeightDirections
-import ContinuousFlexibility.Analysis.N04PositiveGeometryGaugeDirections
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledPulledHeight
-import ContinuousFlexibility.Analysis.N04RealizationJointMixedRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryActualHeightDirections
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryGaugeDirections
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledPulledHeight
+public import ContinuousFlexibility.Analysis.N04RealizationJointMixedRegularity
 
 /-!
 # The actual pulled height from the fixed reference inverse
@@ -10,6 +12,8 @@ The relative inverse cancels the relative transport at every point.
 Only the genuine reciprocal of `Q` is composed with the fixed reference
 inverse; no joint transport tower is needed for the pulled height.
 -/
+
+@[expose] public section
 
 noncomputable section
 

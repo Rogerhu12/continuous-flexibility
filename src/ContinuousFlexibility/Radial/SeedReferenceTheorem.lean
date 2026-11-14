@@ -1,10 +1,12 @@
-import ContinuousFlexibility.Radial.SeedPreparedTail
-import ContinuousFlexibility.Radial.SeedConeTailConstruction
-import ContinuousFlexibility.Radial.SeedPureTailConstruction
-import ContinuousFlexibility.Radial.SeedPureTailCanonical
-import ContinuousFlexibility.Radial.SeedGluedPairConstruction
-import ContinuousFlexibility.Radial.SeedReturnMargins
-import ContinuousFlexibility.Radial.OpenComponentTransport
+module
+
+public import ContinuousFlexibility.Radial.SeedPreparedTail
+public import ContinuousFlexibility.Radial.SeedConeTailConstruction
+public import ContinuousFlexibility.Radial.SeedPureTailConstruction
+public import ContinuousFlexibility.Radial.SeedPureTailCanonical
+public import ContinuousFlexibility.Radial.SeedGluedPairConstruction
+public import ContinuousFlexibility.Radial.SeedReturnMargins
+public import ContinuousFlexibility.Radial.OpenComponentTransport
 
 /-!
 # The central seed joined to the selected natural tails
@@ -13,6 +15,8 @@ The actual cone-tail continuations and positive connectors produce a global
 second-mode solution. Independent tail rescaling then transports the original
 accumulating partition and every negative component exactly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

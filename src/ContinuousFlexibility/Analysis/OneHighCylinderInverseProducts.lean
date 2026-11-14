@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighConvolutionComplexFinite
-import ContinuousFlexibility.Analysis.OneHighConvolutionCharacter
-import ContinuousFlexibility.Analysis.OneHighCylinderFourierInverseL2
+module
+
+public import ContinuousFlexibility.Analysis.OneHighConvolutionComplexFinite
+public import ContinuousFlexibility.Analysis.OneHighConvolutionCharacter
+public import ContinuousFlexibility.Analysis.OneHighCylinderFourierInverseL2
 
 /-!
 # One-high-factor estimates for actual inverse products
@@ -10,6 +12,8 @@ integrals. The complex n-fold convolution is first formed as a genuine
 Bochner convolution; its inverse equals the product, and the positive
 convolution majorant gives the exact one-high-factor bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

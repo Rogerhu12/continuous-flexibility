@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01ReturnChartRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N01ReturnChartRegularity
 
 /-!
 # Joint continuity of the actual ordinary flow
@@ -7,6 +9,8 @@ The angular maps are strictly increasing by N01.  Separate continuity
 therefore gives joint continuity by bracketing the angular coordinate.
 This includes the two turning radii and uses no time derivative there.
 -/
+
+@[expose] public section
 
 noncomputable section
 

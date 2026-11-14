@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterDeepDirichletKernel
-import ContinuousFlexibility.Radial.OuterPhysicalFundamentalPair
+module
+
+public import ContinuousFlexibility.Radial.OuterDeepDirichletKernel
+public import ContinuousFlexibility.Radial.OuterPhysicalFundamentalPair
 
 /-!
 # The actual deep blocks in the whole outer Hilbert space
@@ -8,6 +10,8 @@ The deep Friedrichs inverse and the same natural Poisson vector are
 transported across the proved equality of physical measures.  Their
 norms and integral kernels are retained exactly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

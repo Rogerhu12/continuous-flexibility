@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.WholeCanonicalAtlasChartGeometry
-import ContinuousFlexibility.Analysis.WholeCanonicalAtlasDomainFields
-import ContinuousFlexibility.Analysis.WholeCanonicalAtlasNormalization
-import ContinuousFlexibility.Analysis.WholeCanonicalAtlasReferencePartition
-import ContinuousFlexibility.Analysis.N04bActualAtlasCuts
-import ContinuousFlexibility.Analysis.N01NormalizationRootSeparation
+module
+
+public import ContinuousFlexibility.Analysis.WholeCanonicalAtlasChartGeometry
+public import ContinuousFlexibility.Analysis.WholeCanonicalAtlasDomainFields
+public import ContinuousFlexibility.Analysis.WholeCanonicalAtlasNormalization
+public import ContinuousFlexibility.Analysis.WholeCanonicalAtlasReferencePartition
+public import ContinuousFlexibility.Analysis.N04bActualAtlasCuts
+public import ContinuousFlexibility.Analysis.N01NormalizationRootSeparation
 
 /-!
 # Complete geometry of the actual whole-component atlas
@@ -14,6 +16,8 @@ record, with a reference-only buffered normalization set. The complete
 geometry follows from those actual fields and both proved partitions.
 No canonical primitive estimate is a hypothesis of this assembly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

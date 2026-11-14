@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
-import ContinuousFlexibility.Analysis.CanonicalAuxiliaryAtomPreservation
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
+public import ContinuousFlexibility.Analysis.CanonicalAuxiliaryAtomPreservation
 
 /-!
 # The auxiliary-column quantifier in the principal obligation
@@ -11,6 +13,8 @@ are vacuous. This keeps the neighborhood before the auxiliary column in
 the unchanged blueprint statement. The geometry and field premises are
 instantiated with the same selected reference certificate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

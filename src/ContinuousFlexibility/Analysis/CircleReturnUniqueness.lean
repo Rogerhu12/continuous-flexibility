@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CircleReturnAlgebra
-import ContinuousFlexibility.Analysis.N01ReturnMargins
-import Mathlib.Topology.Instances.AddCircle.DenseSubgroup
+module
+
+public import ContinuousFlexibility.Analysis.CircleReturnAlgebra
+public import ContinuousFlexibility.Analysis.N01ReturnMargins
+public import Mathlib.Topology.Instances.AddCircle.DenseSubgroup
 
 /-!
 # Uniqueness for the actual circle return operator
@@ -14,6 +16,8 @@ Unlike the finite-sum uniqueness lemma, this applies to every element
 of the supplied physical circle model, without assuming a Fourier
 expansion in advance.
 -/
+
+@[expose] public section
 
 noncomputable section
 

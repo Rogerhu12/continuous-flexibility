@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01aOpticalControls
-import ContinuousFlexibility.Radial.DeepTailPhysicalCoefficients
-import Mathlib.Analysis.SpecialFunctions.Trigonometric.Bounds
+module
+
+public import ContinuousFlexibility.Analysis.N01aOpticalControls
+public import ContinuousFlexibility.Radial.DeepTailPhysicalCoefficients
+public import Mathlib.Analysis.SpecialFunctions.Trigonometric.Bounds
 
 /-!
 # Optical controls from the actual radial-reference hypotheses
@@ -10,6 +12,8 @@ radicand on each physical cell. Continuity extends those bounds to the
 endpoints of any component hosted there. The first sine margin gives a
 lower bound for the actual travel with the same host-cell weight.
 -/
+
+@[expose] public section
 
 noncomputable section
 

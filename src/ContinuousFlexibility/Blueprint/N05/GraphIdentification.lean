@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05ReferenceInterface
-import ContinuousFlexibility.Analysis.N05CanonicalPhysicalL2
-import ContinuousFlexibility.Analysis.N05PhysicalCutoffUniqueness
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceInterface
+public import ContinuousFlexibility.Analysis.N05CanonicalPhysicalL2
+public import ContinuousFlexibility.Analysis.N05PhysicalCutoffUniqueness
 
 /-!
 # N05: identification of the literal physical graph
@@ -8,6 +10,8 @@ import ContinuousFlexibility.Analysis.N05PhysicalCutoffUniqueness
 Source: readable manuscript §8, lines 234--256.
 Task: `docs/tasks/N05-GraphIdentification.md`.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

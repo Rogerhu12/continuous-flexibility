@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularRadialPairing
-import ContinuousFlexibility.Analysis.N07aWeakDivergenceEquation
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularRadialPairing
+public import ContinuousFlexibility.Analysis.N07aWeakDivergenceEquation
 
 /-!
 # Local first normal regularity from the actual rough second-order equation
@@ -9,6 +11,8 @@ ordinary Fourier waves. Every term is an actual prescribed L² class.
 The radial multiplier then produces a genuine first weak derivative of
 `χ v`, including at any interior seam of the original physical atlas.
 -/
+
+@[expose] public section
 
 noncomputable section
 

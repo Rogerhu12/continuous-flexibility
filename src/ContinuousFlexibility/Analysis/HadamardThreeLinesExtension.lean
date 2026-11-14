@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.HadamardThreeLines
-import Mathlib.Analysis.Normed.Operator.Extend
+module
+
+public import ContinuousFlexibility.Analysis.HadamardThreeLines
+public import Mathlib.Analysis.Normed.Operator.Extend
 
 /-!
 # Three-lines interpolation from a dense linear domain
@@ -10,6 +12,8 @@ bounded operator on the ambient normed space.  Interior boundedness of that
 operator is a conclusion.  Holomorphy and strip boundedness are required only for
 each vector in the dense domain, which itself needs no norm or topology.
 -/
+
+@[expose] public section
 
 noncomputable section
 

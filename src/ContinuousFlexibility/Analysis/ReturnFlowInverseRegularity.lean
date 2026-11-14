@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01FlowJointRegularity
-import ContinuousFlexibility.Analysis.ReturnCorrectionResidualPeriodicity
-import Mathlib.Analysis.Calculus.InverseFunctionTheorem.ContDiff
+module
+
+public import ContinuousFlexibility.Analysis.N01FlowJointRegularity
+public import ContinuousFlexibility.Analysis.ReturnCorrectionResidualPeriodicity
+public import Mathlib.Analysis.Calculus.InverseFunctionTheorem.ContDiff
 
 /-!
 # Joint regularity of the actual inverse flow
@@ -15,6 +17,8 @@ The final theorem specializes this construction to the N01 ordinary flow.
 The higher-regularity scalar lemma is also available for the cutoff
 interpolation once its actual smooth formula is inserted.
 -/
+
+@[expose] public section
 
 noncomputable section
 

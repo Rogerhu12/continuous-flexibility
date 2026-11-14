@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometryDataCollector
-import ContinuousFlexibility.Analysis.N04NegativeInverseCurrentData
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryDataCollector
+public import ContinuousFlexibility.Analysis.N04NegativeInverseCurrentData
 
 /-!
 # From raw inverse prefixes to the selected current-data interface
@@ -8,6 +10,8 @@ The complete coefficient, including the sampled height, remains
 outside homogeneous normalization. The fixed low order is unchanged.
 Only the finite prefix shift enters the loss at a given parameter order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

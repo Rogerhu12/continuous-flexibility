@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PositiveReferenceCylinder
-import ContinuousFlexibility.Analysis.CanonicalEndpointInverse
+module
+
+public import ContinuousFlexibility.Analysis.PositiveReferenceCylinder
+public import ContinuousFlexibility.Analysis.CanonicalEndpointInverse
 
 /-!
 # The actual canonical reference remainder through an endpoint
@@ -10,6 +12,8 @@ at the endpoint. Local density smoothness follows on the open inverse
 image of the physical collar. Matching endpoint germs and an actual
 one-sided root normal form force its finite boundary jets to vanish.
 -/
+
+@[expose] public section
 
 noncomputable section
 

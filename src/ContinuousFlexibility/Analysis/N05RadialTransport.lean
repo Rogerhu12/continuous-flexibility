@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Geometry.GraphSurfaceGeometry
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+module
+
+public import ContinuousFlexibility.Geometry.GraphSurfaceGeometry
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 
 /-!
 # Exact radial transport for actual planar functions
@@ -9,6 +11,8 @@ N_r = b N_theta says that N(t, theta + A(x) - A(t)) has derivative zero.
 The fundamental theorem of calculus gives the endpoint formula on the
 whole closed strip, requiring only continuity at its physical endpoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

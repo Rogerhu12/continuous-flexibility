@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.IntervalWeakPrimitive
-import ContinuousFlexibility.Radial.TailTestPairing
+module
+
+public import ContinuousFlexibility.Analysis.IntervalWeakPrimitive
+public import ContinuousFlexibility.Radial.TailTestPairing
 
 /-!
 # Classical representatives of the weighted tail resolvent
@@ -9,6 +11,8 @@ second weak derivative identity for its weighted flux. Local integration
 produces continuous representatives of both. A continuous source then gives
 the actual first-order differential system on the open tail.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06HalfPhysicalPairing
+module
+
+public import ContinuousFlexibility.Analysis.N06HalfPhysicalPairing
 
 /-!
 # Full physical tests from the two actual half-period pairings
@@ -10,6 +12,8 @@ on the first half and of its translated second half suffices for the
 full physical weak pairing. No periodicity of the corrected coefficients
 is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchedCentralTrueChoices
-import ContinuousFlexibility.Radial.FixedCentralModelSmallError
+module
+
+public import ContinuousFlexibility.Radial.MatchedCentralTrueChoices
+public import ContinuousFlexibility.Radial.FixedCentralModelSmallError
 
 /-!
 # The actual fixed central models with frequency-normalized remainders
@@ -9,6 +11,8 @@ is chosen before the selected family and retained geometry. The same
 chosen witnesses carry the conormal errors used by the regional factory
 and the sharper remainder used by the weighted Poisson estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

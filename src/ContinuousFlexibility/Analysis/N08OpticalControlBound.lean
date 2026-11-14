@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N08OpticalControlType
+module
+
+public import ContinuousFlexibility.Analysis.N08OpticalControlType
 
 /-!
 # The half-weight bound for the genuine optical control response
@@ -7,6 +9,8 @@ The raw control derivative bound is combined with the relative radicand
 bound, rather than with an unproved lower bound on the reference slope.
 Their product loses only half the circle weight after taking a square root.
 -/
+
+@[expose] public section
 
 noncomputable section
 

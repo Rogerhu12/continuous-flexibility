@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ReferenceCellAlgebra
-import Mathlib.Analysis.Normed.Group.Bounded
-import Mathlib.MeasureTheory.Function.LpSeminorm.TriangleInequality
+module
+
+public import ContinuousFlexibility.Radial.ReferenceCellAlgebra
+public import Mathlib.Analysis.Normed.Group.Bounded
+public import Mathlib.MeasureTheory.Function.LpSeminorm.TriangleInequality
 
 /-!
 # Interior L² control from the actual radial cells
@@ -11,6 +13,8 @@ L² domain gives genuine ordinary L² on every interior cylinder.
 Angular averages are consequently locally integrable, including for
 outputs after their smooth left height is restored.
 -/
+
+@[expose] public section
 
 noncomputable section
 

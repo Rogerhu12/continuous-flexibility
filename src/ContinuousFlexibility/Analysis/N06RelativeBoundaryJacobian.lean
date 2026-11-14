@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06RelativeCanonicalBoundaryPatch
+module
+
+public import ContinuousFlexibility.Analysis.N06RelativeCanonicalBoundaryPatch
 
 /-!
 # The actual derivative of the relative patch at each boundary
@@ -9,6 +11,8 @@ whole ordinary derivative, hence its true Jacobian. On a piece whose
 actual domain is its reference rectangle, the relative construction
 retains the original N04 nonzero Jacobian at both endpoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

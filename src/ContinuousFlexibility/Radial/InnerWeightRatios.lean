@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ScaleSlowVariation
+module
+
+public import ContinuousFlexibility.Radial.ScaleSlowVariation
 
 /-!
 # The actual cell weights of the inner inverse
@@ -9,6 +11,8 @@ independent of the base index and of the number of cells. Real powers
 with absolute exponent at most one include both weighted estimates in
 the inner inverse. The finite middle has the base weight, which is one.
 -/
+
+@[expose] public section
 
 noncomputable section
 

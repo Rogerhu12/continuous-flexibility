@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.ReferenceGraphInterior
-import ContinuousFlexibility.Radial.ReferenceSmoothSourceCalculus
-import ContinuousFlexibility.Radial.ReferenceColumnRapid
-import ContinuousFlexibility.Radial.ReferenceLeftSwitch
+module
+
+public import ContinuousFlexibility.Radial.ReferenceGraphInterior
+public import ContinuousFlexibility.Radial.ReferenceSmoothSourceCalculus
+public import ContinuousFlexibility.Radial.ReferenceColumnRapid
+public import ContinuousFlexibility.Radial.ReferenceLeftSwitch
 
 /-!
 # Smooth extensions of the reconstructed scalar coefficients
@@ -11,6 +13,8 @@ actual left switch reduces the problem to the same zero-extension
 theorem. All derivative and forcing estimates come from the original
 Jacobi equation and positive attenuation.
 -/
+
+@[expose] public section
 
 open Set Filter MeasureTheory
 open scoped ContDiff Topology

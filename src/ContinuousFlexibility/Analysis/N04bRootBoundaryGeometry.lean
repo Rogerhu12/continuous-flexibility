@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04bActualRootCoordinates
-import ContinuousFlexibility.Analysis.RootUniformCollar
-import ContinuousFlexibility.Analysis.RootSmoothHeight
-import ContinuousFlexibility.Analysis.SeeleyRootReflection
+module
+
+public import ContinuousFlexibility.Analysis.N04bActualRootCoordinates
+public import ContinuousFlexibility.Analysis.RootUniformCollar
+public import ContinuousFlexibility.Analysis.RootSmoothHeight
+public import ContinuousFlexibility.Analysis.SeeleyRootReflection
 
 /-!
 # Boundary geometry of the genuinely constructed root coordinate
@@ -13,6 +15,8 @@ angular coordinate derivative and angular-product denominator are all
 positive. The angular derivative is included explicitly for the true
 collar inverse construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

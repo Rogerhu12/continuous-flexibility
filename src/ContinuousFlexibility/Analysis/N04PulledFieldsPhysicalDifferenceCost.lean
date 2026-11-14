@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsPhysicalOneHighCurrent
-import ContinuousFlexibility.Analysis.N04PulledFieldsSampledCoefficientCost
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsPhysicalOneHighCurrent
+public import ContinuousFlexibility.Analysis.N04PulledFieldsSampledCoefficientCost
 
 /-!
 # Restoring the reference after physical-to-sample transfer
@@ -9,6 +11,8 @@ height weight. The transfer is made with that weight still present.
 Only then is the uniform reference term restored at parameter order zero.
 This yields the exact raw certificate used by moving-point composition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

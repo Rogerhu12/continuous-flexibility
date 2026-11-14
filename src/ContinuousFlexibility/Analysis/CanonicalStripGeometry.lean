@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Blueprint.CanonicalParts
-import ContinuousFlexibility.Analysis.EquivariantOpenDomainStrip
+module
+
+public import ContinuousFlexibility.Blueprint.CanonicalParts
+public import ContinuousFlexibility.Analysis.EquivariantOpenDomainStrip
 
 /-!
 # The fundamental angular strip of an actual canonical chart
@@ -8,6 +10,8 @@ The inverse runs over the fixed canonical rectangle. Its reflection,
 translation identity and true inverse fibers identify the fundamental
 angular interval, even when the actual physical boundary is curved.
 -/
+
+@[expose] public section
 
 noncomputable section
 

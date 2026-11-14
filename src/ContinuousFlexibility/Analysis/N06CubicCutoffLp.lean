@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06CanonicalCutoffLp
-import ContinuousFlexibility.Analysis.N06CubicCutoffCommutator
-import ContinuousFlexibility.Analysis.N06CylinderLp
-import ContinuousFlexibility.Analysis.N06WeakAngularMultiplier
+module
+
+public import ContinuousFlexibility.Analysis.N06CanonicalCutoffLp
+public import ContinuousFlexibility.Analysis.N06CubicCutoffCommutator
+public import ContinuousFlexibility.Analysis.N06CylinderLp
+public import ContinuousFlexibility.Analysis.N06WeakAngularMultiplier
 
 /-!
 # Strong L² convergence of the genuine cubic test operator
@@ -13,6 +15,8 @@ original canonical L² space. The true cutoff commutator tends to zero
 there, at the rate supplied by the weighted cutoff derivative bounds.
 No extension of the coefficients through an endpoint is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N01cParameterCalculus
-import ContinuousFlexibility.Analysis.N01cBoundsRestriction
-import ContinuousFlexibility.Analysis.ProjectiveLimitSubspace
-import ContinuousFlexibility.Scalar.WeightedTowerCompositionGeneric
-import ContinuousFlexibility.Scalar.WeightedTowerOperations
+module
+
+public import ContinuousFlexibility.Analysis.N01cParameterCalculus
+public import ContinuousFlexibility.Analysis.N01cBoundsRestriction
+public import ContinuousFlexibility.Analysis.ProjectiveLimitSubspace
+public import ContinuousFlexibility.Scalar.WeightedTowerCompositionGeneric
+public import ContinuousFlexibility.Scalar.WeightedTowerOperations
 
 /-!
 # Genuine scalar composition along the state-flow graph
@@ -12,6 +14,8 @@ real scale. Transport back by its continuous linear equivalence gives
 the actual scalar tower, with its unchanged ordered-partition formula.
 Pairing the state projection and the supplied flow yields the graph.
 -/
+
+@[expose] public section
 
 noncomputable section
 

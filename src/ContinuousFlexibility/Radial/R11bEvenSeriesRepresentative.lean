@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.R11bEvenPartialSums
-import ContinuousFlexibility.Radial.R11bPhysicalL2Convergence
-import ContinuousFlexibility.Radial.R11bSymmetricLimit
+module
+
+public import ContinuousFlexibility.Radial.R11bEvenPartialSums
+public import ContinuousFlexibility.Radial.R11bPhysicalL2Convergence
+public import ContinuousFlexibility.Radial.R11bSymmetricLimit
 
 /-!
 # A symmetric physical representative of an even L² mode series
@@ -9,6 +11,8 @@ Square-summable radial L² data give a physical L² limit of the original
 finite sums. The representative is pointwise even and pi-periodic at every
 radius, including outside the physical core.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

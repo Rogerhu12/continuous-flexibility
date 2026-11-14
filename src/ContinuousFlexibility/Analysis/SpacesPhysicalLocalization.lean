@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesRadialWeightOverlap
-import ContinuousFlexibility.Analysis.SpacesHeightProductBounds
+module
+
+public import ContinuousFlexibility.Analysis.SpacesRadialWeightOverlap
+public import ContinuousFlexibility.Analysis.SpacesHeightProductBounds
 
 /-!
 # Actual weighted localization of physical jets
@@ -9,6 +11,8 @@ linear localization maps on every actual cylinder jet. A finite Leibniz
 sum gives the prescribed weighted derivatives of each localized smooth
 representative, with no loss of differential order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R07FirstBandMatching
+module
+
+public import ContinuousFlexibility.Radial.R07FirstBandMatching
 
 /-!
 # Retained geometry of the actual first-band matching
@@ -11,6 +13,8 @@ tails, and the short-head-join estimate proves the angle inequality for
 the actual cut-normalized incoming solutions. The full chosen cone specification,
 its cross-cut order, and its actual profile germs are retained for R10a.
 -/
+
+@[expose] public section
 
 noncomputable section
 

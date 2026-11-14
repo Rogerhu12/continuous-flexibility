@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CoupledLogProfileCoefficientJets
-import ContinuousFlexibility.Analysis.CoupledPositiveWeightBounds
-import ContinuousFlexibility.Analysis.SolveStateSpaces
-import ContinuousFlexibility.Scalar.WeightedReferenceCoefficients
+module
+
+public import ContinuousFlexibility.Analysis.CoupledLogProfileCoefficientJets
+public import ContinuousFlexibility.Analysis.CoupledPositiveWeightBounds
+public import ContinuousFlexibility.Analysis.SolveStateSpaces
+public import ContinuousFlexibility.Scalar.WeightedReferenceCoefficients
 
 /-!
 # Positive-weight bounds for the actual logarithmic profile
@@ -11,6 +13,8 @@ with one fixed loss in the original state grading. Moving the sample weight
 to its actual cell and dividing by the reference profile retains a positive
 height power. No Banach control model or stronger decay hypothesis is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

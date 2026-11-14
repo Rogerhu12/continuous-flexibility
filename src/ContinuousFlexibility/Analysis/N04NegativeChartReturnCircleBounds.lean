@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartCircleFixedBaseCalculus
-import ContinuousFlexibility.Analysis.N01ReturnVelocityUniformBounds
-import ContinuousFlexibility.Analysis.N04EndpointCircleFixedBaseBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartCircleFixedBaseCalculus
+public import ContinuousFlexibility.Analysis.N01ReturnVelocityUniformBounds
+public import ContinuousFlexibility.Analysis.N04EndpointCircleFixedBaseBounds
 
 /-!
 # A common base for the actual return and interpolation maps
@@ -9,6 +11,8 @@ Every map below is the existing N01 circle-valued map. The endpoint-flow
 estimate, the left-chart projection, and the finite fixed-base circle
 calculus give one low order before all state orders and radius selectors.
 -/
+
+@[expose] public section
 
 noncomputable section
 

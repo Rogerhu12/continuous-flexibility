@@ -1,10 +1,12 @@
-import ContinuousFlexibility.Analysis.IntervalSobolevCutoff
-import Mathlib.MeasureTheory.Function.LpSeminorm.Indicator
-import Mathlib.MeasureTheory.Function.LpSeminorm.Monotonicity
-import Mathlib.MeasureTheory.Function.LpSeminorm.TriangleInequality
-import Mathlib.MeasureTheory.Integral.IntegrableOn
-import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
-import Mathlib.Tactic.Ring
+module
+
+public import ContinuousFlexibility.Analysis.IntervalSobolevCutoff
+public import Mathlib.MeasureTheory.Function.LpSeminorm.Indicator
+public import Mathlib.MeasureTheory.Function.LpSeminorm.Monotonicity
+public import Mathlib.MeasureTheory.Function.LpSeminorm.TriangleInequality
+public import Mathlib.MeasureTheory.Integral.IntegrableOn
+public import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
+public import Mathlib.Tactic.Ring
 
 /-!
 # Sobolev bounds for the interval cutoff
@@ -14,6 +16,8 @@ sum of the original interval derivatives of orders at most `n`. The estimate
 is proved in the actual Lebesgue `Lᵖ` seminorm and applies in particular to
 `p = 2` at every Sobolev level.
 -/
+
+@[expose] public section
 
 noncomputable section
 

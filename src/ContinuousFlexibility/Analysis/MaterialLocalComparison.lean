@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Analysis
-import Mathlib.Analysis.Calculus.MeanValue
+module
+
+public import ContinuousFlexibility.Statements.Analysis
+public import Mathlib.Analysis.Calculus.MeanValue
 
 /-!
 # Comparing weights on a material-coordinate window
@@ -8,6 +10,8 @@ The first material derivative of the logarithm becomes the ordinary
 derivative after pulling back by the actual radius. Thus the weights at
 any two points of a unit material window are uniformly comparable.
 -/
+
+@[expose] public section
 
 noncomputable section
 

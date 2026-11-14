@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartRootFootpoints
-import ContinuousFlexibility.Analysis.N04bRootHeightMatching
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootFootpoints
+public import ContinuousFlexibility.Analysis.N04bRootHeightMatching
 
 /-!
 # The literal current chart is the supplied root projection
@@ -9,6 +11,8 @@ The right travel complement is retained exactly. Equality holds on the
 whole material band and hence on a joint state/spatial neighborhood of
 each positive point of every smaller closed band.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.OneHighFrequencyEmbedding
-import Mathlib.Analysis.PSeries
-import Mathlib.Analysis.Real.Sqrt
-import Mathlib.MeasureTheory.Function.L2Space
-import Mathlib.Tactic.Linarith
+module
+
+public import ContinuousFlexibility.Analysis.OneHighFrequencyEmbedding
+public import Mathlib.Analysis.PSeries
+public import Mathlib.Analysis.Real.Sqrt
+public import Mathlib.MeasureTheory.Function.L2Space
+public import Mathlib.Tactic.Linarith
 
 /-!
 # Square-integrable inverse weights on circle frequencies
@@ -11,6 +13,8 @@ The frequency spacing is any positive real number `q`. In the physical circle
 of period `P` it is `2 * π / P`; keeping it explicit also permits its use in
 the mixed continuous/discrete Fourier measure of a cylinder.
 -/
+
+@[expose] public section
 
 noncomputable section
 

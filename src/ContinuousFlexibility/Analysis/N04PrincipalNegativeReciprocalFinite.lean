@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PrincipalNegativeScalarComposition
-import ContinuousFlexibility.Analysis.AbsoluteReciprocalJetBounds
-import ContinuousFlexibility.Analysis.CircleCompositionFaaBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalNegativeScalarComposition
+public import ContinuousFlexibility.Analysis.AbsoluteReciprocalJetBounds
+public import ContinuousFlexibility.Analysis.CircleCompositionFaaBounds
 
 /-!
 # Finite reciprocal composition estimates
@@ -9,6 +11,8 @@ Only the value of the reciprocal is charged to the outer kernel. Its
 genuine derivatives are bounded by the reciprocal formula, so no upper
 bound on the denominator enters the scalar derivative estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

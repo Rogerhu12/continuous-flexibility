@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.MatchingMatrixAlgebra
-import ContinuousFlexibility.Radial.MorseHeightAngleExclusion
-import ContinuousFlexibility.Radial.HeightJoinTransfer
-import Mathlib.Tactic.FieldSimp
-import Mathlib.Tactic.LinearCombination
+module
+
+public import ContinuousFlexibility.Radial.MatchingMatrixAlgebra
+public import ContinuousFlexibility.Radial.MorseHeightAngleExclusion
+public import ContinuousFlexibility.Radial.HeightJoinTransfer
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.LinearCombination
 
 /-!
 # Selected angles in the matching boundary coordinates
@@ -11,6 +13,8 @@ All lengths in this file are the explicit Euclidean lengths used by
 `radialAngleSine`. In particular, the norm on the product `ℝ × ℝ` is not
 substituted for a Euclidean length. A single signed frame covers both ends.
 -/
+
+@[expose] public section
 
 noncomputable section
 

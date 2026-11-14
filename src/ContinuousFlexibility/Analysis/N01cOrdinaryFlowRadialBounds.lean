@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01cOrdinaryFlowFixedBounds
-import ContinuousFlexibility.Analysis.N01cAngularPrefixTransport
-import ContinuousFlexibility.Analysis.N01cRadialPrefixConstants
-import ContinuousFlexibility.Analysis.N01cWeightAbsorption
+module
+
+public import ContinuousFlexibility.Analysis.N01cOrdinaryFlowFixedBounds
+public import ContinuousFlexibility.Analysis.N01cAngularPrefixTransport
+public import ContinuousFlexibility.Analysis.N01cRadialPrefixConstants
+public import ContinuousFlexibility.Analysis.N01cWeightAbsorption
 
 /-!
 # Positive parameter prefixes of the actual positive-radial flow
@@ -12,6 +14,8 @@ angular prefix changes only the additive high-order loss. Finite
 uniformization of the physical and parameter orders changes only the
 material constants, and one canonical tower precedes all its orders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

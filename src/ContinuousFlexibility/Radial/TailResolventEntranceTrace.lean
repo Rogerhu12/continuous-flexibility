@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.TailResolventClassical
-import Mathlib.MeasureTheory.Function.LpSeminorm.Indicator
+module
+
+public import ContinuousFlexibility.Radial.TailResolventClassical
+public import Mathlib.MeasureTheory.Function.LpSeminorm.Indicator
 
 /-!
 # The Friedrichs entrance trace
@@ -9,6 +11,8 @@ On a regular initial interval, the identity
 continuous functionals on the weighted energy space. The identity vanishes
 on every compact-interior core function, hence on the entire closed form.
 -/
+
+@[expose] public section
 
 noncomputable section
 

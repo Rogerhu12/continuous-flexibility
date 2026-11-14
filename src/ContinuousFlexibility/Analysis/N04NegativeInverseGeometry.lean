@@ -1,10 +1,12 @@
-import ContinuousFlexibility.Analysis.N04NegativeInverseContinuity
-import ContinuousFlexibility.Analysis.N04NegativeGeometryHeightTowers
-import ContinuousFlexibility.Analysis.N04NegativeGeometryPlanarParameterInverse
-import ContinuousFlexibility.Analysis.N04NegativeInverseImplicitIdentification
-import ContinuousFlexibility.Analysis.N04NegativeGeometrySpatialRegularity
-import ContinuousFlexibility.Analysis.N04RealizationLeadNegativeSplit
-import ContinuousFlexibility.Analysis.N01cPhysicalFlowGraph
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeInverseContinuity
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryHeightTowers
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryPlanarParameterInverse
+public import ContinuousFlexibility.Analysis.N04NegativeInverseImplicitIdentification
+public import ContinuousFlexibility.Analysis.N04NegativeGeometrySpatialRegularity
+public import ContinuousFlexibility.Analysis.N04RealizationLeadNegativeSplit
+public import ContinuousFlexibility.Analysis.N01cPhysicalFlowGraph
 
 /-!
 # The actual negative inverse on fixed parameter and canonical domains
@@ -14,6 +16,8 @@ The actual inverse takes its values there even when the physical half-cut
 moves with the state.  All identities concern the stored chosen functions.
 No regularity of a different representative is substituted.
 -/
+
+@[expose] public section
 
 noncomputable section
 

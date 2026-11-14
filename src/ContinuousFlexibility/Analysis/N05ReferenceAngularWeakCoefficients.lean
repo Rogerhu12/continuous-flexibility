@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05ReferenceAngularDualBasis
-import ContinuousFlexibility.Analysis.N05ReferenceAngularWeakClosure
-import ContinuousFlexibility.Radial.R11bAngularDerivativeModes
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceAngularDualBasis
+public import ContinuousFlexibility.Analysis.N05ReferenceAngularWeakClosure
+public import ContinuousFlexibility.Radial.R11bAngularDerivativeModes
 
 /-!
 # All-order Fourier identities of actual weak angular jets
@@ -10,6 +12,8 @@ dual derivative identifies the original source coefficients with the
 coefficients of the actual weak jet. Physical L² supplies the required
 radial local integrability.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.StateProfileRegularity
+module
+
+public import ContinuousFlexibility.Analysis.StateProfileRegularity
 
 /-!
 # Actual root germs from strict support certificates
@@ -9,6 +11,8 @@ controls vanish. A border supported in the positive region vanishes on a
 neighborhood of the same root, so the actual exponential profile agrees
 there with the reference profile for every state.
 -/
+
+@[expose] public section
 
 noncomputable section
 

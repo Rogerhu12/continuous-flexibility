@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedCompactRadial
-import ContinuousFlexibility.Scalar.WeightedDecodeLift
+module
+
+public import ContinuousFlexibility.Scalar.WeightedCompactRadial
+public import ContinuousFlexibility.Scalar.WeightedDecodeLift
 
 /-!
 # The actual cutoff derivative in the weighted height space
@@ -8,6 +10,8 @@ The prescribed cutoff has derivative supported in a compact subset of the
 physical core. This supplies a fixed vector in every weight, using the
 original Sobolev decoder and its exact range theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

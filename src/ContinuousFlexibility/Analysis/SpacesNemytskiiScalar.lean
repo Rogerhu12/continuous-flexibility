@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SpacesReciprocal
-import Mathlib.Analysis.Calculus.Deriv.Support
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+module
+
+public import ContinuousFlexibility.Analysis.SpacesReciprocal
+public import Mathlib.Analysis.Calculus.Deriv.Support
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
 
 /-!
 # A bounded scalar representative for smooth composition
@@ -9,6 +11,8 @@ A fixed scalar cutoff preserves the original function near zero while
 making every derivative globally bounded. The one order-two neighborhood
 that bounds physical heights therefore works for all derivative orders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

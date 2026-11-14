@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationCubicOneHighBounds
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationCubicOneHighBounds
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # Value estimates for the actual cubic quotient
@@ -8,6 +10,8 @@ The open-strip numerator bound extends to the two endpoints through its
 smooth representative. Two cubic factors cost six radial orders and do
 not change the fixed external weight or the parameter seminorm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

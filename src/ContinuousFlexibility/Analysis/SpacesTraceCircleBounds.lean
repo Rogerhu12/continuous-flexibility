@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CircleJetEncoding
-import ContinuousFlexibility.Analysis.SpacesTraceGeometry
-import Mathlib.Analysis.MeanInequalities
+module
+
+public import ContinuousFlexibility.Analysis.CircleJetEncoding
+public import ContinuousFlexibility.Analysis.SpacesTraceGeometry
+public import Mathlib.Analysis.MeanInequalities
 
 /-!
 # Pointwise control of the rows of circle jets
@@ -9,6 +11,8 @@ The actual weak first derivative evaluation controls a weighted angular jet by
 two coordinates in its Hilbert row. Cauchy--Schwarz then supplies a summable
 majorant for the localized extension packets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

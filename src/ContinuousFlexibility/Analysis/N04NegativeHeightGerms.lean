@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04NegativeHeightBasicData
-import ContinuousFlexibility.Analysis.N04NegativeHeightProductData
-import ContinuousFlexibility.Analysis.N04NegativeHeightNeighborhood
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeHeightBasicData
+public import ContinuousFlexibility.Analysis.N04NegativeHeightProductData
+public import ContinuousFlexibility.Analysis.N04NegativeHeightNeighborhood
 
 /-!
 # Finite scalar constructions on one common state neighborhood
@@ -11,6 +13,8 @@ shrinks that neighborhood finitely, independently of all derivative
 orders. The final finite family can therefore be collected before any
 auxiliary column is selected.
 -/
+
+@[expose] public section
 
 noncomputable section
 

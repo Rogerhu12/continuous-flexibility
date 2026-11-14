@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowSobolevBounds
-import Mathlib.Analysis.Normed.Group.Bounded
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowSobolevBounds
+public import Mathlib.Analysis.Normed.Group.Bounded
 
 /-!
 # Uniform numerical constants for bounded circle-flow geometry
@@ -8,6 +10,8 @@ The explicit constants depend continuously on their scalar geometry
 parameter. Their values on a fixed compact interval therefore have one
 positive upper bound, independently of the state or component.
 -/
+
+@[expose] public section
 
 noncomputable section
 

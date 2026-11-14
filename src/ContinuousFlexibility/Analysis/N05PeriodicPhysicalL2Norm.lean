@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05CanonicalPhysicalL2
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalPhysicalL2
 
 /-!
 # Integrals on two actual angular periods
@@ -8,6 +10,8 @@ upper rectangle. Every integrable pi-periodic field therefore has exactly
 twice its half-period integral on the full reference period. In particular,
 this identifies the square integral of an actual L² field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

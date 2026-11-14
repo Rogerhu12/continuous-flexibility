@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Radial.WeakDivergenceRegularity
-import ContinuousFlexibility.Statements.Radial
-import Mathlib.Algebra.Order.ToIntervalMod
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
-import Mathlib.MeasureTheory.Measure.OpenPos
-import Mathlib.Tactic.Positivity
+module
+
+public import ContinuousFlexibility.Radial.WeakDivergenceRegularity
+public import ContinuousFlexibility.Statements.Radial
+public import Mathlib.Algebra.Order.ToIntervalMod
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+public import Mathlib.MeasureTheory.Measure.OpenPos
+public import Mathlib.Tactic.Positivity
 
 /-!
 # Closed scalar traces of one weak-divergence solution
@@ -12,6 +14,8 @@ The side values and side derivative values are continuous up to their own
 closed interval. Equality with one C¹ scalar representative identifies both
 endpoint traces without a smooth extension through the cut.
 -/
+
+@[expose] public section
 
 noncomputable section
 

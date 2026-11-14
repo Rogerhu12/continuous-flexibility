@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06WeakFiniteParseval
+module
+
+public import ContinuousFlexibility.Analysis.N06WeakFiniteParseval
 
 /-!
 # The finite Fourier cylinder graph estimate for weak radial solutions
@@ -8,6 +10,8 @@ same H2 representatives furnished by the weak graph theorem determine five
 weighted fields by actual finite synthesis. All angular orders use the
 explicit Fourier weight, with no smooth radial-source assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

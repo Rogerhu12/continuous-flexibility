@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.NeighborhoodCharacteristicSpeed
-import ContinuousFlexibility.Analysis.NeighborhoodStateBounds
-import Mathlib.Topology.Order.ProjIcc
+module
+
+public import ContinuousFlexibility.Analysis.NeighborhoodCharacteristicSpeed
+public import ContinuousFlexibility.Analysis.NeighborhoodStateBounds
+public import Mathlib.Topology.Order.ProjIcc
 
 /-!
 # Extending the actual characteristic speed for the ordinary flow
@@ -10,6 +12,8 @@ a globally continuous speed and angular derivative. The speed agrees with
 the original coefficients throughout that interval. Smoothness and angular
 periodicity of the actual state height follow from the physical spaces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

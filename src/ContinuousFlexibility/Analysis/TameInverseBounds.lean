@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.TameInverseJets
-import ContinuousFlexibility.Analysis.TameLocalLinear
+module
+
+public import ContinuousFlexibility.Analysis.TameInverseJets
+public import ContinuousFlexibility.Analysis.TameLocalLinear
 
 /-!
 # Local tame bounds for the inverse expressions
@@ -8,6 +10,8 @@ Finite formulas are estimated as ordinary locally tame maps on the product
 of the state and the old increments.  Multilinear normalization is applied
 only after the complete directional tower has been constructed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

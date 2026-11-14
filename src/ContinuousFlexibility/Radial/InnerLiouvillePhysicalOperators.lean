@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerLiouvilleL2Transport
-import ContinuousFlexibility.Radial.InnerWeightL2
-import Mathlib.Analysis.Normed.Operator.Prod
+module
+
+public import ContinuousFlexibility.Radial.InnerLiouvilleL2Transport
+public import ContinuousFlexibility.Radial.InnerWeightL2
+public import Mathlib.Analysis.Normed.Operator.Prod
 
 /-!
 # Actual physical operators from a retained model inverse
@@ -12,6 +14,8 @@ A G A* used by the central bordered inverse; noncentral zero scalars
 remain zero. The field norm loses only the retained logarithmic
 velocity, and the height scale cancels.
 -/
+
+@[expose] public section
 
 noncomputable section
 

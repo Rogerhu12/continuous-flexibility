@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06ReferenceCanonicalEquation
-import ContinuousFlexibility.Analysis.N06RadialCanonicalOperator
-import ContinuousFlexibility.Analysis.N06WeakCylinderGraph
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceCanonicalEquation
+public import ContinuousFlexibility.Analysis.N06RadialCanonicalOperator
+public import ContinuousFlexibility.Analysis.N06WeakCylinderGraph
 
 /-!
 # The genuine N05 reference equation on the unit cylinder
@@ -10,6 +12,8 @@ formal test operator. Combining that identity with the original N05 graph
 gives precisely the weak equation used by the graph estimates, retaining
 the same height and the source with its three actual scalar columns.
 -/
+
+@[expose] public section
 
 noncomputable section
 

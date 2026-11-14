@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06RadialPrimitiveBounds
-import ContinuousFlexibility.Analysis.OneHighCircleFlowLocalization
+module
+
+public import ContinuousFlexibility.Analysis.N06RadialPrimitiveBounds
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowLocalization
 
 /-!
 # A genuine global inverse extension for the radial reference formulas
@@ -10,6 +12,8 @@ extension whose entire range lies in that annulus, while preserving the
 original inverse on a neighborhood of every point of the closed interval.
 Consequently all jets used by the material estimates are unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

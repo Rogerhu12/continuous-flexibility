@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.CanonicalAuxiliaryNormalization
-import ContinuousFlexibility.Analysis.PhysicalTransmissionTrace
-import ContinuousFlexibility.Analysis.SolveReturnEquations
-import ContinuousFlexibility.Analysis.StateNeighborhood
-import ContinuousFlexibility.Analysis.N08Neighborhoods
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalAuxiliaryNormalization
+public import ContinuousFlexibility.Analysis.PhysicalTransmissionTrace
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
+public import ContinuousFlexibility.Analysis.StateNeighborhood
+public import ContinuousFlexibility.Analysis.N08Neighborhoods
 
 /-!
 # The actual auxiliary atom has a zero difference tower
@@ -12,6 +14,8 @@ proved support condition freezes its canonical source on the open strip.
 Open-set locality gives every actual mixed difference jet, and the zero
 continuous multilinear maps form a genuine state derivative tower.
 -/
+
+@[expose] public section
 
 noncomputable section
 

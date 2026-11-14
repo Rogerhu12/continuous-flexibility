@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderPureSobolev
-import ContinuousFlexibility.Analysis.OneHighCylinderRealSobolev
-import ContinuousFlexibility.Analysis.OneHighCylinderPureJets
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderPureSobolev
+public import ContinuousFlexibility.Analysis.OneHighCylinderRealSobolev
+public import ContinuousFlexibility.Analysis.OneHighCylinderPureJets
 
 /-!
 # Physical Sobolev control by the actual pure derivatives of a real function
@@ -9,6 +11,8 @@ The weighted Fourier membership is obtained as a conclusion. The hypotheses
 ask only for finite energy of the genuine radial and angular derivatives
 through the required finite order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

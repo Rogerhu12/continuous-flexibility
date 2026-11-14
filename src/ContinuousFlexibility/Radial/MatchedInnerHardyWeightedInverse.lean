@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchedInnerLocalizedWeights
-import ContinuousFlexibility.Radial.InnerHardyWeightedPoisson
+module
+
+public import ContinuousFlexibility.Radial.MatchedInnerLocalizedWeights
+public import ContinuousFlexibility.Radial.InnerHardyWeightedPoisson
 
 /-!
 # Actual localized weighted inversion from the Hardy gap estimate
@@ -9,6 +11,8 @@ are used for both reciprocal signs. The gap contribution is controlled by
 its actual endpoint energy, so no uniform lower bound on all gap slopes
 is needed. Every estimate is derived from the original physical pieces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

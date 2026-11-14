@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07bCanonicalSourceLift
-import ContinuousFlexibility.Analysis.SpacesTraceRestriction
+module
+
+public import ContinuousFlexibility.Analysis.N07bCanonicalSourceLift
+public import ContinuousFlexibility.Analysis.SpacesTraceRestriction
 
 /-!
 # Positive-height canonical levels have genuine L² unknown sequences
@@ -10,6 +12,8 @@ actual material absorption axiom, and makes the forgotten zeroth jet an
 element of the canonical unknown Hilbert sequence. It is not a new
 assumption on the volume model.
 -/
+
+@[expose] public section
 
 noncomputable section
 

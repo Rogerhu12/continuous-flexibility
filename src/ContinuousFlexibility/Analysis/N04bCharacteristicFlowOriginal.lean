@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bCharacteristicFlowJets
-import ContinuousFlexibility.Analysis.N01FlowAngularVariation
+module
+
+public import ContinuousFlexibility.Analysis.N04bCharacteristicFlowJets
+public import ContinuousFlexibility.Analysis.N01FlowAngularVariation
 
 /-!
 # Actual angular jets of the original characteristic speed
@@ -9,6 +11,8 @@ continuous radial multiplier. This proves angular smoothness and joint
 continuity of every angular jet on the entire physical annulus, including
 the turning radii. No radial smoothness of the square root is asserted.
 -/
+
+@[expose] public section
 
 noncomputable section
 

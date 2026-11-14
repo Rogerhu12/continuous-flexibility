@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PointwiseProductMaterialJets
-import ContinuousFlexibility.Analysis.FlowJetLinearization
+module
+
+public import ContinuousFlexibility.Analysis.PointwiseProductMaterialJets
+public import ContinuousFlexibility.Analysis.FlowJetLinearization
 
 /-!
 # Linear operations on actual pointwise material jets
@@ -8,6 +10,8 @@ These interfaces separate the numerical state grading from ordinary
 finite-dimensional derivatives. In particular, taking an actual fixed
 directional partial costs exactly one input order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

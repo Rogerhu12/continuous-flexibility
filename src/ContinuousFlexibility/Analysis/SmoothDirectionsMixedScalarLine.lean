@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SmoothDirectionsScalarLine
+module
+
+public import ContinuousFlexibility.Analysis.SmoothDirectionsScalarLine
 
 /-!
 # Actual first and mixed scalar derivatives of a directional tower
@@ -8,6 +10,8 @@ into an ordinary derivative of the actual scalar function.  Differentiating
 a first directional derivative along a second direction identifies the
 ordered second jet directly, without exchanging partial derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

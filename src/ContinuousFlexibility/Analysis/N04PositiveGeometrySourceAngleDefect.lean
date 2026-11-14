@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryLabelDefectSampleBridge
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRootLabelPrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointValues
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundary
-import ContinuousFlexibility.Analysis.N04PositiveGeometryRightSource
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryLabelDefectSampleBridge
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRootLabelPrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointValues
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundary
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryRightSource
 
 /-!
 # The actual angular endpoint displacement
@@ -12,6 +14,8 @@ root label minus the angle. Its genuine tower and sampled word bound
 include the zeroth value. Positive radial orders use the same literal
 trace definition, with no angular subtraction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

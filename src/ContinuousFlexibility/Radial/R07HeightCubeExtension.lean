@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.HeightSelectionPrinciple
-import ContinuousFlexibility.Radial.R07HeightUpdate
+module
+
+public import ContinuousFlexibility.Radial.HeightSelectionPrinciple
+public import ContinuousFlexibility.Radial.R07HeightUpdate
 
 /-!
 # Total extensions of functions on the admissible height cube
@@ -9,6 +11,8 @@ The countable selection theorem uses total functions of the raw sequence.
 The following extension preserves all values, continuity on the cube, and
 coordinate-update invariance, while allowing any fixed value off the cube.
 -/
+
+@[expose] public section
 
 noncomputable section
 

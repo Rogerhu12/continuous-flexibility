@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.RootRadialPowerMaterialJets
-import ContinuousFlexibility.Analysis.PointwiseJacobianMaterialJets
-import ContinuousFlexibility.Analysis.RootChartExtension
+module
+
+public import ContinuousFlexibility.Analysis.RootRadialPowerMaterialJets
+public import ContinuousFlexibility.Analysis.PointwiseJacobianMaterialJets
+public import ContinuousFlexibility.Analysis.RootChartExtension
 
 /-!
 # Actual extended root chart jets
@@ -12,6 +14,8 @@ The estimate is pointwise on the unit radial strip. The positive value
 interval remains an explicit input; a separate genuine derivative
 estimate selects a uniform collar for a family.
 -/
+
+@[expose] public section
 
 noncomputable section
 

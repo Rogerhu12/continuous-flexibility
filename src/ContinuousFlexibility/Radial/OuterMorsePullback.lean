@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseRealizationBasic
-import ContinuousFlexibility.Radial.MorseChainScales
+module
+
+public import ContinuousFlexibility.Radial.MorseRealizationBasic
+public import ContinuousFlexibility.Radial.MorseChainScales
 
 /-!
 # Pulling an actual physical state back to a retained Morse cell
@@ -8,6 +10,8 @@ The value and scaled physical flux are pulled back along the actual
 radius chart.  Differentiating the realized profile identity on the
 closed interval also covers the retained cut points.
 -/
+
+@[expose] public section
 
 noncomputable section
 

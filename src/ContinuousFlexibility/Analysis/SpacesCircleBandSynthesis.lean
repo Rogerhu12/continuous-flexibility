@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SpacesCircleBandEstimates
+module
+
+public import ContinuousFlexibility.Analysis.SpacesCircleBandEstimates
 
 /-!
 # Synthesis into the actual closed circle-jet levels
@@ -7,6 +9,8 @@ Every band is sent to its genuine weighted angular derivatives in the
 prescribed inner finite `PiLp` norm and outer square-summable norm. These
 jets satisfy the weak graph equations and commute with the actual bonds.
 -/
+
+@[expose] public section
 
 noncomputable section
 

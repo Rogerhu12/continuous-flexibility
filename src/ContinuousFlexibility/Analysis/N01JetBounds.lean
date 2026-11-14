@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # Named orders of the existing N01 variation bounds
@@ -7,6 +9,8 @@ These definitions are exact aliases for the last two conjuncts of the frozen
 `N01Properties`. They make proof elimination independent of repeated expansion
 of the projective state space. No new hypothesis or conclusion is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

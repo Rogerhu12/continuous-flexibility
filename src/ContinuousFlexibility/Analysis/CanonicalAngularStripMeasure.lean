@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CanonicalSourceMeasure
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalSourceMeasure
 
 /-!
 # Angular boundary lines inside an arbitrary physical domain
@@ -7,6 +9,8 @@ Replacing the half-open angular period by the open period removes a null
 line even when the physical domain is not a radial product. No regularity
 or measurability assumption on the intersected domain is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

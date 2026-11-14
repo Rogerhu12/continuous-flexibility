@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05CanonicalSourceFiniteWeight
-import ContinuousFlexibility.Analysis.N05CanonicalPhysicalL2Local
-import ContinuousFlexibility.Geometry.EuclideanRigidity
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05CanonicalSourceFiniteWeight
+public import ContinuousFlexibility.Analysis.N05CanonicalPhysicalL2Local
+public import ContinuousFlexibility.Geometry.EuclideanRigidity
 
 /-!
 # Local L² bounds for the actual canonical source lift
@@ -12,6 +14,8 @@ localized reference weights have a uniform density bound, so the actual
 change of variables yields L² membership and a common square-integral
 estimate before any infinite source summability is known.
 -/
+
+@[expose] public section
 
 noncomputable section
 

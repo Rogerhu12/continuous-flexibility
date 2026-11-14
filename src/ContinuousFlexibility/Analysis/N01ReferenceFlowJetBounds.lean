@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01OpticalSpeedJetBounds
-import ContinuousFlexibility.Analysis.N01OpticalCollarPositivity
-import ContinuousFlexibility.Analysis.N01FlowSmallness
-import ContinuousFlexibility.Analysis.MixedDerivativeLocality
+module
+
+public import ContinuousFlexibility.Analysis.N01OpticalSpeedJetBounds
+public import ContinuousFlexibility.Analysis.N01OpticalCollarPositivity
+public import ContinuousFlexibility.Analysis.N01FlowSmallness
+public import ContinuousFlexibility.Analysis.MixedDerivativeLocality
 
 /-!
 # Positive-order mixed jets of the actual reference flow
@@ -11,6 +13,8 @@ Its first radial derivative is minus the reference optical speed by the
 original ODE. The quantitative optical-collar estimates therefore bound
 every positive-order mixed jet by a fixed component power.
 -/
+
+@[expose] public section
 
 noncomputable section
 

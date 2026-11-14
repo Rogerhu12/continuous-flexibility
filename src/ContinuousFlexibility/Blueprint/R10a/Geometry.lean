@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.SelectedTailParameters
-import ContinuousFlexibility.Radial.SeedRetainedReference
-import ContinuousFlexibility.Radial.SelectedInitialGapPositivity
+module
+
+public import ContinuousFlexibility.Radial.SelectedTailParameters
+public import ContinuousFlexibility.Radial.SeedRetainedReference
+public import ContinuousFlexibility.Radial.SelectedInitialGapPositivity
 
 /-!
 # R10a: one parameterized selected tail and its reference geometries
@@ -9,6 +11,8 @@ The selected object is chosen once after Cstar and the requested start.
 Every later central window, head length and retained-cone length is then
 realized with that same object and the prescribed fixed central column.
 -/
+
+@[expose] public section
 
 noncomputable section
 

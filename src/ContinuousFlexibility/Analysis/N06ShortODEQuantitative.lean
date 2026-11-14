@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06ShortODELocal
+module
+
+public import ContinuousFlexibility.Analysis.N06ShortODELocal
 
 /-!
 # An explicit short radius for the endpoint ODE estimate
@@ -7,6 +9,8 @@ The radius is chosen from the actual relative second-derivative bound and
 the reciprocal-mass weight.  This converts the local endpoint theorem to
 one polynomial lower bound, without an independently assumed collar.
 -/
+
+@[expose] public section
 
 noncomputable section
 

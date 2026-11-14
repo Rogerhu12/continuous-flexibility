@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aAngularIntervalRestriction
-import ContinuousFlexibility.Analysis.N07aCanonicalOpenCoefficients
-import ContinuousFlexibility.Analysis.N07aCanonicalTestOperator
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularIntervalRestriction
+public import ContinuousFlexibility.Analysis.N07aCanonicalOpenCoefficients
+public import ContinuousFlexibility.Analysis.N07aCanonicalTestOperator
 
 /-!
 # Restricting the actual coefficients and distribution equation
@@ -9,6 +11,8 @@ The smaller-strip objects are the ordinary measure restrictions of the
 same L² classes. Coefficient values are unchanged, their multipliers
 commute with restriction, and the actual divergence equation is retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

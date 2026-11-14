@@ -1,7 +1,11 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometryInverseOperatorBounds
-import ContinuousFlexibility.Analysis.TameFixedBaseCompositionBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryInverseOperatorBounds
+public import ContinuousFlexibility.Analysis.TameFixedBaseCompositionBounds
 
 /-! Fixed-base composition of an actual inverse-circle operator with genuine input towers. -/
+
+@[expose] public section
 
 noncomputable section
 

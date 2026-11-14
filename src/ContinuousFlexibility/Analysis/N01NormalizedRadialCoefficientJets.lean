@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01RadialCoefficientRootJets
+module
+
+public import ContinuousFlexibility.Analysis.N01RadialCoefficientRootJets
 
 /-!
 # The actual radial coefficient in normalized root coordinates
@@ -9,6 +11,8 @@ by δ. This exact function inherits the original N01 derivative loss;
 all powers of the fixed affine norm and δ belong to numerical constants
 chosen before the state.
 -/
+
+@[expose] public section
 
 noncomputable section
 

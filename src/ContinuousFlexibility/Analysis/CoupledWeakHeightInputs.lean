@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CoupledWeakHeightCalculus
-import ContinuousFlexibility.Scalar.WeightedSmoothTameLinear
+module
+
+public import ContinuousFlexibility.Analysis.CoupledWeakHeightCalculus
+public import ContinuousFlexibility.Scalar.WeightedSmoothTameLinear
 
 /-!
 # The actual common height jets at the weak profile weight
@@ -9,6 +11,8 @@ The angular second derivative uses the same physical height and vanishes
 on that radial constant. Weight shifting changes only the model, not the
 decoded fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 

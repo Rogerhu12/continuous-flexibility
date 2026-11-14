@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeInverseOutputAtoms
-import ContinuousFlexibility.Analysis.N04NegativeInversePhysicalBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeInverseOutputAtoms
+public import ContinuousFlexibility.Analysis.N04NegativeInversePhysicalBounds
 
 /-!
 # Recover the actual vector chart from its normalized scalar atoms
@@ -9,6 +11,8 @@ angular coordinate adds the original physical angle. The latter has
 only a first spatial derivative, so it introduces no height loss on
 positive parameter tuples and no extra power in the spatial budget.
 -/
+
+@[expose] public section
 
 noncomputable section
 

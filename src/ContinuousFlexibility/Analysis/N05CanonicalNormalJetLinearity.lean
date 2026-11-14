@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalNormalJetBounds
-import ContinuousFlexibility.Analysis.N05CanonicalFiniteBlockSums
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalNormalJetBounds
+public import ContinuousFlexibility.Analysis.N05CanonicalFiniteBlockSums
 
 /-!
 # Continuous linear restrictions of the fixed normal angular jets
@@ -8,6 +10,8 @@ The actual weak radial and angular identities exclude both default choice
 branches. Finite truncations therefore converge to these very derivatives
 of the original inverse, with one extra angular order on the source.
 -/
+
+@[expose] public section
 
 noncomputable section
 

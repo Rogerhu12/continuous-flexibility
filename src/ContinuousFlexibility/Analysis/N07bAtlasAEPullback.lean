@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07bCanonicalAEPullback
+module
+
+public import ContinuousFlexibility.Analysis.N07bCanonicalAEPullback
 
 /-!
 # Almost-everywhere identification on the whole physical annulus
@@ -10,6 +12,8 @@ therefore give one a.e. identity on the physical fundamental strip.
 This uses the actual atlas and its stated null exceptional set. Neither
 integrability nor continuity of the represented functions is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

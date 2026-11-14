@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ReverseCoordinateOperator
+module
+
+public import ContinuousFlexibility.Analysis.ReverseCoordinateOperator
 
 /-!
 # The actual smooth effective operator on a negative canonical piece
@@ -10,6 +12,8 @@ smooth physical field with the same actual divergence action on every
 locally smooth physical test on the actual current domain. Only open-piece
 inverse identities are used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

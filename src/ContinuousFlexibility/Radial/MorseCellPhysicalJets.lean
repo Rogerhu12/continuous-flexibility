@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseCellModelJets
-import ContinuousFlexibility.Radial.MorseCellJoinCollars
+module
+
+public import ContinuousFlexibility.Radial.MorseCellModelJets
+public import ContinuousFlexibility.Radial.MorseCellJoinCollars
 
 /-!
 # Physical derivatives on a Morse cell
@@ -9,6 +11,8 @@ differentiating the local identity between the velocity and its reciprocal.
 The inverse radius coordinate transports the iterates of this vector
 field to ordinary derivatives in the physical radius.
 -/
+
+@[expose] public section
 
 noncomputable section
 

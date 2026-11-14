@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.StateNeighborhood
-import ContinuousFlexibility.Analysis.SpacesInterpolationProducts
+module
+
+public import ContinuousFlexibility.Analysis.StateNeighborhood
+public import ContinuousFlexibility.Analysis.SpacesInterpolationProducts
 
 /-!
 # Interpolation on the actual nonlinear state grading
@@ -8,6 +10,8 @@ The height, scalar and two circle factors all use their existing
 projective seminorms. Interpolation is stable under their finite sum,
 so the one-high product estimate applies with one fixed state loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

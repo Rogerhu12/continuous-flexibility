@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06LeftColumnDifferenceBound
-import ContinuousFlexibility.Analysis.N06LeftColumnSymmetry
-import ContinuousFlexibility.Analysis.N06CurrentCompactSources
-import ContinuousFlexibility.Analysis.N06CanonicalWeakTransport
+module
+
+public import ContinuousFlexibility.Analysis.N06LeftColumnDifferenceBound
+public import ContinuousFlexibility.Analysis.N06LeftColumnSymmetry
+public import ContinuousFlexibility.Analysis.N06CurrentCompactSources
+public import ContinuousFlexibility.Analysis.N06CanonicalWeakTransport
 
 /-!
 # The actual left-column sources
@@ -12,6 +14,8 @@ admissible state. The last identity displays separately the physical
 coefficient difference and the current coordinate change of the fixed
 reference column. No uniform bound for that coordinate change is asserted.
 -/
+
+@[expose] public section
 
 noncomputable section
 

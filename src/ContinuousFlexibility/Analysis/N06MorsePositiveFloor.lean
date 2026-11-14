@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06MorseRootCurvature
+module
+
+public import ContinuousFlexibility.Analysis.N06MorseRootCurvature
 
 /-!
 # A distance lower bound on both actual positive Morse caps
@@ -9,6 +11,8 @@ does not deteriorate again in the long right cap. This supplies the model
 input for the physical positive-component estimate, beyond a local simple
 root argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.SelectedOutwardRegionMeasure
-import ContinuousFlexibility.Radial.SelectedReferenceTransport
+module
+
+public import ContinuousFlexibility.Radial.SelectedOutwardRegionMeasure
+public import ContinuousFlexibility.Radial.SelectedReferenceTransport
 
 /-!
 # Actual L² Jacobi tests in outward coordinates
@@ -8,6 +10,8 @@ The existing global Glaeser estimate is transported through the reflection.
 Thus the test may approach the singular endpoint; no bounded reciprocal
 of the vanishing profile is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

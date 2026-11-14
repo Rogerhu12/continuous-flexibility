@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07bHeightBound
-import ContinuousFlexibility.Analysis.N07bNormalizedSourceChain
+module
+
+public import ContinuousFlexibility.Analysis.N07bHeightBound
+public import ContinuousFlexibility.Analysis.N07bNormalizedSourceChain
 
 /-!
 # The actual canonical unknown from the primitive middle factor
@@ -14,6 +16,8 @@ No neighborhood restriction or unknown-space membership is assumed. The
 last theorem invokes the proved physical energy and atlas summation bridge
 to construct the actual prescribed canonical Hilbert sequence.
 -/
+
+@[expose] public section
 
 noncomputable section
 

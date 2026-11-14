@@ -1,4 +1,6 @@
-import Mathlib.Analysis.InnerProductSpace.LinearMap
+module
+
+public import Mathlib.Analysis.InnerProductSpace.LinearMap
 
 /-!
 # A symmetric border for a genuine simple-kernel graph
@@ -13,6 +15,8 @@ and target Hilbert spaces.  Its graph is not defined as the range of the
 inverse.  The input reduced inverse solves precisely the sources orthogonal
 to the kernel; no bordered inverse is an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

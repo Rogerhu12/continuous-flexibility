@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.ActualNegativePrincipalDensity
-import ContinuousFlexibility.Analysis.N04bReferenceActualTravel
-import ContinuousFlexibility.Analysis.N01OpticalCollarPositivity
-import ContinuousFlexibility.Analysis.N04bActualRootInterior
+module
+
+public import ContinuousFlexibility.Analysis.ActualNegativePrincipalDensity
+public import ContinuousFlexibility.Analysis.N04bReferenceActualTravel
+public import ContinuousFlexibility.Analysis.N01OpticalCollarPositivity
+public import ContinuousFlexibility.Analysis.N04bActualRootInterior
 
 /-!
 # Radial fields of the actual negative reference atlas
@@ -12,6 +14,8 @@ negative component. Its actual unit principal density, the reference
 coefficient a = w, and positivity determine the height on each circle.
 No extension outside that open component is assumed to be radial.
 -/
+
+@[expose] public section
 
 noncomputable section
 

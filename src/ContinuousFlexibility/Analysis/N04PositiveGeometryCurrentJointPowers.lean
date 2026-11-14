@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryJointNormalization
-import ContinuousFlexibility.Analysis.N04PositiveGeometryCurrentData
-import ContinuousFlexibility.Analysis.N04PrincipalTowerValue
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryJointNormalization
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryCurrentData
+public import ContinuousFlexibility.Analysis.N04PrincipalTowerValue
 
 /-!
 # Current data from positive joint powers on the actual unit strip
@@ -9,6 +11,8 @@ All spatial directions are appended before normalizing the parameter
 multilinear map. The state arity remains the requested positive order,
 and the spatial order occurs with coefficient one in the final loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.RetainedMorseActualChain
-import ContinuousFlexibility.Radial.RetainedMorseUnweightedBounds
-import ContinuousFlexibility.Radial.InnerActualUnweightedHardyInverse
+module
+
+public import ContinuousFlexibility.Radial.RetainedMorseActualChain
+public import ContinuousFlexibility.Radial.RetainedMorseUnweightedBounds
+public import ContinuousFlexibility.Radial.InnerActualUnweightedHardyInverse
 
 /-!
 # The actual unweighted inverse of the retained finite Morse chain
@@ -11,6 +13,8 @@ The constants below depend only on the fixed central and Morse model
 bounds. In particular the construction of a long first cone does not
 enter the final estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

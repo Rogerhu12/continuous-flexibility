@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MorseRadiusODE
+module
+
+public import ContinuousFlexibility.Radial.MorseRadiusODE
 
 /-!
 # A smooth positive connector with prescribed endpoint germs
@@ -8,6 +10,8 @@ constant is determined by the actual integral of the remaining weight.
 Integrating this slope gives the logarithmic height and matches both
 endpoint functions on neighborhoods.
 -/
+
+@[expose] public section
 
 noncomputable section
 

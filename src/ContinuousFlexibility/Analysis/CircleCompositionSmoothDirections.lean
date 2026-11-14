@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CircleCompositionJetNormBounds
-import ContinuousFlexibility.Analysis.CircleCompositionSecondEnvelopes
-import ContinuousFlexibility.Analysis.SmoothDirectionsGluing
+module
+
+public import ContinuousFlexibility.Analysis.CircleCompositionJetNormBounds
+public import ContinuousFlexibility.Analysis.CircleCompositionSecondEnvelopes
+public import ContinuousFlexibility.Analysis.SmoothDirectionsGluing
 
 /-!
 # Genuine smooth directional towers for joint circle composition
@@ -10,6 +12,8 @@ using actual scalar derivatives and a summable Taylor envelope. Open
 low-seminorm boxes cover the full parameter space, and uniqueness of
 directional derivatives glues their towers.
 -/
+
+@[expose] public section
 
 noncomputable section
 

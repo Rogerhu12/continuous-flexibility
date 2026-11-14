@@ -1,4 +1,6 @@
-import Mathlib.Analysis.Calculus.MeanValue
+module
+
+public import Mathlib.Analysis.Calculus.MeanValue
 
 /-!
 # Joint continuity of the actual geometric inverse
@@ -8,6 +10,8 @@ bound and the actual inverse identities turn continuity of the forward
 map into continuity of its chosen inverse. The forward map need not send
 the whole fixed physical domain into the canonical target strip.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularPrimitiveLp
-import ContinuousFlexibility.Scalar.WeightedAngularPrimitiveBounds
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularPrimitiveLp
+public import ContinuousFlexibility.Scalar.WeightedAngularPrimitiveBounds
 
 /-!
 # Angular integration on the actual open annulus
@@ -8,6 +10,8 @@ Interior smoothness suffices for the angular primitive and all its material
 jets. The material radius always lies in the open annulus, so the genuine
 global cylinder calculation applies without a boundary smoothness premise.
 -/
+
+@[expose] public section
 
 noncomputable section
 

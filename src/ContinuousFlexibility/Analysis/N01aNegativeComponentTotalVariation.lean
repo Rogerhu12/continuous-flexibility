@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01aNegativeComponentVariation
-import Mathlib.Algebra.BigOperators.Pi
-import Mathlib.MeasureTheory.Integral.Bochner.Set
-import Mathlib.Topology.Order.Lattice
+module
+
+public import ContinuousFlexibility.Analysis.N01aNegativeComponentVariation
+public import Mathlib.Algebra.BigOperators.Pi
+public import Mathlib.MeasureTheory.Integral.Bochner.Set
+public import Mathlib.Topology.Order.Lattice
 
 /-!
 # Total logarithmic variation from the finitely many negative components
@@ -12,6 +14,8 @@ of its negative part. Each negative-component contribution is bounded by the
 full logarithmic drop on that component, even when a component crosses an
 endpoint of the compact interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

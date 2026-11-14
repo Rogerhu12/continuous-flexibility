@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01FlowHeightVariation
+module
+
+public import ContinuousFlexibility.Analysis.N01FlowHeightVariation
 
 /-!
 # Parameter variation at every partial-return radius
@@ -8,6 +10,8 @@ closed radial interval. This keeps the evaluation radius inside the
 domain of the N01 quantitative towers and permits a subsequent
 continuous limit to the terminal radius.
 -/
+
+@[expose] public section
 
 noncomputable section
 

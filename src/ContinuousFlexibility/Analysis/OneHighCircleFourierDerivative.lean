@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFourierBasic
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierBasic
 
 /-!
 # Derivatives of actual circle Fourier coefficients
@@ -7,6 +9,8 @@ Integration by parts on a full period gives the physical multiplier `iω`.
 The argument includes the zero mode, where the derivative coefficient
 vanishes because the endpoint values agree.
 -/
+
+@[expose] public section
 
 noncomputable section
 

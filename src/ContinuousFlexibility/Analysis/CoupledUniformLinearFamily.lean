@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.TameInverseExpressions
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
-import ContinuousFlexibility.Analysis.TameLocalCalculus
+module
+
+public import ContinuousFlexibility.Analysis.TameInverseExpressions
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
+public import ContinuousFlexibility.Analysis.TameLocalCalculus
 
 /-!
 # Uniform estimates for an actual smooth linear family
@@ -10,6 +12,8 @@ Applying the first tame-jet estimate there gives one common parameter
 neighborhood and one fixed loss for all output orders and all sources.
 There is no bounded-source restriction in the resulting estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

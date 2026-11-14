@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerChainErrorAssembly
-import ContinuousFlexibility.Radial.InnerLocalizedInverseBound
+module
+
+public import ContinuousFlexibility.Radial.InnerChainErrorAssembly
+public import ContinuousFlexibility.Radial.InnerLocalizedInverseBound
 
 /-!
 # The same finite interface inverse in the physical Hilbert formula
@@ -9,6 +11,8 @@ Euclidean cut space. Both diagonal-weight signs use this one equivalence
 and this one inverse. The matrix Neumann factorization is transferred
 exactly to the Hilbert operators used by the physical Schur construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

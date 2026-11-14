@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cFlowStateSmooth
+module
+
+public import ContinuousFlexibility.Analysis.N01cFlowStateSmooth
 
 /-!
 # Vector-valued tower assembly from genuine finite affine germs
@@ -8,6 +10,8 @@ on every finite affine slice satisfy the directional recurrence on the
 original topological source. This is the vector-output version of the
 existing scalar finite-affine assembly argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

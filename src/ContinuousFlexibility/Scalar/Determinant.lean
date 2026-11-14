@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Scalar.Definitions
-import Mathlib.Analysis.Real.Sqrt
-import Mathlib.Tactic.FieldSimp
-import Mathlib.Tactic.Ring
+module
+
+public import ContinuousFlexibility.Scalar.Definitions
+public import Mathlib.Analysis.Real.Sqrt
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.Ring
 
 /-!
 # Algebra of the linearized height equation
@@ -14,6 +16,8 @@ The residual below is the explicit coordinate expression. Identifying it
 with geometric curvature, and identifying these coefficients with the
 derivative of the curvature residual, remain separate obligations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Radial.MatchedRetainedWeightedInverse
-import ContinuousFlexibility.Radial.MatchedFixedCentralPoisson
-import ContinuousFlexibility.Radial.MatchedInnerModelWeights
-import ContinuousFlexibility.Radial.RetainedFixedCentralInverse
-import ContinuousFlexibility.Radial.SelectedFirstInnerInverse
-import ContinuousFlexibility.Blueprint.R10a.Geometry
+module
+
+public import ContinuousFlexibility.Radial.MatchedRetainedWeightedInverse
+public import ContinuousFlexibility.Radial.MatchedFixedCentralPoisson
+public import ContinuousFlexibility.Radial.MatchedInnerModelWeights
+public import ContinuousFlexibility.Radial.RetainedFixedCentralInverse
+public import ContinuousFlexibility.Radial.SelectedFirstInnerInverse
+public import ContinuousFlexibility.Blueprint.R10a.Geometry
 
 /-!
 # Actual weighted inner data of the retained family
@@ -14,6 +16,8 @@ bounds follow from the proved finite-chain theorem. The displayed cost
 depends on the fixed model suppliers and the initial index, before the
 frequency or the length of this finite chain is chosen.
 -/
+
+@[expose] public section
 
 noncomputable section
 

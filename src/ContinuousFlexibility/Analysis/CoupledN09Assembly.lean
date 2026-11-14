@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CoupledInverseRecovery
-import ContinuousFlexibility.Analysis.SolveReturnEquations
+module
+
+public import ContinuousFlexibility.Analysis.CoupledInverseRecovery
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # Assembly of the coupled control inverse
@@ -9,6 +11,8 @@ tame property of the recovered sector map. All other clauses of N09 are
 the two Neumann identities and the already proved recovery equations for
 that same map.
 -/
+
+@[expose] public section
 
 noncomputable section
 

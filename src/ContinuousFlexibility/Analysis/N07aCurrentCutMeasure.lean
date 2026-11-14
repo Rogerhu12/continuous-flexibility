@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularPieceCover
-import ContinuousFlexibility.Analysis.N07aCurrentPhysicalGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularPieceCover
+public import ContinuousFlexibility.Analysis.N07aCurrentPhysicalGeometry
 
 /-!
 # The actual middle cut is a null curve
@@ -10,6 +12,8 @@ identified with their original component pairs using the reference
 partition and the control geometry, without identifying current halves
 with fixed rectangles.
 -/
+
+@[expose] public section
 
 noncomputable section
 

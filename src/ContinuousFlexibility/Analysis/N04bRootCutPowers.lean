@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04bCutPullback
-import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
-import Mathlib.Tactic.NormNum
-import Mathlib.Tactic.Positivity
+module
+
+public import ContinuousFlexibility.Analysis.N04bCutPullback
+public import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.Positivity
 
 /-!
 # The actual root powers at a canonical cut
@@ -11,6 +13,8 @@ canonical unknown carries the radial factor ξ^(-1/4). Their derivatives,
 and the common travel value at (3T/4)^(2/3), give the fixed transmission
 matrix without an assumed jet identity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

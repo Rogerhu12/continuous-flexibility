@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalSourceSingleJetBounds
-import ContinuousFlexibility.Radial.R11bAngularFrequencySource
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalSourceSingleJetBounds
+public import ContinuousFlexibility.Radial.R11bAngularFrequencySource
 
 /-!
 # The actual single-source energies required by first-normal estimates
@@ -9,6 +11,8 @@ Their existing same-endpoint bounds control the first-normal base energy
 and every consecutive pair of source jets, with one coefficient power
 chosen before the retained angular order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

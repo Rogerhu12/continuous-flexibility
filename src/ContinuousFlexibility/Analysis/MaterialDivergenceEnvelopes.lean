@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.MaterialMultiplierEnvelopes
+module
+
+public import ContinuousFlexibility.Analysis.MaterialMultiplierEnvelopes
 
 /-!
 # Uniform L² envelopes for the actual symmetric divergence
@@ -9,6 +11,8 @@ families acting on one height field, or on an already dominated family
 of height fields, give the common second-energy bounds needed for the
 projective source derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

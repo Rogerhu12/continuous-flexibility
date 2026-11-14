@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01ActualControlledRootFlow
-import ContinuousFlexibility.Analysis.N01RootLabels
-import ContinuousFlexibility.Analysis.RootNormalizedFlowCircleJets
-import ContinuousFlexibility.Analysis.RootScaledInverseCoordinate
+module
+
+public import ContinuousFlexibility.Analysis.N01ActualControlledRootFlow
+public import ContinuousFlexibility.Analysis.N01RootLabels
+public import ContinuousFlexibility.Analysis.RootNormalizedFlowCircleJets
+public import ContinuousFlexibility.Analysis.RootScaledInverseCoordinate
 
 /-!
 # The two actual root inverse inputs on one common neighborhood
@@ -12,6 +14,8 @@ the same controlled flow construction and the positive sqrt(δ) parameter
 scaling. The common low order and derivative loss precede every endpoint;
 the collar scale and numerical constants precede every state.
 -/
+
+@[expose] public section
 
 noncomputable section
 

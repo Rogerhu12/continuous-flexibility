@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Scalar.WeightedCoefficientAlgebra
+module
+
+public import ContinuousFlexibility.Scalar.WeightedCoefficientAlgebra
 
 /-!
 # The actual material-coordinate scale and logarithmic coefficients
@@ -9,6 +11,8 @@ material scale. Bounded positive logarithmic jets then control every
 derivative of that inverse scale. All these coefficients grow by
 arbitrarily small powers of the given material envelope.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
-import Mathlib.Analysis.SpecialFunctions.ExpDeriv
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+public import Mathlib.Analysis.SpecialFunctions.ExpDeriv
+public import Mathlib.Tactic.Ring
 
 /-!
 # The integrating factor for a forced scalar linear equation
@@ -10,6 +12,8 @@ formula. Only continuity on the closed interval and the equation on its
 interior are used for the solution. The unordered interval in the
 hypotheses treats both time orientations in one theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

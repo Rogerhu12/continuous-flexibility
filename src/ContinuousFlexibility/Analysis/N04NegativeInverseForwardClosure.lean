@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04NegativeInverseCrossing
-import ContinuousFlexibility.Analysis.N04NegativeInverseGaugePrefix
-import ContinuousFlexibility.Analysis.N04NegativeInverseVectorBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeInverseCrossing
+public import ContinuousFlexibility.Analysis.N04NegativeInverseGaugePrefix
+public import ContinuousFlexibility.Analysis.N04NegativeInverseVectorBounds
 
 /-!
 # Actual forward prefixes at the actual inverse point
@@ -10,6 +12,8 @@ normalized radial coordinate is exactly the original unit coordinate.
 The moving-half scalar estimate therefore applies there. The remaining
 costs are fixed affine normalizations and the actual Jacobian reciprocal.
 -/
+
+@[expose] public section
 
 noncomputable section
 

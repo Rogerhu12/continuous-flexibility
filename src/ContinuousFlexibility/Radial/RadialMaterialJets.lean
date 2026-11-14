@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.CentralLeftAsymptotics
-import ContinuousFlexibility.Radial.CentralRightAsymptotics
+module
+
+public import ContinuousFlexibility.Radial.CentralLeftAsymptotics
+public import ContinuousFlexibility.Radial.CentralRightAsymptotics
 
 /-!
 # Actual derivatives in logarithmic radial coordinate
@@ -9,6 +11,8 @@ The oriented material operator includes the minus sign on the left ray.
 Its iterates agree with actual derivatives of the pullback, and each
 application gains two symbol orders without changing the tail threshold.
 -/
+
+@[expose] public section
 
 noncomputable section
 

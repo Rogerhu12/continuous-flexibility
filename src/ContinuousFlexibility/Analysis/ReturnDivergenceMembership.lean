@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ReturnDivergenceBilinear
-import ContinuousFlexibility.Analysis.MaterialDivergenceNormBounds
-import ContinuousFlexibility.Scalar.Conservation
+module
+
+public import ContinuousFlexibility.Analysis.ReturnDivergenceBilinear
+public import ContinuousFlexibility.Analysis.MaterialDivergenceNormBounds
+public import ContinuousFlexibility.Scalar.Conservation
 
 /-!
 # Physical membership of the actual bilinear divergence
@@ -10,6 +12,8 @@ Its zero extension has the exact source symmetries. A fixed material
 weight power for every coefficient derivative gives every physical L²
 jet and preserves the sharp coefficient/height derivative-order budget.
 -/
+
+@[expose] public section
 
 noncomputable section
 

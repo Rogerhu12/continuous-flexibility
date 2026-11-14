@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartNormalizationBounds
-import ContinuousFlexibility.Analysis.N04NegativeChartCoordinatePullback
-import ContinuousFlexibility.Analysis.N04NegativeChartData
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartNormalizationBounds
+public import ContinuousFlexibility.Analysis.N04NegativeChartCoordinatePullback
+public import ContinuousFlexibility.Analysis.N04NegativeChartData
 
 /-!
 # From the actual physical coordinates to their normalized atoms
@@ -9,6 +11,8 @@ Physical estimates are evaluated on the original reference half. The
 fixed affine pullback costs only material powers; its state derivative
 loss is unchanged. All towers below are towers of the stored chart.
 -/
+
+@[expose] public section
 
 noncomputable section
 

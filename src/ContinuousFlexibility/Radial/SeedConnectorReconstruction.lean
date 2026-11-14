@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.SeedLogarithmicSlope
-import Mathlib.Analysis.Calculus.MeanValue
+module
+
+public import ContinuousFlexibility.Radial.SeedLogarithmicSlope
+public import Mathlib.Analysis.Calculus.MeanValue
 
 /-!
 # Reconstruction and exact cone germs of a prescribed-slope connector
@@ -11,6 +13,8 @@ result supplies equality of all germs at a splice, rather than just
 matching values. The constant-slope height formula treats both cone
 powers in the same theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

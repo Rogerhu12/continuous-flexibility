@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SeeleyPeriodicExtension
-import ContinuousFlexibility.Analysis.RootChartWithin
+module
+
+public import ContinuousFlexibility.Analysis.SeeleyPeriodicExtension
+public import ContinuousFlexibility.Analysis.RootChartWithin
 
 /-!
 # A genuine smooth extension of the root chart
@@ -11,6 +13,8 @@ power is then formed from the extended coefficient, so smoothness is
 claimed precisely where that coefficient is nonzero. On the physical
 half-plane the resulting chart is exactly the original root formula.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFourierParseval
-import Mathlib.MeasureTheory.Integral.Prod
-import Mathlib.MeasureTheory.Integral.Bochner.Set
-import Mathlib.Analysis.Fourier.LpSpace
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierParseval
+public import Mathlib.MeasureTheory.Integral.Prod
+public import Mathlib.MeasureTheory.Integral.Bochner.Set
+public import Mathlib.Analysis.Fourier.LpSpace
 
 /-!
 # Actual Fourier coefficients on the cylinder
@@ -12,6 +14,8 @@ original physical function. Thus the radial `L²` Fourier transform below is
 defined on every continuous, square-integrable cylinder function, without an
 extra radial `L¹` or compact-support assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

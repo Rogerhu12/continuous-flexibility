@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04LiouvilleCharts
-import ContinuousFlexibility.Statements.Nonlinear
-import Mathlib.MeasureTheory.Measure.Prod
-import Mathlib.MeasureTheory.Measure.Typeclasses.NullSingletonClass
-import Mathlib.Topology.OpenPartialHomeomorph.Defs
+module
+
+public import ContinuousFlexibility.Analysis.N04LiouvilleCharts
+public import ContinuousFlexibility.Statements.Nonlinear
+public import Mathlib.MeasureTheory.Measure.Prod
+public import Mathlib.MeasureTheory.Measure.Typeclasses.NullSingletonClass
+public import Mathlib.Topology.OpenPartialHomeomorph.Defs
 
 /-!
 # Closed reference charts and the planar reference partition
@@ -13,6 +15,8 @@ inverse germ at every boundary point. The radial exceptional set of the
 reference partition also gives a planar null exceptional set by taking
 its product with the angular line.
 -/
+
+@[expose] public section
 
 noncomputable section
 

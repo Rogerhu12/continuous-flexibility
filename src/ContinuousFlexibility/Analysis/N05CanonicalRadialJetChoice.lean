@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05CanonicalUniqueness
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalUniqueness
 
 /-!
 # One actual canonical radial derivative independent of source weights
@@ -7,6 +9,8 @@ Canonical tests separate L² classes. Whenever a sequence has a genuine
 square-summable first radial derivative, the choice below is that unique
 sequence. Its linearity is proved only on such actual derivative pairs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

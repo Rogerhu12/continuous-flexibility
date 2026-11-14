@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.Gauge
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
-import Mathlib.Analysis.Calculus.MeanValue
+module
+
+public import ContinuousFlexibility.Radial.Gauge
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+public import Mathlib.Analysis.Calculus.MeanValue
 
 /-!
 # The zero mode by two primitives
@@ -15,6 +17,8 @@ inside the open interval `(a, b)`, with `w` continuous and positive on
 `(a, b)`; the general weighted case is obtained later by density.  It also
 proves uniqueness of the zero channel on `(a, b)`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

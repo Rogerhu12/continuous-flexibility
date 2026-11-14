@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cOriginalCoefficientPowerBounds
-import ContinuousFlexibility.Analysis.N01cSpeedNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N01cOriginalCoefficientPowerBounds
+public import ContinuousFlexibility.Analysis.N01cSpeedNormalization
 
 /-!
 # Actual normalized speed factors before one-high normalization
@@ -10,6 +12,8 @@ orders remain distributed in the power bound. The endpoint-weighted
 optical factor is estimated separately before the complete speed jet is
 normalized once.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N06CurrentInverseTestJets
-import ContinuousFlexibility.Analysis.N06FiniteSourceGeometry
-import ContinuousFlexibility.Analysis.N06WeakAngularLeibniz
-import ContinuousFlexibility.Analysis.N06CanonicalProperties
-import ContinuousFlexibility.Analysis.N04bBoundaryInverseRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentInverseTestJets
+public import ContinuousFlexibility.Analysis.N06FiniteSourceGeometry
+public import ContinuousFlexibility.Analysis.N06WeakAngularLeibniz
+public import ContinuousFlexibility.Analysis.N06CanonicalProperties
+public import ContinuousFlexibility.Analysis.N04bBoundaryInverseRegularity
 
 /-!
 # Actual angular source jets in the current coordinates
@@ -19,6 +21,8 @@ The actual inverse on the closed canonical cylinder is used throughout.
 The constants here may depend on the current state, the piece, the source
 and the finite angular order; no uniform smallness is claimed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

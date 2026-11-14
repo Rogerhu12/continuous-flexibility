@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentData
-import ContinuousFlexibility.Analysis.N04RealizationFixedSpatialProduct
-import ContinuousFlexibility.Analysis.N04RealizationJetScalars
-import ContinuousFlexibility.Analysis.N04SourceColumnsProduct
-import ContinuousFlexibility.Analysis.MaterialSampleBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentData
+public import ContinuousFlexibility.Analysis.N04RealizationFixedSpatialProduct
+public import ContinuousFlexibility.Analysis.N04RealizationJetScalars
+public import ContinuousFlexibility.Analysis.N04SourceColumnsProduct
+public import ContinuousFlexibility.Analysis.MaterialSampleBounds
 
 /-!
 # Reference data and genuine towers for source-column operations
@@ -12,6 +14,8 @@ The conversion lemmas retain the actual spatial derivatives and the
 sample of each piece. Positive parameter derivatives retain the sampled
 height gain; only the zeroth derivative contains the reference field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SpacesNemytskiiKernels
+module
+
+public import ContinuousFlexibility.Analysis.SpacesNemytskiiKernels
 
 /-!
 # Multilinearity and coarse bounds for composition kernels
@@ -7,6 +9,8 @@ The encoded kernels are multilinear in their directions because their
 actual decoded functions are products of linear evaluations. Their tame
 bound also supplies the seminorm product bounds used for continuity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

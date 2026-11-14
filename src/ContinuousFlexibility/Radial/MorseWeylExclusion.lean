@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseMaximalDomain
-import Mathlib.Analysis.SpecialFunctions.ImproperIntegrals
+module
+
+public import ContinuousFlexibility.Radial.MorseMaximalDomain
+public import Mathlib.Analysis.SpecialFunctions.ImproperIntegrals
 
 /-!
 # Exclusion of Weyl sequences below the Morse threshold
@@ -10,6 +12,8 @@ this into pointwise convergence and a uniform bound for the approximants.
 The exponentially decaying negative part of the shifted potential then
 has vanishing form contribution.
 -/
+
+@[expose] public section
 
 noncomputable section
 

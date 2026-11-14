@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.HermiteCompleteness
-import Mathlib.Analysis.InnerProductSpace.l2Space
-import Mathlib.MeasureTheory.Function.L2Space
+module
+
+public import ContinuousFlexibility.Radial.HermiteCompleteness
+public import Mathlib.Analysis.InnerProductSpace.l2Space
+public import Mathlib.MeasureTheory.Function.L2Space
 
 /-!
 # A genuine Hermite Hilbert basis of actual `L²`
@@ -11,6 +13,8 @@ proved totality theorem supply the two hypotheses of the Hilbert-basis
 constructor. Its coefficients are then identified with actual integrals.
 No closed differential-operator domain is introduced here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.SelectedWholeGreenKernel
-import ContinuousFlexibility.Radial.SelectedOuterNaturalUniqueness
-import ContinuousFlexibility.Radial.SelectedOuterTestIntegrability
-import ContinuousFlexibility.Radial.SelectedOuterWeakDuality
+module
+
+public import ContinuousFlexibility.Radial.SelectedWholeGreenKernel
+public import ContinuousFlexibility.Radial.SelectedOuterNaturalUniqueness
+public import ContinuousFlexibility.Radial.SelectedOuterTestIntegrability
+public import ContinuousFlexibility.Radial.SelectedOuterWeakDuality
 
 /-!
 # The actual weighted weak inverse at the original outer cut
@@ -11,6 +13,8 @@ ODE continuation construct one bounded operator. Its regular response,
 symmetry and homogeneous Robin uniqueness are consequences of that
 construction, rather than inputs from the matching realization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

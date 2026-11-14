@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerWeightRatios
-import Mathlib.Analysis.SpecialFunctions.SmoothTransition
+module
+
+public import ContinuousFlexibility.Radial.InnerWeightRatios
+public import Mathlib.Analysis.SpecialFunctions.SmoothTransition
 
 /-!
 # Smooth inner weights which are constant on the buffers
@@ -9,6 +11,8 @@ weight is exactly its endpoint value on each entire exterior buffer, so
 the leading local Poisson term incurs no weight loss there. Logarithmic
 convexity bounds the rest of the cell by the two endpoint comparisons.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.WholeCanonicalAtlasData
+module
+
+public import ContinuousFlexibility.Analysis.WholeCanonicalAtlasData
 
 /-!
 # The retained cuts of the whole-component atlas
@@ -7,6 +9,8 @@ The new enumeration changes neither physical negative half nor cut
 curve. Reindex the existing cut geometry and transmission identities
 through that one enumeration, keeping the same inverse and height.
 -/
+
+@[expose] public section
 
 noncomputable section
 

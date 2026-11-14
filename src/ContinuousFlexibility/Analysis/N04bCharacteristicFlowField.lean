@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04bCharacteristicFlowOriginal
-import ContinuousFlexibility.Analysis.N04bCharacteristicFlowInterior
-import ContinuousFlexibility.Analysis.N04bActualCharacteristics
-import ContinuousFlexibility.Analysis.N04bRootGermCollar
-import ContinuousFlexibility.Analysis.CylinderMixedJets
+module
+
+public import ContinuousFlexibility.Analysis.N04bCharacteristicFlowOriginal
+public import ContinuousFlexibility.Analysis.N04bCharacteristicFlowInterior
+public import ContinuousFlexibility.Analysis.N04bActualCharacteristics
+public import ContinuousFlexibility.Analysis.N04bRootGermCollar
+public import ContinuousFlexibility.Analysis.CylinderMixedJets
 
 /-!
 # The actual corrected field supplies the stored-flow regularity hypotheses
@@ -18,6 +20,8 @@ stored N03 flow; no forward regularity is added to N03.
 This file derives the flow consequences of that raw-field property and
 does not assert its realization by an arbitrary N03 witness.
 -/
+
+@[expose] public section
 
 noncomputable section
 

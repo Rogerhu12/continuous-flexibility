@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cFlowParameterNormalization
-import ContinuousFlexibility.Analysis.N01cFlowOrderConstants
-import ContinuousFlexibility.Analysis.N01cStateInterpolation
+module
+
+public import ContinuousFlexibility.Analysis.N01cFlowParameterNormalization
+public import ContinuousFlexibility.Analysis.N01cFlowOrderConstants
+public import ContinuousFlexibility.Analysis.N01cStateInterpolation
 
 /-!
 # A common-base normalization interface for the flow induction
@@ -9,6 +11,8 @@ The property below is supplied by the already proved interpolation
 normalization. It is available on every larger base before any
 parameter order, polynomial degree, or spatial order is chosen.
 -/
+
+@[expose] public section
 
 noncomputable section
 

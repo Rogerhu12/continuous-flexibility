@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06TurningRootDensity
-import ContinuousFlexibility.Analysis.N06BoundaryRadialOrientation
+module
+
+public import ContinuousFlexibility.Analysis.N06TurningRootDensity
+public import ContinuousFlexibility.Analysis.N06BoundaryRadialOrientation
 
 /-!
 # The actual positive boundary normal row
@@ -15,6 +17,8 @@ forward chart. It is the operator-identification interface, not a boundary
 row assumption. No value of the totalized canonical coefficients or inverse
 chart at an endpoint enters the result.
 -/
+
+@[expose] public section
 
 noncomputable section
 

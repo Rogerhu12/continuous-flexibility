@@ -1,7 +1,9 @@
-import Mathlib.Analysis.Calculus.MeanValue
-import Mathlib.Analysis.Calculus.Deriv.MeanValue
-import Mathlib.Tactic.FieldSimp
-import Mathlib.Tactic.Linarith
+module
+
+public import Mathlib.Analysis.Calculus.MeanValue
+public import Mathlib.Analysis.Calculus.Deriv.MeanValue
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.Linarith
 
 /-!
 # A local derivative estimate for the buffer cutoff error
@@ -11,6 +13,8 @@ on a layer of width `1 / m`. The mean value theorem then bounds the
 first derivative by `C m` times the exponentially small height on that
 same layer. No global supremum on a long cap enters this estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

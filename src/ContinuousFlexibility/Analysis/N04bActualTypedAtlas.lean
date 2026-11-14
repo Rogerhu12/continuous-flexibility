@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bActualNegativePiece
-import ContinuousFlexibility.Analysis.N04bTypedAtlasNegative
+module
+
+public import ContinuousFlexibility.Analysis.N04bActualNegativePiece
+public import ContinuousFlexibility.Analysis.N04bTypedAtlasNegative
 
 /-!
 # The actual family of negative functions and the concrete final atlas
@@ -10,6 +12,8 @@ functions use the same constructed reference triple. The final record
 computes all physical domains, reference optical cuts, positive charts,
 and actual coordinate operator fields from these chosen functions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

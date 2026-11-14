@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ReferenceRawKernelSchur
-import ContinuousFlexibility.Radial.MatchedPhysicalChannelComparison
+module
+
+public import ContinuousFlexibility.Radial.ReferenceRawKernelSchur
+public import ContinuousFlexibility.Radial.MatchedPhysicalChannelComparison
 
 /-!
 # From actual modal channel estimates to the physical raw envelope
@@ -10,6 +12,8 @@ short bridge absorbs those two costs into the unweighted modal envelope.
 An estimate for the actual modal channels remains an explicit input;
 no such estimate is inferred from the matching formula alone.
 -/
+
+@[expose] public section
 
 noncomputable section
 

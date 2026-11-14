@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N05ReferenceZeroRemainder
-import ContinuousFlexibility.Analysis.N05ReferenceCutoffChange
-import ContinuousFlexibility.Analysis.IntervalWeakPotential
-import ContinuousFlexibility.Radial.AngularMeanL2
-import ContinuousFlexibility.Radial.R11bWeakNormalTensor
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceZeroRemainder
+public import ContinuousFlexibility.Analysis.N05ReferenceCutoffChange
+public import ContinuousFlexibility.Analysis.IntervalWeakPotential
+public import ContinuousFlexibility.Radial.AngularMeanL2
+public import ContinuousFlexibility.Radial.R11bWeakNormalTensor
 
 /-!
 # The normal jet of the prescribed physical cutoff
@@ -13,6 +15,8 @@ output cell weight. The weak normal derivative below uses the prescribed
 cutoff itself, so changing the output remainder also changes its normal jet
 by the derivative of that same cutoff.
 -/
+
+@[expose] public section
 
 noncomputable section
 

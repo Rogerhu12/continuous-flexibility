@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aAngularPieceCover
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularPieceCover
 
 /-!
 # Every actual interior interface has its two adjacent pieces
@@ -8,6 +10,8 @@ by the closed physical intervals. A point outside their open interiors
 therefore has one interval ending there and one starting there. The two
 sides use the same elementary finite-cover lemma, with reflection.
 -/
+
+@[expose] public section
 
 noncomputable section
 

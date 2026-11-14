@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ScalarJetSchwarz
-import Mathlib.GroupTheory.Perm.Sign
+module
+
+public import ContinuousFlexibility.Analysis.ScalarJetSchwarz
+public import Mathlib.GroupTheory.Perm.Sign
 
 /-!
 # Permutation symmetry of genuine scalar directional jets
@@ -10,6 +12,8 @@ this symmetry through an arbitrary tail. Adjacent transpositions then
 generate every finite permutation. All derivatives used here belong to
 the given directional tower.
 -/
+
+@[expose] public section
 
 noncomputable section
 

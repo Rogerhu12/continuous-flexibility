@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.TailMassResistanceData
+module
+
+public import ContinuousFlexibility.Radial.TailMassResistanceData
 
 /-!
 # Quantitative consequences of the two-sided deep-tail bounds
@@ -7,6 +9,8 @@ The two large mass--resistance products are both needed: one controls the
 relative length of the mass interval in resistance coordinates, and the other
 controls the same error after shifting the mass weight to the next node.
 -/
+
+@[expose] public section
 
 noncomputable section
 

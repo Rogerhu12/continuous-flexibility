@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06PrimitiveFourierTransport
-import ContinuousFlexibility.Analysis.N06CanonicalGraphFourierCore
+module
+
+public import ContinuousFlexibility.Analysis.N06PrimitiveFourierTransport
+public import ContinuousFlexibility.Analysis.N06CanonicalGraphFourierCore
 
 /-!
 # The original graph has a finite angular core in the primitive gauge
@@ -14,6 +16,8 @@ Its given inverse identifies the approximants and proves convergence in
 the original graph norm. No material-label window, new graph, or N06
 inverse is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

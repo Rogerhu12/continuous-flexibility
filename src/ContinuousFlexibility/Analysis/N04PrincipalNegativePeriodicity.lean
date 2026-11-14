@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PrincipalNegativePotential
-import ContinuousFlexibility.Analysis.N07aCanonicalOpenTests
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalNegativePotential
+public import ContinuousFlexibility.Analysis.N07aCanonicalOpenTests
 
 /-!
 # Periodicity of the negative principal fields
@@ -9,6 +11,8 @@ potential is a finite expression in pulled height, its reciprocal, and
 their spatial derivatives; all of these preserve the same angular
 period on the open unit strip.
 -/
+
+@[expose] public section
 
 noncomputable section
 

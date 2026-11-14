@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartReindex
-import ContinuousFlexibility.Analysis.ActualNegativeLengthMaterialBounds
-import ContinuousFlexibility.Analysis.N04SourceColumnsScalarLinear
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartReindex
+public import ContinuousFlexibility.Analysis.ActualNegativeLengthMaterialBounds
+public import ContinuousFlexibility.Analysis.N04SourceColumnsScalarLinear
 
 /-!
 # Forward normalization at the original negative half sample
@@ -10,6 +12,8 @@ physical width. Both widths come from the retained typed atlas. Its
 proved length bounds therefore control this coefficient at exactly the
 sample used by current chart data, also after material enlargement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

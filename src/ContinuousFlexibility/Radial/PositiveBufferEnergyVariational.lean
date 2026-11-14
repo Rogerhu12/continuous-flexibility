@@ -1,9 +1,11 @@
-import Mathlib.Analysis.InnerProductSpace.LaxMilgram
-import Mathlib.Analysis.InnerProductSpace.Projection.Submodule
-import Mathlib.Analysis.Normed.Operator.Bilinear
-import Mathlib.Tactic.Abel
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Analysis.InnerProductSpace.LaxMilgram
+public import Mathlib.Analysis.InnerProductSpace.Projection.Submodule
+public import Mathlib.Analysis.Normed.Operator.Bilinear
+public import Mathlib.Tactic.Abel
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
 
 /-!
 # Variational minimization with prescribed boundary data
@@ -16,6 +18,8 @@ symmetric form the resulting stationary field is the unique energy minimizer.
 The actual differential energy space and its trace maps are separate analytic
 inputs; no assertion identifying them with abstract data is made here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

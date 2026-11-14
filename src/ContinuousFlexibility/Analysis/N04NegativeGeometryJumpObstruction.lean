@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
+module
+
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
 
 /-!
 # A statewise rescaling obstructs a current directional tower
@@ -13,6 +15,8 @@ The axis form is the one needed when a positive transport multiplier is
 the identity at scalar parameter zero and has a different value elsewhere.
 No gauge or frozen statement is modified in this module.
 -/
+
+@[expose] public section
 
 noncomputable section
 

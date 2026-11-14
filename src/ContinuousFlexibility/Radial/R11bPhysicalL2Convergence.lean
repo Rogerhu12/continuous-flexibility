@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R11bAngularL2Bridge
-import ContinuousFlexibility.Radial.R11bLpConvergence
+module
+
+public import ContinuousFlexibility.Radial.R11bAngularL2Bridge
+public import ContinuousFlexibility.Radial.R11bLpConvergence
 
 /-!
 # Returning normalized angular L² convergence to physical measure
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Radial.R11bLpConvergence
 Both sides use the same raw representatives. The physical measure is exactly
 two pi times the normalized angular product measure.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

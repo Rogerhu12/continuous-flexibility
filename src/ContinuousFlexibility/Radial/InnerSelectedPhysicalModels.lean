@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.InnerSelectedCentralChart
-import ContinuousFlexibility.Radial.InnerSelectedPhysicalGaps
-import ContinuousFlexibility.Radial.InnerMorseScaledPhysicalChart
-import ContinuousFlexibility.Radial.InnerMorseInnerModelArray
+module
+
+public import ContinuousFlexibility.Radial.InnerSelectedCentralChart
+public import ContinuousFlexibility.Radial.InnerSelectedPhysicalGaps
+public import ContinuousFlexibility.Radial.InnerMorseScaledPhysicalChart
+public import ContinuousFlexibility.Radial.InnerMorseInnerModelArray
 
 /-!
 # The same selected models on the actual physical inner chain
@@ -12,6 +14,8 @@ transported to the final reference by its actual chart. The gaps use the
 actual radial IVP construction. No weight parameter enters the model
 array or the resulting physical operator dictionary.
 -/
+
+@[expose] public section
 
 noncomputable section
 

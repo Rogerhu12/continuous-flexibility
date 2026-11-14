@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07bContinuousRadialMembers
-import ContinuousFlexibility.Analysis.N07bReferenceCompatibility
+module
+
+public import ContinuousFlexibility.Analysis.N07bContinuousRadialMembers
+public import ContinuousFlexibility.Analysis.N07bReferenceCompatibility
 
 /-!
 # The actual reference graph from finite regularity and material decay
@@ -10,6 +12,8 @@ degeneracy gives source compatibility, and actual material decay gives the
 natural weighted source and output classes.  No graph membership, weak
 equation, or natural-space membership is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

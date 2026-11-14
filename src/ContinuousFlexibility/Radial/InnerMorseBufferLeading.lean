@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerMorsePhysicalChart
-import ContinuousFlexibility.Radial.InnerMorseWeights
+module
+
+public import ContinuousFlexibility.Radial.InnerMorsePhysicalChart
+public import ContinuousFlexibility.Radial.InnerMorseWeights
 
 /-!
 # The genuine Morse buffers and their physical leading scale
@@ -9,6 +11,8 @@ caps. The actual radius ODE therefore proves the velocity-to-mass bound
 with one fixed constant. The interpolation between the two inner walls
 has exactly the prescribed cut weight on either complete buffer.
 -/
+
+@[expose] public section
 
 noncomputable section
 

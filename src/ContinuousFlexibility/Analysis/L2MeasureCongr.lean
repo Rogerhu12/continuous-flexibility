@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SquareDensityIsometry
-import ContinuousFlexibility.Analysis.CoordinateL2Isometry
+module
+
+public import ContinuousFlexibility.Analysis.SquareDensityIsometry
+public import ContinuousFlexibility.Analysis.CoordinateL2Isometry
 
 /-!
 # Exact changes of measure in L2
@@ -8,6 +10,8 @@ Equality of measures transports representatives, norms and actual integral
 kernels. The equality is eliminated in the generic proofs before any
 physical profile data are substituted.
 -/
+
+@[expose] public section
 
 noncomputable section
 

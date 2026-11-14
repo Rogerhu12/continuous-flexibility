@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01aReferenceHeightPhysicalJets
-import ContinuousFlexibility.Analysis.N01aReferenceHeightScalarJets
-import Mathlib.Analysis.Calculus.ContDiff.Bounds
+module
+
+public import ContinuousFlexibility.Analysis.N01aReferenceHeightPhysicalJets
+public import ContinuousFlexibility.Analysis.N01aReferenceHeightScalarJets
+public import Mathlib.Analysis.Calculus.ContDiff.Bounds
 
 /-!
 # Material jets of the actual reference eigenfield
@@ -9,6 +11,8 @@ The bounded affine-coordinate jets transfer the ordinary Jacobi estimates
 to material derivatives. Differentiating the actual height weight retains
 its original power, leaving only a finite envelope moment to integrate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

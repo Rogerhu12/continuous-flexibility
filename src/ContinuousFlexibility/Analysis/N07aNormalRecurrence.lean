@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aMixedLocalCalculus
-import ContinuousFlexibility.Analysis.N07aNormalExpansionData
+module
+
+public import ContinuousFlexibility.Analysis.N07aMixedLocalCalculus
+public import ContinuousFlexibility.Analysis.N07aNormalExpansionData
 
 /-!
 # The genuine mixed normal recurrence on an open piece
@@ -10,6 +12,8 @@ original source in that equation. All identities are local to the open
 domain; smooth extension of the solution across its boundary is not an
 input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

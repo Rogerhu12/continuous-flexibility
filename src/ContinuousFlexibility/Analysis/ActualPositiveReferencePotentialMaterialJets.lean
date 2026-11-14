@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ActualPositiveReferenceInverseMaterialJets
-import ContinuousFlexibility.Analysis.RadialReferencePotentialJetEnvelope
-import Mathlib.Topology.Order.Compact
+module
+
+public import ContinuousFlexibility.Analysis.ActualPositiveReferenceInverseMaterialJets
+public import ContinuousFlexibility.Analysis.RadialReferencePotentialJetEnvelope
+public import Mathlib.Topology.Order.Compact
 
 /-!
 # Material jets of the same displayed positive reference potential
@@ -12,6 +14,8 @@ the proved inverse jets is combined with the actual forward height jets.
 The physical profile is estimated on the fixed closed annulus, and its
 evaluation point belongs there by the actual inverse range certificate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cComponentSpeedPeriodicity
-import ContinuousFlexibility.Blueprint.N01c.Statements
+module
+
+public import ContinuousFlexibility.Analysis.N01cComponentSpeedPeriodicity
+public import ContinuousFlexibility.Blueprint.N01c.Statements
 
 /-!
 # Actual angular jets under the cosine change of variable
@@ -9,6 +11,8 @@ the reference-subtracted speed acquire exactly one cosine velocity factor.
 The reference speed has no angular dependence, so the same identity gives
 every positive angular derivative needed for the flow's low geometry.
 -/
+
+@[expose] public section
 
 noncomputable section
 

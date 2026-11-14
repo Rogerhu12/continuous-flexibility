@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ReferenceOutputCosine
+module
+
+public import ContinuousFlexibility.Radial.ReferenceOutputCosine
 
 /-!
 # Summing actual modal energy estimates
@@ -8,6 +10,8 @@ sequence in the actual output measure. The scalar source enters only
 the frequency-two coordinate. Isometric cosine synthesis then gives
 the frozen output norm, including both scalar coordinates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,10 @@
-import ContinuousFlexibility.Analysis.N04NegativeInverseCurrentRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeInverseCurrentRegularity
 
 /-! Uniform selected current estimates with the reference present only at order zero. -/
+
+@[expose] public section
 
 noncomputable section
 

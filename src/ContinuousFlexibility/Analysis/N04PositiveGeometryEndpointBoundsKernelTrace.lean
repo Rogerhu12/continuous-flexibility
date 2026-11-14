@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsKernelPower
-import ContinuousFlexibility.Analysis.N04RealizationPhysicalRootJetDirections
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsKernelPower
+public import ContinuousFlexibility.Analysis.N04RealizationPhysicalRootJetDirections
 
 /-!
 # Identifying the finite kernel sum with the actual physical root trace
@@ -9,6 +11,8 @@ identity holds as a function of the angle. Additional angular
 derivatives therefore give the exact mixed spatial kernel formula.
 The chosen root-coordinate extension never appears in this step.
 -/
+
+@[expose] public section
 
 noncomputable section
 

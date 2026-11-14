@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.RootCoefficientFactorization
+module
+
+public import ContinuousFlexibility.Analysis.RootCoefficientFactorization
 
 /-!
 # Actual positive value bounds used to recover the root speed
@@ -8,6 +10,8 @@ actual radial coefficient. The divided determinant has the exact
 reference-radicand formula. These identities provide the positive value
 rectangle required by smooth composition, independently of higher jets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

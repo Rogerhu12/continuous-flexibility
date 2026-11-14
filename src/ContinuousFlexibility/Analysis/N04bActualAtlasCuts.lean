@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04bActualAtlasGerms
+module
+
+public import ContinuousFlexibility.Analysis.N04bActualAtlasGerms
 
 /-!
 # The actual cut geometry of the final atlas
@@ -8,6 +10,8 @@ moving middle curve. The same equivalence indexes the two stored sides.
 The resulting concrete atlas satisfies all of Part A and the complete
 current cut geometry, using only the cumulative field construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalAtomBounds
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalMeasure
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalAtomBounds
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalMeasure
 
 /-!
 # Raw atoms on the fixed reference physical intervals
@@ -9,6 +11,8 @@ CurrentJets samples these reference intervals even at a current state;
 the bounds here therefore have the explicit reference domain. Current
 moving-domain estimates must instead use the actual inverse-chart bounds.
 -/
+
+@[expose] public section
 
 noncomputable section
 

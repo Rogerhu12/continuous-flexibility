@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalScalarColumns
-import ContinuousFlexibility.Analysis.N07aNuSupport
-import ContinuousFlexibility.Analysis.N07aAngularPieceCover
-import ContinuousFlexibility.Analysis.N07aScalarColumnSymmetry
-import ContinuousFlexibility.Analysis.N07aActualPieceCover
-import ContinuousFlexibility.Analysis.N07aScalarSolution
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalScalarColumns
+public import ContinuousFlexibility.Analysis.N07aNuSupport
+public import ContinuousFlexibility.Analysis.N07aAngularPieceCover
+public import ContinuousFlexibility.Analysis.N07aScalarColumnSymmetry
+public import ContinuousFlexibility.Analysis.N07aActualPieceCover
+public import ContinuousFlexibility.Analysis.N07aScalarSolution
 
 /-!
 # A fixed finite set of actual pieces for the scalar columns
@@ -13,6 +15,8 @@ The ν column is supported on the fixed border support, and the auxiliary
 source has its prescribed compact radial support. The genuine physical
 piece geometry turns their union into one finite set of piece indices.
 -/
+
+@[expose] public section
 
 noncomputable section
 

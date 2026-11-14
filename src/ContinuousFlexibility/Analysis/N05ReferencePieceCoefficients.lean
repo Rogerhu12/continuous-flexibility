@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N05ReferenceInterface
-import ContinuousFlexibility.Analysis.N05ReferenceSWindow
-import ContinuousFlexibility.Radial.DeepTailPhysicalWeights
-import Mathlib.Algebra.Order.Floor.Semiring
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceInterface
+public import ContinuousFlexibility.Analysis.N05ReferenceSWindow
+public import ContinuousFlexibility.Radial.DeepTailPhysicalWeights
+public import Mathlib.Algebra.Order.Floor.Semiring
 
 /-!
 # Reference reciprocal coefficients on actual canonical pieces
@@ -11,6 +13,8 @@ reference coordinates associate each point with an actual cell satisfying
 that window, so reciprocal-jet bounds transfer to the piece index. The stronger
 bounded-index helper remains available for explicit seed constructions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

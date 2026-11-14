@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06OpenCubicTestCutoff
-import ContinuousFlexibility.Radial.R11bWeakNormalLimit
+module
+
+public import ContinuousFlexibility.Analysis.N06OpenCubicTestCutoff
+public import ContinuousFlexibility.Radial.R11bWeakNormalLimit
 
 /-!
 # Actual cubic pairings for tests smooth only on the open cylinder
@@ -9,6 +11,8 @@ test operator. The cutoff limit then extends its compact distributional
 identity to the actual test itself. Only integrable actual derivatives
 are required, and no values of a totalized inverse at an endpoint occur.
 -/
+
+@[expose] public section
 
 noncomputable section
 

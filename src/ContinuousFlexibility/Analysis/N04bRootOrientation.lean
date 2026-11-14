@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import Mathlib.Analysis.Calculus.Deriv.Slope
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import Mathlib.Analysis.Calculus.Deriv.Slope
 
 /-!
 # The actual orientations of the negative-component roots
@@ -9,6 +11,8 @@ The one-sided slope limits therefore determine the signs of its actual
 second derivatives. These signs are conclusions of N01, not additional
 hypotheses of the root characteristic construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

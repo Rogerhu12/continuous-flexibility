@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01PositiveProfileNeighborhood
-import ContinuousFlexibility.Analysis.N01RootRadialCoefficientValues
-import ContinuousFlexibility.Analysis.N01CoefficientValueJets
-import ContinuousFlexibility.Analysis.LocalMixedProductBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01PositiveProfileNeighborhood
+public import ContinuousFlexibility.Analysis.N01RootRadialCoefficientValues
+public import ContinuousFlexibility.Analysis.N01CoefficientValueJets
+public import ContinuousFlexibility.Analysis.LocalMixedProductBounds
 
 /-!
 # Actual finite inputs at every regular positive endpoint
@@ -18,6 +20,8 @@ gives a determinant lower bound independent of the state and angle.
 These are inputs for the finite degree-three conformal construction,
 not estimates for a chart, an inverse, or a canonical field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

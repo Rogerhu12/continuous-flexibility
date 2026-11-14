@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesTracePointwise
-import ContinuousFlexibility.Analysis.CircleJetEncoding
+module
+
+public import ContinuousFlexibility.Analysis.SpacesTracePointwise
+public import ContinuousFlexibility.Analysis.CircleJetEncoding
 
 /-!
 # Restriction to all sample circles
@@ -8,6 +10,8 @@ Weighted pointwise bounds and the summable inverse sample weights make
 restriction to the complete family of sample circles a map into the actual
 weighted circle class. Its grading estimate has one fixed loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

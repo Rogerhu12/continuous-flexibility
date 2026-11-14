@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionResidualError
-import ContinuousFlexibility.Scalar.Conservation
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionResidualError
+public import ContinuousFlexibility.Scalar.Conservation
 
 /-!
 # Symmetry and compatibility of the actual residual error
@@ -15,6 +17,8 @@ analytic input is the regularity of the actual error fluxes on the closed
 rectangle; it does not assume that the error already belongs to the
 source kernel.
 -/
+
+@[expose] public section
 
 noncomputable section
 

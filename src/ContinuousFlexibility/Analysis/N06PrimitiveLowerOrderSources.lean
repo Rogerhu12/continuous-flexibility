@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06PrimitiveScalarSources
-import ContinuousFlexibility.Analysis.N06PrimitiveActualJetBounds
+module
+
+public import ContinuousFlexibility.Analysis.N06PrimitiveScalarSources
+public import ContinuousFlexibility.Analysis.N06PrimitiveActualJetBounds
 
 /-!
 # Uniform lower-order source operators from the actual primitive jets
@@ -9,6 +11,8 @@ the original source level. Their constants and one state seminorm are
 chosen before the state. No common-domain or physical-equation conclusion
 is used to construct these sources.
 -/
+
+@[expose] public section
 
 noncomputable section
 

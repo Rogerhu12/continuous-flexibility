@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartRootLabelPrefix
-import ContinuousFlexibility.Analysis.N04RealizationRootBoundaryDirections
-import ContinuousFlexibility.Analysis.N01cActualFlowCircleData
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootLabelPrefix
+public import ContinuousFlexibility.Analysis.N04RealizationRootBoundaryDirections
+public import ContinuousFlexibility.Analysis.N01cActualFlowCircleData
 
 /-!
 # A genuine global finite-plot representative of each root label
@@ -10,6 +12,8 @@ neighbourhood works for every angle and every derivative order. All
 jets at the centre are the original sector jets on the affine images
 of their slots; no quantitative estimate on the extension is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

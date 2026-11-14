@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.R11bWeakModes
-import ContinuousFlexibility.Radial.R11bAngularL2Bridge
-import ContinuousFlexibility.Analysis.IntervalWeakPrimitive
+module
+
+public import ContinuousFlexibility.Radial.R11bWeakModes
+public import ContinuousFlexibility.Radial.R11bAngularL2Bridge
+public import ContinuousFlexibility.Analysis.IntervalWeakPrimitive
 
 /-!
 # The a.e. Fourier identity of an actual weak angular derivative
@@ -9,6 +11,8 @@ The derivative is paired with sine modes. It is not required to be even or to
 belong to the even source space. The fundamental lemma identifies the radial
 coefficient functions themselves, after their local integrability is supplied.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

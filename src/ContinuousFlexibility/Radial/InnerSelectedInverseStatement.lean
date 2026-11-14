@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerSelectedPhysicalInverse
-import ContinuousFlexibility.Radial.InnerMorseInnerSupportedWeights
-import ContinuousFlexibility.Radial.InnerActualReferenceBlocks
+module
+
+public import ContinuousFlexibility.Radial.InnerSelectedPhysicalInverse
+public import ContinuousFlexibility.Radial.InnerMorseInnerSupportedWeights
+public import ContinuousFlexibility.Radial.InnerActualReferenceBlocks
 
 /-!
 # The complete inner inverse assertion on one selected physical geometry
@@ -11,6 +13,8 @@ operators and weak equations are the actual ones constructed from the
 same model-gap dictionary. The two inverse identities are expressed by
 the exact graph equivalence, not by an abstract surrogate operator.
 -/
+
+@[expose] public section
 
 noncomputable section
 

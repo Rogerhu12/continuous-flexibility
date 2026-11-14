@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.EndpointTransportGeometry
-import Mathlib.Analysis.Calculus.Deriv.MeanValue
-import Mathlib.Tactic.Linarith
+module
+
+public import ContinuousFlexibility.Analysis.EndpointTransportGeometry
+public import Mathlib.Analysis.Calculus.Deriv.MeanValue
+public import Mathlib.Tactic.Linarith
 
 /-!
 # A necessary cost of freezing a positive transport on a middle interval
@@ -15,6 +17,8 @@ Only derivatives in the open interval are bounded. Continuity at the two
 ends suffices, so the estimate applies to the open `unitStrip` used by
 `CurrentJetDataOn`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

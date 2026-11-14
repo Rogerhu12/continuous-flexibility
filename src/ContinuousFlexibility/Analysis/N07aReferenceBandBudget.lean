@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aVolumeBandBudget
-import ContinuousFlexibility.Analysis.N07aReferenceSecondNormal
+module
+
+public import ContinuousFlexibility.Analysis.N07aVolumeBandBudget
+public import ContinuousFlexibility.Analysis.N07aReferenceSecondNormal
 
 /-!
 # One actual N05 volume representative for every mode budget
@@ -9,6 +11,8 @@ represents the prescribed reference inverse and controls each of its
 local angular bands.  Higher output orders will be supplied by the exact
 band weights, without choosing another reference inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

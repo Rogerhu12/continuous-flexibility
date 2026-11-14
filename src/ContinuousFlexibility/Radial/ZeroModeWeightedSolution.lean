@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ZeroModeWeightedHeight
-import ContinuousFlexibility.Radial.ReferenceZeroModeBorderCorrection
+module
+
+public import ContinuousFlexibility.Radial.ZeroModeWeightedHeight
+public import ContinuousFlexibility.Radial.ReferenceZeroModeBorderCorrection
 
 /-!
 # The actual weighted zero-mode solution
@@ -10,6 +12,8 @@ solution. The output uses the actual smooth left border, and the estimate
 includes its actual coefficient. All constants are common to the entire
 exponent interval [0,1].
 -/
+
+@[expose] public section
 
 noncomputable section
 

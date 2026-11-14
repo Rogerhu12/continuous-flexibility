@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06CanonicalDifference
+module
+
+public import ContinuousFlexibility.Analysis.N06CanonicalDifference
 
 /-!
 # The sign of the actual positive canonical perturbation
@@ -9,6 +11,8 @@ then identifies the true differential difference. In the positive
 canonical operator its sign is minus, while the potential difference
 has sign plus.
 -/
+
+@[expose] public section
 
 noncomputable section
 

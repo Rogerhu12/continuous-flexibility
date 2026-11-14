@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerActualUnweightedInverse
-import ContinuousFlexibility.Radial.InnerRadialGapChartConstruction
+module
+
+public import ContinuousFlexibility.Radial.InnerActualUnweightedInverse
+public import ContinuousFlexibility.Radial.InnerRadialGapChartConstruction
 
 /-!
 # One central model and two genuine positive gaps
@@ -9,6 +11,8 @@ The only model data are the already selected central chart.  A common
 three-quarter logarithmic slope gives a bound independent of the two
 gap lengths, hence of the subsequent retained-cone length.
 -/
+
+@[expose] public section
 
 noncomputable section
 

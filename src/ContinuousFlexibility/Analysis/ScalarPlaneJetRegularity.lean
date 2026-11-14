@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Statements.Analysis
-import Mathlib.Analysis.Calculus.FDeriv.Partial
-import Mathlib.Analysis.Calculus.ContDiff.Operations
-import Mathlib.Analysis.Normed.Operator.Mul
+module
+
+public import ContinuousFlexibility.Statements.Analysis
+public import Mathlib.Analysis.Calculus.FDeriv.Partial
+public import Mathlib.Analysis.Calculus.ContDiff.Operations
+public import Mathlib.Analysis.Normed.Operator.Mul
 
 /-!
 # Joint smoothness from an actual two-coordinate derivative hierarchy
@@ -13,6 +15,8 @@ Induction then gives all orders of joint smoothness. This applies to a
 parameter line and the angular coordinate without imposing any norm on
 the original parameter space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

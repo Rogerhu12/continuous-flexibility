@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MorseJoinActualGerms
-import ContinuousFlexibility.Scalar.Normalization
-import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
+module
+
+public import ContinuousFlexibility.Radial.MorseJoinActualGerms
+public import ContinuousFlexibility.Scalar.Normalization
+public import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
 
 /-!
 # Globally smooth scalar power perturbations
@@ -11,6 +13,8 @@ only smooth away from their singular base. The existing compact germ-extension
 theorem supplies a genuine global map, with the same germ at every point of
 the fixed interval [-1/2, 1/2].
 -/
+
+@[expose] public section
 
 noncomputable section
 

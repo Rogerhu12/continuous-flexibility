@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CoordinatePrincipalDeterminant
+module
+
+public import ContinuousFlexibility.Analysis.CoordinatePrincipalDeterminant
 
 /-!
 # A forward-only effective principal field
@@ -9,6 +11,8 @@ regularity at a closed endpoint follows directly from the forward chart
 and height there. Its determinant is an algebraic identity in those
 actual first derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

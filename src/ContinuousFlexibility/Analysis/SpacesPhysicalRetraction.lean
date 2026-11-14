@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.SpacesPhysicalShellSynthesis
-import ContinuousFlexibility.Analysis.SpacesPhysicalRowEquiv
-import ContinuousFlexibility.Analysis.SpacesPhysicalBandReconstruction
-import ContinuousFlexibility.Analysis.SpacesPhysicalLocalizationInverse
-import ContinuousFlexibility.Analysis.SpacesSequenceRetraction
+module
+
+public import ContinuousFlexibility.Analysis.SpacesPhysicalShellSynthesis
+public import ContinuousFlexibility.Analysis.SpacesPhysicalRowEquiv
+public import ContinuousFlexibility.Analysis.SpacesPhysicalBandReconstruction
+public import ContinuousFlexibility.Analysis.SpacesPhysicalLocalizationInverse
+public import ContinuousFlexibility.Analysis.SpacesSequenceRetraction
 
 /-!
 # The physical model as an actual tame retract
@@ -13,6 +15,8 @@ band sum and the radial partition of unity. Uniqueness of weak derivatives
 then identifies all the weighted coordinates. Integer cells are reindexed
 isometrically into the fixed natural-number cylinder model in the statement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

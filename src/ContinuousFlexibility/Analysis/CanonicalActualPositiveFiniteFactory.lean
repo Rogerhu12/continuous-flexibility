@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CanonicalPositiveFiniteEndpointBounds
-import ContinuousFlexibility.Analysis.N04bActualAtlasInteriorCompletion
-import ContinuousFlexibility.Analysis.CanonicalPositiveSourceInteriorDivision
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalPositiveFiniteEndpointBounds
+public import ContinuousFlexibility.Analysis.N04bActualAtlasInteriorCompletion
+public import ContinuousFlexibility.Analysis.CanonicalPositiveSourceInteriorDivision
 
 /-!
 # The actual whole-positive family with its endpoint inputs derived
@@ -11,6 +13,8 @@ height. Actual endpoint bounds then feed the existing finite family
 constructor, with one inverse-fiber constant and one height collar for
 all states. The normalization-buffer centers remain free ordered inputs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

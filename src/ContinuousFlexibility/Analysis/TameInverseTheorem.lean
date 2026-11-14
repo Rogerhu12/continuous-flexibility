@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.TameInverseBounds
-import ContinuousFlexibility.Analysis.TameJetLocalBounds
-import ContinuousFlexibility.Analysis.TamePairTopology
+module
+
+public import ContinuousFlexibility.Analysis.TameInverseBounds
+public import ContinuousFlexibility.Analysis.TameJetLocalBounds
+public import ContinuousFlexibility.Analysis.TamePairTopology
 
 /-!
 # Hamilton's smooth tame inverse-family theorem
@@ -10,6 +12,8 @@ proves local tame growth of each expression, and then normalizes its
 multilinear increments.  The initial inverse is assumed only continuous
 and tame, as in the frozen statement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

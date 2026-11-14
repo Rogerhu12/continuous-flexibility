@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceHeightCurrentSamplePrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceHeightWordBounds
-import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceSamplePrefix
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceHeightCurrentSamplePrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceHeightWordBounds
+public import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceSamplePrefix
 
 /-!
 # One sampled prefix for the actual source height and reciprocal
@@ -10,6 +12,8 @@ actual source jets use one low base selected before any derivative
 budget. Reindexing aligns their high seminorms and normalized powers;
 the finite radial product and composition preserve the angular reserve.
 -/
+
+@[expose] public section
 
 noncomputable section
 

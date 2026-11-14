@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.IntervalWeakRegularity
+module
+
+public import ContinuousFlexibility.Analysis.IntervalWeakRegularity
 
 /-!
 # Energy identities from actual conormal primitives
@@ -8,6 +10,8 @@ regularity theorem. Once the actual flux primitive has been constructed,
 Fubini permits C¹ compact tests. Applying this to `χ² u` gives the local
 energy identity needed for Caccioppoli estimates.
 -/
+
+@[expose] public section
 
 open Set Filter MeasureTheory
 open scoped ContDiff Topology

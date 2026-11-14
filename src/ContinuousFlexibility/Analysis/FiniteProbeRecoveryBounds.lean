@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N03ResidualErrorBounds
+module
+
+public import ContinuousFlexibility.Analysis.N03ResidualErrorBounds
 
 /-!
 # A common fixed loss after finitely many genuine source probes
@@ -9,6 +11,8 @@ the state is chosen. A recovery operation losing two spatial orders then
 preserves the original low-order neighborhood and increases the loss by
 exactly two. Component constants remain unrestricted in this lemma.
 -/
+
+@[expose] public section
 
 noncomputable section
 

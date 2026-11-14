@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N03InteriorChartJets
-import ContinuousFlexibility.Analysis.N03InteriorHeightJets
-import ContinuousFlexibility.Analysis.N03InteriorJacobianBounds
+module
+
+public import ContinuousFlexibility.Analysis.N03InteriorChartJets
+public import ContinuousFlexibility.Analysis.N03InteriorHeightJets
+public import ContinuousFlexibility.Analysis.N03InteriorJacobianBounds
 
 /-!
 # Closing the physical estimates in the negative interior
@@ -12,6 +14,8 @@ height jets and, through the two transport equations, a positive lower
 bound on the actual chart Jacobian. One low order and one loss work for
 all component constants and all output orders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

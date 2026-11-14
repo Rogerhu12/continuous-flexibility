@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CoupledControlAlgebra
-import ContinuousFlexibility.Analysis.CoupledTameComposition
-import ContinuousFlexibility.Analysis.SolveStateSpaces
-import ContinuousFlexibility.Scalar.WeightedStateTopology
+module
+
+public import ContinuousFlexibility.Analysis.CoupledControlAlgebra
+public import ContinuousFlexibility.Analysis.CoupledTameComposition
+public import ContinuousFlexibility.Analysis.SolveStateSpaces
+public import ContinuousFlexibility.Scalar.WeightedStateTopology
 
 /-!
 # Smooth dependence of the actual height response to a control
@@ -10,6 +12,8 @@ The source column and the scalar inverse are composed on their original
 spaces. The two height components are retained, including the left
 constant. Only the already prescribed Banach levels are completed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

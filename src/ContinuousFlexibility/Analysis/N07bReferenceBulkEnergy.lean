@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N07bReferenceAngularExpansion
-import ContinuousFlexibility.Analysis.N07bFiniteMaterialJetEnergy
-import ContinuousFlexibility.Analysis.N07bPiecewiseCanonicalEnergy
-import ContinuousFlexibility.Analysis.N07bCanonicalAngularPullback
-import ContinuousFlexibility.Analysis.N07bReferenceGeometry
-import ContinuousFlexibility.Analysis.N07bReferencePieceRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N07bReferenceAngularExpansion
+public import ContinuousFlexibility.Analysis.N07bFiniteMaterialJetEnergy
+public import ContinuousFlexibility.Analysis.N07bPiecewiseCanonicalEnergy
+public import ContinuousFlexibility.Analysis.N07bCanonicalAngularPullback
+public import ContinuousFlexibility.Analysis.N07bReferenceGeometry
+public import ContinuousFlexibility.Analysis.N07bReferencePieceRegularity
 
 /-!
 # Actual reference bulk forcing in the prescribed canonical source level
@@ -19,6 +21,8 @@ the primitive geometric estimates. No bound or membership of the reference
 forcing is assumed. Closed-piece extensions and symmetries are kept separate
 from the energy argument when constructing the prescribed volume-model lift.
 -/
+
+@[expose] public section
 
 noncomputable section
 

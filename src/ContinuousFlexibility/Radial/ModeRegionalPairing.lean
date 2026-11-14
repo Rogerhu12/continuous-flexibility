@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ModeCoreSource
-import ContinuousFlexibility.Radial.MatchingGraphRestrictions
+module
+
+public import ContinuousFlexibility.Radial.ModeCoreSource
+public import ContinuousFlexibility.Radial.MatchingGraphRestrictions
 
 /-!
 # Regional modal pairings
@@ -8,6 +10,8 @@ The Hilbert inner product equals its ordinary weighted integral. The
 source projection clauses then localize supported factors to the actual
 inner interval, and the outer projection has zero true border row.
 -/
+
+@[expose] public section
 
 noncomputable section
 

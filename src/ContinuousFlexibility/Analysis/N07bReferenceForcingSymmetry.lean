@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07bReferenceGraphFromDecay
-import Mathlib.Analysis.Calculus.Deriv.Shift
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+module
+
+public import ContinuousFlexibility.Analysis.N07bReferenceGraphFromDecay
+public import Mathlib.Analysis.Calculus.Deriv.Shift
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
 
 /-!
 # Actual symmetries of the reference forcing
@@ -9,6 +11,8 @@ Periodicity and reflection pass through the actual one-dimensional
 derivatives defining the radial expression. These identities also hold
 for the totalized derivative, so no extra regularity premise is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryFormulaWordBounds
-import ContinuousFlexibility.Analysis.N06RootBoundaryFiniteFormulas
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryFormulaWordBounds
+public import ContinuousFlexibility.Analysis.N06RootBoundaryFiniteFormulas
 
 /-!
 # The actual finite boundary differential expressions
@@ -9,6 +11,8 @@ joint tower is built by scalar addition, multiplication and actual
 angular differentiation. A finite reserve of three angular derivatives
 then proves a polynomial material cost for every original joint word.
 -/
+
+@[expose] public section
 
 noncomputable section
 

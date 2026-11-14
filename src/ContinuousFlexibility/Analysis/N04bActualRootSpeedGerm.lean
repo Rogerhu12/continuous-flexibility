@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01FlowAngularVariation
-import ContinuousFlexibility.Scalar.S05CalculusProof
-import Mathlib.Analysis.Calculus.Deriv.Slope
+module
+
+public import ContinuousFlexibility.Analysis.N01FlowAngularVariation
+public import ContinuousFlexibility.Scalar.S05CalculusProof
+public import Mathlib.Analysis.Calculus.Deriv.Slope
 
 /-!
 # Actual corrected characteristic speeds at a component endpoint
@@ -18,6 +20,8 @@ agree there with drift plus or minus `sqrt x` times that factor, including
 The physical radius is `r₀ + σ x`; to use x as the ODE time one multiplies
 the displayed physical speeds by the same inward sign σ.
 -/
+
+@[expose] public section
 
 noncomputable section
 

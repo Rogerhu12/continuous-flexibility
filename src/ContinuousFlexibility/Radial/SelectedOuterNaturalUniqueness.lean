@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.SelectedOutwardRegionMeasure
-import ContinuousFlexibility.Radial.OuterPhysicalTailUniqueness
-import ContinuousFlexibility.Radial.OuterFundamentalPair
-import ContinuousFlexibility.Radial.OuterFirstOrderRegularity
+module
+
+public import ContinuousFlexibility.Radial.SelectedOutwardRegionMeasure
+public import ContinuousFlexibility.Radial.OuterPhysicalTailUniqueness
+public import ContinuousFlexibility.Radial.OuterFundamentalPair
+public import ContinuousFlexibility.Radial.OuterFirstOrderRegularity
 
 /-!
 # The actual natural line at the original exterior cut
@@ -10,6 +12,8 @@ Classification is applied only on the deep tail. Two conserved full-state
 Wronskians propagate that equality through the finite core. Continuity
 then includes the regular cut, without imposing a derivative there.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.PositiveBufferComparisonCoordinates
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferComparisonCoordinates
 
 /-!
 # Domains in the common inward buffer coordinate
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Radial.PositiveBufferComparisonCoordinates
 The exterior corresponds to negative normalized coordinates. Reflecting
 that coordinate gives the positive half-line used in the ODE comparison.
 -/
+
+@[expose] public section
 
 noncomputable section
 

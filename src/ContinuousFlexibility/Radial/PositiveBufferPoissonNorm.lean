@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.PositiveBufferSurgeryNorm
-import ContinuousFlexibility.Radial.PositiveBufferIntervalProjection
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferSurgeryNorm
+public import ContinuousFlexibility.Radial.PositiveBufferIntervalProjection
 
 /-!
 # Physical Poisson norm estimates
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Radial.PositiveBufferIntervalProjection
 The endpoint weights enter through their actual square roots. The estimate
 uses the max norm on the state space and the Euclidean expression stated in R09.
 -/
+
+@[expose] public section
 
 noncomputable section
 

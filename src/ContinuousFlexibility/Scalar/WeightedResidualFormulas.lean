@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedStateJetFormulas
-import ContinuousFlexibility.Scalar.WeightedStateFlatness
+module
+
+public import ContinuousFlexibility.Scalar.WeightedStateJetFormulas
+public import ContinuousFlexibility.Scalar.WeightedStateFlatness
 
 /-!
 # Finite-jet formulas for the removable weighted scalar residual
@@ -9,6 +11,8 @@ parameter. The resulting formula uses only the profile mean, its first
 derivative, and spatial height jets of order at most two. At parameter zero
 the actual frozen residual agrees with the radial PDE on the whole plane.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.SpacesPhysicalDecode
-import ContinuousFlexibility.Analysis.SpacesHeightAlgebra
-import ContinuousFlexibility.Analysis.SpacesInterpolationProducts
-import Mathlib.MeasureTheory.Function.LpSeminorm.LpNorm
+module
+
+public import ContinuousFlexibility.Analysis.SpacesPhysicalDecode
+public import ContinuousFlexibility.Analysis.SpacesHeightAlgebra
+public import ContinuousFlexibility.Analysis.SpacesInterpolationProducts
+public import Mathlib.MeasureTheory.Function.LpSeminorm.LpNorm
 
 /-!
 # Quantitative products in the physical grading
@@ -10,6 +12,8 @@ The actual mixed Leibniz formula uses one `L²` factor and the uniform
 cylinder estimate on the other. Interpolation then gives a fixed-loss
 one-high-factor bound in the original compatible-jet grading.
 -/
+
+@[expose] public section
 
 noncomputable section
 

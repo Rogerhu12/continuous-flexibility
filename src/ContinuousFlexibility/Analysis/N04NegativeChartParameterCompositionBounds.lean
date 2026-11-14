@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartVariationSelection
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartVariationSelection
 
 /-!
 # Positive parameter jets of a scalar function along the same flow
@@ -8,6 +10,8 @@ variation and the canonical finite forcing sum. A marked height weight
 survives both terms. No differential equation for the outer scalar
 function is used, so the result also applies to the endpoint label.
 -/
+
+@[expose] public section
 
 noncomputable section
 

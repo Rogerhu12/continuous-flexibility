@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.TerminalCapAttenuation
-import ContinuousFlexibility.Radial.R07CapPullback
-import ContinuousFlexibility.Radial.MorseChainGeometry
-import ContinuousFlexibility.Radial.MorseCellMassTravel
+module
+
+public import ContinuousFlexibility.Radial.TerminalCapAttenuation
+public import ContinuousFlexibility.Radial.R07CapPullback
+public import ContinuousFlexibility.Radial.MorseChainGeometry
+public import ContinuousFlexibility.Radial.MorseCellMassTravel
 
 /-!
 # Actual Morse short-cap attenuation
@@ -16,6 +18,8 @@ frequency hypothesis proves that the entire derivative window remains
 inside that cap. Both physical jets then decay by exp (-j sqrt A / 48).
 No scalar equation, potential bound, or exponential estimate is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

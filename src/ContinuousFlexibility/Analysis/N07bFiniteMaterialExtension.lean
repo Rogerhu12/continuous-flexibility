@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07bFiniteFlatExtension
-import ContinuousFlexibility.Analysis.MaterialEndpointDecay
+module
+
+public import ContinuousFlexibility.Analysis.N07bFiniteFlatExtension
+public import ContinuousFlexibility.Analysis.MaterialEndpointDecay
 
 /-!
 # Finite-order flat extension from actual material decay
@@ -9,6 +11,8 @@ the material envelope. Any positive height exponent absorbs that growth
 and gives quadratic endpoint decay. Only the finitely many jets needed
 for the chosen extension order are used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

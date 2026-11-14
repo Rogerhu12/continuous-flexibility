@@ -1,6 +1,8 @@
-import Mathlib.Analysis.SpecialFunctions.Sqrt
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Analysis.SpecialFunctions.Sqrt
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
 
 /-!
 # Algebraic selection of the two null characteristic directions
@@ -10,6 +12,8 @@ equal characteristic directions. Their oriented radial difference then
 selects the positive direction for the first coordinate and the negative
 direction for the second. No transport equation is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

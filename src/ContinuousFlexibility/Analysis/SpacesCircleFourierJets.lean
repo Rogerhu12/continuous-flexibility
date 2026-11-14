@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SpacesCircleFourier
+module
+
+public import ContinuousFlexibility.Analysis.SpacesCircleFourier
 
 /-!
 # Angular Fourier symbols of the actual circle jets
@@ -7,6 +9,8 @@ Differentiation has symbol `2 I n`, consistently with period `π`.
 The coefficient identity is proved from integration by parts for smooth
 periodic functions and then iterated through all derivative orders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

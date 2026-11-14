@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06CubicJetBounds
+module
+
+public import ContinuousFlexibility.Analysis.N06CubicJetBounds
 
 /-!
 # The actual finite-mode cubic perturbation relative to the reference graph
@@ -9,6 +11,8 @@ composition gives a fixed-order L² bound independent of the Fourier cutoff.
 All five weighted derivative fields and all their memberships are derived
 from the radial equations, rather than supplied as an operator estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

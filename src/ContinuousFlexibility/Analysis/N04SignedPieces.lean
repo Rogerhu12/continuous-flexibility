@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N04CriticalSet
-import ContinuousFlexibility.Analysis.N04PieceData
-import ContinuousFlexibility.Analysis.N04PositiveComponents
-import ContinuousFlexibility.Analysis.N04NegativeHalves
-import ContinuousFlexibility.Analysis.N04IntervalSubdivision
-import Mathlib.Basic.Denumerable
+module
+
+public import ContinuousFlexibility.Analysis.N04CriticalSet
+public import ContinuousFlexibility.Analysis.N04PieceData
+public import ContinuousFlexibility.Analysis.N04PositiveComponents
+public import ContinuousFlexibility.Analysis.N04NegativeHalves
+public import ContinuousFlexibility.Analysis.N04IntervalSubdivision
+public import Mathlib.Basic.Denumerable
 
 /-!
 # The actual signed physical partition
@@ -14,6 +16,8 @@ the simple critical radii and the countable subdivision grids. An
 equivalence, rather than a surjective enumeration, transfers this
 partition to the natural-number indices of CanonicalData.
 -/
+
+@[expose] public section
 
 noncomputable section
 

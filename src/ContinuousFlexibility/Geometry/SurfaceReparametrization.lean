@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Geometry.SurfaceGeometry
+module
+
+public import ContinuousFlexibility.Geometry.SurfaceGeometry
 
 /-!
 # Actual coordinate reparameterization of surface geometry
@@ -10,6 +12,8 @@ fixed geometrically, including under orientation-reversing coordinate maps.
 Only local `C²` hypotheses are needed; no second-form transformation law or
 curvature invariance is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.StateNeighborhood
-import ContinuousFlexibility.Analysis.MaterialSampleBounds
-import ContinuousFlexibility.Analysis.N01JetBounds
-import ContinuousFlexibility.Blueprint.CanonicalParts
+module
+
+public import ContinuousFlexibility.Analysis.StateNeighborhood
+public import ContinuousFlexibility.Analysis.MaterialSampleBounds
+public import ContinuousFlexibility.Analysis.N01JetBounds
+public import ContinuousFlexibility.Blueprint.CanonicalParts
 
 /-!
 # Preserving the cumulative construction on a smaller neighborhood
@@ -12,6 +14,8 @@ directional derivative towers and the loss selected at each parameter
 order, then hold on that same new neighborhood. No data are replaced in
 this restriction step.
 -/
+
+@[expose] public section
 
 noncomputable section
 

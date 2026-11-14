@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.MaterialMultiplierNormBounds
-import ContinuousFlexibility.Analysis.MaterialPartialEnergy
+module
+
+public import ContinuousFlexibility.Analysis.MaterialMultiplierNormBounds
+public import ContinuousFlexibility.Analysis.MaterialPartialEnergy
 
 /-!
 # Fixed losses for the actual physical partial derivatives
@@ -10,6 +12,8 @@ material weight from the inverse length scale. The estimates require
 only smoothness and weighted L² jets, so they also apply to intermediate
 fields without a parity assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01cStateAngleSelections
-import ContinuousFlexibility.Analysis.N01cFlowForcingExpansion
-import ContinuousFlexibility.Analysis.N01cFlowForcingSobolev
-import ContinuousFlexibility.Analysis.N01cStateSeminorms
+module
+
+public import ContinuousFlexibility.Analysis.N01cStateAngleSelections
+public import ContinuousFlexibility.Analysis.N01cFlowForcingExpansion
+public import ContinuousFlexibility.Analysis.N01cFlowForcingSobolev
+public import ContinuousFlexibility.Analysis.N01cStateSeminorms
 
 /-!
 # Seminorms of the actual selected forcing slots
@@ -12,6 +14,8 @@ The one-high expression on their unit ball is bounded by a single
 aggregate of the original directions. Finite parameter prefixes are
 chosen without changing the base.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseSecondModeMassTransport
-import ContinuousFlexibility.Radial.MorseCellMassResistanceBounds
+module
+
+public import ContinuousFlexibility.Radial.MorseSecondModeMassTransport
+public import ContinuousFlexibility.Radial.MorseCellMassResistanceBounds
 
 /-!
 # Scalar bounds for a second-mode Morse tail
@@ -8,6 +10,8 @@ The actual mass/resistance estimates give the small-edge and large-product
 quantities needed for the deep-tail hypotheses. The normalization of the
 physical logarithmic coordinate cancels from every product.
 -/
+
+@[expose] public section
 
 noncomputable section
 

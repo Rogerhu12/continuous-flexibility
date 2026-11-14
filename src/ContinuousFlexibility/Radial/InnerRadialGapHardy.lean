@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerGapHardyCoercivity
-import ContinuousFlexibility.Radial.InnerGapHardyPoisson
-import ContinuousFlexibility.Radial.InnerRadialActualPieces
+module
+
+public import ContinuousFlexibility.Radial.InnerGapHardyCoercivity
+public import ContinuousFlexibility.Radial.InnerGapHardyPoisson
+public import ContinuousFlexibility.Radial.InnerRadialActualPieces
 
 /-!
 # Uniform Hardy bounds for the same actual gap operators
@@ -10,6 +12,8 @@ columns. The auxiliary positive slope constructs these operators; the
 bounds below use only monotonicity of the actual profile. The entire
 gap conormal matrix, including its off-diagonal entries, is retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

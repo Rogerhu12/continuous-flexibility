@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N08NuProfileLift
-import ContinuousFlexibility.Analysis.N08WeakControlLift
-import ContinuousFlexibility.Scalar.WeightedUniformTameGermOperations
+module
+
+public import ContinuousFlexibility.Analysis.N08NuProfileLift
+public import ContinuousFlexibility.Analysis.N08WeakControlLift
+public import ContinuousFlexibility.Scalar.WeightedUniformTameGermOperations
 
 /-!
 # The actual logarithmic state profile in a positive weighted space
@@ -9,6 +11,8 @@ The scalar direction and the normalized weak control series have now both
 been realized in the same physical model. Their sum is a continuous linear
 map whose every output order is controlled by the level-zero state norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

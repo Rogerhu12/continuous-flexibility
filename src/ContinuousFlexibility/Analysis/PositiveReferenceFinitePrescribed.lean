@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PositiveReferenceTaylorPrescribedWidth
-import ContinuousFlexibility.Analysis.PositiveReferenceValueEnvelope
+module
+
+public import ContinuousFlexibility.Analysis.PositiveReferenceTaylorPrescribedWidth
+public import ContinuousFlexibility.Analysis.PositiveReferenceValueEnvelope
 
 /-!
 # The actual finite reference construction at a displayed width
@@ -10,6 +12,8 @@ coordinate and clipped-log height. The finite numerical data determine
 the width before the coordinate is constructed. No assertion identifies
 this new choice with a previously chosen qualitative interpolation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

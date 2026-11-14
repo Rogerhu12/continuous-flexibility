@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aActualMainWeightedBudget
-import ContinuousFlexibility.Analysis.N07aAngularSequenceBandLift
+module
+
+public import ContinuousFlexibility.Analysis.N07aActualMainWeightedBudget
+public import ContinuousFlexibility.Analysis.N07aAngularSequenceBandLift
 
 /-!
 # Actual one-high weighted realizations of the relative main blocks
@@ -9,6 +11,8 @@ reference inverse at its fixed base order. Both ordinary and commutator
 blocks are realized in the prescribed volume graph, with unchanged
 forgotten fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 

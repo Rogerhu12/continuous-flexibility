@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CircleEnergyEnvelope
-import Mathlib.Analysis.Calculus.MeanValue
+module
+
+public import ContinuousFlexibility.Analysis.CircleEnergyEnvelope
+public import Mathlib.Analysis.Calculus.MeanValue
 
 /-!
 # A summable envelope for the difference of a scalar field curve
@@ -9,6 +11,8 @@ inserted. Thus the same summable envelope controls the two endpoint
 fields without assuming that either endpoint already belongs to the
 circle model.
 -/
+
+@[expose] public section
 
 noncomputable section
 

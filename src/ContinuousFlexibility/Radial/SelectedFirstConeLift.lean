@@ -1,10 +1,14 @@
-import ContinuousFlexibility.Radial.SelectedRetainedCone
-import ContinuousFlexibility.Radial.SelectedGrowingCone
-import ContinuousFlexibility.Radial.SelectedBoundaryMargin
+module
+
+public import ContinuousFlexibility.Radial.SelectedRetainedCone
+public import ContinuousFlexibility.Radial.SelectedGrowingCone
+public import ContinuousFlexibility.Radial.SelectedBoundaryMargin
 
 /-!
 # Actual first-band growing lifts with exactly retained matching states
 -/
+
+@[expose] public section
 
 noncomputable section
 

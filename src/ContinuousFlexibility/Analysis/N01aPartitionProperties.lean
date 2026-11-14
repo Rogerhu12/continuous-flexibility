@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01aPartitionGrouping
-import ContinuousFlexibility.Analysis.N01aReferenceCoarseningBasic
+module
+
+public import ContinuousFlexibility.Analysis.N01aPartitionGrouping
+public import ContinuousFlexibility.Analysis.N01aReferenceCoarseningBasic
 
 /-!
 # Partition and trace properties of the grouped cells
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Analysis.N01aReferenceCoarseningBasic
 Finite fibers preserve smooth localizers, the partition of unity and the
 overlap bound. One original sampling collar is retained in each group.
 -/
+
+@[expose] public section
 
 noncomputable section
 

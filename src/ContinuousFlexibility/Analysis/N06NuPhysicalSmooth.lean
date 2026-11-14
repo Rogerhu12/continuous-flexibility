@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06NuCoordinateBounds
+module
+
+public import ContinuousFlexibility.Analysis.N06NuCoordinateBounds
 
 /-!
 # Smoothness and finite symmetry calculus for the actual nu column
@@ -8,6 +10,8 @@ smooth by N01's positive discriminant. Outside that support the genuine
 column vanishes on a neighborhood. Periodicity and angular reflection
 follow from the actual height decoder and the same finite formula.
 -/
+
+@[expose] public section
 
 noncomputable section
 

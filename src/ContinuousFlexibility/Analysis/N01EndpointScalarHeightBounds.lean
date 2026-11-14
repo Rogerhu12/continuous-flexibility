@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01EndpointCircleJets
-import ContinuousFlexibility.Analysis.N01FlowScalarHeightBounds
-import ContinuousFlexibility.Analysis.N01FlowSamplePrefactor
+module
+
+public import ContinuousFlexibility.Analysis.N01EndpointCircleJets
+public import ContinuousFlexibility.Analysis.N01FlowScalarHeightBounds
+public import ContinuousFlexibility.Analysis.N01FlowSamplePrefactor
 
 /-!
 # Local physical height bounds for the chosen endpoint scalar jets
@@ -10,6 +12,8 @@ multilinear fields used in circle reconstruction. Cancelling the N01
 height factor against the output circle weight costs exactly one material
 order, independently of the angular and parameter orders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

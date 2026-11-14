@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MatchingInverseFormula
+module
+
+public import ContinuousFlexibility.Radial.MatchingInverseFormula
 
 /-!
 # Pairing identities for the actual source restrictions
@@ -7,6 +9,8 @@ The source fields are orthogonal restrictions for the existing modal
 pairing. These identities use their frozen almost-everywhere clauses,
 including the scalar coordinate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

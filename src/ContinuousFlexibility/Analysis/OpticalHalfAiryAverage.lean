@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06AiryRadialGerm
-import ContinuousFlexibility.Analysis.OneHighCircleFlowLocalization
+module
+
+public import ContinuousFlexibility.Analysis.N06AiryRadialGerm
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowLocalization
 
 /-!
 # The actual Airy average on a complete optical half
@@ -9,6 +11,8 @@ bounds. A smooth clamp in the value variable makes a positive square-root
 representative without altering any germ on that interval. Its derivatives
 away from those germs are never part of a quantitative estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

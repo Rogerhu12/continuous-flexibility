@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalBlockDecay
-import ContinuousFlexibility.Analysis.N05ActualWeightKernel
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalBlockDecay
+public import ContinuousFlexibility.Analysis.N05ActualWeightKernel
 
 /-!
 # Actual sample weights on the canonical inverse blocks
@@ -8,6 +10,8 @@ The fine logarithmic comparison for the actual endpoint weight contributes
 only powers of the coefficient envelope. The material powers remain exactly
 `t - 4` and `-t`; neither endpoint conversion spends an extra material order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

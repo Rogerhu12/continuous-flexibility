@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowTimeChange
-import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowTimeChange
+public import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
 
 /-!
 # Joint smoothness on the original open time strip
@@ -9,6 +11,8 @@ remaining inside the supplied closed interval and starting at its initial
 time. The smooth reparametrized flow then agrees locally with the original
 flow after an explicit affine change of coordinates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

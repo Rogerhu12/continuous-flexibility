@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.RootDividedHeight
-import ContinuousFlexibility.Analysis.N04NegativeHeightIdentity
-import ContinuousFlexibility.Analysis.N03UniformRootBandGeometry
+module
+
+public import ContinuousFlexibility.Analysis.RootDividedHeight
+public import ContinuousFlexibility.Analysis.N04NegativeHeightIdentity
+public import ContinuousFlexibility.Analysis.N03UniformRootBandGeometry
 
 /-!
 # The actual stored height on the fixed uncorrected root band
@@ -11,6 +13,8 @@ formula. All premises are actual whole-band chart/coefficient facts
 already supplied by the fixed-cutoff construction, with the original
 chosen inverse input and scale retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

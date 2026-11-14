@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01FlowChartIndependence
-import ContinuousFlexibility.Analysis.OpticalTravelVariation
+module
+
+public import ContinuousFlexibility.Analysis.N01FlowChartIndependence
+public import ContinuousFlexibility.Analysis.OpticalTravelVariation
 
 /-!
 # Actual height variation of the minus characteristic speed
@@ -10,6 +12,8 @@ height direction.  A direction with radial derivative equal to the
 profile has response E times the optical speed; the metric profile is
 held fixed during this variation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

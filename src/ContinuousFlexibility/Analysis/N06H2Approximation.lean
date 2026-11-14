@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06IntervalPrimitiveLp
-import ContinuousFlexibility.Analysis.SmoothCompactL2Density
-import Mathlib.Topology.Sequences
+module
+
+public import ContinuousFlexibility.Analysis.N06IntervalPrimitiveLp
+public import ContinuousFlexibility.Analysis.SmoothCompactL2Density
+public import Mathlib.Topology.Sequences
 
 /-!
 # Smooth H2 approximation with arbitrary endpoint values
@@ -10,6 +12,8 @@ integrated twice. The two constants are the original value and derivative
 at zero. Thus neither the original representative nor its approximants
 are required to satisfy a boundary condition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

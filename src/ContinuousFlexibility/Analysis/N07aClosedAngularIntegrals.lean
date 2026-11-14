@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Statements.Radial
-import Mathlib.Analysis.Calculus.ParametricIntervalIntegral
-import Mathlib.MeasureTheory.Integral.DominatedConvergence
-import Mathlib.MeasureTheory.Integral.Prod
+module
+
+public import ContinuousFlexibility.Statements.Radial
+public import Mathlib.Analysis.Calculus.ParametricIntervalIntegral
+public import Mathlib.MeasureTheory.Integral.DominatedConvergence
+public import Mathlib.MeasureTheory.Integral.Prod
 
 /-!
 # Angular integrals of genuine closed side jets
@@ -9,6 +11,8 @@ import Mathlib.MeasureTheory.Integral.Prod
 Continuity and differentiation of angular pairings use only continuity on the
 closed side rectangle and the true derivative strictly inside that side.
 -/
+
+@[expose] public section
 
 noncomputable section
 

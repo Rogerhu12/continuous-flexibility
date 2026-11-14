@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalBand
-import ContinuousFlexibility.Analysis.N07aAngularReferenceCoordinates
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalBand
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceCoordinates
 
 /-!
 # Actual bands of an affine radial pullback
@@ -9,6 +11,8 @@ A radial additive term is retained precisely in angular band zero.  This
 single statement handles both the left asymptotic height and the fixed
 compatibility column in the canonical reference graph.
 -/
+
+@[expose] public section
 
 noncomputable section
 

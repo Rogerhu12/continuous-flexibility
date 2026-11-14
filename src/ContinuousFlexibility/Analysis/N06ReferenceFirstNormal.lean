@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06ReferenceNormalLp
-import ContinuousFlexibility.Radial.R11bGlobalL2
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceNormalLp
+public import ContinuousFlexibility.Radial.R11bGlobalL2
 
 /-!
 # The original physical first normal estimate in actual canonical coordinates
@@ -14,6 +16,8 @@ This module retains the original inverse, its first-normal constant and
 its chosen derivative. No canonical derivative or canonical L2 membership
 is supplied as an additional hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

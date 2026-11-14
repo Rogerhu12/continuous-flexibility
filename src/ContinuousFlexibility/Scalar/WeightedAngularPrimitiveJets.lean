@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedAngularPrimitive
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+module
+
+public import ContinuousFlexibility.Scalar.WeightedAngularPrimitive
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
 
 /-!
 # Mixed weighted jets of angular primitives
@@ -8,6 +10,8 @@ Radial derivatives commute with the actual angular integral.  A positive
 number of angular derivatives removes that integral.  The same identities
 hold after the material pullback and multiplication by its radial weights.
 -/
+
+@[expose] public section
 
 noncomputable section
 

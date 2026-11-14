@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.IntervalL1Primitive
-import ContinuousFlexibility.Analysis.FlatExtension
-import Mathlib.Analysis.SpecialFunctions.NonIntegrable
-import Mathlib.Analysis.Calculus.MeanValue
+module
+
+public import ContinuousFlexibility.Analysis.IntervalL1Primitive
+public import ContinuousFlexibility.Analysis.FlatExtension
+public import Mathlib.Analysis.SpecialFunctions.NonIntegrable
+public import Mathlib.Analysis.Calculus.MeanValue
 
 /-!
 # Zero endpoint traces from integrable derivatives and reciprocal-distance weights
@@ -12,6 +14,8 @@ endpoint forces that extension's endpoint value to vanish.  This reduces
 smooth flat extension to integral estimates for actual ordinary derivatives.
 The same trace lemma treats either endpoint.
 -/
+
+@[expose] public section
 
 noncomputable section
 

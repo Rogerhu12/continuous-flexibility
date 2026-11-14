@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01ControlledLeftRootInput
-import ContinuousFlexibility.Analysis.RootInputOrdinaryJets
+module
+
+public import ContinuousFlexibility.Analysis.N01ControlledLeftRootInput
+public import ContinuousFlexibility.Analysis.RootInputOrdinaryJets
 
 /-!
 # Actual ordinary left-root fields on a common neighborhood
@@ -9,6 +11,8 @@ for the smooth extensions. Their ordinary jets obey one fixed loss,
 including every root boundary jet. The positive root value is retained
 for the subsequent radial power and height constructions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

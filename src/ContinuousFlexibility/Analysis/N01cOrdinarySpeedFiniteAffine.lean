@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cComponentCosineSpeed
-import ContinuousFlexibility.Analysis.N01cFiniteAffineMixedJets
+module
+
+public import ContinuousFlexibility.Analysis.N01cComponentCosineSpeed
+public import ContinuousFlexibility.Analysis.N01cFiniteAffineMixedJets
 
 /-!
 # Actual physical-speed finite-affine smoothness
@@ -9,6 +11,8 @@ The same actual normalized factors therefore give a jointly smooth
 finite-affine formula for the ordinary speed. Arbitrary physical radial
 derivatives are taken on that open component before fixing the radius.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometryFlowCoefficientBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryFlowCoefficientBounds
 
 /-!
 # The sharp spatial degree of a composed displacement
@@ -8,6 +10,8 @@ evaluation point removes its unused zeroth jet. Weighted composition
 then retains the degree `j - 1`, including when the inner angle itself
 is unbounded. The zeroth order is estimated directly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

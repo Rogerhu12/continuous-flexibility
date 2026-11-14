@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerCutNormalization
+module
+
+public import ContinuousFlexibility.Radial.InnerCutNormalization
 
 /-!
 # The actual compressed model flux errors in physical normalization
@@ -9,6 +11,8 @@ exactly, including when the central drift has been retained in kappa.
 The only estimates supplied to the uniform envelope are geometric mass,
 action and neighboring weight comparisons.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerRadialL2Mass
-import ContinuousFlexibility.Statements.RadialTargets
-import Mathlib.Analysis.InnerProductSpace.ProdL2
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialL2Mass
+public import ContinuousFlexibility.Statements.RadialTargets
+public import Mathlib.Analysis.InnerProductSpace.ProdL2
 
 /-!
 # The physical energy coordinates on a positive gap
@@ -11,6 +13,8 @@ Their squared Hilbert norm is exactly the radial energy. This identity
 turns the scalar radial coercivity theorem into a bound on a closed
 energy space without changing the physical source measure.
 -/
+
+@[expose] public section
 
 noncomputable section
 

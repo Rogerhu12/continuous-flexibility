@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CoupledLogProfileWeakBounds
-import ContinuousFlexibility.Analysis.CoupledRadialFamilyHeightBounds
-import ContinuousFlexibility.Scalar.WeightedDecodeLift
+module
+
+public import ContinuousFlexibility.Analysis.CoupledLogProfileWeakBounds
+public import ContinuousFlexibility.Analysis.CoupledRadialFamilyHeightBounds
+public import ContinuousFlexibility.Scalar.WeightedDecodeLift
 
 /-!
 # The actual logarithmic profile in a positive weighted height space
@@ -10,6 +12,8 @@ decoder after its membership and fixed-loss physical estimates have been
 proved. The construction works on the whole state space and vanishes at
 the actual reference state.
 -/
+
+@[expose] public section
 
 noncomputable section
 

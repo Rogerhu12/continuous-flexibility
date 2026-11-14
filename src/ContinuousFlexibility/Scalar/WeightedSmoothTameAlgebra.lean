@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Scalar.WeightedTowerCompositionGeneric
-import ContinuousFlexibility.Scalar.WeightedTowerOperations
-import ContinuousFlexibility.Analysis.TameComposition
-import ContinuousFlexibility.Analysis.TamePairTopology
+module
+
+public import ContinuousFlexibility.Scalar.WeightedTowerCompositionGeneric
+public import ContinuousFlexibility.Scalar.WeightedTowerOperations
+public import ContinuousFlexibility.Analysis.TameComposition
+public import ContinuousFlexibility.Analysis.TamePairTopology
 
 /-!
 # Smooth tame algebra on the full operator parameter domains
@@ -12,6 +14,8 @@ open product domains. Its genuine derivative tower is the actual
 ordered-partition chain rule, while each local estimate comes from the
 existing seminorm calculus.
 -/
+
+@[expose] public section
 
 noncomputable section
 

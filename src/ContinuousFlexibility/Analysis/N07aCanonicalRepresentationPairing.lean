@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalOpenLp
-import ContinuousFlexibility.Analysis.N07aCanonicalCutoffColumn
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalOpenLp
+public import ContinuousFlexibility.Analysis.N07aCanonicalCutoffColumn
 
 /-!
 # Pairing the actual canonical representatives
@@ -9,6 +11,8 @@ canonical L² remainder. These identities retain that scalar exactly.
 All pairings use actual compact tests, so the cutoff height only needs
 interior smoothness. The source representative is the frozen L² class.
 -/
+
+@[expose] public section
 
 noncomputable section
 

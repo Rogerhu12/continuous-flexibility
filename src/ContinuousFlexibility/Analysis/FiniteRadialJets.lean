@@ -1,5 +1,7 @@
-import Mathlib.Analysis.Calculus.IteratedDeriv.FaaDiBruno
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+module
+
+public import Mathlib.Analysis.Calculus.IteratedDeriv.FaaDiBruno
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
 
 /-!
 # Finite radial jets under actual smooth operations
@@ -9,6 +11,8 @@ smooth composition. The inner curves may be vector-valued. The proof is
 a direct consequence of Mathlib's Faà di Bruno formula, whose partition
 blocks never use a derivative above the requested order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

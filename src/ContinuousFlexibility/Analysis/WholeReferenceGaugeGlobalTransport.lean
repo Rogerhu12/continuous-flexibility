@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeRelativeFields
-import ContinuousFlexibility.Analysis.CanonicalActualWholeGeometry
+module
+
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeRelativeFields
+public import ContinuousFlexibility.Analysis.CanonicalActualWholeGeometry
 
 /-!
 # The same global relative transport after fixing the reference gauge
@@ -10,6 +12,8 @@ the same. Consequently the already constructed global C3 transport and
 positive height ratio belong to the new record, without a second choice
 of flows, collars, or a global extension.
 -/
+
+@[expose] public section
 
 noncomputable section
 

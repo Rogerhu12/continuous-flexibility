@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04ActualAtlasTransmission
-import ContinuousFlexibility.Analysis.ActualNegativePrincipalDensity
-import ContinuousFlexibility.Analysis.N04bGeometricCompletion
+module
+
+public import ContinuousFlexibility.Analysis.N04ActualAtlasTransmission
+public import ContinuousFlexibility.Analysis.ActualNegativePrincipalDensity
+public import ContinuousFlexibility.Analysis.N04bGeometricCompletion
 
 /-!
 # Part B for the same actual typed charts
@@ -11,6 +13,8 @@ Part B after replacing only the unused interior divided-difference field.
 This preliminary completion does not use a whole-positive atlas, any
 endpoint bound, or any positive interpolation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

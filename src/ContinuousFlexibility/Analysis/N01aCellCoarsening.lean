@@ -1,7 +1,9 @@
-import Mathlib.Algebra.Order.Chebyshev
-import Mathlib.Data.Set.Card
-import Mathlib.MeasureTheory.Integral.Bochner.Basic
-import Mathlib.MeasureTheory.Constructions.BorelSpace.Real
+module
+
+public import Mathlib.Algebra.Order.Chebyshev
+public import Mathlib.Data.Set.Card
+public import Mathlib.MeasureTheory.Integral.Bochner.Basic
+public import Mathlib.MeasureTheory.Constructions.BorelSpace.Real
 
 /-!
 # Actual square integrals under finite-fiber coarsening
@@ -11,6 +13,8 @@ resulting square integral lies between the sum of the original square
 integrals and the overlap number times that sum. Only measurability of the
 square of the field is used; measurability of its sign is not required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

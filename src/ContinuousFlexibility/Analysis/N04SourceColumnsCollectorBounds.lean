@@ -1,7 +1,11 @@
-import ContinuousFlexibility.Analysis.N04SourceColumnsData
-import ContinuousFlexibility.Analysis.N04RealizationDifferenceValue
+module
+
+public import ContinuousFlexibility.Analysis.N04SourceColumnsData
+public import ContinuousFlexibility.Analysis.N04RealizationDifferenceValue
 
 /-! Abstract bounds used to collect current reference differences. -/
+
+@[expose] public section
 
 noncomputable section
 

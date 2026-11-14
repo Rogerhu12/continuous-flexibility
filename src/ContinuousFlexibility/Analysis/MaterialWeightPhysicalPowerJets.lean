@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.MaterialOrdinaryJets
-import ContinuousFlexibility.Analysis.N07aMaterialPowerJets
+module
+
+public import ContinuousFlexibility.Analysis.MaterialOrdinaryJets
+public import ContinuousFlexibility.Analysis.N07aMaterialPowerJets
 
 /-!
 # Actual physical derivatives of material height and material powers
@@ -8,6 +10,8 @@ The genuine material-coordinate power bounds retain their weight. The
 actual radial expansion converts them to ordinary physical derivatives
 with a coefficient power of E0, before any component or sample is chosen.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryActualCoordinateDirections
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledReferenceChart
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledSampleHeight
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryActualCoordinateDirections
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledReferenceChart
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledSampleHeight
 
 /-!
 # The sampled forward chart on the physical positive slab
@@ -10,6 +12,8 @@ transport using its saved partition budget. The angular component is a
 linear projection of that same transport. Both retain the same sample,
 low base, parameter prefix and final spatial exponent.
 -/
+
+@[expose] public section
 
 noncomputable section
 

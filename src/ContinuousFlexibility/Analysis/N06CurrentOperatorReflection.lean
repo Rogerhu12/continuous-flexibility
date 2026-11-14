@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06CurrentOperatorPeriodicity
-import Mathlib.Analysis.Calculus.FDeriv.Equiv
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentOperatorPeriodicity
+public import Mathlib.Analysis.Calculus.FDeriv.Equiv
 
 /-!
 # Reflection of the actual totalized divergence
@@ -9,6 +11,8 @@ formula is valid even at points where a function is not differentiable,
 so the actual N03 coefficient signs imply reflection covariance without
 unrecorded smoothness assumptions on the corrected coefficient fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 

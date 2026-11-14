@@ -1,10 +1,14 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalOpenCoefficients
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalOpenCoefficients
 
 /-! # Canonical L² representatives of actual bounded open coefficients
 
 This finite-measure construction is independent of physical test pullbacks.
 It retains the same actual value function used by the coefficient algebra.
 -/
+
+@[expose] public section
 
 noncomputable section
 

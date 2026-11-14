@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07bFiniteRadialGreen
-import ContinuousFlexibility.Radial.ReferenceColumnSmooth
-import Mathlib.Analysis.Calculus.ContDiff.Bounds
+module
+
+public import ContinuousFlexibility.Analysis.N07bFiniteRadialGreen
+public import ContinuousFlexibility.Radial.ReferenceColumnSmooth
+public import Mathlib.Analysis.Calculus.ContDiff.Bounds
 
 /-!
 # Actual reference forcing from finite physical jets
@@ -11,6 +13,8 @@ the actual Fréchet jets, so the genuine radial PDE inherits their bound.
 A positive gap between two height exponents absorbs every fixed material
 envelope power. No decay assumption on the forcing is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

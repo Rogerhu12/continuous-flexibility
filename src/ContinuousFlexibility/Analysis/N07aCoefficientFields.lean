@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aCoefficientSpatial
-import ContinuousFlexibility.Analysis.N07aCoefficientSymmetry
-import ContinuousFlexibility.Analysis.N07aReferenceReturn
+module
+
+public import ContinuousFlexibility.Analysis.N07aCoefficientSpatial
+public import ContinuousFlexibility.Analysis.N07aCoefficientSymmetry
+public import ContinuousFlexibility.Analysis.N07aReferenceReturn
 
 /-!
 # The actual coefficient differences as weighted physical fields
@@ -10,6 +12,8 @@ open annulus. Its genuine jets retain the supplied physical decay. The
 diagonal differences are actual even heights; the mixed difference is odd
 and is retained as an odd field for the subsequent angular primitive.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CanonicalActualPositiveFiniteFactory
-import ContinuousFlexibility.Analysis.N04PositiveNormalizationBuffer
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalActualPositiveFiniteFactory
+public import ContinuousFlexibility.Analysis.N04PositiveNormalizationBuffer
 
 /-!
 # One fixed positive family from the actual endpoint data
@@ -10,6 +12,8 @@ interpolation, with degree fixed by the caller. The parameter certificate
 retains the chosen low bounds and the exact height-width reciprocal for
 later estimates. It does not assert material growth of these constants.
 -/
+
+@[expose] public section
 
 noncomputable section
 

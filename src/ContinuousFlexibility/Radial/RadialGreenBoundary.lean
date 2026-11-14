@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.OuterGreenKernel
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.AbsolutelyContinuousFun
+module
+
+public import ContinuousFlexibility.Radial.OuterGreenKernel
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.AbsolutelyContinuousFun
 
 /-!
 # Green's identity for the radial Jacobi expression
@@ -9,6 +11,8 @@ This is the regular-interval integration identity used for the cut traces.
 The derivative calculation keeps the divergence form, so that the
 potential cancels before any integration or endpoint condition is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

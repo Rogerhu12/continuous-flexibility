@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MatchedOuterLaterRetainedEnvelope
+module
+
+public import ContinuousFlexibility.Radial.MatchedOuterLaterRetainedEnvelope
 
 /-!
 # A common actual outer envelope at every retained frequency
@@ -8,6 +10,8 @@ threshold. The actual fixed-frequency constructions handle these modes,
 and their finite maximum is taken after the single retained geometry is
 fixed. The whole operators and natural columns are kept unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CircleCompositionFaaBounds
-import ContinuousFlexibility.Analysis.TameInterpolationOneAdd
+module
+
+public import ContinuousFlexibility.Analysis.CircleCompositionFaaBounds
+public import ContinuousFlexibility.Analysis.TameInterpolationOneAdd
 
 /-!
 # Fixed-loss local growth of actual circle chart composition
@@ -9,6 +11,8 @@ interpolation property of the physical circle grading. The loss is
 chosen before the output order, and all component sums are performed
 before interpolation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

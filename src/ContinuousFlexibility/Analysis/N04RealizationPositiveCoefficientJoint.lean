@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationCoefficientAnnularTowers
-import ContinuousFlexibility.Analysis.N04RealizationMixedJointDirections
-import ContinuousFlexibility.Analysis.N04RealizationPositiveCoefficientPowerBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationCoefficientAnnularTowers
+public import ContinuousFlexibility.Analysis.N04RealizationMixedJointDirections
+public import ContinuousFlexibility.Analysis.N04RealizationPositiveCoefficientPowerBounds
 
 /-!
 # The same corrected coefficient jointly on a fixed positive interval
@@ -11,6 +13,8 @@ mixed towers therefore restrict to that interval on the same state
 neighborhood. Their uniform seminorm bounds justify the existing joint
 construction without assuming a current canonical jet estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

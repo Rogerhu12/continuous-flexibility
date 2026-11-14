@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RootChartExtension
-import ContinuousFlexibility.Analysis.RootCompositionBounds
+module
+
+public import ContinuousFlexibility.Analysis.RootChartExtension
+public import ContinuousFlexibility.Analysis.RootCompositionBounds
 
 /-!
 # Ordinary bounds for the genuine extended root coordinates
@@ -10,6 +12,8 @@ the genuine smooth extensions. Continuity of the ordinary derivatives of
 those extensions gives the same bounds at the root. No derivative of a
 totalized, nonsmooth formula at the root is used for this passage.
 -/
+
+@[expose] public section
 
 noncomputable section
 

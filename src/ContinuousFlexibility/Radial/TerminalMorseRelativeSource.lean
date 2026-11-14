@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.TerminalMorseSourceBudget
-import ContinuousFlexibility.Radial.TerminalMorseBoundarySlopeLower
+module
+
+public import ContinuousFlexibility.Radial.TerminalMorseSourceBudget
+public import ContinuousFlexibility.Radial.TerminalMorseBoundarySlopeLower
 
 /-!
 # The terminal source relative to the actual stand-in energy
@@ -9,6 +11,8 @@ Its secant lower bound loses only a polynomial frequency factor. Half
 of the proved cap attenuation absorbs that factor uniformly, leaving
 a fixed coefficient exponent chosen before any band threshold.
 -/
+
+@[expose] public section
 
 noncomputable section
 

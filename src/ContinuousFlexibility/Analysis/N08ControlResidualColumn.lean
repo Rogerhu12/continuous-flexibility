@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N08ExtendedControlResidual
-import ContinuousFlexibility.Analysis.N08ControlColumnSmooth
+module
+
+public import ContinuousFlexibility.Analysis.N08ExtendedControlResidual
+public import ContinuousFlexibility.Analysis.N08ControlColumnSmooth
 
 /-!
 # The genuine smoothing control column of the scalar residual
@@ -9,6 +11,8 @@ ball and one loss for every output order. Exact affine-line agreement turns
 its weak-control derivative into the original scalar residual's derivative
 in every physical circle direction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

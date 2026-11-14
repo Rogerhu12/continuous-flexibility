@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionVelocityBounds
-import ContinuousFlexibility.Analysis.N01ReferenceOpticalCollars
-import ContinuousFlexibility.Analysis.MaterialSampleRadialPolynomial
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionVelocityBounds
+public import ContinuousFlexibility.Analysis.N01ReferenceOpticalCollars
+public import ContinuousFlexibility.Analysis.MaterialSampleRadialPolynomial
 
 /-!
 # A material inverse bound for the actual radial coefficient
@@ -11,6 +13,8 @@ profile estimate extends to both component endpoints and retains the
 actual containing material cell. N03 preserves this radial coefficient
 exactly. No retained Morse witness or optical root lower is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

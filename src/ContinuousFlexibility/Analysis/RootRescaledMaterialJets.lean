@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.RootRescaledFieldJets
+module
+
+public import ContinuousFlexibility.Analysis.RootRescaledFieldJets
 
 /-!
 # Material bounds for the original regularized root vector field
@@ -8,6 +10,8 @@ of N04FlowJetsTarget. Constants are selected before the state, envelope,
 collar, and coefficient fields. No interpolation or additional loss is
 needed for this step because the coefficient jets enter linearly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

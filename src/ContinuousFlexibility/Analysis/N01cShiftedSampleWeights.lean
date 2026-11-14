@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cMaterialShiftComparison
-import ContinuousFlexibility.Analysis.N01cMaterialAbsorption
-import ContinuousFlexibility.Analysis.MaterialSampleCofinite
+module
+
+public import ContinuousFlexibility.Analysis.N01cMaterialShiftComparison
+public import ContinuousFlexibility.Analysis.N01cMaterialAbsorption
+public import ContinuousFlexibility.Analysis.MaterialSampleCofinite
 
 /-!
 # Exact material weights under a bounded sample-index shift
@@ -11,6 +13,8 @@ bounded index shift permits only finitely many source cells. Compactness
 therefore supplies the missing global constant. The index association is
 an explicit premise; no control interval is silently identified with a cell.
 -/
+
+@[expose] public section
 
 noncomputable section
 

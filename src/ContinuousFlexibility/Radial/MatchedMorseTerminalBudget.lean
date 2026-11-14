@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.TerminalMorseRelativeSource
-import ContinuousFlexibility.Radial.WeightKernelBounds
+module
+
+public import ContinuousFlexibility.Radial.TerminalMorseRelativeSource
+public import ContinuousFlexibility.Radial.WeightKernelBounds
 
 /-!
 # A frequency-independent budget for the true terminal column
@@ -8,6 +10,8 @@ The leading cap has its proved 400 / (j A²) cost. The true residual
 has the fixed original source exponent. Both are absorbed into a fixed
 coefficient exponent while keeping the full signed height exponent.
 -/
+
+@[expose] public section
 
 noncomputable section
 

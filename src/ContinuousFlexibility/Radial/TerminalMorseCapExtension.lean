@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.TerminalMorseLiftEnergy
+module
+
+public import ContinuousFlexibility.Radial.TerminalMorseLiftEnergy
 
 /-!
 # Extending the actual cutoff-energy integral to the inner interval
@@ -7,6 +9,8 @@ Only the derivative of the physical cutoff contributes to this energy.
 Its support lies strictly inside the same model cap, so enlarging the
 integration interval leaves the actual cutoff-energy error unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

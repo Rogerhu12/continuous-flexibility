@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerLiouvilleEnergyDomain
+module
+
+public import ContinuousFlexibility.Radial.InnerLiouvilleEnergyDomain
 
 /-!
 # One smooth representative for both physical H1 coordinates
@@ -7,6 +9,8 @@ The value and normalized derivative are those of the same transported
 model field. Constant rescaling includes the actual unit Poisson
 normalization without choosing an independent gradient representative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

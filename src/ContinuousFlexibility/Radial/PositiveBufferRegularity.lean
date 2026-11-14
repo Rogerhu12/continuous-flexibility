@@ -1,6 +1,8 @@
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
-import Mathlib.Analysis.Calculus.ContDiff.Operations
-import Mathlib.Tactic
+module
+
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+public import Mathlib.Analysis.Calculus.ContDiff.Operations
+public import Mathlib.Tactic
 
 /-!
 # Smoothness of classical buffer solutions
@@ -10,6 +12,8 @@ first derivative, the actual scalar differential equation bootstraps both
 to smoothness.  This lemma treats any open set, hence both finite buffers
 and exterior half-lines, with the same proof.
 -/
+
+@[expose] public section
 
 noncomputable section
 

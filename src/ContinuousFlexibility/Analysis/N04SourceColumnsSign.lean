@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04SourceColumnsGeometry
-import ContinuousFlexibility.Analysis.N04SourceColumnsData
-import ContinuousFlexibility.Analysis.SectorParameterGeometry
-import Mathlib.Topology.Order.IntermediateValue
+module
+
+public import ContinuousFlexibility.Analysis.N04SourceColumnsGeometry
+public import ContinuousFlexibility.Analysis.N04SourceColumnsData
+public import ContinuousFlexibility.Analysis.SectorParameterGeometry
+public import Mathlib.Topology.Order.IntermediateValue
 
 /-!
 # One fixed sign for each inverse determinant
@@ -11,6 +13,8 @@ parameter sections are continuous on preconnected sets, so one scalar of
 absolute value one removes the absolute value throughout each piece.
 Separate continuity suffices; no unproved joint regularity is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

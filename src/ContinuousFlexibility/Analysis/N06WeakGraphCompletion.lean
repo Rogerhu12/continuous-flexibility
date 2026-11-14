@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06WeakGlobalModes
-import ContinuousFlexibility.Analysis.N06CosineCutoffTails
-import ContinuousFlexibility.Analysis.N06GraphCauchy
+module
+
+public import ContinuousFlexibility.Analysis.N06WeakGlobalModes
+public import ContinuousFlexibility.Analysis.N06CosineCutoffTails
+public import ContinuousFlexibility.Analysis.N06GraphCauchy
 
 /-!
 # Completion of the five weak graph fields in the original canonical L2
@@ -10,6 +12,8 @@ norm is controlled by the corresponding tails of the original source and
 solution jet rows. The actual cosine convergence theorem then gives five
 L2 limits at every fixed angular order, with the same graph constant.
 -/
+
+@[expose] public section
 
 noncomputable section
 

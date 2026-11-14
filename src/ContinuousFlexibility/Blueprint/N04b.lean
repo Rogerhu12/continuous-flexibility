@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Blueprint.N04b.FieldRealization
-import ContinuousFlexibility.Blueprint.N04b.CanonicalConstruction
+module
+
+public import ContinuousFlexibility.Blueprint.N04b.FieldRealization
+public import ContinuousFlexibility.Blueprint.N04b.CanonicalConstruction
 
 /-!
 # Blueprint node N04b
@@ -13,6 +15,8 @@ The exact node axiom assertion below checks their full transitive closure.
 Source: paper/flexible-surface-readable/07-fixed-geometry.tex, lines 992--1303.
 Task: docs/tasks/N04b.md.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

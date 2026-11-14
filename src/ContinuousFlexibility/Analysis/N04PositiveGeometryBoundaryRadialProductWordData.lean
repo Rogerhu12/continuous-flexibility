@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryRadialProductComposition
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryRadialProductComposition
 
 /-!
 # Fixed constants for radial product composition
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryRadialProductCo
 Existential witnesses are selected with abstract scalar and plane
 functions. The actual source height uses only the resulting fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 

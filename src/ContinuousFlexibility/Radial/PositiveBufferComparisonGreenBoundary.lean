@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.PositiveBufferComparisonGreenRegularity
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferComparisonGreenRegularity
 
 /-!
 # Cut values, conormals, and the corrected Green identity
@@ -8,6 +10,8 @@ derivative and is identically zero near the opposite cut. Subtracting
 a smooth exterior-homogeneous correction yields the delta-minus-exterior
 conormal identity used by the finite-dimensional DN calculation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

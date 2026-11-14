@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Blueprint.Statements
-import ContinuousFlexibility.Analysis.PhysicalTransmissionJets
-import ContinuousFlexibility.Analysis.PhysicalTransmissionGluing
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
+public import ContinuousFlexibility.Analysis.PhysicalTransmissionJets
+public import ContinuousFlexibility.Analysis.PhysicalTransmissionGluing
 
 /-!
 # Blueprint node N04Transmission
@@ -12,6 +14,8 @@ Source: `paper/flexible-surface-readable/07-fixed-geometry.tex` lines 1725–175
 Task file: `docs/tasks/N04Transmission.md`. The actual equation determines
 the normal jets, and the matching jets give a smooth physical gluing.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

@@ -1,6 +1,10 @@
-import ContinuousFlexibility.Analysis.N04NegativeInverseReferenceBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeInverseReferenceBounds
 
 /-! Uniform coefficient preparation for the actual inverse prefix. -/
+
+@[expose] public section
 
 noncomputable section
 

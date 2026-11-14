@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerPieceProjection
-import ContinuousFlexibility.Radial.InnerBorderTransport
-import Mathlib.Analysis.Normed.Operator.Prod
+module
+
+public import ContinuousFlexibility.Radial.InnerPieceProjection
+public import ContinuousFlexibility.Radial.InnerBorderTransport
+public import Mathlib.Analysis.Normed.Operator.Prod
 
 /-!
 # Actual source pieces with one central scalar
@@ -11,6 +13,8 @@ estimates, and retain the Bessel constant one of the physical L²
 restriction. They also cover the unbordered subspace where the scalar is
 zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

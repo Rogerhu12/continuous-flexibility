@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cActualReferenceWith
+module
+
+public import ContinuousFlexibility.Analysis.N01cActualReferenceWith
 
 /-!
 # Retaining the actual geometric witness through reference completion
@@ -8,6 +10,8 @@ reference. This extraction preserves the actual metadata and profile
 identity; it does not identify a previously arbitrary Through03 witness
 with a newly constructed reference.
 -/
+
+@[expose] public section
 
 noncomputable section
 

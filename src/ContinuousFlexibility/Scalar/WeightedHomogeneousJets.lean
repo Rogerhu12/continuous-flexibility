@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
-import ContinuousFlexibility.Analysis.ProjectiveJetEvaluation
+module
+
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
+public import ContinuousFlexibility.Analysis.ProjectiveJetEvaluation
 
 /-!
 # Identifying actual derivatives in homogeneous operator parameters
@@ -9,6 +11,8 @@ quotients exactly constant.  Uniqueness in the actual Hausdorff target then
 identifies the first and mixed second entries of any genuine directional
 tower.  No continuity of an independently frozen algebraic map is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

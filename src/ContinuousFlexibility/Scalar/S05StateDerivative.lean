@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Statements.Scalar
+module
+
+public import ContinuousFlexibility.Statements.Scalar
 
 /-!
 # State derivative of the normalized height residual
@@ -11,6 +13,8 @@ with the corrected divergence and its residual error.
 
 Source: `paper/flexible-surface-readable/03-height-equation.tex`, lines 474–518.
 -/
+
+@[expose] public section
 
 noncomputable section
 

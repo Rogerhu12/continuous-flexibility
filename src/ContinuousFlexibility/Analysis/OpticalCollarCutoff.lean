@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionCutoff
-import ContinuousFlexibility.Analysis.N01ReferenceOpticalCollars
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionCutoff
+public import ContinuousFlexibility.Analysis.N01ReferenceOpticalCollars
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
 
 /-!
 # Cutoffs supported on quantitatively positive optical collars
@@ -9,6 +11,8 @@ The actual interpolation cutoff is the same fixed smooth transition,
 rescaled so that its derivative is supported on the selected optical
 collar. All orders have uniform inverse-width bounds.
 -/
+
+@[expose] public section
 
 noncomputable section
 

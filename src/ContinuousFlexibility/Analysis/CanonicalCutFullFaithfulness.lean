@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CanonicalStoredSliceBijection
-import ContinuousFlexibility.Analysis.CanonicalCutCoefficientMatching
-import ContinuousFlexibility.Analysis.RootPhysicalTransport
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalStoredSliceBijection
+public import ContinuousFlexibility.Analysis.CanonicalCutCoefficientMatching
+public import ContinuousFlexibility.Analysis.RootPhysicalTransport
 
 /-!
 # Stored coefficients on the whole actual cut
@@ -16,6 +18,8 @@ coefficient recover both remaining stored coefficients.
 This argument uses the actual time ODE at the cut. Even test functions
 alone do not determine the stored angular coefficient there.
 -/
+
+@[expose] public section
 
 noncomputable section
 

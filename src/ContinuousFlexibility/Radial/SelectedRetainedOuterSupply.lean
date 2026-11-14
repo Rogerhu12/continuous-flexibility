@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.SelectedRetainedOuterRealizations
-import ContinuousFlexibility.Radial.SelectedTerminalMatching
-import ContinuousFlexibility.Radial.SelectedTerminalOuterSupply
+module
+
+public import ContinuousFlexibility.Radial.SelectedRetainedOuterRealizations
+public import ContinuousFlexibility.Radial.SelectedTerminalMatching
+public import ContinuousFlexibility.Radial.SelectedTerminalOuterSupply
 
 /-!
 # The actual exterior construction supplies either terminal matching shell
@@ -9,6 +11,8 @@ The same fixed natural functions determine the boundary rows and the actual
 outer inverse. Installing an arbitrary inner operator leaves this construction
 unchanged, so the result applies to both first and later frequency bands.
 -/
+
+@[expose] public section
 
 noncomputable section
 

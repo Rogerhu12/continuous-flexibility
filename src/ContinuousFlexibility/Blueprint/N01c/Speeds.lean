@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Blueprint.N01c.Statements
-import ContinuousFlexibility.Analysis.N01cCharacteristicSpeedTameBounds
+module
+
+public import ContinuousFlexibility.Blueprint.N01c.Statements
+public import ContinuousFlexibility.Analysis.N01cCharacteristicSpeedTameBounds
 
 /-!
 # N01c: quantitative characteristic speeds
@@ -11,6 +13,8 @@ remain attached to the same witness.
 Source: readable §7, Lemma `uniform-characteristic-flow-constants`, Step 1.
 Task: `docs/tasks/N01c-Speeds.md`.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01ActualRootStrip
-import ContinuousFlexibility.Analysis.N01ControlledRootFlow
-import ContinuousFlexibility.Analysis.CanonicalVariationBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01ActualRootStrip
+public import ContinuousFlexibility.Analysis.N01ControlledRootFlow
+public import ContinuousFlexibility.Analysis.CanonicalVariationBounds
 
 /-!
 # A controlled actual root flow at both ends of every negative component
@@ -11,6 +13,8 @@ work for every component and both endpoint orientations. Each component
 may have its own positive collar and numerical constants; their later
 material-envelope absorption is separate from this construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

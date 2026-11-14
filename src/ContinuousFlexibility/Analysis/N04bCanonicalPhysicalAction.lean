@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04bLocalIntertwining
-import ContinuousFlexibility.Blueprint.Statements
-import Mathlib.Tactic.Linarith
+module
+
+public import ContinuousFlexibility.Analysis.N04bLocalIntertwining
+public import ContinuousFlexibility.Blueprint.Statements
+public import Mathlib.Tactic.Linarith
 
 /-!
 # Actual physical operator action from the frozen canonical parts
@@ -14,6 +16,8 @@ One Bool case split handles both canonical signs. The potential acquires
 the same sign when the canonical operator identity is solved for the
 physical divergence operator.
 -/
+
+@[expose] public section
 
 noncomputable section
 

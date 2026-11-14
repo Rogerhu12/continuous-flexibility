@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterTailPointwiseBounds
-import ContinuousFlexibility.Radial.OuterKernelEnvelopeAlgebra
+module
+
+public import ContinuousFlexibility.Radial.OuterTailPointwiseBounds
+public import ContinuousFlexibility.Radial.OuterKernelEnvelopeAlgebra
 
 /-!
 # A uniform physical two-point envelope for the actual deep inverse
@@ -9,6 +11,8 @@ orientation, or tail entrance. The proof uses the actual initial and
 ordinary resistances, the actual normalized Green pair, and its sharp
 mass-resistance products. No pointwise kernel estimate is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

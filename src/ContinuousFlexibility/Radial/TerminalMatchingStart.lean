@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.TerminalMatchingThreshold
-import ContinuousFlexibility.Radial.MorseChainGeometry
+module
+
+public import ContinuousFlexibility.Radial.TerminalMatchingThreshold
+public import ContinuousFlexibility.Radial.MorseChainGeometry
 
 /-!
 # A matching start chosen before the actual selected geometry
@@ -9,6 +11,8 @@ thresholds and actions therefore agree above their starting indices.
 The scalar suppression theorem consequently chooses a single start
 before the final chain, selected sequence, and retained heads exist.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06PhysicalReconstruction
+module
+
+public import ContinuousFlexibility.Analysis.N06PhysicalReconstruction
 
 /-!
 # Periodicity of the actual reconstructed source
@@ -7,6 +9,8 @@ The lift identity of a smooth chart implies periodicity of its actual
 Fréchet derivative and Jacobian. Consequently the physical source weight
 used in the canonical source formula is periodic as well as the height.
 -/
+
+@[expose] public section
 
 noncomputable section
 

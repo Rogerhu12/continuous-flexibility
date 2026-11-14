@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Scalar.WeightedGraph
-import ContinuousFlexibility.Analysis.MaterialHeightRegularity
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
-import Mathlib.Analysis.Distribution.AEEqOfIntegralContDiff
-import Mathlib.Algebra.Field.Periodic
-import Mathlib.MeasureTheory.Measure.OpenPos
+module
+
+public import ContinuousFlexibility.Scalar.WeightedGraph
+public import ContinuousFlexibility.Analysis.MaterialHeightRegularity
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
+public import Mathlib.Analysis.Distribution.AEEqOfIntegralContDiff
+public import Mathlib.Algebra.Field.Periodic
+public import Mathlib.MeasureTheory.Measure.OpenPos
 
 /-!
 # Separation, maximality, and closedness of the physical weak graph
@@ -13,6 +15,8 @@ Consequently the weak graph has at most one output for each common height.
 Integration by parts identifies that output with an actual decoded operator;
 continuity of the realized linear operator then proves closedness.
 -/
+
+@[expose] public section
 
 noncomputable section
 

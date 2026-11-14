@@ -1,9 +1,13 @@
-import ContinuousFlexibility.Analysis.N01cStateInterpolation
-import ContinuousFlexibility.Analysis.N01cFlowReferenceDifference
-import ContinuousFlexibility.Analysis.N01cBoundsRestriction
+module
+
+public import ContinuousFlexibility.Analysis.N01cStateInterpolation
+public import ContinuousFlexibility.Analysis.N01cFlowReferenceDifference
+public import ContinuousFlexibility.Analysis.N01cBoundsRestriction
 
 /-! Specialize the weighted reference-segment argument to the actual
 ordinary flows, on the one state neighborhood chosen before all orders. -/
+
+@[expose] public section
 
 noncomputable section
 

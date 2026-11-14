@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.BoundaryTaylorDensity
-import ContinuousFlexibility.Analysis.BoundaryJetClosure
-import ContinuousFlexibility.Analysis.CanonicalFieldJetReduction
+module
+
+public import ContinuousFlexibility.Analysis.BoundaryTaylorDensity
+public import ContinuousFlexibility.Analysis.BoundaryJetClosure
+public import ContinuousFlexibility.Analysis.CanonicalFieldJetReduction
 
 /-!
 # Actual principal remainder after boundary Taylor matching
@@ -12,6 +14,8 @@ The Taylor chart and logarithmic height construction then force the
 remainder jets to vanish. No zero jets of the constructed density are
 assumed, and one component selector covers all three coefficients.
 -/
+
+@[expose] public section
 
 noncomputable section
 

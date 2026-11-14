@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularReferenceDecomposition
-import ContinuousFlexibility.Analysis.N07aAngularEndpointFlux
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceDecomposition
+public import ContinuousFlexibility.Analysis.N07aAngularEndpointFlux
 
 /-!
 # The actual compatible mean of the transported reference source
@@ -9,6 +11,8 @@ normal part has zero radial integral by the continuous endpoint flux.
 Its angular part has zero mean on every actual open piece, which is an
 a.e. cover. No compatibility condition is imposed on the new source.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06RootGreenDensity
-import ContinuousFlexibility.Analysis.N06CurrentChartChange
-import Mathlib.Topology.Order.IntermediateValue
+module
+
+public import ContinuousFlexibility.Analysis.N06RootGreenDensity
+public import ContinuousFlexibility.Analysis.N06CurrentChartChange
+public import Mathlib.Topology.Order.IntermediateValue
 
 /-!
 # The actual angular image of a closed piece boundary
@@ -12,6 +14,8 @@ Thus any actual boundary map appearing in the first-jet record takes
 intermediate value theorem. No boundary inverse or assumed monotonicity
 is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CylinderSobolev
-import Mathlib.Analysis.SpecialFunctions.ExpDeriv
+module
+
+public import ContinuousFlexibility.Analysis.CylinderSobolev
+public import Mathlib.Analysis.SpecialFunctions.ExpDeriv
 
 /-!
 # Integrating factors and the actual angular derivative of a circle flow
@@ -10,6 +12,8 @@ variational equation from the genuine time ODE.  No angular derivative or
 variational equation is supplied as independent data.  There is no choice
 of angular period in this module.
 -/
+
+@[expose] public section
 
 noncomputable section
 

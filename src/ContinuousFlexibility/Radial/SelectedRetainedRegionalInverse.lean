@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.SelectedScaledRobinInverse
-import ContinuousFlexibility.Radial.SelectedFirstNaturalTransport
-import ContinuousFlexibility.Radial.SelectedLaterRetained
-import ContinuousFlexibility.Radial.SelectedOuterDeepSplit
+module
+
+public import ContinuousFlexibility.Radial.SelectedScaledRobinInverse
+public import ContinuousFlexibility.Radial.SelectedFirstNaturalTransport
+public import ContinuousFlexibility.Radial.SelectedLaterRetained
+public import ContinuousFlexibility.Radial.SelectedOuterDeepSplit
 
 /-!
 # Actual regional inverses on the retained pair's two selected cuts
@@ -11,6 +13,8 @@ joins. The old selected profile supplies the complete deep hypotheses and
 the retained pair supplies the actual radius/height transport. The natural
 functions are the fixed functions passed by the first- or later-band data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

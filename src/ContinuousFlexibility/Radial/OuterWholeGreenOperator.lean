@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.OuterActualGreenOperator
-import ContinuousFlexibility.Analysis.L2RestrictionSplit
-import ContinuousFlexibility.Analysis.L2CompactInterval
+module
+
+public import ContinuousFlexibility.Radial.OuterActualGreenOperator
+public import ContinuousFlexibility.Analysis.L2RestrictionSplit
+public import ContinuousFlexibility.Analysis.L2CompactInterval
 
 /-!
 # The constructed Green operator on the whole weighted outer region
@@ -10,6 +12,8 @@ original weighted measure.  Restriction, the actual compact-core isometry,
 and extension by zero identify the four blocks with an operator on one L²
 space.  All norm estimates refer to that whole-space operator.
 -/
+
+@[expose] public section
 
 noncomputable section
 

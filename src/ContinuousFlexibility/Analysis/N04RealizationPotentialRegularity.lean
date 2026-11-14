@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
-import ContinuousFlexibility.Analysis.CylinderMixedJets
+module
+
+public import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
+public import ContinuousFlexibility.Analysis.CylinderMixedJets
 
 /-!
 # Genuine potential towers from the raw canonical fields
@@ -9,6 +11,8 @@ build the actual divergence operator and the reciprocal-height potential.
 Only the three principal fields, pulled height, and reciprocal pulled
 height have input towers. No potential tower is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

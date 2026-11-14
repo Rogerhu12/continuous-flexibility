@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.MatchedTerminalTwoWeightColumns
-import ContinuousFlexibility.Radial.MatchedMorseTerminalBudget
-import ContinuousFlexibility.Radial.SelectedLaterCutoffGeometry
-import ContinuousFlexibility.Radial.SelectedTerminalMatching
-import ContinuousFlexibility.Blueprint.R10a.Geometry
+module
+
+public import ContinuousFlexibility.Radial.MatchedTerminalTwoWeightColumns
+public import ContinuousFlexibility.Radial.MatchedMorseTerminalBudget
+public import ContinuousFlexibility.Radial.SelectedLaterCutoffGeometry
+public import ContinuousFlexibility.Radial.SelectedTerminalMatching
+public import ContinuousFlexibility.Blueprint.R10a.Geometry
 
 /-!
 # The original later terminal columns between two actual weights
@@ -13,6 +15,8 @@ Only local bounds for the two physical weight functions are arguments.
 The true inverse norm remains explicit until the finite-chain estimate
 is inserted.
 -/
+
+@[expose] public section
 
 noncomputable section
 

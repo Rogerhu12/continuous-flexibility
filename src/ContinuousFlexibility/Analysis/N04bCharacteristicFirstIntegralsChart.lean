@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bCharacteristicFirstIntegralsTransport
-import ContinuousFlexibility.Analysis.CharacteristicTravelStrip
+module
+
+public import ContinuousFlexibility.Analysis.N04bCharacteristicFirstIntegralsTransport
+public import ContinuousFlexibility.Analysis.CharacteristicTravelStrip
 
 /-!
 # The full travel strip of an actual characteristic flow
@@ -9,6 +11,8 @@ The full-strip bijection and smooth actual inverse follow from their proved
 regularity, transport equations, and exact endpoint normalizations. This
 module does not identify fixed radial halves with travel-time halves.
 -/
+
+@[expose] public section
 
 noncomputable section
 

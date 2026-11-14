@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerRadialPhysicalSource
-import ContinuousFlexibility.Radial.InnerLiouvilleDirichletUniqueness
-import ContinuousFlexibility.Radial.InnerLiouvilleLocalSolution
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialPhysicalSource
+public import ContinuousFlexibility.Radial.InnerLiouvilleDirichletUniqueness
+public import ContinuousFlexibility.Radial.InnerLiouvilleLocalSolution
 
 /-!
 # Actual retained-model uniqueness in the finite physical chain
@@ -10,6 +12,8 @@ zero-kernel theorem supplies the finite-chain kernel condition. Only
 the distinguished central chart may carry the temporary scalar column;
 on every other chart its local scalar is zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CoupledCircleJointJetAlgebra
-import ContinuousFlexibility.Analysis.TameMultilinearNormalization
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
-import ContinuousFlexibility.Analysis.TameLocalCalculus
+module
+
+public import ContinuousFlexibility.Analysis.CoupledCircleJointJetAlgebra
+public import ContinuousFlexibility.Analysis.TameMultilinearNormalization
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
+public import ContinuousFlexibility.Analysis.TameLocalCalculus
 
 /-!
 # A common low base for genuine joint kernel jets
@@ -12,6 +14,8 @@ source direction. Common low-base kernel estimates control every term;
 multilinear normalization then retains one high factor in the original
 product grading. Parameter order is charged only to the high loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

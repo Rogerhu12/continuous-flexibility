@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import Mathlib.Algebra.BigOperators.Fin
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import Mathlib.Algebra.BigOperators.Fin
 
 /-!
 # Keeping one localized slot separate in the N01 one-high expression
@@ -8,6 +10,8 @@ On the unit low-seminorm box for the other directions, the localized
 slot occurs either at the low order or at the high order. This preserves
 the two different derivative budgets needed by weighted localization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

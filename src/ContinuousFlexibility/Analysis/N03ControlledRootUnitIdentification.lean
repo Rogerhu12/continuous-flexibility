@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01ControlledRootInput
-import ContinuousFlexibility.Analysis.N03StateRootBandIdentification
-import ContinuousFlexibility.Analysis.N03RootUnitScaleIdentification
+module
+
+public import ContinuousFlexibility.Analysis.N01ControlledRootInput
+public import ContinuousFlexibility.Analysis.N03StateRootBandIdentification
+public import ContinuousFlexibility.Analysis.N03RootUnitScaleIdentification
 
 /-!
 # The actual controlled input identifies the original stored root jets
@@ -10,6 +12,8 @@ bound. That bound is used only to obtain the genuine state-dependent N03
 band. The same stored chart and height then have exactly the unit-model
 ordinary jets. No inverse of the chosen band or parameter scale is charged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

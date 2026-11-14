@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aModeBudgetMaterial
-import ContinuousFlexibility.Analysis.N07aScaledModeNorms
+module
+
+public import ContinuousFlexibility.Analysis.N07aModeBudgetMaterial
+public import ContinuousFlexibility.Analysis.N07aScaledModeNorms
 
 /-!
 # Norm bounds from the actual mode energy
@@ -8,6 +10,8 @@ The summable energy controls each individual mode of the same weak
 solution.  The affine radial normalization is then converted back to the
 actual canonical angular-band norm, with its exact length factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

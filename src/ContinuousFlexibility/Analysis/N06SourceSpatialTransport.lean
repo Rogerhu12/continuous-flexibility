@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06NuSpatialCalculus
-import ContinuousFlexibility.Analysis.N06CurrentSourceJets
+module
+
+public import ContinuousFlexibility.Analysis.N06NuSpatialCalculus
+public import ContinuousFlexibility.Analysis.N06CurrentSourceJets
 
 /-!
 # Quantitative transport by the actual inverse-chart vector field
@@ -11,6 +13,8 @@ of a totalized inverse chart is involved. A uniform bound for these
 coefficients is an explicit geometric input; qualitative N04 smoothness
 alone does not assert such a bound before the current state.
 -/
+
+@[expose] public section
 
 noncomputable section
 

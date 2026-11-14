@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCircleRealSobolev
-import ContinuousFlexibility.Analysis.OneHighInterpolation
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleRealSobolev
+public import ContinuousFlexibility.Analysis.OneHighInterpolation
 
 /-!
 # The derivative trade used by tame circle composition
@@ -8,6 +10,8 @@ The common interpolation parameter trades one derivative between the input
 function and the lift geometry. All endpoint memberships are supplied by the
 actual smooth derivative towers.
 -/
+
+@[expose] public section
 
 noncomputable section
 

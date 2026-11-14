@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.RetainedMorseModelFamily
-import ContinuousFlexibility.Radial.RetainedMorseGapCharts
-import ContinuousFlexibility.Radial.InnerRadialGapHardy
+module
+
+public import ContinuousFlexibility.Radial.RetainedMorseModelFamily
+public import ContinuousFlexibility.Radial.RetainedMorseGapCharts
+public import ContinuousFlexibility.Radial.InnerRadialGapHardy
 
 /-!
 # One actual central, Morse, and gap dictionary
@@ -10,6 +12,8 @@ selector keeps the original localized witnesses and the gap selector
 keeps their constructed physical Poisson columns. Incidence and positive
 cut diagonals follow from this alternating dictionary.
 -/
+
+@[expose] public section
 
 noncomputable section
 

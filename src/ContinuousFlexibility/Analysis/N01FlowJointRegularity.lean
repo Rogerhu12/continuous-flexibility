@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01FlowAngularVariation
-import ContinuousFlexibility.Analysis.ReturnCorrectionPatching
-import Mathlib.Analysis.Calculus.FDeriv.Partial
-import Mathlib.Analysis.Normed.Operator.Mul
+module
+
+public import ContinuousFlexibility.Analysis.N01FlowAngularVariation
+public import ContinuousFlexibility.Analysis.ReturnCorrectionPatching
+public import Mathlib.Analysis.Calculus.FDeriv.Partial
+public import Mathlib.Analysis.Normed.Operator.Mul
 
 /-!
 # Joint differentiability of the actual N01 flow
@@ -13,6 +15,8 @@ root, so the partial-derivative criterion gives a joint strict derivative
 at every interior radius. This removes the extra joint-regularity premise
 from the corrected-flow equation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

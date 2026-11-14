@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerLiouvillePhysicalRepresentatives
-import ContinuousFlexibility.Radial.InnerLiouvilleCoefficients
-import ContinuousFlexibility.Radial.InnerRadialPotentialMultiplier
+module
+
+public import ContinuousFlexibility.Radial.InnerLiouvillePhysicalRepresentatives
+public import ContinuousFlexibility.Radial.InnerLiouvilleCoefficients
+public import ContinuousFlexibility.Radial.InnerRadialPotentialMultiplier
 
 /-!
 # The actual signed potential under source and field transport
@@ -10,6 +12,8 @@ radial measure. Conjugating it by the field lift and its adjoint gives
 the model coefficient -j² rho on the retained interval. Positivity of
 the physical weight is derived from the same local profile identity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

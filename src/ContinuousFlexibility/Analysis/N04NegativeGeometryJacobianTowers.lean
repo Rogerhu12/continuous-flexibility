@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometryHeightTowers
-import Mathlib.Analysis.Calculus.Deriv.Abs
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryHeightTowers
+public import Mathlib.Analysis.Calculus.Deriv.Abs
 
 /-!
 # Joint towers of the actual negative Jacobian and its reciprocal
@@ -9,6 +11,8 @@ same stored chart. Fixed spatial jet evaluation identifies that differential
 with its genuine joint parameter tower. Its nonzero component germ then
 permits the absolute value and reciprocal on the original domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

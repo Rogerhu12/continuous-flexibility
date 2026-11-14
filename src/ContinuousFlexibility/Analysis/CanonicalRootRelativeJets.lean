@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N03RootEndpointPhysicalJets
-import ContinuousFlexibility.Analysis.RelativeRootJetBounds
-import ContinuousFlexibility.Analysis.CanonicalRootTransportBoundary
+module
+
+public import ContinuousFlexibility.Analysis.N03RootEndpointPhysicalJets
+public import ContinuousFlexibility.Analysis.RelativeRootJetBounds
+public import ContinuousFlexibility.Analysis.CanonicalRootTransportBoundary
 
 /-!
 # Actual relative root maps on one common neighborhood
@@ -10,6 +12,8 @@ both ends of the composition. The reference root jets are lifted from
 zero state displacement. No chart, inverse chart, root, or reference
 witness is replaced, and no bound on an angular lift value is requested.
 -/
+
+@[expose] public section
 
 noncomputable section
 

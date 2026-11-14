@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryStoredForwardSamplePrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryFixedState
-import ContinuousFlexibility.Analysis.N04RealizationRootBoundaryPoint
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryStoredForwardSamplePrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryFixedState
+public import ContinuousFlexibility.Analysis.N04RealizationRootBoundaryPoint
 
 /-!
 # Original forward jets at the reference state
@@ -10,6 +12,8 @@ reference state. Its positive spatial jets come from the actual joint
 forward tower by fixing the state to zero. Their sampled bounds are
 independent of every later parameter order and shift.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBadBuffer
-import ContinuousFlexibility.Analysis.N04PositiveGeometryCurrentCost
-import ContinuousFlexibility.Analysis.N04RealizationLeadOptical
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBadBuffer
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryCurrentCost
+public import ContinuousFlexibility.Analysis.N04RealizationLeadOptical
 
 /-!
 # The supplied-buffer quantifier obstructs positive geometry
@@ -22,6 +24,8 @@ That exact draft is retained as
 `N04RealizationSuppliedBufferPositiveGeometryObligation`. The corrected
 `N04RealizationPositiveGeometryObligation` instead chooses its buffer.
 -/
+
+@[expose] public section
 
 noncomputable section
 

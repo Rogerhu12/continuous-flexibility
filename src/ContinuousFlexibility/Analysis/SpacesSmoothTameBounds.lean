@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Statements.Analysis
+module
+
+public import ContinuousFlexibility.Statements.Analysis
 
 /-!
 # Smooth tame bounds from a raw derivative kernel
@@ -8,6 +10,8 @@ kernel turn fixed low-seminorm bounds into the local estimates required
 by smooth tameness. The conversion takes place on abstract vector spaces,
 so specializing the theorem never unfolds a concrete weak-jet tower.
 -/
+
+@[expose] public section
 
 noncomputable section
 

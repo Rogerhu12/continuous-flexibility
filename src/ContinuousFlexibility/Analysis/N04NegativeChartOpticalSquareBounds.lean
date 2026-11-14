@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartStateOpticalFactor
-import ContinuousFlexibility.Analysis.N01cOpticalMaterialBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartStateOpticalFactor
+public import ContinuousFlexibility.Analysis.N01cOpticalMaterialBounds
 
 /-!
 # Material bounds for the genuine divided optical square
@@ -10,6 +12,8 @@ host, and then to the sample of the selected atlas half. The absolute
 state-square bound is used only for unmarked factors; the separate
 direction bound keeps the full height gain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

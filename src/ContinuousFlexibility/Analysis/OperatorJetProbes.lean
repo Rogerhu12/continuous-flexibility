@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.PrincipalCoefficientPullback
+module
+
+public import ContinuousFlexibility.Analysis.PrincipalCoefficientPullback
 
 /-!
 # Polynomial tests with prescribed critical Hessians
@@ -8,6 +10,8 @@ their gradient is `(0, 1)` and their three Hessian entries are arbitrary.
 They will force regularity of coefficient fields from equality of the
 actual divergence operators, before any coefficient product rule is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

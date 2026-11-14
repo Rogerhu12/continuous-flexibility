@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerRadialModelPiece
-import ContinuousFlexibility.Radial.InnerLiouvilleUnitFlux
-import ContinuousFlexibility.Radial.InnerChainBoundaryHilbert
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialModelPiece
+public import ContinuousFlexibility.Radial.InnerLiouvilleUnitFlux
+public import ContinuousFlexibility.Radial.InnerChainBoundaryHilbert
 
 /-!
 # The actual retained-model conormal block in the finite chain
@@ -11,6 +13,8 @@ gradient and potential remain those of that combination. The resulting
 affine-hat flux is the full physical matrix: the true diagonal kappa,
 including the density drift, plus the original compression error.
 -/
+
+@[expose] public section
 
 noncomputable section
 

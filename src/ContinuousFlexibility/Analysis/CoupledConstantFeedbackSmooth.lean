@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CoupledConstantFeedbackInverse
-import ContinuousFlexibility.Analysis.CoupledControlCircleDerivative
-import ContinuousFlexibility.Analysis.CoupledControlResponseSmooth
-import ContinuousFlexibility.Analysis.CoupledPhysicalTameComposition
+module
+
+public import ContinuousFlexibility.Analysis.CoupledConstantFeedbackInverse
+public import ContinuousFlexibility.Analysis.CoupledControlCircleDerivative
+public import ContinuousFlexibility.Analysis.CoupledControlResponseSmooth
+public import ContinuousFlexibility.Analysis.CoupledPhysicalTameComposition
 
 /-!
 # The actual constant-circle forward feedback is smooth tame
@@ -11,6 +13,8 @@ scaled height derivative, angular averaging and the circle control
 derivative. The restriction into the control Banach space uses its actual
 finite-order continuity bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

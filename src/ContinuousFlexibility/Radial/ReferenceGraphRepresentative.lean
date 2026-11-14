@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ReferenceGraphClosed
+module
+
+public import ContinuousFlexibility.Radial.ReferenceGraphClosed
 
 /-!
 # Replacing the actual representative of a reference graph
@@ -7,6 +9,8 @@ The field may be replaced by an a.e. equal physical representative while
 retaining the original scalar datum and pointwise angular symmetries.
 All weak pairings and the border row remain their genuine integrals.
 -/
+
+@[expose] public section
 
 open Set Filter MeasureTheory
 

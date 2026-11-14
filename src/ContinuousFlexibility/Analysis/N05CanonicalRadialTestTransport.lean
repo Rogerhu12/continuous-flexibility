@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05CanonicalAngularTransport
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05CanonicalAngularTransport
 
 /-!
 # Actual radial test transport
@@ -9,6 +11,8 @@ gives the test needed for a canonical radial weak derivative. Its compact
 support lies strictly inside the actual physical piece, so the quotient
 extends smoothly by zero even outside the chart.
 -/
+
+@[expose] public section
 
 noncomputable section
 

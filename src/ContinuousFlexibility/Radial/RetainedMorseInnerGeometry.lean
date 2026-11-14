@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ScaledMorseInnerGaps
-import ContinuousFlexibility.Radial.RetainedMorseGapSlope
-import ContinuousFlexibility.Radial.ReferenceFirstGapSlope
+module
+
+public import ContinuousFlexibility.Radial.ScaledMorseInnerGaps
+public import ContinuousFlexibility.Radial.RetainedMorseGapSlope
+public import ContinuousFlexibility.Radial.ReferenceFirstGapSlope
 
 /-!
 # The actual finite inner geometry of the retained pair
@@ -9,6 +11,8 @@ The central buffer is fixed before the retained pair. Every tail cut and
 outer endpoint is the physical dilation of the old selected cell. Their
 membership in the new core follows from the retained profile identity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

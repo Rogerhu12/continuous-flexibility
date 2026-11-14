@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01FlowJointSmoothness
-import ContinuousFlexibility.Analysis.ReturnCorrectionResidualBilinear
-import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
+module
+
+public import ContinuousFlexibility.Analysis.N01FlowJointSmoothness
+public import ContinuousFlexibility.Analysis.ReturnCorrectionResidualBilinear
+public import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
 
 /-!
 # Smoothness of the actual independent-residual error
@@ -11,6 +13,8 @@ Every operation in the frozen correction is therefore smooth. The
 global component selector agrees locally with the corresponding smooth
 formula or with zero, including at every simple turning radius.
 -/
+
+@[expose] public section
 
 noncomputable section
 

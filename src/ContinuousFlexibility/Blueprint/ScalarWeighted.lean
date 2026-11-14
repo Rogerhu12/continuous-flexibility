@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Scalar.WeightedRealization
+module
+
+public import ContinuousFlexibility.Scalar.WeightedRealization
 
 /-!
 # Blueprint node ScalarWeighted
@@ -11,6 +13,8 @@ Source: `paper/flexible-surface-readable/03-height-equation.tex` lines 406–543
 
 Task file: `docs/tasks/ScalarWeighted.md`.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Blueprint.R06a
-import ContinuousFlexibility.Blueprint.R06b
-import ContinuousFlexibility.Blueprint.R06c
-import ContinuousFlexibility.Radial.PositiveBufferR09
+module
+
+public import ContinuousFlexibility.Blueprint.R06a
+public import ContinuousFlexibility.Blueprint.R06b
+public import ContinuousFlexibility.Blueprint.R06c
+public import ContinuousFlexibility.Radial.PositiveBufferR09
 
 /-!
 # Closed analytic inputs for the retained R11a construction
@@ -10,6 +12,8 @@ Only proved deep-tail nodes and the proved positive-buffer theorem are
 used. Keeping this logical composition outside Blueprint.Assembly avoids
 an import cycle with the final R11a node.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

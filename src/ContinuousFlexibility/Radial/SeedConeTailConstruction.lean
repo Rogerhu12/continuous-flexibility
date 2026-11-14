@@ -1,8 +1,12 @@
-import ContinuousFlexibility.Radial.SeedConeTailGluing
-import ContinuousFlexibility.Radial.SeedNaturalState
-import ContinuousFlexibility.Radial.MorseSecondModeSmoothExtension
+module
+
+public import ContinuousFlexibility.Radial.SeedConeTailGluing
+public import ContinuousFlexibility.Radial.SeedNaturalState
+public import ContinuousFlexibility.Radial.MorseSecondModeSmoothExtension
 
 /-! # Inward cone continuation of the actual Morse natural second mode -/
+
+@[expose] public section
 
 noncomputable section
 

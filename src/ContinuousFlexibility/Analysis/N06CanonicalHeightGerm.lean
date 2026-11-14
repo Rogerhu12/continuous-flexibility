@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06CanonicalTestTransport
-import ContinuousFlexibility.Analysis.N05ReferenceTests
-import ContinuousFlexibility.Radial.MatchingCutoffTests
+module
+
+public import ContinuousFlexibility.Analysis.N06CanonicalTestTransport
+public import ContinuousFlexibility.Analysis.N05ReferenceTests
+public import ContinuousFlexibility.Radial.MatchingCutoffTests
 
 /-!
 # Compact realizations of the actual canonical height germ
@@ -11,6 +13,8 @@ symmetries put it in the original physical height model. One such field
 agrees with the actual height near every point of the selected canonical
 radial fiber, including its periodic translates and reflections.
 -/
+
+@[expose] public section
 
 noncomputable section
 

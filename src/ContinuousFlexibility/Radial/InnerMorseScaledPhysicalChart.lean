@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerMorseBufferLeading
+module
+
+public import ContinuousFlexibility.Radial.InnerMorseBufferLeading
 
 /-!
 # Independent physical dilations of the same retained Morse model
@@ -10,6 +12,8 @@ The localized R09 model is unchanged. Its actual physical Dirichlet
 operator, conormal diagonal and full error matrix all use this same
 model and the final reference measure.
 -/
+
+@[expose] public section
 
 noncomputable section
 

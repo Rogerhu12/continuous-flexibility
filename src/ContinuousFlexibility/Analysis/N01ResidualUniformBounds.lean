@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01ReturnVelocityUniformBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01ReturnVelocityUniformBounds
 
 /-!
 # Uniform estimates for the residual of any actual N02 construction
@@ -9,6 +11,8 @@ numerical bounds for the actual construction apply to the same supplied
 return operator, including its use in the pulled displacement. No
 uniform constant is extracted from an abstract smooth-tame assertion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

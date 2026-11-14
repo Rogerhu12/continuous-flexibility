@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.CentralBufferGeometry
-import ContinuousFlexibility.Radial.InnerCentralBufferCoefficients
-import ContinuousFlexibility.Radial.InnerCentralCompressionConstruction
-import ContinuousFlexibility.Radial.InnerModelCoefficientEnvelope
+module
+
+public import ContinuousFlexibility.Radial.CentralBufferGeometry
+public import ContinuousFlexibility.Radial.InnerCentralBufferCoefficients
+public import ContinuousFlexibility.Radial.InnerCentralCompressionConstruction
+public import ContinuousFlexibility.Radial.InnerModelCoefficientEnvelope
 
 /-!
 # Coefficients of the genuine central-column buffer
@@ -11,6 +13,8 @@ The earlier central coefficient bound is reused at C + B₀, which
 dominates this cost as well as the universal mass, velocity and drift
 bounds. No temporary-column inverse is used as an analytic estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerRadialFiniteWeakGraph
-import Mathlib.Order.Fin.Tuple
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialFiniteWeakGraph
+public import Mathlib.Order.Fin.Tuple
 
 /-!
 # A finite physical chain from ordered model cut pairs
@@ -9,6 +11,8 @@ adjoining the two outer boundary points gives all pieces, with the model
 pieces at odd indices and the gaps at even indices. The physical core
 and weight conditions follow from the original profile geometry.
 -/
+
+@[expose] public section
 
 noncomputable section
 

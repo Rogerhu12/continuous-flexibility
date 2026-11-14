@@ -1,7 +1,11 @@
-import ContinuousFlexibility.Analysis.N01cCanonicalComponentEnumeration
-import ContinuousFlexibility.Radial.R11aRetainedFamily
+module
+
+public import ContinuousFlexibility.Analysis.N01cCanonicalComponentEnumeration
+public import ContinuousFlexibility.Radial.R11aRetainedFamily
 
 /-! # The canonical enumeration on the exact reference returned by R11a -/
+
+@[expose] public section
 
 noncomputable section
 

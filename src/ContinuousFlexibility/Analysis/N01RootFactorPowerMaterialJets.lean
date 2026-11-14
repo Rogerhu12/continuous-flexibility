@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N01RootFactorAxisGlobalJets
-import ContinuousFlexibility.Analysis.N01RootFactorAxisMaterialInverse
-import ContinuousFlexibility.Analysis.PositivePowerPolynomialMaterialJets
-import ContinuousFlexibility.Analysis.MaterialGlobalEndpointModels
-import ContinuousFlexibility.Analysis.CanonicalStateInterpolation
+module
+
+public import ContinuousFlexibility.Analysis.N01RootFactorAxisGlobalJets
+public import ContinuousFlexibility.Analysis.N01RootFactorAxisMaterialInverse
+public import ContinuousFlexibility.Analysis.PositivePowerPolynomialMaterialJets
+public import ContinuousFlexibility.Analysis.MaterialGlobalEndpointModels
+public import ContinuousFlexibility.Analysis.CanonicalStateInterpolation
 
 /-!
 # All root jets of actual factor powers under the raw optical lower
@@ -13,6 +15,8 @@ The common low state order and loss precede every real power and all
 root, host, state and strip choices. The strip radius never enters a cost.
 The raw optical lower remains an explicit upstream construction input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

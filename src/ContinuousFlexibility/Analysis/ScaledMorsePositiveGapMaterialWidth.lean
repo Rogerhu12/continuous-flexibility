@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.MorsePositiveGapCells
-import ContinuousFlexibility.Analysis.N06MorsePositiveWidth
-import ContinuousFlexibility.Analysis.MaterialCellOverlapRadialPolynomial
-import ContinuousFlexibility.Radial.DeepTailPhysicalWeights
+module
+
+public import ContinuousFlexibility.Analysis.MorsePositiveGapCells
+public import ContinuousFlexibility.Analysis.N06MorsePositiveWidth
+public import ContinuousFlexibility.Analysis.MaterialCellOverlapRadialPolynomial
+public import ContinuousFlexibility.Radial.DeepTailPhysicalWeights
 
 /-!
 # Material width of the same scaled positive Morse gap
@@ -12,6 +14,8 @@ The fixed index shift and the genuine material overlap estimate then
 bound the width at any cell containing the physical midpoint. No whole
 positive component is required to lie in that cell.
 -/
+
+@[expose] public section
 
 noncomputable section
 

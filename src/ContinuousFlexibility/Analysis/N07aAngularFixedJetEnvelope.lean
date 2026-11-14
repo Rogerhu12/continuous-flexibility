@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aSampleFrechetBounds
-import ContinuousFlexibility.Analysis.OneHighCompositionJets
+module
+
+public import ContinuousFlexibility.Analysis.N07aSampleFrechetBounds
+public import ContinuousFlexibility.Analysis.OneHighCompositionJets
 
 /-!
 # Actual spatial jets at a fixed admissible parameter
@@ -9,6 +11,8 @@ every coefficient envelope. It is used only for membership in the genuine
 reference graph; the uniform one-high estimates are supplied separately.
 No inverse or regularity conclusion is a premise of the construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

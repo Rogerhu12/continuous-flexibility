@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04bActualTypedAtlas
-import ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient
-import ContinuousFlexibility.Analysis.N07aCurrentPhysicalGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N04bActualTypedAtlas
+public import ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient
+public import ContinuousFlexibility.Analysis.N07aCurrentPhysicalGeometry
 
 /-!
 # A moving negative point in the fixed reference partition
@@ -8,6 +10,8 @@ import ContinuousFlexibility.Analysis.N07aCurrentPhysicalGeometry
 The old optical cut is retained as a separate case. Away from it, the
 same component supplies a reference half and its genuine affine inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

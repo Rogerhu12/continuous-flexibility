@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.PeriodicScalarFlow
-import Mathlib.Analysis.Calculus.MeanValue
-import Mathlib.Analysis.Calculus.FDeriv.Add
+module
+
+public import ContinuousFlexibility.Analysis.PeriodicScalarFlow
+public import Mathlib.Analysis.Calculus.MeanValue
+public import Mathlib.Analysis.Calculus.FDeriv.Add
 
 /-!
 # Joint parameter-angle Lipschitz bounds for periodic fields
@@ -13,6 +15,8 @@ the joint Lipschitz hypothesis used by parameter-dependent Gronwall.
 An additional compact index set allows the same constant for every
 time in a closed interval.  No differentiability in that index is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

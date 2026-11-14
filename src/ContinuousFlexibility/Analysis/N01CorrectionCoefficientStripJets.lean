@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01CorrectionCoefficientJointTower
-import ContinuousFlexibility.Analysis.JointJetSpatialRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N01CorrectionCoefficientJointTower
+public import ContinuousFlexibility.Analysis.JointJetSpatialRegularity
 
 /-!
 # Spatial regularity of the actual coefficient jets on a buffered strip
@@ -9,6 +11,8 @@ jets with the pure parameter slots of the actual joint tower. Its
 spatial smoothness and mixed-derivative recurrence therefore apply to
 the same raw coefficient family used in the source construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

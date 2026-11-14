@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.TameInverseBounds
-import ContinuousFlexibility.Analysis.TameJetLocalBounds
-import ContinuousFlexibility.Analysis.SpacesInterpolationProducts
+module
+
+public import ContinuousFlexibility.Analysis.TameInverseBounds
+public import ContinuousFlexibility.Analysis.TameJetLocalBounds
+public import ContinuousFlexibility.Analysis.SpacesInterpolationProducts
 
 /-!
 # A fixed low base for the existing inverse expressions
@@ -10,6 +12,8 @@ value of an intermediate expression is charged to the high-order budget;
 it never becomes a new low-neighborhood hypothesis.  The final theorem
 estimates the already constructed inverse tower.
 -/
+
+@[expose] public section
 
 noncomputable section
 

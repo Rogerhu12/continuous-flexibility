@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Statements.DeepTailOperator
-import Mathlib.MeasureTheory.Function.LocallyIntegrable
-import Mathlib.Analysis.Calculus.Deriv.Support
-import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
+module
+
+public import ContinuousFlexibility.Statements.DeepTailOperator
+public import Mathlib.MeasureTheory.Function.LocallyIntegrable
+public import Mathlib.Analysis.Calculus.Deriv.Support
+public import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
 
 /-!
 # Compact tests for the weighted tail space
@@ -11,6 +13,8 @@ compact topological support inside that interval. Dividing the test by the
 density gives an actual weighted `L²` function, so its ordinary Lebesgue
 pairing is a continuous functional on the weighted space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

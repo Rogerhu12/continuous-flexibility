@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RootCompositionBounds
-import ContinuousFlexibility.Analysis.RootChartWithin
+module
+
+public import ContinuousFlexibility.Analysis.RootCompositionBounds
+public import ContinuousFlexibility.Analysis.RootChartWithin
 
 /-!
 # Root projections of the actual positive state slices
@@ -9,6 +11,8 @@ every real angle. The input slice may be periodic, a lift, or neither;
 the proof uses only its actual smooth jets on the displayed source box.
 This is the form needed for positive state derivatives of the root label.
 -/
+
+@[expose] public section
 
 noncomputable section
 

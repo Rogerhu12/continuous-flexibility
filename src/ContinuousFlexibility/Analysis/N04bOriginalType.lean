@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bStateProfileType
-import ContinuousFlexibility.Scalar.TypeCorrection
+module
+
+public import ContinuousFlexibility.Analysis.N04bStateProfileType
+public import ContinuousFlexibility.Scalar.TypeCorrection
 
 /-!
 # Strict type of the actual original field on every negative component
@@ -8,6 +10,8 @@ The scalar type correction has an exact determinant identity. Its sign
 depends on the controlled profile slope and therefore follows from the
 N01 flow tower throughout the full state and residual neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

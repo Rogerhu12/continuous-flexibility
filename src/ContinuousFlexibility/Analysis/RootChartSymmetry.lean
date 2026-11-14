@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.ActualRootChart
-import ContinuousFlexibility.Analysis.RootFlowSymmetry
-import Mathlib.Analysis.Calculus.Deriv.Add
-import Mathlib.Tactic.Ring
+module
+
+public import ContinuousFlexibility.Analysis.ActualRootChart
+public import ContinuousFlexibility.Analysis.RootFlowSymmetry
+public import Mathlib.Analysis.Calculus.Deriv.Add
+public import Mathlib.Tactic.Ring
 
 /-!
 # Angular symmetries of the actual root chart
@@ -15,6 +17,8 @@ at the root where the coefficient is defined by an actual derivative.
 The final interfaces obtain the input symmetries from the true inverse
 endpoint flow and, for reflection, from uniqueness of the root ODE.
 -/
+
+@[expose] public section
 
 noncomputable section
 

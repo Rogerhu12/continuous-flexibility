@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SpacesCircleBandSynthesis
+module
+
+public import ContinuousFlexibility.Analysis.SpacesCircleBandSynthesis
 
 /-!
 # Circle analysis with a fixed loss of zero
@@ -7,6 +9,8 @@ The analysis coefficients are the actual bands of the order-zero angular
 jets. The two pure order-`s` coordinates control their exponential weight:
 one is the material weight and the other is the angular derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

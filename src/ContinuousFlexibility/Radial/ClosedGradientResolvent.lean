@@ -1,6 +1,8 @@
-import Mathlib.Analysis.InnerProductSpace.ProdL2
-import Mathlib.Analysis.InnerProductSpace.Projection.Submodule
-import Mathlib.Tactic.Linarith
+module
+
+public import Mathlib.Analysis.InnerProductSpace.ProdL2
+public import Mathlib.Analysis.InnerProductSpace.Projection.Submodule
+public import Mathlib.Tactic.Linarith
 
 /-!
 # The positive resolvent of a closed gradient relation
@@ -11,6 +13,8 @@ constructs the resolvent at `-1`, without a spectral theorem and without a
 choice of representatives. Increasing closed gradient spaces give strongly
 convergent positive resolvents.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MatchedTerminalMorseColumns
+module
+
+public import ContinuousFlexibility.Radial.MatchedTerminalMorseColumns
 
 /-!
 # Actual terminal columns between the two finite-chain weights
@@ -8,6 +10,8 @@ residual carries the input weight. Their correction is the same
 restricted matching inverse between those two weights. In particular,
 the original coefficient loss may stay on the output side throughout.
 -/
+
+@[expose] public section
 
 noncomputable section
 

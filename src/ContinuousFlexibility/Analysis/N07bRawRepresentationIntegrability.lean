@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CanonicalSourceConversion
-import ContinuousFlexibility.Analysis.N05CanonicalTests
-import ContinuousFlexibility.Geometry.EuclideanRigidity
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalSourceConversion
+public import ContinuousFlexibility.Analysis.N05CanonicalTests
+public import ContinuousFlexibility.Geometry.EuclideanRigidity
 
 /-!
 # Local integrability of raw canonical representatives
@@ -14,6 +16,8 @@ The proof first uses the integrability part of change of variables on a
 compact physical subset. The positive height and nonzero Jacobian then
 allow division by a continuous nonvanishing factor on that compact set.
 -/
+
+@[expose] public section
 
 noncomputable section
 

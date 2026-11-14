@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.DegenerateEnergy
-import Mathlib.Tactic.GCongr
+module
+
+public import ContinuousFlexibility.Analysis.DegenerateEnergy
+public import Mathlib.Tactic.GCongr
 
 /-!
 # The second stage of the positive-cylinder graph estimate
@@ -8,6 +10,8 @@ All functions are smooth enough for the ordinary integration-by-parts identities
 The vanishing weight supplies the boundary conditions, so none is imposed on the
 original solution. This file uses the energy identities of `DegenerateEnergy`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

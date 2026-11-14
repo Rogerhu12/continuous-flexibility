@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.TerminalInnerPoissonSymmetry
-import ContinuousFlexibility.Radial.TerminalPoissonCorrection
-import ContinuousFlexibility.Radial.ModeInnerSourcePairing
+module
+
+public import ContinuousFlexibility.Radial.TerminalInnerPoissonSymmetry
+public import ContinuousFlexibility.Radial.TerminalPoissonCorrection
+public import ContinuousFlexibility.Radial.ModeInnerSourcePairing
 
 /-!
 # The actual Poisson flux correction identity
@@ -10,6 +12,8 @@ actual cutoff lift identifies the measured conormal flux.  Substituting
 P = L - G F then exposes one source factor on each side of the inverse.
 No abstract energy matrix is substituted for the physical flux matrix.
 -/
+
+@[expose] public section
 
 noncomputable section
 

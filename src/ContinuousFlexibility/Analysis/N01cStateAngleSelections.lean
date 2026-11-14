@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cStateAngleIdentification
-import Mathlib.Analysis.Calculus.ContDiff.FaaDiBruno
+module
+
+public import ContinuousFlexibility.Analysis.N01cStateAngleIdentification
+public import Mathlib.Analysis.Calculus.ContDiff.FaaDiBruno
 
 /-!
 # Selecting and restricting actual state-angle slots
@@ -9,6 +11,8 @@ an ordered-partition embedding preserves those actual slots, and its
 state and angle arities add exactly over the partition. No permutation
 or symmetry premise is needed for the pure-slot identification.
 -/
+
+@[expose] public section
 
 noncomputable section
 

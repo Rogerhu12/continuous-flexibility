@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeHeightFactorGerms
-import ContinuousFlexibility.Analysis.N04NegativeHeightAuxiliaryTransfer
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeHeightFactorGerms
+public import ContinuousFlexibility.Analysis.N04NegativeHeightAuxiliaryTransfer
 
 /-!
 # Current jets of the negative height and its reciprocal
@@ -11,6 +13,8 @@ and reciprocals have current estimates on a common state neighborhood.
 The neighborhood is chosen at the zero auxiliary column and transferred
 unchanged to every auxiliary column.
 -/
+
+@[expose] public section
 
 noncomputable section
 

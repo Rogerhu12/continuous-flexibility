@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.FlowJetPartitionPolynomial
-import ContinuousFlexibility.Analysis.FlowJetMaterialClosure
+module
+
+public import ContinuousFlexibility.Analysis.FlowJetPartitionPolynomial
+public import ContinuousFlexibility.Analysis.FlowJetMaterialClosure
 
 /-!
 # Fixed-loss material bounds for actual coordinate compositions
@@ -9,6 +11,8 @@ The actual partition formula assigns weight k−1 to a derivative of
 order k. Its total weight is n−1, so interpolation reduces each term
 to one high factor without multiplying the derivative loss by n.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06PhysicalPairingLimits
-import ContinuousFlexibility.Analysis.N06CurrentPhysicalTests
-import ContinuousFlexibility.Analysis.N06ControlledPieceFiniteness
-import ContinuousFlexibility.Analysis.N06NamedPhysicalRelation
+module
+
+public import ContinuousFlexibility.Analysis.N06PhysicalPairingLimits
+public import ContinuousFlexibility.Analysis.N06CurrentPhysicalTests
+public import ContinuousFlexibility.Analysis.N06ControlledPieceFiniteness
+public import ContinuousFlexibility.Analysis.N06NamedPhysicalRelation
 
 /-!
 # From actual finite approximants to the named physical weak equation
@@ -13,6 +15,8 @@ transforms and finite support set are derived from the current geometry.
 This is the limit step after finite endpoint terms have cancelled; it
 neither assumes nor asserts convergence of full boundary traces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

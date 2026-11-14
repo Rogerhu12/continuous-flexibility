@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometryRootCollarData
-import ContinuousFlexibility.Analysis.N04RealizationJointMixedRegularity
-import ContinuousFlexibility.Analysis.N01cFiniteAffineJets
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryRootCollarData
+public import ContinuousFlexibility.Analysis.N04RealizationJointMixedRegularity
+public import ContinuousFlexibility.Analysis.N01cFiniteAffineJets
 
 /-!
 # Genuine joint towers for the actual coefficients on a root collar
@@ -11,6 +13,8 @@ fixed reference root factor, yields the literal two coefficients used
 by the regular root flow. Their reference difference and every mixed
 spatial derivative have towers on this same parameter neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

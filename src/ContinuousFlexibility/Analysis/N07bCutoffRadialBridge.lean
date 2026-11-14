@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07bHeightRadialMembers
-import ContinuousFlexibility.Radial.ReferenceCellAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.N07bHeightRadialMembers
+public import ContinuousFlexibility.Radial.ReferenceCellAlgebra
 
 /-!
 # Changing the left cutoff inside the natural physical output class
@@ -9,6 +11,8 @@ core. Their difference need not be compactly supported on the whole real
 line. We use only its almost-everywhere support for the restricted physical
 measure, and the finite set of cells meeting an interior compact interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

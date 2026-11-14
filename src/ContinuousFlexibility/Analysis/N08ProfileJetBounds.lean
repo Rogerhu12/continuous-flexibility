@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N08ProfileCoefficient
-import ContinuousFlexibility.Analysis.SpacesParameterJets
+module
+
+public import ContinuousFlexibility.Analysis.N08ProfileCoefficient
+public import ContinuousFlexibility.Analysis.SpacesParameterJets
 
 /-!
 # All actual spatial jets of logarithmic profile directions
@@ -9,6 +11,8 @@ real parameter line. The established mixed-derivative commutation theorem
 then identifies N01's first coefficient jet with every spatial derivative of
 the reference profile times that control direction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

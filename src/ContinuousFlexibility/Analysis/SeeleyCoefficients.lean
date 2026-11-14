@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SeeleyFiniteBlocks
-import Mathlib.Analysis.SpecificLimits.Basic
-import Mathlib.Topology.Algebra.InfiniteSum.Constructions
+module
+
+public import ContinuousFlexibility.Analysis.SeeleyFiniteBlocks
+public import Mathlib.Analysis.SpecificLimits.Basic
+public import Mathlib.Topology.Algebra.InfiniteSum.Constructions
 
 /-!
 # Reflection coefficients with every moment prescribed
@@ -10,6 +12,8 @@ the preceding moments. Its lower absolute moments are at most `2⁻ⁿ`. For any
 fixed derivative order only finitely many blocks precede this bound, so the
 resulting single coefficient family is absolutely summable at every order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

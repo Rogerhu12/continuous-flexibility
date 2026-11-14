@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalRadialCutoff
-import ContinuousFlexibility.Analysis.SpacesLpRestriction
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalRadialCutoff
+public import ContinuousFlexibility.Analysis.SpacesLpRestriction
 
 /-!
 # Actual zero extension from a canonical rectangle to the cylinder
@@ -9,6 +11,8 @@ canonical measure. Identity pullback and zero extension consequently give
 a linear isometry, with the literal indicator representative and exact
 integral pairing formula.
 -/
+
+@[expose] public section
 
 noncomputable section
 

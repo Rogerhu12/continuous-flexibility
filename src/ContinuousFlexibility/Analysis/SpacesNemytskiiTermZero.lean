@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SpacesNemytskiiTermBounds
+module
+
+public import ContinuousFlexibility.Analysis.SpacesNemytskiiTermBounds
 
 /-!
 # The zero-factor term of the composition formula
@@ -7,6 +9,8 @@ The only composition term without an explicit height factor has scalar
 order zero. The condition `F 0 = 0` supplies the missing factor through a
 global first-derivative bound, cancelling the inverse physical height.
 -/
+
+@[expose] public section
 
 noncomputable section
 

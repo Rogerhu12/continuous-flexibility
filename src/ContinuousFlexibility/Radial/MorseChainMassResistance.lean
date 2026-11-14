@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseRealizedIntegralTransfer
-import ContinuousFlexibility.Radial.MorseRealizedJoinIntegrals
+module
+
+public import ContinuousFlexibility.Radial.MorseRealizedIntegralTransfer
+public import ContinuousFlexibility.Radial.MorseRealizedJoinIntegrals
 
 /-!
 # Uniform mass and resistance of every realized Morse chain
@@ -9,6 +11,8 @@ integrals therefore have constants independent of the height sequence.
 The physical change of variables supplies the amplitude factors, and
 the retained long cap supplies the lower bound on join resistance.
 -/
+
+@[expose] public section
 
 noncomputable section
 

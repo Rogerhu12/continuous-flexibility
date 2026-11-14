@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerRadialPhysicalSource
-import ContinuousFlexibility.Radial.InnerGapPhysicalRealization
-import ContinuousFlexibility.Radial.InnerChainBoundaryHilbert
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialPhysicalSource
+public import ContinuousFlexibility.Radial.InnerGapPhysicalRealization
+public import ContinuousFlexibility.Radial.InnerChainBoundaryHilbert
 
 /-!
 # Actual positive-gap solutions in the finite weak chain
@@ -14,6 +16,8 @@ A positive gap is not the central bordered piece, so it introduces no
 extra scalar. The global source and boundary values are the actual
 orthogonal source restriction and the actual two-cut restriction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

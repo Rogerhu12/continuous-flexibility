@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.SelectedLaterTerminalData
-import ContinuousFlexibility.Radial.RetainedLaterFrozenInverse
+module
+
+public import ContinuousFlexibility.Radial.SelectedLaterTerminalData
+public import ContinuousFlexibility.Radial.RetainedLaterFrozenInverse
 
 /-!
 # Later regional data from the actual localized-model factory
@@ -10,6 +12,8 @@ model with its own remainder and both oriented error estimates. The
 finite model family and the even-frequency reindexing are performed
 here, before constructing the actual inner and outer regional data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

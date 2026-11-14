@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R07MiddlePatch
+module
+
+public import ContinuousFlexibility.Radial.R07MiddlePatch
 
 /-!
 # Uniform realization of a family with a replacement middle
@@ -9,6 +11,8 @@ uniform jet estimates give one realization constant at every order for all
 admissible height sequences. The already proved R05 mass-resistance theorem
 then applies to that same family.
 -/
+
+@[expose] public section
 
 noncomputable section
 

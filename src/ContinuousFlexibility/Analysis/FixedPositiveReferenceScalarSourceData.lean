@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.WholeReferenceGaugePositiveGeometryJets
+module
+
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugePositiveGeometryJets
 
 /-!
 # The same positive inverse and source factor as scalar-source data
@@ -9,6 +11,8 @@ jets are recovered from the normalized inverse-radial atom. The source
 factor is the displayed scalar of the same coordinate and height. Only
 numerical constants vary with the derivative order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

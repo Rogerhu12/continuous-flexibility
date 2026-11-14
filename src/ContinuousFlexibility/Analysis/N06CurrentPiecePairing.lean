@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06CurrentTestLp
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentTestLp
 
 /-!
 # Integrable physical pairings of the actual current representatives
@@ -8,6 +10,8 @@ Jacobian. Thus L2 canonical fields pair integrably with physical tests
 on each current physical tile. This establishes integrability before
 using finite sums or subtracting physical weak identities.
 -/
+
+@[expose] public section
 
 noncomputable section
 

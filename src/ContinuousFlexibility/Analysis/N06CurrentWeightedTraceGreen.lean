@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06CurrentTestTensorGreen
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentTestTensorGreen
 
 /-!
 # Weighted radial Green against the actual current test
@@ -10,6 +12,8 @@ closed Lipschitz traces constructed from the forward chart. Multiplying
 its represented radial jet by the smooth radial weight gives an AC flux,
 so the genuine closed Green formula applies without an endpoint inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

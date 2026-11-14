@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05CanonicalRadialTestTransport
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05CanonicalRadialTestTransport
 
 /-!
 # The actual first radial derivative of a transported test
@@ -9,6 +11,8 @@ ordinary chain and quotient rules therefore give the exact height
 correction in the canonical radial weak derivative, with no independent
 coordinate-derivative assumptions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

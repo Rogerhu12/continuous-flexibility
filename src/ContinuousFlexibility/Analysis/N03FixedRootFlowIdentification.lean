@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N03FixedCutoffRootCollar
-import ContinuousFlexibility.Analysis.RootLocalizedCharacteristicSpeed
-import ContinuousFlexibility.Analysis.RootRescaledStoredFlow
+module
+
+public import ContinuousFlexibility.Analysis.N03FixedCutoffRootCollar
+public import ContinuousFlexibility.Analysis.RootLocalizedCharacteristicSpeed
+public import ContinuousFlexibility.Analysis.RootRescaledStoredFlow
 
 /-!
 # The same controlled flow on a fixed root collar
@@ -11,6 +13,8 @@ root equation on that entire band. Uniqueness identifies every one with
 the supplied controlled family. Its scale δ is unchanged: only the
 normalized interval is restricted to [0, ρ / δ].
 -/
+
+@[expose] public section
 
 noncomputable section
 

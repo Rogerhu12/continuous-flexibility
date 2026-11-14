@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N05ReferenceOutputAngularLimit
-import ContinuousFlexibility.Analysis.N05ReferenceAngularWeakClosure
-import ContinuousFlexibility.Analysis.N05ReferenceWeightedPhysical
-import ContinuousFlexibility.Analysis.N05ReferenceHighConvergence
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceOutputAngularLimit
+public import ContinuousFlexibility.Analysis.N05ReferenceAngularWeakClosure
+public import ContinuousFlexibility.Analysis.N05ReferenceWeightedPhysical
+public import ContinuousFlexibility.Analysis.N05ReferenceHighConvergence
 
 /-!
 # The reconstructed output jet has the actual weak derivative
@@ -10,6 +12,8 @@ The finite angular projections converge to the original high part in
 physical L². The weighted jet limit converges in the same physical space,
 so closure identifies its true full-period weak angular derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

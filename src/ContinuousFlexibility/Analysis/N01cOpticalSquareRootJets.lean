@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cDistributedRadialProducts
-import ContinuousFlexibility.Analysis.N01cStateParameterJets
-import ContinuousFlexibility.Analysis.RootPowerJets
+module
+
+public import ContinuousFlexibility.Analysis.N01cDistributedRadialProducts
+public import ContinuousFlexibility.Analysis.N01cStateParameterJets
+public import ContinuousFlexibility.Analysis.RootPowerJets
 
 /-!
 # Exact square-root jets and endpoint cancellation
@@ -11,6 +13,8 @@ composition, the ordered partitions keep their actual derivative orders.
 If every inner jet gains one endpoint distance, the square-root factor
 loses precisely one such distance per input and leaves a half power.
 -/
+
+@[expose] public section
 
 noncomputable section
 

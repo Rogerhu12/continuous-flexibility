@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryPlaneSavedComposition
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryPlaneSavedComposition
 
 /-!
 # Transport bounds from four scalar factors
@@ -7,6 +9,8 @@ The two scalar compositions and their pairings are estimated on an
 abstract parameter space. Only the displayed transport identities and
 the two region-preserving graphs are required from the actual geometry.
 -/
+
+@[expose] public section
 
 noncomputable section
 

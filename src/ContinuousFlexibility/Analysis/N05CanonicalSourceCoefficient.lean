@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05ReferencePieceIndexBounds
-import ContinuousFlexibility.Analysis.N05ReferenceSourceWeightGap
-import ContinuousFlexibility.Analysis.N05CanonicalPhysicalChange
-import ContinuousFlexibility.Analysis.N05CanonicalEmbeddings
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05ReferencePieceIndexBounds
+public import ContinuousFlexibility.Analysis.N05ReferenceSourceWeightGap
+public import ContinuousFlexibility.Analysis.N05CanonicalPhysicalChange
+public import ContinuousFlexibility.Analysis.N05CanonicalEmbeddings
 
 /-!
 # The source multiplier at the actual controlled reference coordinates
@@ -13,6 +15,8 @@ Jacobian divided by height squared. The actual coordinate bounds and the
 strict endpoint gap control this density uniformly on every physical piece
 and every reference cell containing the same radius.
 -/
+
+@[expose] public section
 
 noncomputable section
 

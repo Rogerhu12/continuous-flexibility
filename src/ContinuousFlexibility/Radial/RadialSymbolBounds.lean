@@ -1,8 +1,10 @@
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
-import Mathlib.Analysis.SpecialFunctions.Pow.Real
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Positivity
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Positivity
+public import Mathlib.Tactic.Ring
 
 /-!
 # Fixed-threshold bounds for actual radial derivative symbols
@@ -12,6 +14,8 @@ Every derivative order uses the same lower threshold `L0`; only the
 constants may depend on the order. These generic closure results must
 still be instantiated on the actual Laplace moments and radial weights.
 -/
+
+@[expose] public section
 
 noncomputable section
 

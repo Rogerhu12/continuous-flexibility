@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Geometry.FlatDevelopment
-import Mathlib.MeasureTheory.Integral.Prod
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+module
+
+public import ContinuousFlexibility.Geometry.FlatDevelopment
+public import Mathlib.MeasureTheory.Integral.Prod
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 
 /-!
 # Conservation from the actual connection
@@ -10,6 +12,8 @@ one-dimensional FTC to both components of a genuine one-form and Fubini to
 its radial derivative. Boundary matching is explicit; no Stokes identity or
 zero-mean source condition is postulated.
 -/
+
+@[expose] public section
 
 noncomputable section
 

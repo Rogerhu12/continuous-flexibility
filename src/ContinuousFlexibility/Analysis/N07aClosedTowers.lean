@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SolveTameSubspace
-import ContinuousFlexibility.Scalar.WeightedTowerCalculus
+module
+
+public import ContinuousFlexibility.Analysis.SolveTameSubspace
+public import ContinuousFlexibility.Scalar.WeightedTowerCalculus
 
 /-!
 # Genuine parameter towers in closed graph spaces
@@ -9,6 +11,8 @@ Every higher directional derivative then lies in the same graph by the
 actual difference quotient. This avoids assuming interchange of spatial
 and parameter derivatives when passing through the Sobolev realization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

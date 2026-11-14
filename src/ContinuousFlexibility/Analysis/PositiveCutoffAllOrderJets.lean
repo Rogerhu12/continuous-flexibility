@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06PositiveCutoffJets
+module
+
+public import ContinuousFlexibility.Analysis.N06PositiveCutoffJets
 
 /-!
 # All orders after the same actual endpoint cutoff
@@ -8,6 +10,8 @@ cutoff factor, while the actual local endpoint jet envelope remains
 linear. Outside the supplied collar the genuine zero germ removes all
 regularity requirements on the endpoint field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

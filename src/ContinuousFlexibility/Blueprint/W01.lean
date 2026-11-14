@@ -1,11 +1,15 @@
-import ContinuousFlexibility.Statements.Milestones
-import ContinuousFlexibility.Analysis.AffineMaterialFull
+module
+
+public import ContinuousFlexibility.Statements.Milestones
+public import ContinuousFlexibility.Analysis.AffineMaterialFull
 
 /-!
 # Blueprint node W01
 
 Source: `paper/flexible-surface-rewrite/07-fixed-geometry.tex` lines 22–59. Proved.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

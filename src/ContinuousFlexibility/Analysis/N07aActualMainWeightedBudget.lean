@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N07aActualMainModeBound
-import ContinuousFlexibility.Analysis.N07aRelativeMainReflection
-import ContinuousFlexibility.Analysis.N07aReferenceEnergyBudget
-import ContinuousFlexibility.Analysis.N07aScalarColumnVolumes
-import ContinuousFlexibility.Analysis.N07aAngularBlockWeights
+module
+
+public import ContinuousFlexibility.Analysis.N07aActualMainModeBound
+public import ContinuousFlexibility.Analysis.N07aRelativeMainReflection
+public import ContinuousFlexibility.Analysis.N07aReferenceEnergyBudget
+public import ContinuousFlexibility.Analysis.N07aScalarColumnVolumes
+public import ContinuousFlexibility.Analysis.N07aAngularBlockWeights
 
 /-!
 # The actual relative main blocks in the prescribed outer weighted norm
@@ -12,6 +14,8 @@ reference energy majorant has been inserted.  The resulting true lp
 majorant retains the angular gap decay and one parameter seminorm, with
 one loss independent of both output orders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

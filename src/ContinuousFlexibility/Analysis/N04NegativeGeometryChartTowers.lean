@@ -1,10 +1,12 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometryTravelTower
-import ContinuousFlexibility.Analysis.N04RealizationLeadStart
-import ContinuousFlexibility.Analysis.N04RealizationJointMixedRegularity
-import ContinuousFlexibility.Analysis.N04RealizationJointSpatialEvaluation
-import ContinuousFlexibility.Analysis.SmoothDirectionsGluing
-import ContinuousFlexibility.Analysis.SmoothDirectionsNormedComposition
-import ContinuousFlexibility.Analysis.N04bOpticalCutoffProperties
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryTravelTower
+public import ContinuousFlexibility.Analysis.N04RealizationLeadStart
+public import ContinuousFlexibility.Analysis.N04RealizationJointMixedRegularity
+public import ContinuousFlexibility.Analysis.N04RealizationJointSpatialEvaluation
+public import ContinuousFlexibility.Analysis.SmoothDirectionsGluing
+public import ContinuousFlexibility.Analysis.SmoothDirectionsNormedComposition
+public import ContinuousFlexibility.Analysis.N04bOpticalCutoffProperties
 
 /-!
 # The actual negative chart jointly in state and physical position
@@ -15,6 +17,8 @@ Strict positivity in the travel strip permits the fixed root change of
 coordinates, and the prescribed component germ identifies its value with
 the stored chart.  This construction does not use the moving half-domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

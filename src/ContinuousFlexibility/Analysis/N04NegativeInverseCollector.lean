@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04NegativeInverseGeometry
-import ContinuousFlexibility.Analysis.N04NegativeInverseOneHigh
-import ContinuousFlexibility.Analysis.N04NegativeGeometryAuxiliary
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeInverseGeometry
+public import ContinuousFlexibility.Analysis.N04NegativeInverseOneHigh
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryAuxiliary
 
 /-!
 # Collect the actual negative inverse fields on one neighborhood
@@ -11,6 +13,8 @@ the exact value at parameter zero supplies the reference field. The
 result is transported to every auxiliary column without changing the
 neighborhood or any material cost.
 -/
+
+@[expose] public section
 
 noncomputable section
 

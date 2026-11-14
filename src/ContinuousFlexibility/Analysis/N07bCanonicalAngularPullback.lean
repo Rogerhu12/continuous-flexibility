@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07bDirectionChain
+module
+
+public import ContinuousFlexibility.Analysis.N07bDirectionChain
 
 /-!
 # Actual angular jets of arbitrary canonical fields
@@ -8,6 +10,8 @@ open piece. It does not require a globally smooth physical source, so it
 also applies to reference forcing whose representative is only finitely
 smooth across the interfaces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

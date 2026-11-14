@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.ReferenceCompactSurgery
-import Mathlib.Analysis.Calculus.FDeriv.Equiv
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
-import Mathlib.Topology.Order.MonotoneContinuity
+module
+
+public import ContinuousFlexibility.Radial.ReferenceCompactSurgery
+public import Mathlib.Analysis.Calculus.FDeriv.Equiv
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+public import Mathlib.Topology.Order.MonotoneContinuity
 
 /-!
 # Transport of the reference geometry by a smooth coordinate
@@ -12,6 +14,8 @@ preserved.  Quantitative metric assumptions are ordinary two-sided
 Lipschitz estimates, used below to transport the actual trace intervals
 and Gaussian endpoint-distance scale.
 -/
+
+@[expose] public section
 
 noncomputable section
 

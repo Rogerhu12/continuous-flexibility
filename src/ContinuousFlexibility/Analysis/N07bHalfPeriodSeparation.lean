@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07bHalfPeriodTests
-import ContinuousFlexibility.Radial.R11bPhysicalPairing
-import Mathlib.Analysis.Distribution.AEEqOfIntegralContDiff
+module
+
+public import ContinuousFlexibility.Analysis.N07bHalfPeriodTests
+public import ContinuousFlexibility.Radial.R11bPhysicalPairing
+public import Mathlib.Analysis.Distribution.AEEqOfIntegralContDiff
 
 /-!
 # Local distributional separation on a physical half-period
@@ -11,6 +13,8 @@ normalization and proves integrability before using Fubini. Consequently
 the weak test pairing separates arbitrary locally integrable sources on
 any open subset of that strip.
 -/
+
+@[expose] public section
 
 noncomputable section
 

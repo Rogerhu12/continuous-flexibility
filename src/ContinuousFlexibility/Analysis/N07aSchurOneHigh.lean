@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aSchurBilinear
+module
+
+public import ContinuousFlexibility.Analysis.N07aSchurBilinear
 
 /-!
 # Schur realization retaining the two input norms
@@ -7,6 +9,8 @@ The high-order source and its fixed lower-order truncation have separate
 Schur majorants.  The resulting operator retains their sum pointwise;
 the higher parameter coefficient never multiplies the high input norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

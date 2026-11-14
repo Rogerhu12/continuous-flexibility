@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cVolterraStateJets
-import Mathlib.Order.Preorder.Finite
+module
+
+public import ContinuousFlexibility.Analysis.N01cVolterraStateJets
+public import Mathlib.Order.Preorder.Finite
 
 /-!
 # Isolating the genuine highest variation in the flow composition
@@ -9,6 +11,8 @@ unique single-block partition therefore contains the sole highest
 variation, and it occurs linearly through the first angular speed jet.
 All other terms are exactly the previously defined lower-order forcing.
 -/
+
+@[expose] public section
 
 noncomputable section
 

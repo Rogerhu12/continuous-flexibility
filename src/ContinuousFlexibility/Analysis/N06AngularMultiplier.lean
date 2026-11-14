@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCircleSobolevAlgebra
-import ContinuousFlexibility.Analysis.OneHighCircleFourierSobolevProduct
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleSobolevAlgebra
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierSobolevProduct
 
 /-!
 # Multiplication on the fixed angular source order
@@ -8,6 +10,8 @@ The one-high Fourier convolution inequality and the existing circle Sobolev
 embedding imply bounded multiplication at every integer order at least one.
 No derivative of the source beyond that same order is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

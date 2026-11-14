@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06IntervalCubicCommutator
-import ContinuousFlexibility.Radial.R11bWeakNormalLimit
+module
+
+public import ContinuousFlexibility.Analysis.N06IntervalCubicCommutator
+public import ContinuousFlexibility.Radial.R11bWeakNormalLimit
 
 /-!
 # The actual cubic weak pairing at both endpoints
@@ -10,6 +12,8 @@ in the original L2 space.  This extends the same compact weak equation
 to an open-smooth test with genuine L2 first jets and L2 operator image;
 no endpoint value of a coefficient or zero trace of the test is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

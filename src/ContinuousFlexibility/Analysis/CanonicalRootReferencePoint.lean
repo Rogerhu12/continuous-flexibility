@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CanonicalRootTransportBoundary
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalRootTransportBoundary
 
 /-!
 # The true reference point of a current root-circle point
@@ -8,6 +10,8 @@ circle. The actual closed inverse identities send that point back to the
 original current point. Its angular coordinate is retained rather than
 silently identified with the current angle.
 -/
+
+@[expose] public section
 
 noncomputable section
 

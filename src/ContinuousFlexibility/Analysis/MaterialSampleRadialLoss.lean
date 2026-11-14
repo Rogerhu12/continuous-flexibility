@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.MaterialSampleDiscreteEnvelope
+module
+
+public import ContinuousFlexibility.Analysis.MaterialSampleDiscreteEnvelope
 
 /-!
 # A linearly reindexed radial loss costs one material weight
@@ -8,6 +10,8 @@ index.  Any fixed linear enlargement of that index changes the exponent
 of the radial loss by at most a constant multiple.  The extra logarithm
 in the material weight then absorbs every fixed radial power.
 -/
+
+@[expose] public section
 
 noncomputable section
 

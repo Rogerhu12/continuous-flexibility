@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SmoothSobolevCore
-import Mathlib.MeasureTheory.Measure.Haar.NormedSpace
-import Mathlib.Dynamics.Ergodic.MeasurePreserving
+module
+
+public import ContinuousFlexibility.Analysis.SmoothSobolevCore
+public import Mathlib.MeasureTheory.Measure.Haar.NormedSpace
+public import Mathlib.Dynamics.Ergodic.MeasurePreserving
 
 /-!
 # A common transport lemma for the two orientations of an interval
@@ -10,6 +12,8 @@ The affine chain rule is proved once, for arbitrary source and target sets;
 the measure-preserving case then covers either endpoint without duplicating
 the extension argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

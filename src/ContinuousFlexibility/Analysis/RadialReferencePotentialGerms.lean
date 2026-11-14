@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas
-import ContinuousFlexibility.Analysis.ReferenceCircleFlow
-import ContinuousFlexibility.Analysis.N04bOperatorGerms
+module
+
+public import ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas
+public import ContinuousFlexibility.Analysis.ReferenceCircleFlow
+public import ContinuousFlexibility.Analysis.N04bOperatorGerms
 
 /-!
 # The potential of radial chart and height germs
@@ -10,6 +12,8 @@ derivatives suffice for the local operator formula. A unit radial density
 and zero mixed density force the actual physical mixed coefficient to
 vanish; this supplies the coefficient germ needed for the potential.
 -/
+
+@[expose] public section
 
 noncomputable section
 

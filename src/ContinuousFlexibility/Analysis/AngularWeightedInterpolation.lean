@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.AngularThreeLines
-import ContinuousFlexibility.Analysis.AngularFrequency
-import Mathlib.Topology.Algebra.InfiniteSum.NatInt
+module
+
+public import ContinuousFlexibility.Analysis.AngularThreeLines
+public import ContinuousFlexibility.Analysis.AngularFrequency
+public import Mathlib.Topology.Algebra.InfiniteSum.NatInt
 
 /-!
 # Weighted interpolation on the full angular Hilbert sum
@@ -11,6 +13,8 @@ output converges coefficientwise, and the `lp` Fatou lemmas supply both
 weighted-domain membership and the norm estimate.  No bound at an
 intermediate order, nor any invariance of cutoff subspaces, is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

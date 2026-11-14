@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedTowerCompositionGeneric
-import ContinuousFlexibility.Analysis.TameJetLocalBounds
+module
+
+public import ContinuousFlexibility.Scalar.WeightedTowerCompositionGeneric
+public import ContinuousFlexibility.Analysis.TameJetLocalBounds
 
 /-!
 # Uniform tame germs on one actual low-seminorm ball
@@ -8,6 +10,8 @@ A germ records one base and one loss for the entire genuine directional
 tower.  Composition selects one smaller source ball using the actual source
 topology; it never chooses a different ball or loss for each derivative order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

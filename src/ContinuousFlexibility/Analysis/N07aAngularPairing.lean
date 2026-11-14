@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularTests
-import ContinuousFlexibility.Analysis.N07aAngularCutoff
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularTests
+public import ContinuousFlexibility.Analysis.N07aAngularCutoff
 
 /-!
 # Removing radial support from the actual weak Fourier identity
@@ -9,6 +11,8 @@ angular derivatives have the same exact multiplier for every cutoff.
 Dominated convergence therefore gives the full separated Fourier
 identity on each bounded canonical interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

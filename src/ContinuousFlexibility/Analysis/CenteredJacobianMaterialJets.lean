@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.PointwiseJacobianMaterialJets
+module
+
+public import ContinuousFlexibility.Analysis.PointwiseJacobianMaterialJets
 
 /-!
 # Jacobian material jets from positive chart jets
@@ -8,6 +10,8 @@ value. Its derivative, and hence its actual Jacobian, are unchanged.
 Thus the existing pointwise Jacobian estimate needs no bound on the
 value of an angular lift and no global smooth extension of the chart.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.InnerBorderTransport
-import ContinuousFlexibility.Radial.InnerLiouvillePhysicalOperators
-import ContinuousFlexibility.Radial.InnerModelCoefficientEnvelope
-import ContinuousFlexibility.Radial.InnerMorseBufferCoefficients
-import ContinuousFlexibility.Radial.InnerCoefficientCosts
+module
+
+public import ContinuousFlexibility.Radial.InnerBorderTransport
+public import ContinuousFlexibility.Radial.InnerLiouvillePhysicalOperators
+public import ContinuousFlexibility.Radial.InnerModelCoefficientEnvelope
+public import ContinuousFlexibility.Radial.InnerMorseBufferCoefficients
+public import ContinuousFlexibility.Radial.InnerCoefficientCosts
 
 /-!
 # The actual local Dirichlet cost in the physical Hilbert space
@@ -14,6 +16,8 @@ Morse cells this is the fixed exponent thirty-six, before any weight
 exponent or starting index is chosen. The cell-weight comparisons add
 one power, giving the fixed localized loss thirty-seven.
 -/
+
+@[expose] public section
 
 noncomputable section
 

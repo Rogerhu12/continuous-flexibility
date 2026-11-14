@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MorseCellMassTravel
+module
+
+public import ContinuousFlexibility.Radial.MorseCellMassTravel
 
 /-!
 # The physical speed-to-mass ratio on both Morse caps
@@ -8,6 +10,8 @@ at the right turning point. Normalizing that radius, applying the
 retained-cell ODE bounds, and undoing the normalization proves the
 uniform ratio needed in the physical leading Poisson estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

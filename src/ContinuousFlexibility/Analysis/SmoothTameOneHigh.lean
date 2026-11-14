@@ -1,6 +1,10 @@
-import ContinuousFlexibility.Analysis.N01NeighborhoodRestriction
+module
+
+public import ContinuousFlexibility.Analysis.N01NeighborhoodRestriction
 
 /-! Global one-high jet estimates give the frozen local tame bounds. -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N08ControlProfileModes
+module
+
+public import ContinuousFlexibility.Analysis.N08ControlProfileModes
 
 /-!
 # Uniform decay at the control label
@@ -8,6 +10,8 @@ the control amplitude dominate a fixed coefficient power. This argument uses
 the actual samples only and makes no claim about placement of control supports
 inside reference cells.
 -/
+
+@[expose] public section
 
 noncomputable section
 

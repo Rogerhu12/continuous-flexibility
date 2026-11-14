@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.CanonicalAuxiliaryNormalization
-import ContinuousFlexibility.Analysis.PhysicalTransmissionTrace
-import ContinuousFlexibility.Analysis.N07bAtlasEnergy
-import ContinuousFlexibility.Analysis.N07bCanonicalAngularPullback
-import ContinuousFlexibility.Analysis.N07aAngularReferenceCoordinates
-import ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalAuxiliaryNormalization
+public import ContinuousFlexibility.Analysis.PhysicalTransmissionTrace
+public import ContinuousFlexibility.Analysis.N07bAtlasEnergy
+public import ContinuousFlexibility.Analysis.N07bCanonicalAngularPullback
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceCoordinates
+public import ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets
 
 /-!
 # Reference source jets for one compact physical support interval
@@ -14,6 +16,8 @@ All other pieces have zero source, by disjointness of the real reference
 intervals. Compactness therefore gives one bound at each finite order,
 without a uniform estimate on the other charts or their inverse jets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

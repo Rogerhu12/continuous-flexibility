@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.SmoothTailCoordinate
-import ContinuousFlexibility.Radial.ReferenceCoordinateBounds
-import ContinuousFlexibility.Radial.ReferenceDilation
+module
+
+public import ContinuousFlexibility.Radial.SmoothTailCoordinate
+public import ContinuousFlexibility.Radial.ReferenceCoordinateBounds
+public import ContinuousFlexibility.Radial.ReferenceDilation
 
 /-!
 # Concrete two-tail accumulating-reference assembly
@@ -11,6 +13,8 @@ pulled-back cells and localizers, positive cell labels and trace
 scaffold.  The input tail identities are only required on the two open
 pieces of the original annulus.
 -/
+
+@[expose] public section
 
 noncomputable section
 

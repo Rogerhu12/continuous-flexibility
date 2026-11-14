@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07bNormalizedDirectionChainCalculus
-import ContinuousFlexibility.Analysis.N07bDirectionChain
+module
+
+public import ContinuousFlexibility.Analysis.N07bNormalizedDirectionChainCalculus
+public import ContinuousFlexibility.Analysis.N07bDirectionChain
 
 /-!
 # Actual normalized paths for a sequence of geometric directions
@@ -9,6 +11,8 @@ The resulting material recurrence uses the actual components and actual
 density drift of that layer's direction. Its initial coefficient is any
 prescribed geometric coefficient, independently of the scalar source.
 -/
+
+@[expose] public section
 
 noncomputable section
 

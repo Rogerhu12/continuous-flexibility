@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Scalar.WeightedGeometryBall
-import ContinuousFlexibility.Scalar.WeightedOrdinaryPointwise
-import ContinuousFlexibility.Scalar.WeightedPartialIdentities
-import ContinuousFlexibility.Scalar.WeightedReferenceBounds
+module
+
+public import ContinuousFlexibility.Scalar.WeightedGeometryBall
+public import ContinuousFlexibility.Scalar.WeightedOrdinaryPointwise
+public import ContinuousFlexibility.Scalar.WeightedPartialIdentities
+public import ContinuousFlexibility.Scalar.WeightedReferenceBounds
 
 /-!
 # Actual low-order bounds for the common scalar geometry ball
@@ -11,6 +13,8 @@ physical-space hypotheses.  In particular, the reciprocal reference bound
 converts the quantitative decoded mixed jets into bounds relative to the
 actual flat reference profile, uniformly up to both endpoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

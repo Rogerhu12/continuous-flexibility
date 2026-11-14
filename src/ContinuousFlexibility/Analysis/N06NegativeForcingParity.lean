@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06NegativeWeakModes
-import ContinuousFlexibility.Analysis.N06CanonicalTestSeparation
-import ContinuousFlexibility.Analysis.N06MaterialJetRows
+module
+
+public import ContinuousFlexibility.Analysis.N06NegativeWeakModes
+public import ContinuousFlexibility.Analysis.N06CanonicalTestSeparation
+public import ContinuousFlexibility.Analysis.N06MaterialJetRows
 
 /-!
 # The actual negative principal forcing has the original even symmetry
@@ -14,6 +16,8 @@ For N05 the height's symmetry follows from its literal VolumeMember clause.
 Consequently the forcing extracted from the same graph can be reconstructed
 by the existing cosine cutoffs rather than only by their even projection.
 -/
+
+@[expose] public section
 
 noncomputable section
 

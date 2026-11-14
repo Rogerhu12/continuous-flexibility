@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerMorseInnerGaps
+module
+
+public import ContinuousFlexibility.Radial.InnerMorseInnerGaps
 
 /-!
 # One positive-gap constant for every finite inner truncation
@@ -9,6 +11,8 @@ applied to their actual strictly positive derivative. The constant is
 chosen before K and j, and is valid on every closed gap of the actual
 finite chain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

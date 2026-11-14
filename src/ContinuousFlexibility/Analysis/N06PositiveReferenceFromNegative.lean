@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06ReferenceNegativeHeight
-import ContinuousFlexibility.Analysis.N06BoundaryRadialOrientation
-import ContinuousFlexibility.Analysis.PositiveReferenceInterpolation
-import ContinuousFlexibility.Analysis.BoundaryTaylorExtension
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceNegativeHeight
+public import ContinuousFlexibility.Analysis.N06BoundaryRadialOrientation
+public import ContinuousFlexibility.Analysis.PositiveReferenceInterpolation
+public import ContinuousFlexibility.Analysis.BoundaryTaylorExtension
 
 /-!
 # A positive reference coordinate from its actual negative neighbours
@@ -20,6 +22,8 @@ and logarithmic-height jets through order three.  The four local interpolation
 functions are concrete polynomials (and exponentials of polynomials), not
 additional geometry inputs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

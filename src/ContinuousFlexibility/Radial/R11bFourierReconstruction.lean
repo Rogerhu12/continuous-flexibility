@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.R11bEvenSeriesCoefficients
-import ContinuousFlexibility.Radial.R11bPhysicalL2Convergence
-import ContinuousFlexibility.Radial.R11bSymmetricLimit
+module
+
+public import ContinuousFlexibility.Radial.R11bEvenSeriesCoefficients
+public import ContinuousFlexibility.Radial.R11bPhysicalL2Convergence
+public import ContinuousFlexibility.Radial.R11bSymmetricLimit
 
 /-!
 # Strong physical reconstruction from the actual even Fourier coefficients
@@ -9,6 +11,8 @@ The mean and all positive even modes are included. Radial coefficient
 representatives may be replaced almost everywhere, so smooth mode
 representatives can be used in the original finite tensor sums.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

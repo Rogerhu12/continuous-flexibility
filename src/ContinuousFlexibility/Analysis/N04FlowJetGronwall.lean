@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04FlowJetEquations
-import ContinuousFlexibility.Analysis.FlowJetIntegralGronwall
+module
+
+public import ContinuousFlexibility.Analysis.N04FlowJetEquations
+public import ContinuousFlexibility.Analysis.FlowJetIntegralGronwall
 
 /-!
 # Gronwall applied to the actual mixed spatial flow jets
@@ -8,6 +10,8 @@ The integral equation and closed-time continuity of the actual
 Fréchet jets were derived from the original ODE. This adapter applies
 the norm estimate to those genuine multilinear-valued functions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

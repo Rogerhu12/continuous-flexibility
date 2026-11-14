@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedReferenceCoefficients
-import ContinuousFlexibility.Analysis.MaterialOrdinaryJets
+module
+
+public import ContinuousFlexibility.Scalar.WeightedReferenceCoefficients
+public import ContinuousFlexibility.Analysis.MaterialOrdinaryJets
 
 /-!
 # Coefficients with arbitrarily small material-envelope growth
@@ -9,6 +11,8 @@ loss.  Bounds by every positive power of `M` are stable under all finite
 products and differentiation.  Consequently a whole fixed coefficient
 expression costs one power of `M`, independently of its number of factors.
 -/
+
+@[expose] public section
 
 noncomputable section
 

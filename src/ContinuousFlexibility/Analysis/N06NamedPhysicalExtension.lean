@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06ClosedPhysicalTests
-import ContinuousFlexibility.Analysis.N06OperatorExtension
+module
+
+public import ContinuousFlexibility.Analysis.N06ClosedPhysicalTests
+public import ContinuousFlexibility.Analysis.N06OperatorExtension
 
 /-!
 # Extending the actual physical equation on the original N05 space
@@ -13,6 +15,8 @@ than imposed on an existential choice of physical representatives.
 The controlled reference atlas and the core perturbation estimate remain
 explicit inputs; neither is asserted for an arbitrary N04 witness.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OuterNaturalMassScale
+module
+
+public import ContinuousFlexibility.Radial.OuterNaturalMassScale
 
 /-!
 # The first-mass estimate at every positive transition index
@@ -9,6 +11,8 @@ annulus bounds its gauge ratio by b/a. The resulting finite maximum is
 independent of the height ratios. Thus the constant below is chosen
 before the profile and all height choices, and includes the initial band.
 -/
+
+@[expose] public section
 
 noncomputable section
 

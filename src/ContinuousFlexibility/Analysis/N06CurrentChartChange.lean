@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CanonicalStripGeometry
-import ContinuousFlexibility.Analysis.N06CanonicalProperties
-import ContinuousFlexibility.Analysis.N05CanonicalPhysicalChange
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalStripGeometry
+public import ContinuousFlexibility.Analysis.N06CanonicalProperties
+public import ContinuousFlexibility.Analysis.N05CanonicalPhysicalChange
 
 /-!
 # Half-period change of variables for the actual current chart
@@ -12,6 +14,8 @@ therefore a bijection from the actual physical half-period domain to
 the canonical rectangle, even when the physical cut moves with angle. All measure
 formulas use its genuine Frechet derivative and the frozen Jacobian.
 -/
+
+@[expose] public section
 
 noncomputable section
 

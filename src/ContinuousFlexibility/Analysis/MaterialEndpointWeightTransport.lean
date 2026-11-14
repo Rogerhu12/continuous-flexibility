@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.MaterialGlobalEndpointModels
-import ContinuousFlexibility.Analysis.MaterialMEndpointShift
+module
+
+public import ContinuousFlexibility.Analysis.MaterialGlobalEndpointModels
+public import ContinuousFlexibility.Analysis.MaterialMEndpointShift
 
 /-!
 # Actual material weights between nearby endpoint coordinates
@@ -9,6 +11,8 @@ bounded displacement in `endpointX 1` preserves both prescribed real
 height and material powers, with all loss in an `E0` power. The two
 physical points may belong to different cells.
 -/
+
+@[expose] public section
 
 noncomputable section
 

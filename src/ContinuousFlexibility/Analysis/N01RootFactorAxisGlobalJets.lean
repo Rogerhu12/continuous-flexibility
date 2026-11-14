@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01DiscriminantGlobalJets
-import ContinuousFlexibility.Analysis.RootCoefficientAxisDivision
+module
+
+public import ContinuousFlexibility.Analysis.N01DiscriminantGlobalJets
+public import ContinuousFlexibility.Analysis.RootCoefficientAxisDivision
 
 /-!
 # Uniform jets of the actual divided factor at every root
@@ -9,6 +11,8 @@ root axis, exact radial division samples only that same point and costs
 one derivative. All numerical constants therefore precede the root,
 orientation, smooth factor, state and qualitative strip radius.
 -/
+
+@[expose] public section
 
 noncomputable section
 

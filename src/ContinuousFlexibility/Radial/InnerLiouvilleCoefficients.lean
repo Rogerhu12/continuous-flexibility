@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.Liouville
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
+module
+
+public import ContinuousFlexibility.Radial.Liouville
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
 
 /-!
 # Exact finite-cell Liouville coefficient identities
@@ -9,6 +11,8 @@ value weights. The density drift contributes s''/s through first-order
 integration by parts. Both identities use derivatives of the actual
 radius and profile on a neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

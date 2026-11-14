@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N03FixedRootInverseIdentification
-import ContinuousFlexibility.Analysis.RootCharacteristicReflection
-import ContinuousFlexibility.Analysis.RootScaledInverseReflection
-import ContinuousFlexibility.Analysis.RootTravelDifferential
-import ContinuousFlexibility.Analysis.CanonicalRootTravelDomain
+module
+
+public import ContinuousFlexibility.Analysis.N03FixedRootInverseIdentification
+public import ContinuousFlexibility.Analysis.RootCharacteristicReflection
+public import ContinuousFlexibility.Analysis.RootScaledInverseReflection
+public import ContinuousFlexibility.Analysis.RootTravelDifferential
+public import ContinuousFlexibility.Analysis.CanonicalRootTravelDomain
 
 /-!
 # Actual root travel throughout the fixed correction band
@@ -12,6 +14,8 @@ values before any choice of a canonical half. Their difference therefore
 identifies the root travel on the entire physical band, including points
 on the moving cut. This is the input to a quantitative domain criterion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

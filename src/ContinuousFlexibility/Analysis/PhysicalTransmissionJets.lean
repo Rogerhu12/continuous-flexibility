@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.PhysicalTransmissionOperator
-import ContinuousFlexibility.Analysis.PhysicalTransmissionTrace
-import ContinuousFlexibility.Analysis.TransmissionJetAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.PhysicalTransmissionOperator
+public import ContinuousFlexibility.Analysis.PhysicalTransmissionTrace
+public import ContinuousFlexibility.Analysis.TransmissionJetAlgebra
 
 /-!
 # Matching all physical jets across a noncharacteristic interface
@@ -12,6 +14,8 @@ actual mixed derivatives from the statement layer.
 
 Source: the readable manuscript, §7, lines 1725–1755.
 -/
+
+@[expose] public section
 
 noncomputable section
 

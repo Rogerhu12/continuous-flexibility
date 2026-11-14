@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04bProfileLine
-import ContinuousFlexibility.Analysis.N04bSingletonType
-import ContinuousFlexibility.Analysis.N04bSqrtCrossing
-import ContinuousFlexibility.Analysis.SmoothDirectionsScalarLine
+module
+
+public import ContinuousFlexibility.Analysis.N04bProfileLine
+public import ContinuousFlexibility.Analysis.N04bSingletonType
+public import ContinuousFlexibility.Analysis.N04bSqrtCrossing
+public import ContinuousFlexibility.Analysis.SmoothDirectionsScalarLine
 
 /-!
 # Strict negativity of the actual profile on negative components
@@ -17,6 +19,8 @@ ordinary one-dimensional radial derivative from `Statements.Analysis`.
 Its value below is obtained from the actual radial coefficients and ODE;
 no differentiability of an arbitrary totalized coefficient is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CanonicalWholePositiveRootMatching
-import ContinuousFlexibility.Analysis.CanonicalWholeNegativeBoundary
-import ContinuousFlexibility.Analysis.WholeComponentFieldGluing
-import ContinuousFlexibility.Analysis.WholeComponentFieldSymmetries
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalWholePositiveRootMatching
+public import ContinuousFlexibility.Analysis.CanonicalWholeNegativeBoundary
+public import ContinuousFlexibility.Analysis.WholeComponentFieldGluing
+public import ContinuousFlexibility.Analysis.WholeComponentFieldSymmetries
 
 /-!
 # Ordinary finite regularity of the actual global relative fields
@@ -12,6 +14,8 @@ gives one more derivative for the coordinate than for the height. The
 same selected fields preserve the open annulus and the positive height.
 No global regularity or matching conclusion is supplied as an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

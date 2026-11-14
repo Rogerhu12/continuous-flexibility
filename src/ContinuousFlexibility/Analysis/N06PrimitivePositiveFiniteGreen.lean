@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06PrimitiveFiniteForcing
-import ContinuousFlexibility.Analysis.N06PrimitiveCubicTestLp
-import ContinuousFlexibility.Analysis.N06PositiveFullPeriodTests
-import ContinuousFlexibility.Analysis.N06CurrentRelativeSourceIdentity
+module
+
+public import ContinuousFlexibility.Analysis.N06PrimitiveFiniteForcing
+public import ContinuousFlexibility.Analysis.N06PrimitiveCubicTestLp
+public import ContinuousFlexibility.Analysis.N06PositiveFullPeriodTests
+public import ContinuousFlexibility.Analysis.N06CurrentRelativeSourceIdentity
 
 /-!
 # Actual positive finite Green on the original canonical interval
@@ -11,6 +13,8 @@ interval cubic pairing applies to the half-period average of every original
 physical test.  Only the same finite H2 height and its true weighted
 endpoint Wronskians remain; no unit geometry or smooth forcing is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

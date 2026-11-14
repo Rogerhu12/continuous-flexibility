@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.HeightDerivatives
-import Mathlib.Analysis.Calculus.FDeriv.Congr
+module
+
+public import ContinuousFlexibility.Scalar.HeightDerivatives
+public import Mathlib.Analysis.Calculus.FDeriv.Congr
 
 /-!
 # Actual second derivatives of scalar products
@@ -9,6 +11,8 @@ C² point. Differentiating that actual germ gives the second product rule.
 These formulas isolate the principal quadratic form of a divergence
 operator using test functions that vanish to first order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

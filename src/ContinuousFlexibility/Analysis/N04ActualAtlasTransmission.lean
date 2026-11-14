@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04bActualAtlasCuts
-import ContinuousFlexibility.Analysis.N04bConstructedRootTransmission
-import ContinuousFlexibility.Analysis.N04bActualCharacteristics
+module
+
+public import ContinuousFlexibility.Analysis.N04bActualAtlasCuts
+public import ContinuousFlexibility.Analysis.N04bConstructedRootTransmission
+public import ContinuousFlexibility.Analysis.N04bActualCharacteristics
 
 /-!
 # Transmission for the actual stored negative charts
@@ -10,6 +12,8 @@ construction. Their common physical point is the middle of the genuine
 travel strip. The constructed root-height identity gives both frozen
 transmission conditions for every smooth physical test function.
 -/
+
+@[expose] public section
 
 noncomputable section
 

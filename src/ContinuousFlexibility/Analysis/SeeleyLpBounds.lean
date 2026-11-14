@@ -1,6 +1,8 @@
-import Mathlib.MeasureTheory.Function.LpSeminorm.Basic
-import Mathlib.MeasureTheory.Group.MeasurableEquiv
-import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
+module
+
+public import Mathlib.MeasureTheory.Function.LpSeminorm.Basic
+public import Mathlib.MeasureTheory.Group.MeasurableEquiv
+public import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
 
 /-!
 # L² bounds for the actual Seeley reflection series
@@ -11,6 +13,8 @@ The summable absolute moments then control the same extension formula at every
 derivative order. The estimates concern the actual pointwise series and do not
 assume an extension operator as input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

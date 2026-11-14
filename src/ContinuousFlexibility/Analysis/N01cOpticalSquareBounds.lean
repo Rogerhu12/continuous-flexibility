@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01cOpticalSquareRootJets
-import ContinuousFlexibility.Analysis.N01cInverseProfileBounds
-import ContinuousFlexibility.Analysis.N01cRelativeControl
-import ContinuousFlexibility.Analysis.N01cControlJetWeights
+module
+
+public import ContinuousFlexibility.Analysis.N01cOpticalSquareRootJets
+public import ContinuousFlexibility.Analysis.N01cInverseProfileBounds
+public import ContinuousFlexibility.Analysis.N01cRelativeControl
+public import ContinuousFlexibility.Analysis.N01cControlJetWeights
 
 /-!
 # Primitive radial bounds for the actual optical square
@@ -10,6 +12,8 @@ The reference and control factors retain their actual component, cell and
 sample. Every estimate follows from the original reference/control jets.
 No speed, coefficient, or optical-jet tame bound is an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

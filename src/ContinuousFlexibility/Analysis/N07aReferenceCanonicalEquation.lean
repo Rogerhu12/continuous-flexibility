@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aReferencePhysicalEquation
-import ContinuousFlexibility.Analysis.N07aReferenceOpenCoefficients
-import ContinuousFlexibility.Analysis.N07aCanonicalEquationPairing
+module
+
+public import ContinuousFlexibility.Analysis.N07aReferencePhysicalEquation
+public import ContinuousFlexibility.Analysis.N07aReferenceOpenCoefficients
+public import ContinuousFlexibility.Analysis.N07aCanonicalEquationPairing
 
 /-!
 # The actual reference canonical equation on even tests
@@ -9,6 +11,8 @@ This is derived from the N05 physical graph, the zero reference return
 residual and the actual ν derivative. The coefficients and three columns
 are precisely the reference primitive functions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

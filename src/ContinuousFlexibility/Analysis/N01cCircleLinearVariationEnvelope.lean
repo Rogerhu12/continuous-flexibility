@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cCircleLinearVariationBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01cCircleLinearVariationBounds
 
 /-!
 # Polynomial envelopes for the genuine linear variational equation
@@ -8,6 +10,8 @@ pointwise coefficient and forcing bounds therefore control their actual
 integrals. The only exponential constant is the already fixed low
 coefficient integral. All higher quantities remain polynomial.
 -/
+
+@[expose] public section
 
 noncomputable section
 

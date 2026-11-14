@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MatchedMorsePieceWindows
+module
+
+public import ContinuousFlexibility.Radial.MatchedMorsePieceWindows
 
 /-!
 # Nonzero localizers intersect only nearby original retained pieces
@@ -9,6 +11,8 @@ chain and the actual pulled-back localizers have identical seam
 coordinates. The initial finite labels are treated by one fixed
 interior seam pair, before any retained length is chosen.
 -/
+
+@[expose] public section
 
 noncomputable section
 

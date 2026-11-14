@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryFormulaWordBounds
-import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryFormulaWordBounds
+public import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
 
 /-!
 # Normed finite kernels on the actual boundary towers
@@ -9,6 +11,8 @@ Products, finite tuples and a polynomially bounded smooth kernel retain
 the original parameter height and the exact sum of angular orders.
 These operations are used in the finite inverse-jet recursion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

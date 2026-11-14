@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRootLabelDirections
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledLabelPrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRootLabelSample
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRootLabelDirections
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledLabelPrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRootLabelSample
 
 /-!
 # Fixed-base normalized prefixes of the actual inverse-root slope
@@ -10,6 +12,8 @@ intrinsic angular derivatives are included at that fixed low order; a
 finite parameter prefix changes only its high-order shift. The resulting
 bounds apply to every genuine tower of the literal inverse-label slope.
 -/
+
+@[expose] public section
 
 noncomputable section
 

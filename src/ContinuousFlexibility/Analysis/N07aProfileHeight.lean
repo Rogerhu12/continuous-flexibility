@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N07aForwardCoefficients
-import ContinuousFlexibility.Analysis.N07aMaterialDecay
-import ContinuousFlexibility.Analysis.N07aProfileCoefficient
-import ContinuousFlexibility.Analysis.PhysicalTransmissionTrace
-import ContinuousFlexibility.Scalar.WeightedDecodeLift
+module
+
+public import ContinuousFlexibility.Analysis.N07aForwardCoefficients
+public import ContinuousFlexibility.Analysis.N07aMaterialDecay
+public import ContinuousFlexibility.Analysis.N07aProfileCoefficient
+public import ContinuousFlexibility.Analysis.PhysicalTransmissionTrace
+public import ContinuousFlexibility.Scalar.WeightedDecodeLift
 
 /-!
 # The actual controlled profile difference in a physical height space
@@ -11,6 +13,8 @@ The q=0 coefficient slice and the genuine N01 bounds imply weighted
 membership of the profile difference. This uses no support assumption on
 the closure of the distinguished control's support.
 -/
+
+@[expose] public section
 
 noncomputable section
 

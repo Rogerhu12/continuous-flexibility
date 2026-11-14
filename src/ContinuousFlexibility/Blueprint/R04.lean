@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Milestones
-import ContinuousFlexibility.Radial.MorseFullStatement
+module
+
+public import ContinuousFlexibility.Statements.Milestones
+public import ContinuousFlexibility.Radial.MorseFullStatement
 
 /-!
 # Blueprint node R04
@@ -12,6 +14,8 @@ The proof is `ContinuousFlexibility.Radial.morse_R04_statement`
 (`Radial/MorseFullStatement.lean`), which proves the statement outright; the
 hypothesis `R02Statement` is not needed.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

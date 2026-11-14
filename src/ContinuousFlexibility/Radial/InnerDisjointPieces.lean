@@ -1,6 +1,8 @@
-import Mathlib.MeasureTheory.Function.L2Space
-import Mathlib.Analysis.InnerProductSpace.ProdL2
-import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+module
+
+public import Mathlib.MeasureTheory.Function.L2Space
+public import Mathlib.Analysis.InnerProductSpace.ProdL2
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 
 /-!
 # Orthogonal assembly in the actual source measure
@@ -10,6 +12,8 @@ summed in one ambient `L²` space. This applies to the physical radial
 measure as well as to the model coordinate. The central scalar border
 is placed in exactly one piece of a Hilbert product.
 -/
+
+@[expose] public section
 
 noncomputable section
 

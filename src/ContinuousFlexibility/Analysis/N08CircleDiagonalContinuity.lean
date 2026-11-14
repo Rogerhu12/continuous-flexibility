@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N08CircleReferenceDiagonal
+module
+
+public import ContinuousFlexibility.Analysis.N08CircleReferenceDiagonal
 
 /-!
 # Continuity of the actual diagonal entries
@@ -8,6 +10,8 @@ Continuity settles any finite collection of components on one common
 neighborhood.  The infinite collection still requires its separate
 uniform geometric estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

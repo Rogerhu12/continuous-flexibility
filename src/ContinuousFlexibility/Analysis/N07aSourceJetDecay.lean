@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aWeightedJetPointwise
-import ContinuousFlexibility.Analysis.MaterialOrdinaryJets
+module
+
+public import ContinuousFlexibility.Analysis.N07aWeightedJetPointwise
+public import ContinuousFlexibility.Analysis.MaterialOrdinaryJets
 
 /-!
 # Material decay of the actual decoded source jets
@@ -8,6 +10,8 @@ Adding c material weights to the input grading buys M^(-c) pointwise
 without an order-dependent loss. The ordinary radial expansion consumes
 one further material weight after its complete coefficient sum is formed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

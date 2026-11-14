@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ProjectiveNewtonLimit
-import ContinuousFlexibility.Analysis.ProjectiveNewtonRapidDecay
+module
+
+public import ContinuousFlexibility.Analysis.ProjectiveNewtonLimit
+public import ContinuousFlexibility.Analysis.ProjectiveNewtonRapidDecay
 
 /-!
 # A common Newton orbit for parameter regularity
@@ -8,6 +10,8 @@ Select the smoothing family and schedule once. The forward smoothing
 estimates, rapid increments at every grade, and zero-residual limit all
 use that selection.
 -/
+
+@[expose] public section
 
 noncomputable section
 

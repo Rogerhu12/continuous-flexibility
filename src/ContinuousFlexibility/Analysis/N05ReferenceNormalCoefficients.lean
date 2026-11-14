@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05PhysicalPieceRadialMultiplier
-import ContinuousFlexibility.Analysis.N05CanonicalRadialTestDerivative
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05PhysicalPieceRadialMultiplier
+public import ContinuousFlexibility.Analysis.N05CanonicalRadialTestDerivative
 
 /-!
 # The actual coefficients of the canonical first radial derivative
@@ -9,6 +11,8 @@ The leading inverse Jacobian and the logarithmic height correction are
 chosen once on the genuine physical pieces. They are measurable and their
 fixed coefficient bounds follow from the selected reference coordinates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

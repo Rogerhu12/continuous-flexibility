@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterBlockOperator
-import ContinuousFlexibility.Radial.OuterGreenIntegral
+module
+
+public import ContinuousFlexibility.Radial.OuterBlockOperator
+public import ContinuousFlexibility.Radial.OuterGreenIntegral
 
 /-!
 # Assembling the actual core kernel and deep-tail resolvent
@@ -10,6 +12,8 @@ are values of the same homogeneous pair at the deep-tail entrance.  Thus
 the operator bound requires neither an assumed outer inverse nor an assumed
 bounded core operator.
 -/
+
+@[expose] public section
 
 noncomputable section
 

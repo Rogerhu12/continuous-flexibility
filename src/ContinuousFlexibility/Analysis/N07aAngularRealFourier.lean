@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularFourier
-import ContinuousFlexibility.Analysis.N07aAngularCharacters
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularFourier
+public import ContinuousFlexibility.Analysis.N07aAngularCharacters
 
 /-!
 # Real inversion for arbitrary canonical Fourier bands
@@ -9,6 +11,8 @@ function even when a band contains infinitely many radial frequencies.
 The proof uses the full Fourier isometry and conjugation on actual `L²`
 classes; no finite radial cutoff is part of the construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

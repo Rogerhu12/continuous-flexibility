@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OperatorJetProbes
-import Mathlib.Analysis.Calculus.Deriv.Prod
+module
+
+public import ContinuousFlexibility.Analysis.OperatorJetProbes
+public import Mathlib.Analysis.Calculus.Deriv.Prod
 
 /-!
 # Actual regularity of the mixed coefficient from operator equality
@@ -11,6 +13,8 @@ derivative in that family must agree, because the fluxes agree on the
 whole angular line. The smooth comparison operator takes two different
 nonzero values on the same tests, which excludes this alternative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01cProfileMajorantWeights
-import ContinuousFlexibility.Analysis.N01cControlJetWeights
-import ContinuousFlexibility.Analysis.N01cReferenceJetBounds
-import ContinuousFlexibility.Analysis.N01cProfileDifferenceBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01cProfileMajorantWeights
+public import ContinuousFlexibility.Analysis.N01cControlJetWeights
+public import ContinuousFlexibility.Analysis.N01cReferenceJetBounds
+public import ContinuousFlexibility.Analysis.N01cProfileDifferenceBounds
 
 /-!
 # Actual profile parameter jets with one exact material height weight
@@ -15,6 +17,8 @@ at every radial order, on the original N01b neighbourhood.
 The zero-parameter difference uses the actual first-jet segment theorem.
 No tame estimate for the profile itself is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

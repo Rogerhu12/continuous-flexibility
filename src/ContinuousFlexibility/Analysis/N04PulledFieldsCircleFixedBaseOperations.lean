@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsFixedBaseComposition
-import ContinuousFlexibility.Analysis.N04PulledFieldsAverageFixedBase
-import ContinuousFlexibility.Analysis.CirclePositiveInverseFixedBaseBounds
-import ContinuousFlexibility.Analysis.CircleUniformFamilyOperations
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsFixedBaseComposition
+public import ContinuousFlexibility.Analysis.N04PulledFieldsAverageFixedBase
+public import ContinuousFlexibility.Analysis.CirclePositiveInverseFixedBaseBounds
+public import ContinuousFlexibility.Analysis.CircleUniformFamilyOperations
 
 /-!
 # Fixed-base families for the actual circle operations
@@ -11,6 +13,8 @@ existing circle-model objects. Their strong seed estimates are combined
 through the genuine finite-partition tower, retaining one low base before
 all parameter orders and all external selectors.
 -/
+
+@[expose] public section
 
 noncomputable section
 

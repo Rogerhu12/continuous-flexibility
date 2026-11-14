@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aBaseInverse
+module
+
+public import ContinuousFlexibility.Analysis.N07aBaseInverse
 
 /-!
 # Feeding the lifted corrected source into the actual reference inverse
@@ -8,6 +10,8 @@ existing N05 estimates apply to that realization.  The coherence clause
 identifies their field and first radial derivative with the same Banach
 solution `n07aBaseInverse`; no new choice of solution is made.
 -/
+
+@[expose] public section
 
 noncomputable section
 

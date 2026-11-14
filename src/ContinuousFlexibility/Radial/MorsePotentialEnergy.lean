@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseWeakOperator
-import ContinuousFlexibility.Statements.Radial
+module
+
+public import ContinuousFlexibility.Radial.MorseWeakOperator
+public import ContinuousFlexibility.Statements.Radial
 
 /-!
 # The actual absolute-potential Morse energy domain
@@ -10,6 +12,8 @@ weak-energy graph for positive `j,A`. Its signed integral form is matched
 with the existing Morse form. No regularity of arbitrary L² distributional
 solutions, maximal distribution domain, or operator graph core is asserted.
 -/
+
+@[expose] public section
 
 noncomputable section
 

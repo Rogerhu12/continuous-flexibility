@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aNuReducedSource
-import ContinuousFlexibility.Analysis.N04RealizationUniformDirection
+module
+
+public import ContinuousFlexibility.Analysis.N07aNuReducedSource
+public import ContinuousFlexibility.Analysis.N04RealizationUniformDirection
 
 /-!
 # The actual reduced scalar residual on one uniform neighborhood
@@ -8,6 +10,8 @@ The scalar realization already supplies a uniform tower. Its composition
 with the actual compact border parameter retains that tower before the
 local smooth-tame wrapper forgets its fixed-domain estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

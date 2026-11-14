@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CircleReturnFourier
-import ContinuousFlexibility.Analysis.CircleReturnSeries
-import ContinuousFlexibility.Analysis.CircleReturnUniqueness
+module
+
+public import ContinuousFlexibility.Analysis.CircleReturnFourier
+public import ContinuousFlexibility.Analysis.CircleReturnSeries
+public import ContinuousFlexibility.Analysis.CircleReturnUniqueness
 
 /-!
 # The return inverse on actual smooth circle functions
@@ -14,6 +16,8 @@ The range lemmas verify the converse direction as well: the return operator
 takes every smooth odd function of period pi to the stated target class.
 No Fourier-expansion hypothesis is imposed on either class of functions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

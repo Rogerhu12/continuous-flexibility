@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04bConstructedRootDensity
+module
+
+public import ContinuousFlexibility.Analysis.N04bConstructedRootDensity
 
 /-!
 # Regularity and Jacobian of the actual interior root chart
@@ -8,6 +10,8 @@ there follows by composition with the explicit root coordinate, and the
 Jacobian follows from its actual differential. The same statements handle
 both orientations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerPositiveGap
+module
+
+public import ContinuousFlexibility.Radial.InnerPositiveGap
 
 /-!
 # Green identities at the actual radial cuts
@@ -8,6 +10,8 @@ For a zero-boundary forced solution and a homogeneous Poisson function,
 the total outward flux pairing is minus their physical source pairing.
 This is the local identity behind `flux D = -T*` in the inner assembly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

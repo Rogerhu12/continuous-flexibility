@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.SpacesPhysicalReconstruction
-import ContinuousFlexibility.Analysis.SpacesPhysicalEncode
-import ContinuousFlexibility.Analysis.SpacesTracePointwise
-import ContinuousFlexibility.Analysis.CircleSmoothReconstruction
+module
+
+public import ContinuousFlexibility.Analysis.SpacesPhysicalReconstruction
+public import ContinuousFlexibility.Analysis.SpacesPhysicalEncode
+public import ContinuousFlexibility.Analysis.SpacesTracePointwise
+public import ContinuousFlexibility.Analysis.CircleSmoothReconstruction
 
 /-!
 # Decoding the actual physical weak jet space
@@ -10,6 +12,8 @@ The smooth material representative is unique, even and linear in its
 weak jets. Restoring the weight and radial coordinate gives exactly the
 height functions and the Hilbert norms specified by the physical model.
 -/
+
+@[expose] public section
 
 noncomputable section
 

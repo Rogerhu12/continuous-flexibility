@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Geometry.GraphEmbedding
-import ContinuousFlexibility.Geometry.SurfaceGeometry
-import ContinuousFlexibility.Scalar.HeightDerivatives
+module
+
+public import ContinuousFlexibility.Geometry.GraphEmbedding
+public import ContinuousFlexibility.Geometry.SurfaceGeometry
+public import ContinuousFlexibility.Scalar.HeightDerivatives
 
 /-!
 # Differential geometry of actual height graphs
@@ -9,6 +11,8 @@ The tangent vectors and normal below use the actual Fréchet derivative of
 `graphMap id z`. All inner products are those of the Euclidean target `E3`;
 the product norm on the coordinate plane is not used as a Euclidean metric.
 -/
+
+@[expose] public section
 
 noncomputable section
 

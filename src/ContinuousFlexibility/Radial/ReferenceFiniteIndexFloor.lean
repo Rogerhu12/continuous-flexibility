@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ScaleSlowVariation
-import ContinuousFlexibility.Radial.MorseRealizationBasic
+module
+
+public import ContinuousFlexibility.Radial.ScaleSlowVariation
+public import ContinuousFlexibility.Radial.MorseRealizationBasic
 
 /-!
 # A finite floor on the radial cell indices
@@ -9,6 +11,8 @@ Gaussian and profile estimates survive with enlarged constants, while
 the actual profile, cells, localizers and trace circles stay unchanged.
 This permits one common label on a prescribed compact middle region.
 -/
+
+@[expose] public section
 
 noncomputable section
 

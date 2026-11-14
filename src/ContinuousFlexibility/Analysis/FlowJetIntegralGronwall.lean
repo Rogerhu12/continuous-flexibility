@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowGronwall
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowGronwall
 
 /-!
 # A uniform norm bound from the actual jet integral equation
@@ -7,6 +9,8 @@ Only the time integral of the coefficient multiplying the unknown jet
 enters the exponential. The constant forcing bound remains a linear
 prefactor. This applies to scalar jets and continuous multilinear maps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.MaterialRadiusJets
+module
+
+public import ContinuousFlexibility.Analysis.MaterialRadiusJets
 
 /-!
 # A fixed material-weight loss for the inverse length scale
@@ -9,6 +11,8 @@ Differentiating the inverse length in the actual material coordinate
 retains that same power in every order, because all positive logarithmic
 jets are bounded.
 -/
+
+@[expose] public section
 
 noncomputable section
 

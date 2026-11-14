@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CanonicalActualEndpointFields
-import ContinuousFlexibility.Analysis.WholeComponentReferenceIdentity
-import ContinuousFlexibility.Analysis.EndpointHeightLogJets
-import Mathlib.Analysis.Calculus.ContDiff.Bounds
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalActualEndpointFields
+public import ContinuousFlexibility.Analysis.WholeComponentReferenceIdentity
+public import ContinuousFlexibility.Analysis.EndpointHeightLogJets
+public import Mathlib.Analysis.Calculus.ContDiff.Bounds
 
 /-!
 # One common whole-component coordinate and height construction
@@ -15,6 +17,8 @@ through order n. The reference member is exactly identity/one everywhere.
 This finite assembly does not assert material growth for its input
 constants or for the intermediate inverse-jet constant.
 -/
+
+@[expose] public section
 
 noncomputable section
 

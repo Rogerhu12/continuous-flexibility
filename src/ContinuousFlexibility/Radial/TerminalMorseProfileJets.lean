@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.TerminalMorsePhysicalJets
+module
+
+public import ContinuousFlexibility.Radial.TerminalMorsePhysicalJets
 
 /-!
 # Actual profile coefficients on the terminal cutoff layer
@@ -8,6 +10,8 @@ same weight identity w(Rt)=weightScale R'(t). The radius equation and
 the actual Morse potential bounds control R''. The reciprocal Hilbert
 density follows from the same positive speed floor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

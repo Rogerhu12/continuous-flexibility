@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06BoundaryAngularImage
-import Mathlib.Analysis.Calculus.Deriv.Slope
+module
+
+public import ContinuousFlexibility.Analysis.N06BoundaryAngularImage
+public import Mathlib.Analysis.Calculus.Deriv.Slope
 
 /-!
 # Radial endpoint orientation of the actual current chart
@@ -14,6 +16,8 @@ or monotonicity of a physical slice.
 The final identity converts the physical outward sign and the signed
 radial Jacobian into the canonical outward sign in the Green formula.
 -/
+
+@[expose] public section
 
 noncomputable section
 

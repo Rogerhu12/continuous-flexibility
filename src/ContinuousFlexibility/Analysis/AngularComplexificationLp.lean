@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.AngularComplexification
-import ContinuousFlexibility.Analysis.AngularFrequency
+module
+
+public import ContinuousFlexibility.Analysis.AngularComplexification
+public import ContinuousFlexibility.Analysis.AngularFrequency
 
 /-!
 # Complexification commutes with angular Hilbert sums
@@ -9,6 +11,8 @@ Hilbert sum of the complexified fibers.  Real spectral multipliers commute
 with this identification.  In particular their domains are characterized
 by the two real components and their squared norms add exactly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

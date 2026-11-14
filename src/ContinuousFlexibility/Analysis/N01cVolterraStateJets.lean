@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cVolterraMultilinear
-import ContinuousFlexibility.Analysis.N01cFlowTopologicalContinuity
-import ContinuousFlexibility.Analysis.N01cCoefficientJetCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N01cVolterraMultilinear
+public import ContinuousFlexibility.Analysis.N01cFlowTopologicalContinuity
+public import ContinuousFlexibility.Analysis.N01cCoefficientJetCalculus
 
 /-!
 # Recursive continuous multilinear variations driven by a genuine speed tower
@@ -18,6 +20,8 @@ proves joint continuity, its zero initial value, its true time ODE and
 uniqueness. Identification with state derivatives is a further theorem,
 not a premise or a conclusion asserted by this construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import Mathlib.MeasureTheory.Function.L2Space
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
-import Mathlib.Topology.Algebra.InfiniteSum.ENNReal
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import Mathlib.MeasureTheory.Function.L2Space
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
+public import Mathlib.Topology.Algebra.InfiniteSum.ENNReal
 
 /-!
 # Actual weighted bounds for the state control means
@@ -11,6 +13,8 @@ The normalized angular mean is then bounded by Hölder's inequality in
 the actual angular measure. The positive material weight is evaluated at
 the same sample that occurs in `CircleMember`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

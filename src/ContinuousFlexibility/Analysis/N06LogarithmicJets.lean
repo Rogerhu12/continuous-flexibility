@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06PositiveClippedJets
-import Mathlib.Analysis.SpecialFunctions.Log.Deriv
-import Mathlib.Analysis.Calculus.IteratedDeriv.FaaDiBruno
+module
+
+public import ContinuousFlexibility.Analysis.N06PositiveClippedJets
+public import Mathlib.Analysis.SpecialFunctions.Log.Deriv
+public import Mathlib.Analysis.Calculus.IteratedDeriv.FaaDiBruno
 
 /-!
 # Actual logarithmic endpoint jets from primitive positive height data
@@ -9,6 +11,8 @@ The interpolation uses logarithms, but no logarithmic jet estimate needs
 to be assumed separately: two ordinary height jets and a positive
 reciprocal bound give the required polynomial estimate on each collar.
 -/
+
+@[expose] public section
 
 noncomputable section
 

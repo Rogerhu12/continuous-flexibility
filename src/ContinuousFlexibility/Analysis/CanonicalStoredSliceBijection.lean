@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CanonicalStoredFootpointIdentification
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalStoredFootpointIdentification
 
 /-!
 # Actual stored angular slices are bijections
@@ -12,6 +14,8 @@ identities and the surjective N01 left gauge imply that every stored
 angular slice is onto. No regularity of the stored cut-axis angular
 coefficient or separate field realization is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

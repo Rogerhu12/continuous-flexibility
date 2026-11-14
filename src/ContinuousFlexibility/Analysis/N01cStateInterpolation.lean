@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01cOneHighProducts
-import ContinuousFlexibility.Analysis.N01cStateSeminorms
-import ContinuousFlexibility.Analysis.TameTransfer
-import ContinuousFlexibility.Analysis.TameSmoothingCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N01cOneHighProducts
+public import ContinuousFlexibility.Analysis.N01cStateSeminorms
+public import ContinuousFlexibility.Analysis.TameTransfer
+public import ContinuousFlexibility.Analysis.TameSmoothingCalculus
 
 /-!
 # Interpolation for the actual joint state grading
@@ -12,6 +14,8 @@ of radius at most one half controls the sum grading of the state and
 the real parameter.  The product estimate is then normalized on one
 smaller neighbourhood of the original reference state.
 -/
+
+@[expose] public section
 
 noncomputable section
 

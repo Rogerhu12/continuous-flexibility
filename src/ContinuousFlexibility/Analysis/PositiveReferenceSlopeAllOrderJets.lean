@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.PositiveCutoffAllOrderJets
-import ContinuousFlexibility.Analysis.PositiveReferenceLinearJetEnvelope
-import ContinuousFlexibility.Analysis.PositiveReferenceCoordinate
+module
+
+public import ContinuousFlexibility.Analysis.PositiveCutoffAllOrderJets
+public import ContinuousFlexibility.Analysis.PositiveReferenceLinearJetEnvelope
+public import ContinuousFlexibility.Analysis.PositiveReferenceCoordinate
 
 /-!
 # All orders of the same normalized reference coordinate
@@ -9,6 +11,8 @@ The endpoint slopes, fixed cutoffs and actual integral normalizer are
 used without changing the coordinate or width. High endpoint jets stay
 linear; the cutoff cost is a power of the supplied inverse-width bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

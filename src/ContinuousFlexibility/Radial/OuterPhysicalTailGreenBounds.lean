@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.OuterPhysicalTailInitialBounds
-import ContinuousFlexibility.Radial.TailFundamentalNodeBounds
-import ContinuousFlexibility.Radial.TailFundamentalStates
+module
+
+public import ContinuousFlexibility.Radial.OuterPhysicalTailInitialBounds
+public import ContinuousFlexibility.Radial.TailFundamentalNodeBounds
+public import ContinuousFlexibility.Radial.TailFundamentalStates
 
 /-!
 # The uniform node Green bound for the same actual basis
@@ -10,6 +12,8 @@ eight over Lambda. Its affine contraction preserves that bound, so
 the two-point node estimate has an explicit constant independent of
 frequency, transition depth, orientation and height choices.
 -/
+
+@[expose] public section
 
 noncomputable section
 

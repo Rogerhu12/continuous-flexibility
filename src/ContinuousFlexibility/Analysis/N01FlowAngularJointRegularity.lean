@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01FlowJointRegularity
-import ContinuousFlexibility.Analysis.N01FlowAngularSmoothness
-import ContinuousFlexibility.Analysis.ReturnFlowInverseRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N01FlowJointRegularity
+public import ContinuousFlexibility.Analysis.N01FlowAngularSmoothness
+public import ContinuousFlexibility.Analysis.ReturnFlowInverseRegularity
 
 /-!
 # Joint regularity of the actual angular variation
@@ -12,6 +14,8 @@ a joint strict derivative and C¹ regularity of the first angular
 variation throughout the open component, including radii where the
 radial square root itself need only be continuous.
 -/
+
+@[expose] public section
 
 noncomputable section
 

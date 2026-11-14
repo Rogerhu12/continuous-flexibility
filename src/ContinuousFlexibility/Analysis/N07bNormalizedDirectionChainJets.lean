@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07bNormalizedSourceJetBounds
-import ContinuousFlexibility.Analysis.N07bNormalizedDirectionChain
+module
+
+public import ContinuousFlexibility.Analysis.N07bNormalizedSourceJetBounds
+public import ContinuousFlexibility.Analysis.N07bNormalizedDirectionChain
 
 /-!
 # Finite jets for layer-dependent normalized directions
@@ -9,6 +11,8 @@ the invariant j+n<=b gives the same finite constant and degree as for one
 fixed direction. The actual normalized paths satisfy this recurrence by
 the preceding genuine material-coordinate differentiation identities.
 -/
+
+@[expose] public section
 
 noncomputable section
 

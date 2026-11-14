@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OscillatorSpectrum
+module
+
+public import ContinuousFlexibility.Radial.OscillatorSpectrum
 
 /-!
 # Uniform arithmetic separation of the central oscillator levels
@@ -8,6 +10,8 @@ This proves the numerical separation in Section 4, equations
 constructed in `OscillatorSpectrum`. It does not identify a closed
 operator domain or assert a resolvent norm bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

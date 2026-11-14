@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.TailClassicalRegularity
-import ContinuousFlexibility.Radial.TailTestPairing
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
-import Mathlib.Tactic.LinearCombination
+module
+
+public import ContinuousFlexibility.Radial.TailClassicalRegularity
+public import ContinuousFlexibility.Radial.TailTestPairing
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+public import Mathlib.Tactic.LinearCombination
 
 /-!+# The actual Green kernel from a pair of fundamental solutions
 
@@ -10,6 +12,8 @@ solution at the larger argument. Zero extension outside the open interval
 makes the kernel symmetric on all of the plane. Each row splits into a
 compact left part and a multiple of the integrable natural solution.
 -/
+
+@[expose] public section
 
 noncomputable section
 

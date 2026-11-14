@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryActualCoordinateDirections
-import ContinuousFlexibility.Analysis.N04PositiveGeometryCoordinateNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryActualCoordinateDirections
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryCoordinateNormalization
 
 /-!
 # Unit normalizations of the actual four coordinate components
@@ -8,6 +10,8 @@ These identities apply to arbitrary genuine towers of the displayed
 fields. Thus restriction and the eventual whole-atlas identification do
 not introduce an independent jet or an additional regularity premise.
 -/
+
+@[expose] public section
 
 noncomputable section
 

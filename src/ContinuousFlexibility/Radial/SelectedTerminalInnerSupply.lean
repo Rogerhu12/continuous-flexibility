@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MatchedPiecesAssembly
+module
+
+public import ContinuousFlexibility.Radial.MatchedPiecesAssembly
 
 /-!
 # The regional inner inverse before installing its fields
@@ -7,6 +9,8 @@ This is the exact output of the physical-to-frozen inverse construction.
 It contains no Poisson columns or matrix estimate. The selected matching
 shell has already fixed the physical cuts, frequency and source map.
 -/
+
+@[expose] public section
 
 noncomputable section
 

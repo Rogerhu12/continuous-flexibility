@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aClosedTowers
+module
+
+public import ContinuousFlexibility.Analysis.N07aClosedTowers
 
 /-!
 # Lifting actual L² coordinate towers to a Sobolev model
@@ -8,6 +10,8 @@ graph. The resulting levels are then restricted to the closed graph of
 the actual bonding maps. Only the original values are identified; higher
 graph relations follow from the genuine parameter difference quotients.
 -/
+
+@[expose] public section
 
 noncomputable section
 

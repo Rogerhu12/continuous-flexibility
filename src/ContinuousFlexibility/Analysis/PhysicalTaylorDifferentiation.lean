@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.PhysicalJetLinearity
-import ContinuousFlexibility.Analysis.PhysicalTopology
-import ContinuousFlexibility.Analysis.CylinderUniformNorm
-import ContinuousFlexibility.Analysis.ScalarDerivativeLimit
-import Mathlib.MeasureTheory.Function.LpSeminorm.SMul
+module
+
+public import ContinuousFlexibility.Analysis.PhysicalJetLinearity
+public import ContinuousFlexibility.Analysis.PhysicalTopology
+public import ContinuousFlexibility.Analysis.CylinderUniformNorm
+public import ContinuousFlexibility.Analysis.ScalarDerivativeLimit
+public import Mathlib.MeasureTheory.Function.LpSeminorm.SMul
 
 /-!
 # Genuine physical-space derivatives from weighted Taylor remainders
@@ -12,6 +14,8 @@ L² function. The finite collection of jet norms controls each projective
 level. Consequently the full difference quotient converges in the
 supplied height space and in its compatibility kernel.
 -/
+
+@[expose] public section
 
 noncomputable section
 

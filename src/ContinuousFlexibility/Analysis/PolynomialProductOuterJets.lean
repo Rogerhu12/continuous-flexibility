@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.PolynomialJetOperations
+module
+
+public import ContinuousFlexibility.Analysis.PolynomialJetOperations
 
 /-!
 # Scalar product jets on a ball with component-power radius
@@ -8,6 +10,8 @@ zeroth values use only the stated radius. The ordinary product rule
 therefore bounds every Taylor jet of multiplication by a component
 power, with constants chosen before the component and evaluation point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

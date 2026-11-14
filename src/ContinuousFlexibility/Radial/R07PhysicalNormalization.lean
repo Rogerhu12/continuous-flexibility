@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.R07NaturalLineNormalization
-import ContinuousFlexibility.Radial.R07DeepTailChange
-import ContinuousFlexibility.Radial.R07CapPullback
-import Mathlib.MeasureTheory.Function.LpSeminorm.SMul
+module
+
+public import ContinuousFlexibility.Radial.R07NaturalLineNormalization
+public import ContinuousFlexibility.Radial.R07DeepTailChange
+public import ContinuousFlexibility.Radial.R07CapPullback
+public import Mathlib.MeasureTheory.Function.LpSeminorm.SMul
 
 /-!
 # Normalized globally smooth physical representatives of the R06 line
@@ -12,6 +14,8 @@ the same line.  Natural-line uniqueness identifies their scalar ratio and
 produces a physical representative whose entrance Cauchy data depend only
 on the normalized outward entrance slope.
 -/
+
+@[expose] public section
 
 noncomputable section
 

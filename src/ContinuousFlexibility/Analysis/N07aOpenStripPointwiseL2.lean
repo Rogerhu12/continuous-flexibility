@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aOpenStripPointwiseL1
-import ContinuousFlexibility.Analysis.N07aCanonicalJetNormBounds
-import Mathlib.MeasureTheory.Function.LpSeminorm.CompareExp
+module
+
+public import ContinuousFlexibility.Analysis.N07aOpenStripPointwiseL1
+public import ContinuousFlexibility.Analysis.N07aCanonicalJetNormBounds
+public import Mathlib.MeasureTheory.Function.LpSeminorm.CompareExp
 
 /-!
 # Uniform point evaluation by four L² jets on the actual canonical piece
@@ -8,6 +10,8 @@ import Mathlib.MeasureTheory.Function.LpSeminorm.CompareExp
 The complete length-dependent constant is explicit, so it can be kept
 inside a sampled subpower envelope in the normal estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

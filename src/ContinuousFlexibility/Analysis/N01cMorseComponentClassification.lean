@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MorseNegativeCover
+module
+
+public import ContinuousFlexibility.Radial.MorseNegativeCover
 
 /-!
 # The actual labeled negative components of a retained Morse tail
@@ -7,6 +9,8 @@ The existence statement keeps the starting index and the exact turning
 endpoints.  In particular the label is the label of the model containing
 the point, before any control enumeration or material sample is chosen.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.PositiveComponentSimpleProfileLower
-import ContinuousFlexibility.Analysis.RetainedPositiveGapProfileLower
-import ContinuousFlexibility.Analysis.RetainedPositiveComponentClassification
-import ContinuousFlexibility.Analysis.RetainedPositiveComponentInteriorEndpoints
-import ContinuousFlexibility.Analysis.PositiveComponentMaterialCell
-import ContinuousFlexibility.Analysis.MaterialGlobalEndpointModels
+module
+
+public import ContinuousFlexibility.Analysis.PositiveComponentSimpleProfileLower
+public import ContinuousFlexibility.Analysis.RetainedPositiveGapProfileLower
+public import ContinuousFlexibility.Analysis.RetainedPositiveComponentClassification
+public import ContinuousFlexibility.Analysis.RetainedPositiveComponentInteriorEndpoints
+public import ContinuousFlexibility.Analysis.PositiveComponentMaterialCell
+public import ContinuousFlexibility.Analysis.MaterialGlobalEndpointModels
 
 /-!
 # One sampled physical lower bound for every retained positive component
@@ -14,6 +16,8 @@ simple-root coefficient. A fixed scaled E0 floor absorbs that finite
 constant. The original reference, component, midpoint cell and sample
 are retained throughout, without requiring one cell for the whole gap.
 -/
+
+@[expose] public section
 
 noncomputable section
 

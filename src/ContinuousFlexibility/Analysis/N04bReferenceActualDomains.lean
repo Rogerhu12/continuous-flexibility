@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04bReferenceActualTravel
-import ContinuousFlexibility.Analysis.N04bReferencePieces
-import ContinuousFlexibility.Analysis.N04bCurrentPartition
+module
+
+public import ContinuousFlexibility.Analysis.N04bReferenceActualTravel
+public import ContinuousFlexibility.Analysis.N04bReferencePieces
+public import ContinuousFlexibility.Analysis.N04bCurrentPartition
 
 /-!
 # Reference domains of the actual moving atlas
@@ -10,6 +12,8 @@ monotonicity identifies the two moving-half definitions with the intervals
 split at the unique optical midpoint. The positive pieces retain exactly
 their existing subdivision intervals and the same typed index.
 -/
+
+@[expose] public section
 
 noncomputable section
 

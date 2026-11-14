@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CanonicalWholeNegativeBoundary
-import ContinuousFlexibility.Analysis.MaterialEndpointWeightRatios
-import ContinuousFlexibility.Analysis.N01ReturnMargins
-import Mathlib.Topology.Order.OrderClosed
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalWholeNegativeBoundary
+public import ContinuousFlexibility.Analysis.MaterialEndpointWeightRatios
+public import ContinuousFlexibility.Analysis.N01ReturnMargins
+public import Mathlib.Topology.Order.OrderClosed
 
 /-!
 # Actual material ratios for the closed negative transport
@@ -12,6 +14,8 @@ coordinate bound extends to the true roots by continuity. The actual
 closed transport remains in that component, so no new material data,
 control geometry, or prescribed cell assignment is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

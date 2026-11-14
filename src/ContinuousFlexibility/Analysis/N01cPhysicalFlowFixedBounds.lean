@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cPhysicalLiePrefixBounds
-import ContinuousFlexibility.Analysis.N01cPhysicalFlowPointBounds
-import ContinuousFlexibility.Analysis.N01cPhysicalFlowAngularInputs
+module
+
+public import ContinuousFlexibility.Analysis.N01cPhysicalLiePrefixBounds
+public import ContinuousFlexibility.Analysis.N01cPhysicalFlowPointBounds
+public import ContinuousFlexibility.Analysis.N01cPhysicalFlowAngularInputs
 
 /-!
 # Fixed-order positive physical radial flow bounds
@@ -11,6 +13,8 @@ positive-parameter angular estimates. One common interpolation base
 controls the complete graph term, with all parameter losses counted in
 its total spatial order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

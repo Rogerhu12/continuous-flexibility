@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CanonicalActualEndpointFields
-import ContinuousFlexibility.Analysis.PlanarInverseDerivativeBound
-import ContinuousFlexibility.Analysis.N01ActualRootGeometry
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalActualEndpointFields
+public import ContinuousFlexibility.Analysis.PlanarInverseDerivativeBound
+public import ContinuousFlexibility.Analysis.N01ActualRootGeometry
 
 /-!
 # Quantitative diagonal bounds at actual fixed root circles
@@ -9,6 +11,8 @@ The actual inverse derivative is a left inverse. Since the root circle
 is fixed, the forward derivative is triangular there. A norm bound on
 the inverse therefore bounds both positive diagonal entries from below.
 -/
+
+@[expose] public section
 
 noncomputable section
 

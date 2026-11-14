@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.FlatMixedDiagonalRealization
-import ContinuousFlexibility.Analysis.TameUniformFamilyJets
+module
+
+public import ContinuousFlexibility.Analysis.FlatMixedDiagonalRealization
+public import ContinuousFlexibility.Analysis.TameUniformFamilyJets
 
 /-!
 # Reflection and linear reconstruction of actual mixed jets
@@ -9,6 +11,8 @@ Linear reconstruction and finite parameter-order maxima retain the
 same label factor. These operations apply to any genuine tower of the
 specified functions, by uniqueness of actual parameter derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

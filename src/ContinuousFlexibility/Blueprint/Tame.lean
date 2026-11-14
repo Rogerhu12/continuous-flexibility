@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Blueprint.Statements
-import ContinuousFlexibility.Analysis.TameCalculusTheorem
-import ContinuousFlexibility.Analysis.TameInverseTheorem
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
+public import ContinuousFlexibility.Analysis.TameCalculusTheorem
+public import ContinuousFlexibility.Analysis.TameInverseTheorem
 
 /-!
 # Blueprint node Tame
@@ -12,6 +14,8 @@ Source: `paper/flexible-surface-readable/07-fixed-geometry.tex` lines 108–354;
 
 Task file: `docs/tasks/Tame.md`. The statement is frozen.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

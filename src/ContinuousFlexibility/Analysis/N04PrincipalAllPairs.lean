@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N04PrincipalPairPieces
-import ContinuousFlexibility.Analysis.N04PrincipalPairNeighborhood
-import ContinuousFlexibility.Analysis.N04PrincipalPairCurrentData
-import ContinuousFlexibility.Analysis.N04PrincipalPositivePairInputs
-import ContinuousFlexibility.Analysis.N04PrincipalPositiveOrientation
-import ContinuousFlexibility.Analysis.N04PrincipalNegativePotentialPair
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalPairPieces
+public import ContinuousFlexibility.Analysis.N04PrincipalPairNeighborhood
+public import ContinuousFlexibility.Analysis.N04PrincipalPairCurrentData
+public import ContinuousFlexibility.Analysis.N04PrincipalPositivePairInputs
+public import ContinuousFlexibility.Analysis.N04PrincipalPositiveOrientation
+public import ContinuousFlexibility.Analysis.N04PrincipalNegativePotentialPair
 
 /-!
 # Paired estimates on every piece of the same atlas
@@ -13,6 +15,8 @@ current-data interface is reconstructed. In particular the resulting
 smooth directional tower is defined on every piece, as the frozen
 interface requires even when later restricted to a predicate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,11 +1,13 @@
-import ContinuousFlexibility.Analysis.N04NegativeInverseReferenceBounds
-import ContinuousFlexibility.Analysis.N04NegativeInverseOverlap
-import ContinuousFlexibility.Analysis.N04NegativeInverseCurrentData
-import ContinuousFlexibility.Analysis.N04NegativeInversePureJointBounds
-import ContinuousFlexibility.Analysis.N04NegativeGeometryPhysicalAtomTowers
-import ContinuousFlexibility.Analysis.ActualNegativeOppositeRootFields
-import ContinuousFlexibility.Analysis.MaterialEndpointWeightTransport
-import ContinuousFlexibility.Analysis.N07aPhysicalAtomBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeInverseReferenceBounds
+public import ContinuousFlexibility.Analysis.N04NegativeInverseOverlap
+public import ContinuousFlexibility.Analysis.N04NegativeInverseCurrentData
+public import ContinuousFlexibility.Analysis.N04NegativeInversePureJointBounds
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryPhysicalAtomTowers
+public import ContinuousFlexibility.Analysis.ActualNegativeOppositeRootFields
+public import ContinuousFlexibility.Analysis.MaterialEndpointWeightTransport
+public import ContinuousFlexibility.Analysis.N07aPhysicalAtomBounds
 
 /-!
 # Actual forward inputs on the two fixed negative reference halves
@@ -16,6 +18,8 @@ without changing that power.  The current/reference atom estimates then
 give pure joint derivative bounds with their exact parameter and physical
 arities, before the moving inverse point is selected.
 -/
+
+@[expose] public section
 
 noncomputable section
 

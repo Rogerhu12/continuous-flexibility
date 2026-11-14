@@ -1,5 +1,7 @@
-import Mathlib.MeasureTheory.Function.L2Space
-import Mathlib.MeasureTheory.Function.SpecialFunctions.Basic
+module
+
+public import Mathlib.MeasureTheory.Function.L2Space
+public import Mathlib.MeasureTheory.Function.SpecialFunctions.Basic
 
 /-!
 # L² under a positive density and multiplication by its square root
@@ -8,6 +10,8 @@ These statements use the actual with-density measure and the original
 representatives. With a positive density almost everywhere, no separate
 measurability premise for the field is needed in the equivalence.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

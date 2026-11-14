@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ParameterizedScalarInverse
-import ContinuousFlexibility.Analysis.N01cCoefficientJetCalculus
-import ContinuousFlexibility.Analysis.CircleSmoothDirectionsOperations
+module
+
+public import ContinuousFlexibility.Analysis.ParameterizedScalarInverse
+public import ContinuousFlexibility.Analysis.N01cCoefficientJetCalculus
+public import ContinuousFlexibility.Analysis.CircleSmoothDirectionsOperations
 
 /-!
 # Actual inverses of finite coefficient scalar families
@@ -17,6 +19,8 @@ the original coefficient tower.  Its displayed partition formula gives
 all state derivatives of the literal inverse and is available for uniform
 estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

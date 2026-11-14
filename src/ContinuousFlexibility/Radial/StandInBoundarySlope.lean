@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.DirichletRiccatiComparison
-import Mathlib.Analysis.SpecialFunctions.Log.Deriv
-import Mathlib.Tactic.FieldSimp
+module
+
+public import ContinuousFlexibility.Radial.DirichletRiccatiComparison
+public import Mathlib.Analysis.SpecialFunctions.Log.Deriv
+public import Mathlib.Tactic.FieldSimp
 
 /-!
 # The positive normalized slope of an incoming stand-in
@@ -19,6 +21,8 @@ The first band uses the growing cone solution. Its normalized slope is
 exactly `1 / j`; a finite Dirichlet cone is a different solution and would
 not give the required upper bound at `j = 2`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

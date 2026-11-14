@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01aReferenceNormalization
-import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
-import Mathlib.Analysis.Calculus.ParametricIntervalIntegral
+module
+
+public import ContinuousFlexibility.Analysis.N01aReferenceNormalization
+public import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
+public import Mathlib.Analysis.Calculus.ParametricIntervalIntegral
 
 /-!
 # Smooth radial modes of the actual reference core
@@ -10,6 +12,8 @@ derivative.  A positive mode of a smooth admissible field vanishes outside
 the radial core, including the end circles.  It is therefore a legitimate
 test in the natural radial kernel identity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

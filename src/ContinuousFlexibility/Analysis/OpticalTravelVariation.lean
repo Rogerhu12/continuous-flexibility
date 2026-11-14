@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import Mathlib.Analysis.Calculus.BumpFunction.FiniteDimension
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
-import Mathlib.Analysis.Calculus.Deriv.Support
-import Mathlib.Analysis.Calculus.ParametricIntegral
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import Mathlib.Analysis.Calculus.BumpFunction.FiniteDimension
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+public import Mathlib.Analysis.Calculus.Deriv.Support
+public import Mathlib.Analysis.Calculus.ParametricIntegral
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
 
 /-!
 # First variation of the optical travel angle
@@ -12,6 +14,8 @@ On one negative component, a compactly supported logarithmic perturbation
 changes the radicand by an affine function of the parameter. A uniform
 positive margin on the support permits differentiation under the integral.
 -/
+
+@[expose] public section
 
 noncomputable section
 

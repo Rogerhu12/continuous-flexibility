@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04PrincipalPairData
-import ContinuousFlexibility.Analysis.N04PrincipalPairFirstMixed
-import ContinuousFlexibility.Analysis.N04PrincipalPositiveReferenceFields
-import ContinuousFlexibility.Analysis.MaterialSampleDiscreteEnvelope
-import ContinuousFlexibility.Analysis.SolveStateSpaces
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalPairData
+public import ContinuousFlexibility.Analysis.N04PrincipalPairFirstMixed
+public import ContinuousFlexibility.Analysis.N04PrincipalPositiveReferenceFields
+public import ContinuousFlexibility.Analysis.MaterialSampleDiscreteEnvelope
+public import ContinuousFlexibility.Analysis.SolveStateSpaces
 
 /-!
 # Paired primitive inputs on the positive pieces
@@ -12,6 +14,8 @@ The physical coefficient references use N01 on the positive inverse
 point. The material height is uniformly bounded, and interpolation uses
 the unchanged sector grading of the original physical spaces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

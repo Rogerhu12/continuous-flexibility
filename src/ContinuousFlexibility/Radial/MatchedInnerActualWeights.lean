@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerRadialWeightedInverse
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialWeightedInverse
 
 /-!
 # The unlocalized bound for the same actual inner inverse
@@ -7,6 +9,8 @@ The original interface theorem already supplies the weighted correction
 with a contractive output loss. Choosing the identity loss gives the
 coarse estimate below for the very same physical inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

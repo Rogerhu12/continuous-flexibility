@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.TameJetComposition
+module
+
+public import ContinuousFlexibility.Analysis.TameJetComposition
 
 /-!
 # Genuine composition through arbitrary locally convex source modules
@@ -9,6 +11,8 @@ ordered-partition construction to the nested product state spaces used by
 the weighted scalar problem.  Only the output is required to have complete
 Banach coordinates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

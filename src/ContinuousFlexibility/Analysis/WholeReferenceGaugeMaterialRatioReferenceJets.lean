@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeUnitMaterialGeometry
-import ContinuousFlexibility.Analysis.RetainedPositiveMaterialRatioJets
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeMaterialRatioJets
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeEnvelopeRatioJets
-import ContinuousFlexibility.Analysis.CanonicalStaticAtomRegularity
+module
+
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeUnitMaterialGeometry
+public import ContinuousFlexibility.Analysis.RetainedPositiveMaterialRatioJets
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeMaterialRatioJets
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeEnvelopeRatioJets
+public import ContinuousFlexibility.Analysis.CanonicalStaticAtomRegularity
 
 /-!
 # All six actual material reference ratios on the same whole atlas
@@ -14,6 +16,8 @@ uses only the positive physical width. The explicit envelope enlargement
 is differentiated as a new function and supplies the floor for finite
 packing; no floor is assumed for the original material datum.
 -/
+
+@[expose] public section
 
 noncomputable section
 

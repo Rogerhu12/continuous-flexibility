@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.NeighborhoodProfileBounds
-import ContinuousFlexibility.Analysis.NeighborhoodCircleChartsState
-import ContinuousFlexibility.Analysis.SolveStateSpaces
-import ContinuousFlexibility.Blueprint.Statements
+module
+
+public import ContinuousFlexibility.Analysis.NeighborhoodProfileBounds
+public import ContinuousFlexibility.Analysis.NeighborhoodCircleChartsState
+public import ContinuousFlexibility.Analysis.SolveStateSpaces
+public import ContinuousFlexibility.Blueprint.Statements
 
 /-!
 # A single neighbourhood for the profile, denominators and left charts
@@ -10,6 +12,8 @@ The three independently constructed radii are intersected at the fixed input
 order four.  Profile regularity is obtained from the raw control estimates,
 before any flow or inverse-chart property is asserted.
 -/
+
+@[expose] public section
 
 noncomputable section
 

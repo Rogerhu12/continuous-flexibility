@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06TurningRootFiniteness
+module
+
+public import ContinuousFlexibility.Analysis.N06TurningRootFiniteness
 
 /-!
 # Compact sets meet only finitely many natural sign intervals
@@ -8,6 +10,8 @@ window these roots are finite, and at most one interval can enter the
 window from its left. This applies to the actual negative components
 retained in N01's control geometry, including their endpoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

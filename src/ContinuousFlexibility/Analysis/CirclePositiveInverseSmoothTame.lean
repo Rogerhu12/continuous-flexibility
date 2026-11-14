@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CirclePositiveInverseModel
-import ContinuousFlexibility.Analysis.CircleInverseSmoothTame
-import ContinuousFlexibility.Analysis.SmoothDirectionsGluing
+module
+
+public import ContinuousFlexibility.Analysis.CirclePositiveInverseModel
+public import ContinuousFlexibility.Analysis.CircleInverseSmoothTame
+public import ContinuousFlexibility.Analysis.SmoothDirectionsGluing
 
 /-!
 # Actual inverse composition is smooth tame on every positive lift
@@ -10,6 +12,8 @@ neighborhood on which the same bound holds. The local inverse theorem
 therefore applies. Its decoded operator is independent of the bound,
 so the resulting genuine towers glue on the full open positive domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

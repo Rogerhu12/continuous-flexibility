@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01SingletonControl
-import ContinuousFlexibility.Analysis.SmoothDirectionsScalarLine
+module
+
+public import ContinuousFlexibility.Analysis.N01SingletonControl
+public import ContinuousFlexibility.Analysis.SmoothDirectionsScalarLine
 
 /-!
 # Actual coefficient variations on a single optical-control line
@@ -9,6 +11,8 @@ parameter derivatives `w χ` and `w' χ + w χ'`.  The N01 coefficient
 tower therefore controls these two products at the actual reference cell
 containing the evaluation radius.
 -/
+
+@[expose] public section
 
 noncomputable section
 

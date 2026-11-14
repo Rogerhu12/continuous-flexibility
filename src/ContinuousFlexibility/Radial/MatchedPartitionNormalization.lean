@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.MatchedModeLocalization
-import ContinuousFlexibility.Radial.ReferenceCellL2
-import Mathlib.MeasureTheory.Constructions.BorelSpace.Metrizable
-import Mathlib.Analysis.MeanInequalities
+module
+
+public import ContinuousFlexibility.Radial.MatchedModeLocalization
+public import ContinuousFlexibility.Radial.ReferenceCellL2
+public import Mathlib.MeasureTheory.Constructions.BorelSpace.Metrizable
+public import Mathlib.Analysis.MeanInequalities
 
 /-!
 # Normalizing the actual radial partition for block reconstruction
@@ -10,6 +12,8 @@ The localizers sum to one; their squares need not. Dividing their squares
 by their actual square sum gives nonnegative reconstruction coefficients.
 The reciprocal square sum has one uniform bound from the finite overlap.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedCompositionControl
-import ContinuousFlexibility.Scalar.WeightedCompositionJets
+module
+
+public import ContinuousFlexibility.Scalar.WeightedCompositionControl
+public import ContinuousFlexibility.Scalar.WeightedCompositionJets
 
 /-!
 # Weighted bounds for individual scalar chain-rule terms
@@ -9,6 +11,8 @@ outer H^(-γ). Their remaining power of H is nonnegative. The zero-arity
 term uses F(0)=0 and the bounded measurable quotient F(z)/z. Both cases
 are actual diagonal monomials of the normalized material jet family.
 -/
+
+@[expose] public section
 
 noncomputable section
 

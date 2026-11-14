@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01EndpointStateEnvelope
-import ContinuousFlexibility.Analysis.SolveNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N01EndpointStateEnvelope
+public import ContinuousFlexibility.Analysis.SolveNormalization
 
 /-!
 # Fixed physical energies along an actual affine height line
@@ -9,6 +11,8 @@ localizations, one for the base height and one for the direction, give
 a summable envelope for the whole parameter segment. No moving input
 energy is substituted for a uniform envelope.
 -/
+
+@[expose] public section
 
 noncomputable section
 

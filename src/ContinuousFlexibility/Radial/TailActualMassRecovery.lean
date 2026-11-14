@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.TailNaturalEquationState
-import ContinuousFlexibility.Radial.TailNodeMassRecovery
+module
+
+public import ContinuousFlexibility.Radial.TailNaturalEquationState
+public import ContinuousFlexibility.Radial.TailNodeMassRecovery
 
 /-!
 # Recovering actual node masses from a square-integrable solution
@@ -10,6 +12,8 @@ at least one half, while the previous-node error is controlled by both
 large mass--resistance products. Summing the resulting one-sided estimate
 proves node square summability without assuming it in advance.
 -/
+
+@[expose] public section
 
 noncomputable section
 

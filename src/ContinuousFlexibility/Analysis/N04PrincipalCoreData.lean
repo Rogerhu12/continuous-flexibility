@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PrincipalAllPairs
-import ContinuousFlexibility.Analysis.N04PrincipalCompleteData
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalAllPairs
+public import ContinuousFlexibility.Analysis.N04PrincipalCompleteData
 
 /-!
 # A common current-data neighborhood for the five undivided atoms
@@ -8,6 +10,8 @@ Each paired estimate has one fixed low order. A finite maximum makes
 the five data clauses simultaneous, after which cubic division supplies
 the remaining three atoms on exactly the same neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

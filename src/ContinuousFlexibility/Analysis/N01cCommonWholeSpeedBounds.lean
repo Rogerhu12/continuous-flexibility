@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01cWholeSpeedPowerBounds
-import ContinuousFlexibility.Analysis.N01cCoefficientBaseSelection
-import ContinuousFlexibility.Analysis.N01cEndpointPowerRestriction
-import ContinuousFlexibility.Analysis.N01cBoundsRestriction
+module
+
+public import ContinuousFlexibility.Analysis.N01cWholeSpeedPowerBounds
+public import ContinuousFlexibility.Analysis.N01cCoefficientBaseSelection
+public import ContinuousFlexibility.Analysis.N01cEndpointPowerRestriction
+public import ContinuousFlexibility.Analysis.N01cBoundsRestriction
 
 /-!
 # A stable common raw estimate for the actual whole speed
@@ -10,6 +12,8 @@ The material and optical inputs construct one endpoint-controlled field.
 Its spatial interpolation loss is selected before any output or parameter
 order. Every subsequent larger base and smaller radius keeps that loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

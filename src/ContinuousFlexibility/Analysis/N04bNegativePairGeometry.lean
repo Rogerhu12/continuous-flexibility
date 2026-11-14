@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04bRootTravelCharts
-import ContinuousFlexibility.Analysis.N04bCutCurve
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Analysis.N04bRootTravelCharts
+public import ContinuousFlexibility.Analysis.N04bCutCurve
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # Current cut geometry of a constructed negative pair
@@ -10,6 +12,8 @@ inverses agree with the root inverses on the closed canonical strips. Their midd
 coverage and endpoint-circle images then give the six current-cut fields.
 All geometric conclusions come from a genuine travel bijection.
 -/
+
+@[expose] public section
 
 noncomputable section
 

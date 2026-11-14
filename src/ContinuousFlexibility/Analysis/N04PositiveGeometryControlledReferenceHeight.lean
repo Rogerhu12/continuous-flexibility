@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryMixedJointWords
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledMovingWords
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledFamilyMaterial
-import ContinuousFlexibility.Analysis.N04PositiveGeometryReferencePullbackCosts
-import ContinuousFlexibility.Analysis.WholePositiveReferenceGauge
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryMixedJointWords
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledMovingWords
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledFamilyMaterial
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryReferencePullbackCosts
+public import ContinuousFlexibility.Analysis.WholePositiveReferenceGauge
 
 /-!
 # The physical height in the retained fixed reference gauge
@@ -12,6 +14,8 @@ are estimated before moving by the actual inverse transport. The exact
 mixed expansion keeps the original parameter prefix. Both literal
 height choices share one sampled polynomial envelope.
 -/
+
+@[expose] public section
 
 noncomputable section
 

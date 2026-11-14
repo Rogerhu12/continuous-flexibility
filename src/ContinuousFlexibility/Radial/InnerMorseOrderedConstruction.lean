@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerModelCoefficientEnvelope
-import ContinuousFlexibility.Radial.InnerMorseBufferBounds
+module
+
+public import ContinuousFlexibility.Radial.InnerModelCoefficientEnvelope
+public import ContinuousFlexibility.Radial.InnerMorseBufferBounds
 
 /-!
 # Ordered choices for the actual Morse models and their envelopes
@@ -10,6 +12,8 @@ any realization of either tail. Every later frequency, however large,
 then yields the actual buffer hypotheses, its action lower bound, and
 small polynomial-exponential errors including an extra frequency factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.ScalarWeighted
-import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
+module
+
+public import ContinuousFlexibility.Statements.ScalarWeighted
+public import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
 
 /-!
 # Quantitative pointwise bounds for the scalar weighted space
@@ -9,6 +11,8 @@ are independent of the height, as required when choosing one common scalar
 state neighbourhood.  An existential bound for each individual height would
 not suffice for that purpose.
 -/
+
+@[expose] public section
 
 noncomputable section
 

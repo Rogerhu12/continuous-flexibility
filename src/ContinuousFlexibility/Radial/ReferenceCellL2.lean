@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Statements.Radial
-import Mathlib.MeasureTheory.Constructions.Polish.Basic
-import Mathlib.MeasureTheory.Function.L2Space
-import Mathlib.MeasureTheory.Function.LpSeminorm.SMul
-import Mathlib.MeasureTheory.Integral.Prod
+module
+
+public import ContinuousFlexibility.Statements.Radial
+public import Mathlib.MeasureTheory.Constructions.Polish.Basic
+public import Mathlib.MeasureTheory.Function.L2Space
+public import Mathlib.MeasureTheory.Function.LpSeminorm.SMul
+public import Mathlib.MeasureTheory.Integral.Prod
 
 /-!
 # Actual local `L²` fields in the reference spaces
@@ -12,6 +14,8 @@ of unity then reconstructs an almost everywhere strongly measurable field
 on the physical annulus. Cell squares are genuine two-dimensional `L²`
 quantities, rather than integrals of a possibly nonmeasurable representative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

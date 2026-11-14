@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.WholePositiveEndpointFields
+module
+
+public import ContinuousFlexibility.Analysis.WholePositiveEndpointFields
 
 /-!
 # Actual reference-state identity germs
@@ -9,6 +11,8 @@ The positive reference height is nonzero on a neighborhood, so the
 corresponding actual ratio equals one there. Certified ambient sources
 satisfy the same assertions directly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

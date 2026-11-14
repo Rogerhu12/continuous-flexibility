@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerPhysicalSourceBridge
-import ContinuousFlexibility.Radial.ModeInnerGreenUniqueness
+module
+
+public import ContinuousFlexibility.Radial.InnerPhysicalSourceBridge
+public import ContinuousFlexibility.Radial.ModeInnerGreenUniqueness
 
 /-!
 # A physical weak right inverse in the frozen modal coordinates
@@ -10,6 +12,8 @@ space. The proved graph bridge and Green uniqueness give both frozen
 inverse identities. No reverse identification of arbitrary frozen
 solutions with a Sobolev domain is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

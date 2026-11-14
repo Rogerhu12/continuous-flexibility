@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N05LocalEvenTests
-import ContinuousFlexibility.Analysis.N06CubicDifferential
-import ContinuousFlexibility.Analysis.N06ReferenceRemainderFields
-import Mathlib.MeasureTheory.Measure.Typeclasses.NullSingletonClass
+module
+
+public import ContinuousFlexibility.Analysis.N05LocalEvenTests
+public import ContinuousFlexibility.Analysis.N06CubicDifferential
+public import ContinuousFlexibility.Analysis.N06ReferenceRemainderFields
+public import Mathlib.MeasureTheory.Measure.Typeclasses.NullSingletonClass
 
 /-!
 # The corrected reference operator in the original physical weak pairing
@@ -13,6 +15,8 @@ physical weak identity at every radius of the open annulus, including the
 turning radii and artificial cuts. No regularity of the unknown field or
 extra regularity of the corrected coefficients is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

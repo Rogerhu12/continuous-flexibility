@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05CanonicalAngularLift
-import ContinuousFlexibility.Analysis.N05CanonicalSourceCoordinateBounds
-import ContinuousFlexibility.Analysis.N05ReferenceWeightedPhysical
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalAngularLift
+public import ContinuousFlexibility.Analysis.N05CanonicalSourceCoordinateBounds
+public import ContinuousFlexibility.Analysis.N05ReferenceWeightedPhysical
 
 /-!
 # Actual weighted angular source representatives and their limits
@@ -10,6 +12,8 @@ order is chosen. Every square-summable jet column has its genuine reference
 source bound, and differences obey the same bound. Thus convergence of the
 canonical column implies physical L² convergence of these very lifts.
 -/
+
+@[expose] public section
 
 noncomputable section
 

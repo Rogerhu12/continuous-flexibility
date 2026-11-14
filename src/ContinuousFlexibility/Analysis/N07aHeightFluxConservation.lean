@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aMixedCoefficientOperator
-import ContinuousFlexibility.Scalar.WeightedErrorConservation
-import ContinuousFlexibility.Scalar.WeightedLinearConservation
+module
+
+public import ContinuousFlexibility.Analysis.N07aMixedCoefficientOperator
+public import ContinuousFlexibility.Scalar.WeightedErrorConservation
+public import ContinuousFlexibility.Scalar.WeightedLinearConservation
 
 /-!
 # Actual source compatibility of the forward operator
@@ -9,6 +11,8 @@ The radial flux is a positive-weight height and vanishes at both ends.
 The angular flux is periodic. These are the boundary identities used in
 the physical integral; no projection onto the source kernel is inserted.
 -/
+
+@[expose] public section
 
 noncomputable section
 

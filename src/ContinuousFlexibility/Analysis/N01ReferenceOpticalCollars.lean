@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.OpticalTravelCollar
-import ContinuousFlexibility.Analysis.N01ReturnMargins
-import ContinuousFlexibility.Analysis.N01ControlCellBounds
-import Mathlib.Topology.Order.OrderClosed
+module
+
+public import ContinuousFlexibility.Analysis.OpticalTravelCollar
+public import ContinuousFlexibility.Analysis.N01ReturnMargins
+public import ContinuousFlexibility.Analysis.N01ControlCellBounds
+public import Mathlib.Topology.Order.OrderClosed
 
 /-!
 # Quantitative optical collars of the actual reference components
@@ -12,6 +14,8 @@ margin supplies a positive travel lower bound in the same cell weight.
 The quantitative maximum argument then constructs an actual interior
 collar. No preassigned middle third is used in this construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

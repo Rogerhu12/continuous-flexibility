@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SolveNewtonBridge
-import ContinuousFlexibility.Analysis.SolveNewtonLimit
+module
+
+public import ContinuousFlexibility.Analysis.SolveNewtonBridge
+public import ContinuousFlexibility.Analysis.SolveNewtonLimit
 
 /-!
 # A nonzero-parameter solution in the actual residual space
@@ -8,6 +10,8 @@ Only the residual is transported to its projective representation. The
 source keeps its complete closed-subspace topology and its inherited grading.
 The sum and maximum residual gradings are compared with uniform constants.
 -/
+
+@[expose] public section
 
 noncomputable section
 

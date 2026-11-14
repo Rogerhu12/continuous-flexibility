@@ -1,6 +1,10 @@
-import ContinuousFlexibility.Analysis.N04SourceColumnsData
+module
+
+public import ContinuousFlexibility.Analysis.N04SourceColumnsData
 
 /-! Products preserve scalar reference envelopes on the actual open strip. -/
+
+@[expose] public section
 
 noncomputable section
 

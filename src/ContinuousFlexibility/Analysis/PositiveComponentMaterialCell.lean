@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.MaterialOneSidedEndpointComparison
-import ContinuousFlexibility.Analysis.N04PositiveComponents
+module
+
+public import ContinuousFlexibility.Analysis.MaterialOneSidedEndpointComparison
+public import ContinuousFlexibility.Analysis.N04PositiveComponents
 
 /-!
 # A genuine material label for each whole positive component
@@ -10,6 +12,8 @@ than half the distance of any other component point. This one-sided fact
 controls the actual height normalizer and sample coefficient powers.
 It does not assert the reverse endpoint-to-sample bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

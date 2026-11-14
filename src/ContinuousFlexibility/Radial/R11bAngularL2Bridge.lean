@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.R11bModeL2
-import ContinuousFlexibility.Radial.R11bPhysicalPairing
-import ContinuousFlexibility.Radial.AngularMeanProbability
+module
+
+public import ContinuousFlexibility.Radial.R11bModeL2
+public import ContinuousFlexibility.Radial.R11bPhysicalPairing
+public import ContinuousFlexibility.Radial.AngularMeanProbability
 
 /-!
 # Physical fields and the manuscript's angular coefficients
@@ -9,6 +11,8 @@ The normalized angular product measure is exactly (2π)⁻¹ times the
 physical measure. Thus the raw angular mean and every positive cosine
 coefficient of an actual physical L² field are radial L² functions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

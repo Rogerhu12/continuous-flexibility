@@ -1,9 +1,13 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartInteriorTravelBand
-import ContinuousFlexibility.Analysis.N04NegativeChartPhysicalBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartInteriorTravelBand
+public import ContinuousFlexibility.Analysis.N04NegativeChartPhysicalBounds
 
 /-! Positive parameter jets of the two actual physical coordinates on the
 material interior. The scalar power uses the one common travel value band.
 The angular coordinate uses only the positive jets of its reference defect. -/
+
+@[expose] public section
 
 noncomputable section
 

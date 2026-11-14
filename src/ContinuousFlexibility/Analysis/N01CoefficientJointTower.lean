@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01OriginalCoefficientSpatialJets
-import ContinuousFlexibility.Analysis.N01ReturnVelocitySpatialTower
-import ContinuousFlexibility.Analysis.SmoothDirectionsSpatialJoint
+module
+
+public import ContinuousFlexibility.Analysis.N01OriginalCoefficientSpatialJets
+public import ContinuousFlexibility.Analysis.N01ReturnVelocitySpatialTower
+public import ContinuousFlexibility.Analysis.SmoothDirectionsSpatialJoint
 
 /-!
 # Actual original coefficients jointly in state and both spatial variables
@@ -11,6 +13,8 @@ needed to join the two physical coordinates. Adding back the actual
 reference coefficient gives the full original coefficient, at order
 zero as well as every positive parameter order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

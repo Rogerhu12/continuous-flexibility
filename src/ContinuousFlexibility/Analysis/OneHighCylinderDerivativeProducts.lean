@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderCutoffProducts
-import ContinuousFlexibility.Analysis.OneHighCylinderFourierApproximation
-import ContinuousFlexibility.Analysis.OneHighL2ProductLimit
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderCutoffProducts
+public import ContinuousFlexibility.Analysis.OneHighCylinderFourierApproximation
+public import ContinuousFlexibility.Analysis.OneHighL2ProductLimit
 
 /-!
 # The full actual cylinder one-high-factor product estimate
@@ -11,6 +13,8 @@ estimate. Their actual derivatives converge in L2, and the common
 almost-everywhere subsequence and Fatou lemma preserve the bound for the
 original derivative product.
 -/
+
+@[expose] public section
 
 noncomputable section
 

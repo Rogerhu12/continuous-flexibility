@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerRadialPhysicalPoisson
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialPhysicalPoisson
 
 /-!
 # Continuity of the same physical Dirichlet realization
@@ -11,6 +13,8 @@ in the central piece only.
 Local squared Dirichlet estimates and physical Bessel restriction then
 make the canonical actual Dirichlet map continuous with the same bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

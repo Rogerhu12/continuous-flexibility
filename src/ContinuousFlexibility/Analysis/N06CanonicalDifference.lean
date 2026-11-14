@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06CubicDifferential
+module
+
+public import ContinuousFlexibility.Analysis.N06CubicDifferential
 
 /-!
 # Actual coefficient differences supplied by N04
@@ -9,6 +11,8 @@ difference. On positive pieces the divided coefficients and all their
 interior spatial jets vanish at the reference state. These conclusions
 use the stated coordinate identities, without adding coefficient bounds.
 -/
+
+@[expose] public section
 
 noncomputable section
 

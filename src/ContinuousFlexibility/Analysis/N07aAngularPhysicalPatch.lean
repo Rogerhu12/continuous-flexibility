@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aAngularPieceExtension
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalMeasure
-import ContinuousFlexibility.Analysis.N07aAngularPieceCover
-import ContinuousFlexibility.Analysis.SpacesLpRestriction
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularPieceExtension
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalMeasure
+public import ContinuousFlexibility.Analysis.N07aAngularPieceCover
+public import ContinuousFlexibility.Analysis.SpacesLpRestriction
 
 /-!
 # Angular patching across the fixed reference piece boundaries
@@ -11,6 +13,8 @@ set. Their zero-extended angular jet towers can therefore be summed in
 the real cylinder L² space. A.e. uniqueness of the physical cover
 identifies that sum with the original rough representative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

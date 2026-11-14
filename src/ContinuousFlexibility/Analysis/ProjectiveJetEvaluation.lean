@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.BastianiCurveChain
-import ContinuousFlexibility.Analysis.ProjectiveMultilinearCalculus
+module
+
+public import ContinuousFlexibility.Analysis.BastianiCurveChain
+public import ContinuousFlexibility.Analysis.ProjectiveMultilinearCalculus
 
 /-!
 # Actual derivatives of projective jets evaluated on varying curves
@@ -14,6 +16,8 @@ The second-order formula below differentiates the actual first
 directional derivative of a composition. General all-order composition
 jets, Schwarz symmetry, and tame bounds remain separate obligations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

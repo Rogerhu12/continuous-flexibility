@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.SelectedRetainedRegionalInverse
-import ContinuousFlexibility.Blueprint.R10a.Geometry
+module
+
+public import ContinuousFlexibility.Radial.SelectedRetainedRegionalInverse
+public import ContinuousFlexibility.Blueprint.R10a.Geometry
 
 /-!
 # The actual retained cut, scale and profile law
@@ -8,6 +10,8 @@ The assertions here are consequences of the original selected geometry
 and retained profile. They contain no operator or norm assumption and
 apply to the finite first band as well as every later band.
 -/
+
+@[expose] public section
 
 noncomputable section
 

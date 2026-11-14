@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MatchingCoreLeftInverse
-import ContinuousFlexibility.Radial.MatchingKernel
-import ContinuousFlexibility.Radial.MatchingRepresentation
+module
+
+public import ContinuousFlexibility.Radial.MatchingCoreLeftInverse
+public import ContinuousFlexibility.Radial.MatchingKernel
+public import ContinuousFlexibility.Radial.MatchingRepresentation
 
 /-!
 # The exact matched modal inverse
@@ -10,6 +12,8 @@ weak graph. Homogeneous uniqueness follows from local graph uniqueness
 and the matching matrix. Smooth-core left inversion and the bordered
 adjoint argument then give the full source and uniqueness properties.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerTwoCutError
-import ContinuousFlexibility.Radial.InnerBufferLocalizedConstruction
+module
+
+public import ContinuousFlexibility.Radial.InnerTwoCutError
+public import ContinuousFlexibility.Radial.InnerBufferLocalizedConstruction
 
 /-!
 # The physical cut normalization
@@ -10,6 +12,8 @@ the positive inward reference energies then costs a fixed constant.
 This also applies to the central reference energies with their retained
 Liouville drift term.
 -/
+
+@[expose] public section
 
 noncomputable section
 

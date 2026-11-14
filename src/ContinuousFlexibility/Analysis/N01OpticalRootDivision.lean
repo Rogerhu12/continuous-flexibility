@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01aOpticalProfile
-import ContinuousFlexibility.Analysis.MaterialSampleRadialPolynomial
-import ContinuousFlexibility.Analysis.OneHighCircleFlowLocalization
-import ContinuousFlexibility.Analysis.SmoothDivisionBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01aOpticalProfile
+public import ContinuousFlexibility.Analysis.MaterialSampleRadialPolynomial
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowLocalization
+public import ContinuousFlexibility.Analysis.SmoothDivisionBounds
 
 /-!
 # Material jets of the actual normalized optical root division
@@ -12,6 +14,8 @@ radicand, in either inward orientation. Only derivatives on the actual
 component enter the bounds, so no derivatives of the auxiliary extension
 and no arbitrary extension width enter the material constants.
 -/
+
+@[expose] public section
 
 noncomputable section
 

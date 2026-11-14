@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.RadialReferencePotentialJetEnvelope
-import ContinuousFlexibility.Analysis.N06ReferenceSourceJets
-import Mathlib.Topology.Order.Compact
+module
+
+public import ContinuousFlexibility.Analysis.RadialReferencePotentialJetEnvelope
+public import ContinuousFlexibility.Analysis.N06ReferenceSourceJets
+public import Mathlib.Topology.Order.Compact
 
 /-!
 # Scalar source jets in one fixed radial reference family
@@ -10,6 +12,8 @@ radial profile pulled back by the same inverse, times its angular mode.
 Only numerical constants are selected below. The factor, inverse and
 original sample weight are inputs shared by every derivative order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

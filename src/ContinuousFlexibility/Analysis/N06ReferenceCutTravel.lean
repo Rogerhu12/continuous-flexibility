@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06ReferenceNullTransport
-import ContinuousFlexibility.Analysis.N06IrrationalCircleRigidity
-import ContinuousFlexibility.Analysis.N05N06ClosedChartBridge
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceNullTransport
+public import ContinuousFlexibility.Analysis.N06IrrationalCircleRigidity
+public import ContinuousFlexibility.Analysis.N05N06ClosedChartBridge
 
 /-!
 # The actual reference cut bisects the optical travel
@@ -11,6 +13,8 @@ this constant to the true optical displacement.  This determines the
 directions of both characteristics and the two equal half travels,
 without assigning values to the inverse chart at a boundary.
 -/
+
+@[expose] public section
 
 noncomputable section
 

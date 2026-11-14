@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N08CellLayerProfileJets
-import ContinuousFlexibility.Analysis.N08CellLayerWeights
+module
+
+public import ContinuousFlexibility.Analysis.N08CellLayerProfileJets
+public import ContinuousFlexibility.Analysis.N08CellLayerWeights
 
 /-!
 # A fixed normalized family of positive radial cell tests
@@ -8,6 +10,8 @@ One sample-height power, chosen before every derivative order, pays for
 all cutoff derivatives. On the entire cell the actual radial slope is
 exactly that same positive sample weight.
 -/
+
+@[expose] public section
 
 noncomputable section
 

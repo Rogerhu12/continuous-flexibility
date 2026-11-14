@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R11bDensityQuotient
-import ContinuousFlexibility.Statements.Radial
+module
+
+public import ContinuousFlexibility.Radial.R11bDensityQuotient
+public import ContinuousFlexibility.Statements.Radial
 
 /-!
 # The actual radial Hilbert density
@@ -9,6 +11,8 @@ Its inverse square root differs from w⁻¹/² by the bounded factor r/√12.
 These facts transfer physical radial L² fields and sources to the actual
 radial Hilbert measure.
 -/
+
+@[expose] public section
 
 noncomputable section
 

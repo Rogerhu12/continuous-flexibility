@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ActualRootChart
-import ContinuousFlexibility.Analysis.PeriodicScalarFlow
-import Mathlib.Tactic.Ring
+module
+
+public import ContinuousFlexibility.Analysis.ActualRootChart
+public import ContinuousFlexibility.Analysis.PeriodicScalarFlow
+public import Mathlib.Tactic.Ring
 
 /-!
 # The actual radial reference root chart
@@ -11,6 +13,8 @@ independent root parameter. Its actual inverse is an angular translation.
 Consequently the even root coordinate is exactly the original angle, and
 the divided odd coefficient is radial on the physical half-plane.
 -/
+
+@[expose] public section
 
 noncomputable section
 

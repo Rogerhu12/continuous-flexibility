@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.FourierUniqueness
-import ContinuousFlexibility.Radial.R11bPhysicalPairing
+module
+
+public import ContinuousFlexibility.Radial.FourierUniqueness
+public import ContinuousFlexibility.Radial.R11bPhysicalPairing
 
 /-!
 # Completeness of the actual physical angular coefficients
@@ -9,6 +11,8 @@ full-measure set. Countability makes all positive even cosine identities
 available on that same set. Angular completeness and Fubini then identify
 the original physical representatives.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

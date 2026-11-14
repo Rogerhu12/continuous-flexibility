@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.RootRescaledMaterialJets
+module
+
+public import ContinuousFlexibility.Analysis.RootRescaledMaterialJets
 
 /-!
 # A genuine controlled family for the regularized root equation
@@ -9,6 +11,8 @@ joint smoothness and all higher-jet bounds then follow from the flow
 theorem. The low state order and loss precede the coefficient constants,
 collar, state, material envelope, and chosen solution family.
 -/
+
+@[expose] public section
 
 noncomputable section
 

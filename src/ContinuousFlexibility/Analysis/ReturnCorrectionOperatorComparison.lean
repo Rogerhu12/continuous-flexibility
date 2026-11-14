@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ReturnOpticalCorrectionSource
+module
+
+public import ContinuousFlexibility.Analysis.ReturnOpticalCorrectionSource
 
 /-!
 # The actual operator difference at the actual residual
@@ -9,6 +11,8 @@ proves C¹ regularity of the actual patched coefficients. The exact
 divergence comparison can then be applied without assuming any extra
 differentiability of the corrected operator or its fluxes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

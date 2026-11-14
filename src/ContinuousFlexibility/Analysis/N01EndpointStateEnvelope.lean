@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01EndpointPositiveCircleMember
+module
+
+public import ContinuousFlexibility.Analysis.N01EndpointPositiveCircleMember
 
 /-!
 # A fixed summable envelope for a genuine state derivative slot
@@ -7,6 +9,8 @@ The localized input is fixed while the base point varies. Cyclic
 symmetry moves any state slot to the last slot without changing the
 actual scalar field or its angular derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

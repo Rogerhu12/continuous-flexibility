@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.NeighborhoodStateBounds
-import ContinuousFlexibility.Analysis.StateProfileRegularity
-import ContinuousFlexibility.Analysis.StateControlCofiniteClosure
-import ContinuousFlexibility.Scalar.WeightedResidualFormulas
-import Mathlib.Analysis.Calculus.Deriv.Support
+module
+
+public import ContinuousFlexibility.Analysis.NeighborhoodStateBounds
+public import ContinuousFlexibility.Analysis.StateProfileRegularity
+public import ContinuousFlexibility.Analysis.StateControlCofiniteClosure
+public import ContinuousFlexibility.Scalar.WeightedResidualFormulas
+public import Mathlib.Analysis.Calculus.Deriv.Support
 
 /-!
 # The actual distinguished column has fixed radial support
@@ -13,6 +15,8 @@ normalized residual depends only on these profile jets, even though its
 radial height primitive itself may change by a constant.  Thus its actual
 parameter derivative vanishes there, uniformly in every other parameter.
 -/
+
+@[expose] public section
 
 noncomputable section
 

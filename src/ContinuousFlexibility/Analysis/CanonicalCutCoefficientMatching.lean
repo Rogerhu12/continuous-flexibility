@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CanonicalGluedAiryIntegral
-import ContinuousFlexibility.Analysis.NegativeCanonicalClosedEffective
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalGluedAiryIntegral
+public import ContinuousFlexibility.Analysis.NegativeCanonicalClosedEffective
 
 /-!
 # The two actual effective fields agree on the cut
@@ -11,6 +13,8 @@ the two forward-only effective physical coefficient fields have the same
 values on the whole cut. Stored coefficient values on the cut are not
 used in this identity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.InnerLiouvilleBorderTransport
-import ContinuousFlexibility.Radial.InnerLiouvillePotentialTransport
-import ContinuousFlexibility.Radial.InnerRadialSmoothGreen
-import ContinuousFlexibility.Radial.Liouville
+module
+
+public import ContinuousFlexibility.Radial.InnerLiouvilleBorderTransport
+public import ContinuousFlexibility.Radial.InnerLiouvillePotentialTransport
+public import ContinuousFlexibility.Radial.InnerRadialSmoothGreen
+public import ContinuousFlexibility.Radial.Liouville
 
 /-!
 # The actual physical equation of a normalized model Poisson field
@@ -11,6 +13,8 @@ row. The pointwise Liouville identity and the actual change of measure
 identify its physical L² class with the classical radial differential
 expression, including the unit-boundary normalization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

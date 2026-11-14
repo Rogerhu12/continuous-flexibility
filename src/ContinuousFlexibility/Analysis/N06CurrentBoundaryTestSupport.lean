@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06CurrentTestTraces
-import ContinuousFlexibility.Analysis.PrincipalCoefficientPullback
-import ContinuousFlexibility.Analysis.N05N06ClosedChartBridge
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentTestTraces
+public import ContinuousFlexibility.Analysis.PrincipalCoefficientPullback
+public import ContinuousFlexibility.Analysis.N05N06ClosedChartBridge
 
 /-!
 # The original radial support removes the outer Green terms
@@ -18,6 +20,8 @@ fields in the Green density. Artificial moving cuts are not tested against
 their reference radial coordinates; their terms are cancelled separately
 by the actual canonical transmission law.
 -/
+
+@[expose] public section
 
 noncomputable section
 

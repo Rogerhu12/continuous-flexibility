@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04BufferedSubdivision
-import ContinuousFlexibility.Analysis.N04PositiveNormalizationBuffer
+module
+
+public import ContinuousFlexibility.Analysis.N04BufferedSubdivision
+public import ContinuousFlexibility.Analysis.N04PositiveNormalizationBuffer
 
 /-!
 # Positive pieces with a buffered normalization region
@@ -9,6 +11,8 @@ The resulting family has compactly interior closed pieces and covers the
 positive region outside a countable set. Only central pieces meet the
 normalization region. All choices are reference-only.
 -/
+
+@[expose] public section
 
 noncomputable section
 

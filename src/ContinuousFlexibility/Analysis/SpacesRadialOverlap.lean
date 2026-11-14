@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SpacesRadialPartition
-import ContinuousFlexibility.Analysis.SpacesLpOverlap
-import ContinuousFlexibility.Analysis.CylinderTestPairing
+module
+
+public import ContinuousFlexibility.Analysis.SpacesRadialPartition
+public import ContinuousFlexibility.Analysis.SpacesLpOverlap
+public import ContinuousFlexibility.Analysis.CylinderTestPairing
 
 /-!
 # Uniform localization bounds for all radial cutoff derivatives
@@ -9,6 +11,8 @@ Every cutoff derivative is supported in the same fixed-width interval.
 At any material radius at most five of these intervals occur. The bounds
 therefore give actual localization and gluing operators on the cylinder.
 -/
+
+@[expose] public section
 
 noncomputable section
 

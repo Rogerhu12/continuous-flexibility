@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aCorrectedForward
-import ContinuousFlexibility.Analysis.N07aNuSource
-import ContinuousFlexibility.Analysis.N07aNormalizedForward
-import ContinuousFlexibility.Analysis.N07aNeighborhood
+module
+
+public import ContinuousFlexibility.Analysis.N07aCorrectedForward
+public import ContinuousFlexibility.Analysis.N07aNuSource
+public import ContinuousFlexibility.Analysis.N07aNormalizedForward
+public import ContinuousFlexibility.Analysis.N07aNeighborhood
 
 /-!
 # The actual normalized physical forward family
@@ -11,6 +13,8 @@ Only the low-order parameter neighborhood is reduced. The forward family
 has the prescribed corrected divergence and distinguished scalar column,
 with values in the true physical Source space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

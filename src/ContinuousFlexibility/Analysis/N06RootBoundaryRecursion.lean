@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06RootRegularTransport
-import ContinuousFlexibility.Analysis.N06RootBoundaryJetAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.N06RootRegularTransport
+public import ContinuousFlexibility.Analysis.N06RootBoundaryJetAlgebra
 
 /-!
 # Actual root boundary jets from the physical transport equations
@@ -9,6 +11,8 @@ current odd jet. The positive factor n + 3/2 is inverted explicitly.
 Every term is a finite Leibniz polynomial in the physical coefficient
 trace jets and already determined even and odd trace functions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

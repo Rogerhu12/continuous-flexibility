@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01SelectorInverse
-import ContinuousFlexibility.Analysis.N01ResidualSmoothTame
-import ContinuousFlexibility.Analysis.CircleCompositionSmoothTame
-import ContinuousFlexibility.Analysis.ReturnCorrectionDisplacementRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N01SelectorInverse
+public import ContinuousFlexibility.Analysis.N01ResidualSmoothTame
+public import ContinuousFlexibility.Analysis.CircleCompositionSmoothTame
+public import ContinuousFlexibility.Analysis.ReturnCorrectionDisplacementRegularity
 
 /-!
 # Actual inverse return coordinates and the initial correction in the circle model
@@ -13,6 +15,8 @@ left chart gives precisely the initial correction map. These are
 elements of the supplied circle space, with the full smooth tame
 towers inherited from the actual forward flow and inverse composition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

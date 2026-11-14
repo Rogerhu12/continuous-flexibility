@@ -1,8 +1,10 @@
-import Mathlib.Dynamics.Circle.RotationNumber.TranslationNumber
-import Mathlib.Tactic.FieldSimp
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Positivity
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Dynamics.Circle.RotationNumber.TranslationNumber
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Positivity
+public import Mathlib.Tactic.Ring
 
 /-!
 # Translation-number bounds from a bounded corrector
@@ -15,6 +17,8 @@ number of iterates, leaving the actual translation number.
 The second result applies this to a uniform first-order expansion with an
 actual bounded Lipschitz solution of the finite cohomological equation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

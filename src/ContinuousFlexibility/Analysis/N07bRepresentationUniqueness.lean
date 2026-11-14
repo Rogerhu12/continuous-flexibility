@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # Uniqueness of canonical representations for N07b
@@ -11,6 +13,8 @@ L² row; retaining the other two scalars determines the full unknown.
 These statements use no additional regularity, coordinate estimates, or
 membership in the fixed reference graph.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Contracts.SphereClosedBending
-import ContinuousFlexibility.Blueprint.Assembly
+module
+
+public import ContinuousFlexibility.Contracts.SphereClosedBending
+public import ContinuousFlexibility.Blueprint.Assembly
 
 /-!
 # Solution: a smooth periodic isometric bending of an embedded sphere
@@ -16,6 +18,8 @@ the Challenge to `Nonempty ContinuousFlexibility.FlatAnnularCore`.
 (`ContinuousFlexibility.Blueprint`). It depends only on `propext`, `Classical.choice` and
 `Quot.sound`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

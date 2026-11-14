@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bPhysicalRootCoordinates
-import ContinuousFlexibility.Analysis.N04bActualTravelChart
+module
+
+public import ContinuousFlexibility.Analysis.N04bPhysicalRootCoordinates
+public import ContinuousFlexibility.Analysis.N04bActualTravelChart
 
 /-!
 # Matching the actual root coordinates to the global travel strip
@@ -10,6 +12,8 @@ and the plus label by plus travel. Thus the same global angle is retained,
 while the inward root travel is the complement of the global travel.
 These are identities of the actual stored-flow inverses.
 -/
+
+@[expose] public section
 
 noncomputable section
 

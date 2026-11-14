@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ReferenceRadialJetBootstrap
+module
+
+public import ContinuousFlexibility.Radial.ReferenceRadialJetBootstrap
 
 /-!
 # Compact forcing and flat scalar inverse images
@@ -8,6 +10,8 @@ scalar weighted space, because only finitely many cells meet its support.
 The actual radial equation and the first-normal weighted bound therefore
 give a smooth flat extension of each nonzero-mode solution.
 -/
+
+@[expose] public section
 
 noncomputable section
 

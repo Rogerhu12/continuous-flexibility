@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.SpacesTraceGeometry
-import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
-import Mathlib.Analysis.Calculus.BumpFunction.FiniteDimension
-import Mathlib.Analysis.Calculus.Deriv.Support
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+module
+
+public import ContinuousFlexibility.Analysis.SpacesTraceGeometry
+public import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
+public import Mathlib.Analysis.Calculus.BumpFunction.FiniteDimension
+public import Mathlib.Analysis.Calculus.Deriv.Support
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
 
 /-!
 # Smooth packets for a right inverse of the sample trace
@@ -12,6 +14,8 @@ The locally finite packet sum is an actual smooth function, has the
 prescribed values at every sample, and differentiates term by term. The
 algebraic map and all these identities precede the norm estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

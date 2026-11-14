@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CoupledCircleMultiplier
-import ContinuousFlexibility.Analysis.SpacesTraceCircleBounds
-import ContinuousFlexibility.Analysis.OneHighCircleFourierChangeVariables
+module
+
+public import ContinuousFlexibility.Analysis.CoupledCircleMultiplier
+public import ContinuousFlexibility.Analysis.SpacesTraceCircleBounds
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierChangeVariables
 
 /-!
 # Fixed translations in the original weighted circle space
@@ -10,6 +12,8 @@ integration preserves every angular derivative norm, so the resulting
 operator preserves every weighted projective seminorm. No bound on the
 sequence of translation angles is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

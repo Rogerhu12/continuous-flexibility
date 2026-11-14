@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05CanonicalInverseLinearity
-import ContinuousFlexibility.Analysis.N05CanonicalInverseBlock
-import ContinuousFlexibility.Analysis.N05CanonicalFiniteApproximation
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalInverseLinearity
+public import ContinuousFlexibility.Analysis.N05CanonicalInverseBlock
+public import ContinuousFlexibility.Analysis.N05CanonicalFiniteApproximation
 
 /-!
 # Finite block sums of the same global inverse
@@ -10,6 +12,8 @@ Linearity of the already constructed restriction of the fixed global map
 therefore identifies each finite block sum with its literal inverse value.
 Continuity of that same restriction identifies the coordinate limits.
 -/
+
+@[expose] public section
 
 noncomputable section
 

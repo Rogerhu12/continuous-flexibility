@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.R11bWeightedBessel
-import ContinuousFlexibility.Radial.R11bFourierCoefficients
-import ContinuousFlexibility.Radial.ProfileScalarSquares
+module
+
+public import ContinuousFlexibility.Radial.R11bWeightedBessel
+public import ContinuousFlexibility.Radial.R11bFourierCoefficients
+public import ContinuousFlexibility.Radial.ProfileScalarSquares
 
 /-!
 # Weighted bounds for every actual even Fourier coefficient
@@ -9,6 +11,8 @@ The normalized constant mode is included. All estimates are made directly
 on localized representatives, so neither a zero mean nor a symmetry premise
 is needed for the Bessel bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

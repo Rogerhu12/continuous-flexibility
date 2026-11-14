@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01CoefficientSmallness
-import ContinuousFlexibility.Analysis.N01OpticalCorrectionCutoffs
-import ContinuousFlexibility.Analysis.N01RadialFlow
+module
+
+public import ContinuousFlexibility.Analysis.N01CoefficientSmallness
+public import ContinuousFlexibility.Analysis.N01OpticalCorrectionCutoffs
+public import ContinuousFlexibility.Analysis.N01RadialFlow
 
 /-!
 # Uniform positivity on the actual optical correction collars
@@ -12,6 +14,8 @@ then preserves both signs on one high-grade neighborhood. In particular
 the actual characteristic discriminant is strictly positive on every
 cutoff transition, without an additional positivity assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

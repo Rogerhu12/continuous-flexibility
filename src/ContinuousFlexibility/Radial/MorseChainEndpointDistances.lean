@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MorseChainRadiusPlacement
+module
+
+public import ContinuousFlexibility.Radial.MorseChainRadiusPlacement
 
 /-!
 # Distances to the actual accumulation radii
@@ -7,6 +9,8 @@ The outward order uses r on the right and -r on the left. A full next
 cell supplies the lower distance bound. The upper bound is the tail sum
 of the actual cell and connector lengths.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

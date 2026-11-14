@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerWeightInterpolation
+module
+
+public import ContinuousFlexibility.Radial.InnerWeightInterpolation
 
 /-!
 # Fixed coefficient powers for the inner weights
@@ -9,6 +11,8 @@ an exponent independent of the weight exponent and of the number of
 retained cells. These local bounds, rather than the condition number of
 the entire weight, are what enter the two final inner inverse estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

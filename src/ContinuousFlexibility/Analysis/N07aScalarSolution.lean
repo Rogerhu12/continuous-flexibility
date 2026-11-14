@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aCorrectedForward
-import ContinuousFlexibility.Analysis.N07aNormalizedSpaces
-import ContinuousFlexibility.Analysis.SolveReturnEquations
+module
+
+public import ContinuousFlexibility.Analysis.N07aCorrectedForward
+public import ContinuousFlexibility.Analysis.N07aNormalizedSpaces
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # The actual normalized scalar equation is a linear solution relation
@@ -9,6 +11,8 @@ The coefficient part is the already constructed physical forward map.
 The distinguished column is used only as its literal pointwise field;
 no Source realization or parameter regularity of that column is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

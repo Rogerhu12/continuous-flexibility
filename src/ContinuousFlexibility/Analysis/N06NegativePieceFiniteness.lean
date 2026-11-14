@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06NaturalPieceFiniteness
-import ContinuousFlexibility.Analysis.N06PhysicalReconstruction
+module
+
+public import ContinuousFlexibility.Analysis.N06NaturalPieceFiniteness
+public import ContinuousFlexibility.Analysis.N06PhysicalReconstruction
 
 /-!
 # Local finiteness of the actual negative canonical pieces
@@ -10,6 +12,8 @@ the actual two-dimensional halves remain inside that same component,
 even when their middle cut moves. Compact finiteness of the original
 components therefore controls the actual current piece closures.
 -/
+
+@[expose] public section
 
 noncomputable section
 

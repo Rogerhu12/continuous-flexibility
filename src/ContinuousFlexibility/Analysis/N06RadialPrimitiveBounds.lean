@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06RadialGeometryJets
-import ContinuousFlexibility.Analysis.N06PositiveWeakGraph
+module
+
+public import ContinuousFlexibility.Analysis.N06RadialGeometryJets
+public import ContinuousFlexibility.Analysis.N06PositiveWeakGraph
 
 /-!
 # Primitive radial bounds imply the unit modal coefficient bounds
@@ -9,6 +11,8 @@ finite jets and positive lower bounds give an explicit polynomial bound
 for the actual radial formulas. In particular no modal equation or graph
 estimate is included among the inputs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

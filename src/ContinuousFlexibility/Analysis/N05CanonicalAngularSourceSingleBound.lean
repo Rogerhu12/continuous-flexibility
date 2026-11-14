@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalAngularSourceBlock
-import ContinuousFlexibility.Analysis.N05CanonicalSourceSingle
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalAngularSourceBlock
+public import ContinuousFlexibility.Analysis.N05CanonicalSourceSingle
 
 /-!
 # Same-endpoint bounds for the fixed unsigned single-coordinate lift
@@ -8,6 +10,8 @@ The fixed global angular lift agrees almost everywhere with its actual
 local periodic transport. Cell integrals transfer that identity to the
 original reference source norm, without an angular parity assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

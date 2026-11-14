@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.EndpointFiberPolynomialMargins
-import ContinuousFlexibility.Analysis.EndpointAngularInterpolation
-import ContinuousFlexibility.Analysis.OneSidedEndpointHeight
+module
+
+public import ContinuousFlexibility.Analysis.EndpointFiberPolynomialMargins
+public import ContinuousFlexibility.Analysis.EndpointAngularInterpolation
+public import ContinuousFlexibility.Analysis.OneSidedEndpointHeight
 
 /-!
 # Polynomial costs of the actual positive-component collars
@@ -11,6 +13,8 @@ one common fixed power for all three reciprocal widths and the displayed
 Jacobian lower bound. The constants precede every radius and field datum.
 No bound for a future global transport is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Geometry.CartesianMetricCoframe
-import ContinuousFlexibility.Geometry.CartesianExterior
+module
+
+public import ContinuousFlexibility.Geometry.CartesianMetricCoframe
+public import ContinuousFlexibility.Geometry.CartesianExterior
 
 /-!
 # Development of an actual flat Cartesian matrix metric
@@ -9,6 +11,8 @@ inversion theorems. The flatness hypothesis is the vanishing actual exterior
 derivative of the explicitly constructed matrix connection, not the existence
 of any development.
 -/
+
+@[expose] public section
 
 noncomputable section
 

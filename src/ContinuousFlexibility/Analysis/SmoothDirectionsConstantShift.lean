@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SmoothDirectionsMixedScalarLine
+module
+
+public import ContinuousFlexibility.Analysis.SmoothDirectionsMixedScalarLine
 
 /-!
 # Positive genuine jets are unchanged by a constant shift
@@ -7,6 +9,8 @@ The assertion follows by differentiating the actual scalar identities
 on the open parameter domain. No choice of a special constant tower or
 formal derivative convention is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N05CanonicalSourceEmbedding
-import ContinuousFlexibility.Analysis.N05CanonicalOutputChoice
-import ContinuousFlexibility.Analysis.N05ReferenceSourceBounds
-import ContinuousFlexibility.Analysis.N05ReferenceLeftChoice
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalSourceEmbedding
+public import ContinuousFlexibility.Analysis.N05CanonicalOutputChoice
+public import ContinuousFlexibility.Analysis.N05ReferenceSourceBounds
+public import ContinuousFlexibility.Analysis.N05ReferenceLeftChoice
 
 /-!
 # One fixed canonical inverse from the actual physical reference inverse
@@ -12,6 +14,8 @@ chosen once. Their definitions have no endpoint or material weight parameter.
 Every stronger canonical volume level gives their genuine physical graph
 and canonical representative identities.
 -/
+
+@[expose] public section
 
 noncomputable section
 

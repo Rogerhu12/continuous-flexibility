@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cActualFlowVariationEnvelope
-import ContinuousFlexibility.Analysis.N01cActualFlowNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N01cActualFlowVariationEnvelope
+public import ContinuousFlexibility.Analysis.N01cActualFlowNormalization
 
 /-!
 # Strong induction for the actual positive angular flow derivatives
@@ -10,6 +12,8 @@ state order. Its normalized estimate is therefore available from strong
 induction. The speed head, the derivative defect, the low geometry, and
 the interpolation base were all fixed before this induction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

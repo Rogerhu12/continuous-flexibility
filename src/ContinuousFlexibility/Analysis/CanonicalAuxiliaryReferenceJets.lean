@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.CanonicalSinglePieceReferenceBounds
-import ContinuousFlexibility.Analysis.BufferedAuxiliaryColumnWitness
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
-import ContinuousFlexibility.Analysis.StateNeighborhood
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalSinglePieceReferenceBounds
+public import ContinuousFlexibility.Analysis.BufferedAuxiliaryColumnWitness
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+public import ContinuousFlexibility.Analysis.StateNeighborhood
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData
 
 /-!
 # Reference jets of the retained auxiliary column
@@ -13,6 +15,8 @@ first gives ordinary finite constants for its actual reference source.
 The optional material enlargement is explicit and preserves the same
 physical spaces, Q, column, state, coefficient fields, and Through03.
 -/
+
+@[expose] public section
 
 noncomputable section
 

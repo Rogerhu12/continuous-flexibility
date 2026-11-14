@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.MatchedOuterSideGlue
-import ContinuousFlexibility.Radial.OuterOutwardHilbert
-import ContinuousFlexibility.Radial.OuterPhysicalTailOutward
-import Mathlib.Analysis.Calculus.Deriv.Shift
+module
+
+public import ContinuousFlexibility.Radial.MatchedOuterSideGlue
+public import ContinuousFlexibility.Radial.OuterOutwardHilbert
+public import ContinuousFlexibility.Radial.OuterPhysicalTailOutward
+public import Mathlib.Analysis.Calculus.Deriv.Shift
 
 /-!
 # Exact outward within derivatives at the two matching cuts
@@ -10,6 +12,8 @@ Reflection transports the one-sided derivative without an ambient
 differentiability assumption.  The sign is exactly the frozen outward
 flux sign, for the original side representatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

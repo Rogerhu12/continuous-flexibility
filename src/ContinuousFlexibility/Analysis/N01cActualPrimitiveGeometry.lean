@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01cScaledMorseOpticalCover
-import ContinuousFlexibility.Analysis.N01cFiniteHeadOpticalBounds
-import ContinuousFlexibility.Radial.R11aRetainedFamily
-import ContinuousFlexibility.Radial.SeedCentralReturn
+module
+
+public import ContinuousFlexibility.Analysis.N01cScaledMorseOpticalCover
+public import ContinuousFlexibility.Analysis.N01cFiniteHeadOpticalBounds
+public import ContinuousFlexibility.Radial.R11aRetainedFamily
+public import ContinuousFlexibility.Radial.SeedCentralReturn
 
 /-!
 # Primitive optical geometry of the actual retained reference
@@ -11,6 +13,8 @@ The single central component uses its simple zeros and compactness. All
 negative points are classified by the same glued profile, and the actual
 cell pullback supplies the labels used by the uniform lower bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

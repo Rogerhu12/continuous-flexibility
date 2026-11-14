@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05OpticalProfileLipschitz
+module
+
+public import ContinuousFlexibility.Analysis.N05OpticalProfileLipschitz
 
 /-!
 # Second derivative bounds for the actual optical radicand
@@ -8,6 +10,8 @@ the profile, reciprocal profile and reciprocal radius jets. The resulting
 coefficient bound also holds at the endpoints of an interval carried by
 one physical cell, provided those endpoints lie in the radial core.
 -/
+
+@[expose] public section
 
 noncomputable section
 

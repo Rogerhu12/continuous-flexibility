@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.RootCircleSampleMaterialJets
-import ContinuousFlexibility.Analysis.TransportedLabelMaterialJets
-import ContinuousFlexibility.Analysis.OneSidedOrdinaryJets
+module
+
+public import ContinuousFlexibility.Analysis.RootCircleSampleMaterialJets
+public import ContinuousFlexibility.Analysis.TransportedLabelMaterialJets
+public import ContinuousFlexibility.Analysis.OneSidedOrdinaryJets
 
 /-!
 # Actual material jets of a transported root-section label
@@ -11,6 +13,8 @@ on an open set therefore gives both genuine smoothness and all ordinary
 jets of the original first integral, with one common low order and loss.
 The first integral is not assumed to have any higher derivative bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

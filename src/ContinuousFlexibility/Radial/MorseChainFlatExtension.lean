@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MorseChainLocalGluing
-import ContinuousFlexibility.Radial.MorseChainEndpointDistances
-import ContinuousFlexibility.Analysis.FlatExtension
+module
+
+public import ContinuousFlexibility.Radial.MorseChainLocalGluing
+public import ContinuousFlexibility.Radial.MorseChainEndpointDistances
+public import ContinuousFlexibility.Analysis.FlatExtension
 
 /-!
 # Flatness at the actual outward accumulation radius
@@ -9,6 +11,8 @@ The exponential derivative bounds are compared to the square of the
 actual distance to the endpoint. The existing one-sided extension
 theorem is then applied by reflection to this same glued function.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

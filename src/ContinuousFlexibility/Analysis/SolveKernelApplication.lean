@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SolveApplication
-import ContinuousFlexibility.Analysis.SolveNormalization
-import ContinuousFlexibility.Analysis.SolveTameSubspace
+module
+
+public import ContinuousFlexibility.Analysis.SolveApplication
+public import ContinuousFlexibility.Analysis.SolveNormalization
+public import ContinuousFlexibility.Analysis.SolveTameSubspace
 
 /-!
 # Solving on a continuously normalized hyperplane
@@ -10,6 +12,8 @@ proved on abstract spaces. A concrete system supplies its actual continuous
 row and the fact that its correction is tangent to that row. The conclusion
 returns a point in the ambient space together with its exact zero row.
 -/
+
+@[expose] public section
 
 noncomputable section
 

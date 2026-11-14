@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerLiouvilleUnitSolution
-import ContinuousFlexibility.Radial.InnerLiouvilleDirichletSolution
+module
+
+public import ContinuousFlexibility.Radial.InnerLiouvilleUnitSolution
+public import ContinuousFlexibility.Radial.InnerLiouvilleDirichletSolution
 
 /-!
 # The same model Dirichlet and Poisson maps solve every local trace problem
@@ -10,6 +12,8 @@ normalized columns. The field and scalar are exactly their linear
 combination; the actual derivative, potential, domain, trace, row and
 all closed-domain weak equations are proved for that same combination.
 -/
+
+@[expose] public section
 
 noncomputable section
 

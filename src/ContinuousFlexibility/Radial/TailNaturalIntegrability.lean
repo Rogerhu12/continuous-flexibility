@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.TailNaturalInterpolation
-import ContinuousFlexibility.Radial.TailTestPairing
-import Mathlib.MeasureTheory.Integral.Bochner.Set
-import Mathlib.Topology.Algebra.InfiniteSum.NatInt
-import Mathlib.Topology.Algebra.InfiniteSum.Real
+module
+
+public import ContinuousFlexibility.Radial.TailNaturalInterpolation
+public import ContinuousFlexibility.Radial.TailTestPairing
+public import Mathlib.MeasureTheory.Integral.Bochner.Set
+public import Mathlib.Topology.Algebra.InfiniteSum.NatInt
+public import Mathlib.Topology.Algebra.InfiniteSum.Real
 
 /-!
 # Global integrability of the actual tail interpolation
@@ -12,6 +14,8 @@ therefore control the weighted absolute and square integrals of the same
 Poisson interpolant. A continuous initial extension can then be attached
 without imposing an artificial entrance boundary condition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SmoothDirectionsLocalJointAngular
+module
+
+public import ContinuousFlexibility.Analysis.SmoothDirectionsLocalJointAngular
 
 /-!
 # Uniform seminorm bounds for the actual local joint towers
@@ -9,6 +11,8 @@ spatial absolute value. Only finitely many input jet orders enter each
 output order. Consequently the seminorm and constant remain uniform in
 any additional spatial label, such as the circle angle.
 -/
+
+@[expose] public section
 
 noncomputable section
 

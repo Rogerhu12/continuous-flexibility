@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06NegativeCurrentTestLp
-import ContinuousFlexibility.Analysis.N06PhysicalPeriodicity
+module
+
+public import ContinuousFlexibility.Analysis.N06NegativeCurrentTestLp
+public import ContinuousFlexibility.Analysis.N06PhysicalPeriodicity
 
 /-!
 # Shifted actual operator tests for the original full angular period
@@ -12,6 +14,8 @@ canonical point; its potential is bounded there by the same original N04
 bound. These facts give L2 tests for both halves of a full-period physical
 pairing, and more generally for every integral angular shift.
 -/
+
+@[expose] public section
 
 noncomputable section
 

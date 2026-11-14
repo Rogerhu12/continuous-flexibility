@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Geometry.SphereCapGluing
-import Mathlib.Geometry.Manifold.SmoothEmbedding
-import Mathlib.Analysis.Calculus.InverseFunctionTheorem.ContDiff
+module
+
+public import ContinuousFlexibility.Geometry.SphereCapGluing
+public import Mathlib.Geometry.Manifold.SmoothEmbedding
+public import Mathlib.Analysis.Calculus.InverseFunctionTheorem.ContDiff
 
 /-!
 # Genuine immersion normal forms for the constructed standard spheres
@@ -10,6 +12,8 @@ the map is the linear inclusion of a plane.  This proves mathlib's normal-form
 `Manifold.IsImmersion`, in addition to the previously proved injectivity of the
 manifold differential.  The complement is the same real line at every point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

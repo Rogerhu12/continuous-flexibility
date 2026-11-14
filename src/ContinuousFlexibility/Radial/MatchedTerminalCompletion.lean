@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Blueprint.R10a.Poisson
-import ContinuousFlexibility.Radial.MatchingInverseTheorem
+module
+
+public import ContinuousFlexibility.Blueprint.R10a.Poisson
+public import ContinuousFlexibility.Radial.MatchingInverseTheorem
 
 /-!
 # Completing the same actual terminal regional data
@@ -10,6 +12,8 @@ cut, scale, boundary line, cutoff and cost is retained definitionally.
 The returned regional record therefore carries the actual local graph
 needed by the estimates for those same operators and columns.
 -/
+
+@[expose] public section
 
 noncomputable section
 

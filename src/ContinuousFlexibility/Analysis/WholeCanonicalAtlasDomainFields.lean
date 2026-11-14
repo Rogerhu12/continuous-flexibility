@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.WholeCanonicalAtlasData
+module
+
+public import ContinuousFlexibility.Analysis.WholeCanonicalAtlasData
 
 /-!
 # Reference signs and current domain fields for the whole atlas
@@ -7,6 +9,8 @@ The negative flags are those of the original actual cut pairs. Positive
 pieces are the genuine full positive intervals, including those that
 touch an ambient endpoint. All fields refer to the same atlas record.
 -/
+
+@[expose] public section
 
 noncomputable section
 

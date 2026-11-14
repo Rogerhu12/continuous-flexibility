@@ -1,10 +1,12 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalCutoffColumn
-import ContinuousFlexibility.Analysis.N07aCanonicalDifference
-import ContinuousFlexibility.Analysis.N07aLocalPullbackEquation
-import ContinuousFlexibility.Analysis.N07aClosedPhysicalHeight
-import ContinuousFlexibility.Analysis.N07aScalarSourceTerminal
-import ContinuousFlexibility.Analysis.N07aAngularNuRegularity
-import ContinuousFlexibility.Analysis.N07aSampleJetAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalCutoffColumn
+public import ContinuousFlexibility.Analysis.N07aCanonicalDifference
+public import ContinuousFlexibility.Analysis.N07aLocalPullbackEquation
+public import ContinuousFlexibility.Analysis.N07aClosedPhysicalHeight
+public import ContinuousFlexibility.Analysis.N07aScalarSourceTerminal
+public import ContinuousFlexibility.Analysis.N07aAngularNuRegularity
+public import ContinuousFlexibility.Analysis.N07aSampleJetAlgebra
 
 /-!
 # The physical equation of the genuine closed negative-piece height
@@ -14,6 +16,8 @@ original weak relation. On a negative piece its principal coefficients
 are exactly `1, 0, -s`. Local smooth tests apply N04 to the open decoder,
 and the positive source factor recovers its actual physical equation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

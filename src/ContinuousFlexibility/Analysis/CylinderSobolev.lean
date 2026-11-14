@@ -1,11 +1,13 @@
-import ContinuousFlexibility.Scalar.HeightDerivatives
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
-import Mathlib.Analysis.Calculus.Deriv.Prod
-import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
-import Mathlib.MeasureTheory.Function.L2Space
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
-import Mathlib.MeasureTheory.Integral.Prod
-import Mathlib.Tactic.Linarith
+module
+
+public import ContinuousFlexibility.Scalar.HeightDerivatives
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+public import Mathlib.Analysis.Calculus.Deriv.Prod
+public import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+public import Mathlib.MeasureTheory.Function.L2Space
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+public import Mathlib.MeasureTheory.Integral.Prod
+public import Mathlib.Tactic.Linarith
 
 /-!
 # Local pointwise bounds on the material cylinder
@@ -15,6 +17,8 @@ the derivative on an interval. Applying this estimate in both coordinates
 gives an integral over the material window. Cauchy--Schwarz then gives the
 four local `L²` norms with a constant independent of the window position.
 -/
+
+@[expose] public section
 
 noncomputable section
 

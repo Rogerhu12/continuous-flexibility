@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsMovingPointOneHigh
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsMovingPointOneHigh
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
 
 /-!
 # Sampled material constants after moving-point composition
@@ -9,6 +11,8 @@ envelopes are absorbed into the single constant of the current-jet
 interface. The sampled height factor and the complete one-high weight
 are retained without alteration.
 -/
+
+@[expose] public section
 
 noncomputable section
 

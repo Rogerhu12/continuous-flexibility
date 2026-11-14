@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.MaterialRadiusJets
-import Mathlib.Analysis.Calculus.Deriv.Support
-import Mathlib.MeasureTheory.Function.LocallyIntegrable
+module
+
+public import ContinuousFlexibility.Analysis.MaterialRadiusJets
+public import Mathlib.Analysis.Calculus.Deriv.Support
+public import Mathlib.MeasureTheory.Function.LocallyIntegrable
 
 /-!
 # Bounded jets of the actual reference primitive
@@ -10,6 +12,8 @@ annulus. Its integral from the right endpoint is a global primitive with
 bounded jets of every order, including order zero. These are the fixed
 unweighted input bounds for compact radial height tests.
 -/
+
+@[expose] public section
 
 noncomputable section
 

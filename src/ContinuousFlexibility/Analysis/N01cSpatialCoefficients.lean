@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cFullNeighborhood
-import ContinuousFlexibility.Analysis.N01cHeightGeometry
-import ContinuousFlexibility.Scalar.TypeCorrection
+module
+
+public import ContinuousFlexibility.Analysis.N01cFullNeighborhood
+public import ContinuousFlexibility.Analysis.N01cHeightGeometry
+public import ContinuousFlexibility.Scalar.TypeCorrection
 
 /-!
 # Spatial coefficient regularity and the exact characteristic type
@@ -17,6 +19,8 @@ every reference negative component retains its type is inserted: such a
 claim needs the additional relative control estimate from the geometric
 neighbourhood construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

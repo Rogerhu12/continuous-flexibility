@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aLeadingCoefficient
-import ContinuousFlexibility.Analysis.StateControlCofiniteClosure
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N07aLeadingCoefficient
+public import ContinuousFlexibility.Analysis.StateControlCofiniteClosure
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 
 /-!
 # Spatial regularity of the actual leading coefficient
@@ -9,6 +11,8 @@ Only interior smoothness of the decoded height is needed here. The actual
 controlled radial profile is already globally smooth from N01, and its
 primitive supplies the radial part of the nonlinear height.
 -/
+
+@[expose] public section
 
 noncomputable section
 

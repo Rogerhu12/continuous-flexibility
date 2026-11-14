@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OpticalCurvatureInequality
+module
+
+public import ContinuousFlexibility.Analysis.OpticalCurvatureInequality
 
 /-!
 # Actual second variation of an optical travel integral
@@ -7,6 +9,8 @@ On a compact interior collar, the radicand has a positive uniform lower
 bound.  Both derivatives below are derivatives of the actual parameter
 integral.  Compactness supplies the domination needed for differentiation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

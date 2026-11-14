@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsFixedBaseMixedProduct
-import ContinuousFlexibility.Analysis.FlatMixedPolynomialCoefficients
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsFixedBaseMixedProduct
+public import ContinuousFlexibility.Analysis.FlatMixedPolynomialCoefficients
 
 /-!
 # The actual correction polynomial preserves a common low base
@@ -10,6 +12,8 @@ its flat component factor and selects one low base before all parameter
 orders. The supplied coefficient towers remain arbitrary genuine towers
 of the same division-free polynomial.
 -/
+
+@[expose] public section
 
 noncomputable section
 

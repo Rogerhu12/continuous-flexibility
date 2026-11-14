@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R11bOrthogonalSeries
-import ContinuousFlexibility.Radial.R11bTensorL2
+module
+
+public import ContinuousFlexibility.Radial.R11bOrthogonalSeries
+public import ContinuousFlexibility.Radial.R11bTensorL2
 
 /-!
 # Strong reconstruction from square-summable product modes
@@ -9,6 +11,8 @@ coefficients reconstruct an actual measurable product field. The raw finite
 sums converge in the square-integral metric, and the limit has exactly the
 sum of the radial squared norms.
 -/
+
+@[expose] public section
 
 noncomputable section
 

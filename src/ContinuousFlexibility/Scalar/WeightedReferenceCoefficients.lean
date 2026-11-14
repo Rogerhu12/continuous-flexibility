@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Scalar.WeightedReferenceBounds
+module
+
+public import ContinuousFlexibility.Scalar.WeightedReferenceBounds
 
 /-!
 # Reference coefficient losses cost one material envelope
@@ -8,6 +10,8 @@ absorbed before the Sobolev order is counted: every fixed reciprocal-profile
 jet costs one power of `M`, rather than a number of powers depending on the
 jet order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

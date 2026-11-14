@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.OscillatorWeakEnergy
-import ContinuousFlexibility.Radial.OscillatorPhysicalFormBasis
-import Mathlib.Analysis.InnerProductSpace.Dual
+module
+
+public import ContinuousFlexibility.Radial.OscillatorWeakEnergy
+public import ContinuousFlexibility.Radial.OscillatorPhysicalFormBasis
+public import Mathlib.Analysis.InnerProductSpace.Dual
 
 /-!
 # The operator associated with the actual closed physical energy form
@@ -11,6 +13,8 @@ that physical space. Riesz representation is then applied to its actual
 bounded source functional. The association is not defined by a spectral
 graph or by the image of an inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

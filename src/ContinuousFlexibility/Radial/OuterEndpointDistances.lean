@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterDeepFactory
-import ContinuousFlexibility.Radial.MorseTransitionBands
+module
+
+public import ContinuousFlexibility.Radial.OuterDeepFactory
+public import ContinuousFlexibility.Radial.MorseTransitionBands
 
 /-!
 # Actual outer entrance distances at a moving cutoff
@@ -9,6 +11,8 @@ The seam limits select the corresponding endpoint eventually. The left
 entrance adds one genuine join of order `A_n^12`; this still has the size
 of the next Morse scale `A_(n+1)`. No frequency is fixed in these estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

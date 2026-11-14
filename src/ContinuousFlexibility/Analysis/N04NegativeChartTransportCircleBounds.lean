@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartReturnCircleBounds
-import ContinuousFlexibility.Analysis.ReturnCorrectionResidualLinear
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartReturnCircleBounds
+public import ContinuousFlexibility.Analysis.ReturnCorrectionResidualLinear
 
 /-!
 # Fixed-base inputs for the actual interior transport system
@@ -9,6 +11,8 @@ For the pulled correction, the supplied N02 residual gives exactly the
 already estimated initial displacement. The two actual inverse maps then
 give a common low order before all state orders and radius selectors.
 -/
+
+@[expose] public section
 
 noncomputable section
 

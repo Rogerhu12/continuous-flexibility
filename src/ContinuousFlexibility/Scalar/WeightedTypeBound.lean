@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Scalar.WeightedGeometry
+module
+
+public import ContinuousFlexibility.Scalar.WeightedGeometry
 
 /-!
 # The weighted type coefficient is uniformly bounded on the common ball
@@ -8,6 +10,8 @@ with the actual perturbed profile is controlled by the quantitative lower
 bound for `Q` and the positive inner radius.  The bound is valid on every
 smaller ball or every higher input order for which the same geometry holds.
 -/
+
+@[expose] public section
 
 noncomputable section
 

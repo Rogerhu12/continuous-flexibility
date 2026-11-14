@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledSampleHeight
-import ContinuousFlexibility.Analysis.N04RealizationPositiveHeightParameterPrefix
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledSampleHeight
+public import ContinuousFlexibility.Analysis.N04RealizationPositiveHeightParameterPrefix
 
 /-!
 # Raw endpoint prefixes at the fixed positive sample
@@ -9,6 +11,8 @@ parameter order as well as all positive orders. Combining this with the
 exact height-weight transfer preserves `parameterHeightWeight` at every
 parameter order, with one coefficient selected before either endpoint.
 -/
+
+@[expose] public section
 
 noncomputable section
 

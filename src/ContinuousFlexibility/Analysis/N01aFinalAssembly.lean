@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cActualControlAssembly
-import ContinuousFlexibility.Analysis.N01aMaterialContext
-import ContinuousFlexibility.Analysis.N01aOpticalProfile
+module
+
+public import ContinuousFlexibility.Analysis.N01cActualControlAssembly
+public import ContinuousFlexibility.Analysis.N01aMaterialContext
+public import ContinuousFlexibility.Analysis.N01aOpticalProfile
 
 /-!
 # Assembling the actual reference and control geometry
@@ -10,6 +12,8 @@ host-index discrepancy and the pointwise primitive optical bound. The
 material data, spaces, controls and reference state are then constructed
 on that same reference and its actual host cells.
 -/
+
+@[expose] public section
 
 noncomputable section
 

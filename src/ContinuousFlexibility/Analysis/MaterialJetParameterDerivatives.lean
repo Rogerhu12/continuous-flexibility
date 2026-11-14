@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.MixedJetParameterDerivatives
+module
+
+public import ContinuousFlexibility.Analysis.MixedJetParameterDerivatives
 
 /-!
 # Parameter differentiation through the actual weighted divergence
@@ -8,6 +10,8 @@ material multipliers and ordinary partial derivatives. The parameter
 derivative therefore commutes with every weighted physical jet of the
 symmetric divergence. Only smooth slices near the parameter are used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

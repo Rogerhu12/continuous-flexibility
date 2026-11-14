@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerRadialActualAssembly
-import ContinuousFlexibility.Radial.InnerLiouvillePhysicalRepresentatives
-import ContinuousFlexibility.Radial.InnerBorderWeights
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialActualAssembly
+public import ContinuousFlexibility.Radial.InnerLiouvillePhysicalRepresentatives
+public import ContinuousFlexibility.Radial.InnerBorderWeights
 
 /-!
 # Exact action of a constant weight on actual model columns
@@ -10,6 +12,8 @@ own piece. A multiplier equal to one there preserves that full column,
 including its scalar coordinate. This identifies the central column
 inside either sign of the actual Morse chain weight.
 -/
+
+@[expose] public section
 
 noncomputable section
 

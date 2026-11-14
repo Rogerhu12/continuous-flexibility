@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06NuSpatialCoordinateBounds
-import ContinuousFlexibility.Analysis.N06NuCoordinateCompact
+module
+
+public import ContinuousFlexibility.Analysis.N06NuSpatialCoordinateBounds
+public import ContinuousFlexibility.Analysis.N06NuCoordinateCompact
 
 /-!
 # Uniform physical spatial packets near a fixed state
@@ -8,6 +10,8 @@ The zero-state packet is a fixed smooth radial field. The actual spatial
 packet difference bound then gives simultaneous value and derivative
 bounds on one ball in the original order n+4 state seminorm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SmoothDirectionsOneHighLimit
-import Mathlib.Analysis.Calculus.ParametricIntervalIntegral
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
+module
+
+public import ContinuousFlexibility.Analysis.SmoothDirectionsOneHighLimit
+public import Mathlib.Analysis.Calculus.ParametricIntervalIntegral
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
 
 /-!
 # Angular differentiation of genuine parameter jets
@@ -12,6 +14,8 @@ along an actual parameter line, with domination supplied by the next
 parameter jet, proves that angular differentiation commutes with every
 parameter jet. No mixed derivative or endpoint regularity is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

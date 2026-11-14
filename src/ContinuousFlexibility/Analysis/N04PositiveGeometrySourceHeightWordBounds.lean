@@ -1,7 +1,11 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryActualHeightDirections
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryRadialProductWordData
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryActualHeightDirections
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryRadialProductWordData
 
 /-! # Word bounds for the literal source height and its reciprocal -/
+
+@[expose] public section
 
 noncomputable section
 

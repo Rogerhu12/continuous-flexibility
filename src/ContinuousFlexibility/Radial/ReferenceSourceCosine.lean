@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ReferenceCosineReconstruction
+module
+
+public import ContinuousFlexibility.Radial.ReferenceCosineReconstruction
 
 /-!
 # Fourier realization of the frozen reference source space
@@ -7,6 +9,8 @@ These wrappers connect the actual coefficient analysis to SourceMember,
 the frozen source norm, and almost-everywhere equality in the physical
 annulus. No reconstruction or norm-comparison hypothesis is added.
 -/
+
+@[expose] public section
 
 noncomputable section
 

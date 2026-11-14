@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseChainPartitionData
-import ContinuousFlexibility.Radial.MatchedWeightFibers
+module
+
+public import ContinuousFlexibility.Radial.MorseChainPartitionData
+public import ContinuousFlexibility.Radial.MatchedWeightFibers
 
 /-!
 # The actual Morse partition has at most three cells at each level
@@ -9,6 +11,8 @@ enumeration. At any fixed attenuation level there is at most one cell
 from each tail, and at most one middle cell. This is a level multiplicity
 bound, independent of the pointwise overlap bound for the localizers.
 -/
+
+@[expose] public section
 
 noncomputable section
 

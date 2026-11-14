@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04bSingletonType
-import Mathlib.Topology.Algebra.InfiniteSum.Ring
-import Mathlib.Tactic.Abel
+module
+
+public import ContinuousFlexibility.Analysis.N04bSingletonType
+public import Mathlib.Topology.Algebra.InfiniteSum.Ring
+public import Mathlib.Tactic.Abel
 
 /-!
 # Strict radial profile type on the full N01 neighborhood
@@ -10,6 +12,8 @@ profile perturbation. Its first radial flow jet is therefore an affine
 optical square root. The N01 directional tower prevents this radicand
 from crossing zero anywhere in the original state neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

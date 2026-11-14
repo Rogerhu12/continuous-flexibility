@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MatchedModeLocalization
+module
+
+public import ContinuousFlexibility.Radial.MatchedModeLocalization
 
 /-!
 # Cellwise conversion of physical sources and Hilbert fields
@@ -9,6 +11,8 @@ the return of a Hilbert field to ordinary dr cost one power of the
 reciprocal density on a cell. These are actual local L² statements,
 including measurability, rather than estimates of formal integrals.
 -/
+
+@[expose] public section
 
 noncomputable section
 

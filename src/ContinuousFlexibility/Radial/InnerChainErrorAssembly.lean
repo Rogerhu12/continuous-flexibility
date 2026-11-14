@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerChainDiagonal
-import ContinuousFlexibility.Radial.InnerTwoCutError
+module
+
+public import ContinuousFlexibility.Radial.InnerChainDiagonal
+public import ContinuousFlexibility.Radial.InnerTwoCutError
 
 /-!
 # The actual chain error and its physical cut normalization
@@ -10,6 +12,8 @@ Diagonal cut weights and energy normalization are moved through those
 restrictions exactly. The estimate therefore applies to the actual
 conjugated interface error, with no global weight condition number.
 -/
+
+@[expose] public section
 
 noncomputable section
 

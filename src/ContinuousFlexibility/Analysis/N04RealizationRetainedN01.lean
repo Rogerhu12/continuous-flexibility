@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationFlowInstallation
-import ContinuousFlexibility.Analysis.N01PrimitiveFixedWitnessConstruction
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationFlowInstallation
+public import ContinuousFlexibility.Analysis.N01PrimitiveFixedWitnessConstruction
 
 /-!
 # Completing N01 on the retained input data
@@ -10,6 +12,8 @@ reference, material data, physical spaces and all six static geometry
 fields through the three quantitative factories. Retained reference
 metadata remains attached to the unchanged caller-supplied reference.
 -/
+
+@[expose] public section
 
 noncomputable section
 

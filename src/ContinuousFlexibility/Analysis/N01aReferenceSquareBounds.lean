@@ -1,8 +1,12 @@
-import ContinuousFlexibility.Analysis.N01aReferencePartitionSquares
+module
+
+public import ContinuousFlexibility.Analysis.N01aReferencePartitionSquares
 
 /-!
 # Physical square bounds and scalar convergence for reference graphs
 -/
+
+@[expose] public section
 
 noncomputable section
 

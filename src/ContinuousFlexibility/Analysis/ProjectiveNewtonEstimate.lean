@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ProjectiveJetEvaluation
-import Mathlib.Analysis.Calculus.MeanValue
-import Mathlib.Tactic.Abel
+module
+
+public import ContinuousFlexibility.Analysis.ProjectiveJetEvaluation
+public import Mathlib.Analysis.Calculus.MeanValue
+public import Mathlib.Tactic.Abel
 
 /-!
 # Taylor and Newton estimates in a projective grading
@@ -10,6 +12,8 @@ segment. Applying this estimate to the quadratic right-inverse identity gives
 the residual bound after a Newton step. For a smoothed step the remaining
 first-order term is exactly the derivative applied to the smoothing error.
 -/
+
+@[expose] public section
 
 noncomputable section
 

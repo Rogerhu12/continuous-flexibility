@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.SelectedOuterWeakSolution
-import Mathlib.MeasureTheory.Measure.OpenPos
-import Mathlib.Analysis.Calculus.TangentCone.Real
+module
+
+public import ContinuousFlexibility.Radial.SelectedOuterWeakSolution
+public import Mathlib.MeasureTheory.Measure.OpenPos
+public import Mathlib.Analysis.Calculus.TangentCone.Real
 
 /-!
 # Recovery of ordinary-support Jacobi tests
@@ -10,6 +12,8 @@ derivative in the open interval. Subtracting the smooth test then gives
 the actual homogeneous value/flux system. Its natural Robin uniqueness
 recovers the test, including the regular cut.
 -/
+
+@[expose] public section
 
 noncomputable section
 

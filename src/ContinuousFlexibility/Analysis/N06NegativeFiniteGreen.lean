@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06FiniteWeakGreen
-import ContinuousFlexibility.Analysis.N06HalfPhysicalPairing
+module
+
+public import ContinuousFlexibility.Analysis.N06FiniteWeakGreen
+public import ContinuousFlexibility.Analysis.N06HalfPhysicalPairing
 
 /-!
 # Negative canonical principal Green formula with actual endpoint traces
@@ -14,6 +16,8 @@ The full-circle formula uses the original unnormalized physical measure on
 canonical measure on `(a,b) x (0,pi]`; both bulk and boundary integrals are
 halved. Thus no additional pi factor is present in the canonical identity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

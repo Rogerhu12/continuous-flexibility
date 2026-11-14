@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.Milestones
-import Lean.Util.CollectAxioms
-import Lean.Compiler.Old
+module
+
+public import ContinuousFlexibility.Statements.Milestones
+public import Lean.Util.CollectAxioms
+public import Lean.Compiler.Old
 
 /-!
 This audit checks actual declaration ownership, including private helpers and
@@ -11,6 +13,8 @@ definition is identified separately; its axioms are still checked.
 It also checks that all 58 milestone declarations have the closed type Prop.
 Passing this audit does not construct a proof of any milestone proposition.
 -/
+
+@[expose] public section
 
 open Lean in
 run_cmd do

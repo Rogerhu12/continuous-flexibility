@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Blueprint.Statements
-import ContinuousFlexibility.Analysis.N04bActualAtlasCuts
-import ContinuousFlexibility.Analysis.N04bActualRootDensity
-import ContinuousFlexibility.Analysis.N04bActualRootTransmission
-import ContinuousFlexibility.Analysis.N04bGeometricCompletion
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
+public import ContinuousFlexibility.Analysis.N04bActualAtlasCuts
+public import ContinuousFlexibility.Analysis.N04bActualRootDensity
+public import ContinuousFlexibility.Analysis.N04bActualRootTransmission
+public import ContinuousFlexibility.Analysis.N04bGeometricCompletion
 
 /-!
 # N04b: canonical coordinates of the actual corrected field
@@ -19,6 +21,8 @@ difference is a conclusion.
 Source: paper/flexible-surface-readable/07-fixed-geometry.tex, lines 992--1303.
 Task: docs/tasks/N04b-CanonicalConstruction.md.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

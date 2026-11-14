@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cComponentOpticalGeometry
-import ContinuousFlexibility.Analysis.N01cFiniteAffineSpeedFactors
-import ContinuousFlexibility.Analysis.N01cCosineRootPath
+module
+
+public import ContinuousFlexibility.Analysis.N01cComponentOpticalGeometry
+public import ContinuousFlexibility.Analysis.N01cFiniteAffineSpeedFactors
+public import ContinuousFlexibility.Analysis.N01cCosineRootPath
 
 /-!
 # The actual compact component speed
@@ -10,6 +12,8 @@ speed after the cosine change of variable on the physical half-period.
 The supplied trajectories therefore satisfy the transformed classical
 equation on that interval. No extension of their time equation is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

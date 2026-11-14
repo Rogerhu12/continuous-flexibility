@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Blueprint.Statements
-import ContinuousFlexibility.Analysis.IrrationalLiftRigidity
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
+public import ContinuousFlexibility.Analysis.IrrationalLiftRigidity
 
 /-!
 # The actual N01 travel angle supplies the rigidity frequency
@@ -9,6 +11,8 @@ radial reference. Its frozen return margin supplies irrationality of
 their travel divided by π. Thus the two return translations determine
 a normalized continuous degree-one boundary lift uniquely.
 -/
+
+@[expose] public section
 
 noncomputable section
 

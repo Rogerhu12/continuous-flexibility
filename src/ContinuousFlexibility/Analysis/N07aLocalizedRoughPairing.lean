@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalRoughPairing
-import ContinuousFlexibility.Analysis.N07aPeriodicRadialPairing
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalRoughPairing
+public import ContinuousFlexibility.Analysis.N07aPeriodicRadialPairing
 
 /-!
 # A localized rough physical pairing with its exact normalization
@@ -8,6 +10,8 @@ The integrability premise is on the actual transformed paired functions.
 The chart proves physical integrability; compact test support then extends
 it to the annulus before the physical full-period mean is evaluated.
 -/
+
+@[expose] public section
 
 noncomputable section
 

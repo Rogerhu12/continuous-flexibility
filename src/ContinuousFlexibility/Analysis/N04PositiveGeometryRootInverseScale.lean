@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryActualRootInverseDifferential
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryActualRootInverseDifferential
 
 /-!
 # The scalar inverse radial scale
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Analysis.N04PositiveGeometryActualRootInverseDiffer
 The zeroth power trace is an ordinary scalar power. Its normalization
 identity is kept separate from all moving differential towers.
 -/
+
+@[expose] public section
 
 noncomputable section
 

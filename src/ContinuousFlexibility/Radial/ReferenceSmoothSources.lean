@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ReferenceCellAlgebra
-import Mathlib.Topology.Order.Compact
+module
+
+public import ContinuousFlexibility.Radial.ReferenceCellAlgebra
+public import Mathlib.Topology.Order.Compact
 
 /-!
 # Smooth finite-mode sources for the reference graph
@@ -9,6 +11,8 @@ coefficient is smooth and has compact topological support in the open
 core, and the nonzero frequencies are precisely positive even cosine
 frequencies. Such a source belongs to every fixed weighted source space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

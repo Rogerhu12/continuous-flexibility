@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsMixedComposition
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsMixedTerm
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsMixedComposition
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsMixedTerm
 
 /-!
 # A moving point with the original finite state budget
@@ -9,6 +11,8 @@ except an original singleton. Thus the outer field is evaluated only
 through the original state prefix. Each other block saves one spatial
 order, which pays exactly for its outer spatial derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

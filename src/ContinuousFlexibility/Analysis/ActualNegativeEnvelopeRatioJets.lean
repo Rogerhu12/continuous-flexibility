@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.MaterialEnvelopeRatioJets
-import ContinuousFlexibility.Analysis.ActualNegativeMaterialRatioJets
+module
+
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeRatioJets
+public import ContinuousFlexibility.Analysis.ActualNegativeMaterialRatioJets
 
 /-!
 # Actual negative envelope ratios with the original atlas and samples
@@ -8,6 +10,8 @@ The scalar envelope may be explicitly enlarged, but its sample function
 is required to be the same. The original actual atlas and its true optical
 cut remain fixed throughout; only its already proved metadata is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.MaterialSampleCofinite
-import ContinuousFlexibility.Analysis.MaterialCoordinate
-import ContinuousFlexibility.Analysis.ComponentConstantAbsorption
+module
+
+public import ContinuousFlexibility.Analysis.MaterialSampleCofinite
+public import ContinuousFlexibility.Analysis.MaterialCoordinate
+public import ContinuousFlexibility.Analysis.ComponentConstantAbsorption
 
 /-!
 # Divergence of the actual material envelope along cell samples
@@ -14,6 +16,8 @@ actual E0 samples.
 No canonical component index is changed here, and no neighborhood,
 fixed-loss estimate, or endpoint jet estimate is inferred.
 -/
+
+@[expose] public section
 
 noncomputable section
 

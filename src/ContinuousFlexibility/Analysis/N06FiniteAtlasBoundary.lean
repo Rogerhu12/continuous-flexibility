@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06FinitePhysicalPartition
-import ContinuousFlexibility.Analysis.N06NaturalPieceFiniteness
-import Mathlib.MeasureTheory.Measure.OpenPos
-import Mathlib.Order.Interval.Set.Disjoint
+module
+
+public import ContinuousFlexibility.Analysis.N06FinitePhysicalPartition
+public import ContinuousFlexibility.Analysis.N06NaturalPieceFiniteness
+public import Mathlib.MeasureTheory.Measure.OpenPos
+public import Mathlib.Order.Interval.Set.Disjoint
 
 /-!
 # Endpoint cancellation in the reference atlas index order
@@ -16,6 +18,8 @@ interval metadata. These intervals supply an index order, not the shape of
 the current moving physical domains. No extra interval partition or
 vanishing total boundary sum is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

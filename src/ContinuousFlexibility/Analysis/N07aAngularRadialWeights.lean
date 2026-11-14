@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularMaterialWeights
-import ContinuousFlexibility.Radial.R11bWeightedCellClosure
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularMaterialWeights
+public import ContinuousFlexibility.Radial.R11bWeightedCellClosure
 
 /-!
 # Genuine physical decay implies the reference weighted cell graph norms
@@ -9,6 +11,8 @@ localizers. Thus a uniform weighted pointwise bound yields a summable
 reference cell-square series, without any bound on the number of cells
 with one index. The final comparison applies to arbitrary material data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

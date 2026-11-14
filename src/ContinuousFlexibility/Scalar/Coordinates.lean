@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.Definitions
-import Mathlib.Analysis.Calculus.FDeriv.Prod
+module
+
+public import ContinuousFlexibility.Scalar.Definitions
+public import Mathlib.Analysis.Calculus.FDeriv.Prod
 
 /-!
 # Actual derivatives in polar coordinate space
@@ -8,6 +10,8 @@ The coordinate space is a real product, restricted to positive radius in
 the theorems which use polar expressions. These derivatives are the actual
 Fréchet derivatives evaluated on coordinate directions, not independent jets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

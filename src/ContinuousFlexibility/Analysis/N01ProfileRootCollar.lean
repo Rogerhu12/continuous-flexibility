@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01NormalizationRootSeparation
-import ContinuousFlexibility.Analysis.CircleJetClosedGraph
-import Mathlib.Order.Filter.Finite
-import Mathlib.Topology.Algebra.InfiniteSum.ENNReal
+module
+
+public import ContinuousFlexibility.Analysis.N01NormalizationRootSeparation
+public import ContinuousFlexibility.Analysis.CircleJetClosedGraph
+public import Mathlib.Order.Filter.Finite
+public import Mathlib.Topology.Algebra.InfiniteSum.ENNReal
 
 /-!
 # One actual profile collar for every state at a fixed root
@@ -12,6 +14,8 @@ control to vanish near the root. Local finiteness then makes all controls
 vanish on one neighborhood, independently of the state. The radius may
 depend on the root; no uniform radius over components is asserted.
 -/
+
+@[expose] public section
 
 noncomputable section
 

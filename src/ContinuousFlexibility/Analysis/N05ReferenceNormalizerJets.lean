@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05ReferenceSourceCompatibility
-import ContinuousFlexibility.Analysis.N05ReferenceLowAngularWeak
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceSourceCompatibility
+public import ContinuousFlexibility.Analysis.N05ReferenceLowAngularWeak
 
 /-!
 # Angular jets of the actual auxiliary normalizer
@@ -9,6 +11,8 @@ makes its actual angular derivatives admissible in every fixed reference
 source weight. The corrected source therefore has the literal derivative
 `f_j - λ ∂θ^j ψ`, with the same scalar λ at every angular order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

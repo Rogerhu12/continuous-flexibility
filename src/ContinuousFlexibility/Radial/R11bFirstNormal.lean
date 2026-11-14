@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.R11bModeDerivativeBounds
-import ContinuousFlexibility.Radial.ProfileWeightedL2
-import ContinuousFlexibility.Radial.R11bWeightedSynthesis
-import ContinuousFlexibility.Radial.R11bNormalReconstruction
+module
+
+public import ContinuousFlexibility.Radial.R11bModeDerivativeBounds
+public import ContinuousFlexibility.Radial.ProfileWeightedL2
+public import ContinuousFlexibility.Radial.R11bWeightedSynthesis
+public import ContinuousFlexibility.Radial.R11bNormalReconstruction
 
 /-!
 # The first normal estimate for the same reference inverse
@@ -11,6 +13,8 @@ and every inverse on the original spaces. Ordinary L2 control supplies
 summability of the derivative modes; exact finite synthesis preserves the
 weighted bound, which passes to the actual normal derivative.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

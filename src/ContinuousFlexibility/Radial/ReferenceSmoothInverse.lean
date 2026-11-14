@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ReferenceSmoothCoefficientExtensions
-import ContinuousFlexibility.Radial.ReferenceGraphRepresentative
-import ContinuousFlexibility.Radial.ReferencePhiRapid
+module
+
+public import ContinuousFlexibility.Radial.ReferenceSmoothCoefficientExtensions
+public import ContinuousFlexibility.Radial.ReferenceGraphRepresentative
+public import ContinuousFlexibility.Radial.ReferencePhiRapid
 
 /-!
 # Smooth inverse images of the actual finite-source core
@@ -13,6 +15,8 @@ attenuation to every jet. The zero mode retains its actual left constant.
 The final finite sum is therefore a global smooth admissible field and
 represents the same frozen weak graph.
 -/
+
+@[expose] public section
 
 open Set Filter MeasureTheory
 open scoped ContDiff Topology

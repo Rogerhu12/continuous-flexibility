@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.MatchingInnerDecomposition
-import ContinuousFlexibility.Radial.MatchingOuterDecomposition
-import ContinuousFlexibility.Radial.MatchingOuterCorePairing
-import ContinuousFlexibility.Radial.MatchingInactiveScalar
-import ContinuousFlexibility.Radial.ModeCoreInverse
+module
+
+public import ContinuousFlexibility.Radial.MatchingInnerDecomposition
+public import ContinuousFlexibility.Radial.MatchingOuterDecomposition
+public import ContinuousFlexibility.Radial.MatchingOuterCorePairing
+public import ContinuousFlexibility.Radial.MatchingInactiveScalar
+public import ContinuousFlexibility.Radial.ModeCoreInverse
 
 /-!
 # Exact inversion of the concrete smooth core
@@ -12,6 +14,8 @@ The actual Poisson trace pairings give the coefficients in the matching
 matrix system. Its left inverse therefore recovers the smooth boundary
 values and fluxes, and all Poisson corrections cancel exactly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

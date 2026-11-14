@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aOpenDistributionFlux
-import ContinuousFlexibility.Analysis.N07aWeakNormalEquation
+module
+
+public import ContinuousFlexibility.Analysis.N07aOpenDistributionFlux
+public import ContinuousFlexibility.Analysis.N07aWeakNormalEquation
 
 /-!
 # The actual finite weak jet expansion of a divergence operator
@@ -9,6 +11,8 @@ weak jets. Compact-test product rules identify it with the original
 distribution; neither a boundary trace nor a smooth representative of
 the unknown is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

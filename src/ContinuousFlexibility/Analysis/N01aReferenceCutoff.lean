@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01aReferenceGreen
-import ContinuousFlexibility.Radial.TailKernelTestExtension
+module
+
+public import ContinuousFlexibility.Analysis.N01aReferenceGreen
+public import ContinuousFlexibility.Radial.TailKernelTestExtension
 
 /-!
 # Interior cutoff tests approaching the actual reference eigenfunction
@@ -8,6 +10,8 @@ Green symmetry removes all derivatives of the cutoff before passing to the
 limit.  The resulting test bounds are uniform even though the cutoff support
 approaches both end circles.
 -/
+
+@[expose] public section
 
 noncomputable section
 

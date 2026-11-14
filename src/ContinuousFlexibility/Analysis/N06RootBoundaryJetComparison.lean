@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06RootJetTransportCalculus
-import ContinuousFlexibility.Analysis.N06RootBoundaryFiniteFormulas
+module
+
+public import ContinuousFlexibility.Analysis.N06RootJetTransportCalculus
+public import ContinuousFlexibility.Analysis.N06RootBoundaryFiniteFormulas
 
 /-!
 # Finite angular jet comparison for the root boundary polynomials
@@ -8,6 +10,8 @@ The common factor delta is retained under addition, multiplication and
 angular differentiation. These elementary estimates are used on the
 explicit physical boundary formulas, whose depth is only four.
 -/
+
+@[expose] public section
 
 noncomputable section
 

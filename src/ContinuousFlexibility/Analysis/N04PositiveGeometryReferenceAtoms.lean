@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
-import ContinuousFlexibility.Analysis.RetainedPositiveComponentMaterialWidth
-import ContinuousFlexibility.Analysis.WholeReferenceGaugePositiveGeometryJets
-import ContinuousFlexibility.Analysis.CanonicalAuxiliaryAtomPreservation
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
+public import ContinuousFlexibility.Analysis.RetainedPositiveComponentMaterialWidth
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugePositiveGeometryJets
+public import ContinuousFlexibility.Analysis.CanonicalAuxiliaryAtomPreservation
 
 /-!
 # Reference geometry bounds for the same positive family
@@ -11,6 +13,8 @@ certificate give the eight geometry atoms at their original samples.
 The numerical bound is uniform in the auxiliary column. No current
 geometry certificate is used to produce these reference bounds.
 -/
+
+@[expose] public section
 
 noncomputable section
 

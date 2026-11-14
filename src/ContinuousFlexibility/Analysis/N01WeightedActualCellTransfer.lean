@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.MaterialSampleWeightedConstraint
-import ContinuousFlexibility.Analysis.ActualRadialCellComparison
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Analysis.MaterialSampleWeightedConstraint
+public import ContinuousFlexibility.Analysis.ActualRadialCellComparison
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # Full return-label weight transfer at every actual containing cell
@@ -10,6 +12,8 @@ negative component. The common-point index comparison then transfers
 the complete height and material weight to any containing cell with
 two additional orders. All losses are fixed before the order `s`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

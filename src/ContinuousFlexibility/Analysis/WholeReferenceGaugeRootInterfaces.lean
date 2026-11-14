@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasInterfaces
-import ContinuousFlexibility.Analysis.WholeComponentFieldSelection
-import ContinuousFlexibility.Analysis.PositiveComponentAdjacency
+module
+
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasInterfaces
+public import ContinuousFlexibility.Analysis.WholeComponentFieldSelection
+public import ContinuousFlexibility.Analysis.PositiveComponentAdjacency
 
 /-!
 # The actual two kinds of adjacent pieces at a profile root
@@ -14,6 +16,8 @@ whole positive component, or a whole positive component followed by a
 left negative half. The final adapter uses the unchanged physical
 metadata of the fixed-reference-gauge atlas.
 -/
+
+@[expose] public section
 
 noncomputable section
 

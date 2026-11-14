@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01ActualCellMaterialOrder
-import ContinuousFlexibility.Analysis.MaterialPlateauSampleWeights
+module
+
+public import ContinuousFlexibility.Analysis.N01ActualCellMaterialOrder
+public import ContinuousFlexibility.Analysis.MaterialPlateauSampleWeights
 
 /-!
 # Moving the complete return-label grading into actual local energy
@@ -9,6 +11,8 @@ with the uniform two-order sample-to-support bound. The complete height
 and material weight is therefore controlled at every point in the
 expanded component support, with one loss chosen before all orders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

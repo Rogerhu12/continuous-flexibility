@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedCandidateFieldDecoding
-import ContinuousFlexibility.Scalar.WeightedGlobalStateJets
+module
+
+public import ContinuousFlexibility.Scalar.WeightedCandidateFieldDecoding
+public import ContinuousFlexibility.Scalar.WeightedGlobalStateJets
 
 /-!
 # Exact global decoders of the concrete scalar candidates
@@ -9,6 +11,8 @@ differences are identified with the frozen physical expressions. The type
 perturbation has its required identity on the open annulus, where it is
 subsequently multiplied by an actual supported source.
 -/
+
+@[expose] public section
 
 noncomputable section
 

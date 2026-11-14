@@ -1,6 +1,8 @@
-import Mathlib.MeasureTheory.Function.L2Space
-import Mathlib.Analysis.Normed.Operator.Basic
-import Mathlib.Analysis.InnerProductSpace.LinearMap
+module
+
+public import Mathlib.MeasureTheory.Function.L2Space
+public import Mathlib.Analysis.Normed.Operator.Basic
+public import Mathlib.Analysis.InnerProductSpace.LinearMap
 
 /-!
 # Closed finite-piece distribution tests
@@ -12,6 +14,8 @@ piece measures and the maps extracting each height and source coordinate are exp
 This does not assert that a global physical test meets only finitely many canonical pieces,
 or identify the physical relation with these tests. Those are separate geometric obligations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

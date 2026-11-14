@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SpacesHeightProductBounds
+module
+
+public import ContinuousFlexibility.Analysis.SpacesHeightProductBounds
 
 /-!
 # Finite products of normalized physical jets
@@ -7,6 +9,8 @@ One factor carries the physical weight and its L² norm. The remaining
 factors use point evaluation. The interpolation product inequality gives
 one high factor with a loss independent of the number of factors.
 -/
+
+@[expose] public section
 
 noncomputable section
 

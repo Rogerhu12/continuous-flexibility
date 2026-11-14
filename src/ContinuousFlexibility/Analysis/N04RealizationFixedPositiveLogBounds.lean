@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CanonicalFixedPositiveFamily
-import ContinuousFlexibility.Analysis.OneSidedEndpointHeight
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalFixedPositiveFamily
+public import ContinuousFlexibility.Analysis.OneSidedEndpointHeight
 
 /-!
 # The retained low logarithmic bound for the actual positive height
@@ -9,6 +11,8 @@ The existing width-margin theorem then gives the smallness required by
 the Taylor and exponential consumers. No new collar, low envelope or
 sampled material estimate is selected.
 -/
+
+@[expose] public section
 
 noncomputable section
 

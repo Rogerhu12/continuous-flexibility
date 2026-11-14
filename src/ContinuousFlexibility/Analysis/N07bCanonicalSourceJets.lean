@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07bCanonicalSourceIntegrability
-import ContinuousFlexibility.Analysis.PointwiseCylinderJets
-import ContinuousFlexibility.Analysis.PhysicalTransmissionTrace
-import Mathlib.Analysis.Calculus.Deriv.Abs
+module
+
+public import ContinuousFlexibility.Analysis.N07bCanonicalSourceIntegrability
+public import ContinuousFlexibility.Analysis.PointwiseCylinderJets
+public import ContinuousFlexibility.Analysis.PhysicalTransmissionTrace
+public import Mathlib.Analysis.Calculus.Deriv.Abs
 
 /-!
 # Actual canonical source jets on a single dynamic piece
@@ -16,6 +18,8 @@ agrees on the open piece with a smooth closed-piece extension. They do not
 require the original field to be smooth across interfaces. No estimate
 uniform in the piece or state, and no global summability, is asserted.
 -/
+
+@[expose] public section
 
 noncomputable section
 

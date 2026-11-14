@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsPhysicalPower
-import ContinuousFlexibility.Analysis.N04RealizationFactoredRootTraceDirections
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsPhysicalPower
+public import ContinuousFlexibility.Analysis.N04RealizationFactoredRootTraceDirections
 
 /-!
 # Genuine radial trace identities under inward orientation
@@ -8,6 +10,8 @@ The affine radial coordinate acts on each genuine radial jet by its
 scalar power. This identity is an identity of the whole angular trace,
 so it also transports every mixed parameter and angular derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

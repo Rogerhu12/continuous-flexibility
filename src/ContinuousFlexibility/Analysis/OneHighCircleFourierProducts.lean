@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFourierProduct
-import ContinuousFlexibility.Analysis.OneHighConvolutionProducts
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierProduct
+public import ContinuousFlexibility.Analysis.OneHighConvolutionProducts
 
 /-!
 # Fourier majorants for products of any positive number of circle functions
@@ -8,6 +10,8 @@ The actual Fourier coefficients of the pointwise product are dominated by
 the full positive convolution. This is the bridge from circle functions to
 the arbitrary-arity one-high-factor estimate on frequency space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,12 @@
-import ContinuousFlexibility.Analysis.N01aReferenceModeAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.N01aReferenceModeAlgebra
 
 /-!
 # Convergence of the actual radial modes of the smooth graph core
 -/
+
+@[expose] public section
 
 noncomputable section
 

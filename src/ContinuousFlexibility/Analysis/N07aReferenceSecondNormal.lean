@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aReferenceFiniteJets
-import ContinuousFlexibility.Analysis.N07aReferenceOpenCoefficients
-import ContinuousFlexibility.Analysis.N07aOpenDistributionFlux
-import ContinuousFlexibility.Analysis.N07aOpenNormalBootstrap
+module
+
+public import ContinuousFlexibility.Analysis.N07aReferenceFiniteJets
+public import ContinuousFlexibility.Analysis.N07aReferenceOpenCoefficients
+public import ContinuousFlexibility.Analysis.N07aOpenDistributionFlux
+public import ContinuousFlexibility.Analysis.N07aOpenNormalBootstrap
 
 /-!
 # Actual second normal derivatives of the reference inverse
@@ -10,6 +12,8 @@ N05 supplies the four finite jets. The original canonical distribution
 equation and the genuine reciprocal leading coefficient then recover an
 L² second derivative on the entire open canonical piece.
 -/
+
+@[expose] public section
 
 noncomputable section
 

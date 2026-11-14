@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedOddProductPrimitive
-import ContinuousFlexibility.Scalar.WeightedDecodedProductMap
+module
+
+public import ContinuousFlexibility.Scalar.WeightedOddProductPrimitive
+public import ContinuousFlexibility.Scalar.WeightedDecodedProductMap
 
 /-!
 # The continuous bilinear primitive encoding of odd products
@@ -9,6 +11,8 @@ of g. Algebraic linearity is proved on the globally smooth decoded fields.
 The actual physical one-high-factor estimate supplies continuity in the
 prescribed projective topology and is retained after lifting.
 -/
+
+@[expose] public section
 
 noncomputable section
 

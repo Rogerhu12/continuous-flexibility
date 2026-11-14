@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CoupledScalarErrorCoefficient
+module
+
+public import ContinuousFlexibility.Analysis.CoupledScalarErrorCoefficient
 
 /-!
 # One smooth tame sector neighborhood for the actual error coefficient
@@ -8,6 +10,8 @@ The common height is affine and the external parameter is a coordinate.
 Finite algebra of the actual weak-height operations therefore gives one
 uniform tower, which is restricted to a sector neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.NeumannPackage
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Analysis.NeumannPackage
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # The control Neumann inverse and the coupled mean equation
@@ -11,6 +13,8 @@ control with the prescribed weighted mean leaves a zero-mean circle source.
 No smallness or regularity of the parameter family is assumed here beyond
 the explicit pointwise hypotheses of the individual algebraic lemmas.
 -/
+
+@[expose] public section
 
 noncomputable section
 

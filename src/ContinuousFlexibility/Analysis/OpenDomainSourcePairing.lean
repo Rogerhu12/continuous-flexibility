@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.EquivariantOpenDomainStrip
-import ContinuousFlexibility.Analysis.CanonicalSourceMeasure
+module
+
+public import ContinuousFlexibility.Analysis.EquivariantOpenDomainStrip
+public import ContinuousFlexibility.Analysis.CanonicalSourceMeasure
 
 /-!
 # Source pairing on an actual open physical domain
@@ -9,6 +11,8 @@ set. The inverse-chart strip theorem identifies the actual image of one
 angular period. The genuine Jacobian change of variables therefore gives
 the same source pairing for curved physical pieces as for radial strips.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.BoundaryTaylorExtension
-import Mathlib.Analysis.Calculus.Deriv.Support
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Ring
+module
+
+public import ContinuousFlexibility.Analysis.BoundaryTaylorExtension
+public import Mathlib.Analysis.Calculus.Deriv.Support
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
 
 /-!
 # Linear mixed-jet bounds for boundary Taylor extensions
@@ -13,6 +15,8 @@ boundary coefficient functions. Thus the estimate is linear in the data,
 has no lower-width hypothesis, and introduces no growing derivative loss
 in the boundary data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

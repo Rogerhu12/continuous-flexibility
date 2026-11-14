@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CylinderMixedJets
+module
+
+public import ContinuousFlexibility.Analysis.CylinderMixedJets
 
 /-!
 # Ordinary mixed jets and the scalar height derivatives
@@ -7,6 +9,8 @@ These identities retain the actual Fréchet partials used by scalar geometry.
 They let the quantitative mixed-jet estimates control the radial derivative,
 the normalized angular derivative and its angular derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

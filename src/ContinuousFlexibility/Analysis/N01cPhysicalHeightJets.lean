@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cHeightParameterJets
-import ContinuousFlexibility.Analysis.MaterialOrdinaryJets
+module
+
+public import ContinuousFlexibility.Analysis.N01cHeightParameterJets
+public import ContinuousFlexibility.Analysis.MaterialOrdinaryJets
 
 /-!
 # Actual physical height jets from material jets
@@ -11,6 +13,8 @@ point.  Consequently every physical jet of a decoded height is a genuine
 continuous-linear functional, with no regularity or continuity premise
 added to the physical-space realization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

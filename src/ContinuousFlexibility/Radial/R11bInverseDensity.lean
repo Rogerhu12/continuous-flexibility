@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R11bPhysicalMultiplier
-import Mathlib.MeasureTheory.Function.SpecialFunctions.Basic
+module
+
+public import ContinuousFlexibility.Radial.R11bPhysicalMultiplier
+public import Mathlib.MeasureTheory.Function.SpecialFunctions.Basic
 
 /-!
 # The reciprocal physical density on attenuated source and output remainders
@@ -9,6 +11,8 @@ square-root multiplier. Strict positive attenuation then gives genuine L²
 membership in the physical measure. The output statement retains the
 subtracted left constant.
 -/
+
+@[expose] public section
 
 noncomputable section
 

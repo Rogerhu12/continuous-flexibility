@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aParameterGrading
-import ContinuousFlexibility.Analysis.StateNeighborhood
-import ContinuousFlexibility.Scalar.WeightedUniformTameGerm
+module
+
+public import ContinuousFlexibility.Analysis.N07aParameterGrading
+public import ContinuousFlexibility.Analysis.StateNeighborhood
+public import ContinuousFlexibility.Scalar.WeightedUniformTameGerm
 
 /-!
 # One sector neighborhood for an existing uniform tower
@@ -9,6 +11,8 @@ A single low seminorm ball fits inside the supplied open domain. The
 same base increase restricts its uniform tower, so the resulting sector
 neighborhood is chosen before every spatial and parameter order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

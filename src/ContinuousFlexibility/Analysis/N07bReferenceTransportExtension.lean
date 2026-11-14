@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07bTransportWeightComparison
-import ContinuousFlexibility.Analysis.N07bTransportMaterialBounds
-import ContinuousFlexibility.Analysis.N07bReferenceTransport
+module
+
+public import ContinuousFlexibility.Analysis.N07bTransportWeightComparison
+public import ContinuousFlexibility.Analysis.N07bTransportMaterialBounds
+public import ContinuousFlexibility.Analysis.N07bReferenceTransport
 
 /-!
 # The actual flat reference transport remainder
@@ -16,6 +18,8 @@ are the actual reference-to-current chart and height transition formulas.
 No source norm, graph membership, or prescribed decay conclusion is an
 input to the construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

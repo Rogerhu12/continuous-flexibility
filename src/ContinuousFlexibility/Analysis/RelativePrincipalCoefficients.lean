@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.AdjugateInversePrincipalField
+module
+
+public import ContinuousFlexibility.Analysis.AdjugateInversePrincipalField
 
 /-!
 # Relative principal fields of two genuine coordinate changes
@@ -8,6 +10,8 @@ actual principal density.  The last lemma compares two physical fields
 whose actual charts have the same canonical density.  It assumes neither
 the desired relative coefficient identity nor a full operator identity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

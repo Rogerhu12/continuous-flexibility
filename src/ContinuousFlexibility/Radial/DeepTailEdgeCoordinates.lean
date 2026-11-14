@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.TailClampedResistance
-import ContinuousFlexibility.Radial.TailMassResistanceData
-import ContinuousFlexibility.Radial.TailEdgeFluxMatrix
-import ContinuousFlexibility.Radial.TailPhysicalGreenContinuity
+module
+
+public import ContinuousFlexibility.Radial.TailClampedResistance
+public import ContinuousFlexibility.Radial.TailMassResistanceData
+public import ContinuousFlexibility.Radial.TailEdgeFluxMatrix
+public import ContinuousFlexibility.Radial.TailPhysicalGreenContinuity
 
 /-!
 # The actual potential on a compact deep-tail edge
@@ -10,6 +12,8 @@ The resistance chart is formed from the original density, extended constantly
 outside the edge. Its diagonal Green integral is bounded by the two actual
 mass-resistance products in the deep-tail hypotheses.
 -/
+
+@[expose] public section
 
 noncomputable section
 

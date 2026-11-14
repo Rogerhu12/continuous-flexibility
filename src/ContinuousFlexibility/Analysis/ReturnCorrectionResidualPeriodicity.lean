@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionResidualCompatibility
-import ContinuousFlexibility.Scalar.GreenIdentity
-import Mathlib.Analysis.Calculus.Deriv.Shift
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionResidualCompatibility
+public import ContinuousFlexibility.Scalar.GreenIdentity
+public import Mathlib.Analysis.Calculus.Deriv.Shift
 
 /-!
 # Periodicity of the independent return error
@@ -12,6 +14,8 @@ independent residual. The source compatibility theorem consequently
 requires only regularity of those actual fluxes, with periodicity and
 radial boundary matching proved from the original data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

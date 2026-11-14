@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N05ReferenceZeroRemainder
-import ContinuousFlexibility.Analysis.N05CanonicalInverseNormal
-import ContinuousFlexibility.Analysis.N05CanonicalMixedWeakJets
-import ContinuousFlexibility.Analysis.N05CanonicalOutputAngularJets
-import ContinuousFlexibility.Analysis.N05ReferenceNormalAngularSobolev
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceZeroRemainder
+public import ContinuousFlexibility.Analysis.N05CanonicalInverseNormal
+public import ContinuousFlexibility.Analysis.N05CanonicalMixedWeakJets
+public import ContinuousFlexibility.Analysis.N05CanonicalOutputAngularJets
+public import ContinuousFlexibility.Analysis.N05ReferenceNormalAngularSobolev
 
 /-!
 # Positive angular jets of the same canonical normal derivative
@@ -13,6 +15,8 @@ derivatives therefore identify the angular jets of the single fixed normal
 sequence, irrespective of the representative chosen by a physical estimate.
 All material powers and constants precede the angular order and the source.
 -/
+
+@[expose] public section
 
 noncomputable section
 

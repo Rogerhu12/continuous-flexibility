@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationPositiveHeightTraceJets
-import ContinuousFlexibility.Analysis.N04RealizationFixedSpatialProduct
-import ContinuousFlexibility.Analysis.CanonicalFixedPositiveFamily
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationPositiveHeightTraceJets
+public import ContinuousFlexibility.Analysis.N04RealizationFixedSpatialProduct
+public import ContinuousFlexibility.Analysis.CanonicalFixedPositiveFamily
 
 /-!
 # The actual finite positive height and its reciprocal parameter towers
@@ -10,6 +12,8 @@ exponential are applied to the retained root traces. Both reciprocal
 choices use one scalar kernel. No final height tower, quantitative
 height estimate or order-dependent neighborhood is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

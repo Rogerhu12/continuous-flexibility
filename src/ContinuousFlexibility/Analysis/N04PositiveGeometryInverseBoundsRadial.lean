@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsFinite
-import ContinuousFlexibility.Analysis.N04RealizationEndpointFiberDirections
-import ContinuousFlexibility.Analysis.N01cFiniteAffineJets
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsFinite
+public import ContinuousFlexibility.Analysis.N04RealizationEndpointFiberDirections
+public import ContinuousFlexibility.Analysis.N01cFiniteAffineJets
 
 /-!
 # The actual positive radial inverse on the original state space
@@ -15,6 +17,8 @@ Its forward lower bound supplies the hypotheses of the ordinary scalar
 implicit function theorem.  Composing its actual inverse with the endpoint
 coefficient tower then gives the entire moving radial inverse tower.
 -/
+
+@[expose] public section
 
 noncomputable section
 

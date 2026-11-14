@@ -1,6 +1,8 @@
-import Mathlib.MeasureTheory.Function.L2Space
-import Mathlib.MeasureTheory.Function.LpSeminorm.Indicator
-import Mathlib.Analysis.Normed.Operator.Prod
+module
+
+public import Mathlib.MeasureTheory.Function.L2Space
+public import Mathlib.MeasureTheory.Function.LpSeminorm.Indicator
+public import Mathlib.Analysis.Normed.Operator.Prod
 
 /-!
 # The actual L² decomposition across a measurable interface
@@ -11,6 +13,8 @@ The product carries its usual maximum norm, so restriction has norm at most
 one and gluing has norm at most two.  These maps apply to the actual radial
 measure and do not assume that it has finite total mass.
 -/
+
+@[expose] public section
 
 noncomputable section
 

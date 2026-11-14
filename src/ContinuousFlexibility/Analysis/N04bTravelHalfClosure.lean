@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04bClosedTravelInverse
+module
+
+public import ContinuousFlexibility.Analysis.N04bClosedTravelInverse
 
 /-!
 # Exact closures of the actual moving travel halves
@@ -9,6 +11,8 @@ closed target substrip through its open interior and applying that
 inverse proves the reverse closure inclusion. Thus no radial graph
 assumption and no preassigned half-domain closure is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap
 
 /-!
 # A common positive collar around the actual cutoff transition
@@ -9,6 +11,8 @@ inside the same positive open strip. The corrected speed gap is proved
 again for this cutoff after a common shrinking of the parameter
 neighborhood; all flow identities and derivative estimates use it.
 -/
+
+@[expose] public section
 
 noncomputable section
 

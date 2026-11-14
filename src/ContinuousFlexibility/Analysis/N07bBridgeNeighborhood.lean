@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07bScalarBridgeConstruction
-import ContinuousFlexibility.Analysis.N07bPrimitiveGeometrySource
-import ContinuousFlexibility.Analysis.N07bPrimitiveGeometryReference
-import ContinuousFlexibility.Analysis.N07bNeighborhood
+module
+
+public import ContinuousFlexibility.Analysis.N07bScalarBridgeConstruction
+public import ContinuousFlexibility.Analysis.N07bPrimitiveGeometrySource
+public import ContinuousFlexibility.Analysis.N07bPrimitiveGeometryReference
+public import ContinuousFlexibility.Analysis.N07bNeighborhood
 
 /-!
 # One common neighborhood for the actual scalar/Banach bridge
@@ -12,6 +14,8 @@ space, graph and inverse. The source norm has the requested original
 grading, while the identification uses the actual reference source built
 from the physical solution.
 -/
+
+@[expose] public section
 
 noncomputable section
 

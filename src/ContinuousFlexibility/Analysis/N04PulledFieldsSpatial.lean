@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsInverseJoint
-import ContinuousFlexibility.Analysis.CanonicalStripGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsInverseJoint
+public import ContinuousFlexibility.Analysis.CanonicalStripGeometry
 
 /-!
 # Spatial regularity of the actual pulled fields
@@ -9,6 +11,8 @@ spatial smoothness and angular equivariance transport the actual physical
 fields to the unit strip.  These qualitative conclusions require no
 quantitative reference-jet certificate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

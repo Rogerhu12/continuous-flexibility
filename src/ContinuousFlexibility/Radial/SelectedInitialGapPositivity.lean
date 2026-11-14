@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R07MiddlePreservation
+module
+
+public import ContinuousFlexibility.Radial.R07MiddlePreservation
 
 /-!
 # Positivity on the original selected cut-to-entry bridges
@@ -8,6 +10,8 @@ closed interval. Its full profile germs preserve that fact through both
 seams. The selected cut order places each first cut-to-entry bridge
 inside this interval, including the part beyond the first matching join.
 -/
+
+@[expose] public section
 
 noncomputable section
 

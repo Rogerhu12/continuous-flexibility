@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01HeightTestWeightBridge
-import ContinuousFlexibility.Analysis.N01WeightedActualCellTransfer
-import ContinuousFlexibility.Analysis.RadialPlateauNorm
+module
+
+public import ContinuousFlexibility.Analysis.N01HeightTestWeightBridge
+public import ContinuousFlexibility.Analysis.N01WeightedActualCellTransfer
+public import ContinuousFlexibility.Analysis.RadialPlateauNorm
 
 /-!
 # Actual one-order material comparison forced by N01
@@ -10,6 +12,8 @@ physical height model. Its proved grading bound is inserted into the
 mixed flow response, so no test-direction or weight-comparison premise
 remains in this conclusion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

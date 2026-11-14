@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01EndpointSmoothTame
-import ContinuousFlexibility.Analysis.TameUniformFamilyJets
+module
+
+public import ContinuousFlexibility.Analysis.N01EndpointSmoothTame
+public import ContinuousFlexibility.Analysis.TameUniformFamilyJets
 
 /-!
 # Selector-uniform bounds for the actual closed-radius flow towers
@@ -10,6 +12,8 @@ the supplied finite-maximum grading and to joint jet growth preserves
 that uniformity. The result applies to any genuine tower of the actual
 flow displacement, by uniqueness.
 -/
+
+@[expose] public section
 
 noncomputable section
 

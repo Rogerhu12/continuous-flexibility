@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Blueprint.N04Coordinates.FlowJets
-import ContinuousFlexibility.Blueprint.N04Coordinates.Realization
+module
+
+public import ContinuousFlexibility.Blueprint.N04Coordinates.FlowJets
+public import ContinuousFlexibility.Blueprint.N04Coordinates.Realization
 
 /-!
 # Blueprint node N04Coordinates
@@ -11,6 +13,8 @@ explicit proof obligations until their axiom audits contain no sorryAx.
 Source: paper/flexible-surface-readable/07-fixed-geometry.tex, lines 1497–1760.
 Task: docs/tasks/N04Coordinates.md.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

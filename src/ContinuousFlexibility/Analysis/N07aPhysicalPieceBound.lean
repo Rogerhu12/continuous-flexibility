@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalEven
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalEven
 
 /-!
 # Continuous physical inequalities extend from the actual open pieces
@@ -8,6 +10,8 @@ The original exceptional set is null in the radial variable and works
 at every fixed angle. Equality with the pointwise minimum extends from
 almost everywhere to the entire open annulus.
 -/
+
+@[expose] public section
 
 noncomputable section
 

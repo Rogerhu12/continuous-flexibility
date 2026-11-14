@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06WeakAngularCalculus
-import ContinuousFlexibility.Analysis.CylinderMixedJets
-import Mathlib.Data.Nat.Choose.Sum
+module
+
+public import ContinuousFlexibility.Analysis.N06WeakAngularCalculus
+public import ContinuousFlexibility.Analysis.CylinderMixedJets
+public import Mathlib.Data.Nat.Choose.Sum
 
 /-!
 # Finite Leibniz jets of genuinely weak canonical fields
@@ -10,6 +12,8 @@ jets are arbitrary elements of the actual canonical L² space. Applying
 the first weak product rule to each triangular entry and Pascal's identity
 proves every finite Leibniz row without differentiating an L² representative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

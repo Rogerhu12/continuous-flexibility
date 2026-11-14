@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MorseChainScales
+module
+
+public import ContinuousFlexibility.Radial.MorseChainScales
 
 /-!
 # Slow variation of the coefficient exponent against the attenuation exponent
@@ -10,6 +12,8 @@ attenuation exponent `radialS n = (2/3) n^3`: for every `ε > 0` one has
 These are the scalar facts behind the absorption of fixed coefficient powers in the block Schur
 summation (Section 6 of the manuscript).  No analytic operator statement is proved here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

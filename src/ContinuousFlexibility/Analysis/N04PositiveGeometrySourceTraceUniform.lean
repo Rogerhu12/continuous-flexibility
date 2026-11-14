@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceTraceSamplePrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryUniformSeminorm
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceTraceSamplePrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryUniformSeminorm
 
 /-!
 # One common sector for the actual source trace seminorm bounds
@@ -8,6 +10,8 @@ The two sampled prefixes select the low order before all future orders.
 A single smaller sector then supplies the uniform angular seminorm
 bounds used by the actual controlled-transport factory.
 -/
+
+@[expose] public section
 
 noncomputable section
 

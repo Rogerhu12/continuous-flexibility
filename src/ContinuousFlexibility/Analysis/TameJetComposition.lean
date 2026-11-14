@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ProjectiveJetCompositionTwo
-import Mathlib.Analysis.Calculus.ContDiff.FaaDiBruno
+module
+
+public import ContinuousFlexibility.Analysis.ProjectiveJetCompositionTwo
+public import Mathlib.Analysis.Calculus.ContDiff.FaaDiBruno
 
 /-!
 # All-order composition of actual projective jets
@@ -9,6 +11,8 @@ composition and its continuity are constructed in topological modules, so
 no norm is imposed on a projective limit. The actual derivative recurrence
 uses the already proved variable-multilinear curve rule.
 -/
+
+@[expose] public section
 
 noncomputable section
 

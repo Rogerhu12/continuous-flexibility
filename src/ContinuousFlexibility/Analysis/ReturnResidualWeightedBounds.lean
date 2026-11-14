@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ReturnChartUniformBounds
+module
+
+public import ContinuousFlexibility.Analysis.ReturnChartUniformBounds
 
 /-!
 # Height-weight decay of the independent residual correction
@@ -9,6 +11,8 @@ bound, including at zero residual. The displacement and velocity maps
 retain exactly the height weight of the independent decoded residual.
 No nonzero-residual division or replacement residual space is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterPhysicalFundamentalPair
-import ContinuousFlexibility.Radial.OuterEntranceVariation
+module
+
+public import ContinuousFlexibility.Radial.OuterPhysicalFundamentalPair
+public import ContinuousFlexibility.Radial.OuterEntranceVariation
 
 /-!
 # Ordinary source integrals on the physical outer interval
@@ -9,6 +11,8 @@ weighted L² source is an ordinary integrable Jacobi source.  Multiplication
 by a homogeneous solution is integrable on each initial compact segment,
 even when the source has no continuous representative at the entrance.
 -/
+
+@[expose] public section
 
 noncomputable section
 

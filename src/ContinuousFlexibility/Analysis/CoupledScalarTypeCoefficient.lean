@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CoupledWeakHeightInputs
+module
+
+public import ContinuousFlexibility.Analysis.CoupledWeakHeightInputs
 
 /-!
 # The normalized scalar type coefficient at the weak profile weight
@@ -7,6 +9,8 @@ The denominator is normalized by the actual positive profile. Exponential
 profile factors and the smooth reciprocal extension act on weak decaying
 heights. The singular reference factors remain proved radial multipliers.
 -/
+
+@[expose] public section
 
 noncomputable section
 

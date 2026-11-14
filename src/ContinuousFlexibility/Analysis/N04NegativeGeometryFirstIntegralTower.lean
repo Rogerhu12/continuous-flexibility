@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01ReturnVelocitySpatialTower
-import ContinuousFlexibility.Analysis.N04bCharacteristicFirstIntegrals
+module
+
+public import ContinuousFlexibility.Analysis.N01ReturnVelocitySpatialTower
+public import ContinuousFlexibility.Analysis.N04bCharacteristicFirstIntegrals
 
 /-!
 # The same first integral with a variable physical radius
@@ -11,6 +13,8 @@ inverse of the same corrected flow, jointly in state, radius and angle.
 Only the real original-coefficient discriminant on the chosen strip is
 an input; no parameter tower or inverse regularity is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

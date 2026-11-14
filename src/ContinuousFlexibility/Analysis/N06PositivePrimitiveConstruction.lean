@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N06PositiveReferenceBounds
-import ContinuousFlexibility.Analysis.N06PositiveReferenceSlopeJets
-import ContinuousFlexibility.Analysis.N06PositiveReferenceHeightJets
-import ContinuousFlexibility.Analysis.N06LogarithmicJets
-import ContinuousFlexibility.Analysis.N06RadialInverseJets
+module
+
+public import ContinuousFlexibility.Analysis.N06PositiveReferenceBounds
+public import ContinuousFlexibility.Analysis.N06PositiveReferenceSlopeJets
+public import ContinuousFlexibility.Analysis.N06PositiveReferenceHeightJets
+public import ContinuousFlexibility.Analysis.N06LogarithmicJets
+public import ContinuousFlexibility.Analysis.N06RadialInverseJets
 
 /-!
 # Quantitative construction with one explicit positive collar width
@@ -18,6 +20,8 @@ The resulting maps are the original integral coordinate and logarithmic
 height. All constants below depend only on the fixed cutoff; the endpoint
 fields and the physical interval remain explicit inputs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

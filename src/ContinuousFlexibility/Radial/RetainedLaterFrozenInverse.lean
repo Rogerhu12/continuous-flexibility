@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.RetainedFixedCentralInverse
+module
+
+public import ContinuousFlexibility.Radial.RetainedFixedCentralInverse
 
 /-!
 # The actual later-band inverse with the fixed exponent thirty-eight
@@ -8,6 +10,8 @@ tail or the retained pair. Actual finite-chain inversion then supplies
 the original frozen modal graph, with its unchanged source and scalar,
 and a representative for every ambient source.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CanonicalGluedAiryIntegral
-import Mathlib.Topology.Order.DenselyOrdered
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalGluedAiryIntegral
+public import Mathlib.Topology.Order.DenselyOrdered
 
 /-!
 # Extending actual angular bounds to an interior section's endpoints
@@ -9,6 +11,8 @@ component. Its angular derivative is therefore continuous at both
 endpoints of any strictly interior radial interval. Bounds proved on
 the open interval extend to its closure with the same constants.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CoupledScalarHeightDerivative
-import ContinuousFlexibility.Analysis.N06LeftColumnPhysical
-import ContinuousFlexibility.Analysis.N07aNuScalarState
+module
+
+public import ContinuousFlexibility.Analysis.CoupledScalarHeightDerivative
+public import ContinuousFlexibility.Analysis.N06LeftColumnPhysical
+public import ContinuousFlexibility.Analysis.N07aNuScalarState
 
 /-!
 # The actual left column in the reduced scalar geometry
@@ -11,6 +13,8 @@ controls vanish as germs. Equality of the full residual parameter curves
 therefore identifies the two genuine derivatives. Outside that support,
 both divergence expressions are zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

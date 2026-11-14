@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06EvenCylinder
-import ContinuousFlexibility.Analysis.N06CubicLp
-import ContinuousFlexibility.Scalar.Conservation
-import Mathlib.Tactic.FinCases
+module
+
+public import ContinuousFlexibility.Analysis.N06EvenCylinder
+public import ContinuousFlexibility.Analysis.N06CubicLp
+public import ContinuousFlexibility.Scalar.Conservation
+public import Mathlib.Tactic.FinCases
 
 /-!
 # The cubic graph estimate in the actual cylinder L² space
@@ -11,6 +13,8 @@ The normalized Fourier square integrals are identified with the existing
 perturbation estimate therefore have a genuine L² graph bound, with the
 same constant as the scalar positive-cylinder estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

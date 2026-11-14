@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05CanonicalInverseDefinition
-import ContinuousFlexibility.Analysis.N05CanonicalTests
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05CanonicalInverseDefinition
+public import ContinuousFlexibility.Analysis.N05CanonicalTests
 
 /-!
 # Reflection of the actual canonical output
@@ -10,6 +12,8 @@ and height transfer these two identities to reflection about the midpoint
 of the canonical half-period. Almost-everywhere representatives then give
 the exact reflection equation in the canonical L² space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

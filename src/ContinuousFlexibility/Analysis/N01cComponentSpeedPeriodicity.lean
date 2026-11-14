@@ -1,7 +1,11 @@
-import ContinuousFlexibility.Analysis.N01cComponentCosineSpeed
-import ContinuousFlexibility.Scalar.GreenIdentity
+module
+
+public import ContinuousFlexibility.Analysis.N01cComponentCosineSpeed
+public import ContinuousFlexibility.Scalar.GreenIdentity
 
 /-! Angular periodicity of the actual state fields and compact speed. -/
+
+@[expose] public section
 
 noncomputable section
 

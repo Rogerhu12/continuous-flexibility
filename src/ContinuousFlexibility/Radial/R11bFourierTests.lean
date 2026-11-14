@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R11bRadialTests
-import ContinuousFlexibility.Radial.FourierSineOrthogonality
+module
+
+public import ContinuousFlexibility.Radial.R11bRadialTests
+public import ContinuousFlexibility.Radial.FourierSineOrthogonality
 
 /-!
 # Separated Fourier tests for the actual weak equations
@@ -9,6 +11,8 @@ No summability or Fourier reconstruction is used here. A compact radial test
 times any smooth periodic angular factor is an admissible two-dimensional
 test, with its radial and angular derivatives computed explicitly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

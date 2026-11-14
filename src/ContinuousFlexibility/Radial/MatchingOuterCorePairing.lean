@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MatchingOuterGreen
-import ContinuousFlexibility.Radial.MatchingInnerCorePairing
-import ContinuousFlexibility.Radial.MatchingBoundaryAlgebra
+module
+
+public import ContinuousFlexibility.Radial.MatchingOuterGreen
+public import ContinuousFlexibility.Radial.MatchingInnerCorePairing
+public import ContinuousFlexibility.Radial.MatchingBoundaryAlgebra
 
 /-!
 # Outer Poisson reciprocity for the actual smooth source
@@ -10,6 +12,8 @@ The outer weak Green identity proves this from the prescribed Poisson
 columns and the actual Hilbert pairing, including tests approaching the
 degenerate endpoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

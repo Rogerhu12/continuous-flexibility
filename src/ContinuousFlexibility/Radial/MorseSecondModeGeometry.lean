@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseSecondModeMassTransport
-import ContinuousFlexibility.Radial.MorseCellMassTravel
+module
+
+public import ContinuousFlexibility.Radial.MorseSecondModeMassTransport
+public import ContinuousFlexibility.Radial.MorseCellMassTravel
 
 /-!
 # Geometry of the actual outward second-mode tail
@@ -8,6 +10,8 @@ The same signed logarithmic coordinate orders both sides outward.
 All entries and nodes are actual retained Morse radii, with the original
 flat endpoint as their limit.
 -/
+
+@[expose] public section
 
 noncomputable section
 

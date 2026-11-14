@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.MaterialSampleWeightedConstraint
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Analysis.MaterialSampleWeightedConstraint
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # One fixed material order for the full N01 flow prefactor
@@ -9,6 +11,8 @@ after a bounded sample-index change. The remaining, arbitrarily large
 `E0` power costs exactly one material order. Its exponent changes only
 the numerical constant, not the derivative loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R11bPartitionSquare
-import Mathlib.MeasureTheory.Function.StronglyMeasurable.AEStronglyMeasurable
+module
+
+public import ContinuousFlexibility.Radial.R11bPartitionSquare
+public import Mathlib.MeasureTheory.Function.StronglyMeasurable.AEStronglyMeasurable
 
 /-!
 # Measurability recovered from localized fields
@@ -8,6 +10,8 @@ A finite-at-each-point partition of one reconstructs the field as the
 almost-everywhere limit of its measurable partial sums. No measurability
 of the unlocalized representative is assumed.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

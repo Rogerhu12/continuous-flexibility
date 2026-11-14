@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.EndpointFiberInterpolation
-import ContinuousFlexibility.Analysis.PositiveReferenceIdentity
+module
+
+public import ContinuousFlexibility.Analysis.EndpointFiberInterpolation
+public import ContinuousFlexibility.Analysis.PositiveReferenceIdentity
 
 /-!
 # Explicit reciprocal costs of the actual fiber collars
@@ -9,6 +11,8 @@ bound. The same actual integral interpolation has a radial lower bound
 independent of its higher-jet envelope. Together these control the
 displayed determinant lower bound without an uncontrolled small width.
 -/
+
+@[expose] public section
 
 noncomputable section
 

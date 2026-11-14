@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01FlowAngularVariation
+module
+
+public import ContinuousFlexibility.Analysis.N01FlowAngularVariation
 
 /-!
 # Continuous first derivatives of the specified return charts
@@ -8,6 +10,8 @@ derivative of the actual return.  Positivity and the N01 inverse
 identities then propagate this regularity through both specified
 inverses and their composition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

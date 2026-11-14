@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06WeakGraphJetClosure
-import ContinuousFlexibility.Analysis.N06CubicMultiplierSymmetry
-import ContinuousFlexibility.Analysis.N06WeakAngularMultiplier
+module
+
+public import ContinuousFlexibility.Analysis.N06WeakGraphJetClosure
+public import ContinuousFlexibility.Analysis.N06CubicMultiplierSymmetry
+public import ContinuousFlexibility.Analysis.N06WeakAngularMultiplier
 
 /-!
 # Reflection signs of the actual weak graph fields
@@ -9,6 +11,8 @@ The even cosine basis has alternating signs after angular differentiation.
 The exact measure-preserving canonical reflection carries those signs
 through the original L2 limits, without choosing pointwise representatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

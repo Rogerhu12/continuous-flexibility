@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneSidedBoundaryTaylorRepresentative
-import ContinuousFlexibility.Analysis.EndpointHeightValueBounds
+module
+
+public import ContinuousFlexibility.Analysis.OneSidedBoundaryTaylorRepresentative
+public import ContinuousFlexibility.Analysis.EndpointHeightValueBounds
 
 /-!
 # One common explicit collar for genuine one-sided height fields
@@ -8,6 +10,8 @@ The radius is the reciprocal of a displayed sum. Its inverse cost is
 therefore exact, and its choice precedes the family index. Finite
 ordinary jets match the actual one-sided field at both root circles.
 -/
+
+@[expose] public section
 
 noncomputable section
 

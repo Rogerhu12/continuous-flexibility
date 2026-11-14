@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.PositiveBufferMatrixPositivity
-import ContinuousFlexibility.Radial.PositiveBufferPoissonNorm
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferMatrixPositivity
+public import ContinuousFlexibility.Radial.PositiveBufferPoissonNorm
 
 /-!
 # Uniform constants and physical conormal estimates
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Radial.PositiveBufferPoissonNorm
 All smallness conditions are consequences of the single frozen attenuation
 hypothesis. The diagonal comparison uses the genuine profile conormals.
 -/
+
+@[expose] public section
 
 noncomputable section
 

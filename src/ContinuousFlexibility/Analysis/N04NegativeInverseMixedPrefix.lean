@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationJointMixedRegularity
-import ContinuousFlexibility.Analysis.N04RealizationMixedSlotBudget
-import ContinuousFlexibility.Analysis.N01cStateAngleGraphBudget
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationJointMixedRegularity
+public import ContinuousFlexibility.Analysis.N04RealizationMixedSlotBudget
+public import ContinuousFlexibility.Analysis.N01cStateAngleGraphBudget
 
 /-!
 # Recover the actual mixed inverse jets from their pure joint prefix
@@ -9,6 +11,8 @@ Spatial differentiation appends physical basis vectors. The exact
 original parameter arity remains fixed, so the positive height factor
 survives when the joint inverse estimate is turned into current data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

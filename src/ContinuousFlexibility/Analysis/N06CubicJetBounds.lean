@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06AngularProductSum
-import ContinuousFlexibility.Analysis.N06CubicMultipliers
+module
+
+public import ContinuousFlexibility.Analysis.N06AngularProductSum
+public import ContinuousFlexibility.Analysis.N06CubicMultipliers
 
 /-!
 # The genuine cubic divergence estimate at every fixed angular order
@@ -8,6 +10,8 @@ The actual divergence expression is factored into the five weighted graph
 fields. Small spatial coefficient jets through order b + 1 then control
 all actual output angular jets through b in the same L² space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

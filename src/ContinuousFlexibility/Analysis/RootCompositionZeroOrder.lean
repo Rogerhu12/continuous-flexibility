@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import Mathlib.Analysis.Calculus.Deriv.Prod
-import Mathlib.Analysis.Calculus.MeanValue
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import Mathlib.Analysis.Calculus.Deriv.Prod
+public import Mathlib.Analysis.Calculus.MeanValue
 
 /-!
 # Values and zero-order bounds for substitution at a root
@@ -12,6 +14,8 @@ product norms of the statement layer. In particular the middle coordinate
 direction `(0, 1, 0)` has norm one, and the distance between the two sampled
 points is exactly twice the nonnegative root power.
 -/
+
+@[expose] public section
 
 noncomputable section
 

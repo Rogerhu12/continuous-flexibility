@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CircleJetEncoding
-import ContinuousFlexibility.Analysis.SpacesCircleCylinder
-import Mathlib.Analysis.Fourier.AddCircle
+module
+
+public import ContinuousFlexibility.Analysis.CircleJetEncoding
+public import ContinuousFlexibility.Analysis.SpacesCircleCylinder
+public import Mathlib.Analysis.Fourier.AddCircle
 
 /-!
 # Fourier coefficients for the actual angular measure
@@ -8,6 +10,8 @@ import Mathlib.Analysis.Fourier.AddCircle
 The normalization is the one used by the prescribed circle norm: the
 angular interval has length `π`, and the Fourier modes have frequency `2 n`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

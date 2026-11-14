@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
-import ContinuousFlexibility.Analysis.N01cCoefficientParameters
-import ContinuousFlexibility.Analysis.N01cPolarMixedParameterJets
-import ContinuousFlexibility.Analysis.N01cProfileMixedDerivatives
-import ContinuousFlexibility.Analysis.N01cSpatialCoefficients
+module
+
+public import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
+public import ContinuousFlexibility.Analysis.N01cCoefficientParameters
+public import ContinuousFlexibility.Analysis.N01cPolarMixedParameterJets
+public import ContinuousFlexibility.Analysis.N01cProfileMixedDerivatives
+public import ContinuousFlexibility.Analysis.N01cSpatialCoefficients
 
 /-!
 # All spatial jets of the actual coefficient family
@@ -19,6 +21,8 @@ returns precisely the coefficientFamily appearing in the task statement.
 The explicit spatial partition identity is retained for the subsequent
 raw weighted estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

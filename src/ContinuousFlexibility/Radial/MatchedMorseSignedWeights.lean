@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MatchedInnerCoarseWeights
+module
+
+public import ContinuousFlexibility.Radial.MatchedInnerCoarseWeights
 
 /-!
 # The two signed multipliers of the original finite chain
@@ -8,6 +10,8 @@ original coefficient loss. The finite bounds are used only to define
 the existing multiplication equivalences, not as quantitative inverse
 estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

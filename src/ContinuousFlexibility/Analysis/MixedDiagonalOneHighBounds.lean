@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.SymmetricMultilinearDiagonalBounds
-import ContinuousFlexibility.Analysis.MixedParameterSymmetry
-import ContinuousFlexibility.Analysis.JointMixedDiagonalCalculus
-import ContinuousFlexibility.Analysis.TameMultilinearNormalization
+module
+
+public import ContinuousFlexibility.Analysis.SymmetricMultilinearDiagonalBounds
+public import ContinuousFlexibility.Analysis.MixedParameterSymmetry
+public import ContinuousFlexibility.Analysis.JointMixedDiagonalCalculus
+public import ContinuousFlexibility.Analysis.TameMultilinearNormalization
 
 /-!
 # From actual diagonal mixed estimates to unrestricted one-high bounds
@@ -12,6 +14,8 @@ polydisc. Homogeneous normalization then restores arbitrary directions,
 including directions in the kernel of the low seminorm. The one
 constant is chosen before the spatial orders and all evaluation data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

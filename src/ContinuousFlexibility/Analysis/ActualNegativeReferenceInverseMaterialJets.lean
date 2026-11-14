@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ActualNegativeReferenceHeightMaterialJets
-import ContinuousFlexibility.Analysis.ActualNegativeReferenceScalarInverse
-import ContinuousFlexibility.Analysis.RadialUnitDensityInverseJets
+module
+
+public import ContinuousFlexibility.Analysis.ActualNegativeReferenceHeightMaterialJets
+public import ContinuousFlexibility.Analysis.ActualNegativeReferenceScalarInverse
+public import ContinuousFlexibility.Analysis.RadialUnitDensityInverseJets
 
 /-!
 # Positive inverse-coordinate jets on the actual negative reference half
@@ -11,6 +13,8 @@ half sample before the finite inverse polynomial is used. The true
 optical host remains distinct from the atlas sample cell. No zeroth
 inverse-coordinate estimate or replacement inverse is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

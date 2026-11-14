@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06PrimitiveScalarSources
-import ContinuousFlexibility.Analysis.N07aReferenceOpenCoefficients
+module
+
+public import ContinuousFlexibility.Analysis.N06PrimitiveScalarSources
+public import ContinuousFlexibility.Analysis.N07aReferenceOpenCoefficients
 
 /-!
 # The actual reference columns in the original volume model
@@ -9,6 +11,8 @@ reference jets make the pieces meeting it finite. The original local
 source construction then puts their actual reference transforms in any
 fixed material level, without a controlled-coordinate hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

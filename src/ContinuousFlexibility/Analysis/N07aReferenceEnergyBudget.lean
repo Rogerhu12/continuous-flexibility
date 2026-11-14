@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aReferenceBandBudget
-import ContinuousFlexibility.Analysis.N07aReferenceSourceBudget
-import ContinuousFlexibility.Analysis.N07aReferenceScalarMaps
-import ContinuousFlexibility.Analysis.N07aVolumeWeightBounds
+module
+
+public import ContinuousFlexibility.Analysis.N07aReferenceBandBudget
+public import ContinuousFlexibility.Analysis.N07aReferenceSourceBudget
+public import ContinuousFlexibility.Analysis.N07aReferenceScalarMaps
+public import ContinuousFlexibility.Analysis.N07aVolumeWeightBounds
 
 /-!
 # The actual reference energy source in an outer square-summable budget
@@ -12,6 +14,8 @@ majorant.  The scalar frequencies remain `0,1,0`; their angular factor is
 therefore fixed independently of the input band.  The reference potential
 is retained as one sampled subpower envelope.
 -/
+
+@[expose] public section
 
 noncomputable section
 

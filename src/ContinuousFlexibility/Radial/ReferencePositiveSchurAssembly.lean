@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.MatchedPhysicalScalarGate
-import ContinuousFlexibility.Radial.MatchedModeMeasureEmbedding
-import ContinuousFlexibility.Radial.MatchedModePhysicalEquation
-import ContinuousFlexibility.Radial.ReferenceSourceEnergy
+module
+
+public import ContinuousFlexibility.Radial.MatchedPhysicalScalarGate
+public import ContinuousFlexibility.Radial.MatchedModeMeasureEmbedding
+public import ContinuousFlexibility.Radial.MatchedModePhysicalEquation
+public import ContinuousFlexibility.Radial.ReferenceSourceEnergy
 
 /-!
 # Positive reference modes from the actual scalar-gated Schur estimate
@@ -12,6 +14,8 @@ Schur bounds prove membership in the desired weighted output space;
 changing to that L² representative preserves the ordinary weak equation
 and the physical bordered row. The scalar appears only at frequency two.
 -/
+
+@[expose] public section
 
 noncomputable section
 

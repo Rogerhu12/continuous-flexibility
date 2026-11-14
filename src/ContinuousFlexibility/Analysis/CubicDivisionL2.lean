@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CubicDivisionSmooth
-import ContinuousFlexibility.Analysis.EulerL2Division
-import ContinuousFlexibility.Analysis.IteratedDerivLinearFactor
+module
+
+public import ContinuousFlexibility.Analysis.CubicDivisionSmooth
+public import ContinuousFlexibility.Analysis.EulerL2Division
+public import ContinuousFlexibility.Analysis.IteratedDerivLinearFactor
 
 /-!
 # Cubic division with three derivatives lost
@@ -9,6 +11,8 @@ The Euler estimate controls each smooth division by the coordinate with
 constant two. Applying it to the three global smooth factors of a function
 with a cubic zero gives a uniform constant eight, at every derivative order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

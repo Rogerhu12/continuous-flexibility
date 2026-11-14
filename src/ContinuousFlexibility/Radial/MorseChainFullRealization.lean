@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MorseChainRealization
+module
+
+public import ContinuousFlexibility.Radial.MorseChainRealization
 
 /-!
 # A uniformly realized family of accumulating Morse chains
@@ -12,6 +14,8 @@ the admissible cube.
 This is the geometric part of §5 of the readable manuscript, through
 Lemma `lem:tail-flat`.  No spectral input from R04 is needed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

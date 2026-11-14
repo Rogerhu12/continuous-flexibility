@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Contracts.CartesianFlatness
-import ContinuousFlexibility.Geometry.MatrixDevelopment
+module
+
+public import ContinuousFlexibility.Contracts.CartesianFlatness
+public import ContinuousFlexibility.Geometry.MatrixDevelopment
 
 /-!
 # Actual global planar development of the analytic core
@@ -9,6 +11,8 @@ global smooth extensions in `FlatAnnularCore`. A planar development, a
 primitive, or Cartesian flatness is not an additional input. Existence of
 the analytic core itself remains the nonlinear existence obligation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

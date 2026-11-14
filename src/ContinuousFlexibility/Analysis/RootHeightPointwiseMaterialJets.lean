@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.RootChartPointwiseMaterialJets
-import ContinuousFlexibility.Analysis.RootAngularProductMaterialJets
-import ContinuousFlexibility.Analysis.RootSmoothHeight
+module
+
+public import ContinuousFlexibility.Analysis.RootChartPointwiseMaterialJets
+public import ContinuousFlexibility.Analysis.RootAngularProductMaterialJets
+public import ContinuousFlexibility.Analysis.RootSmoothHeight
 
 /-!
 # Actual root-height jets from the original smooth fields
@@ -12,6 +14,8 @@ low orders and losses precede the value intervals and numerical jet
 majorants. No derivative bound for the height, factor, or Jacobian is
 assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

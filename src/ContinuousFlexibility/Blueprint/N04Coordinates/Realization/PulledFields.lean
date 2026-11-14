@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsClosure
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsClosure
 
 /-!
 # N04Coordinates-Realization: pulled fields
@@ -12,6 +14,8 @@ The statement is defined in
 Source: paper/flexible-surface-readable/07-fixed-geometry.tex, lines 1700-1717 (Step 5 of the current geometric jets lemma).
 Task: docs/tasks/N04Realization-PulledFields.md.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

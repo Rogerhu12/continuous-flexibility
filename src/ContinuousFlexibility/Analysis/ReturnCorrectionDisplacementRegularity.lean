@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.AngularRegularityIntegral
-import ContinuousFlexibility.Analysis.N01ReturnChartSmoothness
-import ContinuousFlexibility.Analysis.ReturnCorrectionResidualPeriodicity
+module
+
+public import ContinuousFlexibility.Analysis.AngularRegularityIntegral
+public import ContinuousFlexibility.Analysis.N01ReturnChartSmoothness
+public import ContinuousFlexibility.Analysis.ReturnCorrectionResidualPeriodicity
 
 /-!
 # Smoothness of the actual frozen displacement
@@ -14,6 +16,8 @@ residual, without dividing by the residual.
 All maps in the final results are computed from the original N01 charts
 and the existing decoded circle argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06WeakAngularCalculus
-import ContinuousFlexibility.Analysis.SpacesLpCurveDerivative
-import ContinuousFlexibility.Radial.TailKernelTestExtension
+module
+
+public import ContinuousFlexibility.Analysis.N06WeakAngularCalculus
+public import ContinuousFlexibility.Analysis.SpacesLpCurveDerivative
+public import ContinuousFlexibility.Radial.TailKernelTestExtension
 
 /-!
 # The actual interior cutoffs in each original canonical L² space
@@ -10,6 +12,8 @@ identity on a unit canonical cylinder. A globally smooth periodic test
 therefore has a sequence of genuine compact canonical tests, with no
 condition on its values at the two endpoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Geometry.GraphEmbedding
-import Mathlib.Geometry.Manifold.Instances.Sphere
+module
+
+public import ContinuousFlexibility.Geometry.GraphEmbedding
+public import Mathlib.Geometry.Manifold.Instances.Sphere
 
 /-!
 # Explicit Cartesian stereographic coordinates on the standard sphere
@@ -9,6 +11,8 @@ These charts use half the library's stereographic scale, so the equator
 has planar radius one. Their manifold compatibility is proved separately
 from the coordinate algebra; no replacement smooth sphere is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.TerminalPoissonMatrixEstimate
-import ContinuousFlexibility.Radial.ModeHomogeneousRegularity
-import ContinuousFlexibility.Radial.MatchedPiecesAssembly
+module
+
+public import ContinuousFlexibility.Radial.TerminalPoissonMatrixEstimate
+public import ContinuousFlexibility.Radial.ModeHomogeneousRegularity
+public import ContinuousFlexibility.Radial.MatchedPiecesAssembly
 
 /-!
 # The complete inner Poisson companion for one matching geometry
@@ -10,6 +12,8 @@ representatives gain C² regularity from the homogeneous weak equation.
 The flux matrix is measured from those representatives. These three
 outputs fill exactly the final block of MatchingInnerRealizations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

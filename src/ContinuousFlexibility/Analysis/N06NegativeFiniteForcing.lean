@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06NegativeWeakModes
+module
+
+public import ContinuousFlexibility.Analysis.N06NegativeWeakModes
 
 /-!
 # The finite negative principal field is the actual forcing cutoff
@@ -9,6 +11,8 @@ forcing. This identity is in the original canonical measure. It allows
 the Green bulk terms to pass to a limit using only value and source L2
 convergence, without an infinite boundary trace or a full second-jet limit.
 -/
+
+@[expose] public section
 
 noncomputable section
 

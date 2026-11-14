@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cOpticalMixedJets
-import ContinuousFlexibility.Analysis.N01cProfileMajorantWeights
+module
+
+public import ContinuousFlexibility.Analysis.N01cOpticalMixedJets
+public import ContinuousFlexibility.Analysis.N01cProfileMajorantWeights
 
 /-!
 # Weighted Leibniz products of the actual optical-root jets
@@ -9,6 +11,8 @@ parameter factors restore the k endpoint powers reserved in the outer
 real-power estimate. A nonempty parameter product retains exactly one
 height weight; the remaining height factors use their scalar bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

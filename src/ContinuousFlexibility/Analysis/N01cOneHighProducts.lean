@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.Analysis
-import ContinuousFlexibility.Analysis.TameMultilinearNormalization
-import Mathlib.Analysis.SpecialFunctions.Pow.Real
+module
+
+public import ContinuousFlexibility.Statements.Analysis
+public import ContinuousFlexibility.Analysis.TameMultilinearNormalization
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 
 /-!
 # Interpolation products with one high seminorm factor
@@ -11,6 +13,8 @@ at most the output order.  The number of factors changes only the constant.
 The final theorem normalizes a genuine multilinear map from its original
 product estimate; it does not assume a one-high-factor conclusion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

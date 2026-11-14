@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06RootNormalizedHeights
-import ContinuousFlexibility.Analysis.N06RootNormalizedFormula
+module
+
+public import ContinuousFlexibility.Analysis.N06RootNormalizedHeights
+public import ContinuousFlexibility.Analysis.N06RootNormalizedFormula
 
 /-!
 # The actual normalized physical root packet
@@ -9,6 +11,8 @@ maps identify them globally, including their smooth extensions. Their
 finite spatial jets are bounded in the original state grading at n+7.
 Changing only q changes just the last constant entry of this packet.
 -/
+
+@[expose] public section
 
 noncomputable section
 

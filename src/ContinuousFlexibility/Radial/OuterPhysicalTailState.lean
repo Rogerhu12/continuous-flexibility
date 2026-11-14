@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterNaturalPhysicalL2
-import ContinuousFlexibility.Radial.OuterFirstOrderState
+module
+
+public import ContinuousFlexibility.Radial.OuterNaturalPhysicalL2
+public import ContinuousFlexibility.Radial.OuterFirstOrderState
 
 /-!
 # Actual physical states from the logarithmic tail equation
@@ -9,6 +11,8 @@ Dirichlet state, to the true radial Jacobi equation. The regular entrance
 is included: continuity of the actual Jacobi expression extends its
 interior identity to that point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

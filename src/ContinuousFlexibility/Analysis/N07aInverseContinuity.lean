@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.TameInverseFamily
+module
+
+public import ContinuousFlexibility.Analysis.TameInverseFamily
 
 /-!
 # Joint continuity forced by the actual forward family and tame inverse bounds
@@ -8,6 +10,8 @@ vanishing source error. At every fixed output order the tame estimate
 then tends to zero in the original topology defined by the seminorms.
 No continuity of the inverse is assumed, and no operator norm is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

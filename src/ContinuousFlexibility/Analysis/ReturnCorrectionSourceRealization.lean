@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ReturnOpticalCorrectionSource
-import ContinuousFlexibility.Analysis.ReturnCorrectionSource
+module
+
+public import ContinuousFlexibility.Analysis.ReturnOpticalCorrectionSource
+public import ContinuousFlexibility.Analysis.ReturnCorrectionSource
 
 /-!
 # Realization of the actual independent error in the physical source
@@ -9,6 +11,8 @@ source integral. Weighted height membership therefore lifts that same
 field into the original source kernel. The realization is unique on the
 common neighborhood and can be used by every later jet construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

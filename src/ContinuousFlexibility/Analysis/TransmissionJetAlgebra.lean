@@ -1,4 +1,6 @@
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+module
+
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
 
 /-!
 # Multiplication and cancellation of finite ordinary jets
@@ -8,6 +10,8 @@ Leibniz's formula preserves equality of finite jets under multiplication.
 If the coefficient is nonzero, equality of the product at the next order
 then determines the next derivative from the already matching lower jets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

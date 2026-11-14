@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R07MorseJoinParameters
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+module
+
+public import ContinuousFlexibility.Radial.R07MorseJoinParameters
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
 
 /-!
 # Joint continuity of all chosen-join spatial jets
@@ -9,6 +11,8 @@ point of the closed join, including its endpoints.  Smooth dependence on the
 two finite-dimensional logarithmic amplitudes therefore gives continuity of
 every spatial derivative for the product topology on the height cube.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cCompositionJetBounds
-import ContinuousFlexibility.Analysis.N01cStateAngleGraphBudget
-import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
+module
+
+public import ContinuousFlexibility.Analysis.N01cCompositionJetBounds
+public import ContinuousFlexibility.Analysis.N01cStateAngleGraphBudget
+public import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
 
 /-!
 # Smooth finite-dimensional composition with the saved inverse degree
@@ -13,6 +15,8 @@ only additional copies enter a uniform coefficient.
 The intermediate space is any normed space. This covers a fixed scalar
 root transition as well as multiplication of two scalar fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 

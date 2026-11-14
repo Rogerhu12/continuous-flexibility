@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SobolevJetBonding
+module
+
+public import ContinuousFlexibility.Analysis.SobolevJetBonding
 
 /-!
 # Restriction and right inverses on the Sobolev completions
@@ -10,6 +12,8 @@ values on the domain is a right inverse of this restriction after completion:
 equality of values implies equality of every within-derivative on the domain,
 and equality then passes from the dense smooth core to the completed spaces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

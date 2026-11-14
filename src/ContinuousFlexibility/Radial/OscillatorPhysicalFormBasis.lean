@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OscillatorWeakEnergy
+module
+
+public import ContinuousFlexibility.Radial.OscillatorWeakEnergy
 
 /-!
 # Hermite coordinates in the actual physical energy space
@@ -7,6 +9,8 @@ The ambient space is defined by a genuine weak derivative and actual
 almost-everywhere multiplication by `jX`, before any spectral coordinates
 are introduced. The positive weights here correspond to `Hosc + 1`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

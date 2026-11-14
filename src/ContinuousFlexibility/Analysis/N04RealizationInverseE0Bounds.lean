@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationAtomFrechetBounds
-import ContinuousFlexibility.Analysis.N07aInverseChartBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationAtomFrechetBounds
+public import ContinuousFlexibility.Analysis.N07aInverseChartBounds
 
 /-!
 # Actual inverse-coordinate jets with sampled E0 powers
@@ -10,6 +12,8 @@ reference atom. Their Fréchet bounds therefore retain an E0 power and one
 state loss. Only positive derivatives of the unwrapped angular coordinate
 are estimated; its unbounded value is never put into the envelope.
 -/
+
+@[expose] public section
 
 noncomputable section
 

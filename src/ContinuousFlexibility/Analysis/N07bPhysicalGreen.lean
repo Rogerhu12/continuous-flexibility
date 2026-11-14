@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.PhysicalTransmissionOperator
-import ContinuousFlexibility.Radial.R11bRadialTests
-import ContinuousFlexibility.Scalar.GreenIdentity
+module
+
+public import ContinuousFlexibility.Analysis.PhysicalTransmissionOperator
+public import ContinuousFlexibility.Radial.R11bRadialTests
+public import ContinuousFlexibility.Scalar.GreenIdentity
 
 /-!
 # Physical Green symmetry for N07b
@@ -10,6 +12,8 @@ endpoints. The existing rectangle Green identity therefore gives symmetry
 against every full-period radial test. All angular averages in this module
 use the same full period as the frozen radial test space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

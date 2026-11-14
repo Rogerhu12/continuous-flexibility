@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchedOuterLocalizerBounds
-import ContinuousFlexibility.Radial.MatchedOuterModalCells
+module
+
+public import ContinuousFlexibility.Radial.MatchedOuterLocalizerBounds
+public import ContinuousFlexibility.Radial.MatchedOuterModalCells
 
 /-!
 # Uniform actual deep modal blocks before the height and frequency choices
@@ -9,6 +11,8 @@ and sharp denominator at one common cutoff. The original localizer support
 geometry and actual kernel then give bounds for the supplied operator and
 supplied natural vector on their genuine physical Hilbert space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

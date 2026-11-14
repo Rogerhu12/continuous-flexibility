@@ -1,10 +1,12 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalSourceOpen
-import ContinuousFlexibility.Analysis.N07aCurrentCanonicalEquation
-import ContinuousFlexibility.Analysis.N07aCurrentPrincipalPositivity
-import ContinuousFlexibility.Analysis.N07aCanonicalCoefficientDifference
-import ContinuousFlexibility.Analysis.N07aAngularOpenRegularity
-import ContinuousFlexibility.Analysis.N07aOpenClassicalNormal
-import ContinuousFlexibility.Analysis.N07aSampleJetAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalSourceOpen
+public import ContinuousFlexibility.Analysis.N07aCurrentCanonicalEquation
+public import ContinuousFlexibility.Analysis.N07aCurrentPrincipalPositivity
+public import ContinuousFlexibility.Analysis.N07aCanonicalCoefficientDifference
+public import ContinuousFlexibility.Analysis.N07aAngularOpenRegularity
+public import ContinuousFlexibility.Analysis.N07aOpenClassicalNormal
+public import ContinuousFlexibility.Analysis.N07aSampleJetAlgebra
 
 /-!
 # All genuine canonical weak jets and the actual classical normal equation
@@ -15,6 +17,8 @@ actual open coefficient representatives. The signed potential stays in
 the divergence bootstrap, and the resulting six normal coefficients are
 exactly the family used by the quantitative normal recurrence.
 -/
+
+@[expose] public section
 
 noncomputable section
 

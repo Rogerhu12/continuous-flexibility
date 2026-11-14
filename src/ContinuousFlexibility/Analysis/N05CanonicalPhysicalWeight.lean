@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalEmbeddings
-import ContinuousFlexibility.Scalar.WeightedReferenceCoefficients
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalEmbeddings
+public import ContinuousFlexibility.Scalar.WeightedReferenceCoefficients
 
 /-!
 # Physical coefficient factors are absorbed by the canonical sample weights
@@ -8,6 +10,8 @@ A fixed coefficient power costs one actual material factor at the chosen
 cell sample. Every positive endpoint exponent absorbs that material factor
 and every prescribed material order, uniformly in the canonical piece.
 -/
+
+@[expose] public section
 
 noncomputable section
 

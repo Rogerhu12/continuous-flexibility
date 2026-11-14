@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06ReferenceWeakIdentity
-import ContinuousFlexibility.Analysis.N06ReferenceNuColumn
-import ContinuousFlexibility.Analysis.MaterialHeightRegularity
-import ContinuousFlexibility.Radial.R11bTestPairing
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceWeakIdentity
+public import ContinuousFlexibility.Analysis.N06ReferenceNuColumn
+public import ContinuousFlexibility.Analysis.MaterialHeightRegularity
+public import ContinuousFlexibility.Radial.R11bTestPairing
 
 /-!
 # The actual perturbed relation at the reference state
@@ -13,6 +15,8 @@ gives `PerturbedCanonicalRelation` on the same graph. The proof keeps the
 original representatives, including the height tail using `S.chiLeft`;
 it makes no identification of that cutoff with `D.chiLeft`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

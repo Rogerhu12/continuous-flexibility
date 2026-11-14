@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01aWeightedEnumeration
-import Mathlib.Algebra.Order.Floor.Ring
-import Mathlib.Data.Real.Archimedean
+module
+
+public import ContinuousFlexibility.Analysis.N01aWeightedEnumeration
+public import Mathlib.Algebra.Order.Floor.Ring
+public import Mathlib.Data.Real.Archimedean
 
 /-!
 # Linear weights from finite density witnesses
@@ -8,6 +10,8 @@ import Mathlib.Data.Real.Archimedean
 A real depth parameter can be chosen separately for each enumeration
 index. Rounding only the resulting weight bound costs one fixed unit.
 -/
+
+@[expose] public section
 
 noncomputable section
 

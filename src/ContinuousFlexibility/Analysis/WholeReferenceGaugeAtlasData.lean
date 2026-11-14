@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.WholeCanonicalAtlasData
-import ContinuousFlexibility.Analysis.WholePositiveReferenceGauge
+module
+
+public import ContinuousFlexibility.Analysis.WholeCanonicalAtlasData
+public import ContinuousFlexibility.Analysis.WholePositiveReferenceGauge
 
 /-!
 # One whole atlas with the actual fixed positive reference gauge
@@ -10,6 +12,8 @@ maps the physical interval to `(0,1)`. Its composite with the existing
 relative transport gives the raw chart, inverse and height, and their
 actual coordinate formulas define the principal field and potential.
 -/
+
+@[expose] public section
 
 noncomputable section
 

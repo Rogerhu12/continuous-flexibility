@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseLabelPositiveWords
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseLabelPositiveWords
 
 /-!
 # Sample conversion and common budgets for a label and its slope
@@ -7,6 +9,8 @@ The prefix arithmetic uses only a graded parameter space and scalar
 sample costs. Keeping it separate avoids unfolding the actual atlas
 while aligning the two angular horizons.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationDoubleExpansionHeight
-import ContinuousFlexibility.Analysis.N04RealizationMixedJointDirections
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationDoubleExpansionHeight
+public import ContinuousFlexibility.Analysis.N04RealizationMixedJointDirections
 
 /-!
 # The original parameter count in the inverse-point spatial expansion
@@ -10,6 +12,8 @@ parameter derivative.  The existing double scalar expansion therefore
 uses only mixed jets with the original word's exact parameter count.
 The factor `2 ^ angleArity` accounts for the two physical coordinates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

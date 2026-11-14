@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseMiddleJoin
-import ContinuousFlexibility.Radial.MorseChainLocalGluing
+module
+
+public import ContinuousFlexibility.Radial.MorseMiddleJoin
+public import ContinuousFlexibility.Radial.MorseChainLocalGluing
 
 /-!
 # Finite positive bridges and positions of two cone heads
@@ -8,6 +10,8 @@ The cone reference heights are fixed before their short joins are chosen.
 Their lengths can then be made arbitrarily small while the two cones remain
 strictly ordered in height. All constructions here concern the finite middle.
 -/
+
+@[expose] public section
 
 noncomputable section
 

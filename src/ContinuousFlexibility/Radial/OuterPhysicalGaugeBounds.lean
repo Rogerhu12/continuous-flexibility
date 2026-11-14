@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.OuterPhysicalPointwiseDecay
-import ContinuousFlexibility.Radial.OuterTailDensityBounds
-import ContinuousFlexibility.Radial.OuterOutwardGreenTransport
+module
+
+public import ContinuousFlexibility.Radial.OuterPhysicalPointwiseDecay
+public import ContinuousFlexibility.Radial.OuterTailDensityBounds
+public import ContinuousFlexibility.Radial.OuterOutwardGreenTransport
 
 /-!
 # Uniform physical gauge losses on the actual deep tail
@@ -10,6 +12,8 @@ the logarithmic tail. Thus pointwise and two-point estimates for the
 same logarithmic basis pass to the outward physical coordinates with
 fixed numerical losses, independent of the frequency and depth.
 -/
+
+@[expose] public section
 
 noncomputable section
 

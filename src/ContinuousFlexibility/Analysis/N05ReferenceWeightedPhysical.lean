@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ReferenceWeightedMeasure
-import ContinuousFlexibility.Radial.ReferenceGraphNorms
+module
+
+public import ContinuousFlexibility.Radial.ReferenceWeightedMeasure
+public import ContinuousFlexibility.Radial.ReferenceGraphNorms
 
 /-!
 # Positive reference weights control actual physical L² limits
@@ -8,6 +10,8 @@ This uses the genuine cell partition and the existing exponential weight
 embedding. It applies to all fields, including odd angular derivatives,
 without imposing source compatibility or output parity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

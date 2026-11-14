@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07bMaterialAngularChain
+module
+
+public import ContinuousFlexibility.Analysis.N07bMaterialAngularChain
 
 /-!
 # Square-root normalization of the actual inverse angular derivative
@@ -7,6 +9,8 @@ The square-root derivative is obtained by differentiating its actual
 square on a positive neighborhood. Thus the normalization identity uses
 the genuine differential and only local differentiability and positivity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Statements.Analysis
+module
+
+public import ContinuousFlexibility.Statements.Analysis
 
 /-!
 # Fixed-loss mixed spatial jets of a genuine periodic scalar flow
@@ -8,6 +10,8 @@ The material envelope and the state precede neither the output constants
 nor the fixed loss. The angular Gronwall exponent is controlled
 separately from the possibly large parameter derivatives of the field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

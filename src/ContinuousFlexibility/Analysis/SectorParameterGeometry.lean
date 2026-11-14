@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SolveStateSpaces
-import ContinuousFlexibility.Analysis.SolveReturnEquations
-import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
+module
+
+public import ContinuousFlexibility.Analysis.SolveStateSpaces
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
+public import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
 
 /-!
 # Affine sector parameters and their actual seminorms
@@ -9,6 +11,8 @@ The inclusion uses the given physical state space. Its pulled-back sum
 grading is exactly the sector grading, so restricting a directional
 tower preserves the original one-high-factor estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

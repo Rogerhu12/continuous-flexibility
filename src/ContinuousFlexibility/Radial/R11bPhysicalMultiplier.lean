@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R11bPhysicalPairing
-import ContinuousFlexibility.Radial.R11bPartitionMultiplier
+module
+
+public import ContinuousFlexibility.Radial.R11bPhysicalPairing
+public import ContinuousFlexibility.Radial.R11bPartitionMultiplier
 
 /-!
 # Exponentially bounded cell multipliers in the physical measure
@@ -9,6 +11,8 @@ Together with finite overlap, this gives a physical L² estimate for an
 unbounded multiplier whose square has a fixed exponential bound on each
 localized cell. The estimate does not count cells of a given index.
 -/
+
+@[expose] public section
 
 noncomputable section
 

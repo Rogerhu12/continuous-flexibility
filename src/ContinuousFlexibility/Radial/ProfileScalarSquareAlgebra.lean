@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ProfileScalarSquares
+module
+
+public import ContinuousFlexibility.Radial.ProfileScalarSquares
 
 /-!
 # Algebra of scalar localized square series
@@ -7,6 +9,8 @@ All identities concern the actual representatives. Addition and
 subtraction use only L2 membership of each localized term, which is enough
 even before a global ordinary derivative has been reconstructed.
 -/
+
+@[expose] public section
 
 open Set Filter MeasureTheory
 open ContinuousFlexibility.Statements

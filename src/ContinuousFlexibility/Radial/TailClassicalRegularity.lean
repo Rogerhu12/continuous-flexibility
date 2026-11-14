@@ -1,9 +1,11 @@
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
-import Mathlib.Analysis.Calculus.ContDiff.Operations
-import Mathlib.Analysis.Calculus.FDeriv.Extend
-import Mathlib.Analysis.ODE.ExistUnique
-import Mathlib.Tactic.FieldSimp
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+public import Mathlib.Analysis.Calculus.ContDiff.Operations
+public import Mathlib.Analysis.Calculus.FDeriv.Extend
+public import Mathlib.Analysis.ODE.ExistUnique
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.Ring
 
 /-!
 # Classical regularity of the tail first-order system
@@ -14,6 +16,8 @@ together. The within-set formulation also applies at a regular entrance:
 it asserts one-sided smoothness there and does not assert a smooth
 extension across that entrance.
 -/
+
+@[expose] public section
 
 noncomputable section
 

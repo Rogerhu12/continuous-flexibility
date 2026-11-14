@@ -1,8 +1,10 @@
-import Mathlib.MeasureTheory.Integral.Marginal
-import Mathlib.MeasureTheory.Constructions.Pi
-import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
-import Mathlib.MeasureTheory.Constructions.BorelSpace.Basic
-import Mathlib.Topology.Sequences
+module
+
+public import Mathlib.MeasureTheory.Integral.Marginal
+public import Mathlib.MeasureTheory.Constructions.Pi
+public import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
+public import Mathlib.MeasureTheory.Constructions.BorelSpace.Basic
+public import Mathlib.Topology.Sequences
 
 /-!
 # Simultaneous selection of infinitely many height ratios
@@ -20,6 +22,8 @@ union bound gives a point satisfying the conditions attached to those
 coordinates; compactness of the cube and closedness of each good set pass to
 the limit.  No measure on the infinite product is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

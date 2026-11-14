@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.ActualNegativeLengthMaterialBounds
-import ContinuousFlexibility.Analysis.RetainedPositiveComponentMaterialWidth
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeUnitMaterialGeometry
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+module
+
+public import ContinuousFlexibility.Analysis.ActualNegativeLengthMaterialBounds
+public import ContinuousFlexibility.Analysis.RetainedPositiveComponentMaterialWidth
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeUnitMaterialGeometry
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
 
 /-!
 # Four actual length atoms on the same whole reference atlas
@@ -12,6 +14,8 @@ their canonical interval is exactly `(0,1)`. An explicit material envelope
 enlargement packages these value costs. The four actual atoms are constant
 in space, so every positive-order mixed derivative is exactly zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

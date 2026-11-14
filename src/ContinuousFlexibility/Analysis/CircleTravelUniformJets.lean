@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CircleTranslationUniformBounds
-import ContinuousFlexibility.Analysis.CirclePositiveInverseUniformBounds
-import ContinuousFlexibility.Analysis.TameUniformFamilyJets
+module
+
+public import ContinuousFlexibility.Analysis.CircleTranslationUniformBounds
+public import ContinuousFlexibility.Analysis.CirclePositiveInverseUniformBounds
+public import ContinuousFlexibility.Analysis.TameUniformFamilyJets
 
 /-!
 # Uniform chart jets with arbitrary componentwise travel
@@ -12,6 +14,8 @@ member of the travel family. A fixed half-lower-bound open domain retains
 the actual positive inverse and contains every lift with the stated lower
 derivative bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

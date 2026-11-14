@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerRadialH1Density
-import ContinuousFlexibility.Radial.InnerRadialFiniteWeakGraph
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialH1Density
+public import ContinuousFlexibility.Radial.InnerRadialFiniteWeakGraph
 
 /-!
 # Smooth tests in the actual matched physical domain
@@ -8,6 +10,8 @@ These statements construct domain membership from the actual field and
 normalized derivative. Arbitrary endpoint values are obtained by the
 fixed affine lift; only the residual is sent to the proved H¹ closure.
 -/
+
+@[expose] public section
 
 noncomputable section
 

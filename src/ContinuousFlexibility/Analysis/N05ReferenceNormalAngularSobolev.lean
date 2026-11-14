@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05ReferenceNormalAngularEnergy
-import ContinuousFlexibility.Analysis.N05ReferenceOutputAngularSobolev
-import ContinuousFlexibility.Radial.R11bAngularFrequencySource
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceNormalAngularEnergy
+public import ContinuousFlexibility.Analysis.N05ReferenceOutputAngularSobolev
+public import ContinuousFlexibility.Radial.R11bAngularFrequencySource
 
 /-!
 # Angular regularity of the same actual physical normal derivative
@@ -10,6 +12,8 @@ positive angular weak jets are reconstructed from consecutive source
 jets, retaining the same material exponent and the original physical
 normal weak identity. Low modes cost only their fixed frequency power.
 -/
+
+@[expose] public section
 
 noncomputable section
 

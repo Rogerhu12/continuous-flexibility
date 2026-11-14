@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OuterMorseLocalizedDensity
+module
+
+public import ContinuousFlexibility.Radial.OuterMorseLocalizedDensity
 
 /-!
 # The manuscript bounds for one actual outer inverse
@@ -9,6 +11,8 @@ weighted localization are the operators already carried by the actual
 Green data. Each ordinary localized operator has the same negative
 localized kernel; no global unweighted bound is asserted.
 -/
+
+@[expose] public section
 
 noncomputable section
 

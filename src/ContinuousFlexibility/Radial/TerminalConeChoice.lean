@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.TerminalConeLayer
+module
+
+public import ContinuousFlexibility.Radial.TerminalConeLayer
 
 /-!
 # Choosing one retained-cone length for the finite first band
@@ -7,6 +9,8 @@ The upper frequency bound and desired relative error are fixed before
 the length. The same choice controls every real frequency in [2,J],
 so there is no per-frequency change of the reference geometry.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartJacobianIdentities
-import ContinuousFlexibility.Analysis.N04NegativeChartWidths
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartJacobianIdentities
+public import ContinuousFlexibility.Analysis.N04NegativeChartWidths
 
 /-!
 # The actual forward determinant on the fixed reference half
@@ -9,6 +11,8 @@ original component. Consequently its fixed physical unit map is valid
 even when the current cut has moved. This identifies the determinant
 polynomial and its absolute value with the stored Jacobian atom.
 -/
+
+@[expose] public section
 
 noncomputable section
 

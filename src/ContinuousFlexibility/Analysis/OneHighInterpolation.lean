@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.OneHighFrequencyNorms
-import Mathlib.Analysis.Convex.Segment
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.NormNum
+module
+
+public import ContinuousFlexibility.Analysis.OneHighFrequencyNorms
+public import Mathlib.Analysis.Convex.Segment
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.NormNum
 
 /-!
 # Interpolation with one high factor
@@ -11,6 +13,8 @@ norms. Applying this to two frequency functions and then using the weighted
 arithmetic-geometric mean inequality proves the segment estimate in Lemma 7.2(i).
 The argument includes both segment endpoints and permits arbitrary real orders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsColumnTransport
-import ContinuousFlexibility.Analysis.N04PulledFieldsMovingFamily
-import ContinuousFlexibility.Analysis.N04PulledFieldsCurrentData
-import ContinuousFlexibility.Analysis.N04PulledFieldsInversePointData
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsColumnTransport
+public import ContinuousFlexibility.Analysis.N04PulledFieldsMovingFamily
+public import ContinuousFlexibility.Analysis.N04PulledFieldsCurrentData
+public import ContinuousFlexibility.Analysis.N04PulledFieldsInversePointData
 
 /-!
 # Current data of the actual pulled physical columns
@@ -11,6 +13,8 @@ Its pure-word prefix and the physical sampled prefix give the positive
 parameter jets by masked composition. Integrating the genuine first
 parameter jet supplies the reference difference and its value bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

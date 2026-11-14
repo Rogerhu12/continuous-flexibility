@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.RootBoundaryJets
-import ContinuousFlexibility.Analysis.RootEvenInteriorBounds
-import ContinuousFlexibility.Analysis.RootOddBounds
+module
+
+public import ContinuousFlexibility.Analysis.RootBoundaryJets
+public import ContinuousFlexibility.Analysis.RootEvenInteriorBounds
+public import ContinuousFlexibility.Analysis.RootOddBounds
 
 /-!
 # Uniform finite-order bounds for the root substitutions
@@ -12,6 +14,8 @@ integral of the middle derivative, and therefore loses exactly one
 derivative. Boundary jets are handled using the actual globally defined
 functions in `CSBound`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

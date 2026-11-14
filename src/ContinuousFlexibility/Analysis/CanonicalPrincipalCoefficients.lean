@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PrincipalCoefficientPullback
-import ContinuousFlexibility.Blueprint.CanonicalParts
+module
+
+public import ContinuousFlexibility.Analysis.PrincipalCoefficientPullback
+public import ContinuousFlexibility.Blueprint.CanonicalParts
 
 /-!
 # Principal density forced by the canonical operator identity
@@ -9,6 +11,8 @@ Its type sign cancels from the principal terms. On a negative piece the
 canonical coefficient regularity follows from the prescribed constant
 normal form on the open piece, rather than being assumed separately.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05ReferenceSourceCompatibility
-import ContinuousFlexibility.Radial.R11bModeL2
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceSourceCompatibility
+public import ContinuousFlexibility.Radial.R11bModeL2
 
 /-!
 # Bounds for the actual source compatibility correction
@@ -8,6 +10,8 @@ The auxiliary scalar is the actual normalized physical integral. Physical
 L² control and Cauchy--Schwarz bound it by the original reference source
 square sum. The compact normalizer then preserves that square estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

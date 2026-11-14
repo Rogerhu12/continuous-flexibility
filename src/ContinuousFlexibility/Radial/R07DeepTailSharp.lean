@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R07DeepTailHypotheses
+module
+
+public import ContinuousFlexibility.Radial.R07DeepTailHypotheses
 
 /-!
 # The physical flatness product bound
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Radial.R07DeepTailHypotheses
 The leading coefficient `2` in the quadratic exponent is preserved.
 All fixed normalization losses are absorbed by a multiple of `n^(3/2)+n`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01RootCoefficientValueRectangle
-import ContinuousFlexibility.Analysis.N01ShiftedCoefficientJets
-import ContinuousFlexibility.Analysis.PositiveDenominatorQuotientBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01RootCoefficientValueRectangle
+public import ContinuousFlexibility.Analysis.N01ShiftedCoefficientJets
+public import ContinuousFlexibility.Analysis.PositiveDenominatorQuotientBounds
 
 /-!
 # Actual fixed-loss mixed jets of the oriented characteristic drift
@@ -11,6 +13,8 @@ low-seminorm ball, the zeroth coefficient estimate bounds b as well.
 One genuine quotient composition therefore controls the drift at every
 spatial order. The orientation ±1 does not change absolute mixed jets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

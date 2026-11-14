@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CoordinateOperatorConstruction
-import ContinuousFlexibility.Analysis.CanonicalCoefficientIdentities
-import ContinuousFlexibility.Geometry.PlanarOrientation
-import Mathlib.Analysis.Calculus.BumpFunction.FiniteDimension
+module
+
+public import ContinuousFlexibility.Analysis.CoordinateOperatorConstruction
+public import ContinuousFlexibility.Analysis.CanonicalCoefficientIdentities
+public import ContinuousFlexibility.Geometry.PlanarOrientation
+public import Mathlib.Analysis.Calculus.BumpFunction.FiniteDimension
 
 /-!
 # A smooth effective physical operator from a genuine canonical action
@@ -13,6 +15,8 @@ its actual action locally: a real smooth cutoff extends each required germ
 to an admissible global test. Reversing the coordinate change gives a smooth
 principal field, and the constant test removes the entire zeroth-order term.
 -/
+
+@[expose] public section
 
 noncomputable section
 

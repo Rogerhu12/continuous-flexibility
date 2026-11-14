@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aOpenCoefficientWeakJets
-import ContinuousFlexibility.Analysis.N07aVolumeCell
-import ContinuousFlexibility.Analysis.N07aAngularEven
+module
+
+public import ContinuousFlexibility.Analysis.N07aOpenCoefficientWeakJets
+public import ContinuousFlexibility.Analysis.N07aVolumeCell
+public import ContinuousFlexibility.Analysis.N07aAngularEven
 
 /-!
 # Realization of the original coefficient jets in the prescribed volume graph
@@ -9,6 +11,8 @@ The angular derivatives and reflection relation are proved for the actual
 classes. Changing the material level rescales these classes by exactly the
 weight prescribed in `IsVolumeModel`, so every level has the same source.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aTubularCutCoordinates
-import ContinuousFlexibility.Analysis.N07aLocalPullbackEquation
-import ContinuousFlexibility.Analysis.N07aClosedPDEGluing
+module
+
+public import ContinuousFlexibility.Analysis.N07aTubularCutCoordinates
+public import ContinuousFlexibility.Analysis.N07aLocalPullbackEquation
+public import ContinuousFlexibility.Analysis.N07aClosedPDEGluing
 
 /-!
 # Physical gluing in genuine smooth tubular coordinates
@@ -10,6 +12,8 @@ Their actual equations have identical normalized coefficients there.
 The closed transmission theorem then gives a smooth physical field on
 an open neighborhood of the actual cut point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01EndpointStateCircleMember
-import ContinuousFlexibility.Analysis.N01EndpointScalarCircleMember
-import ContinuousFlexibility.Analysis.ScalarJetSchwarz
+module
+
+public import ContinuousFlexibility.Analysis.N01EndpointStateCircleMember
+public import ContinuousFlexibility.Analysis.N01EndpointScalarCircleMember
+public import ContinuousFlexibility.Analysis.ScalarJetSchwarz
 
 /-!
 # All positive-order endpoint jets are actual circle fields
@@ -10,6 +12,8 @@ The exact multilinear telescoping identity then separates an arbitrary
 tuple into its pure scalar part and finitely many tuples with a state
 slot. Every term lies in the range of the actual circle decoder.
 -/
+
+@[expose] public section
 
 noncomputable section
 

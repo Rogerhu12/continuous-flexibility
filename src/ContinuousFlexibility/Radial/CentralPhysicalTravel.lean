@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.CentralModel
-import ContinuousFlexibility.Radial.CentralTravelAngle
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
+module
+
+public import ContinuousFlexibility.Radial.CentralModel
+public import ContinuousFlexibility.Radial.CentralTravelAngle
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
 
 /-!
 # The physical optical integral of the central model
@@ -9,6 +11,8 @@ The integral is taken in the actual radial variable. Its evaluation
 uses the proved derivative of the radius and the actual profile
 pullback, including the central density-root factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

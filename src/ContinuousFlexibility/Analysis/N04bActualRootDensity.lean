@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bActualTravelChart
-import ContinuousFlexibility.Analysis.N04bConstructedRootDensity
+module
+
+public import ContinuousFlexibility.Analysis.N04bActualTravelChart
+public import ContinuousFlexibility.Analysis.N04bConstructedRootDensity
 
 /-!
 # The actual corrected field in a pasted characteristic root chart
@@ -10,6 +12,8 @@ agrees near the physical point with the actual root chart, with the actual
 height value, therefore has principal density (1, 0, -ξ).
 This is the local calculation used after constructing the literal atlas.
 -/
+
+@[expose] public section
 
 noncomputable section
 

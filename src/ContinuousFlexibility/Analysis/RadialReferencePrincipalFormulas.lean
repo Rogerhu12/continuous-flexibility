@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.PositiveReferenceCylinder
-import ContinuousFlexibility.Analysis.CoordinateOperatorConstruction
-import ContinuousFlexibility.Radial.RadialHeight
+module
+
+public import ContinuousFlexibility.Analysis.PositiveReferenceCylinder
+public import ContinuousFlexibility.Analysis.CoordinateOperatorConstruction
+public import ContinuousFlexibility.Radial.RadialHeight
 
 /-!
 # Principal and potential formulas for a genuine radial reference chart
@@ -10,6 +12,8 @@ of the cylindrical map. The potential uses the actual coefficient germs
 at the physical point. Its radial formula therefore requires no equation
 for the total coefficient fields outside that neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

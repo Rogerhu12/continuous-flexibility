@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04RealizationTransportRatios
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationTransportRatios
 
 /-!
 # From sampled subpower envelopes to the physical material weight
@@ -9,6 +11,8 @@ cancels, leaving one power of the material weight at the actual point.
 This estimate is uniform in the piece index and is valid for any family
 of domains carrying the displayed material comparison.
 -/
+
+@[expose] public section
 
 noncomputable section
 

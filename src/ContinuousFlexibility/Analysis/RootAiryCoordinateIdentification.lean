@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RootTravelDifferential
-import ContinuousFlexibility.Analysis.AiryHalfHolonomy
+module
+
+public import ContinuousFlexibility.Analysis.RootTravelDifferential
+public import ContinuousFlexibility.Analysis.AiryHalfHolonomy
 
 /-!
 # The actual root chart determined by its two first integrals
@@ -9,6 +11,8 @@ axis. Thus the two characteristic values determine the entire root
 chart. Reflection obtains the second value from the same signed inverse
 sample; the Boolean formula retains the right-root travel offset.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.MaterialRhoGrowth
-import ContinuousFlexibility.Radial.MorseChainScales
+module
+
+public import ContinuousFlexibility.Analysis.MaterialRhoGrowth
+public import ContinuousFlexibility.Radial.MorseChainScales
 
 /-!
 # Quantitative size of a complete radial plateau
@@ -8,6 +10,8 @@ The actual cell bounds control the inverse collar width. The supplied
 material coordinate has only cubic endpoint growth, so the full plateau
 also has a radial material support bounded by a fixed radial weight.
 -/
+
+@[expose] public section
 
 noncomputable section
 

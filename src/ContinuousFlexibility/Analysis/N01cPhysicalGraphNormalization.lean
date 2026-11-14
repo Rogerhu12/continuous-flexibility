@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
-import ContinuousFlexibility.Analysis.N01cPhysicalGraphRawBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
+public import ContinuousFlexibility.Analysis.N01cPhysicalGraphRawBounds
 
 /-!
 # Final normalization and finite constants for physical radial jets
@@ -8,6 +10,8 @@ The complete weighted multilinear map is normalized once. Its raw power
 is at most one by the proved Lie/graph order budget. Finite choices of
 parameter and spatial indices enlarge only the material constants.
 -/
+
+@[expose] public section
 
 noncomputable section
 

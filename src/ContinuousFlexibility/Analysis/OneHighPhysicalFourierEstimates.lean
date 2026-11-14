@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.OneHighCircleSobolevJetsBasic
-import ContinuousFlexibility.Analysis.OneHighCylinderSobolevJetsBasic
-import ContinuousFlexibility.Analysis.OneHighCylinderFourierInversion
-import ContinuousFlexibility.Analysis.OneHighInterpolation
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleSobolevJetsBasic
+public import ContinuousFlexibility.Analysis.OneHighCylinderSobolevJetsBasic
+public import ContinuousFlexibility.Analysis.OneHighCylinderFourierInversion
+public import ContinuousFlexibility.Analysis.OneHighInterpolation
 
 /-!
 # Physical circle and cylinder interpolation
@@ -11,6 +13,8 @@ physical frequencies `2*pi/P` and `2*pi`, and normalized angular Haar measure.
 The segment estimate permits arbitrary real orders and includes both
 endpoints. The endpoint memberships ensure that every real norm is finite.
 -/
+
+@[expose] public section
 
 noncomputable section
 

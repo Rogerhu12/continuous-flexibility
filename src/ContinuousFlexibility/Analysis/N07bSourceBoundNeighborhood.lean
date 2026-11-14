@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07bSourceBound
-import ContinuousFlexibility.Analysis.N07bNeighborhood
+module
+
+public import ContinuousFlexibility.Analysis.N07bSourceBound
+public import ContinuousFlexibility.Analysis.N07bNeighborhood
 
 /-!
 # Absorbing a fixed polynomial state factor in the source geometry
@@ -13,6 +15,8 @@ The charts and all previously chosen spaces and inverses are unchanged.
 This is a conditional geometric reduction. No coefficient estimate is
 asserted to follow from the qualitative frozen chart conditions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

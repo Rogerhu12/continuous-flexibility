@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PlanarInverseDerivativeBound
-import ContinuousFlexibility.Analysis.NonlinearInverseMaterialBounds
+module
+
+public import ContinuousFlexibility.Analysis.PlanarInverseDerivativeBound
+public import ContinuousFlexibility.Analysis.NonlinearInverseMaterialBounds
 
 /-!
 # Actual planar inverse jets from a Jacobian lower bound
@@ -9,6 +11,8 @@ four forward matrix entries, and |J|≥κ. Its high state factor remains
 linear. The already proved nonlinear inverse polynomial estimate then
 controls all positive inverse jets; no inverse jet estimate is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

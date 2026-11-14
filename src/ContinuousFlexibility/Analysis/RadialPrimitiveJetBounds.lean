@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.WeightedAngularPrimitiveJets
-import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
-import ContinuousFlexibility.Analysis.OneHighCircleFlowIntegral
+module
+
+public import ContinuousFlexibility.Scalar.WeightedAngularPrimitiveJets
+public import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowIntegral
 
 /-!
 # Linear jet bounds for the actual radial primitive
@@ -9,6 +11,8 @@ Angular derivatives pass through the displayed radial integral. A positive
 number of radial derivatives removes that integral. The resulting bound
 is linear in the integrand jets and uses the same fixed integration base.
 -/
+
+@[expose] public section
 
 noncomputable section
 

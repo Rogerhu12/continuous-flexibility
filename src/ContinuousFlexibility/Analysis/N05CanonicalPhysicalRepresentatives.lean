@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05CanonicalPhysicalAE
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05CanonicalPhysicalAE
 
 /-!
 # Physical representatives determine both canonical transforms
@@ -9,6 +11,8 @@ chart transfers that equality to the canonical rectangle, where the frozen
 height and source formulas preserve it. No pointwise or smooth representative
 is selected.
 -/
+
+@[expose] public section
 
 noncomputable section
 

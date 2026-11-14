@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.FlatMixedDiagonalGrowth
+module
+
+public import ContinuousFlexibility.Analysis.FlatMixedDiagonalGrowth
 
 /-!
 # Finite parameter budgets and the actual multilinear mixed jets
@@ -9,6 +11,8 @@ the genuine tower and algebraic multilinear normalization recover the
 full one-high bound from its diagonal. Neither operation changes the
 retained flat label factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05ReferenceSymbols
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceSymbols
 
 /-!
 # Centered quadratic tests for canonical reference symbols
@@ -7,6 +9,8 @@ Three actual centered coordinate polynomials identify the three entries
 of the transported principal matrix. Taking its determinant cancels the
 Jacobian and gives the exact height-factor identity on a negative piece.
 -/
+
+@[expose] public section
 
 noncomputable section
 

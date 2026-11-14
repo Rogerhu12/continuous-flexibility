@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.SpacesTorusFourier
-import ContinuousFlexibility.Analysis.SpacesRadialPartition
-import ContinuousFlexibility.Analysis.SpacesMollifierL1
-import Mathlib.Analysis.Real.Pi.Bounds
+module
+
+public import ContinuousFlexibility.Analysis.SpacesTorusFourier
+public import ContinuousFlexibility.Analysis.SpacesRadialPartition
+public import ContinuousFlexibility.Analysis.SpacesMollifierL1
+public import Mathlib.Analysis.Real.Pi.Bounds
 
 /-!
 # Normalized torus coordinates on physical unit cells
@@ -11,6 +13,8 @@ A radial interval of length six and one full angular period carry exactly
 records that normalization as a measure-preserving map, so all subsequent
 Fourier estimates use the actual prescribed cylinder measure.
 -/
+
+@[expose] public section
 
 noncomputable section
 

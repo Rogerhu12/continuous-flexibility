@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.BoundaryTaylorExtension
-import ContinuousFlexibility.Analysis.FiniteRadialJets
-import Mathlib.Analysis.SpecialFunctions.Log.Deriv
+module
+
+public import ContinuousFlexibility.Analysis.BoundaryTaylorExtension
+public import ContinuousFlexibility.Analysis.FiniteRadialJets
+public import Mathlib.Analysis.SpecialFunctions.Log.Deriv
 
 /-!
 # Positive heights from boundary Taylor extensions of logarithmic data
@@ -14,6 +16,8 @@ Only a smooth positive neighborhood of the two boundary circles is
 required for the input height. Outside that neighborhood it is used only
 through the already extracted boundary data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

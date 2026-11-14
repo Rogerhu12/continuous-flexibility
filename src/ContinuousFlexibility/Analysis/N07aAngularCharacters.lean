@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesTorusFourier
-import ContinuousFlexibility.Analysis.SpacesCircleFourierJets
+module
+
+public import ContinuousFlexibility.Analysis.SpacesTorusFourier
+public import ContinuousFlexibility.Analysis.SpacesCircleFourierJets
 
 /-!
 # Public character identities for the two-dimensional angular Fourier model
@@ -9,6 +11,8 @@ than unfolding the torus character implementation. It separates the
 unrestricted radial Fourier index from the genuine period-`π` angular
 frequency.
 -/
+
+@[expose] public section
 
 noncomputable section
 

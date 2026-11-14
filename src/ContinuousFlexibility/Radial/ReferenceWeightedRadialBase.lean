@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ReferenceWeightedMeasure
+module
+
+public import ContinuousFlexibility.Radial.ReferenceWeightedMeasure
 
 /-!
 # Canonical radial and angular reference measures
@@ -8,6 +10,8 @@ weighted physical measure. The existing cell sum is a proved representation
 under the actual partition hypothesis. The angular probability measure is
 shared by the Fourier and physical-coefficient APIs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

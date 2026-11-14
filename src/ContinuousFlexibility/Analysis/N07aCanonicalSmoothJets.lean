@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalSmoothDecode
-import ContinuousFlexibility.Analysis.N07aLocalizedFirstJets
-import ContinuousFlexibility.Analysis.N07aMixedLocalCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalSmoothDecode
+public import ContinuousFlexibility.Analysis.N07aLocalizedFirstJets
+public import ContinuousFlexibility.Analysis.N07aMixedLocalCalculus
 
 /-!
 # Classical jets of the canonical smooth decoder
@@ -10,6 +12,8 @@ jets. The first derivative is identified by compact localization and the
 true cylinder product rule; all higher derivatives follow by the weak
 suffix identity and local commutation of smooth mixed derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

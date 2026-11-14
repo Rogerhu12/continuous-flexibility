@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SmoothDirectionsLocalAngularJets
-import ContinuousFlexibility.Analysis.ScalarPlaneJetRegularity
-import ContinuousFlexibility.Analysis.MixedDerivativeLocality
+module
+
+public import ContinuousFlexibility.Analysis.SmoothDirectionsLocalAngularJets
+public import ContinuousFlexibility.Analysis.ScalarPlaneJetRegularity
+public import ContinuousFlexibility.Analysis.MixedDerivativeLocality
 
 /-!
 # Spatial smoothness and mixed derivatives of actual parameter jets
@@ -11,6 +13,8 @@ parameter towers. Local FTC proves both coordinate derivatives of every
 parameter jet. The resulting hierarchy gives joint spatial smoothness
 and identifies the ordinary mixed spatial derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.AngularYosida
-import Mathlib.Analysis.Normed.Group.Bounded
+module
+
+public import ContinuousFlexibility.Analysis.AngularYosida
+public import Mathlib.Analysis.Normed.Group.Bounded
 
 /-!
 # Angular regularity of a bounded inverse
@@ -9,6 +11,8 @@ the lower semicontinuity of the Hilbert-sum norm.  Higher regularity then
 follows by applying the already proved inverse regularity to the first
 commuted equation.  No domain preservation of the inverse is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

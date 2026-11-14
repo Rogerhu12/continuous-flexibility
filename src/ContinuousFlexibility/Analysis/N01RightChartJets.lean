@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01ReturnInverseJets
-import ContinuousFlexibility.Analysis.N01LeftChartJets
-import ContinuousFlexibility.Analysis.CircleLiftCompositionJets
+module
+
+public import ContinuousFlexibility.Analysis.N01ReturnInverseJets
+public import ContinuousFlexibility.Analysis.N01LeftChartJets
+public import ContinuousFlexibility.Analysis.CircleLiftCompositionJets
 
 /-!
 # Actual all-order jets of the right return coordinate
@@ -10,6 +12,8 @@ with the stored return inverse. The travel constant cancels exactly.
 Composition uses the existing one-high-factor estimate; odd projection
 does not enlarge the uniform angular jet bound or the derivative loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

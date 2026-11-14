@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceHeightSamplePrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryFormulaPrefix
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceHeightSamplePrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryFormulaPrefix
 
 /-!
 # Sampled mixed derivatives of the stored positive height
@@ -9,6 +11,8 @@ controlled-height estimate. Its existing collar, logarithmic bound and
 material envelope are reused for both `Q` and its literal reciprocal.
 The same parameter prefix is retained through every spatial order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

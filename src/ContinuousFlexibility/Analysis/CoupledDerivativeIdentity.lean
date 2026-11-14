@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CoupledActualErrorIdentity
+module
+
+public import ContinuousFlexibility.Analysis.CoupledActualErrorIdentity
 
 /-!
 # Exact derivative identity for the recovered state
@@ -7,6 +9,8 @@ The scalar and circle computations identify the value of the same genuine
 first jet. The conclusion is the actual ambient line derivative required
 by N10, and affine transport gives its sector-coordinate version.
 -/
+
+@[expose] public section
 
 noncomputable section
 

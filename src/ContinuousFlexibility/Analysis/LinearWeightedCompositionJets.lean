@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.FlowJetLinearization
-import Mathlib.Analysis.Calculus.ContDiff.Bounds
+module
+
+public import ContinuousFlexibility.Analysis.FlowJetLinearization
+public import Mathlib.Analysis.Calculus.ContDiff.Bounds
 
 /-!
 # Jets of a coefficient composed with a linear map and a linear weight
@@ -8,6 +10,8 @@ The fixed linear maps do not cost an input derivative. All derivatives
 of the coefficient through the output order enter only linearly. This is
 the quantitative operation used by the regularized root vector field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

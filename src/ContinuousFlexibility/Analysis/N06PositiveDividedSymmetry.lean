@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06PositiveCanonicalSymmetry
+module
+
+public import ContinuousFlexibility.Analysis.N06PositiveCanonicalSymmetry
 
 /-!
 # Symmetries of the actual positive cubic quotients
@@ -7,6 +9,8 @@ The original interior factorization determines the quotients uniquely.
 Consequently the proved current/reference principal symmetries give the
 period and even/odd/even reflection of these actual divided coefficients.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CircleMultilinearRealization
+module
+
+public import ContinuousFlexibility.Analysis.CircleMultilinearRealization
 
 /-!
 # Joint continuity from actual line derivatives and seminorm bounds
@@ -9,6 +11,8 @@ telescoping estimate controls variation of the directions. Thus a tower
 with actual line derivatives and uniform continuous-seminorm bounds
 has the joint continuity required by SmoothDirections.
 -/
+
+@[expose] public section
 
 noncomputable section
 

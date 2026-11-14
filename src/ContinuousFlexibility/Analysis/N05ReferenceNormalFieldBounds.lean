@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N05ReferenceZeroRemainder
-import ContinuousFlexibility.Analysis.N05ReferenceNormalCoefficientBounds
-import ContinuousFlexibility.Analysis.N05ReferenceOutputMultiplier
-import ContinuousFlexibility.Analysis.N05ReferenceFullAngularSobolev
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceZeroRemainder
+public import ContinuousFlexibility.Analysis.N05ReferenceNormalCoefficientBounds
+public import ContinuousFlexibility.Analysis.N05ReferenceOutputMultiplier
+public import ContinuousFlexibility.Analysis.N05ReferenceFullAngularSobolev
 
 /-!
 # Weighted bounds for the actual canonical radial field
@@ -10,6 +12,8 @@ Both coefficients have one common material exponent. Multiplication and
 subtraction therefore put the genuine radial field in a fixed weaker
 reference output space, uniformly before any angular order is chosen.
 -/
+
+@[expose] public section
 
 noncomputable section
 

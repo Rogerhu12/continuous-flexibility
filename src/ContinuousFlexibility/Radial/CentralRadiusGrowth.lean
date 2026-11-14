@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.CentralRadius
+module
+
+public import ContinuousFlexibility.Radial.CentralRadius
 
 /-!
 # Global growth of the actual central logarithmic radius derivative
@@ -8,6 +10,8 @@ actual half-line Gaussian kernel. It bounds the logarithmic derivative
 of the already constructed radius. Full differentiated end expansions
 are separate obligations of R03.07.
 -/
+
+@[expose] public section
 
 noncomputable section
 

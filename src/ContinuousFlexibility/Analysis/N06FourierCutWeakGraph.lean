@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06GlobalFourierApproximants
-import ContinuousFlexibility.Analysis.N06WeakAngularMultiplier
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
+module
+
+public import ContinuousFlexibility.Analysis.N06GlobalFourierApproximants
+public import ContinuousFlexibility.Analysis.N06WeakAngularMultiplier
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
 
 /-!
 # Fourier truncation preserves the actual canonical weak graph
@@ -10,6 +12,8 @@ coefficients are arbitrary L2 functions. Angular integration by parts and
 Fubini identify their actual weak jets on every original canonical interval.
 The zeroth reflection condition follows from the genuine cosine synthesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

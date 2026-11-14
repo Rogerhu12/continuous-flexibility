@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedCompositionMaps
-import ContinuousFlexibility.Scalar.WeightedUniformTameGermOperations
+module
+
+public import ContinuousFlexibility.Scalar.WeightedCompositionMaps
+public import ContinuousFlexibility.Scalar.WeightedUniformTameGermOperations
 
 /-!
 # Canonical actual scalar composition and its uniform tame germ
@@ -10,6 +12,8 @@ its genuine uniform tower near zero by decoder injectivity.  This canonical
 operation can then be composed with actual state germs vanishing at their
 center, including smooth cutoff extensions of scalar powers.
 -/
+
+@[expose] public section
 
 noncomputable section
 

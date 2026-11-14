@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData
-import ContinuousFlexibility.Analysis.WholeCanonicalInterfaceClassification
-import ContinuousFlexibility.Analysis.ActualAtlasCutFirstJets
+module
+
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData
+public import ContinuousFlexibility.Analysis.WholeCanonicalInterfaceClassification
+public import ContinuousFlexibility.Analysis.ActualAtlasCutFirstJets
 
 /-!
 # Retained physical interfaces and middle-cut jets after reference gauging
@@ -10,6 +12,8 @@ negative field. Hence the actual interface classification is the former
 one, and the forward middle-cut first jets are those of the same
 original negative atlas. Root matching is a separate assertion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

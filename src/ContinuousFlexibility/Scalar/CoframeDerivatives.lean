@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.Coframe
-import ContinuousFlexibility.Scalar.ConnectionVariation
+module
+
+public import ContinuousFlexibility.Scalar.Coframe
+public import ContinuousFlexibility.Scalar.ConnectionVariation
 
 /-!
 # Actual derivatives of the displayed orthonormal coframe
@@ -9,6 +11,8 @@ differentiates the actual coefficients along arbitrary scalar curves.
 The spatial Cartan structure equations are proved after binding these
 one-parameter identities to spatial directional derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

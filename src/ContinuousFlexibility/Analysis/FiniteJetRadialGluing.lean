@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.FiniteJetGluing
-import ContinuousFlexibility.Scalar.Coordinates
+module
+
+public import ContinuousFlexibility.Analysis.FiniteJetGluing
+public import ContinuousFlexibility.Scalar.Coordinates
 
 /-!
 # Finite matching at an actual radial interface
@@ -9,6 +11,8 @@ The left and right functions need ordinary regularity only at the
 points of their own closed half-strip. It applies to a closed negative
 root extension and the adjacent positive Taylor construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

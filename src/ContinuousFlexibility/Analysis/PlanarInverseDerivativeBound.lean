@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.AdjugateInversePrincipalField
-import Mathlib.Analysis.Normed.Operator.Prod
+module
+
+public import ContinuousFlexibility.Analysis.AdjugateInversePrincipalField
+public import Mathlib.Analysis.Normed.Operator.Prod
 
 /-!
 # A numerical bound for the actual inverse derivative
@@ -10,6 +12,8 @@ the inverse germ. A lower bound for the actual Jacobian therefore gives
 the quantitative first inverse derivative needed by the existing
 higher-jet inverse theorem, without assuming an inverse-jet estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

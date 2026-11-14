@@ -1,11 +1,13 @@
-import ContinuousFlexibility.Analysis.CircleShiftedForwardFixedBaseBounds
-import ContinuousFlexibility.Analysis.TameInverseValueFixedBaseBounds
-import ContinuousFlexibility.Analysis.TamePositiveLowerDomain
-import ContinuousFlexibility.Analysis.TameTranslatedInverseFixedBaseBounds
-import ContinuousFlexibility.Analysis.CircleInverseCompositionGrowth
-import ContinuousFlexibility.Analysis.CanonicalStateInterpolation
-import ContinuousFlexibility.Analysis.SolveNewtonBridge
-import ContinuousFlexibility.Analysis.N01cStateSeminorms
+module
+
+public import ContinuousFlexibility.Analysis.CircleShiftedForwardFixedBaseBounds
+public import ContinuousFlexibility.Analysis.TameInverseValueFixedBaseBounds
+public import ContinuousFlexibility.Analysis.TamePositiveLowerDomain
+public import ContinuousFlexibility.Analysis.TameTranslatedInverseFixedBaseBounds
+public import ContinuousFlexibility.Analysis.CircleInverseCompositionGrowth
+public import ContinuousFlexibility.Analysis.CanonicalStateInterpolation
+public import ContinuousFlexibility.Analysis.SolveNewtonBridge
+public import ContinuousFlexibility.Analysis.N01cStateSeminorms
 
 /-!
 # Fixed low-base bounds for the genuine positive circle inverse
@@ -16,6 +18,8 @@ normalized as a continuous linear map. The fixed-base inverse theorem is
 applied once at zero travel, and translation transports the same estimate
 to every given tower of the literal positive inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

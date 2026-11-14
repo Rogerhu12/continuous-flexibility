@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CirclePositiveLiftDomain
+module
+
+public import ContinuousFlexibility.Analysis.CirclePositiveLiftDomain
 
 /-!
 # One inverse-composition map on the positive-lift domain
@@ -8,6 +10,8 @@ given circle model. The decoded operator is always composition with the
 same actual invFun. Thus different local lower bounds give the same
 operator, which permits their genuine smooth tame towers to be glued.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartRootCoordinateBounds
-import ContinuousFlexibility.Analysis.N04NegativeChartInteriorPhysicalPositive
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootCoordinateBounds
+public import ContinuousFlexibility.Analysis.N04NegativeChartInteriorPhysicalPositive
 
 /-!
 # Root and interior coverage of each actual reference half
@@ -9,6 +11,8 @@ its positive band. Its material reciprocal bound supplies the interior
 estimate. Both regions use the same actual chart tower and the same half
 sample; the common parameter sector is chosen before all derivative orders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

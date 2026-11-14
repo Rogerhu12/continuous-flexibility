@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.Positivity
-import Mathlib.Analysis.Real.Sqrt
-import Mathlib.Tactic.FieldSimp
+module
+
+public import ContinuousFlexibility.Scalar.Positivity
+public import Mathlib.Analysis.Real.Sqrt
+public import Mathlib.Tactic.FieldSimp
 
 /-!
 # Pointwise coframe identity
@@ -9,6 +11,8 @@ Section 3, immediately after `height-jet-notation`. This proves the equality
 of the quadratic expressions. The Cartan structure equations and the
 identification with a geometric connection remain separate obligations.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility
 

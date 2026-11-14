@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aIntervalPrimitiveLp
-import ContinuousFlexibility.Analysis.IntervalWeakDivergence
-import ContinuousFlexibility.Analysis.L2BoundedMultiplier
+module
+
+public import ContinuousFlexibility.Analysis.N07aIntervalPrimitiveLp
+public import ContinuousFlexibility.Analysis.IntervalWeakDivergence
+public import ContinuousFlexibility.Analysis.L2BoundedMultiplier
 
 /-!
 # Recovering the actual second weak derivative on a regular radial interval
@@ -10,6 +12,8 @@ weak flux. Division by the actual nonvanishing leading coefficient then
 produces a genuine L² second derivative. Only coefficient bounds are used;
 no regularity of a chosen L² representative is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

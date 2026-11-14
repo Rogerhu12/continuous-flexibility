@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04RealizationNuResidualTower
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationNuResidualTower
 
 /-!
 # A uniform tower for the actual distinguished physical column
@@ -8,6 +10,8 @@ field on its original open neighborhood. Decoding commutes with that
 derivative, so this is the actual scalar column, with its uniform bounds
 still attached before any source-kernel wrapper is chosen.
 -/
+
+@[expose] public section
 
 noncomputable section
 

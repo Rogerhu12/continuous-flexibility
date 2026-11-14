@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.TailContinuedFraction
+module
+
+public import ContinuousFlexibility.Radial.TailContinuedFraction
 
 /-!
 # The square-summable natural node solution
@@ -7,6 +9,8 @@ The limiting ratios from finite Dirichlet walls determine a positive
 solution of the sign-alternated tridiagonal node equation. The mass-weighted
 values decay geometrically under the deep-tail ratio bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

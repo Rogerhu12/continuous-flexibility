@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.CentralEnergyIdentity
-import ContinuousFlexibility.Radial.OscillatorCompactCore
-import Mathlib.Analysis.InnerProductSpace.PiL2
-import Mathlib.MeasureTheory.Function.ConvergenceInMeasure
+module
+
+public import ContinuousFlexibility.Radial.CentralEnergyIdentity
+public import ContinuousFlexibility.Radial.OscillatorCompactCore
+public import Mathlib.Analysis.InnerProductSpace.PiL2
+public import Mathlib.MeasureTheory.Function.ConvergenceInMeasure
 
 /-!
 # The actual weak-derivative physical energy space
@@ -10,6 +12,8 @@ This file defines the Hilbert subspace of actual L2 triples (u, d, jXu).
 Weak differentiation uses genuine smooth compact tests, and multiplication
 by jX is an almost-everywhere identity of actual L2 representatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

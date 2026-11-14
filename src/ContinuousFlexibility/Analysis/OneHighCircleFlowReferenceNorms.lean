@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowReferenceIntegrability
-import ContinuousFlexibility.Analysis.OneHighCircleFlowSpeedNorms
-import ContinuousFlexibility.Analysis.OneHighCircleFourierRealAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowReferenceIntegrability
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowSpeedNorms
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierRealAlgebra
 
 /-!
 # Actual norms of the speed relative to a scalar reference
@@ -10,6 +12,8 @@ particular its order-(s+1) difference norm controls the order-s norm
 of the angular speed derivative. These are the quantities entering
 the translation comparison, with their time integrability proved.
 -/
+
+@[expose] public section
 
 noncomputable section
 

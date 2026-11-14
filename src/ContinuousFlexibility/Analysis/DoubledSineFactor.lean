@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SmoothDivisionBounds
-import ContinuousFlexibility.Analysis.OneHighCircleFlowLocalization
-import Mathlib.Analysis.SpecialFunctions.Trigonometric.Bounds
+module
+
+public import ContinuousFlexibility.Analysis.SmoothDivisionBounds
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowLocalization
+public import Mathlib.Analysis.SpecialFunctions.Trigonometric.Bounds
 
 /-!
 # One fixed smooth factor for the doubled-angle sine
@@ -11,6 +13,8 @@ reciprocal agreeing with the true reciprocal on a larger interval than
 the nearest-root window. All derivative bounds are numerical constants,
 chosen before any state, coefficient field, or physical radius.
 -/
+
+@[expose] public section
 
 noncomputable section
 

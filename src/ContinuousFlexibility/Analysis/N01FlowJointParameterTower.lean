@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01EndpointAngularJets
-import ContinuousFlexibility.Analysis.N01FlowSmallness
-import ContinuousFlexibility.Analysis.SmoothDirectionsJointAngular
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N01EndpointAngularJets
+public import ContinuousFlexibility.Analysis.N01FlowSmallness
+public import ContinuousFlexibility.Analysis.SmoothDirectionsJointAngular
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
 
 /-!
 # Genuine joint N01 parameter and angular towers at closed radii
@@ -11,6 +13,8 @@ Their finite joint expansion gives the actual flow increment, and the
 explicit reference flow restores the original flow. This construction
 applies to every radius in the closed flow interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

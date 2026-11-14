@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MorseChainGeometry
-import ContinuousFlexibility.Radial.MorseChainOverlapPartition
-import Mathlib.Logic.Equiv.Nat
+module
+
+public import ContinuousFlexibility.Radial.MorseChainGeometry
+public import ContinuousFlexibility.Radial.MorseChainOverlapPartition
+public import Mathlib.Logic.Equiv.Nat
 
 /-!
 # One indexing of the two genuine overlapping partitions
@@ -8,6 +10,8 @@ import Mathlib.Logic.Equiv.Nat
 The middle term occupies index zero. The remaining indices enumerate
 the two outward chains by the actual Bool-times-Nat equivalence.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsPhysicalOneHighPrefix
-import ContinuousFlexibility.Analysis.N04PulledFieldsPhysicalCurrent
-import ContinuousFlexibility.Analysis.N04PulledFieldsJointExpansion
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsPhysicalOneHighPrefix
+public import ContinuousFlexibility.Analysis.N04PulledFieldsPhysicalCurrent
+public import ContinuousFlexibility.Analysis.N04PulledFieldsJointExpansion
 
 /-!
 # Actual current data from sampled physical one-high estimates
@@ -11,6 +13,8 @@ low order works for the whole field family. Interpolation and the
 independent inverse prefix choose one smaller neighborhood before the
 field index. The full current data follow on that same neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

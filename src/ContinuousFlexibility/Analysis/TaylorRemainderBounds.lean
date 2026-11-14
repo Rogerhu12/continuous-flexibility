@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.FiniteJetRemainder
-import ContinuousFlexibility.Analysis.FiniteTaylorPolynomial
-import ContinuousFlexibility.Analysis.WeightedJetComposition
+module
+
+public import ContinuousFlexibility.Analysis.FiniteJetRemainder
+public import ContinuousFlexibility.Analysis.FiniteTaylorPolynomial
+public import ContinuousFlexibility.Analysis.WeightedJetComposition
 
 /-!
 # Weighted bounds for finite Taylor remainders
@@ -10,6 +12,8 @@ whose lower jets vanish and whose top derivative is bounded by twice the
 given bound. On a convex set of radius `ρ`, this gives all the powers
 `ρ ^ (n - j)` needed by the scale-invariant composition estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

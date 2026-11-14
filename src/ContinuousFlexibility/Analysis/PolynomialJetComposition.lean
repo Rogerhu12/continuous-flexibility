@@ -1,5 +1,7 @@
-import Mathlib.Analysis.Calculus.ContDiff.Bounds
-import Mathlib.Analysis.SpecialFunctions.Pow.Real
+module
+
+public import Mathlib.Analysis.Calculus.ContDiff.Bounds
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 
 /-!
 # Fixed component powers under finite jet operations
@@ -9,6 +11,8 @@ ordinary Faà di Bruno and Leibniz estimates therefore preserve growth by
 a fixed power of the component weight. Circle-lift values need not be
 bounded: composition only uses positive-order jets of the inner map.
 -/
+
+@[expose] public section
 
 noncomputable section
 

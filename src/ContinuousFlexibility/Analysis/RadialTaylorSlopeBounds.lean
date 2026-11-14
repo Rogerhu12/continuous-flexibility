@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.AngularTaylorPolynomial
-import ContinuousFlexibility.Analysis.PositiveAngularTaylorInterpolation
+module
+
+public import ContinuousFlexibility.Analysis.AngularTaylorPolynomial
+public import ContinuousFlexibility.Analysis.PositiveAngularTaylorInterpolation
 
 /-!
 # Positive radial Taylor slopes and a fixed mass margin
@@ -10,6 +12,8 @@ Uniform finite endpoint jets therefore give a positive slope on one
 collar chosen before the state. A separate elementary choice also makes
 the endpoint mass smaller than the fixed reference exit mass.
 -/
+
+@[expose] public section
 
 noncomputable section
 

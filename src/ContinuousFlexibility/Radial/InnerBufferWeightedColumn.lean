@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerBufferLocalizedConstruction
-import ContinuousFlexibility.Radial.InnerLocalizedWeights
+module
+
+public import ContinuousFlexibility.Radial.InnerBufferLocalizedConstruction
+public import ContinuousFlexibility.Radial.InnerLocalizedWeights
 
 /-!
 # Actual weighted Poisson columns from compression
@@ -10,6 +12,8 @@ cut weight, whereas the inverse applied to its commutator only pays the
 weight ratio inside its own retained model interval. The scalar estimate
 uses that same inverse, so the temporary central border is included.
 -/
+
+@[expose] public section
 
 noncomputable section
 

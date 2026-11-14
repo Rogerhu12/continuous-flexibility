@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.R07IncomingScale
-import ContinuousFlexibility.Radial.R07RadialUniqueness
-import ContinuousFlexibility.Radial.R07Assembly
+module
+
+public import ContinuousFlexibility.Radial.R07IncomingScale
+public import ContinuousFlexibility.Radial.R07RadialUniqueness
+public import ContinuousFlexibility.Radial.R07Assembly
 
 /-!
 # A concrete continuous incoming family with a fixed cap slope
@@ -10,6 +12,8 @@ other member has the same Cauchy data at the join and is transported by its
 own physical equation across the join. Scalar invariance of the model and
 finite-interval uniqueness identify the whole cap with the fixed member.
 -/
+
+@[expose] public section
 
 noncomputable section
 

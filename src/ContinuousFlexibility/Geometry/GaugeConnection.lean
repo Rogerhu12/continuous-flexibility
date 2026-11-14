@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Geometry.RotatedCoframe
+module
+
+public import ContinuousFlexibility.Geometry.RotatedCoframe
 
 /-!
 # The connection of a rotated coframe
@@ -8,6 +10,8 @@ For the convention `dη₁ = α ∧ η₂`, `dη₂ = -α ∧ η₁`, rotation b
 below use actual Frechet partial derivatives. This does not assert that an
 arbitrary closed connection on an annulus has a single-valued primitive.
 -/
+
+@[expose] public section
 
 noncomputable section
 

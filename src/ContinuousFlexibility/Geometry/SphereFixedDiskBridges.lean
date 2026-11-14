@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Geometry.SphereFixedDisks
-import ContinuousFlexibility.Statements.MainGeometry
+module
+
+public import ContinuousFlexibility.Geometry.SphereFixedDisks
+public import ContinuousFlexibility.Statements.MainGeometry
 
 /-!
 # Fixed disk regions for the actual sphere family
@@ -11,6 +13,8 @@ unit disk in the direction required by `Statements.DiskRegions`. The open rim
 agreement gives pointwise stationarity on the entire complementary cap,
 including the equator.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06PrimitiveReferenceColumns
-import ContinuousFlexibility.Analysis.N07aReferenceEnergyBudget
+module
+
+public import ContinuousFlexibility.Analysis.N06PrimitiveReferenceColumns
+public import ContinuousFlexibility.Analysis.N07aReferenceEnergyBudget
 
 /-!
 # The original reference inverse and its actual right-hand-side budget
@@ -9,6 +11,8 @@ calling the reference energy estimate. All constants precede the input
 band and source. This uses N05 and the raw reference jets, with no N06
 inverse or controlled reference coordinate hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

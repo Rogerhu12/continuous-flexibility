@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterTailInitialBounds
-import ContinuousFlexibility.Radial.OuterPhysicalTailBasis
+module
+
+public import ContinuousFlexibility.Radial.OuterTailInitialBounds
+public import ContinuousFlexibility.Radial.OuterPhysicalTailBasis
 
 /-!
 # Initial-edge estimates for the same actual physical basis
@@ -8,6 +10,8 @@ The reciprocal entrance normalizations cancel in the initial Green
 product. The full initial interval is controlled by its actual Poisson
 matrix, so it can use the first edge's label in localized estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

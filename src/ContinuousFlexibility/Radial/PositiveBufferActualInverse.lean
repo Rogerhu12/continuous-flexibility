@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.PositiveBufferSurgeryNorm
-import ContinuousFlexibility.Radial.PositiveBufferRestrictionForm
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferSurgeryNorm
+public import ContinuousFlexibility.Radial.PositiveBufferRestrictionForm
 
 /-!
 # The actual interval inverse from the normalized Green subtraction
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Radial.PositiveBufferRestrictionForm
 The finite-rank formula acts on the frozen L² × ℝ space. Both source and
 output restrictions are actual indicator operators.
 -/
+
+@[expose] public section
 
 noncomputable section
 

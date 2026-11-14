@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.L2KernelRepresentation
-import ContinuousFlexibility.Radial.TailFormIdentification
-import ContinuousFlexibility.Radial.TailGreenL2Representation
-import ContinuousFlexibility.Radial.TailNaturalUniqueness
+module
+
+public import ContinuousFlexibility.Analysis.L2KernelRepresentation
+public import ContinuousFlexibility.Radial.TailFormIdentification
+public import ContinuousFlexibility.Radial.TailGreenL2Representation
+public import ContinuousFlexibility.Radial.TailNaturalUniqueness
 
 /-!
 # The actual fundamental Green kernel for every weighted L² source
@@ -11,6 +13,8 @@ The right state is the actual square-integrable natural solution. This
 proves row-wise L² membership and extends the proved test representation
 of the Friedrichs inverse without any all-source representation input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

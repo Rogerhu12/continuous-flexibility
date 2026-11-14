@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometryPlanarParameterInverse
-import ContinuousFlexibility.Analysis.N04NegativeGeometryImplicitDirections
-import ContinuousFlexibility.Analysis.CircleSmoothDirectionsOperations
-import Mathlib.Analysis.Calculus.ContDiff.Operations
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryPlanarParameterInverse
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryImplicitDirections
+public import ContinuousFlexibility.Analysis.CircleSmoothDirectionsOperations
+public import Mathlib.Analysis.Calculus.ContDiff.Operations
 
 /-!
 # The genuine joint tower of a parameterized planar inverse
@@ -12,6 +14,8 @@ The ordinary implicit theorem on finite affine slices and the actual
 right-inverse equation then identify all implicit jet candidates.
 The parameter space retains its given topology throughout.
 -/
+
+@[expose] public section
 
 noncomputable section
 

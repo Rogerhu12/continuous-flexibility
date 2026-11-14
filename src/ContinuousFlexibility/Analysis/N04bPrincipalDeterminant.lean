@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.PrincipalCoefficientPullback
+module
+
+public import ContinuousFlexibility.Analysis.PrincipalCoefficientPullback
 
 /-!
 # The determinant of the actual transformed principal density
@@ -9,6 +11,8 @@ coordinate change multiplies the physical determinant by the fourth power
 of the actual height factor. This is an algebraic identity for the genuine
 derivative of the chart, and does not assume a transformation law.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowVariational
-import Mathlib.Algebra.Field.Periodic
-import Mathlib.Analysis.Calculus.Deriv.Shift
-import Mathlib.Analysis.Calculus.Deriv.MeanValue
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowVariational
+public import Mathlib.Algebra.Field.Periodic
+public import Mathlib.Analysis.Calculus.Deriv.Shift
+public import Mathlib.Analysis.Calculus.Deriv.MeanValue
 
 /-!
 # Continuity and the angular Jacobian of classical periodic flows
@@ -13,6 +15,8 @@ proves joint continuity, so the angular derivative is obtained from the
 genuine flow equation without a regularity hypothesis on the family.
 The angular period is an arbitrary positive real number.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryFiniteKernelBounds
-import ContinuousFlexibility.Analysis.N01cStateAngleSelections
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryFiniteKernelBounds
+public import ContinuousFlexibility.Analysis.N01cStateAngleSelections
 
 /-!
 # Saved positive words through a finite coefficient kernel
@@ -9,6 +11,8 @@ one from each block therefore leaves at least one saved order after the
 blocks are combined. The original parameter arity still determines the
 single height factor in the resulting bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowBasic
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowBasic
 
 /-!
 # Integral Gronwall with the actual time-dependent coefficients
@@ -9,6 +11,8 @@ estimate. The integrating factor below keeps the integral dependence.
 This is a general intermediate inequality; its applications derive the
 integral premise from the genuine trajectory or jet equation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

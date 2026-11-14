@@ -1,9 +1,11 @@
-import Mathlib.Analysis.LocallyConvex.WithSeminorms
-import Mathlib.Analysis.Normed.Module.Seminorm.Norm
-import Mathlib.Topology.Algebra.Module.ContinuousLinearMap.PiProd
-import Mathlib.Topology.Algebra.Module.ContinuousLinearMap.Restrict
-import Mathlib.Topology.Metrizable.CompletelyMetrizable
-import Mathlib.Topology.UniformSpace.Pi
+module
+
+public import Mathlib.Analysis.LocallyConvex.WithSeminorms
+public import Mathlib.Analysis.Normed.Module.Seminorm.Norm
+public import Mathlib.Topology.Algebra.Module.ContinuousLinearMap.PiProd
+public import Mathlib.Topology.Algebra.Module.ContinuousLinearMap.Restrict
+public import Mathlib.Topology.Metrizable.CompletelyMetrizable
+public import Mathlib.Topology.UniformSpace.Pi
 
 /-!
 # Compatible Banach scales as complete graded Fréchet spaces
@@ -21,6 +23,8 @@ Instantiating the levels with the manuscript's actual weighted Sobolev
 spaces, constructing smoothing operators, and proving tame estimates and
 a Nash–Moser iteration are separate obligations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

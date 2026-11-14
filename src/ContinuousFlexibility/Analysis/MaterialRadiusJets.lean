@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.MaterialOrdinaryJets
-import Mathlib.Analysis.Calculus.ContDiff.Bounds
+module
+
+public import ContinuousFlexibility.Analysis.MaterialOrdinaryJets
+public import Mathlib.Analysis.Calculus.ContDiff.Bounds
 
 /-!
 # Uniform ordinary jets of the material radius
@@ -10,6 +12,8 @@ after composition with the radius. Consequently all jets of the radius
 are bounded, and composing a scalar function with this actual coordinate
 costs only a constant at each fixed derivative order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

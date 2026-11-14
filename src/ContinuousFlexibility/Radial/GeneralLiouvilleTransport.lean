@@ -1,10 +1,12 @@
-import ContinuousFlexibility.Statements.Radial
-import ContinuousFlexibility.Radial.Liouville
-import Mathlib.Analysis.Calculus.InverseFunctionTheorem.Deriv
-import Mathlib.Analysis.Calculus.InverseFunctionTheorem.ContDiff
-import Mathlib.MeasureTheory.Function.JacobianOneDim
-import Mathlib.MeasureTheory.Function.L2Space
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+module
+
+public import ContinuousFlexibility.Statements.Radial
+public import ContinuousFlexibility.Radial.Liouville
+public import Mathlib.Analysis.Calculus.InverseFunctionTheorem.Deriv
+public import Mathlib.Analysis.Calculus.InverseFunctionTheorem.ContDiff
+public import Mathlib.MeasureTheory.Function.JacobianOneDim
+public import Mathlib.MeasureTheory.Function.L2Space
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 
 /-!
 # Full Liouville transport on the actual open radius range
@@ -13,6 +15,8 @@ No endpoint or surjectivity condition on the positive increasing radius is
 imposed. The primitive is integrated in model coordinates, and multiplication
 by the possibly unbounded positive density is implemented by changing measure.
 -/
+
+@[expose] public section
 
 noncomputable section
 

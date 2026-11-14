@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CharacteristicODEUniqueness
-import ContinuousFlexibility.Analysis.N01ReturnChartRegularity
-import ContinuousFlexibility.Analysis.StateControlCofiniteClosure
-import ContinuousFlexibility.Analysis.MaterialHeightRegularity
+module
+
+public import ContinuousFlexibility.Analysis.CharacteristicODEUniqueness
+public import ContinuousFlexibility.Analysis.N01ReturnChartRegularity
+public import ContinuousFlexibility.Analysis.StateControlCofiniteClosure
+public import ContinuousFlexibility.Analysis.MaterialHeightRegularity
 
 /-!
 # Ordinary-flow independence of the left chart
@@ -13,6 +15,8 @@ square root is separated into a continuous radial coefficient and a
 smooth angular factor; no radial differentiability of that square root
 is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

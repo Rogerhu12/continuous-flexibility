@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.PolynomialJetComposition
+module
+
+public import ContinuousFlexibility.Analysis.PolynomialJetComposition
 
 /-!
 # Exact height weights through mixed-jet composition and multiplication
@@ -8,6 +10,8 @@ jet estimate. Only the auxiliary component power grows under the chain
 and product rules. The functions and their derivatives remain the
 original ones; normalization is used only for a finite scalar majorant.
 -/
+
+@[expose] public section
 
 noncomputable section
 

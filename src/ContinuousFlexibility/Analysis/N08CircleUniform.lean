@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N08CircleTailComparison
-import ContinuousFlexibility.Analysis.N08ControlHeightLocalization
-import ContinuousFlexibility.Analysis.N08PhysicalCellEscape
-import ContinuousFlexibility.Analysis.N08DiagonalNeighborhood
+module
+
+public import ContinuousFlexibility.Analysis.N08CircleTailComparison
+public import ContinuousFlexibility.Analysis.N08ControlHeightLocalization
+public import ContinuousFlexibility.Analysis.N08PhysicalCellEscape
+public import ContinuousFlexibility.Analysis.N08DiagonalNeighborhood
 
 /-!
 # Uniform invertibility of the actual control diagonal
@@ -11,6 +13,8 @@ bound uses the actual localized height operators and the physical-cell
 comparison forced by N01. The remaining finite labels are controlled by
 continuity of that same first jet at the reference state.
 -/
+
+@[expose] public section
 
 noncomputable section
 

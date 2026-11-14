@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aAngularFirstJetGluing
-import ContinuousFlexibility.Analysis.N07aAngularReferenceSource
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularFirstJetGluing
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceSource
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
 
 /-!
 # The true reference flux has a right derivative at every interface
@@ -11,6 +13,8 @@ reference flux has a genuine right derivative at every radius, including
 the roots and middle cuts. This is the derivative used by FTC2; no global
 second normal derivative is postulated.
 -/
+
+@[expose] public section
 
 noncomputable section
 

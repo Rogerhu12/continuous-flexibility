@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CoupledCircleCompositionTerms
+module
+
+public import ContinuousFlexibility.Analysis.CoupledCircleCompositionTerms
 
 /-!
 # Finite expansions for every angular composition jet
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Analysis.CoupledCircleCompositionTerms
 Repeated angular differentiation produces a finite list of actual terms.
 The list retains the derivative budget needed by the fixed-loss estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

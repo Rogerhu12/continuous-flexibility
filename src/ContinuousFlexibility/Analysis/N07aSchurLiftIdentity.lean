@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aSchurOneHigh
+module
+
+public import ContinuousFlexibility.Analysis.N07aSchurOneHigh
 
 /-!
 # A Schur lift represents the same original operator
@@ -8,6 +10,8 @@ After Riesz realization, their scalar pairings determine every band.
 A bounded inclusion into the original space then identifies the lifted
 operator with the original one using the genuine strong band expansion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

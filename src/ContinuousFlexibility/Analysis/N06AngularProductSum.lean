@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06AngularLeibnizLp
+module
+
+public import ContinuousFlexibility.Analysis.N06AngularLeibnizLp
 
 /-!
 # Finite sums of products on the actual angular-jet L² space
@@ -7,6 +9,8 @@ The fixed-order multiplication estimate is combined with finite
 Cauchy--Schwarz. The output and every source component retain precisely
 the same actual angular derivative order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

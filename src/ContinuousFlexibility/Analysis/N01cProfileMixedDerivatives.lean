@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01cStateParameterJets
-import ContinuousFlexibility.Analysis.CylinderMixedJets
-import ContinuousFlexibility.Radial.RadialHeight
-import Mathlib.Order.Filter.Finite
+module
+
+public import ContinuousFlexibility.Analysis.N01cStateParameterJets
+public import ContinuousFlexibility.Analysis.CylinderMixedJets
+public import ContinuousFlexibility.Radial.RadialHeight
+public import Mathlib.Order.Filter.Finite
 
 /-!
 # Actual mixed parameter and radial derivatives of the controlled profile
@@ -17,6 +19,8 @@ The final identity retains the same state, control functions, and
 direction vectors.  No relation between a control's index and its physical
 support cell is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

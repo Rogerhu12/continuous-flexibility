@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.TerminalMatchingFixedThreshold
-import ContinuousFlexibility.Radial.TerminalMorseRelativeSource
-import ContinuousFlexibility.Radial.TerminalMorseEnergyBudget
-import ContinuousFlexibility.Radial.R07LaterSelection
+module
+
+public import ContinuousFlexibility.Radial.TerminalMatchingFixedThreshold
+public import ContinuousFlexibility.Radial.TerminalMorseRelativeSource
+public import ContinuousFlexibility.Radial.TerminalMorseEnergyBudget
+public import ContinuousFlexibility.Radial.R07LaterSelection
 
 /-!
 # A common terminal threshold for the actual later coefficients
@@ -10,6 +12,8 @@ The source and energy exponents and the inner inverse exponent are fixed
 before Cstar. After choosing any larger Cstar, one starting index makes
 their actual matching error smaller than the selected margin.
 -/
+
+@[expose] public section
 
 noncomputable section
 

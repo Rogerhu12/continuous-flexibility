@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05ReferenceOutputAngularLimit
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceOutputAngularLimit
 
 /-!
 # Strong high angular jet limits of the same reference inverse
@@ -8,6 +10,8 @@ all output coefficient square sums. The reconstruction therefore needs
 only angular square summability on the actual source. Its energy bound
 has the original constant and the original material exponents.
 -/
+
+@[expose] public section
 
 noncomputable section
 

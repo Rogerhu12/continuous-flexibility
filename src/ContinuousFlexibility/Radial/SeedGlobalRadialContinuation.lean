@@ -1,5 +1,9 @@
-import ContinuousFlexibility.Radial.SeedGlobalLogContinuation
-import ContinuousFlexibility.Radial.SeedRadialContinuation
+module
+
+public import ContinuousFlexibility.Radial.SeedGlobalLogContinuation
+public import ContinuousFlexibility.Radial.SeedRadialContinuation
+
+@[expose] public section
 
 noncomputable section
 

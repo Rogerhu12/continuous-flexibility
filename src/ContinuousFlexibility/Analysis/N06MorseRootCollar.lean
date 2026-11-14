@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06ReferenceRootDivision
-import ContinuousFlexibility.Analysis.N06MorseJoinFloor
-import ContinuousFlexibility.Radial.ScaleSlowVariation
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceRootDivision
+public import ContinuousFlexibility.Analysis.N06MorseJoinFloor
+public import ContinuousFlexibility.Radial.ScaleSlowVariation
 
 /-!
 # Polynomial collars of the actual reference turning roots
@@ -12,6 +14,8 @@ bound for the ordinary profile jets and the previously proved curvature
 lower bound select an explicit inverse-polynomial collar on both sides.
 No root-coordinate or endpoint-jet estimate is an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchingMatrixAlgebra
-import Mathlib.Analysis.Normed.Module.FiniteDimension
+module
+
+public import ContinuousFlexibility.Radial.MatchingMatrixAlgebra
+public import Mathlib.Analysis.Normed.Module.FiniteDimension
 
 /-!
 # Inverting the normalized matrix of cut values
@@ -8,6 +10,8 @@ The Green-column argument produces a matrix `1 + E`.  This module isolates
 the exact inverse identities and the elementary norm estimate used in the
 Dirichlet correction.  It applies to any finite set of cuts.
 -/
+
+@[expose] public section
 
 noncomputable section
 

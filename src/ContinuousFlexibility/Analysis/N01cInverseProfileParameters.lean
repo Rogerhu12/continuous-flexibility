@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cProfileRadialBounds
-import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
+module
+
+public import ContinuousFlexibility.Analysis.N01cProfileRadialBounds
+public import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
 
 /-!
 # Actual parameter towers for reciprocal radial profiles
@@ -14,6 +16,8 @@ spatial equality is transferred through a genuine neighbourhood germ.
 The reflected base state and all reflected parameter directions remain
 explicit in the exact tower formula.
 -/
+
+@[expose] public section
 
 noncomputable section
 

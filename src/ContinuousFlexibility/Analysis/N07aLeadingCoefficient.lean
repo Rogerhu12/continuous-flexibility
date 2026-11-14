@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import ContinuousFlexibility.Scalar.WeightedCoefficientAlgebra
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import ContinuousFlexibility.Scalar.WeightedCoefficientAlgebra
 
 /-!
 # The actual leading physical coefficient in the normal bootstrap
@@ -9,6 +11,8 @@ comparable to the reference radial weight. N03 preserves this coefficient
 exactly. Its reciprocal therefore has arbitrarily small material growth,
 without introducing a further ellipticity hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

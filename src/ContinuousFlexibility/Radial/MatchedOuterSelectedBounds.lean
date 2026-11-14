@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MatchedOuterSelectedScale
-import ContinuousFlexibility.Radial.MatchedOuterWholeModalBounds
-import ContinuousFlexibility.Radial.MatchedOuterNaturalColumn
+module
+
+public import ContinuousFlexibility.Radial.MatchedOuterSelectedScale
+public import ContinuousFlexibility.Radial.MatchedOuterWholeModalBounds
+public import ContinuousFlexibility.Radial.MatchedOuterNaturalColumn
 
 /-!
 # Uniform whole-tail bounds at the actual selected matching scale
@@ -10,6 +12,8 @@ the actual j² w(p)/p normalization. Their constants precede the height
 sequence, frequency, tail pair and supplied inverse. The only operator
 input is its all-source Green identity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

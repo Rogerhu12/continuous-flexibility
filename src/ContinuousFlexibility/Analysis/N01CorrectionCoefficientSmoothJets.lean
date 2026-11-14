@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01CorrectionCoefficientSpatialJets
-import ContinuousFlexibility.Analysis.N01CorrectionCoefficientSourceData
-import ContinuousFlexibility.Analysis.ReturnCorrectionSourceJets
+module
+
+public import ContinuousFlexibility.Analysis.N01CorrectionCoefficientSpatialJets
+public import ContinuousFlexibility.Analysis.N01CorrectionCoefficientSourceData
+public import ContinuousFlexibility.Analysis.ReturnCorrectionSourceJets
 
 /-!
 # The actual correction jets in the original smooth coefficient space
@@ -11,6 +13,8 @@ raw field itself. Zeroth-order identification, source symmetry and all
 material parameter derivatives therefore follow without additional
 regularity or formal-jet hypotheses.
 -/
+
+@[expose] public section
 
 noncomputable section
 

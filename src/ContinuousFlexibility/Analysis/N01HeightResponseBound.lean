@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01HeightLineResponse
+module
+
+public import ContinuousFlexibility.Analysis.N01HeightLineResponse
 
 /-!
 # The full optical response is bounded by the actual height-direction norm
@@ -8,6 +10,8 @@ Continuity of the actual response primitive then passes the same bound
 to the terminal radius. A direction agreeing locally with a radial
 primitive detects at least the full optical travel.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Geometry.CapDiskNormal
-import ContinuousFlexibility.Contracts.GraphCylinderVolume
-import Mathlib.Analysis.Calculus.InverseFunctionTheorem.ContDiff
-import Mathlib.Analysis.Calculus.InverseFunctionTheorem.Deriv
+module
+
+public import ContinuousFlexibility.Geometry.CapDiskNormal
+public import ContinuousFlexibility.Contracts.GraphCylinderVolume
+public import Mathlib.Analysis.Calculus.InverseFunctionTheorem.ContDiff
+public import Mathlib.Analysis.Calculus.InverseFunctionTheorem.Deriv
 
 /-!
 # The actual radial wall of the cap interior
@@ -12,6 +14,8 @@ therefore a genuine smooth function of physical height. This constructs the
 wall used for the inside region; it does not assume an interior or an outward
 orientation, and it does not assert that the analytic annular core exists.
 -/
+
+@[expose] public section
 
 noncomputable section
 

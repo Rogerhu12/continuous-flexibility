@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06WeakGraph
+module
+
+public import ContinuousFlexibility.Analysis.N06WeakGraph
 
 /-!
 # N06: the maximal weak modal graph
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Analysis.N06WeakGraph
 Source: `paper/flexible-surface-readable/08-stable-inverse.tex` lines 256–318.
 Task: `docs/tasks/N06-WeakGraph.md`.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

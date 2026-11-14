@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.SelectedOuterDeepSplit
-import ContinuousFlexibility.Radial.OuterPhysicalTailBasis
+module
+
+public import ContinuousFlexibility.Radial.SelectedOuterDeepSplit
+public import ContinuousFlexibility.Radial.OuterPhysicalTailBasis
 
 /-!
 # The actual selected deep split in the physical tail factory
@@ -9,6 +11,8 @@ only syntactic difference is the natural-number versus real exponent in
 the gauge density. Thus the complete physical basis is constructed from
 the deep hypotheses already proved for the selected profile.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Blueprint.CanonicalParts
-import Mathlib.Analysis.Convex.Topology
+module
+
+public import ContinuousFlexibility.Blueprint.CanonicalParts
+public import Mathlib.Analysis.Convex.Topology
 
 /-!
 # Connected actual pieces and their reflection-axis points
@@ -8,6 +10,8 @@ The current physical domain is the image of the fixed canonical strip
 under its genuine continuous inverse. Thus connectedness and an axis
 point follow from the existing chart contract even for curved cuts.
 -/
+
+@[expose] public section
 
 noncomputable section
 

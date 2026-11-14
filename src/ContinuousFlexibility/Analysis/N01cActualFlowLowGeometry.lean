@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cCommonCosineGeometry
-import ContinuousFlexibility.Analysis.N01cActualFlowForcingComposition
-import ContinuousFlexibility.Analysis.N01cFlowNumericConstants
+module
+
+public import ContinuousFlexibility.Analysis.N01cCommonCosineGeometry
+public import ContinuousFlexibility.Analysis.N01cActualFlowForcingComposition
+public import ContinuousFlexibility.Analysis.N01cFlowNumericConstants
 
 /-!
 # Stable low geometry of the actual finite-plot flow
@@ -10,6 +12,8 @@ the low derivative-defect norm. Its finite plot has exactly the same
 value at parameter zero. The numerical constants are chosen once from
 the common integrated fourth speed norm, before any parameter order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Scalar.HeightVariation
+module
+
+public import ContinuousFlexibility.Scalar.HeightVariation
 
 /-!
 # Removing the height parameter singularity
@@ -8,6 +10,8 @@ At a zero-residual base height, the genuine curvature numerator along
 normalized residual and proves its actual smoothness in the real parameter.
 This does not assert tame smoothness on the later weighted function spaces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

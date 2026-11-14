@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerRadialPotentialGraph
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialPotentialGraph
 
 /-!
 # The actual broken weak graph as a linear domain
@@ -9,6 +11,8 @@ are the actual matched H¹ domain, the local weak equations, and the one
 central row. No inverse, gluing conclusion, or Schur decomposition is a
 field of this space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

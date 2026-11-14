@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationEndpointFiberDirections
-import ContinuousFlexibility.Analysis.N04RealizationAngularFiberDirections
-import ContinuousFlexibility.Analysis.EndpointFiberPullbackAssembly
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationEndpointFiberDirections
+public import ContinuousFlexibility.Analysis.N04RealizationAngularFiberDirections
+public import ContinuousFlexibility.Analysis.EndpointFiberPullbackAssembly
 
 /-!
 # Joint regularity of the actual fiber pullback coordinate and chart
@@ -10,6 +12,8 @@ of the pulled-back fields supplies precisely the boundary data used
 by the radial interpolation. The final chart is its original forward
 fiber-angle formula, not a newly chosen inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

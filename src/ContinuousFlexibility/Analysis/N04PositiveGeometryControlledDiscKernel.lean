@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsSpatialKernel
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsSpatialKernel
 
 /-!
 # Finite spatial kernels for powers of the actual root discriminant
@@ -9,6 +11,8 @@ outer derivative order. The actual input bound supplies that radius at
 one fixed low parameter order; no polynomial dependence on a varying
 compact radius is asserted here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R07ConeTransfer
-import ContinuousFlexibility.Radial.R07ConeMiddle
+module
+
+public import ContinuousFlexibility.Radial.R07ConeTransfer
+public import ContinuousFlexibility.Radial.R07ConeMiddle
 
 /-!
 # Simultaneous finite cone heights and short-join tolerance
@@ -8,6 +10,8 @@ The two cone heights are chosen in disjoint thirds of the available
 middle-height interval. A single positive angle margin and a single join
 length work for every member of the finite frequency family.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Statements.N06PrimitiveGeometryBridge
-import ContinuousFlexibility.Analysis.N05ReferenceResidual
-import ContinuousFlexibility.Analysis.N06ReferenceCanonicalEquation
-import ContinuousFlexibility.Analysis.N06FiniteReferenceColumns
-import ContinuousFlexibility.Analysis.N07aReferenceOpenCoefficients
-import ContinuousFlexibility.Analysis.N07aCanonicalTestDivergence
+module
+
+public import ContinuousFlexibility.Statements.N06PrimitiveGeometryBridge
+public import ContinuousFlexibility.Analysis.N05ReferenceResidual
+public import ContinuousFlexibility.Analysis.N06ReferenceCanonicalEquation
+public import ContinuousFlexibility.Analysis.N06FiniteReferenceColumns
+public import ContinuousFlexibility.Analysis.N07aReferenceOpenCoefficients
+public import ContinuousFlexibility.Analysis.N07aCanonicalTestDivergence
 
 /-!
 # The genuine N05 reference equation in the open coefficient algebra
@@ -13,6 +15,8 @@ and the three original scalar columns.  The equation comes from the same
 N05 graph, before a relative operator or an N06 inverse has been built.
 No unit-length assertion is made about the canonical interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeInverseGeometry
-import ContinuousFlexibility.Analysis.N04NegativeInverseMixedPrefix
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeInverseGeometry
+public import ContinuousFlexibility.Analysis.N04NegativeInverseMixedPrefix
 
 /-!
 # The two actual inverse atoms from the vector inverse point
@@ -9,6 +11,8 @@ subtracts the original canonical angle; its derivative vanishes on
 every positive-parameter pure tuple. These identities retain the exact
 inverse point and require no estimates for inverse atoms as input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CanonicalActualReferenceGeometry
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalActualReferenceGeometry
 
 /-!
 # Qualitative geometry for the supplied reference gauge
@@ -10,6 +12,8 @@ transport theorems are applied to that exact displayed atlas. No
 reference functions, positive controls, cells or neighborhoods are
 selected here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerSelectedWeightedModels
-import ContinuousFlexibility.Radial.InnerActualReferenceBlocks
+module
+
+public import ContinuousFlexibility.Radial.InnerSelectedWeightedModels
+public import ContinuousFlexibility.Radial.InnerActualReferenceBlocks
 
 /-!
 # The two interface estimates for one selected physical inner chain
@@ -10,6 +12,8 @@ physical Poisson bounds. Invertibility is established at weight
 exponent zero, so the same interface inverse is used for every later
 weight exponent and sign.
 -/
+
+@[expose] public section
 
 noncomputable section
 

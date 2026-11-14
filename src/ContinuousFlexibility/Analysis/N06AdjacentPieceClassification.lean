@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06NegativePieceFiniteness
-import ContinuousFlexibility.Analysis.N06FiniteAtlasBoundary
-import Mathlib.Analysis.Calculus.LocalExtr.Basic
+module
+
+public import ContinuousFlexibility.Analysis.N06NegativePieceFiniteness
+public import ContinuousFlexibility.Analysis.N06FiniteAtlasBoundary
+public import Mathlib.Analysis.Calculus.LocalExtr.Basic
 
 /-!
 # Every adjacent negative reference pair is the prescribed cut pair
@@ -15,6 +17,8 @@ Thus the ordinary root and affine-cut matching theorems exhaust all
 adjacent reference indices, with no new classification premise. Current
 physical domains are not asserted to be these radial intervals.
 -/
+
+@[expose] public section
 
 noncomputable section
 

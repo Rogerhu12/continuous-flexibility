@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MatchingGraphRestrictions
-import ContinuousFlexibility.Radial.MatchedPhysicalChannelComparison
-import ContinuousFlexibility.Radial.MatchedPhysicalScalarGate
+module
+
+public import ContinuousFlexibility.Radial.MatchingGraphRestrictions
+public import ContinuousFlexibility.Radial.MatchedPhysicalChannelComparison
+public import ContinuousFlexibility.Radial.MatchedPhysicalScalarGate
 
 /-!
 # Exact compact support of the existing inner channels
@@ -11,6 +13,8 @@ which vanishes on that compact interval therefore gives the zero output
 channel, or the zero restricted input. These are equalities of the
 original L² elements and operators.
 -/
+
+@[expose] public section
 
 noncomputable section
 

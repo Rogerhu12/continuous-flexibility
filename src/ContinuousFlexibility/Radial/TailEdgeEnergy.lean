@@ -1,8 +1,10 @@
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
-import Mathlib.Analysis.Calculus.Deriv.Mul
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+public import Mathlib.Analysis.Calculus.Deriv.Mul
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
 
 /-!
 # Dirichlet energy on a resistance edge
@@ -11,6 +13,8 @@ On an edge with both endpoint values zero, the evaluation bound has the
 diagonal of the zero-potential Dirichlet Green function as its constant.
 Integrating gives the small relative bound used for the exact edge inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

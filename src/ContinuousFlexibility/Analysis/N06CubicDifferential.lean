@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.PhysicalTransmissionOperator
+module
+
+public import ContinuousFlexibility.Analysis.PhysicalTransmissionOperator
 
 /-!
 # Cubic coefficient differences act on the degenerate graph norm
@@ -8,6 +10,8 @@ The coefficients are genuine cubic multiples and all derivatives are the actual 
 derivatives. A local equality of coefficient differences is sufficient for the final
 two-operator estimate; no equality outside the canonical piece is required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

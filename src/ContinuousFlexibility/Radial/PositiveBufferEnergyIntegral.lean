@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.PositiveBufferEnergyMinimizer
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferEnergyMinimizer
 
 /-!
 # The physical energy of actual variational profiles
@@ -9,6 +11,8 @@ the potential on that region and on the support of the lift makes its total
 physical energy nonnegative.  Consequently its energy on each subregion is
 bounded by the energy of the lift.
 -/
+
+@[expose] public section
 
 noncomputable section
 

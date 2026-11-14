@@ -1,8 +1,10 @@
-import Mathlib.Analysis.Calculus.ContDiff.Comp
-import Mathlib.Analysis.Calculus.ContDiff.Bounds
-import Mathlib.Analysis.Calculus.ParametricIntervalIntegral
-import Mathlib.Analysis.Normed.Group.Bounded
-import Mathlib.Topology.Order.Compact
+module
+
+public import Mathlib.Analysis.Calculus.ContDiff.Comp
+public import Mathlib.Analysis.Calculus.ContDiff.Bounds
+public import Mathlib.Analysis.Calculus.ParametricIntervalIntegral
+public import Mathlib.Analysis.Normed.Group.Bounded
+public import Mathlib.Topology.Order.Compact
 
 /-!
 # Smooth dependence of a compact interval integral
@@ -13,6 +15,8 @@ bounded on a compact parameter neighborhood times the integration interval.
 This supplies the local domination needed for differentiation under the
 integral.  Finite-order induction then gives smoothness of every order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

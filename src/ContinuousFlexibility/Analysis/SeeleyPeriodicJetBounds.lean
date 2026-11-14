@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SeeleyWithinCylinderJets
-import ContinuousFlexibility.Analysis.PeriodicScalarFlow
-import Mathlib.Analysis.Calculus.FDeriv.Add
+module
+
+public import ContinuousFlexibility.Analysis.SeeleyWithinCylinderJets
+public import ContinuousFlexibility.Analysis.PeriodicScalarFlow
+public import Mathlib.Analysis.Calculus.FDeriv.Add
 
 /-!
 # Automatic bounds for periodic within-jets with radial support
@@ -10,6 +12,8 @@ translation preserves the half-plane. Vanishing on an open radial tail
 also propagates through derivatives, by germ congruence. Compactness of
 one angular period therefore bounds every actual within-jet separately.
 -/
+
+@[expose] public section
 
 noncomputable section
 

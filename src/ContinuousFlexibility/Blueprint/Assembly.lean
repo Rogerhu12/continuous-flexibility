@@ -1,45 +1,47 @@
-import ContinuousFlexibility.Blueprint.S01
-import ContinuousFlexibility.Blueprint.S02
-import ContinuousFlexibility.Blueprint.R01
-import ContinuousFlexibility.Blueprint.R02
-import ContinuousFlexibility.Blueprint.R03
-import ContinuousFlexibility.Blueprint.R04
-import ContinuousFlexibility.Blueprint.W01
-import ContinuousFlexibility.Blueprint.ScalarCalculus
-import ContinuousFlexibility.Blueprint.ScalarWeighted
-import ContinuousFlexibility.Blueprint.Tame
-import ContinuousFlexibility.Blueprint.Spaces
-import ContinuousFlexibility.Blueprint.R05a
-import ContinuousFlexibility.Blueprint.R05b
-import ContinuousFlexibility.Blueprint.R06a
-import ContinuousFlexibility.Blueprint.R06b
-import ContinuousFlexibility.Blueprint.R06c
-import ContinuousFlexibility.Blueprint.R07
-import ContinuousFlexibility.Blueprint.R08
-import ContinuousFlexibility.Blueprint.R09
-import ContinuousFlexibility.Blueprint.R10a
-import ContinuousFlexibility.Blueprint.R10b
-import ContinuousFlexibility.Blueprint.R11a
-import ContinuousFlexibility.Blueprint.R11b
-import ContinuousFlexibility.Blueprint.R12
-import ContinuousFlexibility.Blueprint.N01a
-import ContinuousFlexibility.Blueprint.N01b
-import ContinuousFlexibility.Blueprint.N01c
-import ContinuousFlexibility.Blueprint.N02N03
-import ContinuousFlexibility.Blueprint.N04Root
-import ContinuousFlexibility.Blueprint.N04Cubic
-import ContinuousFlexibility.Blueprint.N04Transmission
-import ContinuousFlexibility.Blueprint.N04a
-import ContinuousFlexibility.Blueprint.N04b
-import ContinuousFlexibility.Blueprint.N04Coordinates
-import ContinuousFlexibility.Blueprint.N05
-import ContinuousFlexibility.Blueprint.N06
-import ContinuousFlexibility.Blueprint.N07a
-import ContinuousFlexibility.Blueprint.N07b
-import ContinuousFlexibility.Blueprint.N08
-import ContinuousFlexibility.Blueprint.N09N10
-import ContinuousFlexibility.Blueprint.Solve
-import ContinuousFlexibility.Blueprint.N12
+module
+
+public import ContinuousFlexibility.Blueprint.S01
+public import ContinuousFlexibility.Blueprint.S02
+public import ContinuousFlexibility.Blueprint.R01
+public import ContinuousFlexibility.Blueprint.R02
+public import ContinuousFlexibility.Blueprint.R03
+public import ContinuousFlexibility.Blueprint.R04
+public import ContinuousFlexibility.Blueprint.W01
+public import ContinuousFlexibility.Blueprint.ScalarCalculus
+public import ContinuousFlexibility.Blueprint.ScalarWeighted
+public import ContinuousFlexibility.Blueprint.Tame
+public import ContinuousFlexibility.Blueprint.Spaces
+public import ContinuousFlexibility.Blueprint.R05a
+public import ContinuousFlexibility.Blueprint.R05b
+public import ContinuousFlexibility.Blueprint.R06a
+public import ContinuousFlexibility.Blueprint.R06b
+public import ContinuousFlexibility.Blueprint.R06c
+public import ContinuousFlexibility.Blueprint.R07
+public import ContinuousFlexibility.Blueprint.R08
+public import ContinuousFlexibility.Blueprint.R09
+public import ContinuousFlexibility.Blueprint.R10a
+public import ContinuousFlexibility.Blueprint.R10b
+public import ContinuousFlexibility.Blueprint.R11a
+public import ContinuousFlexibility.Blueprint.R11b
+public import ContinuousFlexibility.Blueprint.R12
+public import ContinuousFlexibility.Blueprint.N01a
+public import ContinuousFlexibility.Blueprint.N01b
+public import ContinuousFlexibility.Blueprint.N01c
+public import ContinuousFlexibility.Blueprint.N02N03
+public import ContinuousFlexibility.Blueprint.N04Root
+public import ContinuousFlexibility.Blueprint.N04Cubic
+public import ContinuousFlexibility.Blueprint.N04Transmission
+public import ContinuousFlexibility.Blueprint.N04a
+public import ContinuousFlexibility.Blueprint.N04b
+public import ContinuousFlexibility.Blueprint.N04Coordinates
+public import ContinuousFlexibility.Blueprint.N05
+public import ContinuousFlexibility.Blueprint.N06
+public import ContinuousFlexibility.Blueprint.N07a
+public import ContinuousFlexibility.Blueprint.N07b
+public import ContinuousFlexibility.Blueprint.N08
+public import ContinuousFlexibility.Blueprint.N09N10
+public import ContinuousFlexibility.Blueprint.Solve
+public import ContinuousFlexibility.Blueprint.N12
 
 /-!
 # Blueprint assembly
@@ -47,6 +49,8 @@ import ContinuousFlexibility.Blueprint.N12
 The blueprint nodes compose to `Nonempty FlatAnnularCore`. This file contains no `sorry`;
 the result depends on `sorryAx` exactly through the nodes that are still open.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

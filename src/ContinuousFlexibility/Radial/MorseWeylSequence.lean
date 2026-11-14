@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseMaximalDomain
-import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
+module
+
+public import ContinuousFlexibility.Radial.MorseMaximalDomain
+public import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
 
 /-!
 # Right-tail Weyl sequences for the Morse potential
@@ -8,6 +10,8 @@ A translated cutoff with width `n + 1` is multiplied by sine or cosine at
 the frequency of the target energy. Choosing the larger of the two `L²`
 norms gives a uniform normalization estimate, including at zero frequency.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.TailNaturalIntegrability
-import ContinuousFlexibility.Radial.TailNaturalEquationState
-import ContinuousFlexibility.Radial.TailNaturalNodeBounds
-import ContinuousFlexibility.Radial.TailNodeMassRecovery
+module
+
+public import ContinuousFlexibility.Radial.TailNaturalIntegrability
+public import ContinuousFlexibility.Radial.TailNaturalEquationState
+public import ContinuousFlexibility.Radial.TailNaturalNodeBounds
+public import ContinuousFlexibility.Radial.TailNodeMassRecovery
 
 /-!
 # Quantitative weighted norms of the actual natural tail
@@ -11,6 +13,8 @@ masses. Integrating the already constructed Poisson interpolation on the
 actual disjoint edges turns this into a bound for the whole outward tail.
 These estimates retain the first physical mass, as required in Lemma 6.4.
 -/
+
+@[expose] public section
 
 noncomputable section
 

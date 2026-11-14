@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
-import ContinuousFlexibility.Analysis.CanonicalAuxiliaryAtomPreservation
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
+public import ContinuousFlexibility.Analysis.CanonicalAuxiliaryAtomPreservation
 
 /-!
 # One positive geometry neighborhood for every auxiliary column
@@ -8,6 +10,8 @@ The selected positive pieces, geometric fields and gradings are
 unchanged by auxiliary replacement. A certificate at one auxiliary
 column therefore gives the same certificate at every other column.
 -/
+
+@[expose] public section
 
 noncomputable section
 

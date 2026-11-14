@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.AngularInverseRegularity
+module
+
+public import ContinuousFlexibility.Analysis.AngularInverseRegularity
 
 /-!
 # Higher angular powers and the commuted equation
@@ -7,6 +9,8 @@ The powers below are iterates of the maximal frequency operator.  Their
 coordinate formulas and all linearity assertions are proved on the actual
 Sobolev domains, including the intermediate domains in the commutator sum.
 -/
+
+@[expose] public section
 
 noncomputable section
 

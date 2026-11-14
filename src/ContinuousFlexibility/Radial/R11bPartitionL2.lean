@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.R11bPartitionMeasurable
-import Mathlib.MeasureTheory.Function.L2Space
-import Mathlib.MeasureTheory.Integral.Lebesgue.Add
+module
+
+public import ContinuousFlexibility.Radial.R11bPartitionMeasurable
+public import Mathlib.MeasureTheory.Function.L2Space
+public import Mathlib.MeasureTheory.Integral.Lebesgue.Add
 
 /-!
 # Global physical L2 membership from localized squares
@@ -9,6 +11,8 @@ Tonelli's theorem converts the summable family of actual square integrals
 into an integrable square majorant. Bounded overlap then controls the
 unlocalized field. The measure may be infinite and need not be sigma-finite.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

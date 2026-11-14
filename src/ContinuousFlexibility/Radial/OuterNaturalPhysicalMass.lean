@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.OuterNaturalMassScale
-import ContinuousFlexibility.Radial.DeepTailPhysicalLift
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
+module
+
+public import ContinuousFlexibility.Radial.OuterNaturalMassScale
+public import ContinuousFlexibility.Radial.DeepTailPhysicalLift
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
 
 /-!
 # First-mass transport for the actual radial deep tail
@@ -11,6 +13,8 @@ of each retained Morse mass interval, in outward order. Consequently
 the first mass is the normalized radial mass from the preceding module
 by its definition, not by an assumed mass comparison.
 -/
+
+@[expose] public section
 
 noncomputable section
 

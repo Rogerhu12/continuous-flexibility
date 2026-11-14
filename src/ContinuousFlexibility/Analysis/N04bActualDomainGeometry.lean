@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04bReferenceActualDomains
-import ContinuousFlexibility.Analysis.N04bNegativePairDomains
-import ContinuousFlexibility.Analysis.N04bNormalizationRegion
+module
+
+public import ContinuousFlexibility.Analysis.N04bReferenceActualDomains
+public import ContinuousFlexibility.Analysis.N04bNegativePairDomains
+public import ContinuousFlexibility.Analysis.N04bNormalizationRegion
 
 /-!
 # Actual typed domains, normalization and planar partition
@@ -10,6 +12,8 @@ the null moving cuts. Positive subdivisions retain their fixed radial
 domains. One arbitrary equivalence transfers the actual typed partition to
 the natural-number indices of the final atlas.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFourierSeries
-import ContinuousFlexibility.Analysis.OneHighCircleFourierSobolevProduct
-import ContinuousFlexibility.Analysis.OneHighConvolutionComplex
-import Mathlib.MeasureTheory.Integral.Bochner.SumMeasure
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierSeries
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierSobolevProduct
+public import ContinuousFlexibility.Analysis.OneHighConvolutionComplex
+public import Mathlib.MeasureTheory.Integral.Bochner.SumMeasure
 
 /-!
 # The actual angular multiplication commutator
@@ -12,6 +14,8 @@ uses the existing complete circle product estimate through the Fourier
 series of the nonnegative majorants, so no radial periodic extension is
 assumed and no second product inequality is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.TameUniformGrowth
-import ContinuousFlexibility.Analysis.CircleOuterCompositionBounds
-import ContinuousFlexibility.Analysis.CircleFiniteProductBounds
-import ContinuousFlexibility.Analysis.CircleCompositionSmoothDirections
+module
+
+public import ContinuousFlexibility.Analysis.TameUniformGrowth
+public import ContinuousFlexibility.Analysis.CircleOuterCompositionBounds
+public import ContinuousFlexibility.Analysis.CircleFiniteProductBounds
+public import ContinuousFlexibility.Analysis.CircleCompositionSmoothDirections
 
 /-!
 # Uniform bounded-set estimates for the actual composition tower
@@ -12,6 +14,8 @@ order and a loss chosen before the size of the bounded low-seminorm
 set. Multilinear normalization then gives a homogeneous bound for
 arbitrary directions, on the same bounded set of base points.
 -/
+
+@[expose] public section
 
 noncomputable section
 

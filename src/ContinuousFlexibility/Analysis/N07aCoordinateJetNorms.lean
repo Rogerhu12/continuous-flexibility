@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aSampleFrechetBounds
-import Mathlib.Analysis.Normed.Operator.Prod
+module
+
+public import ContinuousFlexibility.Analysis.N07aSampleFrechetBounds
+public import Mathlib.Analysis.Normed.Operator.Prod
 
 /-!
 # Actual coordinate derivatives with the identity angle separated
@@ -8,6 +10,8 @@ The unwrapped angular coordinate is unbounded at order zero. Its positive
 order derivatives have a fixed bound, so only the actual angle defect
 uses the geometric jet estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

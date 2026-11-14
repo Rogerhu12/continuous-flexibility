@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SpacesCompactHeights
-import ContinuousFlexibility.Scalar.WeightedDecodeLift
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Analysis.SpacesCompactHeights
+public import ContinuousFlexibility.Scalar.WeightedDecodeLift
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # Genuine compact even tests in the physical height space
@@ -9,6 +11,8 @@ An actual smooth periodic field with compact radial support has every
 weighted material jet in L². Its evenness then places it in the frozen
 height decoder, so N03 may be applied to this actual test field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import Mathlib.MeasureTheory.Function.LpSpace.Basic
-import Mathlib.MeasureTheory.Function.LpSeminorm.Indicator
+module
+
+public import Mathlib.MeasureTheory.Function.LpSpace.Basic
+public import Mathlib.MeasureTheory.Function.LpSeminorm.Indicator
 
 /-!
 # Restriction and zero extension in actual `L²` spaces
@@ -8,6 +10,8 @@ These operators retain the original measure normalization. Restriction is
 contractive, zero extension from a restricted measure is isometric, and
 their inverse identity is proved for the actual almost-everywhere classes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RootStationaryMaterialJets
-import ContinuousFlexibility.Analysis.ParameterizedInverseStateJets
+module
+
+public import ContinuousFlexibility.Analysis.RootStationaryMaterialJets
+public import ContinuousFlexibility.Analysis.ParameterizedInverseStateJets
 
 /-!
 # Actual inverse jets on the stationary root axis
@@ -11,6 +13,8 @@ derived from the true inverse identity; the existing inverse polynomial
 then controls all positive jets with one material loss. No inverse flow
 jet or inverse angular lower bound is supplied as a quantitative input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

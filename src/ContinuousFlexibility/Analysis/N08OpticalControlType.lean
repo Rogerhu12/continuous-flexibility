@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N08OpticalSquareRoot
-import ContinuousFlexibility.Analysis.N08CircleReferenceDiagonal
-import ContinuousFlexibility.Analysis.N08StateLinearOperations
+module
+
+public import ContinuousFlexibility.Analysis.N08OpticalSquareRoot
+public import ContinuousFlexibility.Analysis.N08CircleReferenceDiagonal
+public import ContinuousFlexibility.Analysis.N08StateLinearOperations
 
 /-!
 # Relative control of the actual optical radicand
@@ -12,6 +14,8 @@ inside such a line, so its control coefficient is bounded relative to the
 reference radicand. No placement of the control interval in `C.cell m` is
 used, and preservation of the negative type is proved rather than assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

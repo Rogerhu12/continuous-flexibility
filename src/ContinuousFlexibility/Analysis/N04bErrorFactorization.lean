@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # The exact vanishing forced by the return-error factorization
@@ -8,6 +10,8 @@ N03 therefore identifies the actual physical operators on every height
 test. More generally, continuity of a parameter-dependent linear error
 preserves a residual that is smaller than the parameter to first order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

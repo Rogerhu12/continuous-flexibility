@@ -1,8 +1,10 @@
-import Mathlib.RingTheory.Polynomial.Hermite.Gaussian
-import Mathlib.Algebra.Polynomial.Monic
-import Mathlib.Analysis.Calculus.ContDiff.Polynomial
-import Mathlib.Tactic.Ring
-import Mathlib.Tactic.NormNum
+module
+
+public import Mathlib.RingTheory.Polynomial.Hermite.Gaussian
+public import Mathlib.Algebra.Polynomial.Monic
+public import Mathlib.Analysis.Calculus.ContDiff.Polynomial
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.NormNum
 
 /-!
 # Differential equations of the existing Hermite polynomials
@@ -11,6 +13,8 @@ These are mathlib's probabilists' Hermite polynomials, mapped to real
 coefficients. Their derivative and second-order equation are deduced from
 the existing recursion; no polynomial eigen-equation is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

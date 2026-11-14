@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledFamilyMaterial
-import ContinuousFlexibility.Analysis.N04PositiveGeometryReferencePullbackCosts
-import ContinuousFlexibility.Analysis.N04RealizationFixedRadialPullback
-import ContinuousFlexibility.Analysis.WholePositiveReferenceGauge
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledFamilyMaterial
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryReferencePullbackCosts
+public import ContinuousFlexibility.Analysis.N04RealizationFixedRadialPullback
+public import ContinuousFlexibility.Analysis.WholePositiveReferenceGauge
 
 /-!
 # The actual inverse chart in the fixed reference gauge
@@ -11,6 +13,8 @@ reference inverse. Its radial chain coefficients change the material
 constant only. The original parameter height factor and the complete
 normalized spatial-plus-parameter exponent remain unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

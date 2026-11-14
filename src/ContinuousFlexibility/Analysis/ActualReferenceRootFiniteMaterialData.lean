@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.ActualReferenceRootSlopeNormalization
-import ContinuousFlexibility.Analysis.N03RootEndpointMaterialJets
-import ContinuousFlexibility.Analysis.N04bActualAtlasInteriorCompletion
-import ContinuousFlexibility.Analysis.OneSidedBoundaryJets
-import ContinuousFlexibility.Analysis.N04bReferenceActualTravel
+module
+
+public import ContinuousFlexibility.Analysis.ActualReferenceRootSlopeNormalization
+public import ContinuousFlexibility.Analysis.N03RootEndpointMaterialJets
+public import ContinuousFlexibility.Analysis.N04bActualAtlasInteriorCompletion
+public import ContinuousFlexibility.Analysis.OneSidedBoundaryJets
+public import ContinuousFlexibility.Analysis.N04bReferenceActualTravel
 
 /-!
 # Actual finite reference data with a material envelope
@@ -14,6 +16,8 @@ A finite sum gives the raw coefficients and the two positive lower
 bounds needed by the displayed reference Taylor width. The optical
 lower condition remains explicit on the same negative component/host.
 -/
+
+@[expose] public section
 
 noncomputable section
 

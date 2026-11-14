@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsMixedBlocks
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInversePartitionBudget
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsMixedBlocks
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInversePartitionBudget
 
 /-!
 # One weighted term of the actual parameterized inverse recurrence
@@ -9,6 +11,8 @@ All remaining genuine inverse blocks save one spatial order. The exact
 partition budget therefore preserves both the spatial coefficient one
 and a single positive-parameter height factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

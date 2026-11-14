@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.CentralRadiusMetric
+module
+
+public import ContinuousFlexibility.Radial.CentralRadiusMetric
 
 /-!
 # The actual central profile and its surviving mode
@@ -8,6 +10,8 @@ the required turning coefficient. Its explicit positive mode solves the
 actual radial Jacobi equation. This is a differential kernel statement;
 the closed spectral domain and its full kernel classification are separate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

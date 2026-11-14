@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01FlowGermLocality
-import ContinuousFlexibility.Analysis.ReturnCorrectionResidualCompatibility
+module
+
+public import ContinuousFlexibility.Analysis.N01FlowGermLocality
+public import ContinuousFlexibility.Analysis.ReturnCorrectionResidualCompatibility
 
 /-!
 # The actual residual error does not see the height trace constant
@@ -10,6 +12,8 @@ coefficient error vanishes off those components. Both actual fluxes
 therefore use only derivatives of the decoded height-space component.
 This is a global identity of the flux functions, before differentiating.
 -/
+
+@[expose] public section
 
 noncomputable section
 

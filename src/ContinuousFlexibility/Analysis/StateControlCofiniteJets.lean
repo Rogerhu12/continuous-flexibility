@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.StateControlDecay
-import Mathlib.Order.Filter.Cofinite
-import Mathlib.Order.Filter.Finite
+module
+
+public import ContinuousFlexibility.Analysis.StateControlDecay
+public import Mathlib.Order.Filter.Cofinite
+public import Mathlib.Order.Filter.Finite
 
 /-!
 # Flat control jets from cofinite bounds on the components
@@ -12,6 +14,8 @@ all but finitely many components then gives the endpoint limit of the
 actual locally finite control sum. No identification of a component with
 the cell used to estimate its coefficient is needed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

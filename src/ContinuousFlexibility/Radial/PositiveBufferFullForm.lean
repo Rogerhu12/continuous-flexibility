@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.PositiveBufferEnergyForm
-import ContinuousFlexibility.Radial.PositiveBufferTraceMap
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferEnergyForm
+public import ContinuousFlexibility.Radial.PositiveBufferTraceMap
 
 /-!
 # The full bordered inverse in its actual energy domain
@@ -9,6 +11,8 @@ field. This module turns those coordinates into the energy-space element
 used by Green's identity. The scalar restriction in the unbordered case is
 retained as part of the domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cActualFlowSpeedOuterBounds
-import ContinuousFlexibility.Analysis.N01cActualFlowForcingComposition
+module
+
+public import ContinuousFlexibility.Analysis.N01cActualFlowSpeedOuterBounds
+public import ContinuousFlexibility.Analysis.N01cActualFlowForcingComposition
 
 /-!
 # The actual singleton linear speed jet
@@ -9,6 +11,8 @@ zeroth state jet is therefore the actual first angular derivative of the
 cosine speed, with the genuine compact-time derivative as its multiplier.
 Further angular derivatives do not change that multiplier.
 -/
+
+@[expose] public section
 
 noncomputable section
 

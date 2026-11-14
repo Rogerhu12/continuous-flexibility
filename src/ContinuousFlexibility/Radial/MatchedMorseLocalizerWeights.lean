@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.MatchedMorseLocalizerPieces
-import ContinuousFlexibility.Radial.MatchedMorsePieceWeights
-import ContinuousFlexibility.Radial.MatchedMorseNearWeights
-import ContinuousFlexibility.Radial.InnerPhysicalSourceBridge
+module
+
+public import ContinuousFlexibility.Radial.MatchedMorseLocalizerPieces
+public import ContinuousFlexibility.Radial.MatchedMorsePieceWeights
+public import ContinuousFlexibility.Radial.MatchedMorseNearWeights
+public import ContinuousFlexibility.Radial.InnerPhysicalSourceBridge
 
 /-!
 # Uniform actual weight comparisons on the true localizers
@@ -11,6 +13,8 @@ old labels. The fixed initial seam index absorbs the finitely many
 initial labels. Every later label meets only neighboring original
 pieces. All constants are independent of the retained length and mode.
 -/
+
+@[expose] public section
 
 noncomputable section
 

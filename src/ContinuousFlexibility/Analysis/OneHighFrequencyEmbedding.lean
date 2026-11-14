@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OneHighFrequencyNorms
+module
+
+public import ContinuousFlexibility.Analysis.OneHighFrequencyNorms
 
 /-!
 # The inverse-weight Fourier embedding estimate
@@ -7,6 +9,8 @@ Cauchy--Schwarz turns a square-integrable inverse weight and weighted frequency
 data into integrable Fourier data, with the exact product of the two `L²` norms.
 Circle and cylinder embeddings differ only in their inverse-weight integral.
 -/
+
+@[expose] public section
 
 noncomputable section
 

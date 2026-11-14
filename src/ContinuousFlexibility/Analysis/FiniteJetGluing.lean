@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.FirstDerivativeGluing
+module
+
+public import ContinuousFlexibility.Analysis.FirstDerivativeGluing
 
 /-!
 # Finite regularity from matching ordinary jets
@@ -8,6 +10,8 @@ points. Matching actual jets through order n suffices for a C^n piecewise
 function on the open ambient domain. No common infinite-order collar or
 restriction on how curves cross the interface is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

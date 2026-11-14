@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.Gauge
-import ContinuousFlexibility.Radial.OscillatorCompactCore
-import ContinuousFlexibility.Statements.Radial
-import Mathlib.Analysis.Calculus.MeanValue
-import Mathlib.Analysis.Calculus.TangentCone.Real
+module
+
+public import ContinuousFlexibility.Radial.Gauge
+public import ContinuousFlexibility.Radial.OscillatorCompactCore
+public import ContinuousFlexibility.Statements.Radial
+public import Mathlib.Analysis.Calculus.MeanValue
+public import Mathlib.Analysis.Calculus.TangentCone.Real
 
 /-!
 # The obstruction to an unweighted inverse at a flat endpoint
@@ -13,6 +15,8 @@ flat endpoint has a differential image arbitrarily small relative to its
 unweighted norm.  The weighted inverse and the cell-localized estimates
 are unaffected by this obstruction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

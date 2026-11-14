@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05CanonicalSourceCoefficient
-import ContinuousFlexibility.Radial.ProfilePartitionBounds
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05CanonicalSourceCoefficient
+public import ContinuousFlexibility.Radial.ProfilePartitionBounds
 
 /-!
 # Finite localized source weights on the actual pieces
@@ -10,6 +12,8 @@ localizers. The same constant controls every such finite sum, because the
 true nonnegative partition of one has square sum at most one. This permits
 deriving the infinite source square sum from integral estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

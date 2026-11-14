@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07bAngularChainExpansion
-import ContinuousFlexibility.Analysis.N07bMaterialJetEnergy
-import ContinuousFlexibility.Analysis.N07bCanonicalSourceLift
-import ContinuousFlexibility.Radial.R11bPartitionSquare
+module
+
+public import ContinuousFlexibility.Analysis.N07bAngularChainExpansion
+public import ContinuousFlexibility.Analysis.N07bMaterialJetEnergy
+public import ContinuousFlexibility.Analysis.N07bCanonicalSourceLift
+public import ContinuousFlexibility.Radial.R11bPartitionSquare
 
 /-!
 # A genuine physical majorant for the canonical source energy
@@ -12,6 +14,8 @@ Once that comparison is available, finite Cauchy--Schwarz and the actual
 material jet energies supply an integrable majorant independent of the
 piece index. The source loses only one material weight order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OuterSeamRegions
+module
+
+public import ContinuousFlexibility.Radial.OuterSeamRegions
 
 /-!
 # Reverse support bounds for a specified physical localizer
@@ -8,6 +10,8 @@ Separation of the two chains identifies its side, and the collar geometry
 then bounds its fixed physical label. No covering cell is substituted for
 the localizer that appears in the estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

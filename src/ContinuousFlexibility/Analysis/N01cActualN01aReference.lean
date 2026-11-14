@@ -1,8 +1,12 @@
-import ContinuousFlexibility.Analysis.N01cActualReferenceWith
-import ContinuousFlexibility.Analysis.N01cActualPrimitiveGeometry
-import ContinuousFlexibility.Analysis.N01cRetainedComponentEnumeration
+module
+
+public import ContinuousFlexibility.Analysis.N01cActualReferenceWith
+public import ContinuousFlexibility.Analysis.N01cActualPrimitiveGeometry
+public import ContinuousFlexibility.Analysis.N01cRetainedComponentEnumeration
 
 /-! # The actual N01a reference with both primitive obligations retained -/
+
+@[expose] public section
 
 noncomputable section
 

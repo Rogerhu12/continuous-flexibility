@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PrincipalDividedValue
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalDividedValue
 
 /-!
 # Abstract transport of current data through cubic division
@@ -7,6 +9,8 @@ This interface leaves the parameter space, grading, open domain and
 sample envelopes abstract. The quotient tower is constructed on every
 piece, with a zero tower outside the pieces carrying the numerator.
 -/
+
+@[expose] public section
 
 noncomputable section
 

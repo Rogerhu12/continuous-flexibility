@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04bOpticalHeightVariation
+module
+
+public import ContinuousFlexibility.Analysis.N04bOpticalHeightVariation
 
 /-!
 # Sensitivity of the actual radial coefficient to a height direction
@@ -10,6 +12,8 @@ zero first derivative and nonzero second derivative at an interior
 point.  The last lemma records the effect of a fixed change of radial
 coordinate on this response, without assuming any estimate for it.
 -/
+
+@[expose] public section
 
 noncomputable section
 

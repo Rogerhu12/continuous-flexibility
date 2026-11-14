@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ReferenceCosineAlgebra
-import ContinuousFlexibility.Radial.ReferenceSmoothGreen
-import ContinuousFlexibility.Analysis.RootCompositionIntegral
+module
+
+public import ContinuousFlexibility.Radial.ReferenceCosineAlgebra
+public import ContinuousFlexibility.Radial.ReferenceSmoothGreen
+public import ContinuousFlexibility.Analysis.RootCompositionIntegral
 
 /-!
 # Smooth projected radial tests
@@ -9,6 +11,8 @@ Angular integration over a compact period preserves smoothness. Its actual
 radial derivative is the coefficient of the actual radial partial, and
 finite cosine projection preserves compact radial support.
 -/
+
+@[expose] public section
 
 open Set Filter MeasureTheory
 open scoped ContDiff Topology

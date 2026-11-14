@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.TailEdgeEnergy
-import Mathlib.Topology.Order.IntermediateValue
+module
+
+public import ContinuousFlexibility.Radial.TailEdgeEnergy
+public import Mathlib.Topology.Order.IntermediateValue
 
 /-!
 # Weighted Poincaré estimates on a mass interval
@@ -9,6 +11,8 @@ mean supplies a zero of the continuous function, and weighted Cauchy--Schwarz
 then controls every value, including both endpoint traces. These estimates
 apply to either orientation of an interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
+module
+
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
 
 /-!
 # Fixed low-order bounds under the endpoint's linear parameter maps
@@ -8,6 +10,8 @@ to one or two circle entries. A uniform seminorm bound for that map
 preserves the one-high expression with the same low order and loss.
 Only a numerical factor depending on the parameter order is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

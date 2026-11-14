@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01aReferenceCutoff
-import ContinuousFlexibility.Analysis.N01aReferencePairing
+module
+
+public import ContinuousFlexibility.Analysis.N01aReferenceCutoff
+public import ContinuousFlexibility.Analysis.N01aReferencePairing
 
 /-!
 # Vanishing of the inverse scalar at a pure row
@@ -8,6 +10,8 @@ The scalar coefficient is recovered by testing against interior cutoffs of
 the actual normalized natural eigenfunction.  The smooth-core approximation
 then transfers this conclusion to the reference inverse itself.
 -/
+
+@[expose] public section
 
 noncomputable section
 

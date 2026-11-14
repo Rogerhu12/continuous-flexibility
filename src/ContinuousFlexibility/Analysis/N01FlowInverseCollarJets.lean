@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01FlowCollarJetBounds
-import ContinuousFlexibility.Analysis.N01FlowInverseJetBounds
-import ContinuousFlexibility.Analysis.PolynomialFiberInverseJets
+module
+
+public import ContinuousFlexibility.Analysis.N01FlowCollarJetBounds
+public import ContinuousFlexibility.Analysis.N01FlowInverseJetBounds
+public import ContinuousFlexibility.Analysis.PolynomialFiberInverseJets
 
 /-!
 # Mixed jets of the actual inverse flow on the selected optical collars
@@ -10,6 +12,8 @@ smoothness and right-inverse identity are derived from N01. The common
 angular derivative lower bound then converts the forward mixed-jet
 bounds into bounds for every positive-order mixed inverse jet.
 -/
+
+@[expose] public section
 
 noncomputable section
 

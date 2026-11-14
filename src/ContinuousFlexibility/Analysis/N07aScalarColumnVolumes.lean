@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N07aFiniteCoefficientTameVolume
-import ContinuousFlexibility.Analysis.N07aScalarColumnSupport
-import ContinuousFlexibility.Analysis.N07aCanonicalAtomBounds
-import ContinuousFlexibility.Analysis.N07aParameterGrading
-import ContinuousFlexibility.Analysis.N07aReferenceReturn
-import ContinuousFlexibility.Analysis.N07aCanonicalCoefficientDifference
+module
+
+public import ContinuousFlexibility.Analysis.N07aFiniteCoefficientTameVolume
+public import ContinuousFlexibility.Analysis.N07aScalarColumnSupport
+public import ContinuousFlexibility.Analysis.N07aCanonicalAtomBounds
+public import ContinuousFlexibility.Analysis.N07aParameterGrading
+public import ContinuousFlexibility.Analysis.N07aReferenceReturn
+public import ContinuousFlexibility.Analysis.N07aCanonicalCoefficientDifference
 
 /-!
 # The actual scalar columns in every weighted source level
@@ -13,6 +15,8 @@ support gives one fixed finite set of pieces. Consequently all three
 original columns have genuine weighted graph representatives and a
 one-high norm bound, independently of the later nonlinear Source family.
 -/
+
+@[expose] public section
 
 noncomputable section
 

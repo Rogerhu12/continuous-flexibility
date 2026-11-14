@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.IntervalFluxEnergy
-import ContinuousFlexibility.Radial.R11bRadialTests
-import ContinuousFlexibility.Radial.R11bTensorL2
-import ContinuousFlexibility.Radial.R11bPhysicalPairing
+module
+
+public import ContinuousFlexibility.Analysis.IntervalFluxEnergy
+public import ContinuousFlexibility.Radial.R11bRadialTests
+public import ContinuousFlexibility.Radial.R11bTensorL2
+public import ContinuousFlexibility.Radial.R11bPhysicalPairing
 
 /-!
 # The actual weak normal derivative of radial tensors
@@ -10,6 +12,8 @@ Compact radial tests restrict to smooth compact tests on every angular slice.
 One-dimensional integration by parts and physical Fubini then identify the
 normal derivative of a radial C¹ representative times an angular L² function.
 -/
+
+@[expose] public section
 
 noncomputable section
 

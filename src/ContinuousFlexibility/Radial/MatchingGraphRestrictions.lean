@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ModeLocalMeasure
-import Mathlib.Analysis.Calculus.Deriv.Basic
-import Mathlib.MeasureTheory.Measure.Typeclasses.NullSingletonClass
+module
+
+public import ContinuousFlexibility.Radial.ModeLocalMeasure
+public import Mathlib.Analysis.Calculus.Deriv.Basic
+public import Mathlib.MeasureTheory.Measure.Typeclasses.NullSingletonClass
 
 /-!
 # Restriction of the frozen modal equation to matching regions
@@ -9,6 +11,8 @@ The given source maps are the actual Hilbert-space restrictions.
 These lemmas transport a global weak solution to the inner
 and outer regions and preserve the inner border row.
 -/
+
+@[expose] public section
 
 noncomputable section
 

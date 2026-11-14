@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledSavedMovingWords
-import ContinuousFlexibility.Analysis.CircleSmoothDirectionsOperations
-import ContinuousFlexibility.Analysis.TameProductDirections
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledSavedMovingWords
+public import ContinuousFlexibility.Analysis.CircleSmoothDirectionsOperations
+public import ContinuousFlexibility.Analysis.TameProductDirections
 
 /-!
 # The fixed spatial coordinates in positive joint words
@@ -10,6 +12,8 @@ first spatial derivative has cost one, and every parameter derivative
 vanishes. Adding or pairing that coordinate therefore preserves the
 saved spatial order and the original parameter height factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

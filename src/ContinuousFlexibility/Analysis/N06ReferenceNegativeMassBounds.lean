@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06ReferenceNegativeMass
-import ContinuousFlexibility.Analysis.N06ReferenceTravelBounds
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceNegativeMass
+public import ContinuousFlexibility.Analysis.N06ReferenceTravelBounds
 
 /-!
 # Reciprocal mass from the original physical cell certificate
@@ -11,6 +13,8 @@ with the proved cut-travel estimate keeps one and the same physical cell
 in both the cut-radius lower bound and the reciprocal-mass upper bound.
 This physical index is not replaced by the canonical label `K.cell`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

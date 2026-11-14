@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.WholePositiveEndpointFields
-import ContinuousFlexibility.Analysis.N04bPositiveDivision
+module
+
+public import ContinuousFlexibility.Analysis.WholePositiveEndpointFields
+public import ContinuousFlexibility.Analysis.N04bPositiveDivision
 
 /-!
 # Positive source functions are unchanged by interior division
@@ -8,6 +10,8 @@ The interior completion changes only the stored divided coefficient.
 These equalities retain the complete source functions, including their
 endpoint selection, before applying any spatial derivative or bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

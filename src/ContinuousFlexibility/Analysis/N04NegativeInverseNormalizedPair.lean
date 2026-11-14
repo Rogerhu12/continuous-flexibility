@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeInverseRawEnvelope
-import ContinuousFlexibility.Analysis.N04NegativeInverseMixedPrefix
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeInverseRawEnvelope
+public import ContinuousFlexibility.Analysis.N04NegativeInverseMixedPrefix
 
 /-!
 # A normalized inverse point and height with a common coefficient
@@ -8,6 +10,8 @@ The two actual directional towers are bounded before any concrete
 realization gauge or physical grading is supplied. The finite majorants
 share one coefficient and the original positive parameter height.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import Mathlib.Analysis.Normed.Group.InfiniteSum
-import Mathlib.Analysis.Normed.Field.Basic
-import Mathlib.Topology.Algebra.InfiniteSum.Real
+module
+
+public import Mathlib.Analysis.Normed.Group.InfiniteSum
+public import Mathlib.Analysis.Normed.Field.Basic
+public import Mathlib.Topology.Algebra.InfiniteSum.Real
 
 /-!
 # Coefficient data for a single extension operator at every derivative order
@@ -10,6 +12,8 @@ summability at every order permits the same reflection series to be used at all
 Sobolev levels. `SeeleyCoefficients` constructs these data without assuming an
 extension theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

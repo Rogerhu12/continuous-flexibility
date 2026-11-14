@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.TailSmoothResistanceStep
-import ContinuousFlexibility.Statements.DeepTailOperator
-import Mathlib.Topology.Order.ProjIcc
-import Mathlib.Topology.Order.IntermediateValue
+module
+
+public import ContinuousFlexibility.Radial.TailSmoothResistanceStep
+public import ContinuousFlexibility.Statements.DeepTailOperator
+public import Mathlib.Topology.Order.ProjIcc
+public import Mathlib.Topology.Order.IntermediateValue
 
 /-!
 # Resistance coordinates for a density defined on a closed tail edge
@@ -13,6 +15,8 @@ mass integrals, resistance integrals and interior differential equation remain
 those of the original density. The density is the same `tailClampedDensity`
 used by the smooth resistance steps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

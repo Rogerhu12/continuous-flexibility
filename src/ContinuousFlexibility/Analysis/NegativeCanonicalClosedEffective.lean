@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.AdjugateInversePrincipalField
+module
+
+public import ContinuousFlexibility.Analysis.AdjugateInversePrincipalField
 
 /-!
 # A genuine closed-endpoint effective field on a negative piece
@@ -9,6 +11,8 @@ physical piece, and the determinant identity holds there. In the interior it agr
 the previously reconstructed reverse field and has the stored physical
 operator's action. No boundary value of the total inverse is involved.
 -/
+
+@[expose] public section
 
 noncomputable section
 

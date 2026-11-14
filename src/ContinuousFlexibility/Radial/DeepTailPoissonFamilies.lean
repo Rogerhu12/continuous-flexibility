@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.DeepTailPoissonContinuity
-import ContinuousFlexibility.Radial.DeepTailEdgeCoordinates
+module
+
+public import ContinuousFlexibility.Radial.DeepTailPoissonContinuity
+public import ContinuousFlexibility.Radial.DeepTailEdgeCoordinates
 
 /-!
 # Choosing the actual Poisson basis continuously on fixed edges
@@ -8,6 +10,8 @@ Only joint continuity of the density on the closed physical edge is
 needed. The split between its mass and resistance parts may depend on
 the parameter; it is absent from the Poisson equation itself.
 -/
+
+@[expose] public section
 
 noncomputable section
 

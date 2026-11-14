@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MorseChainEndpointDistances
-import Mathlib.Analysis.SpecialFunctions.SmoothTransition
-import Mathlib.Data.Set.Card
+module
+
+public import ContinuousFlexibility.Radial.MorseChainEndpointDistances
+public import Mathlib.Analysis.SpecialFunctions.SmoothTransition
+public import Mathlib.Data.Set.Card
 
 /-!
 # Genuine overlapping localizers for accumulating Morse cells
@@ -9,6 +11,8 @@ The transition at a seam lies in a small interval on both sides of it.
 The differences of successive smooth steps form the actual partition
 on the outward half, with at most two nonzero terms at any point.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

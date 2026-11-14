@@ -1,7 +1,11 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartControlledCollar
-import ContinuousFlexibility.Analysis.N01cMaterialShiftComparison
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartControlledCollar
+public import ContinuousFlexibility.Analysis.N01cMaterialShiftComparison
 
 /-! The circle label and cutoff costs at the exact selected half sample. -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderPlancherel
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderPlancherel
 
 /-!
 # Converse angular Parseval on the full cylinder
@@ -8,6 +10,8 @@ identify its extended L2 norm with that of all angular coefficients.
 Square integrability of the function is a conclusion when the coefficient
 energy, or equivalently the energy of their real Fourier transforms, is finite.
 -/
+
+@[expose] public section
 
 noncomputable section
 

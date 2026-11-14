@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsMixedBlocks
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsMixedBlocks
 
 /-!
 # Actual composition through a state-preserving moving point
@@ -7,6 +9,8 @@ The same selected blocks used in the inverse recurrence also describe
 an arbitrary scalar or vector field evaluated at the moving inverse
 point. Only original state singletons survive in the state coordinate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

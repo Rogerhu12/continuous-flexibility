@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N07aSampleMaterialAbsorption
-import ContinuousFlexibility.Analysis.N07aActualPieceCover
-import ContinuousFlexibility.Analysis.N07aStateSampleLinearJets
-import ContinuousFlexibility.Scalar.WeightedAngularPrimitiveBounds
-import ContinuousFlexibility.Analysis.N07aMaterialJetFunctional
+module
+
+public import ContinuousFlexibility.Analysis.N07aSampleMaterialAbsorption
+public import ContinuousFlexibility.Analysis.N07aActualPieceCover
+public import ContinuousFlexibility.Analysis.N07aStateSampleLinearJets
+public import ContinuousFlexibility.Scalar.WeightedAngularPrimitiveBounds
+public import ContinuousFlexibility.Analysis.N07aMaterialJetFunctional
 
 /-!
 # The actual weighted physical jets from the piece estimates
@@ -11,6 +13,8 @@ Every finite ordinary jet entering the true material formula is bounded
 at the same point. The complete coefficient envelope costs two material
 orders, and continuity extends the resulting bound across interfaces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

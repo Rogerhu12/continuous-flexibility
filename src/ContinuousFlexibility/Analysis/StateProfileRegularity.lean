@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import ContinuousFlexibility.Analysis.FlatExtension
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import ContinuousFlexibility.Analysis.FlatExtension
 
 /-!
 # Regularity of the actual controlled profile
@@ -9,6 +11,8 @@ pointwise infinite sum in the profile agrees there with a smooth finite
 sum. At the two ends, flatness of the control sum supplies the remaining
 regularity needed to form the smooth profile.
 -/
+
+@[expose] public section
 
 noncomputable section
 

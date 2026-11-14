@@ -1,9 +1,11 @@
-import Mathlib.Analysis.Calculus.Deriv.Mul
-import Mathlib.Analysis.Calculus.Deriv.Pow
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
-import Mathlib.MeasureTheory.Integral.IntegralEqImproper
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Analysis.Calculus.Deriv.Mul
+public import Mathlib.Analysis.Calculus.Deriv.Pow
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+public import Mathlib.MeasureTheory.Integral.IntegralEqImproper
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
 
 /-!
 # Energy and conormal identities for a positive buffer
@@ -12,6 +14,8 @@ The functions and their first derivatives are explicit classical representatives
 All differentiability assumptions are local to the interval, so these lemmas apply
 to a finite-buffer minimizer before choosing any global smooth extension.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

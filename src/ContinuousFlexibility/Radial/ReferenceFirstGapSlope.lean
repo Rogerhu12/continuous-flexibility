@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.SelectedSideTransport
-import ContinuousFlexibility.Radial.CentralModelSlopeWindow
+module
+
+public import ContinuousFlexibility.Radial.SelectedSideTransport
+public import ContinuousFlexibility.Radial.CentralModelSlopeWindow
 
 /-!
 # One uniform profile-slope bound on the actual first gaps
@@ -8,6 +10,8 @@ The retained connectors and the fixed central model meet through full
 profile germs.  The old cut-to-join cone then extends the same bound to
 both physical matching joins, without choosing a new reference geometry.
 -/
+
+@[expose] public section
 
 noncomputable section
 

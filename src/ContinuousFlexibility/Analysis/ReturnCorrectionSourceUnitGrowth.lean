@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ReturnCoefficientLocalBounds
-import ContinuousFlexibility.Analysis.ReturnCorrectionSourceNormBudget
-import ContinuousFlexibility.Analysis.SourceMixedOrderInterpolation
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCoefficientLocalBounds
+public import ContinuousFlexibility.Analysis.ReturnCorrectionSourceNormBudget
+public import ContinuousFlexibility.Analysis.SourceMixedOrderInterpolation
 
 /-!
 # Fixed-loss unit-direction growth of the actual source jets
@@ -9,6 +11,8 @@ Complementary coefficient and height orders are interpolated before the
 finite spatial sum is estimated. The common low order and loss are fixed
 before the low-ball radii, parameter arity, and output order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

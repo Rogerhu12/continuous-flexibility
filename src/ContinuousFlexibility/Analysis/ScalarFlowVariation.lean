@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CharacteristicODEUniqueness
-import Mathlib.Analysis.Calculus.Deriv.Slope
-import Mathlib.Logic.Function.Basic
-import Mathlib.MeasureTheory.Integral.DominatedConvergence
+module
+
+public import ContinuousFlexibility.Analysis.CharacteristicODEUniqueness
+public import Mathlib.Analysis.Calculus.Deriv.Slope
+public import Mathlib.Logic.Function.Basic
+public import Mathlib.MeasureTheory.Integral.DominatedConvergence
 
 /-!
 # The angular variational equation for a scalar flow
@@ -12,6 +14,8 @@ field between them.  The exponential solution formula and continuity of
 parametric integrals then give the first angular derivative of the flow.
 The radial dependence of the vector field is only required to be continuous.
 -/
+
+@[expose] public section
 
 noncomputable section
 

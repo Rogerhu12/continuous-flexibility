@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalPhysicalChange
-import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalPhysicalChange
+public import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
 
 /-!
 # Actual angular jets of controlled reference sources
@@ -10,6 +12,8 @@ by the actual radial height/Jacobian factor. Compactness and periodicity
 bound the physical jets; the original coordinate bounds control the
 factor. No canonical jet bound is added as a hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

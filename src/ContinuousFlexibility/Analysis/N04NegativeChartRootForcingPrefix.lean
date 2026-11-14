@@ -1,10 +1,14 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartSpeedSlots
-import ContinuousFlexibility.Analysis.N04NegativeChartActualRootPrefix
-import ContinuousFlexibility.Analysis.N04NegativeChartRootLowFlow
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartSpeedSlots
+public import ContinuousFlexibility.Analysis.N04NegativeChartActualRootPrefix
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootLowFlow
 
 /-! The actual forcing heads inherit the physical root-field prefix.
 Every extracted state direction is an original direction or zero. The
 angular slots spend only their number in the spatial prefix. -/
+
+@[expose] public section
 
 noncomputable section
 

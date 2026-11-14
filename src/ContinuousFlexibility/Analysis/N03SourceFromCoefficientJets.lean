@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionSourceSmoothTame
-import ContinuousFlexibility.Analysis.ReturnCorrectionSourceRealization
-import ContinuousFlexibility.Analysis.N01ResidualSectorCoordinates
-import ContinuousFlexibility.Analysis.PhysicalGradeEnergy
-import ContinuousFlexibility.Analysis.TameSmoothingCalculus
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionSourceSmoothTame
+public import ContinuousFlexibility.Analysis.ReturnCorrectionSourceRealization
+public import ContinuousFlexibility.Analysis.N01ResidualSectorCoordinates
+public import ContinuousFlexibility.Analysis.PhysicalGradeEnergy
+public import ContinuousFlexibility.Analysis.TameSmoothingCalculus
 
 /-!
 # The original N03 source operator from its actual coefficient jets
@@ -14,6 +16,8 @@ bilinear source realization then has the full smooth tame tower proved
 by the divergence calculus; no source membership or tame assumption is
 introduced here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

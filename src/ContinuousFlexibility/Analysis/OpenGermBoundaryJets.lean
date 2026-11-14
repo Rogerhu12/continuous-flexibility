@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OneSidedOrdinaryJets
+module
+
+public import ContinuousFlexibility.Analysis.OneSidedOrdinaryJets
 
 /-!
 # Ordinary boundary jets determined by an open-side identity
@@ -8,6 +10,8 @@ order, continuity of that actual derivative and equality in the open
 side determine its boundary value. No common neighborhood of infinite
 smoothness, derivative loss, or new numerical constant is selected.
 -/
+
+@[expose] public section
 
 noncomputable section
 

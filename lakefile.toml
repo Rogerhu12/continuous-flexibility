@@ -13,17 +13,23 @@ rev = "c55e6e786f49471c72fbddbec5415808896aec1e"
 
 [[lean_lib]]
 name = "ContinuousFlexibility"
+leanOptions = {backward.privateInPublic = true, weak.backward.proofsInPublic = true}
+moreLeanArgs = ["-Dbackward.privateInPublic.warn=false"]
 srcDir = "src"
 
 [[lean_lib]]
 name = "AxiomAudit"
+leanOptions = {backward.privateInPublic = true, weak.backward.proofsInPublic = true}
+moreLeanArgs = ["-Dbackward.privateInPublic.warn=false"]
 srcDir = "src"
 
-# Statement of the main theorem with Mathlib notions only; see src/Challenge/comparator.json.
+# Statement of the main theorem with Mathlib notions only; see comparator.json.
 [[lean_lib]]
 name = "FlexibleSphereChallenge"
 srcDir = "src/Challenge"
 
 [[lean_lib]]
 name = "FlexibleSphereSolution"
+leanOptions = {backward.privateInPublic = true, weak.backward.proofsInPublic = true}
+moreLeanArgs = ["-Dbackward.privateInPublic.warn=false"]
 srcDir = "src/Solution"

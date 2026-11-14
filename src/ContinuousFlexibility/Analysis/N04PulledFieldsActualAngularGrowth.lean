@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsStripAngularPower
-import ContinuousFlexibility.Analysis.N04PulledFieldsActualDisplacementFixedBase
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsStripAngularPower
+public import ContinuousFlexibility.Analysis.N04PulledFieldsActualDisplacementFixedBase
 
 /-!
 # Fixed-base angular powers of the actual transport fields
@@ -9,6 +11,8 @@ retained circle decoders identify any supplied genuine spatial tower
 with the strong circle families. The actual residual is already
 substituted in the displacement, on the original sector parameter space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

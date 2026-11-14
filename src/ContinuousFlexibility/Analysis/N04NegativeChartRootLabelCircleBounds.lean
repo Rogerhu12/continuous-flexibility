@@ -1,7 +1,11 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartReturnCircleBounds
-import ContinuousFlexibility.Analysis.N01RootLabels
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartReturnCircleBounds
+public import ContinuousFlexibility.Analysis.N01RootLabels
 
 /-! The two actual root labels, in one circle family with one low base. -/
+
+@[expose] public section
 
 noncomputable section
 

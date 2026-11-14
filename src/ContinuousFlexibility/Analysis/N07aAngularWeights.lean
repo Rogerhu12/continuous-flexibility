@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.AngularFrequency
-import Mathlib.Algebra.Order.BigOperators.Group.Finset
+module
+
+public import ContinuousFlexibility.Analysis.AngularFrequency
+public import Mathlib.Algebra.Order.BigOperators.Group.Finset
 
 /-!
 # The actual derivative-jet weight and the angular spectral weight
@@ -11,6 +13,8 @@ below, rather than a single Japanese-bracket power. The estimates here
 compare increments in that actual norm to the existing angular Sobolev
 norm, with constants independent of the base order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

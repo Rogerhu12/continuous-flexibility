@@ -1,11 +1,13 @@
-import ContinuousFlexibility.Radial.SelectedFirstInnerInverse
-import ContinuousFlexibility.Radial.SelectedTerminalMatching
-import ContinuousFlexibility.Radial.SelectedTerminalOuterSupply
-import ContinuousFlexibility.Radial.SelectedRetainedOuterSupply
-import ContinuousFlexibility.Radial.SelectedFirstOuterPoisson
-import ContinuousFlexibility.Radial.SelectedFirstCutoffGeometry
-import ContinuousFlexibility.Radial.TerminalConeMatrixBudget
-import ContinuousFlexibility.Radial.TerminalRegionalData
+module
+
+public import ContinuousFlexibility.Radial.SelectedFirstInnerInverse
+public import ContinuousFlexibility.Radial.SelectedTerminalMatching
+public import ContinuousFlexibility.Radial.SelectedTerminalOuterSupply
+public import ContinuousFlexibility.Radial.SelectedRetainedOuterSupply
+public import ContinuousFlexibility.Radial.SelectedFirstOuterPoisson
+public import ContinuousFlexibility.Radial.SelectedFirstCutoffGeometry
+public import ContinuousFlexibility.Radial.TerminalConeMatrixBudget
+public import ContinuousFlexibility.Radial.TerminalRegionalData
 
 /-!
 # Actual regional matching data throughout the first frequency band
@@ -20,6 +22,8 @@ outer inverse and its Poisson columns without changing any geometric,
 boundary or source field. The inner inverse is constructed here from the
 fixed central localized model; it is not an abstract input to this theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

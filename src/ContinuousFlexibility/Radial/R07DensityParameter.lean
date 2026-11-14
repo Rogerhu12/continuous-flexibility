@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.R07TailParameter
-import ContinuousFlexibility.Radial.R07DeepTailDensity
-import Mathlib.Analysis.Calculus.IteratedDeriv.FaaDiBruno
+module
+
+public import ContinuousFlexibility.Radial.R07TailParameter
+public import ContinuousFlexibility.Radial.R07DeepTailDensity
+public import Mathlib.Analysis.Calculus.IteratedDeriv.FaaDiBruno
 
 /-!
 # Joint continuity of all physical deep-tail density jets
@@ -10,6 +12,8 @@ profile jets through a fixed smooth coordinate change and multiplication by
 a fixed smooth weight.  The normalized physical density has precisely this
 form, since the two endpoint radii are fixed throughout the height family.
 -/
+
+@[expose] public section
 
 noncomputable section
 

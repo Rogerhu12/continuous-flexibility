@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cMaterialShiftComparison
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
+module
+
+public import ContinuousFlexibility.Analysis.N01cMaterialShiftComparison
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
 
 /-!
 # Reference coefficient jets in the actual material envelope
@@ -14,6 +16,8 @@ normalization; no coefficient or tame estimate is assumed. The resulting
 comparison controls the actual reference profile and inverse-profile
 radial jets, including their ordinary iterated-derivative formulation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

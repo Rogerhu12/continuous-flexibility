@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import ContinuousFlexibility.Scalar.GreenIdentity
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import ContinuousFlexibility.Scalar.GreenIdentity
 
 /-!
 # Angular regularity of the actual characteristic speed
@@ -10,6 +12,8 @@ vanish or change its radicand's sign: no differentiability of its square root
 is used. In particular, the assertions include the closed ends of a control
 interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

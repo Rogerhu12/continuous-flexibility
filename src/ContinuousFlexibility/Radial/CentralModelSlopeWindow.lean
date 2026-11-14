@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.CentralStatementBridges
+module
+
+public import ContinuousFlexibility.Radial.CentralStatementBridges
 
 /-!
 # A fixed coercive window for the central model
@@ -8,6 +10,8 @@ The model buffer can therefore be chosen beyond a single radius where
 the slope is at least three quarters. This radius is fixed before any
 selected tails or retained-cone lengths are chosen.
 -/
+
+@[expose] public section
 
 noncomputable section
 

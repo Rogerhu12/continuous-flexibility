@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.HeightBandCount
+module
+
+public import ContinuousFlexibility.Radial.HeightBandCount
 
 /-!
 # One numerical start absorbs every fixed later inverse coefficient
@@ -7,6 +9,8 @@ The start depends on the already chosen constants, before choosing a
 selected tail.  Only the actual band upper endpoint and d_n identity
 are used, so any larger actual starting index is permitted.
 -/
+
+@[expose] public section
 
 noncomputable section
 

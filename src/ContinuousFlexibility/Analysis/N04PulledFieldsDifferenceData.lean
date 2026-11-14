@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationDifferenceValue
-import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationDifferenceValue
+public import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
 
 /-!
 # Reference differences over an abstract graded parameter space
@@ -8,6 +10,8 @@ Integrate the genuine first parameter derivative, then subtract the same
 reference in every positive-order tower. The complete scalar calculation
 is performed before the concrete physical parameter space is substituted.
 -/
+
+@[expose] public section
 
 noncomputable section
 

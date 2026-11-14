@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CanonicalCutFirstJets
-import ContinuousFlexibility.Analysis.AiryFirstJetMatching
-import ContinuousFlexibility.Analysis.TwoOpenPieceGluing
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalCutFirstJets
+public import ContinuousFlexibility.Analysis.AiryFirstJetMatching
+public import ContinuousFlexibility.Analysis.TwoOpenPieceGluing
 
 /-!
 # Genuine C¹ Airy first integrals on the whole negative component
@@ -11,6 +13,8 @@ derivatives. The current-domain partition then gives C¹ gluing on the
 entire negative component. This regularity theorem does not assert that
 the stored physical coefficients already agree on the cut itself.
 -/
+
+@[expose] public section
 
 noncomputable section
 

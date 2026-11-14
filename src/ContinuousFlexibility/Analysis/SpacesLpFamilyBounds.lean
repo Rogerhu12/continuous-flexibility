@@ -1,4 +1,6 @@
-import Mathlib.Analysis.InnerProductSpace.l2Space
+module
+
+public import Mathlib.Analysis.InnerProductSpace.l2Space
 
 /-!
 # Three-term estimates for square-summable families
@@ -6,6 +8,8 @@ import Mathlib.Analysis.InnerProductSpace.l2Space
 A pointwise estimate by three row norms lifts to the actual Hilbert-sum
 norm. This separates the general norm argument from concrete jet maps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

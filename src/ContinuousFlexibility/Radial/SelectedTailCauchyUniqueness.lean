@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.SelectedTailRegularResponse
+module
+
+public import ContinuousFlexibility.Radial.SelectedTailRegularResponse
 
 /-!
 # Natural-line uniqueness in the actual radial coordinate
@@ -7,6 +9,8 @@ This is the first-order uniqueness already proved by the deep natural
 line and the finite core transfer. Its inputs are the actual value and
 physical flux, not a postulated separated graph or inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

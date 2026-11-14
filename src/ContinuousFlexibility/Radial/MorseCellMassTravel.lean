@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseLeftCapBounds
-import Mathlib.MeasureTheory.Function.JacobianOneDim
+module
+
+public import ContinuousFlexibility.Radial.MorseLeftCapBounds
+public import Mathlib.MeasureTheory.Function.JacobianOneDim
 
 /-!
 # Travel and velocity mass on an actual Morse cell
@@ -9,6 +11,8 @@ negative with size at least a fixed multiple of `A`. The same interval gives
 the lower velocity mass bound by the radius equation. The upper mass bound
 uses the total radius increment and does not use the growing model length.
 -/
+
+@[expose] public section
 
 noncomputable section
 

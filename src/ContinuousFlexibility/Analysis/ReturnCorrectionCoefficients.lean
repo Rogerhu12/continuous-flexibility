@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionAlgebra
-import ContinuousFlexibility.Statements.Nonlinear
-import Mathlib.Tactic.FieldSimp
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionAlgebra
+public import ContinuousFlexibility.Statements.Nonlinear
+public import Mathlib.Tactic.FieldSimp
 
 /-!
 # The return correction as the actual symmetric coefficient object
@@ -11,6 +13,8 @@ The radial coefficient is preserved by construction. The compatibility
 integral is automatic once an error has actually been realized in
 `PhysicalSpacesData.Source`; this does not replace that realization step.
 -/
+
+@[expose] public section
 
 noncomputable section
 

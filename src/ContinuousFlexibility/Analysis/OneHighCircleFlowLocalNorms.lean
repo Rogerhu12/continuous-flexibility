@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowLocalization
-import ContinuousFlexibility.Analysis.OneHighCircleFlowReferenceNorms
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowLocalization
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowReferenceNorms
 
 /-!
 # Actual speed norms for a local time neighborhood
@@ -9,6 +11,8 @@ closed interval. Their totalization outside that interval is used only to
 write ordinary time integrals. The derived global localization has exactly
 the same jets and integrated norms on the interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Scalar.HeightVariation
+module
+
+public import ContinuousFlexibility.Scalar.HeightVariation
 
 /-!
 # Algebra used after expanding the actual divergence
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Scalar.HeightVariation
 These are intermediate scalar identities. `Linearization.lean` supplies
 their arguments from actual spatial derivatives of the height and profile.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility
 

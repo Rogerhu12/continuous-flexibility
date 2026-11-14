@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Geometry.GraphEmbedding
-import Mathlib.Analysis.Normed.Affine.Isometry
-import Mathlib.LinearAlgebra.Basis.Basic
-import Mathlib.LinearAlgebra.Span.Defs
-import Mathlib.Data.Set.Card
+module
+
+public import ContinuousFlexibility.Geometry.GraphEmbedding
+public import Mathlib.Analysis.Normed.Affine.Isometry
+public import Mathlib.LinearAlgebra.Basis.Basic
+public import Mathlib.LinearAlgebra.Span.Defs
+public import Mathlib.Data.Set.Card
 
 /-!
 # At most four affine isometries preserve a marked frame
@@ -12,6 +14,8 @@ affine isometries, including reflections, are allowed. The point, normal and
 two principal lines must still be identified on the actual closed surface.
 No existence of a cap or a noncongruence conclusion is assumed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

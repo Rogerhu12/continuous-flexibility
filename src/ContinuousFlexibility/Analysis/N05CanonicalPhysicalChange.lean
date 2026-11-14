@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05CanonicalPhysicalAE
-import Mathlib.LinearAlgebra.Basis.Fin
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05CanonicalPhysicalAE
+public import Mathlib.LinearAlgebra.Basis.Fin
 
 /-!
 # Change of variables for the genuine canonical chart
@@ -11,6 +13,8 @@ the actual physical domain intersected with a half-period and its source
 measure. At the controlled reference chart the physical domain is a radial
 rectangle and this determinant is the real radial derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

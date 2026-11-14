@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowLocalization
-import ContinuousFlexibility.Analysis.OneSidedOrdinaryJets
-import ContinuousFlexibility.Analysis.CylinderMixedJetNorms
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowLocalization
+public import ContinuousFlexibility.Analysis.OneSidedOrdinaryJets
+public import ContinuousFlexibility.Analysis.CylinderMixedJetNorms
 
 /-!
 # One fixed smooth localization of a root coefficient field
@@ -11,6 +13,8 @@ agree on the middle quarter, including its endpoints. The quantitative
 flow input only uses that quarter, so no derivatives of the clamp enter
 the actual field bounds there.
 -/
+
+@[expose] public section
 
 noncomputable section
 

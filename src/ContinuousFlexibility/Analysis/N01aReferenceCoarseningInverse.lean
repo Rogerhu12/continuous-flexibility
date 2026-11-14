@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01aReferenceCoarseningNorms
+module
+
+public import ContinuousFlexibility.Analysis.N01aReferenceCoarseningNorms
 
 /-!
 # Inverse, reciprocity and first-normal estimates after coarsening
@@ -7,6 +9,8 @@ The actual inverse function is unchanged. Only its norm constant increases;
 the weak differential expression, border, row and physical equivalence are
 identical for the two partitions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

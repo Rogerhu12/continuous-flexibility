@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Blueprint.Statements
-import ContinuousFlexibility.Radial.ReferenceModalKernelEnvelope
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
+public import ContinuousFlexibility.Radial.ReferenceModalKernelEnvelope
 
 /-!
 # The frozen R11a conclusion from one actual matched family
@@ -9,6 +11,8 @@ the raw spatial estimate refer to the same reference data. The preceding
 construction supplies one inverse at the three exponents. This assembly
 does not choose a second geometry or replace an actual matching operator.
 -/
+
+@[expose] public section
 
 noncomputable section
 

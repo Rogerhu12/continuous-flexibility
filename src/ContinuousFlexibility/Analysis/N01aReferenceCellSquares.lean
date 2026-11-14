@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01aReferencePureRow
-import ContinuousFlexibility.Radial.WeightKernelBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01aReferencePureRow
+public import ContinuousFlexibility.Radial.WeightKernelBounds
 
 /-!
 # Removing a positive reference weight from cell squares
@@ -8,6 +10,8 @@ The attenuation exponent dominates every fixed multiple of the coefficient
 exponent.  Thus a positive reference weight controls the unweighted sum of
 the actual localized square integrals, for sources and outputs alike.
 -/
+
+@[expose] public section
 
 noncomputable section
 

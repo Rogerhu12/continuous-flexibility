@@ -1,5 +1,7 @@
-import Mathlib.Data.Set.Basic
-import Mathlib.Data.Real.Basic
+module
+
+public import Mathlib.Data.Set.Basic
+public import Mathlib.Data.Real.Basic
 
 /-!
 # Replacing positive pieces in an actual signed partition
@@ -9,6 +11,8 @@ family is disjoint and covers the positive points in question. The same
 argument applies to reference intervals and to current planar domains;
 it does not require the current negative pieces to be radial strips.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Analysis
 

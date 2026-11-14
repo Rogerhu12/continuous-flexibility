@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.DeepTailJacobiFamilies
-import ContinuousFlexibility.Radial.DeepTailPoissonCandidate
+module
+
+public import ContinuousFlexibility.Radial.DeepTailJacobiFamilies
+public import ContinuousFlexibility.Radial.DeepTailPoissonCandidate
 
 /-!
 # Continuity of the normalized natural entrance derivative
@@ -10,6 +12,8 @@ convergent continued fraction, and hence a continuous normalized entrance
 slope. Identification with the original natural line preserves its full
 entrance regularity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

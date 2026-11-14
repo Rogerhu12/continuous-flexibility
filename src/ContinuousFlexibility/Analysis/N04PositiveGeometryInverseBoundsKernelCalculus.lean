@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04RealizationEnvelopeDifferential
-import ContinuousFlexibility.Analysis.RootCompositionIntegral
-import ContinuousFlexibility.Analysis.BoundaryTaylorBounds
-import ContinuousFlexibility.Analysis.PolynomialJetOperations
-import ContinuousFlexibility.Analysis.PointwiseAffineMaterialJets
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationEnvelopeDifferential
+public import ContinuousFlexibility.Analysis.RootCompositionIntegral
+public import ContinuousFlexibility.Analysis.BoundaryTaylorBounds
+public import ContinuousFlexibility.Analysis.PolynomialJetOperations
+public import ContinuousFlexibility.Analysis.PointwiseAffineMaterialJets
 
 /-!
 # Ordinary kernel jets through the actual radial integrals
@@ -13,6 +15,8 @@ contain the component, coefficient vector, and physical evaluation point.
 The integral operation keeps the integration point inside that same
 uniform index set; it does not select a bound for each component.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.MorseChainLocalGluing
-import ContinuousFlexibility.Radial.DeepTailEdgeComparison
-import Mathlib.Analysis.Calculus.FDeriv.Extend
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
+module
+
+public import ContinuousFlexibility.Radial.MorseChainLocalGluing
+public import ContinuousFlexibility.Radial.DeepTailEdgeComparison
+public import Mathlib.Analysis.Calculus.FDeriv.Extend
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
 
 /-!
 # Smooth interpolation from matching height and flux
@@ -10,6 +12,8 @@ The actual interpolant is the existing `morseOutwardGlue`.  Matching values
 and derivatives permit differentiation across every interior node; the
 smooth divergence system then supplies all higher derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

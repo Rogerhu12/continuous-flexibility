@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MorseMaximalDomain
+module
+
+public import ContinuousFlexibility.Radial.MorseMaximalDomain
 
 /-!
 # The maximal graph of the Morse partner family
@@ -7,6 +9,8 @@ The Darboux step changes `α` while keeping `w` and the asymptotic potential
 `b` fixed. The shifted resolvent and the positive-potential kernel theorem
 identify the distributional graph throughout this parameter family.
 -/
+
+@[expose] public section
 
 noncomputable section
 

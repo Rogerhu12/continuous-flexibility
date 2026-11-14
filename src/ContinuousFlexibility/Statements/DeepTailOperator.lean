@@ -1,7 +1,9 @@
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
-import Mathlib.MeasureTheory.Function.L2Space
-import Mathlib.MeasureTheory.Measure.WithDensity
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
+module
+
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+public import Mathlib.MeasureTheory.Function.L2Space
+public import Mathlib.MeasureTheory.Measure.WithDensity
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
 
 /-!
 # The deep-tail operator statement layer
@@ -10,6 +12,8 @@ The scalar density, weighted Hilbert space and Friedrichs form definitions
 are independent of the oscillator, the reference surface and physical-radius
 matching. They retain the original declaration names and definitions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

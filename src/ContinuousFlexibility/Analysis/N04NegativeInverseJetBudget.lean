@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeInverseJetRecurrence
-import ContinuousFlexibility.Analysis.N01cPhysicalFlowGraph
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeInverseJetRecurrence
+public import ContinuousFlexibility.Analysis.N01cPhysicalFlowGraph
 
 /-!
 # Sharp mixed bounds for actual inverse and pulled-height jets
@@ -10,6 +12,8 @@ finite polynomial majorant independent of the interpolation scale.
 The exact degree and one positive-parameter height factor survive both
 the inverse induction and composition with the physical height.
 -/
+
+@[expose] public section
 
 noncomputable section
 

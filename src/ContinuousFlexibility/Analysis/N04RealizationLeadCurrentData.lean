@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadAssembly
-import ContinuousFlexibility.Analysis.NonlinearNeighborhoodRestriction
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadAssembly
+public import ContinuousFlexibility.Analysis.NonlinearNeighborhoodRestriction
 
 /-!
 # Jet-difference towers of scalar families
@@ -12,6 +14,8 @@ It is restricted to the pieces satisfying a predicate, so that negative and
 positive pieces can be supplied separately and combined. The derivative
 tower, as well as its estimates, is required only on those pieces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

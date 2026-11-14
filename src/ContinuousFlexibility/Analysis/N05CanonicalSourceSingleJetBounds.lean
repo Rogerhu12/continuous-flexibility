@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalSourceSingleJets
-import ContinuousFlexibility.Analysis.N05CanonicalNormalizedAngularJets
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalSourceSingleJets
+public import ContinuousFlexibility.Analysis.N05CanonicalNormalizedAngularJets
 
 /-!
 # Same-endpoint bounds for the normalized single-row angular jets
@@ -9,6 +11,8 @@ exponential. The actual normalizer contributes only a finite-order constant.
 The coefficient power is fixed before the angular order; the material
 exponent is exactly the one prescribed for the physical inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

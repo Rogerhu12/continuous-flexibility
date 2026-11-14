@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cCosineSpeedPrefixBounds
-import ContinuousFlexibility.Analysis.N01cActualFlowSmoothDirections
+module
+
+public import ContinuousFlexibility.Analysis.N01cCosineSpeedPrefixBounds
+public import ContinuousFlexibility.Analysis.N01cActualFlowSmoothDirections
 
 /-!
 # Finite constants and the actual positive angular induction property
@@ -9,6 +11,8 @@ losses are uniformized before the spatial order, and spatial constants
 are uniformized afterwards. The induction property is stated for the
 canonical genuine angular state tower of the original flow.
 -/
+
+@[expose] public section
 
 noncomputable section
 

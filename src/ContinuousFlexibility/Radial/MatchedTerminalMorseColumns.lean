@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchedTerminalWeightedCorrection
-import ContinuousFlexibility.Radial.MatchedTerminalMorseLeading
+module
+
+public import ContinuousFlexibility.Radial.MatchedTerminalWeightedCorrection
+public import ContinuousFlexibility.Radial.MatchedTerminalMorseLeading
 
 /-!
 # Actual terminal Morse columns after a physical weight
@@ -9,6 +11,8 @@ the original terminal cutoff. Their true leading term has cost
 400 / (j A²). The residual retains its original attenuation and is
 corrected by the same scalar-gated inner inverse in the matching data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

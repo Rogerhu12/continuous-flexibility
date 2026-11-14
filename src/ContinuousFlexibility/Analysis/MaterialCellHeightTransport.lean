@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.MaterialCellEndpointModels
+module
+
+public import ContinuousFlexibility.Analysis.MaterialCellEndpointModels
 
 /-!
 # Actual height weights between points of one material cell
@@ -7,6 +9,8 @@ A map that stays inside the same physical cell has a uniform height
 ratio bound in the requested coefficient envelope. The comparison uses
 physical evaluation points, not an arbitrary reassignment of cell labels.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderSmoothJets
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderSmoothJets
 
 /-!
 # Real functions in the physical cylinder Fourier representation
@@ -7,6 +9,8 @@ Real cylinder functions use their canonical complex inclusion in the existing
 mixed Fourier transform. Their Sobolev and Fourier L¹ norms below are only
 abbreviations for those same physical norms.
 -/
+
+@[expose] public section
 
 noncomputable section
 

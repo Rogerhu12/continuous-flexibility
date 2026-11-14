@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aAngularReferenceFlux
-import ContinuousFlexibility.Analysis.IntervalWeakDivergence
-import ContinuousFlexibility.Radial.R11bRadialTests
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceFlux
+public import ContinuousFlexibility.Analysis.IntervalWeakDivergence
+public import ContinuousFlexibility.Radial.R11bRadialTests
 
 /-!
 # Compact-test Green identity for the genuine right flux
@@ -10,6 +12,8 @@ FTC2 only needs the actual continuous flux and its integrable right
 derivative there. Thus interfaces with unequal second normal derivatives
 produce no unproved integration-by-parts boundary term.
 -/
+
+@[expose] public section
 
 noncomputable section
 

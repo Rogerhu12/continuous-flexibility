@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.TailNaturalInterpolation
-import ContinuousFlexibility.Radial.TailRegularIntervalState
-import ContinuousFlexibility.Analysis.OneSidedSmoothExtension
+module
+
+public import ContinuousFlexibility.Radial.TailNaturalInterpolation
+public import ContinuousFlexibility.Radial.TailRegularIntervalState
+public import ContinuousFlexibility.Analysis.OneSidedSmoothExtension
 
 /-!
 # Joining the actual initial gap to the outward natural state
@@ -9,6 +11,8 @@ Value and flux are matched at the first mass node. Smooth extension at the
 entrance is performed only after solving the original equation on the
 whole one-sided tail.
 -/
+
+@[expose] public section
 
 noncomputable section
 

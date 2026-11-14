@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.InteriorScalarFlowField
-import ContinuousFlexibility.Analysis.N04FlowTimeReversal
+module
+
+public import ContinuousFlexibility.Analysis.InteriorScalarFlowField
+public import ContinuousFlexibility.Analysis.N04FlowTimeReversal
 
 /-!
 # Actual forward and inverse flows through a fixed radial interior
@@ -10,6 +12,8 @@ Gronwall constant. Picard existence and the proved mixed-flow theorem
 then provide both actual flows and all their spatial displacement jets.
 The common state order and loss precede the interval and its constants.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.WeightKernelBounds
+module
+
+public import ContinuousFlexibility.Radial.WeightKernelBounds
 
 /-!
 # A common spatial envelope for finitely many initial frequency bands
@@ -7,6 +9,8 @@ Only constants and coefficient exponents are enlarged. The full spatial
 decay and the actual family of quantities remain unchanged. This absorbs
 the finitely many modes before the uniform deep-tail threshold.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerLiouvilleFormTransport
-import ContinuousFlexibility.Radial.InnerLiouvilleModelRealization
+module
+
+public import ContinuousFlexibility.Radial.InnerLiouvilleFormTransport
+public import ContinuousFlexibility.Radial.InnerLiouvilleModelRealization
 
 /-!
 # The same localized Dirichlet inverse solves the physical weak problem
@@ -9,6 +11,8 @@ actual L² source, and returns the physical domain, signed potential,
 scalar row and every closed-domain weak test equation. The field and
 scalar are exactly the previously defined physical continuous map.
 -/
+
+@[expose] public section
 
 noncomputable section
 

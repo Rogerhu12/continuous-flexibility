@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.TailNaturalInterpolation
-import ContinuousFlexibility.Radial.TailNaturalNodeBounds
-import ContinuousFlexibility.Radial.TailRegularIntervalState
+module
+
+public import ContinuousFlexibility.Radial.TailNaturalInterpolation
+public import ContinuousFlexibility.Radial.TailNaturalNodeBounds
+public import ContinuousFlexibility.Radial.TailRegularIntervalState
 
 /-!
 # The natural solution does not satisfy the entrance Dirichlet condition
@@ -9,6 +11,8 @@ At the first mass entrance the outgoing natural flux is positive on the
 mass scale. If a separate initial gap is present, this exceeds its free
 impedance, so the actual solution has a negative entrance value.
 -/
+
+@[expose] public section
 
 noncomputable section
 

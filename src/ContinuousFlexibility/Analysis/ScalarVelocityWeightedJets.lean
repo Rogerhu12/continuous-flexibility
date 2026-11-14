@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ScalarWeightedJetBounds
+module
+
+public import ContinuousFlexibility.Analysis.ScalarWeightedJetBounds
 
 /-!
 # Weighted angular jets of a correction velocity
@@ -7,6 +9,8 @@ The scalar expression is the actual velocity formula, with its two
 inverse coordinate maps supplied as scalar functions. The component
 weight and the radial cutoff derivative remain explicit in the bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

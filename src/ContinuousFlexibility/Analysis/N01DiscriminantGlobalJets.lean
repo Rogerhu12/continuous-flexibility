@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01OriginalCoefficientGlobalJets
-import ContinuousFlexibility.Analysis.CoefficientDiscriminantMaterialBounds
-import ContinuousFlexibility.Analysis.CanonicalStateInterpolation
+module
+
+public import ContinuousFlexibility.Analysis.N01OriginalCoefficientGlobalJets
+public import ContinuousFlexibility.Analysis.CoefficientDiscriminantMaterialBounds
+public import ContinuousFlexibility.Analysis.CanonicalStateInterpolation
 
 /-!
 # One common global bound for the actual coefficient discriminant
@@ -10,6 +12,8 @@ annulus. Smooth representatives are used only for their exact germs at
 the evaluation point, so their cutoff radii incur no derivative cost.
 The existing polynomial closure preserves one high state seminorm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

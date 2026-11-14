@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.AngularRegularity
-import Mathlib.Analysis.Calculus.ParametricIntervalIntegral
+module
+
+public import ContinuousFlexibility.Analysis.AngularRegularity
+public import Mathlib.Analysis.Calculus.ParametricIntervalIntegral
 
 /-!
 # Radial integration preserves continuous angular derivatives
@@ -8,6 +10,8 @@ Continuity of the actual angular derivative on a compact rectangle supplies
 the domination needed to differentiate the parameter integral.  This is
 iterated without differentiating the radial variable.
 -/
+
+@[expose] public section
 
 noncomputable section
 

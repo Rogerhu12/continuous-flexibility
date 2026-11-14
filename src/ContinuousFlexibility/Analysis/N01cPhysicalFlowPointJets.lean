@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cPhysicalLieParameterJets
-import ContinuousFlexibility.Analysis.N01cPhysicalGraphJets
-import ContinuousFlexibility.Analysis.N01cStateAngleIdentification
+module
+
+public import ContinuousFlexibility.Analysis.N01cPhysicalLieParameterJets
+public import ContinuousFlexibility.Analysis.N01cPhysicalGraphJets
+public import ContinuousFlexibility.Analysis.N01cStateAngleIdentification
 
 /-!
 # Exact point-jet identification for positive radial flow derivatives
@@ -11,6 +13,8 @@ slots identify that slice with the same joint composition jet. The
 word form retains the original direction type, so estimates may be
 transported before the two arities are simplified.
 -/
+
+@[expose] public section
 
 noncomputable section
 

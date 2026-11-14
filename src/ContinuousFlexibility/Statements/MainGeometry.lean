@@ -1,10 +1,12 @@
-import ContinuousFlexibility.Geometry.SphereCapGluing
-import ContinuousFlexibility.Geometry.SurfaceReparametrization
-import ContinuousFlexibility.Contracts.GraphFamilyCurvature
-import Mathlib.Geometry.Manifold.VectorBundle.Riemannian
-import Mathlib.Geometry.Manifold.SmoothEmbedding
-import Mathlib.Geometry.Euclidean.Volume.Measure
-import Mathlib.LinearAlgebra.Trace
+module
+
+public import ContinuousFlexibility.Geometry.SphereCapGluing
+public import ContinuousFlexibility.Geometry.SurfaceReparametrization
+public import ContinuousFlexibility.Contracts.GraphFamilyCurvature
+public import Mathlib.Geometry.Manifold.VectorBundle.Riemannian
+public import Mathlib.Geometry.Manifold.SmoothEmbedding
+public import Mathlib.Geometry.Euclidean.Volume.Measure
+public import Mathlib.LinearAlgebra.Trace
 
 /-!
 # Actual geometric statements for the full closed-sphere theorem
@@ -19,6 +21,8 @@ on the actual image. The signed mean curvature is forced by the genuine normal
 derivative and the tangent-space shape operator, rather than supplied as an
 unidentified scalar invariant.
 -/
+
+@[expose] public section
 
 noncomputable section
 

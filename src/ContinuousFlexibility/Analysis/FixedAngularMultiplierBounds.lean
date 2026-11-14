@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.AngularSineQuotient
-import Mathlib.Algebra.BigOperators.Fin
+module
+
+public import ContinuousFlexibility.Analysis.AngularSineQuotient
+public import Mathlib.Algebra.BigOperators.Fin
 
 /-!
 # A fixed angular multiplier preserves the radial order
@@ -10,6 +12,8 @@ the genuine radial boundary jet leaves it unchanged. The ordinary
 one-dimensional Leibniz rule then bounds every mixed derivative with no
 loss. The constant is independent of the radial order and translation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

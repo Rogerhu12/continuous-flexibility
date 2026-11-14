@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01aReferenceMeasurable
-import ContinuousFlexibility.Analysis.N01aReferenceModes
+module
+
+public import ContinuousFlexibility.Analysis.N01aReferenceMeasurable
+public import ContinuousFlexibility.Analysis.N01aReferenceModes
 
 /-!
 # The actual angular-mode map on physical L²
@@ -8,6 +10,8 @@ All integrals use the reference convention of a normalized angular integral
 over a full turn.  No alternate Fourier norm or finite-mode restriction is
 introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

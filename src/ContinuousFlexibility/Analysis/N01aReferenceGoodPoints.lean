@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01aReferenceGoodPointIntegral
-import ContinuousFlexibility.Analysis.N01aReferenceWeightedRealizations
-import ContinuousFlexibility.Analysis.N01aJacobiTransfer
-import Mathlib.Topology.Order.Compact
+module
+
+public import ContinuousFlexibility.Analysis.N01aReferenceGoodPointIntegral
+public import ContinuousFlexibility.Analysis.N01aReferenceWeightedRealizations
+public import ContinuousFlexibility.Analysis.N01aJacobiTransfer
+public import Mathlib.Topology.Order.Compact
 
 /-!
 # Actual reference energy has good points at every sufficiently large depth
@@ -11,6 +13,8 @@ A minimum on each compact right band converts its integral estimate into
 pointwise cubic exponential decay.  All points are taken from the actual
 reference profile and the depth parameter is real.
 -/
+
+@[expose] public section
 
 noncomputable section
 

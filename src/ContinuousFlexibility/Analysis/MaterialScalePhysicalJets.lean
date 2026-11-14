@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.MaterialScalarPowerJets
-import ContinuousFlexibility.Analysis.SpacesTraceGeometry
-import ContinuousFlexibility.Scalar.WeightedMaterialScale
+module
+
+public import ContinuousFlexibility.Analysis.MaterialScalarPowerJets
+public import ContinuousFlexibility.Analysis.SpacesTraceGeometry
+public import ContinuousFlexibility.Scalar.WeightedMaterialScale
 
 /-!
 # Physical jets of the actual material scale and its reciprocal
@@ -10,6 +12,8 @@ the actual scale. Its global upper bound and the inverse bound forced by
 the first radial expansion then give pure E0 costs for both scale atoms.
 No lower floor on the original E0 is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

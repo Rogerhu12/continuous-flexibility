@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionResidualBilinear
-import ContinuousFlexibility.Analysis.ReturnCorrectionTraceFlux
-import ContinuousFlexibility.Analysis.MaterialDivergenceEnergy
-import ContinuousFlexibility.Analysis.MaterialJetParameterDerivatives
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionResidualBilinear
+public import ContinuousFlexibility.Analysis.ReturnCorrectionTraceFlux
+public import ContinuousFlexibility.Analysis.MaterialDivergenceEnergy
+public import ContinuousFlexibility.Analysis.MaterialJetParameterDerivatives
 
 /-!
 # The actual symmetric divergence as a bilinear field operator
@@ -12,6 +14,8 @@ its weighted height-space coordinate. Spatial differentiation is applied
 only after differentiability has been proved. The output is extended by
 zero outside the annulus, as required by the physical source decoder.
 -/
+
+@[expose] public section
 
 noncomputable section
 

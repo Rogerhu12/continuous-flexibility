@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N08ControlRestriction
-import ContinuousFlexibility.Analysis.SolveCircleProjection
+module
+
+public import ContinuousFlexibility.Analysis.N08ControlRestriction
+public import ContinuousFlexibility.Analysis.SolveCircleProjection
 
 /-!
 # Actual constant control basis in the physical circle space
@@ -9,6 +11,8 @@ circle, with amplitude `H_m ^ (3/4)`. Exact realization gives the physical
 element. Its control restriction is the unit vector, and its projective
 grading costs only the corresponding power of `M_m`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

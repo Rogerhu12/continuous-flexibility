@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationJointExpansionBounds
-import ContinuousFlexibility.Analysis.N04RealizationHeightJointDirections
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationJointExpansionBounds
+public import ContinuousFlexibility.Analysis.N04RealizationHeightJointDirections
 
 /-!
 # Physical height bounds for the genuine joint tower
@@ -9,6 +11,8 @@ expansions of the original mixed parameter jets. Their numerical bound
 retains the physical height once, including parameter order zero. No
 bound for a final canonical field is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

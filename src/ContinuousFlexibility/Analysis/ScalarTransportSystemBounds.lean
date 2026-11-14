@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ScalarTransportJetBounds
+module
+
+public import ContinuousFlexibility.Analysis.ScalarTransportJetBounds
 
 /-!
 # Weighted bounds for the actual three-field transport recurrence
@@ -9,6 +11,8 @@ has one slope field and two transported fields; only the second
 transported field carries the independent-residual weight. Radial
 strong induction preserves the exact spatial degree and that charge.
 -/
+
+@[expose] public section
 
 noncomputable section
 

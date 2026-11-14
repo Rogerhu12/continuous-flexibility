@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCurrentQualitativeRegularity
-import ContinuousFlexibility.Analysis.N07aScalarSourceTerminal
+module
+
+public import ContinuousFlexibility.Analysis.N07aCurrentQualitativeRegularity
+public import ContinuousFlexibility.Analysis.N07aScalarSourceTerminal
 
 /-!
 # The two equations retained by the actual reconstructed unknown
@@ -9,6 +11,8 @@ canonical equation already proved for the smooth decoder. They record
 provenance of that same unknown; neither contains physical regularity or
 transmission conclusions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

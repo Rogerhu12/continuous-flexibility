@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalAngular
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalSource
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalLocalRegularity
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalGluing
-import ContinuousFlexibility.Analysis.N07aAngularNuRegularity
-import ContinuousFlexibility.Analysis.N07aLeadingRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalAngular
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalSource
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalLocalRegularity
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalGluing
+public import ContinuousFlexibility.Analysis.N07aAngularNuRegularity
+public import ContinuousFlexibility.Analysis.N07aLeadingRegularity
 
 /-!
 # The actual nonlinear weak solution is smooth on the physical annulus
@@ -15,6 +17,8 @@ physical source then recover all normal jets on compact inner strips.
 The final representative is glued across every root and cut without
 using any pre-existing smooth traces of the unknown.
 -/
+
+@[expose] public section
 
 noncomputable section
 

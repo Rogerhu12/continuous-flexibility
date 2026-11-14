@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartData
-import ContinuousFlexibility.Analysis.N04NegativeChartReindex
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeNegativeGeometryJets
-import ContinuousFlexibility.Analysis.N04SourceColumnsData
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartData
+public import ContinuousFlexibility.Analysis.N04NegativeChartReindex
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeNegativeGeometryJets
+public import ContinuousFlexibility.Analysis.N04SourceColumnsData
 
 /-!
 # Reference coefficients for the selected negative chart calculus
@@ -11,6 +13,8 @@ and its original half sample. Only the auxiliary column is replaced, and
 none of the geometric atoms depends on it. The negative enumeration lets
 the scalar product and reciprocal calculus use these actual reference jets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

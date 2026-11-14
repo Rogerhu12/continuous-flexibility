@@ -1,7 +1,11 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledHeightSamplePrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometryStoredHeightJets
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledHeightSamplePrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryStoredHeightJets
 
 /-! # Sample bounds for the original complete height jets -/
+
+@[expose] public section
 
 noncomputable section
 

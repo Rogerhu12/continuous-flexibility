@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N08EnvelopeComparisonNumeric
-import ContinuousFlexibility.Statements.Analysis
+module
+
+public import ContinuousFlexibility.Analysis.N08EnvelopeComparisonNumeric
+public import ContinuousFlexibility.Statements.Analysis
 
 /-!
 # Moving envelope losses from a control label to its physical cell
@@ -9,6 +11,8 @@ A single compact middle interval supplies the comparison constants
 elsewhere. Consequently any fixed positive-power comparison of height
 weights gives a fixed-power comparison of the material envelopes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

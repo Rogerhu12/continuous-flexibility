@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06MorsePhysicalPositiveFloor
+module
+
+public import ContinuousFlexibility.Analysis.N06MorsePhysicalPositiveFloor
 
 /-!
 # The actual positive coefficient on the Morse joins
@@ -9,6 +11,8 @@ join logarithmic slope then give a coefficient-power positive floor.
 The slope inequality is extended to the two endpoints by continuity.
 No bound on a new canonical chart is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

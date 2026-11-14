@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MorseJoinActualGerms
-import ContinuousFlexibility.Radial.MorseJoinHeightContrast
-import ContinuousFlexibility.Radial.MorseChainRadiusPlacement
+module
+
+public import ContinuousFlexibility.Radial.MorseJoinActualGerms
+public import ContinuousFlexibility.Radial.MorseJoinHeightContrast
+public import ContinuousFlexibility.Radial.MorseChainRadiusPlacement
 
 /-!
 # An actual join between two adjacent Morse cells
@@ -9,6 +11,8 @@ The two physical support collars have length one quarter of the connector.
 The model ODE controls their logarithmic derivatives, and the actual height
 contrast supplies the integral budget for the cutoff construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedConservation
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+module
+
+public import ContinuousFlexibility.Scalar.WeightedConservation
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
 
 /-!
 # Actual pointwise derivatives of weighted composition maps
@@ -9,6 +11,8 @@ composition tower.  The identity is proved from the genuine line derivatives
 in `SmoothDirections`, so later estimates apply to the actual tower rather
 than a separately postulated family of formal derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

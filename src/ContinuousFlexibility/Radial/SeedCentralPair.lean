@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.SeedCentralCutoff
+module
+
+public import ContinuousFlexibility.Radial.SeedCentralCutoff
 
 /-!
 # The central profile and second-mode solution with exact cone ends
@@ -7,6 +9,8 @@ The profile and height are normalized at radius one. They recover the
 unscaled central model on the retained interval. Every critical point is
 therefore an original simple turning point; the added parts are increasing.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.Periodic
-import Mathlib.Topology.Instances.AddCircle.DenseSubgroup
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.Periodic
+public import Mathlib.Topology.Instances.AddCircle.DenseSubgroup
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
 
 /-!
 # Rigidity of continuous degree-one periodic lifts
@@ -11,6 +13,8 @@ constant translation increment with its actual translation length.  Two
 incommensurable periods then make a continuous displacement constant; odd
 symmetry forces that constant to vanish.
 -/
+
+@[expose] public section
 
 noncomputable section
 

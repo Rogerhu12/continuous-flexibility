@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05CanonicalPhysicalChange
-import ContinuousFlexibility.Analysis.N05CanonicalPhysicalWeight
-import ContinuousFlexibility.Analysis.N05ReferencePieceCoefficients
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05CanonicalPhysicalChange
+public import ContinuousFlexibility.Analysis.N05CanonicalPhysicalWeight
+public import ContinuousFlexibility.Analysis.N05ReferencePieceCoefficients
 
 /-!
 # The actual canonical height multiplier controls the physical endpoint weight
@@ -10,6 +12,8 @@ The genuine chart, height and reciprocal-profile bounds combine into one
 coefficient power. The actual material sample weights absorb that power
 uniformly over every piece and every fixed material order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

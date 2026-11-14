@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cCoefficientBaseSelection
-import ContinuousFlexibility.Analysis.N01cCoefficientPolarPowerInputs
+module
+
+public import ContinuousFlexibility.Analysis.N01cCoefficientBaseSelection
+public import ContinuousFlexibility.Analysis.N01cCoefficientPolarPowerInputs
 
 /-!
 # The fixed radial prefix interpolation step on an abstract graded space
@@ -8,6 +10,8 @@ All choices and scalar inequalities are proved before the physical
 state space is specialized. This keeps the actual root producer small
 while preserving its original towers and its fixed low order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

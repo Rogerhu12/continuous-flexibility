@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ReferenceSmoothGreen
+module
+
+public import ContinuousFlexibility.Radial.ReferenceSmoothGreen
 
 /-!
 # The actual remainder and forcing of a reference graph element
@@ -8,6 +10,8 @@ expressions are retained as functions. Their periodicity is proved from the
 original formulas, and integrable pairings can be subtracted without using
 the convention that a nonintegrable Bochner integral is zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

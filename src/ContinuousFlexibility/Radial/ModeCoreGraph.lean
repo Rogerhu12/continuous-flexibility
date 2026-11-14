@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ModeCoreSource
-import ContinuousFlexibility.Radial.RadialGreenBoundary
+module
+
+public import ContinuousFlexibility.Radial.ModeCoreSource
+public import ContinuousFlexibility.Radial.RadialGreenBoundary
 
 /-!
 # The extended modal graph and its actual smooth core
@@ -10,6 +12,8 @@ differential component and every original smooth weak test are unchanged.
 The graph is exactly the adjoint relation of the concrete smooth test
 pairs, and those pairs satisfy the graph by the global Green identity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

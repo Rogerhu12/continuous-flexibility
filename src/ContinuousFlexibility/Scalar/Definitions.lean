@@ -1,4 +1,6 @@
-import Mathlib.Basic.Real.Basic
+module
+
+public import Mathlib.Basic.Real.Basic
 
 /-!
 # Coordinate expressions for the height equation
@@ -7,6 +9,8 @@ These are pointwise expressions from Section 3 of the supplied manuscript,
 not definitions of geometric curvature. Their relation to derivatives of a
 smooth height and to the Riemannian curvature is a separate proof obligation.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility
 

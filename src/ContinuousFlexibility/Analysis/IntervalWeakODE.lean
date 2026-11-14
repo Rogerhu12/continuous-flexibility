@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.IntervalL1Primitive
-import ContinuousFlexibility.Analysis.IntervalWeakDivergence
-import Mathlib.Analysis.ODE.PicardLindelof
+module
+
+public import ContinuousFlexibility.Analysis.IntervalL1Primitive
+public import ContinuousFlexibility.Analysis.IntervalWeakDivergence
+public import Mathlib.Analysis.ODE.PicardLindelof
 
 /-!
 # Interior regularity of weak scalar divergence equations
@@ -12,6 +14,8 @@ classification. The resulting continuous representative satisfies an actual
 first-order system, to which the ordinary smooth ODE regularity theorem
 applies.
 -/
+
+@[expose] public section
 
 open Set Filter MeasureTheory
 open scoped ContDiff Topology

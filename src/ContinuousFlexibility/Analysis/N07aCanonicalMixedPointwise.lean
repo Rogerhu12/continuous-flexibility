@@ -1,9 +1,13 @@
-import ContinuousFlexibility.Analysis.N07aOpenStripPointwiseL2
-import ContinuousFlexibility.Analysis.N07aCanonicalGreenPairing
+module
+
+public import ContinuousFlexibility.Analysis.N07aOpenStripPointwiseL2
+public import ContinuousFlexibility.Analysis.N07aCanonicalGreenPairing
 
 /-!
 # Pointwise mixed jets from the actual mixed L² jets
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.PhysicalJetMollification
-import ContinuousFlexibility.Analysis.SpacesHeightBounds
-import Mathlib.Analysis.Distribution.AEEqOfIntegralContDiff
+module
+
+public import ContinuousFlexibility.Analysis.PhysicalJetMollification
+public import ContinuousFlexibility.Analysis.SpacesHeightBounds
+public import Mathlib.Analysis.Distribution.AEEqOfIntegralContDiff
 
 /-!
 # Uniqueness and the unweighted physical jet tower
@@ -9,6 +11,8 @@ The compact planar test identity separates periodic cylinder `L²`
 classes. Thus every weighted coordinate of a compatible physical jet
 has the same unweighted derivative as the pure coordinate of its order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

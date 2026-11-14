@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Analysis
-import ContinuousFlexibility.Analysis.ProjectiveJets
+module
+
+public import ContinuousFlexibility.Statements.Analysis
+public import ContinuousFlexibility.Analysis.ProjectiveJets
 
 /-!
 # Elementary smooth tame calculus
@@ -8,6 +10,8 @@ The derivative towers are genuine projective directional derivatives. This
 module proves the linear, additive and bilinear parts of `TameCalculusTarget`.
 The numerical estimates retain one high-order factor and fixed losses.
 -/
+
+@[expose] public section
 
 noncomputable section
 

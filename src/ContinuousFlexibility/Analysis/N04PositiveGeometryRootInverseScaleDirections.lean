@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryRootInverseScale
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledHeightTrace
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryRootInverseScale
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledHeightTrace
 
 /-!
 # The joint inverse radial scale
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledHeightTrace
 This module isolates one stage of the actual inverse differential.
 The original state, functions and derivative budgets are retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

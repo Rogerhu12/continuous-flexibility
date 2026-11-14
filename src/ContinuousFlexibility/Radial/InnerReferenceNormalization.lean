@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerInterfaceInverse
-import Mathlib.Analysis.InnerProductSpace.Positive
+module
+
+public import ContinuousFlexibility.Radial.InnerInterfaceInverse
+public import Mathlib.Analysis.InnerProductSpace.Positive
 
 /-!
 # Contractive normalization by the full inner reference interface
@@ -14,6 +16,8 @@ The proof uses the positive quadratic form on the real Hilbert space;
 it does not require a complex C⋆-algebra structure or assume the desired
 contraction. The matrix and continuous-operator adjoints agree exactly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

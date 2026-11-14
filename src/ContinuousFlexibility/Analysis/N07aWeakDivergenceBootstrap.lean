@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aWeakSecondNormal
-import ContinuousFlexibility.Analysis.N07aWeakNormalBootstrap
+module
+
+public import ContinuousFlexibility.Analysis.N07aWeakSecondNormal
+public import ContinuousFlexibility.Analysis.N07aWeakNormalBootstrap
 
 /-!
 # All normal weak derivatives from the actual divergence equation
@@ -9,6 +11,8 @@ regularity is established together with the solution, so it is not
 silently treated as an independently smooth source. All products are
 the actual canonical L² multipliers.
 -/
+
+@[expose] public section
 
 noncomputable section
 

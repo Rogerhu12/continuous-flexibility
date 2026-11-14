@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedTowerCompositionBounds
-import ContinuousFlexibility.Scalar.WeightedGenericJetComposition
+module
+
+public import ContinuousFlexibility.Scalar.WeightedTowerCompositionBounds
+public import ContinuousFlexibility.Scalar.WeightedGenericJetComposition
 
 /-!
 # Uniform composition for nested scalar state domains
@@ -8,6 +10,8 @@ The source may be any topological real module and the intermediate space any
 locally convex real module.  This includes finite products of the actual
 weighted height model and scalar parameters, with their original topologies.
 -/
+
+@[expose] public section
 
 noncomputable section
 

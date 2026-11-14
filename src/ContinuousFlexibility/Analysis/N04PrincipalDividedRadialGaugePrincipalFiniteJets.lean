@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PrincipalDividedRadialGaugePrincipalTransformation
-import ContinuousFlexibility.Analysis.FiniteFullJetBoundary
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalDividedRadialGaugePrincipalTransformation
+public import ContinuousFlexibility.Analysis.FiniteFullJetBoundary
 
 /-!
 # Finite principal jets for the same fixed reference gauge
@@ -9,6 +11,8 @@ principal fields. Common smooth precomposition and multiplication keep
 their finite ordinary jet matching. No jets of a separately chosen
 inverse map are compared.
 -/
+
+@[expose] public section
 
 noncomputable section
 

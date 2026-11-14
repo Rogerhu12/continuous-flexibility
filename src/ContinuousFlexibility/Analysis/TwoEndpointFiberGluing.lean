@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RadialGermGlue
-import ContinuousFlexibility.Analysis.PositiveFiberCoordinates
+module
+
+public import ContinuousFlexibility.Analysis.RadialGermGlue
+public import ContinuousFlexibility.Analysis.PositiveFiberCoordinates
 
 /-!
 # Gluing the two actual positive collars to a fixed reference coordinate
@@ -9,6 +11,8 @@ glues therefore preserve global smoothness, one common positive scalar
 slope, exact reference values between the exits, and every ordinary jet
 of each endpoint collar. The construction handles both ends symmetrically.
 -/
+
+@[expose] public section
 
 noncomputable section
 

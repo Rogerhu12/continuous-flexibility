@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerMorseInnerWeightCosts
+module
+
+public import ContinuousFlexibility.Radial.InnerMorseInnerWeightCosts
 
 /-!
 # The actual piece weight compared with its original cell value
@@ -7,6 +9,8 @@ Every constant gap value is one cut value of its larger-index adjacent
 model. Consequently both reciprocal signs of the original interpolated
 weight cost only half a coefficient power on every actual piece.
 -/
+
+@[expose] public section
 
 noncomputable section
 

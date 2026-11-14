@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06OrientedRootDensity
-import ContinuousFlexibility.Analysis.N06AdjacentPieceClassification
-import ContinuousFlexibility.Analysis.N06CutBoundaryCancellation
+module
+
+public import ContinuousFlexibility.Analysis.N06OrientedRootDensity
+public import ContinuousFlexibility.Analysis.N06AdjacentPieceClassification
+public import ContinuousFlexibility.Analysis.N06CutBoundaryCancellation
 
 /-!
 # Actual finite modal matching in the finite-atlas orientation
@@ -17,6 +19,8 @@ Only true root interfaces retain shared forward first-jet records. The
 artificial cut relation now follows from the genuine closed inverse and
 the original N04 transmission clause; it needs no cut geometry record.
 -/
+
+@[expose] public section
 
 noncomputable section
 

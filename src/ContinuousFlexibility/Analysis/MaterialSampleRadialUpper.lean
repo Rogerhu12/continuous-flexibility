@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.MaterialSampleShift
-import ContinuousFlexibility.Analysis.N01ControlIndexBound
+module
+
+public import ContinuousFlexibility.Analysis.MaterialSampleShift
+public import ContinuousFlexibility.Analysis.N01ControlIndexBound
 
 /-!
 # Actual sample losses at a controlled radial index
@@ -10,6 +12,8 @@ lying in a linearly indexed reference cell incurs only one material
 weight at its control label. The comparison uses the actual endpoint
 models and does not replace the sample map.
 -/
+
+@[expose] public section
 
 noncomputable section
 

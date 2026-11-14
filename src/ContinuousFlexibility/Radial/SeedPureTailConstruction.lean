@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.SeedPureTail
-import ContinuousFlexibility.Radial.ConeModeCutoff
-import ContinuousFlexibility.Radial.SeedOrientedGluing
-import ContinuousFlexibility.Radial.SeedConnectorReconstruction
-import ContinuousFlexibility.Radial.SeedLogSlopeLower
+module
+
+public import ContinuousFlexibility.Radial.SeedPureTail
+public import ContinuousFlexibility.Radial.ConeModeCutoff
+public import ContinuousFlexibility.Radial.SeedOrientedGluing
+public import ContinuousFlexibility.Radial.SeedConnectorReconstruction
+public import ContinuousFlexibility.Radial.SeedLogSlopeLower
 
 /-!
 # Continuing a mixed cone tail to a pure cone mode
@@ -12,6 +14,8 @@ at an inward point where that solution is nonzero.  Its profile is
 strictly increasing everywhere.  An oriented germ splice therefore
 preserves the outward natural tail and all its simple critical points.
 -/
+
+@[expose] public section
 
 noncomputable section
 

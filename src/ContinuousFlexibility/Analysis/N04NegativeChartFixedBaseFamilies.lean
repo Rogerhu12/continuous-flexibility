@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.TameFixedBaseCompositionBounds
-import ContinuousFlexibility.Analysis.TameUniformSmoothFamily
-import ContinuousFlexibility.Analysis.N01cStateSeminorms
+module
+
+public import ContinuousFlexibility.Analysis.TameFixedBaseCompositionBounds
+public import ContinuousFlexibility.Analysis.TameUniformSmoothFamily
+public import ContinuousFlexibility.Analysis.N01cStateSeminorms
 
 /-!
 # Finite assembly with a common low order
@@ -10,6 +12,8 @@ order before every parameter order. The objects remain genuine directional
 towers. The elementary operations and the actual partition chain rule
 preserve this order of quantifiers.
 -/
+
+@[expose] public section
 
 noncomputable section
 

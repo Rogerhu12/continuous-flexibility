@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
-import ContinuousFlexibility.Analysis.ReverseCoordinateOperator
-import ContinuousFlexibility.Analysis.PhysicalTransmissionTrace
-import ContinuousFlexibility.Analysis.SpacesHeightAlgebra
-import ContinuousFlexibility.Analysis.SpacesCylinderEvenJets
-import ContinuousFlexibility.Analysis.PeriodicScalarFlow
+module
+
+public import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
+public import ContinuousFlexibility.Analysis.ReverseCoordinateOperator
+public import ContinuousFlexibility.Analysis.PhysicalTransmissionTrace
+public import ContinuousFlexibility.Analysis.SpacesHeightAlgebra
+public import ContinuousFlexibility.Analysis.SpacesCylinderEvenJets
+public import ContinuousFlexibility.Analysis.PeriodicScalarFlow
 
 /-!
 # Local mixed derivatives and a fixed periodic multiplier
@@ -14,6 +16,8 @@ is used. On a compact radial set the fixed multiplier has uniform jets
 at all angles by periodicity. The resulting bound is linear in the
 source jet bound and introduces no derivative loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
 
 /-!
 # The negative geometry obligation in three parts
@@ -13,6 +15,8 @@ The geometry interface on negative pieces is split by atoms:
 `n04Realization_negativeGeometry_of_split` derives
 `N04RealizationNegativeGeometryObligation` from the three parts.
 -/
+
+@[expose] public section
 
 noncomputable section
 

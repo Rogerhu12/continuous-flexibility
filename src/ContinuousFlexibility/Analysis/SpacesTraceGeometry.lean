@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.MaterialLocalComparison
-import Mathlib.Topology.LocallyFinite
-import Mathlib.Topology.Algebra.InfiniteSum.ENNReal
+module
+
+public import ContinuousFlexibility.Analysis.MaterialLocalComparison
+public import Mathlib.Topology.LocallyFinite
+public import Mathlib.Topology.Algebra.InfiniteSum.ENNReal
 
 /-!
 # Quantitative material windows for the circle trace
@@ -11,6 +13,8 @@ inverse power of a window radius is bounded by one power of the weight `M`.
 The windows are locally finite because the original cells are locally finite
 away from the two endpoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

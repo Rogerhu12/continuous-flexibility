@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGraph
-import ContinuousFlexibility.Analysis.CylinderTestPeriodization
-import Mathlib.Analysis.Distribution.AEEqOfIntegralContDiff
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGraph
+public import ContinuousFlexibility.Analysis.CylinderTestPeriodization
+public import Mathlib.Analysis.Distribution.AEEqOfIntegralContDiff
 
 /-!
 # Separation by the actual canonical tests
@@ -9,6 +11,8 @@ A compact planar test supported in the open fundamental rectangle can be
 periodized without changing it on that rectangle. The local distribution
 uniqueness theorem therefore separates canonical L² classes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

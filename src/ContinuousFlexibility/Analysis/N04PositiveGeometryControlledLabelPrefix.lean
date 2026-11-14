@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationFixedBasePrefix
-import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationFixedBasePrefix
+public import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
 
 /-!
 # Abstract fixed-base label prefixes
@@ -8,6 +10,8 @@ The numerical normalization for the two actual root labels is carried
 out on an abstract parameter space. This keeps the physical state
 implementation out of finite-prefix selection and scalar arithmetic.
 -/
+
+@[expose] public section
 
 noncomputable section
 

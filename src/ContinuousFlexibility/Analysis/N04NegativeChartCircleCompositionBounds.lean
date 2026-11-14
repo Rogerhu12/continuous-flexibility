@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CircleShiftedForwardFixedBaseBounds
-import ContinuousFlexibility.Analysis.CircleCompositionSmoothDirections
+module
+
+public import ContinuousFlexibility.Analysis.CircleShiftedForwardFixedBaseBounds
+public import ContinuousFlexibility.Analysis.CircleCompositionSmoothDirections
 
 /-!
 # One low order for joint circle composition
@@ -9,6 +11,8 @@ explicit formula is a finite sum of the existing composition kernels.
 The common kernel base therefore works before every parameter order and
 every travel selector. Multilinear normalization retains one high factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import Mathlib.Analysis.SpecialFunctions.Pow.Real
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Positivity
+module
+
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Positivity
 
 /-!
 # Diagonal widths against component-uniform material costs
@@ -11,6 +13,8 @@ fixed derivative loss. The first index tests an integer upper bound for
 the real cost exponent; the second tests the loss. Each width is strictly
 positive. No limiting argument or zero-width component is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

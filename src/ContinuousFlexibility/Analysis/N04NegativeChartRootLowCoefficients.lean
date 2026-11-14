@@ -1,10 +1,14 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartFieldPowerControl
-import ContinuousFlexibility.Analysis.CylinderMixedJets
-import ContinuousFlexibility.Analysis.OneSidedOrdinaryJets
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartFieldPowerControl
+public import ContinuousFlexibility.Analysis.CylinderMixedJets
+public import ContinuousFlexibility.Analysis.OneSidedOrdinaryJets
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
 
 /-! The actual two coefficient jets needed by the positive root band.
 The fixed low state order is chosen once; no extension has a numerical cost. -/
+
+@[expose] public section
 
 noncomputable section
 

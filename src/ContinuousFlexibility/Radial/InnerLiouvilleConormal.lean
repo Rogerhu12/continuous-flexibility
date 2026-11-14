@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.Liouville
-import ContinuousFlexibility.Statements.RadialTargets
+module
+
+public import ContinuousFlexibility.Radial.Liouville
+public import ContinuousFlexibility.Statements.RadialTargets
 
 /-!
 # General physical conormals of the actual unit Poisson columns
@@ -8,6 +10,8 @@ Both signs use one formula. The density-root drift is retained on the
 diagonal; removing that same diagonal leaves exactly the two-sided
 height/density scaling of the model flux error.
 -/
+
+@[expose] public section
 
 noncomputable section
 

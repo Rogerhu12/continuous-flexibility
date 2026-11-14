@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01EndpointWeightedJets
-import ContinuousFlexibility.Analysis.N01StateLocalizationEnergy
-import ContinuousFlexibility.Analysis.CircleEnergyEnvelope
+module
+
+public import ContinuousFlexibility.Analysis.N01EndpointWeightedJets
+public import ContinuousFlexibility.Analysis.N01StateLocalizationEnergy
+public import ContinuousFlexibility.Analysis.CircleEnergyEnvelope
 
 /-!
 # Actual endpoint jets with a state slot belong to the circle model
@@ -10,6 +12,8 @@ and the base point remain in their original physical spaces. The
 resulting envelope is summable and depends quadratically on that one
 direction, uniformly over the base point and the remaining slots.
 -/
+
+@[expose] public section
 
 noncomputable section
 

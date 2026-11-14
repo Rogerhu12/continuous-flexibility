@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.TailTestPairing
-import Mathlib.Analysis.Distribution.AEEqOfIntegralContDiff
-import Mathlib.Analysis.InnerProductSpace.Projection.Submodule
+module
+
+public import ContinuousFlexibility.Radial.TailTestPairing
+public import Mathlib.Analysis.Distribution.AEEqOfIntegralContDiff
+public import Mathlib.Analysis.InnerProductSpace.Projection.Submodule
 
 /-!
 # Compact tests are dense in the actual weighted tail space
@@ -12,6 +14,8 @@ vanishes. Consequently identities and norm bounds for the existing
 continuous operator extend from compact smooth sources to every L² source.
 No finiteness of the total tail mass is required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

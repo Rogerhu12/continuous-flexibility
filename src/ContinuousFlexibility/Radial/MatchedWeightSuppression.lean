@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerUniformSuppression
-import ContinuousFlexibility.Radial.WeightKernelBounds
+module
+
+public import ContinuousFlexibility.Radial.InnerUniformSuppression
+public import ContinuousFlexibility.Radial.WeightKernelBounds
 
 /-!
 # Adjacent-action suppression for returning matched blocks
@@ -9,6 +11,8 @@ The extra ingredient for a returning block is that the action at the
 transition cell is an arbitrarily small multiple of the preceding action.
 The existing Morse transition-ratio limit proves this uniformly in frequency.
 -/
+
+@[expose] public section
 
 noncomputable section
 

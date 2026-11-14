@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06PrimitivePrincipalWeightedBudget
-import ContinuousFlexibility.Analysis.N07aAngularSequenceBandLift
-import ContinuousFlexibility.Analysis.N07aVolumeLinearLift
+module
+
+public import ContinuousFlexibility.Analysis.N06PrimitivePrincipalWeightedBudget
+public import ContinuousFlexibility.Analysis.N07aAngularSequenceBandLift
+public import ContinuousFlexibility.Analysis.N07aVolumeLinearLift
 
 /-!
 # Every actual principal block belongs to the original source level
@@ -9,6 +11,8 @@ The graph consists of the genuine weak angular derivatives and the
 original even reflection.  A single outer L2 majorant supplies all of its
 coordinates.  No a priori bounded relative operator is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

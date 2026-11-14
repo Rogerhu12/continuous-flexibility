@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import Mathlib.MeasureTheory.Integral.Lebesgue.Basic
-import Mathlib.Topology.Algebra.InfiniteSum.ENNReal
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import Mathlib.MeasureTheory.Integral.Lebesgue.Basic
+public import Mathlib.Topology.Algebra.InfiniteSum.ENNReal
 
 /-!
 # Summing actual height energies over negative components
@@ -11,6 +13,8 @@ of all restricted physical jet energies is bounded by the original
 global physical energy.  The conclusion concerns the actual decoder
 and the full infinite sum over components.
 -/
+
+@[expose] public section
 
 noncomputable section
 

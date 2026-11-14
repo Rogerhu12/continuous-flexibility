@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerLiouvilleWeights
-import ContinuousFlexibility.Radial.InnerBufferWeightedColumn
-import ContinuousFlexibility.Radial.InnerBorderWeights
+module
+
+public import ContinuousFlexibility.Radial.InnerLiouvilleWeights
+public import ContinuousFlexibility.Radial.InnerBufferWeightedColumn
+public import ContinuousFlexibility.Radial.InnerBorderWeights
 
 /-!
 # Weighted physical columns of the same compressed model
@@ -10,6 +12,8 @@ uses the same Dirichlet inverse as the original Poisson column. The
 single scalar is included, and its cut weight is one in the central
 model; in every other model it vanishes by the original scalar equation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

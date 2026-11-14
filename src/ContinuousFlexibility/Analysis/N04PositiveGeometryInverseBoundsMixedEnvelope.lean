@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsMixedTerm
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsMixedTerm
 
 /-!
 # A genuine mixed inverse envelope with the original state prefix
@@ -9,6 +11,8 @@ block has lower total order. Consequently only forward state orders up
 to the requested prefix are used, even as the spatial order grows.
 The exponent `spatial + shift * state - 1` is preserved exactly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

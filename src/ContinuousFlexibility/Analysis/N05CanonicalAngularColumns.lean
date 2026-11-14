@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalAngularSourceBounds
-import ContinuousFlexibility.Analysis.N05CanonicalLpMaps
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalAngularSourceBounds
+public import ContinuousFlexibility.Analysis.N05CanonicalLpMaps
 
 /-!
 # Continuous canonical jet columns and their fixed physical sources
@@ -9,6 +11,8 @@ space. Its unsigned physical lift has a source bound independent of the
 number of retained jets. On the volume graph, the zero column agrees
 almost everywhere with the already fixed source lift.
 -/
+
+@[expose] public section
 
 noncomputable section
 

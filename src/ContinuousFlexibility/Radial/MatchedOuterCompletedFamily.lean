@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.MatchedOuterUniformRetainedEnvelope
-import ContinuousFlexibility.Radial.MatchedOuterMatchingTransfer
-import ContinuousFlexibility.Radial.MatchedModeCellBounds
-import ContinuousFlexibility.Radial.ReferenceRawKernelSchur
+module
+
+public import ContinuousFlexibility.Radial.MatchedOuterUniformRetainedEnvelope
+public import ContinuousFlexibility.Radial.MatchedOuterMatchingTransfer
+public import ContinuousFlexibility.Radial.MatchedModeCellBounds
+public import ContinuousFlexibility.Radial.ReferenceRawKernelSchur
 
 /-!
 # Uniform outer channels of the same completed matching family
@@ -11,6 +13,8 @@ natural columns. The stored matching inverses and columns are identified
 with them by the original graph uniqueness and natural Robin line.
 Constants are chosen before the modal index and all channel labels.
 -/
+
+@[expose] public section
 
 noncomputable section
 

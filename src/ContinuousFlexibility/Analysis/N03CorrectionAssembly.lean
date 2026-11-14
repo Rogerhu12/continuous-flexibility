@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap
-import ContinuousFlexibility.Analysis.ReturnCorrectionOperatorComparison
-import ContinuousFlexibility.Analysis.N02ReturnAssembly
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap
+public import ContinuousFlexibility.Analysis.ReturnCorrectionOperatorComparison
+public import ContinuousFlexibility.Analysis.N02ReturnAssembly
 
 /-!
 # Assembly of the actual N03 correction
@@ -12,6 +14,8 @@ clause of the frozen N03 property follows from the proved geometric and
 divergence identities. The same corrected coefficients are smooth and
 π-periodic on the open annulus.
 -/
+
+@[expose] public section
 
 noncomputable section
 

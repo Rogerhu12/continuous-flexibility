@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N05ReferenceInterface
-import ContinuousFlexibility.Analysis.N06FiniteReferenceColumns
-import ContinuousFlexibility.Analysis.N05ReferenceSWindow
-import ContinuousFlexibility.Radial.InnerUniformSuppression
-import ContinuousFlexibility.Radial.MorseTransitionBands
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceInterface
+public import ContinuousFlexibility.Analysis.N06FiniteReferenceColumns
+public import ContinuousFlexibility.Analysis.N05ReferenceSWindow
+public import ContinuousFlexibility.Radial.InnerUniformSuppression
+public import ContinuousFlexibility.Radial.MorseTransitionBands
 
 /-!
 # Compact support meets finitely many controlled reference pieces
@@ -14,6 +16,8 @@ the piece by that of the cell, and the profile's own compact finiteness
 therefore proves the atlas finiteness needed by the three actual reference
 source columns.
 -/
+
+@[expose] public section
 
 noncomputable section
 

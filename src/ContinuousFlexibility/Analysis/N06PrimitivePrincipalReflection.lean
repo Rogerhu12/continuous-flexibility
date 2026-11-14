@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N06PrimitivePositiveModeEnergy
-import ContinuousFlexibility.Analysis.N06PrincipalJetAlgebra
-import ContinuousFlexibility.Analysis.N06PositiveCanonicalSymmetry
-import ContinuousFlexibility.Analysis.N06NegativeForcingParity
-import ContinuousFlexibility.Analysis.N07aCanonicalRadialReflection
-import ContinuousFlexibility.Analysis.SolveReturnEquations
+module
+
+public import ContinuousFlexibility.Analysis.N06PrimitivePositiveModeEnergy
+public import ContinuousFlexibility.Analysis.N06PrincipalJetAlgebra
+public import ContinuousFlexibility.Analysis.N06PositiveCanonicalSymmetry
+public import ContinuousFlexibility.Analysis.N06NegativeForcingParity
+public import ContinuousFlexibility.Analysis.N07aCanonicalRadialReflection
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # Reflection of the actual principal perturbation
@@ -13,6 +15,8 @@ N03 and the genuine N04 density.  Reflection is transferred through the
 compact weak equation, so no pointwise regularity of an inverse height
 or a chosen weak derivative is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

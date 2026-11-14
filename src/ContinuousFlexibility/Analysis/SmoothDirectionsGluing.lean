@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
-import ContinuousFlexibility.Analysis.N01NeighborhoodRestriction
+module
+
+public import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
+public import ContinuousFlexibility.Analysis.N01NeighborhoodRestriction
 
 /-!
 # Local directional towers and local tame estimates glue
@@ -9,6 +11,8 @@ estimates on bounded low-seminorm neighborhoods while retaining one
 genuine tower on the entire open domain. No global growth assumption is
 imposed on a nonlinear or bilinear map.
 -/
+
+@[expose] public section
 
 noncomputable section
 

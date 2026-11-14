@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.PositiveReferenceCollarPrescribedWidth
-import ContinuousFlexibility.Analysis.PrescribedEndpointWidth
-import ContinuousFlexibility.Analysis.PositiveFiberInterpolationSymmetry
-import ContinuousFlexibility.Analysis.TwoEndpointFiberGluing
+module
+
+public import ContinuousFlexibility.Analysis.PositiveReferenceCollarPrescribedWidth
+public import ContinuousFlexibility.Analysis.PrescribedEndpointWidth
+public import ContinuousFlexibility.Analysis.PositiveFiberInterpolationSymmetry
+public import ContinuousFlexibility.Analysis.TwoEndpointFiberGluing
 
 /-!
 # An actual radial fiber from two endpoint jet families
@@ -13,6 +15,8 @@ positive radial derivative everywhere and matches the identity between
 the two exits as a joint germ.  No determinant condition is needed at the
 physical endpoints, so they may be turning radii.
 -/
+
+@[expose] public section
 
 noncomputable section
 

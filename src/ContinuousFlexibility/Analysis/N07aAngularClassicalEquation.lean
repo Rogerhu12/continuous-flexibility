@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aAngularOpenRegularity
-import ContinuousFlexibility.Analysis.N07aCanonicalGreenPairing
-import ContinuousFlexibility.Analysis.N07aOpenClassicalNormal
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularOpenRegularity
+public import ContinuousFlexibility.Analysis.N07aCanonicalGreenPairing
+public import ContinuousFlexibility.Analysis.N07aOpenClassicalNormal
 
 /-!
 # The original distribution equation is the classical divergence equation
@@ -11,6 +13,8 @@ of the canonical L² space then identifies the original source with its
 classical divergence. No equation is substituted for the actual
 `divergenceOperator`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

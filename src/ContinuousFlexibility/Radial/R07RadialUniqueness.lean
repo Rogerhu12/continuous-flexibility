@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R07RadialODE
+module
+
+public import ContinuousFlexibility.Radial.R07RadialODE
 
 /-!
 # Uniqueness for the physical radial initial value problem
@@ -9,6 +11,8 @@ cannot have both its value and its derivative vanish at a finite matching
 radius. No endpoint uniqueness assertion is substituted for this finite
 interval statement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

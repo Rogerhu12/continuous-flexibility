@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.FixedPositiveReferenceScalarSourceData
-import ContinuousFlexibility.Analysis.CanonicalReferenceScalarColumnMaterialJets
+module
+
+public import ContinuousFlexibility.Analysis.FixedPositiveReferenceScalarSourceData
+public import ContinuousFlexibility.Analysis.CanonicalReferenceScalarColumnMaterialJets
 
 /-!
 # The two scalar columns of the same positive reference family
@@ -8,6 +10,8 @@ The literal inverse and source factor are supplied by the already fixed
 coordinate and height. The column envelope precedes the whole atlas and
 its enumeration; no reference family, cutoff or sample is selected here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

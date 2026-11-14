@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04SourceColumnsReciprocal
+module
+
+public import ContinuousFlexibility.Analysis.N04SourceColumnsReciprocal
 
 /-!
 # Scalar composition and reciprocals of reference families
@@ -7,6 +9,8 @@ The finite scalar chain rule acts on the actual mixed spatial jets.
 A reciprocal value envelope supplies all higher scalar outer jets, so
 inversion requires no independent higher derivative hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

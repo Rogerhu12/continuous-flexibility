@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CanonicalMaterialRatioDifferenceJets
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalMaterialRatioDifferenceJets
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
 
 /-!
 # The actual fixed geometric atoms have zero state differences
@@ -10,6 +12,8 @@ current-minus-reference jet fields therefore vanish. The already defined
 zero directional tower is transported by equality, so no second derivative
 representation or spatial reference estimate is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

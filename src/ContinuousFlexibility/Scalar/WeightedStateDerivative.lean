@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.WeightedConservation
-import ContinuousFlexibility.Scalar.WeightedStateRegularity
-import ContinuousFlexibility.Scalar.S05StateDerivative
+module
+
+public import ContinuousFlexibility.Scalar.WeightedConservation
+public import ContinuousFlexibility.Scalar.WeightedStateRegularity
+public import ContinuousFlexibility.Scalar.S05StateDerivative
 
 /-!
 # The actual projective height-state derivative
@@ -11,6 +13,8 @@ identifies the derivative in the original projective topology.  The
 normalizing parameter remains independent of the height direction, so the
 argument also applies at parameter zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

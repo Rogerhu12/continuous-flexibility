@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aCoefficientSymmetry
-import ContinuousFlexibility.Radial.RadialHeight
-import Mathlib.Analysis.Calculus.FDeriv.Measurable
+module
+
+public import ContinuousFlexibility.Analysis.N07aCoefficientSymmetry
+public import ContinuousFlexibility.Radial.RadialHeight
+public import Mathlib.Analysis.Calculus.FDeriv.Measurable
 
 /-!
 # The actual measurable reference differential source
@@ -10,6 +12,8 @@ field: totalized Fréchet derivatives are measurable. Setting its value to
 zero on the interfaces changes no physical or canonical L² class. The
 angular period and evenness follow from the actual derivative symmetries.
 -/
+
+@[expose] public section
 
 noncomputable section
 

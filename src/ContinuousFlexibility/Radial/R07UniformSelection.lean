@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.R07BandSelection
-import ContinuousFlexibility.Radial.R07JoinSmallness
-import ContinuousFlexibility.Radial.MorseChainGeometry
+module
+
+public import ContinuousFlexibility.Radial.R07BandSelection
+public import ContinuousFlexibility.Radial.R07JoinSmallness
+public import ContinuousFlexibility.Radial.MorseChainGeometry
 
 /-!
 # A height tolerance and join threshold before the chain is chosen
@@ -12,6 +14,8 @@ because the construction prescribes the join width as a fraction of that
 radius. These two observations allow the starting index to be chosen after
 the tolerance and before the actual Morse chain is constructed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

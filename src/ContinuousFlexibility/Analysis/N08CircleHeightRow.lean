@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N08CircleDerivative
-import ContinuousFlexibility.Analysis.N08StateLinearOperations
-import ContinuousFlexibility.Analysis.N08RadialFlow
+module
+
+public import ContinuousFlexibility.Analysis.N08CircleDerivative
+public import ContinuousFlexibility.Analysis.N08StateLinearOperations
+public import ContinuousFlexibility.Analysis.N08RadialFlow
 
 /-!
 # The actual height row and its parameter factor
@@ -10,6 +12,8 @@ unchanged by a height variation. The actual return residual is therefore
 constant on that line near the base state. Its genuine height derivative
 vanishes, so the N02 derivative factors by `q` on the whole neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

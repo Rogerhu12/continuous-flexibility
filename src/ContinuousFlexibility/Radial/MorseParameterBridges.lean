@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseArithmeticGap
-import ContinuousFlexibility.Radial.MorseTravelIntegral
+module
+
+public import ContinuousFlexibility.Radial.MorseArithmeticGap
+public import ContinuousFlexibility.Radial.MorseTravelIntegral
 
 /-!
 # The return and zero-gap bounds for the chosen Morse parameters
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Radial.MorseTravelIntegral
 The actual travel integral and the integer norm estimates are specialized
 to the same nonsquare integer parameter as in R04.
 -/
+
+@[expose] public section
 
 noncomputable section
 

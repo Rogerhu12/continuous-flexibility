@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsFixedBaseFamily
-import ContinuousFlexibility.Analysis.N04PulledFieldsFixedBasePrefixRadius
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsFixedBaseFamily
+public import ContinuousFlexibility.Analysis.N04PulledFieldsFixedBasePrefixRadius
 
 /-!
 # Fixed-base powers after a weighted linear evaluation bound
@@ -8,6 +10,8 @@ The interpolation argument is carried out with abstract parameter and
 target spaces. A fixed evaluation loss is included before choosing the
 low base, while the evaluation weight remains an independent factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

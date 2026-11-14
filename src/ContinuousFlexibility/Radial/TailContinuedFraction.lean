@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Radial
-import Mathlib.Topology.UniformSpace.UniformApproximation
+module
+
+public import ContinuousFlexibility.Statements.Radial
+public import Mathlib.Topology.UniformSpace.UniformApproximation
 
 /-!
 # The natural-line continued fraction on a deep tail
@@ -8,6 +10,8 @@ The exact backward elimination map on each node preserves [1, 2] and
 contracts uniformly. Finite walls give its unique bounded limit with an
 explicit uniform error bound and continuous dependence on the coefficients.
 -/
+
+@[expose] public section
 
 noncomputable section
 

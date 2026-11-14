@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartRootFieldBounds
-import ContinuousFlexibility.Analysis.N04NegativeChartSpeedJetComposition
-import ContinuousFlexibility.Analysis.N01cFlowSlotBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootFieldBounds
+public import ContinuousFlexibility.Analysis.N04NegativeChartSpeedJetComposition
+public import ContinuousFlexibility.Analysis.N01cFlowSlotBounds
 
 /-!
 # The selected speed slots in the actual root variational equation
@@ -10,6 +12,8 @@ state derivative followed by angular differentiation. Angular slots
 cost only their number of spatial derivatives. Thus the canonical
 forcing heads use the physical raw prefixes already proved above.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01aReferenceCoarseningNorms
+module
+
+public import ContinuousFlexibility.Analysis.N01aReferenceCoarseningNorms
 
 /-!
 # Actual source differences with measurable representatives
@@ -7,6 +9,8 @@ The frozen graph topology uses square norms of differences. The revised
 local L² contract supplies signed measurability and is closed under
 subtraction; the actual integral estimates retain their original form.
 -/
+
+@[expose] public section
 
 noncomputable section
 

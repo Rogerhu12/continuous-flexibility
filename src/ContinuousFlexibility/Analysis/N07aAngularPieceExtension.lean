@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aAngularRadialRecovery
-import ContinuousFlexibility.Analysis.N07aAngularEven
-import ContinuousFlexibility.Analysis.N07aLocalizedWeakJets
-import ContinuousFlexibility.Analysis.N07aCanonicalGreenPairing
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularRadialRecovery
+public import ContinuousFlexibility.Analysis.N07aAngularEven
+public import ContinuousFlexibility.Analysis.N07aLocalizedWeakJets
+public import ContinuousFlexibility.Analysis.N07aCanonicalGreenPairing
 
 /-!
 # Angular weak jets extend across radial piece endpoints
@@ -11,6 +13,8 @@ introduces no boundary term. Every angular jet of a smooth interior L²
 representative extends by zero as its genuine cylinder weak derivative,
 even when no radial trace is known.
 -/
+
+@[expose] public section
 
 noncomputable section
 

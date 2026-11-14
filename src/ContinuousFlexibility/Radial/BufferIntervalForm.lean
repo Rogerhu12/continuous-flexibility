@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Statements.RadialTargets
-import Mathlib.Analysis.Distribution.AEEqOfIntegralContDiff
-import Mathlib.MeasureTheory.Function.LpSpace.Indicator
-import Mathlib.MeasureTheory.Integral.IntegralEqImproper
+module
+
+public import ContinuousFlexibility.Statements.RadialTargets
+public import Mathlib.Analysis.Distribution.AEEqOfIntegralContDiff
+public import Mathlib.MeasureTheory.Function.LpSpace.Indicator
+public import Mathlib.MeasureTheory.Integral.IntegralEqImproper
 
 /-!
 # The actual interval form used in positive-buffer compression
@@ -11,6 +13,8 @@ This module records its support, weak derivative, symmetry, and invariance
 under changing a source outside the retained interval. No interval operator
 or trace is supplied as an extra assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

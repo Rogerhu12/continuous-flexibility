@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalJetNormBounds
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalJetNormBounds
 
 /-!
 # Actual weighted realization of finitely supported coefficient columns
@@ -7,6 +9,8 @@ All jets vanish on pieces where the original open coefficient vanishes.
 The resulting finite sequence lies in every material level, with the
 literal finite sum of the original jet norms as its bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

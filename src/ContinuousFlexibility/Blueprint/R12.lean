@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Blueprint.Statements
-import ContinuousFlexibility.Radial.ReferenceNaturalKernel
-import ContinuousFlexibility.Radial.ReferenceSourceDensity
-import ContinuousFlexibility.Radial.ReferenceSmoothInverse
-import ContinuousFlexibility.Radial.ReferenceSmoothCore
-import ContinuousFlexibility.Radial.ReferenceSmoothGraphGreen
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
+public import ContinuousFlexibility.Radial.ReferenceNaturalKernel
+public import ContinuousFlexibility.Radial.ReferenceSourceDensity
+public import ContinuousFlexibility.Radial.ReferenceSmoothInverse
+public import ContinuousFlexibility.Radial.ReferenceSmoothCore
+public import ContinuousFlexibility.Radial.ReferenceSmoothGraphGreen
 
 /-!
 # Blueprint node R12
@@ -15,6 +17,8 @@ retains the homogeneous profile and return margins on that same witness.
 Source: `paper/flexible-surface-readable/04-reference-overview.tex` lines 49–201
 and `paper/flexible-surface-readable/06-global-reference-inverse.tex` lines 1017–1169.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

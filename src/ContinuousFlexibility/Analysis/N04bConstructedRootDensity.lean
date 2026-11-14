@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bRootTravelDifferential
-import ContinuousFlexibility.Analysis.N04bRootCanonicalCoefficients
+module
+
+public import ContinuousFlexibility.Analysis.N04bRootTravelDifferential
+public import ContinuousFlexibility.Analysis.N04bRootCanonicalCoefficients
 
 /-!
 # Principal coefficients of the constructed characteristic root chart
@@ -9,6 +11,8 @@ principal density is derived from the actual characteristic equations.
 The two directional scaling identities and the root normalization are
 proved consequences of the constructed chart, rather than premises.
 -/
+
+@[expose] public section
 
 noncomputable section
 

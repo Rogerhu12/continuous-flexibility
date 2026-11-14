@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06UnitWeakGraphData
-import ContinuousFlexibility.Analysis.N06MaterialAbsorption
-import ContinuousFlexibility.Analysis.N06WeakAngularLeibniz
+module
+
+public import ContinuousFlexibility.Analysis.N06UnitWeakGraphData
+public import ContinuousFlexibility.Analysis.N06MaterialAbsorption
+public import ContinuousFlexibility.Analysis.N06WeakAngularLeibniz
 
 /-!
 # Physical canonical jet rows with their original material weights
@@ -9,6 +11,8 @@ The stored volume row and its physical representative differ by the
 specific scalar in IsVolumeModel.forget. That scalar multiplies every
 weak angular derivative, and preserves the original reflection condition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

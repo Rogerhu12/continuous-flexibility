@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OuterIntegrableVariation
+module
+
+public import ContinuousFlexibility.Radial.OuterIntegrableVariation
 
 /-!
 # The flux equation for arbitrary locally integrable sources
@@ -8,6 +10,8 @@ The original radial equation therefore holds as a weak equation for every
 locally integrable forcing, including weighted L² forcing.  This file uses
 the actual flux of the same variation-of-parameters value function.
 -/
+
+@[expose] public section
 
 noncomputable section
 

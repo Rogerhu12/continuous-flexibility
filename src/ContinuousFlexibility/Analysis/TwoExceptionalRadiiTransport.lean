@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.AiryHalfHolonomy
+module
+
+public import ContinuousFlexibility.Analysis.AiryHalfHolonomy
 
 /-!
 # Constancy with two exceptional physical radii
@@ -9,6 +11,8 @@ mean value theorem on the three intervals determined by the two radii.
 There is no condition on how often the original trajectory meets a
 geometric interface and no regularity assumption at the exceptional radii.
 -/
+
+@[expose] public section
 
 noncomputable section
 

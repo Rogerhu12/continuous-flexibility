@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.AngularResolventDomains
+module
+
+public import ContinuousFlexibility.Analysis.AngularResolventDomains
 
 /-!
 # Nonnegativity of the angular frequency operator
@@ -7,6 +9,8 @@ The diagonal quadratic form is the sum of the nonnegative terms
 `n * ‖v n‖²`.  The coordinate isometry transports this fact to the actual
 unbounded operator associated with an angular resolvent.
 -/
+
+@[expose] public section
 
 noncomputable section
 

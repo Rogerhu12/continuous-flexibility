@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CirclePositiveInverseSmoothTame
-import ContinuousFlexibility.Analysis.CircleInversePerturbation
+module
+
+public import ContinuousFlexibility.Analysis.CirclePositiveInverseSmoothTame
+public import ContinuousFlexibility.Analysis.CircleInversePerturbation
 
 /-!
 # The inverse displacement on the complete positive-lift domain
@@ -9,6 +11,8 @@ diagonal of the canonical inverse composition operator. Local lower
 derivative bounds identify its decoder with the actual inverse lift;
 the resulting smooth tame map uses the whole open positive domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

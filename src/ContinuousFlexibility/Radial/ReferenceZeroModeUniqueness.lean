@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ReferenceZeroModeGraph
-import ContinuousFlexibility.Radial.ReferenceCosineCoordinates
-import ContinuousFlexibility.Radial.ZeroModeHomogeneousUniqueness
+module
+
+public import ContinuousFlexibility.Radial.ReferenceZeroModeGraph
+public import ContinuousFlexibility.Radial.ReferenceCosineCoordinates
+public import ContinuousFlexibility.Radial.ZeroModeHomogeneousUniqueness
 
 /-!
 # Uniqueness of the actual zero channel
@@ -11,6 +13,8 @@ coefficient by exactly the prescribed left constant. Thus the weak
 homogeneous representation and endpoint exclusion apply to the same
 domain as the frozen two-dimensional graph.
 -/
+
+@[expose] public section
 
 noncomputable section
 

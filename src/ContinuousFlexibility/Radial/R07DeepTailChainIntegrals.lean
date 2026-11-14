@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R07DeepTailData
+module
+
+public import ContinuousFlexibility.Radial.R07DeepTailData
 
 /-!
 # Exact masses and resistances of the concrete logarithmic chain
@@ -8,6 +10,8 @@ quantities in `MorseMassResistanceBounds`, multiplied by the endpoint
 normalization.  The left gap following mass interval `n` uses the original
 gap with index `n+1`.  The initial left gap uses the original starting gap.
 -/
+
+@[expose] public section
 
 noncomputable section
 

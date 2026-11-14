@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesTorusFourier
-import ContinuousFlexibility.Analysis.SpacesCylinderIntegration
+module
+
+public import ContinuousFlexibility.Analysis.SpacesTorusFourier
+public import ContinuousFlexibility.Analysis.SpacesCylinderIntegration
 
 /-!
 # Classical mixed jets of the physical Fourier waves
@@ -9,6 +11,8 @@ derivatives have symbols `(π I k₁ / 3)^a (2 I k₂)^b`; taking real parts
 commutes with all these derivatives. These are the concrete functions
 used by Fourier synthesis, before multiplying by the radial envelopes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

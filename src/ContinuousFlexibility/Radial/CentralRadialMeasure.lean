@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.CentralRadiusMetric
-import ContinuousFlexibility.Radial.CentralRadiusGrowth
-import Mathlib.MeasureTheory.Function.JacobianOneDim
-import Mathlib.MeasureTheory.Function.L2Space
-import Mathlib.MeasureTheory.Integral.IntegralEqImproper
+module
+
+public import ContinuousFlexibility.Radial.CentralRadiusMetric
+public import ContinuousFlexibility.Radial.CentralRadiusGrowth
+public import Mathlib.MeasureTheory.Function.JacobianOneDim
+public import Mathlib.MeasureTheory.Function.L2Space
+public import Mathlib.MeasureTheory.Integral.IntegralEqImproper
 
 /-!
 # Actual central radial measure and full-line change of variables
@@ -12,6 +14,8 @@ Its identification with a pushforward is a theorem. Ordinary `dr` source
 pairings keep their different Jacobian. No closed radial operator or choice
 of a radial orthogonal reduced inverse is asserted here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06PrimitivePrincipalOperator
-import ContinuousFlexibility.Analysis.N06PrimitiveLowerOrderSources
-import ContinuousFlexibility.Analysis.N06ActualRelativeMap
-import ContinuousFlexibility.Analysis.SolveStateSpaces
+module
+
+public import ContinuousFlexibility.Analysis.N06PrimitivePrincipalOperator
+public import ContinuousFlexibility.Analysis.N06PrimitiveLowerOrderSources
+public import ContinuousFlexibility.Analysis.N06ActualRelativeMap
+public import ContinuousFlexibility.Analysis.SolveStateSpaces
 
 /-!
 # The actual relative source on the retained N05 graph
@@ -11,6 +13,8 @@ columns act on the same source level and use the same reference inverse.
 Their uniform orders are enlarged to one order. Their literal source
 identities are retained for the subsequent physical Green argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

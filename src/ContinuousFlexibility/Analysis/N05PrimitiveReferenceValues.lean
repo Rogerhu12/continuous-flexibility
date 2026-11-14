@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05ReferenceHeightWindow
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceHeightWindow
 
 /-!
 # Zeroth primitive values on the actual reference pieces
@@ -12,6 +14,8 @@ The reference-jet premise is an explicit hypothesis of these lemmas.
 Producing it from a full nonlinear construction is a separate obligation
 of the shared interface.
 -/
+
+@[expose] public section
 
 noncomputable section
 

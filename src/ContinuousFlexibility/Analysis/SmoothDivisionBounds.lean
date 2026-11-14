@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.S05CalculusProof
-import ContinuousFlexibility.Analysis.SmoothScaledIntegral
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+module
+
+public import ContinuousFlexibility.Scalar.S05CalculusProof
+public import ContinuousFlexibility.Analysis.SmoothScaledIntegral
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 
 /-!
 # Fixed-loss bounds for the existing smooth simple-zero division
@@ -9,6 +11,8 @@ The smooth factor is the one already constructed by S05. Its factorization
 identifies it uniquely with a fixed interval integral, giving actual
 all-order derivatives and a loss of one independent of the interval width.
 -/
+
+@[expose] public section
 
 noncomputable section
 

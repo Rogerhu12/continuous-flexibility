@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionCoefficients
-import Mathlib.Algebra.Module.Submodule.Equiv
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionCoefficients
+public import Mathlib.Algebra.Module.Submodule.Equiv
 
 /-!
 # Realizing the return error in the physical source space
@@ -15,6 +17,8 @@ The constructions use mathlib's `LinearMap.codRestrictOfInjective` and
 introduced. The last lemmas expose the exact physical-norm criterion
 for bounds on the lifted maps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

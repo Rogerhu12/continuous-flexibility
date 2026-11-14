@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SourceJetAssembly
-import ContinuousFlexibility.Analysis.SmoothTameOneHigh
+module
+
+public import ContinuousFlexibility.Analysis.SourceJetAssembly
+public import ContinuousFlexibility.Analysis.SmoothTameOneHigh
 
 /-!
 # Fixed-loss source bounds in the original projective grading
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Analysis.SmoothTameOneHigh
 Finite maxima of physical Sobolev norms preserve the fixed input loss
 and base order of a genuine directional tower.
 -/
+
+@[expose] public section
 
 noncomputable section
 

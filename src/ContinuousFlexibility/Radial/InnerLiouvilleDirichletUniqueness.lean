@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerLiouvilleDirichletSolution
-import ContinuousFlexibility.Radial.InnerRadialLocalDuality
+module
+
+public import ContinuousFlexibility.Radial.InnerLiouvilleDirichletSolution
+public import ContinuousFlexibility.Radial.InnerRadialLocalDuality
 
 /-!
 # Uniqueness for the actual transported local Dirichlet problem
@@ -9,6 +11,8 @@ localized R09 inverse and the proved Liouville weak-form transport.
 No physical inverse, uniqueness or reverse-domain identification is
 assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

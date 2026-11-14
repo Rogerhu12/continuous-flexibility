@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aUnitCoefficientRows
-import ContinuousFlexibility.Analysis.N07aCurrentPrincipalBounds
-import ContinuousFlexibility.Analysis.N07aReferenceReturn
-import ContinuousFlexibility.Analysis.N07aCylinderWeightedNorms
+module
+
+public import ContinuousFlexibility.Analysis.N07aUnitCoefficientRows
+public import ContinuousFlexibility.Analysis.N07aCurrentPrincipalBounds
+public import ContinuousFlexibility.Analysis.N07aReferenceReturn
+public import ContinuousFlexibility.Analysis.N07aCylinderWeightedNorms
 
 /-!
 # The actual cubic factors in unit coordinates
@@ -11,6 +13,8 @@ piece. Thus the current-minus-reference atom is the original divided
 coefficient, and the exact principal difference is ℓ⁶ x³(1-x)³ times that
 same atom. This retains the factor used by the weak energy estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

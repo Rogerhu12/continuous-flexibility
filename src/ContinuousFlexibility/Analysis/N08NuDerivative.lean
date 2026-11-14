@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.ProjectiveJetEvaluation
-import ContinuousFlexibility.Analysis.N08StateLinearOperations
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
-import ContinuousFlexibility.Scalar.WeightedStateDerivative
-import ContinuousFlexibility.Statements.Nonlinear
-import Mathlib.Analysis.Calculus.Deriv.Shift
+module
+
+public import ContinuousFlexibility.Analysis.ProjectiveJetEvaluation
+public import ContinuousFlexibility.Analysis.N08StateLinearOperations
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
+public import ContinuousFlexibility.Scalar.WeightedStateDerivative
+public import ContinuousFlexibility.Statements.Nonlinear
+public import Mathlib.Analysis.Calculus.Deriv.Shift
 
 /-!
 # The actual scalar nu column
@@ -14,6 +16,8 @@ domain. At sector states, decoder evaluation and the exact coordinate-line
 identity identify it with the frozen `nuColumnField` expression. No
 off-sector positivity or extra differentiability premise is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

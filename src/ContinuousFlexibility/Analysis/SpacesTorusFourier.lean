@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesCircleSpectral
-import Mathlib.Analysis.Fourier.AddCircleMulti
+module
+
+public import ContinuousFlexibility.Analysis.SpacesCircleSpectral
+public import Mathlib.Analysis.Fourier.AddCircleMulti
 
 /-!
 # Exact two-dimensional Fourier shell projections
@@ -10,6 +12,8 @@ basis. Arbitrary spectral bands therefore give contractive projections
 whose sum is the identity. Finite bands are genuine trigonometric
 polynomials, represented by the same `L²` classes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

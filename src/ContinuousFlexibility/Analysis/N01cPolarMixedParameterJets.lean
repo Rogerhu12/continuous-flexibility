@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cHeightProductBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01cHeightProductBounds
 
 /-!
 # All spatial jets of the actual polar-height parameter inputs
@@ -14,6 +16,8 @@ spatial order. Tower uniqueness and the previously proved weighted
 polar-jet estimate retain one high factor, H^(3/4), and a spatial loss of
 four, independently of the parameter order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

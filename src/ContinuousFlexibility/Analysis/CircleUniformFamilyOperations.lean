@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CircleTravelUniformJets
-import ContinuousFlexibility.Analysis.CircleAverageCompositionUniformBounds
-import ContinuousFlexibility.Analysis.TameUniformSmoothFamily
+module
+
+public import ContinuousFlexibility.Analysis.CircleTravelUniformJets
+public import ContinuousFlexibility.Analysis.CircleAverageCompositionUniformBounds
+public import ContinuousFlexibility.Analysis.TameUniformSmoothFamily
 
 /-!
 # Uniform genuine families of the actual circle operations
@@ -10,6 +12,8 @@ positive inverse are the existing circle-model maps. Their quantitative
 jet estimates, including arbitrary selector-dependent travel, assemble
 through the actual finite chain rule.
 -/
+
+@[expose] public section
 
 noncomputable section
 

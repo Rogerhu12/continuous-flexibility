@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.RadialPlateauBounds
-import ContinuousFlexibility.Analysis.MaterialPlateauSize
-import ContinuousFlexibility.Analysis.CylinderUniformNorm
-import ContinuousFlexibility.Analysis.TameLocalCalculus
+module
+
+public import ContinuousFlexibility.Analysis.RadialPlateauBounds
+public import ContinuousFlexibility.Analysis.MaterialPlateauSize
+public import ContinuousFlexibility.Analysis.CylinderUniformNorm
+public import ContinuousFlexibility.Analysis.TameLocalCalculus
 
 /-!
 # Quantitative physical norms of the actual primitive test
@@ -11,6 +13,8 @@ volume, and the exact physical jets. The final direction belongs to the
 supplied height model and agrees with the reference primitive as a germ
 throughout the complete open component.
 -/
+
+@[expose] public section
 
 noncomputable section
 

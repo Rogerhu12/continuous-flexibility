@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05ReferenceSymbolClosure
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceSymbolClosure
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 
 /-!
 # The actual image of the negative cut
@@ -10,6 +12,8 @@ would extend the interior inverse identity to that endpoint.  At the cut,
 the reference determinant is strictly negative, so the image is the nonzero
 canonical endpoint.  The argument treats both physical halves uniformly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

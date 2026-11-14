@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01FlowLocality
-import Mathlib.Analysis.Calculus.MeanValue
+module
+
+public import ContinuousFlexibility.Analysis.N01FlowLocality
+public import Mathlib.Analysis.Calculus.MeanValue
 
 /-!
 # Characteristic locality modulo additive height constants
@@ -11,6 +13,8 @@ radial primitives differ only by a constant on the connected component.
 These facts give the precise locality needed for trace and control
 directions in the supplied physical state space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

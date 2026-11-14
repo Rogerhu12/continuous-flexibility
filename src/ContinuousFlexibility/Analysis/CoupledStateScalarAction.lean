@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # Scalar action through the canonical module structure
@@ -7,6 +9,8 @@ The generic definition fixes the usual module action before specializing
 to the nested physical state spaces. Its projection and continuity lemmas
 avoid repeated low-level scalar-action instance searches on those spaces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

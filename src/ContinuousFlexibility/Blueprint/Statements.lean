@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Statements.Milestones
+module
+
+public import ContinuousFlexibility.Statements.Milestones
 
 /-!
 # Statements of blueprint v3
@@ -8,6 +10,8 @@ large nodes along the top-level structure of their statements, and state the las
 of the chain for one nonzero parameter. All definitions are built from the existing
 data and property definitions of `ContinuousFlexibility.Statements`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

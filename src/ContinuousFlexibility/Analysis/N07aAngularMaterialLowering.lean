@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aAngularMaterialEmbedding
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularMaterialEmbedding
 
 /-!
 # Lowering an arbitrary real material order in the same actual volume graph
@@ -9,6 +11,8 @@ the actual multiplier `M^(u-t)` for every `u ≤ t`. The final forget map is
 exactly the original physical source; no integer restriction is imposed
 on the real material loss of N05.
 -/
+
+@[expose] public section
 
 noncomputable section
 

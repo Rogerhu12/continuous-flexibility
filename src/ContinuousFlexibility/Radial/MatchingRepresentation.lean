@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchedMatrixInverse
-import ContinuousFlexibility.Radial.MatchingInverseFormula
+module
+
+public import ContinuousFlexibility.Radial.MatchedMatrixInverse
+public import ContinuousFlexibility.Radial.MatchingInverseFormula
 
 /-!
 # Construction of the bounded matched representation
@@ -8,6 +10,8 @@ The selected local pieces determine a bounded operator with the exact
 matched formula and a uniformly controlled two-sided matching inverse.
 The differential inverse properties are proved separately.
 -/
+
+@[expose] public section
 
 noncomputable section
 

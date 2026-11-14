@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.PositiveBufferComparison
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferComparison
 
 /-!
 # Uniqueness and conormal proportionality on a positive half-line
@@ -7,6 +9,8 @@ Bounded homogeneous solutions are fixed by their finite endpoint trace.
 The derivative identity at that endpoint follows from the ordinary
 one-sided derivative, without any hypothesis on derivatives at infinity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

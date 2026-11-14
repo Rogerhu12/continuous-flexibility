@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06RootBoundaryRecursion
-import ContinuousFlexibility.Analysis.N01cAngularJetTowers
-import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N06RootBoundaryRecursion
+public import ContinuousFlexibility.Analysis.N01cAngularJetTowers
+public import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
 
 /-!
 # Genuine parameter towers of the root transport traces
@@ -13,6 +15,8 @@ traces and the original root label. The root-coordinate witness may be
 chosen separately at every state: no parameter regularity of that choice
 is assumed. Every tower is for the literal trace of that same witness.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.TameInverseFamily
+module
+
+public import ContinuousFlexibility.Analysis.TameInverseFamily
 
 /-!
 # Initial continuity of a tame inverse family
@@ -7,6 +9,8 @@ The exact resolvent identity reduces continuity of the inverse to joint
 continuity of the forward family and its actual linear-family estimate.
 No operator-norm topology or prior continuity of the inverse is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

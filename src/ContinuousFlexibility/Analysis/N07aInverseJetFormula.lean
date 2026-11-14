@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCompositionBudget
-import Mathlib.Order.Preorder.Finite
+module
+
+public import ContinuousFlexibility.Analysis.N07aCompositionBudget
+public import Mathlib.Order.Preorder.Finite
 
 /-!
 # The triangular higher derivative formula for an actual inverse
@@ -9,6 +11,8 @@ jet. Composing its input slots with the first forward differential removes
 the first inverse differentials. Every remaining forward jet has smaller
 order, while its total excess-order budget remains exactly n - 1.
 -/
+
+@[expose] public section
 
 noncomputable section
 

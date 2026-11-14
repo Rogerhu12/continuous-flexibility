@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerRadialL2Mass
-import ContinuousFlexibility.Radial.MorseCellLiouville
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialL2Mass
+public import ContinuousFlexibility.Radial.MorseCellLiouville
 
 /-!
 # The physical Liouville mass on a retained interval
@@ -10,6 +12,8 @@ density root covers both the Morse value one and the central
 Liouville density. The second theorem converts a model energy bound
 into a physical leading Poisson bound without losing the height scale.
 -/
+
+@[expose] public section
 
 noncomputable section
 

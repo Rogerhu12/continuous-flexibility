@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cActualFlowLowGeometry
-import ContinuousFlexibility.Analysis.N01cActualLinearSpeedJets
-import ContinuousFlexibility.Analysis.N01cActualLinearCoefficientBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01cActualFlowLowGeometry
+public import ContinuousFlexibility.Analysis.N01cActualLinearSpeedJets
+public import ContinuousFlexibility.Analysis.N01cActualLinearCoefficientBounds
 
 /-!
 # One common low bound for all actual flow variations
@@ -11,6 +13,8 @@ all-angle singleton head consequently has a uniform third Sobolev norm,
 and the previously proved composition estimate bounds the genuine
 linear coefficient integral for every parameter variation order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

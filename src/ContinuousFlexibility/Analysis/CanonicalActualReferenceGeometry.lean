@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.CanonicalPositiveReferenceFamily
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasGeometry
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasCutOperator
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeReferenceRadial
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeTransmission
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeGlobalTransport
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalPositiveReferenceFamily
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasGeometry
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasCutOperator
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeReferenceRadial
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeTransmission
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeGlobalTransport
 
 /-!
 # One actual reference-gauged atlas with geometry and transmission
@@ -14,6 +16,8 @@ root and cut transmission, and global relative transport use the same
 smaller neighborhood and the displayed new record. The retained finite
 controls are qualitative; their uniform material costs remain separate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

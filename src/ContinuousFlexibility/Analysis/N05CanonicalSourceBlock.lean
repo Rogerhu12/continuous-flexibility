@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05CanonicalSourceEmbedding
-import ContinuousFlexibility.Analysis.N05CanonicalEvenDensity
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05CanonicalSourceEmbedding
+public import ContinuousFlexibility.Analysis.N05CanonicalEvenDensity
 
 /-!
 # A single actual source block retains its endpoint exponent
@@ -9,6 +11,8 @@ The source is the genuine local lift, extended by zero in the radial variable.
 The estimate keeps its endpoint exponential. Only the fixed coordinate and
 cell-index errors enter the coefficient power; no endpoint gap is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

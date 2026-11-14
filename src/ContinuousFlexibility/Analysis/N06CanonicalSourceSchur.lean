@@ -1,11 +1,13 @@
-import ContinuousFlexibility.Analysis.N07aVolumeLinearLift
-import ContinuousFlexibility.Analysis.N07aAngularCanonicalProjection
-import ContinuousFlexibility.Analysis.N07aAngularCommutatorDomain
-import ContinuousFlexibility.Analysis.N07aSchurLiftIdentity
-import ContinuousFlexibility.Analysis.N07aCircleCoefficientDecay
-import ContinuousFlexibility.Analysis.N06CanonicalTestSeparation
-import ContinuousFlexibility.Analysis.N06PhysicalTestCoordinates
-import ContinuousFlexibility.Analysis.N07aCanonicalWeakJets
+module
+
+public import ContinuousFlexibility.Analysis.N07aVolumeLinearLift
+public import ContinuousFlexibility.Analysis.N07aAngularCanonicalProjection
+public import ContinuousFlexibility.Analysis.N07aAngularCommutatorDomain
+public import ContinuousFlexibility.Analysis.N07aSchurLiftIdentity
+public import ContinuousFlexibility.Analysis.N07aCircleCoefficientDecay
+public import ContinuousFlexibility.Analysis.N06CanonicalTestSeparation
+public import ContinuousFlexibility.Analysis.N06PhysicalTestCoordinates
+public import ContinuousFlexibility.Analysis.N07aCanonicalWeakJets
 
 /-!
 # A Schur operator with the prescribed actual canonical source
@@ -16,6 +18,8 @@ Its actual source is identified first on a single input band and then
 on all inputs by continuous compact-test pairings.  Continuity of the
 unassembled sequence-valued source is not an assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.RootCharacteristicFactor
-import ContinuousFlexibility.Analysis.N06PositiveClippedJets
-import Mathlib.Analysis.SpecialFunctions.Sqrt
+module
+
+public import ContinuousFlexibility.Analysis.RootCharacteristicFactor
+public import ContinuousFlexibility.Analysis.N06PositiveClippedJets
+public import Mathlib.Analysis.SpecialFunctions.Sqrt
 
 /-!
 # Ordinary jets of the actual factored reference root speed
@@ -10,6 +12,8 @@ root need not be smooth away from the physical collar. The final estimate
 is for `referenceRootSpeedFactor` itself, with its original profile and
 the genuine divided derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

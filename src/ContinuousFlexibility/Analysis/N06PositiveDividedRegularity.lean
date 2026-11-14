@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06PositiveCanonicalRegularity
-import ContinuousFlexibility.Analysis.N06Neighborhood
-import ContinuousFlexibility.Analysis.N05ReferenceResidual
+module
+
+public import ContinuousFlexibility.Analysis.N06PositiveCanonicalRegularity
+public import ContinuousFlexibility.Analysis.N06Neighborhood
+public import ContinuousFlexibility.Analysis.N05ReferenceResidual
 
 /-!
 # Positive coefficient regularity on the same complete N05 witness
@@ -10,6 +12,8 @@ same graph and inverse, and the same canonical spaces. The actual cubic
 quotient then gives smooth divided coefficients. No state regularity or
 quantitative smallness of those quotients is asserted here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

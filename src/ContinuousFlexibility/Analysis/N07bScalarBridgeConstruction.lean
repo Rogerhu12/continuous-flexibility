@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N07bPrimitiveGeometryHeight
-import ContinuousFlexibility.Analysis.N07bPrimitiveTransport
-import ContinuousFlexibility.Analysis.N07bReferenceBulkEnergy
-import ContinuousFlexibility.Analysis.N07bReferenceSourceAssembly
-import ContinuousFlexibility.Analysis.N07bFixedGraphIdentification
+module
+
+public import ContinuousFlexibility.Analysis.N07bPrimitiveGeometryHeight
+public import ContinuousFlexibility.Analysis.N07bPrimitiveTransport
+public import ContinuousFlexibility.Analysis.N07bReferenceBulkEnergy
+public import ContinuousFlexibility.Analysis.N07bReferenceSourceAssembly
+public import ContinuousFlexibility.Analysis.N07bFixedGraphIdentification
 
 /-!
 # Constructing the fixed graph element of the physical scalar solution
@@ -14,6 +16,8 @@ level; compact corrections then add the prescribed left constant and
 border scalar. Only after these constructions is the fixed graph inverse
 used to identify the physical solution.
 -/
+
+@[expose] public section
 
 noncomputable section
 

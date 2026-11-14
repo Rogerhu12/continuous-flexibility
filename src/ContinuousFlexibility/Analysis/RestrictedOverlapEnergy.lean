@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.MaterialComponentEnergy
-import Mathlib.MeasureTheory.Integral.Lebesgue.Add
+module
+
+public import ContinuousFlexibility.Analysis.MaterialComponentEnergy
+public import Mathlib.MeasureTheory.Integral.Lebesgue.Add
 
 /-!
 # Actual L2 energy under a finite weighted overlap
@@ -8,6 +10,8 @@ The count of sets containing a point stays inside the integral. Thus a
 coefficient-weight bound for the overlap gives a genuine bound for the
 infinite sum of restricted energies, with one additional material order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

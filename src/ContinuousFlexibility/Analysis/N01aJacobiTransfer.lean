@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Radial
-import ContinuousFlexibility.Radial.TransitionTransfer
+module
+
+public import ContinuousFlexibility.Statements.Radial
+public import ContinuousFlexibility.Radial.TransitionTransfer
 
 /-!
 # Transfer of the actual reference Jacobi state
@@ -9,6 +11,8 @@ has a two-sided transfer bound involving the total variation of `log w`.
 This estimate will compare the weighted decay of the reference kernel
 with the number of negative components of the profile.
 -/
+
+@[expose] public section
 
 noncomputable section
 

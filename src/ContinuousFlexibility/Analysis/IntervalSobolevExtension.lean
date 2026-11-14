@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.SeeleySobolevExtension
-import ContinuousFlexibility.Analysis.IntervalSobolevCutoffNorm
-import ContinuousFlexibility.Analysis.SobolevAffineExtension
-import ContinuousFlexibility.Analysis.SobolevJetRestriction
+module
+
+public import ContinuousFlexibility.Analysis.SeeleySobolevExtension
+public import ContinuousFlexibility.Analysis.IntervalSobolevCutoffNorm
+public import ContinuousFlexibility.Analysis.SobolevAffineExtension
+public import ContinuousFlexibility.Analysis.SobolevJetRestriction
 
 /-!
 # A fixed extension from an interval
@@ -12,6 +14,8 @@ operator, in the corresponding affine orientation. Their sum retains the
 original function on the whole closed interval. The construction is linear
 and independent of the Sobolev order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

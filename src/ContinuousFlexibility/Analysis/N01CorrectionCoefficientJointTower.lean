@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01CoefficientJointTower
-import ContinuousFlexibility.Analysis.N01CorrectionCoefficientJets
-import ContinuousFlexibility.Analysis.ReturnCorrectionCoefficientJetSupport
+module
+
+public import ContinuousFlexibility.Analysis.N01CoefficientJointTower
+public import ContinuousFlexibility.Analysis.N01CorrectionCoefficientJets
+public import ContinuousFlexibility.Analysis.ReturnCorrectionCoefficientJetSupport
 
 /-!
 # The actual correction coefficients jointly in parameters and space
@@ -11,6 +13,8 @@ positive optical strip. The division-free reconstruction identifies the
 result with the original coefficient error, including its zero values
 where the cutoff derivative vanishes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

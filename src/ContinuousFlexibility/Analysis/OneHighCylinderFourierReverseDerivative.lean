@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderAngularPlancherel
-import ContinuousFlexibility.Analysis.OneHighCylinderFourierL2ReverseDerivative
-import ContinuousFlexibility.Analysis.OneHighCylinderFourierRadial
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderAngularPlancherel
+public import ContinuousFlexibility.Analysis.OneHighCylinderFourierL2ReverseDerivative
+public import ContinuousFlexibility.Analysis.OneHighCylinderFourierRadial
 
 /-!
 # Actual cylinder derivatives from frequency membership
@@ -10,6 +12,8 @@ angular coefficient. The angular argument uses the exact coefficient
 multiplier. Converse Parseval then proves full physical L2 membership,
 without assuming it for either actual derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

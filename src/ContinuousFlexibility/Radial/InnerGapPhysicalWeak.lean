@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerGapPotentialLift
-import ContinuousFlexibility.Radial.InnerRadialFiniteWeakGraph
+module
+
+public import ContinuousFlexibility.Radial.InnerGapPotentialLift
+public import ContinuousFlexibility.Radial.InnerRadialFiniteWeakGraph
 
 /-!
 # Positive-gap realization in the common physical weak graph
@@ -9,6 +11,8 @@ Thus the same arbitrary-source Dirichlet inverse satisfies the local
 weak graph used for the finite chain, with one derivative for all tests.
 The converse is included, so the graph also determines that inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04bPlanarInverseGerm
+module
+
+public import ContinuousFlexibility.Analysis.N04bPlanarInverseGerm
 
 /-!
 # Genuine inverse germs for the literal forward function
@@ -9,6 +11,8 @@ theorem. The theorem is applied to the specified forward function itself,
 so the resulting partial homeomorphism has that function globally as its
 forward map, even when the function was constructed by local pasting.
 -/
+
+@[expose] public section
 
 noncomputable section
 

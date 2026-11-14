@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularBandNorm
-import ContinuousFlexibility.Analysis.N07aVolumeCell
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularBandNorm
+public import ContinuousFlexibility.Analysis.N07aVolumeCell
 
 /-!
 # The physical band norm inside an actual weighted source jet
@@ -8,6 +10,8 @@ These identities use the prescribed volume graph, including all of its
 weak derivatives.  They convert its outer Hilbert norm into the exact
 local band quantities appearing in the mode estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

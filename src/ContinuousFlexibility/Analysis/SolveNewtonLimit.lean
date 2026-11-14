@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.ProjectiveNewtonLimit
-import ContinuousFlexibility.Analysis.ProjectiveNewtonRapidDecay
-import Mathlib.Analysis.LocallyConvex.WithSeminorms
-import Mathlib.Analysis.Normed.Order.Hom.Basic
+module
+
+public import ContinuousFlexibility.Analysis.ProjectiveNewtonLimit
+public import ContinuousFlexibility.Analysis.ProjectiveNewtonRapidDecay
+public import Mathlib.Analysis.LocallyConvex.WithSeminorms
+public import Mathlib.Analysis.Normed.Order.Hom.Basic
 
 /-!
 # Newton convergence on a complete space defined by seminorms
@@ -12,6 +14,8 @@ a source.  Completeness and the generating seminorms suffice to close the
 same iteration, so a second projective-limit representation of the source
 is unnecessary.
 -/
+
+@[expose] public section
 
 noncomputable section
 

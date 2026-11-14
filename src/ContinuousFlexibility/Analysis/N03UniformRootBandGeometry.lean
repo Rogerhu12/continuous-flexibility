@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N03FixedRootTravelIdentification
-import ContinuousFlexibility.Analysis.RootTravelUniformBounds
-import ContinuousFlexibility.Analysis.RootAiryCoordinateIdentification
+module
+
+public import ContinuousFlexibility.Analysis.N03FixedRootTravelIdentification
+public import ContinuousFlexibility.Analysis.RootTravelUniformBounds
+public import ContinuousFlexibility.Analysis.RootAiryCoordinateIdentification
 
 /-!
 # A uniform physical band in the correct moving canonical half
@@ -10,6 +12,8 @@ radius before the state or the controlled flow is chosen. Actual travel
 then excludes the moving cut and the opposite half. On this whole band
 the stored chart equals the chart of the same controlled inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.R07OutgoingFamily
-import ContinuousFlexibility.Radial.SelectedBoundaryMargin
-import ContinuousFlexibility.Radial.MorseRealizationBasic
+module
+
+public import ContinuousFlexibility.Radial.R07OutgoingFamily
+public import ContinuousFlexibility.Radial.SelectedBoundaryMargin
+public import ContinuousFlexibility.Radial.MorseRealizationBasic
 
 /-!
 # Continue the selected natural solution to the actual matching join
@@ -11,6 +13,8 @@ a natural solution at the earlier join with the same selected entrance
 value and derivative. ODE uniqueness shows that the whole original open
 tail, and not only its entrance state, is preserved.
 -/
+
+@[expose] public section
 
 noncomputable section
 

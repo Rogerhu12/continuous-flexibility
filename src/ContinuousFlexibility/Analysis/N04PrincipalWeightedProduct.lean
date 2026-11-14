@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PrincipalWeightedPrefix
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalWeightedPrefix
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
 
 /-!
 # Finite products of weighted current towers
@@ -9,6 +11,8 @@ the product estimate, and multilinear normalization is performed after
 the product has been formed. The low order is independent of both the
 parameter and spatial derivative orders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

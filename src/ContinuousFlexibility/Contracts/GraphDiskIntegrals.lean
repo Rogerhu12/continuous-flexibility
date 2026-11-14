@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Contracts.GraphFamilyCurvature
-import Mathlib.MeasureTheory.Measure.Lebesgue.EqHaar
+module
+
+public import ContinuousFlexibility.Contracts.GraphFamilyCurvature
+public import Mathlib.MeasureTheory.Measure.Lebesgue.EqHaar
 
 /-!
 # Actual parameterized graph-disk integrals
@@ -12,6 +14,8 @@ and integrals on the eventual closed sphere, remains a separate obligation.
 The coordinate plane has its product norm; its rotations preserve Lebesgue
 measure by their actual determinant, not by a false max-norm isometry claim.
 -/
+
+@[expose] public section
 
 noncomputable section
 

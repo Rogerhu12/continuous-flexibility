@@ -1,7 +1,11 @@
-import ContinuousFlexibility.Analysis.N08AffineTamePullback
-import ContinuousFlexibility.Analysis.N08Neighborhoods
+module
+
+public import ContinuousFlexibility.Analysis.N08AffineTamePullback
+public import ContinuousFlexibility.Analysis.N08Neighborhoods
 
 /-! # The actual affine inclusion of the closed sector parameter space -/
+
+@[expose] public section
 
 noncomputable section
 

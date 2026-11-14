@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.TameInverseExpressions
-import ContinuousFlexibility.Analysis.TameMultilinearNormalization
+module
+
+public import ContinuousFlexibility.Analysis.TameInverseExpressions
+public import ContinuousFlexibility.Analysis.TameMultilinearNormalization
 
 /-!
 # Abstract ordered forward jets and source normalization
@@ -8,6 +10,8 @@ The parameter recurrence and the source-linear normalization use abstract
 topological vector spaces. Concrete circle realizations are instantiated
 only after these proofs, so their construction is not unfolded repeatedly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

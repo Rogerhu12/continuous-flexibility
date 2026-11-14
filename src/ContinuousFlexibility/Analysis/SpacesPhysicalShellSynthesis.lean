@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SpacesPhysicalSynthesisCoordinates
+module
+
+public import ContinuousFlexibility.Analysis.SpacesPhysicalSynthesisCoordinates
 
 /-!
 # Physical shell synthesis into the actual closed weak graph
@@ -8,6 +10,8 @@ smooth, compactly supported cylinder packet. Continuity and closedness
 extend that graph membership to every square-summable row family. The
 same coordinates at successive levels give exact bonding compatibility.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,10 +1,12 @@
-import ContinuousFlexibility.Analysis.N07aActualForwardDifferentialBound
-import ContinuousFlexibility.Analysis.N07aStageRestriction
-import ContinuousFlexibility.Analysis.N07aActualCanonicalSolutionBounds
-import ContinuousFlexibility.Analysis.N07aCandidateConstruction
-import ContinuousFlexibility.Analysis.N07aLinearFromCandidate
-import ContinuousFlexibility.Analysis.N07aAngularCandidateUniqueness
-import ContinuousFlexibility.Analysis.N07aConstructionRestriction
+module
+
+public import ContinuousFlexibility.Analysis.N07aActualForwardDifferentialBound
+public import ContinuousFlexibility.Analysis.N07aStageRestriction
+public import ContinuousFlexibility.Analysis.N07aActualCanonicalSolutionBounds
+public import ContinuousFlexibility.Analysis.N07aCandidateConstruction
+public import ContinuousFlexibility.Analysis.N07aLinearFromCandidate
+public import ContinuousFlexibility.Analysis.N07aAngularCandidateUniqueness
+public import ContinuousFlexibility.Analysis.N07aConstructionRestriction
 
 /-!
 # N07a: the normalized physical linear inverse and its fixed loss
@@ -12,6 +14,8 @@ import ContinuousFlexibility.Analysis.N07aConstructionRestriction
 Source: `paper/flexible-surface-readable/08-stable-inverse.tex` lines 637–790.
 Task: `docs/tasks/N07a-Linear.md`.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

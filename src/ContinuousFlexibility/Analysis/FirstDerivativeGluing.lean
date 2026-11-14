@@ -1,6 +1,8 @@
-import Mathlib.Analysis.Calculus.ContDiff.Comp
-import Mathlib.Analysis.Calculus.FDeriv.Congr
-import Mathlib.Topology.Piecewise
+module
+
+public import Mathlib.Analysis.Calculus.ContDiff.Comp
+public import Mathlib.Analysis.Calculus.FDeriv.Congr
+public import Mathlib.Topology.Piecewise
 
 /-!
 # Actual first derivatives across a matching interface
@@ -11,6 +13,8 @@ the public union theorem. Matching continuous derivative fields then give
 genuine C¹ regularity on an open domain, without conditions on how often
 a curve crosses the interface.
 -/
+
+@[expose] public section
 
 noncomputable section
 

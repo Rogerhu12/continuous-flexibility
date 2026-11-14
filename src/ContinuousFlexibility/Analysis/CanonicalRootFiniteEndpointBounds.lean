@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CanonicalRootHeightJets
-import ContinuousFlexibility.Analysis.CanonicalRootDiagonalLower
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalRootHeightJets
+public import ContinuousFlexibility.Analysis.CanonicalRootDiagonalLower
 
 /-!
 # Actual finite endpoint bounds from the same Through03 witness
@@ -9,6 +11,8 @@ proved root jet families then give finite numerical envelopes. Their
 inverse first jet supplies the positive diagonal lower bound. No raw
 endpoint estimate or state-uniform coefficient collar is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

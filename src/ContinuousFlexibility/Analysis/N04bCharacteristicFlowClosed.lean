@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04bCharacteristicFirstIntegrals
-import ContinuousFlexibility.Analysis.ScalarFlowSmoothness
-import ContinuousFlexibility.Analysis.ScalarFlowParameterContinuity
-import ContinuousFlexibility.Analysis.PeriodicScalarFlow
+module
+
+public import ContinuousFlexibility.Analysis.N04bCharacteristicFirstIntegrals
+public import ContinuousFlexibility.Analysis.ScalarFlowSmoothness
+public import ContinuousFlexibility.Analysis.ScalarFlowParameterContinuity
+public import ContinuousFlexibility.Analysis.PeriodicScalarFlow
 
 /-!
 # Closed-component regularity of a stored actual characteristic flow
@@ -13,6 +15,8 @@ Gronwall then proves joint continuity, and uniqueness proves its period.
 The actual variational formula proves a strictly positive angular derivative.
 No joint regularity of the stored flow is an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

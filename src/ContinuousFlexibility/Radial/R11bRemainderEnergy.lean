@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.R11bWeightedModeSquares
-import ContinuousFlexibility.Radial.R11bFourierCoefficients
-import ContinuousFlexibility.Radial.R11bRemainderModes
-import ContinuousFlexibility.Radial.ProfileScalarSquareAlgebra
+module
+
+public import ContinuousFlexibility.Radial.R11bWeightedModeSquares
+public import ContinuousFlexibility.Radial.R11bFourierCoefficients
+public import ContinuousFlexibility.Radial.R11bRemainderModes
+public import ContinuousFlexibility.Radial.ProfileScalarSquareAlgebra
 
 /-!
 # The full finite modal energy of an output remainder
@@ -10,6 +12,8 @@ The mean is controlled by ordinary weighted Bessel. Positive frequencies
 also receive the actual inverse's angular frequency bound. A.e. choices of
 the radial representatives preserve every scalar cell square.
 -/
+
+@[expose] public section
 
 noncomputable section
 

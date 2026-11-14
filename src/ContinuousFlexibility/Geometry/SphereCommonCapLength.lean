@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Geometry.SphereNoncongruence
-import ContinuousFlexibility.Contracts.GraphCylinderVolume
+module
+
+public import ContinuousFlexibility.Geometry.SphereNoncongruence
+public import ContinuousFlexibility.Contracts.GraphCylinderVolume
 
 /-!
 # One actual cap length for the full marked sphere construction
@@ -10,6 +12,8 @@ the physical graph. This same length supplies the real cap intersection, the
 jointly smooth embedded sphere family, and the actual noncongruent members.
 No second cap length is selected by a separate existence theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

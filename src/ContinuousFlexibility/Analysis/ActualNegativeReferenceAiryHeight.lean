@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ActualNegativeReferenceAiryCoordinate
-import ContinuousFlexibility.Analysis.PositiveReferenceCylinder
+module
+
+public import ContinuousFlexibility.Analysis.ActualNegativeReferenceAiryCoordinate
+public import ContinuousFlexibility.Analysis.PositiveReferenceCylinder
 
 /-!
 # The same stored reference height on a complete optical half
@@ -10,6 +12,8 @@ the original height itself. Thus the Airy integral formula is a local
 representative of the stored field throughout the half, rather than a
 new atlas normalization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06BoundaryRadialJets
-import ContinuousFlexibility.Analysis.N06CharacteristicRootJets
-import Mathlib.Analysis.SpecialFunctions.Log.Deriv
+module
+
+public import ContinuousFlexibility.Analysis.N06BoundaryRadialJets
+public import ContinuousFlexibility.Analysis.N06CharacteristicRootJets
+public import Mathlib.Analysis.SpecialFunctions.Log.Deriv
 
 /-!
 # Higher boundary jets of the actual characteristic-root construction
@@ -11,6 +13,8 @@ are smooth angular functions of the actual normalized physical chart and
 of the actual logarithmic height. They can therefore be used directly in
 the relative order-four / order-three Taylor patches.
 -/
+
+@[expose] public section
 
 noncomputable section
 

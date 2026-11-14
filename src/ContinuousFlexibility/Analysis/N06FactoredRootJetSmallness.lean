@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06RootJetTransportCalculus
-import ContinuousFlexibility.Analysis.N06RootPhysicalFiniteJets
+module
+
+public import ContinuousFlexibility.Analysis.N06RootJetTransportCalculus
+public import ContinuousFlexibility.Analysis.N06RootPhysicalFiniteJets
 
 /-!
 # The actual oriented and factored root coefficient differences
@@ -10,6 +12,8 @@ isometric. Multiplication by the true fixed reference root factor has
 the displayed finite reference-jet cost. No uniform material estimate
 for that reference cost is silently assumed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

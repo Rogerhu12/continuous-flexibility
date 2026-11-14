@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cCoefficientJetCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N01cCoefficientJetCalculus
 
 /-!
 # Parameter calculus for the actual finite coefficient inputs
@@ -9,6 +11,8 @@ real parameter to the state; no inverse or norm on the state is needed.
 Scalar products are obtained by composing the genuine two-input tower
 with the smooth multiplication map on a finite-dimensional space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

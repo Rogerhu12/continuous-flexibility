@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CoupledControlAlgebra
-import ContinuousFlexibility.Analysis.SolveResidualSpaces
-import ContinuousFlexibility.Analysis.SolveTameSubspace
-import ContinuousFlexibility.Analysis.NeighborhoodCircleChartsState
+module
+
+public import ContinuousFlexibility.Analysis.CoupledControlAlgebra
+public import ContinuousFlexibility.Analysis.SolveResidualSpaces
+public import ContinuousFlexibility.Analysis.SolveTameSubspace
+public import ContinuousFlexibility.Analysis.NeighborhoodCircleChartsState
 
 /-!
 # Parity of the actual circle columns and the recovered chart
@@ -11,6 +13,8 @@ genuine directional derivatives therefore remain in that same subspace.
 This supplies the parity of both columns used in the coupled elimination.
 The zero-mean inverse and the odd left chart then supply the chart sector.
 -/
+
+@[expose] public section
 
 noncomputable section
 

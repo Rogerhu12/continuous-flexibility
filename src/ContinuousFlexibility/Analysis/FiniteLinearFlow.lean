@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.FiniteLinearODE
-import Mathlib.Analysis.Normed.Module.FiniteDimension
+module
+
+public import ContinuousFlexibility.Analysis.FiniteLinearODE
+public import Mathlib.Analysis.Normed.Module.FiniteDimension
 
 /-!
 # The actual finite-interval linear transfer
@@ -8,6 +10,8 @@ The transfer is defined by the solutions constructed in FiniteLinearODE.
 Uniqueness proves linearity and the two inverse identities. Finite
 dimensionality then supplies the continuous linear equivalence.
 -/
+
+@[expose] public section
 
 noncomputable section
 

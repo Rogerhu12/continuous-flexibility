@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PrincipalPairData
-import ContinuousFlexibility.Analysis.N04PrincipalTowerValue
-import ContinuousFlexibility.Analysis.N04PositiveGeometryCurrentData
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalPairData
+public import ContinuousFlexibility.Analysis.N04PrincipalTowerValue
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryCurrentData
 
 /-!
 # Returning paired estimates on selected pieces to current data
@@ -9,6 +11,8 @@ The paired towers need only exist on the selected pieces. Positive
 parameter jets of their actual current fields give the complete current
 difference certificate, including the value bound at the same reference.
 -/
+
+@[expose] public section
 
 noncomputable section
 

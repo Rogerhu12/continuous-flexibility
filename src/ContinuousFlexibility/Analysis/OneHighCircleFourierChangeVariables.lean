@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFourierParseval
-import ContinuousFlexibility.Analysis.OneHighPeriodicJets
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierParseval
+public import ContinuousFlexibility.Analysis.OneHighPeriodicJets
 
 /-!
 # The genuine circle `L²` change-of-variables estimate
@@ -8,6 +10,8 @@ A lift satisfying `h (x + P) = h x + P` maps one period to one period.
 Substitution with its actual derivative, followed by periodicity, proves the
 estimate. No inverse map or pre-assumed composition estimate is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

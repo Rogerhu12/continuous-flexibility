@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CircleSingletonControl
-import ContinuousFlexibility.Analysis.N01RadialFlow
-import ContinuousFlexibility.Analysis.TameLocalCalculus
+module
+
+public import ContinuousFlexibility.Analysis.CircleSingletonControl
+public import ContinuousFlexibility.Analysis.N01RadialFlow
+public import ContinuousFlexibility.Analysis.TameLocalCalculus
 
 /-!
 # Single optical control lines in the actual state space
@@ -10,6 +12,8 @@ decoder. The associated affine state curve has exactly one kappa mean,
 stays in the sector, and has the logarithmic profile used in the optical
 variation formulas. Its grading estimate is uniform in the component.
 -/
+
+@[expose] public section
 
 noncomputable section
 

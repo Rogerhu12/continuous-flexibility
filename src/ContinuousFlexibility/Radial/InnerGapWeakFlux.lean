@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerGapDirichletWeak
-import ContinuousFlexibility.Radial.InnerGapPoissonL2
+module
+
+public import ContinuousFlexibility.Radial.InnerGapDirichletWeak
+public import ContinuousFlexibility.Radial.InnerGapPoissonL2
 
 /-!
 # The same gap Poisson operator, weak conormal flux, and full flux matrix
@@ -10,6 +12,8 @@ identity proves flux(D f) = -P* f for every physical L² source.
 Adding the same Poisson solution changes that flux by the same full
 Dirichlet-to-Neumann matrix, including its off-diagonal entries.
 -/
+
+@[expose] public section
 
 noncomputable section
 

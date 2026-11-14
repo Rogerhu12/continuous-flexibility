@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import ContinuousFlexibility.Scalar.TypeCorrection
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import ContinuousFlexibility.Scalar.TypeCorrection
 
 /-!
 # The actual corrected coefficients retain the fixed turning circles
@@ -9,6 +11,8 @@ profile derivative, with a strictly positive height denominator. The N01
 profile germ and N03 coefficient germs therefore force the determinant to
 vanish on every reference turning circle for every admitted state.
 -/
+
+@[expose] public section
 
 noncomputable section
 

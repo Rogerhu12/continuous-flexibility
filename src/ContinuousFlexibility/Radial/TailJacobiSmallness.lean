@@ -1,7 +1,9 @@
-import Mathlib.Analysis.Real.Sqrt
-import Mathlib.Tactic.FieldSimp
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Analysis.Real.Sqrt
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
 
 /-!
 # Quantitative Jacobi smallness from the actual edge estimates
@@ -10,6 +12,8 @@ The two deep mass-resistance inequalities control both the continued
 fraction coefficient and the ratio in the mass-weighted node norm.
 Only the lower diagonal bound and upper off-diagonal bound are needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05PrimitiveReferenceValues
-import ContinuousFlexibility.Analysis.N05ReferenceResidual
+module
+
+public import ContinuousFlexibility.Analysis.N05PrimitiveReferenceValues
+public import ContinuousFlexibility.Analysis.N05ReferenceResidual
 
 /-!
 # Actual first reference bounds from primitive geometric jets
@@ -14,6 +16,8 @@ ReferenceRadial and ReferenceJets remain explicit hypotheses in this
 module. Producing them from a full nonlinear construction is a separate
 obligation of the shared interface.
 -/
+
+@[expose] public section
 
 noncomputable section
 

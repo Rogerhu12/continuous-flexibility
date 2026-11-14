@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.MatchedOuterUniformCore
-import ContinuousFlexibility.Radial.MatchedOuterLocalizerBounds
-import ContinuousFlexibility.Radial.MatchedOuterModalCells
-import ContinuousFlexibility.Radial.OuterStateScaleEnvelope
+module
+
+public import ContinuousFlexibility.Radial.MatchedOuterUniformCore
+public import ContinuousFlexibility.Radial.MatchedOuterLocalizerBounds
+public import ContinuousFlexibility.Radial.MatchedOuterModalCells
+public import ContinuousFlexibility.Radial.OuterStateScaleEnvelope
 
 /-!
 # The same matching-normalized natural column on the whole outer region
@@ -11,6 +13,8 @@ natural component is divided by the physical square-root state scale,
 exactly as in the matching traces. Core points and deep points are
 estimated separately, using their true localizer labels.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.MorseChainGeometry
-import ContinuousFlexibility.Radial.MorseChainFlatExtension
-import ContinuousFlexibility.Radial.MorseMiddleJoin
-import ContinuousFlexibility.Radial.MorseAdjacentJoin
+module
+
+public import ContinuousFlexibility.Radial.MorseChainGeometry
+public import ContinuousFlexibility.Radial.MorseChainFlatExtension
+public import ContinuousFlexibility.Radial.MorseMiddleJoin
+public import ContinuousFlexibility.Radial.MorseAdjacentJoin
 
 /-!
 # Gluing the actual two-sided Morse profile
@@ -10,6 +12,8 @@ Each outward block consists of a model cell and its following join. The
 left tail uses the reflected coordinate. Two finite cuts connect the
 tails to the middle bridge in physical radius.
 -/
+
+@[expose] public section
 
 noncomputable section
 namespace ContinuousFlexibility.Radial

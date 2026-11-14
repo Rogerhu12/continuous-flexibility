@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerRadialFiniteWeakGraph
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialFiniteWeakGraph
 
 /-!
 # Linearity of the actual signed potential relation
@@ -8,6 +10,8 @@ coefficient in μ_D. Its graph is a linear subspace, including for
 negative retained wells. No bound or positivity assumption replaces
 this constitutive relation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

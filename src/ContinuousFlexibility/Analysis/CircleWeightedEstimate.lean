@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CircleJetBonding
-import ContinuousFlexibility.Analysis.CircleModelRealization
-import Mathlib.Topology.Algebra.InfiniteSum.ENNReal
+module
+
+public import ContinuousFlexibility.Analysis.CircleJetBonding
+public import ContinuousFlexibility.Analysis.CircleModelRealization
+public import Mathlib.Topology.Algebra.InfiniteSum.ENNReal
 
 /-!
 # Fixed derivative and weight losses in the actual circle norm
@@ -12,6 +14,8 @@ the individual weighted jets controls the complete sum over all circles.
 The finite-sum and infinite-sum arguments retain the actual norm from
 `Statements.Analysis`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

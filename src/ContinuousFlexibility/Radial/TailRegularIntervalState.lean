@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.TailClampedResistance
-import ContinuousFlexibility.Radial.TailEdgeFluxBounds
-import ContinuousFlexibility.Radial.TailClassicalRegularity
+module
+
+public import ContinuousFlexibility.Radial.TailClampedResistance
+public import ContinuousFlexibility.Radial.TailEdgeFluxBounds
+public import ContinuousFlexibility.Radial.TailClassicalRegularity
 
 /-!
 # An actual state on a regular resistance interval
@@ -10,6 +12,8 @@ physical interval. Its nonzero off-diagonal flux permits any prescribed
 value and flux at the right end. This includes the separate initial gap
 of a deep tail and uses the original density throughout the closed interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

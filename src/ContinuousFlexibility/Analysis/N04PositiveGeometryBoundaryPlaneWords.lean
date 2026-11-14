@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryMoving
-import ContinuousFlexibility.Analysis.N04PositiveGeometryJointLinearWords
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryMoving
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryJointLinearWords
 
 /-!
 # Boundary coefficients as functions on the physical plane
@@ -9,6 +11,8 @@ back by the angle projection preserves their original state slots and
 both parameter seminorm boxes. A reserve of one gives the saved spatial
 cost needed by the actual whole-component kernels.
 -/
+
+@[expose] public section
 
 noncomputable section
 

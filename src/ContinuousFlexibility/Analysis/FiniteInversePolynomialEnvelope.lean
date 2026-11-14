@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.NonlinearInversePolynomialBounds
+module
+
+public import ContinuousFlexibility.Analysis.NonlinearInversePolynomialBounds
 
 /-!
 # A fixed ordinary polynomial envelope for finite inverse jets
@@ -9,6 +11,8 @@ power of a common numerical bound. Weighted derivative degree is used
 only to restrict which finite forward derivatives are needed.
 This is a new reconstruction after the workspace reset.
 -/
+
+@[expose] public section
 
 noncomputable section
 

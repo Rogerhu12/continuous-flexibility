@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.WeakDivergenceRegularity
-import ContinuousFlexibility.Radial.ModeCompactLocal
-import Mathlib.Topology.Compactness.Lindelof
+module
+
+public import ContinuousFlexibility.Radial.WeakDivergenceRegularity
+public import ContinuousFlexibility.Radial.ModeCompactLocal
+public import Mathlib.Topology.Compactness.Lindelof
 
 /-!
 # C1 representatives of modal weak solutions
@@ -11,6 +13,8 @@ that agree almost everywhere on an open set. A countable open subcover
 ensures that the resulting representative agrees almost everywhere with
 the original modal Hilbert-space element.
 -/
+
+@[expose] public section
 
 noncomputable section
 

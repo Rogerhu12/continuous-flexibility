@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.NeighborhoodCharacteristicSpeed
-import ContinuousFlexibility.Analysis.OneHighCircleFlowLocalization
-import ContinuousFlexibility.Analysis.ScalarSpatialRegularity
+module
+
+public import ContinuousFlexibility.Analysis.NeighborhoodCharacteristicSpeed
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowLocalization
+public import ContinuousFlexibility.Analysis.ScalarSpatialRegularity
 
 /-!
 # All actual angular jets of the original characteristic speed
@@ -10,6 +12,8 @@ radial square root from two genuinely smooth angular factors. One fixed
 smooth radial clamp makes those factors globally smooth without changing
 the speed anywhere on the original closed strip.
 -/
+
+@[expose] public section
 
 noncomputable section
 

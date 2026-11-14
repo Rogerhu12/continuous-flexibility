@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04NegativeHeightDomains
-import ContinuousFlexibility.Analysis.N04NegativeGeometryDataCollector
-import ContinuousFlexibility.Analysis.N04SourceColumnsScalarFamily
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeHeightDomains
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryDataCollector
+public import ContinuousFlexibility.Analysis.N04SourceColumnsScalarFamily
 
 /-!
 # Scalar composition on one fixed compact range
@@ -10,6 +12,8 @@ Every positive derivative of the scalar composite retains the sampled
 height factor.  The first derivative then controls the reference
 difference, on one smaller convex sector neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

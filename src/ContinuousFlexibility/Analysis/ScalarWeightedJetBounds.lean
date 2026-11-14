@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ScalarJetFamilyBounds
+module
+
+public import ContinuousFlexibility.Analysis.ScalarJetFamilyBounds
 
 /-!
 # Scalar jet estimates retaining a component weight
@@ -8,6 +10,8 @@ differentiation. Normalizing by that weight reduces composition and
 product estimates to the uniform scalar bounds, and restores exactly the
 same weight at the end.
 -/
+
+@[expose] public section
 
 noncomputable section
 

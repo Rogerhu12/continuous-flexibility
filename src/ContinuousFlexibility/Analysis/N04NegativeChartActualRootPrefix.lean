@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartRootFieldBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootFieldBounds
 
 /-!
 # Fixed-base raw prefixes of the actual root flow
@@ -8,6 +10,8 @@ representatives used by the flow factory. The closed time zero is
 handled by the zero vector field. No coefficient estimate outside the
 positive half or on an arbitrary extension is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

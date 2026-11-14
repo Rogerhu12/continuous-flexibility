@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aOriginalForward
-import ContinuousFlexibility.Analysis.N07aMixedCoefficientTame
-import ContinuousFlexibility.Analysis.SolveTameSubspace
-import ContinuousFlexibility.Scalar.WeightedScalarOperatorJoint
+module
+
+public import ContinuousFlexibility.Analysis.N07aOriginalForward
+public import ContinuousFlexibility.Analysis.N07aMixedCoefficientTame
+public import ContinuousFlexibility.Analysis.SolveTameSubspace
+public import ContinuousFlexibility.Scalar.WeightedScalarOperatorJoint
 
 /-!
 # The actual original forward family is smooth tame into Source
@@ -10,6 +12,8 @@ The coefficient families are the N01 fields already lifted into their
 physical height models. The target restriction uses the proved physical
 conservation identity, so its source decoder is unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

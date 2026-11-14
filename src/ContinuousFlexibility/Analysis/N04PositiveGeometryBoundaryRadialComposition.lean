@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryComposition
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryTraceOperations
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryComposition
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryTraceOperations
 
 /-!
 # Actual radial traces of a boundary composition
@@ -8,6 +10,8 @@ Positive radial orders use the finite spatial chain rule. The zeroth
 order uses the true outer value at the source point, so no bound on the
 unwrapped source angle and no normalization of that value is required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

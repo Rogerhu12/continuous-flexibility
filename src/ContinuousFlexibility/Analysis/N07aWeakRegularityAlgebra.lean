@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aWeakNormalEquation
+module
+
+public import ContinuousFlexibility.Analysis.N07aWeakNormalEquation
 
 /-!
 # An algebra of actual mixed weak jets
@@ -9,6 +11,8 @@ finite number of weak normal derivatives together with all angular
 derivatives. The proof uses only the actual weak product rule and tests.
 No smoothness of an L² unknown is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

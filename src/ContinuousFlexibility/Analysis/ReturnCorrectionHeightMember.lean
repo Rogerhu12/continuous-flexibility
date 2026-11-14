@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.MaterialDivergenceEnergy
-import ContinuousFlexibility.Analysis.ReturnCorrectionTraceFlux
-import ContinuousFlexibility.Analysis.ReturnOpticalCorrectionSource
-import ContinuousFlexibility.Analysis.ReturnCoefficientGlobalWeighted
+module
+
+public import ContinuousFlexibility.Analysis.MaterialDivergenceEnergy
+public import ContinuousFlexibility.Analysis.ReturnCorrectionTraceFlux
+public import ContinuousFlexibility.Analysis.ReturnOpticalCorrectionSource
+public import ContinuousFlexibility.Analysis.ReturnCoefficientGlobalWeighted
 
 /-!
 # The actual independent residual error belongs to the physical height space
@@ -12,6 +14,8 @@ height-space input, bounded actual coefficient jets, and the exact
 physical derivative identities. The collar corollary supplies those
 coefficient bounds from the actual N01 flow and its actual inverses.
 -/
+
+@[expose] public section
 
 noncomputable section
 

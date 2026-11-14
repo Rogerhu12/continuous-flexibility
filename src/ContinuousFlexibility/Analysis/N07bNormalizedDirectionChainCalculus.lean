@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07bMaterialDirection
-import ContinuousFlexibility.Analysis.N07bNormalizedSourceMaterial
+module
+
+public import ContinuousFlexibility.Analysis.N07bMaterialDirection
+public import ContinuousFlexibility.Analysis.N07bNormalizedSourceMaterial
 
 /-!
 # The same density normalization for arbitrary actual directions
@@ -9,6 +11,8 @@ An arbitrary geometric direction has the same exact conjugation rule;
 only its two material components and its actual density drift change.
 Every identity is proved from the genuine differential, not postulated.
 -/
+
+@[expose] public section
 
 noncomputable section
 

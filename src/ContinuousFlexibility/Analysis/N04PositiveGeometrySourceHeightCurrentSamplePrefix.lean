@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceHeightJets
-import ContinuousFlexibility.Analysis.N04PositiveGeometryRootInverseLabelSamplePrefix
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceHeightJets
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryRootInverseLabelSamplePrefix
 
 /-!
 # Sampled current height jets at the actual source point
@@ -8,6 +10,8 @@ The stored height and inverse label share one low base. Their angular
 horizons are reindexed to the same normalized sampling radius before
 the moving-angle rule is applied, retaining one angular reserve.
 -/
+
+@[expose] public section
 
 noncomputable section
 

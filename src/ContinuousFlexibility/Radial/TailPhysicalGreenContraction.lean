@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.TailPhysicalGreenContinuity
+module
+
+public import ContinuousFlexibility.Radial.TailPhysicalGreenContinuity
 
 /-!
 # Contraction of the physical-edge Green integral
@@ -8,6 +10,8 @@ physical interval.  Consequently the same quantitative smallness used
 in resistance coordinates gives one common contraction constant in the
 parameter-independent space of continuous physical-edge functions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

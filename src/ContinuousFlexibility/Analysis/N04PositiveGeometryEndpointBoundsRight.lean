@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsInverseComposition
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsEvaluation
-import ContinuousFlexibility.Analysis.N04EndpointCircleFixedBaseBounds
-import ContinuousFlexibility.Analysis.N01ReturnInverseCircle
-import ContinuousFlexibility.Analysis.N01RootLabels
-import ContinuousFlexibility.Analysis.SolveStateSpaces
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsInverseComposition
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsEvaluation
+public import ContinuousFlexibility.Analysis.N04EndpointCircleFixedBaseBounds
+public import ContinuousFlexibility.Analysis.N01ReturnInverseCircle
+public import ContinuousFlexibility.Analysis.N01RootLabels
+public import ContinuousFlexibility.Analysis.SolveStateSpaces
 
 /-!
 # Fixed-base bounds for the actual right-root inverse circle
@@ -14,6 +16,8 @@ is exactly the original right-root label. A second genuine positive
 inverse therefore gives the stored right-root inverse circle. Every
 stage retains one low parameter order before all derivative orders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

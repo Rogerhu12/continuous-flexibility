@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05ReferenceNormalCoefficients
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05ReferenceNormalCoefficients
 
 /-!
 # Fixed material bounds for the genuine radial derivative coefficients
@@ -8,6 +10,8 @@ The selected coordinate bounds control the inverse Jacobian and the
 height correction simultaneously. The resulting cell exponent is fixed
 before choosing any source, material level, or angular derivative order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04RealizationNuReducedTower
-import ContinuousFlexibility.Analysis.N04RealizationUniformAffineFamily
-import ContinuousFlexibility.Analysis.N04RealizationUniformSector
-import ContinuousFlexibility.Analysis.N07aNuSource
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationNuReducedTower
+public import ContinuousFlexibility.Analysis.N04RealizationUniformAffineFamily
+public import ContinuousFlexibility.Analysis.N04RealizationUniformSector
+public import ContinuousFlexibility.Analysis.N07aNuSource
 
 /-!
 # The true distinguished column with its uniform sector tower
@@ -10,6 +12,8 @@ The actual reduced scalar column is pulled back along the prescribed
 affine sector projection. One smaller sector neighborhood carries its
 entire height-valued tower and the exact original physical decoder.
 -/
+
+@[expose] public section
 
 noncomputable section
 

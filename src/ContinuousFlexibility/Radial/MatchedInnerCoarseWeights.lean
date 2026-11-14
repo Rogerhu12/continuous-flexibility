@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchedInnerLocalizedWeights
-import ContinuousFlexibility.Radial.InnerMorseInnerWeightCosts
+module
+
+public import ContinuousFlexibility.Radial.MatchedInnerLocalizedWeights
+public import ContinuousFlexibility.Radial.InnerMorseInnerWeightCosts
 
 /-!
 # Removing the fixed loss on the same finite physical chain
@@ -9,6 +11,8 @@ largest actual cell value. Composing that multiplier restores the
 unlocalized weight on the same operator. The scalar coordinate remains
 one throughout, so no replacement inverse is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

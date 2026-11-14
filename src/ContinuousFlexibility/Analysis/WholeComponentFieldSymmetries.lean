@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.WholeComponentCriticalCover
+module
+
+public import ContinuousFlexibility.Analysis.WholeComponentCriticalCover
 
 /-!
 # Symmetries and physical range of the actual component selector
@@ -8,6 +10,8 @@ action therefore commutes with it whenever it commutes with the actual
 component fields and the fallback. The true component cover also
 transfers the component range properties to the whole open annulus.
 -/
+
+@[expose] public section
 
 noncomputable section
 

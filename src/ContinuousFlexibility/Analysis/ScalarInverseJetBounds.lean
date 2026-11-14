@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01ReturnChartSmoothness
-import Mathlib.Analysis.Calculus.ContDiff.Bounds
+module
+
+public import ContinuousFlexibility.Analysis.N01ReturnChartSmoothness
+public import Mathlib.Analysis.Calculus.ContDiff.Bounds
 
 /-!
 # Uniform positive-order jets of actual scalar inverses
@@ -13,6 +15,8 @@ The proof differentiates the exact identity
 `g' = (f' ∘ g)⁻¹`. At each order only lower inverse jets enter.
 The reciprocal has bounded jets on the common compact range of `f'`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06ReferenceRootDivision
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceRootDivision
 
 /-!
 # A quantitative two-sided collar from the actual profile
@@ -9,6 +11,8 @@ radius gives both a positive factor and a positive profile on the whole
 collar.  The negative coordinate side is therefore a true positive-type
 region, with a linear lower bound for the original derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

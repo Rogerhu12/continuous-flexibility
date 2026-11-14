@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OscillatorDifferentialPairing
+module
+
+public import ContinuousFlexibility.Radial.OscillatorDifferentialPairing
 
 /-!
 # Actual differential energy of the central model
@@ -8,6 +10,8 @@ derivatives. A constant shift turns the central expression into the
 oscillator plus one. This supplies the physical energy identity needed
 for R03.03; it does not yet construct its closed weak-derivative domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

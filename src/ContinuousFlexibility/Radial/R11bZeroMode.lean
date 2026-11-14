@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R11bFourierTests
+module
+
+public import ContinuousFlexibility.Radial.R11bFourierTests
 
 /-!
 # The actual weak equation of the zero angular channel
@@ -8,6 +10,8 @@ normalization. Its border contribution vanishes by the cosine mode's zero
 mean. The resulting one-dimensional equation uses the same interior tests as
 the general weak-divergence regularity lemmas.
 -/
+
+@[expose] public section
 
 noncomputable section
 

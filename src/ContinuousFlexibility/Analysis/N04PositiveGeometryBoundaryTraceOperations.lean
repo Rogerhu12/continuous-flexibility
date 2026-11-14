@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryKernelBounds
-import ContinuousFlexibility.Analysis.N06BoundaryRadialJets
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryKernelBounds
+public import ContinuousFlexibility.Analysis.N06BoundaryRadialJets
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
 
 /-!
 # Fixed evaluations and products of actual boundary traces
@@ -9,6 +11,8 @@ Evaluating a full spatial jet on fixed unit vectors keeps the original
 word budget. The radial product formula then constructs genuine traces,
 including their actual constant term.
 -/
+
+@[expose] public section
 
 noncomputable section
 

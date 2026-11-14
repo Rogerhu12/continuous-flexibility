@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.TailMassResistanceData
-import Mathlib.Data.Finsupp.Basic
+module
+
+public import ContinuousFlexibility.Radial.TailMassResistanceData
+public import Mathlib.Data.Finsupp.Basic
 
 /-!
 # Finite coefficient estimates for the low hats
@@ -8,6 +10,8 @@ Each coefficient meets at most two resistance gaps. The estimates here
 sum both neighboring contributions without assumptions on the size or
 location of the finite coefficient support.
 -/
+
+@[expose] public section
 
 noncomputable section
 

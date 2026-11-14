@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import ContinuousFlexibility.Analysis.ProjectiveJets
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import ContinuousFlexibility.Analysis.ProjectiveJets
 
 /-!
 # Affine restriction and uniqueness of directional towers
@@ -8,6 +10,8 @@ The sector parameters enter the physical state by a fixed translation
 and a continuous linear inclusion. This operation retains the actual
 multilinear jets and their difference-quotient identities.
 -/
+
+@[expose] public section
 
 noncomputable section
 

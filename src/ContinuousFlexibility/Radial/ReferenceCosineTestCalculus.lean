@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.ReferenceCosineAnalysis
-import ContinuousFlexibility.Radial.RadialHeight
-import ContinuousFlexibility.Analysis.RootCompositionIntegral
-import Mathlib.Analysis.Calculus.Deriv.Shift
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
+module
+
+public import ContinuousFlexibility.Radial.ReferenceCosineAnalysis
+public import ContinuousFlexibility.Radial.RadialHeight
+public import ContinuousFlexibility.Analysis.RootCompositionIntegral
+public import Mathlib.Analysis.Calculus.Deriv.Shift
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
 
 /-!
 # Actual cosine coefficients of smooth radial tests
@@ -12,6 +14,8 @@ commutation with radial derivatives. A compact radial support remains
 a support for every angular coefficient. The angular variable of the
 test need not be even or have period pi.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ScalarFlowParameterFDeriv
+module
+
+public import ContinuousFlexibility.Analysis.ScalarFlowParameterFDeriv
 
 /-!
 # The actual initial-angle Jacobian of a scalar flow
@@ -8,6 +10,8 @@ parameter-independent field gives the exponential Jacobian. In
 particular, the newly chosen flow has a strictly positive angular
 derivative. The statement treats either order of the time endpoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

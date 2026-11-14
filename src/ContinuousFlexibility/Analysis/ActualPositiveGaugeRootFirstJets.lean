@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ActualPositiveReferenceFirstJets
-import ContinuousFlexibility.Analysis.WholePositiveActualRootFirstJets
+module
+
+public import ContinuousFlexibility.Analysis.ActualPositiveReferenceFirstJets
+public import ContinuousFlexibility.Analysis.WholePositiveActualRootFirstJets
 
 /-!
 # Current root first jets of the actual fixed positive reference gauge
@@ -10,6 +12,8 @@ outputs, while the relative jets come from its certified endpoint
 matching. The true negative inverse supplies the reference angle of
 each current root point, so no angular reparametrization is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

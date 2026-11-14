@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aCircleBlockCoefficients
+module
+
+public import ContinuousFlexibility.Analysis.N07aCircleBlockCoefficients
 
 /-!
 # Summable bounds for the actual multiplication blocks
@@ -7,6 +9,8 @@ Both cosine and sine inputs have the same summable coefficient tail.
 Multiplication by the commutator frequency difference costs one more
 ordinary angular derivative, with a fixed two-derivative summability loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

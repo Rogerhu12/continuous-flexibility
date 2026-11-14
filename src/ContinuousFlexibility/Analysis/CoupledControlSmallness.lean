@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.TameJetLocalBounds
-import Mathlib.Analysis.Calculus.MeanValue
+module
+
+public import ContinuousFlexibility.Analysis.TameJetLocalBounds
+public import Mathlib.Analysis.Calculus.MeanValue
 
 /-!
 # Uniform smallness of a vanishing parameter family
@@ -10,6 +12,8 @@ mean-value inequality makes a family vanishing at parameter zero uniformly
 small. This supplies the Banach-space step in the second Neumann inverse;
 no continuity in an operator-norm topology is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedStateFlatness
-import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
+module
+
+public import ContinuousFlexibility.Scalar.WeightedStateFlatness
+public import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
 
 /-!
 # Regularity of the even/odd scalar field encoding
@@ -8,6 +10,8 @@ The odd summand is the actual angular derivative of an even decoded height.
 It inherits global smoothness and every flat jet, and it vanishes outside
 the same radial interval, including both endpoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

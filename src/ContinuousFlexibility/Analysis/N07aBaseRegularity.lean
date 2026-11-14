@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aBaseInverse
+module
+
+public import ContinuousFlexibility.Analysis.N07aBaseInverse
 
 /-!
 # Regularity already supplied by the actual base inverse
@@ -7,6 +9,8 @@ At the base level the Neumann estimate and the reference inverse bounds
 control the actual canonical field, its three scalars, and one weak radial
 derivative. No higher regularity of the corrected source is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

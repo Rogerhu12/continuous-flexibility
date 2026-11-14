@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MorseWeakEnergy
-import ContinuousFlexibility.Radial.OscillatorCompactCore
-import Mathlib.Topology.Algebra.Module.ContinuousLinearMap.Restrict
+module
+
+public import ContinuousFlexibility.Radial.MorseWeakEnergy
+public import ContinuousFlexibility.Radial.OscillatorCompactCore
+public import Mathlib.Topology.Algebra.Module.ContinuousLinearMap.Restrict
 
 /-!
 # Actual compact cutoffs in the weak Morse energy space
@@ -11,6 +13,8 @@ to the identity in the full Hilbert energy norm. Compact support below means
 existence of compactly supported representatives of the `L²` classes; it does
 not assert compact support of an arbitrarily selected `Lp` representative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

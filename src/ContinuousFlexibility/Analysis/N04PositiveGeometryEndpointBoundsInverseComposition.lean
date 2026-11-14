@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsCalculus
-import ContinuousFlexibility.Analysis.CircleTravelUniformJets
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsCalculus
+public import ContinuousFlexibility.Analysis.CircleTravelUniformJets
 
 /-!
 # Actual inverse composition preserves a common low parameter order
@@ -9,6 +11,8 @@ half-lower-bound domain containing the given endpoint family. Its
 fixed-base estimate and the genuine ordered-partition chain rule then
 give the estimate for the composed family.
 -/
+
+@[expose] public section
 
 noncomputable section
 

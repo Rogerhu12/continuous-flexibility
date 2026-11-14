@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Scalar.WeightedDifferentiationSupport
+module
+
+public import ContinuousFlexibility.Scalar.WeightedDifferentiationSupport
 
 /-!
 # Linearity of the actual supported derivatives
@@ -7,6 +9,8 @@ Ordinary derivative linearity is used where the input fields are smooth.
 Outside the annulus every relevant actual partial is zero by support.
 This gives honest linear field maps for every weight exponent.
 -/
+
+@[expose] public section
 
 noncomputable section
 

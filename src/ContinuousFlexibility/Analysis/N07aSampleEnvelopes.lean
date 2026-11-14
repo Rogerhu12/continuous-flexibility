@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aMaterialProductBounds
+module
+
+public import ContinuousFlexibility.Analysis.N07aMaterialProductBounds
 
 /-!
 # Finite envelopes for actual jet formulas
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Analysis.N07aMaterialProductBounds
 Finite index sets and nonnegative integer powers preserve sampled
 subpower growth. The complete expression is still absorbed only once.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.InnerLiouvilleH1Representative
-import ContinuousFlexibility.Radial.InnerLiouvillePoissonWeak
-import ContinuousFlexibility.Radial.InnerRadialSmoothUnitDomain
-import ContinuousFlexibility.Radial.InnerBufferLocalizedConstruction
+module
+
+public import ContinuousFlexibility.Radial.InnerLiouvilleH1Representative
+public import ContinuousFlexibility.Radial.InnerLiouvillePoissonWeak
+public import ContinuousFlexibility.Radial.InnerRadialSmoothUnitDomain
+public import ContinuousFlexibility.Radial.InnerBufferLocalizedConstruction
 
 /-!
 # Actual unit-trace solutions from the same localized model columns
@@ -11,6 +13,8 @@ Its physical value and scalar are exactly the existing unit Poisson
 pair. Both endpoints use the same construction and the same physical
 domain, signed potential, scalar row and closed weak equation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

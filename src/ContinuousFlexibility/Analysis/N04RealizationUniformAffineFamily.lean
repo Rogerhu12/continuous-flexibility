@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04RealizationUniformAffine
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationUniformAffine
 
 /-!
 # Abstract transport of a retained uniform family
@@ -8,6 +10,8 @@ assembly are performed over abstract graded spaces. The concrete
 geometry enters only through the supplied decoder predicates and the
 already proved neighborhood restriction operation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

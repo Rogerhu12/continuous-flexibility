@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.SelectedStateMargin
+module
+
+public import ContinuousFlexibility.Radial.SelectedStateMargin
 
 /-!
 # The selected angle at the inner edge of the actual short join
@@ -9,6 +11,8 @@ angle definition, for both solutions at once. The reverse ODE estimate
 also proves that the transported states remain nonzero. The same theorem
 works in either direction along the interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

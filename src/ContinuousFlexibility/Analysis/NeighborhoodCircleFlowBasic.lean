@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowVariational
-import Mathlib.Analysis.ODE.ExistUnique
-import Mathlib.Analysis.Calculus.MeanValue
-import Mathlib.Analysis.Calculus.Deriv.Shift
-import Mathlib.Algebra.Field.Periodic
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowVariational
+public import Mathlib.Analysis.ODE.ExistUnique
+public import Mathlib.Analysis.Calculus.MeanValue
+public import Mathlib.Analysis.Calculus.Deriv.Shift
+public import Mathlib.Algebra.Field.Periodic
 
 /-!
 # Scalar circle flows for continuous time coefficients
@@ -12,6 +14,8 @@ vanishing at an endpoint. Only continuity in time is used here; the angular
 derivative is supplied as an actual continuous derivative. Picard--Lindelöf
 then constructs trajectories on the whole compact time interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

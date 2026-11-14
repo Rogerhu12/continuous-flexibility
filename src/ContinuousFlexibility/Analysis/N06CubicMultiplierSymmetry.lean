@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06CubicMultipliers
-import ContinuousFlexibility.Scalar.WeightedDifferentiationSupport
+module
+
+public import ContinuousFlexibility.Analysis.N06CubicMultipliers
+public import ContinuousFlexibility.Scalar.WeightedDifferentiationSupport
 
 /-!
 # Local regularity and reflection signs of the five cubic multipliers
@@ -9,6 +11,8 @@ odd. Their actual first partials give the signs [even, odd, even, even,
 odd] for the five graph multipliers. All differentiability is required
 only inside the canonical strip, where the radial weight is positive.
 -/
+
+@[expose] public section
 
 noncomputable section
 

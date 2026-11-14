@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.WholeCanonicalAtlasReferencePartition
+module
+
+public import ContinuousFlexibility.Analysis.WholeCanonicalAtlasReferencePartition
 
 /-!
 # Actual interfaces of the whole-component atlas
@@ -7,6 +9,8 @@ An adjacent pair can meet only at a true profile root or at the one
 retained optical cut inside a negative component. The argument uses the
 actual reference radii and the same enumeration as the atlas fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 

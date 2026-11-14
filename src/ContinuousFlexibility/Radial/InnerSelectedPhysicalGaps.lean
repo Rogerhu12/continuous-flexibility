@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerSelectedPhysicalChain
-import ContinuousFlexibility.Radial.InnerSelectedPhysicalSlope
+module
+
+public import ContinuousFlexibility.Radial.InnerSelectedPhysicalChain
+public import ContinuousFlexibility.Radial.InnerSelectedPhysicalSlope
 
 /-!
 # Uniform gaps on every selected physical inner chain
@@ -10,6 +12,8 @@ connectors. For later bands the other pieces are exactly scaled terminal
 caps or scaled cap-join-cap intervals. One previously chosen geometric
 constant therefore controls every gap, before selecting a frequency.
 -/
+
+@[expose] public section
 
 noncomputable section
 

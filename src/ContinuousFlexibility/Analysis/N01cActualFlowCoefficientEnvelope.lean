@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cActualFlowHeadBounds
-import ContinuousFlexibility.Analysis.N01cMaterialAbsorption
+module
+
+public import ContinuousFlexibility.Analysis.N01cActualFlowHeadBounds
+public import ContinuousFlexibility.Analysis.N01cMaterialAbsorption
 
 /-!
 # High norms of the actual linear variation coefficient
@@ -9,6 +11,8 @@ trajectory. Global material absorption removes its small weight, while
 retaining one requested-order aggregate and one fixed-order aggregate.
 Its fixed low integral is controlled separately on the common domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

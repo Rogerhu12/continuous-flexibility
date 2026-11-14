@@ -1,11 +1,13 @@
-import Mathlib.Analysis.InnerProductSpace.Basic
-import Mathlib.Analysis.MeanInequalities
-import Mathlib.Analysis.Normed.Operator.Basic
-import Mathlib.Analysis.SpecificLimits.Basic
-import Mathlib.Analysis.SpecialFunctions.Pow.NNReal
-import Mathlib.Topology.Algebra.InfiniteSum.ENNReal
-import Mathlib.Topology.Algebra.InfiniteSum.NatInt
-import Mathlib.Topology.Instances.ENNReal.Lemmas
+module
+
+public import Mathlib.Analysis.InnerProductSpace.Basic
+public import Mathlib.Analysis.MeanInequalities
+public import Mathlib.Analysis.Normed.Operator.Basic
+public import Mathlib.Analysis.SpecificLimits.Basic
+public import Mathlib.Analysis.SpecialFunctions.Pow.NNReal
+public import Mathlib.Topology.Algebra.InfiniteSum.ENNReal
+public import Mathlib.Topology.Algebra.InfiniteSum.NatInt
+public import Mathlib.Topology.Instances.ENNReal.Lemmas
 
 /-!
 # Schur test for block-localized operators
@@ -21,6 +23,8 @@ This file contains the analytic input for the "block Schur estimate" of paper se
 * `exp_row_sum_le`: the exponential row sums along a sequence with gaps `≥ s₀`.
 * `cubic_gap_ge`: the gap condition for the paper's sequence `S n = (2/3) n ^ 3`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

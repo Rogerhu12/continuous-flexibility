@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07bCanonicalSourceEnergy
-import ContinuousFlexibility.Analysis.N05CanonicalTests
-import ContinuousFlexibility.Analysis.N04bBoundaryInverseRegularity
-import ContinuousFlexibility.Geometry.EuclideanRigidity
+module
+
+public import ContinuousFlexibility.Analysis.N07bCanonicalSourceEnergy
+public import ContinuousFlexibility.Analysis.N05CanonicalTests
+public import ContinuousFlexibility.Analysis.N04bBoundaryInverseRegularity
+public import ContinuousFlexibility.Geometry.EuclideanRigidity
 
 /-!
 # Actual square integrability of each canonical source piece
@@ -16,6 +18,8 @@ No physical domain is assumed to be a rectangle or compact. The bound may
 depend on the piece and state; no uniform material estimate or global
 summability is asserted here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

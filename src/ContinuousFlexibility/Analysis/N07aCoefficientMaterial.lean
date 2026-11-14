@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import ContinuousFlexibility.Analysis.SpacesTraceRestriction
-import ContinuousFlexibility.Scalar.WeightedCoefficientAlgebra
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import ContinuousFlexibility.Analysis.SpacesTraceRestriction
+public import ContinuousFlexibility.Scalar.WeightedCoefficientAlgebra
 
 /-!
 # Material bounds for the actual coefficient families
@@ -10,6 +12,8 @@ coefficient and flow variations retain their actual height-weight gain and
 one-high-factor bounds. The canonical jet bound retains exactly the gain
 recorded in N04, without adding an unproved height factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

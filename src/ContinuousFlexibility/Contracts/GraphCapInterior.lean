@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Contracts.CapInteriorProfile
-import ContinuousFlexibility.Contracts.GraphBoundaryNormals
+module
+
+public import ContinuousFlexibility.Contracts.CapInteriorProfile
+public import ContinuousFlexibility.Contracts.GraphBoundaryNormals
 
 /-!
 # Gluing the moving subgraph to the actual revolution body
@@ -10,6 +12,8 @@ one fixed outside region. Its Lebesgue volume is therefore phase independent.
 The complete frontier identification and insertion of the fixed marker remain
 separate obligations before calling this the enclosed region of the final sphere.
 -/
+
+@[expose] public section
 
 noncomputable section
 

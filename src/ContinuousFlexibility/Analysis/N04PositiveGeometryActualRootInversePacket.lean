@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryRootInverseScale
-import ContinuousFlexibility.Analysis.N04PositiveGeometryRootInversePacket
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryRootInverseScale
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryRootInversePacket
 
 /-!
 # The actual scalar packet identity
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Analysis.N04PositiveGeometryRootInversePacket
 This module isolates one stage of the actual inverse differential.
 The original state, functions and derivative budgets are retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

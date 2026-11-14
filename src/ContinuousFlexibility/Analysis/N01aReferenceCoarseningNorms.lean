@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01aReferenceCoarseningBasic
+module
+
+public import ContinuousFlexibility.Analysis.N01aReferenceCoarseningBasic
 
 /-!
 # The actual weighted reference spaces under partition coarsening
@@ -7,6 +9,8 @@ The angular normalization is retained exactly. Source and output membership
 are unchanged, and the squared norms are comparable with one common
 constant for every exponent and every actual member.
 -/
+
+@[expose] public section
 
 noncomputable section
 

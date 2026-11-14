@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OpticalHalfAiryAverage
-import ContinuousFlexibility.Analysis.PositivePowerPolynomialMaterialJets
-import ContinuousFlexibility.Analysis.PointwiseProductPolynomialMaterialJets
+module
+
+public import ContinuousFlexibility.Analysis.OpticalHalfAiryAverage
+public import ContinuousFlexibility.Analysis.PositivePowerPolynomialMaterialJets
+public import ContinuousFlexibility.Analysis.PointwiseProductPolynomialMaterialJets
 
 /-!
 # All-order height bounds on the same complete optical half
@@ -10,6 +12,8 @@ the closed half. Every integral jet samples the same half. The existing
 polynomial power and product calculus is specialized at the zero state;
 no derivative of the representative outside the half is estimated.
 -/
+
+@[expose] public section
 
 noncomputable section
 

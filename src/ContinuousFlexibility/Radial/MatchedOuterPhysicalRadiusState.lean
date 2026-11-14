@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MatchedOuterRadiusState
-import ContinuousFlexibility.Radial.OuterPhysicalFundamentalPair
-import ContinuousFlexibility.Radial.SelectedTailRegularResponse
+module
+
+public import ContinuousFlexibility.Radial.MatchedOuterRadiusState
+public import ContinuousFlexibility.Radial.OuterPhysicalFundamentalPair
+public import ContinuousFlexibility.Radial.SelectedTailRegularResponse
 
 /-!
 # The actual physical fundamental pair under retained radius scaling
@@ -10,6 +12,8 @@ regular cut. Equality of one-sided derivatives supplies the coefficient
 identity at the cut as well. The same four state functions, entrance
 direction and continuation coefficients are retained.
 -/
+
+@[expose] public section
 
 noncomputable section
 

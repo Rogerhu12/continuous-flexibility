@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
-import Mathlib.MeasureTheory.Function.LpSeminorm.SMul
-import Mathlib.MeasureTheory.Function.LpSeminorm.TriangleInequality
+module
+
+public import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+public import Mathlib.MeasureTheory.Function.LpSeminorm.SMul
+public import Mathlib.MeasureTheory.Function.LpSeminorm.TriangleInequality
 
 /-!
 # Polynomially weighted mixed multipliers on the material cylinder
@@ -11,6 +13,8 @@ coefficient whose mixed jets grow by one fixed power of the material
 weight multiplies the complete weighted L² class into itself. The power
 loss is fixed before the derivative orders are chosen.
 -/
+
+@[expose] public section
 
 noncomputable section
 

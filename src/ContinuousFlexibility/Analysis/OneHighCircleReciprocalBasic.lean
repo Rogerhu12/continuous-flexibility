@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCircleInverseGeometry
-import Mathlib.Analysis.Calculus.IteratedDeriv.WithinZpow
-import Mathlib.Algebra.Ring.Periodic
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleInverseGeometry
+public import Mathlib.Analysis.Calculus.IteratedDeriv.WithinZpow
+public import Mathlib.Algebra.Ring.Periodic
 
 /-!
 # Actual derivatives of the reciprocal derivative defect
@@ -9,6 +11,8 @@ On its natural domain this function is -z / (1 + z). The chosen total real
 representative makes its value at zero and every positive-order derivative
 transparent; the arbitrary value at the excluded pole plays no role.
 -/
+
+@[expose] public section
 
 noncomputable section
 

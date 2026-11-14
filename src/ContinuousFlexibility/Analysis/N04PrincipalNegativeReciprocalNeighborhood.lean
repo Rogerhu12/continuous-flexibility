@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentData
-import ContinuousFlexibility.Analysis.N07aCurrentPrincipalBounds
-import ContinuousFlexibility.Analysis.SectorParameterGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentData
+public import ContinuousFlexibility.Analysis.N07aCurrentPrincipalBounds
+public import ContinuousFlexibility.Analysis.SectorParameterGeometry
 
 /-!
 # A reciprocal neighborhood chosen from the value difference
@@ -9,6 +11,8 @@ The order-zero value estimate and the reference reciprocal envelope
 choose the neighborhood once. The material sample envelope absorbs the
 product of their polynomial costs, before any higher order is selected.
 -/
+
+@[expose] public section
 
 noncomputable section
 

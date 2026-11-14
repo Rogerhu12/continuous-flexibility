@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.ProfileLayerCaccioppoli
-import ContinuousFlexibility.Radial.ProfileWeightedLayerIntegrals
-import ContinuousFlexibility.Radial.ProfileCellLayerEnergy
-import Mathlib.Topology.Algebra.InfiniteSum.Real
+module
+
+public import ContinuousFlexibility.Radial.ProfileLayerCaccioppoli
+public import ContinuousFlexibility.Radial.ProfileWeightedLayerIntegrals
+public import ContinuousFlexibility.Radial.ProfileCellLayerEnergy
+public import Mathlib.Topology.Algebra.InfiniteSum.Real
 
 /-!
 # Scalar weighted first-normal estimate
@@ -12,6 +14,8 @@ coefficient cost and the change of weights across each finite index
 window. The same loss and constant work for every Fourier parameter and
 every attenuation exponent in `[-1,1]`.
 -/
+
+@[expose] public section
 
 open Set Filter MeasureTheory Real
 open ContinuousFlexibility.Analysis ContinuousFlexibility.Statements

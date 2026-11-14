@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularFixedJetEnvelope
-import ContinuousFlexibility.Analysis.N07aActualMaterialComparison
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularFixedJetEnvelope
+public import ContinuousFlexibility.Analysis.N07aActualMaterialComparison
 
 /-!
 # A strict height margin absorbs the complete physical transport envelope
@@ -9,6 +11,8 @@ exponent. The genuine material-ratio atom transfers the retained sampled
 height to the actual physical radius, and the strict margin absorbs every
 finite coefficient product at once.
 -/
+
+@[expose] public section
 
 noncomputable section
 

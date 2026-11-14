@@ -1,6 +1,8 @@
-import Mathlib.Topology.Order.IntermediateValue
-import Mathlib.Topology.Instances.Real.Lemmas
-import Mathlib.Tactic.Linarith
+module
+
+public import Mathlib.Topology.Order.IntermediateValue
+public import Mathlib.Topology.Instances.Real.Lemmas
+public import Mathlib.Tactic.Linarith
 
 /-!
 # Continuity at a boundary from actual scalar equations
@@ -11,6 +13,8 @@ enough to determine the limit of the solutions. Neither continuity of
 the selected solutions nor joint continuity of the scalar field is an
 input to this statement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

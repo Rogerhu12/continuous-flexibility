@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.TerminalPhysicalCutoff
-import ContinuousFlexibility.Radial.TerminalMorseLongGeometry
+module
+
+public import ContinuousFlexibility.Radial.TerminalPhysicalCutoff
+public import ContinuousFlexibility.Radial.TerminalMorseLongGeometry
 
 /-!
 # Physical cutoff layers in the same normalized Morse cell
@@ -10,6 +12,8 @@ order, a lower width bound, and surjectivity of the model layer onto the
 physical layer. One Boolean handles the short decreasing cutoff and the
 long increasing cutoff.
 -/
+
+@[expose] public section
 
 noncomputable section
 

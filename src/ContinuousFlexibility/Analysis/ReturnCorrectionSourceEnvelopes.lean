@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionSourceJets
-import ContinuousFlexibility.Analysis.ReturnDivergenceMembership
-import ContinuousFlexibility.Analysis.MaterialCoefficientEnvelopes
-import ContinuousFlexibility.Analysis.MaterialAffineEnvelopes
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionSourceJets
+public import ContinuousFlexibility.Analysis.ReturnDivergenceMembership
+public import ContinuousFlexibility.Analysis.MaterialCoefficientEnvelopes
+public import ContinuousFlexibility.Analysis.MaterialAffineEnvelopes
 
 /-!
 # Genuine second-variation energy envelopes for the source
@@ -11,6 +13,8 @@ coefficient jet. The height along that segment is affine. The exact
 finite fiber expansion therefore gives one weighted L² envelope for
 every second parameter variation in the original source decoder.
 -/
+
+@[expose] public section
 
 noncomputable section
 

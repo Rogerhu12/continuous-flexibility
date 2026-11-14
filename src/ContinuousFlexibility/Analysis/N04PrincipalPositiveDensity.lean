@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PrincipalPositiveGeometry
-import ContinuousFlexibility.Analysis.AdjugateInversePrincipalField
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalPositiveGeometry
+public import ContinuousFlexibility.Analysis.AdjugateInversePrincipalField
 
 /-!
 # The principal field in inverse-chart variables
@@ -10,6 +12,8 @@ with the inverse map as the forward map expresses the stored principal
 field in precisely those variables.  No derivative of a physical field
 at a different point is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

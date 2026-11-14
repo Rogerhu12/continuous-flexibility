@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerDirichletDomain
+module
+
+public import ContinuousFlexibility.Radial.InnerDirichletDomain
 
 /-!
 # The exact local Poisson cutoff decomposition
@@ -9,6 +11,8 @@ zero-endpoint field; the Dirichlet domain theorem and uniqueness then identify
 its correction. The single symmetric scalar border is retained, and in the
 unbordered case the scalar remains zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

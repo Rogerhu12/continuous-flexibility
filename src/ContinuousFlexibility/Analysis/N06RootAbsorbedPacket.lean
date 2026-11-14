@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06RootWeightedHeights
+module
+
+public import ContinuousFlexibility.Analysis.N06RootWeightedHeights
 
 /-!
 # Absorbing q into the actual decaying root inputs
@@ -8,6 +10,8 @@ height entries and the last coordinate is set to one. The resulting
 packet difference from q=0 retains the original material decay, rather
 than treating q itself as an unweighted coordinate difference.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05CanonicalZeroOrderInverse
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalZeroOrderInverse
 
 /-!
 # The fixed canonical inverse belongs to the original physical relation
@@ -8,6 +10,8 @@ global inverse. Together with its genuine physical source normalization
 and selected scalars, this proves the literal frozen reference relation
 on the prescribed base source layer.
 -/
+
+@[expose] public section
 
 noncomputable section
 

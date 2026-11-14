@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.Conservation
-import ContinuousFlexibility.Scalar.TypeCorrection
+module
+
+public import ContinuousFlexibility.Scalar.Conservation
+public import ContinuousFlexibility.Scalar.TypeCorrection
 
 /-!
 # Green identity for actual symmetric divergence operators
@@ -9,6 +11,8 @@ The integration density is `dr dθ`. Formal symmetry is proved on a finite
 rectangle with explicit angular seam and radial conormal boundary conditions;
 no closed operator realization or endpoint limit is asserted here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

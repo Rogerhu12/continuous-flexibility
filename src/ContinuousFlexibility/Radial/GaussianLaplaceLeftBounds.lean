@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.GaussianLaplace
-import Mathlib.Analysis.Calculus.IteratedDeriv.Defs
+module
+
+public import ContinuousFlexibility.Radial.GaussianLaplace
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Defs
 
 /-!
 # Quantitative left-end bounds for the actual Laplace--Gaussian integral
@@ -9,6 +11,8 @@ O(L⁻²) error, for every positive moment parameter. The identities for
 all iterated derivatives retain the shifted moment parameters explicitly.
 This is a left-end input to R03.07, not the complete two-end expansion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Contracts.GraphDiskIntegrals
-import Mathlib.MeasureTheory.Measure.Haar.InnerProductSpace
+module
+
+public import ContinuousFlexibility.Contracts.GraphDiskIntegrals
+public import Mathlib.MeasureTheory.Measure.Haar.InnerProductSpace
 
 /-!
 # The actual subgraph region inside the central cylinder
@@ -10,6 +12,8 @@ under the actual phase rotations. It is only the central-cylinder portion of
 the eventual inside: the outside cap region and the full frontier identification
 still have to be assembled.
 -/
+
+@[expose] public section
 
 noncomputable section
 

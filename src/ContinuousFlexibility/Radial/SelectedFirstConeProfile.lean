@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.FirstConePhysicalIncoming
+module
+
+public import ContinuousFlexibility.Radial.FirstConePhysicalIncoming
 
 /-!
 # One physical cone coefficient from the retained point to the first join
@@ -7,6 +9,8 @@ The old cone and its retained extension agree at the original cut, so
 their coefficients are equal. The resulting profile germ holds on the
 entire physical cap and gives the actual boundary normalization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

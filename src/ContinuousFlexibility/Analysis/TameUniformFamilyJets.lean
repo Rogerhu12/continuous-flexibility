@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.TameUniformFamilyGrowth
-import ContinuousFlexibility.Analysis.TameTopologicalComposition
-import ContinuousFlexibility.Analysis.TameProductDirections
-import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
-import ContinuousFlexibility.Analysis.TameTransfer
+module
+
+public import ContinuousFlexibility.Analysis.TameUniformFamilyGrowth
+public import ContinuousFlexibility.Analysis.TameTopologicalComposition
+public import ContinuousFlexibility.Analysis.TameProductDirections
+public import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
+public import ContinuousFlexibility.Analysis.TameTransfer
 
 /-!
 # Uniform estimates for genuine indexed directional towers
@@ -13,6 +15,8 @@ linear operators and equality on the open domain preserve the same
 quantifier order, so an external radius selector never enters a chosen
 loss or numerical constant.
 -/
+
+@[expose] public section
 
 noncomputable section
 

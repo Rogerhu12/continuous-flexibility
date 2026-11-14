@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerCoefficientWeights
-import ContinuousFlexibility.Radial.InnerWeightL2
+module
+
+public import ContinuousFlexibility.Radial.InnerCoefficientWeights
+public import ContinuousFlexibility.Radial.InnerWeightL2
 
 /-!
 # Actual finite piecewise weights and coefficient loss
@@ -9,6 +11,8 @@ local weight functions, and the weight is one elsewhere. In particular
 the coefficient loss is an actual positive measurable function bounded
 by one, with the required coefficient value on each physical piece.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsMaskedComposition
-import ContinuousFlexibility.Analysis.N01cPhysicalGraphNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsMaskedComposition
+public import ContinuousFlexibility.Analysis.N01cPhysicalGraphNormalization
 
 /-!
 # One-high normalization of the genuine moving-point jets
@@ -9,6 +11,8 @@ one high order. The complete multilinear jet is then normalized once.
 The low order and state neighborhood are unchanged; only the finite
 parameter prefix enters the high-order budget.
 -/
+
+@[expose] public section
 
 noncomputable section
 

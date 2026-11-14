@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesCompactHeights
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Analysis.SpacesCompactHeights
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # Actual compact radial tests in the height space
@@ -10,6 +12,8 @@ places it in every weighted height class. The existing Sobolev-model
 surjectivity supplies an actual height element and a HeightPair with
 zero endpoint constant; no local test-operator assumption is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

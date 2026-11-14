@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cPhysicalHeightBounds
-import ContinuousFlexibility.Analysis.N01cMaterialShiftComparison
+module
+
+public import ContinuousFlexibility.Analysis.N01cPhysicalHeightBounds
+public import ContinuousFlexibility.Analysis.N01cMaterialShiftComparison
 
 /-!
 # Physical height jets at the actual cell samples
@@ -8,6 +10,8 @@ The pointwise physical estimate is transferred to the prescribed material
 sample of the cell. The power of H stays exactly γ, and the input grading
 retains its fixed two-derivative loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ReferenceCosineTests
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
+module
+
+public import ContinuousFlexibility.Radial.ReferenceCosineTests
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
 
 /-!
 # Cosine projection commutes with the actual radial differential expression
@@ -9,6 +11,8 @@ cosine basis. Radial derivatives commute with the compact angular
 integral. Combining those identities gives the genuine modal Jacobi
 equation and finite-projection commutation.
 -/
+
+@[expose] public section
 
 open Set Filter MeasureTheory
 open scoped ContDiff Topology

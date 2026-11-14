@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerLiouvilleFormTransport
-import ContinuousFlexibility.Radial.InnerRadialWeakLinearity
-import ContinuousFlexibility.Radial.InnerRadialPotentialGraph
+module
+
+public import ContinuousFlexibility.Radial.InnerLiouvilleFormTransport
+public import ContinuousFlexibility.Radial.InnerRadialWeakLinearity
+public import ContinuousFlexibility.Radial.InnerRadialPotentialGraph
 
 /-!
 # Actual model Poisson fields satisfy the physical weak equation
@@ -10,6 +12,8 @@ argument in the exact form identity is the genuine compact physical
 test pulled back to the original model core. Symmetry then puts the
 Poisson field in the solution slot, with its original scalar column.
 -/
+
+@[expose] public section
 
 noncomputable section
 

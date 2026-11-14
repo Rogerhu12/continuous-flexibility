@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ScaleSlowVariation
-import ContinuousFlexibility.Radial.WeightedSchurTest
+module
+
+public import ContinuousFlexibility.Radial.ScaleSlowVariation
+public import ContinuousFlexibility.Radial.WeightedSchurTest
 
 /-!
 # Weight absorption and kernel sums for the block Schur estimates
@@ -9,6 +11,8 @@ coefficient weights `exp (c * logM)` or `exp (c * q)` are absorbed by a fraction
 attenuation `exp (-ε |S_k - S_m|)`, and the resulting kernels have uniformly bounded row and
 column sums.
 -/
+
+@[expose] public section
 
 noncomputable section
 

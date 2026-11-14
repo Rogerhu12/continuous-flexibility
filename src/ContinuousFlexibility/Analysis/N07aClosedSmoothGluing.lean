@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aClosedJets
+module
+
+public import ContinuousFlexibility.Analysis.N07aClosedJets
 
 /-!
 # Gluing genuine within-smooth functions on two closed rectangles
@@ -8,6 +10,8 @@ interface, derivatives are joined with `HasFDerivWithinAt.union`; elsewhere
 one side contains a relative neighborhood. Neither branch needs a smooth
 extension to the other side of the interface.
 -/
+
+@[expose] public section
 
 noncomputable section
 

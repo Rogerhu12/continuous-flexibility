@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01ControlIndexBound
-import ContinuousFlexibility.Analysis.MaterialSampleRadialLoss
-import ContinuousFlexibility.Analysis.N01ReturnMargins
+module
+
+public import ContinuousFlexibility.Analysis.N01ControlIndexBound
+public import ContinuousFlexibility.Analysis.MaterialSampleRadialLoss
+public import ContinuousFlexibility.Analysis.N01ReturnMargins
 
 /-!
 # Uniform return margins from the actual N01 towers
@@ -13,6 +15,8 @@ actual material endpoint weights absorb the resulting radial loss.
 The final margin uses exactly one material sample weight and requires no
 identification of the containing cell with the control's weight label.
 -/
+
+@[expose] public section
 
 noncomputable section
 

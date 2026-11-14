@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Blueprint.Statements
-import ContinuousFlexibility.Radial.MorseChainFullRealization
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
+public import ContinuousFlexibility.Radial.MorseChainFullRealization
 
 /-!
 # Blueprint node R05a
@@ -11,6 +13,8 @@ Source: `paper/flexible-surface-readable/05-flat-end-chain.tex` lines 28–323.
 Task file: `docs/tasks/R05a.md`. The geometry and uniform estimates are
 constructed independently of the spectral input retained in this signature.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

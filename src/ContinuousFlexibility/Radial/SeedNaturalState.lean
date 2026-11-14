@@ -1,9 +1,13 @@
-import ContinuousFlexibility.Statements.RadialTargets
-import ContinuousFlexibility.Radial.SeedRadialContinuation
-import ContinuousFlexibility.Radial.MorseJoinActualGerms
-import ContinuousFlexibility.Radial.RadialTailSmoothExtension
+module
+
+public import ContinuousFlexibility.Statements.RadialTargets
+public import ContinuousFlexibility.Radial.SeedRadialContinuation
+public import ContinuousFlexibility.Radial.MorseJoinActualGerms
+public import ContinuousFlexibility.Radial.RadialTailSmoothExtension
 
 /-! # A natural second-mode tail has a nonzero entrance Cauchy state -/
+
+@[expose] public section
 
 noncomputable section
 

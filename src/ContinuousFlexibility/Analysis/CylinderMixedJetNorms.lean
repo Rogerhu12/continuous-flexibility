@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CylinderMixedJets
-import Mathlib.Algebra.BigOperators.Fin
+module
+
+public import ContinuousFlexibility.Analysis.CylinderMixedJets
+public import Mathlib.Algebra.BigOperators.Fin
 
 /-!
 # Actual mixed jets are bounded by the corresponding Fréchet jet
@@ -8,6 +10,8 @@ The coordinate word contains exactly the prescribed numbers of radial
 and angular unit vectors. Evaluation on that word has norm at most the
 multilinear operator norm, including at order zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

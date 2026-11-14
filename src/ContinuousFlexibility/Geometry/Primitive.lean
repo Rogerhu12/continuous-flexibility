@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Geometry.RotatedCoframe
-import Mathlib.MeasureTheory.Integral.CurveIntegral.Poincare
+module
+
+public import ContinuousFlexibility.Geometry.RotatedCoframe
+public import Mathlib.MeasureTheory.Integral.CurveIntegral.Poincare
 
 /-!
 # Primitives of closed coordinate one-forms
@@ -12,6 +14,8 @@ The two-component development here takes values in `ℝ × ℝ` as a coordinate
 space. Its Euclidean metric is the sum of coordinate squares; it is not
 identified with the default product norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

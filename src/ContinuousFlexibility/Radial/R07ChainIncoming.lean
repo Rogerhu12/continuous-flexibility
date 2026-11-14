@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R07MorseIncoming
-import ContinuousFlexibility.Radial.MorseRealizationBasic
+module
+
+public import ContinuousFlexibility.Radial.R07MorseIncoming
+public import ContinuousFlexibility.Radial.MorseRealizationBasic
 
 /-!
 # Incoming solutions at the actual chain cut, join, and entry
@@ -9,6 +11,8 @@ hypothesis directly from the realization and its geometric witness.
 The resulting homogeneous solution exists on the whole cut-to-entry
 interval, including the connector after the preceding Morse cell.
 -/
+
+@[expose] public section
 
 noncomputable section
 

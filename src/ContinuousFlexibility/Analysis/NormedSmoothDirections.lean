@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
-import ContinuousFlexibility.Analysis.ProjectiveCurveIteratedChain
-import Mathlib.Analysis.Calculus.ContDiff.Defs
-import Mathlib.Tactic.FunProp
+module
+
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
+public import ContinuousFlexibility.Analysis.ProjectiveCurveIteratedChain
+public import Mathlib.Analysis.Calculus.ContDiff.Defs
+public import Mathlib.Tactic.FunProp
 
 /-!
 # Normed smooth maps as genuine directional towers
@@ -11,6 +13,8 @@ topological directional tower. Evaluating such a jet on varying curves
 uses its actual Fréchet derivative and the multilinear product rule.
 No norm is introduced on any later parameter space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

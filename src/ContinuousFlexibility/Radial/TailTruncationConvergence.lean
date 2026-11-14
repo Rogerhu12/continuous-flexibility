@@ -1,6 +1,8 @@
-import Mathlib.Analysis.InnerProductSpace.Symmetric
-import Mathlib.Analysis.InnerProductSpace.Projection.Submodule
-import Mathlib.Analysis.Normed.Operator.Banach
+module
+
+public import Mathlib.Analysis.InnerProductSpace.Symmetric
+public import Mathlib.Analysis.InnerProductSpace.Projection.Submodule
+public import Mathlib.Analysis.Normed.Operator.Banach
 
 /-!
 # Strong limits of uniformly bounded inverses
@@ -14,6 +16,8 @@ The compression lemma extends a finite-dimensional compression by the identity o
 the complementary coordinates. It therefore applies to genuine two-sided inverses
 on one fixed Hilbert space, rather than to an inverse on a moving subspace.
 -/
+
+@[expose] public section
 
 noncomputable section
 

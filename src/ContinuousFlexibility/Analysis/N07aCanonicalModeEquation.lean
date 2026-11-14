@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalRadialOperator
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalRadialOperator
 
 /-!
 # The actual radial weak mode equation
@@ -7,6 +9,8 @@ Fubini is applied only after compact-test integrability is established.
 The resulting radial functions are the real cosine coefficients of the
 given canonical L² representatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

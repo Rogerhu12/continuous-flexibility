@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerMorseInnerWeightInterfaces
-import ContinuousFlexibility.Radial.InnerMorseInnerWeightCosts
-import ContinuousFlexibility.Radial.InnerSupportedWeightProducts
+module
+
+public import ContinuousFlexibility.Radial.InnerMorseInnerWeightInterfaces
+public import ContinuousFlexibility.Radial.InnerMorseInnerWeightCosts
+public import ContinuousFlexibility.Radial.InnerSupportedWeightProducts
 
 /-!
 # Canonical supported weights and coefficient loss on the actual chain
@@ -15,6 +17,8 @@ source. Multiplication by the localized output weight is exactly this
 loss composed with the same weight equivalence. Each construction
 retains the single scalar coordinate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

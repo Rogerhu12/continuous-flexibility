@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04bMovingDomains
-import Mathlib.Analysis.Calculus.ContDiff.Operations
-import Mathlib.MeasureTheory.Function.Jacobian
-import Mathlib.MeasureTheory.Measure.Haar.OfBasis
+module
+
+public import ContinuousFlexibility.Analysis.N04bMovingDomains
+public import Mathlib.Analysis.Calculus.ContDiff.Operations
+public import Mathlib.MeasureTheory.Function.Jacobian
+public import Mathlib.MeasureTheory.Measure.Haar.OfBasis
 
 /-!
 # Smooth actual travel cuts have planar measure zero
@@ -16,6 +18,8 @@ the whole curve. The actual differentiable-image null-set theorem then
 applies directly. Equality with the inverse supplied by `invFunOn`
 transfers these conclusions to the genuine travel cut from MovingDomains.
 -/
+
+@[expose] public section
 
 noncomputable section
 

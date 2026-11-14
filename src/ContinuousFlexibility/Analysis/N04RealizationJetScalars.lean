@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+module
+
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
 
 /-!
 # Scalar envelope operations for the coordinate realization
@@ -7,6 +9,8 @@ The sample floor is explicit: coefficient and exponent constants can be
 enlarged together only when the actual sampled envelope is at least one.
 These lemmas contain no coordinate data or final geometric estimate.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Analysis
 

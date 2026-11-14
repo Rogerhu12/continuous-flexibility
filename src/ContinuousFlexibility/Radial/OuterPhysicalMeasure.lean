@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.DeepTailPhysicalLift
-import ContinuousFlexibility.Radial.DeepTailPhysicalBounds
-import ContinuousFlexibility.Statements.RadialTargets
-import Mathlib.MeasureTheory.Function.JacobianOneDim
-import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
+module
+
+public import ContinuousFlexibility.Radial.DeepTailPhysicalLift
+public import ContinuousFlexibility.Radial.DeepTailPhysicalBounds
+public import ContinuousFlexibility.Statements.RadialTargets
+public import Mathlib.MeasureTheory.Function.JacobianOneDim
+public import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
 
 /-!
 # The actual logarithmic measure of a physical deep tail
@@ -12,6 +14,8 @@ the restriction of the original radial Hilbert measure, and its pullback is
 the physical density 12 w(R)/R. Finiteness of the actual tail measure is
 derived from the already proved physical coefficient bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

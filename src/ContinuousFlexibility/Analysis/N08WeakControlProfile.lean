@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N08ControlSeries
-import ContinuousFlexibility.Analysis.N08ControlProfileGain
+module
+
+public import ContinuousFlexibility.Analysis.N08ControlSeries
+public import ContinuousFlexibility.Analysis.N08ControlProfileGain
 
 /-!
 # The actual logarithmic profile of a weak control vector
@@ -8,6 +10,8 @@ Every weak control vector defines the literal locally finite series with
 amplitude `H_m^(3/4)`. Disjoint supports turn the coordinate norm bound into
 uniform decay for every ordinary derivative of that same series.
 -/
+
+@[expose] public section
 
 noncomputable section
 

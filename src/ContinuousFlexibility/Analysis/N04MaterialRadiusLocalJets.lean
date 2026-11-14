@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aMaterialPullbackJets
-import ContinuousFlexibility.Analysis.CylinderMixedJets
+module
+
+public import ContinuousFlexibility.Analysis.N07aMaterialPullbackJets
+public import ContinuousFlexibility.Analysis.CylinderMixedJets
 
 /-!
 # Material radius pullback on an actual open domain
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Analysis.CylinderMixedJets
 The finite chain rule uses only the physical jets at the actual image point.
 The constants are selected before the open set, function and evaluation point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

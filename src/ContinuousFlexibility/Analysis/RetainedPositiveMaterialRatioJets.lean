@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.RetainedPositiveIntervalEndpointX
-import ContinuousFlexibility.Analysis.ActualNegativeMaterialRatioJets
-import ContinuousFlexibility.Analysis.MaterialEnvelopeRatioJets
+module
+
+public import ContinuousFlexibility.Analysis.RetainedPositiveIntervalEndpointX
+public import ContinuousFlexibility.Analysis.ActualNegativeMaterialRatioJets
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeRatioJets
 
 /-!
 # Actual whole-positive material ratio jets
@@ -10,6 +12,8 @@ original midpoint host sample. H and M keep their exact real powers
 until the sample denominator cancels. The envelope uses its proved
 scaled floor. Unit rescaling pays only a positive physical width power.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.Gauge
-import Mathlib.Analysis.Real.Sqrt
+module
+
+public import ContinuousFlexibility.Radial.Gauge
+public import Mathlib.Analysis.Real.Sqrt
 
 /-!
 # Liouville transformation of the actual radial operator
@@ -10,6 +12,8 @@ The positive density is represented as `P = s²`; in the manuscript
 not merely at one point, so that they can genuinely be differentiated.
 No spectral statement or radius-existence statement is assumed or proved here.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

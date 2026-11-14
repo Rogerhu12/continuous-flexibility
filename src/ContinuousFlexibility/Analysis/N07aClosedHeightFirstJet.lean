@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aClosedChartDifferentials
-import ContinuousFlexibility.Analysis.N07aReferenceClosedJetMatching
+module
+
+public import ContinuousFlexibility.Analysis.N07aClosedChartDifferentials
+public import ContinuousFlexibility.Analysis.N07aReferenceClosedJetMatching
 
 /-!
 # The actual physical first jets and their primitive transport
@@ -9,6 +11,8 @@ forward chart. They are derivatives within the genuine state-dependent
 closures. Common reference first jets transfer through the invertible,
 source-independent primitive transport to common current first jets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MatchedInnerCompactEnvelope
-import ContinuousFlexibility.Radial.MatchedModeCellBounds
-import ContinuousFlexibility.Radial.R07LaterSelection
+module
+
+public import ContinuousFlexibility.Radial.MatchedInnerCompactEnvelope
+public import ContinuousFlexibility.Radial.MatchedModeCellBounds
+public import ContinuousFlexibility.Radial.R07LaterSelection
 
 /-!
 # A uniform spatial bound for the actual finite first band
@@ -10,6 +12,8 @@ envelopes of its actual matching operators therefore have one common
 constant. Both the modal operator and the Poisson columns remain the
 ones in the completed actual matching records.
 -/
+
+@[expose] public section
 
 noncomputable section
 

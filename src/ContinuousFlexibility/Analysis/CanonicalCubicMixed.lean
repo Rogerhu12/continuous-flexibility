@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CylinderMixedJets
-import ContinuousFlexibility.Analysis.SmoothScaledIntegral
+module
+
+public import ContinuousFlexibility.Analysis.CylinderMixedJets
+public import ContinuousFlexibility.Analysis.SmoothScaledIntegral
 
 /-!
 # Mixed derivatives of a radially scaled cylinder integral
@@ -10,6 +12,8 @@ integration variable.  The derivative formulas below concern the actual
 iterated derivatives, with local domination obtained from continuity on
 a compact parameter rectangle.
 -/
+
+@[expose] public section
 
 noncomputable section
 

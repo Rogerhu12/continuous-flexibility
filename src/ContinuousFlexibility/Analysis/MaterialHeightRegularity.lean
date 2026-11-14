@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
-import ContinuousFlexibility.Analysis.MaterialOrdinaryJets
-import ContinuousFlexibility.Analysis.MaterialHeightExtension
-import ContinuousFlexibility.Analysis.WeakBranchCore
+module
+
+public import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
+public import ContinuousFlexibility.Analysis.MaterialOrdinaryJets
+public import ContinuousFlexibility.Analysis.MaterialHeightExtension
+public import ContinuousFlexibility.Analysis.WeakBranchCore
 
 /-!
 # Smooth flat extensions of actual material heights
@@ -11,6 +13,8 @@ then decay at the actual radial endpoints. This removes the height
 regularity premise from the weak-branch construction at a fixed nonzero
 parameter.
 -/
+
+@[expose] public section
 
 noncomputable section
 

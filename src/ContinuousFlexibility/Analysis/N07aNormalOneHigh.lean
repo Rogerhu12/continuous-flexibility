@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aNormalExpansionBound
+module
+
+public import ContinuousFlexibility.Analysis.N07aNormalExpansionBound
 
 /-!
 # One high factor in a terminal-jet product
@@ -8,6 +10,8 @@ coefficient factors have a bounded low norm and one shared high state
 size. Interpolation with total exponent at most one leaves precisely a
 high terminal term or a high coefficient term times the low terminal.
 -/
+
+@[expose] public section
 
 noncomputable section
 

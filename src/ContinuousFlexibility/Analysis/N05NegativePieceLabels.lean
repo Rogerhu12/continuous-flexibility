@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05OpticalNegativeGeometry
-import ContinuousFlexibility.Analysis.N05ReferenceNegativeCoefficient
-import ContinuousFlexibility.Analysis.N05ReferencePieceIndexBounds
-import ContinuousFlexibility.Analysis.N05ReferencePieceCoefficients
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05OpticalNegativeGeometry
+public import ContinuousFlexibility.Analysis.N05ReferenceNegativeCoefficient
+public import ContinuousFlexibility.Analysis.N05ReferencePieceIndexBounds
+public import ContinuousFlexibility.Analysis.N05ReferencePieceCoefficients
 
 /-!
 # Actual negative-piece labels and their coefficient bounds
@@ -13,6 +15,8 @@ comparison therefore transfers both the index association and the five
 first-geometry bounds to that selected cell. The label certificate records
 an actual intersection, without assuming any quantitative chart estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

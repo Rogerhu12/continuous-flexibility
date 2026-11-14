@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06FiniteCurrentBoundaryGluing
-import ContinuousFlexibility.Analysis.N06CurrentResidualPairing
+module
+
+public import ContinuousFlexibility.Analysis.N06FiniteCurrentBoundaryGluing
+public import ContinuousFlexibility.Analysis.N06CurrentResidualPairing
 
 /-!
 # Finite current Green gluing in the original physical equation
@@ -17,6 +19,8 @@ identified left-cutoff scalar Green defect remains. This construction
 works for finite H2 modal fields and requires only C1 regularity of their
 value representatives at the boundary.
 -/
+
+@[expose] public section
 
 noncomputable section
 

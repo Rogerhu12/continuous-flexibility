@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OpticalTravelVariation
-import Mathlib.Analysis.Calculus.Deriv.MeanValue
+module
+
+public import ContinuousFlexibility.Analysis.OpticalTravelVariation
+public import Mathlib.Analysis.Calculus.Deriv.MeanValue
 
 /-!
 # A normalized optical control on a negative component
@@ -9,6 +11,8 @@ interior. The mean value theorem yields a point where its reciprocal has
 strictly negative derivative. This gives the interior collar for an actual
 smooth normalized control, arbitrarily close to the turning point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

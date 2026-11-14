@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.TwoExceptionalRadiiTransport
+module
+
+public import ContinuousFlexibility.Analysis.TwoExceptionalRadiiTransport
 
 /-!
 # True endpoint traces with two exceptional radii
@@ -8,6 +10,8 @@ Its two true one-sided limits are equal once its derivative vanishes away
 from the two fixed exceptional radii. No arbitrary total value of a
 canonical chart outside its own physical half enters this assertion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

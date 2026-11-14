@@ -1,15 +1,17 @@
-import ContinuousFlexibility.Analysis.ActualPositiveReferenceFifteenAtoms
-import ContinuousFlexibility.Analysis.WholeReferenceGaugePositiveScalarColumnJets
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeNegativeGeometryJets
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeNegativePrincipalJets
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeNegativePotentialReferenceJets
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeNegativeScalarColumnJets
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeNegativeReferenceRegularity
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeStaticReferenceJets
-import ContinuousFlexibility.Analysis.CanonicalReferenceDividedJets
-import ContinuousFlexibility.Analysis.CanonicalAuxiliaryAtomPreservation
-import ContinuousFlexibility.Analysis.ActualPositiveReferencePrincipalAssembly
-import ContinuousFlexibility.Analysis.N04PositiveReferenceMaterialBounds
+module
+
+public import ContinuousFlexibility.Analysis.ActualPositiveReferenceFifteenAtoms
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugePositiveScalarColumnJets
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeNegativeGeometryJets
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeNegativePrincipalJets
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeNegativePotentialReferenceJets
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeNegativeScalarColumnJets
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeNegativeReferenceRegularity
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeStaticReferenceJets
+public import ContinuousFlexibility.Analysis.CanonicalReferenceDividedJets
+public import ContinuousFlexibility.Analysis.CanonicalAuxiliaryAtomPreservation
+public import ContinuousFlexibility.Analysis.ActualPositiveReferencePrincipalAssembly
+public import ContinuousFlexibility.Analysis.N04PositiveReferenceMaterialBounds
 
 /-!
 # All non-auxiliary reference atoms of one actual whole atlas
@@ -21,6 +23,8 @@ the two E0 ratios; their actual estimates come from the static-atom proof.
 Every other enlarged atom is the same full function. A finite numerical
 maximum is taken before the piece and atom, at each spatial order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

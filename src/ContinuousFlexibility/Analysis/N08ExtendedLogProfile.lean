@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N08LogProfileLift
-import ContinuousFlexibility.Analysis.N08ScalarHeightParameter
-import ContinuousFlexibility.Analysis.TameLocalLinear
+module
+
+public import ContinuousFlexibility.Analysis.N08LogProfileLift
+public import ContinuousFlexibility.Analysis.N08ScalarHeightParameter
+public import ContinuousFlexibility.Analysis.TameLocalLinear
 
 /-!
 # The actual logarithmic profile with an independent weak control
@@ -10,6 +12,8 @@ one continuous linear map. On physical circle directions its affine lines
 are exactly the original state-profile lines. This identification holds for
 every circle direction, including directions outside the constant sector.
 -/
+
+@[expose] public section
 
 noncomputable section
 

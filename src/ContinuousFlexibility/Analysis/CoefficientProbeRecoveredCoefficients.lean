@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CoefficientProbeSineRecovery
-import ContinuousFlexibility.Analysis.OffAxisContinuousRecovery
+module
+
+public import ContinuousFlexibility.Analysis.CoefficientProbeSineRecovery
+public import ContinuousFlexibility.Analysis.OffAxisContinuousRecovery
 
 /-!
 # A common smooth coefficient field reconstructed from the actual probes
@@ -10,6 +12,8 @@ is smooth wherever the original field is smooth. On an open region, the
 true probe identities identify it with any continuous effective field;
 off-axis division is extended to the axes by genuine continuity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

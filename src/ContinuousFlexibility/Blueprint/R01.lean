@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Milestones
-import ContinuousFlexibility.Radial.Gauge
+module
+
+public import ContinuousFlexibility.Statements.Milestones
+public import ContinuousFlexibility.Radial.Gauge
 
 /-!
 # Blueprint node R01
@@ -8,6 +10,8 @@ Source: `paper/flexible-surface-rewrite/05-flat-end-chain.tex` lines 252–268 (
 
 Task file: `docs/tasks/R01.md`. The statement is frozen. Proved.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

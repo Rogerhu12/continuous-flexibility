@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cFlowOrderConstants
-import ContinuousFlexibility.Analysis.StateNeighborhood
-import ContinuousFlexibility.Scalar.WeightedTowerCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N01cFlowOrderConstants
+public import ContinuousFlexibility.Analysis.StateNeighborhood
+public import ContinuousFlexibility.Scalar.WeightedTowerCalculus
 
 /-!
 # Finite collection of actual scalar jet towers
@@ -10,6 +12,8 @@ genuine scalar towers assemble by the existing Pi constructor. Only the
 finite outer family is used to choose common losses and constants; the
 open parameter domain and low grading order are unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

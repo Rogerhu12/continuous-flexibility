@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SmoothDirectionsBoundedLimit
-import ContinuousFlexibility.Analysis.SmoothDirectionsConstantShift
+module
+
+public import ContinuousFlexibility.Analysis.SmoothDirectionsBoundedLimit
+public import ContinuousFlexibility.Analysis.SmoothDirectionsConstantShift
 
 /-!
 # Uniform parameter towers after restoring the reference value
@@ -8,6 +10,8 @@ A uniformly bounded reference family contributes only at parameter order
 zero. Every positive jet is the jet of the actual increment, so one
 continuous seminorm still controls the full family at each fixed order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

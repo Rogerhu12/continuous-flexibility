@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ReferenceCellL2
-import Mathlib.Analysis.Normed.Group.InfiniteSum
-import Mathlib.Topology.Algebra.InfiniteSum.Ring
+module
+
+public import ContinuousFlexibility.Radial.ReferenceCellL2
+public import Mathlib.Analysis.Normed.Group.InfiniteSum
+public import Mathlib.Topology.Algebra.InfiniteSum.Ring
 
 /-!
 # Algebra of the actual reference spaces
@@ -9,6 +11,8 @@ The cell-square estimates use the genuine two-dimensional square integral.
 They therefore retain the measurability and integrability conditions needed by
 the Bochner integral.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Statements
 

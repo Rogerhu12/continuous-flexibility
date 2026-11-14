@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05PhysicalPieces
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05PhysicalPieces
 
 /-!
 # Every negative physical piece belongs to a named cut pair
@@ -9,6 +11,8 @@ Pointwise disjointness of the N04 physical intervals then forces any
 negative piece to be one of these halves.  If the initial point is the
 cut itself, a nearby point in the same open piece selects a half.
 -/
+
+@[expose] public section
 
 noncomputable section
 

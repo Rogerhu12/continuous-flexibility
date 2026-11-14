@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.SmoothScaledIntegral
-import ContinuousFlexibility.Analysis.N06RootSpeedJets
-import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
+module
+
+public import ContinuousFlexibility.Analysis.SmoothScaledIntegral
+public import ContinuousFlexibility.Analysis.N06RootSpeedJets
+public import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
 
 /-!
 # The actual averaged coefficient of the two-sided reference Airy germ
@@ -11,6 +13,8 @@ integral. Its finite jets follow from the existing scaled-integral formula.
 An actual fundamental-theorem calculation gives the differential identity
 that makes the radial coordinate nondegenerate on both sides of the root.
 -/
+
+@[expose] public section
 
 noncomputable section
 

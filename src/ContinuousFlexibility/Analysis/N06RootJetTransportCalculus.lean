@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06BoundaryRadialJets
-import ContinuousFlexibility.Analysis.N06RootPhysicalWeightedSmallness
-import Mathlib.Analysis.Normed.Operator.Prod
+module
+
+public import ContinuousFlexibility.Analysis.N06BoundaryRadialJets
+public import ContinuousFlexibility.Analysis.N06RootPhysicalWeightedSmallness
+public import Mathlib.Analysis.Normed.Operator.Prod
 
 /-!
 # Jet transport used by the actual factored root fields
@@ -10,6 +12,8 @@ radial reflection. It therefore preserves every full derivative norm.
 The remaining cost for the actual factored characteristic speed is the
 finite jet cost of its fixed radial reference factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

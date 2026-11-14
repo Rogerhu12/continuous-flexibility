@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowVariational
-import Mathlib.Analysis.Calculus.FDeriv.Partial
-import Mathlib.Analysis.Calculus.ContDiff.FiniteDimension
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowVariational
+public import Mathlib.Analysis.Calculus.FDeriv.Partial
+public import Mathlib.Analysis.Calculus.ContDiff.FiniteDimension
 
 /-!
 # Joint smoothness of an actual global scalar flow
@@ -11,6 +13,8 @@ derivatives bootstrap joint finite-order regularity. This is used after a
 smooth time change of a supplied compact-interval flow; no global flow
 existence or extension is assumed in that application.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06FiniteAtlasBoundary
-import ContinuousFlexibility.Analysis.N06CurrentBoundaryTestSupport
-import ContinuousFlexibility.Analysis.N06CutSaturatedSupport
+module
+
+public import ContinuousFlexibility.Analysis.N06FiniteAtlasBoundary
+public import ContinuousFlexibility.Analysis.N06CurrentBoundaryTestSupport
+public import ContinuousFlexibility.Analysis.N06CutSaturatedSupport
 
 /-!
 # Actual canonical endpoint rows on the finite physical atlas
@@ -12,6 +14,8 @@ uses the physical test support; such a side cannot be an artificial cut.
 Its actual closed inverse circle, rather than a reference middle radius,
 supplies the physical endpoint used by the support argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

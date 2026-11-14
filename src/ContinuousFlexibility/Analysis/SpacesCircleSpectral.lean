@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesSequenceRetraction
-import Mathlib.Analysis.InnerProductSpace.l2Space
+module
+
+public import ContinuousFlexibility.Analysis.SpacesSequenceRetraction
+public import Mathlib.Analysis.InnerProductSpace.l2Space
 
 /-!
 # Spectral bands in square-summable Banach families
@@ -8,6 +10,8 @@ The masks and regrouping result in this file do not depend on the circle.
 They apply equally to Fourier coefficients in one or several variables and
 to any partition of a spectral index set into countably many bands.
 -/
+
+@[expose] public section
 
 noncomputable section
 

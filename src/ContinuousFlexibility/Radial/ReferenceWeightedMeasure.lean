@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ReferenceCellL2
-import Mathlib.MeasureTheory.Integral.Bochner.SumMeasure
-import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
+module
+
+public import ContinuousFlexibility.Radial.ReferenceCellL2
+public import Mathlib.MeasureTheory.Integral.Bochner.SumMeasure
+public import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
 
 /-!
 # Hilbert realization of the reference cell norms
@@ -10,6 +12,8 @@ normalization of angular averaging. Its L² norm is exactly the frozen
 sum of cell squares. The output remainder uses the same construction
 with the negative coefficient exponent.
 -/
+
+@[expose] public section
 
 noncomputable section
 

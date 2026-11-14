@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowNormContinuity
-import Mathlib.MeasureTheory.Function.LpSpace.ContinuousFunctions
-import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowNormContinuity
+public import Mathlib.MeasureTheory.Function.LpSpace.ContinuousFunctions
+public import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
 
 /-!
 # The genuine circle Sobolev norm of a time integral
@@ -11,6 +13,8 @@ time integral. Its norm inequality gives Minkowski for the actual circle
 proves the corresponding physical Sobolev bound, with all time
 integrability derived from continuity of the derivative family.
 -/
+
+@[expose] public section
 
 noncomputable section
 

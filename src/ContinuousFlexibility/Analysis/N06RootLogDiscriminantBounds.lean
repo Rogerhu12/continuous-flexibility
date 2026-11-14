@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06PhysicalRootLogHeight
+module
+
+public import ContinuousFlexibility.Analysis.N06PhysicalRootLogHeight
 
 /-!
 # Weighted finite jets of the actual root log-discriminant
@@ -14,6 +16,8 @@ These estimates use the physical fields, before choosing any chart or
 angular gauge. The oriented version is the precise discriminant term in
 the genuine root log-height identity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

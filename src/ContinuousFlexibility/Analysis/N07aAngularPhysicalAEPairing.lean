@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aAngularInnerIntervals
-import ContinuousFlexibility.Analysis.N07aPeriodicRadialPairing
-import ContinuousFlexibility.Radial.ReferenceCellAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularInnerIntervals
+public import ContinuousFlexibility.Analysis.N07aPeriodicRadialPairing
+public import ContinuousFlexibility.Radial.ReferenceCellAlgebra
 
 /-!
 # The same periodic physical representative retains every original pairing
@@ -11,6 +13,8 @@ Consequently their pairings agree against arbitrary tests, including the
 original 2π-periodic RadialTest class. No periodicity of the test or
 integrability shortcut is needed for this a.e. invariance statement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

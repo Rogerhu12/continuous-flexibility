@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadStart
-import ContinuousFlexibility.Analysis.RetainedMorsePositiveGapComponents
-import ContinuousFlexibility.Analysis.MorseRealizationComponentOrder
-import Mathlib.Data.Nat.Pairing
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadStart
+public import ContinuousFlexibility.Analysis.RetainedMorsePositiveGapComponents
+public import ContinuousFlexibility.Analysis.MorseRealizationComponentOrder
+public import Mathlib.Data.Nat.Pairing
 
 /-!
 # Infinitely many positive components of the same retained start
@@ -13,6 +15,8 @@ into the actual positive-component index type.
 
 No new reference profile, source enumeration, or material data is selected.
 -/
+
+@[expose] public section
 
 noncomputable section
 

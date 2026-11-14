@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bRootFlowContinuity
-import ContinuousFlexibility.Analysis.RootChartSymmetry
+module
+
+public import ContinuousFlexibility.Analysis.N04bRootFlowContinuity
+public import ContinuousFlexibility.Analysis.RootChartSymmetry
 
 /-!
 # One actual smooth root function for both physical characteristic families
@@ -13,6 +15,8 @@ footpoints, with the exact boundary value and divided odd coefficient.
 The structure below packages conclusions of this construction. It is not
 an additional hypothesis in N01, N03 or the raw field realization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

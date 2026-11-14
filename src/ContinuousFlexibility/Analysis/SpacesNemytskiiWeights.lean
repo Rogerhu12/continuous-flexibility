@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.MaterialOrdinaryJets
-import ContinuousFlexibility.Analysis.SpacesNemytskiiScalar
+module
+
+public import ContinuousFlexibility.Analysis.MaterialOrdinaryJets
+public import ContinuousFlexibility.Analysis.SpacesNemytskiiScalar
 
 /-!
 # Radial coefficients in the composition jet formula
@@ -9,6 +11,8 @@ derivatives preserve the corresponding class of radial coefficients, so
 the number of height factors, rather than the spatial derivative order,
 determines the power left in a normalized composition jet.
 -/
+
+@[expose] public section
 
 noncomputable section
 

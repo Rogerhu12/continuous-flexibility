@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.CanonicalSourceMeasure
-import ContinuousFlexibility.Analysis.BoundaryMixedJets
-import ContinuousFlexibility.Blueprint.CanonicalParts
-import Mathlib.Analysis.Calculus.InverseFunctionTheorem.ContDiff
-import Mathlib.Topology.Algebra.Module.FiniteDimension
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalSourceMeasure
+public import ContinuousFlexibility.Analysis.BoundaryMixedJets
+public import ContinuousFlexibility.Blueprint.CanonicalParts
+public import Mathlib.Analysis.Calculus.InverseFunctionTheorem.ContDiff
+public import Mathlib.Topology.Algebra.Module.FiniteDimension
 
 /-!
 # Actual smooth local inverses at physical endpoints
@@ -14,6 +16,8 @@ The stored canonical inverse agrees with it on the image of the current
 physical interior in the local chart source. Generic radial-curve
 transport remains available when the physical boundary is a true circle.
 -/
+
+@[expose] public section
 
 noncomputable section
 

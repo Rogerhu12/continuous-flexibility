@@ -1,10 +1,12 @@
-import ContinuousFlexibility.Radial.R11bFourierCoefficients
-import ContinuousFlexibility.Radial.R11bAngularL2Bridge
-import ContinuousFlexibility.Radial.R11bWeakModes
-import ContinuousFlexibility.Radial.R11bZeroMode
-import ContinuousFlexibility.Radial.R11bGlobalL2
-import ContinuousFlexibility.Radial.R11bRadialTests
-import ContinuousFlexibility.Analysis.IntervalWeakPotentialRegularity
+module
+
+public import ContinuousFlexibility.Radial.R11bFourierCoefficients
+public import ContinuousFlexibility.Radial.R11bAngularL2Bridge
+public import ContinuousFlexibility.Radial.R11bWeakModes
+public import ContinuousFlexibility.Radial.R11bZeroMode
+public import ContinuousFlexibility.Radial.R11bGlobalL2
+public import ContinuousFlexibility.Radial.R11bRadialTests
+public import ContinuousFlexibility.Analysis.IntervalWeakPotentialRegularity
 
 /-!
 # Actual C¹ representatives of every even angular coefficient
@@ -13,6 +15,8 @@ The mean occupies index zero, the physical border occupies index one, and
 all positive frequencies are 2*n. Moving only the actual border to the
 forcing gives the scalar potential equation and its integrated flux.
 -/
+
+@[expose] public section
 
 noncomputable section
 

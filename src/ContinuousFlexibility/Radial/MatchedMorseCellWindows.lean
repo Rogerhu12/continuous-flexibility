@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseSecondModeLocalization
-import ContinuousFlexibility.Radial.MorseChainPartitionData
+module
+
+public import ContinuousFlexibility.Radial.MorseSecondModeLocalization
+public import ContinuousFlexibility.Radial.MorseChainPartitionData
 
 /-!
 # Actual localizer windows in one outward orientation
@@ -10,6 +12,8 @@ These statements concern the original nonzero localizers and remain
 valid after an order-isomorphism pullback; saturated final cells are
 not used to locate physical points.
 -/
+
+@[expose] public section
 
 noncomputable section
 

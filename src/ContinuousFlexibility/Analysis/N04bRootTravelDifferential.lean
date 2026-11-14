@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04bRootReparametrization
-import Mathlib.Analysis.Calculus.Deriv.Inverse
-import Mathlib.Tactic.Convert
+module
+
+public import ContinuousFlexibility.Analysis.N04bRootReparametrization
+public import Mathlib.Analysis.Calculus.Deriv.Inverse
+public import Mathlib.Tactic.Convert
 
 /-!
 # Differentials of the constructed root travel charts
@@ -9,6 +11,8 @@ The forward root coordinate is differentiated using its proved inverse,
 whose derivative is the square root. A single signed chain rule therefore
 computes the actual constructed chart on both moving travel halves.
 -/
+
+@[expose] public section
 
 noncomputable section
 

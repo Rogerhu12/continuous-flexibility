@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aMaterialPullbackJets
-import ContinuousFlexibility.Analysis.N07aMaterialIntegrability
+module
+
+public import ContinuousFlexibility.Analysis.N07aMaterialPullbackJets
+public import ContinuousFlexibility.Analysis.N07aMaterialIntegrability
 
 /-!
 # Positive physical decay gives actual weighted L² jets
@@ -8,6 +10,8 @@ The radial Leibniz formula adds the actual factor H^(-γ) to the finite
 ordinary-to-material jet expansion. Any stronger positive physical decay
 then supplies an integrable majorant for every fixed material weight.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.WeightedJointComposition
-import ContinuousFlexibility.Analysis.ScalarRpowJetGrowth
+module
+
+public import ContinuousFlexibility.Analysis.WeightedJointComposition
+public import ContinuousFlexibility.Analysis.ScalarRpowJetGrowth
 
 /-!
 # Positive powers of actual weighted joint towers
@@ -9,6 +11,8 @@ outer power derivative. The genuine finite-partition composition then
 keeps one high parameter factor and a fixed joint derivative loss.
 Square root and reciprocal are special cases on the very same tower.
 -/
+
+@[expose] public section
 
 noncomputable section
 

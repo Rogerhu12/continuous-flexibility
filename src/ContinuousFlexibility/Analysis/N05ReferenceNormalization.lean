@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05ReferenceAuxiliary
-import ContinuousFlexibility.Scalar.WeightedAngularMeanJets
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.Periodic
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceAuxiliary
+public import ContinuousFlexibility.Scalar.WeightedAngularMeanJets
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.Periodic
 
 /-!
 # The physical source normalization in the reference angular convention
@@ -11,6 +13,8 @@ interval integrability therefore identifies the normalized averages over
 one and two periods. The physical compatibility functional, its kernel,
 and its fixed normalizer retain exactly their reference-space integrals.
 -/
+
+@[expose] public section
 
 noncomputable section
 

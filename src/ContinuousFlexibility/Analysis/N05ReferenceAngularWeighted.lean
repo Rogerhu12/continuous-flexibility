@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05ReferenceHighProjection
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceHighProjection
 
 /-!
 # Arbitrary angular square weights for the same reference inverse
@@ -8,6 +10,8 @@ reference norms. A single inverse bound controls every nonnegative angular
 weight, hence all polynomial frequency weights simultaneously. Summability
 of the output is a conclusion, obtained from summability of the input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

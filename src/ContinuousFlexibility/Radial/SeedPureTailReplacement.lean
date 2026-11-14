@@ -1,8 +1,12 @@
-import ContinuousFlexibility.Radial.SeedPureTail
-import ContinuousFlexibility.Radial.SeedOrientedGluing
-import ContinuousFlexibility.Radial.SeedLogSlopeLower
+module
+
+public import ContinuousFlexibility.Radial.SeedPureTail
+public import ContinuousFlexibility.Radial.SeedOrientedGluing
+public import ContinuousFlexibility.Radial.SeedLogSlopeLower
 
 /-! # Replacing the inward part of a pure natural tail -/
+
+@[expose] public section
 
 noncomputable section
 

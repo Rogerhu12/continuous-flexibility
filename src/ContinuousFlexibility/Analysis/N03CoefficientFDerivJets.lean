@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N03TotalCoefficientJets
-import ContinuousFlexibility.Analysis.CylinderMixedJets
-import ContinuousFlexibility.Analysis.PointwiseMaterialJetOperations
+module
+
+public import ContinuousFlexibility.Analysis.N03TotalCoefficientJets
+public import ContinuousFlexibility.Analysis.CylinderMixedJets
+public import ContinuousFlexibility.Analysis.PointwiseMaterialJetOperations
 
 /-!
 # Ordinary jets of the actual corrected coefficients
@@ -10,6 +12,8 @@ ordinary Fréchet jet. The finite coordinate expansion only contributes
 the numerical factor 2^n. It changes neither the state neighborhood nor
 the derivative loss of the corrected-coefficient estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aAngularEven
-import ContinuousFlexibility.Radial.ReferenceCosineAlgebra
-import ContinuousFlexibility.Radial.ReferenceCosineParseval
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularEven
+public import ContinuousFlexibility.Radial.ReferenceCosineAlgebra
+public import ContinuousFlexibility.Radial.ReferenceCosineParseval
 
 /-!
 # The same angular bands in the physical and canonical Fourier conventions
@@ -10,6 +12,8 @@ canonical complex coefficients average over a `π` interval.  For the actual
 even, `π`-periodic fields the two normalizations agree, with the usual
 `sqrt 2` factor for positive cosine modes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ReferenceCosineConvergence
-import ContinuousFlexibility.Radial.ReferenceZeroMeanDensity
-import Mathlib.Analysis.SpecificLimits.Basic
+module
+
+public import ContinuousFlexibility.Radial.ReferenceCosineConvergence
+public import ContinuousFlexibility.Radial.ReferenceZeroMeanDensity
+public import Mathlib.Analysis.SpecificLimits.Basic
 
 /-!
 # Density of smooth finite-mode reference sources
@@ -11,6 +13,8 @@ approximated by a smooth compactly supported coefficient. The zero
 coefficient keeps its ordinary integral exactly zero, while the scalar
 border datum is kept exactly unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

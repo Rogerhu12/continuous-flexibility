@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aLpParameterJets
-import ContinuousFlexibility.Analysis.SmoothDirectionsScalarLine
-import Mathlib.Analysis.Calculus.ParametricIntegral
+module
+
+public import ContinuousFlexibility.Analysis.N07aLpParameterJets
+public import ContinuousFlexibility.Analysis.SmoothDirectionsScalarLine
+public import Mathlib.Analysis.Calculus.ParametricIntegral
 
 /-!
 # Genuine parameter jets through a dominated scalar integral
@@ -11,6 +13,8 @@ comes from genuine difference quotients; a continuous numerical majorant
 supplies domination along each scalar line inside the original open set.
 No spatial continuity of the higher parameter jets is required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

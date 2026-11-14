@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PrincipalDividedActualReferenceGaugeEndpointJets
-import ContinuousFlexibility.Analysis.N04PrincipalDividedRadialGaugePrincipalDifferenceExtension
-import ContinuousFlexibility.Analysis.IntervalCubicGermDivision
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalDividedActualReferenceGaugeEndpointJets
+public import ContinuousFlexibility.Analysis.N04PrincipalDividedRadialGaugePrincipalDifferenceExtension
+public import ContinuousFlexibility.Analysis.IntervalCubicGermDivision
 
 /-!
 # The actual fixed-reference principal numerator is cubically divisible
@@ -11,6 +13,8 @@ applies to the actual current-minus-reference principal fields. Its
 mixed estimate uses six additional radial derivatives of that actual
 numerator and no angular derivative loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.TailMassResistanceData
-import Mathlib.MeasureTheory.Function.L2Space
-import Mathlib.MeasureTheory.Integral.Bochner.Set
-import Mathlib.Order.Interval.Set.Union
+module
+
+public import ContinuousFlexibility.Radial.TailMassResistanceData
+public import Mathlib.MeasureTheory.Function.L2Space
+public import Mathlib.MeasureTheory.Integral.Bochner.Set
+public import Mathlib.Order.Interval.Set.Union
 
 /-!
 # Weighted square integrability of an actual tail interpolant
@@ -10,6 +12,8 @@ The upper interpolation estimate suffices for the parameter argument:
 square-summable node data produce a square-integrable solution.  No lower
 interpolation estimate or converse limit-point assertion is used here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

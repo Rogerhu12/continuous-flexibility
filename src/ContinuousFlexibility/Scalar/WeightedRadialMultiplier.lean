@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.WeightedPointwise
-import Mathlib.MeasureTheory.Function.LpSeminorm.Monotonicity
-import Mathlib.MeasureTheory.Function.LpSeminorm.TriangleInequality
+module
+
+public import ContinuousFlexibility.Scalar.WeightedPointwise
+public import Mathlib.MeasureTheory.Function.LpSeminorm.Monotonicity
+public import Mathlib.MeasureTheory.Function.LpSeminorm.TriangleInequality
 
 /-!
 # Radial multipliers in the actual weighted jet norms
@@ -10,6 +12,8 @@ times `M^r`, its action costs exactly `r` weighted-jet orders.  The estimate
 uses the real radial Leibniz formula and the cylinder L² triangle inequality.
 The constants are chosen before the input height.
 -/
+
+@[expose] public section
 
 noncomputable section
 

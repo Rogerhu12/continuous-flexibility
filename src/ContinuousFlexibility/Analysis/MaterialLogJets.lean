@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.AffineMaterialData
-import ContinuousFlexibility.Radial.RadialSymbolBounds
+module
+
+public import ContinuousFlexibility.Analysis.AffineMaterialData
+public import ContinuousFlexibility.Radial.RadialSymbolBounds
 
 /-!
 # Uniform positive material derivatives of the three logarithms
@@ -9,6 +11,8 @@ of order minus two and differentiates once. The three logarithms
 have order at most three. These estimates concern the actual
 iterated derivatives and transfer back to the physical interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

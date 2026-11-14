@@ -1,5 +1,7 @@
-import Mathlib.Analysis.Calculus.ImplicitContDiff
-import Mathlib.Analysis.Calculus.Deriv.MeanValue
+module
+
+public import Mathlib.Analysis.Calculus.ImplicitContDiff
+public import Mathlib.Analysis.Calculus.Deriv.MeanValue
 
 /-!
 # Joint smoothness of the actual scalar inverse
@@ -10,6 +12,8 @@ smooth solution, and strict monotonicity identifies that solution with
 any supplied actual right inverse. No parameter continuity or
 differentiability of the inverse is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

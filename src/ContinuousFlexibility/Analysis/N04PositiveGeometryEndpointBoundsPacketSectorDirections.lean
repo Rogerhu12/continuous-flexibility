@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsPacketDirections
-import ContinuousFlexibility.Analysis.SectorParameterGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsPacketDirections
+public import ContinuousFlexibility.Analysis.SectorParameterGeometry
 
 /-!
 # Actual packet jets in the original sector parameters
@@ -8,6 +10,8 @@ The affine state inclusion has exactly the sector grading. Pulling back
 the original packet towers therefore keeps the same base, angular loss,
 material exponent and normalized directional estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

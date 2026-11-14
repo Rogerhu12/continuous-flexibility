@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MatchedOuterWholeHilbert
-import ContinuousFlexibility.Radial.MatchedOuterPhysicalFlux
-import ContinuousFlexibility.Radial.MatchedOuterTraceTransport
+module
+
+public import ContinuousFlexibility.Radial.MatchedOuterWholeHilbert
+public import ContinuousFlexibility.Radial.MatchedOuterPhysicalFlux
+public import ContinuousFlexibility.Radial.MatchedOuterTraceTransport
 
 /-!
 # The actual normalized outer natural columns
@@ -10,6 +12,8 @@ square root of the unchanged boundary scale and extended by the existing
 physical extension. Its representative uses the same natural function
 on its side and zero on the other side and the open inner interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

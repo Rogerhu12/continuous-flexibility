@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aLinearJetFrechetBounds
-import ContinuousFlexibility.Analysis.N07aFiniteOneHighProduct
-import ContinuousFlexibility.Analysis.N07aCompositionBudget
+module
+
+public import ContinuousFlexibility.Analysis.N07aLinearJetFrechetBounds
+public import ContinuousFlexibility.Analysis.N07aFiniteOneHighProduct
+public import ContinuousFlexibility.Analysis.N07aCompositionBudget
 
 /-!
 # Composition of the actual source-linear jets with the actual chart
@@ -9,6 +11,8 @@ Both functions may depend on the same state and piece. The derivative
 partition is charged once, including the high-state term already present
 in the outer estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

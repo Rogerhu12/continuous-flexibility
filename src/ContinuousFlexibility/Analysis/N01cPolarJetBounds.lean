@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cStateHeightBounds
-import ContinuousFlexibility.Analysis.FlatExtension
+module
+
+public import ContinuousFlexibility.Analysis.N01cStateHeightBounds
+public import ContinuousFlexibility.Analysis.FlatExtension
 
 /-!
 # Weighted jets of the actual polar height inputs
@@ -12,6 +14,8 @@ Consequently all five height inputs share one coefficient-envelope power,
 retain the original height exponent, and require four additional input
 grading orders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

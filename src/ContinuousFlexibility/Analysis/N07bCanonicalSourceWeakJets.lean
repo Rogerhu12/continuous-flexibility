@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05CanonicalTests
-import ContinuousFlexibility.Analysis.CircleJetEncoding
-import ContinuousFlexibility.Analysis.N07bCanonicalSourceSymmetry
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalTests
+public import ContinuousFlexibility.Analysis.CircleJetEncoding
+public import ContinuousFlexibility.Analysis.N07bCanonicalSourceSymmetry
 
 /-!
 # Actual angular jets in the canonical weak graph
@@ -12,6 +14,8 @@ transfers this identity to the canonical measure. Smoothness is required
 only on the canonical open piece; the totalized inverse is unrestricted
 outside that piece.
 -/
+
+@[expose] public section
 
 noncomputable section
 

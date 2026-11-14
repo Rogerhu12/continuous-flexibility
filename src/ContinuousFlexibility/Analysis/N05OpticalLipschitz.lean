@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05OpticalPrimitive
-import Mathlib.Topology.MetricSpace.Lipschitz
+module
+
+public import ContinuousFlexibility.Analysis.N05OpticalPrimitive
+public import Mathlib.Topology.MetricSpace.Lipschitz
 
 /-!
 # A polynomial bound from the actual optical integral
@@ -10,6 +12,8 @@ root on that plateau gives a lower bound for the actual optical travel.
 After the Tricomi time normalization, only a first power of a Lipschitz
 constant at least one is needed to bound the radicand divided by radius.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveReferenceMaterialBounds
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveReferenceMaterialBounds
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
 
 /-!
 # One sampled material envelope for the fixed reference jet prefix
@@ -10,6 +12,8 @@ before choosing the component or evaluation point, and absorbs the
 reference normalization into the enlarged material cost used by
 CurrentJets. No reference field is selected again.
 -/
+
+@[expose] public section
 
 noncomputable section
 

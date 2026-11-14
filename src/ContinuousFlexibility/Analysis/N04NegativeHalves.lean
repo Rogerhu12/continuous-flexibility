@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # The two halves of each negative radial component
@@ -8,6 +10,8 @@ Splitting each at its midpoint preserves their original indices and gives
 nondegenerate pieces whose closed intervals lie inside the radial core.
 Only the countable set of midpoints is omitted from their union.
 -/
+
+@[expose] public section
 
 noncomputable section
 

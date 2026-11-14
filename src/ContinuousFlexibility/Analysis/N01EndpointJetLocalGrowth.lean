@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01EndpointStateJetGrowth
-import ContinuousFlexibility.Analysis.N01EndpointScalarJetGrowth
-import ContinuousFlexibility.Analysis.CircleMultilinearRealization
+module
+
+public import ContinuousFlexibility.Analysis.N01EndpointStateJetGrowth
+public import ContinuousFlexibility.Analysis.N01EndpointScalarJetGrowth
+public import ContinuousFlexibility.Analysis.CircleMultilinearRealization
 
 /-!
 # Local circle estimates for every positive endpoint jet
@@ -11,6 +13,8 @@ in each Hilbert coordinate, where the triangle inequality applies.
 One low order works for every parameter order, with a loss chosen
 separately for each parameter order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

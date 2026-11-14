@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.TailNaturalUniqueness
-import ContinuousFlexibility.Radial.TailFundamentalStates
-import ContinuousFlexibility.Radial.TailFundamentalNodeBounds
-import ContinuousFlexibility.Radial.TailFundamentalGreenBounds
-import ContinuousFlexibility.Radial.TailFundamentalGreenRepresentation
+module
+
+public import ContinuousFlexibility.Radial.TailNaturalUniqueness
+public import ContinuousFlexibility.Radial.TailFundamentalStates
+public import ContinuousFlexibility.Radial.TailFundamentalNodeBounds
+public import ContinuousFlexibility.Radial.TailFundamentalGreenBounds
+public import ContinuousFlexibility.Radial.TailFundamentalGreenRepresentation
 
 /-!
 # The natural line and the localized kernel of the actual tail resolvent
@@ -12,6 +14,8 @@ A normalized Dirichlet left state gives a single symmetric kernel. Its
 classical representation is identified with the supplied Friedrichs
 resolvent, and the same two states give the localized product estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

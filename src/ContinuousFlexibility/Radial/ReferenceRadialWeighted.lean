@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R11bGlobalL2
+module
+
+public import ContinuousFlexibility.Radial.R11bGlobalL2
 
 /-!
 # Scalar radial weighted L² fields
@@ -8,6 +10,8 @@ projection. The coefficient exponent is written directly as A, without the
 factor 2 used in the source/output conventions. No parity, boundary value,
 or equation is built into this norm predicate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

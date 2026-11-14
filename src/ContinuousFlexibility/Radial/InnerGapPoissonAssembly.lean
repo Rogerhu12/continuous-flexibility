@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerGapAssemblyData
-import ContinuousFlexibility.Radial.InnerGapWeights
-import ContinuousFlexibility.Radial.InnerDisjointPieces
+module
+
+public import ContinuousFlexibility.Radial.InnerGapAssemblyData
+public import ContinuousFlexibility.Radial.InnerGapWeights
+public import ContinuousFlexibility.Radial.InnerDisjointPieces
 
 /-!
 # The actual finite gap Poisson sum and its reference normalization
@@ -15,6 +17,8 @@ A physical weight which is constant on each entire gap cancels the
 reciprocal cut weight exactly. The weighted estimate consequently holds
 for either sign, for the very same Poisson sum and reference matrix.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionSource
-import ContinuousFlexibility.Analysis.ProjectiveDifferential
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionSource
+public import ContinuousFlexibility.Analysis.ProjectiveDifferential
 
 /-!
 # Physical norms detect the actual height and source topologies
@@ -9,6 +11,8 @@ coordinate with convergence of the actual weighted physical norms.
 The source carries the induced topology of the existing compatibility
 kernel, so the same criterion applies there without a new completion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

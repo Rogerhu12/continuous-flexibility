@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N03FixedRootTravelIdentification
-import ContinuousFlexibility.Analysis.RootCircleSampleMaterialJets
+module
+
+public import ContinuousFlexibility.Analysis.N03FixedRootTravelIdentification
+public import ContinuousFlexibility.Analysis.RootCircleSampleMaterialJets
 
 /-!
 # The actual two first-integral labels on a fixed left root section
@@ -9,6 +11,8 @@ identify each first integral with a signed sample of the very same
 controlled root input. Thus its angular jets are restrictions of that
 input; no radial fractional-power estimate is needed at the section.
 -/
+
+@[expose] public section
 
 noncomputable section
 

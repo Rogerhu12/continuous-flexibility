@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterActualInverseAssertions
-import Mathlib.MeasureTheory.Function.LpSpace.Indicator
+module
+
+public import ContinuousFlexibility.Radial.OuterActualInverseAssertions
+public import Mathlib.MeasureTheory.Function.LpSpace.Indicator
 
 /-!
 # The same outer inverse for ordinary compactly supported Jacobi sources
@@ -10,6 +12,8 @@ support.  Applying the same Robin inverse gives the ordinary kernel
 `-∫ K f`, the original Jacobi equation, and the same boundary conditions.
 No global unweighted L² bound is asserted.
 -/
+
+@[expose] public section
 
 noncomputable section
 

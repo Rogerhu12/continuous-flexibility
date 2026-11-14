@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsEvaluation
-import ContinuousFlexibility.Analysis.N04RealizationRootBoundaryDirections
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsEvaluation
+public import ContinuousFlexibility.Analysis.N04RealizationRootBoundaryDirections
 
 /-!
 # Fixed-base one-high estimates for the actual left-root inverse
@@ -10,6 +12,8 @@ genuine positive inverse estimate directly. Every angular derivative of
 the literal inverse-label displacement has the same low parameter order
 and its original sampled height weight.
 -/
+
+@[expose] public section
 
 noncomputable section
 

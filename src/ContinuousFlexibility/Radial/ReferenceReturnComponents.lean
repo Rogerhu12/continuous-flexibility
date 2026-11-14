@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ReferenceCellSaturation
-import ContinuousFlexibility.Radial.MorseArithmeticGap
+module
+
+public import ContinuousFlexibility.Radial.ReferenceCellSaturation
+public import ContinuousFlexibility.Radial.MorseArithmeticGap
 
 /-!
 # Negative components and the return margins of model intervals
@@ -9,6 +11,8 @@ computed optical integrals, and their pointwise cell coverage.  The
 quadratic irrationality, uniform small divisors, coefficient allowance,
 and whole-cell containment are proved here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

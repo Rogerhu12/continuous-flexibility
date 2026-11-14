@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04RealizationDoubleExpansionHeight
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationDoubleExpansionHeight
 
 /-!
 # The physical parameter budget in the two-coordinate expansion
@@ -9,6 +11,8 @@ parameter derivatives than the sum of the original block counts.  The
 identity below permits an exact truncation before applying the existing
 height estimate; spatial differentiation does not enlarge that prefix.
 -/
+
+@[expose] public section
 
 noncomputable section
 

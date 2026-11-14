@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderFrequency
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderFrequency
 
 /-!
 # Physical mixed-frequency weights for cylinder Sobolev estimates
@@ -8,6 +10,8 @@ monomials are dominated by the total Sobolev weight; conversely, the weight
 is bounded by pure radial and angular endpoint weights. Subadditivity places
 the full output order on one input in a genuine convolution estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

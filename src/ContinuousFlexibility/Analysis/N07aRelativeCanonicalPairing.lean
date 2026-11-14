@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aCurrentCanonicalEquation
-import ContinuousFlexibility.Analysis.N07aReferenceOperatorIdentity
-import ContinuousFlexibility.Analysis.N07aCanonicalCoefficientDifference
+module
+
+public import ContinuousFlexibility.Analysis.N07aCurrentCanonicalEquation
+public import ContinuousFlexibility.Analysis.N07aReferenceOperatorIdentity
+public import ContinuousFlexibility.Analysis.N07aCanonicalCoefficientDifference
 
 /-!
 # Exact local identification of the actual relative operator
@@ -9,6 +11,8 @@ Subtracting the two proved canonical equations identifies `P.relative`
 with the principal difference and the actual potential and scalar-column
 differences. The compatibility column retains its current transformation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05ReferenceCutImage
-import ContinuousFlexibility.Analysis.N05CanonicalBoundarySymmetry
-import Mathlib.Analysis.SpecialFunctions.Sqrt
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05ReferenceCutImage
+public import ContinuousFlexibility.Analysis.N05CanonicalBoundarySymmetry
+public import Mathlib.Analysis.SpecialFunctions.Sqrt
 
 /-!
 # Actual null coordinates of the reference Tricomi chart
@@ -12,6 +14,8 @@ force both actual functions `φ ± (2/3) ξ sqrt ξ` to have null differential.
 Their angular derivatives cannot vanish, by the nonzero mixed pairing
 with the radial chart coordinate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

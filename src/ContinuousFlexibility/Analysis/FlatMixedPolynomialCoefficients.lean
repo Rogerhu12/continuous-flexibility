@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.FlatMixedDiagonalOperations
-import ContinuousFlexibility.Analysis.SmoothDirectionsNormedComposition
+module
+
+public import ContinuousFlexibility.Analysis.FlatMixedDiagonalOperations
+public import ContinuousFlexibility.Analysis.SmoothDirectionsNormedComposition
 
 /-!
 # The division-free correction polynomial retains the flat factor
@@ -10,6 +12,8 @@ linear reconstruction preserve the flat weight, while allowing a fixed
 loss at each fixed parameter arity. The output towers are arbitrary
 genuine towers of the original two coefficient functions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06ClosedCubicPairing
-import ContinuousFlexibility.Analysis.N06CanonicalTestOperator
-import ContinuousFlexibility.Radial.MatchingCutoffTests
+module
+
+public import ContinuousFlexibility.Analysis.N06ClosedCubicPairing
+public import ContinuousFlexibility.Analysis.N06CanonicalTestOperator
+public import ContinuousFlexibility.Radial.MatchingCutoffTests
 
 /-!
 # Closed cubic pairings from a genuine smooth neighborhood
@@ -13,6 +15,8 @@ The closed cubic pairing therefore applies to the original local data.
 The test need not be even. Its angular condition is exactly period `pi`,
 as in the original canonical test class.
 -/
+
+@[expose] public section
 
 noncomputable section
 

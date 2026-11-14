@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.TerminalMatchingStart
+module
+
+public import ContinuousFlexibility.Radial.TerminalMatchingStart
 
 /-!
 # Terminal suppression after a common frequency threshold is fixed
@@ -7,6 +9,8 @@ The Morse compression may choose any threshold above the explicit
 terminal floor. Only the initial index is chosen afterwards. This
 keeps the threshold shared by the local models and the selected tail.
 -/
+
+@[expose] public section
 
 noncomputable section
 

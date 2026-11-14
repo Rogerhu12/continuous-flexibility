@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aSampleJetBounds
-import ContinuousFlexibility.Analysis.N07aFiniteStateProduct
+module
+
+public import ContinuousFlexibility.Analysis.N07aSampleJetBounds
+public import ContinuousFlexibility.Analysis.N07aFiniteStateProduct
 
 /-!
 # Multiplication of actual coefficient jets with fixed loss
@@ -8,6 +10,8 @@ The genuine Leibniz terms are estimated at their own derivative orders.
 Interpolation is applied to the complete pair of state factors before
 summing, on one low-order ball for every output order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

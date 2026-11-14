@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05ReferenceAngularJetParseval
-import ContinuousFlexibility.Analysis.N05ReferenceAngularWeighted
-import ContinuousFlexibility.Radial.R11bWeightedCellClosure
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceAngularJetParseval
+public import ContinuousFlexibility.Analysis.N05ReferenceAngularWeighted
+public import ContinuousFlexibility.Radial.R11bWeightedCellClosure
 
 /-!
 # The same inverse bounds actual finite angular derivatives
@@ -10,6 +12,8 @@ order. Their frozen weighted energies equal the frequency-weighted
 singleton energies exactly. The common reference inverse therefore obeys
 one estimate for all these derivative orders, with no extra material loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

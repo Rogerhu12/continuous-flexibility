@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CoupledCircleCompositionJetBounds
-import ContinuousFlexibility.Analysis.SpacesTraceRestriction
+module
+
+public import ContinuousFlexibility.Analysis.CoupledCircleCompositionJetBounds
+public import ContinuousFlexibility.Analysis.SpacesTraceRestriction
 
 /-!
 # Composition kernels in the actual weighted circle class
@@ -8,6 +10,8 @@ The pointwise jet estimate has a fixed summable sample envelope. Summing
 its squares gives membership and one-high-factor estimates in precisely
 the circle norms used by the physical model.
 -/
+
+@[expose] public section
 
 noncomputable section
 

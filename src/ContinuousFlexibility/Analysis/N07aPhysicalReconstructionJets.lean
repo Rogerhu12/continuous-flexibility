@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aActualHeightBounds
-import ContinuousFlexibility.Analysis.N07aStateLinearJetComposition
-import ContinuousFlexibility.Analysis.N07aMixedLocalCalculus
-import ContinuousFlexibility.Analysis.SolveReturnEquations
+module
+
+public import ContinuousFlexibility.Analysis.N07aActualHeightBounds
+public import ContinuousFlexibility.Analysis.N07aStateLinearJetComposition
+public import ContinuousFlexibility.Analysis.N07aMixedLocalCalculus
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # Jets of the original physical remainder
@@ -10,6 +12,8 @@ The original height factor and forward chart reconstruct the physical
 remainder on each actual piece. The whole composition and product retain
 one fixed loss, and equality on the open pieces identifies every jet.
 -/
+
+@[expose] public section
 
 noncomputable section
 

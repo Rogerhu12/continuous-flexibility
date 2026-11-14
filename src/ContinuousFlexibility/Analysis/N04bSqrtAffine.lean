@@ -1,10 +1,12 @@
-import Mathlib.Analysis.SpecialFunctions.Sqrt
-import Mathlib.Analysis.Calculus.Deriv.Mul
-import Mathlib.Analysis.Calculus.Deriv.Add
-import Mathlib.Analysis.Calculus.Deriv.Pow
-import Mathlib.Tactic.Ring
-import Mathlib.Tactic.Convert
-import Mathlib.Tactic.NormNum
+module
+
+public import Mathlib.Analysis.SpecialFunctions.Sqrt
+public import Mathlib.Analysis.Calculus.Deriv.Mul
+public import Mathlib.Analysis.Calculus.Deriv.Add
+public import Mathlib.Analysis.Calculus.Deriv.Pow
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.Convert
+public import Mathlib.Tactic.NormNum
 
 /-!
 # An affine optical radicand cannot cross zero smoothly
@@ -14,6 +16,8 @@ square. On the nonnegative half-line that square is the identity, whose
 one-sided derivative is one. An invertible affine change of parameter
 gives the same obstruction at every nonconstant affine zero.
 -/
+
+@[expose] public section
 
 set_option backward.isDefEq.respectTransparency false
 

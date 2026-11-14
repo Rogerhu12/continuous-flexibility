@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ParameterizedPositiveReference
-import ContinuousFlexibility.Analysis.CylinderSobolev
+module
+
+public import ContinuousFlexibility.Analysis.ParameterizedPositiveReference
+public import ContinuousFlexibility.Analysis.CylinderSobolev
 
 /-!
 # Genuine endpoint germs for the parameterized positive primitive
@@ -10,6 +12,8 @@ endpoint values then gives equality on that whole neighborhood times
 the angular line. The result is a genuine planar germ, which is enough
 to glue the exit to the fixed reference coordinate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

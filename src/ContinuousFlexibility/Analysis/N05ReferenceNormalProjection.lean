@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05ReferenceNormalUniqueness
-import ContinuousFlexibility.Radial.ReferenceGraphProjection
-import ContinuousFlexibility.Radial.R11bWeakNormalLimit
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceNormalUniqueness
+public import ContinuousFlexibility.Radial.ReferenceGraphProjection
+public import ContinuousFlexibility.Radial.R11bWeakNormalLimit
 
 /-!
 # Angular projections of the actual physical normal derivative
@@ -9,6 +11,8 @@ Differentiation under the genuine angular integral gives commutation on
 smooth tests. Self-adjointness then projects the physical weak derivative,
 and L² representatives preserve that same weak relation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

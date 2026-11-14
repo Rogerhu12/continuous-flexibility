@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.DeepTailPhysicalPoisson
+module
+
+public import ContinuousFlexibility.Radial.DeepTailPhysicalPoisson
 
 /-!
 # The optional initial resistance edge
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Radial.DeepTailPhysicalPoisson
 The first edge may precede the first mass entrance. Its own hypothesis
 controls the same actual Green contraction as on all subsequent edges.
 -/
+
+@[expose] public section
 
 noncomputable section
 

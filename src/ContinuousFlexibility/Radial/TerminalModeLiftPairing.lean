@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ModeInnerSourcePairing
-import ContinuousFlexibility.Radial.TerminalMorseEnergySeparation
+module
+
+public import ContinuousFlexibility.Radial.ModeInnerSourcePairing
+public import ContinuousFlexibility.Radial.TerminalMorseEnergySeparation
 
 /-!
 # Actual mode pairings for terminal cutoff sources
@@ -9,6 +11,8 @@ to the already proved physical density integral. Diagonal entries are
 the actual cutoff energy, and off-diagonal entries vanish by the
 proved separation of the two cutoffs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

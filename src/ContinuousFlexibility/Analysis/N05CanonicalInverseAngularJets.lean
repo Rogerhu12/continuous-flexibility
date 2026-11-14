@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N05CanonicalAngularJetChoice
-import ContinuousFlexibility.Analysis.N05CanonicalOutputAngularJets
-import ContinuousFlexibility.Analysis.N05CanonicalAngularPairing
-import ContinuousFlexibility.Analysis.N05CanonicalInverseDefinition
-import ContinuousFlexibility.Analysis.N05CanonicalOutputBlock
-import ContinuousFlexibility.Analysis.N05ReferenceZeroRemainder
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalAngularJetChoice
+public import ContinuousFlexibility.Analysis.N05CanonicalOutputAngularJets
+public import ContinuousFlexibility.Analysis.N05CanonicalAngularPairing
+public import ContinuousFlexibility.Analysis.N05CanonicalInverseDefinition
+public import ContinuousFlexibility.Analysis.N05CanonicalOutputBlock
+public import ContinuousFlexibility.Analysis.N05ReferenceZeroRemainder
 
 /-!
 # Positive angular jets of the fixed global canonical inverse
@@ -13,6 +15,8 @@ canonical weak derivative of the original global inverse. The same choice
 therefore has both the genuine reference energy estimate and the local
 canonical estimate with its endpoint exponential intact.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MatchingInverseTheorem
+module
+
+public import ContinuousFlexibility.Radial.MatchingInverseTheorem
 
 /-!
 # Blueprint node R10b
@@ -8,6 +10,8 @@ Inversion of the matching matrix and the exact matched inverse.
 Source: `paper/flexible-surface-readable/06-global-reference-inverse.tex` lines 776–850.
 Task file: `docs/tasks/R10b.md`.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

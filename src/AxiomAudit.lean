@@ -1,5 +1,7 @@
-import ContinuousFlexibility
-import Lean.Util.CollectAxioms
+module
+
+public import ContinuousFlexibility
+public import Lean.Util.CollectAxioms
 
 /-!
 # Axiom audit of project theorems
@@ -9,6 +11,8 @@ The audit rejects `sorryAx` and every axiom other than Lean's usual
 declarations owned by project modules, including private helper declarations,
 as well as declarations in the project namespace and transitive dependencies.
 -/
+
+@[expose] public section
 
 open Lean in
 run_cmd do

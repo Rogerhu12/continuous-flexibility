@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06PrimitivePrincipalModeBound
-import ContinuousFlexibility.Analysis.N06PrimitiveReferenceBudget
-import ContinuousFlexibility.Analysis.N07aAngularReferenceInverse
-import ContinuousFlexibility.Analysis.N07aVolumeWeightBounds
+module
+
+public import ContinuousFlexibility.Analysis.N06PrimitivePrincipalModeBound
+public import ContinuousFlexibility.Analysis.N06PrimitiveReferenceBudget
+public import ContinuousFlexibility.Analysis.N07aAngularReferenceInverse
+public import ContinuousFlexibility.Analysis.N07aVolumeWeightBounds
 
 /-!
 # The original weighted source budget for every principal block
@@ -11,6 +13,8 @@ reference inverse preserves that band, including its three scalar
 components.  The actual RHS budget and the positive height gain absorb
 the reference energy envelope only after all length factors are present.
 -/
+
+@[expose] public section
 
 noncomputable section
 

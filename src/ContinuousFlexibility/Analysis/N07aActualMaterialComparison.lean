@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aMaterialLocalWindow
-import ContinuousFlexibility.Analysis.N07aMaterialPieceBounds
-import ContinuousFlexibility.Analysis.N07aInverseChartDisplacement
-import ContinuousFlexibility.Analysis.SolveReturnEquations
+module
+
+public import ContinuousFlexibility.Analysis.N07aMaterialLocalWindow
+public import ContinuousFlexibility.Analysis.N07aMaterialPieceBounds
+public import ContinuousFlexibility.Analysis.N07aInverseChartDisplacement
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # Sampled material ratios on the actual current physical pieces
@@ -10,6 +12,8 @@ Reference ratios are combined with the actual inverse displacement.
 The complete subpower coefficient is absorbed against the genuine
 H^(3/4) difference gain before choosing one common state neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

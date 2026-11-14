@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartRootAxisValues
-import ContinuousFlexibility.Analysis.RootOddUniformValueInterval
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootAxisValues
+public import ContinuousFlexibility.Analysis.RootOddUniformValueInterval
 
 /-!
 # A quantitative positive band for the actual odd coefficient
@@ -9,6 +11,8 @@ Its reciprocal pays only the actual inverse root scale, the actual axis
 material cost, and the same inverse-coordinate low-jet bound. No target
 coefficient lower bound is introduced as a hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

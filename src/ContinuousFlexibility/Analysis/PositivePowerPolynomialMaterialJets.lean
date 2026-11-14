@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RootPowerJets
-import ContinuousFlexibility.Analysis.CoordinateCompositionMaterialBounds
+module
+
+public import ContinuousFlexibility.Analysis.RootPowerJets
+public import ContinuousFlexibility.Analysis.CoordinateCompositionMaterialBounds
 
 /-!
 # Polynomial material cost of an actual positive power
@@ -9,6 +11,8 @@ reciprocal. No compact value rectangle or chosen smooth extension enters
 the estimate. The common low order and loss precede the exponent, all
 numerical majorants, the state, and the material envelope.
 -/
+
+@[expose] public section
 
 noncomputable section
 

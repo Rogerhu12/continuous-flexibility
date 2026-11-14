@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04PieceData
-import ContinuousFlexibility.Analysis.N04bAtlasBoundary
-import ContinuousFlexibility.Blueprint.Statements
-import Mathlib.MeasureTheory.Measure.Typeclasses.NullSingletonClass
+module
+
+public import ContinuousFlexibility.Analysis.N04PieceData
+public import ContinuousFlexibility.Analysis.N04bAtlasBoundary
+public import ContinuousFlexibility.Blueprint.Statements
+public import Mathlib.MeasureTheory.Measure.Typeclasses.NullSingletonClass
 
 /-!
 # The reference Liouville atlas on the actual sign pieces
@@ -17,6 +19,8 @@ This proves the geometric part of the coordinate stage. It does not assert
 that these reference coordinates give the characteristic Tricomi normal
 form or the transmission identity required by N04PartB.
 -/
+
+@[expose] public section
 
 noncomputable section
 

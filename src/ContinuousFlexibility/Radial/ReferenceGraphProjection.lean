@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ReferenceGraphCoefficients
-import ContinuousFlexibility.Radial.ReferenceGraphClosed
+module
+
+public import ContinuousFlexibility.Radial.ReferenceGraphCoefficients
+public import ContinuousFlexibility.Radial.ReferenceGraphClosed
 
 /-!
 # Finite angular projection preserves the actual weak graph
@@ -10,6 +12,8 @@ preserves the left constant and its first positive mode preserves the
 border row and column. Uniqueness of the already constructed inverse then
 forces finite angular spectrum for finite-mode sources.
 -/
+
+@[expose] public section
 
 open Set Filter MeasureTheory
 open scoped ContDiff Topology

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CanonicalActualReferenceGeometry
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalActualReferenceGeometry
 
 /-!
 # Geometry of the reference-gauged atlas for a supplied family
@@ -11,6 +13,8 @@ smaller neighborhood and the identity at the reference state. The same
 individual geometry, operator, radiality, transmission and global transport
 lemmas then apply to the displayed atlas.
 -/
+
+@[expose] public section
 
 noncomputable section
 

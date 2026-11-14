@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.AffineMaterialSampling
-import ContinuousFlexibility.Analysis.ControlCellEndpointBounds
+module
+
+public import ContinuousFlexibility.Analysis.AffineMaterialSampling
+public import ContinuousFlexibility.Analysis.ControlCellEndpointBounds
 
 /-!
 # Material weight comparison preserving the height exponent
@@ -10,6 +12,8 @@ Thus cell-to-cell comparisons can retain the exact height exponent rather
 than lose a fraction of it. The estimates below reuse the explicit scalar
 bounds already proved for material sampling.
 -/
+
+@[expose] public section
 
 noncomputable section
 

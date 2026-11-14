@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RootTravelOppositeCoordinates
-import ContinuousFlexibility.Analysis.N04bActualAtlasGerms
+module
+
+public import ContinuousFlexibility.Analysis.RootTravelOppositeCoordinates
+public import ContinuousFlexibility.Analysis.N04bActualAtlasGerms
 
 /-!
 # Opposite-root identities for the original stored negative fields
@@ -9,6 +11,8 @@ component. The formulas use its actual shared travel chart on the whole
 open component, so they also apply where a moving half crosses the fixed
 reference cut. No half domain or material sample is replaced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

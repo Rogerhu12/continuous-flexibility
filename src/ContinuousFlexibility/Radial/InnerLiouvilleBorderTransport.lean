@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerLiouvillePoissonTransport
+module
+
+public import ContinuousFlexibility.Radial.InnerLiouvillePoissonTransport
 
 /-!
 # The actual temporary physical border
@@ -9,6 +11,8 @@ g_model/(12*sqrt(lam)*s*(R'/R)^2). Hence the same scalar row is preserved
 exactly. Reciprocal velocity is bounded on this finite positive cell
 by compactness, with no additional analytic hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

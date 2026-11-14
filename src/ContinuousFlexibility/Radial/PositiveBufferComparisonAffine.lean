@@ -1,11 +1,13 @@
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
-import Mathlib.Analysis.Calculus.ContDiff.Operations
-import Mathlib.Analysis.Calculus.Deriv.Comp
-import Mathlib.Analysis.Calculus.Deriv.Mul
-import Mathlib.Analysis.Calculus.Deriv.Add
-import Mathlib.MeasureTheory.Measure.Lebesgue.Integral
-import Mathlib.MeasureTheory.Measure.Haar.NormedSpace
-import Mathlib.MeasureTheory.Group.Integral
+module
+
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+public import Mathlib.Analysis.Calculus.ContDiff.Operations
+public import Mathlib.Analysis.Calculus.Deriv.Comp
+public import Mathlib.Analysis.Calculus.Deriv.Mul
+public import Mathlib.Analysis.Calculus.Deriv.Add
+public import Mathlib.MeasureTheory.Measure.Lebesgue.Integral
+public import Mathlib.MeasureTheory.Measure.Haar.NormedSpace
+public import Mathlib.MeasureTheory.Group.Integral
 
 /-!
 # Affine changes of the positive-buffer coordinate
@@ -15,6 +17,8 @@ needed for the left endpoint.  The normalized potential carries the
 square of the coordinate slope; the energy integral carries its
 absolute value.
 -/
+
+@[expose] public section
 
 noncomputable section
 

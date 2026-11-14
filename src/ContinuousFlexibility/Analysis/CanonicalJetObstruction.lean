@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CanonicalJetNormalization
-import ContinuousFlexibility.Analysis.StateNeighborhood
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalJetNormalization
+public import ContinuousFlexibility.Analysis.StateNeighborhood
 
 /-!
 # Why the qualitative canonical identities do not bound an arbitrary witness
@@ -12,6 +14,8 @@ This is a counterexample to a *same-witness* completion lemma.  It is not a
 counterexample to `N04bStatement → N04cStatement`: that existential statement
 is allowed to construct different, quantitatively normalized canonical data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

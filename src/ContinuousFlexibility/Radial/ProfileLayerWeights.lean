@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.WeightKernelBounds
-import Mathlib.Tactic.NormNum
+module
+
+public import ContinuousFlexibility.Radial.WeightKernelBounds
+public import Mathlib.Tactic.NormNum
 
 /-!
 # Fixed-index-window weight comparisons
@@ -9,6 +11,8 @@ exponents vary by at most a fixed multiple of `1 + radialQ n`. Thus a
 fixed coefficient loss in an endpoint-layer energy estimate is absorbed
 by enlarging the output exponent, uniformly for `|γ| ≤ 1`.
 -/
+
+@[expose] public section
 
 open Real
 open ContinuousFlexibility.Statements

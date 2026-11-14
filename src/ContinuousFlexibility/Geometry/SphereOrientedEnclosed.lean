@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Contracts.SphereEnclosedRegion
-import ContinuousFlexibility.Geometry.EnclosedRegionUniqueness
-import ContinuousFlexibility.Geometry.SphereMeanIntegral
+module
+
+public import ContinuousFlexibility.Contracts.SphereEnclosedRegion
+public import ContinuousFlexibility.Geometry.EnclosedRegionUniqueness
+public import ContinuousFlexibility.Geometry.SphereMeanIntegral
 
 /-!
 # Oriented shape geometry of the constructed marked sphere
@@ -10,6 +12,8 @@ the same sphere family and the same cap parameters. Any other oriented
 enclosure of this family has the same region, normal, and shape operator. Its
 ambient mean agrees on the surface and has the same integral.
 -/
+
+@[expose] public section
 
 noncomputable section
 

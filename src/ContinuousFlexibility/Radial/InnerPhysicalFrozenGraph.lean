@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerRadialWeakDirichlet
-import ContinuousFlexibility.Radial.InnerRadialPhysicalSchur
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialWeakDirichlet
+public import ContinuousFlexibility.Radial.InnerRadialPhysicalSchur
 
 /-!
 # The actual physical weak graph satisfies the frozen inner graph
@@ -8,6 +10,8 @@ The supported physical forcing is recovered exactly by its actual piece
 projections. The field and scalar are those of the same physical graph
 witness. No replacement solution or new source is selected.
 -/
+
+@[expose] public section
 
 noncomputable section
 

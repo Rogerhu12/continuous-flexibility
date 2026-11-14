@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CoupledControlLift
-import ContinuousFlexibility.Analysis.CoupledCircleParity
-import ContinuousFlexibility.Analysis.StateKappaBounds
+module
+
+public import ContinuousFlexibility.Analysis.CoupledControlLift
+public import ContinuousFlexibility.Analysis.CoupledCircleParity
+public import ContinuousFlexibility.Analysis.StateKappaBounds
 
 /-!
 # Linear recovery of the full coupled increment
@@ -11,6 +13,8 @@ linear maps of the independent source. A total representative is zero away
 from the neighborhood where the Neumann criterion holds; its sector-valued
 version is a codomain restriction of exactly the same map.
 -/
+
+@[expose] public section
 
 noncomputable section
 

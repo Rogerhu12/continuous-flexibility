@@ -1,10 +1,12 @@
-import ContinuousFlexibility.Statements.N07aCanonicalGeometry
-import ContinuousFlexibility.Analysis.SpacesTraceRestriction
-import ContinuousFlexibility.Analysis.IntervalWeakPrimitive
-import ContinuousFlexibility.Analysis.SpacesCylinderIntegration
-import Mathlib.MeasureTheory.Measure.OpenPos
-import Mathlib.MeasureTheory.Measure.Typeclasses.SFinite
-import Mathlib.Topology.Compactness.LocallyFinite
+module
+
+public import ContinuousFlexibility.Statements.N07aCanonicalGeometry
+public import ContinuousFlexibility.Analysis.SpacesTraceRestriction
+public import ContinuousFlexibility.Analysis.IntervalWeakPrimitive
+public import ContinuousFlexibility.Analysis.SpacesCylinderIntegration
+public import Mathlib.MeasureTheory.Measure.OpenPos
+public import Mathlib.MeasureTheory.Measure.Typeclasses.SFinite
+public import Mathlib.Topology.Compactness.LocallyFinite
 
 /-!
 # The actual physical canonical pieces are locally finite
@@ -15,6 +17,8 @@ short pieces from meeting a compact subinterval of the annulus. This
 uses the material envelope and the actual ratio of sample and point
 weights; it needs no properness or multiplicity assumption on `K.cell`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

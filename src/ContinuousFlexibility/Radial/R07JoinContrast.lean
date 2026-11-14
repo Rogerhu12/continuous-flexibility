@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MorseJoinHeightContrast
+module
+
+public import ContinuousFlexibility.Radial.MorseJoinHeightContrast
 
 /-!
 # From the endpoint heights to the transfer contrast
@@ -8,6 +10,8 @@ two endpoint height ratios. This quantity is unchanged when the direction
 of traversal is reversed. The actual logarithmic contrast estimate gives
 the exponential bound used in `R07JoinSmallness`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

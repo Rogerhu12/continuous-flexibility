@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06RadialReferenceGeometry
-import Mathlib.Analysis.Calculus.Deriv.Inv
+module
+
+public import ContinuousFlexibility.Analysis.N06RadialReferenceGeometry
+public import Mathlib.Analysis.Calculus.Deriv.Inv
 
 /-!
 # Finite scalar jet bounds for radial reference geometry
@@ -8,6 +10,8 @@ These elementary estimates control products, compositions, and reciprocals
 of the primitive radial functions through order two. They use actual
 derivatives and retain explicit polynomial constants.
 -/
+
+@[expose] public section
 
 noncomputable section
 

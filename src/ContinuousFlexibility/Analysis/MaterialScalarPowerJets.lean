@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.MaterialOrdinaryJets
-import ContinuousFlexibility.Analysis.MaterialEnvelopeLogJets
+module
+
+public import ContinuousFlexibility.Analysis.MaterialOrdinaryJets
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeLogJets
 
 /-!
 # Physical powers from genuine scalar logarithmic jets
@@ -8,6 +10,8 @@ One scalar argument applies to every positive weight with bounded positive
 material derivatives of its logarithm. The actual E0 model supplies those
 logarithmic bounds; no E0 floor or extra envelope hypothesis is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

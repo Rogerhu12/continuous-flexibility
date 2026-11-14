@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Blueprint.Statements
-import ContinuousFlexibility.Analysis.N01CorrectionCoefficientMaterialTame
-import ContinuousFlexibility.Analysis.N01ResidualSmoothTame
-import ContinuousFlexibility.Analysis.N03CorrectionAssembly
-import ContinuousFlexibility.Analysis.N03SourceFromActualCoefficientJets
-import ContinuousFlexibility.Analysis.ReturnCorrectionUniformNeighborhood
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
+public import ContinuousFlexibility.Analysis.N01CorrectionCoefficientMaterialTame
+public import ContinuousFlexibility.Analysis.N01ResidualSmoothTame
+public import ContinuousFlexibility.Analysis.N03CorrectionAssembly
+public import ContinuousFlexibility.Analysis.N03SourceFromActualCoefficientJets
+public import ContinuousFlexibility.Analysis.ReturnCorrectionUniformNeighborhood
 
 /-!
 # Blueprint node N02N03
@@ -14,6 +16,8 @@ Source: `paper/flexible-surface-rewrite/07-fixed-geometry.tex` lines 341–460.
 
 Task file: `docs/tasks/N02N03.md`. The original statement is unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

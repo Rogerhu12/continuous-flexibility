@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aPhysicalJetTowers
-import ContinuousFlexibility.Analysis.N07aSobolevCoordinates
-import ContinuousFlexibility.Analysis.N07aSobolevTowers
-import ContinuousFlexibility.Scalar.WeightedDecodeLift
+module
+
+public import ContinuousFlexibility.Analysis.N07aPhysicalJetTowers
+public import ContinuousFlexibility.Analysis.N07aSobolevCoordinates
+public import ContinuousFlexibility.Analysis.N07aSobolevTowers
+public import ContinuousFlexibility.Scalar.WeightedDecodeLift
 
 /-!
 # Lifting a genuine physical parameter family with its one-high estimate
@@ -11,6 +13,8 @@ towers, and their uniform physical decay estimate. Closed weak graphs
 produce the original Sobolev-valued tower. The same one-high estimate then
 holds in the frozen grading, with the original fixed base and loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

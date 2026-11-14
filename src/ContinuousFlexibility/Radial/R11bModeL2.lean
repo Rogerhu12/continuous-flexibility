@@ -1,5 +1,7 @@
-import Mathlib.MeasureTheory.Function.L2Space
-import Mathlib.MeasureTheory.Integral.Prod
+module
+
+public import Mathlib.MeasureTheory.Function.L2Space
+public import Mathlib.MeasureTheory.Integral.Prod
 
 /-!
 # Single-mode L² estimates for an actual product measure
@@ -8,6 +10,8 @@ A square-integrable angular factor defines a bounded coefficient map on a
 product L² space. The coefficient is the original integral of representatives.
 The proof uses Cauchy–Schwarz on almost every section, followed by Fubini.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

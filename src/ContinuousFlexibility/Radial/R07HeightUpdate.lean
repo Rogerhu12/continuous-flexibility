@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R07JoinParameterJets
-import Mathlib.Algebra.BigOperators.Group.Finset.Piecewise
+module
+
+public import ContinuousFlexibility.Radial.R07JoinParameterJets
+public import Mathlib.Algebra.BigOperators.Group.Finset.Piecewise
 
 /-!
 # Updating one height scales precisely the corresponding outward tail
@@ -9,6 +11,8 @@ multiplies all later cell amplitudes by one common positive scalar.  The exact
 parameter identities for the actual joins transfer this scaling to every
 physical point of the outward tail, as a full smooth germ.
 -/
+
+@[expose] public section
 
 noncomputable section
 

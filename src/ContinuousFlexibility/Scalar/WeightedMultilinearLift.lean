@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedDecodeLift
-import Mathlib.Topology.Algebra.Module.Multilinear.Basic
+module
+
+public import ContinuousFlexibility.Scalar.WeightedDecodeLift
+public import Mathlib.Topology.Algebra.Module.Multilinear.Basic
 
 /-!
 # Actual multilinear decoder lifts
@@ -8,6 +10,8 @@ A finite product estimate in continuous source seminorms gives continuity for
 the original projective topology.  The proof uses the finite multilinear
 difference formula, so it does not assume continuity of an inverse decoder.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -43,12 +43,12 @@ def modules() -> list[str]:
 
 
 def main() -> None:
-    text = HEADER + "".join(f"import {m}\n" for m in modules())
+    text = HEADER + "module\n\n" + "".join(f"public import {m}\n" for m in modules())
     if "--check" in sys.argv:
         current = OUT.read_text(encoding="utf-8") if OUT.exists() else ""
         sys.exit(0 if current == text else 1)
     OUT.write_text(text, encoding="utf-8", newline="\n")
-    print(f"{OUT.relative_to(ROOT)}: {text.count(chr(10) + 'import ') + text.startswith('import ')} imports")
+    print(f"{OUT.relative_to(ROOT)}: {text.count(chr(10) + 'public import ')} imports")
 
 
 if __name__ == "__main__":

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.RootFlowParameterDerivative
-import ContinuousFlexibility.Analysis.ParameterizedCircleInverse
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Ring
+module
+
+public import ContinuousFlexibility.Analysis.RootFlowParameterDerivative
+public import ContinuousFlexibility.Analysis.ParameterizedCircleInverse
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
 
 /-!
 # The root-parameter derivative of the actual inverse coordinate
@@ -16,6 +18,8 @@ positive root coefficient (2/3) c₀(0, θ) hL'(θ).
 The inverse and coordinate derivatives are conclusions, not input
 regularity assumptions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

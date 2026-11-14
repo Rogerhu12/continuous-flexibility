@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aLocalizedWeakJets
-import ContinuousFlexibility.Analysis.N07aAngularCutoff
-import ContinuousFlexibility.Analysis.CircleSmoothReconstruction
+module
+
+public import ContinuousFlexibility.Analysis.N07aLocalizedWeakJets
+public import ContinuousFlexibility.Analysis.N07aAngularCutoff
+public import ContinuousFlexibility.Analysis.CircleSmoothReconstruction
 
 /-!
 # Smooth reconstruction on a whole canonical piece
@@ -11,6 +13,8 @@ and the original canonical measure. Choosing a cutoff equal to one near
 each radial point therefore glues a smooth representative on the entire
 open piece, without assuming traces at the endpoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

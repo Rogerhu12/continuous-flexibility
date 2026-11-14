@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationHeightGraphComposition
-import ContinuousFlexibility.Analysis.N01cFiniteParameterProducts
-import ContinuousFlexibility.Analysis.N04RealizationMixedSlotBudget
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationHeightGraphComposition
+public import ContinuousFlexibility.Analysis.N01cFiniteParameterProducts
+public import ContinuousFlexibility.Analysis.N04RealizationMixedSlotBudget
 
 /-!
 # Affine reconstruction of the actual inverse point
@@ -10,6 +12,8 @@ contributes only its linear angular projection, which vanishes on a
 positive-state pure word. Thus reconstructing the actual point preserves
 the positive-parameter height factor of its two normalized atoms.
 -/
+
+@[expose] public section
 
 noncomputable section
 

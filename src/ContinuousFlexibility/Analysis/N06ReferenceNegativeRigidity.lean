@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06ReferenceCutTravel
-import ContinuousFlexibility.Analysis.N06NegativePieceFiniteness
-import Mathlib.Analysis.Calculus.Deriv.MeanValue
-import ContinuousFlexibility.Analysis.N05N06ClosedChartBridge
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceCutTravel
+public import ContinuousFlexibility.Analysis.N06NegativePieceFiniteness
+public import Mathlib.Analysis.Calculus.Deriv.MeanValue
+public import ContinuousFlexibility.Analysis.N05N06ClosedChartBridge
 
 /-!
 # Radiality of the selected reference charts on the negative halves
@@ -12,6 +14,8 @@ from their null characteristics, the common cut radius and the original
 irrational return margin.  No chosen Morse realization, coordinate
 formula, boundary inverse value or additional matching condition is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

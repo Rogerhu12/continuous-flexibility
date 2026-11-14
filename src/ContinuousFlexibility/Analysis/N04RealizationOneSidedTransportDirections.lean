@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04RealizationPositiveAngularInverse
-import ContinuousFlexibility.Analysis.N04RealizationBoundaryTaylorDirections
-import ContinuousFlexibility.Analysis.N04RealizationEndpointPullbackDirections
-import ContinuousFlexibility.Analysis.OneSidedWholeComponentTransport
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationPositiveAngularInverse
+public import ContinuousFlexibility.Analysis.N04RealizationBoundaryTaylorDirections
+public import ContinuousFlexibility.Analysis.N04RealizationEndpointPullbackDirections
+public import ContinuousFlexibility.Analysis.OneSidedWholeComponentTransport
 
 /-!
 # The literal positive transport from its raw endpoint towers
@@ -13,6 +15,8 @@ on one unchanged state domain. The only positivity input is the spatial
 angular positivity already certified by the finite collar construction.
 There is no inverse tower or completed current-jet hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

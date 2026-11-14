@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Scalar.Coordinates
-import Mathlib.Data.Set.Function
-import Mathlib.Topology.ContinuousOn
-import Mathlib.Tactic.Linarith
+module
+
+public import ContinuousFlexibility.Scalar.Coordinates
+public import Mathlib.Data.Set.Function
+public import Mathlib.Topology.ContinuousOn
+public import Mathlib.Tactic.Linarith
 
 /-!
 # Actual physical domains cut by a travel coordinate
@@ -16,6 +18,8 @@ strip. Its level lies in the canonical interior, so no unspecified boundary
 value of `invFunOn` is used. These results do not assume a radial graph for
 the physical cut and do not assert a characteristic normal form.
 -/
+
+@[expose] public section
 
 noncomputable section
 

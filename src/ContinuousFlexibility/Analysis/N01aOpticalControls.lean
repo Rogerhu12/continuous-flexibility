@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01aOpticalWeights
+module
+
+public import ContinuousFlexibility.Analysis.N01aOpticalWeights
 
 /-!
 # Uniform optical controls from actual profile bounds
@@ -8,6 +10,8 @@ on each negative component. The output is a family of globally smooth,
 compactly supported logarithmic controls whose actual travel derivative
 is one, with one coefficient power for every derivative order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

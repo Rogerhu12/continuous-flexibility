@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N08FlowParameterIntegral
-import ContinuousFlexibility.Analysis.N08RadialFlow
+module
+
+public import ContinuousFlexibility.Analysis.N08FlowParameterIntegral
+public import ContinuousFlexibility.Analysis.N08RadialFlow
 
 /-!
 # Uniform parameter control of the given ordinary flows
@@ -8,6 +10,8 @@ N01's genuine first jets give a parameter Lipschitz constant independent
 of the interior radius. This supplies domination for the ordinary integral
 identity, including integration up to the continuous left endpoint.
 -/
+
+@[expose] public section
 
 noncomputable section
 

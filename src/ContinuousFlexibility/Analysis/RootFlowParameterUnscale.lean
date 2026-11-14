@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.RootScaledInverseCoordinate
+module
+
+public import ContinuousFlexibility.Analysis.RootScaledInverseCoordinate
 
 /-!
 # Removing the normalization scale from the same chosen root flow
@@ -10,6 +12,8 @@ unscaled equation for the very same coefficient functions. This chooses
 neither a new atlas nor a new flow. The inverse-coordinate equality keeps
 both physical parameters, including the three-halves root scaling.
 -/
+
+@[expose] public section
 
 noncomputable section
 

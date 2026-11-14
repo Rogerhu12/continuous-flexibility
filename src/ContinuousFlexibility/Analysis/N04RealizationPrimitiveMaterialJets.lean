@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationPrimitiveJetAlgebra
-import ContinuousFlexibility.Analysis.N04RealizationPrimitiveIdentities
-import ContinuousFlexibility.Analysis.N04RealizationMaterialScalarJets
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationPrimitiveJetAlgebra
+public import ContinuousFlexibility.Analysis.N04RealizationPrimitiveIdentities
+public import ContinuousFlexibility.Analysis.N04RealizationMaterialScalarJets
 
 /-!
 # Material primitive jets from the actual factor envelopes
@@ -11,6 +13,8 @@ reciprocal density, on the same open material piece. The normalizer and
 reference multipliers keep their actual factors. All finite algebra
 preserves the common coefficient weight and evaluation index.
 -/
+
+@[expose] public section
 
 noncomputable section
 

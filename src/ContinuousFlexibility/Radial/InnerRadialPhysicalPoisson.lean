@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.InnerRadialPhysicalSource
-import ContinuousFlexibility.Radial.InnerRadialWeakGreen
-import ContinuousFlexibility.Radial.InnerBorderWeights
-import Mathlib.Analysis.Normed.Module.FiniteDimension
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialPhysicalSource
+public import ContinuousFlexibility.Radial.InnerRadialWeakGreen
+public import ContinuousFlexibility.Radial.InnerBorderWeights
+public import Mathlib.Analysis.Normed.Module.FiniteDimension
 
 /-!
 # The same physical Poisson operator and its actual adjoint
@@ -15,6 +17,8 @@ The arbitrary-L² Dirichlet conormal flux is therefore minus the adjoint
 of this same physical Poisson operator. No pairing or flux identity is
 an additional hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

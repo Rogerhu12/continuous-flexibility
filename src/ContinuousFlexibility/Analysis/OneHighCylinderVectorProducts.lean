@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderRealProducts
-import ContinuousFlexibility.Analysis.OneHighCircleComponents
-import ContinuousFlexibility.Analysis.OneHighL2Domination
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderRealProducts
+public import ContinuousFlexibility.Analysis.OneHighCircleComponents
+public import ContinuousFlexibility.Analysis.OneHighL2Domination
 
 /-!
 # Products of actual vector derivative norms on the full cylinder
@@ -9,6 +11,8 @@ Expansion over finitely many component choices reduces the norm products
 to the same scalar one-high estimate. Membership is proved from the finite
 majorant, so no product-integrability hypothesis is added.
 -/
+
+@[expose] public section
 
 noncomputable section
 

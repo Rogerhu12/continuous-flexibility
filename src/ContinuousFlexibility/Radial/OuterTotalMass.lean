@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ModeLocalMeasure
-import ContinuousFlexibility.Radial.ScaleSlowVariation
+module
+
+public import ContinuousFlexibility.Radial.ModeLocalMeasure
+public import ContinuousFlexibility.Radial.ScaleSlowVariation
 
 /-!
 # A uniform total mass bound from the actual profile estimates
@@ -9,6 +11,8 @@ covers every interior point.  Its stretched exponential has a fixed
 maximum controlled by the same profile constant.  Thus every outer
 restriction has a mass bound independent of its cut and frequency.
 -/
+
+@[expose] public section
 
 noncomputable section
 

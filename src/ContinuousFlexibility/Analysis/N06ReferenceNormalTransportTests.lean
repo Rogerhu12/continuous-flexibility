@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.CanonicalStripGeometry
-import ContinuousFlexibility.Analysis.N06CanonicalProperties
-import Mathlib.Algebra.Field.Periodic
-import ContinuousFlexibility.Radial.R11bRadialTests
-import Mathlib.Analysis.Calculus.Deriv.Slope
-import Mathlib.Topology.Order.IntermediateValue
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalStripGeometry
+public import ContinuousFlexibility.Analysis.N06CanonicalProperties
+public import Mathlib.Algebra.Field.Periodic
+public import ContinuousFlexibility.Radial.R11bRadialTests
+public import Mathlib.Analysis.Calculus.Deriv.Slope
+public import Mathlib.Topology.Order.IntermediateValue
 
 /-!
 # Radial weighted pullbacks of compact canonical tests
@@ -13,6 +15,8 @@ support of the original canonical test makes the actual zero extension
 globally smooth. The radial coordinate can have either orientation; its
 orientation is obtained from the actual injective chart.
 -/
+
+@[expose] public section
 
 noncomputable section
 

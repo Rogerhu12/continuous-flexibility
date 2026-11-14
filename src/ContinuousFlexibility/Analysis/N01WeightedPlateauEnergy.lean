@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01PlateauEnergy
-import ContinuousFlexibility.Analysis.N01PlateauMaterialPowers
-import ContinuousFlexibility.Analysis.WeightedCutoffJetEnergy
+module
+
+public import ContinuousFlexibility.Analysis.N01PlateauEnergy
+public import ContinuousFlexibility.Analysis.N01PlateauMaterialPowers
+public import ContinuousFlexibility.Analysis.WeightedCutoffJetEnergy
 
 /-!
 # Summing local height jets with the actual return-label material weight
@@ -10,6 +12,8 @@ Three orders transfer that power to the expanded support, one order
 controls cutoff derivatives, and one controls support overlap. The total
 additional order is five, independently of the output material power.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05CanonicalSourceL2
-import ContinuousFlexibility.Analysis.N05CanonicalSourceLift
-import Mathlib.Topology.Algebra.InfiniteSum.Real
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalSourceL2
+public import ContinuousFlexibility.Analysis.N05CanonicalSourceLift
+public import Mathlib.Topology.Algebra.InfiniteSum.Real
 
 /-!
 # The fixed actual source lift belongs to every weaker reference source space
@@ -10,6 +12,8 @@ The uniformly bounded finite weighted sums then establish the full source
 square summability and norm bound. Thus the physical inverse can be applied
 to the actual lift without assuming that a physical source already exists.
 -/
+
+@[expose] public section
 
 noncomputable section
 

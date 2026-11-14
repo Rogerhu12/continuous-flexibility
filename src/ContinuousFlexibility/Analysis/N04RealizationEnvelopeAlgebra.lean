@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cOpticalNumericEnvelopes
+module
+
+public import ContinuousFlexibility.Analysis.N01cOpticalNumericEnvelopes
 
 /-!
 # Finite envelopes on a fixed index set
@@ -7,6 +9,8 @@ The indices may contain a state, a piece and an actual evaluation point.
 All constants are chosen before those indices. Finite collection and the
 conversion to a natural state degree do not restrict the index set.
 -/
+
+@[expose] public section
 
 noncomputable section
 

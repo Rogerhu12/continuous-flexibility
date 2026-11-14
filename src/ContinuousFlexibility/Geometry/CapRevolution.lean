@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Geometry.CapMeridian
-import ContinuousFlexibility.Geometry.GraphEmbedding
-import Mathlib.Analysis.Complex.Circle
-import Mathlib.Topology.Order.Compact
+module
+
+public import ContinuousFlexibility.Geometry.CapMeridian
+public import ContinuousFlexibility.Geometry.GraphEmbedding
+public import Mathlib.Analysis.Complex.Circle
+public import Mathlib.Topology.Order.Compact
 
 /-!
 # The actual surface obtained by revolving the constructed cap meridian
@@ -12,6 +14,8 @@ for actual image injectivity; real angular parameters are periodic.
 Axis charts, the marked top extension and the standard-sphere assembly remain
 separate obligations of the fixed-cap construction in Section 2.
 -/
+
+@[expose] public section
 
 noncomputable section
 

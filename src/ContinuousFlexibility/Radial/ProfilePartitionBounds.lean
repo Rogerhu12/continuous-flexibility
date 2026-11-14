@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.Radial
-import Mathlib.Topology.Algebra.InfiniteSum.Order
-import Mathlib.Tactic.Linarith
+module
+
+public import ContinuousFlexibility.Statements.Radial
+public import Mathlib.Topology.Algebra.InfiniteSum.Order
+public import Mathlib.Tactic.Linarith
 
 /-!
 # Uniform bounds for the actual radial localizers
@@ -9,6 +11,8 @@ Nonnegativity and the partition-of-one identity give a pointwise bound of
 one, without any derivative bounds or a bound on the number of cells at a
 fixed index.
 -/
+
+@[expose] public section
 
 open Set
 open ContinuousFlexibility.Statements

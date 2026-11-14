@@ -1,10 +1,12 @@
-import ContinuousFlexibility.Statements.Radial
-import Mathlib.Analysis.SpecialFunctions.Pow.Real
-import Mathlib.Data.Set.Card
-import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
-import Mathlib.MeasureTheory.Measure.Real
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Ring
+module
+
+public import ContinuousFlexibility.Statements.Radial
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
+public import Mathlib.Data.Set.Card
+public import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
+public import Mathlib.MeasureTheory.Measure.Real
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
 
 /-!
 # Counting the actual reference cells
@@ -14,6 +16,8 @@ actual cell. These intervals are pairwise disjoint in the bounded radial
 core. Their Lebesgue measures therefore bound the number of cells carrying
 any one reference index by a fixed coefficient power.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ScaleSlowVariation
+module
+
+public import ContinuousFlexibility.Radial.ScaleSlowVariation
 
 /-!
 # The coefficient envelope for the outer inverse
@@ -7,6 +9,8 @@ The actual quadratic core and natural-mass losses fit the manuscript's
 E_n envelope uniformly for every n >= 1. These elementary comparisons
 keep the action loss K_n separate from the coefficient envelope.
 -/
+
+@[expose] public section
 
 noncomputable section
 

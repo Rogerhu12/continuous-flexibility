@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.ReferencePositiveSchurAssembly
-import ContinuousFlexibility.Radial.ReferenceZeroModeAssembly
-import ContinuousFlexibility.Radial.ReferenceInverseCompletion
-import ContinuousFlexibility.Radial.ReferenceCommonInverse
+module
+
+public import ContinuousFlexibility.Radial.ReferencePositiveSchurAssembly
+public import ContinuousFlexibility.Radial.ReferenceZeroModeAssembly
+public import ContinuousFlexibility.Radial.ReferenceInverseCompletion
+public import ContinuousFlexibility.Radial.ReferenceCommonInverse
 
 /-!
 # One actual reference inverse from uniform raw Schur bounds
@@ -12,6 +14,8 @@ uniqueness identifies the assembled solution and forces linearity.
 Choosing the lowest attenuation then gives one function valid at all
 three exponents on the same reference data and with the same losses.
 -/
+
+@[expose] public section
 
 noncomputable section
 

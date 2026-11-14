@@ -1,9 +1,13 @@
-import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
-import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
+module
+
+public import ContinuousFlexibility.Analysis.N01cMixedPowerNormalization
+public import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
 
 /-! Transfer positive parameter jets to the actual reference difference.
 The endpoint factor is fixed along the reference segment, so the zeroth
 order is obtained from the first derivative with the same endpoint weight. -/
+
+@[expose] public section
 
 noncomputable section
 

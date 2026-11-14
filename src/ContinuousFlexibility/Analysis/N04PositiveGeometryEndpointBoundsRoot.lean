@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsLeft
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsRight
-import ContinuousFlexibility.Analysis.CanonicalNeighborhoodRestriction
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsLeft
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsRight
+public import ContinuousFlexibility.Analysis.CanonicalNeighborhoodRestriction
 
 /-!
 # Both actual inverse root labels on one common neighborhood
@@ -10,6 +12,8 @@ chosen. The resulting bound has constants independent of the Boolean
 endpoint selector, component and angle. The final theorem obtains its
 ordinary-flow Jacobian hypothesis from N01 on one smaller neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

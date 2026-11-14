@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.TailEdgeZeroGreen
-import ContinuousFlexibility.Radial.TailEdgeMassResistance
-import Mathlib.Topology.ContinuousMap.Compact
-import Mathlib.Topology.MetricSpace.Contracting
-import Mathlib.Topology.Order.ProjIcc
+module
+
+public import ContinuousFlexibility.Radial.TailEdgeZeroGreen
+public import ContinuousFlexibility.Radial.TailEdgeMassResistance
+public import Mathlib.Topology.ContinuousMap.Compact
+public import Mathlib.Topology.MetricSpace.Contracting
+public import Mathlib.Topology.Order.ProjIcc
 
 /-!
 # The perturbed Dirichlet problem on one resistance edge
@@ -12,6 +14,8 @@ the sup norm with constant equal to the diagonal integral. The unique
 integral solution satisfies the differential equation and the prescribed
 endpoint values.
 -/
+
+@[expose] public section
 
 noncomputable section
 

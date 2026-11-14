@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.MaterialCoordinateParameterDerivatives
-import ContinuousFlexibility.Analysis.N04RealizationEnvelopeDifferential
+module
+
+public import ContinuousFlexibility.Analysis.MaterialCoordinateParameterDerivatives
+public import ContinuousFlexibility.Analysis.N04RealizationEnvelopeDifferential
 
 /-!
 # Material envelopes for the existing fixed radial chain coefficients
@@ -9,6 +11,8 @@ derivative. Uniform envelopes for the positive jets of the fixed radial
 map therefore control its coefficients and their finite mass. No bound
 on the value of the radial map is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

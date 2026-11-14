@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R11bFiniteSource
+module
+
+public import ContinuousFlexibility.Radial.R11bFiniteSource
 
 /-!
 # The scalar row of a finite derivative source
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Radial.R11bFiniteSource
 The compatible-field conditions are independent of the source's scalar row.
 Its contribution to the norm is exactly its square.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

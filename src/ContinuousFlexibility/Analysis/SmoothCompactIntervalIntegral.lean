@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.CanonicalCubicMixed
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalCubicMixed
 
 /-!
 # Joint smoothness of compact parameter integrals
@@ -8,6 +10,8 @@ weight therefore preserves smooth dependence on the finite dimensional
 cylinder parameter.  The proof differentiates once under the integral and
 then applies the same statement to the Banach space of linear maps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

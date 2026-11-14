@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aAngularBands
-import ContinuousFlexibility.Analysis.N07aAngularCosineCoefficients
-import ContinuousFlexibility.Analysis.N07aAngularPeriodMeasure
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularBands
+public import ContinuousFlexibility.Analysis.N07aAngularCosineCoefficients
+public import ContinuousFlexibility.Analysis.N07aAngularPeriodMeasure
 
 /-!
 # Identification of canonical bands with actual physical cosine projections
@@ -10,6 +12,8 @@ two-variable coefficient with the Fourier transform of the angular
 section coefficient; the scalar half-period identity then identifies the
 actual cosine projection with the existing canonical Hilbert band.
 -/
+
+@[expose] public section
 
 noncomputable section
 

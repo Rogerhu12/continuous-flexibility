@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchedModeGraphProjection
-import ContinuousFlexibility.Radial.MatchedModeTestClosure
+module
+
+public import ContinuousFlexibility.Radial.MatchedModeGraphProjection
+public import ContinuousFlexibility.Radial.MatchedModeTestClosure
 
 /-!
 # The full modal graph of a physical weak solution
@@ -8,6 +10,8 @@ The actual cosine projection is first tested on compactly contained radial
 supports. The proved test closure then recovers the complete frozen graph,
 including the frequency-two row and the opposite model scalar.
 -/
+
+@[expose] public section
 
 noncomputable section
 

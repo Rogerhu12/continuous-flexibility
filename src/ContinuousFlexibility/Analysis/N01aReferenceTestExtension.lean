@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01aReferenceScalar
+module
+
+public import ContinuousFlexibility.Analysis.N01aReferenceScalar
 
 /-!
 # Extending smooth graph tests to ordinary-support radial tests
@@ -7,6 +9,8 @@ These are exactly the test functions in `NaturalRadialNull`.  Their support
 may approach the end circles, while their interior cutoffs are valid tests
 for the original two-dimensional distributional graph.
 -/
+
+@[expose] public section
 
 noncomputable section
 

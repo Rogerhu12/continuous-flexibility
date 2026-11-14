@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryRootInversePacket
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryRootInversePacket
 
 /-!
 # Fixed constants for inverse packet word bounds
@@ -7,6 +9,8 @@ The witnesses are selected while the parameter space and all four scalar
 functions are abstract. Actual root charts consume fields of this data,
 without eliminating an existential into their full quantitative target.
 -/
+
+@[expose] public section
 
 noncomputable section
 

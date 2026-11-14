@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04FlowQualitative
-import ContinuousFlexibility.Analysis.ParameterizedInverseFirstDerivative
+module
+
+public import ContinuousFlexibility.Analysis.N04FlowQualitative
+public import ContinuousFlexibility.Analysis.ParameterizedInverseFirstDerivative
 
 /-!
 # Genuine inverses for the regularized mixed flow
@@ -9,6 +11,8 @@ Jacobian at every external parameter. The actual inverse is therefore
 jointly smooth on the whole parameter space, even though quantitative
 bounds are only required on the fixed parameter box.
 -/
+
+@[expose] public section
 
 noncomputable section
 

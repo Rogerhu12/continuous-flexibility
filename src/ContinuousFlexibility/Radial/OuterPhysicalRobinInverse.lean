@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.OuterPhysicalGreenAssembly
-import ContinuousFlexibility.Radial.OuterPhysicalRobinUniqueness
-import ContinuousFlexibility.Radial.OuterPhysicalNaturalNorm
-import ContinuousFlexibility.Radial.OuterPhysicalTailBasisNorm
+module
+
+public import ContinuousFlexibility.Radial.OuterPhysicalGreenAssembly
+public import ContinuousFlexibility.Radial.OuterPhysicalRobinUniqueness
+public import ContinuousFlexibility.Radial.OuterPhysicalNaturalNorm
+public import ContinuousFlexibility.Radial.OuterPhysicalTailBasisNorm
 
 /-!
 # Constructing the actual bounded Robin inverse
@@ -11,6 +13,8 @@ finite-core ODE solutions, deep Friedrichs inverse, and compact core
 kernel produce its operator and every field below.  In particular, the
 weak graph is inverted on all L² sources in both directions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

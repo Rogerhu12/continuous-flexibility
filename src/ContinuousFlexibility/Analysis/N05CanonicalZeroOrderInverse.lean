@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalWeightedInverseL2
-import ContinuousFlexibility.Analysis.N05CanonicalOutputReflection
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalWeightedInverseL2
+public import ContinuousFlexibility.Analysis.N05CanonicalOutputReflection
 
 /-!
 # The actual inverse in the zero-order canonical volume space
@@ -8,6 +10,8 @@ The weighted L² output already belongs to the true sequence space and is
 even. Inserting its single zero jet therefore gives the literal target
 volume level, with material loss four and the same three physical scalars.
 -/
+
+@[expose] public section
 
 noncomputable section
 

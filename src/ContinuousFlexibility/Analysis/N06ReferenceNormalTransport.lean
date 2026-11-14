@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N06ReferenceNormalTransportTests
-import ContinuousFlexibility.Analysis.N06HalfPhysicalPairing
-import ContinuousFlexibility.Analysis.N06WeakAngularCalculus
-import ContinuousFlexibility.Analysis.N06ReferenceRemainderFields
-import ContinuousFlexibility.Analysis.IntervalWeakPotential
-import ContinuousFlexibility.Radial.R11bWeakNormalTensor
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceNormalTransportTests
+public import ContinuousFlexibility.Analysis.N06HalfPhysicalPairing
+public import ContinuousFlexibility.Analysis.N06WeakAngularCalculus
+public import ContinuousFlexibility.Analysis.N06ReferenceRemainderFields
+public import ContinuousFlexibility.Analysis.IntervalWeakPotential
+public import ContinuousFlexibility.Radial.R11bWeakNormalTensor
 
 /-!
 # The first weak radial derivative in actual reference coordinates
@@ -14,6 +16,8 @@ extended by zero on the actual piece. Genuine change of variables then
 gives the derivative of the canonical height. Both chart orientations
 are covered, and the derivative of the left cutoff remains explicit.
 -/
+
+@[expose] public section
 
 noncomputable section
 

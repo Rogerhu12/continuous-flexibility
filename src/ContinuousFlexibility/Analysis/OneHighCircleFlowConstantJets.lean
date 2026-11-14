@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowIntegrableMinkowski
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowIntegrableMinkowski
 
 /-!
 # Subtracting an angle-independent reference from actual circle jets
@@ -8,6 +10,8 @@ the canonical jets of the difference of the real lifts. Its elementary
 supremum bound will establish time integrability even when the reference
 speed is only integrable.
 -/
+
+@[expose] public section
 
 noncomputable section
 

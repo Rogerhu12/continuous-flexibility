@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.SelectedOuterTestRecovery
-import ContinuousFlexibility.Radial.SelectedOuterKernelSymmetry
+module
+
+public import ContinuousFlexibility.Radial.SelectedOuterTestRecovery
+public import ContinuousFlexibility.Radial.SelectedOuterKernelSymmetry
 
 /-!
 # Full weak test identities from the constructed weighted Green map
@@ -8,6 +10,8 @@ The response records the actual representative and flux already obtained
 from variation of parameters. Test recovery and Hilbert-space symmetry
 then give the weak identity for every ordinary-support smooth test.
 -/
+
+@[expose] public section
 
 noncomputable section
 

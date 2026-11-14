@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerCoefficientWeights
-import ContinuousFlexibility.Radial.InnerChainWeights
+module
+
+public import ContinuousFlexibility.Radial.InnerCoefficientWeights
+public import ContinuousFlexibility.Radial.InnerChainWeights
 
 /-!
 # The prescribed weights on both retained Morse tails
@@ -10,6 +12,8 @@ order. The first inward value is the middle value one. The actual smooth
 interpolation has fixed coefficient-power comparisons both with the
 cell value and with either cut, for both reciprocal weight signs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

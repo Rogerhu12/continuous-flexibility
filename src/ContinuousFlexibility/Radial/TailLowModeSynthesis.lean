@@ -1,6 +1,8 @@
-import Mathlib.Analysis.InnerProductSpace.l2Space
-import Mathlib.Analysis.Normed.Operator.Extend
-import Mathlib.LinearAlgebra.Finsupp.LinearCombination
+module
+
+public import Mathlib.Analysis.InnerProductSpace.l2Space
+public import Mathlib.Analysis.Normed.Operator.Extend
+public import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 
 /-!
 # Synthesis and averaging for the low tail modes
@@ -16,6 +18,8 @@ mass indicators forming an orthonormal family in the physical `L²` space.
 The Kronecker pairing of indicators with hats gives a genuine bounded
 projection on the energy space and zero averages for its complementary part.
 -/
+
+@[expose] public section
 
 noncomputable section
 

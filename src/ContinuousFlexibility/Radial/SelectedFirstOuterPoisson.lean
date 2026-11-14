@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.SelectedFirstMargin
-import ContinuousFlexibility.Radial.SelectedFirstNaturalTransport
-import ContinuousFlexibility.Radial.FirstConePhysicalIncoming
-import ContinuousFlexibility.Radial.FirstConeLayerSeparation
-import ContinuousFlexibility.Radial.SelectedOuterPoisson
+module
+
+public import ContinuousFlexibility.Radial.SelectedFirstMargin
+public import ContinuousFlexibility.Radial.SelectedFirstNaturalTransport
+public import ContinuousFlexibility.Radial.FirstConePhysicalIncoming
+public import ContinuousFlexibility.Radial.FirstConeLayerSeparation
+public import ContinuousFlexibility.Radial.SelectedOuterPoisson
 
 /-!
 # The fixed first-band natural family on any retained reference
@@ -13,6 +15,8 @@ reference are later inputs. Only the incoming solution is normalized on
 that final geometry; the natural solution is exactly the radius dilation
 of the already chosen member of the family.
 -/
+
+@[expose] public section
 
 noncomputable section
 

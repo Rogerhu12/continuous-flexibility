@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Scalar.GreenIdentity
-import ContinuousFlexibility.Scalar.SecondProduct
-import Mathlib.Analysis.Calculus.Deriv.Comp
-import Mathlib.Analysis.Calculus.Deriv.Prod
+module
+
+public import ContinuousFlexibility.Scalar.GreenIdentity
+public import ContinuousFlexibility.Scalar.SecondProduct
+public import Mathlib.Analysis.Calculus.Deriv.Comp
+public import Mathlib.Analysis.Calculus.Deriv.Prod
 
 /-!
 # First jets and physical conormals at a common root boundary
@@ -16,6 +18,8 @@ the canonical value traces and cancellation of the canonical inward
 derivatives imply equality of the physical value and conormal traces.
 This is a smooth interface calculation, not a closed weak-domain theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

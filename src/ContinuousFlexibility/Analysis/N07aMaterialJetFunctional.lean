@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aMaterialDecay
+module
+
+public import ContinuousFlexibility.Analysis.N07aMaterialDecay
 
 /-!
 # Fixed linear formulas for the actual weighted material jets
@@ -7,6 +9,8 @@ At each material point, a weighted jet is a fixed continuous linear
 combination of finitely many ordinary physical jets. Applying this map
 to genuine parameter towers requires no interchange of two derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

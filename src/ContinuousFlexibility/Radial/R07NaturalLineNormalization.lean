@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.DeepTailOperator
-import Mathlib.Analysis.Calculus.TangentCone.Real
-import Mathlib.Analysis.Calculus.Deriv.Mul
+module
+
+public import ContinuousFlexibility.Statements.DeepTailOperator
+public import Mathlib.Analysis.Calculus.TangentCone.Real
+public import Mathlib.Analysis.Calculus.Deriv.Mul
 
 /-!
 # Normalization of the actual one-dimensional natural solution space
@@ -10,6 +12,8 @@ at its smooth entrance.  Consequently a natural solution normalized to have
 entrance value one spans the natural line with coefficient exactly equal to
 the entrance value of any other natural solution.
 -/
+
+@[expose] public section
 
 noncomputable section
 

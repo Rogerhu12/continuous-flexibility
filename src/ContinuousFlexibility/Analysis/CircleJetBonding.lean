@@ -1,4 +1,8 @@
-import ContinuousFlexibility.Analysis.CircleJetClosedGraph
+module
+
+public import ContinuousFlexibility.Analysis.CircleJetClosedGraph
+
+@[expose] public section
 
 open scoped BigOperators ENNReal
 

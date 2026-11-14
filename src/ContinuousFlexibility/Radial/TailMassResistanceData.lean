@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.TailFormCore
-import Mathlib.Tactic.Linarith
+module
+
+public import ContinuousFlexibility.Radial.TailFormCore
+public import Mathlib.Tactic.Linarith
 
 /-!
 # Consequences of the deep-tail data
@@ -8,6 +10,8 @@ All interval masses and resistances are genuine positive integrals on compact
 subintervals of the tail. The estimates here only unpack the geometric and
 mass--resistance hypotheses; no operator assertion is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

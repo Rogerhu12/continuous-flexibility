@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Analysis
-import ContinuousFlexibility.Analysis.TameLinear
+module
+
+public import ContinuousFlexibility.Statements.Analysis
+public import ContinuousFlexibility.Analysis.TameLinear
 
 /-!
 # Transfer of smoothing operators and smooth tame maps
@@ -21,6 +23,8 @@ smaller neighbourhoods.
 * `hasSmoothing_transport`, `smoothTameOn_transport`: transport along an
   isometric (for every seminorm) continuous linear equivalence.
 -/
+
+@[expose] public section
 
 noncomputable section
 

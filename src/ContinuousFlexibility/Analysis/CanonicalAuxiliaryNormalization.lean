@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import Mathlib.Analysis.Calculus.FDeriv.Congr
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import Mathlib.Analysis.Calculus.FDeriv.Congr
 
 /-!
 # Sources supported in the actual normalization region
@@ -9,6 +11,8 @@ the normalization region.  Equality of the chart germs there also gives
 equality of their real Jacobians.  A source supported in that region
 therefore has exactly the same canonical transform in every state.
 -/
+
+@[expose] public section
 
 noncomputable section
 

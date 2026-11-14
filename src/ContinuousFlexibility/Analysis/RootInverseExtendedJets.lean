@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.RootInverseNormalizedBounds
-import ContinuousFlexibility.Analysis.RootExtensionPhysicalBounds
-import ContinuousFlexibility.Analysis.RootChartSymmetry
+module
+
+public import ContinuousFlexibility.Analysis.RootInverseNormalizedBounds
+public import ContinuousFlexibility.Analysis.RootExtensionPhysicalBounds
+public import ContinuousFlexibility.Analysis.RootChartSymmetry
 
 /-!
 # Actual extended root jets from the original flow
@@ -11,6 +13,8 @@ jets with one fixed additional loss, including the ordinary root jets.
 No derivatives of a totalized nonsmooth formula are substituted for the
 derivatives of these extensions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

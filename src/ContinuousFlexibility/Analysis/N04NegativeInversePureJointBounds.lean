@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04RealizationJointMixedRegularity
-import ContinuousFlexibility.Analysis.N04RealizationMixedSlotBudget
-import ContinuousFlexibility.Analysis.N01cStateAngleGraphBudget
-import Mathlib.Analysis.Normed.Module.RCLike.Real
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationJointMixedRegularity
+public import ContinuousFlexibility.Analysis.N04RealizationMixedSlotBudget
+public import ContinuousFlexibility.Analysis.N01cStateAngleGraphBudget
+public import Mathlib.Analysis.Normed.Module.RCLike.Real
 
 /-!
 # Exact parameter and spatial arities in a genuine joint tower
@@ -14,6 +16,8 @@ spatial arity, with only a factor `2^spatialArity`.
 The arbitrary two-index majorant can carry both the sampled height and
 the saved spatial degree required in implicit inverse estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

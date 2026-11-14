@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04RealizationPrimitiveFactorEnvelopes
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationPrimitiveFactorEnvelopes
 
 /-!
 # The nine actual material direction fields
@@ -8,6 +10,8 @@ reference directions use one arbitrary vector in the same transported
 continuous linear maps. The material components and exact density drift
 then follow from the actual factor certificate on the original piece.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05ReferenceLowAngularBasis
-import ContinuousFlexibility.Radial.ReferenceGraphCoefficients
-import ContinuousFlexibility.Radial.ReferenceWeightedMeasure
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceLowAngularBasis
+public import ContinuousFlexibility.Radial.ReferenceGraphCoefficients
+public import ContinuousFlexibility.Radial.ReferenceWeightedMeasure
 
 /-!
 # The low angular jets keep the original output weights
@@ -9,6 +11,8 @@ The positive frequency coefficient is that of the original output. Its
 weighted norm is bounded by the true remainder norm. The mean disappears
 at positive derivative order, and the bordered mode contributes only 2^(2b).
 -/
+
+@[expose] public section
 
 noncomputable section
 

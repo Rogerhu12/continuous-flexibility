@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Blueprint.R10a.Geometry
-import ContinuousFlexibility.Radial.InnerMorseMonotoneChoices
-import ContinuousFlexibility.Radial.SelectedFirstRegionalData
-import ContinuousFlexibility.Radial.SelectedLaterTerminalRegional
+module
+
+public import ContinuousFlexibility.Blueprint.R10a.Geometry
+public import ContinuousFlexibility.Radial.InnerMorseMonotoneChoices
+public import ContinuousFlexibility.Radial.SelectedFirstRegionalData
+public import ContinuousFlexibility.Radial.SelectedLaterTerminalRegional
 
 /-!
 # One reference carrying every actual regional inverse
@@ -12,6 +14,8 @@ absorbs the actual later inverse cost. The selected tail precedes the
 finite first-band margin and cone length. Only then is one reference
 realized, and that same reference serves every even frequency.
 -/
+
+@[expose] public section
 
 noncomputable section
 

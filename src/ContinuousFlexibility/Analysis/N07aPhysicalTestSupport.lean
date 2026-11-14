@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalTestOperator
-import ContinuousFlexibility.Analysis.N07aCanonicalRoughPairing
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalTestOperator
+public import ContinuousFlexibility.Analysis.N07aCanonicalRoughPairing
 
 /-!
 # Actual support and periodicity for physical weak pairings
@@ -9,6 +11,8 @@ canonical source has a periodic physical representative on its piece.
 The genuine compact test and its actual divergence vanish outside that
 piece, including at the radial endpoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cActualFlowLowerBounds
-import ContinuousFlexibility.Analysis.N01cActualFlowHeadBounds
-import ContinuousFlexibility.Analysis.N01cFlowForcingFamilyEnvelope
+module
+
+public import ContinuousFlexibility.Analysis.N01cActualFlowLowerBounds
+public import ContinuousFlexibility.Analysis.N01cActualFlowHeadBounds
+public import ContinuousFlexibility.Analysis.N01cFlowForcingFamilyEnvelope
 
 /-!
 # The actual positive variational forcing under strict induction
@@ -9,6 +11,8 @@ The input at lower parameter orders is the canonical genuine flow jet
 already obtained in the induction. The resulting forcing estimate is
 for the actual circle linear equation of the same finite plot.
 -/
+
+@[expose] public section
 
 noncomputable section
 

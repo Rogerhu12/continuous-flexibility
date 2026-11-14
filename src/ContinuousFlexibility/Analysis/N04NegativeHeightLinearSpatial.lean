@@ -1,7 +1,11 @@
-import ContinuousFlexibility.Analysis.N04NegativeHeightCurrentData
-import ContinuousFlexibility.Analysis.N04RealizationPotentialRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeHeightCurrentData
+public import ContinuousFlexibility.Analysis.N04RealizationPotentialRegularity
 
 /-! Scalar identities used by the selected height-data linear operations. -/
+
+@[expose] public section
 
 noncomputable section
 

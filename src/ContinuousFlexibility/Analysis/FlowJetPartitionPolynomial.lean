@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.FlowJetPolynomial
-import ContinuousFlexibility.Analysis.FlowJetLinearization
+module
+
+public import ContinuousFlexibility.Analysis.FlowJetPolynomial
+public import ContinuousFlexibility.Analysis.FlowJetLinearization
 
 /-!
 # Weighted polynomial majorants for the nonlinear partition forcing
@@ -9,6 +11,8 @@ nonlinear partition term, the original outer derivative has weight
 length−1 and each lower flow jet has weight partSize−1; their sum is
 exactly the required total derivative weight.
 -/
+
+@[expose] public section
 
 noncomputable section
 

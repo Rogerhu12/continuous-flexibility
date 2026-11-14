@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PrincipalNegativeReferenceInputs
-import ContinuousFlexibility.Analysis.N04PrincipalNegativePotentialExpression
-import ContinuousFlexibility.Analysis.N04PrincipalPairAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalNegativeReferenceInputs
+public import ContinuousFlexibility.Analysis.N04PrincipalNegativePotentialExpression
+public import ContinuousFlexibility.Analysis.N04PrincipalPairAlgebra
 
 /-!
 # Paired current jets of the actual negative potential
@@ -10,6 +12,8 @@ differential expression in pulled height and its reciprocal. Its two
 fixed spatial factors are controlled by the same atlas's reference atoms.
 The paired calculus retains the height gain in the actual difference.
 -/
+
+@[expose] public section
 
 noncomputable section
 

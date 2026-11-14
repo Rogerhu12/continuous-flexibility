@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N04PrincipalPositivePairInputs
-import ContinuousFlexibility.Analysis.N04PrincipalPositiveFormula
-import ContinuousFlexibility.Analysis.N04PrincipalPositiveReferenceDeterminant
-import ContinuousFlexibility.Analysis.N04PrincipalPairNeighborhood
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalPositivePairInputs
+public import ContinuousFlexibility.Analysis.N04PrincipalPositiveFormula
+public import ContinuousFlexibility.Analysis.N04PrincipalPositiveReferenceDeterminant
+public import ContinuousFlexibility.Analysis.N04PrincipalPairNeighborhood
 
 /-!
 # The positive inverse determinant as a paired family
@@ -11,6 +13,8 @@ atoms' first spatial derivatives and the same fixed physical width.
 The reference reciprocal bound then selects one smaller neighborhood
 before any reciprocal derivative order is chosen.
 -/
+
+@[expose] public section
 
 noncomputable section
 

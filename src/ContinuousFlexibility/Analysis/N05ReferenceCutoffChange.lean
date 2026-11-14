@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.Analysis
-import ContinuousFlexibility.Radial.R11bCompactSources
-import ContinuousFlexibility.Radial.ReferenceCellAlgebra
+module
+
+public import ContinuousFlexibility.Statements.Analysis
+public import ContinuousFlexibility.Radial.R11bCompactSources
+public import ContinuousFlexibility.Radial.ReferenceCellAlgebra
 
 /-!
 # Changing to the physical-space left cutoff
@@ -10,6 +12,8 @@ the cutoff in the physical spaces. Their difference is supported away from
 both endpoints inside the physical core and belongs to every cell weight.
 This permits the same left constant to be used with either cutoff.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.L2LocalizedKernel
-import ContinuousFlexibility.Radial.OuterWholeMeasure
-import ContinuousFlexibility.Radial.OuterWholeKernelBounds
+module
+
+public import ContinuousFlexibility.Analysis.L2LocalizedKernel
+public import ContinuousFlexibility.Radial.OuterWholeMeasure
+public import ContinuousFlexibility.Radial.OuterWholeKernelBounds
 
 /-!
 # Actual whole-outer localizers and their same-kernel operator norm
@@ -9,6 +11,8 @@ The original smooth partition gives bounded multipliers on the reflected
 whole measure. A pointwise bound on their actual kernel controls the norm
 of their composition with the already constructed Green operator.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerMorseBufferData
-import ContinuousFlexibility.Radial.MorseTransitionBands
+module
+
+public import ContinuousFlexibility.Radial.InnerMorseBufferData
+public import ContinuousFlexibility.Radial.MorseTransitionBands
 
 /-!
 # Uniform raw Morse buffer bounds before tail selection
@@ -11,6 +13,8 @@ of tau in both actions. On an actual realized chain every earlier cell
 of a frequency band meets this threshold after Cstar is chosen large
 enough. This construction does not enlarge a previously selected tail.
 -/
+
+@[expose] public section
 
 noncomputable section
 

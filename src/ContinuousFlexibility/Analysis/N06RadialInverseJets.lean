@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06RadialGeometryJets
-import ContinuousFlexibility.Analysis.CircleInverseDerivativeBounds
+module
+
+public import ContinuousFlexibility.Analysis.N06RadialGeometryJets
+public import ContinuousFlexibility.Analysis.CircleInverseDerivativeBounds
 
 /-!
 # Actual second derivatives of the radial inverse
@@ -10,6 +12,8 @@ bound. Differentiating that actual identity gives the second derivative.
 The estimates therefore concern the genuine inverse, rather than a
 separately specified derivative field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeftColumnTower
-import ContinuousFlexibility.Analysis.N04RealizationNuColumnTower
-import ContinuousFlexibility.Analysis.N04RealizationHeightFieldJets
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeftColumnTower
+public import ContinuousFlexibility.Analysis.N04RealizationNuColumnTower
+public import ContinuousFlexibility.Analysis.N04RealizationHeightFieldJets
 
 /-!
 # One neighborhood for both actual physical columns
@@ -10,6 +12,8 @@ supplied nonlinear witness. Their two uniform height towers are
 restricted once to a common sector neighborhood and weakened to common
 fixed orders. The choice precedes every spatial and parameter order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

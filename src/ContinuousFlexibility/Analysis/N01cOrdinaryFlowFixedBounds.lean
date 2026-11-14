@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01cPhysicalFlowFixedBounds
-import ContinuousFlexibility.Analysis.N01cCommonWholeSpeedBounds
-import ContinuousFlexibility.Analysis.N01cCommonCosineTowers
-import ContinuousFlexibility.Analysis.N01cActualFlowSmoothDirections
+module
+
+public import ContinuousFlexibility.Analysis.N01cPhysicalFlowFixedBounds
+public import ContinuousFlexibility.Analysis.N01cCommonWholeSpeedBounds
+public import ContinuousFlexibility.Analysis.N01cCommonCosineTowers
+public import ContinuousFlexibility.Analysis.N01cActualFlowSmoothDirections
 
 /-!
 # Fixed-order bounds for the actual positive-radial ordinary flow
@@ -12,6 +14,8 @@ from the actual smooth cosine speed. The component distance, material
 height bound and genuine state-angle towers are supplied without adding
 an estimate or regularity assumption on the flow.
 -/
+
+@[expose] public section
 
 noncomputable section
 

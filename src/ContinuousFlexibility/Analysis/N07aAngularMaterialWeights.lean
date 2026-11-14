@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesTraceGeometry
-import ContinuousFlexibility.Radial.R11bWeightEmbedding
+module
+
+public import ContinuousFlexibility.Analysis.SpacesTraceGeometry
+public import ContinuousFlexibility.Radial.R11bWeightEmbedding
 
 /-!
 # Arbitrary material data and the reference cell attenuation
@@ -8,6 +10,8 @@ These comparisons use the endpoint formulas and cell comparison in the
 actual `IsMaterialData` contract. They do not specialize the candidate to
 the particular affine construction used to prove W01.
 -/
+
+@[expose] public section
 
 noncomputable section
 

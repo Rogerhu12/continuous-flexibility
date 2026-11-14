@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.PositiveReferenceBlend
-import ContinuousFlexibility.Analysis.CircleInverseExistence
-import ContinuousFlexibility.Analysis.ParameterizedScalarInverse
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
-import Mathlib.Analysis.Calculus.MeanValue
+module
+
+public import ContinuousFlexibility.Analysis.PositiveReferenceBlend
+public import ContinuousFlexibility.Analysis.CircleInverseExistence
+public import ContinuousFlexibility.Analysis.ParameterizedScalarInverse
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+public import Mathlib.Analysis.Calculus.MeanValue
 
 /-!
 # The actual positive reference coordinate
@@ -13,6 +15,8 @@ endpoint values. Positivity gives a genuine global bijection and a smooth
 actual inverse. Endpoint matching uses equality of actual derivatives and
 one value, rather than an asserted Taylor compatibility.
 -/
+
+@[expose] public section
 
 noncomputable section
 

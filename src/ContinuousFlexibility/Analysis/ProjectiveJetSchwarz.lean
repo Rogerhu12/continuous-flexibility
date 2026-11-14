@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ProjectiveJetEvaluation
-import Mathlib.Analysis.Calculus.FDeriv.Symmetric
+module
+
+public import ContinuousFlexibility.Analysis.ProjectiveJetEvaluation
+public import Mathlib.Analysis.Calculus.FDeriv.Symmetric
 
 /-!
 # Symmetry of the actual second projective jet
@@ -13,6 +15,8 @@ Fréchet derivatives. The ordinary Banach Schwarz theorem then applies.
 No symmetry assumption on the candidate jets is used. Higher-order
 permutation symmetry and all-order composition remain separate results.
 -/
+
+@[expose] public section
 
 noncomputable section
 

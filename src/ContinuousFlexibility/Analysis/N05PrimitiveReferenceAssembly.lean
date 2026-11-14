@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05PrimitiveReferenceCoordinates
+module
+
+public import ContinuousFlexibility.Analysis.N05PrimitiveReferenceCoordinates
 
 /-!
 # Controlled coordinates from the primitive N04 certificate
@@ -8,6 +10,8 @@ same nonlinear witness. Reference radiality and reference jets from its
 first bundle provide the inputs to the existing coordinate estimate,
 without changing the canonical data or any of its charts.
 -/
+
+@[expose] public section
 
 noncomputable section
 

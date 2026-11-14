@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SolveStateSpaces
+module
+
+public import ContinuousFlexibility.Analysis.SolveStateSpaces
 
 /-!
 # The actual continuous projection onto the nonlinear state sector
@@ -8,6 +10,8 @@ angular mean of the control coordinate, and takes the odd part of the chart
 coordinate. Its decoded formulas identify the physical scalar residual even
 away from the sector, including directions with arbitrary circle controls.
 -/
+
+@[expose] public section
 
 noncomputable section
 

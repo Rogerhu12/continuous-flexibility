@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.DeepTailPoissonContinuity
-import ContinuousFlexibility.Radial.DeepTailEdgeComparison
-import ContinuousFlexibility.Radial.DeepTailInterpolation
-import ContinuousFlexibility.Radial.TailJacobiSmallness
-import Mathlib.Analysis.Calculus.Deriv.Slope
+module
+
+public import ContinuousFlexibility.Radial.DeepTailPoissonContinuity
+public import ContinuousFlexibility.Radial.DeepTailEdgeComparison
+public import ContinuousFlexibility.Radial.DeepTailInterpolation
+public import ContinuousFlexibility.Radial.TailJacobiSmallness
+public import Mathlib.Analysis.Calculus.Deriv.Slope
 
 /-!
 # Actual Poisson and Jacobi bounds on deep edges
@@ -12,6 +14,8 @@ estimates use deliberately generous constants: the left mass contributes
 at least half its mass to the diagonal, while each off-diagonal is at
 most twice the reciprocal resistance.
 -/
+
+@[expose] public section
 
 noncomputable section
 

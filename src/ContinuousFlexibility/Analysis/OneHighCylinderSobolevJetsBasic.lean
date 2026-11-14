@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCylinderFourierAngular
-import ContinuousFlexibility.Analysis.OneHighCylinderFourierRadial
-import ContinuousFlexibility.Analysis.OneHighCylinderSobolevWeights
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCylinderFourierAngular
+public import ContinuousFlexibility.Analysis.OneHighCylinderFourierRadial
+public import ContinuousFlexibility.Analysis.OneHighCylinderSobolevWeights
 
 /-!
 # Actual mixed jets and physical cylinder Sobolev norms
@@ -9,6 +11,8 @@ The jet data record genuine coordinate derivatives and continuity. There
 are no square-integrability or norm-estimate fields: finite Sobolev
 regularity is supplied separately and derivative membership is proved.
 -/
+
+@[expose] public section
 
 noncomputable section
 

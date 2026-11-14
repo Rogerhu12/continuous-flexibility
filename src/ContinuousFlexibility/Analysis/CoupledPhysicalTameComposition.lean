@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CoupledTameComposition
-import ContinuousFlexibility.Analysis.CoupledConstantCircle
-import ContinuousFlexibility.Scalar.WeightedStateTopology
+module
+
+public import ContinuousFlexibility.Analysis.CoupledTameComposition
+public import ContinuousFlexibility.Analysis.CoupledConstantCircle
+public import ContinuousFlexibility.Scalar.WeightedStateTopology
 
 /-!
 # Composition in the original physical product and subspaces
@@ -9,6 +11,8 @@ These wrappers use the existing projective-limit equivalences for
 products, real constants, and closed subspaces. They transport only the
 chain rule; the input and output gradings remain the prescribed ones.
 -/
+
+@[expose] public section
 
 noncomputable section
 

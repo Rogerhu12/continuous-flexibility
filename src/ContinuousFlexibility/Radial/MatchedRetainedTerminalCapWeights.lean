@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Radial.MatchedMorsePieceWeights
-import ContinuousFlexibility.Radial.MatchedMorseNearWeights
-import ContinuousFlexibility.Radial.InnerPhysicalSourceBridge
-import ContinuousFlexibility.Radial.RetainedMorseInnerGeometry
-import ContinuousFlexibility.Radial.SelectedLaterCapData
-import ContinuousFlexibility.Radial.TerminalMorseCutoffGeometry
+module
+
+public import ContinuousFlexibility.Radial.MatchedMorsePieceWeights
+public import ContinuousFlexibility.Radial.MatchedMorseNearWeights
+public import ContinuousFlexibility.Radial.InnerPhysicalSourceBridge
+public import ContinuousFlexibility.Radial.RetainedMorseInnerGeometry
+public import ContinuousFlexibility.Radial.SelectedLaterCapData
+public import ContinuousFlexibility.Radial.TerminalMorseCutoffGeometry
 
 /-!
 # The original finite-chain weight on the complete terminal cap
@@ -12,6 +14,8 @@ A complete cap meets the terminal gap and the adjacent outermost model.
 Both pieces carry the preceding cell index. The estimate below includes
 both pieces and retains the signed action at the actual transition index.
 -/
+
+@[expose] public section
 
 noncomputable section
 

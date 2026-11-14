@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalUnitModes
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalUnitModes
 
 /-!
 # Uniqueness and scalar normalization of actual interval derivatives
@@ -7,6 +9,8 @@ Weak derivatives are determined as L² classes by compact interior tests.
 The normalization statements distinguish pointwise scalar multiplication
 from scalar multiplication of the prescribed L² quotient.
 -/
+
+@[expose] public section
 
 noncomputable section
 

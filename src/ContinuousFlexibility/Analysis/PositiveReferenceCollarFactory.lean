@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RadialTaylorSlopeBounds
-import ContinuousFlexibility.Analysis.ParameterizedPositiveEndpointGerms
+module
+
+public import ContinuousFlexibility.Analysis.RadialTaylorSlopeBounds
+public import ContinuousFlexibility.Analysis.ParameterizedPositiveEndpointGerms
 
 /-!
 # A positive collar with a fixed reference exit
@@ -10,6 +12,8 @@ exit agrees as a genuine joint germ, not merely to finite order.
 The collar and positive derivative lower bound are chosen before the
 family index from finite raw jet bounds and the fixed reference mass.
 -/
+
+@[expose] public section
 
 noncomputable section
 

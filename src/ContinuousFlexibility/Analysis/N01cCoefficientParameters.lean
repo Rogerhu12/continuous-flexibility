@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N01cParameterCalculus
-import ContinuousFlexibility.Analysis.N01cStateParameterJets
-import ContinuousFlexibility.Analysis.N01cStateHeightJets
-import ContinuousFlexibility.Analysis.N01cHeightGeometry
-import ContinuousFlexibility.Analysis.N01cFullNeighborhood
+module
+
+public import ContinuousFlexibility.Analysis.N01cParameterCalculus
+public import ContinuousFlexibility.Analysis.N01cStateParameterJets
+public import ContinuousFlexibility.Analysis.N01cStateHeightJets
+public import ContinuousFlexibility.Analysis.N01cHeightGeometry
+public import ContinuousFlexibility.Analysis.N01cFullNeighborhood
 
 /-!
 # Actual parameter towers for all three original coefficients
@@ -19,6 +21,8 @@ composition therefore gives genuine parameter towers of the three
 original coefficient formulas at every interior point.  No coefficient
 regularity or quantitative tame estimate is assumed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

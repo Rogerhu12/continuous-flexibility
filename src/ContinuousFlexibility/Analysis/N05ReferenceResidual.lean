@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Statements.Nonlinear
-import ContinuousFlexibility.Radial.RadialHeight
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+module
+
+public import ContinuousFlexibility.Statements.Nonlinear
+public import ContinuousFlexibility.Radial.RadialHeight
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 
 /-!
 # The actual nonlinear return at the radial reference
@@ -12,6 +14,8 @@ The fundamental theorem of calculus then identifies the return map and proves
 that the return residual vanishes.  The correction operator consequently agrees
 with the original operator on every height-space test.
 -/
+
+@[expose] public section
 
 noncomputable section
 

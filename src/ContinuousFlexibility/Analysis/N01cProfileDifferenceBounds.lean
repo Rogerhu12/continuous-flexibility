@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cProfileRadialBounds
-import ContinuousFlexibility.Analysis.N01cReferenceDifferenceBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01cProfileRadialBounds
+public import ContinuousFlexibility.Analysis.N01cReferenceDifferenceBounds
 
 /-!
 # Actual radial profile differences from the same reference
@@ -9,6 +11,8 @@ neighbourhood segment theorem apply directly to every actual radial
 profile jet.  The coefficient keeps the original finite control majorants,
 and one explicit state-displacement factor remains.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01FlowChartIndependence
+module
+
+public import ContinuousFlexibility.Analysis.N01FlowChartIndependence
 
 /-!
 # Locality of the actual ordinary return
@@ -10,6 +12,8 @@ particular a smooth radial cutoff which is one on that component does
 not change its actual return, provided the resulting state remains in
 the N01 neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

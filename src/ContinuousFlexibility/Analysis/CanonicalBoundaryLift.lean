@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CanonicalBoundaryImage
-import ContinuousFlexibility.Analysis.ParameterizedCircleInverse
-import Mathlib.Analysis.Calculus.Darboux
-import Mathlib.Analysis.Calculus.Deriv.MeanValue
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalBoundaryImage
+public import ContinuousFlexibility.Analysis.ParameterizedCircleInverse
+public import Mathlib.Analysis.Calculus.Darboux
+public import Mathlib.Analysis.Calculus.Deriv.MeanValue
 
 /-!
 # Genuine angular lifts on actual closed canonical boundaries
@@ -13,6 +15,8 @@ angular derivative. The resulting boundary map is a genuine smooth
 increasing circle lift. Moving cut curves are not treated as fixed
 physical radial endpoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

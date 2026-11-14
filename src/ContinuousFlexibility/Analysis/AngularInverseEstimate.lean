@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.AngularCommutedEquation
-import ContinuousFlexibility.Analysis.AngularGraphInterpolation
+module
+
+public import ContinuousFlexibility.Analysis.AngularCommutedEquation
+public import ContinuousFlexibility.Analysis.AngularGraphInterpolation
 
 /-!
 # Tame estimates for the angular inverse
@@ -8,6 +10,8 @@ The constant in the order-`p` estimate is an explicit function of `p`,
 `a (p-1)`, `c 0`, and the norm of the inverse.  In particular, no
 higher error coefficient is an argument of this constant.
 -/
+
+@[expose] public section
 
 noncomputable section
 

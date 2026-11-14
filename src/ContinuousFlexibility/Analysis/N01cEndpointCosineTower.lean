@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cCosineAngularStateJets
-import ContinuousFlexibility.Analysis.N01cGradedJetContinuity
-import ContinuousFlexibility.Analysis.N01cEndpointMixedPowerAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.N01cCosineAngularStateJets
+public import ContinuousFlexibility.Analysis.N01cGradedJetContinuity
+public import ContinuousFlexibility.Analysis.N01cEndpointMixedPowerAlgebra
 
 /-!
 # From actual endpoint estimates to joint cosine-speed towers
@@ -10,6 +12,8 @@ prefix therefore has a uniform grading-unit-ball estimate throughout
 each physical component. The exact signed formula transfers that
 estimate to all real cosine times, including the zero-sine times.
 -/
+
+@[expose] public section
 
 noncomputable section
 

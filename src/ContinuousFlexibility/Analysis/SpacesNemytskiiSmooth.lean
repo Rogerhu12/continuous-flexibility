@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.SpacesNemytskiiCurveDerivative
-import ContinuousFlexibility.Analysis.SpacesNemytskiiMultilinear
-import ContinuousFlexibility.Analysis.SpacesMultilinearContinuity
-import ContinuousFlexibility.Analysis.SpacesSmoothTameBounds
-import ContinuousFlexibility.Analysis.TameTransfer
+module
+
+public import ContinuousFlexibility.Analysis.SpacesNemytskiiCurveDerivative
+public import ContinuousFlexibility.Analysis.SpacesNemytskiiMultilinear
+public import ContinuousFlexibility.Analysis.SpacesMultilinearContinuity
+public import ContinuousFlexibility.Analysis.SpacesSmoothTameBounds
+public import ContinuousFlexibility.Analysis.TameTransfer
 
 /-!
 # Smooth tame scalar composition on the actual physical space
@@ -12,6 +14,8 @@ Their continuity and fixed-loss estimates give smooth tameness. Clipping
 the scalar function then gives the exact composition requested on one
 fixed low-seminorm neighborhood of zero for every positive height weight.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.OuterNaturalPhysicalMass
-import ContinuousFlexibility.Radial.OuterNaturalPoisson
-import ContinuousFlexibility.Radial.DeepTailParameterContinuity
+module
+
+public import ContinuousFlexibility.Radial.OuterNaturalPhysicalMass
+public import ContinuousFlexibility.Radial.OuterNaturalPoisson
+public import ContinuousFlexibility.Radial.DeepTailParameterContinuity
 
 /-!
 # The actual physical natural solution normalized at the deep entrance
@@ -9,6 +11,8 @@ The data use the true radial profile. The radial equation follows from
 the local signed gauge identity, and the norm in logarithmic variables
 has exactly the factor required by the physical Hilbert measure.
 -/
+
+@[expose] public section
 
 noncomputable section
 

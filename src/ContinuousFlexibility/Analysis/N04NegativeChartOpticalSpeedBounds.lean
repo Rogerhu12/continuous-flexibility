@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartOpticalSquareBounds
-import ContinuousFlexibility.Analysis.N04NegativeChartAffineSqrtBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartOpticalSquareBounds
+public import ContinuousFlexibility.Analysis.N04NegativeChartAffineSqrtBounds
 
 /-!
 # Actual divided optical-speed jets through the closed half
@@ -9,6 +11,8 @@ positive lower bound. The existing genuine affine square-root tower
 therefore gives every radial/state jet. Every positive state order
 retains one full height factor; all direction seminorms have order zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

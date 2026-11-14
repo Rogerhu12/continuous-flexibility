@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.TerminalPhysicalCutoff
+module
+
+public import ContinuousFlexibility.Radial.TerminalPhysicalCutoff
 
 /-!
 # Closed supports of the actual terminal cutoffs
@@ -7,6 +9,8 @@ The transition layers determine the full closed value supports, not only
 the derivative supports. Two ordered layers therefore give disjoint
 cutoffs, and a central column between the layers is disjoint from both.
 -/
+
+@[expose] public section
 
 noncomputable section
 

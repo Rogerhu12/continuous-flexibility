@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.StateControlCofiniteClosure
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+module
+
+public import ContinuousFlexibility.Analysis.StateControlCofiniteClosure
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 
 /-!
 # The actual radial profile as a coefficient slice
@@ -9,6 +11,8 @@ controlled profile. Its leading coefficient is therefore exactly that
 profile. This identifies profile variation with an existing N01 coefficient
 family, including its genuine parameter derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CanonicalEndpointInverse
-import ContinuousFlexibility.Analysis.N01cFiniteAffineJets
-import Mathlib.Analysis.Calculus.ImplicitContDiff
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalEndpointInverse
+public import ContinuousFlexibility.Analysis.N01cFiniteAffineJets
+public import Mathlib.Analysis.Calculus.ImplicitContDiff
 
 /-!
 # Actual planar inverses on finite affine parameter slices
@@ -14,6 +16,8 @@ smooth function on each finite affine slice. This module applies the
 planar inverse theorem on precisely those slices; it does not give the
 original parameter space an artificial norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

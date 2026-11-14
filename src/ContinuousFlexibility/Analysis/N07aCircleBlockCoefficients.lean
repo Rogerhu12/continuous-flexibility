@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCircleCoefficientDecay
-import ContinuousFlexibility.Analysis.N07aAngularCosineCoefficients
+module
+
+public import ContinuousFlexibility.Analysis.N07aCircleCoefficientDecay
+public import ContinuousFlexibility.Analysis.N07aAngularCosineCoefficients
 
 /-!
 # Actual cosine and sine entries of coefficient multiplication
@@ -8,6 +10,8 @@ The two frequency shifts are the difference and the sum of the input
 and output frequencies. The formula includes the constant mode with its
 correct normalization and applies to coefficients of either parity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

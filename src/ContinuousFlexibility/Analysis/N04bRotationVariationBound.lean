@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04bLiftTranslationBounds
-import ContinuousFlexibility.Analysis.N04bRotationBounds
-import ContinuousFlexibility.Analysis.N04bFourierCorrector
+module
+
+public import ContinuousFlexibility.Analysis.N04bLiftTranslationBounds
+public import ContinuousFlexibility.Analysis.N04bRotationBounds
+public import ContinuousFlexibility.Analysis.N04bFourierCorrector
 
 /-!
 # A quantitative first-order translation-number estimate
@@ -11,6 +13,8 @@ variation. Its displacement defect is bounded uniformly by
 the actual physical translation number. The corrector need not be an
 invertible coordinate change, so no smallness condition on q is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

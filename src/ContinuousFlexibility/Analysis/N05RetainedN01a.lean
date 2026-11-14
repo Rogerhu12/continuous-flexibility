@@ -1,11 +1,13 @@
-import ContinuousFlexibility.Analysis.N05SeedNegativeEnumerationBounds
-import ContinuousFlexibility.Analysis.N05RetainedN01Primitive
-import ContinuousFlexibility.Analysis.N01aControlGeometryAssembly
-import ContinuousFlexibility.Analysis.N01aMaterialContext
-import ContinuousFlexibility.Analysis.N01aOpticalProfile
-import ContinuousFlexibility.Analysis.N01aReferenceHeight
-import ContinuousFlexibility.Analysis.SpacesConclusion
-import ContinuousFlexibility.Analysis.TameCalculusTheorem
+module
+
+public import ContinuousFlexibility.Analysis.N05SeedNegativeEnumerationBounds
+public import ContinuousFlexibility.Analysis.N05RetainedN01Primitive
+public import ContinuousFlexibility.Analysis.N01aControlGeometryAssembly
+public import ContinuousFlexibility.Analysis.N01aMaterialContext
+public import ContinuousFlexibility.Analysis.N01aOpticalProfile
+public import ContinuousFlexibility.Analysis.N01aReferenceHeight
+public import ContinuousFlexibility.Analysis.SpacesConclusion
+public import ContinuousFlexibility.Analysis.TameCalculusTheorem
 
 /-!
 # N01 Part A on the same retained seed reference
@@ -15,6 +17,8 @@ reference, its cells and their indices are not replaced or regrouped.
 The controls retain the actual whole-component hosts returned by their
 construction.  The only extra seed input is its original index formula.
 -/
+
+@[expose] public section
 
 noncomputable section
 

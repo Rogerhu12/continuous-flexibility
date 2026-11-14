@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.NeighborhoodCircleFlowVariational
+module
+
+public import ContinuousFlexibility.Analysis.NeighborhoodCircleFlowVariational
 
 /-!
 # Regularity and lift law of the constructed circle flow
@@ -7,6 +9,8 @@ A continuous angular derivative of a periodic speed is uniformly bounded
 on a compact time strip. Exact differences prove joint continuity, the
 positive angular Jacobian, and uniqueness. No radial derivative is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

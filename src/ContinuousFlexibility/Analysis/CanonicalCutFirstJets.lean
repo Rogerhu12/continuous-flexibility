@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.WeightedCutFirstJets
-import ContinuousFlexibility.Analysis.CanonicalClosedInverseJets
-import ContinuousFlexibility.Blueprint.CanonicalParts
+module
+
+public import ContinuousFlexibility.Analysis.WeightedCutFirstJets
+public import ContinuousFlexibility.Analysis.CanonicalClosedInverseJets
+public import ContinuousFlexibility.Blueprint.CanonicalParts
 
 /-!
 # First-jet matching on the actual canonical cut
@@ -11,6 +13,8 @@ physical tests then fix the height and radial inverse column. The common
 cut curve fixes the angular column. The actual inverse derivative equations
 convert these identities to the full forward derivative matching rule.
 -/
+
+@[expose] public section
 
 noncomputable section
 

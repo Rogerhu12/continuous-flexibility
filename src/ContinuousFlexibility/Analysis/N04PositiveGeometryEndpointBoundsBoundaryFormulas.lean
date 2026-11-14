@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsBoundaryInputPrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryFormulaPrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledSampleHeight
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsBoundaryInputPrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryFormulaPrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledSampleHeight
 
 /-!
 # Sampled mixed prefixes of the eight actual root formulas
@@ -10,6 +12,8 @@ in reserve. Its true parameter towers retain one complete sample height
 factor at every positive parameter order, at one low base selected
 before all finite parameter prefixes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

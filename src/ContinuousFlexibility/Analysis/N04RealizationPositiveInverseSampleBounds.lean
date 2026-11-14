@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aMaterialPieceBounds
-import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
+module
+
+public import ContinuousFlexibility.Analysis.N07aMaterialPieceBounds
+public import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
 
 /-!
 # Material weights at the actual positive inverse point
@@ -9,6 +11,8 @@ interval. Positive current pieces have that same interval, so their
 actual inverse points use the original sample. The height exponent and
 the distinction between zeroth and positive parameter orders are kept.
 -/
+
+@[expose] public section
 
 noncomputable section
 

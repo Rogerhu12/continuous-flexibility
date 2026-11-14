@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CircleSingleComponent
-import ContinuousFlexibility.Analysis.CircleJetAssembly
-import ContinuousFlexibility.Analysis.SmoothDirectionsAngularJets
+module
+
+public import ContinuousFlexibility.Analysis.CircleSingleComponent
+public import ContinuousFlexibility.Analysis.CircleJetAssembly
+public import ContinuousFlexibility.Analysis.SmoothDirectionsAngularJets
 
 /-!
 # Genuine circle towers for one varying radial component
@@ -11,6 +13,8 @@ weighted energy sum is finite. This gives local spatial regularity of
 inverse compositions without extending the uniform endpoint theory to
 a new family of circle models.
 -/
+
+@[expose] public section
 
 noncomputable section
 

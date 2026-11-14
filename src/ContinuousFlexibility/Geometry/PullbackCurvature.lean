@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Geometry.CoframeCurvature
-import ContinuousFlexibility.Scalar.FormPullback
+module
+
+public import ContinuousFlexibility.Geometry.CoframeCurvature
+public import ContinuousFlexibility.Scalar.FormPullback
 
 /-!
 # Actual coordinate change for Cartan curvature
@@ -8,6 +10,8 @@ This combines genuine pullback differentiation with independence of the oriented
 metric coframe. In particular, curvature closedness can be checked in a polar
 chart without constructing a global polar angle.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerLiouvillePhysicalRepresentatives
-import ContinuousFlexibility.Radial.InnerLiouvilleSmoothRepresentative
+module
+
+public import ContinuousFlexibility.Radial.InnerLiouvillePhysicalRepresentatives
+public import ContinuousFlexibility.Radial.InnerLiouvilleSmoothRepresentative
 
 /-!
 # Actual unit-boundary Poisson columns under Liouville transport
@@ -8,6 +10,8 @@ The column, its Lp class, its endpoint values and its scalar all use one
 normalization. A radial unit boundary value is obtained by multiplying
 the model pair by sqrt(lam)*s at that cut.
 -/
+
+@[expose] public section
 
 noncomputable section
 

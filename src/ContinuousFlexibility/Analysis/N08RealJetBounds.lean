@@ -1,7 +1,11 @@
-import ContinuousFlexibility.Analysis.N08StateLinearOperations
-import ContinuousFlexibility.Analysis.ProjectiveJetEvaluation
+module
+
+public import ContinuousFlexibility.Analysis.N08StateLinearOperations
+public import ContinuousFlexibility.Analysis.ProjectiveJetEvaluation
 
 /-! # Scalar first-jet bounds on a fixed-parameter affine line -/
+
+@[expose] public section
 
 noncomputable section
 

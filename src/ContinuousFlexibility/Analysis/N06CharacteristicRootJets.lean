@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bRootBoundaryGeometry
-import ContinuousFlexibility.Analysis.N06RootTransmissionJets
+module
+
+public import ContinuousFlexibility.Analysis.N04bRootBoundaryGeometry
+public import ContinuousFlexibility.Analysis.N06RootTransmissionJets
 
 /-!
 # Actual characteristic-root first jets in physical coordinates
@@ -14,6 +16,8 @@ actual root germ; equality of independently assigned jets is not an input.
 This module concerns the root germs. It does not identify an arbitrary
 canonical atlas with these germs or assert a new global atlas construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

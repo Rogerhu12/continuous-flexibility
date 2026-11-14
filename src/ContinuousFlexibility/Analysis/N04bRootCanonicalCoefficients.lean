@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bSignedRootDensity
-import ContinuousFlexibility.Analysis.N04bCanonicalOperator
+module
+
+public import ContinuousFlexibility.Analysis.N04bSignedRootDensity
+public import ContinuousFlexibility.Analysis.N04bCanonicalOperator
 
 /-!
 # The signed root density at a canonical inverse point
@@ -9,6 +11,8 @@ density. The signed characteristic calculation consequently gives their
 three frozen values at the canonical point. No canonical operator or
 principal-density identity is assumed in this bridge.
 -/
+
+@[expose] public section
 
 noncomputable section
 

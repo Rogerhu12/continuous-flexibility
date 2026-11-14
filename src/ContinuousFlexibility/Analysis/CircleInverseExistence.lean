@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CircleInverseDerivativeBounds
-import Mathlib.Topology.Order.IntermediateValue
-import Mathlib.Logic.Function.Basic
-import Mathlib.Tactic.Linarith
+module
+
+public import ContinuousFlexibility.Analysis.CircleInverseDerivativeBounds
+public import Mathlib.Topology.Order.IntermediateValue
+public import Mathlib.Logic.Function.Basic
+public import Mathlib.Tactic.Linarith
 
 /-!
 # Global inverse existence from a positive derivative lower bound
@@ -12,6 +14,8 @@ surjectivity; strict monotonicity gives injectivity.  The actual chosen
 inverse is Lipschitz and has the reciprocal derivative, by the preceding
 inverse derivative module.  No periodicity or inverse candidate is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

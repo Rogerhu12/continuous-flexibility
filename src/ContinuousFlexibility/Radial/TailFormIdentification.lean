@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.TailTestPairing
-import ContinuousFlexibility.Radial.TailFormCore
-import Mathlib.Analysis.Distribution.AEEqOfIntegralContDiff
-import Mathlib.MeasureTheory.Integral.IntegralEqImproper
+module
+
+public import ContinuousFlexibility.Radial.TailTestPairing
+public import ContinuousFlexibility.Radial.TailFormCore
+public import Mathlib.Analysis.Distribution.AEEqOfIntegralContDiff
+public import Mathlib.MeasureTheory.Integral.IntegralEqImproper
 
 /-!
 # The distributional description of the tail form
@@ -11,6 +13,8 @@ the density and its inverse are bounded. The weak derivative identities are
 closed in the actual weighted energy norm, and the form pairing extends from
 the defining smooth core by continuity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

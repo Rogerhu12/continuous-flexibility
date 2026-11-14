@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aMixedCoefficientOperator
-import ContinuousFlexibility.Scalar.WeightedScalarOperator
+module
+
+public import ContinuousFlexibility.Analysis.N07aMixedCoefficientOperator
+public import ContinuousFlexibility.Scalar.WeightedScalarOperator
 
 /-!
 # Decoding the reference operator plus the actual mixed-weight perturbation
@@ -8,6 +10,8 @@ This identity only uses three arbitrary physical height coefficients.
 The nonlinear coefficient towers enter later, when those three inputs
 are specialized to the N01 fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 

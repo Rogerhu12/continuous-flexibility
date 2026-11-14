@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04RealizationPrimitiveMaterialJets
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationPrimitiveMaterialJets
 
 /-!
 # Finite envelopes of the existing primitive factors
@@ -8,6 +10,8 @@ no map, coefficient, source factor or geometric representative. Its
 constructor is proved from the actual chart and scalar-atom estimates.
 The final fifteen primitive estimates are not fields of this record.
 -/
+
+@[expose] public section
 
 noncomputable section
 

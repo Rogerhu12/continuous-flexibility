@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.NeumannPackage
-import Mathlib.Analysis.Matrix.Order
-import Mathlib.Analysis.SpecialFunctions.ContinuousFunctionalCalculus.Rpow.ConjSqrt
-import Mathlib.Tactic.NoncommRing
-import Mathlib.Tactic.NormNum
+module
+
+public import ContinuousFlexibility.Analysis.NeumannPackage
+public import Mathlib.Analysis.Matrix.Order
+public import Mathlib.Analysis.SpecialFunctions.ContinuousFunctionalCalculus.Rpow.ConjSqrt
+public import Mathlib.Tactic.NoncommRing
+public import Mathlib.Tactic.NormNum
 
 /-!
 # The weighted inverse of the inner interface matrix
@@ -19,6 +21,8 @@ In particular the two signs use the same inverse and require no additional
 unweighted smallness assumption. The local estimates which establish
 smallness are separate from this algebraic step.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerMorseInnerCoercivity
+module
+
+public import ContinuousFlexibility.Radial.InnerMorseInnerCoercivity
 
 /-!
 # Actual inner geometry including the first frequency band
@@ -8,6 +10,8 @@ points. For K>0 the already constructed Morse-tail endpoints are used.
 One positive gap constant is chosen for all K, including zero. No join
 with index N-1 occurs in the first-band construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04NegativeGeometryReductions
-import ContinuousFlexibility.Analysis.N04NegativeGeometrySpatialFields
-import ContinuousFlexibility.Analysis.N06FiniteSourceGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryReductions
+public import ContinuousFlexibility.Analysis.N04NegativeGeometrySpatialFields
+public import ContinuousFlexibility.Analysis.N06FiniteSourceGeometry
 
 /-!
 # Spatial regularity of the actual current negative atoms
@@ -10,6 +12,8 @@ The forward fields are evaluated on the reference half, and the inverse
 fields on their fixed canonical interval.  The preceding component-germ
 lemma supplies the current forward fields on that reference half.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N08HeightLocality
-import ContinuousFlexibility.Analysis.N08CircleReferenceDiagonal
+module
+
+public import ContinuousFlexibility.Analysis.N08HeightLocality
+public import ContinuousFlexibility.Analysis.N08CircleReferenceDiagonal
 
 /-!
 # Local height rescaling preserves the genuine control diagonal
@@ -9,6 +11,8 @@ control line at the two states. Uniqueness of the actual one-variable
 derivative therefore identifies their diagonal entries. This uses the
 existing N02 derivative and does not assume a smooth family of inverses.
 -/
+
+@[expose] public section
 
 noncomputable section
 

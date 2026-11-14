@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04bNegativePieceSymmetry
+module
+
+public import ContinuousFlexibility.Analysis.N04bNegativePieceSymmetry
 
 /-!
 # Full geometric properties of the constructed negative functions
@@ -8,6 +10,8 @@ identities from the actual travel inverse. Their regularity and full
 boundary germs are the proved output of the root construction. Angular
 symmetries are transferred through the actual interior germs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

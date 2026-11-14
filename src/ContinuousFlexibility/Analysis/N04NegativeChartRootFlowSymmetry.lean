@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartRootFlowFactory
-import ContinuousFlexibility.Analysis.ReturnCoefficientParity
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartRootFlowFactory
+public import ContinuousFlexibility.Analysis.ReturnCoefficientParity
 
 /-!
 # Reflection on the actual physical root fibers
@@ -9,6 +11,8 @@ uniqueness argument. The finite-plot representatives may have arbitrary
 smooth extensions outside that interval. Both inverse samples belong to
 the same forward/reverse flow package.
 -/
+
+@[expose] public section
 
 noncomputable section
 

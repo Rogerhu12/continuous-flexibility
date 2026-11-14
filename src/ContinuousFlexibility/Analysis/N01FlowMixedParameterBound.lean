@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01FlowParameterVariation
+module
+
+public import ContinuousFlexibility.Analysis.N01FlowParameterVariation
 
 /-!
 # Mixed height and external-parameter bounds for the actual N01 flow
@@ -9,6 +11,8 @@ the N01 second-order tower on one state direction and the pure external
 parameter gives a bound linear in the state direction's grading.
 No interchange of partial derivatives is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalOpenLp
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalOpenLp
 
 /-!
 # Differences of the actual open coefficient multipliers
@@ -7,6 +9,8 @@ The value functions and their L² actions are retained exactly. A sharper
 geometric bound may be used for a difference even when the record was
 constructed using a coarser finite bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

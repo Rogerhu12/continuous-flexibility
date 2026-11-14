@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.TailActualMassRecovery
-import ContinuousFlexibility.Radial.TailNaturalSolution
-import ContinuousFlexibility.Radial.TailNodeUniqueness
+module
+
+public import ContinuousFlexibility.Radial.TailActualMassRecovery
+public import ContinuousFlexibility.Radial.TailNaturalSolution
+public import ContinuousFlexibility.Radial.TailNodeUniqueness
 
 /-!
 # Uniqueness of the actual square-integrable natural line
@@ -11,6 +13,8 @@ proportional physical fluxes at the first interior node. Initial-value
 uniqueness then extends the identity over the entire open tail, including
 the actual initial gap.
 -/
+
+@[expose] public section
 
 noncomputable section
 

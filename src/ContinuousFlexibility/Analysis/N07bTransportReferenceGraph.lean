@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N07bReferenceTransportExtension
-import ContinuousFlexibility.Analysis.N07bReferenceCompactDecay
-import ContinuousFlexibility.Analysis.N07bReferenceForcingSymmetry
-import ContinuousFlexibility.Analysis.N07bCompactReferenceSources
-import ContinuousFlexibility.Analysis.N07bCutoffRadialBridge
+module
+
+public import ContinuousFlexibility.Analysis.N07bReferenceTransportExtension
+public import ContinuousFlexibility.Analysis.N07bReferenceCompactDecay
+public import ContinuousFlexibility.Analysis.N07bReferenceForcingSymmetry
+public import ContinuousFlexibility.Analysis.N07bCompactReferenceSources
+public import ContinuousFlexibility.Analysis.N07bCutoffRadialBridge
 
 /-!
 # The transported physical field lies in the actual reference graph
@@ -13,6 +15,8 @@ every material height exponent. The same argument applies to the actual
 physical cutoff flux. This retains the prescribed left constant without
 identifying the two cutoffs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

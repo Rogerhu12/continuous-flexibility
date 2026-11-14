@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionVelocityRegularity
-import ContinuousFlexibility.Analysis.N01FlowJointSmoothness
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionVelocityRegularity
+public import ContinuousFlexibility.Analysis.N01FlowJointSmoothness
 
 /-!
 # Transport equations for the actual optical correction
@@ -14,6 +16,8 @@ All derivatives are actual Fréchet partial derivatives.  Their
 existence follows from N01 and the already constructed inverse
 regularity, rather than from a formal rule for inverse coordinates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

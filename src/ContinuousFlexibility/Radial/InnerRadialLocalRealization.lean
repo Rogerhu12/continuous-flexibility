@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerRadialBrokenTrace
-import ContinuousFlexibility.Radial.InnerWeakSchur
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialBrokenTrace
+public import ContinuousFlexibility.Radial.InnerWeakSchur
 
 /-!
 # Actual local solutions and the common source/trace realization
@@ -14,6 +16,8 @@ linear source/trace inverse. Equality with every assembled family of
 local witnesses identifies its value with the very same local
 Dirichlet/Poisson fields, without assuming linearity of chosen gradients.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ReferenceGraphProjection
-import ContinuousFlexibility.Radial.ReferenceSmoothSources
-import ContinuousFlexibility.Radial.ReferenceRadialSmoothExtension
+module
+
+public import ContinuousFlexibility.Radial.ReferenceGraphProjection
+public import ContinuousFlexibility.Radial.ReferenceSmoothSources
+public import ContinuousFlexibility.Radial.ReferenceRadialSmoothExtension
 
 /-!
 # Differential and finite-spectrum properties of smooth core sources
@@ -10,6 +12,8 @@ radial support for every coefficient, a finite projection fixing the
 field, and a legitimate first-normal input using its ordinary angular
 derivative.
 -/
+
+@[expose] public section
 
 open Set Filter MeasureTheory
 open scoped ContDiff Topology

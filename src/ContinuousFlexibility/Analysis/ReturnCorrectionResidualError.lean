@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionResidualLinear
-import ContinuousFlexibility.Analysis.ReturnCorrectionDivergence
-import ContinuousFlexibility.Analysis.ReturnCorrectionSource
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionResidualLinear
+public import ContinuousFlexibility.Analysis.ReturnCorrectionDivergence
+public import ContinuousFlexibility.Analysis.ReturnCorrectionSource
 
 /-!
 # The actual frozen residual coefficient error
@@ -12,6 +14,8 @@ The radial coefficient positivity is derived directly from N01.
 The nonnegative discriminant needed to reconstruct the old coefficients
 is stated only where the correction is active.
 -/
+
+@[expose] public section
 
 noncomputable section
 

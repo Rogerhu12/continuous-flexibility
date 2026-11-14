@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07bCompactSourceEncoding
-import ContinuousFlexibility.Analysis.N07bReferenceCompatibility
-import ContinuousFlexibility.Radial.ReferenceColumnSmooth
-import ContinuousFlexibility.Radial.R11bZeroMode
+module
+
+public import ContinuousFlexibility.Analysis.N07bCompactSourceEncoding
+public import ContinuousFlexibility.Analysis.N07bReferenceCompatibility
+public import ContinuousFlexibility.Radial.ReferenceColumnSmooth
+public import ContinuousFlexibility.Radial.R11bZeroMode
 
 /-!
 # The actual compact reference corrections as physical sources
@@ -13,6 +15,8 @@ physical source kernel. For the reference cutoff, compactness is proved for
 its actual flux on all of the real line; no conclusion about global support
 is inferred from a statement restricted to the core.
 -/
+
+@[expose] public section
 
 noncomputable section
 

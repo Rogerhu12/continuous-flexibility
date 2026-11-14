@@ -1,5 +1,7 @@
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+public import Mathlib.Tactic.Ring
 
 /-!
 # Iterated derivatives of a linear factor
@@ -8,6 +10,8 @@ The identity for the derivatives of `x * u x` is the algebraic input to
 the one-dimensional division estimate.  It keeps the two nonzero terms
 of the product rule explicit, without expanding a binomial sum.
 -/
+
+@[expose] public section
 
 noncomputable section
 

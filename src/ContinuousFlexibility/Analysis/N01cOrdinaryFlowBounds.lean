@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N01cOrdinaryFlowAngularBounds
-import ContinuousFlexibility.Analysis.N01cOrdinaryFlowRadialBounds
-import ContinuousFlexibility.Analysis.N01cFlowPositivePrefix
-import ContinuousFlexibility.Analysis.N01cOrdinaryFlowReferenceBounds
-import ContinuousFlexibility.Analysis.N01cCommonCosineGeometry
-import ContinuousFlexibility.Analysis.N01cPhysicalFlowRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N01cOrdinaryFlowAngularBounds
+public import ContinuousFlexibility.Analysis.N01cOrdinaryFlowRadialBounds
+public import ContinuousFlexibility.Analysis.N01cFlowPositivePrefix
+public import ContinuousFlexibility.Analysis.N01cOrdinaryFlowReferenceBounds
+public import ContinuousFlexibility.Analysis.N01cCommonCosineGeometry
+public import ContinuousFlexibility.Analysis.N01cPhysicalFlowRegularity
 
 /-!
 # The actual ordinary-flow family on one common neighborhood
@@ -13,6 +15,8 @@ parameter order. Their intersection retains those choices. The genuine
 first parameter derivative then controls the reference-subtracted zero
 jet along the reference segment.
 -/
+
+@[expose] public section
 
 noncomputable section
 

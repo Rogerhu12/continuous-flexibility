@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ProjectiveNewtonLimit
-import ContinuousFlexibility.Analysis.ProjectiveNewtonRapidDecay
+module
+
+public import ContinuousFlexibility.Analysis.ProjectiveNewtonLimit
+public import ContinuousFlexibility.Analysis.ProjectiveNewtonRapidDecay
 
 /-!
 # The fixed-parameter Newton limit for the original hypotheses
@@ -9,6 +11,8 @@ every parameter in a single interval. This gives the zero of the actual
 residual and its initial value. Parameter derivatives require additional
 estimates on that same iteration.
 -/
+
+@[expose] public section
 
 noncomputable section
 

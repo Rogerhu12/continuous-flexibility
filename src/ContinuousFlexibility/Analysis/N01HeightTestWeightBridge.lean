@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01HeightWeightConstraint
-import ContinuousFlexibility.Analysis.N01ReverseMaterialOrderActualCell
+module
+
+public import ContinuousFlexibility.Analysis.N01HeightWeightConstraint
+public import ContinuousFlexibility.Analysis.N01ReverseMaterialOrderActualCell
 
 /-!
 # From actual radial height tests to one fixed material-order loss
@@ -10,6 +12,8 @@ bound. The N01 mixed flow response supplies the balanced constraint.
 The two auxiliary fixed losses cost two material orders; the previously
 proved balanced-height argument then gives the fixed output loss one.
 -/
+
+@[expose] public section
 
 noncomputable section
 

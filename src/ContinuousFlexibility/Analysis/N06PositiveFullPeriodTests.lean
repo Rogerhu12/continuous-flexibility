@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06AveragedWeakTests
-import ContinuousFlexibility.Analysis.N06CubicDifferential
-import ContinuousFlexibility.Analysis.N06PositiveCurrentTestLp
-import ContinuousFlexibility.Analysis.N06CurrentOperatorPeriodicity
+module
+
+public import ContinuousFlexibility.Analysis.N06AveragedWeakTests
+public import ContinuousFlexibility.Analysis.N06CubicDifferential
+public import ContinuousFlexibility.Analysis.N06PositiveCurrentTestLp
+public import ContinuousFlexibility.Analysis.N06CurrentOperatorPeriodicity
 
 /-!
 # Full-period test averaging on the actual positive pieces
@@ -12,6 +14,8 @@ have period pi and are smooth locally in the physical annulus. Those local
 facts suffice to commute the actual operator with half-period averaging;
 no global smooth extension of physical coefficients is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

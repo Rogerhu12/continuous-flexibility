@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryReferenceHeightJets
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryRadialComposition
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryMoving
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundary
-import ContinuousFlexibility.Analysis.N04RealizationRootBoundaryDirections
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryReferenceHeightJets
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryRadialComposition
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryMoving
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundary
+public import ContinuousFlexibility.Analysis.N04RealizationRootBoundaryDirections
 
 /-!
 # Genuine radial traces of the original source height ratio
@@ -12,6 +14,8 @@ height at the original source map. Its reciprocal uses the opposite
 powers. Current height jets move only in the genuine inverse root label;
 positive source jets enter through the finite spatial composition rule.
 -/
+
+@[expose] public section
 
 noncomputable section
 

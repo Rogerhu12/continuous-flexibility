@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.WholeComponentRootNeighbors
-import ContinuousFlexibility.Analysis.FiniteJetRadialGluing
+module
+
+public import ContinuousFlexibility.Analysis.WholeComponentRootNeighbors
+public import ContinuousFlexibility.Analysis.FiniteJetRadialGluing
 
 /-!
 # Actual finite-order gluing across every component root
@@ -9,6 +11,8 @@ actual radius. The genuine neighboring component supplies a two-sided
 open strip at each root. Matching only the indicated finite full jets
 therefore gives ordinary finite regularity of the stored global field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

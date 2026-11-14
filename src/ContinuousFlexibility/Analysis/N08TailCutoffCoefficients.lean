@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N08CellLayerEnvelope
-import ContinuousFlexibility.Analysis.N08EndpointDistanceEnvelope
-import ContinuousFlexibility.Analysis.N08CellLayerProfileJets
-import ContinuousFlexibility.Analysis.N08MaterialFamilyBounds
+module
+
+public import ContinuousFlexibility.Analysis.N08CellLayerEnvelope
+public import ContinuousFlexibility.Analysis.N08EndpointDistanceEnvelope
+public import ContinuousFlexibility.Analysis.N08CellLayerProfileJets
+public import ContinuousFlexibility.Analysis.N08MaterialFamilyBounds
 
 /-!
 # Uniform material jets of sample-scaled tail cutoffs
@@ -9,6 +11,8 @@ import ContinuousFlexibility.Analysis.N08MaterialFamilyBounds
 For each requested sample-envelope power, one material-envelope loss works
 for every derivative order. Constants are selected before the cell index.
 -/
+
+@[expose] public section
 
 noncomputable section
 

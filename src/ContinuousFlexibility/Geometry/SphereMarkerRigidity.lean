@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Geometry.SphereCongruenceCurvature
-import ContinuousFlexibility.Geometry.MarkerStabilizer
-import ContinuousFlexibility.Geometry.MarkerFrame
+module
+
+public import ContinuousFlexibility.Geometry.SphereCongruenceCurvature
+public import ContinuousFlexibility.Geometry.MarkerStabilizer
+public import ContinuousFlexibility.Geometry.MarkerFrame
 
 /-!
 # Actual marker constraints on closed sphere congruences
@@ -10,6 +12,8 @@ and normal constraints are conclusions of genuine image congruence, rather than
 new preservation hypotheses. The nonzero signed mean curvature distinguishes
 the two actual unit normals at that fixed point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

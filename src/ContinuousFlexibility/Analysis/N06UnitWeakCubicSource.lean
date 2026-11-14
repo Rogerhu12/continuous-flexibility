@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06UnitWeakGraphData
-import ContinuousFlexibility.Analysis.N06WeakCubicLimit
-import ContinuousFlexibility.Analysis.N06CubicMultiplierJets
-import ContinuousFlexibility.Analysis.N06WeakJetProduct
+module
+
+public import ContinuousFlexibility.Analysis.N06UnitWeakGraphData
+public import ContinuousFlexibility.Analysis.N06WeakCubicLimit
+public import ContinuousFlexibility.Analysis.N06CubicMultiplierJets
+public import ContinuousFlexibility.Analysis.N06WeakJetProduct
 
 /-!
 # The actual cubic source on a completed canonical cylinder
@@ -11,6 +13,8 @@ and all of its angular weak jets in the original canonical L2 row. Matching
 reflection signs make the source even. The scalar graph constant and the
 fixed-order multiplication constant are kept explicit throughout.
 -/
+
+@[expose] public section
 
 noncomputable section
 

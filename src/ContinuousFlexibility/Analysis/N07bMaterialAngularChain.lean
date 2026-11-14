@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07bCanonicalSourceRecursion
-import ContinuousFlexibility.Analysis.N07bMaterialCoordinateMeasure
-import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
+module
+
+public import ContinuousFlexibility.Analysis.N07bCanonicalSourceRecursion
+public import ContinuousFlexibility.Analysis.N07bMaterialCoordinateMeasure
+public import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
 
 /-!
 # Actual material-coordinate calculus for angular source coefficients
@@ -12,6 +14,8 @@ function whose material jets are being expanded. The same formula holds
 for an arbitrary finite sum, providing the exact calculus step needed to
 iterate the finite source expansion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

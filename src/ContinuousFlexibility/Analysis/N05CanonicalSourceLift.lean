@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
-import ContinuousFlexibility.Analysis.N05CanonicalPeriodicRepresentative
-import ContinuousFlexibility.Analysis.N05PhysicalPieces
-import ContinuousFlexibility.Analysis.N05CanonicalPhysicalChange
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
+public import ContinuousFlexibility.Analysis.N05CanonicalPeriodicRepresentative
+public import ContinuousFlexibility.Analysis.N05PhysicalPieces
+public import ContinuousFlexibility.Analysis.N05CanonicalPhysicalChange
 
 /-!
 # The actual physical lift of a canonical source
@@ -12,6 +14,8 @@ pieces give a single function, defined independently of the source weight
 or angular order. Its angular symmetries hold pointwise, and its canonical
 source transform recovers every source in an actual volume level.
 -/
+
+@[expose] public section
 
 noncomputable section
 

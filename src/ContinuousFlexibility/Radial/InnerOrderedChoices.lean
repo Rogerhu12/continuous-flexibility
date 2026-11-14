@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerFrequencySuppression
+module
+
+public import ContinuousFlexibility.Radial.InnerFrequencySuppression
 
 /-!
 # The order of choices for the actual inner bands
@@ -9,6 +11,8 @@ or truncating the geometric realization afterwards does not change the
 argument. The central and cone length thresholds are chosen after the
 starting index and may use its already fixed constants.
 -/
+
+@[expose] public section
 
 noncomputable section
 

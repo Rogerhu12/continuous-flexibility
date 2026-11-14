@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ReferenceCosineLocalPairing
+module
+
+public import ContinuousFlexibility.Radial.ReferenceCosineLocalPairing
 
 /-!
 # Sufficiency of the actual modal weak equations
@@ -8,6 +10,8 @@ coefficients of an arbitrary two-dimensional test. Their convergent
 paired series sum to the frozen distributional equation. The border
 contributes precisely the single physical frequency-two coordinate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

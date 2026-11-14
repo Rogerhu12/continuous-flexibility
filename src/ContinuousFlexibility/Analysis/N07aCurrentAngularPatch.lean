@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCurrentComponentGluing
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalPatch
+module
+
+public import ContinuousFlexibility.Analysis.N07aCurrentComponentGluing
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalPatch
 
 /-!
 # Angular regularity after the actual moving cuts have been glued
@@ -9,6 +11,8 @@ cut. Restricting that field to its two reference halves is then legitimate.
 The positive pieces are unchanged. The fixed reference angular patching
 lemma applies only after these current-domain arguments are complete.
 -/
+
+@[expose] public section
 
 noncomputable section
 

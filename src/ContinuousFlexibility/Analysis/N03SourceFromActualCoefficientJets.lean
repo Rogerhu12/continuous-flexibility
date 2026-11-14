@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01CorrectionCoefficientSmoothJets
-import ContinuousFlexibility.Analysis.N03SourceFromCoefficientJets
+module
+
+public import ContinuousFlexibility.Analysis.N01CorrectionCoefficientSmoothJets
+public import ContinuousFlexibility.Analysis.N03SourceFromCoefficientJets
 
 /-!
 # The N03 source from the actual buffered coefficient family
@@ -11,6 +13,8 @@ input is the local fixed-loss bound for this specific actual family.
 The resulting operator is the original independent-residual source in
 the original physical topology.
 -/
+
+@[expose] public section
 
 noncomputable section
 

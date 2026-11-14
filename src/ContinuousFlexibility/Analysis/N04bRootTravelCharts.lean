@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04bRootTravelIntervals
+module
+
+public import ContinuousFlexibility.Analysis.N04bRootTravelIntervals
 
 /-!
 # Actual root charts on moving travel half-domains
@@ -11,6 +13,8 @@ Both orientations use one Bool parameter. The global inverse formula agrees
 with the signed travel pullback already used by the root-height transmission
 lemmas, so its common cut is the actual point X(T/2, θ).
 -/
+
+@[expose] public section
 
 noncomputable section
 

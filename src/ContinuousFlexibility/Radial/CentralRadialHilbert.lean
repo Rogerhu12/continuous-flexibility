@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.CentralRadialMeasure
-import ContinuousFlexibility.Radial.CentralModel
-import ContinuousFlexibility.Radial.HermiteBasis
+module
+
+public import ContinuousFlexibility.Radial.CentralRadialMeasure
+public import ContinuousFlexibility.Radial.CentralModel
+public import ContinuousFlexibility.Radial.HermiteBasis
 
 /-!
 # Quotient-safe central radial Hilbert transform
@@ -11,6 +13,8 @@ the inverse is constructed on actual `Lp` classes. Smooth forcing identities
 retain the factor `1/12`. An oscillator reduced inverse is not declared to
 be the radial orthogonal reduced inverse: their kernel normalizations differ.
 -/
+
+@[expose] public section
 
 noncomputable section
 

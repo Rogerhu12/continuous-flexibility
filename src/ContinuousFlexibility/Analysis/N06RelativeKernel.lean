@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.WeightKernelBounds
+module
+
+public import ContinuousFlexibility.Radial.WeightKernelBounds
 
 /-!
 # Summability of the relative-operator block kernel
@@ -8,6 +10,8 @@ output factor. The exponent absorption has already been proved in
 `WeightKernelBounds`. Here it gives a common row and column bound, including
 the explicit linear dependence on the size of the perturbation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

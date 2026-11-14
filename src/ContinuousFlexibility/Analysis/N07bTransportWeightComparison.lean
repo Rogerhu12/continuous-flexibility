@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07bReferencePDEDecay
+module
+
+public import ContinuousFlexibility.Analysis.N07bReferencePDEDecay
 
 /-!
 # Image height weights from actual geometric ratio bounds
@@ -9,6 +11,8 @@ before the material-envelope estimate is used; a strict height-exponent
 gap then absorbs the resulting two envelope powers. No regularity, source
 membership, or operator-domain conclusion is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

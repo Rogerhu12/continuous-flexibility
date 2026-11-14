@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerGapDirichlet
-import ContinuousFlexibility.Radial.InnerRadialEnergyDomain
+module
+
+public import ContinuousFlexibility.Radial.InnerGapDirichlet
+public import ContinuousFlexibility.Radial.InnerRadialEnergyDomain
 
 /-!
 # The positive-gap solution in the common physical H¹ domain
@@ -9,6 +11,8 @@ The same solution witness projects continuously to the common physical
 function/weighted-derivative domain used by every finite inner piece.
 No change of measure or alternative derivative representation is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

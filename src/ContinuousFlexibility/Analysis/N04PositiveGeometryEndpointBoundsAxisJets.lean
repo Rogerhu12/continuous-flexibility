@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsPlaneJets
-import ContinuousFlexibility.Analysis.BoundaryMixedJets
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsPlaneJets
+public import ContinuousFlexibility.Analysis.BoundaryMixedJets
 
 /-!
 # Full boundary jets from the actual finite radial traces
@@ -10,6 +12,8 @@ Once those traces have genuine parameter towers, the original full jet
 inherits their towers and bounds, with only the finite angular reserve
 spent on the coordinate words.
 -/
+
+@[expose] public section
 
 noncomputable section
 

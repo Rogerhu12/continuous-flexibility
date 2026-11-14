@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.MaterialShiftedEnvelope
-import ContinuousFlexibility.Analysis.StateKappaBounds
+module
+
+public import ContinuousFlexibility.Analysis.MaterialShiftedEnvelope
+public import ContinuousFlexibility.Analysis.StateKappaBounds
 
 /-!
 # Endpoint bounds for control derivatives
@@ -9,6 +11,8 @@ samples. The cell comparison places both samples at bounded distance from
 the evaluation point in the endpoint coordinate. This gives a positive
 power of the actual material height weight for their product.
 -/
+
+@[expose] public section
 
 noncomputable section
 

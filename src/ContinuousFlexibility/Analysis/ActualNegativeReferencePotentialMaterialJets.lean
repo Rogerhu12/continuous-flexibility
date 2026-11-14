@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ActualNegativeReferenceInverseMaterialJets
-import ContinuousFlexibility.Analysis.ActualNegativeReferencePotentialGerms
-import ContinuousFlexibility.Analysis.RadialUnitDensityPotentialJets
+module
+
+public import ContinuousFlexibility.Analysis.ActualNegativeReferenceInverseMaterialJets
+public import ContinuousFlexibility.Analysis.ActualNegativeReferencePotentialGerms
+public import ContinuousFlexibility.Analysis.RadialUnitDensityPotentialJets
 
 /-!
 # Actual negative reference potential jets at the original half sample
@@ -11,6 +13,8 @@ are combined. The full planar germ identifies the actual mixed jets;
 positive angular orders vanish and the radial jets use the physical
 unit-density flux formula on the same true half.
 -/
+
+@[expose] public section
 
 noncomputable section
 

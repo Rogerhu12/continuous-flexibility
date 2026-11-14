@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06CurrentTestTraces
-import ContinuousFlexibility.Analysis.N06NegativeCurrentTestLp
-import ContinuousFlexibility.Radial.RadialGreenBoundary
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentTestTraces
+public import ContinuousFlexibility.Analysis.N06NegativeCurrentTestLp
+public import ContinuousFlexibility.Radial.RadialGreenBoundary
 
 /-!
 # AC Green calculus for the actual current test traces
@@ -11,6 +13,8 @@ are AC on the closed interval. The genuine AC Green formula therefore
 applies against an H2 mode, with both endpoint values retained and with
 the original transformed test in the bulk integrals.
 -/
+
+@[expose] public section
 
 noncomputable section
 

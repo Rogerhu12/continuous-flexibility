@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ControlCellEndpointBounds
-import ContinuousFlexibility.Analysis.MaterialSampleCofinite
+module
+
+public import ContinuousFlexibility.Analysis.ControlCellEndpointBounds
+public import ContinuousFlexibility.Analysis.MaterialSampleCofinite
 
 /-!
 # The actual material samples in the discrete endpoint coordinate
@@ -10,6 +12,8 @@ the actual reference-cell index by one fixed constant.  A separate
 finite-exception lemma turns subsequent eventual estimates into uniform
 estimates with a positive constant.
 -/
+
+@[expose] public section
 
 noncomputable section
 

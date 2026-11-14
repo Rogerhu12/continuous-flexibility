@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Geometry.EuclideanRigidityCoordinates
-import ContinuousFlexibility.Contracts.CartesianMetric
+module
+
+public import ContinuousFlexibility.Geometry.EuclideanRigidityCoordinates
+public import ContinuousFlexibility.Contracts.CartesianMetric
 
 /-!
 # Actual rotations of the Cartesian coordinate plane
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Contracts.CartesianMetric
 The parameter is measured in turns. Metric and radius statements refer to the
 coordinate Euclidean pairing and the genuine complex norm, never the product norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

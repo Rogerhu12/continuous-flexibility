@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OuterCoreIntervals
+module
+
+public import ContinuousFlexibility.Radial.OuterCoreIntervals
 
 /-!
 # The height scale of the transition-core Hilbert mass
@@ -7,6 +9,8 @@ The estimates use the actual cell charts and actual connector profile.
 Only the previously proved Morse cell and adjacent-height estimates
 enter the explicit bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

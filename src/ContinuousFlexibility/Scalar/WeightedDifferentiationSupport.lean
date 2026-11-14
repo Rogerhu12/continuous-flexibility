@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Scalar.WeightedDifferentiationPullback
-import ContinuousFlexibility.Scalar.Conservation
+module
+
+public import ContinuousFlexibility.Scalar.WeightedDifferentiationPullback
+public import ContinuousFlexibility.Scalar.Conservation
 
 /-!
 # Support and symmetry of the actual coordinate derivatives
@@ -10,6 +12,8 @@ point its totalized Frechet derivative is zero. This proves support
 preservation without imposing a boundary condition or positive weight.
 The signed angular symmetry changes sign once per angular derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

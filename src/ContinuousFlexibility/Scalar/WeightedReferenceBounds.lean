@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ControlCellEndpointBounds
+module
+
+public import ContinuousFlexibility.Analysis.ControlCellEndpointBounds
 
 /-!
 # Material weights dominate the reference inverse
@@ -8,6 +10,8 @@ endpoint coordinates differ from the material endpoint coordinate by a
 bounded amount.  The cubic decay of `H` therefore absorbs every fixed cell
 coefficient loss.  Local finiteness handles the remaining compact interval.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.FiniteRestrictedEnergy
-import ContinuousFlexibility.Analysis.MaterialHeightCutoff
+module
+
+public import ContinuousFlexibility.Analysis.FiniteRestrictedEnergy
+public import ContinuousFlexibility.Analysis.MaterialHeightCutoff
 
 /-!
 # Actual squared jet estimates for radial localization
@@ -8,6 +10,8 @@ The exact radial Leibniz formula and a finite Cauchy--Schwarz estimate
 bound a localized jet by restricted input energies. One material order
 absorbs the scalar cutoff derivative bounds.
 -/
+
+@[expose] public section
 
 noncomputable section
 

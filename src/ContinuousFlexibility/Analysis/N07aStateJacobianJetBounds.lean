@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aStateSampleJetComposition
-import ContinuousFlexibility.Geometry.EuclideanRigidity
-import Mathlib.Analysis.Calculus.Deriv.Abs
+module
+
+public import ContinuousFlexibility.Analysis.N07aStateSampleJetComposition
+public import ContinuousFlexibility.Geometry.EuclideanRigidity
+public import Mathlib.Analysis.Calculus.Deriv.Abs
 
 /-!
 # State-dependent Jacobian jets from positive coordinate jets
@@ -9,6 +11,8 @@ Each differential component uses one extra coordinate derivative. The
 two determinant products are estimated on one common low-order ball.
 The absolute value preserves every local jet bound at a nonzero Jacobian.
 -/
+
+@[expose] public section
 
 noncomputable section
 

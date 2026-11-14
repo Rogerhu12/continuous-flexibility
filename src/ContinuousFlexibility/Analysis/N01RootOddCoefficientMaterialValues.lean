@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N01RootSpeedPowerMaterialJets
-import ContinuousFlexibility.Analysis.RootFlowParameterUnscale
-import ContinuousFlexibility.Analysis.N01RootFieldLocalization
-import ContinuousFlexibility.Analysis.N01RootLabels
-import ContinuousFlexibility.Analysis.RootChartExtension
-import ContinuousFlexibility.Analysis.ActualRootChart
+module
+
+public import ContinuousFlexibility.Analysis.N01RootSpeedPowerMaterialJets
+public import ContinuousFlexibility.Analysis.RootFlowParameterUnscale
+public import ContinuousFlexibility.Analysis.N01RootFieldLocalization
+public import ContinuousFlexibility.Analysis.N01RootLabels
+public import ContinuousFlexibility.Analysis.RootChartExtension
+public import ContinuousFlexibility.Analysis.ActualRootChart
 
 /-!
 # The actual odd root coefficient and its reciprocal
@@ -13,6 +15,8 @@ derivative lies between one quarter and four. Thus the already derived
 material costs of c and its reciprocal control the same genuine odd
 extension at the root, without charging either localization radius.
 -/
+
+@[expose] public section
 
 noncomputable section
 

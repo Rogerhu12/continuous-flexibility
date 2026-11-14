@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CircleReturnAlgebra
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Analysis.CircleReturnAlgebra
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # The actual return residual and the two charted returns
@@ -11,6 +13,8 @@ The identities below use the actual inverse maps from the nonlinear data.
 In particular, vanishing of the residual is equivalent to the two desired
 return identities, not merely to an auxiliary Fourier equation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ReferenceSchurInverse
-import ContinuousFlexibility.Radial.MatchedWeightLevelBounds
-import ContinuousFlexibility.Radial.MatchedWeightMorseFibers
+module
+
+public import ContinuousFlexibility.Radial.ReferenceSchurInverse
+public import ContinuousFlexibility.Radial.MatchedWeightLevelBounds
+public import ContinuousFlexibility.Radial.MatchedWeightMorseFibers
 
 /-!
 # Actual four-channel envelopes imply a common reference inverse
@@ -11,6 +13,8 @@ are applied to the norms of those actual blocks. This file only identifies
 the channel weights and appends the scalar index to the cell-level map;
 it introduces no replacement operator or output-space assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ReferenceSourceCosine
+module
+
+public import ContinuousFlexibility.Radial.ReferenceSourceCosine
 
 /-!
 # Actual coordinates and uniqueness of cosine reconstruction
@@ -9,6 +11,8 @@ implies physical almost-everywhere equality. The last result uses only
 the frozen local cell L² condition, so it also applies to output fields
 whose left constant is not in the weighted remainder space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

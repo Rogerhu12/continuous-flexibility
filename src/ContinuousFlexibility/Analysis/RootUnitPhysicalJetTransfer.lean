@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.RootPhysicalJetTransfer
+module
+
+public import ContinuousFlexibility.Analysis.RootPhysicalJetTransfer
 
 /-!
 # Physical transfer after the root normalization has been removed
@@ -7,6 +9,8 @@ Only the actual inward orientation remains. Its inverse linear map has
 norm one, so the existing ordinary-jet transfer costs the universal
 factor two, and the Jacobian lower bound has no scale divisor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

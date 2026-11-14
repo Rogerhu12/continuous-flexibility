@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.CentralRadius
-import Mathlib.Analysis.Calculus.InverseFunctionTheorem.Deriv
-import Mathlib.Analysis.Calculus.InverseFunctionTheorem.ContDiff
-import Mathlib.Topology.Order.IntermediateValue
+module
+
+public import ContinuousFlexibility.Radial.CentralRadius
+public import Mathlib.Analysis.Calculus.InverseFunctionTheorem.Deriv
+public import Mathlib.Analysis.Calculus.InverseFunctionTheorem.ContDiff
+public import Mathlib.Topology.Order.IntermediateValue
 
 /-!
 # The central radius as an actual radial coordinate
@@ -11,6 +13,8 @@ so the pulled-back positive profile defines a genuine smooth function of
 the radius. The endpoint limits below are qualitative limits, not the
 finite-order asymptotic expansions required for later cutting estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

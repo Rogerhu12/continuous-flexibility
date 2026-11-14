@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CanonicalNegativeRelativePrincipal
-import ContinuousFlexibility.Analysis.CanonicalActualEndpointFields
-import ContinuousFlexibility.Analysis.CanonicalFieldJetReduction
-import ContinuousFlexibility.Analysis.OpenGermBoundaryJets
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalNegativeRelativePrincipal
+public import ContinuousFlexibility.Analysis.CanonicalActualEndpointFields
+public import ContinuousFlexibility.Analysis.CanonicalFieldJetReduction
+public import ContinuousFlexibility.Analysis.OpenGermBoundaryJets
 
 /-!
 # Reference principal jets at the true negative roots
@@ -11,6 +13,8 @@ height ratio.  It is ordinarily smooth at the closed physical endpoints.
 The proved equation on the open negative half therefore determines every
 finite ordinary boundary jet.  No equation across the root is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

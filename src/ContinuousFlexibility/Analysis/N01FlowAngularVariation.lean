@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01FlowChartIndependence
-import ContinuousFlexibility.Analysis.N01FlowContinuity
-import ContinuousFlexibility.Analysis.ScalarFlowVariation
+module
+
+public import ContinuousFlexibility.Analysis.N01FlowChartIndependence
+public import ContinuousFlexibility.Analysis.N01FlowContinuity
+public import ContinuousFlexibility.Analysis.ScalarFlowVariation
 
 /-!
 # The actual N01 angular variational equation
@@ -11,6 +13,8 @@ closed-strip hypotheses of the scalar variational equation.  In particular
 the actual return at the right turning radius has a continuous angular
 derivative given by an exponential integral.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CanonicalRootReferencePoint
-import ContinuousFlexibility.Analysis.CanonicalReferenceGaugeFirstJetTransfer
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalRootReferencePoint
+public import ContinuousFlexibility.Analysis.CanonicalReferenceGaugeFirstJetTransfer
 
 /-!
 # Raw first-jet matching at every actual current root point
@@ -9,6 +11,8 @@ current root point. The positive/negative relative jets and the fixed
 reference data are all read at that same reference angle. This proves
 the current-circle conclusion without an angular identification premise.
 -/
+
+@[expose] public section
 
 noncomputable section
 

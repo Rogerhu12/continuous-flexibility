@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.PositiveBufferEnergyNormalized
-import ContinuousFlexibility.Radial.BufferGreenEnergy
-import ContinuousFlexibility.Radial.PositiveBufferComparisonGreenRegularity
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferEnergyNormalized
+public import ContinuousFlexibility.Radial.BufferGreenEnergy
+public import ContinuousFlexibility.Radial.PositiveBufferComparisonGreenRegularity
 
 /-!
 # Actual Green columns assembled from the variational endpoint profiles
@@ -11,6 +13,8 @@ compactly supported and absent in both comparison buffers. The column
 has unit point-source identity against every energy test, and the
 physical norm estimates retain the conormal normalization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

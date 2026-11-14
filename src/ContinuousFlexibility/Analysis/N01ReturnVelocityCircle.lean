@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01ReturnDisplacementSmoothTame
-import ContinuousFlexibility.Analysis.N01InterpolationInverseCircle
-import ContinuousFlexibility.Analysis.N01OpticalCutoffCircleMultiplier
+module
+
+public import ContinuousFlexibility.Analysis.N01ReturnDisplacementSmoothTame
+public import ContinuousFlexibility.Analysis.N01InterpolationInverseCircle
+public import ContinuousFlexibility.Analysis.N01OpticalCutoffCircleMultiplier
 
 /-!
 # The actual cutoff velocity as a circle linear map
@@ -11,6 +13,8 @@ is one plus a decoded circle field. Multiplying these two actual factors
 and the derivative of the same cutoff gives exactly the original
 independent-residual velocity, with a linear residual argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

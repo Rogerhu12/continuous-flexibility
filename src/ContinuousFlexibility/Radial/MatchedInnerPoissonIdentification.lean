@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MatchingInnerDecomposition
-import ContinuousFlexibility.Radial.TerminalPoissonCorrection
-import ContinuousFlexibility.Radial.MatchedPhysicalPartition
+module
+
+public import ContinuousFlexibility.Radial.MatchingInnerDecomposition
+public import ContinuousFlexibility.Radial.TerminalPoissonCorrection
+public import ContinuousFlexibility.Radial.MatchedPhysicalPartition
 
 /-!
 # Identification and interior return of the actual inner Poisson columns
@@ -11,6 +13,8 @@ actual cutoff lift minus its actual Dirichlet correction is that same
 column. Away from the lift support, only the small source correction
 remains. No weighted inverse estimate is part of the candidate data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

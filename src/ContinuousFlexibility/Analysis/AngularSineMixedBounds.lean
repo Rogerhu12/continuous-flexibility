@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.FixedAngularMultiplierBounds
+module
+
+public import ContinuousFlexibility.Analysis.FixedAngularMultiplierBounds
 
 /-!
 # Uniform mixed bounds for the actual sine quotient
@@ -9,6 +11,8 @@ and the ordinary angular Taylor estimates therefore cost exactly one or
 two angular derivatives, independent of the radial order, evaluation
 point, and numerator. No lower bound for the sine is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

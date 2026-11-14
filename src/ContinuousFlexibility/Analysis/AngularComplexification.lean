@@ -1,7 +1,9 @@
-import Mathlib.Analysis.InnerProductSpace.ProdL2
-import Mathlib.Analysis.Complex.Basic
-import Mathlib.Tactic.Module
-import Mathlib.Tactic.Linarith
+module
+
+public import Mathlib.Analysis.InnerProductSpace.ProdL2
+public import Mathlib.Analysis.Complex.Basic
+public import Mathlib.Tactic.Module
+public import Mathlib.Tactic.Linarith
 
 /-!
 # Complexification of a real Hilbert space
@@ -11,6 +13,8 @@ original space.  Its complex scalar multiplication is explicit; in
 particular no separability or finite-dimensionality assumption is used.
 The norm is the existing product `L²` norm, not the product max norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

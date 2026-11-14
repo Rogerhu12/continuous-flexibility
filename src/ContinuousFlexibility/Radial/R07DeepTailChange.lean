@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R07DeepTailDensity
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
+module
+
+public import ContinuousFlexibility.Radial.R07DeepTailDensity
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
 
 /-!
 # Exact outward-coordinate mass and resistance identities
@@ -10,6 +12,8 @@ frequency-two mass and resistance to the exact radial integrands in `R05`.
 The single orientation sign treats the reversed left-tail interval and the
 right-tail interval in the same statement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cWholeSpeedPowerBounds
-import ContinuousFlexibility.Analysis.N01cEndpointMixedPowerNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N01cWholeSpeedPowerBounds
+public import ContinuousFlexibility.Analysis.N01cEndpointMixedPowerNormalization
 
 /-!
 # The complete endpoint family with a common material constant
@@ -8,6 +10,8 @@ All quantifier transport is over an abstract state space. The actual
 characteristic-speed wrapper only supplies the genuine whole-speed
 control and the component evaluation predicate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

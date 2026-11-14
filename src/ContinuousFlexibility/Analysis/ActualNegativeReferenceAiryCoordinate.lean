@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.OpticalHalfAiryAverage
-import ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields
-import ContinuousFlexibility.Analysis.N01OpticalRootDivision
-import ContinuousFlexibility.Analysis.SolveReturnEquations
+module
+
+public import ContinuousFlexibility.Analysis.OpticalHalfAiryAverage
+public import ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields
+public import ContinuousFlexibility.Analysis.N01OpticalRootDivision
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # The stored negative reference chart is the integral Airy coordinate
@@ -11,6 +13,8 @@ the exact simple-zero factorization, the inward integral is precisely
 the Airy average already selected on the whole optical half. No chart is
 reselected, and no point outside that half enters the identity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

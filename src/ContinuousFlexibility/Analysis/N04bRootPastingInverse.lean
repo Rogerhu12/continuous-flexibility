@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bRootPastingModel
-import ContinuousFlexibility.Analysis.N04bRootLiteralGerms
+module
+
+public import ContinuousFlexibility.Analysis.N04bRootPastingModel
+public import ContinuousFlexibility.Analysis.N04bRootLiteralGerms
 
 /-!
 # Choosing the actual collar inverse for a literal root paste
@@ -9,6 +11,8 @@ inverse. Its positive target collar is shrunk inside the canonical
 interval. The resulting literal inverse keeps the specified physical
 inverse at every positive radius.
 -/
+
+@[expose] public section
 
 noncomputable section
 

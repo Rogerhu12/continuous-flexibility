@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06PotentialMultiplier
-import ContinuousFlexibility.Analysis.N06CanonicalPotentialRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N06PotentialMultiplier
+public import ContinuousFlexibility.Analysis.N06CanonicalPotentialRegularity
 
 /-!
 # The actual potential difference on the selected N05 source space
@@ -10,6 +12,8 @@ potentials. Only their quantitative angular jet difference estimate is
 left as an input. The multiplier acts on the same original source level
 and uses the height of the same original inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

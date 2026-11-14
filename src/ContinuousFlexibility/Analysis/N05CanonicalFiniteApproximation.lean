@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05CanonicalRestriction
-import Mathlib.Topology.Algebra.InfiniteSum.NatInt
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalRestriction
+public import Mathlib.Topology.Algebra.InfiniteSum.NatInt
 
 /-!
 # Actual finite-cell approximations in the canonical weak graph
@@ -8,6 +10,8 @@ A finite coordinate mask multiplies all angular jets on each retained cell
 by one and all other jets by zero. The approximations remain in the actual
 weak graph, are contractions, and converge in its Hilbert norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

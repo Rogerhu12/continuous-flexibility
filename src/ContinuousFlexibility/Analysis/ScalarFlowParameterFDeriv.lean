@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ScalarTrajectorySecant
-import ContinuousFlexibility.Analysis.OneHighCircleFlowIntegral
-import Mathlib.Analysis.Calculus.FDeriv.Basic
+module
+
+public import ContinuousFlexibility.Analysis.ScalarTrajectorySecant
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowIntegral
+public import Mathlib.Analysis.Calculus.FDeriv.Basic
 
 /-!
 # Actual parameter derivatives of a scalar flow
@@ -11,6 +13,8 @@ trajectory equation then gives a continuous operator-valued secant.
 Its norm remainder proves the Fréchet derivative of the chosen flow,
 without assuming any parameter differentiability of that flow.
 -/
+
+@[expose] public section
 
 noncomputable section
 

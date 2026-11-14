@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.SeedConeTail
+module
+
+public import ContinuousFlexibility.Radial.SeedConeTail
 
 /-!
 # A natural tail continued inward to an exact pure cone mode
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Radial.SeedConeTail
 The exponent is a real number with p²=4.  The signed amplitude is kept
 explicit so subsequent rescaling and gluing use one power formula.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import Mathlib.Analysis.SpecialFunctions.SmoothTransition
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
-import Mathlib.Analysis.Calculus.Deriv.Comp
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Analysis.SpecialFunctions.SmoothTransition
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+public import Mathlib.Analysis.Calculus.Deriv.Comp
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
 
 /-!
 # A genuine global time change of a compact-interval scalar flow
@@ -13,6 +15,8 @@ on that interval therefore becomes a genuine global time ODE by the
 chain rule, including at both ends. No continuation of the original
 trajectory outside its time domain is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

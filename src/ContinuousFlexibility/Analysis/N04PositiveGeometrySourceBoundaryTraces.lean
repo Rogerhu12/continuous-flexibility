@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceAngleDefect
-import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceSamplePrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryTraceRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceAngleDefect
+public import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceSamplePrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryTraceRegularity
 
 /-!
 # Actual radial endpoint traces of the retained source
@@ -9,6 +11,8 @@ Positive orders are fixed unit-vector evaluations of the original full
 source jets. At order zero the radial trace is the fixed endpoint and
 the angular trace is the actual inverse-label displacement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

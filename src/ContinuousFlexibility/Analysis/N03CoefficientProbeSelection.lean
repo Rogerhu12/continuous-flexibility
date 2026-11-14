@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N03CorrectedCoefficientJetBounds
-import ContinuousFlexibility.Analysis.PositiveConformalCanonicalExtension
+module
+
+public import ContinuousFlexibility.Analysis.N03CorrectedCoefficientJetBounds
+public import ContinuousFlexibility.Analysis.PositiveConformalCanonicalExtension
 
 /-!
 # Fixed genuine height probes for every negative component
@@ -10,6 +12,8 @@ support inside the annulus. The four even periodic fields are realized
 as actual height elements before choosing any state. Their finite
 seminorms enter only the component and order constants.
 -/
+
+@[expose] public section
 
 noncomputable section
 

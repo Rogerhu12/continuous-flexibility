@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N04RealizationHeightFieldJets
-import ContinuousFlexibility.Analysis.N01cMaterialAbsorption
-import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
-import ContinuousFlexibility.Analysis.SmoothDirectionsSpatialJoint
-import ContinuousFlexibility.Analysis.MixedDerivativeHierarchy
-import ContinuousFlexibility.Analysis.N01ReturnVelocitySpatialTower
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationHeightFieldJets
+public import ContinuousFlexibility.Analysis.N01cMaterialAbsorption
+public import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
+public import ContinuousFlexibility.Analysis.SmoothDirectionsSpatialJoint
+public import ContinuousFlexibility.Analysis.MixedDerivativeHierarchy
+public import ContinuousFlexibility.Analysis.N01ReturnVelocitySpatialTower
 
 /-!
 # Actual height fields jointly in state and physical position
@@ -15,6 +17,8 @@ calculus. The sharper weighted estimate remains available separately.
 Both physical coordinates are then joined to the original parameter
 tower on its unchanged convex neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

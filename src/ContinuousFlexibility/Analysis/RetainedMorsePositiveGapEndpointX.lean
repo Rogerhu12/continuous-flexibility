@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RetainedMorsePositiveGapCoordinates
-import ContinuousFlexibility.Analysis.MaterialCellEndpointModels
+module
+
+public import ContinuousFlexibility.Analysis.RetainedMorsePositiveGapCoordinates
+public import ContinuousFlexibility.Analysis.MaterialCellEndpointModels
 
 /-!
 # Endpoint-coordinate oscillation on the actual retained positive gaps
@@ -9,6 +11,8 @@ index floor preserves this one-step difference. The actual material
 cell comparison consequently bounds the oscillation of endpointX on
 the whole closed scaled gap, without a common containing cell.
 -/
+
+@[expose] public section
 
 noncomputable section
 

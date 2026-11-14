@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CanonicalSourceConversion
-import ContinuousFlexibility.Analysis.N07bCanonicalSourceJets
-import ContinuousFlexibility.Analysis.N07aCanonicalHalfStrip
-import ContinuousFlexibility.Analysis.SpacesCylinderIntegration
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalSourceConversion
+public import ContinuousFlexibility.Analysis.N07bCanonicalSourceJets
+public import ContinuousFlexibility.Analysis.N07aCanonicalHalfStrip
+public import ContinuousFlexibility.Analysis.SpacesCylinderIntegration
 
 /-!
 # The actual current physical measure and closed-piece bounds
@@ -10,6 +12,8 @@ The integration domain follows the state. Fixed radial rectangles are
 retained only for reference-state wrappers. Bounds here are qualitative:
 their constants may depend on the particular state and piece.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Scalar.WeightedDifferentiationSupport
-import ContinuousFlexibility.Scalar.WeightedRadialMultiplier
-import ContinuousFlexibility.Scalar.WeightedFieldRegularity
-import ContinuousFlexibility.Scalar.WeightedDecodeLift
+module
+
+public import ContinuousFlexibility.Scalar.WeightedDifferentiationSupport
+public import ContinuousFlexibility.Scalar.WeightedRadialMultiplier
+public import ContinuousFlexibility.Scalar.WeightedFieldRegularity
+public import ContinuousFlexibility.Scalar.WeightedDecodeLift
 
 /-!
 # Fixed-loss jet bounds for the actual radial derivative
@@ -11,6 +13,8 @@ input material pullback costs one derivative. The logarithmic-weight term
 collects its complete coefficient before using the same envelope bound.
 Thus the actual ordinary radial derivative has one fixed loss of two.
 -/
+
+@[expose] public section
 
 noncomputable section
 

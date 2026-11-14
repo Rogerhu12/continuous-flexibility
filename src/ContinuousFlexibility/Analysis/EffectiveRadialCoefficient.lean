@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.NegativeCanonicalClosedEffective
-import ContinuousFlexibility.Scalar.HeightDerivatives
+module
+
+public import ContinuousFlexibility.Analysis.NegativeCanonicalClosedEffective
+public import ContinuousFlexibility.Scalar.HeightDerivatives
 
 /-!
 # Recovering the radial coefficient from the actual operator action
@@ -12,6 +14,8 @@ which N03 identifies with the original smooth coefficient.
 Thus equality of the actual operators determines their radial coefficient
 without assuming regularity of the stored mixed or angular coefficient.
 -/
+
+@[expose] public section
 
 noncomputable section
 

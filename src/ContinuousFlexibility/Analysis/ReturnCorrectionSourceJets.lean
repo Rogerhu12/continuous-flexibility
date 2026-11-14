@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ReturnDivergenceBilinear
-import ContinuousFlexibility.Analysis.LinearFiberJetExpansion
-import ContinuousFlexibility.Analysis.PhysicalJetCompatibility
+module
+
+public import ContinuousFlexibility.Analysis.ReturnDivergenceBilinear
+public import ContinuousFlexibility.Analysis.LinearFiberJetExpansion
+public import ContinuousFlexibility.Analysis.PhysicalJetCompatibility
 
 /-!
 # Actual multilinear jets of the independent-residual source
@@ -11,6 +13,8 @@ every positive jet is the sum of one term with the base height and one
 term for each height direction. The scalar derivative recurrence is
 proved for every weighted spatial jet, including the height product rule.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.PositiveBufferPoissonColumns
-import ContinuousFlexibility.Radial.PositiveBufferPoissonNorm
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferPoissonColumns
+public import ContinuousFlexibility.Radial.PositiveBufferPoissonNorm
 
 /-!
 # Actual Poisson fields and their classical representatives
@@ -9,6 +11,8 @@ map. Their representatives come from the same finite combination in the
 actual bordered energy domain. Restriction therefore gives the required
 Lebesgue L² field, zero extension, border row, and classical equation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

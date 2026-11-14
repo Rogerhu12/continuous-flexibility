@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07bReferencePDEDecay
-import ContinuousFlexibility.Radial.R11bLeftCorrection
-import ContinuousFlexibility.Radial.R11bZeroMode
+module
+
+public import ContinuousFlexibility.Analysis.N07bReferencePDEDecay
+public import ContinuousFlexibility.Radial.R11bLeftCorrection
+public import ContinuousFlexibility.Radial.R11bZeroMode
 
 /-!
 # Material decay of the actual compact reference corrections
@@ -12,6 +14,8 @@ theorems apply this directly to the left-cutoff flux and the actual border
 column. The final estimate concerns the genuine reference PDE of a C²
 remainder plus the prescribed left constant.
 -/
+
+@[expose] public section
 
 noncomputable section
 

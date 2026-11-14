@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.WeightedWeightShiftJets
-import ContinuousFlexibility.Scalar.WeightedJetNorm
-import ContinuousFlexibility.Scalar.WeightedDecodeLift
+module
+
+public import ContinuousFlexibility.Scalar.WeightedWeightShiftJets
+public import ContinuousFlexibility.Scalar.WeightedJetNorm
+public import ContinuousFlexibility.Scalar.WeightedDecodeLift
 
 /-!
 # Continuous linear inclusions between the actual weighted height spaces
@@ -10,6 +12,8 @@ that same order.  The frozen Sobolev decoder therefore lifts the inclusion to
 a genuine continuous linear map, with zero loss and zero base, on the actual
 projective spaces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

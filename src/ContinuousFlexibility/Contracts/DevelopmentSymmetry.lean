@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Contracts.IsometricGraph
-import Mathlib.Topology.Algebra.Group.ContinuousInv
+module
+
+public import ContinuousFlexibility.Contracts.IsometricGraph
+public import Mathlib.Topology.Algebra.Group.ContinuousInv
 
 /-!
 # Reflection of the actual normalized development
@@ -10,6 +12,8 @@ another development of the same metric with the same exterior normalization.
 This prepares the uniqueness argument for oddness; uniqueness is not an
 assumption of the constructed reflected development.
 -/
+
+@[expose] public section
 
 noncomputable section
 

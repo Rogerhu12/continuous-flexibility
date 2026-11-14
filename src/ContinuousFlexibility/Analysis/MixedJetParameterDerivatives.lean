@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.MaterialDivergenceEnvelopes
+module
+
+public import ContinuousFlexibility.Analysis.MaterialDivergenceEnvelopes
 
 /-!
 # Parameter derivatives of actual spatial jets
@@ -8,6 +10,8 @@ slice. Smoothness is needed only near the parameter under consideration.
 Finite Leibniz sums and the exact partial-derivative identities preserve
 this assertion without introducing a formal spatial jet.
 -/
+
+@[expose] public section
 
 noncomputable section
 

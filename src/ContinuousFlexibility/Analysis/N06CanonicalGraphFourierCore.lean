@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06CanonicalGraphFourierProjection
+module
+
+public import ContinuousFlexibility.Analysis.N06CanonicalGraphFourierProjection
 
 /-!
 # Density of finite angular heights in the original canonical graph
@@ -9,6 +11,8 @@ belong to the same graph, retain all three original scalar coordinates,
 and have one common finite frequency set on every canonical piece. Their
 strong convergence is in the original complete graph norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

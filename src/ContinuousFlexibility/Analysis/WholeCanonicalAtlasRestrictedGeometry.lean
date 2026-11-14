@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.WholeCanonicalAtlasGeometry
-import ContinuousFlexibility.Analysis.WholeCanonicalAtlasCutOperator
-import ContinuousFlexibility.Analysis.CanonicalNeighborhoodRestriction
+module
+
+public import ContinuousFlexibility.Analysis.WholeCanonicalAtlasGeometry
+public import ContinuousFlexibility.Analysis.WholeCanonicalAtlasCutOperator
+public import ContinuousFlexibility.Analysis.CanonicalNeighborhoodRestriction
 
 /-!
 # Restrict the state neighborhood while retaining the constructed atlas
@@ -12,6 +14,8 @@ chart, inverse, height and reference cut; it is not reconstructed from
 a restricted Through03 proof. All actual operator identities refer to
 the same whole-atlas record on the smaller neighborhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

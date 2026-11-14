@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ReturnCoefficientParity
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCoefficientParity
 
 /-!
 # The relative discriminant retained by the actual return patch
@@ -9,6 +11,8 @@ original discriminant. At inactive points the actual patch is exactly
 the original coefficient object. No regularity or coefficient estimate
 for a proposed corrected field is an input to this algebraic transfer.
 -/
+
+@[expose] public section
 
 noncomputable section
 

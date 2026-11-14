@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01ReturnCircleUniformBounds
-import ContinuousFlexibility.Analysis.ReturnInterpolationJetBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01ReturnCircleUniformBounds
+public import ContinuousFlexibility.Analysis.ReturnInterpolationJetBounds
 
 /-!
 # Selector-uniform one-high estimates for the actual cutoff velocity
@@ -11,6 +13,8 @@ the low box and the output order; every numerical constant is chosen
 before the closed-radius selector. Ordinary radial differentiation is a
 separate ODE estimate and is not asserted here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

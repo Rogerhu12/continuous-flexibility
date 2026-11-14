@@ -1,7 +1,9 @@
-import Mathlib.Analysis.ODE.Gronwall
-import Mathlib.Analysis.Calculus.Deriv.Prod
-import Mathlib.Topology.EMetricSpace.Lipschitz
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Analysis.ODE.Gronwall
+public import Mathlib.Analysis.Calculus.Deriv.Prod
+public import Mathlib.Topology.EMetricSpace.Lipschitz
+public import Mathlib.Tactic.Ring
 
 /-!
 # Continuous dependence of scalar trajectories on external parameters
@@ -16,6 +18,8 @@ as supplied by the Picard-Lindelof existence theorem.  The initial time is the
 left endpoint.  A Lipschitz initial-value map gives a uniform parameter
 Lipschitz bound and joint continuity on the parameter-time domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

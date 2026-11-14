@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N06NegativeFiniteGreen
-import ContinuousFlexibility.Analysis.N06ReferenceWeakIdentity
-import ContinuousFlexibility.Analysis.N06ReferenceRemainderEquation
-import ContinuousFlexibility.Analysis.N06ReferenceTestOperator
-import ContinuousFlexibility.Analysis.N06CanonicalWeakTransport
-import ContinuousFlexibility.Analysis.N06CurrentChartChange
+module
+
+public import ContinuousFlexibility.Analysis.N06NegativeFiniteGreen
+public import ContinuousFlexibility.Analysis.N06ReferenceWeakIdentity
+public import ContinuousFlexibility.Analysis.N06ReferenceRemainderEquation
+public import ContinuousFlexibility.Analysis.N06ReferenceTestOperator
+public import ContinuousFlexibility.Analysis.N06CanonicalWeakTransport
+public import ContinuousFlexibility.Analysis.N06CurrentChartChange
 
 /-!
 # The same N05 graph in the actual negative reference coordinates
@@ -19,6 +21,8 @@ the original source, the actual left cutoff, the nu column and the psi
 column. The principal part is literally `d_yy - y d_theta_theta`; its
 potential is retained as a multiplication term, not assumed radial.
 -/
+
+@[expose] public section
 
 noncomputable section
 

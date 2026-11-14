@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04bActualRootCoordinates
-import ContinuousFlexibility.Analysis.N04bLeftRootFlowGeometry
-import ContinuousFlexibility.Analysis.N04bRightRootFlowGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N04bActualRootCoordinates
+public import ContinuousFlexibility.Analysis.N04bLeftRootFlowGeometry
+public import ContinuousFlexibility.Analysis.N04bRightRootFlowGeometry
 
 /-!
 # Root-coordinate functions constructed from the actual N03 data
@@ -11,6 +13,8 @@ flow is normalized by its genuine terminal inverse. Both labels are
 smooth increasing odd circle lifts. The physical root equations then
 construct one smooth G for both characteristics at each endpoint.
 -/
+
+@[expose] public section
 
 noncomputable section
 

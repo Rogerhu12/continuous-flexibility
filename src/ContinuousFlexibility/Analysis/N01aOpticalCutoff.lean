@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.OpticalTravelVariation
-import Mathlib.Analysis.Calculus.Deriv.MeanValue
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
-import Mathlib.Analysis.Calculus.LocalExtr.Basic
-import Mathlib.Analysis.SpecialFunctions.SmoothTransition
+module
+
+public import ContinuousFlexibility.Analysis.OpticalTravelVariation
+public import Mathlib.Analysis.Calculus.Deriv.MeanValue
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+public import Mathlib.Analysis.Calculus.LocalExtr.Basic
+public import Mathlib.Analysis.SpecialFunctions.SmoothTransition
 
 /-!
 # A fixed cutoff for quantitative optical controls
@@ -12,6 +14,8 @@ a smooth step. Consequently its contribution involving the radial
 derivative of the optical radicand is an exact derivative. The remaining
 travel variation has one strict sign.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aFiniteStateProduct
-import ContinuousFlexibility.Analysis.N07aSampleEnvelopes
+module
+
+public import ContinuousFlexibility.Analysis.N07aFiniteStateProduct
+public import ContinuousFlexibility.Analysis.N07aSampleEnvelopes
 
 /-!
 # Finite monomials with an unspent spatial-order budget
@@ -8,6 +10,8 @@ An expression retains all grading factors until its complete finite
 formula is known. Its nonnegative sampled coefficients are subpower.
 The one-high estimate is applied once, after the expression is assembled.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.StateNeighborhood
-import ContinuousFlexibility.Analysis.MaterialSampleBounds
-import ContinuousFlexibility.Analysis.N01JetBounds
-import ContinuousFlexibility.Analysis.ProjectiveJetEvaluation
-import Mathlib.Analysis.Calculus.MeanValue
+module
+
+public import ContinuousFlexibility.Analysis.StateNeighborhood
+public import ContinuousFlexibility.Analysis.MaterialSampleBounds
+public import ContinuousFlexibility.Analysis.N01JetBounds
+public import ContinuousFlexibility.Analysis.ProjectiveJetEvaluation
+public import Mathlib.Analysis.Calculus.MeanValue
 
 /-!
 # Values controlled by genuine first variations
@@ -13,6 +15,8 @@ does: its actual derivative along the segment from the reference state
 controls the change in value.  The estimates retain the low seminorm
 factor explicitly before reducing to a linear high seminorm bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

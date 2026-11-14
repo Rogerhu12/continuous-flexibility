@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SpacesCylinderReconstruction
+module
+
+public import ContinuousFlexibility.Analysis.SpacesCylinderReconstruction
 
 /-!
 # Smooth limits of the complete mixed jet tower
@@ -8,6 +10,8 @@ to the limit. The adjacent mixed jets therefore form a classical smooth
 derivative tower, and reconstruct one smooth function on the material
 plane.
 -/
+
+@[expose] public section
 
 noncomputable section
 

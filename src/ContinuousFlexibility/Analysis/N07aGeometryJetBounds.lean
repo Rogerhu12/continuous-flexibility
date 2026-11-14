@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aMaterialProductBounds
-import ContinuousFlexibility.Analysis.N07aMixedLocalCalculus
-import ContinuousFlexibility.Analysis.N07aNeighborhood
+module
+
+public import ContinuousFlexibility.Analysis.N07aMaterialProductBounds
+public import ContinuousFlexibility.Analysis.N07aMixedLocalCalculus
+public import ContinuousFlexibility.Analysis.N07aNeighborhood
 
 /-!
 # Absolute bounds for the actual geometric jets
@@ -10,6 +12,8 @@ state loss and a sampled subpower envelope. The envelope is kept as a
 whole function, so later products are absorbed only after the complete
 finite expression has been formed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ControlCellEndpointBounds
-import ContinuousFlexibility.Analysis.MaterialSampleCofinite
-import ContinuousFlexibility.Analysis.StateControlCofiniteJets
+module
+
+public import ContinuousFlexibility.Analysis.ControlCellEndpointBounds
+public import ContinuousFlexibility.Analysis.MaterialSampleCofinite
+public import ContinuousFlexibility.Analysis.StateControlCofiniteJets
 
 /-!
 # Endpoint smoothness without identifying control and reference cells
@@ -15,6 +17,8 @@ The material comparison is used only at the actual sample of a reference cell,
 where its membership hypothesis is available. No rate in the physical radial
 coordinate is asserted by this argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

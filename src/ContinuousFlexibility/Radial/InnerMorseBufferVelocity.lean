@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerMorseBufferCoefficients
+module
+
+public import ContinuousFlexibility.Radial.InnerMorseBufferCoefficients
 
 /-!
 # The actual Morse radius on the retained cut models
@@ -8,6 +10,8 @@ The left and right radius ODE estimates give one fixed physical
 velocity bound on that entire cut interval. The argument applies to
 both tails with their original increasing model coordinate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

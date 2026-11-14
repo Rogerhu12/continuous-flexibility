@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalRepresentative
-import ContinuousFlexibility.Analysis.N07aReferenceReturn
-import ContinuousFlexibility.Analysis.N07bCanonicalSourceSymmetry
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalRepresentative
+public import ContinuousFlexibility.Analysis.N07aReferenceReturn
+public import ContinuousFlexibility.Analysis.N07bCanonicalSourceSymmetry
 
 /-!
 # The actual current-to-reference physical height on each piece
@@ -10,6 +12,8 @@ scalar remains explicit. An inverse extension may be supplied, but its
 only interior hypothesis is equality with the original inverse, so every
 interior formula is the literal current-to-reference coordinate change.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import Mathlib.MeasureTheory.Function.L2Space
-import Mathlib.MeasureTheory.Integral.Prod
-import Mathlib.Analysis.InnerProductSpace.l2Space
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.MeasureTheory.Function.L2Space
+public import Mathlib.MeasureTheory.Integral.Prod
+public import Mathlib.Analysis.InnerProductSpace.l2Space
+public import Mathlib.Tactic.Ring
 
 /-!
 # Actual product-space L² synthesis
@@ -10,6 +12,8 @@ A radial L² vector and an angular L² vector define their pointwise product
 in the actual product measure. An orthonormal angular family therefore
 induces an isometric, convergent synthesis of square-summable radial vectors.
 -/
+
+@[expose] public section
 
 noncomputable section
 

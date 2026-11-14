@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RootPhysicalModelParameterUnscale
-import ContinuousFlexibility.Analysis.RootChartExtensionGeometry
+module
+
+public import ContinuousFlexibility.Analysis.RootPhysicalModelParameterUnscale
+public import ContinuousFlexibility.Analysis.RootChartExtensionGeometry
 
 /-!
 # Actual regularity of the same root model at unit parameter scale
@@ -10,6 +12,8 @@ same three-halves scaling at the root by continuity from the physical
 side. These are qualitative regularity and positivity statements only;
 no inverse normalization factor is used as a numerical jet majorant.
 -/
+
+@[expose] public section
 
 noncomputable section
 

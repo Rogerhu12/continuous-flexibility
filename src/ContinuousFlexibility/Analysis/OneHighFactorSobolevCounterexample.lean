@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighFactorCounterexample
-import ContinuousFlexibility.Analysis.OneHighCircleSobolevAlgebra
-import ContinuousFlexibility.Analysis.OneHighCircleRealSobolev
+module
+
+public import ContinuousFlexibility.Analysis.OneHighFactorCounterexample
+public import ContinuousFlexibility.Analysis.OneHighCircleSobolevAlgebra
+public import ContinuousFlexibility.Analysis.OneHighCircleRealSobolev
 
 /-!
 # The composition obstruction in the actual physical Sobolev norms
@@ -10,6 +12,8 @@ actual Fourier coefficients, and Bessel Sobolev norms as the positive
 composition theorems. They refute the original uniform dependence at H¹
 and its derivative-free order-zero version.
 -/
+
+@[expose] public section
 
 noncomputable section
 

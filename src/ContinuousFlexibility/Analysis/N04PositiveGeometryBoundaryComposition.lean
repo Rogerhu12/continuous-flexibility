@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryOperatorBounds
-import ContinuousFlexibility.Analysis.N04RealizationInverseJetFormula
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryOperatorBounds
+public import ContinuousFlexibility.Analysis.N04RealizationInverseJetFormula
 
 /-!
 # Genuine finite spatial compositions at moving boundary points
@@ -9,6 +11,8 @@ ordinary partition formula therefore constructs its actual parameter
 and angular tower without imposing a value bound on an angle lift.
 Finite operator evaluation preserves the reserved angular orders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

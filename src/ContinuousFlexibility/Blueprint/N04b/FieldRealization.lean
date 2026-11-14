@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Blueprint.Statements
-import ContinuousFlexibility.Analysis.N04bOpticalFieldRealization
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
+public import ContinuousFlexibility.Analysis.N04bOpticalFieldRealization
 
 /-!
 # N04b: realization of the actual smooth corrected field
@@ -17,6 +19,8 @@ Source: paper/flexible-surface-readable/07-fixed-geometry.tex, the type
 completion and optical residual completion preceding lines 992--1003.
 Task: docs/tasks/N04b-FieldRealization.md.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

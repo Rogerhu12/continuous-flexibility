@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aNuSupport
-import ContinuousFlexibility.Analysis.N07aCoefficientSymmetry
-import ContinuousFlexibility.Analysis.OneHighCircleFlowIntegral
-import ContinuousFlexibility.Scalar.S04CalculusProof
+module
+
+public import ContinuousFlexibility.Analysis.N07aNuSupport
+public import ContinuousFlexibility.Analysis.N07aCoefficientSymmetry
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowIntegral
+public import ContinuousFlexibility.Scalar.S04CalculusProof
 
 /-!
 # Spatial smoothness of the actual distinguished parameter column
@@ -12,6 +14,8 @@ jointly smooth in that scalar and the physical point. Differentiating that
 actual residual gives the original `nuColumnField`, including at construction
 parameter zero and across every artificial radial cut.
 -/
+
+@[expose] public section
 
 noncomputable section
 

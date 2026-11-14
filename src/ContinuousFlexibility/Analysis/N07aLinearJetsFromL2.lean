@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalMixedPointwise
-import ContinuousFlexibility.Analysis.N07aSampleLinearJets
-import ContinuousFlexibility.Analysis.N07aModeBudgetMaterial
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalMixedPointwise
+public import ContinuousFlexibility.Analysis.N07aSampleLinearJets
+public import ContinuousFlexibility.Analysis.N07aModeBudgetMaterial
 
 /-!
 # The actual L² bounds give source-linear pointwise jets at fixed loss
@@ -8,6 +10,8 @@ import ContinuousFlexibility.Analysis.N07aModeBudgetMaterial
 The only added derivative cost is two, uniformly over all mixed and
 material orders. The complete strip constant remains a subpower envelope.
 -/
+
+@[expose] public section
 
 noncomputable section
 

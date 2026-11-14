@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CoupledControlLift
-import ContinuousFlexibility.Analysis.SolveTameSubspace
+module
+
+public import ContinuousFlexibility.Analysis.CoupledControlLift
+public import ContinuousFlexibility.Analysis.SolveTameSubspace
 
 /-!
 # The closed space of angular-constant controls
@@ -9,6 +11,8 @@ in this closed subspace of the original circle model.  Its grading is the
 inherited circle grading, so no second representation of higher control
 orders is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

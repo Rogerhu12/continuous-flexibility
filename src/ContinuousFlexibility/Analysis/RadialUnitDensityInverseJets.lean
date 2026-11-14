@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.FiniteInversePolynomialEnvelope
-import ContinuousFlexibility.Analysis.RadialReferencePotentialJetEnvelope
-import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
+module
+
+public import ContinuousFlexibility.Analysis.FiniteInversePolynomialEnvelope
+public import ContinuousFlexibility.Analysis.RadialReferencePotentialJetEnvelope
+public import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
 
 /-!
 # Local inverse jets from the actual radial unit density
@@ -11,6 +13,8 @@ are controlled by the height and physical profile. The first inverse
 derivative is their reciprocal product. The finite inverse polynomial
 then uses only those actual data, without a bound on the inverse value.
 -/
+
+@[expose] public section
 
 noncomputable section
 

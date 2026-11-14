@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterWholeNaturalVector
-import ContinuousFlexibility.Radial.OuterPhysicalFundamentalPair
+module
+
+public import ContinuousFlexibility.Radial.OuterWholeNaturalVector
+public import ContinuousFlexibility.Radial.OuterPhysicalFundamentalPair
 
 /-!
 # The norm of the same physical whole natural solution
@@ -8,6 +10,8 @@ The full natural vector from the Green assembly is exactly H.V almost
 everywhere. The exact deep-measure identity transports the already
 constructed Poisson vector without changing its norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

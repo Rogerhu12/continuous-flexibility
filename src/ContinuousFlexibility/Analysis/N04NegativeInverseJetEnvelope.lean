@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeInverseJetBudget
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeInverseJetBudget
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
 
 /-!
 # Uniform material envelopes for the finite inverse majorants
@@ -9,6 +11,8 @@ every requested order. Its degree in a common coefficient envelope is
 independent of the interpolation scale and of every direction. This
 module packages those constants into the frozen `B * E ^ B` form.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.TailFundamentalGreenKernel
-import ContinuousFlexibility.Radial.TailActualSolutionNodes
-import ContinuousFlexibility.Radial.TailNodeProducts
+module
+
+public import ContinuousFlexibility.Radial.TailFundamentalGreenKernel
+public import ContinuousFlexibility.Radial.TailActualSolutionNodes
+public import ContinuousFlexibility.Radial.TailNodeProducts
 
 /-!
 # Localized bounds for the actual fundamental Green kernel
@@ -10,6 +12,8 @@ two physical Poisson interpolants. Shifting the left endpoint consumes one
 decay factor. On the same edge, the conserved discrete Wronskian supplies
 the single product whose node order is reversed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

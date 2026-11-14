@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aReferenceUnitJets
+module
+
+public import ContinuousFlexibility.Analysis.N07aReferenceUnitJets
 
 /-!
 # Primitive reference jets supply the positive unit-cylinder constants
@@ -8,6 +10,8 @@ In particular, neither an inverse estimate nor a commutator estimate is
 assumed. The quotient's second derivative uses the primitive inverse-
 leading atom, so no unquantified reciprocal differentiation occurs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

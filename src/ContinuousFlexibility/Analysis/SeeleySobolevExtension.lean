@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SeeleyCoefficients
-import ContinuousFlexibility.Analysis.SeeleyLpSeries
-import ContinuousFlexibility.Analysis.SobolevJetBonding
+module
+
+public import ContinuousFlexibility.Analysis.SeeleyCoefficients
+public import ContinuousFlexibility.Analysis.SeeleyLpSeries
+public import ContinuousFlexibility.Analysis.SobolevJetBonding
 
 /-!
 # The same Seeley operator at every Sobolev order
@@ -11,6 +13,8 @@ the smooth-jet and actual `L²` estimates. The resulting linear map on the
 smooth core extends to a bounded operator at every Sobolev level, and these
 extensions agree under the natural inclusions between levels.
 -/
+
+@[expose] public section
 
 noncomputable section
 

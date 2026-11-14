@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06CurrentTestTraceCalculus
-import ContinuousFlexibility.Analysis.N06CurrentCubicTestPairing
-import ContinuousFlexibility.Analysis.N06NegativeBulkLimits
+module
+
+public import ContinuousFlexibility.Analysis.N06CurrentTestTraceCalculus
+public import ContinuousFlexibility.Analysis.N06CurrentCubicTestPairing
+public import ContinuousFlexibility.Analysis.N06NegativeBulkLimits
 
 /-!
 # Closed tensor Green identities against actual current tests
@@ -14,6 +16,8 @@ the open strip and the genuine half-period symmetry.
 All integrals use the original, unnormalized canonical half-period
 measure. No boundary smoothness of the totalized inverse chart is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.R11aGeometryCellIndex
-import ContinuousFlexibility.Radial.R10aRegionalConstruction
-import ContinuousFlexibility.Radial.MatchedFixedCentralChoices
-import ContinuousFlexibility.Radial.MatchedSelectedMargin
-import ContinuousFlexibility.Radial.MatchedTerminalCompletion
+module
+
+public import ContinuousFlexibility.Radial.R11aGeometryCellIndex
+public import ContinuousFlexibility.Radial.R10aRegionalConstruction
+public import ContinuousFlexibility.Radial.MatchedFixedCentralChoices
+public import ContinuousFlexibility.Radial.MatchedSelectedMargin
+public import ContinuousFlexibility.Radial.MatchedTerminalCompletion
 
 /-!
 # One quantitative family from the actual closed regional construction
@@ -16,6 +18,8 @@ at every even frequency. The original Poisson and matrix completion
 supplies the same actual matching representation and modal inverse.
 No weighted inverse estimate is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

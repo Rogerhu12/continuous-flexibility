@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesSources
-import ContinuousFlexibility.Statements.Nonlinear
+module
+
+public import ContinuousFlexibility.Analysis.SpacesSources
+public import ContinuousFlexibility.Statements.Nonlinear
 
 /-!
 # Replacing only the auxiliary source column
@@ -10,6 +12,8 @@ has its own genuine continuous tame rank-one projection. Parameterized
 records are repackaged field by field; no state, source, coefficient,
 flow, chart, or inverse function is changed by that repackaging.
 -/
+
+@[expose] public section
 
 noncomputable section
 

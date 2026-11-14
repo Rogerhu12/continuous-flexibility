@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsOriginalFactorsFixedBase
-import ContinuousFlexibility.Analysis.N04PulledFieldsVelocityPolynomialFixedBase
-import ContinuousFlexibility.Analysis.MaterialSampleBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsOriginalFactorsFixedBase
+public import ContinuousFlexibility.Analysis.N04PulledFieldsVelocityPolynomialFixedBase
+public import ContinuousFlexibility.Analysis.MaterialSampleBounds
 
 /-!
 # The actual residual-substituted coefficient error
@@ -11,6 +13,8 @@ factor is kept in one input and bounded above in the other. Consequently
 the polynomial estimate does not require a second quantitative nonlinear
 composition with a residual graph.
 -/
+
+@[expose] public section
 
 noncomputable section
 

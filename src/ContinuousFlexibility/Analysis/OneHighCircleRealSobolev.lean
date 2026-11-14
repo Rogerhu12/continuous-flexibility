@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFourierDerivativeProducts
-import ContinuousFlexibility.Analysis.OneHighPeriodicJets
-import Mathlib.Analysis.Complex.RealDeriv
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFourierDerivativeProducts
+public import ContinuousFlexibility.Analysis.OneHighPeriodicJets
+public import Mathlib.Analysis.Complex.RealDeriv
 
 /-!
 # The same physical circle Sobolev norms for real functions
@@ -10,6 +12,8 @@ canonical real inclusion. No separate Fourier transform or Sobolev norm is
 introduced. The derivative-product and derivative-norm estimates therefore
 apply directly to real composition formulas.
 -/
+
+@[expose] public section
 
 noncomputable section
 

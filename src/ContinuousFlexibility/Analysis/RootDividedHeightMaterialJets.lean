@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.RootDividedHeight
-import ContinuousFlexibility.Analysis.PositivePowerMaterialJets
-import ContinuousFlexibility.Analysis.PointwiseMaterialJetOperations
+module
+
+public import ContinuousFlexibility.Analysis.RootDividedHeight
+public import ContinuousFlexibility.Analysis.PositivePowerMaterialJets
+public import ContinuousFlexibility.Analysis.PointwiseMaterialJetOperations
 
 /-!
 # Fixed-loss jets of the actual divided root height
@@ -11,6 +13,8 @@ product estimate suffice. The common low order and loss precede the
 scale, exponent, positive value intervals, and state. The inputs are
 the actual odd coefficient and divided determinant, not height jets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

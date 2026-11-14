@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.NeighborhoodCircleChartsState
+module
+
+public import ContinuousFlexibility.Analysis.NeighborhoodCircleChartsState
 
 /-!
 # The actual left root label, with all finite angular jet differences
@@ -8,6 +10,8 @@ reference identity is exactly the decoded circle coordinate, so the
 original circle norm gives every finite boundary jet with its actual
 sample weight. No independently prescribed boundary label is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

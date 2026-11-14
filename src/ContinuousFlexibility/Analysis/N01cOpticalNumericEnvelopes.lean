@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cOpticalRootProducts
+module
+
+public import ContinuousFlexibility.Analysis.N01cOpticalRootProducts
 
 /-!
 # Finite numerical envelopes for the optical-root expansion
@@ -8,6 +10,8 @@ the actual reference lower constant, upper optical bound and control
 jets. Finite products and sums affect the coefficient and exponent, not
 the state order or the common parameter neighbourhood.
 -/
+
+@[expose] public section
 
 noncomputable section
 

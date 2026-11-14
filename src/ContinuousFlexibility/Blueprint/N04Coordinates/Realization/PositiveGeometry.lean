@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryProof
-import Lean.Util.CollectAxioms
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryProof
+public import Lean.Util.CollectAxioms
 
 /-!
 # N04Coordinates-Realization: positive geometry
@@ -11,6 +13,8 @@ The statement is defined in
 Source: paper/flexible-surface-readable/07-fixed-geometry.tex, lines 1237-1250 and 1679-1687 (Step 3 of the current geometric jets lemma).
 Task: docs/tasks/N04Realization-PositiveGeometry.md.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

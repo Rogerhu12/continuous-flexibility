@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CoefficientProbeFieldRegularity
-import ContinuousFlexibility.Analysis.CanonicalCutFullFaithfulness
+module
+
+public import ContinuousFlexibility.Analysis.CoefficientProbeFieldRegularity
+public import ContinuousFlexibility.Analysis.CanonicalCutFullFaithfulness
 
 /-!
 # Common smooth numerators for the actual corrected coefficients
@@ -11,6 +13,8 @@ then identified on the whole negative component, including the cut axes.
 Consequently the fixed two-axis normalization leaves every actual local
 jet unchanged on that common physical component.
 -/
+
+@[expose] public section
 
 noncomputable section
 

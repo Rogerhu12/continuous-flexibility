@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MorseChainParameters
-import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
-import Mathlib.Analysis.Calculus.Deriv.MeanValue
+module
+
+public import ContinuousFlexibility.Radial.MorseChainParameters
+public import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
+public import Mathlib.Analysis.Calculus.Deriv.MeanValue
 
 /-!
 # Height contrast at adjacent Morse cells
@@ -10,6 +12,8 @@ The height on the right of a join uses the next cell's left speed, of size
 size `A^5`. The exact adjacent amplitude recursion controls the remaining
 logarithmic term in either direction along the chain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.JointMixedCircleEvaluation
-import ContinuousFlexibility.Analysis.CircleUniformAngularInterpolation
-import ContinuousFlexibility.Analysis.TameUniformSmoothFamily
+module
+
+public import ContinuousFlexibility.Analysis.JointMixedCircleEvaluation
+public import ContinuousFlexibility.Analysis.CircleUniformAngularInterpolation
+public import ContinuousFlexibility.Analysis.TameUniformSmoothFamily
 
 /-!
 # Uniform angular estimates on the actual spatial strips
@@ -10,6 +12,8 @@ constants for the circle family are selected before the selector, so
 identification with the genuine spatial tower gives constants uniform
 in the physical radius as well as the component and the angle.
 -/
+
+@[expose] public section
 
 noncomputable section
 

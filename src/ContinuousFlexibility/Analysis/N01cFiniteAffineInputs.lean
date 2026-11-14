@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01cCoefficientMixedParameterJets
-import ContinuousFlexibility.Analysis.N01cParametricEndpointDivision
-import Mathlib.Algebra.BigOperators.Pi
+module
+
+public import ContinuousFlexibility.Analysis.N01cCoefficientMixedParameterJets
+public import ContinuousFlexibility.Analysis.N01cParametricEndpointDivision
+public import Mathlib.Algebra.BigOperators.Pi
 
 /-!
 # Joint physical smoothness on actual finite affine state planes
@@ -10,6 +12,8 @@ state input give a finite coordinate expansion on every affine plane.
 This proves joint finite-dimensional smoothness without placing a norm
 on the original state space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

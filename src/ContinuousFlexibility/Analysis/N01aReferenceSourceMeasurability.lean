@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01aReferenceZeros
+module
+
+public import ContinuousFlexibility.Analysis.N01aReferenceZeros
 
 /-!
 # Recovering signed source measurability from actual Green reciprocity
@@ -7,6 +9,8 @@ The second-mode kernel is nonzero almost everywhere. Pairing a source with
 its genuine graph therefore gives an integrable product from which the
 signed source is recovered by measurable division.
 -/
+
+@[expose] public section
 
 noncomputable section
 

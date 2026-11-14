@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.PositiveBufferComparisonGreenError
+module
+
+public import ContinuousFlexibility.Radial.PositiveBufferComparisonGreenError
 
 /-!
 # Smooth physical cutoff data
@@ -7,6 +9,8 @@ The source is globally smooth and compactly supported. On the retained
 interval the Green kernel equals one globally smooth interior formula,
 including both finite endpoint traces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

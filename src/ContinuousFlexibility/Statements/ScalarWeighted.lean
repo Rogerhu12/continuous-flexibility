@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Scalar
-import ContinuousFlexibility.Statements.Analysis
+module
+
+public import ContinuousFlexibility.Statements.Scalar
+public import ContinuousFlexibility.Statements.Analysis
 
 /-!
 # Weighted scalar milestone targets
@@ -14,6 +16,8 @@ fixed Banach transmission domain: that belongs to the later return-corrected
 nonlinear construction. The coefficient B=E/(rQ) is not extended across a flat
 endpoint. Only its actual weighted products are required to extend.
 -/
+
+@[expose] public section
 
 noncomputable section
 

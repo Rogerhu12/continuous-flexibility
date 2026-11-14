@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aSampleEnvelopes
-import ContinuousFlexibility.Analysis.N07aMixedLocalCalculus
-import ContinuousFlexibility.Analysis.TameLocalCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N07aSampleEnvelopes
+public import ContinuousFlexibility.Analysis.N07aMixedLocalCalculus
+public import ContinuousFlexibility.Analysis.TameLocalCalculus
 
 /-!
 # Sampled coefficient bounds for actual mixed jets
@@ -8,6 +10,8 @@ import ContinuousFlexibility.Analysis.TameLocalCalculus
 The envelope retains subpower growth and the state appears in one fixed
 shift of its grading. All operations below act on the original functions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.StateKappaBounds
+module
+
+public import ContinuousFlexibility.Analysis.StateKappaBounds
 
 /-!
 # The angular-constant projection on the physical circle space
@@ -8,6 +10,8 @@ It therefore contracts every weighted circle norm and the corresponding
 projective grading.  Exact realization and injectivity of the circle model
 then give a continuous linear projection with zero tame loss.
 -/
+
+@[expose] public section
 
 noncomputable section
 

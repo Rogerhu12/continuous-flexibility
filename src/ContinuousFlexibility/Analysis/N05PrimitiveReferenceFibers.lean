@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N05PrimitiveReferenceValues
-import ContinuousFlexibility.Analysis.N05ReferenceFiberPacking
-import Mathlib.Data.Set.Card
-import Mathlib.MeasureTheory.Measure.Real
+module
+
+public import ContinuousFlexibility.Analysis.N05PrimitiveReferenceValues
+public import ContinuousFlexibility.Analysis.N05ReferenceFiberPacking
+public import Mathlib.Data.Set.Card
+public import Mathlib.MeasureTheory.Measure.Real
 
 /-!
 # Finite fibers from the actual primitive physical lengths
@@ -13,6 +15,8 @@ hypothesis is needed. The primitive premise remains explicit here;
 producing it from a full nonlinear construction is a separate obligation
 of the shared interface.
 -/
+
+@[expose] public section
 
 noncomputable section
 

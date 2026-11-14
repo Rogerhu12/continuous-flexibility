@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.AngularSpectralCoordinates
-import ContinuousFlexibility.Analysis.AngularRealSpectralDecomposition
-import ContinuousFlexibility.Analysis.AngularYosida
+module
+
+public import ContinuousFlexibility.Analysis.AngularSpectralCoordinates
+public import ContinuousFlexibility.Analysis.AngularRealSpectralDecomposition
+public import ContinuousFlexibility.Analysis.AngularYosida
 
 /-!
 # Angular Sobolev scales on a general Hilbert space
@@ -9,6 +11,8 @@ The spectral decomposition is proved for both scalar fields. The public
 scale is built from the original bounded resolvent; no coordinate system
 or decomposition is an assumption on its users.
 -/
+
+@[expose] public section
 
 noncomputable section
 

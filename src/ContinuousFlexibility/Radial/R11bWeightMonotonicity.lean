@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.R11bWeightEmbedding
+module
+
+public import ContinuousFlexibility.Radial.R11bWeightEmbedding
 
 /-!
 # Monotonicity in the reference coefficient exponents
@@ -11,6 +13,8 @@ The maximum graph has a larger output domain after the latter change.
 Accordingly, transporting the full inverse specification below requires a
 separate uniqueness hypothesis on the new graph.
 -/
+
+@[expose] public section
 
 noncomputable section
 

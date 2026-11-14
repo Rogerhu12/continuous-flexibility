@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.AngularMeanL2
-import ContinuousFlexibility.Radial.FourierSineOrthogonality
-import Mathlib.Analysis.InnerProductSpace.Orthonormal
+module
+
+public import ContinuousFlexibility.Radial.AngularMeanL2
+public import ContinuousFlexibility.Radial.FourierSineOrthogonality
+public import Mathlib.Analysis.InnerProductSpace.Orthonormal
 
 /-!
 # Finite Bessel inequalities for actual angular coefficients
@@ -10,6 +12,8 @@ right-hand side are the normalized ordinary angular integrals. The proof
 lifts only the finitely many basis functions to the normalized L² space
 and applies the finite Hilbert-space Bessel inequality.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Radial
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.RootTravelDifferential
-import ContinuousFlexibility.Scalar.HeightDerivatives
+module
+
+public import ContinuousFlexibility.Analysis.RootTravelDifferential
+public import ContinuousFlexibility.Scalar.HeightDerivatives
 
 /-!
 # A smooth angular-product denominator for the root height
@@ -11,6 +13,8 @@ Here φ and χ are the genuine smooth extensions. This expression is
 smooth across the root, and its boundary value is the square of the
 prescribed angular normalization derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

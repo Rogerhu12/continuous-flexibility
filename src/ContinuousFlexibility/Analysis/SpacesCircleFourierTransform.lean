@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SpacesCircleFourierProjection
+module
+
+public import ContinuousFlexibility.Analysis.SpacesCircleFourierProjection
 
 /-!
 # The normalized angular Fourier isometry
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Analysis.SpacesCircleFourierProjection
 The factor `sqrt π` converts the normalized Fourier coefficient convention
 to the unnormalized angular `L²` norm used throughout the physical spaces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

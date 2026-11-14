@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MatchedOuterSelectedCut
-import ContinuousFlexibility.Radial.OuterFrequencyScale
-import ContinuousFlexibility.Radial.StandInBoundarySlope
+module
+
+public import ContinuousFlexibility.Radial.MatchedOuterSelectedCut
+public import ContinuousFlexibility.Radial.OuterFrequencyScale
+public import ContinuousFlexibility.Radial.StandInBoundarySlope
 
 /-!
 # The actual selected boundary scale satisfies the uniform core bounds
@@ -11,6 +13,8 @@ bounds, adjacent amplitude estimates and moving upper frequency cutoff
 give both scale comparisons.  No operator estimate or scale comparison
 is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

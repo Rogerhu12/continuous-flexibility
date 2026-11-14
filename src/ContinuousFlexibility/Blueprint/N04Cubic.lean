@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Blueprint.Statements
-import ContinuousFlexibility.Analysis.CubicDivisionL2
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
+public import ContinuousFlexibility.Analysis.CubicDivisionL2
 
 /-!
 # Blueprint node N04Cubic
@@ -11,6 +13,8 @@ Source: `paper/flexible-surface-readable/07-fixed-geometry.tex` lines 1211–130
 Task file: `docs/tasks/N04Cubic.md`. The frozen statement is proved with the
 uniform constant eight, using three applications of the Euler L² estimate.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

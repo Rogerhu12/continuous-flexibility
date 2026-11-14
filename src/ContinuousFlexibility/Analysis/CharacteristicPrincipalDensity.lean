@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.PrincipalCoefficientPullback
+module
+
+public import ContinuousFlexibility.Analysis.PrincipalCoefficientPullback
 
 /-!
 # Actual characteristic travel coordinates and their principal density
@@ -8,6 +10,8 @@ speeds d+v and d-v. The differential of their half-difference and
 half-sum gives a positive Jacobian and the diagonal wave density.
 No coordinate transformation law is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

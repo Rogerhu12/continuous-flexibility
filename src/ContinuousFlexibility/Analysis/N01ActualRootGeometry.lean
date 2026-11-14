@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01CommonRootCharacteristicStrip
-import Mathlib.Analysis.Calculus.Deriv.Slope
+module
+
+public import ContinuousFlexibility.Analysis.N01CommonRootCharacteristicStrip
+public import Mathlib.Analysis.Calculus.Deriv.Slope
 
 /-!
 # The actual two endpoints and a genuine material cell collar
@@ -9,6 +11,8 @@ component and its simple zeros. A nonzero member of the actual radial
 partition supplies a cell neighborhood of each root; no prescribed cell
 is assumed to contain a neighborhood of that root.
 -/
+
+@[expose] public section
 
 noncomputable section
 

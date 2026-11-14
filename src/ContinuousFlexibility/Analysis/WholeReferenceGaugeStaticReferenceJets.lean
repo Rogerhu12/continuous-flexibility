@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeLengthReferenceJets
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeScaleReferenceJets
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeMaterialRatioReferenceJets
+module
+
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeLengthReferenceJets
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeScaleReferenceJets
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeMaterialRatioReferenceJets
 
 /-!
 # The twelve static reference atoms on one actual whole atlas
@@ -10,6 +12,8 @@ the same original typed atlas, whole-piece indices and stored samples.
 Their proved finite-order bounds are combined after one explicit material
 enlargement. No reference-jet estimate is assumed as an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 

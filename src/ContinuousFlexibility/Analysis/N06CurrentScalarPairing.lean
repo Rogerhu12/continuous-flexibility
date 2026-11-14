@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06PhysicalHeightAffinePairing
-import ContinuousFlexibility.Analysis.N06LeftColumnSymmetry
-import ContinuousFlexibility.Analysis.N06NuPhysicalRegularity
+module
+
+public import ContinuousFlexibility.Analysis.N06PhysicalHeightAffinePairing
+public import ContinuousFlexibility.Analysis.N06LeftColumnSymmetry
+public import ContinuousFlexibility.Analysis.N06NuPhysicalRegularity
 
 /-!
 # The three actual current columns in finite canonical pairings
@@ -15,6 +17,8 @@ gives the precise remainder source used by the positive and negative
 Green identities. All integrability is proved in the original canonical
 L2 spaces before the sums or integrals are split.
 -/
+
+@[expose] public section
 
 noncomputable section
 

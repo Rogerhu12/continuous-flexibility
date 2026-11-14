@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.TailResistanceTransport
-import ContinuousFlexibility.Radial.MorsePositiveJoin
-import Mathlib.Topology.Order.ProjIcc
+module
+
+public import ContinuousFlexibility.Radial.TailResistanceTransport
+public import ContinuousFlexibility.Radial.MorsePositiveJoin
+public import Mathlib.Topology.Order.ProjIcc
 
 /-!
 # Smooth steps with inverse-resistance energy
@@ -11,6 +13,8 @@ the edge. A continuous positive clamped extension supplies a global
 resistance coordinate; the transition is locally constant wherever that
 extension may fail to be smooth.
 -/
+
+@[expose] public section
 
 noncomputable section
 

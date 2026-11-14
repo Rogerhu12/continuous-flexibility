@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.EndpointResistance
-import ContinuousFlexibility.Radial.R11bInverseDensity
-import ContinuousFlexibility.Radial.R11bAngularL2Bridge
-import ContinuousFlexibility.Radial.R11bZeroMode
+module
+
+public import ContinuousFlexibility.Analysis.EndpointResistance
+public import ContinuousFlexibility.Radial.R11bInverseDensity
+public import ContinuousFlexibility.Radial.R11bAngularL2Bridge
+public import ContinuousFlexibility.Radial.R11bZeroMode
 
 /-!
 # The physical left constant is independent of the output exponent
@@ -12,6 +14,8 @@ with the inverse square root of the coefficient is not in L². Subtracting
 two attenuated output realizations therefore identifies their left constants,
 even when their attenuation and coefficient exponents differ.
 -/
+
+@[expose] public section
 
 noncomputable section
 

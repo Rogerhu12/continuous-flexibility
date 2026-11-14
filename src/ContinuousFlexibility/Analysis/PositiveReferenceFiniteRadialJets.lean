@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneSidedBoundaryTaylorRepresentative
-import ContinuousFlexibility.Analysis.PositiveChartRangeGeometry
+module
+
+public import ContinuousFlexibility.Analysis.OneSidedBoundaryTaylorRepresentative
+public import ContinuousFlexibility.Analysis.PositiveChartRangeGeometry
 
 /-!
 # A positive reference chart from actual finite radial endpoint jets
@@ -11,6 +13,8 @@ of angle when the original fields are radial on the open side. The
 existing positive interpolation then gives one genuine reference chart
 and height with the prescribed finite ordinary jets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

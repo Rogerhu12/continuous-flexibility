@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Blueprint.Statements
-import ContinuousFlexibility.Radial.R07Construction
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
+public import ContinuousFlexibility.Radial.R07Construction
 
 /-!
 # Blueprint node R07
@@ -10,6 +12,8 @@ angles bounded below.
 Source: paper/flexible-surface-readable/05-flat-end-chain.tex, lines 790–1013.
 Task file: docs/tasks/R07.md.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

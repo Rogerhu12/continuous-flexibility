@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N07aAngularEven
-import ContinuousFlexibility.Analysis.N07aCanonicalWeakJets
-import ContinuousFlexibility.Analysis.IntervalWeakPrimitive
-import ContinuousFlexibility.Radial.ReferenceGraphCoefficients
-import ContinuousFlexibility.Radial.ReferenceCosineParseval
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularEven
+public import ContinuousFlexibility.Analysis.N07aCanonicalWeakJets
+public import ContinuousFlexibility.Analysis.IntervalWeakPrimitive
+public import ContinuousFlexibility.Radial.ReferenceGraphCoefficients
+public import ContinuousFlexibility.Radial.ReferenceCosineParseval
 
 /-!
 # Actual radial cosine coefficients of canonical weak derivatives
@@ -12,6 +14,8 @@ periodic representative is presumed. Zero extension to the other half
 period is used only to reuse the existing scalar L² coefficient estimate.
 Separated compact tests then identify the genuine first weak derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N08ControlColumnJets
-import ContinuousFlexibility.Analysis.TameInverseBounds
-import ContinuousFlexibility.Analysis.TamePairTopology
+module
+
+public import ContinuousFlexibility.Analysis.N08ControlColumnJets
+public import ContinuousFlexibility.Analysis.TameInverseBounds
+public import ContinuousFlexibility.Analysis.TamePairTopology
 
 /-!
 # Joint smooth tameness of the actual control column
@@ -11,6 +13,8 @@ therefore gives the full smooth-tame estimate on the zero-control slice,
 with no restriction on the size of the column input. The final theorem
 extracts the column and all-order centered bounds from one actual germ.
 -/
+
+@[expose] public section
 
 noncomputable section
 

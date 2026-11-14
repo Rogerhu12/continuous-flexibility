@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.MaterialWeights
+module
+
+public import ContinuousFlexibility.Analysis.MaterialWeights
 
 /-!
 # An endpoint height comparison controls the slower envelope
@@ -7,6 +9,8 @@ The cubic exponent of the height weight bounds the endpoint coordinate
 linearly. The logarithmic envelope then changes by only a fixed power.
 The constants are uniform in both endpoint coordinates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

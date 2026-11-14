@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ActualNegativeLengthRadialBounds
-import ContinuousFlexibility.Analysis.MaterialPointRadialPolynomial
-import ContinuousFlexibility.Analysis.ActualNegativeMaterialSamples
+module
+
+public import ContinuousFlexibility.Analysis.ActualNegativeLengthRadialBounds
+public import ContinuousFlexibility.Analysis.MaterialPointRadialPolynomial
+public import ContinuousFlexibility.Analysis.ActualNegativeMaterialSamples
 
 /-!
 # Actual negative length costs at the stored atlas sample
@@ -11,6 +13,8 @@ power. The proved full-component comparison then transfers the cost to
 the original cell sample stored by this very half of the typed atlas.
 No equality or uniqueness of the two host cells is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

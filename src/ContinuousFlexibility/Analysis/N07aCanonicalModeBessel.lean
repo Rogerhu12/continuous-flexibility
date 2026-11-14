@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalModeParseval
-import Mathlib.Topology.Algebra.InfiniteSum.Real
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalModeParseval
+public import Mathlib.Topology.Algebra.InfiniteSum.Real
 
 /-!
 # Bessel bounds for arbitrary actual canonical source classes
@@ -8,6 +10,8 @@ Only the angular variable is periodically extended. Finite cosine
 projections are contractions on every radial section, so their actual
 radial L² norms have a summable square bound without an evenness premise.
 -/
+
+@[expose] public section
 
 noncomputable section
 

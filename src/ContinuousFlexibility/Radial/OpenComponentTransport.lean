@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.ReferenceDilation
-import Mathlib.Topology.Separation.Hausdorff
-import Mathlib.Topology.Order.DenselyOrdered
+module
+
+public import ContinuousFlexibility.Radial.ReferenceDilation
+public import Mathlib.Topology.Separation.Hausdorff
+public import Mathlib.Topology.Order.DenselyOrdered
 
 /-!
 # Transport of a negative component from an open tail identity
@@ -9,6 +11,8 @@ Only equality on the open negative component is needed.  Smoothness
 extends both the profile identity and its first derivative to the closed
 component, so a component endpoint may coincide with the tail entry.
 -/
+
+@[expose] public section
 
 noncomputable section
 

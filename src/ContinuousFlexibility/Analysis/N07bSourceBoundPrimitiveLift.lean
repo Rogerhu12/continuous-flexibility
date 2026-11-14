@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07bSourceBoundPrimitiveGrowth
+module
+
+public import ContinuousFlexibility.Analysis.N07bSourceBoundPrimitiveGrowth
 
 /-!
 # Actual source lifts from primitive geometric jet estimates
@@ -8,6 +10,8 @@ prescribed volume model, with a uniform norm bound on one common state
 neighborhood. The source order is `b+1`. The geometric input remains
 explicit: qualitative chart regularity alone is not claimed to supply it.
 -/
+
+@[expose] public section
 
 noncomputable section
 

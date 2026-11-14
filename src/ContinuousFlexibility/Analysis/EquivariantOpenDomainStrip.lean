@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PeriodicLiftAxisIntervals
-import ContinuousFlexibility.Analysis.ReflectionStripGeometry
+module
+
+public import ContinuousFlexibility.Analysis.PeriodicLiftAxisIntervals
+public import ContinuousFlexibility.Analysis.ReflectionStripGeometry
 
 /-!
 # A fundamental angular strip for a general physical domain
@@ -9,6 +11,8 @@ angular component preserves the fundamental interval by its genuine
 axis fibers and bounded periodic displacement. Thus no path at a fixed
 physical radius, and no radial-graph assumption on a moving cut, is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

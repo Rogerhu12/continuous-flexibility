@@ -1,10 +1,12 @@
-import ContinuousFlexibility.Radial.R11bFirstNormal
-import ContinuousFlexibility.Radial.R11bMaximumGraphUniqueness
-import ContinuousFlexibility.Radial.ReferenceNaturalKernel
-import ContinuousFlexibility.Radial.ReferenceSourceDensity
-import ContinuousFlexibility.Radial.ReferenceSmoothInverse
-import ContinuousFlexibility.Radial.ReferenceSmoothCore
-import ContinuousFlexibility.Radial.ReferenceSmoothGraphGreen
+module
+
+public import ContinuousFlexibility.Radial.R11bFirstNormal
+public import ContinuousFlexibility.Radial.R11bMaximumGraphUniqueness
+public import ContinuousFlexibility.Radial.ReferenceNaturalKernel
+public import ContinuousFlexibility.Radial.ReferenceSourceDensity
+public import ContinuousFlexibility.Radial.ReferenceSmoothInverse
+public import ContinuousFlexibility.Radial.ReferenceSmoothCore
+public import ContinuousFlexibility.Radial.ReferenceSmoothGraphGreen
 
 /-!
 # Completing a radial reference on the same selected data
@@ -15,6 +17,8 @@ and graph-closure steps without repackaging the reference data existentially.
 Its conclusion concerns the original `D`, so every such certificate remains
 available for the subsequent nonlinear construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

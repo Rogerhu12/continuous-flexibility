@@ -1,6 +1,10 @@
-import ContinuousFlexibility.Radial.SeedPairGluing
+module
+
+public import ContinuousFlexibility.Radial.SeedPairGluing
 
 /-! # Gluing toward either radial endpoint -/
+
+@[expose] public section
 
 noncomputable section
 

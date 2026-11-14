@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.OneHighCircleRepeatedProducts
-import ContinuousFlexibility.Analysis.OneHighPointwiseComposition
-import ContinuousFlexibility.Analysis.OneHighL2Domination
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleRepeatedProducts
+public import ContinuousFlexibility.Analysis.OneHighPointwiseComposition
+public import ContinuousFlexibility.Analysis.OneHighL2Domination
 
 /-!
 # Uniform scalar smooth-composition estimates on the physical circle
@@ -10,6 +12,8 @@ one-high-factor product estimate. The base-point term uses the derivative
 bound on a convex region containing both zero and the input range. The
 constants are specified before the input or the outer function is chosen.
 -/
+
+@[expose] public section
 
 noncomputable section
 

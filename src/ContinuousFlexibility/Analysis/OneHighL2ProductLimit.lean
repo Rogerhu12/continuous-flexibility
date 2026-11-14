@@ -1,5 +1,7 @@
-import Mathlib.MeasureTheory.Function.ConvergenceInMeasure
-import Mathlib.Topology.Algebra.Monoid
+module
+
+public import Mathlib.MeasureTheory.Function.ConvergenceInMeasure
+public import Mathlib.Topology.Algebra.Monoid
 
 /-!
 # Closure of finite L2 product bounds
@@ -9,6 +11,8 @@ almost-everywhere convergent subsequence. Fatou then transfers a uniform
 product bound to the actual product of the limits. The measure may be
 infinite, and no convergence of the products in L2 is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

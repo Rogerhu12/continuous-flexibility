@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bRootTravelClosed
-import ContinuousFlexibility.Analysis.N04bNegativePairGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N04bRootTravelClosed
+public import ContinuousFlexibility.Analysis.N04bNegativePairGeometry
 
 /-!
 # Boundary maps of the constructed physical root charts
@@ -10,6 +12,8 @@ Inside the root strip, and at its positive cut radius, it agrees with the
 already constructed physical travel inverse. At root zero its image is
 the actual physical endpoint circle.
 -/
+
+@[expose] public section
 
 noncomputable section
 

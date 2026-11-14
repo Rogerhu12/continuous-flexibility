@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.TailHighFormBound
-import ContinuousFlexibility.Radial.TailReflectedInverse
-import ContinuousFlexibility.Radial.TailMassCells
+module
+
+public import ContinuousFlexibility.Radial.TailHighFormBound
+public import ContinuousFlexibility.Radial.TailReflectedInverse
+public import ContinuousFlexibility.Radial.TailMassCells
 
 /-!
 # Closing the high-mode estimate in the actual form space
@@ -10,6 +12,8 @@ For a continuous projection preserving that core, the actual zero-mean
 conditions give the high-mode estimate on core residuals. Continuity of both
 energy coordinates then gives the same estimate on the full form space.
 -/
+
+@[expose] public section
 
 noncomputable section
 

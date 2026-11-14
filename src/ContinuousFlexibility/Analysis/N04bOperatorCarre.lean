@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.PrincipalCoefficientPullback
+module
+
+public import ContinuousFlexibility.Analysis.PrincipalCoefficientPullback
 
 /-!
 # Recovering the effective principal coefficients from actual operator values
@@ -12,6 +14,8 @@ coefficients used to store that operator is assumed or inferred.
 These are local operator statements. Applying them to a restricted class
 of test fields still requires genuine local extensions into that class.
 -/
+
+@[expose] public section
 
 noncomputable section
 

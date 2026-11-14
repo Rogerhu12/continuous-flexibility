@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.PositiveReferenceAffineDifference
-import ContinuousFlexibility.Analysis.BoundaryTaylorBounds
-import ContinuousFlexibility.Analysis.LocalMixedProductBounds
+module
+
+public import ContinuousFlexibility.Analysis.PositiveReferenceAffineDifference
+public import ContinuousFlexibility.Analysis.BoundaryTaylorBounds
+public import ContinuousFlexibility.Analysis.LocalMixedProductBounds
 
 /-!
 # Linear high-jet bounds at the fixed positive reference collar
@@ -10,6 +12,8 @@ Its interval length cancels against the actual lower bound for that
 denominator. Only derivatives of the fixed radial cutoffs multiply the
 high endpoint data. No high derivative bound is used to choose a width.
 -/
+
+@[expose] public section
 
 noncomputable section
 

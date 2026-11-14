@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Scalar.WeightedHeightAlgebra
-import ContinuousFlexibility.Scalar.WeightedStatePrimitives
-import ContinuousFlexibility.Scalar.WeightedProductTower
-import ContinuousFlexibility.Scalar.WeightedUniformTameGermOperations
+module
+
+public import ContinuousFlexibility.Scalar.WeightedHeightAlgebra
+public import ContinuousFlexibility.Scalar.WeightedStatePrimitives
+public import ContinuousFlexibility.Scalar.WeightedProductTower
+public import ContinuousFlexibility.Scalar.WeightedUniformTameGermOperations
 
 /-!
 # Uniform tame germs of the concrete scalar height operations
@@ -10,6 +12,8 @@ The original weighted model is complete because its prescribed weak graph
 is closed. This supplies the completeness used in the genuine composition
 theorem, without placing an extra hypothesis on the scalar data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

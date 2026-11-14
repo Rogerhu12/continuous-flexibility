@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Statements.RadialTargets
-import Mathlib.Analysis.InnerProductSpace.Basic
-import Mathlib.Analysis.Normed.Operator.Prod
+module
+
+public import ContinuousFlexibility.Statements.RadialTargets
+public import Mathlib.Analysis.InnerProductSpace.Basic
+public import Mathlib.Analysis.Normed.Operator.Prod
 
 /-!
 # Local bounds for the actual matching formula
@@ -13,6 +15,8 @@ or frequency-uniform geometric estimate is assumed.
 RadialModePair has the ordinary product norm. Its manually defined pairing
 therefore has norm at most two; it is not treated as a Hilbert product.
 -/
+
+@[expose] public section
 
 noncomputable section
 

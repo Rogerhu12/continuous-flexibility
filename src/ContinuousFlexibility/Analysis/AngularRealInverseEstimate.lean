@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.AngularComplexificationLp
-import ContinuousFlexibility.Analysis.AngularInverseEstimate
+module
+
+public import ContinuousFlexibility.Analysis.AngularComplexificationLp
+public import ContinuousFlexibility.Analysis.AngularInverseEstimate
 
 /-!
 # The angular inverse estimate over the reals
@@ -9,6 +11,8 @@ The commutator and inverse identities transfer by their two real
 components.  Applying the complex theorem to the real-axis embedding
 therefore gives the same tame constant for arbitrary real Hilbert fibers.
 -/
+
+@[expose] public section
 
 noncomputable section
 

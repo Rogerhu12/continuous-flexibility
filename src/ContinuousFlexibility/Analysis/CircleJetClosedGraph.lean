@@ -1,4 +1,8 @@
-import ContinuousFlexibility.Statements.Analysis
+module
+
+public import ContinuousFlexibility.Statements.Analysis
+
+@[expose] public section
 
 open Set Filter MeasureTheory
 open scoped ContDiff RealInnerProductSpace InnerProductSpace

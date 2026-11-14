@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseChainFullRealization
-import ContinuousFlexibility.Radial.MorseChainMassResistance
+module
+
+public import ContinuousFlexibility.Radial.MorseChainFullRealization
+public import ContinuousFlexibility.Radial.MorseChainMassResistance
 
 /-!
 # Replacing the finite middle while retaining the actual Morse tails
@@ -9,6 +11,8 @@ after the infinite tail height selection. A fixed smooth positive middle,
 with the same endpoint germs, is multiplied by the head amplitude for every
 height sequence. This preserves all uniform realization estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

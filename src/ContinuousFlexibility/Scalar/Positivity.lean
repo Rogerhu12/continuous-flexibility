@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.Definitions
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Ring
+module
+
+public import ContinuousFlexibility.Scalar.Definitions
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
 
 /-!
 # Positivity of the remainder metric
@@ -10,6 +12,8 @@ following positivity assertion. The quadratic form is the actual coordinate
 expression of the remainder metric; no positivity hypothesis is built into
 its definition.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.AffineMaterialData
+module
+
+public import ContinuousFlexibility.Analysis.AffineMaterialData
 
 /-!
 # Sampling the material weights on the radial cells
@@ -7,6 +9,8 @@ The cell distance estimates bound the discrepancy between the cell index
 and each endpoint variable used by the material weights. This preserves
 the trace widths and controls both directions of the height-weight ratio.
 -/
+
+@[expose] public section
 
 noncomputable section
 

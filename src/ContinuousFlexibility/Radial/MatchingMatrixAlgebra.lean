@@ -1,9 +1,11 @@
-import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
-import Mathlib.Data.Matrix.Block
-import Mathlib.Analysis.Normed.Group.Constructions
-import Mathlib.Analysis.Real.Sqrt
-import Mathlib.Analysis.Normed.Ring.Basic
-import Mathlib.Tactic.NoncommRing
+module
+
+public import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
+public import Mathlib.Data.Matrix.Block
+public import Mathlib.Analysis.Normed.Group.Constructions
+public import Mathlib.Analysis.Real.Sqrt
+public import Mathlib.Analysis.Normed.Ring.Basic
+public import Mathlib.Tactic.NoncommRing
 
 /-!
 # Matching matrix algebra
@@ -16,6 +18,8 @@ with `A = diag a`, `B = diag b`, `A² + B² = 1` and symmetric `D`, put
 invertibility of `K` from a lower bound on the diagonal part, and the scalar identity
 of `eq:rad-eq-tm9`.
 -/
+
+@[expose] public section
 
 open Matrix
 

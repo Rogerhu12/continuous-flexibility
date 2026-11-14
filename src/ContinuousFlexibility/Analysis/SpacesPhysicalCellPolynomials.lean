@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SpacesPhysicalCellBands
+module
+
+public import ContinuousFlexibility.Analysis.SpacesPhysicalCellBands
 
 /-!
 # Smooth representatives of the physical cell jets
@@ -7,6 +9,8 @@ Every finite spectral band is represented by a genuine smooth periodic
 Fourier polynomial on the material plane. Its actual mixed derivatives
 agree almost everywhere with the already constructed cell jet operators.
 -/
+
+@[expose] public section
 
 noncomputable section
 

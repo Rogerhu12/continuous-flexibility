@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CylinderTestPairing
-import Mathlib.MeasureTheory.Function.LpSpace.InfiniteSum
-import Mathlib.Analysis.Normed.Group.InfiniteSum
+module
+
+public import ContinuousFlexibility.Analysis.CylinderTestPairing
+public import Mathlib.MeasureTheory.Function.LpSpace.InfiniteSum
+public import Mathlib.Analysis.Normed.Group.InfiniteSum
 
 /-!
 # Summation estimates for the trace extension
@@ -9,6 +11,8 @@ The pointwise sum of packets with summable L² norms represents the actual
 Banach-space sum. A bounded function supported in a radial interval of length
 two has a uniform cylinder L² bound, independently of the interval's centre.
 -/
+
+@[expose] public section
 
 noncomputable section
 

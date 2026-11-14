@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.RetainedMorsePositiveGapComponents
-import ContinuousFlexibility.Analysis.RetainedMorsePositiveGapMaterialWidth
-import Mathlib.Algebra.Order.Monoid.Unbundled.MinMax
+module
+
+public import ContinuousFlexibility.Analysis.RetainedMorsePositiveGapComponents
+public import ContinuousFlexibility.Analysis.RetainedMorsePositiveGapMaterialWidth
+public import Mathlib.Algebra.Order.Monoid.Unbundled.MinMax
 
 /-!
 # Physical profile lower bounds on the actual retained positive gaps
@@ -11,6 +13,8 @@ height divided by radius cubed. The actual midpoint cell then controls
 both its model weight and reciprocal gap length. The resulting linear
 endpoint lower bound belongs to the same profile and material sample.
 -/
+
+@[expose] public section
 
 noncomputable section
 

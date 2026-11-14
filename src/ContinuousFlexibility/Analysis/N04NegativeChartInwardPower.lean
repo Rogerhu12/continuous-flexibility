@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartOpticalPowerControl
-import ContinuousFlexibility.Analysis.N04NegativeGeometryNormalizedFactorBounds
-import ContinuousFlexibility.Analysis.N01cMaterialShiftComparison
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartOpticalPowerControl
+public import ContinuousFlexibility.Analysis.N04NegativeGeometryNormalizedFactorBounds
+public import ContinuousFlexibility.Analysis.N01cMaterialShiftComparison
 
 /-!
 # Inward coordinates and the actual negative-half sample
@@ -11,6 +13,8 @@ The two material comparisons preserve the exact height exponent. This
 places the actual normalized factors in the same power algebra as the
 divided optical speed, with no radial endpoint denominator.
 -/
+
+@[expose] public section
 
 noncomputable section
 

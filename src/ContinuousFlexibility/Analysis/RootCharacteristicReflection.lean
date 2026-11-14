@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01RootFieldLocalization
-import ContinuousFlexibility.Analysis.ReturnCoefficientParity
+module
+
+public import ContinuousFlexibility.Analysis.N01RootFieldLocalization
+public import ContinuousFlexibility.Analysis.ReturnCoefficientParity
 
 /-!
 # Reflection of the actual localized root fields
@@ -9,6 +11,8 @@ the symmetry of the actual root drift and factored speed. The fixed
 radial clamp preserves these identities. No root collar, additional
 smoothness hypothesis, or new flow is needed for this algebraic step.
 -/
+
+@[expose] public section
 
 noncomputable section
 

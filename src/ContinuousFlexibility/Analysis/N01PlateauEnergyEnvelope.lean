@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01PlateauEnergy
-import ContinuousFlexibility.Analysis.PhysicalGradeEnergy
+module
+
+public import ContinuousFlexibility.Analysis.N01PlateauEnergy
+public import ContinuousFlexibility.Analysis.PhysicalGradeEnergy
 
 /-!
 # Summable envelopes for actual localized height directions
@@ -8,6 +10,8 @@ The envelope includes all levels up to the requested order. It therefore
 controls the supplied projective grading of any realization of the
 localized field, and its sum is a genuine finite physical energy.
 -/
+
+@[expose] public section
 
 noncomputable section
 

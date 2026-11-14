@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularEven
-import ContinuousFlexibility.Analysis.N07aCanonicalWeakJets
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularEven
+public import ContinuousFlexibility.Analysis.N07aCanonicalWeakJets
 
 /-!
 # Radial weak derivatives retain the actual angular reflection
@@ -8,6 +10,8 @@ Reflection is transferred through the original compact test identity and
 the measure-preserving change of angular variable. No pointwise derivative
 of the L² representative is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

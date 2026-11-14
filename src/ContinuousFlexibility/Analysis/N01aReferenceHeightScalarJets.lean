@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.MaterialRadialExpansion
-import ContinuousFlexibility.Analysis.MaterialOrdinaryJets
+module
+
+public import ContinuousFlexibility.Analysis.MaterialRadialExpansion
+public import ContinuousFlexibility.Analysis.MaterialOrdinaryJets
 
 /-!
 # Actual affine-coordinate jets used by the reference height
@@ -8,6 +10,8 @@ These estimates depend only on the scalar affine material model. In
 particular, the sample function is arbitrary and no trace assertion is
 used to obtain regularity of the coordinate or its weights.
 -/
+
+@[expose] public section
 
 noncomputable section
 

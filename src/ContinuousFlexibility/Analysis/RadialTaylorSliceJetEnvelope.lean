@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PositiveReferenceFiniteRadialJets
-import Mathlib.Topology.Order.Compact
+module
+
+public import ContinuousFlexibility.Analysis.PositiveReferenceFiniteRadialJets
+public import Mathlib.Topology.Order.Compact
 
 /-!
 # All orders of the same finite radial Taylor slice
@@ -9,6 +11,8 @@ finite coefficients enter the bound, linearly. Compactness is used on
 the fixed interval [-1,1] for standard monomials, before the center,
 source field or coefficient envelope is supplied.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.DivergenceFluxPullback
+module
+
+public import ContinuousFlexibility.Analysis.DivergenceFluxPullback
 
 /-!
 # Full coordinate identity for the actual conjugated operator
@@ -7,6 +9,8 @@ The principal density is identified on a neighborhood from actual fields.
 Exterior differentiation of the actual pulled-back flux then gives the
 divergence transformation. The height product rule produces the potential.
 -/
+
+@[expose] public section
 
 noncomputable section
 

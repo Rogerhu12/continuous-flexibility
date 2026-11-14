@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.SelectedRetainedMorseProfile
-import ContinuousFlexibility.Radial.InnerMorseTailGap
-import ContinuousFlexibility.Radial.InnerMorsePhysicalChart
+module
+
+public import ContinuousFlexibility.Radial.SelectedRetainedMorseProfile
+public import ContinuousFlexibility.Radial.InnerMorseTailGap
+public import ContinuousFlexibility.Radial.InnerMorsePhysicalChart
 
 /-!
 # Actual logarithmic slopes after retaining the two tails
@@ -10,6 +12,8 @@ The logarithmic slope is unchanged by each side's radius and height
 factors. Closed cap and complete cap-join-cap estimates therefore apply
 to the new physical profile on precisely the retained intervals.
 -/
+
+@[expose] public section
 
 noncomputable section
 

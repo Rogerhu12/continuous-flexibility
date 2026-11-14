@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SpacesBilinearContinuity
-import Mathlib.Analysis.Calculus.MeanValue
-import Mathlib.LinearAlgebra.Multilinear.Basic
+module
+
+public import ContinuousFlexibility.Analysis.SpacesBilinearContinuity
+public import Mathlib.Analysis.Calculus.MeanValue
+public import Mathlib.LinearAlgebra.Multilinear.Basic
 
 /-!
 # Joint continuity of parameterized projective multilinear maps
@@ -10,6 +12,8 @@ directions. Genuine line derivatives and local seminorm bounds give a
 Banach-level mean-value estimate in the base point. Together these prove
 joint continuity in the actual projective topology.
 -/
+
+@[expose] public section
 
 noncomputable section
 

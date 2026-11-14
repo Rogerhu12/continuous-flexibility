@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchedRadialWeightedNorm
-import ContinuousFlexibility.Radial.MatchedSchurSquareBounds
+module
+
+public import ContinuousFlexibility.Radial.MatchedRadialWeightedNorm
+public import ContinuousFlexibility.Radial.MatchedSchurSquareBounds
 
 /-!
 # Schur estimates for the existing physical modal operator
@@ -8,6 +10,8 @@ Channel zero is the scalar border. The other channels are the genuine
 physical cell input and output maps. Norm convergence of the actual
 partition reconstruction supplies every row inequality.
 -/
+
+@[expose] public section
 
 noncomputable section
 

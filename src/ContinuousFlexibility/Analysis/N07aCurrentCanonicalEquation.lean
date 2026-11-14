@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aPerturbedCanonicalEquation
-import ContinuousFlexibility.Analysis.SolveReturnEquations
+module
+
+public import ContinuousFlexibility.Analysis.N07aPerturbedCanonicalEquation
+public import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # The current distribution equation from the primitive geometry
@@ -8,6 +10,8 @@ All coefficient witnesses below are the actual principal functions and
 scalar columns supplied by the raw geometric jet bounds. The equation
 itself comes from the physical relation and the exact change of variables.
 -/
+
+@[expose] public section
 
 noncomputable section
 

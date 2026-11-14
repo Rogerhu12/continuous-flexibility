@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04RealizationTwoEndpointCubicJets
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationTwoEndpointCubicJets
 
 /-!
 # Cubic parameter estimates on an arbitrary fixed component
@@ -8,6 +10,8 @@ zero-based version. It contributes no derivative multiplier. Consequently
 the same genuine numerator majorants give the actual divided field's
 mixed and parameter jets, with loss six and no neighborhood change.
 -/
+
+@[expose] public section
 
 noncomputable section
 

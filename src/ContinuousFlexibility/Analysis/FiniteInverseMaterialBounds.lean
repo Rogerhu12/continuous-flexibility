@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.FiniteInversePolynomialEnvelope
-import Mathlib.Algebra.BigOperators.Fin
-import Mathlib.Analysis.SpecialFunctions.Pow.Real
-import Mathlib.Tactic.Choose
+module
+
+public import ContinuousFlexibility.Analysis.FiniteInversePolynomialEnvelope
+public import Mathlib.Algebra.BigOperators.Fin
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
+public import Mathlib.Tactic.Choose
 
 /-!
 # Finite inverse jets with a retained coefficient envelope
@@ -12,6 +14,8 @@ of the genuine inverse give a polynomial bound for the forward jets.
 The coefficient weight remains explicit, and only its numerical exponent
 and the finite state order grow. No value bound on either map is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

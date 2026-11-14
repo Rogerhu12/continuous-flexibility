@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Statements.ScalarWeighted
-import ContinuousFlexibility.Analysis.MaterialHeightRegularity
-import ContinuousFlexibility.Scalar.RectangleParameterIntegral
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+module
+
+public import ContinuousFlexibility.Statements.ScalarWeighted
+public import ContinuousFlexibility.Analysis.MaterialHeightRegularity
+public import ContinuousFlexibility.Scalar.RectangleParameterIntegral
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 
 /-!
 # Global regularity of the actual weighted scalar state
@@ -12,6 +14,8 @@ The height and profile in this file are precisely the decoded functions in
 constants hold for every state, before restricting to the low-order ball used
 for the discriminant and denominator estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

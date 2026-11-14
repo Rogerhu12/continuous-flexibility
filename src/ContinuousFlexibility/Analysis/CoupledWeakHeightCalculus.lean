@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.CoupledLogProfileLift
-import ContinuousFlexibility.Scalar.WeightedHeightGerms
-import ContinuousFlexibility.Scalar.WeightedCompositionGerm
-import ContinuousFlexibility.Scalar.WeightedPowerExtension
-import ContinuousFlexibility.Scalar.WeightedWeightShift
-import ContinuousFlexibility.Scalar.WeightedCommonHeightCalculus
+module
+
+public import ContinuousFlexibility.Analysis.CoupledLogProfileLift
+public import ContinuousFlexibility.Scalar.WeightedHeightGerms
+public import ContinuousFlexibility.Scalar.WeightedCompositionGerm
+public import ContinuousFlexibility.Scalar.WeightedPowerExtension
+public import ContinuousFlexibility.Scalar.WeightedWeightShift
+public import ContinuousFlexibility.Scalar.WeightedCommonHeightCalculus
 
 /-!
 # Actual algebra at the weak positive profile weight
@@ -12,6 +14,8 @@ Products, smooth scalar functions, and the reference radial coefficients
 act in the same original physical model. Strong height derivatives enter
 through the canonical weight shift, with their actual decoded values.
 -/
+
+@[expose] public section
 
 noncomputable section
 

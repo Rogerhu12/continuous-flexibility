@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MatchedInnerModelWeights
-import ContinuousFlexibility.Radial.InnerMorseInnerWeightCosts
-import ContinuousFlexibility.Radial.InnerCoefficientCosts
+module
+
+public import ContinuousFlexibility.Radial.MatchedInnerModelWeights
+public import ContinuousFlexibility.Radial.InnerMorseInnerWeightCosts
+public import ContinuousFlexibility.Radial.InnerCoefficientCosts
 
 /-!
 # Physical gap and middle data for the original finite-chain weight
@@ -11,6 +13,8 @@ model it preserves the original full Poisson column, including its
 scalar component. The fixed coefficient loss absorbs the unweighted
 Dirichlet cost of every actual piece with one exponent.
 -/
+
+@[expose] public section
 
 noncomputable section
 

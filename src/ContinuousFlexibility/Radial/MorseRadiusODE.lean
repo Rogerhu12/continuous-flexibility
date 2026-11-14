@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.MorseModel
-import Mathlib.Analysis.ODE.ExistUnique
-import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
+module
+
+public import ContinuousFlexibility.Radial.MorseModel
+public import Mathlib.Analysis.ODE.ExistUnique
+public import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
 
 /-!
 # Finite smooth linear systems and the Morse radius initial value problem
@@ -13,6 +15,8 @@ neighborhood of the retained closed interval. The same construction gives
 the actual off-diagonal flux system `u' = p v`, `v' = q u`, with arbitrary
 smooth coefficients and arbitrary initial data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

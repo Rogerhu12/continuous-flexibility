@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.SeedCentralHeads
+module
+
+public import ContinuousFlexibility.Radial.SeedCentralHeads
 
 /-!
 # Prescribing the retained central model window
@@ -8,6 +10,8 @@ that freedom when packaging its output as a central cutoff, so the physical
 central profile and its kernel can be fixed before choosing the size of the
 connected reference.  Both model scale and kernel amplitude remain one.
 -/
+
+@[expose] public section
 
 noncomputable section
 

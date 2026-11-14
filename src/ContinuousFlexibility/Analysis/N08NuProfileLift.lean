@@ -1,7 +1,11 @@
-import ContinuousFlexibility.Analysis.N08NuProfileBounds
-import ContinuousFlexibility.Analysis.N08RadialFamilyLift
+module
+
+public import ContinuousFlexibility.Analysis.N08NuProfileBounds
+public import ContinuousFlexibility.Analysis.N08RadialFamilyLift
 
 /-! # Actual weighted realization of the scalar logarithmic direction -/
+
+@[expose] public section
 
 noncomputable section
 

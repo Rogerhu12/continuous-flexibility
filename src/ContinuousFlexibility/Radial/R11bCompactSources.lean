@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R11bRadialTests
-import ContinuousFlexibility.Statements.RadialTargets
+module
+
+public import ContinuousFlexibility.Radial.R11bRadialTests
+public import ContinuousFlexibility.Statements.RadialTargets
 
 /-!
 # Interior corrections in every radial cell weight
@@ -9,6 +11,8 @@ many cells. Continuous corrections therefore belong to every weighted cell
 space. The actual matched border has this strict interior support; the same
 argument will apply to the derivative of the left-tail cutoff.
 -/
+
+@[expose] public section
 
 noncomputable section
 

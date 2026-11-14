@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aSchurBilinear
-import Mathlib.Topology.Algebra.InfiniteSum.Module
+module
+
+public import ContinuousFlexibility.Analysis.N07aSchurBilinear
+public import Mathlib.Topology.Algebra.InfiniteSum.Module
 
 /-!
 # The bounded frequency-difference operator of actual blocks
@@ -9,6 +11,8 @@ multiplied by their frequency difference.  Schur summability constructs
 one bounded operator, and testing against a single band identifies every
 one of its blocks exactly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

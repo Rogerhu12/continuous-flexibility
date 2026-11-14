@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ProjectiveNewtonRecurrence
+module
+
+public import ContinuousFlexibility.Analysis.ProjectiveNewtonRecurrence
 
 /-!
 # A fixed smoothing scale and the scalar Newton budget
@@ -7,6 +9,8 @@ The discrete smoothing indices grow by a factor of three halves up to the
 rounding error. A single induction propagates the low residual decay and
 the allowed growth of the high state.
 -/
+
+@[expose] public section
 
 noncomputable section
 

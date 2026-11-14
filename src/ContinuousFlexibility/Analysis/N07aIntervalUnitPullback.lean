@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N07aIntervalWeakSecond
-import ContinuousFlexibility.Analysis.N07aAngularLpScale
-import ContinuousFlexibility.Analysis.SpacesTorusCell
+module
+
+public import ContinuousFlexibility.Analysis.N07aIntervalWeakSecond
+public import ContinuousFlexibility.Analysis.N07aAngularLpScale
+public import ContinuousFlexibility.Analysis.SpacesTorusCell
 
 /-!
 # Actual affine normalization of radial weak derivatives
@@ -9,6 +11,8 @@ Positive intervals are pulled back to `(0,1)` with their exact Lebesgue
 factor. The weak derivative acquires the interval length, and the actual
 `L²` representatives and squared norms retain that same normalization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.MaterialPartialNormBounds
-import ContinuousFlexibility.Analysis.MaterialDivergenceEnergy
-import ContinuousFlexibility.Analysis.PhysicalJetBonding
+module
+
+public import ContinuousFlexibility.Analysis.MaterialPartialNormBounds
+public import ContinuousFlexibility.Analysis.MaterialDivergenceEnergy
+public import ContinuousFlexibility.Analysis.PhysicalJetBonding
 
 /-!
 # Quantitative physical sums and symmetric divergence
@@ -9,6 +11,8 @@ All norms below are the actual finite weighted L² jet norms. Monotonicity
 and finite sums require no symmetry of intermediate fields. The material
 multiplier estimates retain the coefficient/height derivative budget.
 -/
+
+@[expose] public section
 
 noncomputable section
 

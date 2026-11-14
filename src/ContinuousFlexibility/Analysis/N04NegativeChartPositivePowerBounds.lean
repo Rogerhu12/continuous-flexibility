@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04SourceColumnsScalarComposition
-import ContinuousFlexibility.Analysis.ScalarRpowJetGrowth
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N04SourceColumnsScalarComposition
+public import ContinuousFlexibility.Analysis.ScalarRpowJetGrowth
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
 
 /-!
 # Positive powers of the actual divided radial coordinate
@@ -10,6 +12,8 @@ endpoint controls the true scalar power derivatives explicitly. The
 finite scalar chain rule then preserves the state neighborhood, the low
 seminorm and a single positive-state height factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsSpatialKernel
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsPacketSector
-import ContinuousFlexibility.Analysis.N06RootPhysicalSmallness
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsSpatialKernel
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsPacketSector
+public import ContinuousFlexibility.Analysis.N06RootPhysicalSmallness
 
 /-!
 # Actual finite spatial inputs of the root kernel
@@ -11,6 +13,8 @@ parameters. N01 supplies the positive denominator locus, and a fixed
 low parameter bound places every finite spatial tuple in one compact
 ball independent of the root and all future angular orders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

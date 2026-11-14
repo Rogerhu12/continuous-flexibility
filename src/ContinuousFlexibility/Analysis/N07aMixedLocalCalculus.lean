@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalWeakJets
-import ContinuousFlexibility.Analysis.SpacesHeightAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalWeakJets
+public import ContinuousFlexibility.Analysis.SpacesHeightAlgebra
 
 /-!
 # Mixed derivative identities on the actual open domain
@@ -8,6 +10,8 @@ The reconstructed unknown and the reciprocal leading coefficient are
 smooth on an open piece. The local identities below differentiate them
 there without demanding a smooth global extension across an endpoint.
 -/
+
+@[expose] public section
 
 noncomputable section
 

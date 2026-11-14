@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsRootMaterial
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsRootPowerCalculus
-import ContinuousFlexibility.Analysis.N01cStateInterpolation
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsRootMaterial
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsRootPowerCalculus
+public import ContinuousFlexibility.Analysis.N01cStateInterpolation
 
 /-!
 # Fixed intrinsic angular shifts in the actual root inputs
@@ -11,6 +13,8 @@ determine the spatial scale in each product. The same base is selected
 before every parameter prefix. The input maps are the literal four
 normalized height fields multiplied by the original scalar parameter.
 -/
+
+@[expose] public section
 
 noncomputable section
 

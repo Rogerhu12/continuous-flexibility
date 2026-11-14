@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
-import Mathlib.Data.Nat.Choose.Sum
+module
+
+public import ContinuousFlexibility.Analysis.N01cMixedPowerBounds
+public import Mathlib.Data.Nat.Choose.Sum
 
 /-!
 # Algebra of the actual spatial-parameter bounds
@@ -9,6 +11,8 @@ Every factor retains its assigned spatial order until its product is
 formed. Thus the interpolation indices are unchanged by addition and
 multiplication.
 -/
+
+@[expose] public section
 
 noncomputable section
 

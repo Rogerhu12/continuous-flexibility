@@ -1,10 +1,12 @@
-import ContinuousFlexibility.Analysis.SpacesCircleRetraction
-import ContinuousFlexibility.Analysis.SpacesCircleParity
-import ContinuousFlexibility.Analysis.SpacesPhysicalProduct
-import ContinuousFlexibility.Analysis.SpacesTameStructure
-import ContinuousFlexibility.Analysis.SpacesTraceExtensionModels
-import ContinuousFlexibility.Analysis.SpacesSources
-import ContinuousFlexibility.Analysis.SpacesReciprocal
+module
+
+public import ContinuousFlexibility.Analysis.SpacesCircleRetraction
+public import ContinuousFlexibility.Analysis.SpacesCircleParity
+public import ContinuousFlexibility.Analysis.SpacesPhysicalProduct
+public import ContinuousFlexibility.Analysis.SpacesTameStructure
+public import ContinuousFlexibility.Analysis.SpacesTraceExtensionModels
+public import ContinuousFlexibility.Analysis.SpacesSources
+public import ContinuousFlexibility.Analysis.SpacesReciprocal
 
 /-!
 # Assembly of the exact weighted spaces
@@ -14,6 +16,8 @@ This assembly keeps the two analytic inputs, physical shell retraction and
 smooth scalar composition, explicit until their concrete constructions are
 supplied. All other clauses are the exact clauses of `IsPhysicalSpaces`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

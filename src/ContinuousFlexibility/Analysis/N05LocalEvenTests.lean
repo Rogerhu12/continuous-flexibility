@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N05ReferenceTests
-import ContinuousFlexibility.Analysis.CylinderTestPeriodization
-import Mathlib.Analysis.Calculus.BumpFunction.FiniteDimension
-import Mathlib.Algebra.Order.Floor.Ring
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceTests
+public import ContinuousFlexibility.Analysis.CylinderTestPeriodization
+public import Mathlib.Analysis.Calculus.BumpFunction.FiniteDimension
+public import Mathlib.Algebra.Order.Floor.Ring
 
 /-!
 # Local even periodic height tests away from reflection circles
@@ -11,6 +13,8 @@ A half-period chamber separates the cutoff from every nontrivial translate
 and from every reflected translate.  Thus the resulting global even periodic
 test agrees with the prescribed smooth germ, not merely with a chosen jet.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04bCollarInverse
+module
+
+public import ContinuousFlexibility.Analysis.N04bCollarInverse
 
 /-!
 # Gluing the physical inverse to its genuine root-collar inverse
@@ -9,6 +11,8 @@ actual physical chart then identifies its physical inverse with the
 collar inverse. A piecewise stored inverse is therefore genuinely smooth
 on a full neighborhood of the root, while retaining every interior germ.
 -/
+
+@[expose] public section
 
 noncomputable section
 

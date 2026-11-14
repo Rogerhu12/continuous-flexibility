@@ -1,5 +1,7 @@
-import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
-import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+module
+
+public import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
 
 /-!
 # Fixed-power growth of scalar power jets
@@ -9,6 +11,8 @@ weight, every derivative of a fixed real power has a bound by another
 fixed power. This applies in particular to the reciprocal and square
 root in the actual characteristic speed on an optical collar.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CircleFlowVariationKernel
-import ContinuousFlexibility.Analysis.OneHighCircleFlowLowGeometryBasic
-import ContinuousFlexibility.Analysis.OneHighCircleFlowJets
+module
+
+public import ContinuousFlexibility.Analysis.CircleFlowVariationKernel
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowLowGeometryBasic
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowJets
 
 /-!
 # Actual angular regularity of the scalar flow variation kernel
@@ -11,6 +13,8 @@ Jacobian kernel, and the compact quotient argument descends continuity
 of its angular jets to the original closed time interval. Clamping time
 then provides total continuous families for compact integration.
 -/
+
+@[expose] public section
 
 noncomputable section
 

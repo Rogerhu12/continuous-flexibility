@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.OneHighCircleFlowJacobian
-import ContinuousFlexibility.Analysis.OneHighCircleSobolevAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowJacobian
+public import ContinuousFlexibility.Analysis.OneHighCircleSobolevAlgebra
 
 /-!
 # The common low Sobolev envelope for circle flows
@@ -9,6 +11,8 @@ derivatives of orders one through four. Monotonicity also replaces the
 `Λ₁` in the Jacobian bounds by `Λ₄`. Thus all the low geometry data needed
 by circle composition depend on the same integrated quantity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

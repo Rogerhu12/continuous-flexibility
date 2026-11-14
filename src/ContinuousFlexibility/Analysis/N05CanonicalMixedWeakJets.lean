@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N05CanonicalRadialJetChoice
-import ContinuousFlexibility.Analysis.N05CanonicalAngularJetChoice
-import ContinuousFlexibility.Analysis.N05CanonicalRadialPairing
-import ContinuousFlexibility.Analysis.N05ReferenceAngularWeakClosure
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalRadialJetChoice
+public import ContinuousFlexibility.Analysis.N05CanonicalAngularJetChoice
+public import ContinuousFlexibility.Analysis.N05CanonicalRadialPairing
+public import ContinuousFlexibility.Analysis.N05ReferenceAngularWeakClosure
 
 /-!
 # Commuting the actual weak normal and angular jets
@@ -13,6 +15,8 @@ fixed derivative selections agree whenever both actual derivative pairs
 have been constructed; no regularity of a global piecewise multiplier is
 assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

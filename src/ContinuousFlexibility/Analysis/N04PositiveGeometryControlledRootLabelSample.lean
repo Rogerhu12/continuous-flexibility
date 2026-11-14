@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledSamplePrefix
-import ContinuousFlexibility.Analysis.MaterialSampleShift
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledSamplePrefix
+public import ContinuousFlexibility.Analysis.MaterialSampleShift
 
 /-!
 # The actual root-label sample and the retained positive sample
@@ -9,6 +11,8 @@ positive atlas uses the cell containing its retained midpoint. The N01
 component-to-host displacement and the retained endpoint geometry give
 one bounded index displacement between these two actual samples.
 -/
+
+@[expose] public section
 
 noncomputable section
 

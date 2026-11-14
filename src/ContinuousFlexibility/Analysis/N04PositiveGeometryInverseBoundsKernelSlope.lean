@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsKernelFormula
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryInverseBoundsKernelFormula
 
 /-!
 # Uniform coefficient jets of the actual normalized radial slope
@@ -8,6 +10,8 @@ and fixed middle mass.  The finite Taylor fields, endpoint cutoffs and
 normalizing integral are the original displayed formulas.  All constants
 are uniform in the component and coefficient vector.
 -/
+
+@[expose] public section
 
 noncomputable section
 

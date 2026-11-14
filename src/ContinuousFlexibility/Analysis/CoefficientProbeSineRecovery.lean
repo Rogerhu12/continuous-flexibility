@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CoefficientProbeFieldRegularity
-import ContinuousFlexibility.Analysis.AngularSineMixedBounds
-import ContinuousFlexibility.Analysis.CanonicalCutAxis
+module
+
+public import ContinuousFlexibility.Analysis.CoefficientProbeFieldRegularity
+public import ContinuousFlexibility.Analysis.AngularSineMixedBounds
+public import ContinuousFlexibility.Analysis.CanonicalCutAxis
 
 /-!
 # Genuine sine recovery of the two coefficient probe fields
@@ -12,6 +14,8 @@ radial region where the original axis values vanish, the normalization
 preserves every germ. The quotient therefore has exactly the one- or
 two-order bound of its original numerator on that whole radial region.
 -/
+
+@[expose] public section
 
 noncomputable section
 

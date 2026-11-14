@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsSampleCoefficientDirections
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRootSpeedFactor
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledSamplePrefix
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsSampleCoefficientDirections
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRootSpeedFactor
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledSamplePrefix
 
 /-!
 # Actual root coefficients at one supplied positive sample
@@ -10,6 +12,8 @@ finite radial and intrinsic angular prefixes have one low base before
 all parameter orders. Both endpoints retain their supplied source and
 their original midpoint sample, including the complete height factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

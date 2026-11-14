@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalRoughPairing
-import Mathlib.Analysis.Calculus.Deriv.Inv
+module
+
+public import ContinuousFlexibility.Analysis.N07aCanonicalRoughPairing
+public import Mathlib.Analysis.Calculus.Deriv.Inv
 
 /-!
 # The height jump cancels in the actual transport ratio
@@ -9,6 +11,8 @@ same logarithmic jump after the actual coordinate first jets are aligned.
 Consequently the quotient used to transport a physical field has one
 common first derivative. The zero jump is the same argument at a root.
 -/
+
+@[expose] public section
 
 noncomputable section
 

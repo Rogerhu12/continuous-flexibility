@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsRadialKernel
-import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsRadialKernel
+public import ContinuousFlexibility.Analysis.N01cSpatialParameterComposition
 
 /-!
 # The finite root kernel for the original mixed spatial word
@@ -9,6 +11,8 @@ and additional angular slots. Each spatial partition records its actual
 two coordinate counts. This prevents a fixed intrinsic angular loss
 from being paid again for every future angular derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

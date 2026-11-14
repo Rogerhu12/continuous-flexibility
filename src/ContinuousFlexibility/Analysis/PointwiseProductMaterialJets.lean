@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CanonicalJetProductClosure
-import Mathlib.Analysis.Calculus.ContDiff.Bounds
-import Mathlib.Algebra.BigOperators.Fin
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalJetProductClosure
+public import Mathlib.Analysis.Calculus.ContDiff.Bounds
+public import Mathlib.Algebra.BigOperators.Fin
 
 /-!
 # Products of actual ordinary jets at one point
@@ -11,6 +13,8 @@ loss for the product of two actual fields. This local form applies at
 root boundaries where the constructed formulas are smooth at the point
 but need not be globally smooth on the whole plane.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerRadialODE
-import ContinuousFlexibility.Radial.InnerPositiveGap
-import Mathlib.Analysis.Calculus.MeanValue
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialODE
+public import ContinuousFlexibility.Radial.InnerPositiveGap
+public import Mathlib.Analysis.Calculus.MeanValue
 
 /-!
 # The actual positive radial gap Poisson problem
@@ -10,6 +12,8 @@ nonvanishing Dirichlet determinant. The actual conormal-flux initial-value
 construction then solves arbitrary two-point boundary data. No restriction
 on the gap length or assumption of Poisson solvability is imposed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

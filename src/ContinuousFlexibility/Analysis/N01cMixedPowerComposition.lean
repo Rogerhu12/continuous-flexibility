@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cMixedPowerAlgebra
+module
+
+public import ContinuousFlexibility.Analysis.N01cMixedPowerAlgebra
 
 /-!
 # Compact scalar composition with distributed spatial orders
@@ -8,6 +10,8 @@ Its parameter derivatives are bounded before the spatial factors are
 multiplied. A nonempty collection of positive parameter factors retains
 one full height weight.
 -/
+
+@[expose] public section
 
 noncomputable section
 

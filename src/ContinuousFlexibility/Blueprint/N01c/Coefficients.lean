@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Blueprint.N01c.Statements
-import ContinuousFlexibility.Analysis.N01cCoefficientTameBounds
-import ContinuousFlexibility.Analysis.N01cMaterialNormalization
+module
+
+public import ContinuousFlexibility.Blueprint.N01c.Statements
+public import ContinuousFlexibility.Analysis.N01cCoefficientTameBounds
+public import ContinuousFlexibility.Analysis.N01cMaterialNormalization
 
 /-!
 # N01c: coefficient families
@@ -11,6 +13,8 @@ smaller neighbourhood with one fixed base and loss.
 Source: readable §7, Proposition 7.8 and its coefficient/weight estimates.
 Task: `docs/tasks/N01c-Coefficients.md`.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

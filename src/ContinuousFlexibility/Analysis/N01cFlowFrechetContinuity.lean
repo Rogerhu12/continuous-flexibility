@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cFlowFrechetParameters
+module
+
+public import ContinuousFlexibility.Analysis.N01cFlowFrechetParameters
 
 /-!
 # Finite-dimensional parameter continuity from the actual scalar time ODE
@@ -14,6 +16,8 @@ requires only the actual classical trajectories, their fixed initial
 value, and a jointly smooth periodic speed.  Joint continuity and all
 parameter derivatives of the trajectory family are conclusions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

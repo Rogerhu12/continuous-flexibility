@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.CircleFiniteProductBounds
-import ContinuousFlexibility.Analysis.CircleOuterCompositionBounds
-import ContinuousFlexibility.Analysis.CircleJetAssembly
-import ContinuousFlexibility.Analysis.TamePairTopology
+module
+
+public import ContinuousFlexibility.Analysis.CircleFiniteProductBounds
+public import ContinuousFlexibility.Analysis.CircleOuterCompositionBounds
+public import ContinuousFlexibility.Analysis.CircleJetAssembly
+public import ContinuousFlexibility.Analysis.TamePairTopology
 
 /-!
 # Uniform projective bounds for the actual composition tower
@@ -10,6 +12,8 @@ One low-order box works for the entire directional tower. For each
 fixed output and parameter order, a continuous seminorm bounds every
 increment homogeneously. The base point enters with affine growth.
 -/
+
+@[expose] public section
 
 noncomputable section
 

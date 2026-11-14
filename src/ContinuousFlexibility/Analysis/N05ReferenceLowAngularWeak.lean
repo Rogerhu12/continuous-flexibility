@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N05ReferenceAngularWeakClosure
-import ContinuousFlexibility.Analysis.N05ReferenceLowAngularBasis
+module
+
+public import ContinuousFlexibility.Analysis.N05ReferenceAngularWeakClosure
+public import ContinuousFlexibility.Analysis.N05ReferenceLowAngularBasis
 
 /-!
 # Weak identities for the actual low angular jets
@@ -7,6 +9,8 @@ import ContinuousFlexibility.Analysis.N05ReferenceLowAngularBasis
 Angular smoothness on each radial slice suffices for periodic integration
 by parts. Addition is justified through the actual physical L² pairings.
 -/
+
+@[expose] public section
 
 noncomputable section
 

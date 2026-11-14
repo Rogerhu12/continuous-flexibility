@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PrincipalPairData
-import ContinuousFlexibility.Analysis.N04PrincipalPairInverse
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalPairData
+public import ContinuousFlexibility.Analysis.N04PrincipalPairInverse
 
 /-!
 # Returning paired estimates to the exact current-data interface
@@ -8,6 +10,8 @@ Once the positive and negative pieces have been combined, the difference
 tower exists on every piece. A final common low order and radius provide
 the frozen value and tower bounds without any additional representatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

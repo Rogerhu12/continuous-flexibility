@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01aOpticalPeak
-import ContinuousFlexibility.Analysis.N01aOpticalJetBounds
+module
+
+public import ContinuousFlexibility.Analysis.N01aOpticalPeak
+public import ContinuousFlexibility.Analysis.N01aOpticalJetBounds
 
 /-!
 # Normalization of the actual optical travel control
@@ -9,6 +11,8 @@ Its derivative is proved for the original logarithmically perturbed
 profile by the one-variable chain rule, without replacing the travel map
 by its linearization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

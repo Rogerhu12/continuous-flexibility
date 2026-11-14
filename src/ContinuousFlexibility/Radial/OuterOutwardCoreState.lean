@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.OuterTransitionCoordinates
-import ContinuousFlexibility.Radial.OuterFundamentalPair
-import ContinuousFlexibility.Radial.OuterPhysicalTailBasis
+module
+
+public import ContinuousFlexibility.Radial.OuterTransitionCoordinates
+public import ContinuousFlexibility.Radial.OuterFundamentalPair
+public import ContinuousFlexibility.Radial.OuterPhysicalTailBasis
 
 /-!
 # Actual core bounds for the normalized outer fundamental pair
@@ -9,6 +11,8 @@ The outward system is reflected back to the original radial system.
 The already proved Morse-core energy estimate then applies directly to
 each unit initial state. No core value estimate is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

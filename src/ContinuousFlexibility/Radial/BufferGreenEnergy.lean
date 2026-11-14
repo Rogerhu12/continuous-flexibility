@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.BufferGreenEnergyMembership
+module
+
+public import ContinuousFlexibility.Radial.BufferGreenEnergyMembership
 
 /-!
 # The genuine normalized Green energy column
@@ -6,6 +8,8 @@ The cutoff profile has an actual weak derivative and actual potential weight in 
 The classical commutator supplies the ordinary source, and conormal normalization
 makes the derivative jump exactly one. The identity holds for every energy test.
 -/
+
+@[expose] public section
 noncomputable section
 namespace ContinuousFlexibility.Radial
 open Real Set Filter MeasureTheory

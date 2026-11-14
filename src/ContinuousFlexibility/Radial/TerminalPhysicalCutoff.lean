@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorsePositiveJoin
-import Mathlib.Analysis.Calculus.Deriv.Support
+module
+
+public import ContinuousFlexibility.Radial.MorsePositiveJoin
+public import Mathlib.Analysis.Calculus.Deriv.Support
 
 /-!
 # A physical transition on the actual cutoff layer
@@ -10,6 +12,8 @@ The cutoff is globally smooth, is constant on either side, and all
 derivatives cost only the corresponding inverse power of the physical
 width b-a.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationJointMixedRegularity
-import ContinuousFlexibility.Analysis.N04RealizationMixedSlotBudget
-import ContinuousFlexibility.Analysis.N01cPhysicalGraphNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationJointMixedRegularity
+public import ContinuousFlexibility.Analysis.N04RealizationMixedSlotBudget
+public import ContinuousFlexibility.Analysis.N01cPhysicalGraphNormalization
 
 /-!
 # Normalize the actual joint bound only after the spatial budget is closed
@@ -10,6 +12,8 @@ and angular basis vectors are appended. Thus every term retains the
 same positive-parameter height factor. The resulting actual mixed
 multilinear map is normalized once, using its proved sublinear power.
 -/
+
+@[expose] public section
 
 noncomputable section
 

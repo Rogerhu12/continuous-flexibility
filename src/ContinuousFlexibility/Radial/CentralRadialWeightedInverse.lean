@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.CentralRadiusGrowth
-import ContinuousFlexibility.Radial.CentralPositionInverse
-import ContinuousFlexibility.Radial.CentralReducedPositionInverse
+module
+
+public import ContinuousFlexibility.Radial.CentralRadiusGrowth
+public import ContinuousFlexibility.Radial.CentralPositionInverse
+public import ContinuousFlexibility.Radial.CentralReducedPositionInverse
 
 /-!
 # The actual central radial weight on the genuine inverse
@@ -10,6 +12,8 @@ Its decomposition into bounded measurable multipliers and the genuine
 position multiplier transfers the already proved physical position
 estimates to the same central inverse. No inverse existence is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

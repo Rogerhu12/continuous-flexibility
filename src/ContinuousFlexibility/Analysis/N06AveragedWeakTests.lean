@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06HalfPhysicalPairing
-import ContinuousFlexibility.Analysis.PhysicalTransmissionOperator
+module
+
+public import ContinuousFlexibility.Analysis.N06HalfPhysicalPairing
+public import ContinuousFlexibility.Analysis.PhysicalTransmissionOperator
 
 /-!
 # Returning from half-period tests to the original physical test class
@@ -12,6 +14,8 @@ weak pairing for every `RadialTest`, including tests which are not even
 and have period only `2 * pi`. The existing averaging construction
 preserves the original compact radial support.
 -/
+
+@[expose] public section
 
 noncomputable section
 

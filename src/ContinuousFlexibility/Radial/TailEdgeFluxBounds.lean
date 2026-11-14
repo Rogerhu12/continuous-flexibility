@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.TailEdgeFluxMatrix
+module
+
+public import ContinuousFlexibility.Radial.TailEdgeFluxMatrix
 
 /-!
 # Quantitative bounds for the actual edge flux coefficients
@@ -7,6 +9,8 @@ The off-diagonal flux coefficient is controlled by the same Green diagonal
 integral that controls the Poisson problem. No separate bound on the maximum
 of the density is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

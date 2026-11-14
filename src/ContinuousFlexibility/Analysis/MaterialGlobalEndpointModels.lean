@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.MaterialCellEndpointModels
+module
+
+public import ContinuousFlexibility.Analysis.MaterialCellEndpointModels
 
 /-!
 # Actual material models throughout the annulus
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Analysis.MaterialCellEndpointModels
 The partition supplies a genuine cell containing each point. No cell
 is reassigned, and no positive component is assumed to lie in one cell.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.TransitionCoefficient
-import ContinuousFlexibility.Radial.WeightKernelBounds
+module
+
+public import ContinuousFlexibility.Analysis.TransitionCoefficient
+public import ContinuousFlexibility.Radial.WeightKernelBounds
 
 /-!
 # Full spatial decay through an intermediate matching level
@@ -9,6 +11,8 @@ The extra distance of the two genuine columns pays for any coefficient
 growth beyond both endpoints. Thus combining the two columns preserves
 the full endpoint travel exponent, including for interior return terms.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Analysis.N06CompatibilityFourierSource
-import ContinuousFlexibility.Analysis.N06ReferenceProjectionRemainder
-import ContinuousFlexibility.Analysis.N06ReferenceGraphFourierProjection
-import ContinuousFlexibility.Analysis.N06NegativeForcingParity
-import ContinuousFlexibility.Analysis.N06ControlledReferenceSources
+module
+
+public import ContinuousFlexibility.Analysis.N06CompatibilityFourierSource
+public import ContinuousFlexibility.Analysis.N06ReferenceProjectionRemainder
+public import ContinuousFlexibility.Analysis.N06ReferenceGraphFourierProjection
+public import ContinuousFlexibility.Analysis.N06NegativeForcingParity
+public import ContinuousFlexibility.Analysis.N06ControlledReferenceSources
 
 /-!
 # Actual finite angular approximants in the same N05 graph
@@ -14,6 +16,8 @@ and the actual reference-coordinate identities prove membership in the
 original graph. Its given inverse identifies these graph elements and
 proves strong convergence in the original graph norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

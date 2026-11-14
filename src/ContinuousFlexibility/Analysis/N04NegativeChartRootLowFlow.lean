@@ -1,9 +1,13 @@
-import ContinuousFlexibility.Analysis.N04NegativeChartPointFlowBounds
-import ContinuousFlexibility.Analysis.RootInverseNormalizedBounds
-import ContinuousFlexibility.Analysis.PeriodicScalarFlow
-import ContinuousFlexibility.Analysis.N01cOpticalNumericEnvelopes
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeChartPointFlowBounds
+public import ContinuousFlexibility.Analysis.RootInverseNormalizedBounds
+public import ContinuousFlexibility.Analysis.PeriodicScalarFlow
+public import ContinuousFlexibility.Analysis.N01cOpticalNumericEnvelopes
 
 /-! Finite ordinary bounds for the same chosen flow on physical radial fibers. -/
+
+@[expose] public section
 
 noncomputable section
 

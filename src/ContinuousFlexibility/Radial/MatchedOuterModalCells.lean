@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.L2LocalizedKernel
-import ContinuousFlexibility.Radial.MatchedModeLocalization
-import ContinuousFlexibility.Radial.OuterDeepDirichletKernel
-import ContinuousFlexibility.Radial.OuterWholeMeasure
+module
+
+public import ContinuousFlexibility.Analysis.L2LocalizedKernel
+public import ContinuousFlexibility.Radial.MatchedModeLocalization
+public import ContinuousFlexibility.Radial.OuterDeepDirichletKernel
+public import ContinuousFlexibility.Radial.OuterWholeMeasure
 
 /-!
 # The specified modal localizers on the actual outward Hilbert space
@@ -11,6 +13,8 @@ The norm statements retain the supplied continuous operator and supplied
 L2 vector. The integral estimate is the existing all-source kernel
 theorem; no substitute inverse is constructed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

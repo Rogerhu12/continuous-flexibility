@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionResidualPeriodicity
+module
+
+public import ContinuousFlexibility.Analysis.ReturnCorrectionResidualPeriodicity
 
 /-!
 # Support of the actual independent-residual error
@@ -10,6 +12,8 @@ At positive radii and simple turning points, all component corrections
 vanish on a common neighborhood. The actual differential error is thus
 supported in the union of the original negative components.
 -/
+
+@[expose] public section
 
 noncomputable section
 

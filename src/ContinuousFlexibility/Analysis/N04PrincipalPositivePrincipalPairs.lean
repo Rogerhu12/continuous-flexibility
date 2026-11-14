@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PrincipalPositiveDeterminantPairs
-import ContinuousFlexibility.Analysis.N04PrincipalPositivePolynomial
-import ContinuousFlexibility.Analysis.N07aActualCubicFactors
+module
+
+public import ContinuousFlexibility.Analysis.N04PrincipalPositiveDeterminantPairs
+public import ContinuousFlexibility.Analysis.N04PrincipalPositivePolynomial
+public import ContinuousFlexibility.Analysis.N07aActualCubicFactors
 
 /-!
 # Paired bounds for the actual positive principal coefficients
@@ -10,6 +12,8 @@ domain the same nine primitive factors give all three components through
 the inverse-adjugate polynomial. The reference expression is the actual
 reference member, obtained by evaluating the same formula at zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 

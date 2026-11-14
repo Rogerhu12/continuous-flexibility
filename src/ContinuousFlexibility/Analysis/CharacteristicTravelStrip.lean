@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.TravelStripGlobalInverse
-import ContinuousFlexibility.Analysis.CharacteristicPrincipalDensity
-import Mathlib.Tactic.Ring
+module
+
+public import ContinuousFlexibility.Analysis.TravelStripGlobalInverse
+public import ContinuousFlexibility.Analysis.CharacteristicPrincipalDensity
+public import Mathlib.Tactic.Ring
 
 /-!
 # The global strip of two genuine characteristic first integrals
@@ -11,6 +13,8 @@ endpoint normalization gives constant travel-time boundaries. The global
 inverse is consequently constructed by the full-strip theorem, rather than
 postulated among the characteristic data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

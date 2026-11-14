@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.InnerRadialLocalRealization
+module
+
+public import ContinuousFlexibility.Radial.InnerRadialLocalRealization
 
 /-!
 # Canonical actual Dirichlet and Poisson realizations
@@ -9,6 +11,8 @@ family of actual local witnesses. The weak conormal functional is
 expanded on the same fixed physical affine hats, so local Green flux
 identities assemble without changing the Dirichlet or Poisson maps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.SolveNormalization
-import ContinuousFlexibility.Analysis.SolveStateSpaces
-import ContinuousFlexibility.Scalar.WeightedStateTopology
+module
+
+public import ContinuousFlexibility.Analysis.SolveNormalization
+public import ContinuousFlexibility.Analysis.SolveStateSpaces
+public import ContinuousFlexibility.Scalar.WeightedStateTopology
 
 /-!
 # The actual normalized height space and its grading
@@ -10,6 +12,8 @@ row.  This module constructs that closed subspace with the induced
 physical grading and the actual subspace topology.  Its inclusion in the
 full `HeightPair` and scalar output preserves every seminorm estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

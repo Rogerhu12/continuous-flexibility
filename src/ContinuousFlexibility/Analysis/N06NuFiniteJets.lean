@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06ActualNuSupport
-import ContinuousFlexibility.Scalar.WeightedResidualFormulas
-import Mathlib.Analysis.Calculus.Deriv.Support
+module
+
+public import ContinuousFlexibility.Analysis.N06ActualNuSupport
+public import ContinuousFlexibility.Scalar.WeightedResidualFormulas
+public import Mathlib.Analysis.Calculus.Deriv.Support
 
 /-!
 # Finite spatial jets for the actual nu column
@@ -12,6 +14,8 @@ entire support of the nu column the actual profile germ is therefore
 the physical nu formula. The only state inputs left are nu, the independent
 construction parameter, and five actual first/second spatial height jets.
 -/
+
+@[expose] public section
 
 noncomputable section
 

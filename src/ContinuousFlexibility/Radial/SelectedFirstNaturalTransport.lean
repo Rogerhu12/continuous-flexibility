@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.SelectedSideTransport
-import ContinuousFlexibility.Radial.SelectedNaturalJoin
-import ContinuousFlexibility.Radial.SelectedNaturalTailTransport
+module
+
+public import ContinuousFlexibility.Radial.SelectedSideTransport
+public import ContinuousFlexibility.Radial.SelectedNaturalJoin
+public import ContinuousFlexibility.Radial.SelectedNaturalTailTransport
 
 /-!
 # The first-band natural solution on the same retained reference
@@ -10,6 +12,8 @@ with its complete old tail and entrance jet unchanged. The retained pair's
 proved profile germs and actual endpoints then transport this very solution
 to the common reference. No new selected tail or natural line is chosen.
 -/
+
+@[expose] public section
 
 noncomputable section
 

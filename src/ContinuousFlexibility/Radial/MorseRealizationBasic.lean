@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseChainScales
-import ContinuousFlexibility.Radial.MorseCellMassTravel
+module
+
+public import ContinuousFlexibility.Radial.MorseChainScales
+public import ContinuousFlexibility.Radial.MorseCellMassTravel
 
 /-!
 # Basic consequences of an arbitrary realized Morse chain
@@ -8,6 +10,8 @@ These projections use the frozen realization itself, rather than the
 stronger witness used to construct one particular chain. Enlarging its
 positive constants preserves every quantitative clause.
 -/
+
+@[expose] public section
 
 noncomputable section
 

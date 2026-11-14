@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.StateKappaBounds
-import Mathlib.Order.Filter.Cofinite
-import Mathlib.Topology.Order.LeftRightNhds
+module
+
+public import ContinuousFlexibility.Analysis.StateKappaBounds
+public import Mathlib.Order.Filter.Cofinite
+public import Mathlib.Topology.Order.LeftRightNhds
 
 /-!
 # Material samples escape every compact interior interval
@@ -11,6 +13,8 @@ the cofinite filter, without choosing one of the endpoints. A bounded change
 of cell index preserves the cofinite filter. These qualitative facts suffice
 for endpoint closure of locally finite control sums.
 -/
+
+@[expose] public section
 
 noncomputable section
 

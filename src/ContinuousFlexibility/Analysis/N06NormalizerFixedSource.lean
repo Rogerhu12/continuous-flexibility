@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06NormalizerConstruction
-import ContinuousFlexibility.Analysis.N06FiniteSourceNormalization
+module
+
+public import ContinuousFlexibility.Analysis.N06NormalizerConstruction
+public import ContinuousFlexibility.Analysis.N06FiniteSourceNormalization
 
 /-!
 # The reselected actual normalizer has no canonical source variation
@@ -10,6 +12,8 @@ region. Thus its actual current and reference canonical sources agree,
 and every mixed jet of their difference vanishes. No support condition
 is required of the input normalizer.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01aReferenceMeasure
-import Mathlib.Algebra.Order.Chebyshev
-import Mathlib.MeasureTheory.Integral.DominatedConvergence
-import Mathlib.MeasureTheory.Constructions.Polish.Basic
+module
+
+public import ContinuousFlexibility.Analysis.N01aReferenceMeasure
+public import Mathlib.Algebra.Order.Chebyshev
+public import Mathlib.MeasureTheory.Integral.DominatedConvergence
+public import Mathlib.MeasureTheory.Constructions.Polish.Basic
 
 /-!
 # Recovering the physical square integral from the reference partition
@@ -10,6 +12,8 @@ The revised local L² contract includes measurability of each signed
 localized field. The quantitative square estimate below uses their
 integrable squares and the actual bounded-overlap partition identity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

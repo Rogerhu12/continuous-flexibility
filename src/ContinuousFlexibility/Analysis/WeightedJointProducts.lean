@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.WeightedJointOperations
-import ContinuousFlexibility.Analysis.PolynomialProductOuterJets
+module
+
+public import ContinuousFlexibility.Analysis.WeightedJointOperations
+public import ContinuousFlexibility.Analysis.PolynomialProductOuterJets
 
 /-!
 # Products of actual weighted joint towers with fixed loss
@@ -10,6 +12,8 @@ by a component power, so every outer product jet has the required
 uniform bound. No high seminorm is multiplied by another high seminorm
 in the resulting estimate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

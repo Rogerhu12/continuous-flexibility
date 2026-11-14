@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Blueprint.Statements
-import ContinuousFlexibility.Radial.TailDeepInverse
+module
+
+public import ContinuousFlexibility.Blueprint.Statements
+public import ContinuousFlexibility.Radial.TailDeepInverse
 
 /-!
 # Blueprint node R06a
@@ -11,6 +13,8 @@ Source: `paper/flexible-surface-readable/05-flat-end-chain.tex` lines 472–725.
 Task file: `docs/tasks/R06a.md`. The full operator construction is in
 `Radial.TailDeepInverse`; the compact-test correction is recorded in `docs/STATUS.md`.
 -/
+
+@[expose] public section
 
 namespace ContinuousFlexibility.Blueprint
 

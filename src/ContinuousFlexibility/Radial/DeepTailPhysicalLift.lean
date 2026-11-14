@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.DeepTailPhysicalSource
-import ContinuousFlexibility.Radial.TailMassResistanceData
-import ContinuousFlexibility.Radial.OuterGreenKernel
+module
+
+public import ContinuousFlexibility.Radial.DeepTailPhysicalSource
+public import ContinuousFlexibility.Radial.TailMassResistanceData
+public import ContinuousFlexibility.Radial.OuterGreenKernel
 
 /-!
 # The actual physical lift of a natural tail solution
@@ -9,6 +11,8 @@ The inverse logarithmic coordinate and normalized gauge are evaluated on
 the original radius. The resulting function has the actual derivatives
 required by the radial Jacobi equation and its first-order flux system.
 -/
+
+@[expose] public section
 
 noncomputable section
 

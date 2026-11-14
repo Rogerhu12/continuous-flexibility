@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ProjectiveJets
+module
+
+public import ContinuousFlexibility.Analysis.ProjectiveJets
 
 /-!
 # Variable multilinear curve product rules in the actual topology
@@ -13,6 +15,8 @@ projective Fréchet space. No norm is imposed on these spaces. The result
 is a product rule for actual quotient derivatives, not a general
 higher-order Faà di Bruno theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

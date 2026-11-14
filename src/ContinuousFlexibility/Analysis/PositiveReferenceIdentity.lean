@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.PositiveReferenceCollarPrescribedWidth
+module
+
+public import ContinuousFlexibility.Analysis.PositiveReferenceCollarPrescribedWidth
 
 /-!
 # The fixed identity and a numerical lower bound for the same primitive
@@ -7,6 +9,8 @@ Constant physical endpoint slopes with total mass `r - l` produce the
 identity radial coordinate. The unused middle mass is at most that
 width, so the prescribed lower bound has a width-independent floor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

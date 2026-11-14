@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledFamily
-import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledFamily
+public import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
 
 /-!
 # The gauge of the selected controlled positive family
@@ -8,6 +10,8 @@ The retained transport, inverse and height are inserted into the actual
 whole reference atlas. Its admissibility uses the same buffer and the
 same endpoint matching produced by the controlled construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

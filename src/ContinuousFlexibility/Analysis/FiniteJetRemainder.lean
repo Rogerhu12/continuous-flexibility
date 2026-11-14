@@ -1,7 +1,9 @@
-import Mathlib.Analysis.Calculus.ContDiff.Basic
-import Mathlib.Analysis.Calculus.MeanValue
-import Lean.Elab.Tactic.Omega
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Analysis.Calculus.ContDiff.Basic
+public import Mathlib.Analysis.Calculus.MeanValue
+public import Lean.Elab.Tactic.Omega
+public import Mathlib.Tactic.Ring
 
 /-!
 # Uniform bounds for a function with a vanishing finite jet
@@ -12,6 +14,8 @@ vanishes at that point. Downward induction and the mean value inequality
 give the bound `M * R ^ (n - j)`. This deliberately non-sharp version has
 constant one and is convenient when normalizing Taylor remainders.
 -/
+
+@[expose] public section
 
 noncomputable section
 

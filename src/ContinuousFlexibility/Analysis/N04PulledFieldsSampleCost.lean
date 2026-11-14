@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
-import ContinuousFlexibility.Analysis.MaterialSampleBounds
-import ContinuousFlexibility.Analysis.TameLocalCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
+public import ContinuousFlexibility.Analysis.MaterialSampleBounds
+public import ContinuousFlexibility.Analysis.TameLocalCalculus
 
 /-!
 # Uniform material cost at the actual gauge samples
@@ -8,6 +10,8 @@ import ContinuousFlexibility.Analysis.TameLocalCalculus
 The sampled height bound is chosen before the auxiliary column. Cell
 replacement changes neither the physical material nor its samples.
 -/
+
+@[expose] public section
 
 noncomputable section
 

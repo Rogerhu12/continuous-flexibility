@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterSolutionOneSided
-import ContinuousFlexibility.Radial.OuterRobinUniqueness
+module
+
+public import ContinuousFlexibility.Radial.OuterSolutionOneSided
+public import ContinuousFlexibility.Radial.OuterRobinUniqueness
 
 /-!
 # The one-ended maximal weak Robin graph
@@ -9,6 +11,8 @@ one-sided conormal flux.  Its first-order weak equation is exactly
 `(w u')' = J w'/x u - ρ f`.  The value is in the given L² space, which
 is the natural endpoint condition.  No inverse is part of this definition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

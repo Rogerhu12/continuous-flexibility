@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.WeightedSchurTest
-import Mathlib.Analysis.Normed.Lp.lpSpace
+module
+
+public import ContinuousFlexibility.Radial.WeightedSchurTest
+public import Mathlib.Analysis.Normed.Lp.lpSpace
 
 /-!
 # Schur estimates that establish membership in the output space
@@ -8,6 +10,8 @@ The scalar block bound controls every finite sum of squared output norms.
 It therefore proves actual square summability before making a norm estimate;
 no prior continuity or membership of the weighted output is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

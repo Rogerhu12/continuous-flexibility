@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Contracts.CapInteriorClosure
-import ContinuousFlexibility.Geometry.GraphCapAttachment
+module
+
+public import ContinuousFlexibility.Contracts.CapInteriorClosure
+public import ContinuousFlexibility.Geometry.GraphCapAttachment
 
 /-!
 # The frontier of the actual cap body is the actual disk cap plus its top disk
@@ -9,6 +11,8 @@ cap disk, including the bottom axis. Conversely its three meridian regions
 lie on the explicit closed wall. This identifies an actual frontier, rather
 than postulating a region bounded by the cap.
 -/
+
+@[expose] public section
 
 noncomputable section
 

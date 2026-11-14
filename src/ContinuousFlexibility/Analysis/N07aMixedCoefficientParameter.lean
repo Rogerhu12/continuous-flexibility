@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aCoefficientParameterJets
-import ContinuousFlexibility.Analysis.N07aPrimitiveFamilyTame
+module
+
+public import ContinuousFlexibility.Analysis.N07aCoefficientParameterJets
+public import ContinuousFlexibility.Analysis.N07aPrimitiveFamilyTame
 
 /-!
 # The actual mixed coefficient as an even height primitive
@@ -9,6 +11,8 @@ The original parameter jets pass through bounded cylinder integration and
 the same closed Sobolev graphs; no interchange of formal derivatives is
 assumed. Both the primitive decoder and its angular derivative are exact.
 -/
+
+@[expose] public section
 
 noncomputable section
 

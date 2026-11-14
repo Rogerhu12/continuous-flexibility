@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.SpacesLpCurveDerivative
-import ContinuousFlexibility.Statements.Analysis
+module
+
+public import ContinuousFlexibility.Analysis.SpacesLpCurveDerivative
+public import ContinuousFlexibility.Statements.Analysis
 
 /-!
 # Measurability and continuity of actual parameter jets in L²
@@ -9,6 +11,8 @@ difference quotients. No interchange of parameter and spatial derivatives
 is needed. Locally dominated pointwise continuity then gives continuity in
 the actual L² norm.
 -/
+
+@[expose] public section
 
 noncomputable section
 

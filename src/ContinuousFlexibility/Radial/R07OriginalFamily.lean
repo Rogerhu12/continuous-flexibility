@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MorseChainFullRealization
-import ContinuousFlexibility.Radial.MorseChainMassResistance
+module
+
+public import ContinuousFlexibility.Radial.MorseChainFullRealization
+public import ContinuousFlexibility.Radial.MorseChainMassResistance
 
 /-!
 # Uniform constants for the fixed original geometry
@@ -8,6 +10,8 @@ The geometry and auxiliary compactly supported function are fixed before
 the height selection. This exposes the uniform realization and mass bounds
 for that actual family without replacing either of those choices.
 -/
+
+@[expose] public section
 
 noncomputable section
 

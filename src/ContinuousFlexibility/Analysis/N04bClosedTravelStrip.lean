@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04bMovingDomains
-import ContinuousFlexibility.Analysis.ParameterizedCircleInverse
+module
+
+public import ContinuousFlexibility.Analysis.N04bMovingDomains
+public import ContinuousFlexibility.Analysis.ParameterizedCircleInverse
 
 /-!
 # The actual inverse on a closed travel strip
@@ -9,6 +11,8 @@ images. They therefore determine a bijection on the entire closed strip.
 The chosen inverse on that closed strip agrees with every actual interior
 inverse, and its endpoint-circle images are proved from the forward map.
 -/
+
+@[expose] public section
 
 noncomputable section
 

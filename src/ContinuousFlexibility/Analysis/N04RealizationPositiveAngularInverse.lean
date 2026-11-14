@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationPositiveAngularCircle
-import ContinuousFlexibility.Analysis.ParameterizedCircleInverse
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationPositiveAngularCircle
+public import ContinuousFlexibility.Analysis.ParameterizedCircleInverse
 
 /-!
 # Genuine towers for the actual finite positive angular map and its inverse
@@ -10,6 +12,8 @@ formula is assembled in the existing circle model before its proved
 inversion is applied. Both outputs use the literal original maps and
 the same state domain, endpoints, and fixed collar width.
 -/
+
+@[expose] public section
 
 noncomputable section
 

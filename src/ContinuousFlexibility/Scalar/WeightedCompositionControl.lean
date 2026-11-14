@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.WeightedNormalizedMaterialJets
-import ContinuousFlexibility.Scalar.WeightedJetFamilies
-import Mathlib.Analysis.Calculus.MeanValue
+module
+
+public import ContinuousFlexibility.Scalar.WeightedNormalizedMaterialJets
+public import ContinuousFlexibility.Scalar.WeightedJetFamilies
+public import Mathlib.Analysis.Calculus.MeanValue
 
 /-!
 # Uniform control used by scalar composition estimates
@@ -10,6 +12,8 @@ low-norm radius, and the output order. The normalized material jets form an
 actual jet family. On a low-norm ball, diagonal jet products have a linear
 bound in one high input norm, and the decoded scalar range is bounded.
 -/
+
+@[expose] public section
 
 noncomputable section
 

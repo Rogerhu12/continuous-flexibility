@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledHeightTrace
-import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsOddPowerPrefix
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRootRadicandPower
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledHeightTrace
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryEndpointBoundsOddPowerPrefix
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRootRadicandPower
 
 /-!
 # Sampled bounds for the actual height traces
@@ -10,6 +12,8 @@ The two parameter-dependent factors retain the same height weight and
 five angular orders; the remaining factor consists of fixed reference
 radial derivatives at the same positive endpoint sample.
 -/
+
+@[expose] public section
 
 noncomputable section
 

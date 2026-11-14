@@ -1,8 +1,10 @@
-import ContinuousFlexibility.Radial.ReferenceMatchedFamily
-import ContinuousFlexibility.Radial.MatchedChannelEnvelope
-import ContinuousFlexibility.Radial.MatchedFiniteEnvelope
-import ContinuousFlexibility.Radial.MatchedFlooredRawEnvelope
-import ContinuousFlexibility.Radial.MatchingInverseTheorem
+module
+
+public import ContinuousFlexibility.Radial.ReferenceMatchedFamily
+public import ContinuousFlexibility.Radial.MatchedChannelEnvelope
+public import ContinuousFlexibility.Radial.MatchedFiniteEnvelope
+public import ContinuousFlexibility.Radial.MatchedFlooredRawEnvelope
+public import ContinuousFlexibility.Radial.MatchingInverseTheorem
 
 /-!
 # The exact R11a conclusion from the four actual regional estimates
@@ -14,6 +16,8 @@ The actual index floor then costs only exp(S N), including the one scalar
 channel. The already proved physical Schur construction supplies the
 same inverse at the three frozen exponents.
 -/
+
+@[expose] public section
 
 noncomputable section
 

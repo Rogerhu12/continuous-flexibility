@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CanonicalSourceConversion
-import ContinuousFlexibility.Analysis.SpacesLpCurveDerivative
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalSourceConversion
+public import ContinuousFlexibility.Analysis.SpacesLpCurveDerivative
 
 /-!
 # Actual chart change of variables for the source energy
@@ -8,6 +10,8 @@ These formulas apply to arbitrary canonical functions, including every
 actual angular source jet. Integrability is transported by its own
 equivalence, independently of the totalized integral identity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

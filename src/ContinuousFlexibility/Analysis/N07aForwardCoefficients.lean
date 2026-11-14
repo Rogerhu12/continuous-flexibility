@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ControlCellEndpointBounds
-import ContinuousFlexibility.Analysis.TameElementaryCalculus
-import ContinuousFlexibility.Scalar.WeightedReferenceBounds
+module
+
+public import ContinuousFlexibility.Analysis.ControlCellEndpointBounds
+public import ContinuousFlexibility.Analysis.TameElementaryCalculus
+public import ContinuousFlexibility.Scalar.WeightedReferenceBounds
 
 /-!
 # Actual N01 coefficient towers with uniform spatial bounds
@@ -10,6 +12,8 @@ The pointwise N01 towers therefore have one constant over the entire
 annulus, with the same parameter base and loss. Near either endpoint one
 positive power of the actual material height weight remains available.
 -/
+
+@[expose] public section
 
 noncomputable section
 

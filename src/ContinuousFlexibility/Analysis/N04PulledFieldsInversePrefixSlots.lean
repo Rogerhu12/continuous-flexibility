@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsInversePrefixPower
-import ContinuousFlexibility.Analysis.N04PulledFieldsInverseSlotBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsInversePrefixPower
+public import ContinuousFlexibility.Analysis.N04PulledFieldsInverseSlotBounds
 
 /-!
 # Genuine scalar inverse jets on pure mixed slots
@@ -9,6 +11,8 @@ the same original parameter count. The combinatorial factor is uniform
 over the finite total-order prefix and is absorbed into the sampled
 coefficient envelope, without changing the height weight or power scale.
 -/
+
+@[expose] public section
 
 noncomputable section
 

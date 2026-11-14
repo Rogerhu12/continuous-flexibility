@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cFlowVariationInput
+module
+
+public import ContinuousFlexibility.Analysis.N01cFlowVariationInput
 
 /-!
 # Recovering the original directions and physical radius
@@ -7,6 +9,8 @@ The finite affine chart built from a tuple sends its coordinate basis
 to exactly that tuple. The two closed time surjections then evaluate
 the same supplied ordinary trajectory at every physical radius.
 -/
+
+@[expose] public section
 
 noncomputable section
 

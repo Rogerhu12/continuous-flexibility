@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N08CharacteristicFactors
-import ContinuousFlexibility.Analysis.N08RadialFlow
+module
+
+public import ContinuousFlexibility.Analysis.N08CharacteristicFactors
+public import ContinuousFlexibility.Analysis.N08RadialFlow
 
 /-!
 # The actual height variation of the characteristic speed at a radial height
@@ -8,6 +10,8 @@ The radial square root is fixed while the height varies.  The discriminant
 and `Q` have positive values at parameter zero, so their genuine ordinary
 derivatives give the speed variation without a parameter variational ODE.
 -/
+
+@[expose] public section
 
 noncomputable section
 

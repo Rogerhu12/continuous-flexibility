@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PulledFieldsMaskedExpansion
-import ContinuousFlexibility.Analysis.N04RealizationMovingPointMixedBounds
+module
+
+public import ContinuousFlexibility.Analysis.N04PulledFieldsMaskedExpansion
+public import ContinuousFlexibility.Analysis.N04RealizationMovingPointMixedBounds
 
 /-!
 # Moving-point estimates with the original physical parameter budget
@@ -10,6 +12,8 @@ coordinate of the genuine graph vanishes on every zero-state block.
 The exact masked expansion therefore retains the physical loss of the
 original parameter prefix and the existing height and spatial weights.
 -/
+
+@[expose] public section
 
 noncomputable section
 

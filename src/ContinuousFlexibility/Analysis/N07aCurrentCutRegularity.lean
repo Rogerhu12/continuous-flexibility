@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Analysis.N07aTubularPhysicalGluing
-import ContinuousFlexibility.Analysis.N07aPhysicalPieceEquation
-import ContinuousFlexibility.Analysis.N07aLocalPullbackNoncharacteristic
-import ContinuousFlexibility.Analysis.N07aCurrentFirstTraces
-import ContinuousFlexibility.Analysis.N07aReconstructionEquationData
-import ContinuousFlexibility.Analysis.N07aReferenceReturn
+module
+
+public import ContinuousFlexibility.Analysis.N07aTubularPhysicalGluing
+public import ContinuousFlexibility.Analysis.N07aPhysicalPieceEquation
+public import ContinuousFlexibility.Analysis.N07aLocalPullbackNoncharacteristic
+public import ContinuousFlexibility.Analysis.N07aCurrentFirstTraces
+public import ContinuousFlexibility.Analysis.N07aReconstructionEquationData
+public import ContinuousFlexibility.Analysis.N07aReferenceReturn
 
 /-!
 # The actual canonical unknown is smooth across every moving cut
@@ -13,6 +15,8 @@ canonical equation gives the physical equation of each closed height.
 The noncharacteristic coefficient comes from the actual N04 operator
 identity. These proved inputs feed the common tubular-coordinate gluing.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.SpacesTorusCut
-import ContinuousFlexibility.Analysis.SpacesPhysicalFrequencyBands
-import ContinuousFlexibility.Analysis.SpacesTorusCellLp
-import ContinuousFlexibility.Analysis.SpacesTorusCellCoefficients
+module
+
+public import ContinuousFlexibility.Analysis.SpacesTorusCut
+public import ContinuousFlexibility.Analysis.SpacesPhysicalFrequencyBands
+public import ContinuousFlexibility.Analysis.SpacesTorusCellLp
+public import ContinuousFlexibility.Analysis.SpacesTorusCellCoefficients
 
 /-!
 # Actual physical Fourier jet operators in each cell
@@ -10,6 +12,8 @@ These operators use the normalized torus only internally. Their inputs
 and outputs are the real cylinder `L²` classes fixed in the statements,
 and their symbols are the actual physical mixed derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

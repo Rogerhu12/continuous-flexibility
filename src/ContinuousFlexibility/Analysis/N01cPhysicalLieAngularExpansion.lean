@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N01cPhysicalLieExpansion
+module
+
+public import ContinuousFlexibility.Analysis.N01cPhysicalLieExpansion
 
 /-!
 # Angular jets of the finite physical Lie expansion
@@ -7,6 +9,8 @@ Angular differentiation only hits existing factors. It preserves their
 number and their total radial order. The total spatial order is exactly
 n+b, which is the budget used before the physical flow graph is inserted.
 -/
+
+@[expose] public section
 
 noncomputable section
 

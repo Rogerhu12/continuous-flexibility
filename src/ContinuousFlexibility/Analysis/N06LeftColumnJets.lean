@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06LeftColumnPhysical
-import ContinuousFlexibility.Analysis.CylinderMixedJets
-import ContinuousFlexibility.Analysis.PhysicalTransmissionTrace
-import ContinuousFlexibility.Scalar.WeightedDifferentiationSupport
+module
+
+public import ContinuousFlexibility.Analysis.N06LeftColumnPhysical
+public import ContinuousFlexibility.Analysis.CylinderMixedJets
+public import ContinuousFlexibility.Analysis.PhysicalTransmissionTrace
+public import ContinuousFlexibility.Scalar.WeightedDifferentiationSupport
 
 /-!
 # Angular jets of the genuine left-column difference
@@ -11,6 +13,8 @@ below retains the original cutoff derivatives and the actual mixed jets
 of the original coefficient differences. The corrected operator is
 identified with that formula by N03 on the cutoff support.
 -/
+
+@[expose] public section
 
 noncomputable section
 

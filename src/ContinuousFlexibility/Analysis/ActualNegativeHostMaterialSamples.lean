@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.ActualNegativeMaterialSamples
+module
+
+public import ContinuousFlexibility.Analysis.ActualNegativeMaterialSamples
 
 /-!
 # A genuine negative host and the stored half sample
@@ -9,6 +11,8 @@ have uniformly bounded endpoint-coordinate distance: the actual middle
 point belongs to the host, while the existing half-sample comparison
 holds at that same point. No uniqueness of cells is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

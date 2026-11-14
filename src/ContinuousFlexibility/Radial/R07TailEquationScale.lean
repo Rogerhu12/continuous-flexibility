@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.R07NaturalLineNormalization
-import ContinuousFlexibility.Radial.R07NaturalTailScale
+module
+
+public import ContinuousFlexibility.Radial.R07NaturalLineNormalization
+public import ContinuousFlexibility.Radial.R07NaturalTailScale
 
 /-!
 # Scalar invariance of the normalized R06 natural line
@@ -8,6 +10,8 @@ Multiplying the density by a positive constant scales both terms in the
 natural equation and its weighted measure.  The normalized entrance slope
 is therefore unchanged, by the actual natural-line uniqueness in R06.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01cNormalizedCoefficients
-import ContinuousFlexibility.Analysis.N01cCommonType
+module
+
+public import ContinuousFlexibility.Analysis.N01cNormalizedCoefficients
+public import ContinuousFlexibility.Analysis.N01cCommonType
 
 /-!
 # The original minus speed in normalized physical variables
@@ -10,6 +12,8 @@ This is an identity for the original speed, with the original profile,
 height and controls. Positivity of the optical square is supplied by the
 common geometric neighbourhood, separately from this algebraic identity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N05OpticalRootQuotient
+module
+
+public import ContinuousFlexibility.Analysis.N05OpticalRootQuotient
 
 /-!
 # An explicit two-sided collar from an optical root lower bound
@@ -12,6 +14,8 @@ The working interval is an original domain of the profile. In particular,
 this file does not infer a positive-side neighborhood from containment of
 an open negative component in a material cell.
 -/
+
+@[expose] public section
 
 noncomputable section
 

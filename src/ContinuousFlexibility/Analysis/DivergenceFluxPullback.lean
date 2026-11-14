@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.DivergenceConjugation
+module
+
+public import ContinuousFlexibility.Analysis.DivergenceConjugation
 
 /-!
 # The actual flux under a coordinate change
@@ -7,6 +9,8 @@ A divergence operator is the exterior derivative of its flux one-form.
 Pulling back this actual form gives the principal density transformation,
 including the orientation factor of the Jacobian.
 -/
+
+@[expose] public section
 
 noncomputable section
 

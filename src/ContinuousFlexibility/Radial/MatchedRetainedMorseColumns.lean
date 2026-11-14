@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchedRetainedMorseWeights
-import ContinuousFlexibility.Radial.MatchedInnerInterpolationWalls
+module
+
+public import ContinuousFlexibility.Radial.MatchedRetainedMorseWeights
+public import ContinuousFlexibility.Radial.MatchedInnerInterpolationWalls
 
 /-!
 # The actual finite-chain weight on retained Morse columns
@@ -9,6 +11,8 @@ of the same actual dictionary. Its pullback and its endpoint restriction
 are computed here, so the normalized column estimate has no assumed
 physical interpolation identity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

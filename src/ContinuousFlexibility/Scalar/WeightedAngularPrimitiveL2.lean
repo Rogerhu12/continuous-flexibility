@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.WeightedAngularPrimitiveJets
-import ContinuousFlexibility.Analysis.CircleJetClosedGraph
-import ContinuousFlexibility.Analysis.CylinderTestPairing
+module
+
+public import ContinuousFlexibility.Scalar.WeightedAngularPrimitiveJets
+public import ContinuousFlexibility.Analysis.CircleJetClosedGraph
+public import ContinuousFlexibility.Analysis.CylinderTestPairing
 
 /-!
 # The cylinder L² bound for angular integration
@@ -9,6 +11,8 @@ The actual integral from zero is bounded on each angular interval by
 Cauchy--Schwarz. Fubini then gives its cylinder operator bound with constant
 `π`, without losing a radial or angular derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

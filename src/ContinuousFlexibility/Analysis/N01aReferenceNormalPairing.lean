@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N01aReferenceWeightedMode
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
+module
+
+public import ContinuousFlexibility.Analysis.N01aReferenceWeightedMode
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
 
 /-!
 # The actual first-normal estimate as a dual estimate
@@ -8,6 +10,8 @@ The given weak normal derivative need not have been declared measurable.
 The square bounds still control every actual iterated pairing, which is
 enough to bound the smooth eigenfunction's derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01ReturnInverseCircle
-import ContinuousFlexibility.Analysis.CircleAveragedComposition
-import ContinuousFlexibility.Analysis.CircleWeightedProduct
-import ContinuousFlexibility.Analysis.ReturnCorrectionResidualLinear
+module
+
+public import ContinuousFlexibility.Analysis.N01ReturnInverseCircle
+public import ContinuousFlexibility.Analysis.CircleAveragedComposition
+public import ContinuousFlexibility.Analysis.CircleWeightedProduct
+public import ContinuousFlexibility.Analysis.ReturnCorrectionResidualLinear
 
 /-!
 # The actual independent-residual displacement as a circle linear map
@@ -13,6 +15,8 @@ circle derivative. Multiplication and the actual forward return chart
 then realize exactly the original displacement linear map, including
 at zeros of the residual.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N04RealizationPrimitiveFactorEnvelopes
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationPrimitiveFactorEnvelopes
 
 /-!
 # The three actual normalized initial factors
@@ -8,6 +10,8 @@ reciprocal height, or actual reference/current height ratio. The latter
 two are reconstructed from source factors and genuine inverse/reference
 Jacobians on the same open material piece before jets are transferred.
 -/
+
+@[expose] public section
 
 noncomputable section
 

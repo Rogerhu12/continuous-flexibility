@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N07aHeightFluxConservation
+module
+
+public import ContinuousFlexibility.Analysis.N07aHeightFluxConservation
 
 /-!
 # Source compatibility of the actual coefficient operators
@@ -6,6 +8,8 @@ import ContinuousFlexibility.Analysis.N07aHeightFluxConservation
 The radial and angular flux conservation lemmas apply to the literal
 common-height operator and to the positive-weight coefficient perturbation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

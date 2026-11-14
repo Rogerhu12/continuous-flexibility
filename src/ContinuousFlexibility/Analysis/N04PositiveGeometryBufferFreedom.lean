@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveNormalizationBuffer
-import ContinuousFlexibility.Analysis.PositiveChartRangeGeometry
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveNormalizationBuffer
+public import ContinuousFlexibility.Analysis.PositiveChartRangeGeometry
 
 /-!
 # Arbitrarily small right collars in a qualitative normalization buffer
@@ -12,6 +14,8 @@ interval and its support certificate remain unchanged.
 These are consequences of the existing definitions, not new assumptions on a
 positive-geometry realization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

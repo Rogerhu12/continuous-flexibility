@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01aReferenceHeightMajorants
-import ContinuousFlexibility.Analysis.N01aOpticalProfile
-import ContinuousFlexibility.Analysis.AffineMaterialSampling
-import ContinuousFlexibility.Analysis.N01aJacobiTransfer
+module
+
+public import ContinuousFlexibility.Analysis.N01aReferenceHeightMajorants
+public import ContinuousFlexibility.Analysis.N01aOpticalProfile
+public import ContinuousFlexibility.Analysis.AffineMaterialSampling
+public import ContinuousFlexibility.Analysis.N01aJacobiTransfer
 
 /-!
 # Reference-kernel jets from the actual Jacobi equation
@@ -10,6 +12,8 @@ The optical radicand supplies both coefficients of the scalar equation.
 The cell bounds become powers of the actual material envelope, so the
 pointwise Cauchy-data factor is preserved at every ordinary derivative.
 -/
+
+@[expose] public section
 
 noncomputable section
 

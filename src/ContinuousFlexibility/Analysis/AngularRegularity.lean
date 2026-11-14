@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ScalarFlowVariation
-import Mathlib.Analysis.Calculus.ContDiff.Deriv
-import Mathlib.Analysis.Calculus.IteratedDeriv.Defs
+module
+
+public import ContinuousFlexibility.Analysis.ScalarFlowVariation
+public import Mathlib.Analysis.Calculus.ContDiff.Deriv
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Defs
 
 /-!
 # Continuous angular derivatives with a continuous radial parameter
@@ -9,6 +11,8 @@ The radial variable is a parameter throughout.  This elementary calculus
 records actual angular derivatives and their joint continuity, without
 requiring radial derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

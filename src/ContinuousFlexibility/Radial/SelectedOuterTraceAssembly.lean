@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.SelectedTailRegularResponse
-import ContinuousFlexibility.Radial.MatchingTraceCalculus
+module
+
+public import ContinuousFlexibility.Radial.SelectedTailRegularResponse
+public import ContinuousFlexibility.Radial.MatchingTraceCalculus
 
 /-!
 # Gluing the two one-sided representatives and their frozen traces
@@ -9,6 +11,8 @@ either cut it is exactly that side's constructed representative. The
 within-derivative in the frozen outer flux therefore equals the derivative
 on the correct physical half-closed tail.
 -/
+
+@[expose] public section
 
 noncomputable section
 

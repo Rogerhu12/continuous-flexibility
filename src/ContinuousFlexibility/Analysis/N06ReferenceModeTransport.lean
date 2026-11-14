@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N06WeakCylinderPDE
-import ContinuousFlexibility.Analysis.N06AngularMeanBridge
-import ContinuousFlexibility.Analysis.N06ReferenceSourceJets
-import ContinuousFlexibility.Radial.R11bFourierCoefficients
+module
+
+public import ContinuousFlexibility.Analysis.N06WeakCylinderPDE
+public import ContinuousFlexibility.Analysis.N06AngularMeanBridge
+public import ContinuousFlexibility.Analysis.N06ReferenceSourceJets
+public import ContinuousFlexibility.Radial.R11bFourierCoefficients
 
 /-!
 # Actual Fourier modes under the controlled reference chart
@@ -12,6 +14,8 @@ actual radial reference chart, height conjugacy divides each mode by the
 same radial height. Almost-everywhere changes of representatives preserve
 these coefficients, so the identities apply to the original L2 fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 

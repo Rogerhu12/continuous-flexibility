@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.MorseSecondModeDeepTail
+module
+
+public import ContinuousFlexibility.Radial.MorseSecondModeDeepTail
 
 /-!
 # Physical growth for the actual second-mode Morse tail
@@ -7,6 +9,8 @@ The normalized logarithmic density and the original cell localization
 satisfy the full physical relation. The cross products retain their
 quadratic exponent, including the index shift on the left.
 -/
+
+@[expose] public section
 
 noncomputable section
 

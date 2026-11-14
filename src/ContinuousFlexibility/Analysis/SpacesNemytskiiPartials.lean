@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.SpacesNemytskiiTerms
+module
+
+public import ContinuousFlexibility.Analysis.SpacesNemytskiiTerms
 
 /-!
 # Coordinate differentiation of composition terms
@@ -7,6 +9,8 @@ The coordinate derivatives used in the finite jet expansion are actual
 one-variable derivatives of slices. Finite products differentiate by
 replacing one recorded jet order at a time.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.IntervalWeakIntegral
+module
+
+public import ContinuousFlexibility.Analysis.IntervalWeakIntegral
 
 /-!
 # Local regularity for a weak one-dimensional divergence equation
@@ -12,6 +14,8 @@ and integrating again. The remaining homogeneous solution is classified by
 The coefficient is allowed to vanish at the interval endpoints, and neither
 the solution nor the forcing is assumed integrable up to those endpoints.
 -/
+
+@[expose] public section
 
 open Set Filter MeasureTheory
 open scoped ContDiff Topology

@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.ReferenceCellL2
-import ContinuousFlexibility.Radial.ScaleSlowVariation
+module
+
+public import ContinuousFlexibility.Radial.ReferenceCellL2
+public import ContinuousFlexibility.Radial.ScaleSlowVariation
 
 /-!
 # Endpoint geometry for the actual zero-mode kernel
@@ -10,6 +12,8 @@ fixed larger level. Consequently the inverse profile between a point and
 a deeper source costs a fixed coefficient power at the source level.
 No monotonicity of the profile or of the cell enumeration is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

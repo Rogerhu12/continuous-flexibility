@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.PolynomialJetComposition
-import Mathlib.Analysis.Calculus.IteratedDeriv.Defs
+module
+
+public import ContinuousFlexibility.Analysis.PolynomialJetComposition
+public import Mathlib.Analysis.Calculus.IteratedDeriv.Defs
 
 /-!
 # Linear operations on component-power jet bounds
@@ -8,6 +10,8 @@ These estimates retain the original functions and ordinary Fréchet
 derivatives. In particular the product with a coordinate projection only
 requires positive-order jets, so unbounded circle lifts are allowed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

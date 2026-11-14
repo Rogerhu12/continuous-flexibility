@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.IntervalFluxEnergy
-import ContinuousFlexibility.Radial.ProfileLayerGeometry
-import ContinuousFlexibility.Radial.ProfilePartitionBounds
-import ContinuousFlexibility.Radial.R11bWeightedSquareDensity
+module
+
+public import ContinuousFlexibility.Analysis.IntervalFluxEnergy
+public import ContinuousFlexibility.Radial.ProfileLayerGeometry
+public import ContinuousFlexibility.Radial.ProfilePartitionBounds
+public import ContinuousFlexibility.Radial.R11bWeightedSquareDensity
 
 /-!
 # Scalar profile squares and localized first derivatives
@@ -11,6 +13,8 @@ bound. Consequently a continuous derivative on the open core becomes an
 actual L2 function after multiplication by its localizer. These are
 membership proofs for the original representatives.
 -/
+
+@[expose] public section
 
 open Set Filter MeasureTheory Real
 open ContinuousFlexibility.Analysis ContinuousFlexibility.Statements

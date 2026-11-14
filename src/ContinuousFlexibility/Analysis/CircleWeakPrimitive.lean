@@ -1,8 +1,12 @@
-import ContinuousFlexibility.Analysis.CircleJetBonding
-import Mathlib.Algebra.Order.ToIntervalMod
-import Mathlib.Analysis.Distribution.AEEqOfIntegralContDiff
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.Periodic
-import Mathlib.MeasureTheory.Integral.Prod
+module
+
+public import ContinuousFlexibility.Analysis.CircleJetBonding
+public import Mathlib.Algebra.Order.ToIntervalMod
+public import Mathlib.Analysis.Distribution.AEEqOfIntegralContDiff
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.Periodic
+public import Mathlib.MeasureTheory.Integral.Prod
+
+@[expose] public section
 
 open Set Filter MeasureTheory
 open scoped ContDiff ENNReal Topology

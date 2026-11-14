@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalAEPairing
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalRepresentative
-import ContinuousFlexibility.Analysis.N07aAngularPhysicalSource
-import ContinuousFlexibility.Analysis.N07aReferenceReturn
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalAEPairing
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalRepresentative
+public import ContinuousFlexibility.Analysis.N07aAngularPhysicalSource
+public import ContinuousFlexibility.Analysis.N07aReferenceReturn
 
 /-!
 # The actual fixed row survives current-to-reference coordinate transport
@@ -11,6 +13,8 @@ which contains the support of the true reference column. Therefore two
 physical fields representing the same canonical unknown at the current
 and reference parameters have exactly the same original row integral.
 -/
+
+@[expose] public section
 
 noncomputable section
 

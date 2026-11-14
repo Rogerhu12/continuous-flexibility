@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.ScaleSlowVariation
+module
+
+public import ContinuousFlexibility.Radial.ScaleSlowVariation
 
 /-!
 # Physical attenuation of the natural node values
@@ -7,6 +9,8 @@ The mass-resistance lower bound and the genuine natural-line recurrence
 give the cubic attenuation exponent in the frozen physical conclusion.
 The accumulated errors are absorbed by a fixed power of `radialE`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

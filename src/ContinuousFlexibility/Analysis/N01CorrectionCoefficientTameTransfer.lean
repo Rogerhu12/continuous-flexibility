@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N01CorrectionCoefficientFlatBounds
-import ContinuousFlexibility.Analysis.FlatMixedDiagonalRealization
-import ContinuousFlexibility.Analysis.ActualRadialCellComparison
+module
+
+public import ContinuousFlexibility.Analysis.N01CorrectionCoefficientFlatBounds
+public import ContinuousFlexibility.Analysis.FlatMixedDiagonalRealization
+public import ContinuousFlexibility.Analysis.ActualRadialCellComparison
 
 /-!
 # Transferring actual joint coefficient estimates to the source family
@@ -11,6 +13,8 @@ the fixed finite maximum for the two components, and the flat strip
 estimate therefore control the same smooth coefficient family used by
 the source operator.
 -/
+
+@[expose] public section
 
 noncomputable section
 

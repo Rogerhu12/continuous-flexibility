@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.N06ChartAlmostEverywhere
+module
+
+public import ContinuousFlexibility.Analysis.N06ChartAlmostEverywhere
 
 /-!
 # Extending almost-everywhere identities from a half-period tile
@@ -8,6 +10,8 @@ union of angular translates of its exceptional set in the measured tile.
 Translations preserve null sets. No continuity of the representatives
 and no pointwise identity inferred from an L² class are used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

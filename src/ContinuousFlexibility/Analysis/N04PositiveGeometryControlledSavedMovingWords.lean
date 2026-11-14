@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledMovingWords
-import ContinuousFlexibility.Analysis.N01cParameterCalculus
+module
+
+public import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledMovingWords
+public import ContinuousFlexibility.Analysis.N01cParameterCalculus
 
 /-!
 # Moving-point composition with a saved ordinary order
@@ -9,6 +11,8 @@ its saved positive-order bound into the existing unsaved bound. The same
 linear operation on the actual output tower is cancelled at the end.
 Neither input is required to have a bounded zeroth value.
 -/
+
+@[expose] public section
 
 noncomputable section
 

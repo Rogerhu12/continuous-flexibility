@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.InverseFieldsPhysicalJetClosure
-import ContinuousFlexibility.Analysis.CanonicalNegativePotentialJets
-import ContinuousFlexibility.Analysis.CanonicalStateInterpolation
-import ContinuousFlexibility.Analysis.N04bFieldRegularity
+module
+
+public import ContinuousFlexibility.Analysis.InverseFieldsPhysicalJetClosure
+public import ContinuousFlexibility.Analysis.CanonicalNegativePotentialJets
+public import ContinuousFlexibility.Analysis.CanonicalStateInterpolation
+public import ContinuousFlexibility.Analysis.N04bFieldRegularity
 
 /-!
 # Physical jet estimates give the actual negative canonical potential
@@ -12,6 +14,8 @@ stored potential with the explicit inverse field. Thus physical
 coefficient, chart, and height estimates, together with the actual
 Jacobian lower bound, control every mixed derivative of the potential.
 -/
+
+@[expose] public section
 
 noncomputable section
 

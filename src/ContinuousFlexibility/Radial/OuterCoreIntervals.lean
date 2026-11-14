@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OuterCoreMass
+module
+
+public import ContinuousFlexibility.Radial.OuterCoreMass
 
 /-!
 # The physical transition-core interval on either end
@@ -7,6 +9,8 @@ For a cell strictly after the initial cell, the core is precisely that
 retained cell together with the glue preceding it in the outward order.
 The endpoints below are in increasing physical radius on both ends.
 -/
+
+@[expose] public section
 
 noncomputable section
 

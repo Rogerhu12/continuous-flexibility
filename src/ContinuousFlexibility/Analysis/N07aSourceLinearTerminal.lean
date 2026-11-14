@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aLinearJetCoefficient
-import ContinuousFlexibility.Analysis.N07aCanonicalJetNormBounds
+module
+
+public import ContinuousFlexibility.Analysis.N07aLinearJetCoefficient
+public import ContinuousFlexibility.Analysis.N07aCanonicalJetNormBounds
 
 /-!
 # The actual source-linear field has mixed L² terminal bounds
@@ -9,6 +11,8 @@ exact rectangle measure then give the terminal mixed-jet L² estimates,
 with the complete square-root length factor retained in the sampled
 envelope.
 -/
+
+@[expose] public section
 
 noncomputable section
 

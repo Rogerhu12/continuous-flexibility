@@ -1,4 +1,6 @@
-import Mathlib.MeasureTheory.Function.L2Space
+module
+
+public import Mathlib.MeasureTheory.Function.L2Space
 
 /-!
 # Operator bounds from the actual bounded integral kernel
@@ -8,6 +10,8 @@ bound on the actual kernel gives its finite-measure L² operator bound.
 This applies to localized Green operators after their integral formula
 has been established; no bounded integral operator is postulated here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

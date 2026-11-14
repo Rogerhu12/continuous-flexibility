@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CanonicalStripGeometry
-import Mathlib.Topology.MetricSpace.Contracting
-import Mathlib.Analysis.Normed.Group.Uniform
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalStripGeometry
+public import Mathlib.Topology.MetricSpace.Contracting
+public import Mathlib.Analysis.Normed.Group.Uniform
 
 /-!
 # Global inverse for a small perturbation on a strip
@@ -13,6 +15,8 @@ bijection preserves the open strip exactly. This supplies a global
 inverse criterion for the relative coordinate patch, rather than only
 the nonzero endpoint Jacobian.
 -/
+
+@[expose] public section
 
 noncomputable section
 

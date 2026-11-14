@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Scalar.GreenIdentity
+module
+
+public import ContinuousFlexibility.Scalar.GreenIdentity
 
 /-!
 # Finite-regularity Green identity for reference reconstruction
@@ -9,6 +11,8 @@ and once continuously differentiable coefficients suffice for Green
 symmetry. No infinite-order regularity is inferred from piecewise
 smoothness.
 -/
+
+@[expose] public section
 
 noncomputable section
 

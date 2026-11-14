@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N06ReferenceForcingMap
-import ContinuousFlexibility.Analysis.N06ReferenceUnitEquation
-import ContinuousFlexibility.Analysis.N06N05PositiveCubicSourceMap
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceForcingMap
+public import ContinuousFlexibility.Analysis.N06ReferenceUnitEquation
+public import ContinuousFlexibility.Analysis.N06N05PositiveCubicSourceMap
 
 /-!
 # The positive cubic map from the original N05 graph and reference atlas
@@ -11,6 +13,8 @@ its weak equation. Thus the positive cubic map no longer takes a forcing
 lift or an independent weak equation as input. The radial geometry and
 its identification with the actual reference coefficients remain explicit.
 -/
+
+@[expose] public section
 
 noncomputable section
 

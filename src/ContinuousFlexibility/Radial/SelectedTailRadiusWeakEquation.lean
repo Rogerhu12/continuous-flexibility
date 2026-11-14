@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.SelectedTailInverseRadius
-import ContinuousFlexibility.Radial.SelectedTailWeakPairing
+module
+
+public import ContinuousFlexibility.Radial.SelectedTailInverseRadius
+public import ContinuousFlexibility.Radial.SelectedTailWeakPairing
 
 /-!
 # Weak equations for the same inverse on the actual scaled reference
@@ -8,6 +10,8 @@ The operator, Jacobi test source, smooth test and measure all use the
 same radius/height transport. The square-root density factors cancel in
 the inner products. No equality of entire reference profiles is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

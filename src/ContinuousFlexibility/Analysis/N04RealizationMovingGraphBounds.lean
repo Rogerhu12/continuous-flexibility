@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationPhysicalJointBounds
-import ContinuousFlexibility.Analysis.N01cPhysicalFlowGraph
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationPhysicalJointBounds
+public import ContinuousFlexibility.Analysis.N01cPhysicalFlowGraph
 
 /-!
 # Weighted finite partitions for a genuine moving-point graph
@@ -10,6 +12,8 @@ costs one less order before it is inserted into the outer joint jet;
 a block containing parameter directions has its supplied finite-prefix
 offset. The two costs combine without changing the parameter domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

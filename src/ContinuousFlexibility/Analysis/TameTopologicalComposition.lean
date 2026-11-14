@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.TameComposition
-import ContinuousFlexibility.Analysis.ProjectiveCurveIteratedChain
+module
+
+public import ContinuousFlexibility.Analysis.TameComposition
+public import ContinuousFlexibility.Analysis.ProjectiveCurveIteratedChain
 
 /-!
 # Smooth tame composition with actual topological parameter spaces
@@ -9,6 +11,8 @@ The output is a projective limit of Banach spaces. The genuine curve
 rule differentiates the finite partition expressions, while the
 existing local bounds give the homogeneous tame estimates.
 -/
+
+@[expose] public section
 
 noncomputable section
 

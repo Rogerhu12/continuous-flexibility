@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04NegativeInverseCollector
-import ContinuousFlexibility.Analysis.N04NegativeInverseMixedPrefix
+module
+
+public import ContinuousFlexibility.Analysis.N04NegativeInverseCollector
+public import ContinuousFlexibility.Analysis.N04NegativeInverseMixedPrefix
 
 /-!
 # Genuine joint prefixes and their mixed derivative bounds
@@ -8,6 +10,8 @@ Only the original positive parameter arity is fixed. Appending spatial
 directions preserves that arity and its sampled height factor. The
 conversion is proved independently of any concrete realization gauge.
 -/
+
+@[expose] public section
 
 noncomputable section
 

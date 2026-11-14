@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Radial.Gauge
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
-import Mathlib.Analysis.SpecialFunctions.Sqrt
-import Mathlib.Tactic.FieldSimp
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Ring
+module
+
+public import ContinuousFlexibility.Radial.Gauge
+public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+public import Mathlib.Analysis.SpecialFunctions.Sqrt
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
 
 /-!
 # The actual radial energy on a positive inner gap
@@ -14,6 +16,8 @@ For a homogeneous function the same energy is exactly the pairing of
 its boundary values with its outward conormal derivatives. No bound on
 the length of the gap, or on an off-diagonal flux entry, is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

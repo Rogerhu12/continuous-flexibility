@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.OuterLocalizerBlocks
-import ContinuousFlexibility.Radial.OuterDeepFactory
-import ContinuousFlexibility.Radial.OuterFullCore
+module
+
+public import ContinuousFlexibility.Radial.OuterLocalizerBlocks
+public import ContinuousFlexibility.Radial.OuterDeepFactory
+public import ContinuousFlexibility.Radial.OuterFullCore
 
 /-!
 # Exact seam blocks met by the outer core and actual deep edges
@@ -9,6 +11,8 @@ A right node edge is one seam block. A left node edge crosses the next
 seam and is contained in two consecutive blocks. The complete left initial
 edge and the complete transition core also have explicit two-block covers.
 -/
+
+@[expose] public section
 
 noncomputable section
 

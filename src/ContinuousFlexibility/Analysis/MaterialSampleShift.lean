@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.MaterialSampleGlobalModels
-import ContinuousFlexibility.Analysis.MaterialSampleRadialLoss
-import ContinuousFlexibility.Analysis.MaterialWeightShift
+module
+
+public import ContinuousFlexibility.Analysis.MaterialSampleGlobalModels
+public import ContinuousFlexibility.Analysis.MaterialSampleRadialLoss
+public import ContinuousFlexibility.Analysis.MaterialWeightShift
 
 /-!
 # Precise sample-weight comparison under bounded index displacement
@@ -9,6 +11,8 @@ Height exponents are preserved exactly. A bounded sample-index shift
 costs a fixed `E0` power for height weights and an arbitrarily small extra
 order for each specified material power.
 -/
+
+@[expose] public section
 
 noncomputable section
 

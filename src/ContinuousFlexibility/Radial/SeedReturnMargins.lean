@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.MorseNegativeCover
-import ContinuousFlexibility.Radial.SeedCentralReturn
-import ContinuousFlexibility.Radial.ReferenceFiniteIndexFloor
-import ContinuousFlexibility.Radial.TwoTailReferenceAssembly
+module
+
+public import ContinuousFlexibility.Radial.MorseNegativeCover
+public import ContinuousFlexibility.Radial.SeedCentralReturn
+public import ContinuousFlexibility.Radial.ReferenceFiniteIndexFloor
+public import ContinuousFlexibility.Radial.TwoTailReferenceAssembly
 
 /-!
 # Return margins for the actual glued seed
@@ -12,6 +14,8 @@ A finite index floor treats the compact central interval, and cell
 saturation then gives whole-interval containment. The analytic profile,
 Jacobi field and endpoints are never changed by these two operations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

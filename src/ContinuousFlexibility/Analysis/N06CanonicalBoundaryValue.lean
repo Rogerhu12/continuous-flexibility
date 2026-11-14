@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CanonicalBoundaryImage
-import Mathlib.Topology.Order.IntermediateValue
+module
+
+public import ContinuousFlexibility.Analysis.CanonicalBoundaryImage
+public import Mathlib.Topology.Order.IntermediateValue
 
 /-!
 # The actual radial value of a canonical boundary
@@ -10,6 +12,8 @@ of the angle. This supplies the constant boundary value required by the
 boundary angular lift theorem, without any prescribed endpoint value of the
 stored inverse chart or an additional boundary compatibility assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

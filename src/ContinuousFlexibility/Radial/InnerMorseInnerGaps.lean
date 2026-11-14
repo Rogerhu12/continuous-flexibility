@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.InnerMorseInnerChain
-import ContinuousFlexibility.Radial.InnerModelChainGaps
+module
+
+public import ContinuousFlexibility.Radial.InnerMorseInnerChain
+public import ContinuousFlexibility.Radial.InnerModelChainGaps
 
 /-!
 # Exact pieces of the actual finite inner gap family
@@ -8,6 +10,8 @@ The enumeration distinguishes the two terminal cap remnants, the two
 fixed central connectors, and the complete intervening Morse gaps.
 All endpoint identities refer to the same previously constructed chain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

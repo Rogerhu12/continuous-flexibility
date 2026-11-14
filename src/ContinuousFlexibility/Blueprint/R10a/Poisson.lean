@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.TerminalRegionalData
+module
+
+public import ContinuousFlexibility.Radial.TerminalRegionalData
 
 /-!
 # R10a: the actual terminal Poisson correction
@@ -7,6 +9,8 @@ The regional data supply actual cutoffs, stand-ins and inverse operators.
 The Hilbert cutoff columns, corrected Poisson representatives and their
 flux matrix are constructed here on the same reference and same cuts.
 -/
+
+@[expose] public section
 
 noncomputable section
 

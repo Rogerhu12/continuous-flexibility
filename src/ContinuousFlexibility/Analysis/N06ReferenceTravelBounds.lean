@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N06ReferenceCutTravel
-import ContinuousFlexibility.Radial.ScaleSlowVariation
+module
+
+public import ContinuousFlexibility.Analysis.N06ReferenceCutTravel
+public import ContinuousFlexibility.Radial.ScaleSlowVariation
 
 /-!
 # Quantitative travel and half-widths on the original physical cells
@@ -13,6 +15,8 @@ and a quantitatively nonzero canonical radius.
 Every coefficient exponent below uses the cell supplied by
 `RadialReturnMargins`.  No identification with `K.cell` is asserted.
 -/
+
+@[expose] public section
 
 noncomputable section
 

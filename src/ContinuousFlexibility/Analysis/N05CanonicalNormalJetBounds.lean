@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.N05CanonicalInverseNormalLevel
-import ContinuousFlexibility.Analysis.N05CanonicalInverseNormalAngular
-import ContinuousFlexibility.Analysis.N05CanonicalInverseLinearity
+module
+
+public import ContinuousFlexibility.Analysis.N05CanonicalInverseNormalLevel
+public import ContinuousFlexibility.Analysis.N05CanonicalInverseNormalAngular
+public import ContinuousFlexibility.Analysis.N05CanonicalInverseLinearity
 
 /-!
 # Genuine bounded angular jets of the fixed first normal derivative
@@ -9,6 +11,8 @@ The actual corrected source and its consecutive angular jets control the
 single canonical radial derivative. All choices below are identified by
 their weak test identities before any linearity or continuity is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

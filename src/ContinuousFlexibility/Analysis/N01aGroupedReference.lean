@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Analysis.N01aPartitionReference
-import ContinuousFlexibility.Analysis.N01aReferenceEigenfieldGraph
-import ContinuousFlexibility.Analysis.N01aReferenceWeightedMode
-import ContinuousFlexibility.Analysis.N01aReferenceSourceMeasurability
+module
+
+public import ContinuousFlexibility.Analysis.N01aPartitionReference
+public import ContinuousFlexibility.Analysis.N01aReferenceEigenfieldGraph
+public import ContinuousFlexibility.Analysis.N01aReferenceWeightedMode
+public import ContinuousFlexibility.Analysis.N01aReferenceSourceMeasurability
 
 /-!
 # A full radial reference with linearly growing cell indices
@@ -11,6 +13,8 @@ weighted graph. Green reciprocity then recovers signed source
 measurability. Thus the cell grouping retains the entire frozen R12
 specification, including closed graph and smooth-core closure.
 -/
+
+@[expose] public section
 
 noncomputable section
 

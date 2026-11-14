@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Statements.Analysis
-import Mathlib.Topology.Algebra.Module.Spaces.ContinuousLinearMap
+module
+
+public import ContinuousFlexibility.Statements.Analysis
+public import Mathlib.Topology.Algebra.Module.Spaces.ContinuousLinearMap
 
 /-!
 # Bilinear continuity in the projective grading
@@ -8,6 +10,8 @@ A product estimate in each original seminorm gives joint continuity.
 The resulting bilinear map can therefore be curried into actual
 continuous linear maps, as required by the tame calculus statement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

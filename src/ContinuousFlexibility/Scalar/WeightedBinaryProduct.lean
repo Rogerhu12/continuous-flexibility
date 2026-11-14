@@ -1,6 +1,10 @@
-import ContinuousFlexibility.Scalar.WeightedDecodedProductMap
+module
+
+public import ContinuousFlexibility.Scalar.WeightedDecodedProductMap
 
 /-! # The literal two-factor decoder, without finite-product elaboration -/
+
+@[expose] public section
 
 noncomputable section
 

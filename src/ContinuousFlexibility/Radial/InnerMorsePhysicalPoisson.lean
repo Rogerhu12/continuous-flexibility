@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerMorseModelEnvelope
-import ContinuousFlexibility.Radial.InnerMorseBufferLeading
-import ContinuousFlexibility.Radial.InnerCentralPhysicalPoisson
+module
+
+public import ContinuousFlexibility.Radial.InnerMorseModelEnvelope
+public import ContinuousFlexibility.Radial.InnerMorseBufferLeading
+public import ContinuousFlexibility.Radial.InnerCentralPhysicalPoisson
 
 /-!
 # The same Morse Poisson columns in the actual physical weighted space
@@ -12,6 +14,8 @@ them constant on each complete buffer, while the already proved
 coefficient ratio controls the remainder. All positive even-frequency
 bands use the same fixed leading constant on both tails.
 -/
+
+@[expose] public section
 
 noncomputable section
 

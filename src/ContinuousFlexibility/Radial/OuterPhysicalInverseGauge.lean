@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.OuterPhysicalTailBasis
-import ContinuousFlexibility.Radial.OuterOutwardHilbert
+module
+
+public import ContinuousFlexibility.Radial.OuterPhysicalTailBasis
+public import ContinuousFlexibility.Radial.OuterOutwardHilbert
 
 /-!
 # The inverse physical gauge on the actual L2 spaces
@@ -8,6 +10,8 @@ The pullback and the square density transport all L2 functions. This is
 used below for classification of the natural line, without assuming a
 bound for multiplication by the reciprocal gauge.
 -/
+
+@[expose] public section
 
 noncomputable section
 

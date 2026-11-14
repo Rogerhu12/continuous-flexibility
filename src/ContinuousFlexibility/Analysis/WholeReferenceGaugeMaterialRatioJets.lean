@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.ActualNegativeMaterialRatioJets
-import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData
-import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
+module
+
+public import ContinuousFlexibility.Analysis.ActualNegativeMaterialRatioJets
+public import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData
+public import ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization
 
 /-!
 # The four actual negative H/M reference ratio atoms
@@ -11,6 +13,8 @@ not just zero state differences. The original E0 gives separate constants
 and exponents. The explicit existing envelope enlargement packages them
 into the single-constant form without changing H, M, samples or the atlas.
 -/
+
+@[expose] public section
 
 noncomputable section
 

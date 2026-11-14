@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.CoefficientProbeRecoveredCoefficients
-import ContinuousFlexibility.Analysis.CoefficientProbeNumeratorBounds
+module
+
+public import ContinuousFlexibility.Analysis.CoefficientProbeRecoveredCoefficients
+public import ContinuousFlexibility.Analysis.CoefficientProbeNumeratorBounds
 
 /-!
 # Linear mixed bounds for the recovered coefficient correction
@@ -10,6 +12,8 @@ numerators costs no derivatives and true sine removal costs at most two
 angular derivatives. The same finite constant is chosen before the source
 fields, the original coefficients, the state and the error majorant.
 -/
+
+@[expose] public section
 
 noncomputable section
 

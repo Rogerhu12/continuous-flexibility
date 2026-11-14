@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N07aAngularEven
-import ContinuousFlexibility.Radial.ReferenceCosineWeighted
+module
+
+public import ContinuousFlexibility.Analysis.N07aAngularEven
+public import ContinuousFlexibility.Radial.ReferenceCosineWeighted
 
 /-!
 # Actual periodic representatives on the half and full angular intervals
@@ -8,6 +10,8 @@ The physical graph uses a `2π` interval, whereas a canonical source uses
 one `π` period.  Translation of the second half gives genuine `L²`
 membership on the full interval, including a.e. strong measurability.
 -/
+
+@[expose] public section
 
 noncomputable section
 

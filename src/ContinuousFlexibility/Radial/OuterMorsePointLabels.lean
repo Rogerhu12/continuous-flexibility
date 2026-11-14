@@ -1,7 +1,9 @@
-import ContinuousFlexibility.Radial.MorseChainLocalGluing
-import ContinuousFlexibility.Radial.OuterLocalizerCutoff
-import ContinuousFlexibility.Radial.OuterTailPointwiseBounds
-import ContinuousFlexibility.Radial.OuterTransitionCoordinates
+module
+
+public import ContinuousFlexibility.Radial.MorseChainLocalGluing
+public import ContinuousFlexibility.Radial.OuterLocalizerCutoff
+public import ContinuousFlexibility.Radial.OuterTailPointwiseBounds
+public import ContinuousFlexibility.Radial.OuterTransitionCoordinates
 
 /-!
 # Actual physical labels on the whole outer interval
@@ -12,6 +14,8 @@ Morse label. The cover uses the actual node limit and coordinate map,
 without numerical deep-tail hypotheses. A specified nonzero localizer
 has physical label within two of any label assigned to its point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

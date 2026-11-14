@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Scalar.WeightedSmoothTameLinear
-import ContinuousFlexibility.Analysis.SolveNewtonBridge
-import ContinuousFlexibility.Analysis.ProjectiveLimitSubspace
+module
+
+public import ContinuousFlexibility.Scalar.WeightedSmoothTameLinear
+public import ContinuousFlexibility.Analysis.SolveNewtonBridge
+public import ContinuousFlexibility.Analysis.ProjectiveLimitSubspace
 
 /-!
 # Composition with represented projective codomains
@@ -11,6 +13,8 @@ a complete projective limit therefore suffices for composition in the
 original output grading. This includes Banach control spaces and closed
 subspaces and products of the physical spaces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

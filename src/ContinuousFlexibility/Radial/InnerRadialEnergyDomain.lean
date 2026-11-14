@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Radial.InnerGapEnergyCoordinates
-import Mathlib.Topology.Algebra.Module.ClosedSubmodule
-import Mathlib.Analysis.Calculus.Deriv.Support
+module
+
+public import ContinuousFlexibility.Radial.InnerGapEnergyCoordinates
+public import Mathlib.Topology.Algebra.Module.ClosedSubmodule
+public import Mathlib.Analysis.Calculus.Deriv.Support
 
 /-!
 # The common physical first-order energy domain
@@ -11,6 +13,8 @@ functions compactly supported in the open piece. It does not depend on
 the sign of the potential, so positive gaps and retained wells have a
 common domain for matching.
 -/
+
+@[expose] public section
 
 noncomputable section
 

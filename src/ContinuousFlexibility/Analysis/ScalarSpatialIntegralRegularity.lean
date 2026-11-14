@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.ScalarSpatialRegularity
-import ContinuousFlexibility.Analysis.OneHighCircleFlowIntegral
+module
+
+public import ContinuousFlexibility.Analysis.ScalarSpatialRegularity
+public import ContinuousFlexibility.Analysis.OneHighCircleFlowIntegral
 
 /-!
 # Compact integration with only continuous time dependence
@@ -8,6 +10,8 @@ The existing compact-parameter derivative theorem is applied to the true
 one-dimensional spatial derivative. Induction then preserves every finite
 spatial order while allowing a merely continuous time variable.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
+module
+
+public import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
 
 /-!
 # Quantitative height evaluation bounds for N01c
@@ -9,6 +11,8 @@ and then by the grading of any realization satisfying `IsSobolevModel`.
 The constant is explicit, independent of the height and the evaluation
 point, and the loss is exactly two material derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

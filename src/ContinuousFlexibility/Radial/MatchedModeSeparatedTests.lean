@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Radial.MatchedModeTestClosure
-import ContinuousFlexibility.Radial.MatchingWeakGluing
+module
+
+public import ContinuousFlexibility.Radial.MatchedModeTestClosure
+public import ContinuousFlexibility.Radial.MatchingWeakGluing
 
 /-!
 # The original test class on separated outer intervals
@@ -9,6 +11,8 @@ gap. Its two indicator restrictions are therefore smooth and retain the
 original endpoint behavior. The equation follows from the equations on
 the two intervals, without imposing topological support at the endpoints.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.RetainedMorsePositiveGapComponents
-import ContinuousFlexibility.Analysis.RetainedPositiveComponentInteriorEndpoints
-import ContinuousFlexibility.Analysis.PositiveComponentAdjacency
+module
+
+public import ContinuousFlexibility.Analysis.RetainedMorsePositiveGapComponents
+public import ContinuousFlexibility.Analysis.RetainedPositiveComponentInteriorEndpoints
+public import ContinuousFlexibility.Analysis.PositiveComponentAdjacency
 
 /-!
 # Whole positive components of the same retained reference
@@ -12,6 +14,8 @@ root and the first left-tail right root, its right endpoint is exactly
 the left endpoint of one of the positive Morse gaps already recognized.
 The two exceptional left endpoints yield only finitely many components.
 -/
+
+@[expose] public section
 
 noncomputable section
 

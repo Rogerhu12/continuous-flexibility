@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
-import ContinuousFlexibility.Analysis.N04RealizationRootBoundaryPoint
+module
+
+public import ContinuousFlexibility.Analysis.N04RealizationLeadCurrentSplit
+public import ContinuousFlexibility.Analysis.N04RealizationRootBoundaryPoint
 
 /-!
 # Values of the actual positive inverse-angle atom
@@ -11,6 +13,8 @@ original N01 root label, whereas the middle germ fixes it to zero on the
 normalization buffer.  Thus the separation between these two prescribed
 values is measured in the same canonical radial coordinate.
 -/
+
+@[expose] public section
 
 noncomputable section
 

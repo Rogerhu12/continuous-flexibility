@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Analysis.CoupledLogProfilePointwise
-import ContinuousFlexibility.Analysis.CoupledScalarHeightDerivative
-import ContinuousFlexibility.Analysis.SpacesParameterJets
+module
+
+public import ContinuousFlexibility.Analysis.CoupledLogProfilePointwise
+public import ContinuousFlexibility.Analysis.CoupledScalarHeightDerivative
+public import ContinuousFlexibility.Analysis.SpacesParameterJets
 
 /-!
 # Actual coefficient jets control every logarithmic state direction
@@ -9,6 +11,8 @@ At zero external parameter the radial coefficient is the physical profile.
 The genuine first coefficient jet from N01 therefore controls all spatial
 jets of the reference profile times the actual logarithmic perturbation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Analysis.AdjugateAiryTransport
+module
+
+public import ContinuousFlexibility.Analysis.AdjugateAiryTransport
 
 /-!
 # Actual Airy transport for the oppositely oriented half
@@ -8,6 +10,8 @@ chart positive-Jacobian and leaves the Airy principal field unchanged.
 The already proved transport identity therefore supplies the reversed
 travel sign. All derivatives here are the actual chart derivatives.
 -/
+
+@[expose] public section
 
 noncomputable section
 

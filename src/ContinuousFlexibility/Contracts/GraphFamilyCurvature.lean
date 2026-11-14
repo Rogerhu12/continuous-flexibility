@@ -1,6 +1,8 @@
-import ContinuousFlexibility.Contracts.GraphFamilyImage
-import ContinuousFlexibility.Geometry.GraphSurfaceGeometry
-import ContinuousFlexibility.Geometry.SurfaceReparametrization
+module
+
+public import ContinuousFlexibility.Contracts.GraphFamilyImage
+public import ContinuousFlexibility.Geometry.GraphSurfaceGeometry
+public import ContinuousFlexibility.Geometry.SurfaceReparametrization
 
 /-!
 # Actual normals of the developed graph and its rotation family
@@ -11,6 +13,8 @@ by the actual ambient Euclidean rotation. This is not yet an identification with
 the outward normal of a closed surface; the separated cap and inside region are
 still separate construction obligations.
 -/
+
+@[expose] public section
 
 noncomputable section
 

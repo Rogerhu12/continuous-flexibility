@@ -1,4 +1,6 @@
-import ContinuousFlexibility.Radial.OuterPhysicalRobinSolution
+module
+
+public import ContinuousFlexibility.Radial.OuterPhysicalRobinSolution
 
 /-!
 # The actual endpoint Green bracket vanishes
@@ -7,6 +9,8 @@ The bracket against the same normalized natural solution is the remaining
 natural source integral.  Its endpoint limit is zero for every weighted
 L² source, by integrability of that actual pairing.
 -/
+
+@[expose] public section
 
 noncomputable section
 

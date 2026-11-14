@@ -1,5 +1,7 @@
-import ContinuousFlexibility.Analysis.AngularWeightedInterpolation
-import ContinuousFlexibility.Analysis.AngularWeightBounds
+module
+
+public import ContinuousFlexibility.Analysis.AngularWeightedInterpolation
+public import ContinuousFlexibility.Analysis.AngularWeightBounds
 
 /-!
 # Interpolation with an additive high-order error
@@ -10,6 +12,8 @@ The endpoint error `c * ‖v‖` is incorporated in the diagonal graph weight
 theorem specializes this argument to the exact Japanese-bracket angular
 Sobolev scale, with no restriction on the spectral multiplicities.
 -/
+
+@[expose] public section
 
 noncomputable section
 
