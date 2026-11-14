@@ -49,7 +49,7 @@ theorem n04NegativeGeometry_inverse_continuousOn_of_lipschitz
       have hpre : (z.1, F (z.1, G q)) ∈ U ×ˢ W := ⟨hz.1, htz⟩
       apply hInj z.1 hz.1 (hMaps hpre) hGq
       exact hRight (z.1, F (z.1, G q)) ⟨hz.1, htz⟩
-    simpa only [hleft] using
+    simpa only [hleft, Prod.mk.eta] using
       (hLip z.1 hz.1).dist_le_mul z.2 hz.2 (F (z.1, G q)) htz
   have hlim : Tendsto (fun z : P × Y => (K : ℝ) * dist z.2 (F (z.1, G q)))
       (𝓝 q) (𝓝 0) := by
