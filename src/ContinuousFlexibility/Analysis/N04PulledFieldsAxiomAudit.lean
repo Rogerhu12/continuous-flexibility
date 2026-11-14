@@ -77,11 +77,15 @@ run_cmd do
       | none => false
     if own then
       declarations := declarations + 1
-      match info with
-      | .thmInfo _ => theorems := theorems + 1
-      | .axiomInfo _ => throwError "PulledFields support declared an axiom: {name}"
-      | _ => pure ()
+      -- Imported declarations of a module may be seen as `axiomInfo` without their
+      -- values; `collectAxioms` still follows them. A declared axiom is the one whose
+      -- own axiom set contains it.
       let axioms ← collectAxioms name
+      if axioms.contains name then
+        throwError "PulledFields support declared an axiom: {name}"
+      match info with
+      | .thmInfo _ | .axiomInfo _ => theorems := theorems + 1
+      | _ => pure ()
       for ax in axioms do
         unless ax == ``propext || ax == ``Classical.choice || ax == ``Quot.sound do
           throwError "Unexpected axiom {ax} in PulledFields support declaration {name}"
