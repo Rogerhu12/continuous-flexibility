@@ -89,3 +89,26 @@ set against `propext`, `Classical.choice`, and `Quot.sound`, and prints that
 set for the CI log. Compilation fixes are being validated before recording
 completion; the interface changes and historical counterexample alone do
 not establish completion.
+
+### CI performance repair, 2026-11-14
+
+Run `43523267701` stopped `N04PositiveGeometrySourceSamplePrefix` after
+305 seconds and reported a separate unfinished unit-vector inequality in
+`N04PositiveGeometrySourceHeightWordBounds`. The inequality now uses
+`norm_num [Prod.norm_def]` and passes its single-file check.
+
+The source-prefix proof is split at its mathematical interfaces. The new
+`N04PositiveGeometryBoundaryCompositionPrefixWordData` selects the four
+finite-order composition constants and proves the plane-basis bound in
+an abstract context. `N04PositiveGeometrySourceWordBounds` specializes
+that bound to the actual source maps. `N04PositiveGeometrySourceSamplePrefix`
+then supplies the material samples and seminorm windows. Explicit witness
+projections and scalar envelope packing keep these steps separate during
+elaboration; the source-prefix theorem statement is unchanged.
+
+With the pinned Lean and Mathlib versions, the three files passed local
+checks in approximately 7, 27, and 21 seconds respectively. Stage diagnostics
+also confirmed why the intermediate single-declaration version was still
+too large: it exhausted the default 200,000-heartbeat budget at the final
+composition bound. Neither the heartbeat budget nor the CI file limit was
+increased. The complete CI remains the completion gate.

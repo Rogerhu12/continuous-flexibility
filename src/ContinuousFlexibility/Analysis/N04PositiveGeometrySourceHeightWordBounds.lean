@@ -111,7 +111,7 @@ theorem n04PositiveGeometry_sourceHeightChoice_word_bound
       (fun F : PolarPoint → ℝ => radialBoundaryJet F r n y.2) (hformula y))
   have hF (j : ℕ) (hj : j ≤ n) : N04BoundaryWordBounds (JF j hj) K s d z θ P M H t shift := by
     have h := (hR j hj (JR j hj)).fixedEvaluation (fun _ => ((1 : ℝ), (0 : ℝ)))
-      (fun _ => by simp only [Prod.norm_def, norm_one, norm_zero, max_eq_left zero_le_one])
+      (fun _ => by norm_num [Prod.norm_def])
     exact h.congr hz (fun y hy => by
       simpa only [n04PositiveGeometry_referenceHeightPowerJet, hidx, hrad] using
         (n06_radialBoundaryJet_eq_frechet j (hf y hy)).symm)
