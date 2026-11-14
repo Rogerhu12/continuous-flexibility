@@ -18,6 +18,29 @@ namespace ContinuousFlexibility.Analysis
 
 open Set Function ContinuousFlexibility.Statements
 
+private theorem transport_high_order_le {a low sa ca s c K : ℕ}
+    (h : a ≤ low) (he : sa + ca * K = s + c * K) :
+    a + sa + ca * K + 1 ≤ low + s + c * K + 1 := by
+  omega
+
+private theorem transportSavedWords_boolChoice
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    {U : Set E} {f g : E × PolarPoint → PolarPoint}
+    (Jf : SmoothDirections (U ×ˢ univ) f)
+    (Jg : SmoothDirections (U ×ˢ univ) g)
+    {N K C : ℕ} {x : E} {Ω : Set PolarPoint}
+    {p q : Seminorm ℝ E} {R M H t : ℝ}
+    (hx : x ∈ U)
+    (hf : N04PlaneSavedWordBounds Jf N K C x Ω p q R M H t)
+    (hg : N04PlaneSavedWordBounds Jg N K C x Ω p q R M H t)
+    (inverse : Bool)
+    (Q : SmoothDirections (U ×ˢ univ) (fun z => if inverse then g z else f z)) :
+    N04PlaneSavedWordBounds Q N K C x Ω p q R M H t := by
+  cases inverse with
+  | false => exact hf.congr hx Q (fun _ _ => rfl)
+  | true => exact hg.congr hx Q (fun _ _ => rfl)
+
 theorem n04PositiveGeometry_actualControlledTransport_sample_prefix
     {W : N04RealizationStart} {X : N04RealizationChoice W}
     (G : N04PositiveGeometryControlledFamily W X 3)
@@ -114,18 +137,10 @@ theorem n04PositiveGeometry_actualControlledTransport_sample_prefix
   have hcost {a : ℝ} (ha : a ≤ A) : a * E ^ a ≤ A * E ^ A :=
     mul_le_mul ha (Real.rpow_le_rpow_of_exponent_le hE ha)
       (Real.rpow_nonneg (zero_le_one.trans hE) _) (zero_le_one.trans hA)
-  have hha : angleData.choose + sa + asd.choose * K + 1 ≤ high := by
-    have he : angleData.choose + sa + asd.choose * K + 1 =
-        angleData.choose + (sa + asd.choose * K) + 1 := by omega
-    rw [he, hea]
-    dsimp only [high]
-    omega
-  have hhr : radialData.choose + sr + rsd.choose * K + 1 ≤ high := by
-    have he : radialData.choose + sr + rsd.choose * K + 1 =
-        radialData.choose + (sr + rsd.choose * K) + 1 := by omega
-    rw [he, her]
-    dsimp only [high]
-    omega
+  have hha : angleData.choose + sa + asd.choose * K + 1 ≤ high :=
+    transport_high_order_le hal hea
+  have hhr : radialData.choose + sr + rsd.choose * K + 1 ≤ high :=
+    transport_high_order_le hrl her
   have hangle (θ : ℝ) : N04BoundaryWordBounds (JA i) K (s + K) 1 x θ P
       (A * E ^ A) H t c := by
     apply N04BoundaryWordBounds.scalarPi hU _ hM hH (zero_le_one.trans ht)
@@ -138,7 +153,7 @@ theorem n04PositiveGeometry_actualControlledTransport_sample_prefix
     exact raw.mono_budget le_rfl has
       (fun z hz => ⟨(hp hal z).trans hz.1, (hp hha z).trans hz.2⟩)
       hM hH ht (hcost (le_max_left _ _))
-      (by dsimp only [t]; rw [hea]) hac
+      (congrArg (fun q : ℕ => R ^ (1 / ((q : ℝ) + 1))) hea) hac
   have hradial (θ : ℝ) : N04BoundaryWordBounds (JR i) K (s + K) 1 x θ P
       (A * E ^ A) H t c := by
     apply N04BoundaryWordBounds.scalarPi hU _ hM hH (zero_le_one.trans ht)
@@ -151,15 +166,14 @@ theorem n04PositiveGeometry_actualControlledTransport_sample_prefix
     exact raw.mono_budget le_rfl hrs
       (fun z hz => ⟨(hp hrl z).trans hz.1, (hp hhr z).trans hz.2⟩)
       hM hH ht (hcost (le_max_right _ _))
-      (by dsimp only [t]; rw [her]) hrc
+      (congrArg (fun q : ℕ => R ^ (1 / ((q : ℝ) + 1))) her) hrc
   have hout := outputData.choose_spec.2 base ε hGb hGε i (F i) (JA i) (JR i)
     (p low) (p high) R H t (zero_le_one.trans hR) hH hHR ht K s c le_rfl x hx hangle hradial
   have hactual : N04PlaneSavedWordBounds Q (K + s + 1) K shift x
       (Icc (n04PositiveLeft i) (n04PositiveRight i) ×ˢ univ)
-      (p low) (p high) R (B * E ^ B) H t := by
-    cases inverse with
-    | false => exact hout.1.congr hx Q (fun _ _ => rfl)
-    | true => exact hout.2.congr hx Q (fun _ _ => rfl)
+      (p low) (p high) R (B * E ^ B) H t :=
+    transportSavedWords_boolChoice (F i).transport (F i).inverseTransport
+      hx hout.1 hout.2 inverse Q
   exact hactual y ⟨⟨hy.1.1.le, hy.1.2.le⟩, mem_univ _⟩ j hj hjN w hw v hpure hbox
 
 end ContinuousFlexibility.Analysis
