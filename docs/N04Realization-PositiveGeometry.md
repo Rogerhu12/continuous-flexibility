@@ -14,7 +14,7 @@ It changes the following intermediate interfaces.
 
 | Interface | Change | Reason |
 | --- | --- | --- |
-| `N04PositiveReferenceMaterialBounds` | Records the same chosen `Y,H`, all their forward/height/reciprocal jets, and all positive-order jets of `invFun Y` with one material sample per piece. | The reference producer already proves these estimates; the old wrapper discarded them. |
+| `N04PositiveReferenceMaterialBounds` | Records the positive-order jets of the same chosen `Y` and `Function.invFun Y`, and all-order jets of `H` and its pointwise reciprocal, with one material sample per piece. | The reference producer already proves these estimates; the old wrapper discarded them. |
 | `n04Coordinates_actual_whole_reference_nonAuxiliaryJets` | Returns that material certificate together with its existing family and all non-auxiliary reference jets. | The current construction must use the very family for which reference estimates are proved. |
 | `N04RealizationReferenceObligation` and its proof | Preserve the material certificate in the existential output. | Avoids choosing an unrelated reference family in the positive node. |
 | `N04RealizationPositiveGeometryObligation` | Takes the reference certificate and chooses the normalization buffer before its smaller neighborhood and actual transport. | Arbitrarily prescribed collars can defeat every uniform material bound. |
