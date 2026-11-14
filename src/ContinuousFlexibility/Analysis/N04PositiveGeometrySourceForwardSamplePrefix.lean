@@ -39,6 +39,9 @@ def n04PositiveGeometry_sourceForwardJet_joint
     (sectorPairGrading_withSeminorms W.S).toLocallyConvexSpace
   have hN := n01Properties_restrict W.hT W.through03.1.1 hb le_rfl hε hεW
   exact n04PositiveGeometry_boundaryMoving_directions
+    (f := n04PositiveGeometry_sourceJet W.S W.C (X.src i side) (W.A X.e₀) n)
+    (ψ := fun y : (StateDirections W.S × ℝ) × ℝ =>
+      n01RootLabel W.S W.C (liftSectorParameter W.S W.C y.1) m (!side) y.2)
     (n04PositiveGeometry_sourceJet_joint W X hb hε hεW hεone hflow
       i side m hm hctx n hn hn4)
     (n04Realization_rootLabel_forwardJointDirections W.hT W.hS hN m (!side))

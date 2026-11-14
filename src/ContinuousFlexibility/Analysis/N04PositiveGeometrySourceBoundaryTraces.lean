@@ -1,6 +1,6 @@
 import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceAngleDefect
 import ContinuousFlexibility.Analysis.N04PositiveGeometrySourceSamplePrefix
-import ContinuousFlexibility.Analysis.OneSidedBoundaryTaylorRepresentative
+import ContinuousFlexibility.Analysis.N04PositiveGeometryBoundaryTraceRegularity
 
 /-!
 # Actual radial endpoint traces of the retained source
@@ -22,9 +22,10 @@ theorem n04PositiveGeometry_radialBoundaryJet_postcompCLM
     (hf : ContDiffAt ℝ ∞ f (c, θ)) (n : ℕ) :
     radialBoundaryJet (fun p => L (f p)) c n θ =
       L (iteratedFDeriv ℝ n f (c, θ) (fun _ => (1, 0))) := by
-  rw [n06_radialBoundaryJet_eq_frechet n (L.contDiff.contDiffAt.comp (c, θ) hf)]
-  exact congrArg (fun A : PolarPoint [×n]→L[ℝ] ℝ => A (fun _ => (1, 0)))
-    (L.iteratedFDeriv_comp_left hf (by simp : (n : ℕ∞ω) ≤ ∞))
+  exact (n06_radialBoundaryJet_eq_frechet n
+    (L.contDiff.contDiffAt.comp (c, θ) hf)).trans
+      (congrArg (fun A : PolarPoint [×n]→L[ℝ] ℝ => A (fun _ => (1, 0)))
+        (L.iteratedFDeriv_comp_left hf (by simp : (n : ℕ∞ω) ≤ ∞)))
 
 section Projection
 
@@ -80,13 +81,11 @@ theorem n04PositiveGeometry_sourceAngleTrace_contDiff
     (i : N04PositiveComponent W.D.a W.D.b (deriv W.D.w)) (side : Bool) (j : ℕ)
     {z : StateDirections W.S × ℝ} (hz : z ∈ sectorNeighborhood W.S base ε ε) :
     ContDiff ℝ ∞ (fun θ => n04PositiveGeometry_sourceAngleTrace W X i side j (z, θ)) := by
-  have h := contDiff_radialBoundaryJet_of_contDiffAt (n04PositiveEndpoint i side)
+  exact n04PositiveGeometry_radialAngleDefect_contDiff
+    (F := fun p => (n04PositiveSourceMap (X.src i side) (W.A X.e₀)
+      (liftSectorParameter W.S W.C z) p).2) (n04PositiveEndpoint i side)
     (fun θ => (n04PositiveGeometry_source_root_smooth (X := X) hb hεW i side
       (z, θ) ⟨hz, mem_univ θ⟩).snd) j
-  apply h.sub
-  by_cases hj : j = 0
-  · simpa only [if_pos hj] using (contDiff_id : ContDiff ℝ ∞ (fun θ : ℝ => θ))
-  · simpa only [if_neg hj] using (contDiff_const : ContDiff ℝ ∞ (fun _ : ℝ => (0 : ℝ)))
 
 theorem n04PositiveGeometry_sourceAngleTrace_period
     (hb : W.base ≤ base) (hεW : ε ≤ W.ε)
@@ -99,17 +98,13 @@ theorem n04PositiveGeometry_sourceAngleTrace_period
     (liftSectorParameter_mem_stateNeighborhood (C := W.C)
       (sectorNeighborhood_mono W.S hb hεW hεW hz) le_rfl)
     (W.through03.1.1.2.2.1.liftSectorParameter_sector z)
-  intro θ
-  have he := radialBoundaryJet_angleAffine_on_closedStrip (α := 1) (β := Real.pi)
-    (τ := fun t : ℝ => t + Real.pi) hd.interval hd.endpoint
-    (fun η => (hd.root_smooth η).snd) (contDiff_id.add contDiff_const)
+  exact n04PositiveGeometry_radialAngleDefect_period
+    (F := fun p => (n04PositiveSourceMap (X.src i side) (W.A X.e₀)
+      (liftSectorParameter W.S W.C z) p).2) hd.interval hd.endpoint
+    (fun η => (hd.root_smooth η).snd)
     (fun r hr η => by
-      simpa only [Prod.mk_add_mk, add_zero, Prod.snd_add, one_mul, add_comm]
-        using congrArg Prod.snd (hd.period_add (r, η) ⟨hr, mem_univ η⟩)) j θ
-  change radialBoundaryJet _ _ j (θ + Real.pi) - (if j = 0 then θ + Real.pi else 0) =
-    radialBoundaryJet _ _ j θ - (if j = 0 then θ else 0)
-  rw [he]
-  by_cases hj : j = 0 <;> simp only [hj, if_pos, if_neg, one_mul] <;> ring
+      simpa only [Prod.mk_add_mk, add_zero, Prod.snd_add]
+        using congrArg Prod.snd (hd.period_add (r, η) ⟨hr, mem_univ η⟩)) j
 
 def n04PositiveGeometry_sourceProjectedTrace_joint
     (hb : W.base ≤ base) (hε : 0 < ε) (hεW : ε ≤ W.ε) (hεone : ε ≤ 1)

@@ -78,13 +78,21 @@ theorem n04PositiveGeometry_sourceHeightChoice_sample_prefix
   have hAr (inv : Bool) : 1 ≤ Ar inv := (referenceOrder inv).choose_spec.1
   have hAs : 1 ≤ As := sourceOrder.choose_spec.1
   let B := 1 + L + Ac false + Ac true + Ar false + Ar true + As
-  have hB : 1 ≤ B := by dsimp only [B]; linarith [hAc false, hAc true, hAr false, hAr true]
-  have hLB : L ≤ B := by dsimp only [B]; linarith [hAc false, hAc true, hAr false, hAr true]
+  have hB : 1 ≤ B := by
+    dsimp only [B]
+    linarith only [hL, hAc false, hAc true, hAr false, hAr true, hAs]
+  have hLB : L ≤ B := by
+    dsimp only [B]
+    linarith only [hAc false, hAc true, hAr false, hAr true, hAs]
   have hAcB (inv : Bool) : Ac inv ≤ B := by
-    cases inv <;> dsimp only [B] <;> linarith [hAc false, hAc true, hAr false, hAr true]
+    cases inv <;> dsimp only [B] <;>
+      linarith only [hL, hAc false, hAc true, hAr false, hAr true, hAs]
   have hArB (inv : Bool) : Ar inv ≤ B := by
-    cases inv <;> dsimp only [B] <;> linarith [hAc false, hAc true, hAr false, hAr true]
-  have hAsB : As ≤ B := by dsimp only [B]; linarith [hAc false, hAc true, hAr false, hAr true]
+    cases inv <;> dsimp only [B] <;>
+      linarith only [hL, hAc false, hAc true, hAr false, hAr true, hAs]
+  have hAsB : As ≤ B := by
+    dsimp only [B]
+    linarith only [hL, hAc false, hAc true, hAr false, hAr true]
   let N := K + s + 1
   let boundData (j : Fin 4) := n04PositiveGeometry_sourceHeightChoice_word_bound
     W X hb hε hεW hεone hflow j.val N (by omega) L hL
@@ -97,7 +105,7 @@ theorem n04PositiveGeometry_sourceHeightChoice_sample_prefix
     (Finset.single_le_sum (fun j _ => zero_le_one.trans (hCj j)) (Finset.mem_univ j)).trans
       (le_add_of_nonneg_left zero_le_one)
   let degree := (4 + 2 * N) * (N + 2)
-  let packData := coefficientEnvelope_pack (C * B ^ degree) (B * (degree : ℝ))
+  let packData := n04PositiveGeometry_polynomial_sample_pack C B degree
   let A₀ := packData.choose
   let A := max 1 A₀
   have hA : 1 ≤ A := le_max_left _ _
@@ -139,12 +147,17 @@ theorem n04PositiveGeometry_sourceHeightChoice_sample_prefix
       (pow_le_pow_right₀ ht (Nat.add_le_add_left (Nat.mul_le_mul_right _ ha) _))
       (pow_nonneg (zero_le_one.trans ht) _)
       (mul_nonneg (zero_le_one.trans hM) (parameterHeightWeight_nonneg hH _))
-  apply ((boundData ⟨n, by omega⟩).choose_spec.2 i side m hm hctx inv Q
-    K s 1 le_rfl z hz θ P M H t hM hH hHM hHL ht shift ?_ ?_ ?_).enlarge hH (zero_le_one.trans ht)
-  · intro j hj JR
+  have hReference (j : ℕ) (hj : j ≤ n)
+      (JR : SmoothDirections (sectorNeighborhood W.S base ε ε ×ˢ univ)
+        (n04PositiveGeometry_referenceHeightPowerJet W.S W.C (W.A X.e₀) m (!side)
+          (if inv then -1 else 1) j)) :
+      N04BoundaryWordBounds JR K s 1 z θ P M H t shift := by
     exact ((referenceOrder inv).choose_spec.2 i side m hm hctx j (hj.trans hn) JR
       K shift z hz θ P t ht).enlarge hH (zero_le_one.trans ht) (hcost (hArB inv))
-  · intro j hj JC
+  have hCurrent (j : ℕ) (hj : j ≤ n)
+      (JC : SmoothDirections (sectorNeighborhood W.S base ε ε ×ˢ univ)
+        (n04PositiveGeometry_sourceHeightCurrentJet W X i side m (if inv then 1 else -1) j)) :
+      N04BoundaryWordBounds JC K s 1 z θ P M H t shift := by
     have hraw := (currentOrder inv).choose_spec.2 i side m hm hctx j (hj.trans hn) JC
       z hz ((hp hcl z).trans hzlow) θ R hR
       ((hp (hhigh Bc (cc inv) hcl (hcc inv)) z).trans hzR)
@@ -155,7 +168,10 @@ theorem n04PositiveGeometry_sourceHeightChoice_sample_prefix
     have he := congrArg (fun q : ℝ => Ac inv * E ^ Ac inv * parameterHeightWeight H w.stateArity *
       q ^ ((w.angleArity - 1) + cc inv * w.stateArity)) (htbudget (cc inv) (hcc inv))
     exact (h.trans_eq he).trans (hwordCost (hcc inv) (hAcB inv) l w)
-  · intro j hj hjn JS
+  have hSource (j : ℕ) (hj : 1 ≤ j) (hjn : j ≤ n)
+      (JS : SmoothDirections (sectorNeighborhood W.S base ε ε ×ˢ univ)
+        (n04PositiveGeometry_sourceJet W.S W.C (X.src i side) (W.A X.e₀) j)) :
+      N04BoundaryWordBounds JS K s 1 z θ P M H t shift := by
     have hraw := sourceOrder.choose_spec.2 i side m hm hctx j hj (by omega) JS
       z hz ((hp hsl z).trans hzlow) θ R hR ((hp (hhigh Bs cs hsl hcs) z).trans hzR)
     intro l w hk ha v hv hvP
@@ -164,18 +180,17 @@ theorem n04PositiveGeometry_sourceHeightChoice_sample_prefix
     have he := congrArg (fun q : ℝ => As * E ^ As * parameterHeightWeight H w.stateArity *
       q ^ ((w.angleArity - 1) + cs * w.stateArity)) (htbudget cs hcs)
     exact (h.trans_eq he).trans (hwordCost hcs hAsB l w)
-  · calc
-      Cj ⟨n, by omega⟩ * M ^ ((n + 1 + 2 * N) * (N + 2)) ≤ C * M ^ degree :=
-        mul_le_mul (hCC _) (pow_le_pow_right₀ hM
-          (Nat.mul_le_mul_right _ (by omega))) (pow_nonneg (zero_le_one.trans hM) _)
-          (zero_le_one.trans hC)
-      _ = (C * B ^ degree) * E ^ (B * (degree : ℝ)) := by
-        dsimp only [M]
-        rw [mul_pow, ← Real.rpow_mul_natCast (zero_le_one.trans hE)]
-        ring
-      _ ≤ A₀ * E ^ A₀ := packData.choose_spec.2 E hE
-      _ ≤ A * E ^ A := mul_le_mul (le_max_right _ _)
-        (Real.rpow_le_rpow_of_exponent_le hE (le_max_right _ _))
-        (Real.rpow_nonneg (zero_le_one.trans hE) _) (zero_le_one.trans hA)
+  have hout := (boundData ⟨n, by omega⟩).choose_spec.2 i side m hm hctx inv Q
+    K s 1 le_rfl z hz θ P M H t hM hH hHM hHL ht shift hReference hCurrent hSource
+  apply hout.enlarge hH (zero_le_one.trans ht)
+  calc
+    Cj ⟨n, by omega⟩ * M ^ ((n + 1 + 2 * N) * (N + 2)) ≤ C * M ^ degree :=
+      mul_le_mul (hCC _) (pow_le_pow_right₀ hM
+        (Nat.mul_le_mul_right _ (by omega))) (pow_nonneg (zero_le_one.trans hM) _)
+        (zero_le_one.trans hC)
+    _ ≤ A₀ * E ^ A₀ := packData.choose_spec.2 E hE
+    _ ≤ A * E ^ A := mul_le_mul (le_max_right _ _)
+      (Real.rpow_le_rpow_of_exponent_le hE (le_max_right _ _))
+      (Real.rpow_nonneg (zero_le_one.trans hE) _) (zero_le_one.trans hA)
 
 end ContinuousFlexibility.Analysis
