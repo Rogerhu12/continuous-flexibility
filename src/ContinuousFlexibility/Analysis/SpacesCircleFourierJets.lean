@@ -21,8 +21,6 @@ namespace ContinuousFlexibility.Statements
 open Set Filter MeasureTheory
 open scoped ENNReal ComplexConjugate ContDiff
 
-private instance circleFourierJets_period_pos : Fact (0 < Real.pi) := ⟨Real.pi_pos⟩
-
 theorem circleFourierWave_periodic (n : ℤ) :
     Function.Periodic (circleFourierWave n) Real.pi := by
   intro θ

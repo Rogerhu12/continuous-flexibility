@@ -26,8 +26,6 @@ open ContinuousFlexibility.Radial
 
 set_option backward.isDefEq.respectTransparency false
 
-private instance : Fact (0 < Real.pi) := ⟨Real.pi_pos⟩
-
 theorem n06_circleFourierWave_reflection (n : ℤ) (θ : ℝ) :
     circleFourierWave n (Real.pi - θ) = conj (circleFourierWave n θ) := by
   simp only [circleFourierWave]

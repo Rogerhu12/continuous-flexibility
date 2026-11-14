@@ -22,8 +22,6 @@ namespace ContinuousFlexibility.Statements
 open Set Filter MeasureTheory ContinuousFlexibility.Radial
 open scoped ComplexConjugate ContDiff
 
-private instance : Fact (0 < Real.pi) := ⟨Real.pi_pos⟩
-
 theorem n07aCircleFourierCoeff_interval (f : ℝ → ℝ) (n : ℤ) :
     circleFourierCoeff f n = ((Real.pi⁻¹ : ℝ) : ℂ) *
       ∫ θ in (0 : ℝ)..Real.pi, circleFourierWave (-n) θ * (f θ : ℂ) := by

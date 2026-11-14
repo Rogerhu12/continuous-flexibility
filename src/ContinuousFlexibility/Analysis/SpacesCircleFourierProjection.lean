@@ -22,8 +22,6 @@ namespace ContinuousFlexibility.Statements
 open Set Filter MeasureTheory
 open scoped ENNReal BigOperators ComplexConjugate ContDiff
 
-private instance circleFourierProjection_period_pos : Fact (0 < Real.pi) := ⟨Real.pi_pos⟩
-
 /-- Passing from the actual angular interval to the quotient circle preserves
 our Fourier coefficients with their stated normalization. -/
 theorem circleFourierCoeff_eq_liftIoc (f : ℝ → ℝ) (n : ℤ) :

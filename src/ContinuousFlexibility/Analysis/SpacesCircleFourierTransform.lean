@@ -21,8 +21,6 @@ namespace ContinuousFlexibility.Statements
 open Set Filter MeasureTheory
 open scoped ENNReal ComplexConjugate ContDiff
 
-private instance circleFourierTransform_period_pos : Fact (0 < Real.pi) := ⟨Real.pi_pos⟩
-
 private instance circleFourierTransform_finite : IsFiniteMeasure angleMeasure :=
   ⟨by
     rw [angleMeasure, Measure.restrict_apply_univ, Real.volume_Ioc, sub_zero]

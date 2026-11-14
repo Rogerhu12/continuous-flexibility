@@ -22,7 +22,9 @@ namespace ContinuousFlexibility.Statements
 open Set Filter MeasureTheory
 open scoped ENNReal RealInnerProductSpace ComplexConjugate ContDiff
 
-private instance circleFourier_period_pos : Fact (0 < Real.pi) := ⟨Real.pi_pos⟩
+/-- The angular period `π` is positive. Public: a module does not see another module's
+private instances. -/
+instance circleFourier_period_pos : Fact (0 < Real.pi) := ⟨Real.pi_pos⟩
 
 /-- The complex Fourier mode on the angular circle of period `π`. -/
 def circleFourierWave (n : ℤ) (θ : ℝ) : ℂ :=
