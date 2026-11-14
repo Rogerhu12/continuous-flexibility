@@ -129,3 +129,11 @@ and affine bounds now keep those operations local. Its unchanged theorem
 passed the pinned single-file check in 58 seconds. All these changes are
 proof repairs; the parameter prefix, material sample, selected buffer,
 reference certificate, and final theorem statements are preserved.
+
+The four factor estimates use `N04PositiveGeometryActualFactorPrefixData`
+to specialize the generic angular, radial, and inverse bounds to the actual
+sector parameter space in separate declarations with explicit types.
+The assembly also fixes its topological additive-group and continuous
+scalar-action proof instances locally. This avoids repeatedly deriving
+those same instances inside each saved-word bound; the four factor
+conclusions and the order of all uniform choices are unchanged.

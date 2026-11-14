@@ -3,6 +3,7 @@ import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledAngleWords
 import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledRadialWords
 import ContinuousFlexibility.Analysis.N04PositiveGeometryControlledAngularLower
 import ContinuousFlexibility.Analysis.N04PositiveGeometryPlaneSavedComposition
+import ContinuousFlexibility.Analysis.N04PositiveGeometryActualFactorPrefixData
 
 /-!
 # One material power for the four actual scalar factors
@@ -48,15 +49,20 @@ theorem n04PositiveGeometry_controlledFactors_saved_prefix
       N04PlaneSavedWordBounds F.radial N K (shift + 1) x Ω p q R M H t ∧
       N04PlaneSavedWordBounds F.radialInverse N K (shift + 1) x Ω p q R M H t := by
   let V := StateDirections W.S × ℝ
+  haveI : IsTopologicalAddGroup V := inferInstance
+  haveI : ContinuousSMul ℝ V := inferInstance
   let I := N04PositiveComponent W.D.a W.D.b (deriv W.D.w)
   let E : I → ℝ := fun i => W.U.E0 (W.U.sample (X.cell i))
   have hE (i : I) : 1 ≤ E i := (W.floor _).trans (le_enlargedMaterialData_E0 W.T _)
-  obtain ⟨Bφ, hBφ, hφ⟩ := n04PositiveGeometry_controlledAngle_saved_word_bound
-    (V := V) G N A RH hA
-  obtain ⟨BY, hBY, hY⟩ := n04PositiveGeometry_controlledRadial_saved_word_bound
-    (V := V) G false N A RH hA
-  obtain ⟨Bρ, hBρ, hρ⟩ := n04PositiveGeometry_controlledRadial_saved_word_bound
-    (V := V) G true N A RH hA
+  let angleData := n04PositiveGeometry_actualAnglePrefixData G N A RH hA
+  let Bφ : ℝ := angleData.choose
+  let hφ := angleData.choose_spec.2
+  let radialData := n04PositiveGeometry_actualRadialPrefixData G false N A RH hA
+  let BY : ℝ := radialData.choose
+  let hY := radialData.choose_spec.2
+  let radialInverseData := n04PositiveGeometry_actualRadialPrefixData G true N A RH hA
+  let Bρ : ℝ := radialInverseData.choose
+  let hρ := radialInverseData.choose_spec.2
   let D : ℝ := max 1 (max Bφ (max BY (max Bρ (max RH (2 * G.Cinput)))))
   have hD : 1 ≤ D := le_max_left _ _
   have hφD : Bφ ≤ D := (le_max_left _ _).trans (le_max_right _ _)
@@ -70,8 +76,13 @@ theorem n04PositiveGeometry_controlledFactors_saved_prefix
   have hCD : 2 * G.Cinput ≤ D := (le_max_right _ _).trans
     ((le_max_right _ _).trans ((le_max_right _ _).trans
       ((le_max_right _ _).trans (le_max_right _ _))))
-  obtain ⟨Ainv, hAinv, dinv, hinv⟩ := n04PositiveGeometry_angularInverse_saved_prefix (E := V) N
-  obtain ⟨B₁, _, hpack⟩ := n04PositiveGeometry_polynomial_sample_pack Ainv D dinv
+  let inverseData := n04PositiveGeometry_actualInversePrefixData W N
+  let Ainv : ℝ := inverseData.choose
+  let dinv : ℕ := inverseData.choose_spec.2.choose
+  let hinv := inverseData.choose_spec.2.choose_spec
+  let packData := n04PositiveGeometry_polynomial_sample_pack Ainv D dinv
+  let B₁ : ℝ := packData.choose
+  let hpack := packData.choose_spec.2
   let B : ℝ := max D B₁
   have hDB : D ≤ B := le_max_left _ _
   have hB : 1 ≤ B := hD.trans hDB
