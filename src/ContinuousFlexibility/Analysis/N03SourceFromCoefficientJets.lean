@@ -78,6 +78,45 @@ theorem N01Properties.symmetricDivergenceBilinear_actual_of_eq
   exact (congrArg (fun B => symmetricDivergenceBilinear hS hT B η) heq).trans
     (hN.symmetricDivergenceBilinear_actual hS hT R χ z ρ η hregular)
 
+/-- `smoothTameOn_symmetricSource_of_coefficient_jets` on the sector parameter space,
+with the derivative hypothesis in this file's instances. Converting it inside the large
+proof below exceeds the elaboration budget; here it is a plain application. -/
+private theorem smoothTameOn_symmetricSource_sectorParameter
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    {U : Set ((StateDirections S × ℝ) × CircleSpace S)}
+    (hU : IsOpen U) (hc : Convex ℝ U)
+    (p : ℕ → Seminorm ℝ ((StateDirections S × ℝ) × CircleSpace S))
+    (q : ℕ → Seminorm ℝ (HeightPair S))
+    (hpcont : ∀ s, Continuous (p s)) (hqcont : ∀ s, Continuous (q s))
+    (hp : Monotone p) (hq : Monotone q)
+    (hIp : HasInterpolation p) (hIq : HasInterpolation q)
+    (hheight : ∀ s η, physicalNorm T (3 / 4 : ℝ) s
+      ((S.height (3 / 4 : ℝ)).decode η.1) ≤ q s η)
+    (A : ∀ n : ℕ, ((StateDirections S × ℝ) × CircleSpace S) →
+      MultilinearMap ℝ (fun _ : Fin n => (StateDirections S × ℝ) × CircleSpace S)
+        (annularSmoothCoefficientSpace D))
+    (hcoeff : LocalCoefficientMaterialTameBounds (T := T) (U := U) p A)
+    (hsym : ∀ n x, x ∈ U → ∀ v,
+      SymmetricErrorCoefficientSymmetry (A n x v).val)
+    (hderiv : ∀ n (x w : (StateDirections S × ℝ) × CircleSpace S)
+      (v : Fin n → (StateDirections S × ℝ) × CircleSpace S) (t : ℝ), x + t • w ∈ U →
+      MixedJetHasDerivAt
+        (fun s r => ((A n (x + s • w) v).val (T.radius r.1, r.2)).1)
+        (fun r => ((A (n + 1) (x + t • w) (Fin.cons w v)).val
+          (T.radius r.1, r.2)).1) t ∧
+      MixedJetHasDerivAt
+        (fun s r => ((A n (x + s • w) v).val (T.radius r.1, r.2)).2)
+        (fun r => ((A (n + 1) (x + t • w) (Fin.cons w v)).val
+          (T.radius r.1, r.2)).2) t)
+    (f : ((StateDirections S × ℝ) × CircleSpace S) × HeightPair S → S.Source)
+    (hdecode : ∀ z ∈ U ×ˢ (univ : Set (HeightPair S)),
+      physicalSourceDecode S (f z) =
+        symmetricDivergenceBilinear hS hT (A 0 z.1 Fin.elim0) z.2) :
+    SmoothTameOn (pairGrading p q) S.sourceGrading
+      (U ×ˢ (univ : Set (HeightPair S))) f :=
+  smoothTameOn_symmetricSource_of_coefficient_jets hS hT hU hc p q hpcont hqcont hp hq
+    hIp hIq hheight A hcoeff hsym hderiv f hdecode
+
 theorem N01Properties.exists_returnCorrectionSource_of_coefficient_jets
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
@@ -171,9 +210,8 @@ theorem N01Properties.exists_returnCorrectionSource_of_coefficient_jets
   have hconv : Convex ℝ (sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S))) := by
     intro x hx y hy a b ha hb hab
     exact ⟨sectorNeighborhood_convex S base ε ε hx.1 hy.1 ha hb hab, mem_univ _⟩
-  refine smoothTameOn_symmetricSource_of_coefficient_jets
-    (E := (StateDirections S × ℝ) × CircleSpace S) (D := D) (T := T) (S := S)
-    (U := sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S))) hS hT
+  refine smoothTameOn_symmetricSource_sectorParameter hS hT
+    (U := sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S)))
     ((sectorNeighborhood_isOpen S base ε ε).prod isOpen_univ) hconv
     p q hpcont hqcont hp hq hIp hIq hheight A hcoeff hsym hderiv
     (fun z : ((StateDirections S × ℝ) × CircleSpace S) × HeightPair S =>
