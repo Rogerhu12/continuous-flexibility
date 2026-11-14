@@ -96,8 +96,8 @@ theorem modeExtendedGraph_iff_core_pairings {D : ReferenceData}
         linarith only [he]
       · simp only [hj, if_neg, ite_false, zero_mul, mul_zero, add_zero, sub_zero] at he ⊢
         linarith only [he]
-    · have hz := h 0 contDiff_const HasCompactSupport.zero (by simp) 1
-      rw [matchingTestSource_pairing] at hz
+    · have hz := (matchingTestSource_pairing hD hB j 0 contDiff_const 1 U).symm.trans
+        (h 0 contDiff_const HasCompactSupport.zero (by simp) 1)
       simp only [matchingTestInput, modePairing, matchingJacobiVector_zero,
         matchingSmoothVector_zero, inner_zero_right, neg_zero, zero_add,
         Pi.zero_apply, mul_zero, intervalIntegral.integral_zero, one_mul, mul_one,
