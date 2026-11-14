@@ -21,7 +21,7 @@ local instance n01CorrectionOriginalFactorGrowthStateSMul (S : PhysicalSpacesDat
 open Set ContinuousFlexibility.Analysis
 open scoped ContDiff Topology
 
-private theorem sqrt_discriminant_from_minus_speed {a b c : ℝ} (ha : a ≠ 0) :
+theorem sqrt_discriminant_from_minus_speed {a b c : ℝ} (ha : a ≠ 0) :
     b - a * (b / a - Real.sqrt (b ^ 2 - a * c) / a) = Real.sqrt (b ^ 2 - a * c) := by
   field_simp [ha] <;> ring
 
@@ -66,7 +66,7 @@ private theorem fstParameter_jointGrowth_congr
     (f := fun m x => g m (x.1.1, x.2)) (J := K)
     (base := base) (loss := loss) hcongr W
 
-private theorem scalar_sub_mul_jointGrowth
+theorem scalar_sub_mul_jointGrowth
     {E : Type*}
     [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
     [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]

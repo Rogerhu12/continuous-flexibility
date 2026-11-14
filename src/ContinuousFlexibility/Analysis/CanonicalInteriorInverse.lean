@@ -7,12 +7,11 @@ import Mathlib.Analysis.Convex.Topology
 /-!
 # Agreement of genuine local inverses on the canonical interior
 
-The generic rectangle lemmas retain their connectedness argument and do
-not prescribe boundary values of a totalized inverse. The actual dynamic
-piece wrapper instead uses the stored boundary inverse germ: the actual
-inverse is continuous on the canonical closed cylinder, and hence agrees
-with a genuine local inverse throughout a nearby canonical interior.
-No current physical domain is assumed to be a radial rectangle.
+The generic rectangular lemmas use connectedness and endpoint avoidance
+to determine the physical side of a local inverse. For the actual current
+physical domain, the closed inverse contract already gives continuity and
+the exact inverse value. These identify the local inverse on a nearby
+canonical interior without imposing a rectangular shape on the domain.
 -/
 
 noncomputable section
@@ -160,9 +159,44 @@ theorem exists_invFunOn_eq_localInverse_on_openStrip
   exists_rightInverse_eq_localInverse_on_openStrip hab hbij.mapsTo hboundary hbij.injOn
     hbij.surjOn.mapsTo_invFunOn hbij.surjOn.rightInvOn_invFunOn e heF hpe hp
 
-/-- At every point of the actual closed physical domain, the prescribed
-inverse agrees with a smooth local inverse on a nearby canonical interior.
-Closed-domain inverse continuity follows from the stored boundary germ. -/
+/-- Continuity and the true base inverse value identify a local inverse
+on a nearby target interior for arbitrary physical and target domains. -/
+theorem exists_rightInverse_eq_localInverse_on_openDomain
+    {U V : Set PolarPoint} {F G : PolarPoint → PolarPoint}
+    (hmapG : MapsTo G V U) (hright : ∀ q ∈ V, F (G q) = q)
+    (e : OpenPartialHomeomorph PolarPoint PolarPoint)
+    (heF : (e : PolarPoint → PolarPoint) = F)
+    {p : PolarPoint} (hpe : p ∈ e.source)
+    (hG : ContinuousAt G (F p)) (hGF : G (F p) = p) :
+    ∃ δ > 0, Metric.ball (F p) δ ⊆ e.target ∧
+      MapsTo e.symm (Metric.ball (F p) δ ∩ V) U ∧
+      EqOn G e.symm (Metric.ball (F p) δ ∩ V) := by
+  have hFp : F p ∈ e.target := by
+    rw [← heF]
+    exact e.map_source hpe
+  have hGp : G (F p) ∈ e.source := by
+    rw [hGF]
+    exact hpe
+  have hnear : e.target ∩ G ⁻¹' e.source ∈ 𝓝 (F p) :=
+    inter_mem (e.open_target.mem_nhds hFp)
+      (hG.eventually (e.open_source.mem_nhds hGp))
+  obtain ⟨δ, hδ, hδset⟩ := Metric.mem_nhds_iff.mp hnear
+  have heq : EqOn G e.symm (Metric.ball (F p) δ ∩ V) := by
+    intro q hq
+    have hqt := (hδset hq.1).1
+    apply e.injOn (hδset hq.1).2 (e.map_target hqt)
+    calc
+      e (G q) = F (G q) := congrFun heF (G q)
+      _ = q := hright q hq.2
+      _ = e (e.symm q) := (e.right_inv hqt).symm
+  refine ⟨δ, hδ, fun q hq => (hδset hq).1, ?_, heq⟩
+  intro q hq
+  rw [← heq hq]
+  exact hmapG hq.2
+
+/-- At every point of the actual physical closure the stored inverse
+agrees with a genuine smooth local inverse on a whole nearby canonical
+interior. Closed inverse regularity comes from the boundary-germ contract. -/
 theorem canonicalChart_exists_smooth_interiorInverse
     {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
     {K : CanonicalData S} {base : ℕ} {ε : ℝ}
@@ -180,36 +214,13 @@ theorem canonicalChart_exists_smooth_interiorInverse
         (Metric.ball (K.chart z m p) δ ∩ canonicalOpen S K m) := by
   have hcharts := hK.charts z hz hsector m
   have hclosed := hK.boundary z hz hsector m
-  have hpreg := hclosed.2.2.2.2.1 p hp
-  obtain ⟨e, heF, hpe, hsmooth⟩ :=
-    exists_smooth_localInverse_of_planeJacobian_ne_zero hpreg.1 hpreg.2.2.1
-  have hFp : K.chart z m p ∈ e.target := by
-    rw [← heF]
-    exact e.map_source hpe
-  have hGp : K.inverseChart z m (K.chart z m p) = p :=
-    hclosed.2.2.1 p hp
-  have hGcont : ContinuousAt (K.inverseChart z m) (K.chart z m p) :=
+  obtain ⟨e, heF, hpe, hsmooth, _⟩ :=
+    canonicalChart_exists_smooth_endpointInverse hK hz hsector m p hp
+  have hG : ContinuousAt (K.inverseChart z m) (K.chart z m p) :=
     (n04b_inverseChart_contDiffAt_closed hK hz hsector m (hclosed.1 hp)).continuousAt
-  have hGsource : K.inverseChart z m (K.chart z m p) ∈ e.source := by
-    rw [hGp]
-    exact hpe
-  have hnear : ∀ᶠ q in 𝓝 (K.chart z m p),
-      q ∈ e.target ∧ K.inverseChart z m q ∈ e.source :=
-    Filter.Eventually.and (e.open_target.mem_nhds hFp)
-      (hGcont.eventually (e.open_source.mem_nhds hGsource))
-  obtain ⟨δ, hδ, hball⟩ := Metric.mem_nhds_iff.mp hnear
-  have heq : EqOn (K.inverseChart z m) e.symm
-      (Metric.ball (K.chart z m p) δ ∩ canonicalOpen S K m) := by
-    intro q hq
-    have hGin := (hball hq.1).2
-    calc
-      K.inverseChart z m q = e.symm (e (K.inverseChart z m q)) :=
-        (e.left_inv hGin).symm
-      _ = e.symm q := by
-        rw [heF, hcharts.2.2.2.1 q hq.2]
-  refine ⟨e, δ, heF, hpe, hsmooth, hδ, fun q hq => (hball hq).1, ?_, heq⟩
-  intro q hq
-  rw [← heq hq]
-  exact hcharts.2.1 hq.2
+  obtain ⟨δ, hδ, htarget, hlocal, heq⟩ :=
+    exists_rightInverse_eq_localInverse_on_openDomain hcharts.2.1 hcharts.2.2.2.1
+      e heF hpe hG (hclosed.2.2.1 p hp)
+  exact ⟨e, δ, heF, hpe, hsmooth, hδ, htarget, hlocal, heq⟩
 
 end ContinuousFlexibility.Analysis

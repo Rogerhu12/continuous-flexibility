@@ -1,0 +1,91 @@
+{
+  "purpose": "Preserve the actual positive Taylor height and reciprocal quantitative closure during a runtime outage.",
+  "parent": "1e6fa133c796d112fdc03e932fd53e2724623ebb",
+  "compilation": "Not compiled; pending bounded integration and CI.",
+  "total_lean_lines": 1609,
+  "files": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04RealizationLogScalarBounds.lean",
+      "lines": 45,
+      "sha256": "69e8add20ab180347b75ab923cf481a3b3e934ad67f60d825ffd3dad0be764e3",
+      "review": "Independent static review passed; compilation pending."
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04RealizationFiniteProductScale.lean",
+      "lines": 70,
+      "sha256": "320387e54a2e9709c4d57bf5a10b8551d0518b05430a1acd2886f1e6fd4892d7",
+      "review": "Independent static review passed; compilation pending."
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04RealizationLogCompositionBounds.lean",
+      "lines": 109,
+      "sha256": "d3c6a91b96b7b88115308fef3e3452ef17ed7aeb407137dbe180b3fb7634acee",
+      "review": "Independent static review passed; compilation pending."
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04RealizationAngularTraceBounds.lean",
+      "lines": 50,
+      "sha256": "1f58558ed39fa7389f308dec3b65fd41c886b9eb83c87d532acf6327e59df135",
+      "review": "Independent static review passed; compilation pending."
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04RealizationLogHeightTraceBounds.lean",
+      "lines": 164,
+      "sha256": "0d8c3dda1febc1680d9256bae872b9ec3da37e859c2d579630356e2ad9b71633",
+      "review": "Independent static review passed; compilation pending."
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04RealizationTaylorCorrectionBounds.lean",
+      "lines": 125,
+      "sha256": "7cc74eab2b49248b363d9a61a11aeebfc2c1aa6431f88703ec0fdbe9e28cf863",
+      "review": "Independent static review passed; compilation pending."
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04RealizationPositiveTracePrefix.lean",
+      "lines": 74,
+      "sha256": "3cd52b2ed32275d6bedca7922715ed5c1561616d66c8ed7ee0953d7f3a20795d",
+      "review": "Independent static review passed; compilation pending."
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04RealizationPositiveHeightTaylorBounds.lean",
+      "lines": 189,
+      "sha256": "dd4b364b3cfc152045a2eb33afdf505ef89a621d72943abaf7cc8f45eb401291",
+      "review": "Independent static review passed; compilation pending."
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04RealizationPositiveHeightParameterPrefix.lean",
+      "lines": 110,
+      "sha256": "6bc84b45d84281d2ed574f3f860f9ebdeb3356dbd94d1ff5837f9f8c46b43d86",
+      "review": "Independent static review passed; compilation pending."
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04RealizationPositiveHeightOneHigh.lean",
+      "lines": 116,
+      "sha256": "8a622a7295af2b1f87741652cbc2d6800623b68e30f485658ccd003bed4dd668",
+      "review": "Independent static review passed; compilation pending."
+    }
+  ],
+  "interface": "Genuine raw endpoint radial traces through fixed degree n, positive root values with reciprocal bounds, the original fixed collar and its low Taylor amplitude control. No actual Q jet bound, potential bound, divided-field bound, or CurrentJets premise.",
+  "domain": "The same U, actual endpoint sources, fixed delta, and actual positiveHeightTaylorInterpolation; both reciprocal choices share the proof.",
+  "remaining_source_obligation": "Actual genuine raw root-axis parameter towers and sample-E0 envelopes from the source owner, on the retained common neighborhood. This checkpoint does not claim N04CoordinatesRealization completion.",
+  "review_update": "All initial ten files passed independent static review; none has been compiled.",
+  "additional_files": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04RealizationActualPositiveGaugeFields.lean",
+      "lines": 129,
+      "review": "Independent static review passed; compilation pending."
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04RealizationPositiveGaugeHeightBounds.lean",
+      "lines": 190,
+      "review": "Independent static review passed; compilation pending."
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04RealizationPositiveGaugePotentialBounds.lean",
+      "lines": 238,
+      "review": "Mathematical and dependency review passed; explicit CanonicalGeometry namespace added after independent review; final review and compilation pending."
+    }
+  ],
+  "current_checkpoint_parent": "d34e43a1d9bc61824cdfa95fffc575b1e4cc3c93",
+  "connection": "Exact same-atlas positive gauge identities and derived pulled-height bounds are now connected to the original principal inputs through the existing potential differential-product theorem. No final potential bound or CurrentJets premise is assumed."
+}

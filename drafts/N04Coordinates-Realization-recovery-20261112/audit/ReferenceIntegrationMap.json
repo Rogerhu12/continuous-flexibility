@@ -1,0 +1,1002 @@
+{
+  "kind": "read-only-exact-recovery-integration-map",
+  "backupCommit": "0227745d7d0b759233e7714896f99493b29661d2",
+  "snapshot": 38,
+  "main": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "sourceHead": "794d5d0e3a0c7f6864660e89166fc58c6295cd70",
+  "originalReferenceManifestBlob": "0ae5d8a1d49a64c412183757910c6ff25507260c",
+  "counts": {
+    "referenceModules": 41,
+    "referenceLines": 4902,
+    "auxiliaryModules": 9,
+    "auxiliaryLines": 1085,
+    "overlapModules": 2,
+    "overlapLines": 256,
+    "unionModules": 48,
+    "unionLines": 5731,
+    "activeSourcePrefixModules": 14,
+    "activeSourcePrefixLines": 1880,
+    "remainingUnionModules": 34,
+    "remainingUnionLines": 3851
+  },
+  "referenceFiles": [
+    {
+      "order": 1,
+      "module": "ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields",
+      "targetPath": "src/ContinuousFlexibility/Analysis/ActualReferenceNegativeRadialFields.lean",
+      "lines": 156,
+      "blob": "008d8b2a059105c2fbe5ceea6d25fc8bca8a84c5",
+      "archiveCommit": "44b4443bdf6ad798d4b9631371234b8225f9718f",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-13/audit/reconstructed/ActualReferenceNegativeRadialFields.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualNegativePrincipalDensity",
+        "ContinuousFlexibility.Analysis.N04bReferenceActualTravel",
+        "ContinuousFlexibility.Analysis.N01OpticalCollarPositivity",
+        "ContinuousFlexibility.Analysis.N04bActualRootInterior"
+      ],
+      "activeInSource794": true,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualReferenceNegativeEndpointDataReviewedManifest.json",
+        "sha256": "f5792f65df07694fa330cdc669d7ebd446577e0cffef75b61e0f4edf4f845c8f"
+      }
+    },
+    {
+      "order": 2,
+      "module": "ContinuousFlexibility.Analysis.ActualReferenceNegativeEndpointData",
+      "targetPath": "src/ContinuousFlexibility/Analysis/ActualReferenceNegativeEndpointData.lean",
+      "lines": 126,
+      "blob": "7d2ff0fac9e08218174cd6870ba79b8529aa8a01",
+      "archiveCommit": "44b4443bdf6ad798d4b9631371234b8225f9718f",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-13/audit/reconstructed/ActualReferenceNegativeEndpointData.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields",
+        "ContinuousFlexibility.Analysis.CanonicalRootTransportBoundary",
+        "ContinuousFlexibility.Analysis.N04bActualAtlasCuts"
+      ],
+      "activeInSource794": true,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualReferenceNegativeEndpointDataReviewedManifest.json",
+        "sha256": "f5792f65df07694fa330cdc669d7ebd446577e0cffef75b61e0f4edf4f845c8f"
+      }
+    },
+    {
+      "order": 3,
+      "module": "ContinuousFlexibility.Analysis.ActualPositiveReferenceEndpointData",
+      "targetPath": "src/ContinuousFlexibility/Analysis/ActualPositiveReferenceEndpointData.lean",
+      "lines": 160,
+      "blob": "f4f42daf4f17ad80d97001397d7a2873e0b82cdf",
+      "archiveCommit": "44b4443bdf6ad798d4b9631371234b8225f9718f",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-13/audit/reconstructed/ActualPositiveReferenceEndpointData.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualReferenceNegativeEndpointData",
+        "ContinuousFlexibility.Analysis.WholePositiveEndpointFields"
+      ],
+      "activeInSource794": true,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferenceInterpolationReviewedManifest.json",
+        "sha256": "3828d5181d7559adea4d9dbb7e89ffbcb0ef9b452cb6d7a7c358fab84f736728"
+      }
+    },
+    {
+      "order": 4,
+      "module": "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry",
+      "targetPath": "src/ContinuousFlexibility/Analysis/PositiveChartRangeGeometry.lean",
+      "lines": 168,
+      "blob": "fadd30e6e59365b6798c1b0a917c3d86f1775f05",
+      "archiveCommit": "08f54fa0f2826963980a9fcfe15090d501718e12",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-12/positive/reconstructed/PositiveChartRangeGeometry.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.WholePositiveCanonicalFields",
+        "ContinuousFlexibility.Analysis.PositiveReferenceCylinder"
+      ],
+      "activeInSource794": true,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveChartRangeGeometryReviewedManifest.json",
+        "sha256": "97cd4ecb74836bca17a67d6e413f437e2019c6449037d66e23b788e2525e70b3"
+      }
+    },
+    {
+      "order": 5,
+      "module": "ContinuousFlexibility.Analysis.PositiveReferenceFiniteRadialJets",
+      "targetPath": "src/ContinuousFlexibility/Analysis/PositiveReferenceFiniteRadialJets.lean",
+      "lines": 167,
+      "blob": "db60546bb34349a040955ace14facdf5b13dfa0d",
+      "archiveCommit": "44b4443bdf6ad798d4b9631371234b8225f9718f",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-13/root/compatibility/radial-reference-bool/PositiveReferenceFiniteRadialJets.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.OneSidedBoundaryTaylorRepresentative",
+        "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry"
+      ],
+      "activeInSource794": true,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/radial-reference-bool/PositiveReferenceFiniteRadialJetsReviewedManifest.json",
+        "sha256": "7ef9f39d393ba5882a57fa5996c4418917611af7a17f6544f0cd6ff05f0b1879"
+      }
+    },
+    {
+      "order": 6,
+      "module": "ContinuousFlexibility.Analysis.ActualPositiveReferenceInterpolation",
+      "targetPath": "src/ContinuousFlexibility/Analysis/ActualPositiveReferenceInterpolation.lean",
+      "lines": 80,
+      "blob": "89bec50456142fde3eb21c28e397456a000b0548",
+      "archiveCommit": "44b4443bdf6ad798d4b9631371234b8225f9718f",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-13/audit/reconstructed/ActualPositiveReferenceInterpolation.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualPositiveReferenceEndpointData",
+        "ContinuousFlexibility.Analysis.PositiveReferenceFiniteRadialJets"
+      ],
+      "activeInSource794": true,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferenceInterpolationReviewedManifest.json",
+        "sha256": "3828d5181d7559adea4d9dbb7e89ffbcb0ef9b452cb6d7a7c358fab84f736728"
+      }
+    },
+    {
+      "order": 7,
+      "module": "ContinuousFlexibility.Analysis.CanonicalPositiveReferenceFamily",
+      "targetPath": "src/ContinuousFlexibility/Analysis/CanonicalPositiveReferenceFamily.lean",
+      "lines": 56,
+      "blob": "0a0206739fd3b542d87723155b08504317d2562e",
+      "archiveCommit": "2391bb285a08c1ae79449b2e05595fed9c2a281f",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-14/root/reconstructed/CanonicalPositiveReferenceFamily.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualPositiveReferenceInterpolation"
+      ],
+      "activeInSource794": true,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalPositiveReferenceFamilyReviewedManifest.json",
+        "sha256": "5fff12bfcf721722076f03f62f6d7a9e857334f4bc9815f34713c3b8036724a0"
+      }
+    },
+    {
+      "order": 8,
+      "module": "ContinuousFlexibility.Analysis.WholePositiveReferenceGauge",
+      "targetPath": "src/ContinuousFlexibility/Analysis/WholePositiveReferenceGauge.lean",
+      "lines": 171,
+      "blob": "6f113d58d024c6376b5a1fe1ffb7f7ce29cfd7be",
+      "archiveCommit": "08f54fa0f2826963980a9fcfe15090d501718e12",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-12/positive/compatibility/reference-gauge-ranges/WholePositiveReferenceGauge.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry"
+      ],
+      "activeInSource794": true,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/reference-gauge-ranges/WholePositiveReferenceGaugeReviewedManifest.json",
+        "sha256": "c840e5892621bb0d24bc16a65ce264898a538ecafb8c82b4728ee5760b11d6c2"
+      }
+    },
+    {
+      "order": 9,
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData",
+      "targetPath": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasData.lean",
+      "lines": 131,
+      "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "archiveCommit": "44b4443bdf6ad798d4b9631371234b8225f9718f",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-13/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.WholeCanonicalAtlasData",
+        "ContinuousFlexibility.Analysis.WholePositiveReferenceGauge"
+      ],
+      "activeInSource794": true,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasDataReviewedManifest.json",
+        "sha256": "701abf400f31e9d5bd990eff6d782e8878b3bb25e17a721750de8d04a4e319d7"
+      }
+    },
+    {
+      "order": 10,
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasGeometry",
+      "targetPath": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasGeometry.lean",
+      "lines": 163,
+      "blob": "e349394e51c8caef8a751f9b4e6c4900f13f8d0d",
+      "archiveCommit": "44b4443bdf6ad798d4b9631371234b8225f9718f",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-13/root/reconstructed/WholeReferenceGaugeAtlasGeometry.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData"
+      ],
+      "activeInSource794": true,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasGeometryReviewedManifest.json",
+        "sha256": "8d624dafe17b76df6ddd73e50c1fb56e6723cc2e81f2d2ccf534ad71a954e6c1"
+      }
+    },
+    {
+      "order": 11,
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasOperator",
+      "targetPath": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasOperator.lean",
+      "lines": 106,
+      "blob": "de3ff006b2c03592d7c5489ed41c4b73adad8c73",
+      "archiveCommit": "44b4443bdf6ad798d4b9631371234b8225f9718f",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-13/root/reconstructed/WholeReferenceGaugeAtlasOperator.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData",
+        "ContinuousFlexibility.Analysis.WholeCanonicalAtlasOperator"
+      ],
+      "activeInSource794": true,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasOperatorReviewedManifest.json",
+        "sha256": "fa97fcb6417b534498826a84699b8ac2c4ff5b9f7ac6b13a2706b3d7d3e141ee"
+      }
+    },
+    {
+      "order": 12,
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasCutOperator",
+      "targetPath": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasCutOperator.lean",
+      "lines": 102,
+      "blob": "14acbf9b59c2fd57da53b0d7e0290c43f649331c",
+      "archiveCommit": "2391bb285a08c1ae79449b2e05595fed9c2a281f",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-14/root/compatibility/reference-gauge-restriction/WholeReferenceGaugeAtlasCutOperator.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasOperator",
+        "ContinuousFlexibility.Analysis.CanonicalSourceConversion",
+        "ContinuousFlexibility.Analysis.CanonicalNeighborhoodRestriction"
+      ],
+      "activeInSource794": false,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/reference-gauge-restriction/WholeReferenceGaugeAtlasCutOperatorRestrictedReviewedManifest.json",
+        "sha256": "6cbca3bd5a107404cfe58b2f61f0b77b9bd26637c38c301834af6b0a092c774c"
+      }
+    },
+    {
+      "order": 13,
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeRelativeFields",
+      "targetPath": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeRelativeFields.lean",
+      "lines": 101,
+      "blob": "ba1d43881f06ffb76d0d658ed762dd435a668d0b",
+      "archiveCommit": "44b4443bdf6ad798d4b9631371234b8225f9718f",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-13/positive/reconstructed/WholeReferenceGaugeRelativeFields.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData"
+      ],
+      "activeInSource794": true,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeReferenceGaugeRelativeFieldsReviewedManifest.json",
+        "sha256": "6d48aab93f9ac35c31649f9cfef52a25c5a253f1d0eeced51ff11f011e240e82"
+      }
+    },
+    {
+      "order": 14,
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeReferenceRadial",
+      "targetPath": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeReferenceRadial.lean",
+      "lines": 138,
+      "blob": "4fb8973a3fbe0b887088e2d297b5ff0cb9cfd11d",
+      "archiveCommit": "2391bb285a08c1ae79449b2e05595fed9c2a281f",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-14/root/reconstructed/WholeReferenceGaugeReferenceRadial.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeRelativeFields"
+      ],
+      "activeInSource794": false,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeReferenceRadialReviewedManifest.json",
+        "sha256": "918b814c0c1fd0e063d1138b8a869079423c36f903ae18a20be96d07ca80c0e9"
+      }
+    },
+    {
+      "order": 15,
+      "module": "ContinuousFlexibility.Analysis.FiniteFirstJetInverse",
+      "targetPath": "src/ContinuousFlexibility/Analysis/FiniteFirstJetInverse.lean",
+      "lines": 104,
+      "blob": "bf09a201a95c1fbcfb1c956a58a2fc041e6a0051",
+      "archiveCommit": "44b4443bdf6ad798d4b9631371234b8225f9718f",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-13/positive/reconstructed/FiniteFirstJetInverse.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.FiniteFullJetBoundary"
+      ],
+      "activeInSource794": false,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/FiniteFirstJetInverseReviewedManifest.json",
+        "sha256": "152f63a0537a1b1cf8c628945d620eefa860716f5c09f348146f14154a3ac90c"
+      }
+    },
+    {
+      "order": 16,
+      "module": "ContinuousFlexibility.Analysis.ActualPositiveReferenceFirstJets",
+      "targetPath": "src/ContinuousFlexibility/Analysis/ActualPositiveReferenceFirstJets.lean",
+      "lines": 123,
+      "blob": "76fa1a822a2df404ea31125c346670efa50b3010",
+      "archiveCommit": "44b4443bdf6ad798d4b9631371234b8225f9718f",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-13/positive/reconstructed/ActualPositiveReferenceFirstJets.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualPositiveReferenceInterpolation",
+        "ContinuousFlexibility.Analysis.FiniteFirstJetInverse",
+        "ContinuousFlexibility.Analysis.CanonicalWholePositiveRootMatching"
+      ],
+      "activeInSource794": false,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/ActualPositiveReferenceFirstJetsReviewedManifest.json",
+        "sha256": "451fea2a1013f2a6511ac9e13ab8fa766c38f96684cdd09c816a1b79b5613764"
+      }
+    },
+    {
+      "order": 17,
+      "module": "ContinuousFlexibility.Analysis.CanonicalRootReferencePoint",
+      "targetPath": "src/ContinuousFlexibility/Analysis/CanonicalRootReferencePoint.lean",
+      "lines": 56,
+      "blob": "c9151542eb34c0b542e371c5e8795e9561c7a56c",
+      "archiveCommit": "44b4443bdf6ad798d4b9631371234b8225f9718f",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-13/positive/reconstructed/CanonicalRootReferencePoint.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CanonicalRootTransportBoundary"
+      ],
+      "activeInSource794": false,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalReferenceGaugeRootCircleJetsReviewedManifest.json",
+        "sha256": "c9ee57e932ea75c9e39ab17d07cd30c397a39afa4919c1a6b5f53e8ee214da89"
+      }
+    },
+    {
+      "order": 18,
+      "module": "ContinuousFlexibility.Analysis.WholePositiveReferenceGaugeFirstJets",
+      "targetPath": "src/ContinuousFlexibility/Analysis/WholePositiveReferenceGaugeFirstJets.lean",
+      "lines": 53,
+      "blob": "65bb127b9dd24cee1d337794f1a01d8f12a54326",
+      "archiveCommit": "44b4443bdf6ad798d4b9631371234b8225f9718f",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-13/positive/reconstructed/WholePositiveReferenceGaugeFirstJets.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.FiniteFirstJetInverse",
+        "ContinuousFlexibility.Analysis.WholePositiveReferenceGauge"
+      ],
+      "activeInSource794": false,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/ReferenceGaugeFirstJetsReviewedManifest.json",
+        "sha256": "20ecfa6e6254e59206b4d4a1aac70e25fb33908bb37c14aee065d29149e2e8a5"
+      }
+    },
+    {
+      "order": 19,
+      "module": "ContinuousFlexibility.Analysis.CanonicalReferenceGaugeReconstruction",
+      "targetPath": "src/ContinuousFlexibility/Analysis/CanonicalReferenceGaugeReconstruction.lean",
+      "lines": 108,
+      "blob": "26ed383f47116763359682c60dc2edc920b01d5e",
+      "archiveCommit": "44b4443bdf6ad798d4b9631371234b8225f9718f",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-13/positive/reconstructed/CanonicalReferenceGaugeReconstruction.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CanonicalActualEndpointFields",
+        "ContinuousFlexibility.Analysis.WholePositiveReferenceGaugeFirstJets"
+      ],
+      "activeInSource794": false,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/ReferenceGaugeFirstJetsReviewedManifest.json",
+        "sha256": "20ecfa6e6254e59206b4d4a1aac70e25fb33908bb37c14aee065d29149e2e8a5"
+      }
+    },
+    {
+      "order": 20,
+      "module": "ContinuousFlexibility.Analysis.CanonicalReferenceGaugeFirstJetTransfer",
+      "targetPath": "src/ContinuousFlexibility/Analysis/CanonicalReferenceGaugeFirstJetTransfer.lean",
+      "lines": 77,
+      "blob": "277d516f1a3b04934606c057b1539d3fd2d371b9",
+      "archiveCommit": "44b4443bdf6ad798d4b9631371234b8225f9718f",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-13/positive/reconstructed/CanonicalReferenceGaugeFirstJetTransfer.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CanonicalReferenceGaugeReconstruction"
+      ],
+      "activeInSource794": false,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalReferenceGaugeFirstJetTransferReviewedManifest.json",
+        "sha256": "3714ad542b35b8111a70299fd5aa2ae68ab660b2bbdf247ceae422f8f9b42c7f"
+      }
+    },
+    {
+      "order": 21,
+      "module": "ContinuousFlexibility.Analysis.CanonicalReferenceGaugeRootCircleJets",
+      "targetPath": "src/ContinuousFlexibility/Analysis/CanonicalReferenceGaugeRootCircleJets.lean",
+      "lines": 75,
+      "blob": "b3384e644fc97fc8f120ed3377e4ebdd1b2adcd4",
+      "archiveCommit": "44b4443bdf6ad798d4b9631371234b8225f9718f",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-13/positive/reconstructed/CanonicalReferenceGaugeRootCircleJets.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CanonicalRootReferencePoint",
+        "ContinuousFlexibility.Analysis.CanonicalReferenceGaugeFirstJetTransfer"
+      ],
+      "activeInSource794": false,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalReferenceGaugeRootCircleJetsReviewedManifest.json",
+        "sha256": "c9ee57e932ea75c9e39ab17d07cd30c397a39afa4919c1a6b5f53e8ee214da89"
+      }
+    },
+    {
+      "order": 22,
+      "module": "ContinuousFlexibility.Analysis.WholePositiveActualRootFirstJets",
+      "targetPath": "src/ContinuousFlexibility/Analysis/WholePositiveActualRootFirstJets.lean",
+      "lines": 80,
+      "blob": "8fd6a4e731dc52d1214203a3a2d0a6b05b24ef0c",
+      "archiveCommit": "44b4443bdf6ad798d4b9631371234b8225f9718f",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-13/positive/reconstructed/WholePositiveActualRootFirstJets.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CanonicalWholePositiveRootMatching",
+        "ContinuousFlexibility.Analysis.CanonicalReferenceGaugeRootCircleJets"
+      ],
+      "activeInSource794": false,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveActualRootFirstJetsReviewedManifest.json",
+        "sha256": "a72c54e2493fa3a37e31a2e3bb8d1837148ef4104b8f3268e56e255fea5ce379"
+      }
+    },
+    {
+      "order": 23,
+      "module": "ContinuousFlexibility.Analysis.ActualPositiveGaugeRootFirstJets",
+      "targetPath": "src/ContinuousFlexibility/Analysis/ActualPositiveGaugeRootFirstJets.lean",
+      "lines": 87,
+      "blob": "af468a906190a61a33173a6df00a8ae88a30afb4",
+      "archiveCommit": "2391bb285a08c1ae79449b2e05595fed9c2a281f",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-14/positive/reconstructed/ActualPositiveGaugeRootFirstJets.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualPositiveReferenceFirstJets",
+        "ContinuousFlexibility.Analysis.WholePositiveActualRootFirstJets"
+      ],
+      "activeInSource794": false,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/ActualPositiveGaugeRootFirstJetsReviewedManifest.json",
+        "sha256": "daab7af622f31bb567df9c543302b17a9108f8ac82acf0576dab101c0d46544f"
+      }
+    },
+    {
+      "order": 24,
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeRootFirstJets",
+      "targetPath": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeRootFirstJets.lean",
+      "lines": 102,
+      "blob": "be4a8a0a3fe29b50db53f246b56d536dbe172f49",
+      "archiveCommit": "2391bb285a08c1ae79449b2e05595fed9c2a281f",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-14/positive/reconstructed/WholeReferenceGaugeRootFirstJets.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualPositiveGaugeRootFirstJets",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData"
+      ],
+      "activeInSource794": false,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeReferenceGaugeTransmissionReviewedManifest.json",
+        "sha256": "3297c4d49269ded304b761fd4424ea19280ca6d2c9823bf498b0ff61dee5cec9"
+      }
+    },
+    {
+      "order": 25,
+      "module": "ContinuousFlexibility.Analysis.WholeCanonicalInterfaceClassification",
+      "targetPath": "src/ContinuousFlexibility/Analysis/WholeCanonicalInterfaceClassification.lean",
+      "lines": 122,
+      "blob": "b21513d9523375d05141018d7f7e296f78d44212",
+      "archiveCommit": "08f54fa0f2826963980a9fcfe15090d501718e12",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-12/audit/reconstructed/WholeCanonicalInterfaceClassification.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.WholeCanonicalAtlasReferencePartition"
+      ],
+      "activeInSource794": false,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeCanonicalInterfaceClassificationReviewedManifest.json",
+        "sha256": "0717275818f7cb2457dc99a2979b7c47571e9a56dc2b052a02dd47eda1b6f8c7"
+      }
+    },
+    {
+      "order": 26,
+      "module": "ContinuousFlexibility.Analysis.ConstructedRootCutFirstJets",
+      "targetPath": "src/ContinuousFlexibility/Analysis/ConstructedRootCutFirstJets.lean",
+      "lines": 174,
+      "blob": "c351965626552621e295cf05b2295b8a07a5b29d",
+      "archiveCommit": "08f54fa0f2826963980a9fcfe15090d501718e12",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-12/audit/compatibility/cut-first-jets-syntax/ConstructedRootCutFirstJets.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04bConstructedRootTransmission",
+        "ContinuousFlexibility.Analysis.N04bRootInteriorRegularity",
+        "Mathlib.Analysis.Calculus.FDeriv.Pow",
+        "Mathlib.Analysis.SpecialFunctions.Sqrt"
+      ],
+      "activeInSource794": false,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ConstructedRootCutFirstJetsReviewedManifest.json",
+        "sha256": "149080f566248354e5323212d314326232a7057befd299975d5980fe5476c04d"
+      }
+    },
+    {
+      "order": 27,
+      "module": "ContinuousFlexibility.Analysis.ActualAtlasCutFirstJets",
+      "targetPath": "src/ContinuousFlexibility/Analysis/ActualAtlasCutFirstJets.lean",
+      "lines": 146,
+      "blob": "ddb7cdf61cd013c97afe3efb33b13e03394fa986",
+      "archiveCommit": "08f54fa0f2826963980a9fcfe15090d501718e12",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-12/audit/reconstructed/ActualAtlasCutFirstJets.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ConstructedRootCutFirstJets",
+        "ContinuousFlexibility.Analysis.N04bActualAtlasCuts",
+        "ContinuousFlexibility.Analysis.N04bActualCharacteristics",
+        "ContinuousFlexibility.Analysis.WholeCanonicalAtlasData"
+      ],
+      "activeInSource794": false,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualCutTransmissionReviewedManifest.json",
+        "sha256": "75965327e6dda26c602e0003dd1291220510fff635637de62dabf15173a0b316"
+      }
+    },
+    {
+      "order": 28,
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasInterfaces",
+      "targetPath": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasInterfaces.lean",
+      "lines": 70,
+      "blob": "23a91459c8a857886c76d04e87e1f9d09443f634",
+      "archiveCommit": "44b4443bdf6ad798d4b9631371234b8225f9718f",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-13/audit/reconstructed/WholeReferenceGaugeAtlasInterfaces.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData",
+        "ContinuousFlexibility.Analysis.WholeCanonicalInterfaceClassification",
+        "ContinuousFlexibility.Analysis.ActualAtlasCutFirstJets"
+      ],
+      "activeInSource794": false,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeAtlasInterfacesReviewedManifest.json",
+        "sha256": "d88eae7d2730b560151c7d7b06d56642cdd5c74752da469b6e8a0dd43e53f26d"
+      }
+    },
+    {
+      "order": 29,
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeRootInterfaces",
+      "targetPath": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeRootInterfaces.lean",
+      "lines": 162,
+      "blob": "62be48b1594bfe8207dac3edb24dac4f750415cf",
+      "archiveCommit": "2391bb285a08c1ae79449b2e05595fed9c2a281f",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-14/audit/reconstructed/WholeReferenceGaugeRootInterfaces.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasInterfaces",
+        "ContinuousFlexibility.Analysis.WholeComponentFieldSelection",
+        "ContinuousFlexibility.Analysis.PositiveComponentAdjacency"
+      ],
+      "activeInSource794": false,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeRootInterfacesReviewedManifest.json",
+        "sha256": "6b31dac8dd8e087e42f6687941a31d711bf6bdc1652ea504211570a19a3a47d4"
+      }
+    },
+    {
+      "order": 30,
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeRootMatching",
+      "targetPath": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeRootMatching.lean",
+      "lines": 133,
+      "blob": "d044ebf2139de1886c261a1ad19294ff4f227d5b",
+      "archiveCommit": "2391bb285a08c1ae79449b2e05595fed9c2a281f",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-14/positive/reconstructed/WholeReferenceGaugeRootMatching.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeRootFirstJets",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeRootInterfaces"
+      ],
+      "activeInSource794": false,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeReferenceGaugeTransmissionReviewedManifest.json",
+        "sha256": "3297c4d49269ded304b761fd4424ea19280ca6d2c9823bf498b0ff61dee5cec9"
+      }
+    },
+    {
+      "order": 31,
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeTransmission",
+      "targetPath": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeTransmission.lean",
+      "lines": 110,
+      "blob": "706d01f4aaf9bc87b63313e16292f0528678aff5",
+      "archiveCommit": "2391bb285a08c1ae79449b2e05595fed9c2a281f",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-14/positive/reconstructed/WholeReferenceGaugeTransmission.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeRootMatching"
+      ],
+      "activeInSource794": false,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeReferenceGaugeTransmissionReviewedManifest.json",
+        "sha256": "3297c4d49269ded304b761fd4424ea19280ca6d2c9823bf498b0ff61dee5cec9"
+      }
+    },
+    {
+      "order": 32,
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeGlobalTransport",
+      "targetPath": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeGlobalTransport.lean",
+      "lines": 97,
+      "blob": "9dd60b6e07fff54af9c9212383f8fddaa9eb3fdb",
+      "archiveCommit": "44b4443bdf6ad798d4b9631371234b8225f9718f",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-13/root/reconstructed/WholeReferenceGaugeGlobalTransport.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeRelativeFields",
+        "ContinuousFlexibility.Analysis.CanonicalActualWholeGeometry"
+      ],
+      "activeInSource794": false,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeGlobalTransportReviewedManifest.json",
+        "sha256": "f0a26518adcc14cf6b2784edacd9972151c20aa65595c03325d5bfef665a5831"
+      }
+    },
+    {
+      "order": 33,
+      "module": "ContinuousFlexibility.Analysis.CanonicalActualReferenceGeometry",
+      "targetPath": "src/ContinuousFlexibility/Analysis/CanonicalActualReferenceGeometry.lean",
+      "lines": 137,
+      "blob": "c0a923a761357bfcb72f507a2b9906cc6221f45e",
+      "archiveCommit": "2391bb285a08c1ae79449b2e05595fed9c2a281f",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-14/root/reconstructed/CanonicalActualReferenceGeometry.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CanonicalPositiveReferenceFamily",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasGeometry",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasCutOperator",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeReferenceRadial",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeTransmission",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeGlobalTransport"
+      ],
+      "activeInSource794": false,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalActualReferenceGeometryReviewedManifest.json",
+        "sha256": "b24c25236d45604fe1ee6a5cb903de0dc830c6dc1f5beb30b848ade9738d3516"
+      }
+    },
+    {
+      "order": 34,
+      "module": "ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas",
+      "targetPath": "src/ContinuousFlexibility/Analysis/RadialReferencePrincipalFormulas.lean",
+      "lines": 100,
+      "blob": "096b420be6425f39b2f5e73e4a0f60cbd9113ced",
+      "archiveCommit": "2391bb285a08c1ae79449b2e05595fed9c2a281f",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-14/audit/reconstructed/RadialReferencePrincipalFormulas.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.PositiveReferenceCylinder",
+        "ContinuousFlexibility.Analysis.CoordinateOperatorConstruction",
+        "ContinuousFlexibility.Radial.RadialHeight"
+      ],
+      "activeInSource794": true,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholePositiveReferencePrincipalReviewedManifest.json",
+        "sha256": "ce850327465e1d0660aa6f109c29578f00353722b9842339e511cea95e944ca3"
+      }
+    },
+    {
+      "order": 35,
+      "module": "ContinuousFlexibility.Analysis.RadialReferencePotentialGerms",
+      "targetPath": "src/ContinuousFlexibility/Analysis/RadialReferencePotentialGerms.lean",
+      "lines": 143,
+      "blob": "ccd28495960875f494c654dc82d107ed67ba59a4",
+      "archiveCommit": "2391bb285a08c1ae79449b2e05595fed9c2a281f",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-14/audit/reconstructed/RadialReferencePotentialGerms.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas",
+        "ContinuousFlexibility.Analysis.ReferenceCircleFlow",
+        "ContinuousFlexibility.Analysis.N04bOperatorGerms"
+      ],
+      "activeInSource794": false,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeReferencePrincipalReviewedManifest.json",
+        "sha256": "01149dca044841909ecc4398c562e1ef48b584bacd18b3b850a8d84c83620b1b"
+      }
+    },
+    {
+      "order": 36,
+      "module": "ContinuousFlexibility.Analysis.WholePositiveReferencePrincipal",
+      "targetPath": "src/ContinuousFlexibility/Analysis/WholePositiveReferencePrincipal.lean",
+      "lines": 195,
+      "blob": "fcb65801fb0da7c1ccbf3e7a0bf826f303bf9a3b",
+      "archiveCommit": "2391bb285a08c1ae79449b2e05595fed9c2a281f",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-14/audit/reconstructed/WholePositiveReferencePrincipal.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasOperator",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeRelativeFields",
+        "ContinuousFlexibility.Analysis.N01OpticalCollarPositivity"
+      ],
+      "activeInSource794": true,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholePositiveReferencePrincipalReviewedManifest.json",
+        "sha256": "ce850327465e1d0660aa6f109c29578f00353722b9842339e511cea95e944ca3"
+      }
+    },
+    {
+      "order": 37,
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeReferencePrincipal",
+      "targetPath": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeReferencePrincipal.lean",
+      "lines": 175,
+      "blob": "2d253a2be2fb1b7653fba79a0ff2495b7244e1ab",
+      "archiveCommit": "71fd2c8ba445c4fa595f823339912f3d55744631",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-15/audit/reconstructed/WholeReferenceGaugeReferencePrincipal.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.RadialReferencePotentialGerms",
+        "ContinuousFlexibility.Analysis.WholePositiveReferencePrincipal",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeReferenceRadial",
+        "ContinuousFlexibility.Analysis.WholeCanonicalAtlasPrincipalDensity"
+      ],
+      "activeInSource794": false,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeReferencePrincipalReviewedManifest.json",
+        "sha256": "01149dca044841909ecc4398c562e1ef48b584bacd18b3b850a8d84c83620b1b"
+      }
+    },
+    {
+      "order": 38,
+      "module": "ContinuousFlexibility.Analysis.PhysicalSpacesAuxiliaryColumn",
+      "targetPath": "src/ContinuousFlexibility/Analysis/PhysicalSpacesAuxiliaryColumn.lean",
+      "lines": 134,
+      "blob": "f51d3dac4fa34bdb9cd36c4588b5a490437d10b5",
+      "archiveCommit": "71fd2c8ba445c4fa595f823339912f3d55744631",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-15/audit/reconstructed/PhysicalSpacesAuxiliaryColumn.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.SpacesSources",
+        "ContinuousFlexibility.Statements.Nonlinear"
+      ],
+      "activeInSource794": false,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/BufferedRadialAuxiliaryColumnReviewedManifest.json",
+        "sha256": "e41b8670ddd1f4646b96ca9613e73aaf83ad372c333b9a0c7f1e40e67b63d533"
+      }
+    },
+    {
+      "order": 39,
+      "module": "ContinuousFlexibility.Analysis.BufferedRadialAuxiliaryColumn",
+      "targetPath": "src/ContinuousFlexibility/Analysis/BufferedRadialAuxiliaryColumn.lean",
+      "lines": 122,
+      "blob": "6bc85192cefb26fff23cca0845fdfa7296ed161e",
+      "archiveCommit": "71fd2c8ba445c4fa595f823339912f3d55744631",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-15/audit/reconstructed/BufferedRadialAuxiliaryColumn.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.PhysicalSpacesAuxiliaryColumn",
+        "ContinuousFlexibility.Analysis.N04PositiveNormalizationBuffer"
+      ],
+      "activeInSource794": false,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/BufferedRadialAuxiliaryColumnReviewedManifest.json",
+        "sha256": "e41b8670ddd1f4646b96ca9613e73aaf83ad372c333b9a0c7f1e40e67b63d533"
+      }
+    },
+    {
+      "order": 40,
+      "module": "ContinuousFlexibility.Analysis.RadialGaugePrincipalTransformation",
+      "targetPath": "src/ContinuousFlexibility/Analysis/RadialGaugePrincipalTransformation.lean",
+      "lines": 87,
+      "blob": "283d5dc38c2658787f5f410bdeb55d42d4bb1dd7",
+      "archiveCommit": "0db1a62e32efbba45f732812fc085ac6d6f6c3d3",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-16/root/reconstructed/RadialGaugePrincipalTransformation.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.PositiveReferenceCylinder",
+        "ContinuousFlexibility.Analysis.WholePositiveCanonicalFields",
+        "ContinuousFlexibility.Analysis.WholePositiveReferenceGauge"
+      ],
+      "activeInSource794": false,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/RadialGaugePrincipalTransformationReviewedManifest.json",
+        "sha256": "9cf696dc96c790e4067e854cb7439a911e2dfd3d6df51272811c840be4b87a07"
+      }
+    },
+    {
+      "order": 41,
+      "module": "ContinuousFlexibility.Analysis.RadialGaugePrincipalFiniteJets",
+      "targetPath": "src/ContinuousFlexibility/Analysis/RadialGaugePrincipalFiniteJets.lean",
+      "lines": 105,
+      "blob": "3a43ccceb3f82270ebdde43087111bd569cdab5f",
+      "archiveCommit": "0db1a62e32efbba45f732812fc085ac6d6f6c3d3",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-16/root/reconstructed/RadialGaugePrincipalFiniteJets.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.RadialGaugePrincipalTransformation",
+        "ContinuousFlexibility.Analysis.FiniteFullJetBoundary"
+      ],
+      "activeInSource794": false,
+      "reviewedManifest": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/RadialGaugePrincipalFiniteJetsReviewedManifest.json",
+        "sha256": "308199552c13b7d9b951847d7dcf921d4d975281a321f1703c2e683ce29647a1"
+      }
+    }
+  ],
+  "auxiliaryFiles": [
+    {
+      "module": "ContinuousFlexibility.Analysis.PhysicalSpacesAuxiliaryColumn",
+      "targetPath": "src/ContinuousFlexibility/Analysis/PhysicalSpacesAuxiliaryColumn.lean",
+      "lines": 134,
+      "blob": "f51d3dac4fa34bdb9cd36c4588b5a490437d10b5",
+      "archiveCommit": "71fd2c8ba445c4fa595f823339912f3d55744631",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-15/audit/reconstructed/PhysicalSpacesAuxiliaryColumn.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.SpacesSources",
+        "ContinuousFlexibility.Statements.Nonlinear"
+      ],
+      "alreadyInReference41": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.BufferedRadialAuxiliaryColumn",
+      "targetPath": "src/ContinuousFlexibility/Analysis/BufferedRadialAuxiliaryColumn.lean",
+      "lines": 122,
+      "blob": "6bc85192cefb26fff23cca0845fdfa7296ed161e",
+      "archiveCommit": "71fd2c8ba445c4fa595f823339912f3d55744631",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-15/audit/reconstructed/BufferedRadialAuxiliaryColumn.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.PhysicalSpacesAuxiliaryColumn",
+        "ContinuousFlexibility.Analysis.N04PositiveNormalizationBuffer"
+      ],
+      "alreadyInReference41": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.BufferedAuxiliaryColumnWitness",
+      "targetPath": "src/ContinuousFlexibility/Analysis/BufferedAuxiliaryColumnWitness.lean",
+      "lines": 104,
+      "blob": "0c7fdb43f9427a38602e91da42f8c0fe272f3f67",
+      "archiveCommit": "0db1a62e32efbba45f732812fc085ac6d6f6c3d3",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-16/audit/reconstructed/BufferedAuxiliaryColumnWitness.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.BufferedRadialAuxiliaryColumn"
+      ],
+      "alreadyInReference41": false
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalAuxiliaryNormalization",
+      "targetPath": "src/ContinuousFlexibility/Analysis/CanonicalAuxiliaryNormalization.lean",
+      "lines": 107,
+      "blob": "cd9b3609c29ddc4ee10946be787f94494928fa60",
+      "archiveCommit": "0db1a62e32efbba45f732812fc085ac6d6f6c3d3",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-16/audit/reconstructed/CanonicalAuxiliaryNormalization.lean",
+      "imports": [
+        "ContinuousFlexibility.Statements.Nonlinear",
+        "Mathlib.Analysis.Calculus.FDeriv.Congr"
+      ],
+      "alreadyInReference41": false
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalAuxiliaryDifferenceJets",
+      "targetPath": "src/ContinuousFlexibility/Analysis/CanonicalAuxiliaryDifferenceJets.lean",
+      "lines": 105,
+      "blob": "8d19127ce692316b3dc71d27ea7aa2fade5d2cda",
+      "archiveCommit": "0db1a62e32efbba45f732812fc085ac6d6f6c3d3",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-16/audit/reconstructed/CanonicalAuxiliaryDifferenceJets.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CanonicalAuxiliaryNormalization",
+        "ContinuousFlexibility.Analysis.PhysicalTransmissionTrace",
+        "ContinuousFlexibility.Analysis.SolveReturnEquations",
+        "ContinuousFlexibility.Analysis.StateNeighborhood",
+        "ContinuousFlexibility.Analysis.N08Neighborhoods"
+      ],
+      "alreadyInReference41": false
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalSinglePieceReferenceBounds",
+      "targetPath": "src/ContinuousFlexibility/Analysis/CanonicalSinglePieceReferenceBounds.lean",
+      "lines": 202,
+      "blob": "0faf674e011dad24acc0cc1bc818e9b012b68bc4",
+      "archiveCommit": "62fd35116408c35e0e565addea82100f07fa19b2",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-17/audit/reconstructed/CanonicalSinglePieceReferenceBounds.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CanonicalAuxiliaryNormalization",
+        "ContinuousFlexibility.Analysis.PhysicalTransmissionTrace",
+        "ContinuousFlexibility.Analysis.N07bAtlasEnergy",
+        "ContinuousFlexibility.Analysis.N07bCanonicalAngularPullback",
+        "ContinuousFlexibility.Analysis.N07aAngularReferenceCoordinates",
+        "ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets"
+      ],
+      "alreadyInReference41": false
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalAuxiliaryReferenceJets",
+      "targetPath": "src/ContinuousFlexibility/Analysis/CanonicalAuxiliaryReferenceJets.lean",
+      "lines": 132,
+      "blob": "9a16fdb05086007f6c72692fce2e50b0acc58e30",
+      "archiveCommit": "62fd35116408c35e0e565addea82100f07fa19b2",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-17/audit/reconstructed/CanonicalAuxiliaryReferenceJets.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CanonicalSinglePieceReferenceBounds",
+        "ContinuousFlexibility.Analysis.BufferedAuxiliaryColumnWitness",
+        "ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization",
+        "ContinuousFlexibility.Analysis.StateNeighborhood",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData"
+      ],
+      "alreadyInReference41": false
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CanonicalAuxiliaryAtomPreservation",
+      "targetPath": "src/ContinuousFlexibility/Analysis/CanonicalAuxiliaryAtomPreservation.lean",
+      "lines": 68,
+      "blob": "5090df125dd2c756ed0a4554caf9482ff6665cbe",
+      "archiveCommit": "456cd39af7215e75d7b1e8530ea749e7440ba57e",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-18/audit/reconstructed/CanonicalAuxiliaryAtomPreservation.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.PhysicalSpacesAuxiliaryColumn",
+        "ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization"
+      ],
+      "alreadyInReference41": false
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAuxiliaryPackage",
+      "targetPath": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAuxiliaryPackage.lean",
+      "lines": 111,
+      "blob": "505a22c75a965fc75bf35bf74e13175b7d95097a",
+      "archiveCommit": "456cd39af7215e75d7b1e8530ea749e7440ba57e",
+      "archivePath": "drafts/N04Coordinates-recovery-20261112/source-snapshot-18/audit/reconstructed/WholeReferenceGaugeAuxiliaryPackage.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CanonicalAuxiliaryAtomPreservation",
+        "ContinuousFlexibility.Analysis.CanonicalAuxiliaryReferenceJets",
+        "ContinuousFlexibility.Analysis.CanonicalAuxiliaryDifferenceJets"
+      ],
+      "alreadyInReference41": false
+    }
+  ],
+  "requiredReference41MainPorts": [
+    {
+      "module": "ActualReferenceNegativeRadialFields",
+      "line": 135,
+      "action": "Shorten n04b_reference_actualTravelChart call to href hfield m hr theta; remove hT hS hN."
+    },
+    {
+      "module": "WholeReferenceGaugeAtlasCutOperator",
+      "line": 57,
+      "action": "Inherit reference_flow := hfield.reference_flow in restricted N04bFieldRegularity record."
+    }
+  ],
+  "additionalReferenceQuantitativeMainPorts": [
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04ActualTravelDifferenceAngularBounds.lean",
+      "blob": "d201f14194e6df9c339b3e9b0ea0ae9ecf626f5c",
+      "sha256": "eaa14196be78e7434d780cb537c878193906d23b8b35da4d424265897e63ba4c",
+      "hits": [
+        {
+          "line": 133,
+          "text": "    ((material_circle_sample_weights_pos hT hN.1.1.1.1).2) l h rsel hcover J _ nmax\n  intro i m hr x hx θ\n  have href := (n04b_reference_firstIntegrals hN.1.1.2.2.1 hT hS hN hfield\n    m (hrsel i m) θ).1\n  rw [href]\n  have hd := hN.1.1.n04MinusFirstIntegralCircle_decode"
+        }
+      ],
+      "scope": "additional already frozen draft outside this 867-node selection",
+      "action": "When and only when selecting the new reference-flow contract, remove the old hT hS hN positional arguments."
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N03RootEndpointMaterialJets.lean",
+      "blob": "67909442f863f93ac90079022eeb473feee7e722",
+      "sha256": "dcdb96e62937189c4e819ec7c9d9055f6629b1b329e69721b4be5100a5358001",
+      "hits": [
+        {
+          "line": 92,
+          "text": "  have hB' := n04PartB_restrict hB hb hηε\n  have hfield' : N04bFieldRegularity D S C L rootBase η :=\n    { smooth_coefficients := fun z hz => hfield.smooth_coefficients z (hsub hz)\n      periodic_coefficients := fun z hz => hfield.periodic_coefficients z (hsub hz)\n      positive_a := fun z hz => hfield.positive_a z (hsub hz)\n      negative_discriminant := fun z hz => hfield.negative_discriminant z (hsub hz) }"
+        },
+        {
+          "line": 95,
+          "text": "      periodic_coefficients := fun z hz => hfield.periodic_coefficients z (hsub hz)\n      positive_a := fun z hz => hfield.positive_a z (hsub hz)\n      negative_discriminant := fun z hz => hfield.negative_discriminant z (hsub hz) }\n  obtain ⟨CF, lowF, lossF, hCF, hfloorF, BF, hBF, hchart⟩ :=\n    n01_rootChart_unit_positive_material_jets_of_component_optical hS hT hN'.1.1 hflow hK\n  obtain ⟨CH, lowH, lossH, hCH, hfloorH, hheights⟩ :="
+        }
+      ],
+      "scope": "additional already frozen draft outside this 867-node selection",
+      "action": "Add reference_flow := hfield.reference_flow to the restricted record."
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceDerivativeSourceBounds.lean",
+      "blob": "5adeff1258a17595c84851d6cb875915dfebb4ad",
+      "sha256": "740df37b72d5ffbbb057f6c5c15274478cbf3815c342a1b7fcfceb5bdc59e4ad",
+      "hits": [
+        {
+          "line": 138,
+          "text": "  have htime : opticalTravel D.w (C.left m) p.1 ∈ Ioo (0 : ℝ) (C.travel m) := by\n    have hm := (n04b_actualTravelChart_bijOn hN hS hT hfield href hsref m).mapsTo hp\n    simpa only [n04b_reference_actualTravelChart hN.1.1.2.2.1 hT hS hN hfield m\n      ⟨hp.1.1.le, hp.1.2.le⟩ p.2] using hm.1\n  have htpos : 0 < t := n04b_travelOrientation_pos_of_fullStrip side htime\n  have htT : t ≤ C.travel m := by"
+        }
+      ],
+      "scope": "additional already frozen draft outside this 867-node selection",
+      "action": "When and only when selecting the new reference-flow contract, remove the old hT hS hN positional arguments."
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceAiryCoordinate.lean",
+      "blob": "b5d3ecd7b7260eb69b418da9ddcb0d6279986653",
+      "sha256": "8f7b0552ef8d8001432a74d11359cec6a51263dd84a51711853bf414b381bdce",
+      "hits": [
+        {
+          "line": 126,
+          "text": "  rw [hg.1.self_of_nhds]\n  change n04bRootStripChart (C.travel m) side (n04bActualTravelChart S C L z₀ m p) = _\n  rw [n04b_reference_actualTravelChart hN.1.1.2.2.1 hT hS hN hfield m\n    ⟨hp.1.1.le, hp.1.2.le⟩ θ]\n  change (n04bRootHalfCoordinate (C.travel m) side\n    (opticalTravel D.w (C.left m) p.1), θ) = _"
+        }
+      ],
+      "scope": "additional already frozen draft outside this 867-node selection",
+      "action": "When and only when selecting the new reference-flow contract, remove the old hT hS hN positional arguments."
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferenceSourceSquares.lean",
+      "blob": "7791aa8d49e87108052f185a0af3d09773d986b0",
+      "sha256": "5e46d450a5d7766cec6832979b607b224fa7a1e263006ca091156d9a8b3d0c62",
+      "hits": [
+        {
+          "line": 103,
+          "text": "      (fun q : PolarPoint => (opticalTravel D.w (C.left m) q.1, q.2)) := by\n    filter_upwards [(isOpen_Ioo.prod isOpen_univ).mem_nhds hp] with q hq\n    exact n04b_reference_actualTravelChart hN.1.1.2.2.1 hT hS hN hfield m\n      ⟨hq.1.1.le, hq.1.2.le⟩ q.2\n  have hd := ((n04b_referenceTravel_hasDerivAt hD hC m hp.1).comp_hasFDerivAt\n    (f := fun q : PolarPoint => q.1) p"
+        }
+      ],
+      "scope": "additional already frozen draft outside this 867-node selection",
+      "action": "When and only when selecting the new reference-flow contract, remove the old hT hS hN positional arguments."
+    }
+  ],
+  "guards": [
+    "Read-only metadata only; no proof source activation, copying, Git ref/index mutation or remote write.",
+    "41 historical gate unchanged; current source independently activated only14 via explicit c796 proposal, pendingCI165.",
+    "Remaining27 and auxiliary9 ownership handoff not observed in latestPR18 body.",
+    "FullReferenceJets294/151 assembly additionally needs same-family ReferencePrincipal continuation and later b'/epsilon' geometry output to avoid reconstructing actual typed atlas."
+  ],
+  "sampleShift": {
+    "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeMaterialSamples.lean",
+    "sha256": "ff7974347639219b1aea1d4f515c89bd9e8b13ab830d607498ecb8319519ab57",
+    "lines": 197,
+    "stored_at": {
+      "commit": "f98e15e4243d0d47a9d42fa40e64f60ed54691d3",
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-21/audit/reconstructed/WholeReferenceGaugeMaterialSamples.lean"
+    }
+  }
+}

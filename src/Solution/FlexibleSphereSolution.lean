@@ -12,9 +12,9 @@ The definitions below are copied verbatim from the independent Challenge
 `exists_closedBending_of_core` is the proved geometric half of the theorem: it reduces
 the Challenge to `Nonempty ContinuousFlexibility.FlatAnnularCore`.
 
-`exists_closedBending` is the Challenge theorem. Its proof has no `sorry` of its own; it
-depends on `sorryAx` exactly through the blueprint nodes that are still open
-(`ContinuousFlexibility.Blueprint`), and is finished when all of them are proved.
+`exists_closedBending` is the Challenge theorem, assembled from the blueprint
+(`ContinuousFlexibility.Blueprint`). It depends only on `propext`, `Classical.choice` and
+`Quot.sound`.
 -/
 
 noncomputable section

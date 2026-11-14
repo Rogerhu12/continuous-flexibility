@@ -7,12 +7,12 @@ import Mathlib.Topology.Algebra.Module.FiniteDimension
 /-!
 # Actual smooth local inverses at physical endpoints
 
-The actual closed-piece hypothesis supplies pointwise smoothness and an
-invertible derivative. The inverse function theorem therefore gives a local
-inverse smooth at the image point, including at a physical endpoint.
-The prescribed canonical inverse agrees with this inverse on the image
-of the physical interior in the local chart source. This argument uses
-only the forward boundary jets and the open-piece inverse identity.
+The actual closed-domain contract supplies pointwise smoothness and an
+invertible derivative. The inverse function theorem gives a local inverse
+smooth at the image point, including on a curved physical boundary.
+The stored canonical inverse agrees with it on the image of the current
+physical interior in the local chart source. Generic radial-curve
+transport remains available when the physical boundary is a true circle.
 -/
 
 noncomputable section
@@ -47,8 +47,8 @@ theorem exists_smooth_localInverse_of_planeJacobian_ne_zero
     hF.mem_toOpenPartialHomeomorph_source hFD hn, ?_⟩
   exact hF.to_localInverse hFD hn
 
-/-- The local endpoint inverse agrees with the specified inverse on the
-actual image collar. This uses only the open-piece inverse identity. -/
+/-- The local inverse at any point of the actual physical closure agrees
+with the stored inverse on its current interior image collar. -/
 theorem canonicalChart_exists_smooth_endpointInverse
     {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
     {K : CanonicalData S} {base : ℕ} {ε : ℝ}

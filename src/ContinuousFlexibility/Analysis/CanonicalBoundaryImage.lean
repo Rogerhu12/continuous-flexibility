@@ -2,11 +2,13 @@ import ContinuousFlexibility.Blueprint.CanonicalParts
 import Mathlib.Topology.Separation.Hausdorff
 
 /-!
-# Images of actual physical boundaries
+# Images of physical endpoints
 
-Continuity of the forward chart and its genuine inverse force every
-point of the actual physical frontier to map to a canonical endpoint.
-The fixed radial-strip lemma remains a separate geometric specialization.
+The generic rectangular lemma uses only continuity and the open inverse.
+For an actual canonical chart, the closed inverse identities identify the
+image of the frontier of the current physical domain. Fixed radial
+endpoints are used only for positive pieces, whose actual domain is the
+reference rectangle by the canonical contract.
 -/
 
 noncomputable section
@@ -71,9 +73,8 @@ theorem endpoint_image_mem_boundary_of_openStrip_inverse
     · exact Or.inr hr
   · exact Or.inl hl.symm
 
-/-- PartA determines that the actual physical frontier lands on the
-canonical endpoints. A reference endpoint is not assumed to belong to
-the frontier of a current piece with a moving cut. -/
+/-- The frontier of the current physical piece maps to one of the two
+canonical radial boundaries, without asserting that the frontier is radial. -/
 theorem canonicalChart_endpoint_radial_eq_boundary
     {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
     {K : CanonicalData S} {base : ℕ} {ε : ℝ}
@@ -98,5 +99,50 @@ theorem canonicalChart_endpoint_radial_eq_boundary
     · exact False.elim (hnot ⟨⟨hl, hr⟩, mem_univ _⟩)
     · exact Or.inr hr
   · exact Or.inl hl.symm
+
+/-- Only a positive piece has the fixed reference closed rectangle. -/
+theorem canonicalPhysicalPieceClosed_of_positive
+    {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
+    {K : CanonicalData S} {base : ℕ} {ε : ℝ}
+    (hK : Blueprint.N04PartA D S C K base ε)
+    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
+    (hsector : stateSector S z.1) (m : ℕ) (hm : K.positive m = true) :
+    physicalPieceClosed S K z m =
+      Icc (K.physicalLeft m) (K.physicalRight m) ×ˢ (univ : Set ℝ) := by
+  change closure (physicalPieceOpen S K z m) = _
+  rw [(hK.domains z hz hsector m).2.2.2.2.2.1 hm,
+    referencePhysicalPieceOpen, closure_prod_eq,
+    closure_Ioo (hK.referenceBounds m).1.ne, closure_univ]
+
+/-- The rectangular endpoint specialization is valid for the positive
+pieces, using their actual domain equality. -/
+theorem canonicalChart_positive_endpoint_radial_eq_boundary
+    {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
+    {K : CanonicalData S} {base : ℕ} {ε : ℝ}
+    (hK : Blueprint.N04PartA D S C K base ε)
+    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
+    (hsector : stateSector S z.1) (m : ℕ) (hm : K.positive m = true)
+    (p : PolarPoint)
+    (hp : p.1 = K.physicalLeft m ∨ p.1 = K.physicalRight m) :
+    (K.chart z m p).1 = K.left m ∨ (K.chart z m p).1 = K.right m := by
+  have hlength := (hK.referenceBounds m).1
+  have hpcc : p.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m) := by
+    rcases hp with h | h
+    · rw [h]
+      exact ⟨le_rfl, hlength.le⟩
+    · rw [h]
+      exact ⟨hlength.le, le_rfl⟩
+  have hpclosed : p ∈ physicalPieceClosed S K z m := by
+    rw [canonicalPhysicalPieceClosed_of_positive hK hz hsector m hm]
+    exact ⟨hpcc, mem_univ _⟩
+  have hpnot : p ∉ physicalPieceOpen S K z m := by
+    rw [(hK.domains z hz hsector m).2.2.2.2.2.1 hm]
+    intro hin
+    rcases hp with h | h
+    · exact (ne_of_gt hin.1.1) h
+    · exact (ne_of_lt hin.1.2) h
+  apply canonicalChart_endpoint_radial_eq_boundary hK hz hsector m p
+  rw [(hK.domains z hz hsector m).1.frontier_eq]
+  exact ⟨hpclosed, hpnot⟩
 
 end ContinuousFlexibility.Analysis
