@@ -112,3 +112,20 @@ also confirmed why the intermediate single-declaration version was still
 too large: it exhausted the default 200,000-heartbeat budget at the final
 composition bound. Neither the heartbeat budget nor the CI file limit was
 increased. The complete CI remains the completion gate.
+
+The next compilation pass isolated the actual radial trace regularity
+and the sector-unit seminorm estimate into small lemmas. Explicit maps
+in the forward moving composition and explicit input word estimates in
+the height composition remove ambiguous elaboration. The coefficient
+jet proof now applies multilinear extensionality exactly once and takes
+values of the coefficient identity with `congrArg`, rather than rewriting
+the full actual-atlas context.
+
+The physical unit-height prefix had another expensive existential
+elimination, followed by a horizon rewrite and Boolean case split in its
+large dependent context. Named witness projections, scalar equality
+transport, a small pure-direction lemma, and separately typed physical
+and affine bounds now keep those operations local. Its unchanged theorem
+passed the pinned single-file check in 58 seconds. All these changes are
+proof repairs; the parameter prefix, material sample, selected buffer,
+reference certificate, and final theorem statements are preserved.

@@ -33,6 +33,17 @@ private theorem physicalUnitLinear_norm_le (l r C : ℝ)
   · exact (le_max_right _ _).trans
       (le_mul_of_one_le_left (le_max_of_le_left (abs_nonneg _)) hC)
 
+private theorem physicalHeight_pureDirections
+    {E : Type*} [Zero E] {n : ℕ} (w : StateAngleWord n)
+    (u : Fin n → E × PolarPoint)
+    (h₀ : ∀ j, w.isState j = false → (u j).1 = 0)
+    (h₁ : ∀ j, w.isState j = true → (u j).2 = 0) :
+    ∀ j, if w.isState j then (u j).2 = 0 else (u j).1 = 0 := by
+  intro j
+  cases hj : w.isState j with
+  | false => simpa only [hj, Bool.false_eq_true, ite_false] using h₀ j hj
+  | true => simpa only [hj, ite_true] using h₁ j hj
+
 theorem n04PositiveGeometry_actualControlledUnitHeight_sample_prefix_of_inverseWords
     {W : N04RealizationStart} {X : N04RealizationChoice W} {order : ℕ}
     (G : N04PositiveGeometryControlledFamily W X order) (hn : order ≤ 3)
@@ -69,32 +80,52 @@ theorem n04PositiveGeometry_actualControlledUnitHeight_sample_prefix_of_inverseW
           parameterHeightWeight (W.U.H (W.U.sample (X.cell i)) ^ (3 / 4 : ℝ)) w.stateArity *
           R ^ (((w.angleArity + shift * w.stateArity : ℕ) : ℝ) /
             (((s + shift * K : ℕ) : ℝ) + 1)) := by
-  obtain ⟨Lq, hLq, pq⟩ := n04PositiveGeometry_actualControlledHeight_sample_prefix
+  let heightPrefixData := n04PositiveGeometry_actualControlledHeight_sample_prefix
     G hn hb hε hεW hεone hGb hGε hflow hctx
-  obtain ⟨Ls, _, ps⟩ := hσ
-  obtain ⟨RH, _, hheight⟩ := n04PositiveGeometry_sample_height_bound W X
+  let Lq : ℕ := heightPrefixData.choose
+  have hLq : base ≤ Lq := heightPrefixData.choose_spec.1
+  let pq := heightPrefixData.choose_spec.2
+  let Ls : ℕ := hσ.choose
+  let ps := hσ.choose_spec.2
+  let heightData := n04PositiveGeometry_sample_height_bound W X
     (by norm_num : (0 : ℝ) < 3 / 4)
+  let RH : ℝ := heightData.choose
+  let hheight := heightData.choose_spec.2
   let low := Lq + Ls
   have hql : Lq ≤ low := by dsimp only [low]; omega
   have hsl : Ls ≤ low := by dsimp only [low]; omega
   let C := max 1 (W.D.b - W.D.a)
   have hC : 1 ≤ C := le_max_left _ _
   refine ⟨low, hLq.trans hql, fun K => ?_⟩
-  obtain ⟨cq, pqc⟩ := pq K
-  obtain ⟨cs, psc⟩ := ps K
+  let heightShiftData := pq K
+  let cq : ℕ := heightShiftData.choose
+  let pqc := heightShiftData.choose_spec
+  let inverseShiftData := ps K
+  let cs : ℕ := inverseShiftData.choose
+  let psc := inverseShiftData.choose_spec
   let shift := cq + cs + 1
   have hcq : cq ≤ shift := by dsimp only [shift]; omega
   have hcs : cs ≤ shift := by dsimp only [shift]; omega
   have hcq1 : cq + 1 ≤ shift := by dsimp only [shift]; omega
   have hshift : 1 ≤ shift := by dsimp only [shift]; omega
   refine ⟨shift, fun s => ?_⟩
-  obtain ⟨Aq, hAq, hqraw⟩ := pqc (s + (shift - cq) * K)
-  obtain ⟨As, hAs, hsraw⟩ := psc (s + (shift - cs) * K)
+  let heightBoundData := pqc (s + (shift - cq) * K)
+  let Aq : ℝ := heightBoundData.choose
+  have hAq : 1 ≤ Aq := heightBoundData.choose_spec.1
+  let hqraw := heightBoundData.choose_spec.2
+  let inverseBoundData := psc (s + (shift - cs) * K)
+  let As : ℝ := inverseBoundData.choose
+  let hsraw := inverseBoundData.choose_spec.2
   let A := max Aq As
   have hA : 1 ≤ A := hAq.trans (le_max_left _ _)
-  obtain ⟨B, hB, hphysical⟩ := n04PositiveGeometry_controlledReferenceHeight_unit_word_bound
+  let physicalBoundData := n04PositiveGeometry_controlledReferenceHeight_unit_word_bound
     (E := StateDirections W.S × ℝ) G Y H₀ href hmaterial (K + s) A RH
-  obtain ⟨B₀, _, hpack⟩ := n04PositiveGeometry_polynomial_sample_pack (C ^ (K + s)) B 1
+  let B : ℝ := physicalBoundData.choose
+  have hB : 1 ≤ B := physicalBoundData.choose_spec.1
+  let hphysical := physicalBoundData.choose_spec.2
+  let packData := n04PositiveGeometry_polynomial_sample_pack (C ^ (K + s)) B 1
+  let B₀ : ℝ := packData.choose
+  let hpack := packData.choose_spec.2
   let D := max 1 B₀
   have hD : 1 ≤ D := le_max_left _ _
   have hB₀D : B₀ ≤ D := le_max_right _ _
@@ -183,37 +214,51 @@ theorem n04PositiveGeometry_actualControlledUnitHeight_sample_prefix_of_inverseW
       ((hp (hhigh Ls cs hsl hcs) x).trans hxR) j hj (by omega) u hu a ha
       (fun k => ⟨(hp hsl (a k).1).trans (haB k).1,
         (hp (hhigh Ls cs hsl hcs) (a k).1).trans (haB k).2.1, (haB k).2.2⟩)
-    apply h.trans
-    have he := hden cs hcs
-    rw [he]
-    exact mul_le_mul
+    have hroot : R ^ (1 / (((s + (shift - cs) * K + cs * K : ℕ) : ℝ) + 1)) = t :=
+      congrArg (fun d : ℕ => R ^ (1 / ((d : ℝ) + 1))) (hden cs hcs)
+    have hpower := (congrArg (fun z : ℝ =>
+      z ^ (u.angleArity + cs * u.stateArity - 1)) hroot).trans_le
+        (pow_le_pow_right₀ ht (Nat.sub_le_sub_right
+          (Nat.add_le_add_left (Nat.mul_le_mul_right _ hcs) _) 1))
+    exact h.trans (mul_le_mul
       (mul_le_mul_of_nonneg_right (hcost (le_max_right _ _)) (parameterHeightWeight_nonneg hH _))
-      (pow_le_pow_right₀ ht (Nat.sub_le_sub_right
-        (Nat.add_le_add_left (Nat.mul_le_mul_right _ hcs) _) 1))
-      (pow_nonneg (zero_le_one.trans ht) _) (mul_nonneg hAM (parameterHeightWeight_nonneg hH _))
+      hpower (pow_nonneg (Real.rpow_nonneg (zero_le_one.trans hR) _) _)
+      (mul_nonneg hAM (parameterHeightWeight_nonneg hH _)))
   let JU := J.congrOn (fun y _ => congrArg
     (n04PositiveGeometry_controlledPhysicalHeight G H₀ i (liftSectorParameter W.S W.C y.1))
     (hpoint y.2).symm)
-  have hout := n04PositiveGeometry_affineSpatial_word_bound JP
-    (sectorNeighborhood_isOpen W.S base ε ε) (isOpen_Ioo.prod isOpen_univ) L (l, 0)
-    (fun _ _ => mem_univ _) JU (p low) (p (low + s + shift * K + 1))
-    hC hL (zero_le_one.trans hR) n w x hx q hq
-    (fun u huL huH huS hu0 hu1 => hphysical
-      (sectorNeighborhood W.S base ε ε) (sectorNeighborhood_isOpen W.S base ε ε)
+  have hphysicalWord (u : Fin n → (StateDirections W.S × ℝ) × PolarPoint)
+      (huL : ∀ j, p low (u j).1 ≤ 1)
+      (huH : ∀ j, p (low + s + shift * K + 1) (u j).1 ≤ R)
+      (huS : ∀ j, ‖(u j).2‖ ≤ 1)
+      (hu0 : ∀ j, w.isState j = false → (u j).1 = 0)
+      (hu1 : ∀ j, w.isState j = true → (u j).2 = 0) :
+      ‖JP.D n (x, (l, 0) + L q) u‖ ≤ B * E ^ B *
+        parameterHeightWeight H w.stateArity * t ^ (w.angleArity + shift * w.stateArity) :=
+    hphysical (sectorNeighborhood W.S base ε ε)
+      (sectorNeighborhood_isOpen W.S base ε ε)
       (sectorNeighborhood_convex W.S base ε ε) (liftSectorParameter W.S W.C) i false
       RQ JQ (JS i) JP x hx ((l, 0) + L q) (p low) (p (low + s + shift * K + 1))
       R (zero_le_one.trans hR) H t hH (hheight i).2 ht K shift hshift hrawQ hrawS
       n hnpos hnN w hw u
-      (fun j => by
-        cases hj : w.isState j with
-        | false => simpa only [hj, if_false] using hu0 j hj
-        | true => simpa only [hj, if_true] using hu1 j hj)
-      (fun j => ⟨huL j, huH j, huS j⟩)) v
-    (fun j => (hbox j).1) (fun j => (hbox j).2.1) (fun j => (hbox j).2.2)
-    (fun j hj => by simpa only [hj, if_false] using hpure j)
-    (fun j hj => by simpa only [hj, if_true] using hpure j)
+      (physicalHeight_pureDirections w u hu0 hu1)
+      (fun j => ⟨huL j, huH j, huS j⟩)
+  have hout : ‖JU.D n (x, q) v‖ ≤ C ^ n * (B * E ^ B *
+      parameterHeightWeight H w.stateArity * t ^ (w.angleArity + shift * w.stateArity)) :=
+    n04PositiveGeometry_affineSpatial_word_bound
+      (U := sectorNeighborhood W.S base ε ε) (V := univ) (W := unitStrip)
+      (f := fun y : (StateDirections W.S × ℝ) × PolarPoint =>
+        n04PositiveGeometry_controlledPhysicalHeight G H₀ i
+          (liftSectorParameter W.S W.C y.1) y.2)
+      JP (sectorNeighborhood_isOpen W.S base ε ε) (isOpen_Ioo.prod isOpen_univ) L (l, 0)
+      (fun _ _ => mem_univ _) JU (p low) (p (low + s + shift * K + 1))
+      hC hL (zero_le_one.trans hR) n w x hx q hq hphysicalWord v
+      (fun j => (hbox j).1) (fun j => (hbox j).2.1) (fun j => (hbox j).2.2)
+      (fun j hj => by simpa only [hj, Bool.false_eq_true, ite_false] using hpure j)
+      (fun j hj => by simpa only [hj, ite_true] using hpure j)
   have hpack0 : C ^ (K + s) * (B * E ^ B) ≤ B₀ * E ^ B₀ := by
-    simpa only [pow_one] using hpack E hE
+    exact (congrArg (fun a : ℝ => C ^ (K + s) * a)
+      (pow_one (B * E ^ B))).symm.trans_le (hpack E hE)
   have hpack' : C ^ n * (B * E ^ B) ≤ D * E ^ D :=
     (mul_le_mul_of_nonneg_right (pow_le_pow_right₀ hC hnN)
       (mul_nonneg (zero_le_one.trans hB) (Real.rpow_nonneg (zero_le_one.trans hE) _))).trans
@@ -223,7 +268,7 @@ theorem n04PositiveGeometry_actualControlledUnitHeight_sample_prefix_of_inverseW
     ‖J.D n (x, q) v‖ ≤ C ^ n * (B * E ^ B * parameterHeightWeight H w.stateArity *
         t ^ (w.angleArity + shift * w.stateArity)) := hout
     _ = (C ^ n * (B * E ^ B)) * parameterHeightWeight H w.stateArity *
-        t ^ (w.angleArity + shift * w.stateArity) := by ring
+        t ^ (w.angleArity + shift * w.stateArity) := by simp only [mul_assoc]
     _ ≤ D * E ^ D * parameterHeightWeight H w.stateArity *
         t ^ (w.angleArity + shift * w.stateArity) :=
       mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_right hpack'
