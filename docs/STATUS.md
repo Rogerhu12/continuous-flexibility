@@ -1,6 +1,6 @@
 # Status
 
-Last updated: 2026-11-14.
+Last updated: 2026-11-15.
 
 ## Completed line: Tame
 
@@ -46,6 +46,14 @@ spectra and Hamilton's Nash–Moser theorem as standard inputs; none of these is
 | Blueprint statements proved / total | 42 / 42 (S01, S02, R01, R02, R03, R04, W01, N12, Tame, N04Cubic, R05a, N04Transmission, ScalarCalculus, R05b, R06a, N04Root, Solve, R06b, R06c, Spaces, R07, R08, R10b, R09, ScalarWeighted, R12, R11b, N04a, N01b, N01a, R10a, N09N10, R11a, N07b, N08, N07a, N06, N01c, N05, N02N03, N04b, N04Coordinates); `BlueprintStatus` also counts N01c's three sub-statements (45 / 45) |
 | Challenge (`FlexibleSphere.exists_closedBending`) | proved; axioms `propext`, `Classical.choice`, `Quot.sound` |
 | Modules on the module system | 6109 of 6109 |
+
+Palomar preparation (`line/PalomarPrep`, `line/ChallengeTrim`), [CI run 43731241698](https://github.com/Rogerhu12/continuous-flexibility/actions/runs/43731241698)
+on main: every `.lean` file in the repository is a module of at most 10,000 lines, which CI now checks
+(the six drafts and the archived `DeclarationEvidence.lean` were removed; they remain at `befe4386`).
+The Challenge no longer states conclusions that thm:main does not claim or that follow from the rest
+(Gaussian curvature, smoothness of the shape operator, a second self-adjointness, closedness of the
+disks and nonempty interiors, positive area and volume, finite volume), and its total mean curvature
+integrates the mean curvature read at the preimage instead of an ambient representative.
 
 Module system and packaging (`line/ModuleSystem`), [CI run 43593739653](https://github.com/Rogerhu12/continuous-flexibility/actions/runs/43593739653):
 every file is a module, with `LICENSE` (Apache-2.0), `formalization.yaml` (v0.4) and
