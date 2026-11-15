@@ -1,13 +1,18 @@
-import FlexibleSphereSolution
-import ContinuousFlexibility.Analysis.SobolevExtension
-import ContinuousFlexibility.Analysis.HadamardThreeLinesExtension
-import ContinuousFlexibility.Radial.OuterUniformInverse
-import Lean.Util.CollectAxioms
+module
+
+public import FlexibleSphereSolution
+public import ContinuousFlexibility.Analysis.SobolevExtension
+public import ContinuousFlexibility.Analysis.HadamardThreeLinesExtension
+public import ContinuousFlexibility.Radial.OuterUniformInverse
+public import Lean.Util.CollectAxioms
+public meta import Lean.Elab.Command
 
 /-!
 Prints, for every blueprint node, whether its proof still depends on `sorryAx`, and
 the axioms of the Challenge theorem. Run with `lake env lean scripts/BlueprintStatus.lean`.
 -/
+
+@[expose] public section
 
 open Lean in
 run_cmd do
