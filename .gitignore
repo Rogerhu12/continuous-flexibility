@@ -6,3 +6,4 @@
 *.trace
 *.log
 scratch/
+__pycache__/

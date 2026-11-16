@@ -269,7 +269,7 @@ zeroth-parameter-order reference inverse jets.
 ## 6. Historical proposal for the parent-preserving repair
 
 A historical two-file patch is available at
-[N04PulledFields-reference-repair.patch](../../drafts/N04PulledFields-reference-repair.patch).
+[N04PulledFields-reference-repair.patch](../archive/drafts/N04PulledFields-reference-repair.patch).
 It changes only `N04RealizationLeadCurrentSplit.lean` and
 `N04RealizationLeadCurrentProof.lean`; it leaves
 `N04RealizationLeadAssembly.lean`, including the parent statement, unchanged.

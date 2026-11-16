@@ -243,11 +243,17 @@ jobs:
           gh cache list -R "$GITHUB_REPOSITORY" --key "$PREFIX" --limit 100 --json id,key             --jq '.[] | select(.key != $ENV.KEEP) | .id' |
             while read -r id; do gh cache delete "$id" -R "$GITHUB_REPOSITORY" || true; done
       - name: Count compiled modules
+        # Every source file under src/ against its own .olean; the restored cache may still hold
+        # build output of modules that no longer exist, and those are not counted.
         if: always()
         shell: bash
         run: |
-          total=$(find src/ContinuousFlexibility -name '*.lean' | wc -l)
-          built=$(find .lake/build/lib/lean/ContinuousFlexibility -name '*.olean' ! -name '*.server.olean' ! -name '*.private.olean' | wc -l)
+          total=0; built=0
+          while IFS= read -r f; do
+            rel=${f#src/}; rel=${rel#Challenge/}; rel=${rel#Solution/}
+            total=$((total + 1))
+            if [ -f ".lake/build/lib/lean/${rel%.lean}.olean" ]; then built=$((built + 1)); fi
+          done < <(find src -name '*.lean')
           echo "modules compiled / total: $built / $total"
       - name: Blueprint status and endpoint axioms
         shell: bash

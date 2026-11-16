@@ -7,12 +7,12 @@ The task rules now assign interface repairs to the subnode line itself.
 The active definition has been repaired by indexing its directional towers
 by `P m`; `mono`, `union`, and the final all-pieces assembly were adapted
 at the same time. The original two audit modules were kept under
-`drafts/N04NegativeGeometry-original-interface/` because their negation
-does not apply to the repaired definition. Palomar admits only module
-files, so they were removed from the tree after commit `befe4386`, where
-they remain. The final `N04cStatement` is
-unchanged. Work continues on the actual negative-piece geometric towers;
-the historical refutation is not a completion claim.
+`drafts/N04NegativeGeometry-original-interface/` (now
+`docs/archive/drafts/`) because their negation does not apply to the
+repaired definition. Palomar admits only module files, so they were
+removed from the tree after commit `befe4386`, where they remain. The
+final `N04cStatement` is unchanged, and NegativeGeometry is proved under
+the repaired definition; the historical refutation is not a completion claim.
 
 ## Historical audit
 

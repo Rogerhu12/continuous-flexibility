@@ -1,53 +1,15 @@
 # Working on a blueprint node
 
+All blueprint statements are proved (`docs/STATUS.md`). The task files here record, for each
+line, the problem, the completion standard and the source; the Lean statement files cite them.
+The rules below are the ones the lines worked under.
+
 Each file `docs/tasks/<Node>.md` is one line of work: problem, completion standard, source.
 A `Tool-*` task has no blueprint node: its Lean statement follows the manuscript lemma it cites.
 Line numbers refer to the readable manuscript in `paper/flexible-surface-readable/`; older Lean files
 cite the 62-page version in `paper/flexible-surface-rewrite/`, which has the same labels.
 One line works on one branch `line/<Node>` and opens one pull request into `main`.
 The rules below are the same for every line.
-
-## Notices to individual lines
-
-Read this section every time you check the rules. A notice is removed when it is done.
-
-- **All lines: merge `origin/main` to get the quick check and the 5-minute file limit.** CI first
-  builds only the modules your branch changed and stops at the first failure, so errors return in
-  minutes; the full build runs only when that passes. A changed file that compiles for more than
-  5 minutes is stopped and named in the log: split it, or find the slow declaration. Each run prints
-  the 15 slowest modules it compiled.
-- **All lines: merge `origin/main` now to get the faster CI.** A run uses the workflow file of the
-  branch it runs on. The workflow on `main` (since `4c5e7aff`) first restores main's compiled build
-  and then your branch's own, so after merging main you no longer recompile what main already
-  compiled (N07a, N07b, R11a, N08: well over 100,000 lines). A branch without this merge rebuilds
-  all of it on every push; N02N03's current run has been compiling for more than 1.5 hours.
-- **N02N03, N04b, N04Coordinates, N05, N06: merge `origin/main` now.** N07b's statement repair is on
-  `main` (`docs/STATUS.md`, "Statement repairs"): `physicalPieceOpen` takes the state, the old fixed
-  interval is `referencePhysicalPieceOpen`, and the N04 output also carries
-  `CanonicalPrimitiveGeometry`, which the N04 producers must prove. N07a's repair is now on `main`
-  too: N02N03 must also prove `ReturnCorrectionSpatialProperties` (smoothness and π-periodicity of
-  the actual corrected `b/c` coefficients), and the N04 producers also
-  `CanonicalGeometry.PrimitiveGeometryProperties`. One more will follow (N01c:
-  `N01PrimitiveGeometry` in the N01a output and new flow-loss quantifiers). Merge `main` each time
-  one lands.
-- **R10a, R11a, N07a, N07b, N09N10: your math-research access check was wrong, not your access.**
-  `git ls-remote` on a bare URL has no credentials. Use the URL derived from your `origin` remote
-  (step 4 of "When you finish" below), and take the next reserved topic.
-- **N01a (PR #31): do not mark ready yet; merge `origin/main` and port to R12's definitions.**
-  R12 (merged) changed two definitions in `Statements/Radial.lean`:
-  `RadialCellIntegrable D f` is now `∀ m, MemLp (fun x => D.localizer m x.1 * f x) 2
-  (radialPhysicalMeasure D)`, and the first-normal estimate takes `SourceDerivativeMember D γ M fθ`
-  instead of `SourceMember D γ M (fθ, 0)`. R12 also added declarations with the names of six of
-  yours in `ContinuousFlexibility.Statements`. Branch `integrate/batch-7` already contains two
-  fixes you can merge: the six clashing names renamed `n01a_*`, and the argument in
-  `N01aReferencePureRow.lean`. The next error is `N01aReferenceMeasure.lean:40`
-  (`integrable_square` becomes `(hf m).integrable_sq`); the places that construct
-  `RadialCellIntegrable` (`n01a_radialCellIntegrable_sub`, `cell_integrable_iff`, ...) need
-  `memLp_two_iff_integrable_sq` with the measurability you already assume. Mark ready again when
-  CI is green on the merge with current `main`.
-  Since then N01b (merged) also changed `controlGeometryConditions` (`Statements/Nonlinear.lean`):
-  the control support clause is now `tsupport (C.control m) ⊆ Ioo (C.left m) (C.right m)`, so the
-  controls N01a constructs must satisfy the strict inclusion.
 
 ## Start
 
